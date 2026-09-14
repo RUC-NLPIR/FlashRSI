@@ -1,0 +1,26 @@
+# Relative paths below are resolved from the directory containing this file.
+run:
+  output_dir: ./runs
+
+benchmark:
+  name: searchqa
+  split: 
+    train: 0.6
+    dev: 0.2
+    test: 0.2
+
+agent:
+  name: miniagent
+  model_name: deepseek-v4-flash
+  api_key:
+  base_url: 
+
+algorithm:
+  name: skillopt
+  worker:
+    type: llm # llm/agent
+    model_name: gpt-5
+    api_key: 
+    base_url: 
+  
+
