@@ -38,7 +38,7 @@ def test_defaults_and_nested_overrides_do_not_mutate_inputs(tmp_path, settings):
     assert yaml.safe_load(path.read_text()) == settings
     config["benchmark"]["split"]["train"] = 0.9
     assert overrides == before
-    assert load_config(path)["benchmark"]["split"]["train"] == 0.6
+    assert load_config(path)["benchmark"]["split"] == "auto"
 
 
 def test_paths_use_the_directory_of_their_source(tmp_path, monkeypatch, settings):
@@ -94,12 +94,18 @@ def test_config_without_yaml_accepts_custom_backend_and_model_names(
         ({"algorithm": {"worker": {"name": "miniagent"}}}, "requires type: agent"),
         ({"algorithm": {"worker": []}}, "algorithm.worker must be a mapping"),
         ({"benchmark": []}, "benchmark must be a mapping"),
-        ({"benchmark": {"split": []}}, "benchmark.split must be a mapping"),
+        ({"benchmark": {"split": []}}, "benchmark.split must be 'auto' or a mapping"),
+        (
+            {"benchmark": {"split": "default"}},
+            "benchmark.split must be 'auto' or a mapping",
+        ),
         (
             {"benchmark": {"split": {"val": 0.2}}},
             "Unknown keys in benchmark.split: val",
         ),
         ({"benchmark": {"split": {"train": 0.8}}}, "ratios must sum to 1"),
+        ({"benchmark": {"split": None}}, "benchmark.split must be 'auto' or a mapping"),
+        ({"benchmark": {"split": True}}, "benchmark.split must be 'auto' or a mapping"),
     ],
 )
 def test_invalid_config_has_actionable_errors(tmp_path, settings, override, message):
@@ -121,6 +127,48 @@ def test_split_allows_float_rounding_and_zero(settings, ratios):
     split = dict(zip(("train", "dev", "test"), ratios))
     settings["benchmark"] = {"split": split}
     assert load_config(overrides=settings)["benchmark"]["split"] == split
+
+
+def test_auto_split_overrides_explicit_ratios_and_survives_save_reload(
+    tmp_path, settings
+):
+    settings["run"] = {"output_dir": str(tmp_path / "runs")}
+    settings["benchmark"] = {"split": {"train": 0.6, "dev": 0.2, "test": 0.2}}
+    path = tmp_path / "config.yaml"
+    path.write_text(yaml.safe_dump(settings))
+
+    config = load_config(path, overrides={"benchmark": {"split": "auto"}})
+    assert config.benchmark.split == "auto"
+    run_dir = prepare_run_dir(config)
+    assert load_config(run_dir / "config.yaml").benchmark.split == "auto"
+
+    ratios = {"train": 0.5, "dev": 0.25, "test": 0.25}
+    overridden = load_config(
+        run_dir / "config.yaml", overrides={"benchmark": {"split": ratios}}
+    )
+    assert overridden.benchmark.split == ratios
+
+
+def test_explicit_split_mappings_still_merge_recursively(tmp_path, settings):
+    settings["benchmark"] = {"split": {"train": 0.6, "dev": 0.2, "test": 0.2}}
+    path = tmp_path / "config.yaml"
+    path.write_text(yaml.safe_dump(settings))
+
+    config = load_config(
+        path, overrides={"benchmark": {"split": {"train": 0.5, "dev": 0.3}}}
+    )
+
+    assert config.benchmark.split == {"train": 0.5, "dev": 0.3, "test": 0.2}
+
+
+def test_partial_split_uses_legacy_ratios_and_survives_save_reload(tmp_path, settings):
+    settings["run"] = {"output_dir": str(tmp_path / "runs")}
+    settings["benchmark"] = {"split": {"train": 0.5, "dev": 0.3}}
+    config = load_config(overrides=settings)
+    assert config.benchmark.split == {"train": 0.5, "dev": 0.3, "test": 0.2}
+    assert settings["benchmark"]["split"] == {"train": 0.5, "dev": 0.3}
+    run_dir = prepare_run_dir(config)
+    assert load_config(run_dir / "config.yaml") == config
 
 
 @pytest.mark.parametrize(

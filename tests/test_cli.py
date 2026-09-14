@@ -42,6 +42,7 @@ def test_prepare_from_yaml_creates_named_directory_and_redacted_config(
     config = load_config(run_dir / "config.yaml")
     assert config.agent.model_name == "yaml-target"
     assert config.benchmark.limit == 10
+    assert config.benchmark.split == "auto"
     assert config.agent.api_key is None
     assert config.algorithm.worker.api_key is None
     output = capsys.readouterr()
@@ -49,6 +50,27 @@ def test_prepare_from_yaml_creates_named_directory_and_redacted_config(
     assert "Preparation only" in output.out
     assert "test-target-secret" not in output.out + output.err
     assert "test-worker-secret" not in output.out + output.err
+
+
+def test_cli_auto_overrides_explicit_yaml_split_and_is_saved(config_path):
+    values = yaml.safe_load(config_path.read_text())
+    values["benchmark"]["split"] = {"train": 0.6, "dev": 0.2, "test": 0.2}
+    config_path.write_text(yaml.safe_dump(values))
+    assert (
+        main(
+            [
+                "run",
+                "--config",
+                str(config_path),
+                "--prepare-only",
+                "--benchmark.split",
+                "auto",
+            ]
+        )
+        == 0
+    )
+    (run_dir,) = (config_path.parent / "runs").iterdir()
+    assert load_config(run_dir / "config.yaml").benchmark.split == "auto"
 
 
 def test_flags_and_typed_settings_override_yaml_and_resolve_paths_from_cwd(

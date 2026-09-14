@@ -7,7 +7,7 @@ name = "flashrsi-lite"
 version = "0.1.0"
 description = "A minimal framework for reproducible agent evolution"
 requires-python = ">=3.11"
-dependencies = ["PyYAML>=6,<7"]
+dependencies = ["PyYAML>=6,<7", "datasets>=3,<5"]
 
 [project.scripts]
 flashrsi = "flashrsi.cli:main"

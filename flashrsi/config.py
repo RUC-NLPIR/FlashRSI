@@ -13,11 +13,13 @@ from typing import Any
 
 import yaml
 
+_SPLIT_RATIOS = {"train": 0.6, "dev": 0.2, "test": 0.2}
+
 _DEFAULTS = {
     "run": {"output_dir": "runs"},
     "benchmark": {
         "name": "searchqa",
-        "split": {"train": 0.6, "dev": 0.2, "test": 0.2},
+        "split": "auto",
     },
     "agent": {
         "name": "miniagent",
@@ -225,14 +227,19 @@ def _validate(config: dict) -> None:
     _require_text(output_dir, "run.output_dir")
 
     split = config["benchmark"]["split"]
-    if not isinstance(split, Mapping):
-        raise ValueError("benchmark.split must be a mapping")
-    _reject_unknown(split, _DEFAULTS["benchmark"]["split"], "benchmark.split")
-    for name, ratio in split.items():
-        if type(ratio) not in (int, float) or not 0 <= ratio <= 1:
-            raise ValueError(f"benchmark.split.{name} must be a number between 0 and 1")
-    if not math.isclose(sum(split.values()), 1.0, rel_tol=0, abs_tol=1e-9):
-        raise ValueError("benchmark.split ratios must sum to 1")
+    if split != "auto":
+        if not isinstance(split, Mapping):
+            raise ValueError("benchmark.split must be 'auto' or a mapping")
+        _reject_unknown(split, _SPLIT_RATIOS, "benchmark.split")
+        split = {**_SPLIT_RATIOS, **split}
+        for name, ratio in split.items():
+            if type(ratio) not in (int, float) or not 0 <= ratio <= 1:
+                raise ValueError(
+                    f"benchmark.split.{name} must be a number between 0 and 1"
+                )
+        if not math.isclose(sum(split.values()), 1.0, rel_tol=0, abs_tol=1e-9):
+            raise ValueError("benchmark.split ratios must sum to 1")
+        config["benchmark"]["split"] = split
 
     worker = config["algorithm"]["worker"]
     if not isinstance(worker, Mapping):
