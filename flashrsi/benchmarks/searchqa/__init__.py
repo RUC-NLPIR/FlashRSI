@@ -48,6 +48,8 @@ class SearchQA(Benchmark):
             raise RuntimeError("searchqa has not been loaded; call load() first")
         graded = []
         for trajectory in trajs:
+            if trajectory.task is None:
+                raise ValueError("SearchQA grading requires a Task; use Agent.rollout")
             try:
                 task = self._tasks_by_id[trajectory.task.task_id]
             except KeyError as error:

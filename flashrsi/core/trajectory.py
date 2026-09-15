@@ -19,15 +19,17 @@ def _immutable_mapping(value: Mapping[str, Any]) -> Mapping[str, Any]:
 class Trajectory:
     """The result and accounting information from one Agent task run."""
 
-    task: Task
-    status: str
-    output: str
+    task: Task | None = None
+    status: str = "finished"
+    output: str = ""
     messages: tuple[Mapping[str, Any], ...] = ()
     metrics: Mapping[str, float] = field(default_factory=dict)
     error_message: str | None = None
     usage: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
+        if self.task is not None and not isinstance(self.task, Task):
+            raise ValueError("task must be a Task or None")
         if self.status not in {"finished", "error"}:
             raise ValueError("status must be 'finished' or 'error'")
         if not isinstance(self.output, str):

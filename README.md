@@ -1,7 +1,8 @@
 # FlashRSI-Lite
 
-按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程，
-以及 Benchmark 核心模型和 SearchQA 接入。Agent 和算法执行将在后续步骤接入。
+按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
+Benchmark 核心模型与 SearchQA 接入，以及 Snapshot 和 Agent 基类。
+具体 Agent 后端、算法和 runner 执行将在后续步骤接入。
 
 ## 安装与验证
 
@@ -172,7 +173,8 @@ runs/skillopt-miniagent-searchqa-20260914-163000-123456/
 
 重复调用创建新目录；若时间戳碰撞，则增加一微秒重试，已有实验保持原样。
 运行时配置保留传入的 API key，写入磁盘的配置副本将其置空。
-子目录目前为空，实际执行与结果记录将在对应步骤实现。
+CLI 准备模式下这些子目录仍为空。通过 Python 使用 Snapshot 时可将 `working/`
+传给 `Snapshot.check_out()`，并显式保存版本；runner 自动执行与结果记录将在后续步骤接入。
 
 ## Benchmark
 
@@ -241,7 +243,7 @@ auto 保留目录内已有的分区，并按上述规则补齐缺失分区。原
 
 当前没有自动注册机制；`flashrsi.benchmarks` 只是导出 `SearchQA` 类。
 没有必要的 `SearchQABenchmark` 别名已移除。Benchmark 可单独通过 Python 使用，
-按配置名选择实例的 runner、CLI 执行和 Agent 将在后续步骤接入。
+按配置名选择实例的 runner、CLI 执行和具体 Agent 后端将在后续步骤接入。
 
 ### 数据集准备与独立使用
 
@@ -268,3 +270,277 @@ uv run python scripts/prepare_searchqa.py
 
 脚本锁定 EvoOS 源版本，验证源文件校验和、跨分区唯一 ID、所有答案、原始提示词
 重建和 Parquet 往返一致性；缓存和发布数据不进入 Git。
+
+## Agent：一个运行入口，自动获取文件版本
+
+调用者使用 `agent = MyAgent(config)` 创建 Agent，执行时只使用
+`await agent.run(prompt, working_dir=None)`。提问、任务执行和编辑文件使用同一个入口，
+始终返回完整的 Trajectory；编辑场景可以忽略最终 output，但消息和用量仍然保留。
+算法启动时用 `set_scope` 设置组件的默认可见和编辑权限。Agent 没有独立的 `ask`、
+`edit` 或 checkout 接口，也不记录演化历史。
+
+### 当前职责划分
+
+| 概念 | 负责什么 |
+| --- | --- |
+| Agent | 接入 harness、执行 prompt/Task、应用编辑权限、选择当前版本 |
+| Snapshot | 保存完整文件、组件规则和版本来源；导出编辑目录、生成候选、保存与加载 |
+| Worker | 算法中的生成或编辑角色，使用同一个 Agent `run` 接口，不要求独立基类 |
+| Algorithm | 设置范围，组织候选生成与评估，根据评分决定是否接受候选 |
+| Benchmark | 提供 Task，给执行结果评分 |
+| Trajectory | 保存一次执行的输出、消息、用量、错误和评分 |
+
+接入者在 harness 目录放置 `components.yaml` 并实现 `_run`，框架管理版本文件与执行上下文。算法只调用公共接口，
+不需要知道 harness 使用 SDK 还是子进程。Algorithm 和 runner 的正式实现留在后续步骤，
+下文示例展示它们会使用的现有接口。
+
+### 如何接入一个 harness
+
+一个 harness 一个目录。框架根据接入类所在模块定位目录，无需在类里声明
+`source_dir` 或 `component_rules`。例如未来的内置 harness 可以采用以下布局：
+
+```text
+flashrsi/agents/my_agent/
+├── __init__.py       # Agent 接入类
+├── components.yaml  # 组件与文件映射
+├── runtime/         # 原生运行代码
+├── skills/
+└── prompts/
+```
+
+原生 harness 可以保留自己的目录结构，用 `components.yaml` 指定对应的相对路径：
+
+```yaml
+code:
+  - runtime/**
+skill:
+  - skills/**
+prompt:
+  - prompts/**
+```
+
+`__init__.py` 中的接入类主要实现 `_run`：
+
+```python
+class MyAgent(Agent):
+    name = "my_agent"
+    description = "My harness"
+
+    async def _run(self, prompt, working_dir=None):
+        # 用 self.files_dir 中的代码和配置调用原有 harness。
+        result = await native_run(
+            prompt=prompt,
+            files_dir=self.files_dir,
+            working_dir=working_dir,
+            model=self.config.get("model_name"),
+        )
+        return Trajectory(
+            output=result.text, messages=result.messages, usage=result.usage
+        )
+```
+
+公开的 `run` 由基类实现，负责准备版本文件、固定本次执行版本及清理文件。接入者实现
+`_run`，不用自己处理 Snapshot、提交或临时目录。没有装饰器、隐式方法替换或额外的管理类。
+
+| 路径 | 含义 | 使用时机 |
+| --- | --- | --- |
+| 接入模块所在目录 | 默认的文件来源根目录，包含 `components.yaml` | 初始化时自动定位，与当前工作目录无关 |
+| `config.source_dir`（可选） | 覆盖默认根目录，新目录必须包含 `components.yaml` | 使用外部 harness 文件或本地实验副本 |
+| `self.files_dir` | 本次执行实际使用的代码和配置目录 | `_run` 内加载代码、prompt、skills 或 SDK 设置 |
+| `working_dir` | 任务工作目录或需要编辑的目标目录 | 传给原生 harness 的任务环境 |
+
+运行时必须从 `self.files_dir` 加载可演化文件。开源 harness 可以从这里启动新进程；
+闭源 harness 用这里的原生配置和扩展创建 SDK 会话。仅把路径写进 Snapshot，仍从原始
+源码包或默认配置加载，会导致修改不生效。接入者必须在返回前等待子进程、SDK 会话及
+所有使用该目录的工作结束；基类会在返回、异常或取消时清理文件。
+
+Worker 的 `working_dir` 可以是另一个 Agent 的候选目录。Worker 自身的指令与工具
+应从自己的 `files_dir` 加载，不能让目标目录中的配置替代 Worker 配置。具体 SDK
+如何关闭隐式项目配置、显式加载扩展，由接入者按该 SDK 支持的接口完成。
+
+`config` 可为完整实验配置（使用其中的 `agent` 部分），也可为单独的 Agent/Worker
+配置映射。Worker 通常传 `config.algorithm.worker`。`source_dir` 相对路径按当前工作目录
+解析，也支持 `~`；覆盖时同时从新目录加载映射，不回退到原目录。未指定来源且接入模块
+旁没有 `components.yaml` 时，Agent 为无文件的 Worker，可正常调用 `run/rollout`，但没有
+可演化 Snapshot。交互环境中定义的类也可显式传入来源目录。
+
+自动定位使用具体接入类定义所在的模块；子类移到新模块后，需要在新目录提供映射或
+显式指定来源。`components.yaml` 必须是“组件名 → 非空路径规则列表”，重复键和非法
+路径会报错；`{}` 可以表示空文件版本。根目录的映射文件属于接入元数据，不进入 Snapshot。
+规则若覆盖接入类所在文件或继承的 `_run` 实现文件，会在初始化时明确报错；其他接入辅助
+代码也应留在规则范围之外。这样候选修改的是实际运行代码和资源。
+
+### Snapshot 如何自动获取
+
+构造时，框架自动定位目录、读取 `components.yaml`，再收集匹配的文件并建立初始 Snapshot。
+使用者不需要先构造 Snapshot，接入者也不需要填写 ID、root 或 parent。普通执行只需：
+
+```python
+agent = MyAgent(config)
+result = await agent.run("回答这个问题")
+result = await worker.run("改进这些文件", working_dir=candidate_dir)
+```
+
+最终组件规则复制并固定在 Snapshot 中，后续候选继承相同规则；实例上的
+`agent.component_rules` 是只读属性，读取当前 Snapshot 的不可变规则。修改原目录中的
+映射文件不会改变已有版本。每个文件只属于一个组件，规则不表示本轮允许编辑的范围。
+目前已自动定位目录并加载映射；组件名称和路径仍在 YAML 中声明，预定义类别和自动识别
+组件语义尚未实现。
+
+`SnapshotFile.executable` 从原文件自动读取，保存脚本能否直接执行，不需要手工填写。
+算法的可读、可写、隐藏权限由 `set_scope` 统一决定，不重复存到每个文件条目中。
+
+只收集声明的执行文件，未匹配的文档等文件不进入版本。`.git`、虚拟环境、依赖安装目录、
+缓存、真实 `.env` 文件、根目录下的 `logs/`、`runs/` 和日志产物自动跳过；
+`.env.example`、`.env.template` 及 `src/logs/` 这类源码资源仍可按规则收集。
+选中的符号链接、特殊文件和跨组件冲突会拒绝；目录链接可能包含被选中的文件时也会拒绝。
+未声明的文件和目录跳过，不跟随链接。凭据从运行配置传给 SDK/模型，不由框架写入 Snapshot；
+后端仍须确保声明的源码和配置内容没有硬编码凭据。
+
+原目录在初始化后变化，不会隐式改变当前版本。每次 `run` 使用独立的版本文件副本，
+执行产生的临时修改不会自动提交，也不会影响下一次运行或源目录。`files_dir` 只在运行
+内部可访问。每批 `rollout` 固定版本，同时运行的其他候选和 `update` 都不影响该批次；
+同一执行上下文内的 `snapshot` 也指向正在执行的版本和编辑权限。
+
+### Trajectory 与 rollout
+
+`_run` 返回 `Trajectory(output=..., messages=..., usage=...)`，无需创建虚构的 Task。
+直接 `run` 的轨迹通常 `task=None`；基类 `rollout(tasks, snapshot=None)` 将每个
+`Task.question` 传给 `run`，再把完整的原始 Task 关联回轨迹，保留状态、消息、指标、
+用量和错误。现有 `Trajectory(task, status, output)` 写法仍有效。
+
+`snapshot` 是可选的候选评估参数：
+
+```python
+current = await target.rollout(tasks)  # 当前版本
+candidate_results = await target.rollout(tasks, snapshot=candidate)  # 试跑候选
+# 算法评分并决定接受之后，才调用 target.update(candidate)
+```
+
+试跑候选不会改变 `target.snapshot`，多个候选可以并发评估。每批任务固定自己的版本
+和编辑权限；接入者的 `_run` 只读取 `self.files_dir`，无需接收 Snapshot 参数。
+
+`rollout` 默认顺序执行，不负责评分，空输入返回空元组。返回的错误轨迹会被保留；
+未处理的后端异常向调用者抛出。SearchQA 拒绝没有 Task 的直接运行记录，评分请使用
+`rollout` 的结果。基类暂不执行带 `Task.env` 的任务，会在任何任务开始前明确报错；
+容器和终端环境由后续 benchmark 执行适配处理，不把镜像名猜作本地工作目录。
+
+### 算法如何编辑和选择候选
+
+算法启动时设置一次默认范围，再通过 `agent.snapshot` 获取当前版本：
+
+```python
+target.set_scope({"skill": "rw", "prompt": "r", "code": "none"})
+```
+
+这里有两张用途不同的映射：`component_rules` 是从 `components.yaml` 加载的
+“组件 → 文件路径规则”，随快照保存；`set_scope` 接收“组件 → 权限”，由算法设置，
+只影响运行期的编辑范围。
+
+| 权限 | 编辑目录中的行为 |
+| --- | --- |
+| `rw` | 可见，可新增、修改、删除 |
+| `r` | 可见、只读 |
+| `none` | 隐藏，不允许改动 |
+
+调用 `set_scope` 后，未列出的组件默认隐藏；重复调用整体替换默认范围。
+未设置 scope 时所有组件可读写，`set_scope({})` 则隐藏全部组件。未知组件或权限立即报错。
+范围仅控制交给演化 Worker 的编辑目录；目标 Agent 执行任务仍使用完整代码和配置。
+文件操作直接使用 Snapshot：
+
+- `snapshot.check_out(working_dir=...)`：在指定父目录下创建临时子目录并按范围导出，只读文件带只读标志，退出上下文清理。省略参数时使用系统临时目录。
+- `baseline.commit(directory)`：自动检查归类与权限，保留未导出的隐藏文件，生成完整候选。
+- `snapshot.save(path)` / `Snapshot.load(path)`：将完整文件、组件规则和版本信息保存为 JSON，或从中恢复。
+
+`baseline` 只是修改前的 Snapshot。`commit` 不改变它，也不自动接受候选；新版本的
+`parent_id` 指向它。`commit` 自动检查内容、删除、新增、重命名和可执行标志的改动，
+只读文件即使被 Worker 改过权限后写入也不能提交。主动创建隐藏组件的路径也会被拒绝。
+算法无需调用 `validate`；这个公共接口已移除。
+
+Snapshot 构造和加载时校验文件标签与固定规则一致，规则也参与版本哈希。
+`rollout(snapshot=...)` 和 `update` 自动检查版本兼容性及 Agent 当前权限，不能用
+旧的宽权限快照或加载的候选绕过范围。历史版本或兄弟候选也可以使用，但相对当前版本的
+差异必须符合权限。只有 `update` 会选择未来调用使用的版本。
+
+权限是 Agent 绑定给 Snapshot 的临时编辑视图，不参与版本 ID、相等比较或 JSON 保存。
+快照中的完整文件和历史信息保持不变。已获取的快照与正在执行的批次保持原来的权限视图，
+`set_scope` 影响后续获取和调用。`load` 只恢复版本；传回 Agent 后重新使用该 Agent 的权限。
+隐藏表示不导出到编辑目录，`Snapshot.files` 仍包含完整版本；此机制不提供进程级文件访问隔离。
+
+路径规则从文件树根目录匹配，`*` 只匹配当前路径段，完整的 `**` 段匹配多层目录。
+候选继承固定规则，因此已有路径保留标签，新文件也能自动归类；删除检查原组件；
+重命名按删除加新增处理。
+与自动收集不同，`commit` 和手动 `Snapshot.from_directory` 校验完整输入文件树，
+不会静默忽略未分类文件或运行产物。保存文件保留 bytes、组件和可执行标记，使用
+SHA-256 校验，`root_id/parent_id` 只记录在 Snapshot。保存不覆盖已有目标。
+JSON 格式为 v2，包含 `component_rules`；旧 v1 文件没有分类规则，需要从来源目录
+重新创建快照，加载时会明确提示。`load` 恢复文件版本，不恢复进程、SDK 会话或 Agent。
+
+### 最小离线示例
+
+```python
+import asyncio
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from flashrsi.core import Agent, Task, Trajectory
+
+
+class ExampleAgent(Agent):
+    name = "example"
+    description = "Offline example"
+
+    async def _run(self, prompt, working_dir=None):
+        answer = (self.files_dir / "skills/main.md").read_text(encoding="utf-8")
+        return Trajectory(output=answer)
+
+
+class Editor(Agent):
+    name = "editor"
+
+    async def _run(self, prompt, working_dir=None):
+        (working_dir / "skills/main.md").write_text(prompt, encoding="utf-8")
+        return Trajectory(output="已修改", usage={"example_calls": 1})
+
+
+with TemporaryDirectory() as temporary:
+    source = Path(temporary) / "files"
+    (source / "skills").mkdir(parents=True)
+    (source / "skills/main.md").write_text("initial answer", encoding="utf-8")
+    (source / "components.yaml").write_text("skill: ['skills/**']\n", encoding="utf-8")
+    target = ExampleAgent({"source_dir": source})
+    target.set_scope({"skill": "rw"})
+    tasks = (Task("capital", "capital?", ground_truth="Paris"),)
+
+    # 这个离线示例用精确匹配评分；正式算法调用 benchmark.grade。
+    def score(trajectories):
+        return sum(item.output == item.task.ground_truth for item in trajectories)
+
+    current_results = asyncio.run(target.rollout(tasks))
+
+    baseline = target.snapshot
+    with baseline.check_out() as directory:
+        edited = asyncio.run(Editor().run("Paris", working_dir=directory))
+        candidate = baseline.commit(directory)
+    candidate_results = asyncio.run(target.rollout(tasks, snapshot=candidate))
+    assert candidate_results[0].output == "Paris"
+    assert target.snapshot is baseline
+    if score(candidate_results) > score(current_results):
+        target.update(candidate)
+    assert asyncio.run(target.run("capital?")).output == "Paris"
+```
+
+[examples/agents/native_adapters.py](examples/agents/native_adapters.py) 使用两个独立的示例
+harness 目录：[open_harness](examples/agents/open_harness/__init__.py) 和
+[closed_harness](examples/agents/closed_harness/__init__.py)。它们都从自己的模块目录自动
+加载 `components.yaml`，无需传入来源路径。开源后端实际启动候选 Python 源码，闭源后端
+通过注入的假 SDK 显式传入原生指令和 skills，展示与编辑目标目录的区别。可直接执行：
+
+```bash
+uv run python examples/agents/native_adapters.py
+```
+
+本阶段验证包括真实本地子进程、假 SDK、并发/取消和 SearchQA 本地评分闭环，未调用
+真实模型或 Claude SDK。MiniAgent、Claude Code、SkillOpt 和 runner 的正式接入仍留在
+后续步骤，CLI 只支持准备模式。`mvp_doc.md` 中旧签名尚未同步，仍由开发者维护；
+这里记录本轮明确确认并实现的接口。
