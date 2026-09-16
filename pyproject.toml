@@ -14,10 +14,14 @@ flashrsi = "flashrsi.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.9"]
+miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["flashrsi*"]
+
+[tool.setuptools.package-data]
+"flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

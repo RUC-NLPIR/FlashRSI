@@ -1,0 +1,8 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools: []
+middlewares: []
+skills:
+  - main
+sub_agents: []
