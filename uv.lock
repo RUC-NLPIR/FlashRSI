@@ -601,6 +601,9 @@ dev = [
     { name = "pytest" },
     { name = "ruff" },
 ]
+llm = [
+    { name = "openai" },
+]
 miniagent = [
     { name = "openai" },
     { name = "requests" },
@@ -610,13 +613,14 @@ miniagent = [
 requires-dist = [
     { name = "claude-agent-sdk", marker = "extra == 'claude-code'", specifier = ">=0.2.153,<0.3" },
     { name = "datasets", specifier = ">=3,<5" },
+    { name = "openai", marker = "extra == 'llm'", specifier = ">=2,<3" },
     { name = "openai", marker = "extra == 'miniagent'", specifier = ">=2,<3" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8" },
     { name = "pyyaml", specifier = ">=6,<7" },
     { name = "requests", marker = "extra == 'miniagent'", specifier = ">=2.32,<3" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.9" },
 ]
-provides-extras = ["dev", "miniagent", "claude-code"]
+provides-extras = ["dev", "llm", "miniagent", "claude-code"]
 
 [[package]]
 name = "frozenlist"

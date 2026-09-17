@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
+import os
 import sys
 from collections.abc import Sequence
 from typing import Any
 
 import yaml
 
+from flashrsi._records import _redact, _secrets
 from flashrsi.config import _ConfigLoader, load_config, prepare_run_dir
 
 
@@ -31,10 +34,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error(str(exc))
 
     if not args.prepare_only:
-        parser.error(
-            "Experiment execution is not implemented yet. "
-            "Use --prepare-only to validate configuration and create a run directory."
-        )
+        from flashrsi.runner import _run
+
+        try:
+            run_dir, result = asyncio.run(_run(config))
+        except Exception as exc:
+            parser.error(_redact(str(exc), _secrets(config) + _secrets(os.environ)))
+        print(f"Completed experiment: {run_dir}")
+        print(f"Snapshot: {result['snapshot_id']}")
+        print(f"Test {result['primary_metric']}: {result['test_score']}")
+        return 0
 
     try:
         run_dir = prepare_run_dir(config)

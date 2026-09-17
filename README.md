@@ -2,7 +2,113 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-算法和 runner 执行将在后续步骤接入。
+现已接入 SkillOpt、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。Terminal-Bench 留到第 7 步。
+
+## SkillOpt
+
+安装所选后端依赖后即可运行，例如 MiniAgent 目标与纯 LLM Worker：
+
+```bash
+uv sync --extra miniagent --extra llm --extra dev
+uv run flashrsi run --config example.yaml \
+  --algorithm.num_epochs 1 --algorithm.max_steps 1 --benchmark.limit 6
+```
+
+模型和连接分别配置在 `agent.llm` 与 `algorithm.worker.llm`。上面的命令会调用模型；
+省略小规模覆盖时使用默认训练参数。Claude Code 目标需要 `claude-code` extra，
+通过 `--agent claude_code --model <Anthropic兼容模型>` 选择；Worker 可继续使用纯 LLM。
+Agent Worker 设置 `algorithm.worker.type: agent` 和 `algorithm.worker.name`，
+可选 `miniagent` 或 `claude_code`，使用它自己的模型和原生配置。
+
+流程集中在 [SkillOpt](flashrsi/algorithms/skillopt/__init__.py)：
+
+1. 初始化时加载 benchmark、设置范围；演化开始时在 dev 集评估初始版本。
+2. 每个 epoch 按 `seed + epoch` 打乱 train，依次执行 batch。
+3. 每个 reflection minibatch 分别分析失败与成功轨迹，生成结构化编辑。
+4. 按来源分组、分层合并；超过预算时由 Worker 排序选择。
+5. 通过 Snapshot checkout/commit 生成候选，在 dev 上严格提升才 `update`；平分也拒绝。
+6. 从第二个 epoch 末开始，在同一批训练任务上比较相邻 epoch 版本，更新优化器记忆及长期指导。
+7. runner 最后只对选中的版本评估一次 test，不将 test 反馈交给 Worker。
+
+`Algorithm(config, *, target, worker, benchmark)` 统一补齐算法默认配置、设置目标 scope、
+加载 benchmark 并检查通用执行能力，最后调用 `_check()` 完成算法自己的检查。
+runner 不重复加载数据，`evolve()` 直接组织演化流程并返回最终 `Snapshot`，
+选中的版本同时保留在 `target.snapshot`。算法不按 harness 或 benchmark 名称分支。
+
+算法在类上声明 `evolve_scope` 和 `observation_scope`。基类将 observation 中的组件设为
+`r`，evolve 中的组件设为 `rw`，重叠时以 `rw` 为准；未声明组件隐藏。
+SkillOpt 两者均为 `{"skill"}`。组件校验直接由 `Agent.set_scope()` 完成；
+SkillOpt 的 `_check()` 只检查算法参数和非空 train/dev，不重复检查 metric 契约。
+scope 控制目标快照的编辑目录；目标执行任务仍使用完整版本。
+
+实现按职责阅读：
+
+| 位置 | 职责 |
+| --- | --- |
+| `core/algorithm.py` | 初始化、`_evaluate`、`_ask`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
+| `algorithms/skillopt/__init__.py` | `evolve` 主流程、反思、合并排序、slow/meta update、接受或拒绝候选 |
+| `algorithms/skillopt/_patch.py` | 编辑响应解析、精确锚点、预算与保护区、slow guidance 应用 |
+| `algorithms/skillopt/_prompts.py` | 算法使用的 prompt 模板 |
+| `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
+
+基类的 `_evaluate` 返回评分后的 Trajectory，不更新目标版本；`_ask` 保留完整 Worker
+轨迹后返回文本。`_candidate` 接收文本文件更新，保留未指定文件，通过 Snapshot 检查
+权限并生成候选，不自动接受。`_read_text` 只读取 observation/evolve 声明的组件，
+二进制资源保留不改。其他算法若需要删除文件或修改二进制，可以直接使用 Snapshot 接口。
+runner 的最终 test 也复用 `_evaluate`；记录与算法内评估采用相同格式。
+
+`_ask(prompt)` 和 `_evaluate(snapshot, tasks)` 可直接调用；可选的关键字参数 `label`
+只用于轨迹文件名和 Worker 错误中的阶段提示，不影响模型输入或算法决策。
+默认分别使用 `worker` 和 `evaluation`，需要区分阶段时可写 `label="reflection"` 或
+`label="candidate_dev"`，记录文件按调用顺序命名为 `00001-<label>.json`。
+
+| algorithm 字段 | 默认值 | 含义 |
+| --- | --- | --- |
+| `num_epochs` | `4` | train 遍历次数 |
+| `batch_size` | `40` | 每次 fast update 的训练任务数 |
+| `reflection_minibatch_size` | `8` | 每次反思的最大任务数，成功/失败分别调用 |
+| `edit_budget` | `4` | 一次 fast update 最多应用的编辑条数 |
+| `merge_batch_size` | `8` | 一次合并最多输入的同源 patch 数，至少 2 |
+| `seed` | `42` | batch 调度与 slow update 抽样种子 |
+| `max_steps` | 空 | fast update 批次数上限；不是模型调用次数上限 |
+| `success_threshold` | `0.0` | finished 且主指标大于该值才归为成功 |
+| `use_slow_update` | `true` | 比较相邻 epoch，更新 skill 内的长期指导 |
+| `use_meta_skill` | `true` | 根据相邻 epoch 结果更新仅供优化器使用的记忆 |
+| `slow_update_samples` | `20` | 每次比较最多抽样的训练任务数 |
+
+所有筛选均使用 `benchmark.primary_metric`，按任务取平均；要求 train/dev 非空。
+达到 `max_steps` 时不再开始新的 batch；完整 epoch 已结束时仍执行其 epoch-end update。
+空 patch 跳过候选评估，但继续后续 batch。最近 5 个被拒绝的 fast patch 进入下一次反思。
+
+Worker 统一调用 `run(prompt)` 返回 JSON 文本，SkillOpt 应用编辑，不让 Worker 直接写目标目录。
+编辑协议属于算法私有实现，支持 `append`、`insert_after`、`replace`、`delete`，每条指定
+文件路径，后三种要求唯一、精确的文本锚点。支持多个 UTF-8 skill 文件；二进制支持资源保留不改。
+空 skill 目录允许 Worker 新建符合组件规则的原生技能；MiniAgent 通常应修改已启用的
+`skills/main.md`，新增文件是否会加载仍由其原生配置决定。Claude Code 采用
+`skills/<name>/SKILL.md` 与原生 frontmatter；算法不会修改默认 harness 的 seed 文件。
+
+fast edit 不能修改或引入 `SLOW_UPDATE_START/END` 保护区；只有 slow update 能写入。
+保护区校验是 SkillOpt 的编辑规则，Snapshot 的 scope 仍只表达文件权限。
+本 MVP 将 slow candidate 也纳入严格 dev 筛选，避免其接受后遗留过期的 baseline 分数。
+这是对旧版流程的明确调整；多文件协议、无自动恢复和严格解析也与旧版不同，
+本实现不宣称逐字复现官方 prompts 或论文数值。Worker 错误、非法 JSON、歧义锚点和越界
+编辑直接报错，保存已有证据，不静默替换为另一种优化策略。
+
+纯 LLM Worker 的 `llm` 使用 OpenAI-compatible Chat Completions：
+`model_name`、`api_key`、`base_url` 分别映射到模型与客户端，其他请求参数直接传给 SDK。
+凭据和地址留空时使用原生 `OPENAI_API_KEY`/`OPENAI_BASE_URL`。角色层 `timeout` 默认 300 秒，
+`max_retries` 默认 1；不隐式继承目标配置。该 Worker 无 Snapshot，也不支持带 `working_dir`
+的文件编辑。空回答、截断回答及未完成的工具调用返回 error Trajectory。
+
+实验目录包含解析后的配置（含算法默认值）、以版本 ID 命名的初始与候选 Snapshot、
+每次 Worker 调用的 prompt/Trajectory、train/dev 评分轨迹、候选接受记录，以及
+按调用顺序编号的 `trajectories/*-test.json` 和最终 `result.json`。Agent Worker 的版本额外保存为
+`snapshots/worker.json`。失败保存 `error.json` 并返回非零状态；配置与运行记录脱敏。
+Snapshot 保留原始文件内容，不能把凭据写入 seed 文件；候选检查已知运行凭据。
+当前不支持断点续跑、环境任务执行或并发调度，直接 Python 使用不配置实验目录时结果保留在内存。
+
+第 6 步验证包含本地模拟服务上的真实 MiniAgent 子进程/OpenAI SDK、Claude SDK/CLI
+演化闭环，以及算法、scope、持久化与失败行为的离线测试；未调用真实付费模型。
 
 ## 安装与验证
 
@@ -65,8 +171,8 @@ uv run flashrsi run --config example.yaml --prepare-only \
 负数可直接作为值；以 `-` 开头的普通字符串使用等号写法，例如 `--agent.prompt=-text`。
 
 `python -m flashrsi` 与 `flashrsi` 使用同一入口，`flashrsi run --help` 查看参数。
-目前不加 `--prepare-only` 会明确报错并返回非零状态，不创建目录；
-接入 runner 后，普通 `run` 才会执行演化。准备模式不下载数据或调用模型。
+不加 `--prepare-only` 时执行 SkillOpt 演化，结束后评估 test 集并保存结果。
+准备模式仍不下载数据或调用模型。不支持的算法、Agent 和 Benchmark 名称会在执行前报错。
 
 ## 配置
 
@@ -176,7 +282,7 @@ config = load_config(
 `run.output_dir` 相对 YAML 所在目录解析；通过 `overrides` 设置时相对当前工作目录。
 未传 YAML 时也相对当前工作目录。返回配置中的 `output_dir` 为绝对路径。
 
-创建 Agent 时明确传入它自己的子配置；runner 接入后也遵守同一分发约定：
+创建 Agent 时明确传入它自己的子配置；runner 遵守同一分发约定：
 
 ```python
 target = MiniAgent(config.agent)
@@ -215,7 +321,7 @@ runs/skillopt-miniagent-searchqa-20260914-163000-123456/
 `PASSWORD` 结尾的字段及 Authorization、Cookie 等凭据字段，同时脱敏其他字段中
 重复出现的相同值；嵌套映射和列表也按此处理。
 CLI 准备模式下这些子目录仍为空。通过 Python 使用 Snapshot 时可将 `working/`
-传给 `Snapshot.check_out()`，并显式保存版本；runner 自动执行与结果记录将在后续步骤接入。
+传给 `Snapshot.check_out()`，并显式保存版本；普通 CLI 运行由 runner 和算法保存版本与记录。
 
 ## Benchmark
 
@@ -284,7 +390,7 @@ auto 保留目录内已有的分区，并按上述规则补齐缺失分区。原
 
 当前没有自动注册机制；`flashrsi.benchmarks` 只是导出 `SearchQA` 类。
 没有必要的 `SearchQABenchmark` 别名已移除。Benchmark 可单独通过 Python 使用，
-按配置名选择实例的 runner 和 CLI 执行将在后续步骤接入。
+runner 根据配置名实例化 Benchmark、目标 Agent、Worker 和 Algorithm。
 
 ### 数据集准备与独立使用
 
@@ -332,8 +438,8 @@ uv run python scripts/prepare_searchqa.py
 | Trajectory | 保存一次执行的输出、消息、用量、错误和评分 |
 
 接入者在 harness 目录放置 `components.yaml` 并实现 `_run`，框架管理版本文件与执行上下文。算法只调用公共接口，
-不需要知道 harness 使用 SDK 还是子进程。Algorithm 和 runner 的正式实现留在后续步骤，
-下文示例展示它们会使用的现有接口。
+不需要知道 harness 使用 SDK 还是子进程。SkillOpt 与 runner 已通过这些接口接入，
+下文示例展示相同的候选生成与选择流程。
 
 ### 如何接入一个 harness
 
@@ -592,8 +698,8 @@ uv run python examples/agents/native_adapters.py
 ```
 
 Agent 基类阶段验证包括真实本地子进程、假 SDK、并发/取消和 SearchQA 本地评分闭环，未调用
-真实模型或 Claude SDK。SkillOpt 和 runner 的正式接入仍留在
-后续步骤，CLI 只支持准备模式。`mvp_doc.md` 中旧签名尚未同步，仍由开发者维护；
+真实模型或 Claude SDK。SkillOpt 已沿用这些接口接入，CLI 同时支持执行和准备模式。
+`mvp_doc.md` 中旧签名尚未同步，仍由开发者维护；
 这里记录本轮明确确认并实现的接口。
 
 ## MiniAgent
@@ -706,7 +812,7 @@ MiniAgent 的资源布局和 Snapshot 组件如下：
 
 本阶段集成测试使用真实本地子进程、真实 OpenAI SDK 和本地模拟 HTTP 服务，验证两种
 协议、skill/code 候选、文件编辑、SearchQA 离线评分、并发、取消和错误处理。
-CLI 仍只执行 `--prepare-only`，完整演化运行待 SkillOpt/runner 接入。
+CLI 可通过 SkillOpt/runner 执行完整演化；`--prepare-only` 保留准备模式。
 
 ### Atria 真实模型验证
 
@@ -903,4 +1009,4 @@ MCP、commands/输出样式、前台与后台 subagents、子 agent 续接、历
 update 生效、后台双子 agent 消息收集及 SendMessage 上下文续接；candidate rollout
 仍有超时，部分输出未通过严格格式断言，代理也出现模型路由失败。本次配置结构迁移
 采用离线协议与本地服务回归，没有重新调用付费模型。
-CLI 当前仍只支持 `--prepare-only`，SkillOpt、runner 和 Terminal-Bench 留到后续步骤。
+CLI 已支持 SkillOpt 演化与最终测试；Terminal-Bench 留到第 7 步。

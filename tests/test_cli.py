@@ -144,15 +144,12 @@ def test_flags_and_typed_settings_override_yaml_and_resolve_paths_from_cwd(
     assert not (tmp_path / "runs").exists()
 
 
-def test_run_without_execution_support_fails_without_creating_directories(
-    config_path, capsys
-):
+def test_unsupported_algorithm_fails_without_creating_directories(config_path, capsys):
     with pytest.raises(SystemExit) as exc:
-        main(["run", "--config", str(config_path)])
+        main(["run", "--config", str(config_path), "--algorithm", "unknown"])
     assert exc.value.code == 2
     output = capsys.readouterr()
-    assert "not implemented yet" in output.err
-    assert "--prepare-only" in output.err
+    assert "Unsupported algorithm" in output.err
     assert "test-target-secret" not in output.err
     assert not (config_path.parent / "runs").exists()
 

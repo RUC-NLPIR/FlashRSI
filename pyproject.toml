@@ -14,6 +14,7 @@ flashrsi = "flashrsi.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.9"]
+llm = ["openai>=2,<3"]
 miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
 claude-code = ["claude-agent-sdk>=0.2.153,<0.3"]
 

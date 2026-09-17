@@ -1,6 +1,7 @@
 """Detach configuration and redact credentials in persisted runtime records."""
 
 import json
+import os
 from collections.abc import Mapping
 from pathlib import Path
 
@@ -76,3 +77,44 @@ def _config_record(value):
             default=lambda item: {"type": "yaml", "value": yaml.safe_dump(item)},
         )
     )
+
+
+def _trajectory_record(trajectory):
+    """Serialize the public record without deepcopying immutable mapping views."""
+    task = trajectory.task
+    return {
+        "task": None
+        if task is None
+        else {
+            "task_id": task.task_id,
+            "question": task.question,
+            "ground_truth": task.ground_truth,
+            "env": task.env,
+            "metadata": dict(task.metadata),
+        },
+        "status": trajectory.status,
+        "output": trajectory.output,
+        "messages": list(trajectory.messages),
+        "metrics": dict(trajectory.metrics),
+        "error_message": trajectory.error_message,
+        "usage": dict(trajectory.usage),
+    }
+
+
+def _write_record(path, value, config):
+    """Write a new JSON record, including YAML-specific metadata when necessary."""
+
+    def encode(item):
+        if isinstance(item, Mapping):
+            return dict(item)
+        if isinstance(item, Path):
+            return str(item)
+        return {"type": "yaml", "value": yaml.safe_dump(item)}
+
+    detached = json.loads(json.dumps(value, default=encode, ensure_ascii=False))
+    secrets = sorted(
+        set(_secrets(config) + _secrets(os.environ)), key=len, reverse=True
+    )
+    with Path(path).open("x", encoding="utf-8") as stream:
+        json.dump(_redact(detached, secrets), stream, ensure_ascii=False, indent=2)
+        stream.write("\n")
