@@ -17,11 +17,18 @@ def config_path(tmp_path):
             {
                 "run": {"output_dir": "runs"},
                 "benchmark": {"limit": 10},
-                "agent": {"model_name": "yaml-target", "api_key": "test-target-secret"},
+                "agent": {
+                    "llm": {
+                        "model_name": "yaml-target",
+                        "api_key": "test-target-secret",
+                    }
+                },
                 "algorithm": {
                     "worker": {
-                        "model_name": "yaml-worker",
-                        "api_key": "test-worker-secret",
+                        "llm": {
+                            "model_name": "yaml-worker",
+                            "api_key": "test-worker-secret",
+                        },
                     }
                 },
             }
@@ -40,11 +47,11 @@ def test_prepare_from_yaml_creates_named_directory_and_redacted_config(
     assert run_dir.name.startswith("skillopt-miniagent-searchqa-")
     assert (run_dir / "snapshots").is_dir()
     config = load_config(run_dir / "config.yaml")
-    assert config.agent.model_name == "yaml-target"
+    assert config.agent.llm.model_name == "yaml-target"
     assert config.benchmark.limit == 10
     assert config.benchmark.split == "auto"
-    assert config.agent.api_key is None
-    assert config.algorithm.worker.api_key is None
+    assert config.agent.llm.api_key is None
+    assert config.algorithm.worker.llm.api_key is None
     output = capsys.readouterr()
     assert str(run_dir) in output.out
     assert "Preparation only" in output.out
@@ -87,7 +94,7 @@ def test_flags_and_typed_settings_override_yaml_and_resolve_paths_from_cwd(
                 str(config_path),
                 "--prepare-only",
                 "--set",
-                "agent.model_name=set-model",
+                "agent.llm.model_name=set-model",
                 "--model",
                 "flag-model",
                 "--worker-model",
@@ -109,7 +116,7 @@ def test_flags_and_typed_settings_override_yaml_and_resolve_paths_from_cwd(
                 "--set",
                 "agent.enabled=true",
                 "--set",
-                "agent.base_url=null",
+                "agent.llm.base_url=null",
                 "--set",
                 "agent.tools=[{name: search, timeout: 30}]",
                 "--set",
@@ -124,11 +131,11 @@ def test_flags_and_typed_settings_override_yaml_and_resolve_paths_from_cwd(
     (run_dir,) = (shell_dir / "final-runs").iterdir()
     assert run_dir.name.startswith("custom_algo-claude_code-custom_bench-")
     config = load_config(run_dir / "config.yaml")
-    assert config.agent.model_name == "set-model"
-    assert config.algorithm.worker.model_name == "flag-worker"
+    assert config.agent.llm.model_name == "set-model"
+    assert config.algorithm.worker.llm.model_name == "flag-worker"
     assert config.algorithm.rounds == 3
     assert config.agent.enabled is True
-    assert config.agent.base_url is None
+    assert config.agent.llm.base_url is None
     assert config.agent.tools[0].timeout == 30
     assert config.benchmark.filters.language == "en"
     assert config.benchmark.limit == 10
@@ -150,6 +157,57 @@ def test_run_without_execution_support_fails_without_creating_directories(
     assert not (config_path.parent / "runs").exists()
 
 
+def test_llm_override_keeps_independent_connections_and_redacts_nested_credentials(
+    config_path,
+):
+    assert (
+        main(
+            [
+                "run",
+                "--config",
+                str(config_path),
+                "--prepare-only",
+                "--agent.llm.base_url=https://target.test/v1",
+                "--algorithm.worker.llm.base_url=https://worker.test/v1",
+                "--algorithm.worker.llm.auth_token=worker-auth-secret",
+                "--algorithm.worker.llm.effort=high",
+                "--algorithm.worker.timeout=600",
+            ]
+        )
+        == 0
+    )
+    (run_dir,) = (config_path.parent / "runs").iterdir()
+    content = (run_dir / "config.yaml").read_text()
+    config = load_config(run_dir / "config.yaml")
+    assert config.agent.llm.base_url == "https://target.test/v1"
+    assert config.algorithm.worker.llm.base_url == "https://worker.test/v1"
+    assert config.algorithm.worker.llm.auth_token is None
+    assert config.algorithm.worker.llm.effort == "high"
+    assert config.algorithm.worker.timeout == 600
+    assert "worker-auth-secret" not in content
+
+
+def test_flat_connection_override_reports_migration_without_leaking_value(
+    config_path,
+    capsys,
+):
+    with pytest.raises(SystemExit) as exc:
+        main(
+            [
+                "run",
+                "--config",
+                str(config_path),
+                "--prepare-only",
+                "--algorithm.worker.api_key=misplaced-secret",
+            ]
+        )
+    assert exc.value.code == 2
+    error = capsys.readouterr().err
+    assert "Move algorithm.worker.api_key to algorithm.worker.llm.api_key" in error
+    assert "misplaced-secret" not in error
+    assert not (config_path.parent / "runs").exists()
+
+
 @pytest.mark.parametrize(
     ("settings", "message"),
     [
@@ -157,7 +215,10 @@ def test_run_without_execution_support_fails_without_creating_directories(
         (["=value"], "non-empty dot-separated keys"),
         (["agent..model_name=value"], "non-empty dot-separated keys"),
         (["agent.extra=1", "agent.extra.nested=2"], "agent.extra is not a mapping"),
-        (["agent.api_key=[test-secret"], "Invalid YAML value for --set agent.api_key"),
+        (
+            ["agent.llm.api_key=[test-secret"],
+            "Invalid YAML value for --set agent.llm.api_key",
+        ),
         (["agent.extra={key: 1, key: 2}"], "Invalid YAML value for --set agent.extra"),
         (["benchmark.split.train=0.9"], "ratios must sum to 1"),
     ],
@@ -213,8 +274,8 @@ def test_module_entry_point_supports_pure_cli_configuration(tmp_path):
     assert result.returncode == 0, result.stderr
     (run_dir,) = output_dir.iterdir()
     config = load_config(run_dir / "config.yaml")
-    assert config.agent.model_name == "cli-target"
-    assert config.algorithm.worker.model_name == "cli-worker"
+    assert config.agent.llm.model_name == "cli-target"
+    assert config.algorithm.worker.llm.model_name == "cli-worker"
 
 
 def test_help_and_missing_config_are_actionable(tmp_path, capsys):
@@ -240,9 +301,9 @@ def test_dotted_flags_set_arbitrary_config_depth_and_preserve_yaml_types(tmp_pat
                 str(output_dir),
                 "--agent.name",
                 "miniagent",
-                "--agent.model_name",
+                "--agent.llm.model_name",
                 "dotted-target",
-                "--algorithm.worker.model_name=dotted-worker",
+                "--algorithm.worker.llm.model_name=dotted-worker",
                 "--benchmark.split.train",
                 "0.5",
                 "--benchmark.split.dev=0.25",
@@ -250,13 +311,13 @@ def test_dotted_flags_set_arbitrary_config_depth_and_preserve_yaml_types(tmp_pat
                 "0.25",
                 "--algorithm.search.policy.max_depth",
                 "4",
-                "--algorithm.worker.sampling.temperature",
+                "--algorithm.worker.llm.sampling.temperature",
                 "-0.7",
-                "--algorithm.worker.sampling.delta",
+                "--algorithm.worker.llm.sampling.delta",
                 "-1.0e-3",
                 "--agent.enabled",
                 "true",
-                "--agent.base_url=null",
+                "--agent.llm.base_url=null",
                 "--agent.tools=[{name: search, timeout: 30}]",
                 "--agent.prompt=-text",
                 "--agent.endpoint=https://example.test/?a=b=c",
@@ -266,15 +327,15 @@ def test_dotted_flags_set_arbitrary_config_depth_and_preserve_yaml_types(tmp_pat
     )
     (run_dir,) = output_dir.iterdir()
     config = load_config(run_dir / "config.yaml")
-    assert config.agent.model_name == "dotted-target"
-    assert config.algorithm.worker.model_name == "dotted-worker"
+    assert config.agent.llm.model_name == "dotted-target"
+    assert config.algorithm.worker.llm.model_name == "dotted-worker"
     assert config.benchmark.split.train == 0.5
     assert config.benchmark.split.dev == config.benchmark.split.test == 0.25
     assert config.algorithm.search.policy.max_depth == 4
-    assert config.algorithm.worker.sampling.temperature == -0.7
-    assert config.algorithm.worker.sampling.delta == -0.001
+    assert config.algorithm.worker.llm.sampling.temperature == -0.7
+    assert config.algorithm.worker.llm.sampling.delta == -0.001
     assert config.agent.enabled is True
-    assert config.agent.base_url is None
+    assert config.agent.llm.base_url is None
     assert config.agent.tools[0].timeout == 30
     assert config.agent.prompt == "-text"
     assert config.agent.endpoint == "https://example.test/?a=b=c"
@@ -284,11 +345,19 @@ def test_dotted_flags_set_arbitrary_config_depth_and_preserve_yaml_types(tmp_pat
     ("settings", "expected"),
     [
         (
-            ["--set=agent.model_name=set-value", "--agent.model_name", "dotted-value"],
+            [
+                "--set=agent.llm.model_name=set-value",
+                "--agent.llm.model_name",
+                "dotted-value",
+            ],
             "dotted-value",
         ),
         (
-            ["--agent.model_name=dotted-value", "--set", "agent.model_name=set-value"],
+            [
+                "--agent.llm.model_name=dotted-value",
+                "--set",
+                "agent.llm.model_name=set-value",
+            ],
             "set-value",
         ),
     ],
@@ -310,7 +379,7 @@ def test_dotted_and_set_flags_follow_order_and_override_named_flags(
         == 0
     )
     (run_dir,) = (config_path.parent / "runs").iterdir()
-    assert load_config(run_dir / "config.yaml").agent.model_name == expected
+    assert load_config(run_dir / "config.yaml").agent.llm.model_name == expected
 
 
 @pytest.mark.parametrize("following", [[], ["--prepare-only"], ["-c"], ["--"]])
@@ -335,7 +404,7 @@ def test_option_terminator_stops_dotted_parsing_and_errors_omit_values(
                 str(config_path),
                 "--prepare-only",
                 "--",
-                "--agent.api_key=test-hidden-secret",
+                "--agent.llm.api_key=test-hidden-secret",
             ]
         )
     assert exc.value.code == 2

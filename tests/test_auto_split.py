@@ -12,8 +12,8 @@ from flashrsi.config import load_config
 def _config(**benchmark):
     return load_config(
         overrides={
-            "agent": {"model_name": "target"},
-            "algorithm": {"worker": {"model_name": "worker"}},
+            "agent": {"llm": {"model_name": "target"}},
+            "algorithm": {"worker": {"llm": {"model_name": "worker"}}},
             "benchmark": benchmark,
         }
     )

@@ -56,7 +56,7 @@ def _parser() -> argparse.ArgumentParser:
         allow_abbrev=False,
         epilog=(
             "Any configuration field accepts --path.to.key VALUE or --path.to.key=VALUE, "
-            "e.g. --algorithm.worker.temperature 0.7. Values use YAML syntax. "
+            "e.g. --algorithm.worker.llm.temperature 0.7. Values use YAML syntax. "
             "Dotted options and --set override named flags; the last setting wins."
         ),
     )
@@ -66,8 +66,8 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--benchmark", help="Override benchmark.name")
     run.add_argument("--algorithm", help="Override algorithm.name")
     run.add_argument("--agent", help="Override agent.name")
-    run.add_argument("--model", help="Override agent.model_name")
-    run.add_argument("--worker-model", help="Override algorithm.worker.model_name")
+    run.add_argument("--model", help="Override agent.llm.model_name")
+    run.add_argument("--worker-model", help="Override algorithm.worker.llm.model_name")
     run.add_argument("--output-dir", metavar="PATH", help="Override run.output_dir")
     run.add_argument(
         "--set",
@@ -129,8 +129,8 @@ def _overrides(args: argparse.Namespace) -> dict[str, Any]:
         "benchmark": "benchmark.name",
         "algorithm": "algorithm.name",
         "agent": "agent.name",
-        "model": "agent.model_name",
-        "worker_model": "algorithm.worker.model_name",
+        "model": "agent.llm.model_name",
+        "worker_model": "algorithm.worker.llm.model_name",
         "output_dir": "run.output_dir",
     }
     for flag, path in fields.items():

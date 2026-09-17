@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from flashrsi._records import _redact, _secrets
 from flashrsi.core import Agent, Trajectory
 
 _ENTRY = Path(__file__).with_name("_entry.py")
@@ -23,11 +24,12 @@ class MiniAgent(Agent):
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         config = self.config
-        model = config["model_name"]
+        llm = config["llm"]
+        model = llm["model_name"]
         timeout = config.get("timeout", 300)
         # Use the harness's existing environment interface in this child only.
-        api_key = config.get("api_key") or ""
-        base_url = config.get("base_url") or ""
+        api_key = llm.get("api_key") or ""
+        base_url = llm.get("base_url") or ""
         env = {
             **os.environ,
             "FLASHRSI_MINIAGENT_API_KEY": api_key,
@@ -35,11 +37,11 @@ class MiniAgent(Agent):
             "FLASHRSI_MINIAGENT_SIDE_MODEL": model,
             "FLASHRSI_MINIAGENT_BASE_URL": base_url,
             "FLASHRSI_MINIAGENT_SIDE_BASE_URL": base_url,
-            "FLASHRSI_MINIAGENT_MAX_TOKENS": str(config.get("max_tokens", 4096)),
-            "FLASHRSI_MINIAGENT_LLM_MAX_RETRIES": str(config.get("llm_max_retries", 1)),
-            "FLASHRSI_MINIAGENT_REASONING": config.get("reasoning_effort") or "",
+            "FLASHRSI_MINIAGENT_MAX_TOKENS": str(llm.get("max_tokens", 4096)),
+            "FLASHRSI_MINIAGENT_LLM_MAX_RETRIES": str(llm.get("llm_max_retries", 1)),
+            "FLASHRSI_MINIAGENT_REASONING": llm.get("reasoning_effort") or "",
             "FLASHRSI_MINIAGENT_EXTRA_BODY": json.dumps(
-                config.get("extra_body") or {}, default=dict
+                llm.get("extra_body") or {}, default=dict
             ),
         }
         # files_dir belongs to Agent; logs and the task cwd belong to this run.
@@ -58,7 +60,9 @@ class MiniAgent(Agent):
             }
             if working_dir is not None:
                 request["working_dir"] = str(working_dir)
-            secrets = _secrets(env)
+            secrets = sorted(
+                set(_secrets(env) + _secrets(config)), key=len, reverse=True
+            )
             process = await asyncio.create_subprocess_exec(
                 sys.executable,
                 "-I",
@@ -113,27 +117,3 @@ async def _stop(process):
     elif process.returncode is None:
         process.kill()
     await process.wait()
-
-
-def _secrets(env):
-    values = [
-        value
-        for key, value in env.items()
-        if key.upper().endswith(("API_KEY", "TOKEN", "SECRET", "PASSWORD"))
-    ]
-    return sorted(filter(None, values), key=len, reverse=True)
-
-
-def _redact(value, secrets):
-    """Redact subprocess text and decoded JSON without changing their structure."""
-    if isinstance(value, str):
-        for secret in secrets:
-            value = value.replace(secret, "[REDACTED]")
-        return value
-    if isinstance(value, dict):
-        return {
-            _redact(key, secrets): _redact(item, secrets) for key, item in value.items()
-        }
-    if isinstance(value, list):
-        return [_redact(item, secrets) for item in value]
-    return value

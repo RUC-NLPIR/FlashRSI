@@ -68,7 +68,7 @@ def test_source_override_uses_its_own_manifest_and_files(
     else:
         source = external
 
-    agent = agent_type({"agent": {"source_dir": source, "model_name": "offline"}})
+    agent = agent_type({"source_dir": source, "llm": {"model_name": "offline"}})
 
     assert agent.component_rules == {"prompt": ("skills/**",)}
     assert agent.snapshot.files["skills/main.md"].component == "prompt"

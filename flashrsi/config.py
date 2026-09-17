@@ -13,7 +13,21 @@ from typing import Any
 
 import yaml
 
+from flashrsi._records import _redact_config
+
 _SPLIT_RATIOS = {"train": 0.6, "dev": 0.2, "test": 0.2}
+
+# Previously accepted request fields now have one unambiguous location.
+_LLM_FIELDS = (
+    "model_name",
+    "api_key",
+    "base_url",
+    "max_tokens",
+    "reasoning_effort",
+    "effort",
+    "llm_max_retries",
+    "extra_body",
+)
 
 _DEFAULTS = {
     "run": {"output_dir": "runs"},
@@ -23,17 +37,13 @@ _DEFAULTS = {
     },
     "agent": {
         "name": "miniagent",
-        "model_name": None,
-        "api_key": None,
-        "base_url": None,
+        "llm": {"model_name": None, "api_key": None, "base_url": None},
     },
     "algorithm": {
         "name": "skillopt",
         "worker": {
             "type": "llm",
-            "model_name": None,
-            "api_key": None,
-            "base_url": None,
+            "llm": {"model_name": None, "api_key": None, "base_url": None},
         },
     },
 }
@@ -93,14 +103,6 @@ def _wrap(value: Any) -> Any:
     return value
 
 
-def _plain(value: Any) -> Any:
-    if isinstance(value, Mapping):
-        return {key: _plain(item) for key, item in value.items()}
-    if isinstance(value, list):
-        return [_plain(item) for item in value]
-    return value
-
-
 class _ConfigLoader(yaml.SafeLoader):
     """Reject duplicate YAML keys instead of silently discarding settings."""
 
@@ -132,7 +134,8 @@ def load_config(
     ``run.output_dir`` is relative to the YAML file, or to the current directory
     when set through overrides. This function does not create directories or
     read environment variables. Each category accepts additional parameters;
-    nested mappings support attribute access. API keys remain in the result.
+    nested mappings support attribute access. Target and worker model settings
+    live in their independent ``llm`` mappings. Credentials remain in the result.
     """
     base_dir = Path.cwd()
     values = {}
@@ -168,7 +171,7 @@ def prepare_run_dir(config: Mapping[str, Any]) -> Path:
     """Create ``{algo}-{agent_name}-{bench}-{time}`` under run.output_dir.
 
     Time is local, with microseconds. A collision advances the timestamp by one
-    microsecond. The saved config omits API key values; the input is unchanged.
+    microsecond. The saved config omits credential values; the input is unchanged.
     This function prepares directories but does not execute an experiment.
     """
     resolved = load_config(overrides=config)
@@ -186,9 +189,7 @@ def prepare_run_dir(config: Mapping[str, Any]) -> Path:
         except FileExistsError:
             timestamp += timedelta(microseconds=1)
 
-    saved = _plain(resolved)
-    saved["agent"]["api_key"] = None
-    saved["algorithm"]["worker"]["api_key"] = None
+    saved = _redact_config(resolved)
     try:
         for name in ("snapshots", "trajectories", "working"):
             (run_dir / name).mkdir()
@@ -252,10 +253,23 @@ def _validate(config: dict) -> None:
         raise ValueError("algorithm.worker.name requires type: agent")
 
     for section, values in (("agent", config["agent"]), ("algorithm.worker", worker)):
-        _require_text(values["model_name"], f"{section}.model_name")
+        _validate_role_config(values, section)
+        llm = values["llm"]
+        if not isinstance(llm, Mapping):
+            raise ValueError(f"{section}.llm must be a mapping")
+        _require_text(llm["model_name"], f"{section}.llm.model_name")
         for field in ("api_key", "base_url"):
-            if values[field] is not None:
-                _require_text(values[field], f"{section}.{field}")
+            if llm[field] is not None:
+                _require_text(llm[field], f"{section}.llm.{field}")
+
+
+def _validate_role_config(values: Mapping[str, Any], section: str) -> None:
+    """Reject old field placement even when constructing an Agent directly."""
+    for field in _LLM_FIELDS:
+        if field in values:
+            raise ValueError(f"Move {section}.{field} to {section}.llm.{field}")
+    if "llm" in values and not isinstance(values["llm"], Mapping):
+        raise ValueError(f"{section}.llm must be a mapping")
 
 
 def _require_name(value: Any, field: str) -> None:

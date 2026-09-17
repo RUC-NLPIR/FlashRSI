@@ -15,6 +15,7 @@ flashrsi = "flashrsi.cli:main"
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.9"]
 miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
+claude-code = ["claude-agent-sdk>=0.2.153,<0.3"]
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -22,6 +23,7 @@ include = ["flashrsi*"]
 
 [tool.setuptools.package-data]
 "flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
+"flashrsi.agents.claude_code" = ["*.yaml", "*.md", "settings.json", ".mcp.json", ".lsp.json", ".claude-plugin/*.json", "skills/**/*", "commands/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "output-styles/**/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

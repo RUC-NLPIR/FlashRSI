@@ -2,18 +2,20 @@
 
 from __future__ import annotations
 
+import copy
 import inspect
 import sys
 from collections.abc import Iterable, Mapping
 from contextvars import ContextVar
-from dataclasses import replace
+from dataclasses import dataclass, replace
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
 import yaml
 
-from flashrsi.config import _ConfigLoader
+from flashrsi._records import _config_record
+from flashrsi.config import Config, _ConfigLoader, _validate_role_config
 from flashrsi.core.benchmark import Task
 from flashrsi.core.snapshot import (
     Snapshot,
@@ -22,6 +24,13 @@ from flashrsi.core.snapshot import (
     _matching_components,
 )
 from flashrsi.core.trajectory import Trajectory
+
+
+@dataclass(frozen=True)
+class _Execution:
+    snapshot: Snapshot | None
+    files_dir: Path | None
+    config: Config
 
 
 class Agent:
@@ -42,20 +51,34 @@ class Agent:
             raise ValueError("Agent subclasses must declare a non-empty name")
         if config is not None and not isinstance(config, Mapping):
             raise ValueError("Agent config must be a mapping")
-        self.config = config.get("agent", config) if config is not None else {}
-        if not isinstance(self.config, Mapping):
-            raise ValueError("Agent config must be a mapping")
-        self._snapshot = _capture_agent(type(self), self.config)
+        if config is not None and "agent" in config:
+            raise ValueError(
+                "Pass the Agent's own configuration: config.agent or "
+                "config.algorithm.worker, not the whole experiment configuration"
+            )
+        self._config = Config(copy.deepcopy(config))
+        _validate_role_config(self._config, "config")
+        self._snapshot = _capture_agent(type(self), self._config)
         # Local to the async call: update changes the default for future calls,
         # never the files or version visible inside a running backend.
-        self._execution: ContextVar[tuple[Snapshot | None, Path | None] | None] = (
-            ContextVar("agent_execution", default=None)
+        self._execution: ContextVar[_Execution | None] = ContextVar(
+            "agent_execution", default=None
         )
+
+    @property
+    def config(self) -> Config:
+        """Defaults outside execution; a detached configuration inside a call.
+
+        Edit these defaults before the next run or rollout. Backends should only
+        read the call-local copy; edits elsewhere cannot affect an active batch.
+        """
+        execution = self._execution.get()
+        return execution.config if execution is not None else self._config
 
     @property
     def snapshot(self) -> Snapshot:
         execution = self._execution.get()
-        snapshot = execution[0] if execution is not None else self._snapshot
+        snapshot = execution.snapshot if execution is not None else self._snapshot
         if snapshot is None:
             raise RuntimeError("this Agent has no versioned files; add components.yaml")
         return snapshot
@@ -64,7 +87,7 @@ class Agent:
     def component_rules(self) -> Mapping[str, tuple[str, ...]]:
         """The selected version's rules, loaded from components.yaml once at creation."""
         execution = self._execution.get()
-        snapshot = execution[0] if execution is not None else self._snapshot
+        snapshot = execution.snapshot if execution is not None else self._snapshot
         return (
             snapshot.component_rules if snapshot is not None else MappingProxyType({})
         )
@@ -73,9 +96,9 @@ class Agent:
     def files_dir(self) -> Path:
         """This call's code/configuration directory, available inside _run only."""
         execution = self._execution.get()
-        if execution is None or execution[1] is None:
+        if execution is None or execution.files_dir is None:
             raise RuntimeError("files_dir is available only inside a run with files")
-        return execution[1]
+        return execution.files_dir
 
     def set_scope(self, scope: Mapping[str, str]) -> None:
         """Set editing defaults: rw, r, or none; omitted components are hidden.
@@ -104,7 +127,7 @@ class Agent:
             if not working_dir.is_dir():
                 raise ValueError("working_dir must be an existing directory")
         execution = self._execution.get()
-        selected = execution[0] if execution is not None else self._snapshot
+        selected = execution.snapshot if execution is not None else self._snapshot
         if selected is None:
             return await self._execute(prompt, working_dir, None, None)
         with selected._export(full=True) as files:
@@ -134,12 +157,14 @@ class Agent:
                 "tasks with env require an environment-aware rollout"
             )
         execution = self._execution.get()
-        baseline = execution[0] if execution is not None else self._snapshot
+        baseline = execution.snapshot if execution is not None else self._snapshot
         selected = baseline if snapshot is None else snapshot
         if selected is not None:
             self._validate_snapshot(selected, baseline=baseline)
             selected = selected._with_scope(baseline._scope)
-        token = self._execution.set((selected, None))
+        token = self._execution.set(
+            _Execution(selected, None, copy.deepcopy(self.config))
+        )
         try:
             trajectories = []
             for task in tasks:
@@ -155,12 +180,19 @@ class Agent:
         snapshot: Snapshot | None,
         files_dir: Path | None,
     ) -> Trajectory:
-        token = self._execution.set((snapshot, files_dir))
+        config = copy.deepcopy(self.config)
+        _validate_role_config(config, "config")
+        record = {
+            "type": "RunConfig",
+            "config": _config_record(config),
+            "snapshot_id": snapshot.id if snapshot is not None else None,
+        }
+        token = self._execution.set(_Execution(snapshot, files_dir, config))
         try:
             result = await self._run(prompt, working_dir)
             if not isinstance(result, Trajectory):
                 raise TypeError("_run must return a Trajectory")
-            return result
+            return replace(result, messages=(record, *result.messages))
         finally:
             self._execution.reset(token)
 

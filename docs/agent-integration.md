@@ -26,17 +26,39 @@ skill:
 
 | 输入 | 用途 |
 | --- | --- |
-| `self.config` | 按原生接口传入模型名、地址等设置；原生用环境变量，就配置子进程的环境 |
+| `self.config` | 当前调用固定的角色配置；模型名、地址和请求参数从 `self.config.llm` 读取，执行参数读取该角色自身字段 |
 | `self.files_dir` | 从这里执行所选版本的代码、加载配置与资源 |
 | `working_dir` | 传给 harness 的任务或编辑目录 |
 
 返回 `Trajectory` 时填写答案和状态；原生提供 messages、usage 就一并带回，没有则用默认空值。
 调用结束前关闭自己启动的进程或 SDK 会话；运行产物放在版本目录外，保存的记录按项目要求脱敏。
 
+目标 Agent 使用 `TargetAgent(config.agent)`，Worker 使用
+`WorkerAgent(config.algorithm.worker)`；构造函数拒绝整份实验配置。两种角色各自拥有
+独立的 `llm`，适配器不需要判断自己的角色。`timeout`、`max_turns`、权限和
+`source_dir` 等执行参数留在角色层；原生资源配置继续从 `self.files_dir` 加载。
+
+初始化会复制配置，之后通过实例的 `config` 调整下一次执行的默认值。单次 `run` 和
+整批 `rollout` 都固定开始时的配置；`_run` 只读取本次副本。基类在 messages 前加入
+脱敏的 `RunConfig`，记录角色配置和 Snapshot ID；适配器直接返回原生 messages 即可。
+该记录不展开后端默认值或继承的环境变量，也不等同于完整模型请求。
+日期、二进制、集合等非 JSON 的 YAML 值以 `type: yaml` 和 YAML 文本 `value`
+记录，保证 trajectory 可序列化；实验配置文件保留这些值的原类型。
+`update(snapshot)` 只选择资源版本，不更改模型或连接配置。
+
 先看短例子：[进程接入](../examples/agents/open_harness/__init__.py)、
 [SDK 接入](../examples/agents/closed_harness/__init__.py)。
 MiniAgent 的完整实现是 [适配类](../flashrsi/agents/miniagent/__init__.py) 和
 [_entry.py](../flashrsi/agents/miniagent/_entry.py)。后者只是它的子进程入口，其他 harness 不必照搬。
+Claude Code 的 [适配类](../flashrsi/agents/claude_code/__init__.py) 直接创建官方 SDK 会话，
+默认使用原生 `claude_code` system prompt，不预装 skill 或附加指令；
+从 `files_dir` 加载按需添加的原生插件（skills、agents、hooks 等）、MCP 和 settings，
+将 `working_dir` 传为 cwd，并关闭隐式项目配置。SDK 事件含子 agent 的文本和父子 ID；
+适配器负责等有限子任务结束及收集其主 agent 回复，公共 Trajectory 保持不变。
+`CLAUDE.md` 可以不存在或为空；版本中提供非空内容时，经 SDK `system_prompt.append`
+追加。这是显式选择 Snapshot 资源，不是 CLI 的目录发现与分层加载。默认版本不含这个文件。
+会话与子任务输出使用独立临时运行目录，关闭历史 auto memory，原生凭据仍从原位置读取。
+扩展加载失败、SDK 异常和暂停／中止结果返回错误轨迹，并保留脱敏诊断。
 
 ## MiniAgent 的调用路径
 
@@ -44,9 +66,10 @@ MiniAgent 的完整实现是 [适配类](../flashrsi/agents/miniagent/__init__.p
 MiniAgent._run → 子进程 _entry.py → 原生 run → Trajectory
 ```
 
-适配类直接把 config 映射为原生参数和子进程环境变量，原生 `run` 不接收框架 config，
+适配类直接把 `config.llm` 和角色执行参数映射为原生参数和子进程环境变量，原生 `run` 不接收框架 config，
 也没有给 Context、llm、reader 注入客户端。模型设置只在子进程中生效。
-`source_dir` 提供的 harness 需支持同样的原生参数和环境变量；没有返回 messages 时留空。
+`source_dir` 提供的 harness 需支持同样的原生参数和环境变量；没有返回 messages 时，
+最终轨迹仍包含基类添加的 `RunConfig`。
 
 ## harness 的小改动
 

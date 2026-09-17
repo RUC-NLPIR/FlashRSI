@@ -138,11 +138,14 @@ def model_server():
     assert not model.errors
 
 
-def _config(model_server, **overrides):
+def _config(model_server, *, llm=None, **overrides):
     return {
-        "model_name": "custom-model",
-        "api_key": "local-test-key",
-        "base_url": model_server.base_url,
+        "llm": {
+            "model_name": "custom-model",
+            "api_key": "local-test-key",
+            "base_url": model_server.base_url,
+            **(llm or {}),
+        },
         **overrides,
     }
 
@@ -168,10 +171,9 @@ def _trace_text(trajectory):
     )
 
 
-@pytest.mark.parametrize("full_config", [False, True])
-def test_text_run_uses_real_chat_sdk_with_defaults(model_server, full_config):
+def test_text_run_uses_real_chat_sdk_with_defaults(model_server):
     config = _config(model_server)
-    agent = MiniAgent({"agent": config} if full_config else config)
+    agent = MiniAgent(config)
     trajectory = asyncio.run(agent.run("Capital of France?"))
 
     assert trajectory.status == "finished", trajectory.error_message
@@ -199,7 +201,7 @@ def test_text_run_uses_real_chat_sdk_with_defaults(model_server, full_config):
 
 
 def test_openai_model_uses_real_responses_sdk(model_server):
-    agent = MiniAgent(_config(model_server, model_name="openai/gpt-5"))
+    agent = MiniAgent(_config(model_server, llm={"model_name": "openai/gpt-5"}))
     trajectory = asyncio.run(agent.run("Capital of France?"))
 
     assert trajectory.status == "finished", trajectory.error_message
@@ -219,7 +221,7 @@ def test_openai_model_uses_real_responses_sdk(model_server):
 @pytest.mark.parametrize("model_name", ["organization/custom-model", "anthropic/model"])
 def test_namespaced_model_ids_use_compatible_sdk_unchanged(model_server, model_name):
     result = asyncio.run(
-        MiniAgent(_config(model_server, model_name=model_name)).run("question")
+        MiniAgent(_config(model_server, llm={"model_name": model_name})).run("question")
     )
 
     assert result.status == "finished", result.error_message
@@ -237,7 +239,9 @@ def test_reasoning_effort_is_explicit_and_not_inferred(
 ):
     result = asyncio.run(
         MiniAgent(
-            _config(model_server, model_name=model_name, reasoning_effort=effort)
+            _config(
+                model_server, llm={"model_name": model_name, "reasoning_effort": effort}
+            )
         ).run("question")
     )
 
@@ -260,12 +264,12 @@ def test_extra_body_reaches_the_selected_sdk_api(model_server, model_name):
     config = load_config(
         overrides={
             "agent": _config(
-                model_server, model_name=model_name, extra_body=extra_body
+                model_server, llm={"model_name": model_name, "extra_body": extra_body}
             ),
-            "algorithm": {"worker": {"model_name": "other-model"}},
+            "algorithm": {"worker": {"llm": {"model_name": "other-model"}}},
         }
     )
-    result = asyncio.run(MiniAgent(config).run("question"))
+    result = asyncio.run(MiniAgent(config.agent).run("question"))
 
     assert result.status == "finished", result.error_message
     request = model_server.requests[0]
@@ -295,12 +299,12 @@ def test_rollout_preserves_tasks_and_can_be_graded_locally(model_server, tmp_pat
         overrides={
             "benchmark": {"data_path": data},
             "agent": _config(model_server),
-            "algorithm": {"worker": {"model_name": "custom-model"}},
+            "algorithm": {"worker": {"llm": {"model_name": "custom-model"}}},
         }
     )
     benchmark = SearchQA(config)
     benchmark.load()
-    agent = MiniAgent(config)
+    agent = MiniAgent(config.agent)
     (trajectory,) = asyncio.run(agent.rollout(benchmark.dev))
     (graded,) = benchmark.grade((trajectory,))
 
@@ -428,7 +432,9 @@ def test_worker_edits_target_with_its_own_skill_configuration(
         return 200, response
 
     model_server.reply = reply
-    worker = MiniAgent(_config(model_server, model_name=model_name, source_dir=source))
+    worker = MiniAgent(
+        _config(model_server, llm={"model_name": model_name}, source_dir=source)
+    )
     baseline = worker.snapshot
     trajectory = asyncio.run(worker.run("Improve skills/main.md", working_dir=target))
 
@@ -442,7 +448,9 @@ def test_worker_edits_target_with_its_own_skill_configuration(
     assert "updated skill" in _trace_text(trajectory)
     if model_name == "openai/gpt-5":
         first_assistant = next(
-            message for message in trajectory.messages if message["role"] == "assistant"
+            message
+            for message in trajectory.messages
+            if message.get("role") == "assistant"
         )
         call = first_assistant["tool_calls"][0]
         assert call["function"]["name"] == "write_file"
@@ -464,7 +472,8 @@ def test_worker_edits_target_with_its_own_skill_configuration(
         assert assistant["reasoning_content"] == "Choose the file tool."
 
 
-def test_api_error_returns_redacted_trace_without_retries(model_server):
+@pytest.mark.parametrize("credential", ["api_key", "extra_body"])
+def test_api_error_returns_redacted_trace_without_retries(model_server, credential):
     secret = "secret-key-that-must-not-appear"
     model_server.reply = lambda request: (
         401,
@@ -475,7 +484,12 @@ def test_api_error_returns_redacted_trace_without_retries(model_server):
             }
         },
     )
-    agent = MiniAgent(_config(model_server, api_key=secret))
+    llm = (
+        {"api_key": secret}
+        if credential == "api_key"
+        else {"extra_body": {"provider_options": {"api_key": secret}}}
+    )
+    agent = MiniAgent(_config(model_server, llm=llm))
     trajectory = asyncio.run(agent.run("question"))
 
     assert trajectory.status == "error"
@@ -504,28 +518,38 @@ def test_concurrent_instances_keep_endpoint_auth_and_options_isolated(
         200,
         _chat_reply(request["body"], request["body"]["model"]),
     )
-    first = MiniAgent(
-        _config(
-            model_server,
-            model_name="custom-model",
-            base_url=model_server.base_url + "/first",
-            api_key="first-key",
-            max_tokens=31,
-            reasoning_effort="low",
-            extra_body={"provider_options": {"tag": "first"}},
-        )
+    config = load_config(
+        overrides={
+            "agent": _config(
+                model_server,
+                llm={
+                    "model_name": "custom-model",
+                    "base_url": model_server.base_url + "/first",
+                    "api_key": "first-key",
+                    "max_tokens": 31,
+                    "reasoning_effort": "low",
+                    "extra_body": {"provider_options": {"tag": "first"}},
+                },
+            ),
+            "algorithm": {
+                "worker": _config(
+                    model_server,
+                    type="agent",
+                    name="miniagent",
+                    llm={
+                        "model_name": "other-model",
+                        "base_url": model_server.base_url + "/second",
+                        "api_key": "second-key",
+                        "max_tokens": 47,
+                        "reasoning_effort": "high",
+                        "extra_body": {"provider_options": {"tag": "second"}},
+                    },
+                )
+            },
+        }
     )
-    second = MiniAgent(
-        _config(
-            model_server,
-            model_name="other-model",
-            base_url=model_server.base_url + "/second",
-            api_key="second-key",
-            max_tokens=47,
-            reasoning_effort="high",
-            extra_body={"provider_options": {"tag": "second"}},
-        )
-    )
+    first = MiniAgent(config.agent)
+    second = MiniAgent(config.algorithm.worker)
 
     async def scenario():
         return await asyncio.gather(
@@ -566,8 +590,8 @@ def test_public_model_fields_are_validated_by_config(field, value):
     with pytest.raises(ValueError, match=field):
         load_config(
             overrides={
-                "agent": {"model_name": "custom-model", field: value},
-                "algorithm": {"worker": {"model_name": "gpt-5"}},
+                "agent": {"llm": {"model_name": "custom-model", field: value}},
+                "algorithm": {"worker": {"llm": {"model_name": "gpt-5"}}},
             }
         )
 
@@ -580,7 +604,7 @@ def test_custom_model_uses_sdk_environment_defaults(model_server, monkeypatch):
     monkeypatch.setenv("FLASHRSI_MINIAGENT_EXTRA_BODY", "invalid inherited JSON")
     monkeypatch.setenv("OPENAI_BASE_URL", model_server.base_url)
     monkeypatch.setenv("OPENAI_API_KEY", "environment-test-key")
-    agent = MiniAgent({"model_name": "custom-model"})
+    agent = MiniAgent({"llm": {"model_name": "custom-model"}})
     result = asyncio.run(agent.run("question"))
     assert result.status == "finished", result.error_message
     request = model_server.requests[0]
@@ -599,7 +623,9 @@ def test_deepseek_name_uses_generic_environment_without_provider_defaults(
     monkeypatch.setenv("DEEPSEEK_API_KEY", "unused-provider-key")
     monkeypatch.setenv("OPENAI_API_KEY", "generic-environment-key")
     monkeypatch.setenv("OPENAI_BASE_URL", model_server.base_url)
-    result = asyncio.run(MiniAgent({"model_name": "deepseek-v4-flash"}).run("question"))
+    result = asyncio.run(
+        MiniAgent({"llm": {"model_name": "deepseek-v4-flash"}}).run("question")
+    )
 
     assert result.status == "finished", result.error_message
     request = model_server.requests[0]
@@ -614,12 +640,60 @@ def test_deepseek_name_uses_generic_environment_without_provider_defaults(
 def test_changed_config_is_used_on_the_next_run(model_server):
     agent = MiniAgent(_config(model_server))
     asyncio.run(agent.run("first"))
-    agent.config.update(model_name="other-model", api_key="updated-key", max_tokens=73)
+    agent.config["llm"].update(
+        model_name="other-model", api_key="updated-key", max_tokens=73
+    )
     result = asyncio.run(agent.run("second"))
     assert result.status == "finished", result.error_message
     assert model_server.requests[-1]["body"]["model"] == "other-model"
     assert model_server.requests[-1]["body"]["max_tokens"] == 73
     assert model_server.requests[-1]["authorization"] == "Bearer updated-key"
+
+
+def test_rollout_pins_llm_options_while_defaults_change(model_server):
+    agent = MiniAgent(_config(model_server, llm={"max_tokens": 31}))
+
+    def reply(request):
+        if len(model_server.requests) == 1:
+            # The server thread is outside the running Agent's execution context.
+            agent.config.llm.update(
+                model_name="next-model", api_key="next-key", max_tokens=47
+            )
+        return 200, _chat_reply(request["body"], request["body"]["model"])
+
+    model_server.reply = reply
+    batch = asyncio.run(
+        agent.rollout(
+            [Task("first", "first question"), Task("second", "second question")]
+        )
+    )
+    later = asyncio.run(agent.run("next batch"))
+
+    assert [trace.output for trace in (*batch, later)] == [
+        "custom-model",
+        "custom-model",
+        "next-model",
+    ]
+    assert [request["body"]["max_tokens"] for request in model_server.requests] == [
+        31,
+        31,
+        47,
+    ]
+    assert [request["authorization"] for request in model_server.requests] == [
+        "Bearer local-test-key",
+        "Bearer local-test-key",
+        "Bearer next-key",
+    ]
+    for trace, model in (
+        (batch[0], "custom-model"),
+        (batch[1], "custom-model"),
+        (later, "next-model"),
+    ):
+        recorded = trace.messages[0]
+        assert recorded["type"] == "RunConfig"
+        assert recorded["config"]["llm"]["model_name"] == model
+        assert recorded["config"]["llm"]["api_key"] is None
+        assert recorded["snapshot_id"] == agent.snapshot.id
 
 
 @pytest.mark.parametrize("side_model", [None, "gpt-5"])
@@ -698,10 +772,12 @@ def test_middleware_side_call_uses_child_environment(
     agent = MiniAgent(
         _config(
             model_server,
-            model_name=model_name,
             source_dir=source,
-            reasoning_effort="low",
-            extra_body={"provider_options": {"tag": "side-and-main"}},
+            llm={
+                "model_name": model_name,
+                "reasoning_effort": "low",
+                "extra_body": {"provider_options": {"tag": "side-and-main"}},
+            },
         )
     )
     result = asyncio.run(agent.run("question"))
@@ -746,7 +822,9 @@ def test_forced_answer_uses_current_model_and_budget(
 
     model_server.reply = reply
     agent = MiniAgent(
-        _config(model_server, model_name=model_name, max_turns=1, max_tokens=97)
+        _config(
+            model_server, llm={"model_name": model_name, "max_tokens": 97}, max_turns=1
+        )
     )
     result = asyncio.run(agent.run("question", working_dir=tmp_path))
     assert result.status == "finished", result.error_message
@@ -774,7 +852,7 @@ def test_incomplete_response_is_error_and_keeps_partial_trace(model_server, mode
 
     model_server.reply = reply
     result = asyncio.run(
-        MiniAgent(_config(model_server, model_name=model_name)).run("q")
+        MiniAgent(_config(model_server, llm={"model_name": model_name})).run("q")
     )
     assert result.status == "error"
     assert result.output == ""
@@ -786,7 +864,9 @@ def test_incomplete_response_is_error_and_keeps_partial_trace(model_server, mode
 
 def test_server_errors_obey_native_retry_limit(model_server):
     model_server.reply = lambda request: (500, {"error": {"message": "unavailable"}})
-    result = asyncio.run(MiniAgent(_config(model_server, llm_max_retries=1)).run("q"))
+    result = asyncio.run(
+        MiniAgent(_config(model_server, llm={"llm_max_retries": 1})).run("q")
+    )
     assert result.status == "error"
     assert "500" in result.error_message
     assert len(model_server.requests) == 1
@@ -813,7 +893,9 @@ def test_timeout_reports_error_and_leaves_completed_edits(model_server, tmp_path
     assert result.status == "error" and "timed out" in result.error_message
     assert len(model_server.requests) == 2
     assert (tmp_path / "notes.txt").read_text() == "saved"
-    assert result.messages == ()
+    assert len(result.messages) == 1
+    assert result.messages[0]["type"] == "RunConfig"
+    assert result.messages[0]["config"]["timeout"] == 3
     assert result.usage == {}
 
 
@@ -836,15 +918,19 @@ def test_adapter_only_needs_native_result_not_log_files(tmp_path, include_messag
     )
     agent = MiniAgent(
         {
-            "model_name": "unused",
             "source_dir": source,
-            "api_key": 'quoted"key\\with\nnewline',
+            "llm": {
+                "model_name": "unused",
+                "api_key": 'quoted"key\\with\nnewline',
+            },
         }
     )
     result = asyncio.run(agent.run("native answer"))
     assert result.status == "finished", result.error_message
     assert result.output == "native answer"
-    assert result.messages == (
+    assert result.messages[0]["type"] == "RunConfig"
+    assert result.messages[0]["config"]["llm"]["api_key"] is None
+    assert result.messages[1:] == (
         ({"role": "assistant", "content": "[REDACTED]"},) if include_messages else ()
     )
     assert result.usage == {"model_calls": [], "turns": 1}
@@ -892,7 +978,7 @@ def test_timeout_and_cancellation_stop_child_and_remove_export(tmp_path, mode):
     )
     agent = MiniAgent(
         {
-            "model_name": "custom-model",
+            "llm": {"model_name": "custom-model"},
             "source_dir": source,
             "timeout": 0.5 if mode == "timeout" else 30,
         }

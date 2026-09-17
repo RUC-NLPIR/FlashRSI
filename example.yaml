@@ -8,15 +8,16 @@ benchmark:
 
 agent:
   name: miniagent
-  model_name: deepseek-v4-flash
-  api_key:
-  base_url: 
+  llm:
+    model_name: deepseek-v4-flash
+    api_key:
+    base_url:
 
 algorithm:
   name: skillopt
   worker:
     type: llm # llm/agent
-    model_name: gpt-5
-    api_key: 
-    base_url: 
-  
+    llm:
+      model_name: gpt-5
+      api_key:
+      base_url:

@@ -2,11 +2,13 @@ import asyncio
 import inspect
 import json
 import sys
+from datetime import date, datetime, timezone
 
 import pytest
+import yaml
 
 from flashrsi.benchmarks import SearchQA
-from flashrsi.config import load_config
+from flashrsi.config import load_config, prepare_run_dir
 from flashrsi.core import Agent, Snapshot, SnapshotFile, Task, Trajectory
 from flashrsi.core.snapshot import _create_snapshot
 
@@ -38,7 +40,7 @@ def source(tmp_path):
 
 @pytest.fixture
 def agent(source):
-    return FileAgent({"source_dir": source, "model_name": "offline"})
+    return FileAgent({"source_dir": source, "llm": {"model_name": "offline"}})
 
 
 def _candidate(agent, content, baseline=None):
@@ -68,7 +70,7 @@ def test_agent_constructs_snapshot_automatically_and_has_one_public_run(agent, s
 
 
 def test_instance_source_override_uses_existing_native_file_layout(source):
-    agent = FileAgent({"source_dir": source, "model_name": "offline"})
+    agent = FileAgent({"source_dir": source, "llm": {"model_name": "offline"}})
     assert asyncio.run(agent.run("question")).output == "initial answer"
     with pytest.raises(RuntimeError, match="only inside"):
         agent.files_dir
@@ -76,8 +78,8 @@ def test_instance_source_override_uses_existing_native_file_layout(source):
 
 def test_runtime_config_credentials_never_enter_snapshot(source, tmp_path):
     (source / ".env").write_text("SECRET=source-secret")
-    agent = FileAgent({"source_dir": source, "api_key": "runtime-secret"})
-    assert agent.config["api_key"] == "runtime-secret"
+    agent = FileAgent({"source_dir": source, "llm": {"api_key": "runtime-secret"}})
+    assert agent.config["llm"]["api_key"] == "runtime-secret"
     path = tmp_path / "snapshot.json"
     agent.snapshot.save(path)
     assert "api_key" not in path.read_text()
@@ -141,7 +143,7 @@ def test_rollout_rebinds_exact_task_preserving_trace_usage_metrics(agent):
     task = Task("one", "question", "answer", metadata={"answers": ["answer"]})
     result = asyncio.run(agent.rollout([task]))[0]
     assert result.task is task
-    assert result.messages == ({"role": "user", "content": "question"},)
+    assert result.messages[1:] == ({"role": "user", "content": "question"},)
     assert result.usage == {"input_tokens": 10, "output_tokens": 2}
     assert result.metrics == {}
     assert asyncio.run(agent.rollout(())) == ()
@@ -506,8 +508,8 @@ def test_question_only_trajectory_and_searchqa_grading_contract(agent, tmp_path)
     config = load_config(
         overrides={
             "benchmark": {"data_path": path},
-            "agent": {"model_name": "offline"},
-            "algorithm": {"worker": {"model_name": "offline"}},
+            "agent": {"llm": {"model_name": "offline"}},
+            "algorithm": {"worker": {"llm": {"model_name": "offline"}}},
         }
     )
     bench = SearchQA(config)
@@ -541,3 +543,164 @@ def test_question_only_trajectory_and_searchqa_grading_contract(agent, tmp_path)
             Trajectory(task="bad")
 
     asyncio.run(scenario())
+
+
+def test_agent_requires_own_role_config_and_detaches_shared_input(source):
+    config = load_config(
+        overrides={
+            "agent": {"source_dir": source, "llm": {"model_name": "target"}},
+            "algorithm": {"worker": {"llm": {"model_name": "worker"}}},
+        }
+    )
+    with pytest.raises(ValueError, match="own configuration"):
+        FileAgent(config)
+    target = FileAgent(config.agent)
+    worker = FileAgent({**config.algorithm.worker, "source_dir": source})
+    config.agent.llm.model_name = "external-change"
+    assert target.config.llm.model_name == "target"
+    assert worker.config.llm.model_name == "worker"
+    target.config.llm.model_name = "new-target"
+    assert worker.config.llm.model_name == "worker"
+
+
+@pytest.mark.parametrize("field", ["model_name", "max_tokens", "effort", "extra_body"])
+def test_direct_agent_and_later_edits_reject_old_llm_field_location(source, field):
+    with pytest.raises(ValueError, match=f"Move config.{field} to config.llm.{field}"):
+        FileAgent({"source_dir": source, field: "old-value"})
+    agent = FileAgent({"source_dir": source, "llm": {"model_name": "model"}})
+    agent.config[field] = "old-value"
+    with pytest.raises(ValueError, match=f"Move config.{field} to config.llm.{field}"):
+        asyncio.run(agent.run("question"))
+
+
+def test_active_run_and_rollout_pin_nested_config_and_record_each_call(source):
+    async def scenario():
+        started, proceed = asyncio.Event(), asyncio.Event()
+
+        class ConfigAgent(FileAgent):
+            async def _run(self, prompt, working_dir=None):
+                if prompt == "pause":
+                    started.set()
+                    await proceed.wait()
+                return Trajectory(
+                    output=json.dumps(
+                        {
+                            "model": self.config.llm.model_name,
+                            "stop": self.config.llm.extra_body.stop,
+                        }
+                    )
+                )
+
+        agent = ConfigAgent(
+            {
+                "source_dir": source,
+                "llm": {
+                    "model_name": "before",
+                    "extra_body": {"stop": ["old"]},
+                    "api_key": "private-key",
+                },
+            }
+        )
+        baseline = agent.snapshot
+        batch = asyncio.create_task(
+            agent.rollout(
+                [
+                    Task("first", "pause"),
+                    Task("second", "next"),
+                ]
+            )
+        )
+        await started.wait()
+        agent.config.llm.model_name = "after"
+        agent.config.llm.extra_body.stop.append("new")
+        current = await agent.run("concurrent")
+        assert json.loads(current.output) == {"model": "after", "stop": ["old", "new"]}
+        proceed.set()
+        previous = await batch
+        assert [json.loads(t.output) for t in previous] == [
+            {"model": "before", "stop": ["old"]},
+        ] * 2
+        for result in previous:
+            record = result.messages[0]
+            assert record["type"] == "RunConfig"
+            assert record["snapshot_id"] == baseline.id
+            assert record["config"]["llm"]["model_name"] == "before"
+            assert record["config"]["llm"]["api_key"] is None
+        agent.config.llm.extra_body.stop.clear()
+        assert current.messages[0]["config"]["llm"]["extra_body"]["stop"] == [
+            "old",
+            "new",
+        ]
+        assert agent.snapshot is baseline
+
+        # A standalone run has the same pinning boundary as a whole rollout.
+        started.clear()
+        proceed.clear()
+        pending = asyncio.create_task(agent.run("pause"))
+        await started.wait()
+        agent.config.llm.model_name = "latest"
+        proceed.set()
+        assert json.loads((await pending).output)["model"] == "after"
+        assert json.loads((await agent.run("next")).output)["model"] == "latest"
+
+    asyncio.run(scenario())
+
+
+def test_error_result_keeps_redacted_config_and_no_snapshot_for_stateless_worker():
+    class FailedWorker(Agent):
+        name = "failed_worker"
+
+        async def _run(self, prompt, working_dir=None):
+            return Trajectory(status="error", error_message="failure")
+
+    worker = FailedWorker(
+        {
+            "llm": {
+                "model_name": "worker",
+                "auth_token": "private-token",
+                "max_tokens": 12,
+                "extra_body": {"headers": {"Authorization": "Bearer private-token"}},
+            },
+            "notes": "token=private-token",
+        }
+    )
+    result = asyncio.run(worker.run("fail"))
+    record = result.messages[0]
+    assert result.status == "error"
+    assert record["snapshot_id"] is None
+    assert record["config"]["llm"]["auth_token"] is None
+    assert record["config"]["llm"]["max_tokens"] == 12
+    assert record["config"]["llm"]["extra_body"]["headers"]["Authorization"] is None
+    assert record["config"]["notes"] == "token=[REDACTED]"
+    assert worker.config.llm.auth_token == "private-token"
+
+
+def test_yaml_extra_values_keep_yaml_semantics_and_can_be_recorded_as_json(
+    source, tmp_path
+):
+    extras = {
+        "date": date(2026, 9, 17),
+        "timestamp": datetime(2026, 9, 17, 12, tzinfo=timezone.utc),
+        "binary": b"sample-bytes",
+        "labels": {"one", "two"},
+    }
+    config = load_config(
+        overrides={
+            "run": {"output_dir": str(tmp_path / "runs")},
+            "agent": {
+                "source_dir": str(source),
+                "llm": {"model_name": "model"},
+                "extras": extras,
+            },
+            "algorithm": {"worker": {"llm": {"model_name": "worker"}}},
+        }
+    )
+    directory = prepare_run_dir(config)
+    reloaded = load_config(directory / "config.yaml")
+    assert reloaded.agent.extras == extras
+    result = asyncio.run(FileAgent(config.agent).run("Q"))
+    records = json.loads(json.dumps([dict(m) for m in result.messages]))
+    for name, original in extras.items():
+        value = records[0]["config"]["extras"][name]
+        assert value["type"] == "yaml"
+        assert yaml.safe_load(value["value"]) == original

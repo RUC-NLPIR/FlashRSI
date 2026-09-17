@@ -1,0 +1,17 @@
+prompt:
+  - CLAUDE.md
+  - output-styles/**
+skill:
+  - skills/**
+  - commands/**
+agent:
+  - agents/**
+hook:
+  - hooks/**
+tool:
+  - .mcp.json
+  - .lsp.json
+  - servers/**
+config:
+  - .claude-plugin/plugin.json
+  - settings.json

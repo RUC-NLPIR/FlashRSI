@@ -1,8 +1,8 @@
 # FlashRSI-Lite
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
-Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 后端。
-Claude Code、算法和 runner 执行将在后续步骤接入。
+Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
+算法和 runner 执行将在后续步骤接入。
 
 ## 安装与验证
 
@@ -35,8 +35,8 @@ uv run flashrsi run \
   --prepare-only
 ```
 
-`--model` 对应 `agent.model_name`，`--worker-model` 对应
-`algorithm.worker.model_name`。`--output-dir` 设置实验输出根目录。
+`--model` 对应 `agent.llm.model_name`，`--worker-model` 对应
+`algorithm.worker.llm.model_name`。`--output-dir` 设置实验输出根目录。
 所有配置参数都支持 `--完整.字段.路径 值` 或 `--完整.字段.路径=值`，层级不受限制。
 新增参数无需注册 CLI 选项，值按 YAML 解析：
 
@@ -44,8 +44,8 @@ uv run flashrsi run \
 uv run flashrsi run --config example.yaml --prepare-only \
   --benchmark.limit 20 \
   --algorithm.rounds 3 \
-  --algorithm.worker.model_name gpt-5 \
-  --algorithm.worker.temperature=0.7 \
+  --algorithm.worker.llm.model_name gpt-5 \
+  --algorithm.worker.llm.temperature=0.7 \
   --agent.tools '[{name: search, timeout: 30}]'
 ```
 
@@ -55,7 +55,7 @@ uv run flashrsi run --config example.yaml --prepare-only \
 uv run flashrsi run --config example.yaml --prepare-only \
   --set benchmark.limit=20 \
   --set algorithm.rounds=3 \
-  --set algorithm.worker.temperature=0.7 \
+  --set algorithm.worker.llm.temperature=0.7 \
   --set 'agent.tools=[{name: search, timeout: 30}]'
 ```
 
@@ -76,7 +76,7 @@ uv run flashrsi run --config example.yaml --prepare-only \
 | --- | --- | --- |
 | `run` | `output_dir` | 实验输出根目录 |
 | `benchmark` | `name`, `split` | Benchmark 与自动/比例划分策略 |
-| `agent` | `name`, `model_name`, `api_key`, `base_url` | 目标 Agent 及模型连接配置 |
+| `agent` | `name`, `llm` | 被演化和评估的目标 Agent，拥有独立模型配置 |
 | `algorithm` | `name`, `worker` | 演化算法及它使用的 Worker |
 
 每个类别及 `algorithm.worker` 都可直接添加额外参数，无需修改配置类。
@@ -86,10 +86,10 @@ uv run flashrsi run --config example.yaml --prepare-only \
 ```python
 config = load_config("example.yaml")
 print(config.benchmark.name)
-print(config.algorithm.worker.model_name)
+print(config.algorithm.worker.llm.model_name)
 
 config.benchmark.limit = 100
-config.algorithm.worker.temperature = 0.7
+config.algorithm.worker.llm.temperature = 0.7
 ```
 
 也支持 `config["benchmark"]["name"]` 和 `.get()` 等字典操作。
@@ -116,22 +116,43 @@ benchmark:
 为兼容已有配置，比例映射缺少的键仍从 0.6/0.2/0.2 补齐后校验。
 CLI 可用 `--benchmark.split auto`，或用点路径覆盖比例字段。
 
-`algorithm.worker.type` 可以是 `llm` 或 `agent`。Worker 同样使用 `model_name`、
-`api_key`、`base_url`；当 `type: agent` 时，还需要 `name` 来选择 harness，例如：
+目标 Agent 与 Worker 各自拥有 `llm`，两者不继承模型、连接地址、凭据或请求参数。
+`llm` 内放 `model_name`、`api_key`、`base_url` 以及后端支持的模型请求参数；
+`timeout`、`max_turns`、工具权限和 `source_dir` 放在执行者这一层。
+Snapshot 中的原生配置文件则控制所选版本的 skills、工具、hooks 等行为。
+
+`algorithm.worker.type` 可以是 `llm` 或 `agent`，两种 Worker 使用相同的 `llm`
+结构。当 `type: agent` 时，还需要 `name` 来选择 harness，例如：
 
 ```yaml
+agent:
+  name: miniagent
+  llm:
+    model_name: target-model
+    api_key:
+    base_url:
+    max_tokens: 4096
+  timeout: 300
+  max_turns: 10
+
 algorithm:
   name: skillopt
   worker:
     type: agent
     name: claude_code
-    model_name: your-model
-    api_key:
-    base_url:
+    llm:
+      model_name: worker-model
+      api_key:
+      base_url:
+      effort: high
+    timeout: 600
+    max_turns: 20
 ```
 
-Agent 和 Worker 都必须指定 `model_name`。`api_key`、`base_url` 可以留空，
-其后端默认行为将在模型接入时实现。配置层不读取环境变量，也不检查模型是否可用。
+Agent 和 Worker 都必须指定 `llm.model_name`。`llm.api_key`、`llm.base_url` 可以留空，
+由各后端按下文约定读取原生环境或认证。配置层不读取环境变量，也不检查模型是否可用。
+不同后端保留自己的请求参数语义，例如 MiniAgent 的 `llm.reasoning_effort`
+与 Claude Code 的 `llm.effort`。旧的顶层模型字段会报错并提示迁移到 `llm`。
 为用于目录命名，算法、Agent 和 Benchmark 的 `name` 使用字母、数字、`_`、`-`。
 
 ```python
@@ -148,12 +169,30 @@ print(run_dir)
 ```python
 config = load_config(
     "example.yaml",
-    overrides={"algorithm": {"worker": {"model_name": "another-model"}}},
+    overrides={"algorithm": {"worker": {"llm": {"model_name": "another-model"}}}},
 )
 ```
 
 `run.output_dir` 相对 YAML 所在目录解析；通过 `overrides` 设置时相对当前工作目录。
 未传 YAML 时也相对当前工作目录。返回配置中的 `output_dir` 为绝对路径。
+
+创建 Agent 时明确传入它自己的子配置；runner 接入后也遵守同一分发约定：
+
+```python
+target = MiniAgent(config.agent)
+worker = ClaudeCode(config.algorithm.worker)
+```
+
+实例在初始化时复制配置。后续通过 `target.config.llm.model_name = "another-model"`
+调整默认值；修改原来的 `config.agent` 不会改变已创建的实例。一次 `run` 和整批
+`rollout` 各自在开始时复制并固定配置，外部调整只影响之后开始的调用。
+适配器在 `_run` 中只读取 `self.config`；此时它指向本次调用的配置副本。
+`update(snapshot)` 只选择资源版本，不替换运行配置。比较 baseline 和 candidate 时，
+调用方应使用相同模型配置；更换目标模型后需要重新评估 baseline。
+
+`llm` 定义主模型和默认连接。MiniAgent 当前主模型和辅助模型共用它；Claude 自定义
+子 agent 的模型选择继续遵循原生定义。各后端仍可使用各自原生环境回退；运行中修改
+进程环境不属于此配置固定约定。
 
 ## 实验目录
 
@@ -165,14 +204,16 @@ config = load_config(
 
 ```text
 runs/skillopt-miniagent-searchqa-20260914-163000-123456/
-├── config.yaml       # 解析后的配置；两个 api_key 字段置空
+├── config.yaml       # 解析后的配置；嵌套凭据字段置空
 ├── snapshots/        # 初始版本和候选版本
 ├── trajectories/     # rollout 与评分结果
 └── working/          # checkout、任务执行等临时目录
 ```
 
 重复调用创建新目录；若时间戳碰撞，则增加一微秒重试，已有实验保持原样。
-运行时配置保留传入的 API key，写入磁盘的配置副本将其置空。
+运行时配置保留传入的凭据。写入磁盘时递归清空以 `API_KEY`、`TOKEN`、`SECRET`、
+`PASSWORD` 结尾的字段及 Authorization、Cookie 等凭据字段，同时脱敏其他字段中
+重复出现的相同值；嵌套映射和列表也按此处理。
 CLI 准备模式下这些子目录仍为空。通过 Python 使用 Snapshot 时可将 `working/`
 传给 `Snapshot.check_out()`，并显式保存版本；runner 自动执行与结果记录将在后续步骤接入。
 
@@ -273,7 +314,7 @@ uv run python scripts/prepare_searchqa.py
 
 ## Agent：一个运行入口，自动获取文件版本
 
-调用者使用 `agent = MyAgent(config)` 创建 Agent，执行时只使用
+调用者使用 `agent = MyAgent(config.agent)` 创建目标 Agent，执行时只使用
 `await agent.run(prompt, working_dir=None)`。提问、任务执行和编辑文件使用同一个入口，
 始终返回完整的 Trajectory；编辑场景可以忽略最终 output，但消息和用量仍然保留。
 算法启动时用 `set_scope` 设置组件的默认可见和编辑权限。Agent 没有独立的 `ask`、
@@ -332,14 +373,14 @@ class MyAgent(Agent):
             prompt=prompt,
             files_dir=self.files_dir,
             working_dir=working_dir,
-            model=self.config.get("model_name"),
+            model=self.config["llm"].get("model_name"),
         )
         return Trajectory(
             output=result.text, messages=result.messages, usage=result.usage
         )
 ```
 
-公开的 `run` 由基类实现，负责准备版本文件、固定本次执行版本及清理文件。接入者实现
+公开的 `run` 由基类实现，负责准备版本文件、固定本次执行版本与配置及清理文件。接入者实现
 `_run`，不用自己处理 Snapshot、提交或版本目录的导出与清理。harness 自己的日志、
 任务目录和进程生命周期仍由接入者管理。
 
@@ -359,8 +400,9 @@ Worker 的 `working_dir` 可以是另一个 Agent 的候选目录。Worker 自�
 应从自己的 `files_dir` 加载，不能让目标目录中的配置替代 Worker 配置。具体 SDK
 如何关闭隐式项目配置、显式加载扩展，由接入者按该 SDK 支持的接口完成。
 
-`config` 可为完整实验配置（使用其中的 `agent` 部分），也可为单独的 Agent/Worker
-配置映射。Worker 通常传 `config.algorithm.worker`。`source_dir` 相对路径按当前工作目录
+构造 Agent 时传入单独的 Agent/Worker 配置映射：目标用 `config.agent`，Worker 用
+`config.algorithm.worker`。误传完整实验配置会明确报错，避免 Worker 静默使用目标配置。
+`source_dir` 相对路径按当前工作目录
 解析，也支持 `~`；覆盖时同时从新目录加载映射，不回退到原目录。未指定来源且接入模块
 旁没有 `components.yaml` 时，Agent 为无文件的 Worker，可正常调用 `run/rollout`，但没有
 可演化 Snapshot。交互环境中定义的类也可显式传入来源目录。
@@ -377,7 +419,7 @@ Worker 的 `working_dir` 可以是另一个 Agent 的候选目录。Worker 自�
 使用者不需要先构造 Snapshot，接入者也不需要填写 ID、root 或 parent。普通执行只需：
 
 ```python
-agent = MyAgent(config)
+agent = MyAgent(config.agent)
 result = await agent.run("回答这个问题")
 result = await worker.run("改进这些文件", working_dir=candidate_dir)
 ```
@@ -409,6 +451,14 @@ result = await worker.run("改进这些文件", working_dir=candidate_dir)
 直接 `run` 的轨迹通常 `task=None`；基类 `rollout(tasks, snapshot=None)` 将每个
 `Task.question` 传给 `run`，再把完整的原始 Task 关联回轨迹，保留状态、消息、指标、
 用量和错误。现有 `Trajectory(task, status, output)` 写法仍有效。
+
+基类在返回的 `messages` 首位加入 `RunConfig`，包含本次执行的脱敏角色配置和
+`snapshot_id`（无文件 Worker 为 `None`）。这是传给适配器的配置，不会展开后端默认值、
+继承的环境变量或完整模型请求；原生 messages 仍保留在它之后。返回错误轨迹时也记录
+该信息；未处理异常和取消继续向调用者抛出。
+普通配置值直接记录为 JSON；日期、二进制、集合等 YAML 特有值记录为
+`{"type": "yaml", "value": "..."}`，其中 value 可用 `yaml.safe_load` 恢复。
+保存到 `config.yaml` 的对应值仍保留原有 YAML 类型。
 
 `snapshot` 是可选的候选评估参数：
 
@@ -542,7 +592,7 @@ uv run python examples/agents/native_adapters.py
 ```
 
 Agent 基类阶段验证包括真实本地子进程、假 SDK、并发/取消和 SearchQA 本地评分闭环，未调用
-真实模型或 Claude SDK。Claude Code、SkillOpt 和 runner 的正式接入仍留在
+真实模型或 Claude SDK。SkillOpt 和 runner 的正式接入仍留在
 后续步骤，CLI 只支持准备模式。`mvp_doc.md` 中旧签名尚未同步，仍由开发者维护；
 这里记录本轮明确确认并实现的接口。
 
@@ -577,7 +627,7 @@ from flashrsi.benchmarks import SearchQA
 from flashrsi.config import load_config
 
 config = load_config("example.yaml", overrides={"benchmark": {"limit": 3}})
-agent = MiniAgent(config)
+agent = MiniAgent(config.agent)
 benchmark = SearchQA(config)
 benchmark.load()
 graded = benchmark.grade(asyncio.run(agent.rollout(benchmark.dev)))
@@ -614,33 +664,33 @@ MiniAgent 的资源布局和 Snapshot 组件如下：
 
 | 配置字段 | 默认值 | 含义 |
 | --- | --- | --- |
-| `model_name` | 必填 | OpenAI 或兼容端点上的模型名 |
-| `api_key` | 空 | 优先使用配置，否则读取 `OPENAI_API_KEY` |
-| `base_url` | 空 | 优先使用配置，否则读取 `OPENAI_BASE_URL` 或使用 SDK 默认地址 |
+| `llm.model_name` | 必填 | OpenAI 或兼容端点上的模型名 |
+| `llm.api_key` | 空 | 优先使用配置，否则读取 `OPENAI_API_KEY` |
+| `llm.base_url` | 空 | 优先使用配置，否则读取 `OPENAI_BASE_URL` 或使用 SDK 默认地址 |
 | `max_turns` | `10` | 原生循环轮数，最后一轮请求直接回答 |
-| `max_tokens` | `4096` | 原生主循环和强制回答的输出预算；辅助调用沿用原生各自预算 |
-| `llm_max_retries` | `1` | 原生每次调用的最大尝试次数 |
-| `reasoning_effort` | 未设置 | 显式设置时原样传给模型 API |
-| `extra_body` | `{}` | 原样传给模型 API 的额外请求字段，主调用和辅助调用均生效 |
+| `llm.max_tokens` | `4096` | 原生主循环和强制回答的输出预算；辅助调用沿用原生各自预算 |
+| `llm.llm_max_retries` | `1` | 原生每次调用的最大尝试次数 |
+| `llm.reasoning_effort` | 未设置 | 显式设置时原样传给模型 API |
+| `llm.extra_body` | `{}` | 原样传给模型 API 的额外请求字段，主调用和辅助调用均生效 |
 | `timeout` | `300` | 整次运行超时，单位秒 |
 | `source_dir` | 内置目录 | 可选完整来源目录，须带 `components.yaml` 和实际 runtime/资源 |
 
 所有模型通过 OpenAI SDK 调用 OpenAI 或兼容端点。主循环中 GPT/o 系列使用 Responses，
 其余模型使用 Chat Completions；辅助文本调用使用 Chat Completions。模型名保留原值，
 包括 `org/model`，仅兼容去除已有的 `openai/` 前缀。
-模型的推理或其他专有选项由 `reasoning_effort` 和 `extra_body` 显式配置，
+模型的推理或其他专有选项由 `llm.reasoning_effort` 和 `llm.extra_body` 显式配置，
 不根据模型名推断或自动启用。
 
 适配类把模型连接和预算配置写入子进程的原生环境变量。
-`model_name` 对应 `FLASHRSI_MINIAGENT_MODEL` / `FLASHRSI_MINIAGENT_SIDE_MODEL`，
-`base_url` 对应 `FLASHRSI_MINIAGENT_BASE_URL` / `FLASHRSI_MINIAGENT_SIDE_BASE_URL`，
-`api_key` 和 `extra_body` 分别对应 `FLASHRSI_MINIAGENT_API_KEY` 和
+`llm.model_name` 对应 `FLASHRSI_MINIAGENT_MODEL` / `FLASHRSI_MINIAGENT_SIDE_MODEL`，
+`llm.base_url` 对应 `FLASHRSI_MINIAGENT_BASE_URL` / `FLASHRSI_MINIAGENT_SIDE_BASE_URL`，
+`llm.api_key` 和 `llm.extra_body` 分别对应 `FLASHRSI_MINIAGENT_API_KEY` 和
 `FLASHRSI_MINIAGENT_EXTRA_BODY`（JSON）。主调用和辅助调用使用相同配置。
 父进程环境不变，已有 `FLASHRSI_MINIAGENT_*` 模型设置由本次配置覆盖。
 
 题目、资源目录和运行参数通过 stdin 传递，密钥通过子进程环境传递。
 凭据不写入源码、Snapshot、命令行参数或请求文件，返回记录和内置 harness 日志会脱敏。
-`Trajectory.messages` 保存原生对话列表，`usage.model_calls` 保存原生记录的
+`Trajectory.messages` 在 `RunConfig` 后保存原生对话列表，`usage.model_calls` 保存原生记录的
 用量、模型、轮次和耗时，`usage.turns` 保存循环轮数。统计范围沿用原生主循环、辅助调用和
 强制回答，网页提取用量没有额外补齐；不再额外保存完整 provider 响应。API 错误保留已有对话和用量，
 不会把失败当成成功答案。
@@ -675,5 +725,182 @@ uv run --extra miniagent python examples/miniagent_atria.py
 真实执行 `rollout` 后由 SearchQA 评分，3 条均完成，平均 EM/F1 均为 1.0；这是接入验证，
 不代表完整数据集的模型表现。
 
-当前调用使用非流式 Chat Completions，Atria 已验证支持；不要通过 `extra_body`
+当前调用使用非流式 Chat Completions，Atria 已验证支持；不要通过 `llm.extra_body`
 设置 `stream: true`，原生循环需要完整响应对象。
+
+## Claude Code
+
+第 5 步通过官方 `claude-agent-sdk` 接入，沿用 `run`、`rollout`、候选评估和 `update`。
+安装 SDK 可选依赖（包含原生 Claude CLI），无需依赖旧 FlashRSI 或系统 `claude`：
+
+```bash
+uv sync --extra dev --extra miniagent --extra claude-code
+uv run --extra claude-code python examples/claude_code.py --model YOUR_MODEL
+```
+
+第二条命令会真实调用模型，验证问答、编辑 MiniAgent skill、Claude skill 候选生效、
+基线保持原样以及 `update`。演示脚本在候选中添加并显式调用测试用 skill；默认 Agent
+不包含该 skill。配置、Snapshot 和 Trajectory 保存到独立实验目录。
+也可安装 `flashrsi-lite[claude-code]`。不安装此 extra 仍可导入和使用其他 Agent，
+Claude SDK 只在 `ClaudeCode.run` 时导入。SDK 依赖范围为 `>=0.2.153,<0.3`，
+当前锁定 0.2.153。
+
+```python
+import asyncio
+
+from flashrsi.agents import ClaudeCode
+from flashrsi.benchmarks import SearchQA
+from flashrsi.config import load_config
+
+config = load_config(
+    "example.yaml",
+    overrides={
+        "agent": {"name": "claude_code", "llm": {"model_name": "your-claude-model"}},
+        "benchmark": {"limit": 30},
+    },
+)
+agent = ClaudeCode(config.agent)
+benchmark = SearchQA(config)
+benchmark.load()
+graded = benchmark.grade(asyncio.run(agent.rollout(benchmark.dev)))
+
+# 作为 Worker 时传入 algorithm.worker 配置，仍调用同一 run 接口。
+# worker = ClaudeCode(config.algorithm.worker)
+# edited = await worker.run("Improve the skill files", working_dir=directory)
+```
+
+闭源 harness 只保存 SDK 能显式加载的资源：
+
+| 组件 | 文件 | 原生加载方式 |
+| --- | --- | --- |
+| `prompt` | 可选 `CLAUDE.md`、`output-styles/**` | `CLAUDE.md` 内容经 SDK `system_prompt.append` 显式追加；输出样式按插件加载 |
+| `skill` | `skills/**`、`commands/**` | 原生 skills 和命令，可包含支持资源 |
+| `agent` | `agents/**` | 原生自定义 subagent 定义 |
+| `hook` | `hooks/**` | `hooks/hooks.json` 及其调用的脚本 |
+| `tool` | `.mcp.json`、`.lsp.json`、`servers/**` | MCP/LSP 声明及本地服务代码 |
+| `config` | `.claude-plugin/plugin.json`、`settings.json` | 插件声明和显式加载的原生 settings |
+
+默认使用 SDK 的原生 `claude_code` system prompt，不附加 `CLAUDE.md`、skill 或指定
+解题流程。插件清单用于加载版本化扩展，默认 settings、hooks 和 MCP 声明为空，
+不附加自定义 agent 或服务。需要 skill 时，按 Claude Code 原生目录和 frontmatter 格式
+新增文件，随插件自动发现；不需要修改框架。这里采用原生插件布局
+`skills/<name>/SKILL.md`，对应 `flashrsi:<name>`；普通项目则使用
+`.claude/skills/<name>/SKILL.md`。演化示例只在候选中创建测试技能，默认资源不包含它。
+组件规则允许候选新增对应文件。SDK、CLI、接入代码和运行产物不进入 Snapshot。
+`code` 组件不存在，对它设置 scope 会立即报错；本地工具和 hook 源码
+分别属于 `tool` 和 `hook`。
+
+例如只演化自定义 agent 和工具，可以设置 `agent.set_scope({"agent": "rw", "tool": "rw"})`。
+新增 `agents/reviewer.md` 使用原生 frontmatter（如 `name`、`description`、`tools`）和正文，
+模型通过原生 Agent 工具调用它。`settings.json` 支持原生设置，例如 `outputStyle`；
+模型、连接信息和配置中显式传入的 SDK 选项继续作为本次运行参数。
+`settings.json.env` 不允许设置凭据（名称以 `API_KEY`、`TOKEN`、`SECRET`、`PASSWORD`
+结尾）、`ANTHROPIC_BASE_URL`、provider 切换以及接入层管理的目录和持久化开关；
+这些配置应通过运行参数或父进程环境传入。普通工具环境变量仍随 settings 版本生效。
+
+插件输出样式在 `output-styles/*.md` 的 frontmatter 中设置 `force-for-plugin: true`，
+可再加 `keep-coding-instructions: true` 保留原生编码指令。当前 bundled CLI 2.1.273
+已验证这种加载方式；仅在 settings 中选择插件 `outputStyle` 时，CLI 虽报告选中，
+正文未进入模型请求，因此不要依赖这种方式。
+
+hook 命令引用 `"${CLAUDE_PLUGIN_ROOT}/hooks/check.py"`，MCP 的 `args` 引用
+`${CLAUDE_PLUGIN_ROOT}/servers/server.py`。每次执行将 `CLAUDE_PLUGIN_ROOT` 设为当前
+版本目录，由 CLI 原生展开；脚本解释器及服务依赖仍需在运行环境安装。
+凭据通过环境传入，不能硬编码在这些版本文件里。`.lsp.json` 沿用原生插件加载，
+LSP 进程和语言环境需自行准备；本轮未做真实 LSP 服务验证。
+
+每次运行创建新的 SDK 会话：`self.files_dir` 提供 prompt 和插件，`working_dir`
+作为工具工作的 cwd；不传后者时使用独立临时目录。显式设置 `setting_sources=[]`
+关闭用户及目标目录的配置和 `CLAUDE.md` 自动加载，`strict_mcp_config=True` 关闭
+隐式 MCP 配置，再显式传入当前版本的 `.mcp.json` 和 `settings.json`。
+`CLAUDE.md` 可以不存在或为空；候选提供非空内容时，通过 SDK 的 `system_prompt.append` 追加；
+这不会启用日常 CLI 的目录发现和分层加载规则。
+Worker 编辑另一个 Agent 时仍使用自己的指令、扩展和工具配置。
+运行时显式关闭 auto memory，避免同一工作目录的历史记忆影响候选评估。
+`CLAUDE_CONFIG_DIR` 和 `CLAUDE_CODE_TMPDIR` 指向每次调用独立的临时目录，
+会话 transcript 和子任务输出在 SDK 退出后清理，不进入 Snapshot。
+`CLAUDE_SECURESTORAGE_CONFIG_DIR` 保留原生凭据位置（包括默认 macOS Keychain），
+无需复制登录凭据；显式设置该变量时仍沿用它的值。
+这属于配置选择，不是操作系统文件隔离；原生工具仍可读取任务要求访问的文件。
+
+| 配置字段 | 默认值 | 含义 |
+| --- | --- | --- |
+| `llm.model_name` | 必填 | 原样传给 Claude SDK 的模型名 |
+| `llm.api_key` | 空 | 非空时传入子进程 `ANTHROPIC_API_KEY`，并清空继承的 `ANTHROPIC_AUTH_TOKEN`；空时沿用原生认证 |
+| `llm.base_url` | 空 | 非空时传入 `ANTHROPIC_BASE_URL`；空时沿用原生环境或默认地址 |
+| `max_turns` | `10` | 原生会话轮数上限 |
+| `max_budget_usd` | 未设置 | 原生单次调用费用上限 |
+| `timeout` | `300` | 执行超时秒数；退出前仍等待 SDK 清理 |
+| `completion_grace` | `0.5` | 已知子任务及其回复结束后，等待尾随 SDK 事件的静默窗口，单位秒 |
+| `permission_mode` | `acceptEdits` | 原生工具权限模式，默认允许文件编辑 |
+| `allowed_tools` | `[Read, Glob, Grep]` | 原生自动允许列表，SDK 的 `skills="all"` 另启用 Skill；按需要显式授权 Bash 等工具 |
+| `tools` | 未设置 | 原生可用工具集合；`[]` 禁用内置工具 |
+| `llm.effort` | 未设置 | 原样传给 SDK 的推理选项 |
+| `cli_path` | 未设置 | 可选 CLI 路径；默认使用 SDK 自带版本，相对路径按当前工作目录解析 |
+| `source_dir` | 内置目录 | 可选资源目录，需包含 `components.yaml`；扩展文件按需提供 |
+
+此后端使用 Claude 原生协议，`llm.base_url` 应指向 Anthropic 兼容端点；
+MiniAgent 的 OpenAI 兼容端点不能直接当作 Claude 端点使用。凭据仅经 SDK 的子进程
+环境传入，父进程环境不变，返回记录会脱敏。CLI stderr 经脱敏后写入 Python debug 日志。
+错误 Trajectory 另附最多 8192 字符的 stderr 尾部，保留扩展解析与启动诊断。
+会话保留本次运行内的原生 transcript，并清空继承的 `CLAUDE_CODE_SKIP_PROMPT_HISTORY`，
+使 `SendMessage` 可以继续已完成的子 agent。原生 CLI 的其他缓存和诊断行为仍由其管理。
+
+### 消息和多 agent
+
+一次 `run` 返回一个 Trajectory，包含本次调用内部的主 agent 和 subagents。
+`messages` 首位为基类记录的 `RunConfig`，随后是按 SDK 到达顺序保存的事件列表。
+其中 `RunInput` 保存原始 prompt、
+传给 SDK 的 system prompt 配置及 Snapshot ID。随后保留 SDK 消息及内容块的 dataclass
+字段，以类名标注 `type`，包括工具调用/结果、任务事件、hook 事件和各轮 ResultMessage。
+`forward_subagent_text=True` 开启子 agent 文本转发；SDK 暴露的其他内容块也原样转换。
+这是 SDK 可见的记录，不保证恢复 CLI 内部未暴露的信息或完整原始请求。
+`RunInput.system_prompt` 是 preset/append 配置，并非展开后的模型 system prompt；
+`UserMessage` 也可能是工具结果或子任务输入。此事件列表不能直接作为模型会话重放，
+也没有开启 token delta 记录。
+
+无需新增嵌套 Trajectory 类型：子消息的 `parent_tool_use_id` 指向创建它的 Agent
+工具调用；任务事件的 `task_id` 和 `tool_use_id` 关联进度与结束状态。一个流中多个
+子 agent 的消息可以交错，父子关系通过这些 ID 保留，不靠消息相邻顺序猜测。
+
+```python
+result = await agent.run("Delegate two evidence checks and summarize the results")
+child_events = [m for m in result.messages if m.get("parent_tool_use_id")]
+task_events = [m for m in result.messages if m.get("task_id")]
+```
+
+接入层持续读取消息，等待已知有限子任务（`local_agent`、`local_workflow`）终止，
+并收集后台完成通知触发的主 agent 回复。`TaskNotificationMessage` 和终止状态的
+`TaskUpdatedMessage` 都能结束任务，输出取最终成功 Result 的答案。
+常驻后台 shell、远程监控和长期 teammate 不作为这次有限执行的等待条件。
+SDK 当前没有明确的“整个 run 已结束”事件，因此已知任务与通知处理结束后还会等待
+`completion_grace` 静默窗口收集尾随事件；这不构成任意长期 agent team 的生命周期管理。
+仍有未完成任务或回复时，`timeout` 到期返回错误并保留已收到的轨迹。
+子 agent transcript 由原生 CLI 异步落盘：极快的模型在落盘前续接时仍可能遇到
+`No transcript found`。接入层已允许持久化；本轮续接验证等待实际文件发布，
+不宣称修复了 CLI 内部的这一时序问题。
+
+`usage` 将各轮 Result 的 token 统计、`num_turns`、`duration_ms` 累加；
+`model_usage`、`total_cost_usd`、`duration_api_ms` 是原生会话累计值，取最新结果，
+不再与子消息的统计重复累加。主轮次 token 统计和包含子 agent 的按模型总量可能不同；
+每轮原始 Result 和任务自身的用量仍留在 `messages`，便于核对。
+`duration_ms` 是各轮执行耗时之和，不包含所有后台等待时间，不能当作完整墙钟耗时。
+错误结果（包括 `subtype=success` 但 `is_error=True`）、SDK 执行错误、缺少结果和超时
+均返回错误 Trajectory，保留已收到的消息和结果用量。原生 init 的插件加载错误、
+MCP `failed` / `needs-auth` 也会终止运行；主动 `disabled` 的 MCP 不视为加载失败。
+settings JSON 损坏或覆盖运行时保留字段，在调用模型前返回错误；`CLAUDE.md` 可省略。
+`tool_deferred`、`aborted_streaming`、`aborted_tools` 不能报告为完成；当前没有暂停后恢复接口，
+这些结果返回错误并保留原始待执行工具信息。
+取消向上传播；执行期限不打断 SDK 的退出清理，SDK 会话先关闭，
+再清理临时任务目录和版本目录。没有独立会话复用或恢复逻辑。
+
+本步离线验证使用真实 SDK、SDK 自带 Claude CLI 和本地 Anthropic SSE 模拟服务，
+覆盖 SearchQA 评分、原生 Skill 加载候选、原生 Read/Write 编辑 MiniAgent、hooks/settings、
+MCP、commands/输出样式、前台与后台 subagents、子 agent 续接、历史 memory 隔离、
+原生认证目录及扩展加载失败，以及冲突的目标配置不会替换 Worker 配置；
+另用 CLI 协议替身验证超时、取消、失败、任务结束顺序和并发。
+2026-09-17 的真实模型 smoke 已验证基础回答、Worker 文件编辑、baseline 隔离、
+update 生效、后台双子 agent 消息收集及 SendMessage 上下文续接；candidate rollout
+仍有超时，部分输出未通过严格格式断言，代理也出现模型路由失败。本次配置结构迁移
+采用离线协议与本地服务回归，没有重新调用付费模型。
+CLI 当前仍只支持 `--prepare-only`，SkillOpt、runner 和 Terminal-Bench 留到后续步骤。

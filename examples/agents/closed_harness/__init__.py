@@ -19,5 +19,5 @@ class SDKAgent(Agent):
             instructions=(self.files_dir / "CLAUDE.md").read_text(),
             skills_dir=self.files_dir / ".claude/skills",
             cwd=working_dir,
-            model=self.config.get("model_name"),
+            model=self.config["llm"].get("model_name"),
         )

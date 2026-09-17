@@ -29,7 +29,7 @@ class FakeSDK:
 async def main():
     target = ProcessAgent({})
     target.set_scope({"skill": "rw", "code": "rw"})
-    worker = SDKAgent({"model_name": "offline"}, sdk=FakeSDK())
+    worker = SDKAgent({"llm": {"model_name": "offline"}}, sdk=FakeSDK())
     for agent in (target, worker):
         assert "components.yaml" not in agent.snapshot.files
         assert "__init__.py" not in agent.snapshot.files

@@ -1,0 +1,398 @@
+"""Load versioned Claude Code extensions and retain the native event stream."""
+
+from __future__ import annotations
+
+import asyncio
+import json
+import logging
+import os
+from contextlib import aclosing
+from dataclasses import fields, is_dataclass
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from flashrsi._records import _redact, _secrets
+from flashrsi.core import Agent, Trajectory
+
+_LOGGER = logging.getLogger(__name__)
+
+
+class ClaudeCode(Agent):
+    """Use a fresh SDK session for each prompt or file-editing task."""
+
+    name = "claude_code"
+    description = "Claude Code with versioned native extensions and delegated tasks."
+
+    async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
+        # Import only when used: other Agents do not require this optional SDK.
+        from claude_agent_sdk import (
+            ClaudeAgentOptions,
+            ClaudeSDKClient,
+            ResultMessage,
+            SystemMessage,
+        )
+
+        config = self.config
+        llm = config["llm"]
+        env = {
+            "CLAUDE_PLUGIN_ROOT": str(self.files_dir),
+            "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+            "CLAUDE_CODE_SKIP_PROMPT_HISTORY": "",
+            # An empty value retains the default native Keychain/file location.
+            # Redirect transcripts without moving or copying login credentials.
+            "CLAUDE_SECURESTORAGE_CONFIG_DIR": os.environ.get(
+                "CLAUDE_SECURESTORAGE_CONFIG_DIR",
+                os.environ.get("CLAUDE_CONFIG_DIR", ""),
+            ),
+        }
+        if llm.get("api_key"):
+            env["ANTHROPIC_API_KEY"] = llm["api_key"]
+            env["ANTHROPIC_AUTH_TOKEN"] = ""
+        if llm.get("base_url"):
+            env["ANTHROPIC_BASE_URL"] = llm["base_url"]
+        secrets = sorted(
+            set(_secrets(os.environ) + _secrets(env) + _secrets(config)),
+            key=len,
+            reverse=True,
+        )
+        timeout = config.get("timeout", 300)
+        messages = [
+            {"type": "RunInput", "prompt": prompt, "snapshot_id": self.snapshot.id}
+        ]
+        result = None
+        usage = {}
+        error = None
+        stderr_tail = ""
+
+        def stderr(line):
+            nonlocal stderr_tail
+            line = _redact(line, secrets)
+            _LOGGER.debug("%s", line)
+            stderr_tail = (stderr_tail + line + "\n")[-8192:]
+
+        try:
+            try:
+                instructions = (self.files_dir / "CLAUDE.md").read_text(
+                    encoding="utf-8"
+                )
+            except FileNotFoundError:
+                instructions = ""
+            settings = _settings(self.files_dir / "settings.json")
+        except (OSError, UnicodeError, ValueError) as exc:
+            return Trajectory(
+                status="error",
+                messages=_redact(messages, secrets),
+                error_message=_redact(str(exc), secrets),
+            )
+
+        with TemporaryDirectory(prefix="flashrsi-claude-code-") as temporary:
+            runtime = Path(temporary).resolve()
+            env["CLAUDE_CONFIG_DIR"] = str(runtime / "state")
+            env["CLAUDE_CODE_TMPDIR"] = str(runtime / "tmp")
+            (runtime / "tmp").mkdir(mode=0o700)
+            task_dir = working_dir or runtime / "work"
+            task_dir.mkdir(exist_ok=True)
+            # cwd is the task/edit target. Configuration always comes from our
+            # version, even when the target has its own CLAUDE.md or .claude/.
+            system_prompt = {"type": "preset", "preset": "claude_code"}
+            if instructions.strip():
+                system_prompt["append"] = instructions
+            options = ClaudeAgentOptions(
+                model=llm["model_name"],
+                system_prompt=system_prompt,
+                plugins=[{"type": "local", "path": str(self.files_dir)}],
+                skills="all",
+                setting_sources=[],
+                strict_mcp_config=True,
+                mcp_servers=str(self.files_dir / ".mcp.json")
+                if (self.files_dir / ".mcp.json").is_file()
+                else {},
+                settings=settings,
+                forward_subagent_text=True,
+                include_hook_events=True,
+                cwd=task_dir,
+                env=env,
+                permission_mode=config.get("permission_mode", "acceptEdits"),
+                allowed_tools=config.get("allowed_tools", ["Read", "Glob", "Grep"]),
+                tools=config.get("tools"),
+                max_turns=config.get("max_turns", 10),
+                max_budget_usd=config.get("max_budget_usd"),
+                effort=llm.get("effort"),
+                cli_path=Path(config["cli_path"]).expanduser().resolve()
+                if config.get("cli_path")
+                else None,
+                stderr=stderr,
+            )
+            messages[0]["system_prompt"] = options.system_prompt
+            client = ClaudeSDKClient(options=options)
+            try:
+                try:
+                    async with asyncio.timeout(timeout):
+                        await client.connect()
+                        await client.query(prompt)
+                        async with aclosing(
+                            _messages(
+                                client,
+                                completion_grace=config.get("completion_grace", 0.5),
+                            )
+                        ) as stream:
+                            async for message in stream:
+                                messages.append(_record(message))
+                                if isinstance(message, SystemMessage):
+                                    error = _extension_error(message)
+                                    if error:
+                                        break
+                                if isinstance(message, ResultMessage):
+                                    result = message
+                                    _add_usage(usage, result)
+                                    error = _result_error(result)
+                                    if error:
+                                        break
+                finally:
+                    # Cleanup has its own bounded SDK waits. The execution
+                    # deadline or caller cancellation must not interrupt them.
+                    await _disconnect(client)
+            except TimeoutError:
+                error = f"Claude Code timed out after {timeout:g}s"
+            except Exception as exc:
+                # SDK control failures also use plain Exception. Cancellation
+                # is a BaseException and still propagates after cleanup.
+                error = str(exc) or type(exc).__name__
+
+        if result is None:
+            error = error or "Claude Code ended without a result"
+        if error and stderr_tail:
+            error += "\nClaude Code stderr (tail):\n" + stderr_tail.rstrip()
+
+        return Trajectory(
+            status="error" if error else "finished",
+            output=_redact(result.result or "", secrets) if not error else "",
+            messages=_redact(messages, secrets),
+            usage=_redact(usage, secrets),
+            error_message=_redact(error, secrets),
+        )
+
+
+def _settings(path):
+    """Validate settings the CLI can otherwise silently ignore.
+
+    Runtime authentication and storage cannot be replaced by a candidate's
+    settings.env. Other native settings are passed through unchanged.
+    """
+    if not path.is_file():
+        return None
+    try:
+        settings = json.loads(path.read_text(encoding="utf-8-sig"))
+    except ValueError as exc:
+        raise ValueError(f"Invalid {path.name}: {exc}") from None
+    if not isinstance(settings, dict):
+        raise ValueError(f"{path.name} must contain a JSON object")
+    environment = settings.get("env", {})
+    if not isinstance(environment, dict) or any(
+        not isinstance(value, str) for value in environment.values()
+    ):
+        raise ValueError(f"{path.name}.env must map names to strings")
+    reserved = {
+        "ANTHROPIC_BASE_URL",
+        "CLAUDE_CONFIG_DIR",
+        "CLAUDE_SECURESTORAGE_CONFIG_DIR",
+        "CLAUDE_PLUGIN_ROOT",
+        "CLAUDE_CODE_DISABLE_AUTO_MEMORY",
+        "CLAUDE_CODE_SKIP_PROMPT_HISTORY",
+        "CLAUDE_CODE_TMPDIR",
+        "CLAUDE_CODE_USE_BEDROCK",
+        "CLAUDE_CODE_USE_VERTEX",
+        "CLAUDE_CODE_USE_FOUNDRY",
+    }
+    for name in environment:
+        if name.upper() in reserved or name.upper().endswith(
+            ("API_KEY", "TOKEN", "SECRET", "PASSWORD")
+        ):
+            raise ValueError(
+                f"{path.name}.env cannot set runtime field {name}; "
+                "use runtime config or the parent environment"
+            )
+    return str(path)
+
+
+def _extension_error(message):
+    if message.subtype != "init":
+        return None
+    failures = [
+        json.dumps(item, ensure_ascii=False)
+        for item in message.data.get("plugin_errors", ())
+    ]
+    failures.extend(
+        f"MCP server {server['name']}: {server['status']}"
+        for server in message.data.get("mcp_servers", ())
+        if server["status"] in {"failed", "needs-auth"}
+    )
+    if failures:
+        return "Claude Code extensions failed to load: " + "; ".join(failures)
+    return None
+
+
+def _result_error(result):
+    if (
+        result.deferred_tool_use is not None
+        or result.terminal_reason == "tool_deferred"
+    ):
+        return "Claude Code deferred a tool; this run cannot resume deferred work"
+    if result.terminal_reason in {"aborted_streaming", "aborted_tools"}:
+        return f"Claude Code ended with {result.terminal_reason}"
+    if result.is_error or result.subtype != "success":
+        return (
+            "; ".join(result.errors or [])
+            or result.result
+            or f"Claude Code ended with {result.subtype}"
+        )
+    return None
+
+
+async def _messages(client, *, completion_grace):
+    """Collect delegated work and its parent continuation before closing the SDK.
+
+    The CLI has turn-end events but no run-end event. Once known agent tasks and
+    notification turns finish, drain trailing events for a short quiet interval.
+    Background shells are not finite delegated work and do not hold the run open.
+    """
+    from claude_agent_sdk import (
+        AssistantMessage,
+        ClaudeSDKError,
+        ResultMessage,
+        SystemMessage,
+        TaskNotificationMessage,
+        TaskStartedMessage,
+        TaskUpdatedMessage,
+    )
+
+    active = set()
+    delegated = set()
+    background = set()
+    notifications = set()
+    handling = set()
+    in_turn = True
+    result = None
+    async with aclosing(client.receive_messages()) as stream:
+        while True:
+            settled = result is not None and not (active or notifications or in_turn)
+            if settled and not delegated:
+                return
+            try:
+                if settled:
+                    try:
+                        async with asyncio.timeout(completion_grace):
+                            message = await anext(stream)
+                    except TimeoutError:
+                        return
+                else:
+                    message = await anext(stream)
+            except StopAsyncIteration:
+                if not settled:
+                    raise ClaudeSDKError(
+                        "Claude Code stream ended before delegated work and its "
+                        "parent response completed"
+                    ) from None
+                return
+
+            if isinstance(message, TaskStartedMessage):
+                if message.task_type in {"local_agent", "local_workflow"}:
+                    delegated.add(message.task_id)
+                    active.add(message.task_id)
+                    if message.data.get("is_backgrounded") is not False:
+                        background.add(message.task_id)
+            elif isinstance(message, TaskUpdatedMessage):
+                if message.status in {"completed", "failed", "stopped", "killed"}:
+                    active.discard(message.task_id)
+            elif isinstance(message, TaskNotificationMessage):
+                active.discard(message.task_id)
+                if message.task_id in background and message.status in {
+                    "completed",
+                    "failed",
+                }:
+                    notifications.add(message.task_id)
+            elif (
+                isinstance(message, SystemMessage)
+                and message.subtype == "background_tasks_changed"
+            ):
+                # Foreground agents may be backgrounded without another start
+                # event. This snapshot marks that transition, not task completion.
+                background.update(
+                    task["task_id"]
+                    for task in message.data.get("tasks", ())
+                    if task["task_id"] in delegated
+                )
+            elif isinstance(message, SystemMessage) and message.subtype == "init":
+                # Each auto-generated notification turn has its own init. New
+                # notifications arriving during this turn belong to a later one.
+                in_turn = True
+                handling = notifications.copy()
+            elif (
+                isinstance(message, AssistantMessage)
+                and message.parent_tool_use_id is None
+                and not in_turn
+            ):
+                in_turn = True
+                handling = notifications.copy()
+            elif isinstance(message, ResultMessage):
+                result = message
+                in_turn = False
+                notifications.difference_update(handling)
+                handling.clear()
+                if message.is_error or message.subtype != "success":
+                    yield message
+                    return
+            yield message
+
+
+def _add_usage(usage, result):
+    """Sum turn counters; native model totals and cost are session cumulative."""
+    _sum_counters(usage, result.usage or {})
+    usage["num_turns"] = usage.get("num_turns", 0) + result.num_turns
+    usage["duration_ms"] = usage.get("duration_ms", 0) + result.duration_ms
+    usage.update(
+        model_usage=result.model_usage,
+        total_cost_usd=result.total_cost_usd,
+        duration_api_ms=result.duration_api_ms,
+        session_id=result.session_id,
+    )
+
+
+def _sum_counters(total, values):
+    for key, value in values.items():
+        if isinstance(value, dict):
+            _sum_counters(total.setdefault(key, {}), value)
+        elif isinstance(value, (int, float)) and not isinstance(value, bool):
+            total[key] = total.get(key, 0) + value
+        else:
+            total[key] = value
+
+
+async def _disconnect(client):
+    cleanup = asyncio.create_task(client.disconnect())
+    cancelled = False
+    while not cleanup.done():
+        try:
+            await asyncio.shield(cleanup)
+        except asyncio.CancelledError:
+            cancelled = True
+    cleanup.result()
+    if cancelled:
+        raise asyncio.CancelledError
+
+
+def _record(value):
+    """Keep SDK message and content-block types along with their native fields."""
+    if is_dataclass(value):
+        return {
+            "type": type(value).__name__,
+            **{
+                field.name: _record(getattr(value, field.name))
+                for field in fields(value)
+            },
+        }
+    if isinstance(value, dict):
+        return {key: _record(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_record(item) for item in value]
+    return value

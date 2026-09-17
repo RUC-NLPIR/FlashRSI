@@ -31,13 +31,15 @@ async def main():
             # These labels organize smoke artifacts; no Algorithm/Benchmark runs.
             "algorithm": {
                 "name": "smoke",
-                "worker": {"model_name": "Atria-Dawn-Preview"},
+                "worker": {"llm": {"model_name": "Atria-Dawn-Preview"}},
             },
             "benchmark": {"name": "local"},
             "agent": {
-                "model_name": "Atria-Dawn-Preview",
-                "base_url": "https://api.atria-asi.ai/v1",
-                "api_key": key,
+                "llm": {
+                    "model_name": "Atria-Dawn-Preview",
+                    "base_url": "https://api.atria-asi.ai/v1",
+                    "api_key": key,
+                },
             },
         }
     )
@@ -53,7 +55,7 @@ async def main():
         print(f"{name}: {trajectory.status} — {trajectory.output}", flush=True)
         assert trajectory.status == "finished", trajectory.error_message
 
-    agent = MiniAgent(config)
+    agent = MiniAgent(config.agent)
     agent.set_scope({"skill": "rw"})
     baseline = agent.snapshot
     baseline.save(run_dir / "snapshots" / "baseline.json")
