@@ -1,7 +1,13 @@
 """Explicit endpoint configuration shared by web tools and preflight."""
 
-import os
 from urllib.parse import urlparse
+
+_config: dict = {}
+
+
+def configure(config: dict) -> None:
+    global _config
+    _config = config
 
 
 class WebToolError(RuntimeError):
@@ -9,13 +15,11 @@ class WebToolError(RuntimeError):
 
 
 def endpoint(tool: str) -> str:
-    name = {"web_search": "FLASHRSI_SEARCH_URL", "read_url": "FLASHRSI_BROWSE_URL"}[
-        tool
-    ]
-    value = os.environ.get(name, "")
+    name = {"web_search": "search_url", "read_url": "browse_url"}[tool]
+    value = _config.get(name, "")
     if not value:
         raise WebToolError(
-            f"{tool} requires an explicit {name} endpoint; configure a trusted "
+            f"{tool} requires an explicit web.{name} endpoint; configure a trusted "
             "search/browse service or remove this tool from agent.yaml"
         )
     parsed = urlparse(value)
@@ -28,11 +32,11 @@ def endpoint(tool: str) -> str:
         or parsed.fragment
     ):
         raise WebToolError(
-            f"{name} must be a URL without credentials, query, or fragment"
+            f"web.{name} must be a URL without credentials, query, or fragment"
         )
     if parsed.scheme != "https" and not (local and parsed.scheme == "http"):
         raise WebToolError(
-            f"{name} requires HTTPS (HTTP is permitted only for loopback tests)"
+            f"web.{name} requires HTTPS (HTTP is permitted only for loopback tests)"
         )
     return value
 
@@ -44,5 +48,5 @@ def validate_config(names) -> None:
 
 
 def headers() -> dict:
-    secret = os.environ.get("FLASHRSI_WEB_API_KEY")
+    secret = _config.get("api_key")
     return {"Authorization": "Bearer " + secret} if secret else {}

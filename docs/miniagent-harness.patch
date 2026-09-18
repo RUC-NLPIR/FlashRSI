@@ -1,18 +1,53 @@
 diff --git a/runtime/agent.py b/runtime/agent.py
 --- a/runtime/agent.py
 +++ b/runtime/agent.py
-@@ -182,8 +182,7 @@
+@@ -18,7 +18,6 @@
+ import copy
+ import json
+ import logging
+-import os
+ import re
+ import time
+ import uuid
+@@ -29,6 +28,7 @@
+ from typing import Any
+
+ from . import llm, reader
++from . import web_config as web_settings
+ from . import workspace as ws_mod
+ from .tool_result import ToolResult
+ from .tools import web_search_structured
+@@ -36,10 +36,6 @@
+ from .workspace import WorkspaceBundle
+
+ logger = logging.getLogger(__name__)
+-
+-
+-def _env_truthy(name: str) -> bool:
+-    return os.environ.get(name, "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+ # ---------------------------------------------------------------------------
+@@ -86,6 +82,7 @@
+ class Context:
+     workspace: WorkspaceBundle
+     trace: TraceWriter
++    working_dir: Path = field(default_factory=Path.cwd)
+     # ── identity / config ──
+     question: str = ""
+     run_id: str = ""
+@@ -182,8 +179,7 @@
  def _serialize_assistant(msg) -> dict:
      """Convert an LLM response Message into a plain dict for the next request.
- 
+
 -    Preserves `reasoning_content` so deepseek-reasoner's thinking chain
 -    stays attached to the tool round-trip (provider-required). Strips
 +    Preserves `reasoning_content` for models that require it on tool round-trips. Strips
      fields the API rejects on input (`refusal`, `audio`, etc.)."""
      if hasattr(msg, "model_dump"):
          d = msg.model_dump(exclude_none=True)
-@@ -229,20 +228,11 @@
- 
+@@ -229,20 +225,11 @@
+
  def _make_chat_tool_call(call_id: str, name: str, arguments: str):
      """Create a chat-completions-shaped tool call object."""
 -    try:
@@ -34,20 +69,20 @@ diff --git a/runtime/agent.py b/runtime/agent.py
 +        type="function",
 +        function=SimpleNamespace(name=name, arguments=arguments),
 +    )
- 
- 
+
+
  def _responses_call_to_chat_tool_call(fc: Any):
-@@ -663,6 +653,8 @@
- 
- 
+@@ -663,6 +650,8 @@
+
+
  async def _dispatch(name: str, args: dict, ctx: Context) -> str:
 +    if name not in ctx.workspace.tool_names:
 +        return f"Unavailable tool: {name}"
      original_name = name
      original_args = copy.deepcopy(args)
      action = "executed"
-@@ -753,6 +745,8 @@
- 
+@@ -753,6 +742,8 @@
+
      # execution (skipped if before_tool set skip)
      if not skipped:
 +        if name not in ctx.workspace.tool_names:
@@ -55,26 +90,54 @@ diff --git a/runtime/agent.py b/runtime/agent.py
          builtin = await _dispatch_builtin(name, args, ctx)
          if builtin is not None:
              result = builtin
-@@ -855,6 +849,7 @@
+@@ -855,7 +846,13 @@
      model: str | None = None,
      workspace_dir: str | Path | None = None,
      editor: bool = False,
 +    working_dir: str | Path | None = None,
++    llm_config: dict | None = None,
++    web_config: dict | None = None,
++    debug_llm_io: bool = False,
  ) -> dict[str, Any]:
++    llm.configure(llm_config or {})
++    web_settings.configure(web_config or {})
      runs_root = Path(runs_root)
      runs_root.mkdir(parents=True, exist_ok=True)
-@@ -867,6 +862,10 @@
+     if editor:
+@@ -867,9 +864,15 @@
          from .web_config import validate_config
- 
+
          validate_config(bundle.tool_names)
 +    if working_dir is not None:
 +        from .editor import attach
 +
 +        attach(bundle, Path(working_dir))
- 
+
      model = model or llm.DEFAULT_MODEL
-     trace = TraceWriter(runs_root, question)
-@@ -980,9 +979,7 @@
+-    trace = TraceWriter(runs_root, question)
++    trace = TraceWriter(
++        runs_root, question, config={"llm": llm_config, "web": web_config}
++    )
+     trace.event(
+         "workspace",
+         root=str(bundle.root),
+@@ -880,6 +883,7 @@
+     ctx = Context(
+         workspace=bundle,
+         trace=trace,
++        working_dir=Path(working_dir).resolve() if working_dir else Path.cwd(),
+         sub_agents=bundle.sub_agents,
+         question=question,
+         run_id=trace.dir.name,
+@@ -890,7 +894,6 @@
+     stop_reason = "max_turns"
+     answer = ""
+
+-    debug_llm_io = _env_truthy("FLASHRSI_MINIAGENT_DEBUG_LLM_IO")
+     _log_dir = trace.dir / "log" if debug_llm_io else None
+     if _log_dir is not None:
+         _log_dir.mkdir(exist_ok=True)
+@@ -980,9 +983,7 @@
                      len(bundle.tool_schemas) if bundle.tool_schemas else 0
                  )
              _req_file = _log_dir / f"turn_{turn:03d}_request.json"
@@ -82,10 +145,10 @@ diff --git a/runtime/agent.py b/runtime/agent.py
 -                json.dumps(_req_log, ensure_ascii=False, default=str, indent=2)
 -            )
 +            trace.write_json(_req_file, _req_log)
- 
+
          is_last_turn = turn == max_turns
          _tc = "none" if is_last_turn else "auto"
-@@ -1018,14 +1015,7 @@
+@@ -1018,14 +1019,7 @@
                      except Exception:
                          _resp_data = repr(resp)
                      _resp_file = _log_dir / f"turn_{turn:03d}_response.json"
@@ -100,8 +163,8 @@ diff --git a/runtime/agent.py b/runtime/agent.py
 +                    trace.write_json(_resp_file, {"turn": turn, "response": _resp_data})
                  _llm_last_err = None
                  break  # success
- 
-@@ -1036,7 +1026,7 @@
+
+@@ -1036,7 +1030,7 @@
                      turn,
                      _attempt,
                      llm.LLM_MAX_RETRIES,
@@ -110,7 +173,7 @@ diff --git a/runtime/agent.py b/runtime/agent.py
                  )
                  if llm.is_fatal_api_error(e):
                      break
-@@ -1069,9 +1059,8 @@
+@@ -1069,9 +1063,8 @@
                  "LLM call failed (attempts=%d, turn=%d): %s\nHTTP detail: %s",
                  _attempt,
                  turn,
@@ -122,7 +185,7 @@ diff --git a/runtime/agent.py b/runtime/agent.py
              )
              stop_reason = f"llm_error: {e}"
              break
-@@ -1088,6 +1077,11 @@
+@@ -1088,6 +1081,11 @@
          trace.event("model_usage", **usage)
          failure = llm.response_error(resp, responses_api=use_responses_api)
          if failure:
@@ -134,7 +197,7 @@ diff --git a/runtime/agent.py b/runtime/agent.py
              stop_reason = f"llm_error: {failure}"
              trace.event("llm_error", turn=turn, error=failure)
              break
-@@ -1162,8 +1156,8 @@
+@@ -1162,8 +1160,8 @@
                  candidate_answer,
                  ctx,
              )
@@ -144,7 +207,7 @@ diff --git a/runtime/agent.py b/runtime/agent.py
                  messages.append({"role": "user", "content": feedback})
                  if use_responses_api:
                      resp_input = [{"role": "user", "content": feedback}]
-@@ -1332,21 +1326,7 @@
+@@ -1332,21 +1330,7 @@
                          reasoning=reasoning_cfg,
                          session_id=responses_session_id,
                      )
@@ -166,7 +229,7 @@ diff --git a/runtime/agent.py b/runtime/agent.py
                  else:
                      forced_messages = messages + [
                          {"role": "user", "content": forced_prompt}
-@@ -1354,20 +1334,31 @@
+@@ -1354,20 +1338,31 @@
                      resp = await llm.chat(
                          forced_messages, model=model, tools=None, tool_choice="none"
                      )
@@ -212,10 +275,10 @@ diff --git a/runtime/agent.py b/runtime/agent.py
                  if forced:
                      answer = forced
                  trace.event(
-@@ -1412,4 +1403,4 @@
+@@ -1412,4 +1407,4 @@
      trace.event("run_end", **summary)
      trace.close()
- 
+
 -    return {"answer": answer, **summary}
 +    return trace.redact({"answer": answer, "messages": messages, **summary})
 diff --git a/runtime/editor.py b/runtime/editor.py
@@ -224,18 +287,18 @@ diff --git a/runtime/editor.py b/runtime/editor.py
 @@ -1,4 +1,4 @@
 -"""Trusted file tools for MiniAgent's native workspace-edit role."""
 +"""Native MiniAgent file tools, attached to the running agent's own workspace."""
- 
+
  from pathlib import Path
- 
+
 @@ -22,7 +22,8 @@
      return target
- 
- 
+
+
 -def bundle(workspace: Path) -> WorkspaceBundle:
 +def attach(bundle: WorkspaceBundle, workspace: Path) -> None:
 +    """Add editing tools without loading instructions from the editing target."""
      root = workspace.resolve(strict=True)
- 
+
      async def read_file(args, ctx):
 @@ -86,17 +87,28 @@
                  },
@@ -281,19 +344,8 @@ diff --git a/runtime/editor.py b/runtime/editor.py
 diff --git a/runtime/llm.py b/runtime/llm.py
 --- a/runtime/llm.py
 +++ b/runtime/llm.py
-@@ -1,30 +1,20 @@
-+"""OpenAI-compatible model calls for the MiniAgent runtime.
-+
-+Connection settings come from FLASHRSI_MINIAGENT_API_KEY / BASE_URL, falling
-+back to OPENAI_API_KEY / OPENAI_BASE_URL and the SDK's default endpoint.
-+FLASHRSI_MINIAGENT_MODEL supplies the model; there is no default model.
-+SIDE_MODEL / SIDE_BASE_URL optionally override it for reader and side calls.
-+
-+FLASHRSI_MINIAGENT_MAX_TOKENS defaults to 4096 and LLM_MAX_RETRIES to 1 attempt.
-+REASONING is omitted unless set. EXTRA_BODY is a JSON object of explicit API
-+options, passed unchanged; model names do not imply provider-specific options.
-+All short names above use the FLASHRSI_MINIAGENT_ prefix.
- """
+@@ -1,32 +1,14 @@
+-"""
 -LLM wrapper for FlashRSI MiniAgent. DeepSeek calls use the OpenAI SDK directly;
 -OpenAI models (gpt-*) use the official OpenAI Responses API for reasoning-chain continuity;
 -other providers (e.g. Anthropic) fall back to litellm Chat Completions.
@@ -315,40 +367,43 @@ diff --git a/runtime/llm.py b/runtime/llm.py
 -
 -Plus auth env vars for non-DeepSeek providers (consumed by litellm):
 -  ANTHROPIC_API_KEY / OPENAI_API_KEY / ...
--"""
- 
++"""OpenAI-compatible model calls for the MiniAgent runtime.
++
++Connection and request options are supplied by run(llm_config=...).
++side_model / side_base_url optionally override reader and side calls.
++Model names do not imply provider-specific options.
+ """
+
  from __future__ import annotations
- 
+
  import asyncio
-+import json
  import logging
- import os
+-import os
  from typing import Any
-@@ -120,128 +110,40 @@
+
+ from openai import AsyncOpenAI
+@@ -88,7 +70,7 @@
+         if usage_text:
+             message += " (" + ", ".join(usage_text) + ")"
+         message += (
+-            "; output budget exhausted. Increase FLASHRSI_MINIAGENT_MAX_TOKENS "
++            "; output budget exhausted. Increase llm.max_tokens "
+             "without disabling reasoning; the configured budget is not increased automatically."
+         )
+     return message
+@@ -120,128 +102,39 @@
  # Config
  # ---------------------------------------------------------------------------
- 
+
 -DEEPSEEK_API_KEY: str = os.environ.get("DEEPSEEK_API_KEY", "")
 -DEFAULT_MODEL: str = os.environ.get("FLASHRSI_MINIAGENT_MODEL", "deepseek-v4-flash")
-+API_KEY: str = os.environ.get("FLASHRSI_MINIAGENT_API_KEY") or os.environ.get(
-+    "OPENAI_API_KEY", ""
-+)
-+DEFAULT_MODEL: str = os.environ.get("FLASHRSI_MINIAGENT_MODEL", "")
- SIDE_MODEL: str = os.environ.get("FLASHRSI_MINIAGENT_SIDE_MODEL", DEFAULT_MODEL)
+-SIDE_MODEL: str = os.environ.get("FLASHRSI_MINIAGENT_SIDE_MODEL", DEFAULT_MODEL)
 -ANALYZE_MODEL: str = os.environ.get(
 -    "FLASHRSI_MINIAGENT_ANALYZE_MODEL", "anthropic/claude-opus-4.6"
-+BASE_URL: str = (
-+    os.environ.get("FLASHRSI_MINIAGENT_BASE_URL")
-+    or os.environ.get("OPENAI_BASE_URL")
-+    or "https://api.openai.com/v1"
- )
+-)
 -BASE_URL: str = os.environ.get(
 -    "FLASHRSI_MINIAGENT_BASE_URL", "https://api.deepseek.com"
-+SIDE_BASE_URL: str = os.environ.get("FLASHRSI_MINIAGENT_SIDE_BASE_URL") or BASE_URL
-+MAX_TOKENS: int = int(os.environ.get("FLASHRSI_MINIAGENT_MAX_TOKENS", "4096"))
-+LLM_MAX_RETRIES: int = max(
-+    1, int(os.environ.get("FLASHRSI_MINIAGENT_LLM_MAX_RETRIES", "1"))
- )
+-)
 -SIDE_BASE_URL: str = os.environ.get("FLASHRSI_MINIAGENT_SIDE_BASE_URL", "")
 -ANALYZE_BASE_URL: str = os.environ.get("FLASHRSI_MINIAGENT_ANALYZE_BASE_URL", "")
 -MAX_TOKENS: int = int(os.environ.get("FLASHRSI_MINIAGENT_MAX_TOKENS", "128000"))
@@ -389,15 +444,7 @@ diff --git a/runtime/llm.py b/runtime/llm.py
 -
 -def _get_proxy_client(base_url: str, api_key: str) -> AsyncOpenAI:
 -    if not api_key:
-+REASONING_EFFORT: str = os.environ.get("FLASHRSI_MINIAGENT_REASONING", "")
-+EXTRA_BODY: dict = json.loads(os.environ.get("FLASHRSI_MINIAGENT_EXTRA_BODY", "{}"))
-+
-+_clients: dict[str, AsyncOpenAI] = {}
-+
-+
-+def _get_client(base_url: str) -> AsyncOpenAI:
-+    if not API_KEY:
-         raise RuntimeError("MiniAgent model API key is not set")
+-        raise RuntimeError("MiniAgent model API key is not set")
 -    key = (base_url.rstrip("/"), api_key)
 -    client = _proxy_clients.get(key)
 -    if client is None:
@@ -450,13 +497,36 @@ diff --git a/runtime/llm.py b/runtime/llm.py
 -def _is_deepseek_reasoning_model(model: str) -> bool:
 -    m = _strip_litellm_provider_prefix(model)
 -    return m.startswith("deepseek") and ("reasoner" in m or "v4" in m)
-+    if base_url not in _clients:
-+        _clients[base_url] = AsyncOpenAI(
-+            api_key=API_KEY, base_url=base_url, max_retries=0
-+        )
-+    return _clients[base_url]
- 
- 
++
++def configure(config: dict) -> None:
++    """Initialize the native runtime in its independent process."""
++    global API_KEY, DEFAULT_MODEL, SIDE_MODEL, BASE_URL, SIDE_BASE_URL
++    global MAX_TOKENS, LLM_MAX_RETRIES, REASONING_EFFORT, EXTRA_BODY
++    API_KEY = config.get("api_key") or ""
++    DEFAULT_MODEL = config.get("model_name") or ""
++    SIDE_MODEL = config.get("side_model") or DEFAULT_MODEL
++    BASE_URL = config.get("base_url") or "https://api.openai.com/v1"
++    SIDE_BASE_URL = config.get("side_base_url") or BASE_URL
++    MAX_TOKENS = config.get("max_tokens", 4096)
++    LLM_MAX_RETRIES = max(1, config.get("llm_max_retries", 1))
++    REASONING_EFFORT = config.get("reasoning_effort") or ""
++    EXTRA_BODY = config.get("extra_body") or {}
++
++
++configure({})
++
++_clients: dict[tuple[str, str], AsyncOpenAI] = {}
++
++
++def _get_client(base_url: str) -> AsyncOpenAI:
++    if not API_KEY:
++        raise RuntimeError("MiniAgent requires llm.api_key in config")
++    key = (base_url, API_KEY)
++    if key not in _clients:
++        _clients[key] = AsyncOpenAI(api_key=API_KEY, base_url=base_url, max_retries=0)
++    return _clients[key]
+
+
  def is_openai_model(model: str) -> bool:
      m = model.removeprefix("openai/")
      return m.startswith(("gpt-", "o1", "o3", "o4"))
@@ -475,10 +545,10 @@ diff --git a/runtime/llm.py b/runtime/llm.py
 -    if m == _strip_deepseek_prefix(SIDE_MODEL):
 -        return _get_ds_side_client()
 -    return _get_ds_client()
- 
- 
+
+
  # ---------------------------------------------------------------------------
-@@ -333,106 +235,22 @@
+@@ -333,106 +226,22 @@
  ) -> Any:
      """One-shot chat completion. Returns an OpenAI ChatCompletion response."""
      target = model or DEFAULT_MODEL
@@ -593,10 +663,10 @@ diff --git a/runtime/llm.py b/runtime/llm.py
 +        kwargs["extra_body"] = EXTRA_BODY
 +    base_url = SIDE_BASE_URL if target == SIDE_MODEL else BASE_URL
 +    return await _get_client(base_url).chat.completions.create(**kwargs)
- 
- 
+
+
  async def responses(
-@@ -448,15 +266,6 @@
+@@ -448,15 +257,6 @@
      max_output_tokens: int | None = None,
  ) -> Any:
      """Use the official OpenAI client without mutating process-global routing."""
@@ -612,7 +682,7 @@ diff --git a/runtime/llm.py b/runtime/llm.py
      kwargs: dict = {
          "model": model.removeprefix("openai/"),
          "input": input,
-@@ -477,7 +286,9 @@
+@@ -477,7 +277,9 @@
          kwargs["extra_headers"] = {"session_id": session_id}
      if previous_response_id:
          kwargs["previous_response_id"] = previous_response_id
@@ -620,26 +690,48 @@ diff --git a/runtime/llm.py b/runtime/llm.py
 +    if EXTRA_BODY:
 +        kwargs["extra_body"] = EXTRA_BODY
 +    return await _get_client(BASE_URL).responses.create(**kwargs)
- 
- 
+
+
  async def text(
 diff --git a/runtime/trace.py b/runtime/trace.py
 --- a/runtime/trace.py
 +++ b/runtime/trace.py
 @@ -17,6 +17,7 @@
- 
+
  import hashlib
  import json
 +import os
  import time
  import uuid
  from datetime import datetime
-@@ -26,17 +27,48 @@
- 
+@@ -25,18 +26,69 @@
+
+
  class TraceWriter:
-     def __init__(self, root: Path, question: str):
+-    def __init__(self, root: Path, question: str):
++    def __init__(self, root: Path, question: str, *, config: dict | None = None):
++        secrets = set()
++
++        def collect(value, credential=False):
++            if isinstance(value, dict):
++                for key, item in value.items():
++                    collect(
++                        item,
++                        credential
++                        or key.upper().endswith(
++                            ("API_KEY", "TOKEN", "SECRET", "PASSWORD")
++                        ),
++                    )
++            elif isinstance(value, (list, tuple)):
++                for item in value:
++                    collect(item, credential)
++            elif credential and isinstance(value, str) and value:
++                secrets.add(value)
++
++        collect(config)
 +        self._secrets = sorted(
-+            {
++            secrets
++            | {
 +                value
 +                for name, value in os.environ.items()
 +                if value
@@ -682,10 +774,10 @@ diff --git a/runtime/trace.py b/runtime/trace.py
 +            indent=2,
 +        )
 +        path.write_text(serialized, encoding="utf-8")
- 
+
      # ------------------------------------------------------------------
      def event(self, kind: str, **payload: Any) -> None:
-@@ -45,17 +77,20 @@
+@@ -45,17 +97,20 @@
              "kind": kind,
              **payload,
          }
@@ -699,7 +791,7 @@ diff --git a/runtime/trace.py b/runtime/trace.py
 +            + "\n"
 +        )
          self._trace.flush()
- 
+
      # ------------------------------------------------------------------
      def save_search(self, idx: int, query: str, results_text: str) -> None:
          path = self.dir / "searches" / f"q_{idx:03d}.json"
@@ -709,35 +801,91 @@ diff --git a/runtime/trace.py b/runtime/trace.py
 -            )
 -        )
 +        self.write_json(path, {"query": query, "results": results_text})
- 
+
      def save_page(
          self, url: str, focus: str, extracted: str, raw_text: str = ""
-@@ -73,16 +108,14 @@
+@@ -73,16 +128,14 @@
          ]
          if raw_text:
              body += ["", "## Raw Page Snapshot", "", raw_text]
 -        path.write_text("\n".join(body))
 +        path.write_text(self.redact("\n".join(body)), encoding="utf-8")
          return str(path)
- 
+
      def save_answer(self, answer: str) -> None:
 -        (self.dir / "answer.md").write_text(answer)
 +        (self.dir / "answer.md").write_text(self.redact(answer), encoding="utf-8")
- 
+
      def save_summary(self, summary: dict) -> None:
 -        (self.dir / "summary.json").write_text(
 -            json.dumps(summary, ensure_ascii=False, indent=2)
 -        )
 +        self.write_json(self.dir / "summary.json", summary)
- 
+
      def __enter__(self):
          return self
+diff --git a/runtime/web_config.py b/runtime/web_config.py
+--- a/runtime/web_config.py
++++ b/runtime/web_config.py
+@@ -1,7 +1,13 @@
+ """Explicit endpoint configuration shared by web tools and preflight."""
+
+-import os
+ from urllib.parse import urlparse
++
++_config: dict = {}
++
++
++def configure(config: dict) -> None:
++    global _config
++    _config = config
+
+
+ class WebToolError(RuntimeError):
+@@ -9,13 +15,11 @@
+
+
+ def endpoint(tool: str) -> str:
+-    name = {"web_search": "FLASHRSI_SEARCH_URL", "read_url": "FLASHRSI_BROWSE_URL"}[
+-        tool
+-    ]
+-    value = os.environ.get(name, "")
++    name = {"web_search": "search_url", "read_url": "browse_url"}[tool]
++    value = _config.get(name, "")
+     if not value:
+         raise WebToolError(
+-            f"{tool} requires an explicit {name} endpoint; configure a trusted "
++            f"{tool} requires an explicit web.{name} endpoint; configure a trusted "
+             "search/browse service or remove this tool from agent.yaml"
+         )
+     parsed = urlparse(value)
+@@ -28,11 +32,11 @@
+         or parsed.fragment
+     ):
+         raise WebToolError(
+-            f"{name} must be a URL without credentials, query, or fragment"
++            f"web.{name} must be a URL without credentials, query, or fragment"
+         )
+     if parsed.scheme != "https" and not (local and parsed.scheme == "http"):
+         raise WebToolError(
+-            f"{name} requires HTTPS (HTTP is permitted only for loopback tests)"
++            f"web.{name} requires HTTPS (HTTP is permitted only for loopback tests)"
+         )
+     return value
+
+@@ -44,5 +48,5 @@
+
+
+ def headers() -> dict:
+-    secret = os.environ.get("FLASHRSI_WEB_API_KEY")
++    secret = _config.get("api_key")
+     return {"Authorization": "Bearer " + secret} if secret else {}
 diff --git a/runtime/workspace.py b/runtime/workspace.py
 --- a/runtime/workspace.py
 +++ b/runtime/workspace.py
 @@ -162,4 +162,4 @@
      )
- 
- 
+
+
 -SEED_WORKSPACE: Path = Path(__file__).parent / "seed_workspace"
 +SEED_WORKSPACE: Path = Path(__file__).parent.parent

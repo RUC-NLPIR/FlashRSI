@@ -3,10 +3,16 @@
 import asyncio
 import json
 import os
+import signal
 import sys
 
 
 async def _main():
+    # The adapter gives native tools a chance to reap their own subprocesses.
+    if os.name == "posix":
+        asyncio.get_running_loop().add_signal_handler(
+            signal.SIGTERM, asyncio.current_task().cancel
+        )
     request = json.load(sys.stdin)
     # Reserve stdout for the result; harness/tool output goes to stderr.
     with os.fdopen(os.dup(sys.stdout.fileno()), "w", encoding="utf-8") as result_stream:

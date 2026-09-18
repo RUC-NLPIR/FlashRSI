@@ -1,7 +1,8 @@
 prompts:
   system: prompts/system.md
   extract: prompts/extract.md
-tools: []
+tools:
+  - shell
 middlewares: []
 skills:
   - main

@@ -15,6 +15,15 @@ from flashrsi._records import _redact, _secrets
 from flashrsi.core import Agent, Trajectory
 
 _LOGGER = logging.getLogger(__name__)
+_PROVIDER_ENV = (
+    "CLAUDE_CODE_USE_BEDROCK",
+    "CLAUDE_CODE_USE_VERTEX",
+    "CLAUDE_CODE_USE_FOUNDRY",
+    "CLAUDE_CODE_USE_ANTHROPIC_AWS",
+    "CLAUDE_CODE_USE_ANTHROPIC_GOOGLE_CLOUD",
+    "CLAUDE_CODE_USE_MANTLE",
+    "CLAUDE_CODE_USE_GATEWAY",
+)
 
 
 class ClaudeCode(Agent):
@@ -22,6 +31,19 @@ class ClaudeCode(Agent):
 
     name = "claude_code"
     description = "Claude Code with versioned native extensions and delegated tasks."
+
+    _container_extra = "claude-code"
+
+    def _check_container(self) -> None:
+        super()._check_container()
+        if self.config.get("cli_path"):
+            raise ValueError("Container execution installs its own CLI; omit cli_path")
+        if self.config["llm"].get("auth", "api_key") == "login":
+            raise ValueError(
+                "Claude Code containers cannot use llm.auth: login; "
+                "configure llm.api_key, llm.auth_token, or llm.oauth_token"
+            )
+        _authentication_env(self.config["llm"])
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         # Import only when used: other Agents do not require this optional SDK.
@@ -34,22 +56,17 @@ class ClaudeCode(Agent):
 
         config = self.config
         llm = config["llm"]
-        env = {
-            "CLAUDE_PLUGIN_ROOT": str(self.files_dir),
-            "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-            "CLAUDE_CODE_SKIP_PROMPT_HISTORY": "",
-            # An empty value retains the default native Keychain/file location.
-            # Redirect transcripts without moving or copying login credentials.
-            "CLAUDE_SECURESTORAGE_CONFIG_DIR": os.environ.get(
-                "CLAUDE_SECURESTORAGE_CONFIG_DIR",
-                os.environ.get("CLAUDE_CONFIG_DIR", ""),
-            ),
-        }
-        if llm.get("api_key"):
-            env["ANTHROPIC_API_KEY"] = llm["api_key"]
-            env["ANTHROPIC_AUTH_TOKEN"] = ""
-        if llm.get("base_url"):
-            env["ANTHROPIC_BASE_URL"] = llm["base_url"]
+        try:
+            env = _authentication_env(llm)
+        except ValueError as exc:
+            return Trajectory(status="error", error_message=str(exc))
+        env.update(
+            {
+                "CLAUDE_PLUGIN_ROOT": str(self.files_dir),
+                "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+                "CLAUDE_CODE_SKIP_PROMPT_HISTORY": "",
+            }
+        )
         secrets = sorted(
             set(_secrets(os.environ) + _secrets(env) + _secrets(config)),
             key=len,
@@ -88,6 +105,16 @@ class ClaudeCode(Agent):
         with TemporaryDirectory(prefix="flashrsi-claude-code-") as temporary:
             runtime = Path(temporary).resolve()
             env["CLAUDE_CONFIG_DIR"] = str(runtime / "state")
+            # Only explicit login mode may consult the user's native credential
+            # location. API credentials and all transcripts stay run-local.
+            env["CLAUDE_SECURESTORAGE_CONFIG_DIR"] = (
+                os.environ.get(
+                    "CLAUDE_SECURESTORAGE_CONFIG_DIR",
+                    os.environ.get("CLAUDE_CONFIG_DIR", ""),
+                )
+                if llm.get("auth", "api_key") == "login"
+                else str(runtime / "state")
+            )
             env["CLAUDE_CODE_TMPDIR"] = str(runtime / "tmp")
             (runtime / "tmp").mkdir(mode=0o700)
             task_dir = working_dir or runtime / "work"
@@ -173,6 +200,38 @@ class ClaudeCode(Agent):
         )
 
 
+def _authentication_env(llm):
+    """Map explicit connection settings to the native CLI's environment."""
+    auth = llm.get("auth", "api_key")
+    if auth not in ("api_key", "login"):
+        raise ValueError("Claude Code llm.auth must be 'api_key' or 'login'")
+    credentials = {
+        "api_key": "ANTHROPIC_API_KEY",
+        "auth_token": "ANTHROPIC_AUTH_TOKEN",
+        "oauth_token": "CLAUDE_CODE_OAUTH_TOKEN",
+    }
+    provided = [name for name in credentials if llm.get(name)]
+    if auth == "login" and provided:
+        raise ValueError("Claude Code llm.auth: login cannot include API credentials")
+    if auth == "api_key" and len(provided) != 1:
+        raise ValueError(
+            "Claude Code requires exactly one of llm.api_key, llm.auth_token, "
+            "or llm.oauth_token; use llm.auth: login for native login"
+        )
+    # Empty values override inherited credentials; the endpoint has an explicit
+    # default so a parent ANTHROPIC_BASE_URL cannot redirect this role.
+    env = {name: "" for name in credentials.values()}
+    # This adapter supports the configured Anthropic-compatible endpoint and
+    # explicit native login, not cloud-provider routing inherited from the CLI.
+    env.update({name: "" for name in _PROVIDER_ENV})
+    env["ANTHROPIC_BASE_URL"] = llm.get("base_url") or "https://api.anthropic.com"
+    for name in provided:
+        if not isinstance(llm[name], str) or not llm[name].strip():
+            raise ValueError(f"Claude Code llm.{name} must be a non-empty string")
+        env[credentials[name]] = llm[name]
+    return env
+
+
 def _settings(path):
     """Validate settings the CLI can otherwise silently ignore.
 
@@ -200,9 +259,7 @@ def _settings(path):
         "CLAUDE_CODE_DISABLE_AUTO_MEMORY",
         "CLAUDE_CODE_SKIP_PROMPT_HISTORY",
         "CLAUDE_CODE_TMPDIR",
-        "CLAUDE_CODE_USE_BEDROCK",
-        "CLAUDE_CODE_USE_VERTEX",
-        "CLAUDE_CODE_USE_FOUNDRY",
+        *_PROVIDER_ENV,
     }
     for name in environment:
         if name.upper() in reserved or name.upper().endswith(
@@ -210,7 +267,7 @@ def _settings(path):
         ):
             raise ValueError(
                 f"{path.name}.env cannot set runtime field {name}; "
-                "use runtime config or the parent environment"
+                "use Agent runtime config"
             )
     return str(path)
 

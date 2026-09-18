@@ -1,8 +1,8 @@
 """Live Claude Code smoke test; makes model calls using native authentication.
 
 uv run --extra claude-code python examples/claude_code.py --model YOUR_MODEL
-Optional connection settings: ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN,
-and ANTHROPIC_BASE_URL. Export these in the process environment when needed.
+This example explicitly selects llm.auth: login and uses the local Claude login.
+For API authentication, set llm.api_key (or auth_token/oauth_token) in config.
 """
 
 import argparse
@@ -29,7 +29,7 @@ async def main(model, *, timeout=180, max_turns=10, max_budget_usd=1.0):
         overrides={
             "agent": {
                 "name": "claude_code",
-                "llm": {"model_name": model},
+                "llm": {"model_name": model, "auth": "login"},
                 "timeout": timeout,
                 "max_turns": max_turns,
                 "max_budget_usd": max_budget_usd,

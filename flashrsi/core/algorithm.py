@@ -44,8 +44,10 @@ class Algorithm:
             if type(agent)._run is Agent._run:
                 raise ValueError(f"Algorithm {role} must implement Agent._run")
         splits = self.benchmark.load()
-        if type(self.target).rollout is Agent.rollout and any(
-            task.env is not None for tasks in splits.values() for task in tasks
+        if (
+            type(self.target).rollout is Agent.rollout
+            and self.target._env_runner is None
+            and any(task.env is not None for tasks in splits.values() for task in tasks)
         ):
             raise ValueError(
                 "Algorithm target needs environment-aware rollout for these tasks"

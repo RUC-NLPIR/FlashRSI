@@ -1,22 +1,14 @@
 """OpenAI-compatible model calls for the MiniAgent runtime.
 
-Connection settings come from FLASHRSI_MINIAGENT_API_KEY / BASE_URL, falling
-back to OPENAI_API_KEY / OPENAI_BASE_URL and the SDK's default endpoint.
-FLASHRSI_MINIAGENT_MODEL supplies the model; there is no default model.
-SIDE_MODEL / SIDE_BASE_URL optionally override it for reader and side calls.
-
-FLASHRSI_MINIAGENT_MAX_TOKENS defaults to 4096 and LLM_MAX_RETRIES to 1 attempt.
-REASONING is omitted unless set. EXTRA_BODY is a JSON object of explicit API
-options, passed unchanged; model names do not imply provider-specific options.
-All short names above use the FLASHRSI_MINIAGENT_ prefix.
+Connection and request options are supplied by run(llm_config=...).
+side_model / side_base_url optionally override reader and side calls.
+Model names do not imply provider-specific options.
 """
 
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
-import os
 from typing import Any
 
 from openai import AsyncOpenAI
@@ -78,7 +70,7 @@ def response_error(response: Any, *, responses_api: bool = False) -> str | None:
         if usage_text:
             message += " (" + ", ".join(usage_text) + ")"
         message += (
-            "; output budget exhausted. Increase FLASHRSI_MINIAGENT_MAX_TOKENS "
+            "; output budget exhausted. Increase llm.max_tokens "
             "without disabling reasoning; the configured budget is not increased automatically."
         )
     return message
@@ -110,35 +102,34 @@ def usage_dict(response: Any) -> dict:
 # Config
 # ---------------------------------------------------------------------------
 
-API_KEY: str = os.environ.get("FLASHRSI_MINIAGENT_API_KEY") or os.environ.get(
-    "OPENAI_API_KEY", ""
-)
-DEFAULT_MODEL: str = os.environ.get("FLASHRSI_MINIAGENT_MODEL", "")
-SIDE_MODEL: str = os.environ.get("FLASHRSI_MINIAGENT_SIDE_MODEL", DEFAULT_MODEL)
-BASE_URL: str = (
-    os.environ.get("FLASHRSI_MINIAGENT_BASE_URL")
-    or os.environ.get("OPENAI_BASE_URL")
-    or "https://api.openai.com/v1"
-)
-SIDE_BASE_URL: str = os.environ.get("FLASHRSI_MINIAGENT_SIDE_BASE_URL") or BASE_URL
-MAX_TOKENS: int = int(os.environ.get("FLASHRSI_MINIAGENT_MAX_TOKENS", "4096"))
-LLM_MAX_RETRIES: int = max(
-    1, int(os.environ.get("FLASHRSI_MINIAGENT_LLM_MAX_RETRIES", "1"))
-)
-REASONING_EFFORT: str = os.environ.get("FLASHRSI_MINIAGENT_REASONING", "")
-EXTRA_BODY: dict = json.loads(os.environ.get("FLASHRSI_MINIAGENT_EXTRA_BODY", "{}"))
 
-_clients: dict[str, AsyncOpenAI] = {}
+def configure(config: dict) -> None:
+    """Initialize the native runtime in its independent process."""
+    global API_KEY, DEFAULT_MODEL, SIDE_MODEL, BASE_URL, SIDE_BASE_URL
+    global MAX_TOKENS, LLM_MAX_RETRIES, REASONING_EFFORT, EXTRA_BODY
+    API_KEY = config.get("api_key") or ""
+    DEFAULT_MODEL = config.get("model_name") or ""
+    SIDE_MODEL = config.get("side_model") or DEFAULT_MODEL
+    BASE_URL = config.get("base_url") or "https://api.openai.com/v1"
+    SIDE_BASE_URL = config.get("side_base_url") or BASE_URL
+    MAX_TOKENS = config.get("max_tokens", 4096)
+    LLM_MAX_RETRIES = max(1, config.get("llm_max_retries", 1))
+    REASONING_EFFORT = config.get("reasoning_effort") or ""
+    EXTRA_BODY = config.get("extra_body") or {}
+
+
+configure({})
+
+_clients: dict[tuple[str, str], AsyncOpenAI] = {}
 
 
 def _get_client(base_url: str) -> AsyncOpenAI:
     if not API_KEY:
-        raise RuntimeError("MiniAgent model API key is not set")
-    if base_url not in _clients:
-        _clients[base_url] = AsyncOpenAI(
-            api_key=API_KEY, base_url=base_url, max_retries=0
-        )
-    return _clients[base_url]
+        raise RuntimeError("MiniAgent requires llm.api_key in config")
+    key = (base_url, API_KEY)
+    if key not in _clients:
+        _clients[key] = AsyncOpenAI(api_key=API_KEY, base_url=base_url, max_retries=0)
+    return _clients[key]
 
 
 def is_openai_model(model: str) -> bool:

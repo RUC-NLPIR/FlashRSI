@@ -9,6 +9,8 @@ import time
 from pathlib import Path
 
 import pytest
+from test_claude_code import _config as _cli_config
+from test_claude_code import local_cli as local_cli
 from test_claude_code_native import _config, _message_events
 from test_claude_code_native import anthropic_server as anthropic_server
 
@@ -67,7 +69,7 @@ def test_run_ignores_old_auto_memory_and_cleans_private_runtime(
 
 @pytest.mark.parametrize("credential_source", ["config_dir", "secure_storage"])
 def test_private_runtime_preserves_native_credential_location(
-    anthropic_server, tmp_path, monkeypatch, credential_source
+    anthropic_server, local_cli, tmp_path, monkeypatch, credential_source
 ):
     credentials = tmp_path / "native-auth"
     credentials.mkdir()
@@ -116,7 +118,11 @@ def test_private_runtime_preserves_native_credential_location(
 
     monkeypatch.setattr(sdk, "ClaudeSDKClient", client)
     trajectory = asyncio.run(
-        ClaudeCode(_config(anthropic_server, tools=[])).run("Answer directly")
+        ClaudeCode(
+            _cli_config(
+                local_cli, llm={"auth": "login", "api_key": None, "base_url": None}
+            )
+        ).run("Answer directly")
     )
     assert trajectory.status == "finished", trajectory.error_message
     assert statuses[0]["loggedIn"] is True

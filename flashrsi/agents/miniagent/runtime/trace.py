@@ -26,9 +26,29 @@ from typing import Any
 
 
 class TraceWriter:
-    def __init__(self, root: Path, question: str):
+    def __init__(self, root: Path, question: str, *, config: dict | None = None):
+        secrets = set()
+
+        def collect(value, credential=False):
+            if isinstance(value, dict):
+                for key, item in value.items():
+                    collect(
+                        item,
+                        credential
+                        or key.upper().endswith(
+                            ("API_KEY", "TOKEN", "SECRET", "PASSWORD")
+                        ),
+                    )
+            elif isinstance(value, (list, tuple)):
+                for item in value:
+                    collect(item, credential)
+            elif credential and isinstance(value, str) and value:
+                secrets.add(value)
+
+        collect(config)
         self._secrets = sorted(
-            {
+            secrets
+            | {
                 value
                 for name, value in os.environ.items()
                 if value

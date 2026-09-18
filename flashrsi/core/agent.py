@@ -45,6 +45,10 @@ class Agent:
 
     name: str
     description: str
+    # Built-ins reuse their package extra. External adapters may name their own
+    # distributions; installation pins the host's versions in both cases.
+    _container_extra: str | None = None
+    _container_dependencies: tuple[str, ...] | None = None
 
     def __init__(self, config: Mapping[str, Any] | None = None) -> None:
         if not isinstance(getattr(self, "name", None), str) or not self.name:
@@ -59,6 +63,8 @@ class Agent:
         self._config = Config(copy.deepcopy(config))
         _validate_role_config(self._config, "config")
         self._snapshot = _capture_agent(type(self), self._config)
+        # An integration binds execution independently of the harness type.
+        self._env_runner = None
         # Local to the async call: update changes the default for future calls,
         # never the files or version visible inside a running backend.
         self._execution: ContextVar[_Execution | None] = ContextVar(
@@ -137,24 +143,31 @@ class Agent:
         """Backend hook. Load versioned files from files_dir, not the source package."""
         raise NotImplementedError(f"{self.name} does not implement _run")
 
+    def _check_container(self) -> None:
+        """Adapters may add checks for configuration that cannot leave the host."""
+        if self._container_extra is None and self._container_dependencies is None:
+            raise ValueError(f"{self.name} has not declared container dependencies")
+
     async def rollout(
         self, tasks: Iterable[Task], *, snapshot: Snapshot | None = None
     ) -> tuple[Trajectory, ...]:
-        """Execute question-only tasks using one pinned version and attach Tasks.
+        """Execute tasks using one pinned version and configuration and attach Tasks.
 
         Omit snapshot to use the current version. Supplying a candidate evaluates
         it without selecting it; only update changes the default version.
-        Environment-backed benchmarks must supply their own execution adapter;
-        an env string can name a container/image as well as a local directory.
+        The caller binds an integration for environment tasks. It receives this
+        Agent with the pinned snapshot/config; ordinary questions use run.
         """
         if type(self)._run is Agent._run:
             raise NotImplementedError(f"{self.name} does not implement _run")
         tasks = tuple(tasks)
         if any(not isinstance(task, Task) for task in tasks):
             raise ValueError("rollout tasks must be Task instances")
-        if any(task.env is not None for task in tasks):
+        env_runner = self._env_runner
+        if env_runner is None and any(task.env is not None for task in tasks):
             raise NotImplementedError(
-                "tasks with env require an environment-aware rollout"
+                "tasks with env require an environment-aware rollout; "
+                "bind an execution integration before rollout"
             )
         execution = self._execution.get()
         baseline = execution.snapshot if execution is not None else self._snapshot
@@ -168,7 +181,15 @@ class Agent:
         try:
             trajectories = []
             for task in tasks:
-                trajectories.append(replace(await self.run(task.question), task=task))
+                if task.env is None:
+                    result = await self.run(task.question)
+                else:
+                    result = await env_runner(self, task)
+                    if not isinstance(result, Trajectory):
+                        raise TypeError(
+                            "environment execution must return a Trajectory"
+                        )
+                trajectories.append(replace(result, task=task))
             return tuple(trajectories)
         finally:
             self._execution.reset(token)

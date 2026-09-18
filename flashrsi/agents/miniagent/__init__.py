@@ -21,29 +21,11 @@ class MiniAgent(Agent):
 
     name = "miniagent"
     description = "A workspace-driven ReAct harness with optional file editing."
+    _container_extra = "miniagent"
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         config = self.config
-        llm = config["llm"]
-        model = llm["model_name"]
         timeout = config.get("timeout", 300)
-        # Use the harness's existing environment interface in this child only.
-        api_key = llm.get("api_key") or ""
-        base_url = llm.get("base_url") or ""
-        env = {
-            **os.environ,
-            "FLASHRSI_MINIAGENT_API_KEY": api_key,
-            "FLASHRSI_MINIAGENT_MODEL": model,
-            "FLASHRSI_MINIAGENT_SIDE_MODEL": model,
-            "FLASHRSI_MINIAGENT_BASE_URL": base_url,
-            "FLASHRSI_MINIAGENT_SIDE_BASE_URL": base_url,
-            "FLASHRSI_MINIAGENT_MAX_TOKENS": str(llm.get("max_tokens", 4096)),
-            "FLASHRSI_MINIAGENT_LLM_MAX_RETRIES": str(llm.get("llm_max_retries", 1)),
-            "FLASHRSI_MINIAGENT_REASONING": llm.get("reasoning_effort") or "",
-            "FLASHRSI_MINIAGENT_EXTRA_BODY": json.dumps(
-                llm.get("extra_body") or {}, default=dict
-            ),
-        }
         # files_dir belongs to Agent; logs and the task cwd belong to this run.
         with TemporaryDirectory(prefix="flashrsi-miniagent-") as temporary:
             root = Path(temporary)
@@ -53,7 +35,9 @@ class MiniAgent(Agent):
             # These are the native run() arguments, passed unchanged by _entry.py.
             request = {
                 "question": prompt,
-                "model": model,
+                "llm_config": config["llm"],
+                "web_config": config.get("web", {}),
+                "debug_llm_io": config.get("debug_llm_io", False),
                 "max_turns": config.get("max_turns", 10),
                 "workspace_dir": str(self.files_dir),
                 "runs_root": str(root / "runs"),
@@ -61,7 +45,7 @@ class MiniAgent(Agent):
             if working_dir is not None:
                 request["working_dir"] = str(working_dir)
             secrets = sorted(
-                set(_secrets(env) + _secrets(config)), key=len, reverse=True
+                set(_secrets(os.environ) + _secrets(config)), key=len, reverse=True
             )
             process = await asyncio.create_subprocess_exec(
                 sys.executable,
@@ -69,7 +53,6 @@ class MiniAgent(Agent):
                 "-B",
                 str(_ENTRY),
                 cwd=task_dir,
-                env=env,
                 stdin=asyncio.subprocess.PIPE,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
@@ -77,7 +60,8 @@ class MiniAgent(Agent):
             )
             try:
                 stdout, stderr = await asyncio.wait_for(
-                    process.communicate(json.dumps(request).encode()), timeout=timeout
+                    process.communicate(json.dumps(request, default=dict).encode()),
+                    timeout=timeout,
                 )
             except TimeoutError:
                 return Trajectory(
@@ -110,6 +94,15 @@ class MiniAgent(Agent):
 async def _stop(process):
     """Finish all work using files_dir before Agent removes that directory."""
     if os.name == "posix":
+        if process.returncode is None:
+            try:
+                os.killpg(process.pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            try:
+                await asyncio.wait_for(process.wait(), timeout=2)
+            except TimeoutError:
+                pass
         try:
             os.killpg(process.pid, signal.SIGKILL)
         except ProcessLookupError:

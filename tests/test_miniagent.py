@@ -5,8 +5,10 @@ import importlib.util
 import inspect
 import json
 import os
+import shlex
 import shutil
 import signal
+import sys
 import threading
 from contextlib import suppress
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -315,6 +317,239 @@ def test_rollout_preserves_tasks_and_can_be_graded_locally(model_server, tmp_pat
     assert graded.usage == trajectory.usage and trajectory.usage
 
 
+@pytest.mark.filterwarnings("ignore:Task.checksum will be deprecated")
+@pytest.mark.parametrize("tool_name", ["write_file", "shell"])
+def test_terminal_bench_uses_real_miniagent_tools_and_native_verifier(
+    model_server, tmp_path, monkeypatch, tool_name
+):
+    pytest.importorskip("harbor")
+    from harbor.environments.factory import EnvironmentFactory
+    from test_harbor import _LocalEnvironment
+
+    from flashrsi.benchmarks import TerminalBench
+    from flashrsi.integrations import harbor
+
+    directory = tmp_path / "native-task"
+    (directory / "environment").mkdir(parents=True)
+    (directory / "tests").mkdir()
+    (directory / "task.toml").write_text(
+        '[verifier.env]\nVERIFIER_DIR = "/logs/verifier"\n'
+    )
+    (directory / "instruction.md").write_text("Write SOLVED to answer.txt")
+    (directory / "environment/Dockerfile").write_text("FROM scratch\nWORKDIR /\n")
+    (directory / "tests/test.sh").write_text(
+        '#!/bin/sh\nmkdir -p "$VERIFIER_DIR"\n'
+        'if [ "$(cat answer.txt 2>/dev/null)" = SOLVED ]; then\n'
+        '  echo 1 > "$VERIFIER_DIR/reward.txt"\n'
+        'else\n  echo 0 > "$VERIFIER_DIR/reward.txt"\nfi\n'
+    )
+    environments = []
+
+    def create_environment(config, **kwargs):
+        environment = _LocalEnvironment(remote_root=tmp_path / "remote", **kwargs)
+        environments.append(environment)
+        return environment
+
+    which = shutil.which
+    monkeypatch.setattr(
+        harbor.shutil,
+        "which",
+        lambda command: "/fake/docker" if command == "docker" else which(command),
+    )
+    monkeypatch.setattr(
+        EnvironmentFactory, "create_environment_from_config", create_environment
+    )
+
+    def reply(request):
+        body = request["body"]
+        edited = any(message["role"] == "tool" for message in body["messages"])
+        arguments = (
+            {"command": "printf SOLVED > answer.txt"}
+            if tool_name == "shell"
+            else {"path": "answer.txt", "content": "SOLVED"}
+        )
+        tool = None if edited else (tool_name, arguments)
+        return 200, _chat_reply(body, "done", tool=tool)
+
+    model_server.reply = reply
+    benchmark = TerminalBench(
+        {"data_path": directory, "split": {"train": 0, "dev": 0, "test": 1}}
+    )
+    benchmark.load()
+    agent = MiniAgent(_config(model_server))
+    agent.set_scope({"skill": "rw"})
+    baseline = agent.snapshot
+    marker = "Candidate skill: finish the requested file edit."
+    with baseline.check_out() as files:
+        (files / "skills/main.md").write_text(marker)
+        candidate = baseline.commit(files)
+    harbor.bind(agent)
+
+    (trajectory,) = benchmark.grade(
+        asyncio.run(agent.rollout(benchmark.test, snapshot=candidate))
+    )
+
+    assert trajectory.status == "finished", trajectory.error_message
+    assert trajectory.output == "done"
+    assert trajectory.metrics == {"reward": 1.0}
+    assert trajectory.task is benchmark.test[0]
+    tool_output = next(
+        message["content"]
+        for message in trajectory.messages
+        if message.get("role") == "tool"
+    )
+    if tool_name == "shell":
+        assert json.loads(tool_output)["exit_code"] == 0
+    else:
+        assert "Wrote answer.txt" in tool_output
+    assert len(model_server.requests) == 2
+    assert all(
+        marker in request["body"]["messages"][0]["content"]
+        for request in model_server.requests
+    )
+    assert trajectory.messages[0]["snapshot_id"] == candidate.id
+    assert agent.snapshot is baseline
+    assert baseline.files["skills/main.md"].content != marker.encode()
+    (environment,) = environments
+    assert environment.events.index("agent") < environment.events.index(
+        ("upload", "/tests")
+    )
+    assert environment.events[-1] == "stop"
+
+
+@pytest.mark.filterwarnings("ignore:Task.checksum will be deprecated")
+def test_terminal_bench_service_survives_agent_until_verifier(
+    model_server, tmp_path, monkeypatch
+):
+    pytest.importorskip("harbor")
+    import fcntl
+
+    from harbor.environments.factory import EnvironmentFactory
+    from test_harbor import _LocalEnvironment
+
+    from flashrsi.benchmarks import TerminalBench
+    from flashrsi.integrations import harbor
+
+    directory, remote = tmp_path / "native-task", tmp_path / "remote"
+    (directory / "environment").mkdir(parents=True)
+    (directory / "tests").mkdir()
+    (directory / "task.toml").write_text(
+        '[verifier.env]\nVERIFIER_DIR = "/logs/verifier"\n'
+    )
+    (directory / "instruction.md").write_text("Leave a SOLVED HTTP service running")
+    (directory / "environment/Dockerfile").write_text("FROM scratch\nWORKDIR /\n")
+    (directory / "tests/test.sh").write_text(
+        f"#!/bin/sh\n{shlex.quote(sys.executable)} - <<'PY'\n"
+        "import os\nfrom pathlib import Path\nfrom urllib.request import urlopen\n"
+        "port = int(Path('service.port').read_text())\n"
+        "try:\n"
+        "    with urlopen(f'http://127.0.0.1:{port}', timeout=1) as response:\n"
+        "        passed = response.read() == b'SOLVED'\n"
+        "except OSError:\n    passed = False\n"
+        "print('Service survived Agent exit:', passed)\n"
+        "output = Path(os.environ['VERIFIER_DIR'])\n"
+        "output.mkdir(parents=True, exist_ok=True)\n"
+        "(output / 'reward.txt').write_text(str(int(passed)))\nPY\n"
+    )
+    service_code = (
+        "import fcntl, os\nfrom pathlib import Path\n"
+        "from http.server import BaseHTTPRequestHandler, HTTPServer\n"
+        "lock = open('service.lock', 'w')\n"
+        "fcntl.flock(lock, fcntl.LOCK_EX)\n"
+        "class Handler(BaseHTTPRequestHandler):\n"
+        "    def do_GET(self):\n"
+        "        self.send_response(200)\n"
+        "        self.end_headers()\n"
+        "        self.wfile.write(b'SOLVED')\n"
+        "server = HTTPServer(('127.0.0.1', 0), Handler)\n"
+        "Path('service.pid').write_text(str(os.getpid()))\n"
+        "Path('service.port').write_text(str(server.server_port))\n"
+        "server.serve_forever()\n"
+    )
+    ready_code = (
+        "import time\nfrom pathlib import Path\n"
+        "for _ in range(200):\n"
+        "    if Path('service.port').exists():\n        break\n"
+        "    time.sleep(0.01)\n"
+        "else:\n    raise RuntimeError('service did not start')\n"
+    )
+    command = (
+        "nohup "
+        + shlex.join([sys.executable, "-c", service_code])
+        + " > service.log 2>&1 & "
+        + shlex.join([sys.executable, "-c", ready_code])
+    )
+
+    def stop_service():
+        pid_file = remote / "service.pid"
+        if pid_file.exists():
+            with suppress(ProcessLookupError):
+                os.kill(int(pid_file.read_text()), signal.SIGKILL)
+            pid_file.unlink()
+
+    class ServiceEnvironment(_LocalEnvironment):
+        async def stop(self, delete):
+            # Real Docker stop terminates the task's services after verification.
+            stop_service()
+            await super().stop(delete)
+
+    environments = []
+
+    def create_environment(config, **kwargs):
+        environment = ServiceEnvironment(remote_root=remote, **kwargs)
+        environments.append(environment)
+        return environment
+
+    which = shutil.which
+    monkeypatch.setattr(
+        harbor.shutil,
+        "which",
+        lambda command: "/fake/docker" if command == "docker" else which(command),
+    )
+    monkeypatch.setattr(
+        EnvironmentFactory, "create_environment_from_config", create_environment
+    )
+
+    def reply(request):
+        first = len(model_server.requests) == 1
+        return 200, _chat_reply(
+            request["body"],
+            "done",
+            tool=("shell", {"command": command}) if first else None,
+        )
+
+    model_server.reply = reply
+    benchmark = TerminalBench(
+        {"data_path": directory, "split": {"train": 0, "dev": 0, "test": 1}}
+    )
+    benchmark.load()
+    agent = MiniAgent(_config(model_server, timeout=10))
+    harbor.bind(agent)
+
+    async def scenario():
+        (trajectory,) = benchmark.grade(await agent.rollout(benchmark.test))
+        assert trajectory.status == "finished", trajectory.error_message
+        assert trajectory.metrics == {"reward": 1.0}
+        assert "Service survived Agent exit: True" in trajectory.messages[-1]["stdout"]
+        assert len(model_server.requests) == 2
+        (environment,) = environments
+        assert environment.events.index("agent") < environment.events.index("verifier")
+        assert environment.events[-1] == "stop"
+        async with asyncio.timeout(2):
+            with (remote / "service.lock").open() as lock:
+                while True:
+                    try:
+                        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                        break
+                    except BlockingIOError:
+                        await asyncio.sleep(0.01)
+
+    try:
+        asyncio.run(scenario())
+    finally:
+        stop_service()
+
+
 def test_skill_candidate_changes_requests_without_selecting_it(model_server, tmp_path):
     source = _copy_source(tmp_path)
     (source / "skills/main.md").write_text("Answer marker: baseline.")
@@ -596,7 +831,9 @@ def test_public_model_fields_are_validated_by_config(field, value):
         )
 
 
-def test_custom_model_uses_sdk_environment_defaults(model_server, monkeypatch):
+def test_missing_config_key_does_not_use_environment_credentials(
+    model_server, monkeypatch
+):
     monkeypatch.setenv("FLASHRSI_MINIAGENT_BASE_URL", "https://legacy.invalid")
     monkeypatch.setenv("FLASHRSI_MINIAGENT_API_KEY", "unused-legacy-key")
     monkeypatch.setenv("FLASHRSI_MINIAGENT_MAX_TOKENS", "invalid-legacy-budget")
@@ -606,32 +843,28 @@ def test_custom_model_uses_sdk_environment_defaults(model_server, monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "environment-test-key")
     agent = MiniAgent({"llm": {"model_name": "custom-model"}})
     result = asyncio.run(agent.run("question"))
-    assert result.status == "finished", result.error_message
-    request = model_server.requests[0]
-    assert request["path"] == "/v1/chat/completions"
-    assert request["body"]["model"] == "custom-model"
-    assert request["authorization"] == "Bearer environment-test-key"
-
-    assert request["body"]["max_tokens"] == 4096
-    assert "reasoning_effort" not in request["body"]
-    assert "thinking" not in request["body"]
+    assert result.status == "error"
+    assert "llm.api_key" in result.error_message
+    assert model_server.requests == []
 
 
-def test_deepseek_name_uses_generic_environment_without_provider_defaults(
+def test_deepseek_name_uses_explicit_config_without_provider_defaults(
     model_server, monkeypatch
 ):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "unused-provider-key")
     monkeypatch.setenv("OPENAI_API_KEY", "generic-environment-key")
     monkeypatch.setenv("OPENAI_BASE_URL", model_server.base_url)
     result = asyncio.run(
-        MiniAgent({"llm": {"model_name": "deepseek-v4-flash"}}).run("question")
+        MiniAgent(_config(model_server, llm={"model_name": "deepseek-v4-flash"})).run(
+            "question"
+        )
     )
 
     assert result.status == "finished", result.error_message
     request = model_server.requests[0]
     assert request["path"] == "/v1/chat/completions"
     assert request["body"]["model"] == "deepseek-v4-flash"
-    assert request["authorization"] == "Bearer generic-environment-key"
+    assert request["authorization"] == "Bearer local-test-key"
     assert "thinking" not in request["body"]
     assert "reasoning_effort" not in request["body"]
     assert os.environ["DEEPSEEK_API_KEY"] == "unused-provider-key"
@@ -700,23 +933,19 @@ def test_rollout_pins_llm_options_while_defaults_change(model_server):
 def test_native_responses_keeps_main_endpoint_with_same_side_model(
     model_server, monkeypatch, side_model
 ):
-    for name in os.environ:
-        if name.startswith("FLASHRSI_MINIAGENT_"):
-            monkeypatch.delenv(name)
     settings = {
-        "FLASHRSI_MINIAGENT_API_KEY": "native-test-key",
-        "FLASHRSI_MINIAGENT_MODEL": "gpt-5",
-        "FLASHRSI_MINIAGENT_BASE_URL": model_server.base_url + "/main",
-        "FLASHRSI_MINIAGENT_SIDE_BASE_URL": model_server.base_url + "/side",
+        "api_key": "native-test-key",
+        "model_name": "gpt-5",
+        "base_url": model_server.base_url + "/main",
+        "side_base_url": model_server.base_url + "/side",
     }
     if side_model is not None:
-        settings["FLASHRSI_MINIAGENT_SIDE_MODEL"] = side_model
-    for name, value in settings.items():
-        monkeypatch.setenv(name, value)
+        settings["side_model"] = side_model
     path = Path(inspect.getfile(MiniAgent)).parent / "runtime/llm.py"
     spec = importlib.util.spec_from_file_location("native_routing_llm", path)
     llm = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(llm)
+    llm.configure(settings)
 
     async def scenario():
         try:
@@ -741,7 +970,7 @@ def test_native_responses_keeps_main_endpoint_with_same_side_model(
 
 
 @pytest.mark.parametrize("model_name", ["custom-model", "gpt-5"])
-def test_middleware_side_call_uses_child_environment(
+def test_middleware_side_call_uses_explicit_config(
     model_server, tmp_path, monkeypatch, model_name
 ):
     source = _copy_source(tmp_path)
@@ -904,13 +1133,13 @@ def test_adapter_only_needs_native_result_not_log_files(tmp_path, include_messag
     source = _copy_source(tmp_path)
     (source / "runtime/agent.py").write_text(
         "import os, subprocess, sys\n"
-        "async def run(question, *, model, max_turns, workspace_dir, runs_root):\n"
+        "async def run(question, *, llm_config, web_config, debug_llm_io, max_turns, workspace_dir, runs_root):\n"
         "    print('native console log without newline', end='')\n"
         "    os.write(1, b'raw native output\\n')\n"
         "    subprocess.run([sys.executable, '-c', 'print(123)'], check=True)\n"
         "    result = {'answer': question, 'stop_reason': 'completed', 'usage': [], 'turns': 1}\n"
         + (
-            "    result['messages'] = [{'role': 'assistant', 'content': os.environ['FLASHRSI_MINIAGENT_API_KEY']}]\n"
+            "    result['messages'] = [{'role': 'assistant', 'content': llm_config['api_key']}]\n"
             if include_messages
             else ""
         )
@@ -961,6 +1190,107 @@ def test_disabled_builtin_tool_cannot_be_called(model_server, tmp_path):
     assert result.status == "finished", result.error_message
     assert not marker.exists()
     assert "Unavailable tool: web_search" in _trace_text(result)
+
+
+@pytest.mark.parametrize("tool", ["web_search", "read_url"])
+def test_web_tools_use_explicit_role_config(model_server, tmp_path, monkeypatch, tool):
+    source = _copy_source(tmp_path)
+    (source / "agent.yaml").write_text(
+        (source / "agent.yaml").read_text().replace("  - shell", f"  - {tool}")
+    )
+    arguments = (
+        {"query": "test search"}
+        if tool == "web_search"
+        else {"url": "https://page.test", "focus": "test"}
+    )
+    (source / f"tool_descriptions/{tool}.json").write_text(
+        json.dumps(
+            {
+                "name": tool,
+                "description": "Test web tool",
+                "parameters": {
+                    "type": "object",
+                    "properties": {key: {"type": "string"} for key in arguments},
+                    "required": list(arguments),
+                },
+            }
+        )
+    )
+    monkeypatch.setenv("FLASHRSI_SEARCH_URL", "https://ambient.invalid/search")
+    monkeypatch.setenv("FLASHRSI_BROWSE_URL", "https://ambient.invalid/browse")
+    monkeypatch.setenv("FLASHRSI_WEB_API_KEY", "ambient-web-key")
+
+    def reply(request):
+        if request["path"] == "/v1/search":
+            return 200, {"overall_success": True, "items": []}
+        if request["path"] == "/v1/browse":
+            return 200, {"overall_success": True, "semanticDocument": "Page content"}
+        if len(model_server.requests) == 1:
+            return 200, _chat_reply(request["body"], tool=(tool, arguments))
+        return 200, _chat_reply(request["body"])
+
+    model_server.reply = reply
+    agent = MiniAgent(
+        _config(
+            model_server,
+            source_dir=source,
+            web={
+                "search_url": model_server.base_url + "/search",
+                "browse_url": model_server.base_url + "/browse",
+                "api_key": "explicit-web-key",
+            },
+        )
+    )
+    result = asyncio.run(agent.run("Use the web tool"))
+    assert result.status == "finished", result.error_message
+    web_requests = [r for r in model_server.requests if "model" not in r["body"]]
+    assert len(web_requests) == 1
+    assert web_requests[0]["authorization"] == "Bearer explicit-web-key"
+    assert web_requests[0]["path"] == (
+        "/v1/search" if tool == "web_search" else "/v1/browse"
+    )
+    assert "explicit-web-key" not in _trace_text(result)
+
+
+def test_native_debug_logs_redact_explicit_config_credentials(model_server, tmp_path):
+    source = _copy_source(tmp_path)
+    runtime = source / "runtime/agent.py"
+    runtime.write_text(
+        runtime.read_text()
+        + """
+
+_native_run = run
+async def run(**request):
+    result = await _native_run(**request)
+    root = Path(request["runs_root"])
+    assert list(root.glob("*/log/*")), "Debug option did not reach runtime"
+    text = "\\n".join(p.read_text() for p in root.rglob("*") if p.is_file())
+    for secret in ("local-test-key", "nested-test-key", "web-test-key"):
+        assert secret not in text, "Credential appeared in native log"
+    return result
+"""
+    )
+    model_server.reply = lambda request: (
+        200,
+        _chat_reply(
+            request["body"], "answer local-test-key nested-test-key web-test-key"
+        ),
+    )
+    result = asyncio.run(
+        MiniAgent(
+            _config(
+                model_server,
+                source_dir=source,
+                debug_llm_io=True,
+                llm={
+                    "extra_body": {"provider_options": {"api_key": "nested-test-key"}}
+                },
+                web={"api_key": "web-test-key"},
+            )
+        ).run("question local-test-key")
+    )
+    assert result.status == "finished", result.error_message
+    assert result.output == "answer [REDACTED] [REDACTED] [REDACTED]"
 
 
 @pytest.mark.parametrize("mode", ["timeout", "cancel"])

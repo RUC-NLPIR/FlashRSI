@@ -41,7 +41,9 @@ skill:
 初始化会复制配置，之后通过实例的 `config` 调整下一次执行的默认值。单次 `run` 和
 整批 `rollout` 都固定开始时的配置；`_run` 只读取本次副本。基类在 messages 前加入
 脱敏的 `RunConfig`，记录角色配置和 Snapshot ID；适配器直接返回原生 messages 即可。
-该记录不展开后端默认值或继承的环境变量，也不等同于完整模型请求。
+该记录包含当前角色配置，不展开后端默认值，也不等同于完整模型请求。
+用户参数统一来自 config；模型、凭据和端点直接填写在各角色的 `llm` 中。
+原生 CLI 必须使用 env 时，由适配器从 config 构造子进程 env。
 日期、二进制、集合等非 JSON 的 YAML 值以 `type: yaml` 和 YAML 文本 `value`
 记录，保证 trajectory 可序列化；实验配置文件保留这些值的原类型。
 `update(snapshot)` 只选择资源版本，不更改模型或连接配置。
@@ -57,8 +59,38 @@ Claude Code 的 [适配类](../flashrsi/agents/claude_code/__init__.py) 直接�
 适配器负责等有限子任务结束及收集其主 agent 回复，公共 Trajectory 保持不变。
 `CLAUDE.md` 可以不存在或为空；版本中提供非空内容时，经 SDK `system_prompt.append`
 追加。这是显式选择 Snapshot 资源，不是 CLI 的目录发现与分层加载。默认版本不含这个文件。
-会话与子任务输出使用独立临时运行目录，关闭历史 auto memory，原生凭据仍从原位置读取。
+会话与子任务输出使用独立临时运行目录，关闭历史 auto memory，仅在 `llm.auth: login` 时从原位置读取原生凭据。
 扩展加载失败、SDK 异常和暂停／中止结果返回错误轨迹，并保留脱敏诊断。
+
+## 可选：容器执行
+
+只有接入带 `Task.env` 的任务时才需要这一步；普通问答、文件编辑和 Worker 接入仍按
+上面的两步完成。环境执行器由 runner 连接，Agent 不需要实现 Terminal-Bench 或 Harbor 专属钩子。
+
+内置适配器用 `_container_extra` 引用 `pyproject.toml` 中已有的 extra（如 `miniagent`），
+从安装包元数据读取依赖，避免维护第二份包名列表。外部适配器仍可用
+`_container_dependencies` 声明发行包名元组；两者默认 `None` 表示未支持容器。
+`_check_container()` 做执行前检查，覆写时先调用基类检查；Claude Code 在这里检查
+`cli_path` 和显式凭据。容器直接接收解析后的完整角色 config，不转发宿主环境配置。
+版本化资源仍从 `self.files_dir` 读取，容器任务目录仍通过 `working_dir` 传给 `_run`。
+
+Harbor 安装声明依赖在宿主上的对应版本，将框架源码和 Snapshot 分别传入容器，
+按可导入的 Agent 类路径创建实例，再调用现有 `run`。外部适配类必须可导入，其发行包
+也需列入依赖；任意外部源码不会自动复制。声明容器支持前应确认 harness 能在 Linux 中
+运行，并具备目标任务所需的工具。内置 MiniAgent 已通过原生 workspace tool 提供 shell；
+容器支持声明本身不检查某个 harness 是否能完成具体任务。
+框架入口隔离自身的 Python 导入路径，保留任务环境的 `PYTHONPATH` 供任务工具使用。
+
+CLI runner 为 Terminal-Bench 自动绑定 Harbor。直接 Python 使用在 `rollout` 前调用：
+
+```python
+from flashrsi.integrations.harbor import bind
+
+bind(agent)
+```
+
+未绑定环境执行器时，`rollout` 会在开始任何任务前拒绝带 `Task.env` 的整批任务。
+数据、依赖和验证范围见 [Terminal-Bench 说明](terminal-bench.md)。
 
 ## MiniAgent 的调用路径
 
@@ -66,9 +98,10 @@ Claude Code 的 [适配类](../flashrsi/agents/claude_code/__init__.py) 直接�
 MiniAgent._run → 子进程 _entry.py → 原生 run → Trajectory
 ```
 
-适配类直接把 `config.llm` 和角色执行参数映射为原生参数和子进程环境变量，原生 `run` 不接收框架 config，
-也没有给 Context、llm、reader 注入客户端。模型设置只在子进程中生效。
-`source_dir` 提供的 harness 需支持同样的原生参数和环境变量；没有返回 messages 时，
+适配类通过 stdin JSON 直接传入 `llm_config=config.llm`、`web_config=config.web`、
+`debug_llm_io` 和其他原生运行参数。原生 `run` 接收普通字典并初始化当前子进程的
+模型与网页工具设置；无需导入框架 Config，也不读取 `FLASHRSI_*` 或 `OPENAI_*` 回退。
+`source_dir` 提供的 harness 需支持同样的函数参数；没有返回 messages 时，
 最终轨迹仍包含基类添加的 `RunConfig`。
 
 ## harness 的小改动
@@ -77,12 +110,13 @@ MiniAgent._run → 子进程 _entry.py → 原生 run → Trajectory
 
 | 文件 | 改动 |
 | --- | --- |
-| `agent.py`、`editor.py` | 增加可选编辑目录，保留自身指令；原生返回已有 messages，保留失败时已产生的输出和用量；检查工具是否启用 |
+| `agent.py`、`editor.py` | 增加可选编辑目录，Context 向工具提供任务工作目录；保留自身指令；原生返回已有 messages，保留失败时已产生的输出和用量；检查工具是否启用 |
 | `llm.py` | 移除 provider 专用默认值和未使用的 analyzer/LiteLLM 路由；统一使用 OpenAI SDK，保留 Chat/Responses；推理设置和 `extra_body` 显式传入；SDK 重试交给原生循环管理 |
-| `trace.py` | 用运行环境中的密钥对原生日志脱敏 |
+| `trace.py` | 用显式配置和运行环境中的密钥对原生日志脱敏 |
 | `workspace.py` | 默认资源目录改为本包的 `agent.yaml` 所在目录 |
+| `tools/shell.py`、`tool_descriptions/shell.json`、`agent.yaml` | 默认启用原生 shell 工具，支持工作目录、超时和有界输出收集；正常完成时保留后台服务，超时或取消清理当前命令进程组；随 Snapshot 版本化，不依赖框架或 benchmark |
 
-`reader.py`、`tools.py`、`web_config.py`、`tool_result.py` 保持原生逻辑。
+`web_config.py` 改为读取传入的 `web` 字典；`reader.py`、`tools.py`、`tool_result.py` 保持原生逻辑。
 `usage` 沿用原生统计范围，包含主循环、辅助调用与强制回答；网页提取用量没有额外补齐。
 
 原生差异集中在 [miniagent-harness.patch](miniagent-harness.patch)，对比来源是旧 FlashRSI
@@ -90,3 +124,4 @@ MiniAgent._run → 子进程 _entry.py → 原生 run → Trajectory
 对比前对基线使用同样的 Ruff 格式化，以排除纯格式差异。
 
 Review 顺序：`components.yaml` → 适配类 `_run` → `_entry.py` → 上述差异文件。
+进程桥接在收到终止信号时取消原生执行；适配类给工具最多两秒完成清理，再强制终止。

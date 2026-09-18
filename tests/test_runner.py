@@ -1,12 +1,15 @@
 import asyncio
 import json
+import sys
+from dataclasses import replace
+from types import SimpleNamespace
 
 import pytest
 
 from flashrsi import runner
 from flashrsi.cli import main
 from flashrsi.config import load_config
-from flashrsi.core import Agent, Snapshot, Trajectory
+from flashrsi.core import Agent, Snapshot, Task, Trajectory
 
 
 class Target(Agent):
@@ -111,6 +114,65 @@ def test_benchmark_is_loaded_once_by_algorithm_initialization(config, monkeypatc
     monkeypatch.setattr(runner.SearchQA, "load", load)
     asyncio.run(runner._run(config))
     assert len(loads) == 1
+
+
+def test_runner_binds_terminal_bench_target_before_algorithm_start(config, monkeypatch):
+    bound, environments, worker_calls = [], [], []
+
+    async def run_environment(agent, task):
+        environments.append(task)
+        result = await agent.run(task.question)
+        event = {
+            "type": "HarborVerifier",
+            "task_id": task.task_id,
+            "task_checksum": task.metadata["task_checksum"],
+            "rewards": {"reward": float(result.output == "Paris")},
+        }
+        return replace(result, messages=(*result.messages, event))
+
+    def bind(agent):
+        bound.append(agent)
+        agent._env_runner = run_environment
+
+    original_worker_run = Worker._run
+
+    async def worker_run(self, prompt, working_dir=None):
+        assert self._env_runner is None
+        worker_calls.append(prompt)
+        return await original_worker_run(self, prompt, working_dir)
+
+    tasks = tuple(
+        Task(
+            str(index),
+            "Capital?",
+            env=f"task-{index}",
+            metadata={"task_checksum": str(index)},
+        )
+        for index in range(5)
+    )
+    monkeypatch.setattr(runner.TerminalBench, "_iter_tasks", lambda self: iter(tasks))
+    monkeypatch.setattr(Worker, "_run", worker_run)
+    monkeypatch.setitem(
+        sys.modules, "flashrsi.integrations.harbor", SimpleNamespace(bind=bind)
+    )
+    config.benchmark.name = "terminal_bench"
+
+    _, result = asyncio.run(runner._run(config))
+
+    assert len(bound) == 1 and isinstance(bound[0], Target)
+    assert environments and worker_calls
+    assert result["primary_metric"] == "reward"
+    assert result["test_score"] == 1.0
+    assert result["test_tasks"] == 1
+
+
+def test_searchqa_runs_without_importing_harbor(config, monkeypatch):
+    monkeypatch.setitem(sys.modules, "flashrsi.integrations.harbor", None)
+    monkeypatch.setitem(sys.modules, "harbor", None)
+
+    _, result = asyncio.run(runner._run(config))
+
+    assert result["test_score"] == 1.0
 
 
 def test_cli_executes_and_reports_actual_result(config, tmp_path, capsys):

@@ -10,11 +10,11 @@ from statistics import mean
 from flashrsi._records import _write_record
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
 from flashrsi.algorithms import SkillOpt
-from flashrsi.benchmarks import SearchQA
+from flashrsi.benchmarks import SearchQA, TerminalBench
 from flashrsi.config import prepare_run_dir
 
 _AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode}
-_BENCHMARKS = {"searchqa": SearchQA}
+_BENCHMARKS = {"searchqa": SearchQA, "terminal_bench": TerminalBench}
 _ALGORITHMS = {"skillopt": SkillOpt}
 _LOGGER = logging.getLogger(__name__)
 
@@ -41,6 +41,10 @@ async def _run(config):
                 raise ValueError(f"Missing {module}; install flashrsi-lite[{extra}]")
     target, worker = target_type(config.agent), worker_type(worker_config)
     benchmark = benchmark_type(config.benchmark)
+    if isinstance(benchmark, TerminalBench):
+        from flashrsi.integrations.harbor import bind
+
+        bind(target)
     algorithm = algorithm_type(
         config.algorithm, target=target, worker=worker, benchmark=benchmark
     )

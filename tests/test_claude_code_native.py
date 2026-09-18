@@ -3,6 +3,7 @@
 import asyncio
 import inspect
 import json
+import os
 import shutil
 import threading
 import time
@@ -63,6 +64,33 @@ def _message_events(body, text="Paris", *, tool=None, message_id="msg_local"):
     return "".join(
         f"event: {event['type']}\ndata: {json.dumps(event)}\n\n" for event in events
     ).encode()
+
+
+def test_parent_cloud_provider_switches_do_not_redirect_configured_endpoint(
+    anthropic_server, monkeypatch
+):
+    switches = (
+        "CLAUDE_CODE_USE_BEDROCK",
+        "CLAUDE_CODE_USE_VERTEX",
+        "CLAUDE_CODE_USE_FOUNDRY",
+        "CLAUDE_CODE_USE_ANTHROPIC_AWS",
+        "CLAUDE_CODE_USE_ANTHROPIC_GOOGLE_CLOUD",
+        "CLAUDE_CODE_USE_MANTLE",
+        "CLAUDE_CODE_USE_GATEWAY",
+    )
+    for name in switches:
+        monkeypatch.setenv(name, "1")
+    trajectory = asyncio.run(
+        ClaudeCode(_config(anthropic_server, tools=[])).run("Answer directly")
+    )
+    assert trajectory.status == "finished", trajectory.error_message
+    assert trajectory.output == "Paris"
+    assert anthropic_server.requests
+    assert all(
+        request["api_key"] == "local-claude-test-key"
+        for request in anthropic_server.requests
+    )
+    assert all(os.environ[name] == "1" for name in switches)
 
 
 @pytest.fixture

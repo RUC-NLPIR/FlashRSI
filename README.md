@@ -2,11 +2,16 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。Terminal-Bench 留到第 7 步。
+现已接入 SkillOpt、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
+共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
+SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
+[jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
 
 ## SkillOpt
 
-安装所选后端依赖后即可运行，例如 MiniAgent 目标与纯 LLM Worker：
+先在 `example.yaml` 中填写目标和 Worker 的模型、API key 和连接地址，
+安装所选后端依赖后运行，例如 MiniAgent 目标与纯 LLM Worker：
 
 ```bash
 uv sync --extra miniagent --extra llm --extra dev
@@ -96,7 +101,7 @@ fast edit 不能修改或引入 `SLOW_UPDATE_START/END` 保护区；只有 slow 
 
 纯 LLM Worker 的 `llm` 使用 OpenAI-compatible Chat Completions：
 `model_name`、`api_key`、`base_url` 分别映射到模型与客户端，其他请求参数直接传给 SDK。
-凭据和地址留空时使用原生 `OPENAI_API_KEY`/`OPENAI_BASE_URL`。角色层 `timeout` 默认 300 秒，
+凭据须显式提供；地址留空时使用 `https://api.openai.com/v1`。角色层 `timeout` 默认 300 秒，
 `max_retries` 默认 1；不隐式继承目标配置。该 Worker 无 Snapshot，也不支持带 `working_dir`
 的文件编辑。空回答、截断回答及未完成的工具调用返回 error Trajectory。
 
@@ -105,7 +110,8 @@ fast edit 不能修改或引入 `SLOW_UPDATE_START/END` 保护区；只有 slow 
 按调用顺序编号的 `trajectories/*-test.json` 和最终 `result.json`。Agent Worker 的版本额外保存为
 `snapshots/worker.json`。失败保存 `error.json` 并返回非零状态；配置与运行记录脱敏。
 Snapshot 保留原始文件内容，不能把凭据写入 seed 文件；候选检查已知运行凭据。
-当前不支持断点续跑、环境任务执行或并发调度，直接 Python 使用不配置实验目录时结果保留在内存。
+当前不支持断点续跑或并发调度；Terminal-Bench 环境任务由 runner 绑定 Harbor 执行。
+直接 Python 使用不配置实验目录时结果保留在内存。
 
 第 6 步验证包含本地模拟服务上的真实 MiniAgent 子进程/OpenAI SDK、Claude SDK/CLI
 演化闭环，以及算法、scope、持久化与失败行为的离线测试；未调用真实付费模型。
@@ -235,8 +241,8 @@ agent:
   name: miniagent
   llm:
     model_name: target-model
-    api_key:
-    base_url:
+    api_key: your-api-key
+    base_url: https://api.example.com/v1
     max_tokens: 4096
   timeout: 300
   max_turns: 10
@@ -248,15 +254,36 @@ algorithm:
     name: claude_code
     llm:
       model_name: worker-model
-      api_key:
-      base_url:
+      api_key: your-worker-api-key
+      base_url: https://api.anthropic.com
       effort: high
     timeout: 600
     max_turns: 20
 ```
 
-Agent 和 Worker 都必须指定 `llm.model_name`。`llm.api_key`、`llm.base_url` 可以留空，
-由各后端按下文约定读取原生环境或认证。配置层不读取环境变量，也不检查模型是否可用。
+Agent 和 Worker 都必须指定 `llm.model_name`。执行时凭据必须在各自配置中明确提供；
+Claude Code 也可用 `llm.auth: login` 显式选择本机登录。`llm.base_url` 留空使用对应服务的
+官方地址，后端不再隐式读取宿主的模型、凭据或端点环境变量。配置层不检查模型是否可用。
+
+直接在 YAML 中填写各角色的模型连接参数：
+
+```yaml
+agent:
+  name: miniagent
+  llm:
+    model_name: your-model
+    api_key: your-api-key
+    base_url: https://api.example.com/v1
+algorithm:
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
+```
+
+将占位字符串替换为实际值。相同配置传给 Agent、Worker 和容器，保存配置时会清空凭据。
+直接 Python 调用时，在配置字典中填写相同字段即可。
 不同后端保留自己的请求参数语义，例如 MiniAgent 的 `llm.reasoning_effort`
 与 Claude Code 的 `llm.effort`。旧的顶层模型字段会报错并提示迁移到 `llm`。
 为用于目录命名，算法、Agent 和 Benchmark 的 `name` 使用字母、数字、`_`、`-`。
@@ -296,9 +323,8 @@ worker = ClaudeCode(config.algorithm.worker)
 `update(snapshot)` 只选择资源版本，不替换运行配置。比较 baseline 和 candidate 时，
 调用方应使用相同模型配置；更换目标模型后需要重新评估 baseline。
 
-`llm` 定义主模型和默认连接。MiniAgent 当前主模型和辅助模型共用它；Claude 自定义
-子 agent 的模型选择继续遵循原生定义。各后端仍可使用各自原生环境回退；运行中修改
-进程环境不属于此配置固定约定。
+`llm` 定义主模型和默认连接。MiniAgent 的辅助模型默认共用它，也可通过
+`llm.side_model` 和 `llm.side_base_url` 指定；Claude 自定义子 agent 的模型选择继续遵循原生定义。
 
 ## 实验目录
 
@@ -388,11 +414,14 @@ auto 保留目录内已有的分区，并按上述规则补齐缺失分区。原
 确定性划分位于 `flashrsi.benchmarks._data`；SearchQA 只负责其字段映射、提示词和
 评分规则，公共 `load()` / `grade()` 签名保持不变。
 
-当前没有自动注册机制；`flashrsi.benchmarks` 只是导出 `SearchQA` 类。
+当前没有自动注册机制；`flashrsi.benchmarks` 导出 `SearchQA` 和 `TerminalBench` 类。
 没有必要的 `SearchQABenchmark` 别名已移除。Benchmark 可单独通过 Python 使用，
 runner 根据配置名实例化 Benchmark、目标 Agent、Worker 和 Algorithm。
 
 ### 数据集准备与独立使用
+
+仓库保持 private，下载需要有读取权限的本机 Hugging Face 登录或 `HF_TOKEN` 环境变量；
+凭据无需写入实验 YAML。框架使用固定的 revision 和 Hugging Face 本地缓存。
 
 可以直接保留 Hugging Face 上发布的原始分区：
 
@@ -417,6 +446,33 @@ uv run python scripts/prepare_searchqa.py
 
 脚本锁定 EvoOS 源版本，验证源文件校验和、跨分区唯一 ID、所有答案、原始提示词
 重建和 Parquet 往返一致性；缓存和发布数据不进入 Git。
+
+### Terminal-Bench 数据
+
+同一 Hugging Face 仓库的 `terminal_bench` 配置提供 89 个原生任务的索引：
+
+```python
+from datasets import load_dataset
+
+data = load_dataset("jinjiajie/flashrsi", "terminal_bench")
+print(len(data["tasks"]))  # 89
+```
+
+索引列为 `id`、`question`、`task_path`、`task_checksum`、`category`、`difficulty`。
+完整任务目录保存在 `terminal_bench/tasks.tar.gz`，`manifest.json` 记录上游版本与校验和。
+`TerminalBench.load()` 自动下载固定版本的归档、核对 SHA-256 并安全解包，复用 Harbor
+解析原生任务；`load_dataset` 只读取索引。没有官方 train/dev/test 分区，框架默认
+`split: auto` 按 60%/20%/20% 划分；`data_path` 仍可指定本地原生任务目录。
+
+```bash
+uv run --python 3.12 --extra harbor python scripts/prepare_terminal_bench.py
+# 输出到 .cache/terminal_bench/publish；此命令只下载和打包，不上传。
+```
+
+数据镜像不包含 Docker 镜像层；89 个任务仍引用 `alexgshaw/<task>:20251031` 镜像。
+执行仍需要 Docker、可访问镜像与依赖源的网络，以及有相应工具能力的 Agent。
+SearchQA 的已有文件和固定来源版本保持不变。完整运行配置及验证范围见
+[Terminal-Bench 说明](docs/terminal-bench.md)。
 
 ## Agent：一个运行入口，自动获取文件版本
 
@@ -560,7 +616,7 @@ result = await worker.run("改进这些文件", working_dir=candidate_dir)
 
 基类在返回的 `messages` 首位加入 `RunConfig`，包含本次执行的脱敏角色配置和
 `snapshot_id`（无文件 Worker 为 `None`）。这是传给适配器的配置，不会展开后端默认值、
-继承的环境变量或完整模型请求；原生 messages 仍保留在它之后。返回错误轨迹时也记录
+完整模型请求；原生 messages 仍保留在它之后。返回错误轨迹时也记录
 该信息；未处理异常和取消继续向调用者抛出。
 普通配置值直接记录为 JSON；日期、二进制、集合等 YAML 特有值记录为
 `{"type": "yaml", "value": "..."}`，其中 value 可用 `yaml.safe_load` 恢复。
@@ -579,8 +635,10 @@ candidate_results = await target.rollout(tasks, snapshot=candidate)  # 试跑候
 
 `rollout` 默认顺序执行，不负责评分，空输入返回空元组。返回的错误轨迹会被保留；
 未处理的后端异常向调用者抛出。SearchQA 拒绝没有 Task 的直接运行记录，评分请使用
-`rollout` 的结果。基类暂不执行带 `Task.env` 的任务，会在任何任务开始前明确报错；
-容器和终端环境由后续 benchmark 执行适配处理，不把镜像名猜作本地工作目录。
+`rollout` 的结果。带 `Task.env` 的任务交给绑定的环境执行器；未绑定时会在任何任务
+开始前明确报错。CLI runner 为 Terminal-Bench 自动绑定 Harbor；直接 Python 调用须先
+执行 `flashrsi.integrations.harbor.bind(agent)`。环境执行器解释环境引用、准备容器，
+再调用所选 Agent 原有的 `run`；Agent 不需要按 benchmark 实现执行钩子。
 
 ### 算法如何编辑和选择候选
 
@@ -744,8 +802,17 @@ answer = asyncio.run(agent.run("What is 2 + 2?"))
 # edited = asyncio.run(worker.run("Improve the skill files", working_dir=directory))
 ```
 
-默认 `agent.yaml` 只加载 prompt 和 `skills/main.md`，使用题目附带的上下文，不调用
-搜索服务。传入 `working_dir` 时增加 `list_files`、`read_file`、`write_file`、
+默认 `agent.yaml` 加载 prompt、`skills/main.md` 和 `shell` 工具，不调用搜索服务。
+`shell` 使用 `/bin/sh -c` 在任务目录执行命令，接受 `command`、可选 `cwd` 和
+`timeout`（默认 60 秒），返回退出码、合并的 stdout/stderr、超时与截断标志；
+输出最多保留 32 KiB。每次调用使用独立 shell，`cd` 和环境变量不跨调用保留，
+正常结束的命令可以留下后台服务；服务的 stdout/stderr 应重定向到日志文件，
+因为命令退出后工具会关闭输出收集。超时或取消会清理当前命令的进程组。
+后台服务的生命周期由任务环境或调用者管理：Harbor 在 verifier 完成后随容器清理，
+本地调用者负责停止自己启动的服务。实现和 schema 属于 Snapshot 的 `tool` 组件，
+可通过版本中的 `agent.yaml.tools` 启用或关闭。
+
+传入 `working_dir` 时还增加 `list_files`、`read_file`、`write_file`、
 `delete_file` 四个文件工具，路径相对该目录；加载的 prompt、skill 和工具配置仍属于
 Worker 自己。文件工具不允许路径逃逸或符号链接，提交候选时继续由 Snapshot 校验 scope。
 新增 skill 文件后也需要在候选的 `agent.yaml.skills` 中启用；仅可编辑 skill 时，
@@ -765,14 +832,17 @@ MiniAgent 的资源布局和 Snapshot 组件如下：
 仓库。MiniAgent 接入类和进程桥接代码留在 Snapshot 外。临时日志与任务目录分别创建，
 运行结束后清理；传入的编辑目录保留给调用者。超时或进程崩溃返回错误 Trajectory，
 不从日志恢复部分轨迹；已经完成的文件编辑仍会保留。取消向上传播；
-两种情况都先结束并等待子进程，POSIX 上也结束同一进程组内的工具进程。
-这不提供容器或操作系统沙箱。带 `Task.env` 的任务仍由基类明确拒绝，等待后续环境接入。
+超时和取消先取消原生执行，让 shell 清理仍在执行的命令进程组，再结束并等待子进程；
+超过两秒清理期限后强制终止。已经完成的命令留下的后台服务由任务环境管理。
+本地子进程本身不提供容器或操作系统沙箱。绑定 Harbor 后，MiniAgent 可使用同一入口在
+任务容器内执行 shell。shell 使用运行进程的系统权限，`cwd` 只是起始目录，
+不采用上述文件工具的目录限制；Snapshot scope 仍用于校验提交的版本修改。
 
 | 配置字段 | 默认值 | 含义 |
 | --- | --- | --- |
 | `llm.model_name` | 必填 | OpenAI 或兼容端点上的模型名 |
-| `llm.api_key` | 空 | 优先使用配置，否则读取 `OPENAI_API_KEY` |
-| `llm.base_url` | 空 | 优先使用配置，否则读取 `OPENAI_BASE_URL` 或使用 SDK 默认地址 |
+| `llm.api_key` | 执行时必填 | 在配置中填写 API key |
+| `llm.base_url` | OpenAI 官方地址 | 可覆盖为兼容端点，不读取环境回退 |
 | `max_turns` | `10` | 原生循环轮数，最后一轮请求直接回答 |
 | `llm.max_tokens` | `4096` | 原生主循环和强制回答的输出预算；辅助调用沿用原生各自预算 |
 | `llm.llm_max_retries` | `1` | 原生每次调用的最大尝试次数 |
@@ -787,14 +857,13 @@ MiniAgent 的资源布局和 Snapshot 组件如下：
 模型的推理或其他专有选项由 `llm.reasoning_effort` 和 `llm.extra_body` 显式配置，
 不根据模型名推断或自动启用。
 
-适配类把模型连接和预算配置写入子进程的原生环境变量。
-`llm.model_name` 对应 `FLASHRSI_MINIAGENT_MODEL` / `FLASHRSI_MINIAGENT_SIDE_MODEL`，
-`llm.base_url` 对应 `FLASHRSI_MINIAGENT_BASE_URL` / `FLASHRSI_MINIAGENT_SIDE_BASE_URL`，
-`llm.api_key` 和 `llm.extra_body` 分别对应 `FLASHRSI_MINIAGENT_API_KEY` 和
-`FLASHRSI_MINIAGENT_EXTRA_BODY`（JSON）。主调用和辅助调用使用相同配置。
-父进程环境不变，已有 `FLASHRSI_MINIAGENT_*` 模型设置由本次配置覆盖。
+适配类把 `llm`、`web` 和 `debug_llm_io` 直接作为参数通过 stdin JSON 传给原生 `run`。
+运行时不读取 `FLASHRSI_MINIAGENT_*`、`FLASHRSI_SEARCH_URL` 等环境变量。
+主调用和辅助调用默认共用 `llm`；`llm.side_model`、`llm.side_base_url` 可显式覆盖辅助调用。
+网页工具使用角色配置 `web.search_url`、`web.browse_url`、`web.api_key`；默认未启用，
+服务地址须显式提供。`debug_llm_io: true` 启用本轮原生请求调试日志。
 
-题目、资源目录和运行参数通过 stdin 传递，密钥通过子进程环境传递。
+题目、资源目录、模型配置与凭据一起通过 stdin 传递，父进程环境不变。
 凭据不写入源码、Snapshot、命令行参数或请求文件，返回记录和内置 harness 日志会脱敏。
 `Trajectory.messages` 在 `RunConfig` 后保存原生对话列表，`usage.model_calls` 保存原生记录的
 用量、模型、轮次和耗时，`usage.turns` 保存循环轮数。统计范围沿用原生主循环、辅助调用和
@@ -803,9 +872,9 @@ MiniAgent 的资源布局和 Snapshot 组件如下：
 
 `runtime/` 基于旧 FlashRSI 的 `miniagent/harness/`（来源提交
 `5efe9b438483710060183c6c3ecbc5062b410a58`）移植，保留原生 ReAct、middleware、
-自定义工具、Chat/Responses 连续调用及原生环境变量入口。保留的小改动单独列在
+自定义工具、Chat/Responses 连续调用；模型和工具配置改为显式函数参数。保留的小改动单独列在
 [harness 改动清单](docs/agent-integration.md#harness-的小改动) 和
-[原生差异文件](docs/miniagent-harness.patch)，没有框架 config/client 注入或运行时 monkey patch。
+[原生差异文件](docs/miniagent-harness.patch)，原生函数接收普通字典，不依赖框架 Config 类或运行时 monkey patch。
 未搬入旧框架的 registry、演化算法、ArtifactStore 或评测脚本。
 默认资源来自旧版的文本 seed。Web 工具代码保留，但默认关闭，需要自行添加原生 schema
 及配置搜索/浏览服务；本阶段不验证真实 Web 服务。
@@ -902,7 +971,7 @@ graded = benchmark.grade(asyncio.run(agent.rollout(benchmark.dev)))
 模型、连接信息和配置中显式传入的 SDK 选项继续作为本次运行参数。
 `settings.json.env` 不允许设置凭据（名称以 `API_KEY`、`TOKEN`、`SECRET`、`PASSWORD`
 结尾）、`ANTHROPIC_BASE_URL`、provider 切换以及接入层管理的目录和持久化开关；
-这些配置应通过运行参数或父进程环境传入。普通工具环境变量仍随 settings 版本生效。
+模型与认证通过运行 config 传入，目录和持久化开关由适配器管理。普通工具环境变量仍随 settings 版本生效。
 
 插件输出样式在 `output-styles/*.md` 的 frontmatter 中设置 `force-for-plugin: true`，
 可再加 `keep-coding-instructions: true` 保留原生编码指令。当前 bundled CLI 2.1.273
@@ -912,7 +981,7 @@ graded = benchmark.grade(asyncio.run(agent.rollout(benchmark.dev)))
 hook 命令引用 `"${CLAUDE_PLUGIN_ROOT}/hooks/check.py"`，MCP 的 `args` 引用
 `${CLAUDE_PLUGIN_ROOT}/servers/server.py`。每次执行将 `CLAUDE_PLUGIN_ROOT` 设为当前
 版本目录，由 CLI 原生展开；脚本解释器及服务依赖仍需在运行环境安装。
-凭据通过环境传入，不能硬编码在这些版本文件里。`.lsp.json` 沿用原生插件加载，
+凭据通过运行 config 提供，由适配器传给 CLI，不能硬编码在这些版本文件里。`.lsp.json` 沿用原生插件加载，
 LSP 进程和语言环境需自行准备；本轮未做真实 LSP 服务验证。
 
 每次运行创建新的 SDK 会话：`self.files_dir` 提供 prompt 和插件，`working_dir`
@@ -925,15 +994,16 @@ Worker 编辑另一个 Agent 时仍使用自己的指令、扩展和工具配置
 运行时显式关闭 auto memory，避免同一工作目录的历史记忆影响候选评估。
 `CLAUDE_CONFIG_DIR` 和 `CLAUDE_CODE_TMPDIR` 指向每次调用独立的临时目录，
 会话 transcript 和子任务输出在 SDK 退出后清理，不进入 Snapshot。
-`CLAUDE_SECURESTORAGE_CONFIG_DIR` 保留原生凭据位置（包括默认 macOS Keychain），
-无需复制登录凭据；显式设置该变量时仍沿用它的值。
+`llm.auth: login` 时 `CLAUDE_SECURESTORAGE_CONFIG_DIR` 沿用原生凭据位置
+（包括默认 macOS Keychain）；显式 API 凭据模式使用本轮独立目录，不回退到宿主登录。
 这属于配置选择，不是操作系统文件隔离；原生工具仍可读取任务要求访问的文件。
 
 | 配置字段 | 默认值 | 含义 |
 | --- | --- | --- |
 | `llm.model_name` | 必填 | 原样传给 Claude SDK 的模型名 |
-| `llm.api_key` | 空 | 非空时传入子进程 `ANTHROPIC_API_KEY`，并清空继承的 `ANTHROPIC_AUTH_TOKEN`；空时沿用原生认证 |
-| `llm.base_url` | 空 | 非空时传入 `ANTHROPIC_BASE_URL`；空时沿用原生环境或默认地址 |
+| `llm.api_key` | 空 | 显式传给原生 CLI；与 `llm.auth_token`、`llm.oauth_token` 三选一 |
+| `llm.auth` | `api_key` | 默认使用显式凭据；`login` 显式选择本机原生登录，容器不支持 |
+| `llm.base_url` | Anthropic 官方地址 | 显式传给原生 CLI，不读取宿主端点回退 |
 | `max_turns` | `10` | 原生会话轮数上限 |
 | `max_budget_usd` | 未设置 | 原生单次调用费用上限 |
 | `timeout` | `300` | 执行超时秒数；退出前仍等待 SDK 清理 |
@@ -946,7 +1016,8 @@ Worker 编辑另一个 Agent 时仍使用自己的指令、扩展和工具配置
 | `source_dir` | 内置目录 | 可选资源目录，需包含 `components.yaml`；扩展文件按需提供 |
 
 此后端使用 Claude 原生协议，`llm.base_url` 应指向 Anthropic 兼容端点；
-MiniAgent 的 OpenAI 兼容端点不能直接当作 Claude 端点使用。凭据仅经 SDK 的子进程
+MiniAgent 的 OpenAI 兼容端点不能直接当作 Claude 端点使用。
+当前适配器支持 Anthropic 兼容 API 和显式本机登录；宿主的云 provider 路由开关不会生效。凭据仅经 SDK 的子进程
 环境传入，父进程环境不变，返回记录会脱敏。CLI stderr 经脱敏后写入 Python debug 日志。
 错误 Trajectory 另附最多 8192 字符的 stderr 尾部，保留扩展解析与启动诊断。
 会话保留本次运行内的原生 transcript，并清空继承的 `CLAUDE_CODE_SKIP_PROMPT_HISTORY`，
@@ -1009,4 +1080,5 @@ MCP、commands/输出样式、前台与后台 subagents、子 agent 续接、历
 update 生效、后台双子 agent 消息收集及 SendMessage 上下文续接；candidate rollout
 仍有超时，部分输出未通过严格格式断言，代理也出现模型路由失败。本次配置结构迁移
 采用离线协议与本地服务回归，没有重新调用付费模型。
-CLI 已支持 SkillOpt 演化与最终测试；Terminal-Bench 留到第 7 步。
+CLI 已支持 SkillOpt 演化与最终测试；Terminal-Bench 的接入及验证状态见
+[Terminal-Bench 说明](docs/terminal-bench.md)。

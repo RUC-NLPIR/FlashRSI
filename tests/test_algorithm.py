@@ -124,6 +124,18 @@ def test_base_checks_environment_support_including_final_test(target):
     assert algo.benchmark.test[0].env == "image"
 
 
+def test_base_accepts_bound_environment_runner_and_text_worker(target):
+    async def run_environment(agent, task):
+        raise AssertionError("initialization must not execute tasks")
+
+    target._env_runner = run_environment
+    algo = Algorithm(
+        {}, target=target, worker=Worker(), benchmark=MemoryBenchmark(env="image")
+    )
+    assert algo.benchmark.test[0].env == "image"
+    assert type(target).rollout is Agent.rollout
+
+
 def test_base_rejects_unimplemented_execution_before_loading_data(target):
     class MissingWorker(Agent):
         name = "missing_worker"

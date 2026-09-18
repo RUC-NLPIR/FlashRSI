@@ -10,7 +10,7 @@ agent:
   name: miniagent
   llm:
     model_name: deepseek-v4-flash
-    api_key:
+    api_key: # Fill in your API key
     base_url:
 
 algorithm:
@@ -19,5 +19,5 @@ algorithm:
     type: llm # llm/agent
     llm:
       model_name: gpt-5
-      api_key:
+      api_key: # Fill in your API key
       base_url:

@@ -253,6 +253,15 @@ def test_target_and_worker_llm_settings_are_independent(settings):
     assert "temperature" not in config.algorithm.worker.llm
 
 
+def test_environment_is_not_an_implicit_configuration_source(monkeypatch, settings):
+    monkeypatch.setenv("OPENAI_API_KEY", "ambient-key")
+    monkeypatch.setenv("OPENAI_BASE_URL", "https://ambient.test")
+    config = load_config(overrides=settings)
+    assert config.agent.llm.api_key is None
+    assert config.algorithm.worker.llm.api_key is None
+    assert config.agent.llm.base_url is None
+
+
 def test_agent_worker_requires_a_name_and_can_be_switched_to_llm(tmp_path, settings):
     settings["algorithm"]["worker"]["type"] = "agent"
     with pytest.raises(ValueError, match="algorithm.worker.name"):

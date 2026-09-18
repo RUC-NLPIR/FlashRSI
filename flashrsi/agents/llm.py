@@ -24,14 +24,16 @@ class LLM(Agent):
         config = self.config
         llm = json.loads(json.dumps(config.llm, default=dict))
         model = llm.pop("model_name")
-        api_key = llm.pop("api_key", None) or None
-        base_url = llm.pop("base_url", None) or None
+        api_key = llm.pop("api_key", None)
+        base_url = llm.pop("base_url", None) or "https://api.openai.com/v1"
         secrets = sorted(
             set(_secrets(config) + _secrets(os.environ)), key=len, reverse=True
         )
         messages = [{"type": "RunInput", "prompt": prompt}]
         usage = {}
         try:
+            if not api_key:
+                raise ValueError("LLM Worker requires llm.api_key in config")
             async with AsyncOpenAI(
                 api_key=api_key,
                 base_url=base_url,

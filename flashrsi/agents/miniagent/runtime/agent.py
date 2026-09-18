@@ -18,7 +18,6 @@ import asyncio
 import copy
 import json
 import logging
-import os
 import re
 import time
 import uuid
@@ -29,6 +28,7 @@ from types import SimpleNamespace
 from typing import Any
 
 from . import llm, reader
+from . import web_config as web_settings
 from . import workspace as ws_mod
 from .tool_result import ToolResult
 from .tools import web_search_structured
@@ -36,10 +36,6 @@ from .trace import TraceWriter
 from .workspace import WorkspaceBundle
 
 logger = logging.getLogger(__name__)
-
-
-def _env_truthy(name: str) -> bool:
-    return os.environ.get(name, "").strip().lower() in {"1", "true", "yes", "on"}
 
 
 # ---------------------------------------------------------------------------
@@ -86,6 +82,7 @@ class ToolCallRecord:
 class Context:
     workspace: WorkspaceBundle
     trace: TraceWriter
+    working_dir: Path = field(default_factory=Path.cwd)
     # ── identity / config ──
     question: str = ""
     run_id: str = ""
@@ -850,7 +847,12 @@ async def run(
     workspace_dir: str | Path | None = None,
     editor: bool = False,
     working_dir: str | Path | None = None,
+    llm_config: dict | None = None,
+    web_config: dict | None = None,
+    debug_llm_io: bool = False,
 ) -> dict[str, Any]:
+    llm.configure(llm_config or {})
+    web_settings.configure(web_config or {})
     runs_root = Path(runs_root)
     runs_root.mkdir(parents=True, exist_ok=True)
     if editor:
@@ -868,7 +870,9 @@ async def run(
         attach(bundle, Path(working_dir))
 
     model = model or llm.DEFAULT_MODEL
-    trace = TraceWriter(runs_root, question)
+    trace = TraceWriter(
+        runs_root, question, config={"llm": llm_config, "web": web_config}
+    )
     trace.event(
         "workspace",
         root=str(bundle.root),
@@ -879,6 +883,7 @@ async def run(
     ctx = Context(
         workspace=bundle,
         trace=trace,
+        working_dir=Path(working_dir).resolve() if working_dir else Path.cwd(),
         sub_agents=bundle.sub_agents,
         question=question,
         run_id=trace.dir.name,
@@ -889,7 +894,6 @@ async def run(
     stop_reason = "max_turns"
     answer = ""
 
-    debug_llm_io = _env_truthy("FLASHRSI_MINIAGENT_DEBUG_LLM_IO")
     _log_dir = trace.dir / "log" if debug_llm_io else None
     if _log_dir is not None:
         _log_dir.mkdir(exist_ok=True)

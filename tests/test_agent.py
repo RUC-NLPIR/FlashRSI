@@ -289,6 +289,123 @@ def test_rollout_batch_pinned_with_update_and_candidates_run_concurrently(source
     asyncio.run(scenario())
 
 
+def test_mixed_environment_rollout_pins_candidate_config_and_runner(source):
+    async def scenario():
+        started, proceed = asyncio.Event(), asyncio.Event()
+        environments = []
+
+        class EnvironmentAgent(FileAgent):
+            async def _run(self, prompt, working_dir=None):
+                return Trajectory(
+                    output=json.dumps(
+                        {
+                            "skill": (self.files_dir / "skills/main.md").read_text(),
+                            "model": self.config.llm.model_name,
+                            "stop": self.config.llm.extra_body.stop,
+                        }
+                    )
+                )
+
+        async def run_environment(agent, task):
+            environments.append(task)
+            if task.question == "pause":
+                started.set()
+                await proceed.wait()
+            assert agent.snapshot.id == candidate.id
+            assert agent.config.llm.model_name == "before"
+            return await agent.run(task.question)
+
+        async def replacement_runner(agent, task):
+            return Trajectory(output="replacement environment runner")
+
+        agent = EnvironmentAgent(
+            {
+                "source_dir": source,
+                "llm": {
+                    "model_name": "before",
+                    "extra_body": {"stop": ["old"]},
+                },
+            }
+        )
+        agent._env_runner = run_environment
+        candidate = _candidate(agent, "candidate")
+        other = _candidate(agent, "other")
+        tasks = (
+            Task("first", "pause", env="first-environment", metadata={"key": "value"}),
+            Task("plain", "ordinary question"),
+            Task("last", "next", env="last-environment"),
+        )
+        pending = asyncio.create_task(agent.rollout(tasks, snapshot=candidate))
+        await started.wait()
+        agent.update(other)
+        agent.config.llm.model_name = "after"
+        agent.config.llm.extra_body.stop.append("new")
+        agent._env_runner = replacement_runner
+        proceed.set()
+        results = await pending
+
+        assert environments == [tasks[0], tasks[2]]
+        assert tuple(result.task for result in results) == tasks
+        assert [json.loads(result.output) for result in results] == [
+            {"skill": "candidate", "model": "before", "stop": ["old"]}
+        ] * 3
+        assert all(
+            result.messages[0]["snapshot_id"] == candidate.id for result in results
+        )
+        assert agent.snapshot.id == other.id
+        assert json.loads((await agent.run("new call")).output) == {
+            "skill": "other",
+            "model": "after",
+            "stop": ["old", "new"],
+        }
+        assert (await agent.rollout([tasks[2]]))[0].output == (
+            "replacement environment runner"
+        )
+
+    asyncio.run(scenario())
+
+
+def test_unsupported_environment_rejects_whole_batch_before_plain_execution(source):
+    class PlainAgent(FileAgent):
+        async def _run(self, prompt, working_dir=None):
+            raise AssertionError("unsupported batch must fail before any execution")
+
+    agent = PlainAgent({"source_dir": source})
+    with pytest.raises(NotImplementedError, match="environment-aware"):
+        asyncio.run(agent.rollout([Task("plain", "q"), Task("env", "q", env="image")]))
+
+
+@pytest.mark.parametrize("mode", ["error", "cancel", "bad_return"])
+def test_environment_failure_restores_rollout_context(source, mode):
+    async def scenario():
+        async def run_environment(agent, task):
+            assert agent.snapshot.id == candidate.id
+            agent.config.llm.model_name = "environment-only"
+            if mode == "error":
+                raise RuntimeError("environment failed")
+            if mode == "cancel":
+                raise asyncio.CancelledError
+            return "invalid trajectory"
+
+        agent = FileAgent({"source_dir": source, "llm": {"model_name": "baseline"}})
+        agent._env_runner = run_environment
+        baseline = agent.snapshot
+        candidate = _candidate(agent, "candidate")
+        expected = {
+            "error": RuntimeError,
+            "cancel": asyncio.CancelledError,
+            "bad_return": TypeError,
+        }[mode]
+        with pytest.raises(expected):
+            await agent.rollout([Task("env", "q", env="image")], snapshot=candidate)
+        assert agent.snapshot.id == baseline.id
+        assert agent.config.llm.model_name == "baseline"
+        assert agent._execution.get() is None
+        assert (await agent.run("after failure")).output == "initial answer"
+
+    asyncio.run(scenario())
+
+
 @pytest.mark.parametrize("mode", ["error", "cancel", "bad_return"])
 def test_failed_runs_cleanup_files_and_reset_context(source, mode):
     async def scenario():

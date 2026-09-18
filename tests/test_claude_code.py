@@ -66,8 +66,11 @@ record = {
         for root in plugins
     },
     'api_key': os.environ.get('ANTHROPIC_API_KEY'),
+    'auth_token': os.environ.get('ANTHROPIC_AUTH_TOKEN'),
+    'oauth_token': os.environ.get('CLAUDE_CODE_OAUTH_TOKEN'),
     'base_url': os.environ.get('ANTHROPIC_BASE_URL'),
     'config_dir': os.environ.get('CLAUDE_CONFIG_DIR'),
+    'secure_storage': os.environ.get('CLAUDE_SECURESTORAGE_CONFIG_DIR'),
 }
 
 for line in sys.stdin:
@@ -457,20 +460,86 @@ def test_concurrent_candidates_have_independent_sdk_directories(local_cli, tmp_p
     assert len({root for request in requests for root in request["plugins"]}) == 2
 
 
-def test_environment_defaults_and_config_override_do_not_mutate_parent(
-    local_cli, monkeypatch
+@pytest.mark.parametrize("credential", ["api_key", "auth_token", "oauth_token"])
+def test_explicit_credentials_and_default_endpoint_ignore_parent_environment(
+    local_cli, monkeypatch, credential
 ):
-    monkeypatch.setenv("ANTHROPIC_API_KEY", "inherited-test-key")
-    monkeypatch.setenv("ANTHROPIC_BASE_URL", "http://127.0.0.1:2")
-    agent = ClaudeCode(_config(local_cli, llm={"api_key": None, "base_url": None}))
+    inherited = {
+        "ANTHROPIC_API_KEY": "inherited-test-key",
+        "ANTHROPIC_AUTH_TOKEN": "inherited-auth-token",
+        "CLAUDE_CODE_OAUTH_TOKEN": "inherited-oauth-token",
+        "ANTHROPIC_BASE_URL": "http://127.0.0.1:2",
+        "CLAUDE_SECURESTORAGE_CONFIG_DIR": "/host-only/login",
+    }
+    for name, value in inherited.items():
+        monkeypatch.setenv(name, value)
+    agent = ClaudeCode(
+        _config(
+            local_cli,
+            llm={"api_key": None, "base_url": None, credential: "explicit-test-secret"},
+        )
+    )
     assert asyncio.run(agent.run("Capital?")).status == "finished"
     (request,) = _records(local_cli)
-    assert request["api_key"] == "inherited-test-key"
-    assert request["base_url"] == "http://127.0.0.1:2"
-    agent = ClaudeCode(_config(local_cli))
+    for name in ("api_key", "auth_token", "oauth_token"):
+        assert request[name] == ("explicit-test-secret" if name == credential else "")
+    assert request["base_url"] == "https://api.anthropic.com"
+    assert request["secure_storage"] == request["config_dir"]
+    assert not Path(request["secure_storage"]).exists()
+    assert all(os.environ[name] == value for name, value in inherited.items())
+
+
+@pytest.mark.parametrize(
+    "llm,message",
+    [
+        ({"api_key": None}, "exactly one"),
+        ({"auth_token": "conflicting-token"}, "exactly one"),
+        ({"api_key": " "}, "non-empty string"),
+        ({"auth": "automatic"}, "llm.auth"),
+        ({"auth": "login"}, "cannot include API credentials"),
+    ],
+)
+def test_ambiguous_or_missing_credentials_fail_before_starting_cli(
+    local_cli, monkeypatch, llm, message
+):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "parent-key-cannot-fill-config")
+    trajectory = asyncio.run(ClaudeCode(_config(local_cli, llm=llm)).run("Capital?"))
+    assert trajectory.status == "error"
+    assert message in trajectory.error_message
+    assert not _records(local_cli)
+
+
+def test_login_mode_explicitly_uses_native_storage_and_clears_parent_tokens(
+    local_cli, tmp_path, monkeypatch
+):
+    credentials = tmp_path / "native-login"
+    monkeypatch.setenv("CLAUDE_SECURESTORAGE_CONFIG_DIR", str(credentials))
+    for name in (
+        "ANTHROPIC_API_KEY",
+        "ANTHROPIC_AUTH_TOKEN",
+        "CLAUDE_CODE_OAUTH_TOKEN",
+    ):
+        monkeypatch.setenv(name, "parent-token")
+    agent = ClaudeCode(
+        _config(local_cli, llm={"auth": "login", "api_key": None, "base_url": None})
+    )
     assert asyncio.run(agent.run("Capital?")).status == "finished"
-    assert os.environ["ANTHROPIC_API_KEY"] == "inherited-test-key"
-    assert os.environ["ANTHROPIC_BASE_URL"] == "http://127.0.0.1:2"
+    (request,) = _records(local_cli)
+    assert request["secure_storage"] == str(credentials)
+    assert request["config_dir"] != str(credentials)
+    assert request["api_key"] == request["auth_token"] == request["oauth_token"] == ""
+    assert request["base_url"] == "https://api.anthropic.com"
+
+
+def test_container_rejects_host_login_but_accepts_explicit_tokens():
+    for credential in ("api_key", "auth_token", "oauth_token"):
+        ClaudeCode(
+            {"llm": {"model_name": "local-claude", credential: "key"}}
+        )._check_container()
+    with pytest.raises(ValueError, match="cannot use llm.auth: login"):
+        ClaudeCode(
+            {"llm": {"model_name": "local-claude", "auth": "login"}}
+        )._check_container()
 
 
 def test_next_run_uses_updated_llm_without_changing_snapshot(local_cli):

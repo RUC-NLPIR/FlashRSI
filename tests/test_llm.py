@@ -84,13 +84,23 @@ def test_llm_parameters_usage_and_credentials(client):
     assert client.closed
 
 
-def test_native_environment_fallback_and_error(client, monkeypatch):
+def test_requires_explicit_config_even_with_ambient_credentials(client, monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "environment-secret")
     worker = LLM({"llm": {"model_name": "worker"}})
-    client.failure = RuntimeError("failed environment-secret")
     result = asyncio.run(worker.run("hello"))
-    assert client.init["api_key"] is None
+    assert client.init is None
     assert result.status == "error"
+    assert "llm.api_key" in result.error_message
+
+
+def test_default_endpoint_ignores_environment_and_errors_are_redacted(
+    client, monkeypatch
+):
+    monkeypatch.setenv("OPENAI_BASE_URL", "https://ambient.test")
+    worker = LLM({"llm": {"model_name": "worker", "api_key": "explicit-key"}})
+    client.failure = RuntimeError("failed explicit-key")
+    result = asyncio.run(worker.run("hello"))
+    assert client.init["base_url"] == "https://api.openai.com/v1"
     assert result.error_message == "failed [REDACTED]"
     assert client.closed
 
@@ -100,7 +110,9 @@ def test_native_environment_fallback_and_error(client, monkeypatch):
 )
 def test_empty_and_incomplete_response_is_not_success(client, content, reason):
     client.content, client.reason = content, reason
-    result = asyncio.run(LLM({"llm": {"model_name": "worker"}}).run("hello"))
+    result = asyncio.run(
+        LLM({"llm": {"model_name": "worker", "api_key": "test-key"}}).run("hello")
+    )
     assert result.status == "error"
     assert result.usage["total_tokens"] == 12
 
@@ -108,7 +120,9 @@ def test_empty_and_incomplete_response_is_not_success(client, content, reason):
 def test_cancellation_propagates_and_closes_client(client):
     client.failure = asyncio.CancelledError()
     with pytest.raises(asyncio.CancelledError):
-        asyncio.run(LLM({"llm": {"model_name": "worker"}}).run("hello"))
+        asyncio.run(
+            LLM({"llm": {"model_name": "worker", "api_key": "test-key"}}).run("hello")
+        )
     assert client.closed
 
 

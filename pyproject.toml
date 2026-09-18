@@ -17,6 +17,7 @@ dev = ["pytest>=8", "ruff>=0.9"]
 llm = ["openai>=2,<3"]
 miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
 claude-code = ["claude-agent-sdk>=0.2.153,<0.3"]
+harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
 
 [tool.setuptools.packages.find]
 where = ["."]
