@@ -1,0 +1,66 @@
+# 协作实验提交
+
+实验执行时继续写到本地 `runs/`，该目录不直接提交。实验结束后，用框架的打包脚本导出到
+`experiments/<唯一 run-id>/`，所有协作者使用相同的提交结构：
+
+```text
+experiments/<contributor>-<experiment>-<date>-<seed>/
+  README.md          实验提交说明
+  manifest.json      提交者、打包版本、完整日志 SHA256、体积及文件数
+  configs/           已保存的实验配置、数据划分清单（存在时）
+  summaries/         成绩、token、缓存与费用汇总
+  logs.tar.gz        完整持久化日志，包括失败、重试、轨迹及技能快照
+```
+
+`logs.tar.gz` 由 Git LFS 管理，其余小文件直接提交普通 Git。仓库的 `.gitattributes`
+已设置规则；每位协作者需要先安装 Git LFS，并在克隆仓库后执行 `git lfs install`。
+远端仓库也必须支持 Git LFS，并有足够的存储额度。不要在没有 Git LFS 的环境中直接添加压缩包。
+
+## 操作步骤
+
+1. 使用团队指定的框架 commit；实验代码先提交，避免结果无法对应代码版本。记录模型、配置、随机种子，
+   每个独立实验使用不同输出目录，不能覆盖已有结果。`manifest.json` 的 commit 是**打包时**版本；
+   真正执行配置和原有源码指纹仍保留在日志中，不应把打包 commit 当作历史运行版本。
+2. 等实验结束、自动生成 `end-summary.md/json` 后打包。普通 runner 传入该次运行目录；
+   SearchQA 专用 runner 传入 `full`/`pilot`/`smoke` profile 目录，可包含两种 harness。
+3. 检查配置、汇总和原始日志中的可公开内容，提交本人唯一 run-id 对应的目录。修正实验应使用新 ID，
+   不覆盖别人的目录，不删除失败记录只保留高分结果。
+
+```bash
+# 一次性配置；此命令要求已安装 Git LFS。
+git lfs install
+
+# 示例：从现有 SearchQA 双 harness 结果生成统一提交包。
+.venv/bin/python scripts/prepare_experiment_submission.py \
+  --run-dir runs/skillopt-searchqa-deepseek/full \
+  --run-id alice-skillopt-searchqa-deepseek-20260920-seed42 \
+  --contributor alice
+
+# 第一次引入此规范时，将框架脚本、文档和 .gitattributes 单独提交。
+# 后续实验各自只添加唯一目录，避免 git add . 混入无关改动。
+git add experiments/alice-skillopt-searchqa-deepseek-20260920-seed42
+git lfs status
+git diff --cached --stat
+git commit -m "experiment: alice SearchQA DeepSeek seed42"
+```
+
+协作者先拉取共同框架版本，再各自在分支提交实验目录，通过团队的合并流程汇总。
+不要求所有人编辑共享的结果表，避免冲突；各目录里的 JSON 可用于后续自动汇总。
+
+## 保存范围
+
+打包不会运行模型、修改原始日志、提交或推送。保留持久化的完整实验目录（包括核验和进程日志），
+排除 `working/`、锁文件、临时文件、Python 缓存及 `.env*`。失败实验有 `error.json` 也可打包，
+标记为 running 的实验须先停止并确认状态。
+
+工具会检查本机已知凭据及常见 `sk-` token（含 Snapshot 的 base64 内容），发现后拒绝打包；
+这不是所有敏感信息的完整检测。它不改写原始 prompt、路径、服务地址，公开提交前需检查。
+日志中原有绝对路径是历史引用；解包后不会自动成为可直接续跑的配置。
+
+```bash
+# 获取完整归档后解包；只拿到 LFS 指针文件时需先 git lfs pull。
+mkdir -p /tmp/inspect-run
+tar -xzf experiments/alice-skillopt-searchqa-deepseek-20260920-seed42/logs.tar.gz -C /tmp/inspect-run
+```
+
+目前原始运行目录仍有两种内部格式，统一的是上面的提交包格式；无需为提交改写已有实验轨迹。

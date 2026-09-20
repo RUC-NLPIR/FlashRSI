@@ -8,6 +8,7 @@ import logging
 from statistics import mean
 
 from flashrsi._records import _write_record
+from flashrsi._run_summary import _finish_summary
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
 from flashrsi.algorithms import SkillOpt
 from flashrsi.benchmarks import SearchQA, TerminalBench
@@ -78,6 +79,8 @@ async def _run(config):
             config,
         )
         raise
+    finally:
+        _finish_summary(run_dir)
     return run_dir, summary
 
 

@@ -11,3 +11,4 @@ dist/
 .env
 runs/
 .cache/
+experiments/.preparing-*/

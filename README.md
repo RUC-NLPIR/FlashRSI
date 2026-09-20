@@ -10,6 +10,10 @@ SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 
 ## SkillOpt
 
+DeepSeek-v4-flash 答题、DeepSeek-v4-pro 演化，分别运行 MiniAgent / Claude Code 的
+SearchQA 实验入口与论文对照见[双 harness 实验说明](docs/searchqa-deepseek-reproduction.md)。
+该独立脚本支持本地凭据注入、官方评分、固定划分、请求恢复和初始/最终测试对照。
+
 先在 `example.yaml` 中填写目标和 Worker 的模型、API key 和连接地址，
 安装所选后端依赖后运行，例如 MiniAgent 目标与纯 LLM Worker：
 
@@ -1082,3 +1086,9 @@ update 生效、后台双子 agent 消息收集及 SendMessage 上下文续接�
 采用离线协议与本地服务回归，没有重新调用付费模型。
 CLI 已支持 SkillOpt 演化与最终测试；Terminal-Bench 的接入及验证状态见
 [Terminal-Bench 说明](docs/terminal-bench.md)。
+
+### 协作者提交实验
+
+参见 [统一实验提交规范](experiments/README.md)。运行目录仍写入被 Git 忽略的 `runs/`；
+使用 `scripts/prepare_experiment_submission.py` 导出统一的 `experiments/<run-id>/`，
+配置与汇总直接进 Git，完整日志压缩包使用 Git LFS。

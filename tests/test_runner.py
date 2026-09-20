@@ -97,6 +97,10 @@ def test_runner_persists_full_experiment_and_final_test(config):
     assert len(list((run_dir / "snapshots").glob("*.json"))) == 2
     assert len(list((run_dir / "trajectories").glob("*-test.json"))) == 1
     assert (run_dir / "result.json").is_file()
+    assert (
+        json.loads((run_dir / "end-summary.json").read_text())["result"]["status"]
+        == "finished"
+    )
     assert not (run_dir / "error.json").exists()
     assert not list((run_dir / "working").iterdir())
     text = "".join(path.read_text() for path in run_dir.rglob("*") if path.is_file())
@@ -199,6 +203,10 @@ def test_runner_failure_keeps_evidence_and_reports_redacted_error(config, monkey
     (run_dir,) = Path(config.run.output_dir).iterdir()
     assert "worker-private-secret" not in (run_dir / "error.json").read_text()
     assert not (run_dir / "result.json").exists()
+    assert (
+        json.loads((run_dir / "end-summary.json").read_text())["result"]["status"]
+        == "error"
+    )
     assert list((run_dir / "trajectories").glob("*-train.json"))
 
 
