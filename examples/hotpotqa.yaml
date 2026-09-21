@@ -1,0 +1,31 @@
+# HotpotQA fullwiki with SkillOpt on MiniAgent.
+#
+# The published splits already hold out the labeled official validation split
+# as `test`, so keep `split: auto` to preserve that partition. Explicit ratios
+# merge and repartition the splits, which discards the held-out guarantee.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: hotpotqa
+  split: auto
+  seed: 42
+  # Samples proportionally inside the published splits; remove for the full set.
+  limit: 60
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-api-key
+  max_steps: 6
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 2
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

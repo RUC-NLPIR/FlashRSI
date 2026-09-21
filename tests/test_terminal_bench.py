@@ -12,8 +12,8 @@ from types import SimpleNamespace
 import pytest
 
 from flashrsi.benchmarks import TerminalBench
+from flashrsi.benchmarks import _archive as data_module
 from flashrsi.benchmarks import terminal_bench as module
-from flashrsi.benchmarks.terminal_bench import _data as data_module
 from flashrsi.core import Task, Trajectory
 
 
@@ -241,7 +241,7 @@ def test_hf_cache_is_reused_across_benchmark_instances(hf_dataset, monkeypatch):
     splits = TerminalBench({}).load()
     monkeypatch.setattr(
         data_module,
-        "_extract_archive",
+        "_extract",
         lambda *args: pytest.fail("unexpected extraction"),
     )
     assert TerminalBench({}).load() == splits

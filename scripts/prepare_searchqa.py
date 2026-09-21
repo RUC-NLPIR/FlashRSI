@@ -35,7 +35,7 @@ FEATURES = Features(
 )
 
 
-def prepare(output: Path, source_dir: Path | None = None) -> None:
+def prepare(output: Path, source_dir: Path | None = None) -> dict:
     def read_source(name: str) -> bytes:
         path = (
             source_dir / name
@@ -55,15 +55,23 @@ def prepare(output: Path, source_dir: Path | None = None) -> None:
     upstream = json.loads(read_source("manifest.json"))
     manifest = {
         "schema": "flashrsi.searchqa.v1",
-        "source": SOURCE,
-        "source_revision": REVISION,
-        "source_path": "benchmarks/searchqa",
+        "source": {
+            "repo": SOURCE,
+            "revision": REVISION,
+            "path": "benchmarks/searchqa",
+        },
         "upstream": upstream,
-        "columns": {
-            "id": "string",
-            "question": "string",
-            "context": "string",
-            "answers": "list[string]",
+        "notes": {
+            "subset": (
+                "This is the 2,000-task SkillOpt subset, not the full SearchQA "
+                "dataset. Source ids, record order, answer lists, contexts and "
+                "split membership are preserved."
+            ),
+            "prompt": (
+                "The source combines instruction, context and question in one "
+                "input field. Preparation splits them into context and question "
+                "without changing their text; the wrapper is reconstructable."
+            ),
         },
         "splits": {},
     }
@@ -120,7 +128,8 @@ def prepare(output: Path, source_dir: Path | None = None) -> None:
             "file": f"searchqa/{path.name}",
             "bytes": path.stat().st_size,
             "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-            "source_sha256": source_hash,
+            "origin": f"source {split} split, preserved as published",
+            "source_sha256": {f"{split}.jsonl": source_hash},
         }
     (destination / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -128,12 +137,8 @@ def prepare(output: Path, source_dir: Path | None = None) -> None:
     card = (
         Path(__file__).with_name("searchqa_dataset_card.md").read_text(encoding="utf-8")
     )
-    (output / "README.md").write_text(card, encoding="utf-8")
-    print(
-        json.dumps(
-            {"output": str(output.resolve()), "counts": COUNTS, "unique_ids": len(seen)}
-        )
-    )
+    (destination / "README.md").write_text(card, encoding="utf-8")
+    return manifest
 
 
 if __name__ == "__main__":
@@ -143,4 +148,14 @@ if __name__ == "__main__":
         "--source-dir", type=Path, help="Optional directory of the locked source files"
     )
     args = parser.parse_args()
-    prepare(args.output, args.source_dir)
+    manifest = prepare(args.output, args.source_dir)
+    print(
+        json.dumps(
+            {
+                "output": str(args.output.resolve()),
+                "counts": {
+                    split: value["count"] for split, value in manifest["splits"].items()
+                },
+            }
+        )
+    )

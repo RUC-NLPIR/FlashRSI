@@ -11,11 +11,9 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-import gzip
-import hashlib
 import json
-import stat
-import tarfile
+import sys
+import tempfile
 import warnings
 from collections.abc import Iterable
 from pathlib import Path
@@ -23,12 +21,29 @@ from pathlib import Path
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from scripts._dataset_archive import _entries, _sha256, _write_archive  # noqa: E402
+
 DATASET = "terminal-bench@2.0"
 GIT_URL = "https://github.com/laude-institute/terminal-bench-2.git"
 REVISION = "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c"
 REGISTRY = (
     "https://raw.githubusercontent.com/harbor-framework/harbor/v0.23.0/registry.json"
 )
+# The pinned task revision predates the upstream LICENSE file, so the license is
+# recorded from a later upstream revision that is identified explicitly.
+LICENSE_SOURCE = {
+    "repository": "https://github.com/harbor-framework/terminal-bench-2",
+    "revision": "2fd12b88aafdd04a52c298e3940bcb189f9766d6",
+    "license_url": (
+        "https://raw.githubusercontent.com/harbor-framework/terminal-bench-2/"
+        "2fd12b88aafdd04a52c298e3940bcb189f9766d6/LICENSE"
+    ),
+    "note": (
+        "LICENSE from current upstream; the pinned task revision predates this file."
+    ),
+}
 INDEX_SCHEMA = pa.schema(
     [
         ("id", pa.string()),
@@ -41,54 +56,9 @@ INDEX_SCHEMA = pa.schema(
 )
 
 
-def _entries(directory: Path) -> list[Path]:
-    """Validate before reading: archives contain directories and regular files."""
-    if not stat.S_ISDIR(directory.lstat().st_mode):
-        raise ValueError(f"task source must be a directory, not a link: {directory}")
-    entries = [directory, *sorted(directory.rglob("*"))]
-    for path in entries:
-        mode = path.lstat().st_mode
-        if not (stat.S_ISDIR(mode) or stat.S_ISREG(mode)):
-            raise ValueError(f"symlinks and special files are unsupported: {path}")
-    return entries
-
-
-def _sha256(path: Path) -> str:
-    with path.open("rb") as stream:
-        return hashlib.file_digest(stream, "sha256").hexdigest()
-
-
-def _write_archive(path: Path, tasks: list[tuple[str, Path, list[Path]]]) -> None:
-    with path.open("wb") as output:
-        with gzip.GzipFile(filename="", mode="wb", fileobj=output, mtime=0) as zipped:
-            with tarfile.open(
-                fileobj=zipped, mode="w", format=tarfile.PAX_FORMAT
-            ) as tar:
-                for name, directory, entries in tasks:
-                    for entry in entries:
-                        relative = entry.relative_to(directory)
-                        archive_path = (
-                            name
-                            if relative == Path(".")
-                            else f"{name}/{relative.as_posix()}"
-                        )
-                        info = tarfile.TarInfo(archive_path)
-                        metadata = entry.lstat()
-                        info.mode = stat.S_IMODE(metadata.st_mode) & 0o777
-                        info.mtime = info.uid = info.gid = 0
-                        info.uname = info.gname = ""
-                        if stat.S_ISDIR(metadata.st_mode):
-                            info.type = tarfile.DIRTYPE
-                            tar.addfile(info)
-                        elif stat.S_ISREG(metadata.st_mode):
-                            info.size = metadata.st_size
-                            with entry.open("rb") as source:
-                                tar.addfile(info, source)
-                        else:
-                            raise ValueError(f"task source changed file type: {entry}")
-
-
-def prepare(output: Path, task_dirs: Iterable[Path]) -> dict:
+def prepare(
+    output: Path, task_dirs: Iterable[Path], license_file: Path | None = None
+) -> dict:
     """Package explicit native task directories, preserving all task resources.
 
     The caller supplies directories from the pinned source, including when using
@@ -162,7 +132,31 @@ def prepare(output: Path, task_dirs: Iterable[Path]) -> dict:
             }
             for row in rows
         ],
+        "notes": {
+            "grading": (
+                "Harbor runs the native tests against the environment after the "
+                "agent finishes. The index is a browsing aid, not an answer key; "
+                "reference solutions stay inside the archive."
+            ),
+            "runtime": (
+                "The archive holds task definitions and bundled resources, not "
+                "Docker image layers. Execution still needs Docker, task images "
+                "and any network access the tasks require."
+            ),
+        },
     }
+    if license_file is not None:
+        (destination / "UPSTREAM_LICENSE").write_bytes(license_file.read_bytes())
+        (destination / "license-source.json").write_text(
+            json.dumps(LICENSE_SOURCE, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        manifest["license"] = {
+            "file": "terminal_bench/UPSTREAM_LICENSE",
+            "sha256": _sha256(destination / "UPSTREAM_LICENSE"),
+            "spdx": "Apache-2.0",
+            **LICENSE_SOURCE,
+        }
     (destination / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
@@ -196,6 +190,16 @@ def _download_tasks() -> list[Path]:
     return asyncio.run(download())
 
 
+def _download_license(directory: Path) -> Path:
+    """Fetch the upstream LICENSE from the separately identified revision."""
+    from urllib.request import urlopen
+
+    path = directory / "UPSTREAM_LICENSE"
+    with urlopen(LICENSE_SOURCE["license_url"]) as response:  # noqa: S310
+        path.write_bytes(response.read())
+    return path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -206,6 +210,11 @@ def main() -> None:
         type=Path,
         help="Directory containing native tasks from the pinned revision",
     )
+    parser.add_argument(
+        "--license-file",
+        type=Path,
+        help="Upstream LICENSE to record; downloaded when omitted",
+    )
     args = parser.parse_args()
     if args.source_dir is None:
         task_dirs = _download_tasks()
@@ -215,7 +224,9 @@ def main() -> None:
             for path in args.source_dir.expanduser().iterdir()
             if (path / "task.toml").is_file()
         )
-    manifest = prepare(args.output, task_dirs)
+    with tempfile.TemporaryDirectory(prefix="terminal-bench-") as temporary:
+        license_file = args.license_file or _download_license(Path(temporary))
+        manifest = prepare(args.output, task_dirs, license_file)
     print(
         json.dumps(
             {

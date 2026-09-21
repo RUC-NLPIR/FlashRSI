@@ -11,11 +11,16 @@ from flashrsi._records import _write_record
 from flashrsi._run_summary import _finish_summary
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
 from flashrsi.algorithms import SkillOpt
-from flashrsi.benchmarks import SearchQA, TerminalBench
+from flashrsi.benchmarks import HotpotQA, SearchQA, Tau3Banking, TerminalBench
 from flashrsi.config import prepare_run_dir
 
 _AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode}
-_BENCHMARKS = {"searchqa": SearchQA, "terminal_bench": TerminalBench}
+_BENCHMARKS = {
+    "searchqa": SearchQA,
+    "hotpotqa": HotpotQA,
+    "terminal_bench": TerminalBench,
+    "tau3_banking": Tau3Banking,
+}
 _ALGORITHMS = {"skillopt": SkillOpt}
 _LOGGER = logging.getLogger(__name__)
 
@@ -46,6 +51,10 @@ async def _run(config):
         from flashrsi.integrations.harbor import bind
 
         bind(target)
+    if isinstance(benchmark, Tau3Banking):
+        from flashrsi.integrations.tau2 import bind
+
+        bind(target, config.benchmark.get("user_simulator"))
     algorithm = algorithm_type(
         config.algorithm, target=target, worker=worker, benchmark=benchmark
     )
