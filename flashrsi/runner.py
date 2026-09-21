@@ -11,11 +11,15 @@ from flashrsi._records import _write_record
 from flashrsi._run_summary import _finish_summary
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
 from flashrsi.algorithms import SkillOpt
-from flashrsi.benchmarks import SearchQA, TerminalBench
+from flashrsi.benchmarks import HotpotQA, SearchQA, TerminalBench
 from flashrsi.config import prepare_run_dir
 
 _AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode}
-_BENCHMARKS = {"searchqa": SearchQA, "terminal_bench": TerminalBench}
+_BENCHMARKS = {
+    "searchqa": SearchQA,
+    "hotpotqa": HotpotQA,
+    "terminal_bench": TerminalBench,
+}
 _ALGORITHMS = {"skillopt": SkillOpt}
 _LOGGER = logging.getLogger(__name__)
 
