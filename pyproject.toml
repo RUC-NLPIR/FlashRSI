@@ -18,6 +18,12 @@ llm = ["openai>=2,<3"]
 miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
 claude-code = ["claude-agent-sdk>=0.2.153,<0.3"]
 harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
+# tau2-bench is not published on PyPI, so it cannot be a dependency here.
+# Install it alongside this package, in its own environment:
+#   uv pip install "tau2 @ git+https://github.com/sierra-research/tau2-bench.git@v1.0.1" rank_bm25
+# It pins litellm<1.82.7 while harbor requires >=1.92.0, so the two
+# environment integrations cannot share one environment.
+tau2 = ["rank_bm25>=0.2,<1"]
 
 [tool.setuptools.packages.find]
 where = ["."]

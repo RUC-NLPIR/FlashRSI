@@ -1,14 +1,12 @@
-# tau3 Banking: loading and grading only, not yet runnable.
+# tau3 Banking with a fixed Agent.
 #
-# The benchmark supplies tasks and reads the tau2 simulator's reward, but no
-# integration drives the user simulator and tools yet, so `flashrsi run` stops
-# at startup with that gap named. This file records the intended shape and is
-# usable today through benchmark.load() and benchmark.grade().
+# tau2 owns the conversation, the simulated customer, the tools, the database
+# and the reward. FlashRSI supplies the Agent and records the result.
 #
-# Each task carries the domain directory in `env`, its agent policy in
-# `question`, and the simulated customer's script in
-# `metadata.user_instructions`. The user simulator needs its own model
-# configuration; it must not reuse the evolution worker's.
+# Requires tau2-bench, which is not on PyPI and pins litellm<1.82.7, so it
+# cannot share an environment with the harbor extra (Terminal-Bench):
+#   uv pip install "tau2 @ git+https://github.com/sierra-research/tau2-bench.git@v1.0.1"
+#   uv pip install -e ".[tau2,miniagent]"
 run:
   output_dir: ../runs
 
@@ -16,17 +14,25 @@ benchmark:
   name: tau3_banking
   split: auto
   seed: 42
-  # The retrieval variant selects the agent policy and, once the simulator is
-  # connected, the knowledge-base tools. Defaults to upstream's `alltools`.
-  # Others include full_kb, golden_retrieval, grep_only, terminal_use, bm25 and
-  # the qwen/openai embedding variants. Report it alongside any score.
-  variant: alltools
+  limit: 3
+  # The retrieval variant selects the agent policy and its knowledge-base
+  # tools. Upstream's default `alltools` needs OPENAI_API_KEY for embeddings;
+  # grep_only, full_kb, golden_retrieval and no_knowledge need no extra service.
+  variant: grep_only
+  # The simulated customer is played by its own model. It must not reuse the
+  # evolution worker's configuration: the worker edits the Agent being measured.
+  user_simulator:
+    llm:
+      model_name: your-user-simulator-model
+      api_key: your-api-key
 
 agent:
   name: miniagent
   llm:
     model_name: your-target-model
     api_key: your-api-key
+  # Turns tau2 may take in one conversation.
+  max_steps: 30
 
 algorithm:
   name: skillopt

@@ -52,13 +52,9 @@ async def _run(config):
 
         bind(target)
     if isinstance(benchmark, Tau3Banking):
-        # The benchmark supplies tasks and reads the simulator's reward, but no
-        # integration drives the tau2 user simulator yet, so a run cannot score.
-        raise ValueError(
-            "tau3_banking has no execution integration yet: its tasks load and "
-            "grade a recorded Tau2Simulator reward, but nothing runs the tau2 "
-            "user simulator and tools. Use benchmark.load() and grade() directly."
-        )
+        from flashrsi.integrations.tau2 import bind
+
+        bind(target, config.benchmark.get("user_simulator"))
     algorithm = algorithm_type(
         config.algorithm, target=target, worker=worker, benchmark=benchmark
     )
