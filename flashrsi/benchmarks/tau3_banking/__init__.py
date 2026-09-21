@@ -12,6 +12,11 @@ from typing import Any
 
 from flashrsi.benchmarks._data import _split_tasks
 from flashrsi.benchmarks.tau3_banking._data import _download_domain
+from flashrsi.benchmarks.tau3_banking._policy import (
+    _DEFAULT_VARIANT,
+    _policy,
+    _variants,
+)
 from flashrsi.core.benchmark import Benchmark, Task
 from flashrsi.core.trajectory import Trajectory
 
@@ -20,13 +25,6 @@ _GIT_URL = "https://github.com/sierra-research/tau2-bench.git"
 _UPSTREAM_TAG = "v1.0.1"
 _UPSTREAM_REVISION = "fc0055dc4e0a316c3f83133267fbd6faaa770992"
 _REVISION = "8d4ab8ad7bce903fe9959fc46b39d7e414f6711e"
-# The agent answers as the support representative; the simulated customer's
-# script belongs to the user simulator and stays in task metadata.
-_INSTRUCTION = (
-    "You are a customer service representative for this bank. Handle the "
-    "customer's request using the domain's tools and knowledge base, "
-    "following its policy."
-)
 
 
 class Tau3Banking(Benchmark):
@@ -34,7 +32,14 @@ class Tau3Banking(Benchmark):
 
     tau2 owns the user simulator, the tool implementations and the reward, so
     every task carries the domain directory in ``env`` rather than a prompt to
-    answer, and ``question`` is the agent's own role instruction.
+    answer. ``question`` is the domain's own agent policy, rendered from its
+    prompt templates; the simulated customer's script stays in metadata for the
+    user simulator and never reaches the agent.
+
+    ``benchmark.variant`` selects the retrieval variant, defaulting to
+    upstream's own ``alltools``. The variant chooses both the policy text and,
+    once the simulator is connected, the agent's knowledge-base tools, so it
+    must be reported alongside any score.
 
     The domain publishes one collection without training splits, so
     ``split=auto`` partitions its 97 tasks by the shared seeded rule. A local
@@ -63,6 +68,13 @@ class Tau3Banking(Benchmark):
         self.config = config["benchmark"] if "benchmark" in config else config
         if self.config.get("name", self.name) != self.name:
             raise ValueError("Tau3Banking requires benchmark.name: tau3_banking")
+        variant = self.config.get("variant", _DEFAULT_VARIANT)
+        if variant not in _variants():
+            raise ValueError(
+                f"Unknown tau3 Banking retrieval variant: {variant!r}; "
+                f"available: {', '.join(_variants())}"
+            )
+        self.variant = variant
         self._tasks_by_id: dict[str, Task] = {}
 
     def load(self) -> Mapping[str, tuple[Task, ...]]:
@@ -72,6 +84,9 @@ class Tau3Banking(Benchmark):
             self._tasks_by_id = {
                 task.task_id: task for split in self._splits.values() for task in split
             }
+            # The variant changes both the policy and the agent's tools, so it
+            # belongs with the source in any record of what was measured.
+            self.metadata = MappingProxyType({**self.metadata, "variant": self.variant})
         return self._splits
 
     def grade(self, trajs: tuple[Trajectory, ...]) -> tuple[Trajectory, ...]:
@@ -111,7 +126,7 @@ class Tau3Banking(Benchmark):
         """Read the tasks/ directory, which is what the tau2 runtime loads."""
         paths, domain = self._task_files()
         for path in paths:
-            yield _task_from_file(path, domain, dict(self.metadata))
+            yield _task_from_file(path, domain, dict(self.metadata), self.variant)
 
     def _task_files(self) -> tuple[tuple[Path, ...], Path]:
         data_path = self.config.get("data_path")
@@ -135,7 +150,9 @@ class Tau3Banking(Benchmark):
         return paths, domain
 
 
-def _task_from_file(path: Path, domain: Path, source: Mapping[str, Any]) -> Task:
+def _task_from_file(
+    path: Path, domain: Path, source: Mapping[str, Any], variant: str
+) -> Task:
     """Describe one task; grading criteria stay in the file, not on the Task."""
     task = json.loads(path.read_text(encoding="utf-8"))
     task_id = task.get("id")
@@ -148,20 +165,22 @@ def _task_from_file(path: Path, domain: Path, source: Mapping[str, Any]) -> Task
     if not isinstance(instructions, str) or not instructions.strip():
         raise ValueError(f"tau3 Banking task {task_id} has no user instructions")
     criteria = task.get("evaluation_criteria") or {}
+    required = tuple(task.get("required_documents") or ())
     return Task(
         task_id=task_id,
-        question=_INSTRUCTION,
+        question=_policy(domain, variant, required),
         env=str(domain),
         metadata={
             "source_split": "unassigned",
             "source": dict(source),
             "task_checksum": hashlib.sha256(path.read_bytes()).hexdigest(),
             "task_path": str(path.relative_to(domain)),
+            "variant": variant,
             # The simulated customer's script belongs to the user simulator.
             "user_instructions": instructions,
             "reward_basis": tuple(criteria.get("reward_basis") or ()),
             "user_tools": tuple(task.get("user_tools") or ()),
-            "required_documents": tuple(task.get("required_documents") or ()),
+            "required_documents": required,
             "has_initial_state": task.get("initial_state") is not None,
         },
     )

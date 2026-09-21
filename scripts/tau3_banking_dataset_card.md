@@ -35,6 +35,20 @@ Rewards come from the tau2 simulator running this domain. Nothing in this
 directory is a text-matching answer key, and importing a previously recorded
 reward is not evidence that the simulator is connected.
 
+## Agent policy and retrieval variants
+
+The agent's own instructions come from `prompts/`, not from the task files.
+Each of the 14 templates belongs to a retrieval variant and is assembled by
+expanding `{{component:NAME}}` from `prompts/components/`. Two variants also
+inline knowledge-base content: `full_kb` embeds every document, and
+`golden_retrieval` embeds only a task's `required_documents`. The remaining
+placeholders, such as `{{all_tools_dense_instructions}}`, are filled by the
+tau2 runtime when it builds the toolkit.
+
+The variant determines both the policy text and which knowledge-base tools the
+agent has, so runs are comparable only within one variant. Upstream's own
+default is `alltools`. Any reported score should name the variant it used.
+
 ## Task files vs `tasks.json`
 
 The tau2 runtime loads the `tasks/` directory

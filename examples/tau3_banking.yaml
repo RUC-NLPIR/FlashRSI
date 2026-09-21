@@ -5,8 +5,9 @@
 # at startup with that gap named. This file records the intended shape and is
 # usable today through benchmark.load() and benchmark.grade().
 #
-# Each task carries the domain directory in `env`, and the simulated customer's
-# script in `metadata.user_instructions`. The user simulator needs its own model
+# Each task carries the domain directory in `env`, its agent policy in
+# `question`, and the simulated customer's script in
+# `metadata.user_instructions`. The user simulator needs its own model
 # configuration; it must not reuse the evolution worker's.
 run:
   output_dir: ../runs
@@ -15,6 +16,11 @@ benchmark:
   name: tau3_banking
   split: auto
   seed: 42
+  # The retrieval variant selects the agent policy and, once the simulator is
+  # connected, the knowledge-base tools. Defaults to upstream's `alltools`.
+  # Others include full_kb, golden_retrieval, grep_only, terminal_use, bm25 and
+  # the qwen/openai embedding variants. Report it alongside any score.
+  variant: alltools
 
 agent:
   name: miniagent
