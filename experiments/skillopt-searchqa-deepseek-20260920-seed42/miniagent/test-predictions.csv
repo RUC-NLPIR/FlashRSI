@@ -1,0 +1,1442 @@
+task_id,ground_truth,initial_answer,final_answer,initial_status,final_status,initial_em,final_em,initial_f1,final_f1
+e7f1885a07d94efbbebe04829106830c,"""Dalmatian""",Dalmatian,Dalmatian,finished,finished,1.0,1.0,1.0,1.0
+52c26a3da62741cdba8754a3d78d864a,"""hearing""",hearing,Hearing,finished,finished,1.0,1.0,1.0,1.0
+1c168ba59de44d469fba6009f8c14e9e,"""horses""",Horses,horses,finished,finished,1.0,1.0,1.0,1.0
+bd1eb94035884688ac84e585fa2b1088,"""Tiger Woods""",Tiger Woods,Tiger Woods,finished,finished,1.0,1.0,1.0,1.0
+671f3c2e406f4ca7b41cb69fefe72e66,"""Pinocchio""",Pinocchio,Pinocchio,finished,finished,1.0,1.0,1.0,1.0
+1d8e752954e74f6eb7e718011414d6d7,"""the Boy Scouts""",Boy Scouts of America (BSA),Boy Scouts of America,finished,finished,0.0,0.0,0.5714285714285715,0.6666666666666666
+df0a8252d982464597f62bd806caf39c,"""Robert Fulton""",Robert Fulton,Robert Fulton,finished,finished,1.0,1.0,1.0,1.0
+61e95a62a8104bd49be3c8bde39d4f5e,"""War of the Worlds""",**War of the Worlds**,War of the Worlds,finished,finished,1.0,1.0,1.0,1.0
+fe759df9dc274228a80ac6eb905c2748,"""a relief""",relief,relief print,finished,finished,1.0,0.0,1.0,0.6666666666666666
+9ae85053dd2949a9ab57a8963eef3b02,"""parts per million""",parts per million,parts per million,finished,finished,1.0,1.0,1.0,1.0
+95757ee9efaa497f90b0c6d79640865d,"""Syria""",Syria,Syria,finished,finished,1.0,1.0,1.0,1.0
+1137531e97ba4657aa07c7a33e864378,"""Stephen Crane""",Stephen Crane,Stephen Crane,finished,finished,1.0,1.0,1.0,1.0
+c2b851b5ff944169af497fcfcc7b5df5,"""Jordan""",Jordan,Jordan,finished,finished,1.0,1.0,1.0,1.0
+7292cdeca2b949a6bef8c03a9901f5a4,"""a frog""",FROG,Frogs,finished,finished,1.0,0.0,1.0,0.0
+86acb5b661bd4724a5d404e5b17e6a46,"""a bazooka""",bazooka,bazooka,finished,finished,1.0,1.0,1.0,1.0
+832a75b67b3448818c5f87a733494d9f,"""the Sistine Chapel""",Sistine Chapel,Sistine Chapel,finished,finished,1.0,1.0,1.0,1.0
+1d78dedb35da483aa19ae93ef984728c,"""the right side of the brain""",Right brain hemisphere (right hemisphere),right brain,finished,finished,0.0,0.0,0.4444444444444445,0.6666666666666666
+acbe0bdbebb0454c9b5a96a537e7b414,"""tortillas""",Tortillas,Tortillas,finished,finished,1.0,1.0,1.0,1.0
+c6b75f3d0e3247aca276bac0180e28ad,"""Peter the Great""",Peter the Great,Peter the Great,finished,finished,1.0,1.0,1.0,1.0
+86d1ce36f5eb4b5f9d5a2f444e0d3410,"""Austria""",Austria,Austria,finished,finished,1.0,1.0,1.0,1.0
+dff449177b0444fb9fb3d3074c47dfdb,"""Moscow""",Moscow,Moscow,finished,finished,1.0,1.0,1.0,1.0
+e4af38570ede4d60975fe42cbee53740,"""North Dakota""",North Dakota,North Dakota,finished,finished,1.0,1.0,1.0,1.0
+afaf746196804a32aaf822eb592528cc,"""the Plaza""",The Plaza Hotel,The Plaza Hotel,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+82959bc544334b70819123eb60817b19,"""a la king""",a la king,a la king,finished,finished,1.0,1.0,1.0,1.0
+8ce3c7071ee34ee7858f30496106e859,"""The Battle of Crecy""",Battle of Crecy,Battle of Crecy,finished,finished,1.0,1.0,1.0,1.0
+2912f5399c2f4fb6a7c520306d8caf3a,"""Chesapeake Bay""",Chesapeake Bay,Chesapeake,finished,finished,1.0,0.0,1.0,0.6666666666666666
+e4c43c28c96f40a893765744915965da,"""Rio de Janeiro""",True,Surf Bus,finished,finished,0.0,0.0,0.0,0.0
+3b44d20c36344e2cba9635596cfd47fe,"""a nanosecond""",Nanosecond,Nanosecond,finished,finished,1.0,1.0,1.0,1.0
+9a9ed6bd43684cf6a74f78a8e4aa8431,"""Rear Window""",Rear Window,Rear Window,finished,finished,1.0,1.0,1.0,1.0
+6f1d2a3ec3df471987e4b3c6492c1880,"""North by Northwest""",North by Northwest,North by Northwest,finished,finished,1.0,1.0,1.0,1.0
+47a7a24cbbeb4cc980fc15aaedb03bf3,"""7""",6,6,finished,finished,0.0,0.0,0.0,0.0
+0b43263922b84f66ab78b0df30dc751e,"""Saturn""",Saturn,Saturn,finished,finished,1.0,1.0,1.0,1.0
+d94eac11cc30427fac64da9184a9fa41,"""Sacha Baron Cohen""",Sacha Baron Cohen,Sacha Baron Cohen,finished,finished,1.0,1.0,1.0,1.0
+008613ff6fba4f7a98143b17b9da7d2d,"""The Island of Dr. Moreau""",The Island of Doctor Moreau,The Island of Doctor Moreau,finished,finished,0.0,0.0,0.75,0.75
+98c0e02584b04c36927b5cb2a4dd1677,"""Benazir Bhutto""",Benazir Bhutto,Benazir Bhutto,finished,finished,1.0,1.0,1.0,1.0
+6fab6fbb778c4ad784fe0ea2fced512e,"""an ambulance""",Ambulance,ambulance,finished,finished,1.0,1.0,1.0,1.0
+235ada881f2348ed80b6790a9cdf6415,"""(the University of) Kansas""",University of Kansas,University of Kansas,finished,finished,1.0,1.0,1.0,1.0
+ee64d64641884a29968d0d62af120707,"""Banquo""",Banquo,Banquo,finished,finished,1.0,1.0,1.0,1.0
+16f4d1a28f264c15b4c93460cf2d985a,"""Aloha""",Aloha Airlines,Aloha Airlines,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+b7a3b748667348b7bca76958e7ce110a,"""yellow""",Yellow.,yellow,finished,finished,1.0,1.0,1.0,1.0
+35b8579be49e4ac598df516858dda290,"""Marie-Antoinette""",Marie Antoinette,Marie Antoinette,finished,finished,1.0,1.0,1.0,1.0
+80b349e3d51f4adabec627ed444b90e7,"""bullseye""",Bullseye (bull's-eye).,Bullseye,finished,finished,0.0,1.0,0.6666666666666666,1.0
+f40a291848ff41c5adba099e4987078d,"""a Swiss Army knife""",Swiss Army knife,Swiss Army knife,finished,finished,1.0,1.0,1.0,1.0
+113920ea62314360be6016cd2157ec4b,"""1914""",August 1914,1914,finished,finished,0.0,1.0,0.6666666666666666,1.0
+00b991d41226417bb77c2825488baac5,"""Sierra Leone""",Sierra Leone,Sierra Leone,finished,finished,1.0,1.0,1.0,1.0
+858e95fc230148ba8bb554e35b25cbe5,"""Kipling""",Rudyard Kipling,Rudyard Kipling,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+e7071a0a197c471d8026449e74a9233e,"""Beowulf""",Beowulf,Beowulf,finished,finished,1.0,1.0,1.0,1.0
+0bed2137c44d4075bed61696b3a43f86,"""Jennifer Jason Leigh""",Jennifer Jason Leigh,Jennifer Jason Leigh,finished,finished,1.0,1.0,1.0,1.0
+05bb7fe82bee447fb0c2f7886686c5e8,"""Sweden""",Prime Minister of Sweden,Sweden,finished,finished,0.0,1.0,0.4,1.0
+31a472d2b8a942c9a7d7f8050233a960,"""Belle Watling""",Belle Watling,Belle Watling,finished,finished,1.0,1.0,1.0,1.0
+d09e46053b20406e882ae6d1597069be,"""Tel Aviv""",Tel Aviv,Tel Aviv,finished,finished,1.0,1.0,1.0,1.0
+3e31c94908e041c7a855dd7ac5659f2e,"""leeward""",Leeward,leeward,finished,finished,1.0,1.0,1.0,1.0
+ab94aa55c6314e9b8af69bdfac48dadf,"""obscenity""",**Obscenity**,Obscenity,finished,finished,1.0,1.0,1.0,1.0
+8fe10b939ea84d8abd2b64b409aa6d75,"""a condor""",Condor,Condor,finished,finished,1.0,1.0,1.0,1.0
+b35426ec7d4a454889a577624d5f37e3,"""Daredevil""",Daredevil,Daredevil,finished,finished,1.0,1.0,1.0,1.0
+8bc9e0ba6f914607960f73cd61bdd607,"""Wasserman""",August von Wassermann,August von Wassermann,finished,finished,0.0,0.0,0.0,0.0
+458f4f9ec50b4233b211b12f1eeca2a0,"""the Joint Chiefs of Staff""",Joint Chiefs of Staff,Joint Chiefs of Staff,finished,finished,1.0,1.0,1.0,1.0
+75815be29bed4f45aa300fd41e9018ef,"""Moses""",Moses,Moses,finished,finished,1.0,1.0,1.0,1.0
+1bbc678c2c2144a0b98d1db7bd97aab8,"""(Frank Lloyd) Wright""",Frank Lloyd Wright,Frank Lloyd Wright,finished,finished,1.0,1.0,1.0,1.0
+e2a6f8f3f7fd468dbd6c8accff13a62f,"""Bali""",Bali,Bali,finished,finished,1.0,1.0,1.0,1.0
+20a9fdc3a7e3452abc98ea834c7c8287,"""Tippecanoe""",Tippecanoe River,Tippecanoe,finished,finished,0.0,1.0,0.6666666666666666,1.0
+00bae619959f47cb9b81cf3bacba0a38,"""rights""",dates represent how far into the year women must work to earn what men,Equal Pay Day,finished,finished,0.0,0.0,0.0,0.0
+bf17e4448a5a428593a1711cbc0c1feb,"""The Seven Samurai""",Seven Samurai,Seven Samurai,finished,finished,1.0,1.0,1.0,1.0
+7ca14fe0dfee4063a1298c77da63f7a9,"""the Communist Party""",The Chinese Communist Party (CCP),Chinese Communist Party,finished,finished,0.0,0.0,0.6666666666666666,0.8
+3a44d3746b9b447c814217d21fbef168,"""Harrison Ford""",Harrison Ford,Harrison Ford,finished,finished,1.0,1.0,1.0,1.0
+5b015d8aaea04ca68fb2150fad53f044,"""lumbar vertebrae""",**Lumbar vertebrae (L1–L5)**,lumbar vertebrae,finished,finished,0.0,1.0,0.8,1.0
+70006ef9fefc4702911bfd3e8c31ebb9,"""Jem""",Jem,Jem,finished,finished,1.0,1.0,1.0,1.0
+a5d2e623e6c84312b5fe863872fbce1c,"""Amsterdam""",Amsterdam,Amsterdam,finished,finished,1.0,1.0,1.0,1.0
+26f0839b53df4fde898bd35ad64d1b8e,"""Audubon""",Audubon,Audubon,finished,finished,1.0,1.0,1.0,1.0
+e9433b099ee14acf96e5cd7422e6c577,"""rodents""",Rodents,rodents,finished,finished,1.0,1.0,1.0,1.0
+8b649492cc804c6badfd043b2122ccba,"""Henri Matisse""",Henri Matisse,Henri Matisse,finished,finished,1.0,1.0,1.0,1.0
+1afc488880414f70a478f861e1bb181b,"""Valkyries""",Valkyries,Valkyries,finished,finished,1.0,1.0,1.0,1.0
+140eb9010112494aad095739adb735d6,"""the Brooklyn Bridge""",Brooklyn Bridge,Brooklyn Bridge,finished,finished,1.0,1.0,1.0,1.0
+9c037da132884b05be6639477d52a0fc,"""Tiger Woods""",Tiger Woods,Tiger Woods,finished,finished,1.0,1.0,1.0,1.0
+b0ea89ee6dbf4d19a264528fb0b5d2ed,"""Arrested Development""",Arrested Development,Arrested Development,finished,finished,1.0,1.0,1.0,1.0
+e8148b60bf094f7f995b7254b8e18657,"""Venus""",Venus,Venus,finished,finished,1.0,1.0,1.0,1.0
+1f34e8356f244ec090c04c17c6bd2461,"""Scotland""",King of Scotland (King of Scots).,King of Scotland,finished,finished,0.0,0.0,0.2857142857142857,0.5
+9d66eb57ab8a460381f2299472833c31,"""oats""",oats,oats,finished,finished,1.0,1.0,1.0,1.0
+9cce6a8e69214436bdb7a923d2cfa82a,"""China""","A family of Chinese launch vehicles (rockets), derived from ballistic missiles.",China,finished,finished,0.0,1.0,0.0,1.0
+83e227fab836438b9c23a5eabee3f985,"""Samuel Morse""",Samuel Morse,Samuel Morse,finished,finished,1.0,1.0,1.0,1.0
+9bb18f3c66b44057947371fa8d185a1e,"""a sharpener""",a sharpener,a sharpener,finished,finished,1.0,1.0,1.0,1.0
+34f4c188587e4118a9c65bf31bb1cfdb,"""Vermont""","Burlington, Vermont",Vermont,finished,finished,0.0,1.0,0.6666666666666666,1.0
+c35fa3ed34bf4b0e8116f10d1913d75c,"""a rug""",**Rug**,rug,finished,finished,1.0,1.0,1.0,1.0
+e19f0550cc464e6aa8a343ac4905db8b,"""...Hear My Cry""",Hear My Cry,Hear My Cry,finished,finished,1.0,1.0,1.0,1.0
+c93cf43111fb474ba0320e103f2aa01b,"""Botswana""",Botswana,Botswana,finished,finished,1.0,1.0,1.0,1.0
+4e876d2abc10451483f9275829e780a0,"""Ron Howard""",Ron Howard,Ron Howard,finished,finished,1.0,1.0,1.0,1.0
+7a6a2d268f7a4f43936e9d63959b50f4,"""The Cincinnati Kid""",The Cincinnati Kid,The Cincinnati Kid,finished,finished,1.0,1.0,1.0,1.0
+43f44abdf90b4a2ba258141dedb67a06,"""Cleopatra""","Ptolemy XV Caesar (Caesarion), son of Julius Caesar and Cleopatra.",son of Julius Caesar and Cleopatra,finished,finished,0.0,0.0,0.18181818181818182,0.2857142857142857
+7793a82070884d96b11e47e8a1b5a7d7,"""Wilbur""",Wilbur,Wilbur,finished,finished,1.0,1.0,1.0,1.0
+9615057cf59f4fa3a92da965e12c7a40,"""Hill Street Blues""",Hill Street Blues,Hill Street Blues,finished,finished,1.0,1.0,1.0,1.0
+2f702f4dd2574c02addd404d82953d15,"""Bob Hope""",Bob Hope,Bob Hope,finished,finished,1.0,1.0,1.0,1.0
+04d1b7f7695c403497dec7423a68a36c,"""Friday Night Lights""",Friday Night Lights,Friday Night Lights,finished,finished,1.0,1.0,1.0,1.0
+7d6bd0d727e54335be7c1c69886fc82f,"""the Sargasso Sea""",Sargasso Sea,Sargasso Sea,finished,finished,1.0,1.0,1.0,1.0
+d4162c20a5414f1c83e112b7d4f484b1,"""Maria, Full of Grace""",Maria Full of Grace,Maria Full of Grace,finished,finished,1.0,1.0,1.0,1.0
+708b4a8bae5249be828bd88d87df1881,"""(Johann) Strauss""",Johann Strauss II,Johann Strauss II,finished,finished,0.0,0.0,0.8,0.8
+4735c55c7d9f45688c00b6f18aaf9071,"""Russia""",Russia,Russia,finished,finished,1.0,1.0,1.0,1.0
+8f88cd07ca714a469314bfd0dfed46db,"""Tim Duncan""",Tim Duncan,Tim Duncan,finished,finished,1.0,1.0,1.0,1.0
+8ae5b2a6fbe744929bf4f15b5af9d5f5,"""South Korea""",South Korea,South Korea,finished,finished,1.0,1.0,1.0,1.0
+fc200c82aef548ddbf14823397d3defd,"""American Bandstand""",American Bandstand,American Bandstand,finished,finished,1.0,1.0,1.0,1.0
+eec2fd38adce4af1a7c28c7ed67a1e1a,"""Michigan""",Michigan,Michigan,finished,finished,1.0,1.0,1.0,1.0
+7cd88e67c6c64595a44707e44a33c57c,"""Jessica Alba""",Jessica Alba,Jessica Alba,finished,finished,1.0,1.0,1.0,1.0
+629697cab0d844a985ed3c1df7f39678,"""(John) Kerry""",John Kerry,John Kerry,finished,finished,1.0,1.0,1.0,1.0
+dbd0d9898ec74cc6a5d38835a9c3f6e1,"""Kung Fu Panda""",Kung Fu Panda (2008),Kung Fu Panda,finished,finished,0.0,1.0,0.8571428571428571,1.0
+dbcadf420ab94399b8137e3bab4eb2c8,"""nitrogen""",Nitrogen,nitrogen,finished,finished,1.0,1.0,1.0,1.0
+2402a4574a0944ccb31b2fa5af4d0b3e,"""paper tickets""",Paper tickets,Paper tickets,finished,finished,1.0,1.0,1.0,1.0
+feee13cb93224a3297a7b87ddb424640,"""Waiting for Godot""",Waiting for Godot,Waiting for Godot,finished,finished,1.0,1.0,1.0,1.0
+57a9c41a87254962a153f091182dc1c0,"""Greenland""",Greenland,Greenland,finished,finished,1.0,1.0,1.0,1.0
+4fa7c2c886ce4f9790d8a402c9694dcd,"""Intel""",Intel,Intel,finished,finished,1.0,1.0,1.0,1.0
+e4615445187d4054bd1751442077dfde,"""\""Lucky\"" Luciano""","""Lucky"" Luciano","""Lucky"" Luciano",finished,finished,1.0,1.0,1.0,1.0
+27a3d2219dd647dcb8832d1960346ce9,"""Montague""",Montague,Montague,finished,finished,1.0,1.0,1.0,1.0
+e95bc48e53df41cda7d0f253149bab48,"""the New York Yankees""",New York Yankees,New York Yankees,finished,finished,1.0,1.0,1.0,1.0
+a7dce4e10bc94faebb98ca90b963b026,"""Lee Meriwether""",Lee Meriwether,Lee Meriwether,finished,finished,1.0,1.0,1.0,1.0
+e7066c6fbdb1495c8f57b0a40040f837,"""I Am Legend""",I Am Legend,I Am Legend,finished,finished,1.0,1.0,1.0,1.0
+57614fd6dbb04777b14b5c88baa3cb66,"""chariots""",Chariots,Chariots,finished,finished,1.0,1.0,1.0,1.0
+61eddea900ce4ba4bf01cc9eb5b68736,"""Spanglish""",Spanglish,Spanglish,finished,finished,1.0,1.0,1.0,1.0
+5eb5d29e6f8f4ee6bb8c46f30b20bb90,"""Eliza Doolittle""",True,Eliza Doolittle,finished,finished,0.0,1.0,0.0,1.0
+1f9e3d57a12d4308bf7476b2ea0e9c9f,"""Sheriff Pat Garrett""",Pat Garrett,Pat Garrett,finished,finished,0.0,0.0,0.8,0.8
+100e71fde3674af69110d1d286af2550,"""Neptune""",Neptune,Neptune,finished,finished,1.0,1.0,1.0,1.0
+1dccbb3c4bc04d87a2dea2eb10cb996f,"""Attila""",Attila the Hun,Attila the Hun,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+e939d716042547b9a5c0e859a57537ce,"""The Man Without A Country""",The Man Without a Country,The Man Without a Country,finished,finished,1.0,1.0,1.0,1.0
+6b68a6dadf3d4c1fa91721ee57730bdb,"""a banquet""",banquet,banquet,finished,finished,1.0,1.0,1.0,1.0
+6a93924d3a9342568f4e36545ac83e72,"""Rudyard Kipling""",Rudyard Kipling,Rudyard Kipling,finished,finished,1.0,1.0,1.0,1.0
+a4b854f73b0644d1b72679fd808db834,"""Gerry & the Pacemakers""",Gerry and the Pacemakers,Gerry and the Pacemakers,finished,finished,0.0,0.0,0.8,0.8
+df5c7bb060c442689a7a7fccc7079811,"""Mars""",Mars,Mars,finished,finished,1.0,1.0,1.0,1.0
+fbd263a6701c48a8ba24cadff0542457,"""Fahrenheit""",Daniel Gabriel Fahrenheit,Daniel Gabriel Fahrenheit,finished,finished,0.0,0.0,0.5,0.5
+10645748088b4ab0a421f05e992aee53,"""vipers""",Viperidae (vipers),Viperidae,finished,finished,0.0,0.0,0.6666666666666666,0.0
+eb0fb0cca9684810ac6840dd9b8ebb91,"""the Aleutian Islands""",Aleutian Islands,Aleutian Islands,finished,finished,1.0,1.0,1.0,1.0
+61eda64250e44e7da58229538c783ccc,"""a caveat""",Caveat,caveat,finished,finished,1.0,1.0,1.0,1.0
+741b6eda4535483cb9c80242089d8eb2,"""The Godfather Part II""",The Godfather Part II,The Godfather Part II,finished,finished,1.0,1.0,1.0,1.0
+24eb5a009ee64909bad741ae3afe0456,"""Forrest Gump""",Forrest Gump,Forrest Gump,finished,finished,1.0,1.0,1.0,1.0
+3a649663c9c24c5f990723e9ffce087e,"""Gandhi""",Gandhi,Gandhi,finished,finished,1.0,1.0,1.0,1.0
+ba71cadcf9904c98827906d1c71b9c2d,"""Urban Outfitters""",Urban Outfitters,Urban Outfitters,finished,finished,1.0,1.0,1.0,1.0
+8e31e394ac6c45c4acfeda5424aceb64,"""Colombia""",Colombia,Colombia,finished,finished,1.0,1.0,1.0,1.0
+672c19cc7c9046caa525b2eb9222b63c,"""Willy Loman""",Willy Loman,Willy Loman,finished,finished,1.0,1.0,1.0,1.0
+b0f37c93bb7b440fba1eb339b05c31a1,"""Morocco""",Morocco,Morocco,finished,finished,1.0,1.0,1.0,1.0
+3ed3ab8bdddb466a9001f8282173d0fe,"""28 Weeks Later""",28 Weeks Later,28 Weeks Later,finished,finished,1.0,1.0,1.0,1.0
+97ea770391534ffd9d71beb48d620a2d,"""lactic acid""",Lactic acid,lactic acid,finished,finished,1.0,1.0,1.0,1.0
+4c425dc6992c413d9c1521f758c0d85a,"""Hoover""","Herbert Hoover and his wife, Lou, are buried there.",Herbert Hoover National Historic Site,finished,finished,0.0,0.0,0.19999999999999998,0.33333333333333337
+8ead639f93fc46acb2b2761fc7689641,"""Catherine of Aragon""",Catherine of Aragon,Catherine of Aragon,finished,finished,1.0,1.0,1.0,1.0
+1aa44299fa434210937bbaa1eaf40f5e,"""Fokker""",Anthony Fokker,Anthony Fokker,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+215ec23d85f74b059a2e55edab5da89b,"""a cantilever""",Cantilever,cantilever,finished,finished,1.0,1.0,1.0,1.0
+47b66a02f30d4ca89ab37f7bfb96e426,"""George Moscone""",George Moscone,George Moscone,finished,finished,1.0,1.0,1.0,1.0
+da940922cae640058dcd8333a529a70f,"""Ovid""",Ovid,Ovid,finished,finished,1.0,1.0,1.0,1.0
+4cccc854d8e54bd2ae5f20d2df617925,"""Mickey Mantle""",Mickey Mantle,Mickey Mantle,finished,finished,1.0,1.0,1.0,1.0
+ebd09c008e884480b7162148fe0d1cf0,"""The Mamas & The Papas""",The Mamas & the Papas,The Mamas & the Papas,finished,finished,1.0,1.0,1.0,1.0
+4e040c91a514411f869042bd1bb74701,"""a missionary""",missionary,missionary,finished,finished,1.0,1.0,1.0,1.0
+03ff0bfba1e441cb952c5e96e081cd95,"""Jamaica""",Jamaica,Jamaica,finished,finished,1.0,1.0,1.0,1.0
+8fdaafb1da1d49f0abc9772185c545d4,"""malaria""",Malaria,malaria,finished,finished,1.0,1.0,1.0,1.0
+847e5a2123aa4430aad88f8869cd3005,"""a police car""",police car,a police car,finished,finished,1.0,1.0,1.0,1.0
+a2137a7b8c7c426ba4b49bae0d61521e,"""Australia""",Australia,Australia,finished,finished,1.0,1.0,1.0,1.0
+b43617fa1fc145e6809f24a7a652772c,"""Fiddler on the Roof""",Characters in the musical Fiddler on the Roof.,Fiddler on the Roof,finished,finished,0.0,1.0,0.6666666666666666,1.0
+a382ca2b34114134b632096cc1687285,"""Mont Blanc""",Mont Blanc,Mont Blanc,finished,finished,1.0,1.0,1.0,1.0
+74e7110ca4f149b1b1359cc75acd69e7,"""Mendel""",Gregor Mendel,Gregor Mendel,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+dba14eb45c5b4a02814ad91361e35a36,"""do""","**Do** (or ""doh"")",do,finished,finished,0.0,1.0,0.5,1.0
+f0ce0795002b414387a0a2fdd3e8719a,"""-phile""",-phile,-phile,finished,finished,1.0,1.0,1.0,1.0
+46d2aa3ada6f4a5d8a499e4a5c07385e,"""the Amazon""",Amazon River,Amazon,finished,finished,0.0,1.0,0.6666666666666666,1.0
+943c20e85f324584b597e50e0b7d2d05,"""Man Ray""",Man Ray,Man Ray,finished,finished,1.0,1.0,1.0,1.0
+c5a87bda6ee74fea8bc0a238af242296,"""Inuit""",Inuit,Inuit,finished,finished,1.0,1.0,1.0,1.0
+5291a269c9de4712b4900236eb4fe5d4,"""a fox""",Fox,fox,finished,finished,1.0,1.0,1.0,1.0
+9c43041246554b0f9371e45cbaf1b9bf,"""Williamsburg""",Williamsburg,Williamsburg,finished,finished,1.0,1.0,1.0,1.0
+85d92d7d7410408780bc11c741de1676,"""carbonite""",Carbonite,carbonite,finished,finished,1.0,1.0,1.0,1.0
+a487a81f868c4dae9fabcf38497396d1,"""the Lincoln Tunnel""",the Lincoln Tunnel,the Lincoln Tunnel,finished,finished,1.0,1.0,1.0,1.0
+15d8c4fb9ed1486f8e6d80ffcd7d0948,"""a laser beam""",Laser,laser,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+a0dbc05648a74890a966350c81704622,"""Shakira""",Shakira,Shakira,finished,finished,1.0,1.0,1.0,1.0
+ad48db8d48f24570b35c8f4d990547d3,"""swans""",Swans,swans,finished,finished,1.0,1.0,1.0,1.0
+21938e691b2a412ebb7a3548209ecbcb,"""Secretary of Defense""",Secretary of Defense,Secretary of Defense,finished,finished,1.0,1.0,1.0,1.0
+8ed17c48fb864ff6a4bb5ba04055c1f7,"""Mardi Gras""",Mardi Gras,Mardi Gras,finished,finished,1.0,1.0,1.0,1.0
+7c9086aad3f14242bf9a239b0dcc7dfa,"""Mike Connors""",Mike Connors,Mike Connors,finished,finished,1.0,1.0,1.0,1.0
+c1d0ebcfc30d4588bc539e1491bdfda2,"""the Navy""",Secretary of the Navy,Navy,finished,finished,0.0,1.0,0.5,1.0
+491fe356172c4f0f8899595cd13426db,"""Faraday""",Faraday effect,Faraday effect,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+0cd00484d33645b0a58f51dfec568995,"""Venezuela""",Venezuela,Venezuela,finished,finished,1.0,1.0,1.0,1.0
+e2801d2a3baa454f90ef2f954c07989c,"""(John) Bunyan""",John Bunyan,John Bunyan,finished,finished,1.0,1.0,1.0,1.0
+dff359c841e6483e8c5ab98bce20fc29,"""freefall""",Free fall (freefall),freefall,finished,finished,0.0,1.0,0.5,1.0
+39442a5c0c614514b0221df11489fef3,"""carbon dioxide""",Carbon dioxide,carbon dioxide,finished,finished,1.0,1.0,1.0,1.0
+7b6534dc66d6458ebaac8ef00c98c7f5,"""Judi Dench""",Judi Dench,Judi Dench,finished,finished,1.0,1.0,1.0,1.0
+0ffdf0ac392c4050bc585c32b7a48aec,"""Greece""",Greece,Greece,finished,finished,1.0,1.0,1.0,1.0
+a34708851fbd4ddaba3dce11d13bed71,"""Russian""",Russian,Russian,finished,finished,1.0,1.0,1.0,1.0
+8a67adbeab504bceadbcf5848e613469,"""Rudyard Kipling""",Rudyard Kipling,Rudyard Kipling,finished,finished,1.0,1.0,1.0,1.0
+638753d6628e47258d18dc18e1a99623,"""Montana""",Montana counties.,Montana,finished,finished,0.0,1.0,0.6666666666666666,1.0
+2db7671583be4f56be84f68677b6c925,"""iodized""",Iodized salt,iodized salt,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+d3a34a078fa941fb93afb7cb5ee930e3,"""The Water Horse""",The Water Horse: Legend of the Deep,The Water Horse,finished,finished,0.0,1.0,0.5714285714285715,1.0
+10f7141925ef42e2bad2689c5e9c0eda,"""the pituitary gland""",The pituitary gland.,pituitary gland,finished,finished,1.0,1.0,1.0,1.0
+6894daf9cdfe4d2081847134f34ea3fa,"""drought""",drought,Drought,finished,finished,1.0,1.0,1.0,1.0
+d67c9156a9b04624910dea2f510f8047,"""Austria""",Austria,Austria,finished,finished,1.0,1.0,1.0,1.0
+18bbeafcf1a345c297c73e0043e4c884,"""David Lee Roth""",David Lee Roth,David Lee Roth,finished,finished,1.0,1.0,1.0,1.0
+07782e76e7ec403b883dbe704dc16ba2,"""Michael Jordan""",Michael Jordan,Michael Jordan,finished,finished,1.0,1.0,1.0,1.0
+63d0331e94bb40fbb212adc3d586480c,"""Latin""",Latin,Latin,finished,finished,1.0,1.0,1.0,1.0
+40a3c8c8f1f4455fa159207cc1231e59,"""movies""",Movies.,movies,finished,finished,1.0,1.0,1.0,1.0
+b5449c84277b434398372a0c84965db3,"""aleph""",Aleph,Aleph,finished,finished,1.0,1.0,1.0,1.0
+428de1f33b694736b48478c9fa3d9c90,"""South Bend""",South Bend,South Bend,finished,finished,1.0,1.0,1.0,1.0
+09a3c29bd469417c9ee3cec55c1d4b73,"""Aristotle""",Aristotle,Aristotle,finished,finished,1.0,1.0,1.0,1.0
+7821675f0b614f5b89828e5004ce01a4,"""1949""",1949,1949,finished,finished,1.0,1.0,1.0,1.0
+f4eb6ed857034ddb8caede4a50126916,"""nitrogen""",Nitrogen gas (N₂),nitrogen,finished,finished,0.0,1.0,0.5,1.0
+fbea4c11417a4361adeb09ad77c5076b,"""brown""",1st kyu (Ikkyu),Ikkyu,finished,finished,0.0,0.0,0.0,0.0
+a2743674044c4315be9b5a6151cc5f63,"""as""",As,As,finished,finished,1.0,1.0,1.0,1.0
+682e265ba77543ec884da14042e3ac90,"""Lauren Bacall""",Slim (Lauren Bacall),Lauren Bacall,finished,finished,0.0,1.0,0.8,1.0
+7cc0e48d6b9a4e5286b7bf50c81e8d9b,"""Brutus""",Brutus,Brutus,finished,finished,1.0,1.0,1.0,1.0
+fe6e92dd15c0429b9204c0ab231039a9,"""Marsalis""",Marsalis,Marsalis,finished,finished,1.0,1.0,1.0,1.0
+a8648c93b9b0446f8ddeb9c823a713cf,"""Charles Dickens""","Pip, the protagonist and narrator of Dickens's *Great Expectations*.",Great Expectations,finished,finished,0.0,0.0,0.0,0.0
+c548b9c001f4403b88be2af3d566ef35,"""pigeons""",Pigeons,pigeons,finished,finished,1.0,1.0,1.0,1.0
+c128b8c91c024ab0a592dcda590a11f9,"""(Ivan) Lendl""",Ivan Lendl,Ivan Lendl,finished,finished,1.0,1.0,1.0,1.0
+7c18240ce2aa47fcb1230cb11f9baa38,"""Finlandia""",Finlandia,Finlandia,finished,finished,1.0,1.0,1.0,1.0
+9e1e036499dc4e0eaa569116c6abb0ae,"""Little Women""",Little Women,Little Women,finished,finished,1.0,1.0,1.0,1.0
+b697e6d84196496d8edf419d5fa91c5c,"""Alaska""",Alaska,Alaska,finished,finished,1.0,1.0,1.0,1.0
+dffd548d127c4ccfa56872c36e79deea,"""Mrs. Butterworth""",Mrs. Butterworth's,Mrs. Butterworth,finished,finished,0.0,1.0,0.5,1.0
+c062204c69b94a59b3fb9026b1490616,"""Nogales""",Nogales,Nogales,finished,finished,1.0,1.0,1.0,1.0
+de4c635a93fd49b8829dcf3926407b70,"""Jimmy Stewart""",James Stewart,James Stewart,finished,finished,0.0,0.0,0.5,0.5
+1ab28a192f6e4b14a0071a741c9787e1,"""David""",David,David,finished,finished,1.0,1.0,1.0,1.0
+33117d6f9f5e412788148baef55f4b2c,"""beans""",Beans,beans,finished,finished,1.0,1.0,1.0,1.0
+2bda147f9ebb430a8968ff5aae713585,"""Selma""",Selma,Selma,finished,finished,1.0,1.0,1.0,1.0
+aa8d1a9cc4c24910a729bfddfa1ad4e8,"""the pale""",The pale,the pale,finished,finished,1.0,1.0,1.0,1.0
+bb2fcca2557e4a9fb39b466710542338,"""Nicky Hilton""",Nicky Hilton,Nicky Hilton,finished,finished,1.0,1.0,1.0,1.0
+7aced3eb67c74eba971a2530ce81074c,"""the Electoral College""",Electoral College,Electoral College,finished,finished,1.0,1.0,1.0,1.0
+abd5b61589364b07bbf7299c49e70e01,"""\""Who\\'s Afraid of the Big Bad Wolf?\""""","""Who's Afraid of the Big Bad Wolf?""",Who's Afraid of the Big Bad Wolf?,finished,finished,1.0,1.0,1.0,1.0
+a527ced709fa4ddc9bb894a740ce5b8c,"""honor""",Honor,honour,finished,finished,1.0,0.0,1.0,0.0
+d1c87cfadcda4e4a9c21fd93fd267ad8,"""the invisible man""",invisible man,the invisible man,finished,finished,1.0,1.0,1.0,1.0
+b4438c6b6b514aa4a1981bef9d30b21f,"""\""Jersey Joe\""""",Jersey Joe,Jersey Joe,finished,finished,1.0,1.0,1.0,1.0
+c5b64798f0314be897a348c3196681ac,"""David""",David,David,finished,finished,1.0,1.0,1.0,1.0
+4e3710d2b4264c54b0824f4961715d63,"""Prague""",Prague,Prague,finished,finished,1.0,1.0,1.0,1.0
+51b4c515dadb49da82b22445a69a9881,"""comet""",comet,a comet,finished,finished,1.0,1.0,1.0,1.0
+0d267ecf2d3e4b4499a98671ae7e31ff,"""Children of the Corn""",Children of the Corn,Children of the Corn,finished,finished,1.0,1.0,1.0,1.0
+e87835a26a3b447cac651c8c7e8d200b,"""South Africa""",South Africa,South Africa,finished,finished,1.0,1.0,1.0,1.0
+09d5b7de3015405c83f27e785ff9e834,"""pastrami""",Pastrami,Pastrami,finished,finished,1.0,1.0,1.0,1.0
+544b9ff112ec462cbc2365d4534f2877,"""chicken fingers""",Chicken fingers,Chicken fingers,finished,finished,1.0,1.0,1.0,1.0
+3d6d34d50ff1405d9bba93c58ec512cf,"""the Suez Canal""",Suez Canal,Suez Canal,finished,finished,1.0,1.0,1.0,1.0
+b499643a00034309bb74ace2469a01f1,"""Madame Bovary""",Madame Bovary,Madame Bovary,finished,finished,1.0,1.0,1.0,1.0
+c159edd48871458095d1bf54d7a50a5f,"""Angela\\'s Ashes""",Roman de Frank McCourt publié en 1996.,Frank McCourt,finished,finished,0.0,0.0,0.0,0.0
+2e3b022cdde049439745ddea0bb64dd7,"""Nanjing""",Nanjing,Nanjing,finished,finished,1.0,1.0,1.0,1.0
+006813695f494d42b49438c8a0057f73,"""Yorkshire""",Yorkshire,Yorkshire,finished,finished,1.0,1.0,1.0,1.0
+0243fa2f9e5d48dc8c38f1e9380133a3,"""beta""",beta,Beta,finished,finished,1.0,1.0,1.0,1.0
+582bb618fff14b64bff4fe76b41792ad,"""Croatia""",Croatia,Croatia,finished,finished,1.0,1.0,1.0,1.0
+6fc666ad7c134435b8cf8fcf23f8125d,"""Babe Ruth""",Babe Ruth,Babe Ruth,finished,finished,1.0,1.0,1.0,1.0
+f9d719fa59344d7c9b23952b5fb79989,"""Joe Hill""",Joe Hill,Joe Hill,finished,finished,1.0,1.0,1.0,1.0
+0216d5236aeb43348eaea3284961edad,"""Tom Watson""",Tom Watson,Tom Watson,finished,finished,1.0,1.0,1.0,1.0
+c80e413e7a1e4a02ba048cc5246859be,"""Napoleon""",Napoleon,Napoleon,finished,finished,1.0,1.0,1.0,1.0
+2f6470a0709b4fd3a29d7a0a2fd89df2,"""Red Grange""","Red Grange (Harold ""Red"" Grange)",Red Grange,finished,finished,0.0,1.0,0.5714285714285715,1.0
+380905a8be3140d2b8c53427fe923b73,"""Jack Johnson""",Jack Johnson,Jack Johnson,finished,finished,1.0,1.0,1.0,1.0
+08643f2395a442048048c00a198ffff0,"""a modem""",Modem,modem,finished,finished,1.0,1.0,1.0,1.0
+accb1302cc6143be94dd440f7f50c447,"""Italy""",Italy,Italy,finished,finished,1.0,1.0,1.0,1.0
+fd1a54d5872246719e28ba3fab3f5e8d,"""Poseidon""",Poseidon,Poseidon,finished,finished,1.0,1.0,1.0,1.0
+6241e981d4b74d3282534ad5972ff3f2,"""Benjamin Franklin""",Benjamin Franklin,Benjamin Franklin,finished,finished,1.0,1.0,1.0,1.0
+44cd5c74a4544123a44553bd5faaa219,"""Brazil""",Brazil,Brazil,finished,finished,1.0,1.0,1.0,1.0
+bd838a345ffe4ec9bf4cf009757b432d,"""Florida""","Lake Kissimmee is a 34,948-acre lake in Osceola County, Florida, located about 40 miles south of Orlando and 15–18 miles east of Lake Wales.",Osceola County,finished,finished,0.0,0.0,0.08333333333333333,0.0
+80f499f83e834cc99e31318d31aeaf47,"""Phil Mickelson""",Phil Mickelson,Phil Mickelson,finished,finished,1.0,1.0,1.0,1.0
+783e9f82f9c044999fbe04aaed091a80,"""Bowling for Columbine""",Bowling for Columbine,Bowling for Columbine,finished,finished,1.0,1.0,1.0,1.0
+0386b55f3628443484d92c35fb0bb200,"""Andrew Jackson""",Andrew Jackson,Andrew Jackson,finished,finished,1.0,1.0,1.0,1.0
+a0d9bcba64594ec0aaeb2d1cad1a8b59,"""Jacques-Louis David""",Jacques-Louis David,Jacques-Louis David,finished,finished,1.0,1.0,1.0,1.0
+08377c21beb04e8db4a3a2687dba7c33,"""Connecticut""",American politician and former U.S. Senator from Connecticut.,Connecticut,finished,finished,0.0,1.0,0.2222222222222222,1.0
+5209bb3e28874b6ab044698bd558f856,"""Uncle Tom\\'s Cabin""",Uncle Tom's Cabin,Uncle Tom's Cabin,finished,finished,1.0,1.0,1.0,1.0
+aa9245ea61e4446b99430c7e496e3399,"""sin""",sin,sin,finished,finished,1.0,1.0,1.0,1.0
+8d044f3c240847d2862aa7e0d73bd9d8,"""George Orwell""",George Orwell,George Orwell,finished,finished,1.0,1.0,1.0,1.0
+261ebacdeb1f4a0ea230f79306532be5,"""Khartoum""",Khartoum,Khartoum,finished,finished,1.0,1.0,1.0,1.0
+dc0df73d4fe3474cabd047b65c70d911,"""Dr. Strangelove""",Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb,Dr. Strangelove,finished,finished,0.0,1.0,0.2857142857142857,1.0
+aaef2082129b4cfdb2de0a281b65cab6,"""the razorbacks""",Razorback,Razorback,finished,finished,0.0,0.0,0.0,0.0
+40a28f0fbc384b16a4ccccecfa95d96a,"""polonaise""",polonaise,Polonaise,finished,finished,1.0,1.0,1.0,1.0
+eefa42e9cdbd4619998877f1e95eaf52,"""Sleeping Beauty""",Sleeping Beauty,Sleeping Beauty,finished,finished,1.0,1.0,1.0,1.0
+f75e4eca3b14449d915798485cc51c27,"""pens""",Yes,Cross,finished,finished,0.0,0.0,0.0,0.0
+516e0f59e3e7453789815ebab013bda0,"""the jet stream""",Jet streams,jet stream,finished,finished,0.0,1.0,0.5,1.0
+8e8417cee60d41d8bcaab2602c2f6808,"""Michael Jordan""",Michael Jordan,Michael Jordan,finished,finished,1.0,1.0,1.0,1.0
+7ef04f636a284045bab6c1dca3490190,"""\""Just say no\""""",Just say no,Just say no,finished,finished,1.0,1.0,1.0,1.0
+880c4f8fe57445e281ddf15e3e47eecd,"""Arkansas""",Arkansas,Arkansas,finished,finished,1.0,1.0,1.0,1.0
+08fee65a34684a9ba7f3dced52e2eb69,"""the Minotaur""",The Minotaur,Minotaur,finished,finished,1.0,1.0,1.0,1.0
+03a705842c15434283a4f09f89b8b553,"""Mexico""",Mexico,Mexico,finished,finished,1.0,1.0,1.0,1.0
+e1db7097131542138d2b1cfc8012b5d6,"""couscous""",Couscous,Couscous,finished,finished,1.0,1.0,1.0,1.0
+fb48d375beb54c80b9b658c3346aa0f2,"""Arkansas""",Arkansas,Arkansas,finished,finished,1.0,1.0,1.0,1.0
+4605bddda00745439785211508887438,"""napalm""",Napalm,napalm,finished,finished,1.0,1.0,1.0,1.0
+499b5f088dc14ce0a44b5f4cf7118616,"""Einstein""",Albert Einstein,Albert Einstein,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+2df9c599b03a4600b53839efc8c12d03,"""Goodyear""",Goodyear,Goodyear,finished,finished,1.0,1.0,1.0,1.0
+75b567bfce2d483788f98ecb7472f47c,"""Lincoln""",Abraham Lincoln,Abraham Lincoln,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+cadd1ac7cfc54dea8196aa83ea5f8a77,"""Joel Osteen""",Joel Osteen,Joel Osteen,finished,finished,1.0,1.0,1.0,1.0
+657fd4c82a584e22a4c49c116950f142,"""The Who""",The Who,The Who,finished,finished,1.0,1.0,1.0,1.0
+d80763e7226c4f61b747fc7525be2b9e,"""Austria""",Austria,Austria,finished,finished,1.0,1.0,1.0,1.0
+77016bca1c08489493e49af1086680ce,"""igneous""",Igneous rocks,Igneous rocks,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+e3c89907500f4580ad3bcdb4062661e5,"""theism""",Theism,theism,finished,finished,1.0,1.0,1.0,1.0
+3b3c239c629640659e5eba502a817ced,"""Jim Carrey""",Jim Carrey,Jim Carrey,finished,finished,1.0,1.0,1.0,1.0
+cf035f229bb84ceb8116c26d87a74299,"""Tom Osborne""",Tom Osborne,Tom Osborne,finished,finished,1.0,1.0,1.0,1.0
+34b216269ba5429d9077cdc2c7bc3e42,"""Aloha""",Aloha Airlines,Aloha Airlines,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+3d4b3af120844bce9ee06e3fb56f2936,"""the Sons of Liberty""",Sons of Liberty,Sons of Liberty,finished,finished,1.0,1.0,1.0,1.0
+d8833f3292614d978fbe84fe928fb138,"""The Hitchhiker\\'s Guide to the Galaxy""",The Hitchhiker's Guide to the Galaxy,The Hitchhiker's Guide to the Galaxy,finished,finished,1.0,1.0,1.0,1.0
+3cb9999f46154bb3b7d14b2ef04a3c7c,"""Mickey Mouse""",Mickey Mouse,Mickey Mouse,finished,finished,1.0,1.0,1.0,1.0
+10fac0924a5e425098992c27d77da289,"""Jet""",Jet,Jet,finished,finished,1.0,1.0,1.0,1.0
+a75a2c793da5402a830e01de7f154cc0,"""(Billy) Idol""",Billy Idol,Billy Idol,finished,finished,1.0,1.0,1.0,1.0
+7a83242b5eda4715a578d5eece0712f4,"""marriage""",getting married,Getting married,finished,finished,0.0,0.0,0.0,0.0
+5a1069e2fa7342ee80f28ed79ef14db9,"""Oscar De La Hoya""",Oscar De La Hoya,Oscar De La Hoya,finished,finished,1.0,1.0,1.0,1.0
+add3ee5dd6454eac91efd33a2a7a6163,"""PDA""",PDA,PDA,finished,finished,1.0,1.0,1.0,1.0
+b4efa8b30168419cbb1e460342c15062,"""evaporation""",Evaporation,Evaporation,finished,finished,1.0,1.0,1.0,1.0
+9389182a49724617b0f54be9213d0d33,"""Florida""",Florida counties.,Florida,finished,finished,0.0,1.0,0.6666666666666666,1.0
+3574ef631b4d48f7b4b2e304c1b7eba0,"""Scooter""",Scooter,Scooter,finished,finished,1.0,1.0,1.0,1.0
+e16de15cd4ce49ae9730d2d50de9f032,"""Burt\\'s Bees""",Burt's Bees,Burt's Bees,finished,finished,1.0,1.0,1.0,1.0
+69cff2fb4eaf4a54af589d23d5f5e851,"""a troubadour""",troubadour,troubadour,finished,finished,1.0,1.0,1.0,1.0
+83702fa1bfbb40eb894c505260c23913,"""Queen Elizabeth""",Queen Elizabeth II,Queen Elizabeth II,finished,finished,0.0,0.0,0.8,0.8
+16e363a272714ecda717539f291b3f89,"""Live Free or Die Hard""",Live Free or Die Hard,Live Free or Die Hard,finished,finished,1.0,1.0,1.0,1.0
+5537ded80516456582e58a06027b8c06,"""the land of the free""",the free,the free,finished,finished,0.0,0.0,0.5,0.5
+ee8fc58e226e4b9582ed9dc2efaf0e6f,"""fluoridation""",Water fluoridation,water fluoridation,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+c385599879b24c4abc06e53f98863d46,"""Celine Dion""",Celine Dion,Celine Dion,finished,finished,1.0,1.0,1.0,1.0
+1a09c7ead5c7476cb80618a977ff8af3,"""M&M\\'s""",M&M's,M&M's,finished,finished,1.0,1.0,1.0,1.0
+0a7cadd8c4a841f78f7679a402758028,"""yellow""",Yellow,Yellow,finished,finished,1.0,1.0,1.0,1.0
+93c5050360564c80b95382bc27b44fb7,"""Nureyev""",Rudolf Nureyev,Nureyev,finished,finished,0.0,1.0,0.6666666666666666,1.0
+be19f4b2a21e492ea622d31c29dd01b4,"""Q""",Q,Q,finished,finished,1.0,1.0,1.0,1.0
+efcc54e12eff4d83866b4f58c4b3df01,"""Fisherman\\'s Wharf""",Fisherman's Wharf,Fisherman's Wharf,finished,finished,1.0,1.0,1.0,1.0
+593939638fbd4669a2f3343f64f1d414,"""Vladivostok""",Vladivostok,Vladivostok,finished,finished,1.0,1.0,1.0,1.0
+ea5e1d5687754fc19c7e5e5ec47b0ccb,"""Reese\\'s""",Reese's Peanut Butter Cups,Reese's Peanut Butter Cups,finished,finished,0.0,0.0,0.4,0.4
+5b85faf48c5445c795c56d06d072af59,"""Iwo Jima""",Iwo Jima,Iwo Jima,finished,finished,1.0,1.0,1.0,1.0
+6f5857f474d0451ea88b8d42218c5dc6,"""Erin Go Bragh""",Erin Go Bragh,Erin Go Bragh,finished,finished,1.0,1.0,1.0,1.0
+b996c427bf094af6b711b737166e5f1c,"""16th-century""",16th century,16th century,finished,finished,1.0,1.0,1.0,1.0
+07073c3e2de94a46a90014f980f6eb36,"""Dick Durbin""",Dick Durbin,Richard Durbin,finished,finished,1.0,0.0,1.0,0.5
+9625aec4508b46ab8ff49452ae77c08b,"""court""",Court.,court,finished,finished,1.0,1.0,1.0,1.0
+58b3523293b74ff7ad6037676aac940d,"""Little Debbie""",Little Debbie,Little Debbie,finished,finished,1.0,1.0,1.0,1.0
+5793a138742e4e3d941703f36e07f1d6,"""watercolor""",Watercolor,Watercolor,finished,finished,1.0,1.0,1.0,1.0
+de3a5ad837144fae8529d750fcfe6222,"""the sediment""",Sediment,Sediment,finished,finished,1.0,1.0,1.0,1.0
+a7bfde0104e34c739685cddd40203085,"""Brooklyn""",Brooklyn,Brooklyn,finished,finished,1.0,1.0,1.0,1.0
+8344454542d649fd92f5bf7b046d4bed,"""Penn Station""",New York - Penn Station (NYP),Penn Station,finished,finished,0.0,1.0,0.5714285714285715,1.0
+8ae40dd4f4db4ba3965d510abfdbfc53,"""North Carolina""",North Carolina,North Carolina,finished,finished,1.0,1.0,1.0,1.0
+ed3126e9b1c046a88952849cde65acd2,"""a leather feather""",a leather feather,a leather feather,finished,finished,1.0,1.0,1.0,1.0
+e5edc854c80343fe8fd747bb7bf31459,"""promissory""",Promissory note,promissory note,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+498bd3a0553c45aeaea0c0aff24ffdb6,"""Michael Keaton""","A 1989 superhero film directed by Tim Burton, starring Michael Keaton as Batman and Jack Nicholson as the Joker.",Tim Burton,finished,finished,0.0,0.0,0.21052631578947367,0.0
+a108b3fd35a4478490e0d86e65fda61f,"""Gatsby""",GATSBY,Gatsby,finished,finished,1.0,1.0,1.0,1.0
+02d096413cc84c3d8ea71b4740db3c83,"""Sufism""",Sufism,Sufism,finished,finished,1.0,1.0,1.0,1.0
+39141e8c2276481cbec3aeec69da73a8,"""Bones""",Bones,Bones,finished,finished,1.0,1.0,1.0,1.0
+8a48a3e0e4d543fc90493445b3b50f5d,"""A Clockwork Orange""",A Clockwork Orange,A Clockwork Orange,finished,finished,1.0,1.0,1.0,1.0
+0bf04282c3634ddc9384ae26caadd1c2,"""a spoonful""",A spoonful,spoonful,finished,finished,1.0,1.0,1.0,1.0
+733fbb4bb2984bb4bf23569014902ff5,"""1997""",1997,1997,finished,finished,1.0,1.0,1.0,1.0
+1a4e5bce9bc940918d6635479d944d6d,"""Michael Dell""",Michael Dell,Michael Dell,finished,finished,1.0,1.0,1.0,1.0
+dcd3432c065c42e6aa0889fe00ce1551,"""Agamemnon""",Agamemnon,Agamemnon,finished,finished,1.0,1.0,1.0,1.0
+47e0542a24954b67a5d540dc56c1a80d,"""Rudyard Kipling""",Rudyard Kipling,Rudyard Kipling,finished,finished,1.0,1.0,1.0,1.0
+2c76127f56ba4abda3e8ed09146c562d,"""carrots""",Carrots,carrots,finished,finished,1.0,1.0,1.0,1.0
+7e92bf0c1c234cc1a162cefe55db3214,"""iambs""",Iambs (iambic feet),iambic feet,finished,finished,0.0,0.0,0.5,0.0
+92d41fc8d92e4b82becee6215520d0f6,"""the oboe""",Oboe,oboe,finished,finished,1.0,1.0,1.0,1.0
+7be287bcb7614aa3afd1932f498cc515,"""Dale Earnhardt, Jr.""",Dale Earnhardt Jr.,Dale Earnhardt Jr.,finished,finished,1.0,1.0,1.0,1.0
+7757b82b4af04f12a3bea7655cae0e08,"""Vanessa Hudgens""",Vanessa Hudgens,Vanessa Hudgens,finished,finished,1.0,1.0,1.0,1.0
+e868ea3304524abea45d9388a323e271,"""the Nile""",Nile,Nile,finished,finished,1.0,1.0,1.0,1.0
+dad2a74bc1cf453d9348235f071dfcea,"""Julius Caesar""",Julius Caesar,Julius Caesar,finished,finished,1.0,1.0,1.0,1.0
+8067a787d569470497c0cb93213f7e07,"""xenon""",Xenon,Xenon,finished,finished,1.0,1.0,1.0,1.0
+99db7766aa6948779a5a50e754ff2eed,"""Clive Barker""",Clive Barker,Clive Barker,finished,finished,1.0,1.0,1.0,1.0
+0de314b893ea4c7fb7294a61e3792bfb,"""shifts""",12-hour shifts,12-hour shifts,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+fc7bfd85bc0249a8a29c7eb20eb47a7e,"""Angels in America""",Angels in America,Angels in America,finished,finished,1.0,1.0,1.0,1.0
+2ecea5a42dd645ac8d8c0fb34920a228,"""a caldera""",Caldera,caldera,finished,finished,1.0,1.0,1.0,1.0
+51c5b397478b4a7bb93232e7229a6a2d,"""Venezuela""",Venezuela,Venezuela,finished,finished,1.0,1.0,1.0,1.0
+c64e0787ce4545a487b103d88994afcd,"""a mazurka""",Mazurka (Mazur),Mazurka,finished,finished,0.0,1.0,0.6666666666666666,1.0
+12692cce4f124fc2893d040bc78b1f90,"""the bus""",bus,bus,finished,finished,1.0,1.0,1.0,1.0
+81218a8ee1b04b7d879451985591f6fa,"""the heptathlon""",Heptathlon,Heptathlon,finished,finished,1.0,1.0,1.0,1.0
+5af67300706c4224b111bdf8d3e498a2,"""wheels""",Wagon wheels,wagon wheels,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+ed76c0f0111f48a8bddb25039aeb2ad0,"""John Hersey""",John Hersey,John Hersey,finished,finished,1.0,1.0,1.0,1.0
+388c301702f24869a50b31b3ea08ab43,"""the Vikings""",the Vikings,the Vikings,finished,finished,1.0,1.0,1.0,1.0
+2d15ac4929a24bb9b28be47692ec0e31,"""the Mediterranean""",The Mediterranean Sea,Mediterranean Sea,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+39fe55b58957486a9531449bc6a9b0e1,"""the summer session""",the summer session,the summer session,finished,finished,1.0,1.0,1.0,1.0
+00f461b32ab54882926444d14c1c3477,"""Alexander Hamilton""",Alexander Hamilton,Alexander Hamilton,finished,finished,1.0,1.0,1.0,1.0
+b2991dbc96b84be3a3ea13a765cb0289,"""Florida""",Florida,Florida,finished,finished,1.0,1.0,1.0,1.0
+d6254d08e9c44ac1b94eea9be6624549,"""mustard""",mustard,mustard,finished,finished,1.0,1.0,1.0,1.0
+cc319ec003cb41978b34756b47b9780c,"""Hemingway""",Ernest Hemingway,Ernest Hemingway,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+189bf0be3c9a44a39b977d5ee38375f6,"""Joe""",Joe,Joe,finished,finished,1.0,1.0,1.0,1.0
+4aad23ed67974f77ab643d52928b9f13,"""the blind spot""",Blind spot,optic disc,finished,finished,1.0,0.0,1.0,0.0
+eecd780002e6481f93ab585f1ba80ab0,"""Gulliver\\'s Travels""",Gulliver's Travels,Gulliver's Travels,finished,finished,1.0,1.0,1.0,1.0
+bfea66d8093f4a459969f18b65950d5d,"""the coelacanth""",Coelacanth,coelacanth,finished,finished,1.0,1.0,1.0,1.0
+b1fe478a71c943459dcf55119d6f3f4f,"""(Jennifer) Lopez""",Jennifer Lopez,Jennifer Lopez,finished,finished,1.0,1.0,1.0,1.0
+fc3c34a4613c447dbfed5a531b4a9a15,"""Paula Abdul""",Paula Abdul,Paula Abdul,finished,finished,1.0,1.0,1.0,1.0
+b54c0dde6f774d9cab7c34d47de7ac72,"""a dive bomber""",Dive bomber,dive bomber,finished,finished,1.0,1.0,1.0,1.0
+1b7abcf2e5334a52a8a6d454a9a7a422,"""NATO""",NATO,NATO,finished,finished,1.0,1.0,1.0,1.0
+0ad6f400c12a4da8815213c1d6aada43,"""loco""",loco,loco,finished,finished,1.0,1.0,1.0,1.0
+f3ead327d41f4d099f6bafde717d9479,"""H.G. Wells""",H.G. Wells,H.G. Wells,finished,finished,1.0,1.0,1.0,1.0
+e6cd02bc72bc4037b1c570a31c78e8d2,"""prego""",Prego,Prego,finished,finished,1.0,1.0,1.0,1.0
+96b182a87733443d900d573aa6a3daf5,"""Doc""",Doc,Doc,finished,finished,1.0,1.0,1.0,1.0
+e5cf2bd4da0e4489ba32862bcaa41647,"""Henry V""",True,Henry V,finished,finished,0.0,1.0,0.0,1.0
+3024323c6138434d9f1662affb9fb692,"""Rihanna""",Rihanna,Rihanna,finished,finished,1.0,1.0,1.0,1.0
+e060051f352a46f78ec5444cab1399c7,"""the Buffalo Bills""",Buffalo Bills,Buffalo Bills,finished,finished,1.0,1.0,1.0,1.0
+f6180c31a1184b27a7ec86663ff0eaca,"""The Secret Garden""",The Secret Garden,The Secret Garden,finished,finished,1.0,1.0,1.0,1.0
+c97304fe63f44271b054e480071f3bda,"""tornado""",tornado,tornado,finished,finished,1.0,1.0,1.0,1.0
+021a105fde2040e6878900394ac1fe98,"""Salvatore Ferragamo""",Salvatore Ferragamo,Salvatore Ferragamo,finished,finished,1.0,1.0,1.0,1.0
+bd104461e8ca4017aaacd928f8ae5784,"""ginger""","Ginger (pickled ginger, called gari)",ginger,finished,finished,0.0,1.0,0.33333333333333337,1.0
+1f84b610c0904423ad9a44d86c9adf5b,"""Tommy Franks""",Tommy Franks,Tommy Franks,finished,finished,1.0,1.0,1.0,1.0
+cff206087af64daeb2f1d2775346610b,"""Indiana""",Indiana counties.,Indiana,finished,finished,0.0,1.0,0.6666666666666666,1.0
+c03c5949ce35458d871675a72436337f,"""a linchpin""",linchpin,linchpin,finished,finished,1.0,1.0,1.0,1.0
+a5c6e8c4c78449cea0fd71f7d908d88a,"""Graceland""",Graceland,Graceland,finished,finished,1.0,1.0,1.0,1.0
+21cdade1fc4648a6955eb16c68b3c188,"""(Sir Isaac) Newton""",Isaac Newton,Isaac Newton,finished,finished,0.0,0.0,0.8,0.8
+2fd1897c4e914a4b8c1e759123ebc1c3,"""GoldenEye""",GoldenEye,Goldeneye,finished,finished,1.0,1.0,1.0,1.0
+2d937a8e07f1428f9bad2047ae13753c,"""Stalingrad""",Stalingrad,Stalingrad,finished,finished,1.0,1.0,1.0,1.0
+3fd44eac02b5430ab355a5aa5e2b7f66,"""the corner office""",The Corner Office,the Corner Office,finished,finished,1.0,1.0,1.0,1.0
+0ea40b8199ce485e97511ed1a0f4b329,"""canals""",Canals (artificial water canals built by Martians).,canals,finished,finished,0.0,1.0,0.25,1.0
+649fdc580ea74665a873f6a0e29907a5,"""a greyhound""",greyhound,Greyhound,finished,finished,1.0,1.0,1.0,1.0
+d33d8073aa6149dd9e1933b0fbdc9c0c,"""Arthur Conan Doyle""",Arthur Conan Doyle,Arthur Conan Doyle,finished,finished,1.0,1.0,1.0,1.0
+aa7ef353a8c04cb18d00dd74ea5dc4f4,"""Horton Hears a Who!""",Horton Hears a Who!,Horton Hears a Who!,finished,finished,1.0,1.0,1.0,1.0
+d30dbfb5a24b4a848df9d79b5775f6ef,"""a topaz""",Topaz,topaz,finished,finished,1.0,1.0,1.0,1.0
+da2feb04ad764ada9fb88189716f1142,"""Heidi""",Heidi,Heidi,finished,finished,1.0,1.0,1.0,1.0
+e921b02da68c4f3d86a7834ef62a909d,"""White Christmas""",All three are films released in 1954.,movies,finished,finished,0.0,0.0,0.0,0.0
+4c2c3e9c647a45dda53707d3dc4513a5,"""Breckinridge""",Breckenridge,Breckenridge,finished,finished,0.0,0.0,0.0,0.0
+6996fbc6972043ce9f7e0cf90a55b30c,"""Stomp the Yard""",Stomp the Yard,Stomp the Yard,finished,finished,1.0,1.0,1.0,1.0
+773848a7e56340a29b03a44794814582,"""Qatar""","Doha is the capital and most populous city of Qatar, located on the coast of the Persian Gulf.",Qatar,finished,finished,0.0,1.0,0.125,1.0
+74c896e331cf459a91549812a39057cd,"""the Ohio""",the Ohio River,the Ohio,finished,finished,0.0,1.0,0.6666666666666666,1.0
+6b8be20329f043138222e3bef58cd516,"""(Victor) Hugo""",Victor Hugo,Victor Hugo,finished,finished,1.0,1.0,1.0,1.0
+8cec7fcf760149dfb56506296bb3dbbb,"""catcher""",catcher,catcher,finished,finished,1.0,1.0,1.0,1.0
+2a24afd4f4df46ce9481cbc8be5b55c8,"""Romulus & Remus""",Romulus and Remus,Romulus and Remus,finished,finished,0.0,0.0,0.8,0.8
+3bc29910565f4107b297185e7313c776,"""Louisiana""",Louisiana,Louisiana,finished,finished,1.0,1.0,1.0,1.0
+60f4ea1efa2c412a86b4739a9b046439,"""Herman Melville""",Herman Melville,Herman Melville,finished,finished,1.0,1.0,1.0,1.0
+aa09b8584da945bb8e799bfd52f71c8f,"""Flatliners""",Flatliners,Flatliners,finished,finished,1.0,1.0,1.0,1.0
+a42d556eb5d04305a6e25c875f8f0746,"""Idi Amin""",Idi Amin,Idi Amin,finished,finished,1.0,1.0,1.0,1.0
+0cbceee80bee448c8c5d40f39d12d434,"""Catherine""",Catherine de' Medici,Catherine de' Medici,finished,finished,0.0,0.0,0.5,0.5
+46b71fad5fff409cb48a1d3493bbb2e5,"""Spring""",Spring,Spring,finished,finished,1.0,1.0,1.0,1.0
+e10044cc3cae45608f6bdaf58005a26f,"""Agra""",Agra,Agra,finished,finished,1.0,1.0,1.0,1.0
+ba3d5db296944affafda05f4d628c2de,"""pond""",pond,pond,finished,finished,1.0,1.0,1.0,1.0
+c1e6d716026c4caca73f73628224a1ed,"""pitch""",PITCH,pitch,finished,finished,1.0,1.0,1.0,1.0
+ff142be20d6e44aabecda244878d8406,"""Borgia""",Lucrezia Borgia,Borgia,finished,finished,0.0,1.0,0.6666666666666666,1.0
+bc0f71c7bb4c42a885543244834267fc,"""chastity""",Chastity,chastity,finished,finished,1.0,1.0,1.0,1.0
+6e33a868ec674f59bc2e0a7fa4686f4d,"""event horizon""",Event horizon,Event horizon,finished,finished,1.0,1.0,1.0,1.0
+e006f1243e0e486e8bab439af1d1ffd0,"""7 & 11""",7 and 11,7 and 11,finished,finished,0.0,0.0,0.8,0.8
+dca3a642962b4b119f7aa555978dd41e,"""Warsaw""",Warsaw,Warsaw,finished,finished,1.0,1.0,1.0,1.0
+42b2368515d94cd4bb295e157ed3cbe6,"""Panama""",Panama,Panama,finished,finished,1.0,1.0,1.0,1.0
+9baa6e227fc843eaa3aae5983ef9424a,"""a wheelbarrow""",A wheelbarrow,wheelbarrow,finished,finished,1.0,1.0,1.0,1.0
+a31a3da4cb2f47ab81fd576ce09e56df,"""Medium""",Medium,Medium,finished,finished,1.0,1.0,1.0,1.0
+1e08a80bcb084a368495349bfa155a1f,"""bully pulpit""",Bully Pulpit,bully pulpit,finished,finished,1.0,1.0,1.0,1.0
+5d88f1541dc44bfbb209a1b38da8f0c5,"""creation""",creation,creation,finished,finished,1.0,1.0,1.0,1.0
+a7ecab7cd26b40a6a22254f18e9823c6,"""Escalade""",Escalade,Escalade,finished,finished,1.0,1.0,1.0,1.0
+99c441596f1c40f398aff4e4451f428c,"""fog""",Fog,Fog,finished,finished,1.0,1.0,1.0,1.0
+a51fee9868e746cfb2897294ccbf495b,"""Jimmy Swaggart""",Jimmy Swaggart,Jimmy Swaggart,finished,finished,1.0,1.0,1.0,1.0
+50072c2bf1e7453e8f3e59fd50e111cd,"""Anger""",Anger,Anger,finished,finished,1.0,1.0,1.0,1.0
+e72957b206954563842b8921bb239815,"""Frederic Chopin""",Frederic Chopin,Frédéric Chopin,finished,finished,1.0,0.0,1.0,0.5
+04ee94462305470b987a01d6405e159a,"""Netflix""",Netflix,Netflix,finished,finished,1.0,1.0,1.0,1.0
+f024764eb6f44680852b89af7af64fbc,"""creative writing""",Creative Writing (Creative Writing Program),Creative Writing,finished,finished,0.0,1.0,0.5714285714285715,1.0
+7c69a9380360429d91cf729201196b16,"""a beagle""",Beagle,Beagle,finished,finished,1.0,1.0,1.0,1.0
+0c78abcb5f1a4f029167c156ac56b000,"""the Battle of New Orleans""",The Battle of New Orleans,Battle of New Orleans,finished,finished,1.0,1.0,1.0,1.0
+28d672eed13241539963231a521343ee,"""usury""",Usury,Usury,finished,finished,1.0,1.0,1.0,1.0
+22f37f01b06d4413af29385abf55c2d3,"""30""",30 years old,30,finished,finished,0.0,1.0,0.5,1.0
+2d9a9efee3994717a1db7cf02e0f206d,"""a submarine""",Submarine,submarine,finished,finished,1.0,1.0,1.0,1.0
+082c96ededd84d999e08d466a87df5b2,"""Libya""",Libya,Libya,finished,finished,1.0,1.0,1.0,1.0
+8af2fd8cef0c454594e4f3a568588472,"""\""The Last Supper\""""",The Last Supper,The Last Supper,finished,finished,1.0,1.0,1.0,1.0
+77ceea3648764a8e8561ffe69f284d9c,"""Darwin""",Charles Darwin,Charles Darwin,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+9935b8b08a8e4f0d9ed37a330a6cf0fe,"""dock""",dock,dock,finished,finished,1.0,1.0,1.0,1.0
+5bd2e40ac0a54e1db12f2b37f3a86f6c,"""Rwanda-Burundi""",Rwanda & Burundi,Rwanda & Burundi,finished,finished,1.0,1.0,1.0,1.0
+3d01568b168a4f0bb899e8b1c2239944,"""ponies""",Ponies,Ponies,finished,finished,1.0,1.0,1.0,1.0
+777b196aeee34792b1c79c7d022ca04a,"""the cyclotron""",The cyclotron.,cyclotron,finished,finished,1.0,1.0,1.0,1.0
+0cdf302a5c1c4fe0ac9a499470765108,"""Columbia""",Columbia,Columbia,finished,finished,1.0,1.0,1.0,1.0
+6d183cab5f4946cc9693d1bcd464e438,"""a gigabyte""",Gigabyte (GB),gigabyte,finished,finished,0.0,1.0,0.6666666666666666,1.0
+89678f2e2fcf40eb8bf563880994add2,"""Winesburg, Ohio""","Winesburg, Ohio","Winesburg, Ohio",finished,finished,1.0,1.0,1.0,1.0
+37439a48301c4dcfa3a3ac80902c2e0b,"""Aesop""",Aesop,Aesop,finished,finished,1.0,1.0,1.0,1.0
+a790b16e8712437f9650d552069ab5f1,"""salt""",Salt.,salt,finished,finished,1.0,1.0,1.0,1.0
+ec656d35dc024d7197c664055e09a4cd,"""Roentgen""",Wilhelm Conrad Roentgen,Wilhelm Roentgen,finished,finished,0.0,0.0,0.5,0.6666666666666666
+1db6e2ef1adf4e80bde4fb0a65b4a94c,"""rose hips""",Rose hips,Rose Hips,finished,finished,1.0,1.0,1.0,1.0
+77baa9369e3142f1a7884b426030dac0,"""The Big Sleep""",The Big Sleep,The Big Sleep,finished,finished,1.0,1.0,1.0,1.0
+dedfb6cc72b44d74a2adebfd9bbbdf8e,"""dogs""",dog breeds,dog breeds,finished,finished,0.0,0.0,0.0,0.0
+9eebfa2316cd49b4912c6764cb21480c,"""Mork & Mindy""",Mork & Mindy,Mork & Mindy,finished,finished,1.0,1.0,1.0,1.0
+bae1026af636465dbd8a49333f7c831e,"""Super Size Me""",Super Size Me,Super Size Me,finished,finished,1.0,1.0,1.0,1.0
+e225921262ae4952ae88f316adab17fa,"""the Londonderry Air""",Londonderry Air,Londonderry Air,finished,finished,1.0,1.0,1.0,1.0
+d8b9fa1f5cc2426ba74f3bb683d39064,"""director""",director,director,finished,finished,1.0,1.0,1.0,1.0
+aa26349086304052b78f80d0bbbffd62,"""poll tax""",Poll tax,Poll tax,finished,finished,1.0,1.0,1.0,1.0
+957b0fabbe7d4d9184a31d3290258509,"""a heart""",Heart,heart,finished,finished,1.0,1.0,1.0,1.0
+d392df665e19486594f19652ce61a96b,"""The Last of the Mohicans""",Fort William Henry,The Last of the Mohicans,finished,finished,0.0,1.0,0.0,1.0
+2851247e64e74637a690f20a08320673,"""Hugo Chavez""",Hugo Chávez,Hugo Chávez,finished,finished,0.0,0.0,0.5,0.5
+3d16c7b6ee554932b816c4da93f147f1,"""endive""",chicory,endive,finished,finished,0.0,1.0,0.0,1.0
+b28bf588eed3447a8c9fdbf57dc2fc1f,"""the Gulf of Mexico""",Gulf of Mexico,Gulf of Mexico,finished,finished,1.0,1.0,1.0,1.0
+525ee6acd75f4ec98aa1c86eb067e49a,"""white""",White,White,finished,finished,1.0,1.0,1.0,1.0
+1212b9bbd8db40c989cf30794f638eb5,"""one billion""",One billion,one billion,finished,finished,1.0,1.0,1.0,1.0
+de04866a2e794178848e01632d12cc37,"""the Mason-Dixon line""",Mason-Dixon line,Mason-Dixon Line,finished,finished,1.0,1.0,1.0,1.0
+17aa9d61ef8545cab274be711be12545,"""Denmark""",Denmark,Denmark,finished,finished,1.0,1.0,1.0,1.0
+e3bc691db8544b53a257438e4076e07e,"""Ken Russell""",Ken Russell,Ken Russell,finished,finished,1.0,1.0,1.0,1.0
+d29e5124d9364d75a7a6a2973a616c64,"""Leonardo da Vinci""",**Leonardo da Vinci**,Leonardo da Vinci,finished,finished,1.0,1.0,1.0,1.0
+b5ed7cbabbbb41949a7965e7a98ccb49,"""a cereal""",**Cereal**,cereal,finished,finished,1.0,1.0,1.0,1.0
+902560ea8e394e839d513351a0f9c2a9,"""the Crimean War""",Crimean War,Crimean War,finished,finished,1.0,1.0,1.0,1.0
+82bfb03bcd88419eb44235581240a2d5,"""Champion""",Champion,Champion,finished,finished,1.0,1.0,1.0,1.0
+de54b5a1fe6947f993d16474d14f760f,"""Herbert Hoover""",Herbert Hoover,Herbert Hoover,finished,finished,1.0,1.0,1.0,1.0
+7d249f57e28e4719aaec9d223e0a27e7,"""cornrows""",cornrows,cornrows,finished,finished,1.0,1.0,1.0,1.0
+6ac7b9d73a2b4571b40b686fd84cda6c,"""Ford""",Ford,Ford,finished,finished,1.0,1.0,1.0,1.0
+1e94d21f33884494ab304834955241ea,"""the Hudson""",Hudson River,The Hudson River,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+3fbfce94e0414297a6571b37a4c373a9,"""Brazil""",**Brazil**,Brazil,finished,finished,1.0,1.0,1.0,1.0
+9ab071c46a9f49729bc7ced0b8143032,"""Quiz Show""",Quiz Show,Quiz Show,finished,finished,1.0,1.0,1.0,1.0
+6371fd8b1f9a400784076e296ec015ba,"""Who\\'s Afraid of Virginia Woolf?""",Who's Afraid of Virginia Woolf?,Who's Afraid of Virginia Woolf?,finished,finished,1.0,1.0,1.0,1.0
+238903697f2f4d3da4cf0e24a2761db0,"""a cricket""",A cricket,cricket,finished,finished,1.0,1.0,1.0,1.0
+56f8ab13e599488db9ea7da6506dd22b,"""high and dry""",high and dry,high and dry,finished,finished,1.0,1.0,1.0,1.0
+d9aacf57ec6c4710973206838deca5f1,"""Nova Scotia""",Nova Scotia,Nova Scotia,finished,finished,1.0,1.0,1.0,1.0
+db3126341393421caf287bf600f97a46,"""Tunis""",Tunis,Tunis,finished,finished,1.0,1.0,1.0,1.0
+7cb802714cea406aa9c35601bb1b2c23,"""a conversation""",conversation,conversation,finished,finished,1.0,1.0,1.0,1.0
+b7317ee96b234164b583906a8daf293b,"""a Great Dane""",Great Dane,Great Dane,finished,finished,1.0,1.0,1.0,1.0
+b2e6b86c2e54434a85e0f2e6527cf6db,"""Toy""",Toy (Toy Poodle),Toy,finished,finished,0.0,1.0,0.5,1.0
+7472c5a21123400596962aec79a5e9b3,"""twin lens reflex""",Twin-lens reflex camera,Twin-lens reflex camera,finished,finished,0.0,0.0,0.8,0.8
+a5473315502f4e198965fc83e7c263b0,"""Kiss Me, Kate""","Kiss Me, Kate","Kiss Me, Kate",finished,finished,1.0,1.0,1.0,1.0
+5003ecf728f441f786d421fcabc73105,"""a cow""",cow,cow,finished,finished,1.0,1.0,1.0,1.0
+0f6d2de288e348779e8c5d7515792449,"""a leopard""",Leopard,Leopard,finished,finished,1.0,1.0,1.0,1.0
+abd5eadacaa840bd97c69e5cc1beb1e7,"""Phil Collins""",Phil Collins,Phil Collins,finished,finished,1.0,1.0,1.0,1.0
+67488f8f226d4d278ed359cea5b80cf9,"""a pharmacist""",Pharmacist,Pharmacist,finished,finished,1.0,1.0,1.0,1.0
+f4d1c6d45e0f4f4e8e0403bc7ef6b104,"""pink""",pink,pink,finished,finished,1.0,1.0,1.0,1.0
+b339d5fef74349958e739a5f3d7adbd9,"""committees""",Standing committees,Standing committees,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+54e7aaba9cbb454a86af6d916a71109b,"""Italian""",Italian,Italian,finished,finished,1.0,1.0,1.0,1.0
+d3b1dec56b024c339380693b31ae4930,"""Administrative Professionals Week""",Administrative Professionals Week,Administrative Professionals Week,finished,finished,1.0,1.0,1.0,1.0
+18a2740593b247688ca64e5c347040a3,"""Mercury""",Mercury,Mercury,finished,finished,1.0,1.0,1.0,1.0
+4641f3042c1746abb5c9ac68570e7d59,"""a canoe""",Canoe,canoe,finished,finished,1.0,1.0,1.0,1.0
+fa1600f545b14703b72b253b24ba1673,"""(Pablo) Neruda""",Pablo Neruda,Pablo Neruda,finished,finished,1.0,1.0,1.0,1.0
+d702c769002043d08be0f9187d32ac74,"""Tasmania""",Tasmania,Tasmania,finished,finished,1.0,1.0,1.0,1.0
+a6652c364b6e4e8db83b3e26b2dd1c1f,"""11""",11 (A.D. 11),A.D. 11,finished,finished,0.0,0.0,0.5,0.6666666666666666
+d26f3e0fce49475595ab98354c941d49,"""sausages""",bockwurst and chorizo (closest substitutes for blood sausage),sausage,finished,finished,0.0,0.0,0.0,0.0
+3e7b755e768b446cb6ce765d1bb23e7e,"""Princeton""",Princeton University,Princeton University,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+a4f828a3afb942da92913cc3e7f36c24,"""Philadelphia""",Philadelphia,Philadelphia,finished,finished,1.0,1.0,1.0,1.0
+c8d81dd0e7dc4bde9969db769a8be21b,"""QWERTY""",QWERTY,QWERTY,finished,finished,1.0,1.0,1.0,1.0
+59ec0cf2e15944659c77b96d911ceab0,"""syntax""",Syntax,Syntax,finished,finished,1.0,1.0,1.0,1.0
+ce664a256193487bb4eba33daa4bc8b3,"""Fall Out Boy""",Fall Out Boy,Fall Out Boy,finished,finished,1.0,1.0,1.0,1.0
+53846a14ec1e49918818c1bcdcddd918,"""The Twilight Zone""",The Twilight Zone,The Twilight Zone,finished,finished,1.0,1.0,1.0,1.0
+1e5097d79888462caaa39ba4db594a75,"""Punch""",Punch,Punch,finished,finished,1.0,1.0,1.0,1.0
+65b73d8b6bb447a5aa7a83be192a3caa,"""Cesare Borgia""",Cesare Borgia,Cesare Borgia,finished,finished,1.0,1.0,1.0,1.0
+473fd0c2989541d7818aa50866c02941,"""swelling""",Swelling,swelling,finished,finished,1.0,1.0,1.0,1.0
+cc847264086e4567aacc1f8062666dde,"""Istanbul""",Istanbul,Istanbul,finished,finished,1.0,1.0,1.0,1.0
+b315d931dfb2440e92cf1f9e063be50c,"""absinthe""",Absinthe,Absinthe,finished,finished,1.0,1.0,1.0,1.0
+e01ccc8683af45998149ed184e896067,"""Christina Applegate""",Christina Applegate,Christina Applegate,finished,finished,1.0,1.0,1.0,1.0
+5b6144764a754301808a9375717cad70,"""the high jump""",High jump,high jump,finished,finished,1.0,1.0,1.0,1.0
+667a5aaeb91c4ca79152cfe70aa132c4,"""The Louvre""",The Louvre,the Louvre,finished,finished,1.0,1.0,1.0,1.0
+09fb31b2ca0042ca8fc523353e633341,"""A Connecticut Yankee in King Arthur\\'s Court""",A Connecticut Yankee in King Arthur's Court,A Connecticut Yankee in King Arthur's Court,finished,finished,1.0,1.0,1.0,1.0
+51a410837fa748c0ad59b078f5b96ef7,"""Richard Nixon""","Spiro Agnew was the 39th U.S. vice president, serving under Richard Nixon from 1969 until he resigned in 1973 after pleading no contest to federal income tax evasion.",Vice President of the United States,finished,finished,0.0,0.0,0.13793103448275862,0.0
+5348edf0674f4896956056dd6ce97675,"""a lullaby""",lullaby (cradle song),lullaby,finished,finished,0.0,1.0,0.5,1.0
+730d1b61b948484394b9c56703bdb2b3,"""Scrabble""",Scrabble,Scrabble,finished,finished,1.0,1.0,1.0,1.0
+f4c1aaec12fa4c61b379f1a9272d1ff4,"""gossip""",Gossip,Gossip,finished,finished,1.0,1.0,1.0,1.0
+00090d662c4c4db9b088922fef9fe061,"""on bread alone""",by bread alone,by bread alone,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+8e981230d1a340cea3439ecda7c2ea73,"""Capricorn""",Capricorn,Capricorn,finished,finished,1.0,1.0,1.0,1.0
+e1a0e75cc5cf409a9fc1488b071b2eb6,"""manganese""",Manganese,Manganese,finished,finished,1.0,1.0,1.0,1.0
+18a6e062325242e58fa8a5cb5f3d2a32,"""governess""",governess,governess,finished,finished,1.0,1.0,1.0,1.0
+33c1f72dbc194869beed5bf366a6720a,"""the Netherlands""",The Netherlands,The Netherlands,finished,finished,1.0,1.0,1.0,1.0
+579ae7a5dde34d1f8d20f3c5b644f5f4,"""the Titans""",Titans,The Titans,finished,finished,1.0,1.0,1.0,1.0
+e7304dd4e7914bdfbb2b912691b84422,"""Marco Polo""",Marco Polo,Marco Polo,finished,finished,1.0,1.0,1.0,1.0
+f59615e5df1c4b02a8cee40b10c61d8c,"""Notorious B.I.G.""",The Notorious B.I.G. (Biggie Smalls),The Notorious B.I.G.,finished,finished,0.0,1.0,0.6666666666666666,1.0
+ad9d13ba642c4ede85353eafe933faaf,"""Sapphire""",Sapphire,Sapphire,finished,finished,1.0,1.0,1.0,1.0
+d6ba8697e6694769a0ed824a7df27252,"""Tiger Woods""",Golfers,golfers,finished,finished,0.0,0.0,0.0,0.0
+e22ffc29e8624e9d899f6b2066b22cca,"""the United Kingdom""",Gordon Brown was Prime Minister of the United Kingdom from 2007 to 2010.,United Kingdom,finished,finished,0.0,1.0,0.2857142857142857,1.0
+c9416e5462f245f19697e82bcb9f0b02,"""Singin\\' In The Rain""",Singin' in the Rain,Singin' in the Rain,finished,finished,1.0,1.0,1.0,1.0
+c7b1b174463847aebbfd540d05759332,"""AARP""",AARP,AARP,finished,finished,1.0,1.0,1.0,1.0
+05c45056631d408ea58b9008026e33a2,"""(Charles) Guiteau""",Charles Guiteau,Charles Guiteau,finished,finished,1.0,1.0,1.0,1.0
+6d5a1caf360b4cc4af48f703ac98bea6,"""Indiana Jones and the Kingdom of the Crystal Skull""",Dr. Irina Spalko,Irina Spalko,finished,finished,0.0,0.0,0.0,0.0
+98e59cbf1c7047ecbf36b4b7382d3948,"""debts""",debts,debts,finished,finished,1.0,1.0,1.0,1.0
+7209c6f378a14c31aa517a773c7869b6,"""The Bride of Frankenstein""",Bride of Frankenstein,Bride of Frankenstein,finished,finished,1.0,1.0,1.0,1.0
+593f7e68ece24d0d93e4743547f84227,"""St. Louis""",St. Louis,St. Louis,finished,finished,1.0,1.0,1.0,1.0
+36fda1c2c2504199bed202f61b06ecf9,"""Don Diego de la Vega""","Zorro (Spanish for ""fox"") is the secret identity of Don Diego de la Vega, a fictional character created in 1919 by pulp writer Johnston McCulley — a masked, sword-wielding vigilante who defends the poor and victimized.",fox,finished,finished,0.0,0.0,0.2702702702702703,0.0
+a9600ebd49684f158a292964aef91319,"""a carrier""",A carrier,a carrier,finished,finished,1.0,1.0,1.0,1.0
+5f6158c674304dc48612c1c90777f6ef,"""(Grover) Cleveland""",Grover Cleveland,Grover Cleveland,finished,finished,1.0,1.0,1.0,1.0
+e965f5490a7e48029a7c9dee649c6dcb,"""Margrethe""",Queen Margrethe II,Margrethe,finished,finished,0.0,1.0,0.5,1.0
+73726187be7f46a0ab4e6a0a8e9ce810,"""plumeria""",Plumeria,Plumeria,finished,finished,1.0,1.0,1.0,1.0
+d8eba1df0e5b45159283a1f457542c0f,"""Napoleon""",Napoleon,Napoleon,finished,finished,1.0,1.0,1.0,1.0
+1bf2e8f4324d47bf804194ae3eb748aa,"""Guernsey""",**Guernsey**,Guernsey,finished,finished,1.0,1.0,1.0,1.0
+d979fed6fede41ceaa780d115d1d0124,"""bling bling""",Bling-bling,Bling-bling,finished,finished,1.0,1.0,1.0,1.0
+208fecbd8c5449c1bd1b0177453cf9b7,"""Max Planck""",Max Planck,Max Planck,finished,finished,1.0,1.0,1.0,1.0
+76886f1a93914e37bb30e1ca06f555ae,"""Maverick""",Bret Maverick,Bret Maverick,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+177ebf6c9a854c78a73eb21e23402fef,"""Santo Domingo""",Santo Domingo,Santo Domingo,finished,finished,1.0,1.0,1.0,1.0
+460bc426e17b4230a01b3c46c9de3b1c,"""Bangkok""",Bangkok,Bangkok,finished,finished,1.0,1.0,1.0,1.0
+a95d37788dab44fd9249c25f84e2a068,"""a salmon""",Salmon,salmon,finished,finished,1.0,1.0,1.0,1.0
+255522dc506241a18970f20c859f4431,"""seminary""",seminary,seminary,finished,finished,1.0,1.0,1.0,1.0
+5f64cb16a5fe4ae59f115abb613a344f,"""After all, tomorrow is another day!""","After all, tomorrow is another day!","After all, tomorrow is another day!",finished,finished,1.0,1.0,1.0,1.0
+18a7d5d6288145d98f37834834de5b60,"""Katrina and the Waves""",Katrina and the Waves,Kimberley Rew,finished,finished,1.0,0.0,1.0,0.0
+07aaefcffd8e4569b12c80884ef0d24b,"""tanager""",tanager,tanager,finished,finished,1.0,1.0,1.0,1.0
+3829f770d336410dbfb6091efdbcad94,"""Ross Perot""",Ross Perot,Ross Perot,finished,finished,1.0,1.0,1.0,1.0
+43eaa27f886b4573959d36b086d83631,"""Gone With the Wind""",Gone with the Wind,Gone with the Wind,finished,finished,1.0,1.0,1.0,1.0
+3f4bc6026bc340d7bf286106d2381976,"""Benjamin""",Benjamin,Benjamin,finished,finished,1.0,1.0,1.0,1.0
+3c5ee2e049864ca98c7ff8cd1c86942f,"""Woody Allen""",Woody Allen,Woody Allen,finished,finished,1.0,1.0,1.0,1.0
+ceaa70ad97bc40cabc6b6fd99e37b0e4,"""a \""piece of the pie\""""",piece of the pie,piece of the pie,finished,finished,1.0,1.0,1.0,1.0
+cb1b48bb73ee438081bb7b3dc484dc3d,"""bone marrow""",Bone marrow,Bone marrow,finished,finished,1.0,1.0,1.0,1.0
+bc098dd8220e474bb29845ce026fb599,"""gateway""",Gateway,Gateway,finished,finished,1.0,1.0,1.0,1.0
+47c9a3f482a64f4caf0fa08bb40111fe,"""Natty Bumppo""",Deerslayer (Natty Bumppo),Deerslayer,finished,finished,0.0,0.0,0.8,0.0
+56ecfbae1dcb45f0bff6b57741549963,"""George Clinton""",All are pioneering funk musicians.,funk,finished,finished,0.0,0.0,0.0,0.0
+cc7512bd9a034ff786f3ee0a7da05baf,"""hubris""",hubris,Hubris,finished,finished,1.0,1.0,1.0,1.0
+a3db01e563ff481288627ed7f9ed2110,"""the uterus""",Uterus,Uterus,finished,finished,1.0,1.0,1.0,1.0
+5ff5cbfe8f2b43ac9f83e280fd971805,"""rum""",Rum,rum,finished,finished,1.0,1.0,1.0,1.0
+a534d740d99c4f4ebaf7745907603113,"""the Wright Brothers""",The Wright Brothers (Wilbur and Orville Wright),the Wright brothers,finished,finished,0.0,1.0,0.5,1.0
+07c95deaf6164d4380e8c5083b99307c,"""the Buffalo Bills""",Bill,Buffalo Bills,finished,finished,0.0,1.0,0.0,1.0
+6c43e20b398d49b5be1a34ec82a28e2a,"""non sequitur""",Non Sequitur,Non sequitur,finished,finished,1.0,1.0,1.0,1.0
+8b0d46cd4a314123843ca2e8769d9b51,"""Brave New World""",Brave New World,Brave New World,finished,finished,1.0,1.0,1.0,1.0
+938a1a20b96245e6a0c687bf010a20c3,"""the Space Shuttle""",Space Shuttle,Space Shuttle orbiter,finished,finished,1.0,0.0,1.0,0.8
+9288303957c24d2f89bd30ee0ec1b099,"""Gwen Stefani""",Gwen Stefani,Gwen Stefani,finished,finished,1.0,1.0,1.0,1.0
+e521910199f74b7192684bea87fa32d8,"""philosophy""",Philosophy,philosophy,finished,finished,1.0,1.0,1.0,1.0
+cb15bedf505045608c84edea71d6d658,"""The Lost Weekend""",The Lost Weekend,The Lost Weekend,finished,finished,1.0,1.0,1.0,1.0
+c8b56dbe7602481199557313bf404b9f,"""halogens""",Halogens,halogens,finished,finished,1.0,1.0,1.0,1.0
+e2fa62b96fda4696b30620f521123361,"""Benito Mussolini""",Benito Mussolini,Benito Mussolini,finished,finished,1.0,1.0,1.0,1.0
+0505b21549f74c7c89a368a9b41b81c3,"""Beatrix Potter""",Beatrix Potter,Beatrix Potter,finished,finished,1.0,1.0,1.0,1.0
+4aa8fc7557fa4930b5e2e78a896b1084,"""Family Guy""",Family Guy,Family Guy,finished,finished,1.0,1.0,1.0,1.0
+ed9f9cea823345fc9cadc16d151a9bbd,"""The Little Prince""",The Little Prince,The Little Prince,finished,finished,1.0,1.0,1.0,1.0
+353217467129452597e5b903092164e5,"""Bryan Adams""",Bryan Adams,Bryan Adams,finished,finished,1.0,1.0,1.0,1.0
+83b243debd0e4114a279556f70a2a0b5,"""South Dakota""",South Dakota,South Dakota,finished,finished,1.0,1.0,1.0,1.0
+e4a6d8e2126b4fb6b767debdc234a86d,"""Los Angeles""",Los Angeles,Los Angeles,finished,finished,1.0,1.0,1.0,1.0
+fa8f20b61bda46b98977383e6005869e,"""Cincinnati""",Cincinnati,Cincinnati,finished,finished,1.0,1.0,1.0,1.0
+5774b5d48ecc41c884be95aea47e04db,"""the bunny hop""",The Bunny Hop,Bunny Hop,finished,finished,1.0,1.0,1.0,1.0
+10fbb659301f4b829e5c29ae08195da9,"""the Coast Guard""",United States Coast Guard,United States Coast Guard,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+21df075c378849ab9411a0ffaddb3697,"""Easter""",Easter,Easter,finished,finished,1.0,1.0,1.0,1.0
+295f574b0bd6480eaa67181d0f684dc5,"""La""",Sol,Sol,finished,finished,0.0,0.0,0.0,0.0
+7f2457574fc74af697837b4a285a2d31,"""a pearl""",Pearl,pearl,finished,finished,1.0,1.0,1.0,1.0
+73bbbb3357304ec28774176d9745f8a0,"""Montana""",Montana,Montana,finished,finished,1.0,1.0,1.0,1.0
+66bdd306b3794732980b97a5dda113cc,"""Harvard""","<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name=""shell"">
+<｜｜DSML｜｜ parameter name=""command"" string=""true"">curl -s --max-time 20 ""https://www.bing.com/search?format=rss&q=%22Radcliffe+College+for+women%22"" | sed -e 's/<[^>]*>/ /g' | tr -s ' ' | head -c 4000</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>","<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name=""shell"">
+<｜｜DSML｜｜ parameter name=""command"" string=""true"">curl -s ""https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=%22Radcliffe%20College%20for%20women%22%20Harvard%20shares&format=json&srlimit=10"" | python3 -c ""import sys,json;d=json.load(sys.stdin);print(d['query']['searchinfo']);[print(x['title'],'|',x['snippet']) for x in d['query']['search']]""</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+<｜｜DSML｜｜ invoke name=""shell"">
+<｜｜DSML｜｜ parameter name=""command"" string=""true"">curl -s ""https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=insource%3A%2Fshares%20facilities%20with%2F%20Radcliffe&format=json&srlimit=10"" | python3 -c ""import sys,json;d=json.load(sys.stdin);print(d['query']['searchinfo']);[print(x['title'],'|',x['snippet']) for x in d['query']['search']]""</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>",finished,finished,0.0,0.0,0.0,0.0
+e04f70f907f0419ba627c6889342eeb1,"""Interlaken""",Interlaken,Interlaken,finished,finished,1.0,1.0,1.0,1.0
+cd52f29813ed467fa6b62b10895844d8,"""Martina Navratilova""",Martina Navratilova,Martina Navratilova,finished,finished,1.0,1.0,1.0,1.0
+d313db2759024237bbc3e0263f823646,"""Mexico""",Mexico,Mexico,finished,finished,1.0,1.0,1.0,1.0
+aac65b2641484039b5af31a876f03f10,"""Denmark""",Denmark,Denmark,finished,finished,1.0,1.0,1.0,1.0
+43a169819bd049dab9e207b0422b733f,"""Moonlighting""",Moonlighting,Moonlighting,finished,finished,1.0,1.0,1.0,1.0
+4a641c9367f84b589e5be486a01c9078,"""Barnum & Bailey""",Barnum & Bailey,Barnum & Bailey,finished,finished,1.0,1.0,1.0,1.0
+021af5c97c3e4b858d38d473b460e193,"""a rapier""",Rapier,small sword,finished,finished,1.0,0.0,1.0,0.0
+c1cd1e093cf54677a83e671a9a332b98,"""grace""",grace,grace,finished,finished,1.0,1.0,1.0,1.0
+a064125fa3674c049e473e4d7c2afcd1,"""East of Eden""",Connecticut,East of Eden,finished,finished,0.0,1.0,0.0,1.0
+fc7d5b5ff10649fb9d504f8c18c074b7,"""\""The Apprenticeship\""""",The Apprenticeship,The Apprenticeship,finished,finished,1.0,1.0,1.0,1.0
+59d7d4ec3377454b9a5d8a63c4d67a29,"""the American Revolution""",American Revolution,American Revolution,finished,finished,1.0,1.0,1.0,1.0
+b23add0ac57b4bc39756687a895d3736,"""(John) Irving""",John Irving,John Irving,finished,finished,1.0,1.0,1.0,1.0
+3c8e14348a394c04943897987ca68f8c,"""William Jennings Bryan""",William Jennings Bryan,William Jennings Bryan,finished,finished,1.0,1.0,1.0,1.0
+7cbc24d809ce4acf974c2a67b475bcb2,"""Austria""",Austrian newspapers.,Austrian newspapers,finished,finished,0.0,0.0,0.0,0.0
+4412a02b02114936b8bb7a0f366770e2,"""Bonaparte""",Bonaparte,Bonaparte,finished,finished,1.0,1.0,1.0,1.0
+86f594b52f7148ee9ae371cb580c00ce,"""Return of the Jedi""",Return of the Jedi,Return of the Jedi,finished,finished,1.0,1.0,1.0,1.0
+b75da932a89d47d8a88a7516e446ed21,"""Chicago""",Chicago,Chicago,finished,finished,1.0,1.0,1.0,1.0
+a7312ddf63744c37b682fd71a7a30698,"""frogs & toads""",frogs & toads,frogs & toads,finished,finished,1.0,1.0,1.0,1.0
+6cf5711da68d491e9595988d01824176,"""the penny""",Lincoln cent (wheat penny),Lincoln cent,finished,finished,0.0,0.0,0.4,0.0
+0262ecde89394a1594fe54ed6de67d5d,"""(Richard) Branson""",Richard Branson,Richard Branson,finished,finished,1.0,1.0,1.0,1.0
+f233a9c1c2fb4650bae56cfc02ad8cde,"""Don Quixote""",Don Quixote,Don Quixote,finished,finished,1.0,1.0,1.0,1.0
+bd49e52726674480873c9f6528094f03,"""Dick Cheney""",Dick Cheney,Dick Cheney,finished,finished,1.0,1.0,1.0,1.0
+dd95a0955ce14d69994a3834225ac485,"""a windshield""",windshield,windshield,finished,finished,1.0,1.0,1.0,1.0
+94aee49633d343d7868124a082fd4e79,"""a click""",**Klick** (Click),click,finished,finished,0.0,1.0,0.6666666666666666,1.0
+8e11057543334656906b81118a19a735,"""The Mousetrap""",The Mousetrap,The Mousetrap,finished,finished,1.0,1.0,1.0,1.0
+ccd7fad85ef94625bb2b2cd1dcbbc9c9,"""Whatchamacallit""",Whatchamacallit,Whatchamacallit,finished,finished,1.0,1.0,1.0,1.0
+972feb1557d445e098a9a0bc4c8080db,"""windmills""",windmills,windmills,finished,finished,1.0,1.0,1.0,1.0
+8e29a1330c7444029122dcabc01d4c29,"""1789""",1789,1789,finished,finished,1.0,1.0,1.0,1.0
+e7249a74dc344c88b3b10adfedfd2b2c,"""there\\'s no place like home""",There's no place like home.,There's no place like home,finished,finished,1.0,1.0,1.0,1.0
+fa3a3d392e1f435f996add8371a798bf,"""Samuel Goldwyn""",Samuel Goldwyn,Samuel Goldwyn,finished,finished,1.0,1.0,1.0,1.0
+0f72f41ca4ea444a97be577a1beb9bcb,"""pesto""",Pesto,pesto,finished,finished,1.0,1.0,1.0,1.0
+ba6a74f9cd8f4a079cca008178933650,"""Muqtada al-Sadr""",Muqtada al-Sadr,Muqtada al-Sadr,finished,finished,1.0,1.0,1.0,1.0
+9167af082d2742d282753d9175fbeec4,"""a deluge""",deluge,deluge,finished,finished,1.0,1.0,1.0,1.0
+7cefa39a689a4ab89f749733f4573e14,"""Princess Mononoke""",Princess Mononoke,Princess Mononoke,finished,finished,1.0,1.0,1.0,1.0
+84024891efbf49308fd2fe87c30e396a,"""a collie""",Collie (Scottish shepherd dog),Collie,finished,finished,0.0,1.0,0.4,1.0
+9d31050c4b73430485803dd317f7a987,"""a cosmopolitan""",Cosmopolitan,Cosmopolitan,finished,finished,1.0,1.0,1.0,1.0
+cc73517365b94e149cbfc12550b3ae88,"""the medulla oblongata""",medulla oblongata,Medulla oblongata,finished,finished,1.0,1.0,1.0,1.0
+1200fe70bda14116affdd48427cc63ee,"""tennis""","- **Net (let):** a serve that touches the net cord is void/replayed.
+- **Ace:** a serve that lands in the service box and is not touched by the receiver.
+- **Foot fault:** when the server steps over the baseline or assumes an illegal position while serving.",tennis terms,finished,finished,0.0,0.0,0.0,0.6666666666666666
+e8fc1c24fcc34b74ac2048a5d34c9e4a,"""Carmen""",Carmen,Carmen,finished,finished,1.0,1.0,1.0,1.0
+51d16b79273d4676bd38079610968af0,"""the Mississippi""",Mississippi River,Mississippi,finished,finished,0.0,1.0,0.6666666666666666,1.0
+2f64879434954dc380f9213f868e8338,"""Gene Kelly""",Gene Kelly,Gene Kelly,finished,finished,1.0,1.0,1.0,1.0
+5c5525ecc07b45eeb0385e22ff04da2c,"""boatman""",Boatman,boatman,finished,finished,1.0,1.0,1.0,1.0
+1e2d37008d46461abe1a480c9e63bb2e,"""(Olga) Korbut""",Olga Korbut,Olga Korbut,finished,finished,1.0,1.0,1.0,1.0
+3deaa9f97883456d9904db5281da8ddd,"""the maple leaf""",Maple leaf,maple leaf,finished,finished,1.0,1.0,1.0,1.0
+d2aae288da2240479ac8fd64380e8181,"""The Grapes of Wrath""",The Grapes of Wrath,The Grapes of Wrath,finished,finished,1.0,1.0,1.0,1.0
+734c12b3c61f499eb696ab2e7e7521cd,"""Syria""",South Lebanon conflict (Israeli–Lebanese conflict),conflict,finished,finished,0.0,0.0,0.0,0.0
+212743a2ca8448998afb34fe71c6f704,"""a blue whale""",Blue whale,Blue whale,finished,finished,1.0,1.0,1.0,1.0
+3706087847e5422f8271b5ef961601f3,"""Shannen Doherty""",Shannen Doherty,Shannen Doherty,finished,finished,1.0,1.0,1.0,1.0
+48e0ed33e6794e50a1894269c8110e47,"""sostenuto""",Sostenuto,Sostenuto,finished,finished,1.0,1.0,1.0,1.0
+1bcbb6bc51104330894359a3aa0ba675,"""Napster""",Napster,Napster,finished,finished,1.0,1.0,1.0,1.0
+33c1e8acc17f476bbaea3ced919f7261,"""Mercator""",Mercator,Mercator,finished,finished,1.0,1.0,1.0,1.0
+98e248b0cd0b4fa483949dbe09a7ceaa,"""Heaven""",in Heaven,in Heaven,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+7f67766516a34b9b8cf9480ae031e7c0,"""Claudius""",Claudius,Claudius,finished,finished,1.0,1.0,1.0,1.0
+db1c3a9cc3df4782adc936838679d1c0,"""The Searchers""",The Searchers,The Searchers,finished,finished,1.0,1.0,1.0,1.0
+1489805b557742a0972dd1add3b3f3a8,"""Bismarck""",Otto von Bismarck,Otto von Bismarck,finished,finished,0.0,0.0,0.5,0.5
+142c46ffc40d484d9a9805811fa8d989,"""Desert Shield""",Operation Desert Shield,Operation Desert Shield,finished,finished,0.0,0.0,0.8,0.8
+345d4dc06c7e4bd0bf02d54c83af22f0,"""nests""",nests,nests,finished,finished,1.0,1.0,1.0,1.0
+b818cb227aee48e6b44b1d5dbeaf179b,"""Justice League of America""",Justice League of America,Justice League of America,finished,finished,1.0,1.0,1.0,1.0
+b9aef446e8ca412bbcb69b8f94249dea,"""Kentucky""",Kentucky,Kentucky,finished,finished,1.0,1.0,1.0,1.0
+30befaa3a1844891a4fe5ea61ac440a0,"""bitters""",Bitters,bitters,finished,finished,1.0,1.0,1.0,1.0
+d3f8ca7e8c444f63acc92433810f5209,"""staunch""",Stanch,stanch,finished,finished,0.0,0.0,0.0,0.0
+c9cf7304b2c84aebb6f9af8bfc2dac9d,"""earshot""",earshot,earshot,finished,finished,1.0,1.0,1.0,1.0
+e72677bbc791425387075a3a7188230f,"""Montana""",Montana,Montana,finished,finished,1.0,1.0,1.0,1.0
+fe06a70fb7bb4f6fa665e96fe6617b56,"""Advil""",Advil,Advil,finished,finished,1.0,1.0,1.0,1.0
+5287b59ad7184131a93c827769df7ae9,"""a lifeboat""",Lifeboat,Lifeboat,finished,finished,1.0,1.0,1.0,1.0
+faeeb90e9c3f47edb21d0d7ad41c22a2,"""(Charlie) Parker""",Charlie Parker,Charlie Parker,finished,finished,1.0,1.0,1.0,1.0
+1cde9fe2c8f9435aa48e34c4470bba4a,"""Sarah Bernhardt""",Sarah Bernhardt,Sarah Bernhardt,finished,finished,1.0,1.0,1.0,1.0
+381cee68ee3146b3bfdda9b2db468a21,"""health insurance""",Health insurance,health,finished,finished,1.0,0.0,1.0,0.6666666666666666
+d9ea918c55124d12aaa071e29e6c1e28,"""Croque-Madame""",**croque madame**,Croque Madame,finished,finished,1.0,1.0,1.0,1.0
+9e8fc31beb22409189a62f1cbbaf95c9,"""the Union Jack""",Union Jack,Union Jack,finished,finished,1.0,1.0,1.0,1.0
+54d99ac9fa03443e99f77d6f9f208713,"""jumper cables""",Jumper cables,jumper cables,finished,finished,1.0,1.0,1.0,1.0
+4b90f476ede9474aa7eb7e904961c163,"""a nightingale""",Nightingale,nightingale,finished,finished,1.0,1.0,1.0,1.0
+a5fb869ba1534a1fbaf6f7d2daf8c592,"""flea""",The human flea.,human flea,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+0429a0309ef94df8a59959beb9e87fa9,"""Department of Interior""",A bureau of the U.S. Department of the Interior,U.S. Department of the Interior,finished,finished,0.0,0.0,0.6666666666666666,0.8571428571428571
+d43c698a4a4444c8a51ca58fea216d22,"""Val Kilmer""",**Val Kilmer**,Val Kilmer,finished,finished,1.0,1.0,1.0,1.0
+b7258e5a3a2440a6bce0a2f255e1cbcd,"""Eric Knight""",Eric Knight,Eric Knight,finished,finished,1.0,1.0,1.0,1.0
+f359127d25b646d6b1cf595ca1f44c62,"""The Polar Express""",The Polar Express,The Polar Express,finished,finished,1.0,1.0,1.0,1.0
+7e3cea5135b34efab66c1ea8c4610361,"""Stockholm""",Stockholm,Stockholm,finished,finished,1.0,1.0,1.0,1.0
+7a8912ce2dd54b09b9bb42f96dc073b4,"""Tequila Sunrise""",Tequila Sunrise,Tequila Sunrise,finished,finished,1.0,1.0,1.0,1.0
+8b933c2dc3ae468b88d3a744bd052757,"""gold""",Gold,gold,finished,finished,1.0,1.0,1.0,1.0
+399282083ee8402eb87ace6200235232,"""Argentina""",Argentinian newspapers.,Argentinian newspapers,finished,finished,0.0,0.0,0.0,0.0
+3806f3917ad74a7abaf1ac64016cf9b2,"""a dove""",dove,dove,finished,finished,1.0,1.0,1.0,1.0
+4fdd00881ae641ba9535e22d64c3a0ff,"""a bazooka""",a bazooka,a bazooka,finished,finished,1.0,1.0,1.0,1.0
+996d3c20195f43da98f0b5aba98c955f,"""Butch Cassidy""",Butch Cassidy,Butch Cassidy,finished,finished,1.0,1.0,1.0,1.0
+502fb1bae3ee4cbca89cd9f27ea336ad,"""Warsaw""",Warsaw,Warsaw,finished,finished,1.0,1.0,1.0,1.0
+29043bc89e504948b706b4c502a39a27,"""cherries""",Cherry,cherry,finished,finished,0.0,0.0,0.0,0.0
+8c983ce1cbae4056ae03d78d8b67053a,"""Poland""",Both are Polish technical universities (politechniki).,uczelnie techniczne,finished,finished,0.0,0.0,0.0,0.0
+f517a2fbdcd24448b12f40613cff19dc,"""(James) Joyce""",James Joyce,James Joyce,finished,finished,1.0,1.0,1.0,1.0
+e92a6a5f47b344e9956d2f242fd0494a,"""mollusks""",Mollusca (mollusks),Mollusca,finished,finished,0.0,0.0,0.6666666666666666,0.0
+94289b1fd355402ebb4bea3a9f6c0aaa,"""Brigham Young""",Brigham Young,Brigham Young,finished,finished,1.0,1.0,1.0,1.0
+1e7a668213c4433d8b7970a32e3c0af1,"""an iris""",Iris,iris,finished,finished,1.0,1.0,1.0,1.0
+676039c9bae441ceb21198523bf6e920,"""Win, Lose, Or Draw""","Win, Lose or Draw","Win, Lose or Draw",finished,finished,1.0,1.0,1.0,1.0
+9a94c07609304bc890685fb0d6ff799d,"""prone""",PRONE,prone,finished,finished,1.0,1.0,1.0,1.0
+ea8d2f98ab2b41329f96ffd259484819,"""Nanook""",Nanook,Nanook,finished,finished,1.0,1.0,1.0,1.0
+bc0eb04777904f4683de2a681201e3ee,"""truffles""",Truffles,Truffles,finished,finished,1.0,1.0,1.0,1.0
+8e0843e73a22433c845d554d79bac4ab,"""Matt Dillon""",Matt Dillon,Matt Dillon,finished,finished,1.0,1.0,1.0,1.0
+3725ccc6e524405f81722ceffead540a,"""John Wilkes Booth""",John Wilkes Booth,John Wilkes Booth,finished,finished,1.0,1.0,1.0,1.0
+916d6c683689416f920c33fbada5e93f,"""coins""",Coins,coins,finished,finished,1.0,1.0,1.0,1.0
+a054243caf0a49b59814afdb8d715755,"""Gauguin""",Paul Gauguin,Paul Gauguin,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+cade297c16cc4381b27843c523b0c43c,"""Memphis Belle""",The Memphis Belle,Memphis Belle,finished,finished,1.0,1.0,1.0,1.0
+5a59d6e1cec84d6ba54c03a3910af065,"""Lou Reed""",Lou Reed,Lou Reed,finished,finished,1.0,1.0,1.0,1.0
+95cf345e73974f0d88a4b8cc672d87f3,"""Tesla""",Nikola Tesla,Nikola Tesla,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+9a291c44fa1a4d78af5ffdeca1928abd,"""March""",March,March,finished,finished,1.0,1.0,1.0,1.0
+574cafa1c08f45888c669417d5605c91,"""Guy Fawkes""",Guy Fawkes,Guy Fawkes,finished,finished,1.0,1.0,1.0,1.0
+bc05ded989c342ff8a9058bfaf2fd2f5,"""Easter""",Easter,Easter,finished,finished,1.0,1.0,1.0,1.0
+b34b82628e4b4361846043c8dcfb8aac,"""Connecticut""","140,000",Connecticut,finished,finished,0.0,1.0,0.0,1.0
+b63bb97b6419445fb4f54984847ce532,"""Mr. Rogers""",Mister Rogers (Fred Rogers),Fred Rogers,finished,finished,0.0,0.0,0.3333333333333333,0.5
+3cc2460d92a54e71ac0fc71b973918f4,"""a monkey""",monkey,monkey,finished,finished,1.0,1.0,1.0,1.0
+dca652e3f8db4a06b132d57c30c5c77b,"""the pepper""",Bell pepper,pepper,finished,finished,0.0,1.0,0.6666666666666666,1.0
+9e9fc47587634a1d9b023a391fcae693,"""a son""",son,son,finished,finished,1.0,1.0,1.0,1.0
+4c66521b076449809cc45c46c834cebf,"""a cricket""",A cricket.,a cricket,finished,finished,1.0,1.0,1.0,1.0
+015cbdf5c4b4412caf81e8b0fa8d0d2d,"""Fiddler on the Roof""",Fiddler on the Roof,Fiddler on the Roof,finished,finished,1.0,1.0,1.0,1.0
+f1872aa085684205b01c8b044be9c405,"""walk the plank""",Walk the plank.,walk the plank,finished,finished,1.0,1.0,1.0,1.0
+1027da416e6845f7b2dc1ec382291283,"""thy bread""",thy bread,thy bread,finished,finished,1.0,1.0,1.0,1.0
+dd00ef077b1e4d1883cf381ed260e4c4,"""India""",India,India,finished,finished,1.0,1.0,1.0,1.0
+77d63f024ef7435daef2003a2df801a3,"""15""",15,15,finished,finished,1.0,1.0,1.0,1.0
+aa5ccdb669c54275a3ac03c724a4f2e9,"""Tanzania""",The highest freestanding mountain in the world (Africa's highest peak),Tanzania,finished,finished,0.0,1.0,0.0,1.0
+b57a65e684504d9db9a6878292c0313e,"""Driving Miss Daisy""",Driving Miss Daisy,Driving Miss Daisy,finished,finished,1.0,1.0,1.0,1.0
+35001a53f50d46cea48df347c4179128,"""The Grateful Dead""",Bandmates in the Grateful Dead (Bob Weir and Jerry Garcia were both founding members of the band).,Grateful Dead,finished,finished,0.0,1.0,0.23529411764705882,1.0
+662149e9d00747989aabcdf269c496a3,"""dams""",Dams,dams,finished,finished,1.0,1.0,1.0,1.0
+aced03563b4b43af889b1dfbeea8930c,"""Afrikaans""",Afrikaans,Afrikaans,finished,finished,1.0,1.0,1.0,1.0
+94cdf72aba2b4b06a1c9ce934cd407ca,"""the recto""",recto,recto,finished,finished,1.0,1.0,1.0,1.0
+dfec9961833848cbb53dfd96120c5c67,"""the box""",A box,box,finished,finished,1.0,1.0,1.0,1.0
+e76f303b7fb641a2b5dec35240758f37,"""Sartre""",Jean-Paul Sartre,Jean-Paul Sartre,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+d8fc70c4924e4422859a7058f11a5f5a,"""repent""",Repent.,Repent,finished,finished,1.0,1.0,1.0,1.0
+16ae8a29bc944d4e970f0d89ba5b2dcb,"""fly around the world""",Fly around the world,fly around the world,finished,finished,1.0,1.0,1.0,1.0
+5a42df77817c483ab33e7e25cd1ed18e,"""a seal""",Cape fur seal,fur seal,finished,finished,0.0,0.0,0.5,0.6666666666666666
+a58acf29767e4b939a81581b60f3e215,"""All Quiet On The Western Front""",All Quiet on the Western Front,All Quiet on the Western Front,finished,finished,1.0,1.0,1.0,1.0
+979e3f5aac91446b8550161dd89e9e26,"""finale""",Finale,finale,finished,finished,1.0,1.0,1.0,1.0
+4108ae63026e4db5b233293c88731044,"""Mississippi""",Mississippi,Mississippi,finished,finished,1.0,1.0,1.0,1.0
+6bff5f3522d84b2183e903e3157112c8,"""Novel""",Novel,Novel,finished,finished,1.0,1.0,1.0,1.0
+81ff2cf8bf2e4a0cbff1aeff5c0e67df,"""Henry VIII""",Henry VIII,Henry VIII,finished,finished,1.0,1.0,1.0,1.0
+c32dc525fe3b476583cd61345d7cdab1,"""The Stone Diaries""",The Stone Diaries,The Stone Diaries,finished,finished,1.0,1.0,1.0,1.0
+29479a10bb7a409d8ec13616f197f5c9,"""fondue""",Fondue,Fondue,finished,finished,1.0,1.0,1.0,1.0
+d0a7c4d69828416da83a28c969e1d850,"""Lindbergh""",Charles Lindbergh,Charles Lindbergh,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+5be6164a777b48f4bd10f228f27fd1fb,"""the owl and the pussycat""",True,mince and slices of quince,finished,finished,0.0,0.0,0.0,0.25
+113ad57d593f482e96e30af68b3aab9f,"""Billings""","Billings, Montana",Billings,finished,finished,0.0,1.0,0.6666666666666666,1.0
+88243e966a8b44fc96c8fa1d8ee78ff6,"""forests""",national forests,forests,finished,finished,0.0,1.0,0.6666666666666666,1.0
+328b8c0bf3f041cc8aac9d6e641c6d02,"""the CN Tower""",CN Tower,CN Tower,finished,finished,1.0,1.0,1.0,1.0
+80e6e7b117394115b0de70672b547307,"""Pop""",Pop,Pop,finished,finished,1.0,1.0,1.0,1.0
+207951638c3e41b8b33768284cca03d7,"""Strawberry Fields""",Strawberry Fields,Strawberry Fields,finished,finished,1.0,1.0,1.0,1.0
+7e6a0f89411346e2ad88dc04a2be77e3,"""Robert Taft""",Robert A. Taft,Robert A. Taft,finished,finished,1.0,1.0,1.0,1.0
+1c0986d2f8b34d71a803209e1c1af4b2,"""Fi""",Semper Fi,Fi,finished,finished,0.0,1.0,0.6666666666666666,1.0
+dd28ea5ffc9b49149a8b54366a25ad2f,"""carbon""",Carbon,Carbon,finished,finished,1.0,1.0,1.0,1.0
+faa49d92b4c0411590608ab3ff7dbd72,"""Cleveland""",Cleveland,Cleveland,finished,finished,1.0,1.0,1.0,1.0
+04d3b44f40ad45289d0414990690a8ab,"""Milwaukee""",Milwaukee,Milwaukee,finished,finished,1.0,1.0,1.0,1.0
+89ca79133c4643ddbb782bf195c27661,"""Myra Breckenridge""",Myra Breckinridge,Myra Breckinridge,finished,finished,0.0,0.0,0.5,0.5
+465d7e4fc1b840c7af24faea67493152,"""Greenwich Village""",Greenwich Village,Greenwich Village,finished,finished,1.0,1.0,1.0,1.0
+25c3b674680241ec8ece39507edecf5e,"""Jackie Collins""",Jackie Collins,Jackie Collins,finished,finished,1.0,1.0,1.0,1.0
+3addd7957eac46eca1cada2999b225de,"""Joy Division""",Joy Division,Joy Division,finished,finished,1.0,1.0,1.0,1.0
+fd75250e93884f6a83463d93b2108db6,"""George W. Bush""",George W. Bush,George W. Bush,finished,finished,1.0,1.0,1.0,1.0
+32f2ca6f0f214d8a9bda87a315d57b91,"""John Ford""",John Ford,John Ford,finished,finished,1.0,1.0,1.0,1.0
+68ad1d5549fa41d1a6473e25b8e32e95,"""Julie Andrews""",Julie Andrews,Julie Andrews,finished,finished,1.0,1.0,1.0,1.0
+d95d8625d0334f89915ee105b9e34b4d,"""curtsy""",curtsy,curtsy,finished,finished,1.0,1.0,1.0,1.0
+d6c08fd858e14dfd98b924c5aa317752,"""chickens""",chickens,chickens,finished,finished,1.0,1.0,1.0,1.0
+5c63c75dfa8f4d4cad5bccf467ec9f9c,"""the Big Sky Conference""",Big Sky Conference,Big Sky Conference,finished,finished,1.0,1.0,1.0,1.0
+4e09d6c162414151b95d3c8fecc6ab73,"""Mexico""",Mexico,Mexico,finished,finished,1.0,1.0,1.0,1.0
+a6ad95f3074e479facf2421462d3f240,"""Maryland""",Maryland,Maryland,finished,finished,1.0,1.0,1.0,1.0
+2845343a14194de2bc49a207eb280d9d,"""era""",era,era,finished,finished,1.0,1.0,1.0,1.0
+daacd026f4c74f05ad54a81156a73fc7,"""kiss""",Kiss a fool.,Kiss a fool,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+f8388135f4164e7c9b638736e6dbe2ea,"""James Garner""",James Garner,James Garner,finished,finished,1.0,1.0,1.0,1.0
+01eac94b21a24dcead6f9c3efec2a58d,"""(Stephen) King""",Stephen King,Stephen King,finished,finished,1.0,1.0,1.0,1.0
+bffb34366c9d400abba4d4e99017c345,"""Horizon""",Horizon,horizon,finished,finished,1.0,1.0,1.0,1.0
+330fb4fb30c4475f85872be34c1d2117,"""Aunt Polly""",Aunt Polly,Aunt Polly,finished,finished,1.0,1.0,1.0,1.0
+b12327b5ebbe4ce48f26173d175358d2,"""neon""",Packard,neon sign,finished,finished,0.0,0.0,0.0,0.6666666666666666
+1e57515dad4841e3b0cca4d623cb78ff,"""Paul Gauguin""",Paul Gauguin,Paul Gauguin,finished,finished,1.0,1.0,1.0,1.0
+5ad93ba20a924f1fa75167c1b59cd102,"""the Mekong""",Mekong River,Mekong River,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+71c2617a69f845edacd806df4f07f3f1,"""Violeta Chamorro""",Violeta Chamorro (Violeta Barrios de Chamorro),Violeta Chamorro,finished,finished,0.0,1.0,0.5,1.0
+e39d19a65521470fa0a20de46fe730c0,"""Pfizer""",Pfizer,Pfizer,finished,finished,1.0,1.0,1.0,1.0
+9e1a028c042a43a4aad803789594d801,"""dredge""",Dredge,Dredge,finished,finished,1.0,1.0,1.0,1.0
+327c1b33798e4afda8686955e302afaa,"""love""",love,love,finished,finished,1.0,1.0,1.0,1.0
+4f393e1af76a4211855c954e7a48910c,"""welterweight""",Welterweight,Welterweight,finished,finished,1.0,1.0,1.0,1.0
+315ce0c9509e40e9ada49582c4c6dcb0,"""Mark Twain""",Mark Twain,Mark Twain,finished,finished,1.0,1.0,1.0,1.0
+1a5f20f916df46fdb63bc3469336056e,"""\""Hotel California\""""",Hotel California,Hotel California,finished,finished,1.0,1.0,1.0,1.0
+2ae7fad172b94cf9bf4cb7eaa3a85ee5,"""The Green Arrow""",Green Arrow,Green Arrow,finished,finished,1.0,1.0,1.0,1.0
+95b675e8b63a4f39b3bc13d3e926e270,"""a coronation""",Coronation,coronation,finished,finished,1.0,1.0,1.0,1.0
+b167ddfc10bd436aae34f2bab13405ec,"""Tony Dungy""",Tony Dungy,Tony Dungy,finished,finished,1.0,1.0,1.0,1.0
+5c3f466eaa8a4032bdf797970e57f7cf,"""old-fashioned""",Old Fashioned,Old Fashioned,finished,finished,1.0,1.0,1.0,1.0
+8728ca39ca6c4a69ad00664e9ddfee0e,"""the Marine Band""",The United States Marine Band,United States Marine Band,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+e13ba717f9e54416bb61bfb665510cdd,"""Stonehenge""",Stonehenge,Stonehenge,finished,finished,1.0,1.0,1.0,1.0
+1b623543bd15458d80e07eae21850457,"""Materials""",Materials,Materials,finished,finished,1.0,1.0,1.0,1.0
+1ef613f6c25b4d43b8eb623746066663,"""a sun""",The rising sun.,rising sun,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+4ed4090ba9cd449a95f74e9d19aff030,"""\""Rime of the Ancient Mariner\""""",The Rime of the Ancient Mariner,The Rime of the Ancient Mariner,finished,finished,1.0,1.0,1.0,1.0
+a1fff358ccfa4bf2b53a911e082e4cd3,"""\""You had me at \\'hello\\'\""""",You had me at hello.,You had me at hello,finished,finished,1.0,1.0,1.0,1.0
+af49be3e777748e194c3b811d02bd69b,"""the Old Man in the Mountain""",Old Man of the Mountain,Old Man of the Mountain,finished,finished,0.0,0.0,0.75,0.75
+1efda6b3a760493ea90f2a7b5b8bcd4f,"""The Office""",The Office,The Office,finished,finished,1.0,1.0,1.0,1.0
+64a22f0e29224f86b10c0fa0928fa96c,"""cricket""",CRICKET,Cricket,finished,finished,1.0,1.0,1.0,1.0
+06c9760491af4b67ab944157736a1d37,"""E""","**e**
+
+(In ""agency,"" the letter *e* represents the schwa /ə/, the most common sound in English.)",e,finished,finished,0.0,1.0,0.15384615384615385,1.0
+1b6c95d31f6245f5a8817dc8e5129c3e,"""Susan Faludi""",Susan Faludi,Susan Faludi,finished,finished,1.0,1.0,1.0,1.0
+a0f4f67f76034e49a4153768c89364da,"""Fiorello LaGuardia""",Fiorello LaGuardia,Fiorello LaGuardia,finished,finished,1.0,1.0,1.0,1.0
+33c5b638c7c0474798042991babdb389,"""(Jack) Dempsey""",Jack Dempsey,Jack Dempsey,finished,finished,1.0,1.0,1.0,1.0
+b8d6403bc2cd48cda7413a3f5a4ba723,"""(Edward) Hopper""",True,Edward Hopper,finished,finished,0.0,1.0,0.0,1.0
+2c474544cb4543688efecf4d0b9393c4,"""Dred Scott""",Dred Scott,Dred Scott,finished,finished,1.0,1.0,1.0,1.0
+2760e2dfcb7d48308c0e7ff3d66adc03,"""the Ohio""",The Ohio River.,Ohio River,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+de08797cda7e4a928bebeb62b07788ec,"""the Zulu""",Zulu,Zulu,finished,finished,1.0,1.0,1.0,1.0
+87d921a79a624189b7fdbce4ba1c3409,"""to snipe""",snipe,snipe,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+1f75dbd11b634d259b8e74de03011324,"""Nixon""",Richard Nixon,Richard Nixon,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+6bc9eb6be6ef40488546f5c5a2656b0b,"""\""Kokomo\""""",Kokomo,Kokomo,finished,finished,1.0,1.0,1.0,1.0
+bb525e3475144796acac6b4db0591ec4,"""Buffy the Vampire Slayer""",Los Angeles,"Becoming, Part 2",finished,finished,0.0,0.0,0.0,0.0
+8fc577b2c9a24ab1bce297bad2408a47,"""Johns Hopkins""",Johns Hopkins University,Johns Hopkins University,finished,finished,0.0,0.0,0.8,0.8
+5eaf2421079b4899a10cbee96d2cee23,"""Patrick Dempsey""",Patrick Dempsey,Patrick Dempsey,finished,finished,1.0,1.0,1.0,1.0
+ad1053172799410dbbba6e41ff9304a0,"""the Hawkeyes""",the Hawkeyes,the Hawkeyes,finished,finished,1.0,1.0,1.0,1.0
+3d47899ab972454cb664fa33109370c2,"""Hypnos""",Hypnos,Hypnos,finished,finished,1.0,1.0,1.0,1.0
+dee7957065c94ee090d39bdf0373ef9a,"""Vimy Ridge""",Vimy Ridge,Vimy Ridge,finished,finished,1.0,1.0,1.0,1.0
+043508ba85cd4a0eb37a6d3e5d4a5d14,"""Molly""",Molly,Molly,finished,finished,1.0,1.0,1.0,1.0
+1d24871af6db449099d45e17b6341dcd,"""3""",Three,Three,finished,finished,0.0,0.0,0.0,0.0
+8fd31d7bf9f34ee18483bde98c3a7ab2,"""Target""",Target,Target,finished,finished,1.0,1.0,1.0,1.0
+61a6fdc4ec9c4834a833c8b6ed438b61,"""the Tower of London""",Tower of London,Tower of London,finished,finished,1.0,1.0,1.0,1.0
+3be35a549dce4bf090544d80e41457ed,"""a hope chest""",Trousseau,hope chest,finished,finished,0.0,1.0,0.0,1.0
+e166749f42c946f7a18160e48f3c9c77,"""La Vida Loca""",La Vida Loca,La Vida Loca,finished,finished,1.0,1.0,1.0,1.0
+efe119e8c6a64b8ab3377201e682c5ce,"""Jakob Dylan""",Jakob Dylan,Jakob Dylan,finished,finished,1.0,1.0,1.0,1.0
+b8eb90ad5e1f4c93abffc3452a756bfe,"""the Communist Party""",Communist Party of China (CPC),Communist Party of China,finished,finished,0.0,0.0,0.5714285714285715,0.6666666666666666
+4aac711a9ae143968a32b462772a4830,"""Oprah Winfrey""",Oprah Winfrey,Oprah Winfrey,finished,finished,1.0,1.0,1.0,1.0
+e2d39b4356ea455fb10eed85deda8040,"""Brando""",Marlon Brando,Marlon Brando,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+4accac8592a54df1b1b36fb49bf1b4df,"""Venezuela""","4,978 metres (16,332 ft)",Venezuela,finished,finished,0.0,1.0,0.0,1.0
+ba57a86593cb4c0781e2b39cc5a4405e,"""E. coli""",E. coli,E. coli,finished,finished,1.0,1.0,1.0,1.0
+5ae6225b818a41fc8e812560874921fb,"""Robinson Crusoe""",Robinson Crusoe,Robinson Crusoe,finished,finished,1.0,1.0,1.0,1.0
+b1c0c65c74c24c259b951d6a0d48d561,"""Roberto Clemente""",Roberto Clemente,Roberto Clemente,finished,finished,1.0,1.0,1.0,1.0
+b26721de2d9a44f495accae7093d4f3a,"""Russia""",Russia,Russia,finished,finished,1.0,1.0,1.0,1.0
+2f8054d5ed06439e8deb919c9c2449c6,"""Khrushchev""",Nikita Khrushchev,Nikita Khrushchev,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+1d6d2c9e18184226911b9d16a97f3530,"""Sir Edmund Hillary""",Sir Edmund Hillary,Sir Edmund Hillary,finished,finished,1.0,1.0,1.0,1.0
+4b6b4fd437ea490f9c7064152fd5dcac,"""The Last Remake of Beau Geste""",The Last Remake of Beau Geste,The Last Remake of Beau Geste,finished,finished,1.0,1.0,1.0,1.0
+4b6ab1f198474d779f28bddbb79937a2,"""Ford""",Ford,Ford,finished,finished,1.0,1.0,1.0,1.0
+05bb48c9c9094f2f9374148f2756fd4f,"""Ned Flanders""",Ned Flanders,Ned Flanders,finished,finished,1.0,1.0,1.0,1.0
+dedcc7b25ccf4ec388788d84adbebe07,"""a Sentry""",Sentry,Sentry,finished,finished,1.0,1.0,1.0,1.0
+e306bcb045c3479280aae5c54c7fc0a1,"""Henry VIII""",Henry VIII,Henry VIII,finished,finished,1.0,1.0,1.0,1.0
+89eb757291114ed8ac5bb0df63cff34b,"""Virginia""",Former U.S. Senator from Virginia,Senator,finished,finished,0.0,0.0,0.33333333333333337,0.0
+8b9d892de0e143c69dc410f5123e7520,"""LBJ""",LBJ,LBJ,finished,finished,1.0,1.0,1.0,1.0
+d1888a2614b147eeb2957960ac521fe1,"""Tennessee""",Tennessee,Tennessee,finished,finished,1.0,1.0,1.0,1.0
+aaf7b5f9f4fb4dbea1d57e8aa6cfe228,"""your family tree""",Family tree,Family tree,finished,finished,0.0,0.0,0.8,0.8
+bbb1f8afa57049488402d1d02e211878,"""a berating""",berating (a berating),a berating,finished,finished,0.0,1.0,0.6666666666666666,1.0
+1d4d71abca5c48b4a6f3722b09da8643,"""Seattle""",Seattle,Seattle,finished,finished,1.0,1.0,1.0,1.0
+c2f98462f1334e018aedf02dee8e4313,"""Oh, God!""","**Oh, God!**","Oh, God!",finished,finished,1.0,1.0,1.0,1.0
+87662c5037b04f44a5e20fcc7c925f98,"""Minerva""",Minerva,Minerva,finished,finished,1.0,1.0,1.0,1.0
+12b51ad292af470ebd99f1d043357ebc,"""Health & Human Services""",Department of Health and Human Services (HHS),Health and Human Services,finished,finished,0.0,0.0,0.6,0.8571428571428571
+70202b1963a545e7ba8ebeea2b589c32,"""Margaret Mitchell""",Margaret Mitchell,Margaret Mitchell,finished,finished,1.0,1.0,1.0,1.0
+7ec750061ca34bbc927c07fd28f2cefa,"""December""",December,December,finished,finished,1.0,1.0,1.0,1.0
+6f4ec63343fb46d0bf9b7a16802285d5,"""removed""",Removed,removed,finished,finished,1.0,1.0,1.0,1.0
+6423c6aff9d342ba9b280cfe66dcb5ff,"""a perfect game""",Perfect game,A perfect game,finished,finished,1.0,1.0,1.0,1.0
+7a004527051f4f59ba6f9026620091ed,"""the Bering Strait""",The Bering Strait,Bering Strait,finished,finished,1.0,1.0,1.0,1.0
+442ca352dc31418a9548fddc8259ef66,"""Personal""",Personal,Personal Jesus,finished,finished,1.0,0.0,1.0,0.6666666666666666
+8a5053cc7aca4cd1a5ffda77ddb5ce9a,"""Wayne Gretzky""",Wayne Gretzky,Wayne Gretzky,finished,finished,1.0,1.0,1.0,1.0
+c3af854e40fc4dfab301bb95e9d9e3d2,"""Sinclair Lewis""",Sinclair Lewis,Sinclair Lewis,finished,finished,1.0,1.0,1.0,1.0
+6de37e27f88c44f291990360bf815f5a,"""a bay window""",window,bay window,finished,finished,0.0,1.0,0.6666666666666666,1.0
+007e0f579f49464d90e43b6e24cefbb4,"""Spanish-American \nWar""",Spanish-American War,Spanish-American War,finished,finished,1.0,1.0,1.0,1.0
+934bccc0b59a4d75b6562ed5649c8985,"""the Manx""","<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name=""shell"">
+<｜｜DSML｜｜ parameter name=""command"" string=""true"">python3 - <<'PY'
+import urllib.request, urllib.parse, re, html, time
+qs=['""Wight"" ""Jersey"" ""Manx"" cat', '""Wight"" ""Jersey"" ""Manx"" cattle', '""Wight"" ""Jersey"" ""Manx"" sheep', '""Wight"" ""Jersey"" ""Manx"" breed of', '""Wight"" ""Jersey"" ""Manx"" terrier', '""Wight"" ""Jersey"" ""Manx"" pigeon', '""Isle of Wight"" ""Jersey"" ""Manx""']
+for q in qs:
+    url='https://www.bing.com/search?format=rss&q='+urllib.parse.quote(q)
+    req=urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0'})
+    try:
+        data=urllib.request.urlopen(req, timeout=15).read().decode('utf-8','ignore')
+        items=re.findall(r'<item><title>(.*?)</title><link>(.*?)</link><description>(.*?)</description>', data, re.S)
+        print('QUERY:',q)
+        for t,l,d in items[:4]:
+            print(' -', html.unescape(t), '|', html.unescape(re.sub('<.*?>','',d))[:200])
+        print()
+    except Exception as e:
+        print('ERR', q, e)
+    time.sleep(1)
+PY</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>","Based on the terse list of three place-based names — **Wight** (Isle of Wight), **Jersey**, and **Manx** (Isle of Man) — they share the attribute of being islands.
+
+islands",finished,finished,0.0,0.0,0.0,0.0
+ab628aaebd1149a596554d215f8207d9,"""Cleopatra""",Cleopatra,Cleopatra,finished,finished,1.0,1.0,1.0,1.0
+796799cc49d2488c9300266c324a0001,"""Happy Days""",Happy Days,Happy Days,finished,finished,1.0,1.0,1.0,1.0
+fc5312021cfd4dd998dfa3f7342ab62b,"""Freeport""","Freeport, Maine",Freeport,finished,finished,0.0,1.0,0.6666666666666666,1.0
+a0034b2ceb474e749fc178de8e297e27,"""pico de gallo""",Pico de gallo,pico de gallo,finished,finished,1.0,1.0,1.0,1.0
+b3db70bb7a1746eba2857bdcd77aec1e,"""Nostradamus""",Nostradamus,Nostradamus,finished,finished,1.0,1.0,1.0,1.0
+d3bc24bbf7a64cfcbd7817b9c5d6ca54,"""lapis lazuli""",lapis lazuli,Lapis lazuli,finished,finished,1.0,1.0,1.0,1.0
+1647038e04294ba293bafc1dff2754d7,"""Russia""",Russia,Russia,finished,finished,1.0,1.0,1.0,1.0
+4e0652d328f640b6b8a36f47d508a05a,"""one""",one,one,finished,finished,1.0,1.0,1.0,1.0
+a09c6188fae74726aed2bbf66ca193ce,"""Carson City""",Carson City,Carson City,finished,finished,1.0,1.0,1.0,1.0
+3201d8f450dd47debc62e21b5fb3c490,"""Venus""",Venus,Venus,finished,finished,1.0,1.0,1.0,1.0
+f9eb03ae442c4afa9ea03d58106ec819,"""(John) Coltrane""",John Coltrane,John Coltrane,finished,finished,1.0,1.0,1.0,1.0
+68b20a57f30d4561b7f552c22be69343,"""Latino""",Latino,Hispanic,finished,finished,1.0,0.0,1.0,0.0
+8b090fa84d1744e9952401d6cacb09f6,"""Argentina""",Argentina,Argentina,finished,finished,1.0,1.0,1.0,1.0
+f285b18402cc4d1ea3cdbab6ece293df,"""surf s up""",Surf's Up,Surf's Up,finished,finished,1.0,1.0,1.0,1.0
+268bdc9af5244092ac50e46d0e58da14,"""Harp""",The Grass Harp,Harp,finished,finished,0.0,1.0,0.6666666666666666,1.0
+1d4b08ca62204b51b18519d5f7ef66f6,"""Goodyear""",Goodyear,Goodyear,finished,finished,1.0,1.0,1.0,1.0
+75a1657798b3412e83c28343a93c6a2e,"""a bagpipe""",Bagpipes,Bagpipes,finished,finished,0.0,0.0,0.0,0.0
+87885977c8e54c77a529f34c3b03411d,"""algae""",algae,algae,finished,finished,1.0,1.0,1.0,1.0
+3486bf0bc72d438b9627e2ec2b6ce4bb,"""Heathrow""",Heathrow Airport,Heathrow Airport,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+fb928910625f422ba1897825b5ab5f4f,"""15""",15 stars,15,finished,finished,0.0,1.0,0.6666666666666666,1.0
+ae072e1d30fa4694b14ff98e301fd768,"""a repertoire""",A repertoire.,A repertoire,finished,finished,1.0,1.0,1.0,1.0
+30363d00e669430bb626175fcce58d58,"""Stanley Kubrick""",Stanley Kubrick,Stanley Kubrick,finished,finished,1.0,1.0,1.0,1.0
+5e8058a7b16d43f485517f81ee3b4a3a,"""(Louis) Rukeyser""",Louis Rukeyser,Louis Rukeyser,finished,finished,1.0,1.0,1.0,1.0
+7d35fcb607d144308e59842d5fb0e6c7,"""cholesterol""",cholesterol,cholesterol,finished,finished,1.0,1.0,1.0,1.0
+9cf670af0d5547f1af4ba354a41c7065,"""Alien""",Alien,Alien,finished,finished,1.0,1.0,1.0,1.0
+af3c4b517336436681e03e57ce731b31,"""Rosa Parks""",Rosa Parks,Rosa Parks,finished,finished,1.0,1.0,1.0,1.0
+8512ed5d054544cfaec47e568a5e099b,"""John Donne""",John Donne,John Donne,finished,finished,1.0,1.0,1.0,1.0
+d104edea8ff5470a98dc6f81520e39e1,"""Detroit""",Detroit,Detroit,finished,finished,1.0,1.0,1.0,1.0
+44777e2c7f8c42b7a2252b71c64aa422,"""Joe DiMaggio""",Joe DiMaggio,Joe DiMaggio,finished,finished,1.0,1.0,1.0,1.0
+e29870210b084e41a6e65fff44bd5f75,"""Facebook""",Facebook,Facebook,finished,finished,1.0,1.0,1.0,1.0
+f5ee56d993c147c4b84fe7a2e820cafe,"""masks""",Masks,masks,finished,finished,1.0,1.0,1.0,1.0
+592684577f2f4d0185be7aff295266f9,"""Offenbach""",Jacques Offenbach,Jacques Offenbach,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+5fb265572a0349ceab2a01dce4db25ae,"""a big rig""",Big rig,Big rig,finished,finished,1.0,1.0,1.0,1.0
+85a8040e8294493b8d038621e6a04930,"""winter""",winter,winter,finished,finished,1.0,1.0,1.0,1.0
+dfe37094074c4f18840cbd3ddc3f5272,"""Earth""",Earth,Earth,finished,finished,1.0,1.0,1.0,1.0
+29b16038d8d842b8911d0c6cda23ee03,"""Hanson""",Hanson,Hanson,finished,finished,1.0,1.0,1.0,1.0
+5811f1e8130d41fb87b71b4b86c0588f,"""Fargo""",Fargo,Fargo,finished,finished,1.0,1.0,1.0,1.0
+a18fc294f8ea407880c30cf70c7ae290,"""Catherine of Aragon""",Catherine of Aragon,Catherine of Aragon,finished,finished,1.0,1.0,1.0,1.0
+e6e6fdb13a5d482db07eef5e5c02d4f0,"""football""",American football terms.,football,finished,finished,0.0,1.0,0.5,1.0
+90f714b5b60c45cdaaa5a32865335619,"""the Stamp Act""",The Stamp Act (1765).,No taxation without representation,finished,finished,0.0,0.0,0.8,0.0
+0036f2df628845669edefeb70bfe672d,"""Terrence McNally""",Terrence McNally,Terrence McNally,finished,finished,1.0,1.0,1.0,1.0
+2352016546794050829f1b07f25f9090,"""Home Improvement""",Home Improvement,Home Improvement,finished,finished,1.0,1.0,1.0,1.0
+552af585b5004a0a9a56820d059be3e9,"""a duvet""",Duvet,duvet,finished,finished,1.0,1.0,1.0,1.0
+a51dbb7a319b4cfe82ae927d6fa2a378,"""the Khyber Pass""",Khyber Pass,Khyber Pass,finished,finished,1.0,1.0,1.0,1.0
+09610f7c19cd4da480f84cd47fad368c,"""machete""",machete,machete,finished,finished,1.0,1.0,1.0,1.0
+2e32f9a614fe44c488f5f3c973b956ee,"""Beyond the Sea""",Beyond the Sea,Beyond the Sea,finished,finished,1.0,1.0,1.0,1.0
+d05ced73459848598523c0de21f63fb9,"""cricket""",Cricket,Cricket,finished,finished,1.0,1.0,1.0,1.0
+b3813b34d25e4dc592e344a9f226958e,"""Nasser""",Gamal Abdel Nasser,Gamal Abdel Nasser,finished,finished,0.0,0.0,0.5,0.5
+a8a3a1697d9d4157b3f1d41bd510a70d,"""12""",12 pounds,12 pounds,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+dccec34c17324c79a7a24c6f55edc4d5,"""(Vijay) Singh""",Vijay Singh,Vijay Singh,finished,finished,1.0,1.0,1.0,1.0
+7adeaa03d9384dcc8aff7919d46bb858,"""Cancun""",Cancún,Cancún,finished,finished,0.0,0.0,0.0,0.0
+6a67adec151c4625969743e37ad6393d,"""Caliban""",Caliban,Caliban,finished,finished,1.0,1.0,1.0,1.0
+0bf30b86754b402e8edb15e06deea6d7,"""Easter""","Easter (Pascua Florida, ""feast of flowers"")",Easter,finished,finished,0.0,1.0,0.2857142857142857,1.0
+93269a66ef94416f8fa08257efc9d30e,"""eel""",Eel,eel,finished,finished,1.0,1.0,1.0,1.0
+e479559a0b7b47789e1d5293852e6994,"""precipitation""",precipitation,precipitation,finished,finished,1.0,1.0,1.0,1.0
+c37a6b4a6320407089cfcf6effca6f2f,"""the Matterhorn""",Matterhorn,The Matterhorn,finished,finished,1.0,1.0,1.0,1.0
+8d372d89ff964c5a81828bebea3b72b7,"""Sagittarius""",Sagittarius,Sagittarius,finished,finished,1.0,1.0,1.0,1.0
+48e2633ad90147a1bdc751f7387034eb,"""the Moon""",The Moon,Moon,finished,finished,1.0,1.0,1.0,1.0
+857ad42459c14613b984c39ca68430dd,"""Pilate""",Pilate,Pilate,finished,finished,1.0,1.0,1.0,1.0
+540f3cb9af4e4c3c8ce39b2c0ee94522,"""Tasmania""",Tasmania,Tasmania,finished,finished,1.0,1.0,1.0,1.0
+bc382a25e8da4f51a5a9cba127614b4d,"""Rapa Nui""",Rapa Nui,Rapa Nui,finished,finished,1.0,1.0,1.0,1.0
+6db35769ae81425781881647d14b9533,"""Catherine de\\' Medici""",Catherine de' Medici,Catherine de Medici,finished,finished,1.0,1.0,1.0,1.0
+b55ad2773d2b4de9971e7760cc36b8d0,"""Hugh Laurie""",Hugh Laurie,Hugh Laurie,finished,finished,1.0,1.0,1.0,1.0
+84fa5a0c7f7f42fc846f79589a14112f,"""Sarah McLachlan""",Sarah McLachlan,Sarah McLachlan,finished,finished,1.0,1.0,1.0,1.0
+5ada43ba21394ff58c8875db16c2fb4a,"""ATMs""",ATMs,ATMs,finished,finished,1.0,1.0,1.0,1.0
+265083cfc2bc481e8d8ed466bdb62543,"""Flickr""",Flickr,Flickr,finished,finished,1.0,1.0,1.0,1.0
+f26ef14e89244472a71ad384cf5214db,"""plump""",They plump.,plump,finished,finished,0.0,1.0,0.6666666666666666,1.0
+96e5b8ae45b74e3b84ea0dcb32f6e597,"""Johnny Appleseed""",Johnny Appleseed,Johnny Appleseed,finished,finished,1.0,1.0,1.0,1.0
+917d841d16014bbba49d0d3368223e43,"""Don Rickles""",Don Rickles,Don Rickles,finished,finished,1.0,1.0,1.0,1.0
+981894e1f0174f148bfc896cc6c37c38,"""Cape Town""",Cape Town,Cape Town,finished,finished,1.0,1.0,1.0,1.0
+857b8456009640359d2c10e4d19abd19,"""Cleopatra""",Cleopatra,Cleopatra,finished,finished,1.0,1.0,1.0,1.0
+f75bce4f743c4a6d984b64e71bb00261,"""the Normandy invasion""",Operation Overlord (the D-Day Normandy invasion),Operation Overlord,finished,finished,0.0,0.0,0.5714285714285715,0.0
+1bad2fba539343539ccc0666d70f4da3,"""Battlestar Galactica""",Battlestar Galactica,Battlestar Galactica,finished,finished,1.0,1.0,1.0,1.0
+3045f82703e348d9b7355a602dc2653c,"""Kennedy Space Center""",**Kennedy Space Center**,Kennedy Space Center,finished,finished,1.0,1.0,1.0,1.0
+7b8f504bff1240bf983c7f28c50da9e4,"""standard time""",Standard time,Standard time,finished,finished,1.0,1.0,1.0,1.0
+1aab59c3467d486484e0a964728d6fe2,"""a rip-off""",rip-off (ripoff),Rip off,finished,finished,0.0,1.0,0.6666666666666666,1.0
+19803226726c4e5592cc9584cc09c1ca,"""Vietnam""",Nguyen Minh Triet,Nguyen Minh Triet,finished,finished,0.0,0.0,0.0,0.0
+218c4e7c031049cf8e40caa3ef4d03a5,"""Coen""",COEN,Coen,finished,finished,1.0,1.0,1.0,1.0
+aa87cb64b6f54159927506f28ec62f4e,"""Picasso""",Picasso,Picasso,finished,finished,1.0,1.0,1.0,1.0
+dcf0c2c053ad499faac8a13f71296557,"""\""The Lottery\""""",The Lottery,The Lottery,finished,finished,1.0,1.0,1.0,1.0
+2b32a64c14dd45fa88d3022bafb66916,"""the Shawnee""",Shawnee,Shawnee,finished,finished,1.0,1.0,1.0,1.0
+4e2bde6cceaf4589a1827023bc70df00,"""Ham""",Ham,Ham,finished,finished,1.0,1.0,1.0,1.0
+886f2801a4fc43b9adb3ab9f551555d4,"""a marinade""",marinade,marinade,finished,finished,1.0,1.0,1.0,1.0
+3a635690d173489fbb5da0bbc4e67f0a,"""James Earl Jones""",James Earl Jones,James Earl Jones,finished,finished,1.0,1.0,1.0,1.0
+6c4b1e619f9047f5be345a1934fb00a2,"""potato chips""",Potato chips.,potato chips,finished,finished,1.0,1.0,1.0,1.0
+5b6925fbab6a4b369f69c19075efb029,"""constellation""",constellation,constellation,finished,finished,1.0,1.0,1.0,1.0
+b10f01cf02e04443a3de620e24f5f86c,"""Honda""",The Honda Ridgeline is a sport utility truck with unibody construction and independent suspension.,sport utility truck,finished,finished,0.0,0.0,0.15384615384615385,0.0
+23e28bc8e6c0466c9f1c7427b37b8d8f,"""Arby\\'s""",Arby's,Arby's,finished,finished,1.0,1.0,1.0,1.0
+a7674332b87849f4b6cbc64be28b233b,"""the College of William and Mary""",College of William and Mary,College of William and Mary,finished,finished,1.0,1.0,1.0,1.0
+1c6179d329394b268eea8f552523b321,"""Ismene""",Ismene,Ismene,finished,finished,1.0,1.0,1.0,1.0
+c09dc55e403141348ba0778942aef804,"""Catch-22""",Catch-22,Catch-22,finished,finished,1.0,1.0,1.0,1.0
+bf13df65693e41a58ffe9668a2100305,"""the Caspian tern (the Caspain Sea accepted)""",The Caspian tern,the Caspian tern,finished,finished,0.0,0.0,0.5714285714285715,0.5714285714285715
+d848ec91a45a47e9ad5b7951b9fa328c,"""Stoke""",Stoke-on-Trent,Stoke-on-Trent,finished,finished,0.0,0.0,0.0,0.0
+cf4dc2bacd2544738999a500551e695d,"""Andorra""",Andorra,Andorra,finished,finished,1.0,1.0,1.0,1.0
+52842cb313f445e399029f5e78bc5cd1,"""the Cincinnati Reds""",Cincinnati Reds,Cincinnati Reds,finished,finished,1.0,1.0,1.0,1.0
+23a9f0f9823f4c6ba66163b1652a6b05,"""a rhapsody""",Rhapsody,rhapsody,finished,finished,1.0,1.0,1.0,1.0
+1ab6058b99fb4263a34d46ab834a899d,"""Portugal""",Portugal,Portugal,finished,finished,1.0,1.0,1.0,1.0
+7eac903ab82446cbbd0e55db99585f64,"""an aerosol""",Aerosol,aerosol,finished,finished,1.0,1.0,1.0,1.0
+15e2f1ce0d4a4cfc80335a7d931fa6c0,"""Pilgrim\\'s Progress""",The Pilgrim's Progress,The Pilgrim's Progress,finished,finished,1.0,1.0,1.0,1.0
+d89950b1a4264e0fb3790eea755d2f71,"""garlic""",garlic,garlic,finished,finished,1.0,1.0,1.0,1.0
+7085fa663e24471494b27184d9729b3b,"""Catch-22""",Catch-22,Catch-22,finished,finished,1.0,1.0,1.0,1.0
+db406004734c46d28b5237cef711e2fb,"""Newton""",Isaac Newton,Isaac Newton,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+fe5a8c72fb9e4c55933786c6e49072d0,"""Spam""",Spam,Spam,finished,finished,1.0,1.0,1.0,1.0
+5e838c1d51044e77ac345c32b2a8cfee,"""the Hanging Gardens of Babylon""",Hanging Gardens of Babylon,Hanging Gardens,finished,finished,1.0,0.0,1.0,0.6666666666666666
+beac9af49fe24592abc9acc2c575e6e3,"""1939""",1939,1939,finished,finished,1.0,1.0,1.0,1.0
+e57213c97d9541dc97988ec38f544b3c,"""John Madden""",John Madden,Madden Curse,finished,finished,1.0,0.0,1.0,0.5
+962d456952b14ca4a40adb6a665e4655,"""Minnesota""",Minnesota,Minnesota,finished,finished,1.0,1.0,1.0,1.0
+ced61a206d8343fb937e03fd2e76a5ba,"""mercury""",Mercury,mercury,finished,finished,1.0,1.0,1.0,1.0
+f8d0e0ecdc7c4420b7f1f513e18429a6,"""sign the Declaration of Independence""",Sign the Declaration of Independence,sign the Declaration of Independence,finished,finished,1.0,1.0,1.0,1.0
+fcba0d52a55b4d9587eb8442ccf98928,"""crocodile""",Crocodile,crocodile,finished,finished,1.0,1.0,1.0,1.0
+ce8c2511f6a2487995e557418f159efb,"""marsupials""",Marsupials,marsupials,finished,finished,1.0,1.0,1.0,1.0
+7aefedbe5511421bacbdb9d6d5bd94e2,"""(Alexandre) Dumas""","Oui, c’est un roman passionnant.",Alexandre Dumas,finished,finished,0.0,1.0,0.0,1.0
+a0dea12493ec4f3fad8587be85e5d0e0,"""changelings""",Changelings,changelings,finished,finished,1.0,1.0,1.0,1.0
+eaa107b4f1224f229132381f53bb4588,"""mercury""",Mercury,Mercury,finished,finished,1.0,1.0,1.0,1.0
+5f52a6cf393c4f48a852f94e4d035270,"""Lewis Carroll""",Lewis Carroll,Lewis Carroll,finished,finished,1.0,1.0,1.0,1.0
+4d5e0dea4f574ac187add806d1714a0e,"""James Thurber""",James Thurber,James Thurber,finished,finished,1.0,1.0,1.0,1.0
+de3cc412c77c49d2b1c90c72b3e2c4f1,"""deposit""",deposit,deposit,finished,finished,1.0,1.0,1.0,1.0
+e0f0e3482b4d42218bf7856e590ea65c,"""mercury""",Mercury,Mercury,finished,finished,1.0,1.0,1.0,1.0
+34874f99ede8490f8cb0a6989cb2a2e5,"""a raincoat""",Raincoat,Raincoat,finished,finished,1.0,1.0,1.0,1.0
+3ab1af1d409a4e1197e5b6e07b1c71a4,"""Grambling""",Grambling State University,Grambling,finished,finished,0.0,1.0,0.5,1.0
+9e8622f9a9184715982fd8dd1c6e3ba0,"""People""",People,People,finished,finished,1.0,1.0,1.0,1.0
+452f87d64e68457b89435f3595a3f788,"""shears""",shears,shears,finished,finished,1.0,1.0,1.0,1.0
+fbe47ed4a64c4659a4b0ea00be4d94b9,"""water""",Water,water,finished,finished,1.0,1.0,1.0,1.0
+fd8a452315f149bca027943bf51dc942,"""trespassing""",trespassing,trespassing,finished,finished,1.0,1.0,1.0,1.0
+a66e9943b68245029ef11c7874193702,"""the stigma""",Stigma,Stigma,finished,finished,1.0,1.0,1.0,1.0
+4068384dadbf49afb3e663a099fbd619,"""the Secretary of Defense""",Defense,Defense,finished,finished,0.0,0.0,0.5,0.5
+c92ffc250da04dadbd4091e7caff083d,"""Iran Hostage Crisis""",The Iran Hostage Crisis.,Iran hostage crisis,finished,finished,1.0,1.0,1.0,1.0
+648a3e22947944589f67270b3bf39e5b,"""Israel""",Israel,Israel,finished,finished,1.0,1.0,1.0,1.0
+5c562c75aa9f465587b466f96f47c930,"""beer""",Beer,beer,finished,finished,1.0,1.0,1.0,1.0
+10b15b8fe4324bd48b481506d0925863,"""Timon""",Timon,Timon,finished,finished,1.0,1.0,1.0,1.0
+58b49f67d6ca40e19df7fe3f9410d4e6,"""Cairo""",Cairo,Cairo,finished,finished,1.0,1.0,1.0,1.0
+b6b16e7c963241d3819a28cd4d54df69,"""silent""",silent,silent,finished,finished,1.0,1.0,1.0,1.0
+40c86f5f19654755b76a872cad12e8fe,"""(Thomas) Gallaudet""",Thomas Hopkins Gallaudet,Thomas Hopkins Gallaudet,finished,finished,0.0,0.0,0.8,0.8
+c63517e2f3b543afb9157c6e926f3a22,"""(Adolf) Hitler""",Adolf Hitler,Adolf Hitler,finished,finished,1.0,1.0,1.0,1.0
+3bf21733e43c4b5fac681d0e9a4a3b83,"""a yoke""",A yoke,yoke,finished,finished,1.0,1.0,1.0,1.0
+a716cc3098294cbd9a6e00529a414b41,"""Doom""",Doom 3,Doom 3,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+9d65ae3eff6940dd88b0b66996c9360d,"""a hat""",hat,hat,finished,finished,1.0,1.0,1.0,1.0
+791836977d0143509c7b8b00ccfae43d,"""(George) Eliot""",George Eliot,George Eliot,finished,finished,1.0,1.0,1.0,1.0
+e9b52d99692b4cb39db22db4f6b79d7c,"""a pear""",Pear,pear,finished,finished,1.0,1.0,1.0,1.0
+8049aa445ccf4e02848687895819b1a8,"""Alive""",Alive,Alive,finished,finished,1.0,1.0,1.0,1.0
+ffa2d3fd7c8641d5b88780ab0c980057,"""a knickerbocker""",Knickerbocker,Knickerbocker,finished,finished,1.0,1.0,1.0,1.0
+ea6c17bb22ba4ac08420f2395e28ed79,"""Crayola""",Crayola,Crayola,finished,finished,1.0,1.0,1.0,1.0
+30866cba68bb479d8d5a3017dbf63095,"""Joe Frazier""",Joe Frazier,Joe Frazier,finished,finished,1.0,1.0,1.0,1.0
+741f6007092a4251bbb733f8251d6ff8,"""virus""",virus,virus,finished,finished,1.0,1.0,1.0,1.0
+42ddac486eed46c9883ba0550cf719b9,"""George Bernard Shaw""",George Bernard Shaw (Bernard Shaw),Henrik Ibsen,finished,finished,0.0,0.0,0.7499999999999999,0.0
+f5bf85a20abb40d3b781b55fc5ce9f66,"""Sophocles""",Sophocles,Sophocles,finished,finished,1.0,1.0,1.0,1.0
+8bf26a55b8e24999a71cec5c22dd6003,"""Qatar""",Qatar,Qatar,finished,finished,1.0,1.0,1.0,1.0
+8b68dfd9a467473897fa9d1434418267,"""Italy""",grief,grief,finished,finished,0.0,0.0,0.0,0.0
+3da5b2392db8414bba6d0c3da2ab3f79,"""Nixon""",Richard Nixon,Richard Nixon,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+300801d48f2f4d8088876d6a3061b3aa,"""wear it""","A silk or lace head scarf or veil worn over the head and shoulders, often over a high comb, especially by Spanish and Latin-American women.",Spain,finished,finished,0.0,0.0,0.0,0.0
+18f57112ccf54db680526fe8d04f0a0f,"""24""",24,24,finished,finished,1.0,1.0,1.0,1.0
+b83ea47cda2b4428861c4a86eed64ad2,"""landfall""",Landfall,landfall,finished,finished,1.0,1.0,1.0,1.0
+25e3396cd2404cddb1f5a01c7e6e7553,"""Kazakhstan""",Kazakhstan,Kazakhstan,finished,finished,1.0,1.0,1.0,1.0
+37b7a09bb7ed4b7ca9471b847c3b89f7,"""(Frank) Sinatra""",Frank Sinatra,Frank Sinatra,finished,finished,1.0,1.0,1.0,1.0
+878d7d4e5b024fa394d5551a74bf74ce,"""(Richard) Byrd""",Richard Byrd,Richard Byrd,finished,finished,1.0,1.0,1.0,1.0
+e5e77a9058cc4bf7a92c6a911601f701,"""Tom Jones""","Tom Jones (The History of Tom Jones, a Foundling)",Tom Jones,finished,finished,0.0,1.0,0.4444444444444445,1.0
+67c2645726af424ebef4df2229368abf,"""Venus Williams""",Venus Williams,Venus Williams,finished,finished,1.0,1.0,1.0,1.0
+0f4a622654634b7987233ee50d5f72c5,"""'s""",Straight A's,straight A's,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+a95dda91cd1f47ab8473faf8c6d370b5,"""Duchamp""",Marcel Duchamp,Marcel Duchamp,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+d62c4b22ddb244608a60d467aa5c35e8,"""Babe""",Babe,Babe,finished,finished,1.0,1.0,1.0,1.0
+203cf01361a54663adf565df1070296e,"""boxcars""",Boxcars,Boxcars,finished,finished,1.0,1.0,1.0,1.0
+39cb7d676f7049ed976f8986a41c27bb,"""grasshoppers""",grasshopper,grasshopper,finished,finished,0.0,0.0,0.0,0.0
+c54e6e0f897645c18a28a0637f193908,"""Belize""",Belize,Belize,finished,finished,1.0,1.0,1.0,1.0
+df1005681f55423a8bfca735b00db270,"""Calypso""",Calypso,Calypso,finished,finished,1.0,1.0,1.0,1.0
+867f309535fc4b788320e6c2b23fd89e,"""Van Morrison""",Van Morrison,Van Morrison,finished,finished,1.0,1.0,1.0,1.0
+9f05e19748384eacbb1a707586954726,"""South America""",South America,South America,finished,finished,1.0,1.0,1.0,1.0
+4e1a0a534af94137bb8bcf832c41339f,"""Northern Exposure""",Northern Exposure,Northern Exposure,finished,finished,1.0,1.0,1.0,1.0
+1666f5c898ee4e7f83c8916ac0a1a369,"""Hercules""",Hercules,Hercules,finished,finished,1.0,1.0,1.0,1.0
+8c3bc713dc724f5f907694e2d2583526,"""mushrooms""",mushrooms,mushrooms,finished,finished,1.0,1.0,1.0,1.0
+c9cf94088d08447195c9ec8ee3e669f5,"""skull & crossbones""",Skull and crossbones,skull and crossbones,finished,finished,0.0,0.0,0.8,0.8
+5a9531bad7d049b6ad6290ad7ee0203e,"""Trigger""",Trigger,Trigger,finished,finished,1.0,1.0,1.0,1.0
+f6ceae406d594d36865f739600922848,"""St. Francis of Assisi""",St. Francis of Assisi,St. Francis of Assisi,finished,finished,1.0,1.0,1.0,1.0
+5e9c599e2f874b5baac79b49174f52ca,"""IBM""",IBM,IBM,finished,finished,1.0,1.0,1.0,1.0
+145a9ce734fd4d328a4be6f9deec64b9,"""Decoration Day""",Decoration Day,Decoration Day,finished,finished,1.0,1.0,1.0,1.0
+ac3f4d90416d446996962b0020b9c635,"""Odysseus""",Odysseus,Odysseus,finished,finished,1.0,1.0,1.0,1.0
+d054ab0a3bb945a3a156b9b097fa360d,"""the Visigoths""",Visigoths,Visigoths,finished,finished,1.0,1.0,1.0,1.0
+47ea5e3fbfea4969a8e4d6b8167daf7e,"""Claddagh""",The Claddagh ring.,Claddagh ring,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+93f29dc1c04c4d50937ce66a8d373825,"""The Lone Ranger""",The Lone Ranger,the Lone Ranger,finished,finished,1.0,1.0,1.0,1.0
+f55cde33b3c34d17b152fe3f001b879c,"""Estonia""",Estonia,Estonia,finished,finished,1.0,1.0,1.0,1.0
+249f4c256b544aeabfb919547d7f5969,"""prehensile""",Prehensile,prehensile,finished,finished,1.0,1.0,1.0,1.0
+5b4ee5101c9847c68cacae79a5ddaf0a,"""Connecticut""","Hartford, Connecticut",Hartford,finished,finished,0.0,0.0,0.6666666666666666,0.0
+a549a72dcb53436faa67c8b681b85735,"""Beethoven""",Beethoven,Beethoven,finished,finished,1.0,1.0,1.0,1.0
+e5b3512a238c4b12a749ab93a8845fbb,"""Hatch""",HATCH,Hatch,finished,finished,1.0,1.0,1.0,1.0
+53dabd2e810a44e09bf78a3d14a41811,"""the Pyrenees""",Pyrenees,Pyrenees,finished,finished,1.0,1.0,1.0,1.0
+3e27e48cd7ed4f828b1506c626917c3f,"""to displace""",**displaces**,displace,finished,finished,0.0,0.0,0.0,0.6666666666666666
+4af582d60f3e463caa1c8b1669e931a4,"""Italy""",Italy,Italy,finished,finished,1.0,1.0,1.0,1.0
+979feb65f2b643589a974182664cbeb6,"""Frank Sinatra""",Frank Sinatra,Frank Sinatra,finished,finished,1.0,1.0,1.0,1.0
+32c460e50841419e86a4ff76b28d3ac6,"""the Headless Horseman""",The Headless Horseman,Headless Horseman,finished,finished,1.0,1.0,1.0,1.0
+6d30545d099e4ccc89f1ce4b98c6ff24,"""Charles II""",King Charles II,Charles II,finished,finished,0.0,1.0,0.8,1.0
+69904776d81641888e4bd93ea9574275,"""Constantine""",Constantine XI Palaiologos,Constantine,finished,finished,0.0,1.0,0.5,1.0
+15c144e4d19d4ccaacecdf41d55cc6cc,"""Vladivostok""",Vladivostok,Vladivostok,finished,finished,1.0,1.0,1.0,1.0
+4483bb93ad36402ba3e5e3257abfb415,"""Poland""",Poland,Poland,finished,finished,1.0,1.0,1.0,1.0
+152527eaf57e4c11991713d44c1dfa7f,"""bombs""",Bombs,bombs,finished,finished,1.0,1.0,1.0,1.0
+6eea972e7c134cadb65132643a906ba1,"""the Vistula""",Vistula,Vistula,finished,finished,1.0,1.0,1.0,1.0
+a757b55a3f83439db423887bd8143f90,"""Martina Navratilova""",Martina Navratilova,Martina Navratilova,finished,finished,1.0,1.0,1.0,1.0
+3c2897b03e0844a19fd5b3d49e99e3a5,"""Jean""",Blue Jean,Jean,finished,finished,0.0,1.0,0.6666666666666666,1.0
+2711f4e089ee430c8cbeb3498bf95473,"""volcano""",volcano,volcano,finished,finished,1.0,1.0,1.0,1.0
+d3135a3432a24c1b8d22ef8e1753800f,"""3000""",3000,3000,finished,finished,1.0,1.0,1.0,1.0
+606268049245493e960f6a2fe6ddf9ba,"""Son of Sam""",Son of Sam,Son of Sam,finished,finished,1.0,1.0,1.0,1.0
+5ae3072b6bbd40cab41d2d0782aa9bef,"""The Sopranos""","HBO and the producers of ""The Sopranos"" filed a $100 million countersuit against James Gandolfini.",Outstanding Lead Actor in a Drama Series,finished,finished,0.0,0.0,0.15384615384615385,0.0
+48ae0009527a4ba0842cf64a51233faf,"""gestation""",gestation,gestation,finished,finished,1.0,1.0,1.0,1.0
+4abb0e9595604633a05a61c344d88b2d,"""red lion""",Red Lion,Red Lion,finished,finished,1.0,1.0,1.0,1.0
+67848315b1fe4feabe12fd05d9de288a,"""King Lear""",King Lear,King Lear,finished,finished,1.0,1.0,1.0,1.0
+010b367b8f5e49d3be4fea7439de0514,"""Christa McAuliffe""",Christa McAuliffe,Christa McAuliffe,finished,finished,1.0,1.0,1.0,1.0
+3b118e16845f4c09a5c0ad28fa40b006,"""Toyota""",Toyota,Toyota Prius,finished,finished,1.0,0.0,1.0,0.6666666666666666
+a125832f958b4b949d53701e7e7de41d,"""Roger Bannister""","1951, 1953, and 1954",Roger Bannister,finished,finished,0.0,1.0,0.0,1.0
+d047dfa72f104317a4c1c0738089f3ff,"""a junkyard dog""",junkyard dog,junkyard dog,finished,finished,1.0,1.0,1.0,1.0
+de14df3fb3f54ab88707902d3c120396,"""Rachel Carson""",Rachel Carson State Office Building,Rachel Carson State Office Building,finished,finished,0.0,0.0,0.5714285714285715,0.5714285714285715
+30cc22b7eab4467f8f68ae92ee761191,"""hypothermia""",Hypothermia,Hypothermia,finished,finished,1.0,1.0,1.0,1.0
+bfba2cb68c9b4db4a71db7b1ca1daf1f,"""The Joy Luck Club""",The Joy Luck Club,The Joy Luck Club,finished,finished,1.0,1.0,1.0,1.0
+c8f835ba31104b738f8becbcc79adec2,"""Evita""",Evita,Evita,finished,finished,1.0,1.0,1.0,1.0
+3bccee60c0c149e08451db23b0963238,"""John Newbery""",John Newbery,John Newbery,finished,finished,1.0,1.0,1.0,1.0
+35ed2ae3d74d461996decc596476332d,"""the burning bush""",The burning bush,The burning bush,finished,finished,1.0,1.0,1.0,1.0
+b2890ea2eda540d1b74d36f4ef13ec76,"""Gibraltar""",Gibraltar,Gibraltar,finished,finished,1.0,1.0,1.0,1.0
+87e2674ce8d84e098f2f768e294d74e3,"""Luxembourg""",Luxembourg (the Grand Duchy of Luxembourg),Luxembourg,finished,finished,0.0,1.0,0.33333333333333337,1.0
+6dc7354a878e434f999c5f540d943bbb,"""a war""",war,a war,finished,finished,1.0,1.0,1.0,1.0
+696aa36338a346d4929808d4679b19d4,"""Washington""",Washington,Washington,finished,finished,1.0,1.0,1.0,1.0
+4eb0744e8d644b80b94a1344a84859eb,"""Eternity""",Eternity,Eternity,finished,finished,1.0,1.0,1.0,1.0
+592401ec18a74311b063864e6bc63c81,"""(Frederick) Forsyth""",Frederick Forsyth,Frederick Forsyth,finished,finished,1.0,1.0,1.0,1.0
+12ec5c93c19146fdbbeea0c8bbf650cd,"""Gene Hackman""",Gene Hackman,Gene Hackman,finished,finished,1.0,1.0,1.0,1.0
+986c1a379bfa4fe08dd2453eace5f752,"""a mogul""",Mogul,Mogul,finished,finished,1.0,1.0,1.0,1.0
+3331ad327364476aa685018cc01293ea,"""koalas""",Koalas,koalas,finished,finished,1.0,1.0,1.0,1.0
+86bff10296aa4a27a1fc0b4952c4d0c9,"""Google""",Google,Google,finished,finished,1.0,1.0,1.0,1.0
+647e28cc0a244bed847c249d6e8da4f4,"""a barber\\'s pole""",Barber pole,barber's pole,finished,finished,0.0,1.0,0.5,1.0
+b7daed3b13b24c2c900b3db34091f5af,"""Mr. Ed""",Mr. Ed,Mr. Ed,finished,finished,1.0,1.0,1.0,1.0
+0aa8fff3215c4ddd89526bc8e8b49950,"""anesthetics""",Local anesthetics.,local anesthetic,finished,finished,0.0,0.0,0.6666666666666666,0.0
+f4ecbbfd207c46dc9a72ea0b83b0c3da,"""John Locke""",John Locke,John Locke,finished,finished,1.0,1.0,1.0,1.0
+c5cb2da2f1344ef4aeefbc76ba172a4f,"""Maastricht""",Maastricht,Maastricht,finished,finished,1.0,1.0,1.0,1.0
+276fe486a5ef4a809d2a36d07285a6f0,"""an aide""",aide,aide-de-camp,finished,finished,1.0,0.0,1.0,0.0
+4cfac23b2d114f91a2ecebc36feadcb5,"""Guyana""",Guyana,Guyana,finished,finished,1.0,1.0,1.0,1.0
+6d1f497464e8443a84562d229749027e,"""Grand Central Station""",Grand Central Terminal,Grand Central Station,finished,finished,0.0,1.0,0.6666666666666666,1.0
+4a8bc0ccc06749aa839a49d991e3983d,"""(Somerset) Maugham""",W. Somerset Maugham,W. Somerset Maugham,finished,finished,0.0,0.0,0.8,0.8
+01723c627507432bbc50d7cadef3b4db,"""Romeo & Juliet""",Romeo and Juliet,Romeo and Juliet,finished,finished,0.0,0.0,0.8,0.8
+a94000ad11e442f898abfb5d3bd5e1fe,"""Woodrow Wilson""",Thomas Riley Marshall (1854–1925) was the 28th Vice President of the United States.,Vice President of the United States,finished,finished,0.0,0.0,0.0,0.0
+65c309bf461c46e4885d28d56dd9e4f7,"""Gorbachev""",Mikhail Gorbachev,Mikhail Gorbachev,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+ebe62a81dd104541971b10c5a5564d20,"""motor voter""",Motor Voter law,Motor Voter,finished,finished,0.0,1.0,0.8,1.0
+aeb2c8943702445aac674889d64af7a0,"""tennis""",Tennis,tennis,finished,finished,1.0,1.0,1.0,1.0
+bd6bb9b794784cbea8c7ac17e19d119d,"""Timex""",Timex,Timex,finished,finished,1.0,1.0,1.0,1.0
+5135571c42dd41f49eb9b6df45fc00db,"""Coolidge""",Calvin Coolidge,Calvin Coolidge,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+b8186b46d7d54de5b0e9b942723f4fb1,"""Constant""",Constant,Constant,finished,finished,1.0,1.0,1.0,1.0
+b94c8c938de9476f89661dc6d95d1c86,"""Song of the South""",1947 Academy Award for Best Song,Johnny Mercer,finished,finished,0.0,0.0,0.2222222222222222,0.0
+414e2f13970c40c4916add89f9cfa235,"""Chicago""",Chicago,Chicago,finished,finished,1.0,1.0,1.0,1.0
+03275e1352884f2cb6ff1e70031ea96b,"""\\\""The Legend of Sleepy Hollow\\\""""",The Legend of Sleepy Hollow,The Legend of Sleepy Hollow,finished,finished,1.0,1.0,1.0,1.0
+4fc6ad573cba408e933068e8d51cc444,"""Hodgkin\\'s disease""",Hodgkin's disease,Hodgkin's Disease,finished,finished,1.0,1.0,1.0,1.0
+d79569103b7740f0a5684e2ec335e6b5,"""Renaissance""",Renaissance,Renaissance,finished,finished,1.0,1.0,1.0,1.0
+86a2c3181d54411fa035b4d950354130,"""the lottery""",Lottery,lottery,finished,finished,1.0,1.0,1.0,1.0
+21a0bd79a801484098879d6dce609641,"""kaiser""",Kaiser,Kaiser,finished,finished,1.0,1.0,1.0,1.0
+6e2e7a60038547609427b5cc58b35de0,"""Tennyson""","Alfred, Lord Tennyson",Tennyson,finished,finished,0.0,1.0,0.5,1.0
+f1de564a1f2f4a6ca813f99b5b4e8bee,"""the cello""",cello,Cello,finished,finished,1.0,1.0,1.0,1.0
+41ba06c7459e468c8877cfd21a65a845,"""solemn""",SOLEMN,Solemn,finished,finished,1.0,1.0,1.0,1.0
+4180c44eaf304a9a956122b8e8523ac6,"""Herbert Hoover""",Herbert Hoover,Herbert Hoover,finished,finished,1.0,1.0,1.0,1.0
+8f427af6ba8d4055947300f8781815d0,"""Bernard Malamud""",Bernard Malamud,Bernard Malamud,finished,finished,1.0,1.0,1.0,1.0
+9a2ffbc032454b858f83cb50793a4c83,"""December""",December,December,finished,finished,1.0,1.0,1.0,1.0
+d11365f5d8ba4aee988258f9340a7009,"""Plutarch""",Plutarch (the emperor was Trajan),Trajan,finished,finished,0.0,0.0,0.4,0.0
+4185d3cd150d40c9920c37e627eb5153,"""mercy""",Mercy,mercy,finished,finished,1.0,1.0,1.0,1.0
+29320213cd1d46d38ff39332227412bf,"""Thomas Paine""",Thomas Paine,Thomas Paine,finished,finished,1.0,1.0,1.0,1.0
+35ca318c97e44a5fbacec652c6aa178a,"""Nellie Bly""",Nellie Bly (Elizabeth Cochran Seaman) posed as a mental patient to expose the abuse and conditions at the Blackwell's Island Insane Asylum.,Nellie Bly,finished,finished,0.0,1.0,0.1904761904761905,1.0
+550a165ae0c647848de379bee1e01e93,"""resuscitation""",Resuscitation,Resuscitation,finished,finished,1.0,1.0,1.0,1.0
+b24e907a56894606aa1a65db91d5a0f0,"""Minnesota""",Minnesota,Minnesota,finished,finished,1.0,1.0,1.0,1.0
+7a21823438ee4da494e7e27783ef2d42,"""the pole vault""",Pole vault,Pole vault,finished,finished,1.0,1.0,1.0,1.0
+33410f4502a141ba98c15b3972a2e11a,"""panacea""",a remedy that cures all ills or diseases; panacea,hypothetical remedy for all ills or diseases,finished,finished,0.0,0.0,0.2222222222222222,0.0
+39ded4807d8649ac8148c560cdc9be59,"""the city council""",City Council,city council,finished,finished,1.0,1.0,1.0,1.0
+74aa3ba7ab104fe8bbcc426c64520d0f,"""a barbarian""",barbarian,barbarian,finished,finished,1.0,1.0,1.0,1.0
+2d87e6cb50ab4c3ba5df1c11245e5991,"""Charlotte Church""",Charlotte Church,Charlotte Church,finished,finished,1.0,1.0,1.0,1.0
+fa35104992c04600b07ec126b0d8f794,"""hypertext""",Horizontal tab,Hypertext,finished,finished,0.0,1.0,0.0,1.0
+4c62187235714ac8915d93d00b8b86ce,"""Urlacher""",**Jon Bostic**,Jon Bostic,finished,finished,0.0,0.0,0.0,0.0
+aae4ba6a4f184647b881304d15a0127b,"""adhesion""",adhesion,adhesion,finished,finished,1.0,1.0,1.0,1.0
+e30ef51251a847138f4826c6146e982d,"""Scarlett Johansson""",Scarlett Johansson,Scarlett Johansson,finished,finished,1.0,1.0,1.0,1.0
+113ef1dcda894e588b26f9e31a1be728,"""Northern Exposure""","An episode of *Northern Exposure* (Season 6, Episode 9, aired Nov 28, 1994).",fraternal lodge,finished,finished,0.0,0.0,0.2857142857142857,0.0
+ce906c622e204ba6818fe9b27aac5086,"""Babe Ruth""",Babe Ruth,Babe Ruth,finished,finished,1.0,1.0,1.0,1.0
+092f0450ae72424e80d1b7baca5d2eab,"""the engagement ring""",the engagement ring,engagement ring,finished,finished,1.0,1.0,1.0,1.0
+2a5524dbccb6469bb8be6357f68769b2,"""impressionism""",Impressionists (Impressionist),impressionist,finished,finished,0.0,0.0,0.0,0.0
+ddb9ebc2b0824145a5a1561d3e303ac0,"""Augusta (Maine)""",Augusta,Augusta,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+596acfb6acae4c0e917dce07c055168f,"""South America""",Brazil,Brazil,finished,finished,0.0,0.0,0.0,0.0
+384cb3de0b714c049e97f1659df6c38f,"""J.K. Rowling""",J. K. Rowling,J. K. Rowling,finished,finished,0.0,0.0,0.4,0.4
+a0ada661569e4ab2a15db06560ec7b45,"""Labor Day""",Labour Day (Labor Day),Labor Day,finished,finished,0.0,1.0,0.6666666666666666,1.0
+7a5fb1ab2110493a8d592d19360934d2,"""Bosnia-Herzegovina""",Bosnia and Herzegovina,Bosnia and Herzegovina,finished,finished,0.0,0.0,0.8,0.8
+6f76f4ec0a1c46f3824786e43acd1a42,"""the jugular""","Yes — a central line (central venous catheter) is placed into a large central vein such as the jugular vein in the neck to deliver fluids, medicines, blood products, or nutrients.",jugular vein,finished,finished,0.0,0.0,0.07142857142857142,0.6666666666666666
+5218ad458ee3405eb9c00a67cbc1e17d,"""Belize""",Belize,San Salvador,finished,finished,1.0,0.0,1.0,0.0
+7ee3c5d3e0774f0b9a983092d4409d7f,"""a canticle""",canticle,canticle,finished,finished,1.0,1.0,1.0,1.0
+23a78c52899941588ac23167674cce6a,"""the Netherlands""",Netherlands,the Netherlands,finished,finished,1.0,1.0,1.0,1.0
+c8535d02c6354d5caf99f91107e9cb0b,"""dry ice""",Dry ice,Dry ice,finished,finished,1.0,1.0,1.0,1.0
+0599cd7767b242f78cfb9bf6bb49f259,"""Elvis""",Elvis Presley,Elvis Presley,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+7b50344caff24795bd6141f952e6eeeb,"""Friedrich Nietzsche""",Friedrich Nietzsche,Friedrich Nietzsche,finished,finished,1.0,1.0,1.0,1.0
+ff2942e7dcec4b54bb5b4d1c35678ae0,"""Patrick Henry""",Patrick Henry,Patrick Henry,finished,finished,1.0,1.0,1.0,1.0
+1b8886a267e04b48ab393f0703af9532,"""Sri Lanka""",Sri Lanka,Sri Lanka,finished,finished,1.0,1.0,1.0,1.0
+50ba2a5324884e88a4011d8772de0fd0,"""California""",California,California,finished,finished,1.0,1.0,1.0,1.0
+d64533a9d99740d3a80b43bf66e34ac2,"""the Los Angeles Times""",Los Angeles Times,Los Angeles Times,finished,finished,1.0,1.0,1.0,1.0
+fa792aca44234b2ba8410edfad4fe8d4,"""Dreamgirls""",Dreamgirls,Henry Krieger,finished,finished,1.0,0.0,1.0,0.0
+4816238548e944ecb6cbace1042fc0c4,"""Jonathan Demme""",Jonathan Demme,Jonathan Demme,finished,finished,1.0,1.0,1.0,1.0
+24faa13b2b7748f4babea2d6320d458e,"""a sweater girl""",Sweater Girl,Sweater,finished,finished,1.0,0.0,1.0,0.6666666666666666
+af97973283df4d8eb059e58bf9b44cee,"""the brain""",brain,brain,finished,finished,1.0,1.0,1.0,1.0
+337965b613194614a282322ac5ad6cec,"""Jenna Bush""",Jenna Bush,Jenna Bush,finished,finished,1.0,1.0,1.0,1.0
+dac2c24d81ce4899823c9d4fd9f47db9,"""Greece""",Greece,Greece,finished,finished,1.0,1.0,1.0,1.0
+a75f12ade8544e1a89f2d48ccc815a0d,"""George Patton""",George S. Patton,George S. Patton,finished,finished,0.0,0.0,0.8,0.8
+66f76ae1211e41569d562f37fb2b19de,"""\""Mona Lisa\""""",Mona Lisa,Mona Lisa,finished,finished,1.0,1.0,1.0,1.0
+b4c605da009b4af1ab94dce00ffaf73c,"""Ernie Els""",Ernie Els,Ernie Els,finished,finished,1.0,1.0,1.0,1.0
+7ba7634b50af453eb2d560bf6c4bb791,"""South Africa""",South Africa,South Africa,finished,finished,1.0,1.0,1.0,1.0
+67e7f225634c4cba8a31bb6fbc51a107,"""Des Moines""",Des Moines,Des Moines,finished,finished,1.0,1.0,1.0,1.0
+6e1f69f84d5c442a89d09d578cd00ff7,"""poker""",Poker,poker,finished,finished,1.0,1.0,1.0,1.0
+86879fe499e54b40b24406c7feeda67c,"""Dublin""",Dublin,Dublin,finished,finished,1.0,1.0,1.0,1.0
+73f0dd252a6c4ea994872f064611aa27,"""the Better Business Bureau""",The Council of Better Business Bureaus (CBBB).,Council of Better Business Bureaus,finished,finished,0.0,0.0,0.4444444444444444,0.5
+78bd57d4f88e45678b12a7f201c08b91,"""Commerce""",The only federal agency established solely to create jobs through the growth and global competitiveness of minority businesses (part of the U.S. Department of Commerce).,Department of Commerce,finished,finished,0.0,0.0,0.08695652173913045,0.5
+fbabb7185c374402801f5257f49b5309,"""AAA""",AAA (American Automobile Association),AAA,finished,finished,0.0,1.0,0.4,1.0
+c0649d456e0840769b8447d227e1c105,"""California""",San Simeon State Park features 2 campgrounds and a day-use area (San Simeon Creek and Washburn campgrounds).,California,finished,finished,0.0,1.0,0.0,1.0
+9bb5aa2f3e9940eea6f4f04f471601c3,"""Virginia Woolf""",A Room of One's Own,Virginia Woolf,finished,finished,0.0,1.0,0.0,1.0
+83a49886c0224008bb794d5c92caf0dd,"""Portland""",Portland,Portland,finished,finished,1.0,1.0,1.0,1.0
+f3b7ae7f137f4b5291ec44919a269874,"""a hearse""",a hearse,a hearse,finished,finished,1.0,1.0,1.0,1.0
+f26047f9818a46b3a4e70a13f0ee2afe,"""Dolley Madison""",Dolley Madison,Dolley Madison,finished,finished,1.0,1.0,1.0,1.0
+440bce5338e34f74961b06d4e2f538ad,"""Tina Turner""",Tina Turner,Tina Turner,finished,finished,1.0,1.0,1.0,1.0
+e2e5aaa18d614e0094723f4d57fa1086,"""Zimbabwe""",Zimbabwe,Zimbabwe,finished,finished,1.0,1.0,1.0,1.0
+ca692ac8c8d1446c90ed8a4c9d44dde1,"""Lon Chaney""",The Hunchback of Notre Dame (1923) is an American silent film directed by Wallace Worsley and starring Lon Chaney as Quasimodo.,Wallace Worsley,finished,finished,0.0,0.0,0.1904761904761905,0.0
+aee570424f86443691e340cc80dc9063,"""Stand By Me""",Stand by Me,Stand by Me,finished,finished,1.0,1.0,1.0,1.0
+483466929e33400bbfaf264af8db19cf,"""first base""",first base,first base,finished,finished,1.0,1.0,1.0,1.0
+2c0fe5eea1484a689b357d345abba854,"""Richard III""",Richard III,Richard III,finished,finished,1.0,1.0,1.0,1.0
+059c6343bd5840f4b1b2325ff37ed4a0,"""William""",William,William,finished,finished,1.0,1.0,1.0,1.0
+9d7d95de350d49a783ae35644ffcbec3,"""(George) Babbitt""",George Babbitt (George F. Babbitt),George Babbitt,finished,finished,0.0,1.0,0.5714285714285715,1.0
+ec6eb845b2034cc98fc4c430be032e7f,"""Dustin Hoffman""",Dustin Hoffman,Dustin Hoffman,finished,finished,1.0,1.0,1.0,1.0
+d025cc670b164233b35937e971cbe2b9,"""Violin""",Violin,Violin,finished,finished,1.0,1.0,1.0,1.0
+43cd4f4251f04af1abb6e1977eee6ddc,"""the Gollum""",It must tell first.,It must tell first.,finished,finished,0.0,0.0,0.0,0.0
+a087419e91c74230abfb085080ae9c19,"""(Thor) Heyerdahl""",Thor Heyerdahl,Thor Heyerdahl,finished,finished,1.0,1.0,1.0,1.0
+550812d86ec842d18632765827acb71c,"""a woodpecker""",woodpecker,woodpecker,finished,finished,1.0,1.0,1.0,1.0
+626b5316c9e14300b27596c27e1a5c7b,"""a quiver""",Quiver,quiver,finished,finished,1.0,1.0,1.0,1.0
+959bab0d571f4f429d1c1923cb3855d7,"""Douglas MacArthur""",Douglas MacArthur,Douglas MacArthur,finished,finished,1.0,1.0,1.0,1.0
+2cf19e5998f946c084069a90b86cad3b,"""the Green Zone""",The Green Zone.,Green Zone,finished,finished,1.0,1.0,1.0,1.0
+2eb12073b96b4fcab7db4f7c0f183627,"""beer""",beer,beer,finished,finished,1.0,1.0,1.0,1.0
+1f9b96014e71418cbc0ba20a6422f91e,"""\""the Sky\""""",the sky,the sky,finished,finished,1.0,1.0,1.0,1.0
+8b10c96b05fe4a969f451ca45dea9e67,"""spheres of influence""",Spheres of influence.,spheres,finished,finished,1.0,0.0,1.0,0.5
+a9091f1b92fe4f988f7dd362f226f24a,"""Invisible Man""",Invisible Man,Invisible Man,finished,finished,1.0,1.0,1.0,1.0
+5b3065ec8dfd4136a45bb6842419130d,"""The Simple Life""",The Simple Life,The Simple Life,finished,finished,1.0,1.0,1.0,1.0
+11b2ebf9061545afa597e33b12888dd0,"""Mexico""",Mexico,Mexico,finished,finished,1.0,1.0,1.0,1.0
+633265a55d45428c9866b45e75c0b67e,"""Matthew""",Matthew,Matthew,finished,finished,1.0,1.0,1.0,1.0
+b956696a520f4490ba457c175cf49b4f,"""the Western Wall""",The Western Wall (Wailing Wall/Kotel),Western Wall,finished,finished,0.0,1.0,0.6666666666666666,1.0
+469ccca2f4df48c5bb1322f6ee1f5ae2,"""Russia""",Asia,Asia,finished,finished,0.0,0.0,0.0,0.0
+12dec4196bb143a1aefa79d446a748f6,"""Alicia Keys""",Alicia Keys,Alicia Keys,finished,finished,1.0,1.0,1.0,1.0
+b1321e17fa1f436292adc0ea256bd280,"""Anna Karenina""",Anna Karenina,Anna Karenina,finished,finished,1.0,1.0,1.0,1.0
+c05d9ada766347b4972e10b6534785f1,"""Hallmark""",Hallmark,Hallmark,finished,finished,1.0,1.0,1.0,1.0
+7497bd11227f4bd8b027c5f737c3f23c,"""a pineapple""",Pineapple,Pineapple,finished,finished,1.0,1.0,1.0,1.0
+1c7f885133ce4b6eb2af794a2d430d2d,"""the House of Burgesses""",House of Burgesses,House of Burgesses,finished,finished,1.0,1.0,1.0,1.0
+5299ec94dfd7479b83743a56d5f563da,"""Picabo Street""",Picabo Street,Picabo Street,finished,finished,1.0,1.0,1.0,1.0
+37f57f0d6bec4ca8a98ebf3674181eab,"""Some Like It Hot""",Some Like It Hot,Some Like It Hot,finished,finished,1.0,1.0,1.0,1.0
+b0d285b94a5f4f2cb0605919d0567703,"""Thomas Hardy""",Thomas Hardy,Thomas Hardy,finished,finished,1.0,1.0,1.0,1.0
+78211f5b18e9465796b288ddda7768da,"""(Chris) Moneymaker""",Chris Moneymaker,Chris Moneymaker,finished,finished,1.0,1.0,1.0,1.0
+39505c228a0d42ee86d84683483be26e,"""Nepal""",Nepal,Nepal,finished,finished,1.0,1.0,1.0,1.0
+c55531425e38481c87dad17bb5a7eb61,"""the yolk""",Yolk sac,yolk sac,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+9c831d5f63eb406aa414bc8cbcc65702,"""Peter""",Peter,Peter,finished,finished,1.0,1.0,1.0,1.0
+736d549bc5a343c1a16e4b0a95895c72,"""The Lorax""",The Lorax,The Lorax,finished,finished,1.0,1.0,1.0,1.0
+1af943cca718482ea5e270215ce3ae98,"""flowers""",flowers,flowers,finished,finished,1.0,1.0,1.0,1.0
+1bca1e13fe4c455b888d98f248eed26d,"""Hamlet""",Hamlet,Hamlet,finished,finished,1.0,1.0,1.0,1.0
+25c0e5f8a53f4bafae2db6feb35ae667,"""American Wedding""",American Wedding,American Wedding,finished,finished,1.0,1.0,1.0,1.0
+f7d3654582cd4886906bbeb267d4f3a7,"""1927""",1927,1927,finished,finished,1.0,1.0,1.0,1.0
+9f047b722c954616a87f8a75fb05ea1e,"""PET""",PET scanner (positron emission tomography),PET scanner,finished,finished,0.0,0.0,0.33333333333333337,0.6666666666666666
+0def91a119864db7b82f8988d40fa07a,"""jimmy""",jimmy,jimmy,finished,finished,1.0,1.0,1.0,1.0
+5cc9d4417dcb47ff90663dcc8546bcf2,"""Eddie Haskell""",Eddie Haskell,Eddie Haskell,finished,finished,1.0,1.0,1.0,1.0
+1c03c07e617e4f92981e569fce970642,"""George W. Bush""",George W. Bush,George W. Bush,finished,finished,1.0,1.0,1.0,1.0
+f09586515a2044019052af9bf87096cf,"""PepsiCo""","PepsiCo (add ""Co"" to ""Pepsi"")",PepsiCo,finished,finished,0.0,1.0,0.33333333333333337,1.0
+851efecede9a4223bd660d986d272388,"""a ton""",ton,ton,finished,finished,1.0,1.0,1.0,1.0
+0574d25fac6244c3885304a2112a0c15,"""the Blue Jays""",Toronto Blue Jays,Toronto Blue Jays,finished,finished,0.0,0.0,0.8,0.8
+e5a37e657d344835a95788179c1266eb,"""hives""",Annular,annular,finished,finished,0.0,0.0,0.0,0.0
+c5dcf70c3a47476699dbe6811140cb58,"""Sweden""",Sweden,Sweden,finished,finished,1.0,1.0,1.0,1.0
+414b1faf561e44e291e1cba1d53d4e0e,"""the Cultural Revolution""",Cultural Revolution,Cultural Revolution,finished,finished,1.0,1.0,1.0,1.0
+678a7691bb3e4274b624af40ef488b03,"""My Brilliant Career""",My Brilliant Career,My Brilliant Career,finished,finished,1.0,1.0,1.0,1.0
+f6ca20337fba45df808efe56587cd5d5,"""the Spelling Bee""",Scripps National Spelling Bee,Scripps National Spelling Bee,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+0b0636e515c2405b8a03690ddb23484e,"""(Walt) Kelly""",Walt Kelly,Walt Kelly,finished,finished,1.0,1.0,1.0,1.0
+642513b51abe48cc9734dc6164c65a60,"""senators""",Senators,Senators,finished,finished,1.0,1.0,1.0,1.0
+e72e6a8ac4e14372991a131bd3aec1de,"""a Klondike""",Klondike (a Klondike Bar),Klondike,finished,finished,0.0,1.0,0.5,1.0
+6d65e0f818d64a24a17d4ba6408d58ae,"""the Bee Gees""",The Bee Gees,Bee Gees,finished,finished,1.0,1.0,1.0,1.0
+9f7ab33db32d405c808a2a9479086e06,"""a jack""",spare tire,spare tire,finished,finished,0.0,0.0,0.0,0.0
+8c9fb9585a8a4fea9fcbc4354bb8d103,"""Warren & Tonya Harding""",Harding,Warren & Tonya Harding,finished,finished,0.0,1.0,0.5,1.0
+b643995b3c124c28b370cc483af30897,"""Yeardley Smith""",Yeardley Smith,Yeardley Smith,finished,finished,1.0,1.0,1.0,1.0
+7902980ac783461d8f4d50274667d644,"""a monogamist""",monogamist,monogamist,finished,finished,1.0,1.0,1.0,1.0
+49f06cb45863458e82c2cc98d6496fe6,"""lime""",lime,lime,finished,finished,1.0,1.0,1.0,1.0
+2d909b42ef974963b8918ab1c6771b84,"""George Reeves""",George Reeves,George Reeves,finished,finished,1.0,1.0,1.0,1.0
+da85bfd141ae4c97b03144145067dbc7,"""Benedict XVI""",Benedict XVI,Benedict XVI,finished,finished,1.0,1.0,1.0,1.0
+0788e394a0d4417798eeb8c3f1939b85,"""saxophones""",saxophones,saxophones,finished,finished,1.0,1.0,1.0,1.0
+dbea47b42dec407f98ae495bb3adb83e,"""Westminster Abbey""",Westminster Abbey,Westminster Abbey,finished,finished,1.0,1.0,1.0,1.0
+e50d5eee9eac47dd819070f8c206725a,"""fruit""",Trees (fruit trees),fruit tree,finished,finished,0.0,0.0,0.5,0.6666666666666666
+1907544aa6ab4ba28951dc4b0389608f,"""Calypso""",Calypso,Calypso,finished,finished,1.0,1.0,1.0,1.0
+bf73afe8bee84b3bbe542b2b88e4f8d8,"""the League of Nations""",The League of Nations.,League of Nations,finished,finished,1.0,1.0,1.0,1.0
+419b76eb0c8c45568814af128c318830,"""a heel""",heel,heel,finished,finished,1.0,1.0,1.0,1.0
+287dfdc1112d49139b699e77a743cdbf,"""IKEA""",IKEA,IKEA,finished,finished,1.0,1.0,1.0,1.0
+9097a4bf75784749a1be32d1e5c0b875,"""the chakras""",Chakras,chakras,finished,finished,1.0,1.0,1.0,1.0
+8e6cdba3e47d4be38094c354cc9b7529,"""The Truman Show""",The Truman Show,The Truman Show,finished,finished,1.0,1.0,1.0,1.0
+52adaf3083cf4e9d97bdd9fe1d9063cd,"""The Wizard of Oz""",The Wizard of Oz,The Wizard of Oz,finished,finished,1.0,1.0,1.0,1.0
+77c033ce24b14a38b2131274c99a409f,"""barley""",Barley (malted barley),barley,finished,finished,0.0,1.0,0.5,1.0
+bd472ffaee064326a2b7e7437785eea5,"""Debussy""",Stéphane Mallarmé,Claude Debussy,finished,finished,0.0,0.0,0.0,0.6666666666666666
+fa215eac88e94be3ae508faecdf8e161,"""a tandoori oven""",tandoor,tandoor,finished,finished,0.0,0.0,0.0,0.0
+4674a33a917041a3abfa3251b52665b7,"""the Ark of the Covenant""",The ark of the covenant.,Ark of the Covenant,finished,finished,1.0,1.0,1.0,1.0
+f03134f8cfb74c6b9d883b69a587c101,"""Hillary Clinton""",Kirsten Gillibrand,Kirsten Gillibrand,finished,finished,0.0,0.0,0.0,0.0
+5c26e2dde8e2465ab44fc9bbcc0aefb5,"""Tom Cruise""","American actress born December 18, 1978, best known as Joey Potter on *Dawson's Creek*.",actress,finished,finished,0.0,0.0,0.0,0.0
+2f0b7b6952ee4110ac5fb9f91c318650,"""ballot""",ballot,ballot,finished,finished,1.0,1.0,1.0,1.0
+918c7ca9502243d6b410aab5e3258bfb,"""Paul McCartney""",Paul McCartney,Paul McCartney,finished,finished,1.0,1.0,1.0,1.0
+dc15fa04af0040f1b7999769ac1da899,"""(Andrew) Marvell""",Andrew Marvell,Andrew Marvell,finished,finished,1.0,1.0,1.0,1.0
+ba4b4222d75e4579a1222714226d3159,"""Stevie Wonder""",Stevie Wonder,Stevie Wonder,finished,finished,1.0,1.0,1.0,1.0
+9ba40aba1544434b900db2758db2eded,"""the Bermuda Triangle""",Bermuda Triangle,Bermuda Triangle,finished,finished,1.0,1.0,1.0,1.0
+756276d1375f4a4e9b16282e8b915b51,"""lead""",Lead,Lead,finished,finished,1.0,1.0,1.0,1.0
+258ba1332823434980ec88d9ae9e6296,"""(Harold) Macmillan""",Harold Macmillan,Harold Macmillan,finished,finished,1.0,1.0,1.0,1.0
+5ee940c2357946a6ba68ea0713517bca,"""Ulysses""",Ulysses,Ulysses,finished,finished,1.0,1.0,1.0,1.0
+b5068f901df64f1f9d531cd0b22c5072,"""India""",Mexico,Mexico,finished,finished,0.0,0.0,0.0,0.0
+59a121a02d124bfe84f296faf536ec34,"""churrasco""",churrasco,churrasco,finished,finished,1.0,1.0,1.0,1.0
+f41714b7a8db4810ba3ddbcfdeaec344,"""a head""",head,head,finished,finished,1.0,1.0,1.0,1.0
+759f644fc9e34509b7b3c7e588a157cd,"""The Sixth Sense""",The Sixth Sense,The Sixth Sense,finished,finished,1.0,1.0,1.0,1.0
+511231befba84f3baaf198cd8b32f541,"""Apollo""",Apollo program,Apollo,finished,finished,0.0,1.0,0.6666666666666666,1.0
+a19dc82cbad1465baacf847c78322862,"""8""",8,8,finished,finished,1.0,1.0,1.0,1.0
+1d2807eaaa88446189a53b419b218704,"""Russia""",Russia,Russia,finished,finished,1.0,1.0,1.0,1.0
+39eb0eee961849f980899754daa0e6fc,"""Orestes""",Orestes,Orestes,finished,finished,1.0,1.0,1.0,1.0
+3a976786b4fd4a9a9da2119af1c28d36,"""chocolate chip""",Chocolate Crunch Cookie,Chocolate Crunch Cookie,finished,finished,0.0,0.0,0.4,0.4
+3d229189bbfe401c928650ea4a6aa666,"""(Boss) Tweed""",(Boss) Tweed,Boss Tweed,finished,finished,1.0,1.0,1.0,1.0
+aa790318578147efac1e0e1ab82d6368,"""Peter Ustinov""",Peter Ustinov,Peter Ustinov,finished,finished,1.0,1.0,1.0,1.0
+f84af13b9f8f4f3d95607952fb694e5a,"""Rembrandt""",Rembrandt,Rembrandt,finished,finished,1.0,1.0,1.0,1.0
+4e5f40aa1f284f6685174a757e1931ad,"""Jacob & Esau""",Esau and Jacob,Esau and Jacob,finished,finished,0.0,0.0,0.8,0.8
+96c7d722c5454846a324682d10dcd4e0,"""Mendeleev""",Dmitri Mendeleev,Dmitri Mendeleev,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+fbb328204c534e5e81a03f43009eb3ee,"""love""",Love,love,finished,finished,1.0,1.0,1.0,1.0
+4edb4e2bad214db8978b50448dc480d2,"""apathy""",Apathy,Apathy,finished,finished,1.0,1.0,1.0,1.0
+4e11443e24ce44f58ff3ea558f121165,"""London""",London,London,finished,finished,1.0,1.0,1.0,1.0
+7b6242e63e9042fbbe2e72a7414addb7,"""(Nellie) Melba""",Nellie Melba,Nellie Melba,finished,finished,1.0,1.0,1.0,1.0
+f2bce9e28cdd43e6a888bafd35d47f1a,"""Disraeli""",Benjamin Disraeli,Benjamin Disraeli,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+ebd72a59dc8d4c6f829b690ab8211ec5,"""Latvia""",Latvia,Latvia,finished,finished,1.0,1.0,1.0,1.0
+bbf82dbaa08b4b8587eb3872b8f7a876,"""Ham""",Ham,Ham,finished,finished,1.0,1.0,1.0,1.0
+eebc59492b3d4da3a99f616eee08f4a9,"""the pelvis""",Pelvis,Pelvis,finished,finished,1.0,1.0,1.0,1.0
+4419b5d125bd4eeea134f2cc05561f0d,"""Rochester""",Rochester,Edward Rochester,finished,finished,1.0,0.0,1.0,0.6666666666666666
+af5ec5e74b2f4a8685bb7f25fbcbb9b0,"""the U.S.S. Maine""",The USS Maine (the U.S. battleship Maine).,USS Maine,finished,finished,0.0,1.0,0.5714285714285715,1.0
+565fbcb59be4452c98e09c3c0f5b5ab6,"""Irish""",Irish,Irish,finished,finished,1.0,1.0,1.0,1.0
+6abaa808578a4e3fa8eebf0fb4746524,"""heart light""",heartlight,heartlight,finished,finished,0.0,0.0,0.0,0.0
+30c1985fb1704367bb35b80a6666cd10,"""Laura Ingalls Wilder""",Laura Ingalls Wilder,Laura Ingalls Wilder,finished,finished,1.0,1.0,1.0,1.0
+a8e6016661be494ebc65e7a80a1d7ff1,"""Red Buttons""",Red Buttons,Red Buttons,finished,finished,1.0,1.0,1.0,1.0
+9a87943f79f1420f80727b05bb2372de,"""Lebanon""",Lebanon,Lebanon,finished,finished,1.0,1.0,1.0,1.0
+a79aeb2cd44f4d7db90713d72023d094,"""Billie Jean King""",Billie Jean King,Billie Jean King,finished,finished,1.0,1.0,1.0,1.0
+5bcb91f5fee34bec8df82e051e6eee87,"""low-fat milk""",Low-fat (skimmed) milk.,low-fat milk,finished,finished,0.0,1.0,0.8,1.0
+2372fcaa483d4384a68645f3fa9ca173,"""Easter""",Easter,Easter,finished,finished,1.0,1.0,1.0,1.0
+068575aee7224d4ab849f9d138731fdc,"""heresy""",Heresy,heresy,finished,finished,1.0,1.0,1.0,1.0
+eda12d2897b048d29d06e154139b5247,"""Wikipedia""",Wikipedia,Wikipedia,finished,finished,1.0,1.0,1.0,1.0
+8ed57f5c2ea64cf9b3d62d346ca092e4,"""Aaron Copland""",Aaron Copland,Aaron Copland,finished,finished,1.0,1.0,1.0,1.0
+c5f9976c9718450bb1b7f75387b0460f,"""quasars""",Quasars,quasars,finished,finished,1.0,1.0,1.0,1.0
+d274307a500d4d8c8cbf30faf5589cf0,"""the Running of the Bulls""",Running of the bulls (the Encierro),Running of the bulls,finished,finished,0.0,1.0,0.8571428571428571,1.0
+aaa7234299e2425c8b8242bb3d3dcaeb,"""Nine Inch Nails""","American singer-songwriter, record producer, and film score composer.","<｜｜DSML｜｜ calls>
+<｜｜DSML｜｜ invoke name=""shell"">
+<｜｜DSML｜｜ parameter name=""command"" string=""true"">ls -la ""$PWD""; ls -la ""$PWD/..""; find ""$PWD/.."" -maxdepth 3 2>/dev/null | head -40</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
+</｜｜DSML｜｜ calls>",finished,finished,0.0,0.0,0.0,0.0
+0deb5a98a74b4f8c826c8096984a8e0f,"""boysenberry""",Boysenberry,boysenberry,finished,finished,1.0,1.0,1.0,1.0
+30acb98661c6410aaf6c6ff5b2f6a3ea,"""Haiti""",Haiti,Haiti,finished,finished,1.0,1.0,1.0,1.0
+9ec6f9f9af044b988a7d21f9d2b88a20,"""the United Nations""",United Nations,United Nations,finished,finished,1.0,1.0,1.0,1.0
+0c689092f8f44ff995d71ba883c6791e,"""the Sundance Kid""",Sundance Kid,Sundance Kid,finished,finished,1.0,1.0,1.0,1.0
+2e44b7a3015a4079a8460c2c84963a6b,"""hollandaise""",Hollandaise sauce,Hollandaise sauce,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+eef234c3f1844fae80ba0c6820ef33a9,"""The Deer Hunter""",The Deer Hunter (1978),The Deer Hunter,finished,finished,0.0,1.0,0.8,1.0
+dcd5ede5eac44e12b8da2c1f88d05596,"""Philip Morris""",Philip Morris,Philip Morris,finished,finished,1.0,1.0,1.0,1.0
+b92a6b9037e74c47a219a30a0a813683,"""Indian reservations""",Indian reservations,Indian reservations,finished,finished,1.0,1.0,1.0,1.0
+292d47a397f748a0a35a81618994b95b,"""The Little Foxes""",The Little Foxes,The Little Foxes,finished,finished,1.0,1.0,1.0,1.0
+633c88e4bffa422ea29193c32eecd3ca,"""Santa Fe""",Santa Fe,Santa Fe,finished,finished,1.0,1.0,1.0,1.0
+2b49d26a7efb4a2c8159efbe3439e12b,"""Daniel""",Daniel,Daniel,finished,finished,1.0,1.0,1.0,1.0
+b1934fb8f0b84a2bbfd90811a7610018,"""a balloon""",A hot-air balloon.,hot-air balloon,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+c421ee82b0594e76b762cd052e3dfa6f,"""a triangle""","A triangle (the Greek letter delta, Δ).",a triangle,finished,finished,0.0,1.0,0.33333333333333337,1.0
+794123ece5e24a198b589321f65b401f,"""Lafitte""",Jean Lafitte,Jean Lafitte,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+e8d79a2a8fe74e84bf6f81043f5e5641,"""Norway""",Norway,Norway,finished,finished,1.0,1.0,1.0,1.0
+45356ddb6e944e30a15526922f123ed1,"""Death Row Records""",Death Row Records,Death Row Records,finished,finished,1.0,1.0,1.0,1.0
+197ee5401f554bcfbfce4dc751ec3343,"""quark""",Quarks and leptons,atoms,finished,finished,0.0,0.0,0.0,0.0
+cbbe39cda03e4f958df5f7f10b458c70,"""Blazing Saddles""",Blazing Saddles,Blazing Saddles,finished,finished,1.0,1.0,1.0,1.0
+94a90d73a1ed45ab99840bfd4cf10a32,"""the Aeneid""",Aeneid,Aeneid,finished,finished,1.0,1.0,1.0,1.0
+2b6038b0f9a14a089f3df83666f3a7e0,"""hate crimes""",George H.W. Bush,hate crimes,finished,finished,0.0,1.0,0.0,1.0
+65ac6a0f59b540adbb13949a79c487c9,"""a calamity""",Calamity,calamity,finished,finished,1.0,1.0,1.0,1.0
+45ebb1b3c46140d09682cb291cd38d6f,"""Napoleon""",Napoleon Bonaparte,Napoleon Bonaparte,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+731cafd017b843f78bd4c1b8114a5e4d,"""Jane Eyre""",Jane Eyre,Jane Eyre,finished,finished,1.0,1.0,1.0,1.0
+2b73d6c930d24ff99e0a8d7caefde3fe,"""Las Vegas""",Las Vegas,Las Vegas,finished,finished,1.0,1.0,1.0,1.0
+e5f27592956c4b0582eedfb37045a266,"""Pyongyang""",Pyongyang,Pyongyang,finished,finished,1.0,1.0,1.0,1.0
+b441b6baebff401eb4b4d84921f39ff9,"""Norman Mailer""",Norman Mailer,Norman Mailer,finished,finished,1.0,1.0,1.0,1.0
+6c71cf873c0142b48c5fe720db98eba0,"""Scene-it""",Scene It?,Scene It?,finished,finished,1.0,1.0,1.0,1.0
+db51999e46d34d20ac3b6cc07de3ea48,"""Anne""",Anne Shirley,Anne Shirley,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+f1123b7bd1e94b98b4a1022070fb8479,"""a canton""",Canton,Canton,finished,finished,1.0,1.0,1.0,1.0
+344bf9a4bb1a4005a4461ae840c13d4c,"""an encyclopedia""",An encyclopedia.,encyclopedia,finished,finished,1.0,1.0,1.0,1.0
+8361a9df6ddf4364a8299dc8026e7747,"""Punch & Judy""",Punch & Judy,Punch & Judy,finished,finished,1.0,1.0,1.0,1.0
+174f39c3019f42c29c17c2b62b6c9e46,"""Francis Marion""",Francis Marion,Francis Marion,finished,finished,1.0,1.0,1.0,1.0
+69d1ac690138404b8a30e66b4af39e0b,"""Fatah""",Fatah,Fatah,finished,finished,1.0,1.0,1.0,1.0
+b5fdffb7cf664532a0de7444ad3bed4f,"""Tears For Fears""",Tears for Fears,Tears for Fears,finished,finished,1.0,1.0,1.0,1.0
+c687496e98c74437bbc4b8bf606ac072,"""Sarah Bernhardt""",Sarah Bernhardt,Sarah Bernhardt,finished,finished,1.0,1.0,1.0,1.0
+9addc8cd4aaa4ec995e7d66e314640a4,"""Bob Woodward""",Bob Woodward,Bob Woodward,finished,finished,1.0,1.0,1.0,1.0
+c34e279373b949cf8e2c881dacec6171,"""force""",Force,Force,finished,finished,1.0,1.0,1.0,1.0
+8dc2205b82664584a345454726172232,"""Luxembourg""",Luxembourg,Luxembourg,finished,finished,1.0,1.0,1.0,1.0
+d6e95e41b53943a4a2caf08178634e94,"""Henri Matisse""",Henri Matisse,Henri Matisse,finished,finished,1.0,1.0,1.0,1.0
+24d7105838f64c03a776555096791036,"""Kipling""",Rudyard Kipling,Rudyard Kipling,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+28ddc28a1e224b9aa3be88052db91e2b,"""Chile""",Cayenne,cayenne,finished,finished,0.0,0.0,0.0,0.0
+23a6c1fda8fc4c5fbb3b7740bee62ead,"""the Mau Mau movement""",Mau Mau,Mau Mau,finished,finished,0.0,0.0,0.8,0.8
+317d3ca2b3b049c38f0599105b631cb2,"""a three-point landing""",a three-point landing,a three-point landing,finished,finished,1.0,1.0,1.0,1.0
+273e54aff0a149e08852c43ca2c5ea89,"""gin""",orange blossom water,orange flower water,finished,finished,0.0,0.0,0.0,0.0
+4a819c8efa8145aca95fd7f10edf2a14,"""a crush""",crush,crush,finished,finished,1.0,1.0,1.0,1.0
+059fe45574ce48e3becc3b230e4546cb,"""All\\'s Well That Ends Well""",All's Well That Ends Well,All's Well That Ends Well,finished,finished,1.0,1.0,1.0,1.0
+10b4abb550ca406c8d4e33c9cff31fe2,"""Orange County""","Orange County, California",Orange County,finished,finished,0.0,1.0,0.8,1.0
+8d269142648140508ab96ac735141a80,"""Horn""",Horn,Horn,finished,finished,1.0,1.0,1.0,1.0
+e5a2400ddabe4751a3a39adfb948c411,"""manslaughter""",Manslaughter,manslaughter,finished,finished,1.0,1.0,1.0,1.0
+7a903a18b8e44df0bc6b8af86c7e4bf8,"""copper""",Copper,copper,finished,finished,1.0,1.0,1.0,1.0
+9ad3ddc83fcd44078bdecf5310945776,"""Glitter""",Glitter,Glitter,finished,finished,1.0,1.0,1.0,1.0
+a7ebc31e16924865b483b408fa340abb,"""a wedding album""",a wedding album,wedding album,finished,finished,1.0,1.0,1.0,1.0
+1a4c64b7e55f49198320442e20da31a7,"""Washington""",Boeing,Boeing,finished,finished,0.0,0.0,0.0,0.0
+26dda87f8ce44abe9b89e780c0ed4007,"""a nurse purse""",Rn Bags & Handbags | Zazzle,Nurse Purse,finished,finished,0.0,1.0,0.0,1.0
+f257a2c9688441719bc8b80bb03ed3a1,"""a mandolin""",Mandolin,mandolin,finished,finished,1.0,1.0,1.0,1.0
+03cda26c9db54f219e91f5901e725dda,"""Islam""",Islam.,Islam,finished,finished,1.0,1.0,1.0,1.0
+77615b944ac746b5b2e019713abe5eb5,"""a Chinook""",Chinook wind,Chinook wind,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+ece2f199f83f4c6f989911abdee7871a,"""blackened""",Blackened (blackening),blackened,finished,finished,0.0,1.0,0.6666666666666666,1.0
+229a49365ff4462d8bc951ddb68ff1f1,"""Museum of Contemporary Art""",Contemporary art,Contemporary art,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+60b000db8da6444098b74c01cc1eb0e2,"""Riding in Cars with Boys""",Riding in Cars with Boys,Riding in Cars with Boys,finished,finished,1.0,1.0,1.0,1.0
+5d0101c39a8f4b0390277b73d6ca4005,"""FDR""",Franklin D. Roosevelt (FDR),Franklin D. Roosevelt,finished,finished,0.0,0.0,0.4,0.0
+aa3c5dbe762f4e359842e588b8ae47e9,"""Oprah Winfrey""",Oprah Winfrey,Oprah Winfrey,finished,finished,1.0,1.0,1.0,1.0
+7622138eea5d4073a7e5a6acc5beebed,"""Tinactin""",Tinactin,Tinactin,finished,finished,1.0,1.0,1.0,1.0
+f52e36d88d8141589b7f57be7141d2ce,"""Richard Nixon""",Richard Nixon,Richard Nixon,finished,finished,1.0,1.0,1.0,1.0
+d6bb04944a314e1eb2249f019cfac2f6,"""Gentlemen Prefer Blondes""",Gentlemen Prefer Blondes,Gentlemen Prefer Blondes,finished,finished,1.0,1.0,1.0,1.0
+889a04db874a42f199b597a5f4708bcd,"""death""",Death,Death,finished,finished,1.0,1.0,1.0,1.0
+d18899bc5ff04f099b43a18bf4feb87f,"""spurs""",spurs,spurs,finished,finished,1.0,1.0,1.0,1.0
+1957afc2a46e439a8624866564299c77,"""The Fugitive""",The Fugitive (1993),The Fugitive,finished,finished,0.0,1.0,0.6666666666666666,1.0
+f76941e170a44d948c25ceb88c18557b,"""May""",May,May,finished,finished,1.0,1.0,1.0,1.0
+d8496e597ea843a386431d8baa798edb,"""chinchilla""",Chinchillas,Chinchillas,finished,finished,0.0,0.0,0.0,0.0
+c9c3ac27321f436cb35d16796c19d8a6,"""a premium""","The toy in a cereal box is called a **premium** — and ""Premium"" is the brand name on the box of those saltines, so it's right on the box (in the name).",Premium,finished,finished,0.0,1.0,0.07692307692307693,1.0
+2989bc1f17274269ab803d3035267289,"""porcelain""",Ceramics,ceramics,finished,finished,0.0,0.0,0.0,0.0
+9b0f54e4d4b24faca22ba89f1275b675,"""Elie Wiesel""",Elie Wiesel,Elie Wiesel,finished,finished,1.0,1.0,1.0,1.0
+35ee959204c1457da47d572c5ffd92a6,"""Korea""",South Korea,South Korea,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+74788324a10444caa373c6c132264ef1,"""Alice""",Alice,Alice,finished,finished,1.0,1.0,1.0,1.0
+1728772ad1b545e48f1033a908075f50,"""squid""",Giant squid,Giant squid,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+3ed3ed1a2ed24826998f5a377a0eebe5,"""the Department of Justice""",U.S. Department of Justice,Department of Justice,finished,finished,0.0,1.0,0.8571428571428571,1.0
+ab585940f21543cdb602c7f34606b808,"""kugel""",Noodle kugel,Kugel,finished,finished,0.0,1.0,0.6666666666666666,1.0
+285b2733a61f4fb19680ee93b7b80392,"""the Mexican-American War""",Mexican-American War,Mexican-American War,finished,finished,1.0,1.0,1.0,1.0
+29c4441eb3de4e4081e7b021b7b21ae8,"""Karl Marx""",Karl Marx,Karl Marx,finished,finished,1.0,1.0,1.0,1.0
+ba5604cc15714549b1887dda4c79ee1e,"""Boz""",Boz,Boz,finished,finished,1.0,1.0,1.0,1.0
+9430ec5597fd47a6a90f9db7da75bbae,"""trans fats""",trans fatty acids (trans fats),trans fats,finished,finished,0.0,1.0,0.5714285714285715,1.0
+99dc9de2fd094b8e9de41a9040081c1d,"""Sweden""",Sweden,Sweden,finished,finished,1.0,1.0,1.0,1.0
+5290f39935a047d9a6176f83190fdc75,"""Tudor""",Tudor,Tudor,finished,finished,1.0,1.0,1.0,1.0
+45224e0c3ca4482992e8be46e0a67f64,"""salmon""",Salmon,Salmon,finished,finished,1.0,1.0,1.0,1.0
+d929253bd8954a849dfc86401d878d1f,"""the British Shorthair""",The British Shorthair,cat,finished,finished,1.0,0.0,1.0,0.0
+55de755622204878942357d6f0752184,"""Manet""",Édouard Manet,Edouard Manet,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+5a2b64d258194300b61e72edc4e56190,"""Sting""",Sting,Sting,finished,finished,1.0,1.0,1.0,1.0
+ea747bee47074bf980f47568a81425b1,"""gold""",Gold,gold,finished,finished,1.0,1.0,1.0,1.0
+39f0fe99cde247619b4057d0084ba9e1,"""The Count Of Monte Cristo""",The Count of Monte Cristo,The Count of Monte Cristo,finished,finished,1.0,1.0,1.0,1.0
+135b71ec2d6f4f718913298108dcd76b,"""City Slickers""",City Slickers,City Slickers,finished,finished,1.0,1.0,1.0,1.0
+2a022332b2604c7bb184920b069ff82e,"""Espresso""",Espresso,Espresso,finished,finished,1.0,1.0,1.0,1.0
+d9bf831ca84a4d778e20e5dfa93c4bdd,"""Toyota""",Toyota,Toyota,finished,finished,1.0,1.0,1.0,1.0
+1af0be8661d64af09e1065d652312aae,"""the Boston Red Sox""",Boston Red Sox,Boston Red Sox,finished,finished,1.0,1.0,1.0,1.0
+88e4101e4cc043c1a1790407124d6d2b,"""Prince William""",Prince William,Prince William,finished,finished,1.0,1.0,1.0,1.0
+96a445e4c32e496baea79636db8eccb9,"""Buckingham Palace""",Buckingham Palace,Buckingham Palace,finished,finished,1.0,1.0,1.0,1.0
+bb3d2564665c46e2a30f97a7d5eae18f,"""Amun""",Amun (Amon),Amun,finished,finished,0.0,1.0,0.6666666666666666,1.0
+87d2dfd838c94dd5b8462fa868edda8f,"""Heaven Can Wait""",Heaven Can Wait,Heaven Can Wait,finished,finished,1.0,1.0,1.0,1.0
+eaa61dddceac4f74a015cd031e4de67a,"""Eva Peron""","The Duarte family tomb in the Recoleta Cemetery, Buenos Aires.",Eva Peron,finished,finished,0.0,1.0,0.0,1.0
+bf2db66e80ff469e979ac4e9f6b255c4,"""fish sticks""",Fish fingers (fish sticks),Fish fingers,finished,finished,0.0,0.0,0.6666666666666666,0.5
+d08c12ce91114920b1792de8c4d55f66,"""Fletcher Christian""",Fletcher Christian,Fletcher Christian,finished,finished,1.0,1.0,1.0,1.0
+ee02a0e1352b41e28836b95b6d62ae9c,"""Atlas Shrugged""",Atlas Shrugged,Atlas Shrugged,finished,finished,1.0,1.0,1.0,1.0
+d3205343ca1d4166b6cd70984408127f,"""Sacco & Vanzetti""",Sacco & Vanzetti,Sacco & Vanzetti,finished,finished,1.0,1.0,1.0,1.0
+0b57ee37f76e4aedadcf30f3f3f64065,"""an asteroid""",Asteroids,asteroids,finished,finished,0.0,0.0,0.0,0.0
+7773b38bf1b846818f4bba066f7b5d07,"""Death""",Death,Death,finished,finished,1.0,1.0,1.0,1.0
+7917a5e7448447688f273dd89c4b289e,"""water""",Water,water,finished,finished,1.0,1.0,1.0,1.0
+f771a66784f2494b8c0a5aa81f9bd09f,"""soprano""",Soprano,soprano,finished,finished,1.0,1.0,1.0,1.0
+4fa03c33d4d2467096cb5159d9b32d0e,"""gifts""",Gifts,gifts,finished,finished,1.0,1.0,1.0,1.0
+ed13c6c4f99a466abae80756060d24b0,"""an aqueduct""",Aqueduct,aqueduct,finished,finished,1.0,1.0,1.0,1.0
+d5bd248435fd48858beef6626bbadbdb,"""a runway""",runway,runway,finished,finished,1.0,1.0,1.0,1.0
+89412bf5de8446cabc4d5a96cbf7be68,"""a Zamboni""",Zamboni,Zamboni,finished,finished,1.0,1.0,1.0,1.0
+3ddbc52a1228479bba3296be9a652bb6,"""beloved""",Beloved,Immortal Beloved,finished,finished,1.0,0.0,1.0,0.6666666666666666
+39a9394a0123427ea52b07c9ec6c3093,"""France""",France,France,finished,finished,1.0,1.0,1.0,1.0
+7be9991d6f6947e4acc72ea8644b82f5,"""King John""",King John,King John,finished,finished,1.0,1.0,1.0,1.0
+e5fa40d54ba04726b5a9883c5af26081,"""Messiah""",Messiah,Messiah,finished,finished,1.0,1.0,1.0,1.0
+b52a5d5925504e7a9b0eb7b9a2e808fa,"""William S. Hart""",S (Surrey),William S. Hart,finished,finished,0.0,1.0,0.4,1.0
+fd6c948ba43c490c945177ed804fba30,"""South Africa""",South Africa,South Africa,finished,finished,1.0,1.0,1.0,1.0
+c5232cc0d59147dea6d8cff9c57428a6,"""Cock Robin""",Cock Robin,Cock Robin,finished,finished,1.0,1.0,1.0,1.0
+7bd7a98633694059a03bb80a35cfacff,"""Language""",Language,Language,finished,finished,1.0,1.0,1.0,1.0
+3b9b31a7fe0849a18e4d75d6e1d7a915,"""hiccups""",Hiccups,Hiccups,finished,finished,1.0,1.0,1.0,1.0
+f26e7f72328a4556a9fb5655e7770e28,"""Sam Shepard""",Sam Shepard's Family Trilogy plays (with Buried Child).,Sam Shepard,finished,finished,0.0,1.0,0.2,1.0
+da6a69045302434d8aec0c0ddbee1a49,"""a rubaiyat""",A rubaiyat,a rubaiyat,finished,finished,1.0,1.0,1.0,1.0
+ee7665e36cc34a67ba02ba0b1d8a7bcc,"""AT&T""",AT&T,Chevron,finished,finished,1.0,0.0,1.0,0.0
+7dd589a7e5da4b4cb383f057781e1889,"""New Orleans""",New Orleans,New Orleans,finished,finished,1.0,1.0,1.0,1.0
+0878e886ed474c4197ae7b01383a73e9,"""Delilah""",Lilith,Delilah,finished,finished,0.0,1.0,0.0,1.0
+8d987ccf45474bd89253c283b0a2afbf,"""Judas""",Judas Iscariot,Judas Iscariot,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+b54b3d6f34644ea2aaf37de39682368b,"""Ernest Hemingway""",The Sun Also Rises,The Sun Also Rises,finished,finished,0.0,0.0,0.0,0.0
+7326e94d6d5a4e0a8d2017fbd1f333c6,"""Noriega""",Manuel Noriega,Manuel Noriega,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+b439e5783bd64c238c306b520a44aa04,"""a Tesla coil""",a Tesla coil,Tesla coil,finished,finished,1.0,1.0,1.0,1.0
+05883443928c47a2aa0c15e84cc3efce,"""Risk""",Risk,Risk,finished,finished,1.0,1.0,1.0,1.0
+5093b6d997674d25be29a4c94fcd5185,"""Risky Business""",Risky Business,Risky Business,finished,finished,1.0,1.0,1.0,1.0
+7614ea4125f34dcba0d17cfe071d42d3,"""Paraguay""",Paraguay,Paraguay,finished,finished,1.0,1.0,1.0,1.0
+a5f3de4b150341e08b67e7dc71204703,"""Clark""",William Clark,William Clark,finished,finished,0.0,0.0,0.6666666666666666,0.6666666666666666
+884f995169b3419b888c6ad6e2f6bcd8,"""the Edmund Fitzgerald""",SS Edmund Fitzgerald,Edmund Fitzgerald,finished,finished,0.0,1.0,0.8,1.0
+db80db13a92c488e920b53bc3cdcf58a,"""a chimney""",Chimney,chimney,finished,finished,1.0,1.0,1.0,1.0
+74b6042e0798491c81d482aec435e83b,"""pumpkin bread""",Pumpkin bread,Pumpkin bread,finished,finished,1.0,1.0,1.0,1.0
+32f12b8717454d6c9401909b517875d9,"""Nantucket""",Nantucket,Nantucket,finished,finished,1.0,1.0,1.0,1.0
+8907263a3c0846469f4bba527c65c45c,"""a tail""",Tail (prehensile tail),tail,finished,finished,0.0,1.0,0.5,1.0
+9ad0ab836cd145df95b8967e286bf57b,"""The Bronx""",Bronx Zoo,Central Park Zoo,finished,finished,0.0,0.0,0.6666666666666666,0.0
+bfb38a93888b4c0f8c6b83c8d127eb2a,"""Spain""",Spain,Spain,finished,finished,1.0,1.0,1.0,1.0
+3be48ee90f3d4a769cd4213a5fd10ca9,"""Sunset Strip""",Sunset Strip,77 Sunset Strip,finished,finished,1.0,0.0,1.0,0.8

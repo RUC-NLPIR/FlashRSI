@@ -1,0 +1,230 @@
+[
+  {
+    "profile": "full",
+    "harness": "miniagent",
+    "fingerprint": "05bd12255ecd4a24edfe91596b612f24ad45dada09204dfdcfeec6f65d1e8140",
+    "config": {
+      "run": {
+        "output_dir": "original-run/miniagent/attempts"
+      },
+      "benchmark": {
+        "name": "searchqa",
+        "split": "auto",
+        "seed": 42,
+        "data_path": "original-run/data"
+      },
+      "agent": {
+        "name": "miniagent",
+        "llm": {
+          "model_name": "deepseek-v4-flash",
+          "api_key": null,
+          "base_url": "https://MODEL_ENDPOINT/v1",
+          "max_tokens": 16384,
+          "reasoning_effort": "high",
+          "llm_max_retries": 1
+        },
+        "timeout": 300,
+        "max_turns": 10,
+        "source_dir": "original-run/miniagent/seed"
+      },
+      "algorithm": {
+        "num_epochs": 4,
+        "batch_size": 40,
+        "reflection_minibatch_size": 8,
+        "edit_budget": 4,
+        "merge_batch_size": 8,
+        "seed": 42,
+        "max_steps": null,
+        "success_threshold": 0.0,
+        "use_slow_update": true,
+        "use_meta_skill": true,
+        "slow_update_samples": 20,
+        "worker_concurrency": 4,
+        "invalid_patch_policy": "reject_without_score",
+        "protocol_recovery_policy": "retry_malformed_fast_reply_twice_same_prompt_v1",
+        "protocol_recovery_sha256": "f36a6012333d1c4e5a79750e7f7e5cb3568e08f74d52ba2f4051d8b79200a6c8",
+        "protocol_recovery_entrypoint_sha256": "47e9af4b4779bc9f9d95c79d2dd3131756278c32852c9921b433e6e316bfb62e",
+        "patch_recovery_entrypoint_sha256": "881eb7c9dc6170c9778850a786e1dd4a8bb07efc95201260f833e54e77497226",
+        "parallel_entrypoint_sha256": "8c20c0ef52678f010d055fcd68e397434d9dd5f7b349cf71559c85541c08fa0e",
+        "parallel_migration_sha256": "eb9cf7a733ebacef70ce63118a6374850e576fc442c2d26abdb74c6bcb062c2a",
+        "context_recovery_sha256": "3c4f91084888cdf9362dbd97a61fab288065cf706a7d5483b97d42b5ef0a6109",
+        "name": "skillopt",
+        "worker": {
+          "type": "llm",
+          "llm": {
+            "model_name": "deepseek-v4-pro",
+            "api_key": null,
+            "base_url": "https://MODEL_ENDPOINT/v1",
+            "max_tokens": 32768,
+            "reasoning_effort": "high"
+          },
+          "timeout": 600,
+          "max_retries": 1
+        },
+        "parallel_skillopt_sha256": "c63b28bfa649e8d05d4fca7591bfd85b5645b2b3b97e9dd4e56d055c8c401daf",
+        "patch_recovery_sha256": "abf8a886f098f64c998002c48f73ed5eae175ec6c4fe42b49e10d8a2c05c7412"
+      }
+    },
+    "split_counts": {
+      "train": 400,
+      "dev": 200,
+      "test": 1400
+    },
+    "concurrency": 4,
+    "official_revision": "79124b37e9a6371e13b753f8bcd7adb1e493ade1",
+    "recipe": "FlashRSI-Lite SkillOpt constant-edit-budget migration",
+    "primary_metric": "official hard (normalized EM with answer extraction)",
+    "initial_snapshot": "0e9be9c859ee269176ea6db9dddb1ffbca0f53e5b9f5b0bee95a366b3dc18922",
+    "status": "finished",
+    "attempt": "original-run/miniagent/attempts/skillopt-miniagent-searchqa-20260920-125050-547235",
+    "finished_at": "2026-09-20T05:19:49.155711+00:00",
+    "final_snapshot": "fd3108ac28ed753ece3dba1fdf24e4eb6979dd4344716db1898af8902e09ae9b",
+    "baseline_test": {
+      "tasks": 1400,
+      "finished": 1400,
+      "hard": 0.7642857142857142,
+      "f1": 0.8675088917545707,
+      "exact_match": 0.7642857142857142,
+      "lite_f1": 0.8675277041172729
+    },
+    "evolved_test": {
+      "tasks": 1400,
+      "finished": 1400,
+      "hard": 0.8292857142857143,
+      "f1": 0.8982091836734694,
+      "exact_match": 0.8292857142857143,
+      "lite_f1": 0.8982641287284144
+    },
+    "paired_comparison": {
+      "delta_percentage_points": 6.5,
+      "improved_tasks": 117,
+      "regressed_tasks": 26,
+      "paired_bootstrap_95pct_pp": [
+        4.928571428571429,
+        8.142857142857144
+      ]
+    },
+    "accepted_candidates": 7,
+    "candidate_decisions": 43,
+    "test_used_for_selection": false
+  },
+  {
+    "profile": "full",
+    "harness": "claude_code",
+    "fingerprint": "617ce7cbcec4907dfb9432d76916d5fac07e1c415e7476a8617aab29f53aad12",
+    "config": {
+      "run": {
+        "output_dir": "original-run/claude_code/attempts"
+      },
+      "benchmark": {
+        "name": "searchqa",
+        "split": "auto",
+        "seed": 42,
+        "data_path": "original-run/data"
+      },
+      "agent": {
+        "name": "claude_code",
+        "llm": {
+          "model_name": "deepseek-v4-flash",
+          "api_key": null,
+          "base_url": "https://MODEL_ENDPOINT",
+          "effort": "high"
+        },
+        "timeout": 300,
+        "max_turns": 10,
+        "tools": [
+          "Skill",
+          "Read",
+          "Glob",
+          "Grep"
+        ],
+        "allowed_tools": [
+          "Skill",
+          "Read",
+          "Glob",
+          "Grep"
+        ],
+        "source_dir": "original-run/claude_code/seed"
+      },
+      "algorithm": {
+        "num_epochs": 4,
+        "batch_size": 40,
+        "reflection_minibatch_size": 8,
+        "edit_budget": 4,
+        "merge_batch_size": 8,
+        "seed": 42,
+        "max_steps": null,
+        "success_threshold": 0.0,
+        "use_slow_update": true,
+        "use_meta_skill": true,
+        "slow_update_samples": 20,
+        "worker_concurrency": 4,
+        "invalid_patch_policy": "reject_without_score",
+        "protocol_recovery_policy": "retry_malformed_fast_reply_twice_same_prompt_v1",
+        "protocol_recovery_sha256": "f36a6012333d1c4e5a79750e7f7e5cb3568e08f74d52ba2f4051d8b79200a6c8",
+        "protocol_recovery_entrypoint_sha256": "47e9af4b4779bc9f9d95c79d2dd3131756278c32852c9921b433e6e316bfb62e",
+        "patch_recovery_entrypoint_sha256": "881eb7c9dc6170c9778850a786e1dd4a8bb07efc95201260f833e54e77497226",
+        "parallel_entrypoint_sha256": "8c20c0ef52678f010d055fcd68e397434d9dd5f7b349cf71559c85541c08fa0e",
+        "parallel_migration_sha256": "eb9cf7a733ebacef70ce63118a6374850e576fc442c2d26abdb74c6bcb062c2a",
+        "context_recovery_sha256": "3c4f91084888cdf9362dbd97a61fab288065cf706a7d5483b97d42b5ef0a6109",
+        "name": "skillopt",
+        "worker": {
+          "type": "llm",
+          "llm": {
+            "model_name": "deepseek-v4-pro",
+            "api_key": null,
+            "base_url": "https://MODEL_ENDPOINT/v1",
+            "max_tokens": 32768,
+            "reasoning_effort": "high"
+          },
+          "timeout": 600,
+          "max_retries": 1
+        },
+        "parallel_skillopt_sha256": "c63b28bfa649e8d05d4fca7591bfd85b5645b2b3b97e9dd4e56d055c8c401daf",
+        "patch_recovery_sha256": "abf8a886f098f64c998002c48f73ed5eae175ec6c4fe42b49e10d8a2c05c7412"
+      }
+    },
+    "split_counts": {
+      "train": 400,
+      "dev": 200,
+      "test": 1400
+    },
+    "concurrency": 4,
+    "official_revision": "79124b37e9a6371e13b753f8bcd7adb1e493ade1",
+    "recipe": "FlashRSI-Lite SkillOpt constant-edit-budget migration",
+    "primary_metric": "official hard (normalized EM with answer extraction)",
+    "initial_snapshot": "3683142ef789a0f9531fef93220848da0b06393ab619caa176a4c6af42337d42",
+    "status": "finished",
+    "attempt": "original-run/claude_code/attempts/skillopt-claude_code-searchqa-20260920-092210-619800",
+    "finished_at": "2026-09-20T04:40:37.627427+00:00",
+    "final_snapshot": "00bf92fa033bcdf90c6b0329f20254a9ce377aa3e13dfe172168b3d396f2fd16",
+    "baseline_test": {
+      "tasks": 1400,
+      "finished": 1400,
+      "hard": 0.7471428571428571,
+      "f1": 0.8524705035471842,
+      "exact_match": 0.7464285714285714,
+      "lite_f1": 0.8516329037421138
+    },
+    "evolved_test": {
+      "tasks": 1400,
+      "finished": 1400,
+      "hard": 0.8314285714285714,
+      "f1": 0.9025482374768089,
+      "exact_match": 0.8314285714285714,
+      "lite_f1": 0.9025482374768089
+    },
+    "paired_comparison": {
+      "delta_percentage_points": 8.428571428571429,
+      "improved_tasks": 141,
+      "regressed_tasks": 23,
+      "paired_bootstrap_95pct_pp": [
+        6.642857142857143,
+        10.214285714285715
+      ]
+    },
+    "accepted_candidates": 5,
+    "candidate_decisions": 43,
+    "test_used_for_selection": false
+  }
+]

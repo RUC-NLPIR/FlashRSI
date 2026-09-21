@@ -1,0 +1,47 @@
+[
+  {
+    "attempt": "skillopt-claude_code-searchqa-20260919-113651-337748",
+    "trajectory_files": 18,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "llm request failed twice; trajectory: original-run/claude_code/cache/errors/worker/llm/251af7c9394bc0a08b4a5255db9e04b4ddc85b720ba5b08e23b0a3f84cf8c96a-2-7c8c805bd0f24ea597a114e102872bd6.json"
+    }
+  },
+  {
+    "attempt": "skillopt-claude_code-searchqa-20260919-120227-528349",
+    "trajectory_files": 155,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "edit target must occur exactly once in the skill"
+    }
+  },
+  {
+    "attempt": "skillopt-claude_code-searchqa-20260919-170536-724576",
+    "trajectory_files": 369,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "Worker must return a valid JSON object"
+    }
+  },
+  {
+    "attempt": "skillopt-claude_code-searchqa-20260919-215441-407311",
+    "trajectory_files": 576,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "llm request failed twice; trajectory: original-run/claude_code/cache/errors/worker/llm/2c1b1090a7181c3bf46a4d991b472be4a96a491682e2259447ef3fac2b79c299-2-a3c2bb2bd5bc4eb786f03894165afc9a.json"
+    }
+  },
+  {
+    "attempt": "skillopt-claude_code-searchqa-20260920-092210-619800",
+    "trajectory_files": 641,
+    "is_final": true,
+    "outcome": {
+      "status": "finished",
+      "finished_at": "2026-09-20T04:40:37.627427+00:00"
+    }
+  }
+]

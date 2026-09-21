@@ -1,0 +1,182 @@
+[
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-103441-806213",
+    "trajectory_files": 30,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/e42eabd93ce9029766f3a009d287c1b4906c3a8d682e364d7ca2580010a0fb73-2-32444e9dde8f4198b385f5f22f0c257a.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-112021-542368",
+    "trajectory_files": 61,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "CancelledError"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-120227-529026",
+    "trajectory_files": 62,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/10fd089ee9d985623b1832bda2ac2f411baf6b673635f01c7e861af092702d9c-2-6b6c08c14f434b33a615245281735986.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-121907-711958",
+    "trajectory_files": 94,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/0d4d39edd7fc0b1182a586220a3e058feb4f7b3281b6c796ad48ef806120abe8-2-db277e31eed5430dae0816e76379fb08.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-132511-617422",
+    "trajectory_files": 94,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/0d4d39edd7fc0b1182a586220a3e058feb4f7b3281b6c796ad48ef806120abe8-2-f65a17d44e9040c1bb5f4fad007fd241.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-132956-837116",
+    "trajectory_files": 190,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/cb8d5d9e2b736e0fe6cc513c2dd2e3e86380db02bb8d5f9013f0a3189f352107-2-62cd9352d41d4321bce5bc34619ea9be.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-153126-126704",
+    "trajectory_files": 190,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/cb8d5d9e2b736e0fe6cc513c2dd2e3e86380db02bb8d5f9013f0a3189f352107-2-20c63f8a704b48d3b9569b2f4c571ec5.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-154929-009261",
+    "trajectory_files": 192,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/22e9b4716da6386e0cb49fe11d536259beb1918581c5ecbe04a9cf6b9fb9e04a-2-c39ab234655a43a4974834007f0836d1.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-165326-792935",
+    "trajectory_files": 205,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "CancelledError"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-170536-726161",
+    "trajectory_files": 298,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/91222595af4de67818ef0469e876570315ffebfdeebbde69fca9ae7d6a00417d-2-0426799ecc974e2590799a07e7dbf28d.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-185842-279723",
+    "trajectory_files": 298,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/91222595af4de67818ef0469e876570315ffebfdeebbde69fca9ae7d6a00417d-2-4cb147d9221a48369465b4eb91655434.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-190557-555675",
+    "trajectory_files": 332,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "Worker must return a valid JSON object"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-215441-407324",
+    "trajectory_files": 365,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/aad71d6f6b6cc6f4e102108aac3052f729f777eb98f02b332f9a46f548ee0803-2-f009caa0398342fe805061e61aae18fa.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-225744-237125",
+    "trajectory_files": 382,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/62ec896e7647759753faeeb9a74a2c88af74cab3239c1677a9bd638b1169483f-2-9f3b98d346cc4e688bb5271b73a72ed7.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260919-232815-719243",
+    "trajectory_files": 459,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/7f786978314f9f6d74e26a4440cde71d47196f63b631eca4aa2c5abec409a23f-2-9797a97362784dc79df9e62fab946ecd.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260920-005350-706389",
+    "trajectory_files": 509,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "llm request failed twice; trajectory: original-run/miniagent/cache/errors/worker/llm/7a66779ff646c30f05ba0383cee674813272cbc8e9c8cebdc7f2351e8241fda0-2-e9489dfcdb0b4f35812c2c3adf7513eb.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260920-092210-619802",
+    "trajectory_files": 572,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/473c12a6e37dcbe6672e38d4a69b4209fa09a370cbe016321ac09bca9aa2e0c9-2-9119405ce0c04356b69c2c931ef4928c.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260920-110430-619678",
+    "trajectory_files": 587,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/d27b2ce69e2cbeef42792cf3d5192569263f0e190565fad1912017599260476b-2-1a4e4df1dde54cf1975d129753285517.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260920-112231-282033",
+    "trajectory_files": 643,
+    "is_final": false,
+    "error": {
+      "status": "error",
+      "error": "miniagent request failed twice; trajectory: original-run/miniagent/cache/errors/target/miniagent/8b16352691e3ef2d31c8e20c815016a0cdf7064af3322d07d2278becd4370f33-2-3fe4fa4bd9bd40c9b731d8058e37c007.json"
+    }
+  },
+  {
+    "attempt": "skillopt-miniagent-searchqa-20260920-125050-547235",
+    "trajectory_files": 645,
+    "is_final": true,
+    "outcome": {
+      "status": "finished",
+      "finished_at": "2026-09-20T05:19:49.155711+00:00"
+    }
+  }
+]

@@ -1,0 +1,174 @@
+{
+  "previous_plan": {
+    "profile": "full",
+    "harness": "claude_code",
+    "fingerprint": "96bf0e63dc02dbbdf081f9d77d265c4656487b49121e49dd5700971b86ee5ff5",
+    "config": {
+      "run": {
+        "output_dir": "original-run/claude_code/attempts"
+      },
+      "benchmark": {
+        "name": "searchqa",
+        "split": "auto",
+        "seed": 42,
+        "data_path": "original-run/data"
+      },
+      "agent": {
+        "name": "claude_code",
+        "llm": {
+          "model_name": "deepseek-v4-flash",
+          "api_key": null,
+          "base_url": "https://MODEL_ENDPOINT",
+          "effort": "high"
+        },
+        "timeout": 300,
+        "max_turns": 10,
+        "tools": [
+          "Skill",
+          "Read",
+          "Glob",
+          "Grep"
+        ],
+        "allowed_tools": [
+          "Skill",
+          "Read",
+          "Glob",
+          "Grep"
+        ],
+        "source_dir": "original-run/claude_code/seed"
+      },
+      "algorithm": {
+        "num_epochs": 4,
+        "batch_size": 40,
+        "reflection_minibatch_size": 8,
+        "edit_budget": 4,
+        "merge_batch_size": 8,
+        "seed": 42,
+        "max_steps": null,
+        "success_threshold": 0.0,
+        "use_slow_update": true,
+        "use_meta_skill": true,
+        "slow_update_samples": 20,
+        "worker_concurrency": 4,
+        "parallel_entrypoint_sha256": "8c20c0ef52678f010d055fcd68e397434d9dd5f7b349cf71559c85541c08fa0e",
+        "parallel_migration_sha256": "eb9cf7a733ebacef70ce63118a6374850e576fc442c2d26abdb74c6bcb062c2a",
+        "context_recovery_sha256": "3c4f91084888cdf9362dbd97a61fab288065cf706a7d5483b97d42b5ef0a6109",
+        "name": "skillopt",
+        "worker": {
+          "type": "llm",
+          "llm": {
+            "model_name": "deepseek-v4-pro",
+            "api_key": null,
+            "base_url": "https://MODEL_ENDPOINT/v1",
+            "max_tokens": 32768,
+            "reasoning_effort": "high"
+          },
+          "timeout": 600,
+          "max_retries": 1
+        },
+        "parallel_skillopt_sha256": "c63b28bfa649e8d05d4fca7591bfd85b5645b2b3b97e9dd4e56d055c8c401daf"
+      }
+    },
+    "split_counts": {
+      "train": 400,
+      "dev": 200,
+      "test": 1400
+    },
+    "concurrency": 4,
+    "official_revision": "79124b37e9a6371e13b753f8bcd7adb1e493ade1",
+    "recipe": "FlashRSI-Lite SkillOpt constant-edit-budget migration",
+    "primary_metric": "official hard (normalized EM with answer extraction)",
+    "initial_snapshot": "3683142ef789a0f9531fef93220848da0b06393ab619caa176a4c6af42337d42"
+  },
+  "upgraded_plan": {
+    "profile": "full",
+    "harness": "claude_code",
+    "fingerprint": "465aec77433d993f96707a6f91cf0dd83653a87957cdf7eec50fa9f2a929af80",
+    "config": {
+      "run": {
+        "output_dir": "original-run/claude_code/attempts"
+      },
+      "benchmark": {
+        "name": "searchqa",
+        "split": "auto",
+        "seed": 42,
+        "data_path": "original-run/data"
+      },
+      "agent": {
+        "name": "claude_code",
+        "llm": {
+          "model_name": "deepseek-v4-flash",
+          "api_key": null,
+          "base_url": "https://MODEL_ENDPOINT",
+          "effort": "high"
+        },
+        "timeout": 300,
+        "max_turns": 10,
+        "tools": [
+          "Skill",
+          "Read",
+          "Glob",
+          "Grep"
+        ],
+        "allowed_tools": [
+          "Skill",
+          "Read",
+          "Glob",
+          "Grep"
+        ],
+        "source_dir": "original-run/claude_code/seed"
+      },
+      "algorithm": {
+        "num_epochs": 4,
+        "batch_size": 40,
+        "reflection_minibatch_size": 8,
+        "edit_budget": 4,
+        "merge_batch_size": 8,
+        "seed": 42,
+        "max_steps": null,
+        "success_threshold": 0.0,
+        "use_slow_update": true,
+        "use_meta_skill": true,
+        "slow_update_samples": 20,
+        "worker_concurrency": 4,
+        "invalid_patch_policy": "reject_without_score",
+        "patch_recovery_entrypoint_sha256": "881eb7c9dc6170c9778850a786e1dd4a8bb07efc95201260f833e54e77497226",
+        "parallel_entrypoint_sha256": "8c20c0ef52678f010d055fcd68e397434d9dd5f7b349cf71559c85541c08fa0e",
+        "parallel_migration_sha256": "eb9cf7a733ebacef70ce63118a6374850e576fc442c2d26abdb74c6bcb062c2a",
+        "context_recovery_sha256": "3c4f91084888cdf9362dbd97a61fab288065cf706a7d5483b97d42b5ef0a6109",
+        "name": "skillopt",
+        "worker": {
+          "type": "llm",
+          "llm": {
+            "model_name": "deepseek-v4-pro",
+            "api_key": null,
+            "base_url": "https://MODEL_ENDPOINT/v1",
+            "max_tokens": 32768,
+            "reasoning_effort": "high"
+          },
+          "timeout": 600,
+          "max_retries": 1
+        },
+        "parallel_skillopt_sha256": "c63b28bfa649e8d05d4fca7591bfd85b5645b2b3b97e9dd4e56d055c8c401daf",
+        "patch_recovery_sha256": "abf8a886f098f64c998002c48f73ed5eae175ec6c4fe42b49e10d8a2c05c7412"
+      }
+    },
+    "split_counts": {
+      "train": 400,
+      "dev": 200,
+      "test": 1400
+    },
+    "concurrency": 4,
+    "official_revision": "79124b37e9a6371e13b753f8bcd7adb1e493ade1",
+    "recipe": "FlashRSI-Lite SkillOpt constant-edit-budget migration",
+    "primary_metric": "official hard (normalized EM with answer extraction)",
+    "initial_snapshot": "3683142ef789a0f9531fef93220848da0b06393ab619caa176a4c6af42337d42"
+  },
+  "added_algorithm_keys": [
+    "invalid_patch_policy",
+    "patch_recovery_sha256",
+    "patch_recovery_entrypoint_sha256"
+  ],
+  "reason": "Reject unapplicable completed fast patches without a score; record malformed sequential slow/meta output without inventing evaluations. Concurrent reflection/merge parse errors remain terminal.",
+  "created_at": "2026-09-19T09:05:07.327844+00:00"
+}

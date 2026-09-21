@@ -1,0 +1,3 @@
+{"harness": "claude_code", "status": "needs_attention", "reason": "edit target must occur exactly once in the skill"}
+{"harness": "claude_code", "status": "needs_attention", "reason": "Worker must return a valid JSON object"}
+{"harness": "claude_code", "status": "needs_attention", "reason": "Error code: 403 - {'error': {'message': '\u7528\u6237\u989d\u5ea6\u4e0d\u8db3, \u5269\u4f59\u989d\u5ea6: \uff04-20.771130 (request id: 202609191748386457130258268d9d6CAJ9Ky1G)', 'type': 'new_api_error', 'param': '', 'code': 'insufficient_user_quota'}}"}
