@@ -112,6 +112,35 @@ def test_package_round_trip_index_and_manifest(tmp_path):
     assert (destination / "README.md").is_file()
 
 
+def test_records_the_upstream_license_and_provenance_notes(tmp_path):
+    one = _task(tmp_path / "source", "one")
+    license_file = tmp_path / "LICENSE"
+    license_file.write_text("Apache License 2.0\n")
+    output = tmp_path / "publish"
+
+    manifest = module.prepare(output, [one], license_file)
+
+    destination = output / "terminal_bench"
+    assert (destination / "UPSTREAM_LICENSE").read_text() == "Apache License 2.0\n"
+    assert json.loads((destination / "license-source.json").read_text()) == (
+        module.LICENSE_SOURCE
+    )
+    assert manifest["license"]["spdx"] == "Apache-2.0"
+    assert (
+        manifest["license"]["sha256"]
+        == hashlib.sha256(license_file.read_bytes()).hexdigest()
+    )
+    # The pinned task revision predates the license, so its source is explicit.
+    assert manifest["license"]["revision"] == module.LICENSE_SOURCE["revision"]
+    assert manifest["license"]["revision"] != module.REVISION
+    assert set(manifest["notes"]) == {"grading", "runtime"}
+
+    # Without a license the directory stays as it was before this change.
+    plain = module.prepare(tmp_path / "plain", [one])
+    assert "license" not in plain
+    assert not (tmp_path / "plain" / "terminal_bench" / "UPSTREAM_LICENSE").exists()
+
+
 def test_preparation_is_stable_across_order_mtime_and_output_directory(tmp_path):
     one = _task(tmp_path / "source", "one")
     two = _task(tmp_path / "source", "two")
