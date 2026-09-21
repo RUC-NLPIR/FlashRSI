@@ -1,31 +1,4 @@
----
-pretty_name: FlashRSI Benchmarks
-language:
-  - en
-task_categories:
-  - question-answering
-size_categories:
-  - 1K<n<10K
-license: other
-license_name: authorized-by-maintainer
-license_link: https://huggingface.co/datasets/jinjiajie/EvoOS/blob/2e2d97feb4a3394fd577017024e6d9f3176e9fbc/benchmarks/searchqa/README.md
-configs:
-  - config_name: searchqa
-    data_files:
-      - split: train
-        path: searchqa/train.parquet
-      - split: dev
-        path: searchqa/dev.parquet
-      - split: test
-        path: searchqa/test.parquet
----
-
-# FlashRSI Benchmarks
-
-Prepared datasets for FlashRSI. Each benchmark has its own named Hugging Face
-configuration. The initial configuration is `searchqa`.
-
-## SearchQA
+# SearchQA
 
 This is the **2,000-task SkillOpt subset**, exported by
 [jinjiajie/EvoOS](https://huggingface.co/datasets/jinjiajie/EvoOS/tree/2e2d97feb4a3394fd577017024e6d9f3176e9fbc/benchmarks/searchqa).
@@ -75,7 +48,20 @@ Uniform source fields `grader: qa` and `metadata.task_type: searchqa` are record
 here rather than repeated in every row. No examples were filtered, deduplicated,
 reshuffled, or generated. Preparation validates source checksums, counts, globally
 unique IDs, reference answers, prompt reconstruction, and Parquet round trips.
-File checksums and source metadata are in [searchqa/manifest.json](searchqa/manifest.json).
+Per-split output and source checksums are in
+[manifest.json](manifest.json), alongside the source revision and the upstream
+export's own manifest.
+
+## Splits
+
+| Split | Rows | Origin |
+| --- | ---: | --- |
+| `train` | 400 | source train split, preserved as published |
+| `dev` | 200 | source dev split, preserved as published |
+| `test` | 1,400 | source test split, preserved as published |
+
+The fixed SkillOpt partition is preserved exactly; no split is derived or
+repartitioned here. Candidate selection during evolution must not read `test`.
 
 ## Provenance and evaluation
 
