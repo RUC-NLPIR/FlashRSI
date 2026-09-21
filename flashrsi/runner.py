@@ -11,7 +11,7 @@ from flashrsi._records import _write_record
 from flashrsi._run_summary import _finish_summary
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
 from flashrsi.algorithms import SkillOpt
-from flashrsi.benchmarks import HotpotQA, SearchQA, TerminalBench
+from flashrsi.benchmarks import HotpotQA, SearchQA, Tau3Banking, TerminalBench
 from flashrsi.config import prepare_run_dir
 
 _AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode}
@@ -19,6 +19,7 @@ _BENCHMARKS = {
     "searchqa": SearchQA,
     "hotpotqa": HotpotQA,
     "terminal_bench": TerminalBench,
+    "tau3_banking": Tau3Banking,
 }
 _ALGORITHMS = {"skillopt": SkillOpt}
 _LOGGER = logging.getLogger(__name__)
@@ -50,6 +51,14 @@ async def _run(config):
         from flashrsi.integrations.harbor import bind
 
         bind(target)
+    if isinstance(benchmark, Tau3Banking):
+        # The benchmark supplies tasks and reads the simulator's reward, but no
+        # integration drives the tau2 user simulator yet, so a run cannot score.
+        raise ValueError(
+            "tau3_banking has no execution integration yet: its tasks load and "
+            "grade a recorded Tau2Simulator reward, but nothing runs the tau2 "
+            "user simulator and tools. Use benchmark.load() and grade() directly."
+        )
     algorithm = algorithm_type(
         config.algorithm, target=target, worker=worker, benchmark=benchmark
     )

@@ -1,0 +1,33 @@
+# tau3 Banking: loading and grading only, not yet runnable.
+#
+# The benchmark supplies tasks and reads the tau2 simulator's reward, but no
+# integration drives the user simulator and tools yet, so `flashrsi run` stops
+# at startup with that gap named. This file records the intended shape and is
+# usable today through benchmark.load() and benchmark.grade().
+#
+# Each task carries the domain directory in `env`, and the simulated customer's
+# script in `metadata.user_instructions`. The user simulator needs its own model
+# configuration; it must not reuse the evolution worker's.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: tau3_banking
+  split: auto
+  seed: 42
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-api-key
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 1
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
