@@ -7,6 +7,14 @@
 # cannot share an environment with the harbor extra (Terminal-Bench):
 #   uv pip install "tau2 @ git+https://github.com/sierra-research/tau2-bench.git@v1.0.1"
 #   uv pip install -e ".[tau2,miniagent]"
+#
+# The user simulator reads prompt files from tau2's data directory, which the
+# wheel does not ship and which tau2 resolves at import. Copy them from the
+# pinned source and export the variable before running:
+#   data/tau2/user_simulator/*.md  ->  $TAU2_DATA_DIR/tau2/user_simulator/
+#   export TAU2_DATA_DIR=/path/to/tau2-data
+# The benchmark's own domain copy is used for the domain itself, so only the
+# user simulator files are needed there.
 run:
   output_dir: ../runs
 

@@ -179,7 +179,10 @@ def test_reward_becomes_a_graded_trajectory(tmp_path, monkeypatch):
 
     def simulate(config, native):
         seen["config"] = config
-        seen["data_dir"] = __import__("os").environ["TAU2_DATA_DIR"]
+        from tau2.domains.banking_knowledge import utils
+
+        # The domain constants point at this Task's verified copy while running.
+        seen["db_path"] = utils.KNOWLEDGE_DB_PATH
         return SimpleNamespace(
             reward_info=SimpleNamespace(reward=1.0),
             termination_reason="user_stop",
@@ -211,7 +214,11 @@ def test_reward_becomes_a_graded_trajectory(tmp_path, monkeypatch):
     assert seen["config"].llm_user == "sim-model"
     assert seen["config"].retrieval_config == "grep_only"
     assert seen["config"].max_steps == 7
-    assert seen["data_dir"] == str(domain.parents[2])
+    assert seen["db_path"] == domain / "db.json"
+    # The domain constants are restored, so one task cannot affect the next.
+    from tau2.domains.banking_knowledge import utils
+
+    assert utils.KNOWLEDGE_DB_PATH != domain / "db.json"
     # The simulator key never leaks into the recorded trajectory.
     assert "sim-key" not in json.dumps(trajectory.messages, default=str)
 

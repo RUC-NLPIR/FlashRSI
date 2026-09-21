@@ -19,6 +19,7 @@ import os
 import threading
 import uuid
 from collections.abc import Mapping
+from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import replace
 from pathlib import Path
@@ -121,34 +122,68 @@ def _simulate(agent, task, domain, simulator, config):
     loop = asyncio.new_event_loop()
     thread = threading.Thread(target=loop.run_forever, daemon=True)
     thread.start()
-    # tau2 resolves the domain from its data directory, so point it at the
-    # verified copy this Task came from rather than the installed package.
-    previous = os.environ.get("TAU2_DATA_DIR")
-    os.environ["TAU2_DATA_DIR"] = str(domain.parents[2])
     _register_once()
     token = _CURRENT.set({"agent": agent, "loop": loop})
     try:
-        return run_single_task(
-            TextRunConfig(
-                domain=_DOMAIN,
-                agent=_AGENT_NAME,
-                user="user_simulator",
-                llm_user=simulator["model_name"],
-                llm_args_user=_llm_args(simulator),
-                max_steps=config.get("max_steps", 30),
-                retrieval_config=task.metadata["variant"],
-            ),
-            _native_task(domain, task),
-        )
+        with _domain_paths(domain):
+            return run_single_task(
+                TextRunConfig(
+                    domain=_DOMAIN,
+                    agent=_AGENT_NAME,
+                    user="user_simulator",
+                    llm_user=_llm_model(simulator),
+                    llm_args_user=_llm_args(simulator),
+                    max_steps=config.get("max_steps", 30),
+                    retrieval_config=task.metadata["variant"],
+                ),
+                _native_task(domain, task),
+            )
     finally:
         _CURRENT.reset(token)
-        if previous is None:
-            os.environ.pop("TAU2_DATA_DIR", None)
-        else:
-            os.environ["TAU2_DATA_DIR"] = previous
         loop.call_soon_threadsafe(loop.stop)
         thread.join()
         loop.close()
+
+
+@contextmanager
+def _domain_paths(domain: Path):
+    """Point tau2 at the verified domain this Task came from.
+
+    tau2 resolves TAU2_DATA_DIR once at import, and the domain modules copy
+    those paths into their own constants, so the environment variable cannot
+    redirect an already-imported package. Rebind every path that names the
+    installed domain, including the template baked into each variant.
+    """
+    from tau2.domains.banking_knowledge import environment, retrieval, utils
+
+    installed = utils.KNOWLEDGE_DATA_DIR
+    modules = (utils, environment, retrieval)
+    originals = [
+        (module, name, value)
+        for module in modules
+        for name, value in vars(module).items()
+        if isinstance(value, Path) and value.is_relative_to(installed)
+    ]
+    variants = [
+        (variant, variant.prompt_template)
+        for variant in retrieval.RETRIEVAL_VARIANTS.values()
+        if variant.prompt_template.is_relative_to(installed)
+    ]
+
+    def rebind(path: Path) -> Path:
+        return domain / path.relative_to(installed)
+
+    try:
+        for module, name, value in originals:
+            setattr(module, name, rebind(value))
+        for variant, template in variants:
+            object.__setattr__(variant, "prompt_template", rebind(template))
+        yield
+    finally:
+        for module, name, value in originals:
+            setattr(module, name, value)
+        for variant, template in variants:
+            object.__setattr__(variant, "prompt_template", template)
 
 
 def _register_once() -> None:
@@ -171,6 +206,14 @@ def _llm_args(simulator: Mapping) -> dict:
         for source, target in names.items()
         if simulator.get(source) is not None
     }
+
+
+def _llm_model(simulator: Mapping) -> str:
+    """litellm needs a provider prefix; a custom base_url speaks the OpenAI API."""
+    model = simulator["model_name"]
+    if "/" in model or not simulator.get("base_url"):
+        return model
+    return f"openai/{model}"
 
 
 def _native_task(domain: Path, task):
