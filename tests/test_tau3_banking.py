@@ -204,6 +204,20 @@ def test_grading_requires_loaded_benchmark_tasks(tmp_path):
             )
 
 
+def test_reads_the_id_from_the_file_rather_than_its_name(tmp_path):
+    """The tau2 runtime keys on the id inside each file, not the filename."""
+    domain = _domain(tmp_path)
+    path = domain / "tasks" / "task_001.json"
+    task = json.loads(path.read_text())
+    task["id"] = "task_999"
+    path.write_text(json.dumps(task))
+
+    (loaded,) = Tau3Banking(_single(domain)).load()["train"]
+
+    assert loaded.task_id == "task_999"
+    assert loaded.metadata["task_path"] == "tasks/task_001.json"
+
+
 def test_rejects_a_path_that_is_not_a_tau2_domain(tmp_path):
     with pytest.raises(ValueError, match="tau2 domain directory"):
         Tau3Banking({"data_path": tmp_path}).load()

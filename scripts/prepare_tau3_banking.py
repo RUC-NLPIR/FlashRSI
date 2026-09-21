@@ -29,6 +29,7 @@ REVISION = "fc0055dc4e0a316c3f83133267fbd6faaa770992"
 DOMAIN = "data/tau2/domains/banking_knowledge"
 # The tau2 runtime reads the tasks/ directory, so those files are authoritative.
 TASK_DIR = "tasks"
+ARCHIVE_ROOT = "tau3_banking"
 INDEX_SCHEMA = pa.schema(
     [
         ("id", pa.string()),
@@ -87,7 +88,8 @@ def prepare(output: Path, source_dir: Path, license_file: Path | None = None) ->
             raise ValueError(f"duplicate task id: {row['id']}")
         if path.stem != row["id"]:
             raise ValueError(f"task file {path.name} does not match id {row['id']}")
-        files[row["id"]] = (f"{TASK_DIR}/{path.name}", _sha256(path))
+        # Paths are archive-relative, as in the Terminal-Bench manifest.
+        files[row["id"]] = (f"{ARCHIVE_ROOT}/{TASK_DIR}/{path.name}", _sha256(path))
         rows.append(row)
     if not rows:
         raise ValueError(f"source has no task files: {task_dir}")
@@ -97,7 +99,7 @@ def prepare(output: Path, source_dir: Path, license_file: Path | None = None) ->
     destination.mkdir(parents=True, exist_ok=True)
     archive = destination / "domain.tar.gz"
     index = destination / "tasks.parquet"
-    _write_archive(archive, [("tau3_banking", source_dir, _entries(source_dir))])
+    _write_archive(archive, [(ARCHIVE_ROOT, source_dir, _entries(source_dir))])
     pq.write_table(
         pa.Table.from_pylist(rows, schema=INDEX_SCHEMA), index, compression="zstd"
     )

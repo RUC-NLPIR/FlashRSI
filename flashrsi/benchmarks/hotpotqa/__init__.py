@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import replace
+from collections.abc import Mapping, Sequence
 from types import MappingProxyType
 from typing import Any
 
-from flashrsi.benchmarks._data import _load_rows, _split_tasks
-from flashrsi.benchmarks.metrics import qa_metrics
-from flashrsi.core.benchmark import Benchmark, Task
-from flashrsi.core.trajectory import Trajectory
+from flashrsi.benchmarks._qa import QABenchmark
+from flashrsi.core.benchmark import Task
 
 _PROMPT = (
     "Answer the multi-hop question using the supplied Wikipedia context. "
@@ -18,18 +15,25 @@ _PROMPT = (
 )
 
 
-class HotpotQA(Benchmark):
+class HotpotQA(QABenchmark):
     """HotpotQA fullwiki with the published held-out splits and EM/F1 grading.
 
     The published splits already implement ``flashrsi-hotpotqa-heldout-v1``: the
     labeled official validation split is ``test`` and ``dev`` is a seeded holdout
     of official train. ``split=auto`` preserves that partition; explicit ratios
     merge and repartition it, which discards the held-out guarantee.
+
+    Those splits are not drawn from one pool. Official train always contains the
+    gold paragraphs, while the official validation split used as ``test`` is
+    entirely ``hard`` and contains them for only 28% of its rows, so train and
+    dev scores do not predict test scores.
+
+    Only the short answer is scored. Supporting-fact and joint metrics need the
+    agent to report its evidence, which this prompt does not ask for.
     """
 
     name = "hotpotqa"
     description = "Multi-hop question answering over retrieved Wikipedia paragraphs."
-    primary_metric = "exact_match"
     metadata = MappingProxyType(
         {
             "source": "jinjiajie/flashrsi",
@@ -38,60 +42,8 @@ class HotpotQA(Benchmark):
         }
     )
 
-    def __init__(self, config: Mapping[str, Any]) -> None:
-        super().__init__()
-        self.config = config["benchmark"] if "benchmark" in config else config
-        if self.config.get("name", self.name) != self.name:
-            raise ValueError("HotpotQA requires benchmark.name: hotpotqa")
-        self._tasks_by_id: dict[str, Task] = {}
-
-    def load(self) -> Mapping[str, tuple[Task, ...]]:
-        """Load the pinned dataset (or local data), then apply configured splits."""
-        if self._splits is None:
-            self._splits = _split_tasks(self._iter_tasks(), self.config)
-            self._tasks_by_id = {
-                task.task_id: task for split in self._splits.values() for task in split
-            }
-        return self._splits
-
-    def grade(self, trajs: tuple[Trajectory, ...]) -> tuple[Trajectory, ...]:
-        """Score the short answer only; supporting-fact metrics need more output."""
-        if self._splits is None:
-            raise RuntimeError("hotpotqa has not been loaded; call load() first")
-        graded = []
-        for trajectory in trajs:
-            if trajectory.task is None:
-                raise ValueError("HotpotQA grading requires a Task; use Agent.rollout")
-            try:
-                task = self._tasks_by_id[trajectory.task.task_id]
-            except KeyError as error:
-                raise ValueError(
-                    f"trajectory has unknown HotpotQA task: {trajectory.task.task_id}"
-                ) from error
-
-            scores = (
-                qa_metrics(trajectory.output, task.metadata["answers"])
-                if trajectory.status == "finished"
-                else {"exact_match": 0.0, "f1": 0.0}
-            )
-            metrics = {**trajectory.metrics, **scores}
-            graded.append(replace(trajectory, metrics=metrics))
-        return tuple(graded)
-
-    def _iter_tasks(self) -> Iterable[Task]:
-        for source, row in self._load_source_rows():
-            yield self._task_from_row(row, source)
-
-    def _load_source_rows(self) -> Iterable[tuple[str, Mapping[str, Any]]]:
-        rows, self.metadata = _load_rows(
-            self.config.get("data_path"), type(self).metadata
-        )
-        return rows
-
     @staticmethod
     def _task_from_row(row: Mapping[str, Any], source_split: str) -> Task:
-        if not isinstance(row, Mapping):
-            raise ValueError("HotpotQA rows must be mappings")
         task_id = row.get("id")
         question = row.get("question")
         answer = row.get("answer")
@@ -131,9 +83,11 @@ def _context(value: Any, task_id: str) -> str:
     if not isinstance(value, Mapping):
         raise malformed
     titles, paragraphs = value.get("title"), value.get("sentences")
-    if not _is_list(titles) or not _is_list(paragraphs):
-        raise malformed
-    if len(titles) != len(paragraphs):
+    if (
+        not _is_list(titles)
+        or not _is_list(paragraphs)
+        or len(titles) != len(paragraphs)
+    ):
         raise malformed
     lines = []
     for title, sentences in zip(titles, paragraphs, strict=True):

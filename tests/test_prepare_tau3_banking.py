@@ -100,10 +100,11 @@ def test_package_round_trip_index_and_manifest(tmp_path, source):
     assert rows[0]["has_initial_state"] is False
     assert rows[1]["has_initial_state"] is True
     assert SECRET_ACTION not in repr(rows)
+    # Paths are archive-relative, so a loader can join them to the extraction.
     assert manifest["tasks"] == [
         {
             "id": name,
-            "path": f"tasks/{name}.json",
+            "path": f"tau3_banking/tasks/{name}.json",
             "task_checksum": module._sha256(source / "tasks" / f"{name}.json"),
         }
         for name in ("task_001", "task_002")

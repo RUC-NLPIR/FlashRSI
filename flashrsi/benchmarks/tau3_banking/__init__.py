@@ -19,7 +19,14 @@ _DOMAIN = "banking_knowledge"
 _GIT_URL = "https://github.com/sierra-research/tau2-bench.git"
 _UPSTREAM_TAG = "v1.0.1"
 _UPSTREAM_REVISION = "fc0055dc4e0a316c3f83133267fbd6faaa770992"
-_REVISION = "40aa3932298226b2b5063351519291c989b85087"
+_REVISION = "8d4ab8ad7bce903fe9959fc46b39d7e414f6711e"
+# The agent answers as the support representative; the simulated customer's
+# script belongs to the user simulator and stays in task metadata.
+_INSTRUCTION = (
+    "You are a customer service representative for this bank. Handle the "
+    "customer's request using the domain's tools and knowledge base, "
+    "following its policy."
+)
 
 
 class Tau3Banking(Benchmark):
@@ -27,13 +34,11 @@ class Tau3Banking(Benchmark):
 
     tau2 owns the user simulator, the tool implementations and the reward, so
     every task carries the domain directory in ``env`` rather than a prompt to
-    answer. ``question`` is the agent's own policy instruction; the simulated
-    customer's script stays in metadata for the integration to hand to the user
-    simulator, never to the agent under test.
+    answer, and ``question`` is the agent's own role instruction.
 
-    Terminal-Bench publishes one collection without training splits and so does
-    this domain: ``split=auto`` partitions its 97 tasks by the shared seeded
-    rule. A local ``data_path`` may name an extracted domain directory.
+    The domain publishes one collection without training splits, so
+    ``split=auto`` partitions its 97 tasks by the shared seeded rule. A local
+    ``data_path`` may name an extracted domain directory.
     """
 
     name = "tau3_banking"
@@ -103,12 +108,16 @@ class Tau3Banking(Benchmark):
         return tuple(graded)
 
     def _iter_tasks(self) -> Iterable[Task]:
+        """Read the tasks/ directory, which is what the tau2 runtime loads."""
+        paths, domain = self._task_files()
+        for path in paths:
+            yield _task_from_file(path, domain, dict(self.metadata))
+
+    def _task_files(self) -> tuple[tuple[Path, ...], Path]:
         data_path = self.config.get("data_path")
         if data_path is None:
-            domain, index = _download_domain(self.metadata)
-            for row in index:
-                yield _task_from_row(row, domain, dict(self.metadata))
-            return
+            paths = _download_domain(self.metadata)
+            return paths, paths[0].parents[1]
 
         if not isinstance(data_path, (str, Path)) or not str(data_path).strip():
             raise ValueError("benchmark.data_path must be a path")
@@ -118,63 +127,42 @@ class Tau3Banking(Benchmark):
                 f"Tau3Banking data_path must be a tau2 domain directory: {domain}"
             )
         self.metadata = MappingProxyType({"source": "local", "data_path": str(domain)})
-        for row in _read_local_index(domain):
-            yield _task_from_row(row, domain, dict(self.metadata))
+        paths = tuple(sorted((domain / "tasks").glob("task_*.json")))
+        if not paths:
+            raise ValueError(
+                f"Tau3Banking domain has no task files: {domain / 'tasks'}"
+            )
+        return paths, domain
 
 
-def _read_local_index(domain: Path) -> Iterable[Mapping[str, Any]]:
-    """Read the authoritative tasks/ directory, as the tau2 runtime does."""
-    paths = sorted((domain / "tasks").glob("task_*.json"))
-    if not paths:
-        raise ValueError(f"Tau3Banking domain has no task files: {domain / 'tasks'}")
-    for path in paths:
-        task = json.loads(path.read_text(encoding="utf-8"))
-        scenario = task.get("user_scenario") or {}
-        criteria = task.get("evaluation_criteria") or {}
-        yield {
-            "id": task.get("id"),
-            "user_instructions": scenario.get("instructions"),
-            "reward_basis": criteria.get("reward_basis") or [],
-            "user_tools": task.get("user_tools") or [],
-            "required_documents": task.get("required_documents") or [],
-            "has_initial_state": task.get("initial_state") is not None,
-        }
-
-
-def _task_from_row(
-    row: Mapping[str, Any], domain: Path, source: Mapping[str, Any]
-) -> Task:
-    task_id = row.get("id")
-    instructions = row.get("user_instructions")
+def _task_from_file(path: Path, domain: Path, source: Mapping[str, Any]) -> Task:
+    """Describe one task; grading criteria stay in the file, not on the Task."""
+    task = json.loads(path.read_text(encoding="utf-8"))
+    task_id = task.get("id")
+    scenario = task.get("user_scenario") or {}
+    instructions = (
+        scenario.get("instructions") if isinstance(scenario, Mapping) else None
+    )
     if not isinstance(task_id, str) or not task_id.strip():
-        raise ValueError("tau3 Banking row has no non-empty id")
+        raise ValueError(f"tau3 Banking task file has no id: {path.name}")
     if not isinstance(instructions, str) or not instructions.strip():
         raise ValueError(f"tau3 Banking task {task_id} has no user instructions")
-    path = domain / "tasks" / f"{task_id}.json"
-    if not path.is_file():
-        raise ValueError(f"tau3 Banking task file is missing: {path}")
-    with path.open("rb") as stream:
-        checksum = hashlib.file_digest(stream, "sha256").hexdigest()
+    criteria = task.get("evaluation_criteria") or {}
     return Task(
         task_id=task_id,
-        # The agent is a support representative; it is not answering a question.
-        question=(
-            "You are a customer service representative for this bank. Handle the "
-            "customer's request using the domain's tools and knowledge base, "
-            "following its policy."
-        ),
+        question=_INSTRUCTION,
         env=str(domain),
         metadata={
             "source_split": "unassigned",
             "source": dict(source),
-            "task_checksum": checksum,
-            "task_path": f"tasks/{task_id}.json",
+            "task_checksum": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "task_path": str(path.relative_to(domain)),
             # The simulated customer's script belongs to the user simulator.
             "user_instructions": instructions,
-            "reward_basis": tuple(row.get("reward_basis") or ()),
-            "user_tools": tuple(row.get("user_tools") or ()),
-            "required_documents": tuple(row.get("required_documents") or ()),
-            "has_initial_state": bool(row.get("has_initial_state")),
+            "reward_basis": tuple(criteria.get("reward_basis") or ()),
+            "user_tools": tuple(task.get("user_tools") or ()),
+            "required_documents": tuple(task.get("required_documents") or ()),
+            "has_initial_state": task.get("initial_state") is not None,
         },
     )
 
