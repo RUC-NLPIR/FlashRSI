@@ -2,7 +2,7 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
@@ -58,6 +58,8 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/skillopt/__init__.py` | `evolve` 主流程、反思、合并排序、slow/meta update、接受或拒绝候选 |
 | `algorithms/skillopt/_patch.py` | 编辑响应解析、精确锚点、预算与保护区、slow guidance 应用 |
 | `algorithms/skillopt/_prompts.py` | 算法使用的 prompt 模板 |
+| `algorithms/opro/__init__.py` | OPRO 的搜索循环、历史排序、候选采样与最终提升 |
+| `algorithms/opro/_prompts.py` | OPRO 的元提示与历史行模板 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 基类的 `_evaluate` 返回评分后的 Trajectory，不更新目标版本；`_ask` 保留完整 Worker
@@ -120,6 +122,71 @@ Snapshot 保留原始文件内容，不能把凭据写入 seed 文件；候选�
 第 6 步验证包含本地模拟服务上的真实 MiniAgent 子进程/OpenAI SDK、Claude SDK/CLI
 演化闭环，以及算法、scope、持久化与失败行为的离线测试；未调用真实付费模型。
 
+## OPRO
+
+第二个算法，用来检验「算法一行不改跨 harness」的契约：与 SkillOpt 相比，OPRO 的
+编辑粒度、评分集、接受时机和目标组件全部不同，但两者使用同一套公共接口。
+
+| | SkillOpt | OPRO |
+| --- | --- | --- |
+| 编辑粒度 | 锚点增量 patch | 整体重写一个文件 |
+| 评分集 | dev，严格提升才接受 | train，搜索评分 |
+| 接受时机 | 每个候选当场接受或拒绝 | 全程不动当前版本，结束时提升全局最优 |
+| 目标组件 | `skill` | `prompt` |
+
+```bash
+uv run flashrsi run --config examples/opro.yaml \
+  --algorithm.max_steps 2 --algorithm.num_candidates 2 --benchmark.limit 12
+```
+
+流程集中在 [OPRO](flashrsi/algorithms/opro/__init__.py)：
+
+1. 读取目标指令文件的当前文本，在 train 上评分，作为历史第 0 行。
+   Claude Code 的 seed 没有 `CLAUDE.md`，此时基线文本为空，即其原生 prompt。
+2. 每个 step 取历史中分数最高的版本作为 parent；平分时保留较早的指令。
+3. 元提示展示按分数升序的 instruction–score 历史，以及当前最优指令实际产生的轨迹。
+4. 对同一个元提示采样 `num_candidates` 次；空指令和与历史重复的指令直接丢弃，
+   不重新采样，因此一个 step 可能产出少于 `num_candidates` 个候选。
+5. 每个候选整体重写该指令文件，在 train 上评分后加入历史。
+   搜索期间不调用 `update`，所有候选都相对同一基线评分。
+6. 搜索结束后一次性提升全局最优版本，并记录完整历史池。
+7. runner 随后只对选中的版本评估一次 test。
+
+| algorithm 字段 | 默认值 | 含义 |
+| --- | --- | --- |
+| `instruction_path` | 空 | 可选；覆盖目标声明的指令文件 |
+| `max_steps` | `200` | 优化器搜索步数 |
+| `num_candidates` | `8` | 每步采样的指令数 |
+| `history_size` | `20` | 元提示展示的历史行数上限 |
+| `score_threshold` | `0.1` | 低于该分数的历史行不进入元提示 |
+| `few_shot_size` | `3` | 元提示展示的轨迹条数 |
+| `max_evidence_chars` | `24000` | 轨迹证据的字符上限 |
+| `seed` | `42` | 证据抽样种子 |
+
+改哪个文件由目标 Agent 自己声明，配置里通常无需指定。Agent 基类提供
+`instruction_file`，MiniAgent 声明 `prompts/system.md`（`prompts/extract.md`
+服务证据摘要，不是 Agent 的指令），Claude Code 声明 `CLAUDE.md`
+（原生的可选补充指令位，文件由算法新建）。算法只向 Agent 询问这个路径，
+不按 harness 名称分支；未声明该属性的 Agent 会在启动时报错并要求显式指定。
+
+`instruction_path` 仅在需要改写同组件下的其他文件时填写，且必须落在目标的
+`prompt` 组件内，否则启动时报错并列出该 Agent 自己的 prompt 规则。
+`evolve_scope` 与 `observation_scope` 均为 `{"prompt"}`；同组件的其他文件
+可读但不被改写。OPRO 不使用 dev，因此 `_check()` 不要求 dev 非空。
+
+默认值 `max_steps=200`、`num_candidates=8` 与论文一致，意味着约
+`max_steps × num_candidates × len(train)` 次目标执行。实跑时用上面的命令行覆盖，
+或用 `benchmark.limit` 控制规模。
+
+与旧版和 upstream 的三处明确差异：
+
+- 只保留 `<INS>` 指令模板，不迁 `instruction_pos` 的四个插入位置。Lite 把指令写成
+  harness 原生加载的指令文件，框架控制不了它在 QA prompt 中的位置，`A_begin` 的
+  「答案起始句」语义在这里不成立。解析仍取最后一对闭合标签，避免读到模型复述的请求。
+- 元提示中的轨迹证据复用该指令进入历史时已评分的 train 轨迹，不为取证据额外重跑。
+  证据与同一行展示的分数同源，按默认值省去约 600 次目标执行。搜索与接受规则不变。
+- 本实现不宣称逐字复现官方 prompts 或论文数值。
+
 ## 安装与验证
 
 需要 Python 3.11+。在本目录执行：
@@ -181,7 +248,7 @@ uv run flashrsi run --config example.yaml --prepare-only \
 负数可直接作为值；以 `-` 开头的普通字符串使用等号写法，例如 `--agent.prompt=-text`。
 
 `python -m flashrsi` 与 `flashrsi` 使用同一入口，`flashrsi run --help` 查看参数。
-不加 `--prepare-only` 时执行 SkillOpt 演化，结束后评估 test 集并保存结果。
+不加 `--prepare-only` 时执行 `algorithm.name` 选择的演化算法，结束后评估 test 集并保存结果。
 准备模式仍不下载数据或调用模型。不支持的算法、Agent 和 Benchmark 名称会在执行前报错。
 
 ## 配置
