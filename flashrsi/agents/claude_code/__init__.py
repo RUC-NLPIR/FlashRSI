@@ -33,6 +33,9 @@ class ClaudeCode(Agent):
     description = "Claude Code with versioned native extensions and delegated tasks."
 
     _container_extra = "claude-code"
+    # Appended to the native claude_code preset. Absent from the seed, so an
+    # algorithm that targets it creates the file.
+    instruction_file = "CLAUDE.md"
 
     def _check_container(self) -> None:
         super()._check_container()

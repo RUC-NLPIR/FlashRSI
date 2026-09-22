@@ -1,0 +1,30 @@
+# OPRO on SearchQA with MiniAgent.
+#
+# OPRO rewrites one instruction file end to end and scores every candidate on
+# the whole train split, so target executions cost
+# `max_steps × num_candidates × len(train)` runs. The defaults below are the
+# published ones (200 × 8); a first run should cut all three, for example
+# `--algorithm.max_steps 2 --algorithm.num_candidates 2 --benchmark.limit 12`.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 60
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-api-key
+  max_steps: 6
+
+algorithm:
+  name: opro
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

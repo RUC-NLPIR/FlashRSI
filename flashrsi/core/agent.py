@@ -49,6 +49,10 @@ class Agent:
     # distributions; installation pins the host's versions in both cases.
     _container_extra: str | None = None
     _container_dependencies: tuple[str, ...] | None = None
+    # The file this harness treats as its main instructions, for algorithms that
+    # rewrite one whole instruction file. A component can hold several files and
+    # need not ship any of them, so only the adapter knows which one this is.
+    instruction_file: str | None = None
 
     def __init__(self, config: Mapping[str, Any] | None = None) -> None:
         if not isinstance(getattr(self, "name", None), str) or not self.name:

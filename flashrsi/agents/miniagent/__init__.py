@@ -22,6 +22,9 @@ class MiniAgent(Agent):
     name = "miniagent"
     description = "A workspace-driven ReAct harness with optional file editing."
     _container_extra = "miniagent"
+    # agent.yaml loads this as the system prompt; prompts/extract.md serves the
+    # evidence summariser and is not the agent's instructions.
+    instruction_file = "prompts/system.md"
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         config = self.config

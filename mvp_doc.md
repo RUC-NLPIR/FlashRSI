@@ -117,6 +117,9 @@ class Agent:
     # component 名称 -> 文件路径规则
     component_rules: Mapping[str, tuple[str, ...]]
 
+    # 该 harness 视为主指令的文件；整体重写单个指令文件的算法据此定位目标
+    instruction_file: str | None = None
+
     # 基类统一提供
     def set_scope(self, components: set[str]) -> None: ...
 
@@ -156,6 +159,8 @@ class Agent:
 
 文件归类由目标 Agent 决定，算法只选择 scope。已有文件保留原分类；新增文件按固定规则分类；删除检查原分类；重命名按删除和新增处理。分类冲突或新增路径无法分类时拒绝提交。分类规则不能由 worker 修改。
 scope 和兼容性校验在 commit、候选 rollout、update 入口统一执行。文件级 scope 不表达文件内部某几行的权限。
+
+一个 component 可以包含多个文件，也可以在 seed 中没有任何文件，因此 scope 不足以定位单个文件。`instruction_file` 由 Agent 声明哪个文件是它的主指令，供整体重写单个指令文件的算法使用；未声明时为 `None`。算法通过该属性取得路径，不按 harness 名称分支，也不从文件布局猜测；未声明该属性的 Agent 上，此类算法在启动时报错并要求配置显式指定路径。声明的路径必须可归入该 Agent 自己的组件规则。
 
 
 
