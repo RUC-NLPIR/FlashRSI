@@ -10,7 +10,7 @@ from statistics import mean
 from flashrsi._records import _write_record
 from flashrsi._run_summary import _finish_summary
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
-from flashrsi.algorithms import GEPA, OPRO, SkillOpt
+from flashrsi.algorithms import GEPA, OPRO, EvoPrompt, SkillOpt
 from flashrsi.benchmarks import HotpotQA, SearchQA, Tau3Banking, TerminalBench
 from flashrsi.config import prepare_run_dir
 
@@ -21,7 +21,12 @@ _BENCHMARKS = {
     "terminal_bench": TerminalBench,
     "tau3_banking": Tau3Banking,
 }
-_ALGORITHMS = {"skillopt": SkillOpt, "opro": OPRO, "gepa": GEPA}
+_ALGORITHMS = {
+    "skillopt": SkillOpt,
+    "opro": OPRO,
+    "gepa": GEPA,
+    "evoprompt": EvoPrompt,
+}
 _LOGGER = logging.getLogger(__name__)
 
 

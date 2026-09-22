@@ -2,7 +2,7 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
@@ -63,6 +63,8 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/gepa/__init__.py` | GEPA 的迭代循环、parent 选择、minibatch 筛选、种群准入与最终提升 |
 | `algorithms/gepa/_population.py` | 种群记录、逐题 Pareto frontier 与支配剪枝 |
 | `algorithms/gepa/_prompts.py` | GEPA 的反思重写提示 |
+| `algorithms/evoprompt/__init__.py` | EvoPrompt 的种群初始化、GA/DE 单代演化与最终提升 |
+| `algorithms/evoprompt/_prompts.py` | EvoPrompt 的 GA、DE 与 paraphrase 模板 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 基类的 `_evaluate` 返回评分后的 Trajectory，不更新目标版本；`_ask` 保留完整 Worker
@@ -261,6 +263,83 @@ frontier，因此 `_check()` 额外要求 dev 的 `task_id` 唯一。
 种群中已有成员重复的提议分别记录为 `empty_proposal`、`unchanged_instruction` 和
 `duplicate_instruction`，都不产生候选也不消耗筛选预算。Worker 调用本身失败时
 直接报错并保存已有证据，与 SkillOpt 一致，不静默跳过该轮或替换为另一种搜索策略。
+
+## EvoPrompt
+
+第四个算法，同样整体重写一个 prompt 文件。与前三个的区别在于它维护一个固定大小的
+**种群**，每代用进化算子批量产生候选：GA 先造出完整子代再统一淘汰，DE 逐位置用三个
+donor 构造 trial 并成对替换。
+
+| | GEPA | EvoPrompt |
+| --- | --- | --- |
+| 选择单位 | dev 逐题分数构成的 Pareto 种群 | 固定大小的种群，按 dev 均分排序 |
+| 候选来源 | 每轮一个反思重写 | 每代 `population_size` 个算子输出 |
+| 算子输入 | parent 的轨迹证据 | 种群中其他成员的文本 |
+| 淘汰时机 | 通过 minibatch 筛选才进种群 | GA 代末统一淘汰；DE 逐成员成对竞争 |
+
+```bash
+uv run flashrsi run --config examples/evoprompt.yaml \
+  --algorithm.population_size 4 --algorithm.max_steps 2 --benchmark.limit 12
+# DE 变体（需要 population_size >= 4）：
+uv run flashrsi run --config examples/evoprompt.yaml --algorithm.variant de \
+  --algorithm.population_size 4 --algorithm.max_steps 2 --benchmark.limit 12
+```
+
+流程集中在 [EvoPrompt](flashrsi/algorithms/evoprompt/__init__.py)：
+
+1. 读取目标指令文件的当前文本，在 dev 上评分，作为种群成员 0。
+   Claude Code 的 seed 没有 `CLAUDE.md`，此时基线文本为空，即其原生 prompt。
+2. 反复让 Worker 改写该文本，补足到 `population_size` 个成员，每个都在 dev 上评分。
+   与上游从任务专属的 prompt 文件播种不同，这里的种子是目标 harness 自带的指令。
+3. 每代按 `variant` 执行一次进化：
+   - `ga`：按 `selection` 取 `population_size` 对父代，crossover + mutate 得到子代，
+     再按 `survivor_selection` 在「父代 + 子代」中统一淘汰。
+   - `de`：对每个成员取三个不同 donor 构造 trial，严格高分才替换该成员，
+     其余成员原样保留。
+4. 算子返回空文本或与 parent 相同的文本时保留 parent 的快照与分数，不提交候选也不
+   重复评分。这种成员在记录中标记 `carried: true`，便于与「真的评出同样分数的候选」
+   区分；它仍是独立的一条记录，不与 parent 共用对象，否则 `topk` 补齐时会把较优
+   prompt 的所有副本一次排除掉。
+5. 搜索期间不调用 `update`，所有成员都相对同一基线评分；每代记录候选与存活种群。
+6. 结束后一次性提升全局最优成员，并记录完整种群。
+7. runner 随后只对选中的版本评估一次 test。
+
+| algorithm 字段 | 默认值 | 含义 |
+| --- | --- | --- |
+| `variant` | `ga` | `ga` 或 `de` |
+| `population_size` | `10` | 种群大小；`ga` 至少 2，`de` 至少 4 |
+| `max_steps` | `10` | 进化代数 |
+| `selection` | `wheel` | 仅 GA：`wheel`、`random`、`tournament`（接受上游写法 `tour`） |
+| `survivor_selection` | `topk` | 仅 GA：`topk` 保留最优的不同文本，`standard` 直接保留子代 |
+| `donor_random` | `false` | 仅 DE：`false` 用全局最优作为 base vector |
+| `seed` | `42` | 父代采样、donor 采样与 wheel 重采样种子 |
+
+一次运行约消耗 `population_size × (1 + max_steps) × len(dev)` 次目标执行：
+初始化每个成员一次，之后每代每个候选一次。默认值 `population_size=10`、
+`max_steps=10` 与论文一致，实跑时用上面的命令行覆盖，或用 `benchmark.limit` 控制规模。
+
+改哪个文件完全由目标 Agent 声明，没有对应的配置项：与 OPRO、GEPA 读同一个
+`instruction_file`，算法只向 Agent 询问这个路径，不按 harness 名称分支。声明为空、
+或声明的路径不在目标的 `prompt` 组件内时，启动报错并列出该 Agent 自己的 prompt 规则。
+`evolve_scope` 与 `observation_scope` 均为 `{"prompt"}`。EvoPrompt 只用 dev 评分，
+因此 `_check()` 只要求 dev 非空，不要求 train。
+
+与旧版和 upstream 的四处明确差异：
+
+- GA 与 DE 同时迁移，两者共用初始化、候选提交、提升和解析，只有一代之内的算子与
+  淘汰规则不同。`variant` 的取值在启动时校验，不支持的值直接报错。
+- 种群从目标 harness 自带的指令播种并由 Worker 改写补齐，不迁上游按任务准备的
+  初始 prompt 文件列表；对应地没有 `initial_prompts` 配置项。
+- 算子返回空文本或 parent 原文时保留 parent 的快照与分数，不提交一个内容相同的候选。
+  旧版会为这种情况再跑一次完整评估，在 Lite 中这是一次没有信息量的 dev 开销。
+  DE 的 donor 按**位置**排除，不按对象身份，这既是上游的语义（走 population 下标），
+  也避免与这一优化耦合。
+- `topk` 按文本去重后再补齐到固定大小，这是上游的原意：一代 mutation 全部塌缩到
+  同一个 prompt 时，种群不会被它的副本填满，但下一代仍有足够成员可抽父代。
+
+本实现不宣称逐字复现官方 prompts 或论文数值。prompt 模板保持上游原文（含其自带的
+worked example），解析取最后一对闭合的 `<prompt>` 标签，避免读到模型复述的模板示例。
+Worker 调用本身失败时直接报错并保存已有证据，与其他算法一致。
 
 ## 安装与验证
 

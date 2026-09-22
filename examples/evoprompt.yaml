@@ -1,0 +1,35 @@
+# EvoPrompt (GA) on SearchQA with MiniAgent.
+#
+# Every population member is scored on the whole dev split, so a run costs
+# about `population_size × (1 + max_steps) × len(dev)` target executions. The
+# defaults below are the published ones (10 × 10); a first run should cut them,
+# for example `--algorithm.population_size 4 --algorithm.max_steps 2
+# --benchmark.limit 12`. Set `--algorithm.variant de` for the DE variant, which
+# needs `population_size >= 4`.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 60
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-api-key
+  # MiniAgent's per-task ReAct budget is `max_turns` (default 10). Raise it here
+  # if answers are cut off before the agent finishes searching.
+
+algorithm:
+  name: evoprompt
+  # EvoPrompt rewrites whatever file the target agent declares as its
+  # instructions, so there is no path to configure here.
+  variant: ga
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
