@@ -2,7 +2,7 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
@@ -60,6 +60,9 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/skillopt/_prompts.py` | 算法使用的 prompt 模板 |
 | `algorithms/opro/__init__.py` | OPRO 的搜索循环、历史排序、候选采样与最终提升 |
 | `algorithms/opro/_prompts.py` | OPRO 的元提示与历史行模板 |
+| `algorithms/gepa/__init__.py` | GEPA 的迭代循环、parent 选择、minibatch 筛选、种群准入与最终提升 |
+| `algorithms/gepa/_population.py` | 种群记录、逐题 Pareto frontier 与支配剪枝 |
+| `algorithms/gepa/_prompts.py` | GEPA 的反思重写提示 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 基类的 `_evaluate` 返回评分后的 Trajectory，不更新目标版本；`_ask` 保留完整 Worker
@@ -186,6 +189,80 @@ uv run flashrsi run --config examples/opro.yaml \
 - 元提示中的轨迹证据复用该指令进入历史时已评分的 train 轨迹，不为取证据额外重跑。
   证据与同一行展示的分数同源，按默认值省去约 600 次目标执行。搜索与接受规则不变。
 - 本实现不宣称逐字复现官方 prompts 或论文数值。
+
+## GEPA
+
+第三个算法，与 OPRO 同为整体重写一个 prompt 文件，区别在选择机制：OPRO 始终从
+分数最高的指令出发，GEPA 保留一个按 dev 逐题分数构成的种群，并在候选进入 dev
+全量评估前先用 minibatch 筛一遍。
+
+| | OPRO | GEPA |
+| --- | --- | --- |
+| 评分集 | train，搜索评分 | train minibatch 筛选 + dev 全量 |
+| 选择单位 | 历史中的全局最优单点 | dev 逐题分数构成的 Pareto 种群 |
+| 候选来源 | 同一元提示采样多个候选 | 每轮一个反思重写，先筛后评 |
+| 预算 | `max_steps × num_candidates` | `max_metric_calls` 计目标执行次数 |
+
+```bash
+uv run flashrsi run --config examples/gepa.yaml \
+  --algorithm.max_metric_calls 30 --benchmark.limit 24
+```
+
+流程集中在 [GEPA](flashrsi/algorithms/gepa/__init__.py)：
+
+1. 在 dev 上评估初始版本，逐题分数与均分构成种群成员 0。
+   Claude Code 的 seed 没有 `CLAUDE.md`，此时基线文本为空，即其原生 prompt。
+2. 每轮迭代按 Pareto frontier 采样 parent：一个成员只要在**某一道** dev 题上
+   得分最高就保持可选，因此均分落后的分支不会被过早淘汰。
+3. 在 train 上抽 `reflection_minibatch_size` 个任务执行 parent，这批轨迹既用于
+   minibatch 对照，也是反思读取的证据，不额外付一次执行。
+4. Worker 基于该证据整体重写目标的指令文件。
+5. 候选先在同一 minibatch 上对照 parent，未严格提升则丢弃，不进入 dev 全量评估。
+6. 通过筛选的候选在 dev 全量评分后加入种群，记录逐题分数与 parent 索引。
+   加入种群不等于提升：搜索期间不调用 `update`，所有候选都相对同一基线评分。
+7. 预算耗尽后一次性提升均分最优的成员，并记录完整种群。
+8. runner 随后只对选中的版本评估一次 test。
+
+| algorithm 字段 | 默认值 | 含义 |
+| --- | --- | --- |
+| `max_metric_calls` | `null` | 目标执行预算；`null` 时按数据规模推导 |
+| `reflection_minibatch_size` | `3` | 每轮反思与筛选使用的 train 任务数 |
+| `candidate_selection_strategy` | `pareto` | `pareto` 或 `current_best` |
+| `max_evidence_chars` | `24000` | 轨迹证据的字符上限 |
+| `seed` | `42` | parent 采样与 minibatch 抽样种子 |
+| `use_merge` | `false` | 上游的 system-aware merge，本轮未实现，置 `true` 报错 |
+
+单轮迭代消耗 `2 × reflection_minibatch_size + len(dev)` 次目标执行。
+`max_metric_calls` 为 `null` 时取 `max(100, len(dev) + 10 × 单轮开销)`，
+即基线评估加十轮迭代；预算不足一轮时在执行前报错并给出所需下限。
+预算在 `evolve()` 开始时解析一次，不随搜索过程变化。
+
+改哪个文件完全由目标 Agent 声明，没有对应的配置项：与 OPRO 读同一个
+`instruction_file`（MiniAgent 为 `prompts/system.md`，Claude Code 为 `CLAUDE.md`），
+算法只向 Agent 询问这个路径，不按 harness 名称分支。声明为空、或声明的路径不在
+目标的 `prompt` 组件内（即超出 GEPA 可演化的范围）时，启动报错并列出该 Agent
+自己的 prompt 规则。
+`evolve_scope` 与 `observation_scope` 均为 `{"prompt"}`；同组件的其他文件
+（如 MiniAgent 的 `prompts/extract.md`）可读但不被改写。GEPA 按逐题分数构建
+frontier，因此 `_check()` 额外要求 dev 的 `task_id` 唯一。
+
+与旧版和 upstream 的四处明确差异：
+
+- 只迁移默认路径。`use_merge` 的 system-aware crossover 未实现，置 `true` 时
+  启动报错而非静默退化为普通迭代。
+- 每轮只重写一个指令文件，不迁上游按 module 轮换的机制。上游优化的是 compound
+  system（一条 pipeline 含多个 module），而 Lite 的两个 harness 各自只声明一个
+  `instruction_file`，轮换在此没有使用者。将来出现多指令文件的 harness 再补。
+- frontier 只按 dev 逐题分数构建，不迁旧版的 `objective`/`cartesian`/`hybrid`
+  变体与 `top_k_pareto`、`epsilon_greedy` 选择策略。逐题分数是论文机制的核心，
+  其余变体属于旧版自行扩展，未单独验证。
+- 证据是 FlashRSI 的 Trajectory 与其评分，不是上游的 assistant response 加
+  自然语言 feedback；prompt 正文保持上游文本，便于逐行核对。
+
+本实现不宣称逐字复现官方 prompts 或论文数值。空提议、与 parent 相同的提议和与
+种群中已有成员重复的提议分别记录为 `empty_proposal`、`unchanged_instruction` 和
+`duplicate_instruction`，都不产生候选也不消耗筛选预算。Worker 调用本身失败时
+直接报错并保存已有证据，与 SkillOpt 一致，不静默跳过该轮或替换为另一种搜索策略。
 
 ## 安装与验证
 
