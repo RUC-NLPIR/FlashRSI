@@ -157,7 +157,6 @@ uv run flashrsi run --config examples/opro.yaml \
 
 | algorithm 字段 | 默认值 | 含义 |
 | --- | --- | --- |
-| `instruction_path` | 空 | 可选；覆盖目标声明的指令文件 |
 | `max_steps` | `200` | 优化器搜索步数 |
 | `num_candidates` | `8` | 每步采样的指令数 |
 | `history_size` | `20` | 元提示展示的历史行数上限 |
@@ -166,14 +165,13 @@ uv run flashrsi run --config examples/opro.yaml \
 | `max_evidence_chars` | `24000` | 轨迹证据的字符上限 |
 | `seed` | `42` | 证据抽样种子 |
 
-改哪个文件由目标 Agent 自己声明，配置里通常无需指定。Agent 基类提供
-`instruction_file`，MiniAgent 声明 `prompts/system.md`（`prompts/extract.md`
-服务证据摘要，不是 Agent 的指令），Claude Code 声明 `CLAUDE.md`
-（原生的可选补充指令位，文件由算法新建）。算法只向 Agent 询问这个路径，
-不按 harness 名称分支；未声明该属性的 Agent 会在启动时报错并要求显式指定。
-
-`instruction_path` 仅在需要改写同组件下的其他文件时填写，且必须落在目标的
-`prompt` 组件内，否则启动时报错并列出该 Agent 自己的 prompt 规则。
+改哪个文件完全由目标 Agent 声明，没有对应的配置项：`algorithm` 段只放算法自己的
+超参数，目标的文件布局由 Agent 表达。Agent 基类提供 `instruction_file`，MiniAgent
+声明 `prompts/system.md`（`prompts/extract.md` 服务证据摘要，不是 Agent 的指令），
+Claude Code 声明 `CLAUDE.md`（原生的可选补充指令位，文件由算法新建）。算法只向
+Agent 询问这个路径，不按 harness 名称分支。声明为空、或声明的路径不在目标的
+`prompt` 组件内（即超出 OPRO 可演化的范围）时，启动报错并列出该 Agent 自己的
+prompt 规则。
 `evolve_scope` 与 `observation_scope` 均为 `{"prompt"}`；同组件的其他文件
 可读但不被改写。OPRO 不使用 dev，因此 `_check()` 不要求 dev 非空。
 

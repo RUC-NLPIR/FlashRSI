@@ -333,8 +333,6 @@ def test_duplicates_within_one_step_are_dropped_before_evaluation(monkeypatch):
 @pytest.mark.parametrize(
     "config,message",
     [
-        ({"instruction_path": "skills/main.md"}, "prompt component"),
-        ({"instruction_path": "../escape.md"}, "invalid snapshot file path"),
         ({"max_steps": 0}, "max_steps must be an integer"),
         ({"num_candidates": 1.5}, "num_candidates must be an integer"),
         ({"seed": "42"}, "seed must be an integer"),
@@ -372,22 +370,24 @@ def test_each_target_names_its_own_instruction_file(cls):
     assert cls.instruction_file == PATHS[cls]
 
 
-def test_an_explicit_path_overrides_the_target_declaration(monkeypatch):
-    target, _ = make_target(monkeypatch)
-    # prompts/extract.md is in the prompt component but is not the declared
-    # instruction file; an explicit override may still target it.
-    explicit = algorithm(
-        target, ScriptedWorker([]), instruction_path="prompts/extract.md"
-    )
-    assert explicit._path == "prompts/extract.md"
-    assert algorithm(target, ScriptedWorker([]))._path == "prompts/system.md"
-
-
-def test_a_target_without_a_declared_instruction_file_asks_for_one(monkeypatch):
+@pytest.mark.parametrize(
+    "declared,message",
+    [
+        (None, "declares no instruction_file"),
+        ("", "declares no instruction_file"),
+        # In no component OPRO may evolve, so not something to rewrite.
+        ("skills/main.md", "outside its prompt component"),
+        ("../escape.md", "invalid snapshot file path"),
+    ],
+)
+def test_an_unusable_declared_instruction_file_is_rejected(
+    monkeypatch, declared, message
+):
+    """The declaration is the only source, so OPRO checks it rather than trusting it."""
     target, calls = make_target(monkeypatch)
-    monkeypatch.setattr(MiniAgent, "instruction_file", None)
+    monkeypatch.setattr(MiniAgent, "instruction_file", declared)
 
-    with pytest.raises(ValueError, match="declares no instruction_file"):
+    with pytest.raises(ValueError, match=message):
         algorithm(target, ScriptedWorker([]))
     assert not calls
 

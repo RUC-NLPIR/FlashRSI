@@ -36,8 +36,6 @@ class OPRO(Algorithm):
     evolve_scope = {"prompt"}
     observation_scope = {"prompt"}
     _defaults = {
-        # Optional override; by default the target names its own instruction file.
-        "instruction_path": None,
         # Published OPRO uses 200 optimizer steps proposing 8 instructions each.
         "max_steps": 200,
         "num_candidates": 8,
@@ -82,21 +80,22 @@ class OPRO(Algorithm):
     def _check(self) -> None:
         if not self.benchmark.train:
             raise ValueError("OPRO requires a non-empty train split")
-        # The target names its own instruction file; configuration only overrides
-        # it, so a run needs no knowledge of the harness's file layout.
-        path = self.config.instruction_path or self.target.instruction_file
+        # The target names the file it loads its instructions from, so a run
+        # needs no knowledge of the harness's layout and no algorithm branches
+        # on the harness name.
+        path = self.target.instruction_file
         if not isinstance(path, str) or not path:
             raise ValueError(
-                f"{self.target.name} declares no instruction_file; set "
-                "algorithm.instruction_path to the prompt file OPRO should rewrite"
+                f"{self.target.name} declares no instruction_file, so OPRO has "
+                "nothing to rewrite"
             )
         _validate_path(path)
         rules = self.target.component_rules
         if _matching_components(path, rules) != {"prompt"}:
             patterns = ", ".join(rules.get("prompt", ()))
             raise ValueError(
-                "OPRO rewrites one file in the target's prompt component "
-                f"({patterns}); this is not one of them: {path}"
+                f"{self.target.name} declares an instruction_file outside its "
+                f"prompt component ({patterns}), which OPRO cannot evolve: {path}"
             )
         for key in (
             "max_steps",
