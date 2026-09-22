@@ -19,7 +19,8 @@ agent:
   llm:
     model_name: your-target-model
     api_key: your-api-key
-  max_steps: 6
+  # MiniAgent's per-task ReAct budget is `max_turns` (default 10). Raise it here
+  # if answers are cut off before the agent finishes searching.
 
 algorithm:
   name: opro

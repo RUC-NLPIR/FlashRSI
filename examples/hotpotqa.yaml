@@ -18,7 +18,9 @@ agent:
   llm:
     model_name: your-target-model
     api_key: your-api-key
-  max_steps: 6
+  # MiniAgent's per-task ReAct budget is `max_turns` (default 10). Multi-hop
+  # questions need room to retrieve, read and check, so raise it here rather
+  # than letting answers be cut off mid-search.
 
 algorithm:
   name: skillopt
