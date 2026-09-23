@@ -1,11 +1,10 @@
-"""SkillOpt: separate reflection, bounded file edits, and held-out selection."""
+"""SkillOpt: fast batch edits and slow epoch guidance, both gated on dev."""
 
 from __future__ import annotations
 
 import json
 import random
 
-from flashrsi._records import _trajectory_record
 from flashrsi.algorithms.skillopt import _prompts as prompts
 from flashrsi.algorithms.skillopt._patch import (
     _SOURCES,
@@ -18,11 +17,16 @@ from flashrsi.core import Algorithm, Snapshot
 
 
 class SkillOpt(Algorithm):
-    """Evolve skill files through the same public API for every target harness.
+    """Evolve skill files on two time scales, both gated on a held-out score.
 
-    Worker calls produce JSON proposals. SkillOpt applies those proposals to a
-    checkout, so a text LLM and an Agent Worker use exactly the same protocol.
-    Both fast and slow candidates must strictly improve the held-out score.
+    A fast update reflects on one batch of training tasks and applies bounded
+    edits. A slow update runs at the end of an epoch, compares that epoch's
+    version against the previous one, and rewrites a protected region of the
+    skill that fast edits may not touch -- so a lesson drawn from a whole epoch
+    cannot be undone by the next batch's edit.
+
+    Worker calls produce JSON proposals that SkillOpt applies to a checkout, so
+    a text LLM and an Agent Worker use exactly the same protocol.
     """
 
     name = "skillopt"
@@ -58,39 +62,34 @@ class SkillOpt(Algorithm):
     }
 
     async def evolve(self) -> Snapshot:
-        train, dev = self.benchmark.train, self.benchmark.dev
         current = self.target.snapshot
         self._rejected, self._meta_skill = [], ""
-        best = self._score(await self._evaluate(current, dev, label="baseline"))
+        self._best = self._score(
+            await self._evaluate(current, self.benchmark.dev, label="baseline")
+        )
         previous_epoch = None
-        steps = 0
+        step = 0
 
         for epoch in range(self.config.num_epochs):
-            tasks = list(train)
+            tasks = list(self.benchmark.train)
             random.Random(self.config.seed + epoch).shuffle(tasks)
             for start in range(0, len(tasks), self.config.batch_size):
-                if self.config.max_steps is not None and steps >= self.config.max_steps:
+                # An int is never equal to an unset budget, so no branch on None.
+                if step == self.config.max_steps:
                     return self.target.snapshot
-                steps += 1
+                step += 1
                 batch = tuple(tasks[start : start + self.config.batch_size])
-                current, best = await self._fast_update(
-                    current, best, batch, epoch, steps
-                )
-
+                current = await self._fast_update(current, batch, epoch, step)
+            # An epoch that ran to its end still earns its slow update; only a
+            # new batch is refused once the budget is spent.
             if previous_epoch is not None and (
                 self.config.use_slow_update or self.config.use_meta_skill
             ):
-                current, best = await self._slow_update(
-                    previous_epoch, current, best, epoch
-                )
+                current = await self._slow_update(previous_epoch, current, epoch)
             previous_epoch = current
         return self.target.snapshot
 
-    def _check(self) -> None:
-        if not self.benchmark.train or not self.benchmark.dev:
-            raise ValueError("SkillOpt requires non-empty train and dev splits")
-
-    async def _fast_update(self, current, best, batch, epoch, step):
+    async def _fast_update(self, current, batch, epoch, step):
         training = await self._evaluate(current, batch, label="train")
         files = self._read_text(current)
         proposals = await self._reflect(current, files, training)
@@ -101,11 +100,11 @@ class SkillOpt(Algorithm):
                 "decision",
                 {**details, "kind": "fast", "reason": "empty_patch", "accepted": False},
             )
-            return current, best
+            return current
         updated = patch.apply(files, self.config.edit_budget)
         candidate = self._candidate(current, updated)
         return await self._select(
-            current, candidate, best, "fast", {**details, "patch": patch.as_mapping()}
+            current, candidate, "fast", {**details, "patch": patch.as_mapping()}
         )
 
     async def _reflect(self, snapshot, files, training):
@@ -131,7 +130,9 @@ class SkillOpt(Algorithm):
                     templates[source].format(
                         files=_dump(files),
                         rules=_dump(list(snapshot.component_rules["skill"])),
-                        evidence=_dump([_evidence(item) for item in group]),
+                        evidence=_dump(
+                            [self._trajectory_evidence(item) for item in group]
+                        ),
                         rejected=_dump(self._rejected),
                         meta_skill=self._meta_skill,
                         budget=self.config.edit_budget,
@@ -186,7 +187,7 @@ class SkillOpt(Algorithm):
         )
         return _Patch.parse(reply, source if source in _SOURCES else "")
 
-    async def _slow_update(self, previous, current, best, epoch):
+    async def _slow_update(self, previous, current, epoch):
         sample = random.Random(self.config.seed + epoch * 2000).sample(
             list(self.benchmark.train),
             min(self.config.slow_update_samples, len(self.benchmark.train)),
@@ -194,7 +195,10 @@ class SkillOpt(Algorithm):
         before = await self._evaluate(previous, sample, label="comparison_before")
         after = await self._evaluate(current, sample, label="comparison_after")
         comparison = [
-            {"previous": _evidence(a), "current": _evidence(b)}
+            {
+                "previous": self._trajectory_evidence(a),
+                "current": self._trajectory_evidence(b),
+            }
             for a, b in zip(before, after, strict=True)
         ]
         fields = {
@@ -208,24 +212,29 @@ class SkillOpt(Algorithm):
                 "meta_skill_content",
             )
         if not self.config.use_slow_update:
-            return current, best
+            return current
         reply = await self._ask(prompts.SLOW_UPDATE.format(**fields), label="slow")
         files = _apply_guidance(self._read_text(current), reply)
         candidate = self._candidate(current, files)
-        return await self._select(current, candidate, best, "slow", {"epoch": epoch})
+        return await self._select(current, candidate, "slow", {"epoch": epoch})
 
-    async def _select(self, current, candidate, best, kind, details):
+    async def _select(self, current, candidate, kind, details):
+        """Adopt a candidate only on a strict held-out improvement.
+
+        Both time scales land here, so a slow update is gated exactly like a
+        fast one and a tie keeps the incumbent.
+        """
         if candidate.files == current.files:
             self._record(
                 "decision",
                 {**details, "kind": kind, "reason": "no_change", "accepted": False},
             )
-            return current, best
+            return current
         evaluated = await self._evaluate(
             candidate, self.benchmark.dev, label="candidate_dev"
         )
         score = self._score(evaluated)
-        accepted = score > best
+        accepted = score > self._best
         self._record(
             "decision",
             {
@@ -234,26 +243,23 @@ class SkillOpt(Algorithm):
                 "parent_id": current.id,
                 "candidate_id": candidate.id,
                 "score": score,
-                "baseline_score": best,
+                "baseline_score": self._best,
                 "accepted": accepted,
             },
         )
         if accepted:
             self.target.update(candidate)
-            return self.target.snapshot, score
+            self._best = score
+            return self.target.snapshot
         if kind == "fast":
             self._rejected = (
                 self._rejected + [{"score": score, "patch": details["patch"]}]
             )[-5:]
-        return current, best
+        return current
 
-
-def _evidence(trajectory):
-    record = _trajectory_record(trajectory)
-    record["messages"] = [
-        message for message in trajectory.messages if message.get("type") != "RunConfig"
-    ]
-    return record
+    def _check(self) -> None:
+        if not self.benchmark.train or not self.benchmark.dev:
+            raise ValueError("SkillOpt requires non-empty train and dev splits")
 
 
 def _dump(value):

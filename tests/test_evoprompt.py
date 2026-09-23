@@ -7,7 +7,7 @@ import pytest
 
 from flashrsi.agents import ClaudeCode, MiniAgent
 from flashrsi.algorithms import EvoPrompt
-from flashrsi.algorithms.evoprompt import Member, _prompt, _top_k, _wheel
+from flashrsi.algorithms.evoprompt import Member, _top_k
 from flashrsi.core import Agent, Benchmark, Snapshot, Task, Trajectory
 
 # Both harnesses load a prompt file, at their own native path.
@@ -93,6 +93,16 @@ def run_dir(algo, tmp_path):
     for name in ("snapshots", "trajectories", "working"):
         (algo._run_dir / name).mkdir(parents=True)
     return algo._run_dir
+
+
+def seed_population(algo, snapshot, members):
+    """Start a generation from fixed (text, score) pairs on a real snapshot.
+
+    _ga commits children from their parent, so a member needs a usable
+    snapshot; only the text and score vary between these cases.
+    """
+    algo._path = "prompts/system.md"
+    algo._population = [Member(snapshot, text, score) for text, score in members]
 
 
 def decisions(directory):
@@ -304,27 +314,32 @@ def test_ga_topk_rescues_a_winning_parent_from_losing_children(monkeypatch):
 
 def test_ga_tournament_selection_prefers_the_fitter_of_two(monkeypatch):
     target, _ = make_target(monkeypatch)
-    algo = algorithm(target, ScriptedWorker([]), selection="tournament")
-    algo._population = [member_row("weak", 0.0), member_row("strong", 1.0)]
+    worker = ScriptedWorker(["<prompt>child</prompt>"] * 2)
+    algo = algorithm(target, worker, selection="tournament", population_size=2)
+    seed_population(algo, target.snapshot, [("weak", 0.0), ("strong", 1.0)])
 
-    # A binary tournament over a two-member pool always returns the fitter.
-    chosen = {
-        parent.text
-        for seed in range(20)
-        for parent in algo._parents(random.Random(seed), tuple(algo._population))
-    }
+    asyncio.run(algo._ga(random.Random(0), 0))
 
-    assert chosen == {"strong"}
+    # A binary tournament over a two-member pool always returns the fitter, so
+    # every crossover prompt quotes "strong" and never "weak".
+    assert all("strong" in prompt for prompt in worker.prompts)
+    assert not any("weak" in prompt for prompt in worker.prompts)
 
 
-def test_ga_wheel_weights_by_fitness_and_can_repeat_a_parent():
-    population = [member_row("weak", 0.0), member_row("strong", 1.0)]
+def test_ga_wheel_weights_by_fitness_and_can_repeat_a_parent(monkeypatch):
+    target, _ = make_target(monkeypatch)
+    worker = ScriptedWorker(["<prompt>child</prompt>"] * 2)
+    algo = algorithm(target, worker, selection="wheel", population_size=2)
+    seed_population(algo, target.snapshot, [("weak", 0.0), ("strong", 1.0)])
 
-    pool = _wheel(population, random.Random(0), 2)
+    asyncio.run(algo._ga(random.Random(0), 0))
 
-    # Only the fitter member has weight, so the wheel resamples it twice, which
-    # is what lets one member be drawn as both parents of a child.
-    assert [item.text for item in pool] == ["strong", "strong"]
+    # Only the fitter member has weight, so the wheel resamples it into both
+    # slots -- which is what lets one member be drawn as both parents.
+    assert all(
+        prompt.count("strong") == 2 and "weak" not in prompt
+        for prompt in worker.prompts
+    )
 
 
 # -- DE --------------------------------------------------------------------
@@ -530,31 +545,16 @@ def test_top_k_pads_back_to_the_requested_size_with_duplicates():
     assert [item.score for item in survivors] == [1.0, 0.5, 1.0]
 
 
-def test_wheel_falls_back_to_uniform_weights_when_every_fitness_is_zero():
+def test_wheel_falls_back_to_uniform_weights_when_every_fitness_is_zero(monkeypatch):
     """A freshly initialized population would otherwise make choices() raise."""
-    pool = [member_row("a", 0.0), member_row("b", 0.0)]
+    target, _ = make_target(monkeypatch)
+    worker = ScriptedWorker(["<prompt>child</prompt>"] * 2)
+    algo = algorithm(target, worker, selection="wheel", population_size=2)
+    seed_population(algo, target.snapshot, [("a", 0.0), ("b", 0.0)])
 
-    assert len(_wheel(pool, random.Random(0), 4)) == 4
+    asyncio.run(algo._ga(random.Random(0), 0))
 
-
-# -- parsing ---------------------------------------------------------------
-
-
-def test_a_tagged_prompt_is_read_after_a_provider_preamble():
-    assert _prompt("Sure:\n<prompt>Use evidence.</prompt>") == "Use evidence.\n"
-    assert _prompt("<prompt>\nLine one\nLine two\n</prompt>") == "Line one\nLine two\n"
-    assert _prompt("no tag at all") == "no tag at all\n"
-    assert _prompt("<prompt></prompt>") == ""
-
-
-def test_the_last_closed_pair_wins_over_an_echoed_template():
-    """Every upstream template shows the bracketing in its own worked example."""
-    reply = (
-        "1. <prompt>the example from the request</prompt>\n"
-        "2. <prompt>the real answer</prompt>"
-    )
-
-    assert _prompt(reply) == "the real answer\n"
+    assert len(algo._population) == 2
 
 
 # -- configuration ---------------------------------------------------------

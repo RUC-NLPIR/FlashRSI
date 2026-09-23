@@ -46,7 +46,7 @@ class Worker(Agent):
 class Example(Algorithm):
     evolve_scope = {"skill"}
     observation_scope = {"skill", "prompt"}
-    _defaults = {"rounds": 2, "options": {"enabled": True}}
+    _defaults = {"rounds": 2, "options": {"enabled": True}, "max_evidence_chars": 24000}
 
     def _check(self):
         assert self.benchmark.loads == 1
@@ -398,3 +398,41 @@ def test_shared_promotion_of_the_incumbent_records_it_as_not_accepted(target, tm
     decision = json.loads(record.read_text())
     assert decision["accepted"] is False
     assert decision["parent_id"] == decision["candidate_id"] == current.id
+
+
+def test_shared_evidence_is_json_and_marks_a_truncating_cut(target, tmp_path):
+    algo = recording_algorithm(target, tmp_path)
+    rows = [{"b": 2, "a": 1}]
+
+    assert algo._evidence(rows) == '[{"a": 1, "b": 2}]'
+    algo.config.max_evidence_chars = 8
+    # The cut lands mid-JSON, so it is marked rather than passed off as whole.
+    assert algo._evidence(rows) == '[{"a": 1…'
+
+
+def test_shared_trajectory_evidence_drops_the_runtime_configuration(target, tmp_path):
+    algo = recording_algorithm(target, tmp_path)
+    trajectory = replace(
+        Trajectory(output="answer"),
+        messages=({"type": "RunConfig", "config": {}}, {"role": "assistant"}),
+    )
+
+    row = algo._trajectory_evidence(trajectory)
+
+    # The saved record keeps RunConfig; a Worker prompt never shows it.
+    assert row["messages"] == [{"role": "assistant"}]
+    assert row["output"] == "answer"
+
+
+def test_shared_tagged_reply_takes_the_last_closed_pair(target, tmp_path):
+    algo = recording_algorithm(target, tmp_path)
+
+    assert algo._tagged("Sure:\n<INS>Use evidence.</INS>", "INS") == "Use evidence.\n"
+    assert algo._tagged("<p>\nLine one\nLine two\n</p>", "p") == "Line one\nLine two\n"
+    # An untagged reply is what a provider that simply answered produces.
+    assert algo._tagged("no tag at all", "INS") == "no tag at all\n"
+    assert algo._tagged("<INS></INS>", "INS") == ""
+    # Upstream templates show the bracketing in their own worked example, so a
+    # reply that quotes the request back must not be read from that tag.
+    echoed = "1. <INS>the example from the request</INS>\n2. <INS>the real one</INS>"
+    assert algo._tagged(echoed, "INS") == "the real one\n"

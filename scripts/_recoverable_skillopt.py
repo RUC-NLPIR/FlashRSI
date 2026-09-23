@@ -12,7 +12,7 @@ import hashlib
 import random
 from pathlib import Path
 
-from flashrsi.algorithms.skillopt import _dump, _evidence
+from flashrsi.algorithms.skillopt import _dump
 from flashrsi.algorithms.skillopt import _prompts as prompts
 from flashrsi.algorithms.skillopt._patch import _apply_guidance, _field, _PatchError
 from scripts._parallel_skillopt import ParallelSkillOpt
@@ -55,7 +55,7 @@ class RecoverableSkillOpt(ParallelSkillOpt):
         self._record("decision", details)
         self._rejected = (self._rejected + [feedback])[-5:]
 
-    async def _fast_update(self, current, best, batch, epoch, step):
+    async def _fast_update(self, current, batch, epoch, step):
         training = await self._evaluate(current, batch, label="train")
         files = self._read_text(current)
         proposals = await self._reflect(current, files, training)
@@ -66,20 +66,20 @@ class RecoverableSkillOpt(ParallelSkillOpt):
                 "decision",
                 {**details, "kind": "fast", "reason": "empty_patch", "accepted": False},
             )
-            return current, best
+            return current
         try:
             updated = patch.apply(files, self.config.edit_budget)
         except _PatchError as error:
             self._reject_invalid(
                 current, error, kind="fast", epoch=epoch, step=step, patch=patch
             )
-            return current, best
+            return current
         candidate = self._candidate(current, updated)
         return await self._select(
-            current, candidate, best, "fast", {**details, "patch": patch.as_mapping()}
+            current, candidate, "fast", {**details, "patch": patch.as_mapping()}
         )
 
-    async def _slow_update(self, previous, current, best, epoch):
+    async def _slow_update(self, previous, current, epoch):
         sample = random.Random(self.config.seed + epoch * 2000).sample(
             list(self.benchmark.train),
             min(self.config.slow_update_samples, len(self.benchmark.train)),
@@ -87,7 +87,10 @@ class RecoverableSkillOpt(ParallelSkillOpt):
         before = await self._evaluate(previous, sample, label="comparison_before")
         after = await self._evaluate(current, sample, label="comparison_after")
         comparison = [
-            {"previous": _evidence(a), "current": _evidence(b)}
+            {
+                "previous": self._trajectory_evidence(a),
+                "current": self._trajectory_evidence(b),
+            }
             for a, b in zip(before, after, strict=True)
         ]
         fields = {
@@ -106,7 +109,7 @@ class RecoverableSkillOpt(ParallelSkillOpt):
             else:
                 self._meta_skill = meta_skill
         if not self.config.use_slow_update:
-            return current, best
+            return current
         reply = await self._ask(prompts.SLOW_UPDATE.format(**fields), label="slow")
         files = self._read_text(current)
         try:
@@ -115,9 +118,9 @@ class RecoverableSkillOpt(ParallelSkillOpt):
             self._reject_invalid(
                 current, error, kind="slow", epoch=epoch, response=reply
             )
-            return current, best
+            return current
         candidate = self._candidate(current, files)
-        return await self._select(current, candidate, best, "slow", {"epoch": epoch})
+        return await self._select(current, candidate, "slow", {"epoch": epoch})
 
 
 __all__ = ["RecoverableSkillOpt"]

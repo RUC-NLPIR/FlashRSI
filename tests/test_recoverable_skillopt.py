@@ -94,10 +94,9 @@ def test_duplicate_or_missing_target_is_rejected_atomically(
     current = algo.target.snapshot
     records = _records(monkeypatch, algo)
     algo._rejected = [{"prior": index} for index in range(5)]
-    result, best = asyncio.run(
-        algo._fast_update(current, 0.625, algo.benchmark.train[:1], 2, 10)
-    )
-    assert result is current and best == 0.625
+    algo._best = 0.625
+    result = asyncio.run(algo._fast_update(current, algo.benchmark.train[:1], 2, 10))
+    assert result is current and algo._best == 0.625
     assert algo.target.snapshot.id == current.id
     assert "skills/new.md" not in current.files
     assert (source / "skills/main.md").read_text() == original_text
@@ -180,7 +179,7 @@ def test_parallel_parser_errors_remain_terminal(monkeypatch, source, stage):
     rejected = copy.deepcopy(algo._rejected)
     batch = algo.benchmark.train[: 1 if stage == "reflection" else 2]
     with pytest.raises(_PatchError):
-        asyncio.run(algo._fast_update(current, 0, batch, 0, 1))
+        asyncio.run(algo._fast_update(current, batch, 0, 1))
     assert algo.target.snapshot.id == current.id
     assert algo._rejected == rejected
     assert not any(label in {"decision", "candidate_dev"} for label, _ in records)
@@ -199,7 +198,7 @@ def test_non_patch_application_errors_propagate(monkeypatch, source, error):
     monkeypatch.setattr(_Patch, "apply", fail)
     with pytest.raises(type(error), match=str(error)):
         asyncio.run(
-            algo._fast_update(algo.target.snapshot, 0, algo.benchmark.train[:1], 0, 1)
+            algo._fast_update(algo.target.snapshot, algo.benchmark.train[:1], 0, 1)
         )
     assert not any(label == "decision" for label, _ in records)
 
@@ -228,7 +227,7 @@ def test_execution_and_candidate_errors_are_not_converted_to_rejections(
         monkeypatch.setattr(algo, "_select", fail_async)
     with pytest.raises(RuntimeError if stage == "worker" else _PatchError):
         asyncio.run(
-            algo._fast_update(algo.target.snapshot, 0, algo.benchmark.train[:1], 0, 1)
+            algo._fast_update(algo.target.snapshot, algo.benchmark.train[:1], 0, 1)
         )
     assert not any(label == "decision" for label, _ in records)
 
@@ -271,8 +270,9 @@ def test_invalid_meta_retains_old_value_and_valid_slow_is_selected_normally(
     )
     records = _records(monkeypatch, algo)
     current, old_meta = algo.target.snapshot, algo._meta_skill
-    result, best = asyncio.run(algo._slow_update(current, current, 0, 1))
-    assert result.id != current.id and best == 1
+    algo._best = 0
+    result = asyncio.run(algo._slow_update(current, current, 1))
+    assert result.id != current.id and algo._best == 1
     assert algo._meta_skill == old_meta
     invalid = _invalid(records, "meta")
     assert invalid["parent_id"] == current.id
@@ -302,8 +302,9 @@ def test_invalid_slow_is_atomic_and_keeps_new_valid_meta(monkeypatch, source):
     )
     records = _records(monkeypatch, algo)
     current = algo.target.snapshot
-    result, best = asyncio.run(algo._slow_update(current, current, 0.5, 1))
-    assert result is current and best == 0.5
+    algo._best = 0.5
+    result = asyncio.run(algo._slow_update(current, current, 1))
+    assert result is current and algo._best == 0.5
     assert algo.target.snapshot.id == current.id
     assert algo._meta_skill == "Updated meta"
     assert b"SOLVED" not in current.files["skills/main.md"].content
@@ -326,7 +327,8 @@ def test_disabled_stage_is_not_called_after_invalid_sequential_reply(
     )
     records = _records(monkeypatch, algo)
     current, old_meta = algo.target.snapshot, algo._meta_skill
-    assert asyncio.run(algo._slow_update(current, current, 0.5, 1)) == (current, 0.5)
+    algo._best = 0.5
+    assert asyncio.run(algo._slow_update(current, current, 1)) is current
     assert algo._meta_skill == old_meta
     assert len(algo.worker.requests) == 1
     assert len(algo.target.calls) == 4
@@ -346,7 +348,7 @@ def test_sequential_worker_errors_propagate(monkeypatch, source, stage):
     records = _records(monkeypatch, algo)
     current = algo.target.snapshot
     with pytest.raises(RuntimeError, match="gateway failed"):
-        asyncio.run(algo._slow_update(current, current, 0.5, 1))
+        asyncio.run(algo._slow_update(current, current, 1))
     assert not any(label == "decision" for label, _ in records)
 
 
@@ -359,7 +361,8 @@ def test_valid_empty_meta_and_noop_slow_preserve_original_behavior(monkeypatch, 
     )
     records = _records(monkeypatch, algo)
     current = algo.target.snapshot
-    assert asyncio.run(algo._slow_update(current, current, 0.5, 1)) == (current, 0.5)
+    algo._best = 0.5
+    assert asyncio.run(algo._slow_update(current, current, 1)) is current
     assert algo._meta_skill == ""
     assert [v for label, v in records if label == "decision"] == [
         {"epoch": 1, "kind": "slow", "reason": "no_change", "accepted": False}

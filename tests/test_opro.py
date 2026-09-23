@@ -311,7 +311,7 @@ def test_evidence_follows_the_best_candidate_found_within_a_step(monkeypatch):
     assert algo._best().snapshot.id == algo._history[1].snapshot.id
     produced = {
         message["ran"]
-        for item in algo._evidence
+        for item in algo._leader
         for message in item.messages
         if "ran" in message
     }

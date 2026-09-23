@@ -14,7 +14,6 @@ Commit: 2e235c9410e38d531dabfae7fdd9cbded1577373
 from __future__ import annotations
 
 import random
-import re
 from dataclasses import dataclass
 
 from flashrsi.algorithms.evoprompt import _prompts as prompts
@@ -120,7 +119,9 @@ class EvoPrompt(Algorithm):
                 label="paraphrase",
             )
             self._population.append(
-                await self._member(self._population[0], _prompt(reply), label="seed")
+                await self._member(
+                    self._population[0], self._tagged(reply, "prompt"), label="seed"
+                )
             )
 
     async def _ga(self, rng: random.Random, step: int) -> None:
@@ -131,26 +132,47 @@ class EvoPrompt(Algorithm):
         other policies draw from the population itself. Survivor selection is
         then the whole decision: a child not selected is simply never adopted.
         """
-        pool = (
-            _wheel(self._population, rng, self.config.population_size)
-            if self.config.selection == "wheel"
-            else tuple(self._population)
-        )
+        pool = tuple(self._population)
+        if self.config.selection == "wheel":
+            # Roulette wheel: sampling with replacement, weighted by fitness.
+            # Uniform when every fitness is zero -- the ordinary state of a
+            # fresh population, which random.choices would otherwise reject.
+            weights = [member.score for member in pool]
+            pool = tuple(
+                rng.choices(
+                    pool,
+                    weights=weights if sum(weights) > 0 else None,
+                    k=self.config.population_size,
+                )
+            )
+
         children = []
         for _ in range(self.config.population_size):
-            first, second = self._parents(rng, pool)
+            if self.config.selection == "tournament":
+                # A binary tournament per parent, which is upstream's ``tour``:
+                # sample two, keep the fitter.
+                first, second = (
+                    max(rng.sample(pool, 2), key=lambda member: member.score)
+                    for _ in range(2)
+                )
+            else:
+                first, second = rng.sample(pool, 2)
             reply = await self._ask(
                 prompts.GA.format(
                     path=self._path, prompt1=first.text, prompt2=second.text
                 ),
                 label="crossover",
             )
-            children.append(await self._member(first, _prompt(reply), label="child"))
+            children.append(
+                await self._member(first, self._tagged(reply, "prompt"), label="child")
+            )
 
         size = self.config.population_size
         survivors = (
             tuple(children)
             if self.config.survivor_selection == "standard"
+            # Survivors are chosen from the real population, not the resampled
+            # pool: a wheel draw may hold several copies of one member.
             else _top_k(tuple(self._population) + tuple(children), size)
         )
         self._adopt(step, survivors, children)
@@ -178,7 +200,9 @@ class EvoPrompt(Algorithm):
                 ),
                 label="mutate",
             )
-            trial = await self._member(target, _prompt(reply), label="trial")
+            trial = await self._member(
+                target, self._tagged(reply, "prompt"), label="trial"
+            )
             trials.append(trial)
             # A trial competes only with the target it was built from, so a
             # losing one leaves the rest of the population where it was.
@@ -203,17 +227,6 @@ class EvoPrompt(Algorithm):
         candidate = self._candidate(parent.snapshot, {self._path: text})
         results = await self._evaluate(candidate, self.benchmark.dev, label=label)
         return Member(candidate, text, self._score(results))
-
-    def _parents(self, rng: random.Random, pool: tuple[Member, ...]):
-        """Two parents for one child, by the configured policy."""
-        if self.config.selection != "tournament":
-            return rng.sample(list(pool), 2)
-        # A binary tournament per parent, which is what upstream's ``tour``
-        # policy runs: sample two, keep the fitter.
-        return [
-            max(rng.sample(list(pool), 2), key=lambda member: member.score)
-            for _ in range(2)
-        ]
 
     def _adopt(
         self, step: int, survivors: tuple[Member, ...], candidates: list[Member]
@@ -245,21 +258,6 @@ class EvoPrompt(Algorithm):
                 f"EvoPrompt {self.config.variant} needs algorithm.population_size "
                 f">= {_MINIMUM[self.config.variant]}"
             )
-
-
-def _wheel(
-    population: list[Member], rng: random.Random, size: int
-) -> tuple[Member, ...]:
-    """Fitness-proportionate resampling with replacement (roulette wheel).
-
-    Weights fall back to uniform when every fitness is zero, which is the
-    ordinary state of a freshly initialized population and would otherwise make
-    ``random.choices`` raise instead of sampling.
-    """
-    weights = [member.score for member in population]
-    return tuple(
-        rng.choices(population, weights=weights if sum(weights) > 0 else None, k=size)
-    )
 
 
 def _top_k(pool: tuple[Member, ...], size: int) -> tuple[Member, ...]:
@@ -305,21 +303,6 @@ def _row(member: Member) -> dict:
     if member.carried:
         row["carried"] = True
     return row
-
-
-def _prompt(reply: str) -> str:
-    """Read the new prompt out of a tagged reply.
-
-    Every upstream template ends by asking for the result "bracketed with
-    <prompt> and </prompt>", and each one also *shows* that bracketing in its
-    worked example. So the last closed pair wins: a reply that quotes the
-    request back would otherwise be read from the example's tag.
-
-    The text becomes a file's whole content, so it ends with a newline.
-    """
-    found = re.findall(r"<prompt>(.*?)</prompt>", reply, flags=re.DOTALL)
-    text = (found[-1] if found else reply).strip()
-    return text + "\n" if text else text
 
 
 __all__ = ["EvoPrompt"]

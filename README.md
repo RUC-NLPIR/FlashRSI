@@ -57,7 +57,7 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 
 | 位置 | 职责 |
 | --- | --- |
-| `core/algorithm.py` | 初始化与 `_ranges` 参数校验、`_evaluate`、`_ask`、`_score`、`_instruction_path`、`_promote`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
+| `core/algorithm.py` | 初始化与 `_ranges` 参数校验、`_evaluate`、`_ask`、`_score`、`_instruction_path`、`_promote`、`_evidence`/`_trajectory_evidence`/`_tagged`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
 | `algorithms/skillopt/__init__.py` | `evolve` 主流程、反思、合并排序、slow/meta update、接受或拒绝候选 |
 | `algorithms/skillopt/_patch.py` | 编辑响应解析、精确锚点、预算与保护区、slow guidance 应用 |
 | `algorithms/skillopt/_prompts.py` | 算法使用的 prompt 模板 |
@@ -81,11 +81,15 @@ runner 的最终 test 也复用 `_evaluate`；记录与算法内评估采用相�
 默认分别使用 `worker` 和 `evaluation`，需要区分阶段时可写 `label="reflection"` 或
 `label="candidate_dev"`，记录文件按调用顺序命名为 `00001-<label>.json`。
 
-四个算法共享的三个动作也在基类：`_score(results)` 取 benchmark `primary_metric` 的均值，
+算法共享的动作都在基类：`_score(results)` 取 benchmark `primary_metric` 的均值，
 即算法的适应度；`_instruction_path()` 返回 target 自己声明的 `instruction_file`
 并校验它落在算法可编辑的组件内；`_promote(current, best, **details)` 在搜索结束时
 选中一个版本，写入 `kind: "promote"` 决策记录，`details` 里放算法自己的搜索状态
 （OPRO 的 `history`、GEPA 与 EvoPrompt 的 `population`）。
+写 Worker 提示时，`_evidence(rows)` 把行编码为 JSON 并按 `max_evidence_chars` 截断，
+截断处补省略号；`_trajectory_evidence(traj)` 给出整条轨迹并去掉 `RunConfig`；
+`_tagged(reply, tag)` 取回复中最后一对闭合标签内的整段文本。
+选哪些字段进 prompt 仍由算法自己决定，基类只统一编码、上限和解析。
 需要把上游 CLI 的别名规范化时重写 `_normalize()`，它在 `_ranges` 校验之前执行，
 因此保存的配置记录的是实际运行的名字。
 

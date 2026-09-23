@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import copy
+import json
 import math
 import os
+import re
 from collections.abc import Iterable, Mapping
 from pathlib import Path
 from statistics import mean
@@ -104,6 +106,47 @@ class Algorithm:
     def _score(self, results: Iterable[Trajectory]) -> float:
         """The mean primary metric over an evaluation: one algorithm's fitness."""
         return mean(item.metrics[self.benchmark.primary_metric] for item in results)
+
+    def _evidence(self, rows: Iterable[Mapping]) -> str:
+        """Render evidence for a role prompt as JSON, bounded by max_evidence_chars.
+
+        Which fields a role is shown is the algorithm's decision, so callers
+        build the rows; the encoding and the bound are shared. The cut is
+        marked because it lands mid-JSON: a truncated record should read as
+        truncated rather than as a complete attempt.
+        """
+        text = json.dumps(list(rows), ensure_ascii=False, sort_keys=True)
+        limit = self.config.max_evidence_chars
+        return text if len(text) <= limit else text[:limit] + "…"
+
+    def _trajectory_evidence(self, trajectory: Trajectory) -> dict:
+        """One whole trajectory as a row a Worker may read.
+
+        The saved record keeps the RunConfig message for reproducibility; it
+        holds the resolved runtime configuration, so it is dropped on the way
+        into a prompt rather than shown to a Worker.
+        """
+        record = _trajectory_record(trajectory)
+        record["messages"] = [
+            message
+            for message in record["messages"]
+            if message.get("type") != "RunConfig"
+        ]
+        return record
+
+    def _tagged(self, reply: str, tag: str) -> str:
+        """Read one whole instruction out of a reply that brackets it in ``tag``.
+
+        The last *closed* pair wins: upstream templates show the bracketing in
+        a worked example, so a reply that quotes the request back would
+        otherwise be read from the example's own tag. An untagged reply is
+        taken whole, which is what a provider that simply answered produces.
+
+        The text becomes a file's entire content, so it ends with a newline.
+        """
+        found = re.findall(f"<{tag}>(.*?)</{tag}>", reply, flags=re.DOTALL)
+        text = (found[-1] if found else reply).strip()
+        return text + "\n" if text else text
 
     def _promote(self, current: Snapshot, best: Snapshot, **details) -> Snapshot:
         """Select one version at the end of the search and record the decision.

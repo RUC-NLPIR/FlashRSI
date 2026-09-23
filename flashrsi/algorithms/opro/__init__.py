@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import json
 import random
-import re
 from dataclasses import dataclass
 
 from flashrsi.algorithms.opro import _prompts as prompts
@@ -62,7 +60,7 @@ class OPRO(Algorithm):
                 self._read_text(current).get(path, ""), self._score(results), current
             )
         ]
-        self._evidence = results
+        self._leader = results
 
         for step in range(self.config.max_steps):
             parent = self._best()
@@ -74,7 +72,7 @@ class OPRO(Algorithm):
                 # Evaluated before appending, so the evidence follows exactly
                 # the instruction _best() will return, ties included.
                 if scored.score > self._best().score:
-                    self._evidence = results
+                    self._leader = results
                 self._history.append(scored)
 
         best = self._best()
@@ -100,18 +98,32 @@ class OPRO(Algorithm):
     async def _propose(self, step: int) -> tuple[str, ...]:
         """Sample this step's novel instructions from the scored history.
 
+        The optimizer reads the ascending score trajectory and a few examples
+        of what the leading instruction actually produced -- upstream shows raw
+        question/answer pairs there; FlashRSI has trajectories.
+
         A repeat is dropped rather than resampled, so a step may yield fewer
         than num_candidates instructions.
         """
+        sample = random.Random(self.config.seed + step).sample(
+            self._leader, min(self.config.few_shot_size, len(self._leader))
+        )
         prompt = prompts.META.format(
             path=self._path,
             history=self._render_history(),
-            evidence=self._render_evidence(step),
+            evidence=self._evidence(
+                {
+                    "task": item.task.question,
+                    "output": item.output,
+                    "metrics": dict(item.metrics),
+                }
+                for item in sample
+            ),
         )
         seen = {item.text for item in self._history}
         proposed = []
         for _ in range(self.config.num_candidates):
-            text = _instruction(await self._ask(prompt, label="propose"))
+            text = self._tagged(await self._ask(prompt, label="propose"), "INS")
             if text and text not in seen:
                 seen.add(text)
                 proposed.append(text)
@@ -140,48 +152,10 @@ class OPRO(Algorithm):
             or prompts.NO_HISTORY
         )
 
-    def _render_evidence(self, step: int) -> str:
-        """Show what the leading instruction actually produced, as JSON.
-
-        Upstream optionally shows raw question/answer pairs; FlashRSI has
-        trajectories, so the examples come from the scored training run that put
-        this instruction at the top of the history. Bounded because one long
-        task would otherwise fill the whole context.
-        """
-        sample = random.Random(self.config.seed + step).sample(
-            self._evidence, min(self.config.few_shot_size, len(self._evidence))
-        )
-        text = json.dumps(
-            [
-                {
-                    "task": item.task.question,
-                    "output": item.output,
-                    "metrics": dict(item.metrics),
-                }
-                for item in sample
-            ],
-            ensure_ascii=False,
-            sort_keys=True,
-        )
-        limit = self.config.max_evidence_chars
-        return text if len(text) <= limit else text[:limit] + "…"
-
     def _check(self) -> None:
         if not self.benchmark.train:
             raise ValueError("OPRO requires a non-empty train split")
         self._path = self._instruction_path()
-
-
-def _instruction(reply: str) -> str:
-    """Read the new instruction out of a tagged reply.
-
-    The last closed pair wins: a provider that prepends a preamble quoting the
-    request back would otherwise be read from the request's own tag. The text
-    becomes a file's whole content, so it ends with a newline.
-    """
-    found = re.findall(r"<INS>(.*?)</INS>", reply, flags=re.DOTALL)
-    text = (found[-1] if found else reply).strip()
-    return text + "\n" if text else text
 
 
 __all__ = ["OPRO"]

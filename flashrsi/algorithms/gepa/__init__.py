@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import random
 from collections.abc import Mapping
 
@@ -134,12 +133,23 @@ class GEPA(Algorithm):
         self._admit(candidate, text, parent, results, details)
 
     async def _propose(self, parent: Member, evidence) -> str:
-        """Reflect on the parent's own trajectories and rewrite the instruction."""
+        """Reflect on the parent's own trajectories and rewrite the instruction.
+
+        Upstream shows each input, the assistant's response and the feedback on
+        it; FlashRSI has trajectories, so the scores are that feedback.
+        """
         reply = await self._ask(
             prompts.REFLECT.format(
                 path=self._path,
                 instruction=parent.text,
-                evidence=self._render_evidence(evidence),
+                evidence=self._evidence(
+                    {
+                        "task": item.task.question,
+                        "output": item.output,
+                        "metrics": dict(item.metrics),
+                    }
+                    for item in evidence
+                ),
             ),
             label="propose",
         )
@@ -192,28 +202,6 @@ class GEPA(Algorithm):
     def _per_task(self, results) -> Mapping[str, float]:
         metric = self.benchmark.primary_metric
         return {item.task.task_id: item.metrics[metric] for item in results}
-
-    def _render_evidence(self, results) -> str:
-        """Show what the parent's instruction actually produced, as JSON.
-
-        Upstream shows each input, the assistant's response and the feedback on
-        it; FlashRSI has trajectories, so the scores are that feedback. Bounded
-        because one long task would otherwise fill the whole context.
-        """
-        text = json.dumps(
-            [
-                {
-                    "task": item.task.question,
-                    "output": item.output,
-                    "metrics": dict(item.metrics),
-                }
-                for item in results
-            ],
-            ensure_ascii=False,
-            sort_keys=True,
-        )
-        limit = self.config.max_evidence_chars
-        return text if len(text) <= limit else text[:limit] + "…"
 
     def _check(self) -> None:
         if not self.benchmark.train or not self.benchmark.dev:

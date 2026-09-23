@@ -143,6 +143,9 @@ def _algorithm(cls, source, worker=None, **config):
     )
     result._rejected = [{"score": 0.25, "patch": {"edits": []}}]
     result._meta_skill = "Existing optimizer guidance."
+    # evolve() sets the incumbent score; a test calling one stage directly
+    # starts from a baseline nothing has beaten yet.
+    result._best = float("-inf")
     return result
 
 

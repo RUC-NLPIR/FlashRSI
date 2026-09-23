@@ -13,7 +13,7 @@ import hashlib
 from pathlib import Path
 
 from flashrsi.algorithms import SkillOpt
-from flashrsi.algorithms.skillopt import _dump, _evidence
+from flashrsi.algorithms.skillopt import _dump
 from flashrsi.algorithms.skillopt import _prompts as prompts
 from flashrsi.algorithms.skillopt._patch import _SOURCES, _Patch, _ranked
 
@@ -92,7 +92,9 @@ class ParallelSkillOpt(SkillOpt):
                         templates[source].format(
                             files=_dump(files),
                             rules=_dump(list(snapshot.component_rules["skill"])),
-                            evidence=_dump([_evidence(item) for item in group]),
+                            evidence=_dump(
+                                [self._trajectory_evidence(item) for item in group]
+                            ),
                             rejected=_dump(self._rejected),
                             meta_skill=self._meta_skill,
                             budget=self.config.edit_budget,
