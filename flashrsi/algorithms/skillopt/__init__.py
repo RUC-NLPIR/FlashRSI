@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import json
-import math
 import random
-from statistics import mean
 
 from flashrsi._records import _trajectory_record
 from flashrsi.algorithms.skillopt import _prompts as prompts
@@ -44,14 +42,26 @@ class SkillOpt(Algorithm):
         "use_meta_skill": True,
         "slow_update_samples": 20,
     }
+    _ranges = {
+        "num_epochs": (int, 1),
+        "batch_size": (int, 1),
+        "reflection_minibatch_size": (int, 1),
+        "edit_budget": (int, 1),
+        # A merge combines at least two proposals.
+        "merge_batch_size": (int, 2),
+        "seed": int,
+        "max_steps": (int | None, 1),
+        "success_threshold": float,
+        "use_slow_update": bool,
+        "use_meta_skill": bool,
+        "slow_update_samples": (int, 1),
+    }
 
     async def evolve(self) -> Snapshot:
         train, dev = self.benchmark.train, self.benchmark.dev
-        metric = self.benchmark.primary_metric
         current = self.target.snapshot
         self._rejected, self._meta_skill = [], ""
-        baseline = await self._evaluate(current, dev, label="baseline")
-        best = mean(item.metrics[metric] for item in baseline)
+        best = self._score(await self._evaluate(current, dev, label="baseline"))
         previous_epoch = None
         steps = 0
 
@@ -79,34 +89,6 @@ class SkillOpt(Algorithm):
     def _check(self) -> None:
         if not self.benchmark.train or not self.benchmark.dev:
             raise ValueError("SkillOpt requires non-empty train and dev splits")
-        for key in (
-            "num_epochs",
-            "batch_size",
-            "reflection_minibatch_size",
-            "edit_budget",
-            "merge_batch_size",
-            "slow_update_samples",
-        ):
-            value = self.config[key]
-            minimum = 2 if key == "merge_batch_size" else 1
-            if type(value) is not int or value < minimum:
-                raise ValueError(f"algorithm.{key} must be an integer >= {minimum}")
-        if type(self.config.seed) is not int:
-            raise ValueError("algorithm.seed must be an integer")
-        if self.config.max_steps is not None and (
-            type(self.config.max_steps) is not int or self.config.max_steps < 1
-        ):
-            raise ValueError("algorithm.max_steps must be a positive integer or null")
-        for key in ("use_slow_update", "use_meta_skill"):
-            if type(self.config[key]) is not bool:
-                raise ValueError(f"algorithm.{key} must be a boolean")
-        threshold = self.config.success_threshold
-        if (
-            isinstance(threshold, bool)
-            or not isinstance(threshold, (int, float))
-            or not math.isfinite(threshold)
-        ):
-            raise ValueError("algorithm.success_threshold must be finite")
 
     async def _fast_update(self, current, best, batch, epoch, step):
         training = await self._evaluate(current, batch, label="train")
@@ -242,7 +224,7 @@ class SkillOpt(Algorithm):
         evaluated = await self._evaluate(
             candidate, self.benchmark.dev, label="candidate_dev"
         )
-        score = mean(item.metrics[self.benchmark.primary_metric] for item in evaluated)
+        score = self._score(evaluated)
         accepted = score > best
         self._record(
             "decision",

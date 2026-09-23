@@ -3,15 +3,12 @@
 from __future__ import annotations
 
 import json
-import math
 import random
 import re
 from dataclasses import dataclass
-from statistics import mean
 
 from flashrsi.algorithms.opro import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
-from flashrsi.core.snapshot import _matching_components, _validate_path
 
 
 @dataclass(frozen=True, slots=True)
@@ -45,6 +42,15 @@ class OPRO(Algorithm):
         "max_evidence_chars": 24000,
         "seed": 42,
     }
+    _ranges = {
+        "max_steps": (int, 1),
+        "num_candidates": (int, 1),
+        "history_size": (int, 1),
+        "score_threshold": float,
+        "few_shot_size": (int, 1),
+        "max_evidence_chars": (int, 1),
+        "seed": int,
+    }
 
     async def evolve(self) -> Snapshot:
         train, path = self.benchmark.train, self._path
@@ -53,9 +59,7 @@ class OPRO(Algorithm):
         # The starting instruction is row zero of the history OPRO re-ranks.
         self._history = [
             _Scored(
-                self._read_text(current).get(path, ""),
-                _mean(results, self.benchmark.primary_metric),
-                current,
+                self._read_text(current).get(path, ""), self._score(results), current
             )
         ]
         self._evidence = results
@@ -66,92 +70,32 @@ class OPRO(Algorithm):
                 candidate = self._candidate(parent.snapshot, {path: text})
                 # OPRO scores on the training split itself, not a held-out set.
                 results = await self._evaluate(candidate, train, label="candidate")
-                scored = _Scored(
-                    text, _mean(results, self.benchmark.primary_metric), candidate
-                )
+                scored = _Scored(text, self._score(results), candidate)
                 # Evaluated before appending, so the evidence follows exactly
                 # the instruction _best() will return, ties included.
                 if scored.score > self._best().score:
                     self._evidence = results
                 self._history.append(scored)
 
-        return self._promote(current)
-
-    def _check(self) -> None:
-        if not self.benchmark.train:
-            raise ValueError("OPRO requires a non-empty train split")
-        # The target names the file it loads its instructions from, so a run
-        # needs no knowledge of the harness's layout and no algorithm branches
-        # on the harness name.
-        path = self.target.instruction_file
-        if not isinstance(path, str) or not path:
-            raise ValueError(
-                f"{self.target.name} declares no instruction_file, so OPRO has "
-                "nothing to rewrite"
-            )
-        _validate_path(path)
-        rules = self.target.component_rules
-        if _matching_components(path, rules) != {"prompt"}:
-            patterns = ", ".join(rules.get("prompt", ()))
-            raise ValueError(
-                f"{self.target.name} declares an instruction_file outside its "
-                f"prompt component ({patterns}), which OPRO cannot evolve: {path}"
-            )
-        for key in (
-            "max_steps",
-            "num_candidates",
-            "history_size",
-            "few_shot_size",
-            "max_evidence_chars",
-        ):
-            value = self.config[key]
-            if type(value) is not int or value < 1:
-                raise ValueError(f"algorithm.{key} must be an integer >= 1")
-        if type(self.config.seed) is not int:
-            raise ValueError("algorithm.seed must be an integer")
-        threshold = self.config.score_threshold
-        if (
-            isinstance(threshold, bool)
-            or not isinstance(threshold, (int, float))
-            or not math.isfinite(threshold)
-        ):
-            raise ValueError("algorithm.score_threshold must be finite")
-        self._path = path
+        best = self._best()
+        return self._promote(
+            current,
+            best.snapshot,
+            score=best.score,
+            baseline_score=self._history[0].score,
+            history=[
+                {
+                    "text": item.text,
+                    "score": item.score,
+                    "snapshot_id": item.snapshot.id,
+                }
+                for item in self._history
+            ],
+        )
 
     def _best(self) -> _Scored:
         """The global best so far; ties keep the earlier instruction."""
         return max(self._history, key=lambda item: item.score)
-
-    def _promote(self, current: Snapshot) -> Snapshot:
-        """Select once, at the end: the incumbent never moved during the search.
-
-        Every candidate was therefore scored against the same baseline, which is
-        why the whole pool is recorded rather than a sequence of accept/reject
-        decisions.
-        """
-        best = self._best()
-        self._record(
-            "decision",
-            {
-                "kind": "promote",
-                "parent_id": current.id,
-                "candidate_id": best.snapshot.id,
-                "score": best.score,
-                "baseline_score": self._history[0].score,
-                "accepted": best.snapshot.id != current.id,
-                "history": [
-                    {
-                        "text": item.text,
-                        "score": item.score,
-                        "snapshot_id": item.snapshot.id,
-                    }
-                    for item in self._history
-                ],
-            },
-        )
-        if best.snapshot.id != current.id:
-            self.target.update(best.snapshot)
-        return self.target.snapshot
 
     async def _propose(self, step: int) -> tuple[str, ...]:
         """Sample this step's novel instructions from the scored history.
@@ -222,9 +166,10 @@ class OPRO(Algorithm):
         limit = self.config.max_evidence_chars
         return text if len(text) <= limit else text[:limit] + "…"
 
-
-def _mean(results, metric: str) -> float:
-    return mean(item.metrics[metric] for item in results)
+    def _check(self) -> None:
+        if not self.benchmark.train:
+            raise ValueError("OPRO requires a non-empty train split")
+        self._path = self._instruction_path()
 
 
 def _instruction(reply: str) -> str:

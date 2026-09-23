@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import math
 import random
 from collections.abc import Mapping
 
@@ -11,9 +10,6 @@ from flashrsi.algorithms.gepa import _population as pop
 from flashrsi.algorithms.gepa import _prompts as prompts
 from flashrsi.algorithms.gepa._population import Member
 from flashrsi.core import Algorithm, Snapshot
-from flashrsi.core.snapshot import _matching_components, _validate_path
-
-_STRATEGIES = ("pareto", "current_best")
 
 
 class GEPA(Algorithm):
@@ -45,11 +41,18 @@ class GEPA(Algorithm):
         # Upstream's system-aware merge is not part of this migration.
         "use_merge": False,
     }
+    _ranges = {
+        "max_metric_calls": (int | None, 1),
+        "reflection_minibatch_size": (int, 1),
+        "candidate_selection_strategy": ("pareto", "current_best"),
+        "max_evidence_chars": (int, 1),
+        "seed": int,
+        "use_merge": bool,
+    }
 
     async def evolve(self) -> Snapshot:
         train, dev = self.benchmark.train, self.benchmark.dev
         current = self.target.snapshot
-        path = self._path
         budget, cost = self._resolved_budget
 
         results = await self._evaluate(current, dev, label="baseline")
@@ -57,9 +60,9 @@ class GEPA(Algorithm):
             Member(
                 index=0,
                 snapshot=current,
-                text=self._read_text(current).get(path, ""),
+                text=self._read_text(current).get(self._path, ""),
                 per_task=self._per_task(results),
-                score=_mean(results, self.benchmark.primary_metric),
+                score=self._score(results),
             )
         ]
         self._metric_calls = len(dev)
@@ -69,86 +72,26 @@ class GEPA(Algorithm):
             await self._iterate(train, dev, iteration)
             iteration += 1
 
-        return self._promote(current)
-
-    def _check(self) -> None:
-        if not self.benchmark.train or not self.benchmark.dev:
-            raise ValueError("GEPA requires non-empty train and dev splits")
-        seen = set()
-        for task in self.benchmark.dev:
-            if task.task_id in seen:
-                raise ValueError(
-                    "GEPA scores dev tasks individually and needs unique "
-                    f"task_id values: {task.task_id}"
-                )
-            seen.add(task.task_id)
-        # The target names its own instruction file; configuration only overrides
-        # The target names the file it loads its instructions from, so a run
-        # needs no knowledge of the harness's layout and no algorithm branches
-        # on the harness name.
-        path = self.target.instruction_file
-        if not isinstance(path, str) or not path:
-            raise ValueError(
-                f"{self.target.name} declares no instruction_file, so GEPA has "
-                "nothing to rewrite"
-            )
-        _validate_path(path)
-        rules = self.target.component_rules
-        if _matching_components(path, rules) != {"prompt"}:
-            patterns = ", ".join(rules.get("prompt", ()))
-            raise ValueError(
-                f"{self.target.name} declares an instruction_file outside its "
-                f"prompt component ({patterns}), which GEPA cannot evolve: {path}"
-            )
-        self._path = path
-        for key in ("reflection_minibatch_size", "max_evidence_chars"):
-            value = self.config[key]
-            if type(value) is not int or value < 1:
-                raise ValueError(f"algorithm.{key} must be an integer >= 1")
-        calls = self.config.max_metric_calls
-        if calls is not None and (type(calls) is not int or calls < 1):
-            raise ValueError(
-                "algorithm.max_metric_calls must be a positive integer or null"
-            )
-        if type(self.config.seed) is not int:
-            raise ValueError("algorithm.seed must be an integer")
-        if self.config.candidate_selection_strategy not in _STRATEGIES:
-            raise ValueError(
-                "algorithm.candidate_selection_strategy must be one of: "
-                + ", ".join(_STRATEGIES)
-            )
-        if type(self.config.use_merge) is not bool:
-            raise ValueError("algorithm.use_merge must be a boolean")
-        if self.config.use_merge:
-            raise ValueError(
-                "GEPA's system-aware merge is not implemented; set "
-                "algorithm.use_merge to false"
-            )
-        # Resolved here, before the runner creates an experiment directory, so
-        # an unusable budget is reported like any other configuration error.
-        self._resolved_budget = self._budget(self.benchmark.train, self.benchmark.dev)
-
-    def _budget(self, train, dev) -> tuple[int, int]:
-        """Resolve the rollout budget and check that one iteration fits in it.
-
-        An iteration screens the parent on the minibatch, screens the candidate
-        on the same tasks, then evaluates it on the whole dev split.
-        """
-        minibatch = min(self.config.reflection_minibatch_size, len(train))
-        cost = 2 * minibatch + len(dev)
-        needed = len(dev) + cost
-        budget = self.config.max_metric_calls
-        if budget is None:
-            # The budget is a property of how much data there is, so one fixed
-            # number is wrong for every split but one: the baseline pass plus
-            # ten reflective iterations.
-            budget = max(100, len(dev) + 10 * cost)
-        if budget < needed:
-            raise ValueError(
-                f"algorithm.max_metric_calls={budget} cannot complete one "
-                f"iteration; this run needs at least {needed}"
-            )
-        return budget, cost
+        best = self._population[pop.best_index(self._population)]
+        return self._promote(
+            current,
+            best.snapshot,
+            path=self._path,
+            score=best.score,
+            baseline_score=self._population[0].score,
+            metric_calls=self._metric_calls,
+            population=[
+                {
+                    "index": member.index,
+                    "snapshot_id": member.snapshot.id,
+                    "parents": list(member.parents),
+                    "text": member.text,
+                    "score": member.score,
+                    "per_task": dict(member.per_task),
+                }
+                for member in self._population
+            ],
+        )
 
     async def _iterate(self, train, dev, iteration: int) -> None:
         """One reflective mutation: select, propose, screen, admit."""
@@ -226,7 +169,7 @@ class GEPA(Algorithm):
             snapshot=snapshot,
             text=text,
             per_task=self._per_task(results),
-            score=_mean(results, self.benchmark.primary_metric),
+            score=self._score(results),
             parents=(parent.index,),
         )
         self._population.append(member)
@@ -246,42 +189,6 @@ class GEPA(Algorithm):
     def _reject(self, details, reason: str) -> None:
         self._record("decision", {**details, "kind": "reject", "reason": reason})
 
-    def _promote(self, current: Snapshot) -> Snapshot:
-        """Select once, at the end: the current version never moved.
-
-        Every candidate was therefore scored against the same baseline, which is
-        why the whole population is recorded rather than a sequence of
-        accept/reject decisions.
-        """
-        best = self._population[pop.best_index(self._population)]
-        self._record(
-            "decision",
-            {
-                "kind": "promote",
-                "parent_id": current.id,
-                "candidate_id": best.snapshot.id,
-                "path": self._path,
-                "score": best.score,
-                "baseline_score": self._population[0].score,
-                "metric_calls": self._metric_calls,
-                "accepted": best.snapshot.id != current.id,
-                "population": [
-                    {
-                        "index": member.index,
-                        "snapshot_id": member.snapshot.id,
-                        "parents": list(member.parents),
-                        "text": member.text,
-                        "score": member.score,
-                        "per_task": dict(member.per_task),
-                    }
-                    for member in self._population
-                ],
-            },
-        )
-        if best.snapshot.id != current.id:
-            self.target.update(best.snapshot)
-        return self.target.snapshot
-
     def _per_task(self, results) -> Mapping[str, float]:
         metric = self.benchmark.primary_metric
         return {item.task.task_id: item.metrics[metric] for item in results}
@@ -293,7 +200,7 @@ class GEPA(Algorithm):
         it; FlashRSI has trajectories, so the scores are that feedback. Bounded
         because one long task would otherwise fill the whole context.
         """
-        text = _dump(
+        text = json.dumps(
             [
                 {
                     "task": item.task.question,
@@ -301,19 +208,55 @@ class GEPA(Algorithm):
                     "metrics": dict(item.metrics),
                 }
                 for item in results
-            ]
+            ],
+            ensure_ascii=False,
+            sort_keys=True,
         )
         limit = self.config.max_evidence_chars
         return text if len(text) <= limit else text[:limit] + "…"
 
+    def _check(self) -> None:
+        if not self.benchmark.train or not self.benchmark.dev:
+            raise ValueError("GEPA requires non-empty train and dev splits")
+        seen = set()
+        for task in self.benchmark.dev:
+            if task.task_id in seen:
+                raise ValueError(
+                    "GEPA scores dev tasks individually and needs unique "
+                    f"task_id values: {task.task_id}"
+                )
+            seen.add(task.task_id)
+        self._path = self._instruction_path()
+        if self.config.use_merge:
+            raise ValueError(
+                "GEPA's system-aware merge is not implemented; set "
+                "algorithm.use_merge to false"
+            )
+        # Resolved here, before the runner creates an experiment directory, so
+        # an unusable budget is reported like any other configuration error.
+        self._resolved_budget = self._budget(self.benchmark.train, self.benchmark.dev)
 
-def _mean(results, metric: str) -> float:
-    # An empty split cannot reach here: _check rejects it before any execution.
-    return math.fsum(item.metrics[metric] for item in results) / len(results)
+    def _budget(self, train, dev) -> tuple[int, int]:
+        """Resolve the rollout budget and check that one iteration fits in it.
 
-
-def _dump(value) -> str:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True)
+        An iteration screens the parent on the minibatch, screens the candidate
+        on the same tasks, then evaluates it on the whole dev split.
+        """
+        minibatch = min(self.config.reflection_minibatch_size, len(train))
+        cost = 2 * minibatch + len(dev)
+        needed = len(dev) + cost
+        budget = self.config.max_metric_calls
+        if budget is None:
+            # The budget is a property of how much data there is, so one fixed
+            # number is wrong for every split but one: the baseline pass plus
+            # ten reflective iterations.
+            budget = max(100, len(dev) + 10 * cost)
+        if budget < needed:
+            raise ValueError(
+                f"algorithm.max_metric_calls={budget} cannot complete one "
+                f"iteration; this run needs at least {needed}"
+            )
+        return budget, cost
 
 
 def _instruction(reply: str) -> str:
@@ -331,13 +274,11 @@ def _instruction(reply: str) -> str:
     blocks = reply.split("```")
     closed = range(1, len(blocks) - 1, 2)
     if not closed:
-        return _terminate(reply.strip())
-    body = blocks[closed[-1]]
-    tag, newline, rest = body.partition("\n")
-    return _terminate((rest if newline and len(tag.split()) <= 1 else body).strip())
-
-
-def _terminate(text: str) -> str:
+        text = reply.strip()
+    else:
+        body = blocks[closed[-1]]
+        tag, newline, rest = body.partition("\n")
+        text = (rest if newline and len(tag.split()) <= 1 else body).strip()
     return text + "\n" if text else text
 
 

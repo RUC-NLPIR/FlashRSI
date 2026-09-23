@@ -19,6 +19,16 @@
 - 使用 Algorithm、Benchmark、Agent、Worker、Snapshot 这五个核心概念。runner 负责实例化和连接模块。
 - Algorithm 通过公共接口使用 Agent 和 Benchmark，不能按具体 harness 或 benchmark 名称写分支；不支持的组件或执行能力组合在启动时明确报错。
 
+## 算法实现约定
+
+算法文件是读者理解演化思路的入口，以下四条按优先级排列，冲突时以「读者能否直接看懂演化思路」为准。
+
+- **演化思路优先出现。** 类 docstring 用一两句话说明这个算法凭什么与其他算法不同（例如 GEPA 读逐题分数、OPRO 从不移动 incumbent）；`evolve()` 读起来应接近伪代码，把细节交给下面的方法。`_check()` 等校验和准备工作放在类的末尾，不挡在主流程前面。
+- **复用基类，不自造平行设施。** 基类已提供 `_evaluate`、`_ask`、`_read_text`、`_candidate`、`_record`，以及 `_score`（`primary_metric` 均值）、`_instruction_path()`（target 声明的指令文件及其组件校验）、`_promote(current, best, **details)`（搜索结束时选中一个版本并记录决策）、`_normalize()`（别名规范化）。同一个概念在两个算法里出现第二遍时，提到基类而不是各写一份；算法不从 `core` 或 `_records` 引入下划线私有函数，需要就在基类上开一个方法。
+- **参数校验声明化。** 参数的类型与取值范围写在类上的 `_ranges`，由基类统一校验：`int`、`(int, 1)`、`(float, 0)`、`("ga", "de")`，允许不设时写 `int | None`。`_check()` 只留需要数据或 target 才能判断的语义前置条件，例如非空 train/dev、逐题算法要求 `task_id` 唯一、预算够跑一轮。同一个检查不在一条调用链上做两遍；已被配置层或 Snapshot 校验过的值不再复查，路径规则直接调用框架的 `_validate_path`，不手写第二份副本。
+- **封装以「是否承载算法概念」为标准。** 种群、frontier、编辑协议这类算法私有状态可以拆成同目录的私有模块；只被调用一次、或只是包一层 `json.dumps` 的两行函数直接内联。不保留只能填一个值的配置项和从不被读取的字段——若字段实际进入了 prompt 或记录，那它不是死代码，注释说明它的读者是谁。
+- 注释解释「为什么」，特别是与上游实现不一致的取舍；不复述代码已经说清的内容。移植算法在模块 docstring 钉住上游仓库与 commit。
+
 ## 配置与 CLI
 
 - 配置结构参考 [example.yaml](example.yaml)。各类别及 `algorithm.worker` 可以直接添加额外参数；公共字段由配置层校验，额外参数由对应模块解释。

@@ -2,7 +2,7 @@
 
     _initialize  the target's own instruction, then paraphrases of it, all scored
     _ga / _de    one generation, repeated max_steps times
-    _promote     adopt the fittest member, once, at the end
+    _promote     the shared final selection: adopt the fittest member, once
 
 Fitness is always a dev score: `_member` is the only place a prompt becomes a
 candidate Snapshot, and it evaluates every one it builds.
@@ -13,20 +13,16 @@ Commit: 2e235c9410e38d531dabfae7fdd9cbded1577373
 
 from __future__ import annotations
 
-import math
 import random
 import re
 from dataclasses import dataclass
 
 from flashrsi.algorithms.evoprompt import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
-from flashrsi.core.snapshot import _matching_components, _validate_path
 
 #: The smallest population each variant can run: GA draws two parents per
 #: child, DE a target plus three distinct donors.
 _MINIMUM = {"ga": 2, "de": 4}
-_SELECTION = ("wheel", "random", "tournament")
-_SURVIVORS = ("topk", "standard")
 
 
 @dataclass(frozen=True, slots=True)
@@ -77,6 +73,16 @@ class EvoPrompt(Algorithm):
         "donor_random": False,
         "seed": 42,
     }
+    _ranges = {
+        "variant": ("ga", "de"),
+        # The floor is per variant; _check raises that to DE's four donors.
+        "population_size": (int, 2),
+        "max_steps": (int, 1),
+        "selection": ("wheel", "random", "tournament"),
+        "survivor_selection": ("topk", "standard"),
+        "donor_random": bool,
+        "seed": int,
+    }
 
     async def evolve(self) -> Snapshot:
         current = self.target.snapshot
@@ -86,7 +92,15 @@ class EvoPrompt(Algorithm):
         for step in range(self.config.max_steps):
             await generation(random.Random(self.config.seed + step), step)
 
-        return self._promote(current)
+        best = max(self._population, key=lambda member: member.score)
+        return self._promote(
+            current,
+            best.snapshot,
+            path=self._path,
+            score=best.score,
+            baseline_score=self._baseline,
+            population=[_row(member) for member in self._population],
+        )
 
     async def _initialize(self, seed: Snapshot) -> None:
         """Seed the population: the target's own instruction, then paraphrases.
@@ -97,7 +111,7 @@ class EvoPrompt(Algorithm):
         """
         text = self._read_text(seed).get(self._path, "")
         results = await self._evaluate(seed, self.benchmark.dev, label="baseline")
-        self._population = [Member(seed, text, _mean(results, self._metric))]
+        self._population = [Member(seed, text, self._score(results))]
         self._baseline = self._population[0].score
 
         while len(self._population) < self.config.population_size:
@@ -171,31 +185,6 @@ class EvoPrompt(Algorithm):
             survivors.append(trial if trial.score > target.score else target)
         self._adopt(step, tuple(survivors), trials)
 
-    def _promote(self, current: Snapshot) -> Snapshot:
-        """Select once, at the end: the current version never moved.
-
-        Every member was therefore scored against the same baseline, which is
-        why the whole population is recorded rather than a sequence of
-        accept/reject decisions.
-        """
-        best = max(self._population, key=lambda member: member.score)
-        self._record(
-            "decision",
-            {
-                "kind": "promote",
-                "parent_id": current.id,
-                "candidate_id": best.snapshot.id,
-                "path": self._path,
-                "score": best.score,
-                "baseline_score": self._baseline,
-                "accepted": best.snapshot.id != current.id,
-                "population": [_row(member) for member in self._population],
-            },
-        )
-        if best.snapshot.id != current.id:
-            self.target.update(best.snapshot)
-        return self.target.snapshot
-
     # -- the pieces a generation is built from -----------------------------
 
     async def _member(self, parent: Member, text: str, *, label: str) -> Member:
@@ -213,7 +202,7 @@ class EvoPrompt(Algorithm):
             return Member(parent.snapshot, parent.text, parent.score, carried=True)
         candidate = self._candidate(parent.snapshot, {self._path: text})
         results = await self._evaluate(candidate, self.benchmark.dev, label=label)
-        return Member(candidate, text, _mean(results, self._metric))
+        return Member(candidate, text, self._score(results))
 
     def _parents(self, rng: random.Random, pool: tuple[Member, ...]):
         """Two parents for one child, by the configured policy."""
@@ -242,60 +231,20 @@ class EvoPrompt(Algorithm):
         )
         self._population = list(survivors)
 
-    @property
-    def _metric(self) -> str:
-        return self.benchmark.primary_metric
+    def _normalize(self) -> None:
+        # Upstream's CLI calls tournament selection ``tour``.
+        if self.config.selection == "tour":
+            self.config.selection = "tournament"
 
     def _check(self) -> None:
         if not self.benchmark.dev:
             raise ValueError("EvoPrompt requires a non-empty dev split")
-        # The target names the file it loads its instructions from, so a run
-        # needs no knowledge of the harness's layout and no algorithm branches
-        # on the harness name.
-        path = self.target.instruction_file
-        if not isinstance(path, str) or not path:
+        self._path = self._instruction_path()
+        if self.config.population_size < _MINIMUM[self.config.variant]:
             raise ValueError(
-                f"{self.target.name} declares no instruction_file, so EvoPrompt "
-                "has nothing to rewrite"
+                f"EvoPrompt {self.config.variant} needs algorithm.population_size "
+                f">= {_MINIMUM[self.config.variant]}"
             )
-        _validate_path(path)
-        rules = self.target.component_rules
-        if _matching_components(path, rules) != {"prompt"}:
-            patterns = ", ".join(rules.get("prompt", ()))
-            raise ValueError(
-                f"{self.target.name} declares an instruction_file outside its "
-                f"prompt component ({patterns}), which EvoPrompt cannot evolve: "
-                f"{path}"
-            )
-        self._path = path
-        variant = self.config.variant
-        if variant not in _MINIMUM:
-            raise ValueError("algorithm.variant must be one of: " + ", ".join(_MINIMUM))
-        # Upstream's CLI calls tournament selection ``tour``. Accept that
-        # spelling and canonicalize it here, so the loop compares against one
-        # name and the saved configuration records what actually ran.
-        if self.config.selection == "tour":
-            self.config.selection = "tournament"
-        if self.config.selection not in _SELECTION:
-            raise ValueError(
-                "algorithm.selection must be one of: " + ", ".join(_SELECTION)
-            )
-        if self.config.survivor_selection not in _SURVIVORS:
-            raise ValueError(
-                "algorithm.survivor_selection must be one of: " + ", ".join(_SURVIVORS)
-            )
-        for key in ("population_size", "max_steps", "seed"):
-            if type(self.config[key]) is not int:
-                raise ValueError(f"algorithm.{key} must be an integer")
-        if self.config.max_steps < 1:
-            raise ValueError("algorithm.max_steps must be an integer >= 1")
-        if self.config.population_size < _MINIMUM[variant]:
-            raise ValueError(
-                f"EvoPrompt {variant} needs algorithm.population_size >= "
-                f"{_MINIMUM[variant]}"
-            )
-        if type(self.config.donor_random) is not bool:
-            raise ValueError("algorithm.donor_random must be a boolean")
 
 
 def _wheel(
@@ -320,29 +269,30 @@ def _top_k(pool: tuple[Member, ...], size: int) -> tuple[Member, ...]:
     a generation whose mutations collapsed onto one prompt would otherwise fill
     the whole population with copies of it. The padding is equally load-bearing
     -- the next generation still needs ``size`` members to draw parents from, so
-    the best remaining duplicates come back in.
+    once the distinct prompts run out the best duplicates come back in.
+
+    Members are tracked by position because two slots can legitimately hold
+    equal records: a carried parent compares equal to the member it was carried
+    from, and dropping one as a duplicate would lose a slot the next generation
+    needs.
     """
-    best: dict[str, Member] = {}
-    for member in pool:
-        previous = best.get(member.text)
-        if previous is None or member.score > previous.score:
-            best[member.text] = member
-    ranked = sorted(pool, key=lambda member: member.score, reverse=True)
-    survivors = tuple(
-        sorted(best.values(), key=lambda member: member.score, reverse=True)
+    fittest: dict[str, int] = {}
+    for index, member in enumerate(pool):
+        holder = fittest.get(member.text)
+        if holder is None or member.score > pool[holder].score:
+            fittest[member.text] = index
+    ranked = sorted(range(len(pool)), key=lambda index: pool[index].score, reverse=True)
+
+    # One slot per distinct prompt, fittest first, then the best entries left
+    # over -- duplicates included -- to pad back to a full population.
+    survivors = sorted(
+        fittest.values(), key=lambda index: pool[index].score, reverse=True
     )[:size]
-    chosen = {id(member) for member in survivors}
-    survivors += tuple(member for member in ranked if id(member) not in chosen)[
-        : size - len(survivors)
-    ]
+    remaining = [index for index in ranked if index not in survivors]
+    survivors += remaining[: size - len(survivors)]
     while len(survivors) < size:
-        survivors += (ranked[len(survivors) % len(ranked)],)
-    return survivors
-
-
-def _mean(results, metric: str) -> float:
-    # An empty dev split cannot reach here: _check rejects it first.
-    return math.fsum(item.metrics[metric] for item in results) / len(results)
+        survivors.append(ranked[len(survivors) % len(ranked)])
+    return tuple(pool[index] for index in survivors)
 
 
 def _row(member: Member) -> dict:

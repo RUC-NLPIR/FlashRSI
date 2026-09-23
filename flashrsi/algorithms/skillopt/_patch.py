@@ -7,6 +7,8 @@ from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
 from typing import Any
 
+from flashrsi.core.snapshot import _validate_path
+
 _SOURCES = ("failure", "success")
 _START = "<!-- SLOW_UPDATE_START -->"
 _END = "<!-- SLOW_UPDATE_END -->"
@@ -41,16 +43,6 @@ class _Edit:
 
     @classmethod
     def parse(cls, value: Mapping[str, Any], source_type: str = "") -> _Edit:
-        path = value.get("path")
-        if (
-            not isinstance(path, str)
-            or not path
-            or "\\" in path
-            or any(part in ("", ".", "..") for part in path.split("/"))
-            or ":" in path
-            or "\x00" in path
-        ):
-            raise _PatchError("edit path must be a relative POSIX file path")
         op = value.get("op")
         if op not in ("append", "insert_after", "replace", "delete"):
             raise _PatchError("unsupported skill edit operation")
@@ -67,7 +59,10 @@ class _Edit:
         source = source_type or value.get("source_type", "failure")
         if source not in _SOURCES:
             raise _PatchError("source_type must be failure or success")
-        return cls(op, path, content, target, support, source)
+        # The rule a Snapshot applies to a committed path, so a proposal cannot
+        # be accepted here and then rejected at commit.
+        _validate_path(value.get("path"))
+        return cls(op, value["path"], content, target, support, source)
 
     def apply(self, text: str) -> str:
         """Apply one exact edit without changing protected guidance."""
@@ -120,8 +115,6 @@ class _Patch:
 
     def apply(self, files: Mapping[str, str], budget: int) -> dict[str, str]:
         """Calculate all edits before the caller writes or commits any files."""
-        if type(budget) is not int or budget < 1:
-            raise ValueError("edit budget must be a positive integer")
         if len(self.edits) > budget:
             raise _PatchError("patch exceeds the edit budget")
         result = dict(files)

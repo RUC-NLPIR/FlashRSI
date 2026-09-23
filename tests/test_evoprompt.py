@@ -566,7 +566,7 @@ def test_the_last_closed_pair_wins_over_an_echoed_template():
         ({"variant": "pso"}, "variant must be one of"),
         ({"selection": "elitist"}, "selection must be one of"),
         ({"survivor_selection": "best"}, "survivor_selection must be one of"),
-        ({"population_size": 1}, "population_size >= 2"),
+        ({"population_size": 1}, "population_size must be an integer >= 2"),
         ({"variant": "de", "population_size": 3}, "population_size >= 4"),
         ({"max_steps": 0}, "max_steps must be an integer >= 1"),
         ({"seed": "42"}, "seed must be an integer"),

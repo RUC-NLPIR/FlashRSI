@@ -462,7 +462,7 @@ def test_a_dangling_fence_in_an_echoed_request_is_not_a_block():
     "config,message",
     [
         ({"reflection_minibatch_size": 0}, "reflection_minibatch_size must be"),
-        ({"max_metric_calls": 1.5}, "max_metric_calls must be a positive integer"),
+        ({"max_metric_calls": 1.5}, "max_metric_calls must be an integer or null"),
         ({"seed": "42"}, "seed must be an integer"),
         ({"candidate_selection_strategy": "greedy"}, "must be one of"),
         ({"use_merge": True}, "merge is not implemented"),

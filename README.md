@@ -39,22 +39,25 @@ Agent Worker 设置 `algorithm.worker.type: agent` 和 `algorithm.worker.name`�
 6. 从第二个 epoch 末开始，在同一批训练任务上比较相邻 epoch 版本，更新优化器记忆及长期指导。
 7. runner 最后只对选中的版本评估一次 test，不将 test 反馈交给 Worker。
 
-`Algorithm(config, *, target, worker, benchmark)` 统一补齐算法默认配置、设置目标 scope、
-加载 benchmark 并检查通用执行能力，最后调用 `_check()` 完成算法自己的检查。
+`Algorithm(config, *, target, worker, benchmark)` 统一补齐算法默认配置、按 `_ranges`
+校验参数、设置目标 scope、加载 benchmark 并检查通用执行能力，最后调用 `_check()`
+完成算法自己的检查。
 runner 不重复加载数据，`evolve()` 直接组织演化流程并返回最终 `Snapshot`，
 选中的版本同时保留在 `target.snapshot`。算法不按 harness 或 benchmark 名称分支。
 
 算法在类上声明 `evolve_scope` 和 `observation_scope`。基类将 observation 中的组件设为
 `r`，evolve 中的组件设为 `rw`，重叠时以 `rw` 为准；未声明组件隐藏。
 SkillOpt 两者均为 `{"skill"}`。组件校验直接由 `Agent.set_scope()` 完成；
-SkillOpt 的 `_check()` 只检查算法参数和非空 train/dev，不重复检查 metric 契约。
+参数类型与取值范围由类上的 `_ranges` 声明，基类在初始化时统一校验，
+`_check()` 只留下需要数据或 target 才能判断的语义前置条件，例如非空 train/dev、
+`instruction_file` 是否落在可演化组件内，不重复检查参数类型或 metric 契约。
 scope 控制目标快照的编辑目录；目标执行任务仍使用完整版本。
 
 实现按职责阅读：
 
 | 位置 | 职责 |
 | --- | --- |
-| `core/algorithm.py` | 初始化、`_evaluate`、`_ask`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
+| `core/algorithm.py` | 初始化与 `_ranges` 参数校验、`_evaluate`、`_ask`、`_score`、`_instruction_path`、`_promote`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
 | `algorithms/skillopt/__init__.py` | `evolve` 主流程、反思、合并排序、slow/meta update、接受或拒绝候选 |
 | `algorithms/skillopt/_patch.py` | 编辑响应解析、精确锚点、预算与保护区、slow guidance 应用 |
 | `algorithms/skillopt/_prompts.py` | 算法使用的 prompt 模板 |
@@ -77,6 +80,14 @@ runner 的最终 test 也复用 `_evaluate`；记录与算法内评估采用相�
 只用于轨迹文件名和 Worker 错误中的阶段提示，不影响模型输入或算法决策。
 默认分别使用 `worker` 和 `evaluation`，需要区分阶段时可写 `label="reflection"` 或
 `label="candidate_dev"`，记录文件按调用顺序命名为 `00001-<label>.json`。
+
+四个算法共享的三个动作也在基类：`_score(results)` 取 benchmark `primary_metric` 的均值，
+即算法的适应度；`_instruction_path()` 返回 target 自己声明的 `instruction_file`
+并校验它落在算法可编辑的组件内；`_promote(current, best, **details)` 在搜索结束时
+选中一个版本，写入 `kind: "promote"` 决策记录，`details` 里放算法自己的搜索状态
+（OPRO 的 `history`、GEPA 与 EvoPrompt 的 `population`）。
+需要把上游 CLI 的别名规范化时重写 `_normalize()`，它在 `_ranges` 校验之前执行，
+因此保存的配置记录的是实际运行的名字。
 
 | algorithm 字段 | 默认值 | 含义 |
 | --- | --- | --- |

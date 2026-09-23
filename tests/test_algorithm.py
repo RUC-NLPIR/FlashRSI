@@ -8,6 +8,9 @@ from flashrsi.core import Agent, Algorithm, Benchmark, Snapshot, Task, Trajector
 
 
 class MemoryBenchmark(Benchmark):
+    name = "memory"
+    primary_metric = "accuracy"
+
     def __init__(self, *, env=None):
         super().__init__()
         self.loads = 0
@@ -278,3 +281,120 @@ def test_shared_worker_records_errors_and_redacts_both_roles(
     with pytest.raises(ValueError, match="credential"):
         algo._candidate(target.snapshot, {"skills/main.md": "target-secret"})
     assert not list((algo._run_dir / "working").iterdir())
+
+
+# -- shared parameter checking, scoring and promotion ----------------------
+
+
+def test_declared_ranges_are_checked_before_any_collaborator_is_touched(target):
+    """``_ranges`` replaces the per-algorithm type tests each _check used to run."""
+
+    class Ranged(Algorithm):
+        evolve_scope = {"skill"}
+        _defaults = {
+            "steps": 4,
+            "budget": None,
+            "threshold": 0.5,
+            "strategy": "pareto",
+            "merge": False,
+            "seed": 1,
+        }
+        _ranges = {
+            "steps": (int, 1),
+            "budget": (int | None, 1),
+            "threshold": float,
+            "strategy": ("pareto", "current_best"),
+            "merge": bool,
+            "seed": int,
+        }
+
+    def build(**config):
+        benchmark = MemoryBenchmark()
+        Ranged(config, target=target, worker=Worker(), benchmark=benchmark)
+        return benchmark
+
+    # Defaults, an unset optional, and every accepted value pass.
+    assert build().loads == 1
+    assert build(budget=10, steps=1, threshold=0, strategy="current_best").loads == 1
+
+    for config, message in (
+        ({"steps": 0}, "steps must be an integer >= 1"),
+        ({"steps": 1.5}, "steps must be an integer"),
+        ({"steps": True}, "steps must be an integer"),
+        # Only a key declared ``| None`` may be unset.
+        ({"steps": None}, "steps must be an integer"),
+        ({"budget": 0}, "budget must be an integer >= 1 or null"),
+        ({"threshold": float("nan")}, "threshold must be finite"),
+        ({"threshold": "0.5"}, "threshold must be a number"),
+        ({"strategy": "greedy"}, "strategy must be one of: pareto, current_best"),
+        ({"merge": "yes"}, "merge must be a boolean"),
+        ({"seed": "1"}, "seed must be an integer"),
+    ):
+        benchmark = MemoryBenchmark()
+        with pytest.raises(ValueError, match=message):
+            Ranged(config, target=target, worker=Worker(), benchmark=benchmark)
+        # Rejected before the benchmark is loaded or the scope applied.
+        assert benchmark.loads == 0
+
+
+def test_an_accepted_spelling_is_canonicalized_before_it_is_checked(target):
+    """An upstream CLI name reaches ``_ranges`` already rewritten."""
+
+    class Aliased(Algorithm):
+        evolve_scope = {"skill"}
+        _defaults = {"selection": "wheel"}
+        _ranges = {"selection": ("wheel", "tournament")}
+
+        def _normalize(self):
+            if self.config.selection == "tour":
+                self.config.selection = "tournament"
+
+    algo = Aliased(
+        {"selection": "tour"},
+        target=target,
+        worker=Worker(),
+        benchmark=MemoryBenchmark(),
+    )
+    # Canonicalized, so the loop compares against one name and the saved
+    # configuration records what actually ran.
+    assert algo.config.selection == "tournament"
+
+
+def test_shared_score_averages_the_benchmark_primary_metric(target, tmp_path):
+    algo = recording_algorithm(target, tmp_path)
+    scored = tuple(
+        replace(Trajectory(output="answer"), metrics={"accuracy": value, "other": 1.0})
+        for value in (1.0, 0.0, 0.5)
+    )
+    assert algo._score(scored) == 0.5
+    assert algo._score(scored[:1]) == 1.0
+
+
+def test_shared_promotion_selects_once_and_records_the_pool(target, tmp_path):
+    algo = recording_algorithm(target, tmp_path)
+    current = target.snapshot
+    candidate = algo._candidate(current, {"skills/main.md": "evolved"})
+
+    final = algo._promote(current, candidate, score=1.0, pool=["a", "b"])
+
+    assert final is target.snapshot and final.id == candidate.id
+    (record,) = (algo._run_dir / "trajectories").glob("*-decision.json")
+    decision = json.loads(record.read_text())
+    assert decision["kind"] == "promote" and decision["accepted"] is True
+    assert decision["parent_id"] == current.id
+    assert decision["candidate_id"] == candidate.id
+    # Whatever the algorithm's own search state is, recorded beside the decision.
+    assert decision["score"] == 1.0 and decision["pool"] == ["a", "b"]
+
+
+def test_shared_promotion_of_the_incumbent_records_it_as_not_accepted(target, tmp_path):
+    algo = recording_algorithm(target, tmp_path)
+    current = target.snapshot
+
+    final = algo._promote(current, current, score=0.0)
+
+    assert final is current
+    (record,) = (algo._run_dir / "trajectories").glob("*-decision.json")
+    decision = json.loads(record.read_text())
+    assert decision["accepted"] is False
+    assert decision["parent_id"] == decision["candidate_id"] == current.id
