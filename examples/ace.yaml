@@ -1,0 +1,34 @@
+# ACE: one small SearchQA run. Both target and Worker call real models.
+# For HotpotQA, replace the benchmark block with examples/hotpotqa.yaml's block.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 30
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-target-api-key
+
+algorithm:
+  name: ace
+  # offline validates on dev and restores its best playbook. Switch to online
+  # to consume train as a stream instead: scored on first sight, no dev pass,
+  # and whatever it grew is what the run keeps.
+  mode: offline
+  num_epochs: 1
+  max_steps: 2
+  eval_steps: 1
+  max_reflection_rounds: 2
+  # ACE preserves the target's instructions and appends its managed playbook
+  # to instruction_file. No harness-specific algorithm path is needed.
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

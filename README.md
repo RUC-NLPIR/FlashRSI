@@ -2,11 +2,21 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## ACE
+
+新增 [ACE 迁移说明](docs/ace.md) 与 [小规模示例配置](examples/ace.yaml)。
+ACE 通过 Reflector/Curator 积累结构化 playbook，合法增量持续应用。
+`mode: offline`（默认）按 `eval_steps` 周期评估 dev，结束后恢复 dev 最佳版本；
+`mode: online` 按原顺序流式消费 train，每批先执行计分再反思更新，不访问 dev，
+保留最后版本并单独记录累积在线分数，与最终 test 分开口径。
+保留目标原生指令；同一算法支持 MiniAgent 与 Claude Code，已通过双 harness 本地原生协议测试。
+远程真实模型 smoke 与演化收益尚未验证。
 
 ## SkillOpt
 
@@ -68,6 +78,9 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/gepa/_prompts.py` | GEPA 的反思重写提示 |
 | `algorithms/evoprompt/__init__.py` | EvoPrompt 的种群初始化、GA/DE 单代演化与最终提升 |
 | `algorithms/evoprompt/_prompts.py` | EvoPrompt 的 GA、DE 与 paraphrase 模板 |
+| `algorithms/ace/__init__.py` | ACE 的训练反思、增量应用、offline 周期验证与最佳版本恢复、online 流式计分 |
+| `algorithms/ace/_playbook.py` | ADD 协议、section、bullet 编号、计数与精确去重 |
+| `algorithms/ace/_prompts.py` | Reflector、Curator 和训练重试提示 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 基类的 `_evaluate` 返回评分后的 Trajectory，不更新目标版本；`_ask` 保留完整 Worker
