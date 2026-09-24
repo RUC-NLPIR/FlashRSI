@@ -319,7 +319,7 @@ def test_cached_worker_keys_match_serial_and_parallel_replay(
 def test_worker_failure_cancels_all_parallel_waits(source):
     worker = FakeWorker(error_at=0)
     algo = _algorithm(ParallelSkillOpt, source, worker, worker_concurrency=3)
-    with pytest.raises(RuntimeError, match="Worker failed"):
+    with pytest.raises(RuntimeError, match="failed: offline failure"):
         asyncio.run(algo._reflect(algo.target.snapshot, {}, _training()))
     assert worker.active == 0
     assert worker.max_active == 3

@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import stat
 import tempfile
 from collections.abc import Iterator, Mapping
@@ -295,6 +296,24 @@ class Snapshot:
             parent=self,
         )
 
+    def changed_paths(self, candidate: Snapshot) -> tuple[str, ...]:
+        """The paths whose content differs between this version and ``candidate``.
+
+        File identity here is the Snapshot's own: bytes, component label and the
+        executable bit. ``commit`` already walks this same comparison to check
+        permissions, so a caller that needs the paths themselves -- to hold an
+        Agent's account of its edit against what the edit really did -- asks
+        here rather than reimplementing equality.
+        """
+        self._validate_compatible(candidate)
+        return tuple(
+            sorted(
+                path
+                for path in self.files.keys() | candidate.files.keys()
+                if self.files.get(path) != candidate.files.get(path)
+            )
+        )
+
     def _writable_components(self) -> frozenset[str]:
         return frozenset(
             name for name in self.component_rules if self._permission(name) == "rw"
@@ -476,6 +495,36 @@ _RUNTIME_PARTS = frozenset(
         ".mypy_cache",
     }
 )
+
+
+def discard_runtime_files(working_dir: Path) -> tuple[str, ...]:
+    """Delete recognized runtime artifacts from a directory, and name them.
+
+    ``commit`` refuses these paths outright, which is right for a curated tree
+    but costs a whole iteration when the edit was made by an Agent running its
+    own tools: importing an edited module writes ``__pycache__``, and a tool
+    may leave a log beside the file it changed. Dropping them is not a
+    relaxation -- a file the Agent genuinely added is still classified by the
+    component rules, so an unplaceable new path is still refused.
+
+    This is about the directory, not about any one version, which is why it is
+    a function here rather than a Snapshot method.
+    """
+    directory = Path(working_dir).expanduser()
+    discarded = []
+    for root, dirs, names in os.walk(directory, topdown=True):
+        for name in (*dirs, *names):
+            source = Path(root) / name
+            path = source.relative_to(directory).as_posix()
+            if not _is_runtime_path(path):
+                continue
+            discarded.append(path)
+            if name in dirs:
+                dirs.remove(name)
+                shutil.rmtree(source)
+            else:
+                source.unlink()
+    return tuple(sorted(discarded))
 
 
 def _check_runtime_path(path: str) -> None:

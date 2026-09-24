@@ -51,7 +51,7 @@ def _candidate(agent, content, baseline=None):
     return candidate
 
 
-def test_agent_constructs_snapshot_automatically_and_has_one_public_run(agent, source):
+def test_agent_exposes_run_and_ask_and_builds_its_snapshot(agent, source):
     assert agent.snapshot.files["skills/main.md"] == SnapshotFile(
         b"initial answer", "skill"
     )
@@ -62,11 +62,20 @@ def test_agent_constructs_snapshot_automatically_and_has_one_public_run(agent, s
         "prompt",
         "working_dir",
     }
-    for name in ("ask", "edit", "check_out", "commit", "seed"):
+    # ask is run plus "give me the text, and raise if it did not work"; it takes
+    # the same two arguments and adds nothing to the backend's contract.
+    assert set(inspect.signature(Agent.ask).parameters) == {
+        "self",
+        "prompt",
+        "working_dir",
+    }
+    # Editing a directory is run's working_dir, and versions belong to Snapshot.
+    for name in ("edit", "check_out", "commit", "seed"):
         assert not hasattr(agent, name)
     assert not hasattr(agent.snapshot, "validate")
     (source / "skills/main.md").write_text("external edit")
     assert asyncio.run(agent.run("question")).output == "initial answer"
+    assert asyncio.run(agent.ask("question")) == "initial answer"
 
 
 def test_instance_source_override_uses_existing_native_file_layout(source):

@@ -5,6 +5,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass
 
+from flashrsi.algorithms import _replies
 from flashrsi.algorithms.opro import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
 
@@ -56,9 +57,7 @@ class OPRO(Algorithm):
         results = await self._evaluate(current, train, label="baseline")
         # The starting instruction is row zero of the history OPRO re-ranks.
         self._history = [
-            _Scored(
-                self._read_text(current).get(path, ""), self._score(results), current
-            )
+            _Scored(self._read_text(current).get(path, ""), results.score, current)
         ]
         self._leader = results
 
@@ -68,7 +67,7 @@ class OPRO(Algorithm):
                 candidate = self._candidate(parent.snapshot, {path: text})
                 # OPRO scores on the training split itself, not a held-out set.
                 results = await self._evaluate(candidate, train, label="candidate")
-                scored = _Scored(text, self._score(results), candidate)
+                scored = _Scored(text, results.score, candidate)
                 # Evaluated before appending, so the evidence follows exactly
                 # the instruction _best() will return, ties included.
                 if scored.score > self._best().score:
@@ -123,7 +122,7 @@ class OPRO(Algorithm):
         seen = {item.text for item in self._history}
         proposed = []
         for _ in range(self.config.num_candidates):
-            text = self._tagged(await self._ask(prompt, label="propose"), "INS")
+            text = _replies.tagged(await self.worker.ask(prompt), "INS")
             if text and text not in seen:
                 seen.add(text)
                 proposed.append(text)

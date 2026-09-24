@@ -219,7 +219,9 @@ def test_shared_evaluation_records_scores_without_selecting_candidate(
 ):
     class GradedBenchmark(MemoryBenchmark):
         def grade(self, trajectories):
-            return tuple(replace(t, metrics={"score": 1.0}) for t in trajectories)
+            # The benchmark's own primary_metric; an evaluation is read through
+            # it, so grading some other name would be the benchmark's bug.
+            return tuple(replace(t, metrics={"accuracy": 1.0}) for t in trajectories)
 
     async def run(self, prompt, working_dir=None):
         return Trajectory(
@@ -234,7 +236,8 @@ def test_shared_evaluation_records_scores_without_selecting_candidate(
         algo._evaluate(candidate, iter(algo.benchmark.test), **kwargs)
     )
     assert results[0].output == "candidate answer"
-    assert results[0].metrics["score"] == 1.0
+    assert results[0].metrics["accuracy"] == 1.0
+    assert results.score == 1.0
     assert results[0].task is algo.benchmark.test[0]
     assert target.snapshot is baseline
     (path,) = (algo._run_dir / "trajectories").iterdir()
@@ -245,12 +248,11 @@ def test_shared_evaluation_records_scores_without_selecting_candidate(
     assert recorded["trajectories"][0]["messages"][0]["snapshot_id"] == candidate.id
 
 
-@pytest.mark.parametrize(
-    "kwargs,record_label", [({}, "worker"), ({"label": "reflection"}, "reflection")]
-)
-def test_shared_worker_records_errors_and_redacts_both_roles(
-    target, tmp_path, monkeypatch, kwargs, record_label
+def test_worker_questions_are_recorded_and_redacted_against_both_roles(
+    target, tmp_path, monkeypatch
 ):
+    """An algorithm arranges none of this; asking is enough. See Agent.ask."""
+
     class FailedWorker(Worker):
         async def _run(self, prompt, working_dir=None):
             return Trajectory(
@@ -265,13 +267,12 @@ def test_shared_worker_records_errors_and_redacts_both_roles(
     monkeypatch.setenv("TEST_API_KEY", "environment-secret")
     algo = recording_algorithm(target, tmp_path, worker=worker)
     with pytest.raises(RuntimeError) as error:
-        asyncio.run(algo._ask("prompt target-secret", **kwargs))
-    assert (
-        str(error.value)
-        == f"Worker failed during {record_label}: [REDACTED] [REDACTED] [REDACTED]"
-    )
+        asyncio.run(algo.worker.ask("prompt target-secret"))
+    # A single Worker holds only its own credentials, so the error is redacted
+    # against the target's and the environment's as well.
+    assert str(error.value) == "test_worker failed: [REDACTED] [REDACTED] [REDACTED]"
     (path,) = (algo._run_dir / "trajectories").iterdir()
-    assert path.name == f"00001-{record_label}.json"
+    assert path.name == "00001-worker.json"
     text = path.read_text()
     assert all(
         secret not in text
@@ -281,6 +282,18 @@ def test_shared_worker_records_errors_and_redacts_both_roles(
     with pytest.raises(ValueError, match="credential"):
         algo._candidate(target.snapshot, {"skills/main.md": "target-secret"})
     assert not list((algo._run_dir / "working").iterdir())
+
+
+def test_an_unobserved_agent_still_answers_and_raises(target):
+    """A Worker used directly, outside an Algorithm, needs no observer."""
+
+    class Failing(Worker):
+        async def _run(self, prompt, working_dir=None):
+            return Trajectory(status="error", error_message="no model configured")
+
+    assert asyncio.run(Worker().ask("question")) == "unused"
+    with pytest.raises(RuntimeError, match="no model configured"):
+        asyncio.run(Failing().ask("question"))
 
 
 # -- shared parameter checking, scoring and promotion ----------------------
@@ -360,16 +373,6 @@ def test_an_accepted_spelling_is_canonicalized_before_it_is_checked(target):
     assert algo.config.selection == "tournament"
 
 
-def test_shared_score_averages_the_benchmark_primary_metric(target, tmp_path):
-    algo = recording_algorithm(target, tmp_path)
-    scored = tuple(
-        replace(Trajectory(output="answer"), metrics={"accuracy": value, "other": 1.0})
-        for value in (1.0, 0.0, 0.5)
-    )
-    assert algo._score(scored) == 0.5
-    assert algo._score(scored[:1]) == 1.0
-
-
 def test_shared_promotion_selects_once_and_records_the_pool(target, tmp_path):
     algo = recording_algorithm(target, tmp_path)
     current = target.snapshot
@@ -424,15 +427,26 @@ def test_shared_trajectory_evidence_drops_the_runtime_configuration(target, tmp_
     assert row["output"] == "answer"
 
 
-def test_shared_tagged_reply_takes_the_last_closed_pair(target, tmp_path):
-    algo = recording_algorithm(target, tmp_path)
+def test_a_wildcard_scope_resolves_to_every_component_the_target_declares(
+    target, tmp_path
+):
+    """A method that evolves the harness as a directory cannot name them."""
 
-    assert algo._tagged("Sure:\n<INS>Use evidence.</INS>", "INS") == "Use evidence.\n"
-    assert algo._tagged("<p>\nLine one\nLine two\n</p>", "p") == "Line one\nLine two\n"
-    # An untagged reply is what a provider that simply answered produces.
-    assert algo._tagged("no tag at all", "INS") == "no tag at all\n"
-    assert algo._tagged("<INS></INS>", "INS") == ""
-    # Upstream templates show the bracketing in their own worked example, so a
-    # reply that quotes the request back must not be read from that tag.
-    echoed = "1. <INS>the example from the request</INS>\n2. <INS>the real one</INS>"
-    assert algo._tagged(echoed, "INS") == "the real one\n"
+    class Whole(Example):
+        evolve_scope = {"*"}
+        observation_scope = frozenset()
+
+        def _check(self):
+            pass
+
+    algo = Whole({}, target=target, worker=Worker(), benchmark=MemoryBenchmark())
+    assert algo._evolve == frozenset({"skill", "prompt", "code"})
+    baseline = target.snapshot
+    # Every component is editable, including the one an ordinary scope hides.
+    with baseline.check_out() as directory:
+        (directory / "code/main.md").write_text("evolved")
+        (directory / "code/added.md").write_text("new")
+        candidate = baseline.commit(directory)
+    assert candidate.files["code/main.md"].content == b"evolved"
+    assert candidate.files["code/added.md"].component == "code"
+    assert algo._read_text(baseline)["code/main.md"] == "code"

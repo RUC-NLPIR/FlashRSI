@@ -33,7 +33,7 @@ class ParallelSkillOpt(SkillOpt):
     async def _ordered_parallel(self, items, invoke, *, prepare=None):
         """Wait for dependencies, then start calls in serial invocation order.
 
-        The gate is released immediately before invoking the inherited _ask or
+        The gate is released immediately before invoking the inherited Worker.ask or
         _merge. Both enter Worker.run before yielding, preserving its ordinal.
         The semaphore covers the complete request, including response parsing.
         """
@@ -104,7 +104,7 @@ class ParallelSkillOpt(SkillOpt):
 
         async def invoke(request):
             source, prompt = request
-            return _Patch.parse(await self._ask(prompt, label=source), source)
+            return _Patch.parse(await self.worker.ask(prompt), source)
 
         patches = await self._ordered_parallel(requests, invoke)
         for (source, _), patch in zip(requests, patches, strict=True):
@@ -149,13 +149,12 @@ class ParallelSkillOpt(SkillOpt):
         merged = [results[root] if isinstance(root, int) else root for root in roots]
         patch = await self._merge(files, merged, "failure_first")
         if len(patch.edits) > self.config.edit_budget:
-            reply = await self._ask(
+            reply = await self.worker.ask(
                 prompts.RANK.format(
                     files=_dump(files),
                     edits=_dump(patch.as_mapping()["edits"]),
                     budget=self.config.edit_budget,
                 ),
-                label="rank",
             )
             patch = patch.select(
                 _ranked(reply, size=len(patch.edits), limit=self.config.edit_budget)

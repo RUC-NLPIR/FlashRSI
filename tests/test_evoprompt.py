@@ -236,7 +236,7 @@ def test_a_failing_worker_aborts_the_run_rather_than_skipping(monkeypatch):
 
     target, _ = make_target(monkeypatch)
 
-    with pytest.raises(RuntimeError, match="Worker failed during paraphrase"):
+    with pytest.raises(RuntimeError, match="failed: provider exploded"):
         asyncio.run(algorithm(target, Failing()).evolve())
 
 

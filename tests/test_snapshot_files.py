@@ -4,7 +4,7 @@ import shutil
 import pytest
 
 from flashrsi.core import Snapshot, SnapshotFile
-from flashrsi.core.snapshot import _create_snapshot
+from flashrsi.core.snapshot import _create_snapshot, discard_runtime_files
 
 RULES = {"skill": ("skills/**",), "prompt": ("prompts/*.md",), "code": ("src/**",)}
 
@@ -422,3 +422,79 @@ def test_capture_rejects_link_hiding_selected_descendants(source, tmp_path, rule
     (source / "skills/linked").symlink_to(external)
     with pytest.raises(ValueError, match="regular files"):
         Snapshot._capture(source, agent_type="test", component_rules={"skill": (rule,)})
+
+
+def test_discarding_runtime_files_lets_a_tool_edited_directory_commit(source):
+    """An Agent editing a checkout also leaves what its own tools produce.
+
+    ``commit`` refuses those paths outright, which is right for a curated tree
+    but would cost a whole evolution iteration here.
+    """
+    rules = {"skill": ("skills/**",), "prompt": ("prompts/**",), "code": ("src/**",)}
+    snapshot = Snapshot.from_directory(source, agent_type="test", component_rules=rules)
+    with snapshot.check_out() as directory:
+        (directory / "src/run.py").write_text("print('edited')\n")
+        (directory / "src/__pycache__").mkdir()
+        (directory / "src/__pycache__/run.pyc").write_bytes(b"\x00")
+        (directory / "src/build.log").write_text("tool output")
+        (directory / "src/.env").write_text("SECRET=value")
+
+        discarded = discard_runtime_files(directory)
+        candidate = snapshot.commit(directory)
+
+    # A removed directory is reported once; its contents went with it.
+    assert discarded == ("src/.env", "src/__pycache__", "src/build.log")
+    assert candidate.files["src/run.py"].content == b"print('edited')\n"
+    assert set(candidate.files) == set(snapshot.files)
+
+
+def test_discarding_runtime_files_is_not_a_licence_to_add_anything(source):
+    """A file the Agent genuinely added is still classified by the rules."""
+    rules = {"skill": ("skills/**",), "prompt": ("prompts/**",), "code": ("src/**",)}
+    snapshot = Snapshot.from_directory(source, agent_type="test", component_rules=rules)
+    with snapshot.check_out() as directory:
+        (directory / "nowhere.md").write_text("unplaceable")
+        assert discard_runtime_files(directory) == ()
+        with pytest.raises(ValueError, match="exactly one component"):
+            snapshot.commit(directory)
+
+
+def test_changed_paths_reports_the_edit_the_snapshot_itself_sees(source):
+    """File identity is bytes, component and the executable bit."""
+    rules = {"skill": ("skills/**",), "prompt": ("prompts/**",), "code": ("src/**",)}
+    snapshot = Snapshot.from_directory(source, agent_type="test", component_rules=rules)
+    with snapshot.check_out() as directory:
+        (directory / "skills/main.md").write_text("edited")
+        (directory / "skills/added.md").write_text("new")
+        (directory / "prompts/system.md").unlink()
+        candidate = snapshot.commit(directory)
+
+    # Edited, added and removed paths alike; untouched files are absent.
+    assert snapshot.changed_paths(candidate) == (
+        "prompts/system.md",
+        "skills/added.md",
+        "skills/main.md",
+    )
+    assert snapshot.changed_paths(snapshot) == ()
+    # A commit always mints a new id, so identity cannot stand in for this.
+    assert candidate.id != snapshot.id
+
+
+def test_changed_paths_notices_a_mode_change_with_identical_bytes(source):
+    rules = {"code": ("src/**",), "skill": ("skills/**",), "prompt": ("prompts/**",)}
+    snapshot = Snapshot.from_directory(source, agent_type="test", component_rules=rules)
+    with snapshot.check_out() as directory:
+        (directory / "src/run.py").chmod(0o644)
+        candidate = snapshot.commit(directory)
+
+    assert snapshot.files["src/run.py"].content == candidate.files["src/run.py"].content
+    assert snapshot.changed_paths(candidate) == ("src/run.py",)
+
+
+def test_changed_paths_refuses_a_snapshot_from_another_lineage(source, tmp_path):
+    rules = {"skill": ("skills/**",), "prompt": ("prompts/**",), "code": ("src/**",)}
+    snapshot = Snapshot.from_directory(source, agent_type="test", component_rules=rules)
+    other = Snapshot.from_directory(source, agent_type="other", component_rules=rules)
+
+    with pytest.raises(ValueError, match="different Agent type"):
+        snapshot.changed_paths(other)

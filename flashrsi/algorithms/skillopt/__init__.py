@@ -64,9 +64,9 @@ class SkillOpt(Algorithm):
     async def evolve(self) -> Snapshot:
         current = self.target.snapshot
         self._rejected, self._meta_skill = [], ""
-        self._best = self._score(
+        self._best = (
             await self._evaluate(current, self.benchmark.dev, label="baseline")
-        )
+        ).score
         previous_epoch = None
         step = 0
 
@@ -114,19 +114,19 @@ class SkillOpt(Algorithm):
             "success": prompts.REFLECT_SUCCESS,
         }
         size = self.config.reflection_minibatch_size
+        metric = self.benchmark.primary_metric
         for offset in range(0, len(training), size):
             groups = {source: [] for source in _SOURCES}
             for trajectory in training[offset : offset + size]:
                 succeeded = (
                     trajectory.status == "finished"
-                    and trajectory.metrics[self.benchmark.primary_metric]
-                    > self.config.success_threshold
+                    and trajectory.metrics[metric] > self.config.success_threshold
                 )
                 groups["success" if succeeded else "failure"].append(trajectory)
             for source, group in groups.items():
                 if not group:
                     continue
-                reply = await self._ask(
+                reply = await self.worker.ask(
                     templates[source].format(
                         files=_dump(files),
                         rules=_dump(list(snapshot.component_rules["skill"])),
@@ -136,8 +136,7 @@ class SkillOpt(Algorithm):
                         rejected=_dump(self._rejected),
                         meta_skill=self._meta_skill,
                         budget=self.config.edit_budget,
-                    ),
-                    label=source,
+                    )
                 )
                 patch = _Patch.parse(reply, source)
                 if patch.edits:
@@ -159,13 +158,12 @@ class SkillOpt(Algorithm):
             merged.extend(group)
         patch = await self._merge(files, merged, "failure_first")
         if len(patch.edits) > self.config.edit_budget:
-            reply = await self._ask(
+            reply = await self.worker.ask(
                 prompts.RANK.format(
                     files=_dump(files),
                     edits=_dump(patch.as_mapping()["edits"]),
                     budget=self.config.edit_budget,
-                ),
-                label="rank",
+                )
             )
             patch = patch.select(
                 _ranked(reply, size=len(patch.edits), limit=self.config.edit_budget)
@@ -177,13 +175,12 @@ class SkillOpt(Algorithm):
             return _Patch()
         if len(patches) == 1:
             return patches[0]
-        reply = await self._ask(
+        reply = await self.worker.ask(
             prompts.MERGE.format(
                 files=_dump(files),
                 kind=source,
                 patches=_dump([patch.as_mapping() for patch in patches]),
-            ),
-            label="merge",
+            )
         )
         return _Patch.parse(reply, source if source in _SOURCES else "")
 
@@ -208,12 +205,12 @@ class SkillOpt(Algorithm):
         }
         if self.config.use_meta_skill:
             self._meta_skill = _field(
-                await self._ask(prompts.META_SKILL.format(**fields), label="meta"),
+                await self.worker.ask(prompts.META_SKILL.format(**fields)),
                 "meta_skill_content",
             )
         if not self.config.use_slow_update:
             return current
-        reply = await self._ask(prompts.SLOW_UPDATE.format(**fields), label="slow")
+        reply = await self.worker.ask(prompts.SLOW_UPDATE.format(**fields))
         files = _apply_guidance(self._read_text(current), reply)
         candidate = self._candidate(current, files)
         return await self._select(current, candidate, "slow", {"epoch": epoch})
@@ -233,7 +230,7 @@ class SkillOpt(Algorithm):
         evaluated = await self._evaluate(
             candidate, self.benchmark.dev, label="candidate_dev"
         )
-        score = self._score(evaluated)
+        score = evaluated.score
         accepted = score > self._best
         self._record(
             "decision",

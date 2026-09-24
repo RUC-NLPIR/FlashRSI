@@ -89,9 +89,7 @@ class ACE(Algorithm):
                 # can teach the playbook that produced it, and before a retry
                 # hands the target its own diagnosis. Predicting and scoring
                 # ahead of every update is what online means.
-                self._streamed.extend(
-                    item.metrics[self.benchmark.primary_metric] for item in batch
-                )
+                self._streamed.extend(batch.per_task.values())
             reflection, batch = await self._reflect(current, tasks, batch)
             current = self._adopt(
                 current, tag(self._playbook, reflection.tags), "tally"
@@ -141,17 +139,16 @@ class ACE(Algorithm):
     async def _reflect(self, current, tasks, batch):
         for round_index in range(self.config.max_reflection_rounds):
             reflection = Reflection.parse(
-                await self._ask(
+                await self.worker.ask(
                     prompts.REFLECT.format(
                         playbook=self._playbook, evidence=self._render_evidence(batch)
-                    ),
-                    label="reflect",
+                    )
                 )
             )
+            metric = self.benchmark.primary_metric
             if all(
                 item.status == "finished"
-                and item.metrics[self.benchmark.primary_metric]
-                >= self.config.success_threshold
+                and item.metrics[metric] >= self.config.success_threshold
                 for item in batch
             ):
                 break
@@ -167,7 +164,7 @@ class ACE(Algorithm):
         return reflection, batch
 
     async def _curate(self, current, reflection, batch, step):
-        reply = await self._ask(
+        reply = await self.worker.ask(
             prompts.CURATE.format(
                 playbook=self._playbook,
                 reflection=reflection.content,
@@ -177,7 +174,6 @@ class ACE(Algorithm):
                     f"approximate tokens; declined={json.dumps(self._rejected)}"
                 ),
             ),
-            label="curate",
         )
         try:
             grown = Patch.parse(reply).apply(self._playbook, self.config.edit_budget)
@@ -212,9 +208,9 @@ class ACE(Algorithm):
         return candidate
 
     async def _validate(self, current):
-        score = self._score(
+        score = (
             await self._evaluate(current, self.benchmark.dev, label="validation")
-        )
+        ).score
         self._validated_id = current.id
         if score > self._best_score:
             self._best, self._best_score = current, score

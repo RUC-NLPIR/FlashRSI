@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 from collections.abc import Mapping
 from dataclasses import dataclass, field
+from statistics import mean
 from types import MappingProxyType
 from typing import Any
 
@@ -57,3 +58,48 @@ class Trajectory:
         )
         object.__setattr__(self, "metrics", _immutable_mapping(self.metrics))
         object.__setattr__(self, "usage", _immutable_mapping(self.usage))
+
+
+class Results(tuple):
+    """Graded trajectories that know their own score.
+
+    An algorithm asks "how did this version do", not "what is the mean of the
+    benchmark's primary metric over these trajectories" -- the evaluation
+    carries the metric it was graded on, so reading the score needs no help
+    from the algorithm.
+
+    This is a tuple, so iterating, ``len()`` and ``zip()`` work as before.
+    Slicing returns a plain tuple and drops the score, which is why a caller
+    that needs a subset scored evaluates that subset.
+    """
+
+    def __new__(cls, trajectories, *, metric: str):
+        results = super().__new__(cls, trajectories)
+        # Read once here rather than on each access: a caller that wants both
+        # the mean and the per-task scores -- GEPA does -- would otherwise walk
+        # the trajectories twice. A tuple subclass cannot declare __slots__, so
+        # this is an ordinary instance attribute.
+        results._per_task = MappingProxyType(
+            {item.task.task_id: item.metrics[metric] for item in results}
+        )
+        return results
+
+    @property
+    def score(self) -> float:
+        """The mean primary metric: one evaluation's fitness.
+
+        An empty evaluation has no score rather than a zero one, which a
+        caller distinguishes by checking the results themselves.
+        """
+        if not self:
+            raise ValueError("an empty evaluation has no score")
+        return mean(self._per_task.values())
+
+    @property
+    def per_task(self) -> Mapping[str, float]:
+        """The same scores read one task at a time, keyed by ``task_id``.
+
+        A comparison that the mean cannot express reads this instead: a Pareto
+        frontier over individual tasks, or which tasks one edit flipped.
+        """
+        return self._per_task
