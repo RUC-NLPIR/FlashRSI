@@ -179,13 +179,15 @@ def test_multilevel_merge_keeps_sources_separate_until_final_ranking(monkeypatch
     }
     calls = []
 
-    async def ask(prompt, *, label="worker"):
-        if label == "rank":
+    # Each prompt announces its own stage on the first line, which is what a
+    # real provider sees; there is no out-of-band label to branch on.
+    async def ask(prompt):
+        if prompt.startswith("[SkillOpt: rank]"):
             edits = json.loads(prompt.split("EDITS: ", 1)[1])
             assert len(edits) == 8
             calls.append("rank")
             return json.dumps({"selected_indices": [0, 7]})
-        assert label == "merge"
+        assert prompt.startswith("[SkillOpt: merge]")
         source, raw = prompt.split("SOURCE GROUP: ", 1)[1].split("\nPROPOSALS:\n", 1)
         patches = json.loads(raw)
         assert len(patches) == 2  # Singleton remainders require no Worker call.
@@ -195,7 +197,7 @@ def test_multilevel_merge_keeps_sources_separate_until_final_ranking(monkeypatch
         calls.append(source)
         return json.dumps({"edits": edits})
 
-    monkeypatch.setattr(algo, "_ask", ask)
+    monkeypatch.setattr(algo.worker, "ask", ask)
     result = asyncio.run(algo._consolidate({}, proposals))
 
     assert calls == ["failure"] * 4 + ["success"] * 2 + ["failure_first", "rank"]
@@ -215,7 +217,7 @@ def test_worker_error_and_invalid_patch_do_not_change_target(monkeypatch):
     worker = ScriptedWorker(
         [Trajectory(status="error", error_message="provider unavailable")]
     )
-    with pytest.raises(RuntimeError, match="Worker failed"):
+    with pytest.raises(RuntimeError, match="failed: provider unavailable"):
         asyncio.run(algorithm(target, worker).evolve())
     assert target.snapshot.id == original.id
     worker = ScriptedWorker([Trajectory(output="invalid json")])

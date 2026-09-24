@@ -353,7 +353,7 @@ def test_failed_worker_aborts_instead_of_becoming_a_declined_patch(monkeypatch):
         return Trajectory(status="error", error_message="provider unavailable")
 
     monkeypatch.setattr(ScriptedWorker, "_run", fail)
-    with pytest.raises(RuntimeError, match="Worker failed during reflect"):
+    with pytest.raises(RuntimeError, match="failed: provider unavailable"):
         asyncio.run(algo.evolve())
 
 

@@ -7,7 +7,6 @@ import pytest
 
 from flashrsi.agents import ClaudeCode, MiniAgent
 from flashrsi.algorithms import GEPA
-from flashrsi.algorithms.gepa import _instruction
 from flashrsi.algorithms.gepa._population import Member, frontier, prune
 from flashrsi.core import Agent, Benchmark, Snapshot, Task, Trajectory
 
@@ -344,7 +343,7 @@ def test_a_failing_worker_aborts_the_run_rather_than_skipping(monkeypatch):
     target, _ = make_target(monkeypatch)
     algo = algorithm(target, Failing())
 
-    with pytest.raises(RuntimeError, match="Worker failed during propose"):
+    with pytest.raises(RuntimeError, match="failed: provider exploded"):
         asyncio.run(algo.evolve())
 
     # The baseline member survives; the run stops instead of promoting anything.
@@ -425,34 +424,6 @@ def test_pruning_keeps_one_owner_per_task_and_breaks_ties_by_score():
     population = [member(0, {}, 0.5), member(1, {}, 0.6), member(2, {}, 0.6)]
 
     assert prune({"a": {0, 1}, "b": {0, 2}}, population) == {"a": {1}, "b": {2}}
-
-
-# -- parsing ---------------------------------------------------------------
-
-
-def test_a_fenced_proposal_is_read_after_a_provider_preamble():
-    assert (
-        _instruction("Here it is:\n```text\nUse evidence.\n```\n") == "Use evidence.\n"
-    )
-    assert _instruction("```Verify inline.```") == "Verify inline.\n"
-    assert _instruction("```\nLine one\nLine two\n```") == "Line one\nLine two\n"
-    assert _instruction("no fence at all") == "no fence at all\n"
-    assert _instruction("```\n\n```") == ""
-
-
-def test_a_dangling_fence_in_an_echoed_request_is_not_a_block():
-    """The prompt's own closing sentence ends in a lone ``` marker.
-
-    A provider that quotes the request back after answering leaves an odd marker
-    trailing the real block; pairing fences from the left keeps the answer,
-    while taking the last two markers would return the echoed request.
-    """
-    reply = (
-        "```\nAlways cite the source.\n```\n"
-        "Provide the new instructions within ``` blocks."
-    )
-
-    assert _instruction(reply) == "Always cite the source.\n"
 
 
 # -- configuration ---------------------------------------------------------

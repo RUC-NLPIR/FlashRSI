@@ -6,10 +6,8 @@ import copy
 import json
 import math
 import os
-import re
 from collections.abc import Iterable, Mapping
 from pathlib import Path
-from statistics import mean
 from typing import get_args
 
 from flashrsi._records import _redact, _secrets, _trajectory_record, _write_record
@@ -17,7 +15,7 @@ from flashrsi.config import Config
 from flashrsi.core.agent import Agent
 from flashrsi.core.benchmark import Task
 from flashrsi.core.snapshot import Snapshot, _matching_components, _validate_path
-from flashrsi.core.trajectory import Trajectory
+from flashrsi.core.trajectory import Results, Trajectory
 
 
 class Algorithm:
@@ -25,6 +23,9 @@ class Algorithm:
 
     name: str
     description: str
+    # Component names, or {"*"} for every component this target declares. A
+    # method that evolves the harness as a directory cannot name them: each
+    # harness lays its files out differently, so only the target knows them.
     evolve_scope = frozenset()
     observation_scope = frozenset()
     _defaults = {}
@@ -43,15 +44,27 @@ class Algorithm:
         self._run_dir: Path | None = None
         self._sequence = 0
 
+        # Resolved once, because every later reader wants the components
+        # themselves: set_scope validates names, and _read_text compares each
+        # file's own label against them.
+        declared = frozenset(self.target.component_rules)
+        self._evolve = declared if "*" in self.evolve_scope else self.evolve_scope
+        self._observe = (
+            declared if "*" in self.observation_scope else self.observation_scope
+        )
         self.target.set_scope(
             {
-                **{component: "r" for component in self.observation_scope},
-                **{component: "rw" for component in self.evolve_scope},
+                **{component: "r" for component in self._observe},
+                **{component: "rw" for component in self._evolve},
             }
         )
         for role, agent in (("target", target), ("worker", worker)):
             if type(agent)._run is Agent._run:
                 raise ValueError(f"Algorithm {role} must implement Agent._run")
+        # Every Worker question reaches the experiment's records without the
+        # algorithm arranging it, and the error text is redacted against both
+        # roles' credentials -- the Worker alone holds only its own.
+        worker._observer = self._observe_worker
         splits = self.benchmark.load()
         if (
             type(self.target).rollout is Agent.rollout
@@ -103,10 +116,6 @@ class Algorithm:
             )
         return path
 
-    def _score(self, results: Iterable[Trajectory]) -> float:
-        """The mean primary metric over an evaluation: one algorithm's fitness."""
-        return mean(item.metrics[self.benchmark.primary_metric] for item in results)
-
     def _evidence(self, rows: Iterable[Mapping]) -> str:
         """Render evidence for a role prompt as JSON, bounded by max_evidence_chars.
 
@@ -125,28 +134,17 @@ class Algorithm:
         The saved record keeps the RunConfig message for reproducibility; it
         holds the resolved runtime configuration, so it is dropped on the way
         into a prompt rather than shown to a Worker.
+
+        Messages arrive as immutable views, which ``_evidence`` cannot encode;
+        a row exists to be rendered, so they are plain dicts on the way out.
         """
         record = _trajectory_record(trajectory)
         record["messages"] = [
-            message
+            dict(message)
             for message in record["messages"]
             if message.get("type") != "RunConfig"
         ]
         return record
-
-    def _tagged(self, reply: str, tag: str) -> str:
-        """Read one whole instruction out of a reply that brackets it in ``tag``.
-
-        The last *closed* pair wins: upstream templates show the bracketing in
-        a worked example, so a reply that quotes the request back would
-        otherwise be read from the example's own tag. An untagged reply is
-        taken whole, which is what a provider that simply answered produces.
-
-        The text becomes a file's entire content, so it ends with a newline.
-        """
-        found = re.findall(f"<{tag}>(.*?)</{tag}>", reply, flags=re.DOTALL)
-        text = (found[-1] if found else reply).strip()
-        return text + "\n" if text else text
 
     def _promote(self, current: Snapshot, best: Snapshot, **details) -> Snapshot:
         """Select one version at the end of the search and record the decision.
@@ -176,8 +174,12 @@ class Algorithm:
         tasks: Iterable[Task],
         *,
         label: str = "evaluation",
-    ) -> tuple[Trajectory, ...]:
-        """Evaluate without selecting; label only names the scored trace record."""
+    ) -> Results:
+        """Evaluate without selecting; label only names the scored trace record.
+
+        The result knows its own score and per-task scores, so no algorithm
+        reaches for the benchmark's metric name to read them.
+        """
         self._save_snapshot(snapshot)
         tasks = tuple(tasks)
         results = self.benchmark.grade(
@@ -194,25 +196,18 @@ class Algorithm:
                 "trajectories": [_trajectory_record(item) for item in results],
             },
         )
-        return results
+        return Results(results, metric=self.benchmark.primary_metric)
 
-    async def _ask(self, prompt: str, *, label: str = "worker") -> str:
-        """Keep the Worker trajectory and return its text.
-
-        label only names the record and identifies the stage in errors.
-        """
-        result = await self.worker.run(prompt)
+    def _observe_worker(self, prompt: str, result: Trajectory) -> str | None:
+        """Record one Worker question and redact its error; see Agent.ask."""
         self._record(
-            label, {"prompt": prompt, "trajectory": _trajectory_record(result)}
+            "worker", {"prompt": prompt, "trajectory": _trajectory_record(result)}
         )
-        if result.status != "finished":
-            detail = _redact(result.error_message, self._runtime_secrets())
-            raise RuntimeError(f"Worker failed during {label}: {detail}")
-        return result.output
+        return _redact(result.error_message, self._runtime_secrets())
 
     def _read_text(self, snapshot: Snapshot) -> dict[str, str]:
         """Read the declared visible components; leave binary resources untouched."""
-        visible = self.observation_scope | self.evolve_scope
+        visible = self._observe | self._evolve
         files = {}
         for path, entry in sorted(snapshot.files.items()):
             if entry.component in visible:

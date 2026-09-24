@@ -69,6 +69,9 @@ class Agent:
         self._snapshot = _capture_agent(type(self), self._config)
         # An integration binds execution independently of the harness type.
         self._env_runner = None
+        # Set by whoever runs this Agent, to record what ask() did and to
+        # redact credentials it cannot see itself. See Agent.ask.
+        self._observer = None
         # Local to the async call: update changes the default for future calls,
         # never the files or version visible inside a running backend.
         self._execution: ContextVar[_Execution | None] = ContextVar(
@@ -142,6 +145,38 @@ class Agent:
             return await self._execute(prompt, working_dir, None, None)
         with selected._export(full=True) as files:
             return await self._execute(prompt, working_dir, selected, files)
+
+    async def ask(self, prompt: str) -> str:
+        """Answer a prompt as text, raising if this Agent did not finish.
+
+        A caller that wants the text wants the call to have worked, so a failed
+        run is an exception here rather than a Trajectory to inspect.
+        """
+        return await self._answer(prompt, None)
+
+    async def edit(self, working_dir: Path, prompt: str) -> str:
+        """Edit that directory, and say what was done.
+
+        The edit is the directory's new contents; the return value is this
+        Agent's own account of it, which a caller may hold the edit to. Nothing
+        is committed here -- versioning the result belongs to the caller.
+        """
+        return await self._answer(prompt, working_dir)
+
+    async def _answer(self, prompt: str, working_dir: Path | None) -> str:
+        """The half ask and edit share: run, report failure, return the text.
+
+        Whoever created this Agent may attach an observer, which is how the
+        trajectory reaches an experiment's records and how credentials are
+        redacted from the error -- a single Agent holds only its own.
+        """
+        result = await self.run(prompt, working_dir)
+        detail = result.error_message
+        if self._observer is not None:
+            detail = self._observer(prompt, result)
+        if result.status != "finished":
+            raise RuntimeError(f"{self.name} failed: {detail}")
+        return result.output
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         """Backend hook. Load versioned files from files_dir, not the source package."""

@@ -101,7 +101,7 @@ def test_duplicate_or_missing_target_is_rejected_atomically(
     assert "skills/new.md" not in current.files
     assert (source / "skills/main.md").read_text() == original_text
     assert not (source / "skills/new.md").exists()
-    assert [label for label, _ in records] == ["train", "success", "decision"]
+    assert [label for label, _ in records] == ["train", "worker", "decision"]
     assert len(algo.target.calls) == 1
     invalid = _invalid(records, "fast")
     assert invalid["epoch"] == 2 and invalid["step"] == 10

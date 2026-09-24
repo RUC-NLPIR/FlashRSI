@@ -1,0 +1,47 @@
+# AHE on SearchQA with MiniAgent.
+#
+# AHE is the one method here whose Worker edits the harness directory itself,
+# so `algorithm.worker.type` must be `agent` -- a text Worker is refused at
+# startup. The Worker and the target are separate roles with separate models
+# and credentials; the Worker never runs benchmark tasks.
+#
+# One step costs two rollouts of the whole train split (the candidate, and the
+# baseline it is measured against), plus one debugger call per rollout. A first
+# run should cut both: `--algorithm.max_steps 1 --benchmark.limit 6
+# --algorithm.use_debugger false`.
+#
+# What the Evolve Agent may change is whatever the target declares in its own
+# components.yaml, so the same configuration reaches further on MiniAgent
+# (which versions its runtime source) than on Claude Code (which versions the
+# extensions and configuration its SDK supports). Set `agent.name: claude_code`
+# and an Anthropic-compatible `agent.llm` to run it there.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 30
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-target-api-key
+
+algorithm:
+  name: ahe
+  # Every well-formed edit is kept -- there is no score gate. Its per-change
+  # verdicts go to the next Evolve Agent, which decides whether to keep,
+  # improve or roll each one back. That is the published behaviour: a score can
+  # only say an edit did not help, while a verdict says which promise it broke.
+  max_steps: 3
+  worker:
+    type: agent
+    name: miniagent
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
+    # The Evolve Agent needs room to read the harness before editing it.
+    max_turns: 30

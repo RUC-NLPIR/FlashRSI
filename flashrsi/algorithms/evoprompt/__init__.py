@@ -16,6 +16,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass
 
+from flashrsi.algorithms import _replies
 from flashrsi.algorithms.evoprompt import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
 
@@ -110,17 +111,16 @@ class EvoPrompt(Algorithm):
         """
         text = self._read_text(seed).get(self._path, "")
         results = await self._evaluate(seed, self.benchmark.dev, label="baseline")
-        self._population = [Member(seed, text, self._score(results))]
+        self._population = [Member(seed, text, results.score)]
         self._baseline = self._population[0].score
 
         while len(self._population) < self.config.population_size:
-            reply = await self._ask(
+            reply = await self.worker.ask(
                 prompts.INITIALIZE.format(path=self._path, seed=text),
-                label="paraphrase",
             )
             self._population.append(
                 await self._member(
-                    self._population[0], self._tagged(reply, "prompt"), label="seed"
+                    self._population[0], _replies.tagged(reply, "prompt"), label="seed"
                 )
             )
 
@@ -157,14 +157,15 @@ class EvoPrompt(Algorithm):
                 )
             else:
                 first, second = rng.sample(pool, 2)
-            reply = await self._ask(
+            reply = await self.worker.ask(
                 prompts.GA.format(
                     path=self._path, prompt1=first.text, prompt2=second.text
-                ),
-                label="crossover",
+                )
             )
             children.append(
-                await self._member(first, self._tagged(reply, "prompt"), label="child")
+                await self._member(
+                    first, _replies.tagged(reply, "prompt"), label="child"
+                )
             )
 
         size = self.config.population_size
@@ -190,18 +191,17 @@ class EvoPrompt(Algorithm):
             # couple this loop to _member's internals.
             others = [item for index, item in enumerate(current) if index != position]
             first, second, third = rng.sample(others, 3)
-            reply = await self._ask(
+            reply = await self.worker.ask(
                 prompts.DE.format(
                     path=self._path,
                     prompt0=target.text,
                     prompt1=first.text,
                     prompt2=second.text,
                     prompt3=(third if self.config.donor_random else base).text,
-                ),
-                label="mutate",
+                )
             )
             trial = await self._member(
-                target, self._tagged(reply, "prompt"), label="trial"
+                target, _replies.tagged(reply, "prompt"), label="trial"
             )
             trials.append(trial)
             # A trial competes only with the target it was built from, so a
@@ -226,7 +226,7 @@ class EvoPrompt(Algorithm):
             return Member(parent.snapshot, parent.text, parent.score, carried=True)
         candidate = self._candidate(parent.snapshot, {self._path: text})
         results = await self._evaluate(candidate, self.benchmark.dev, label=label)
-        return Member(candidate, text, self._score(results))
+        return Member(candidate, text, results.score)
 
     def _adopt(
         self, step: int, survivors: tuple[Member, ...], candidates: list[Member]

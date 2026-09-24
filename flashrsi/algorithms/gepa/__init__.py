@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Mapping
 
+from flashrsi.algorithms import _replies
 from flashrsi.algorithms.gepa import _population as pop
 from flashrsi.algorithms.gepa import _prompts as prompts
 from flashrsi.algorithms.gepa._population import Member
@@ -60,8 +60,8 @@ class GEPA(Algorithm):
                 index=0,
                 snapshot=current,
                 text=self._read_text(current).get(self._path, ""),
-                per_task=self._per_task(results),
-                score=self._score(results),
+                per_task=results.per_task,
+                score=results.score,
             )
         ]
         self._metric_calls = len(dev)
@@ -121,11 +121,9 @@ class GEPA(Algorithm):
         candidate = self._candidate(parent.snapshot, {self._path: text})
         after = await self._evaluate(candidate, minibatch, label="candidate_minibatch")
         self._metric_calls += len(minibatch)
-        metric = self.benchmark.primary_metric
-        # Screen on the minibatch before spending a whole validation pass.
-        if sum(item.metrics[metric] for item in after) <= sum(
-            item.metrics[metric] for item in before
-        ):
+        # Screen on the minibatch before spending a whole validation pass. Both
+        # ran the same tasks, so comparing the means compares the sums.
+        if after.score <= before.score:
             return self._reject(details, "failed_minibatch_screen")
 
         results = await self._evaluate(candidate, dev, label="candidate_dev")
@@ -136,9 +134,10 @@ class GEPA(Algorithm):
         """Reflect on the parent's own trajectories and rewrite the instruction.
 
         Upstream shows each input, the assistant's response and the feedback on
-        it; FlashRSI has trajectories, so the scores are that feedback.
+        it; FlashRSI has trajectories, so the scores are that feedback. It asks
+        for the rewrite "within ``` blocks", which is what ``fenced`` reads.
         """
-        reply = await self._ask(
+        reply = await self.worker.ask(
             prompts.REFLECT.format(
                 path=self._path,
                 instruction=parent.text,
@@ -151,9 +150,8 @@ class GEPA(Algorithm):
                     for item in evidence
                 ),
             ),
-            label="propose",
         )
-        return _instruction(reply)
+        return _replies.fenced(reply)
 
     def _select(self, rng: random.Random) -> Member:
         """Pick the parent to mutate: the aggregate best, or from the frontier."""
@@ -178,8 +176,8 @@ class GEPA(Algorithm):
             index=len(self._population),
             snapshot=snapshot,
             text=text,
-            per_task=self._per_task(results),
-            score=self._score(results),
+            per_task=results.per_task,
+            score=results.score,
             parents=(parent.index,),
         )
         self._population.append(member)
@@ -198,10 +196,6 @@ class GEPA(Algorithm):
 
     def _reject(self, details, reason: str) -> None:
         self._record("decision", {**details, "kind": "reject", "reason": reason})
-
-    def _per_task(self, results) -> Mapping[str, float]:
-        metric = self.benchmark.primary_metric
-        return {item.task.task_id: item.metrics[metric] for item in results}
 
     def _check(self) -> None:
         if not self.benchmark.train or not self.benchmark.dev:
@@ -245,29 +239,6 @@ class GEPA(Algorithm):
                 f"iteration; this run needs at least {needed}"
             )
         return budget, cost
-
-
-def _instruction(reply: str) -> str:
-    """Read the new instruction out of a fenced reply.
-
-    Upstream asks for it "within ``` blocks"; providers prepend a preamble
-    anyway, so the last *closed* block wins. Closed matters: the sentence asking
-    for one ends in a lone ``` of its own, and a reply that quotes the request
-    back would otherwise be read from that dangling marker.
-
-    An opening fence may carry a language tag — one word on its own line, which
-    is what tells it apart from prose that began on the fence line itself. The
-    text becomes a file's whole content, so it ends with a newline.
-    """
-    blocks = reply.split("```")
-    closed = range(1, len(blocks) - 1, 2)
-    if not closed:
-        text = reply.strip()
-    else:
-        body = blocks[closed[-1]]
-        tag, newline, rest = body.partition("\n")
-        text = (rest if newline and len(tag.split()) <= 1 else body).strip()
-    return text + "\n" if text else text
 
 
 __all__ = ["GEPA"]

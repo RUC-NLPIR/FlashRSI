@@ -99,7 +99,7 @@ class RecoverableSkillOpt(ParallelSkillOpt):
             "comparison": _dump(comparison),
         }
         if self.config.use_meta_skill:
-            reply = await self._ask(prompts.META_SKILL.format(**fields), label="meta")
+            reply = await self.worker.ask(prompts.META_SKILL.format(**fields))
             try:
                 meta_skill = _field(reply, "meta_skill_content")
             except _PatchError as error:
@@ -110,7 +110,7 @@ class RecoverableSkillOpt(ParallelSkillOpt):
                 self._meta_skill = meta_skill
         if not self.config.use_slow_update:
             return current
-        reply = await self._ask(prompts.SLOW_UPDATE.format(**fields), label="slow")
+        reply = await self.worker.ask(prompts.SLOW_UPDATE.format(**fields))
         files = self._read_text(current)
         try:
             files = _apply_guidance(files, reply)
