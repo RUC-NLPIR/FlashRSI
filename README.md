@@ -113,11 +113,13 @@ Trajectory 的 tuple，`for` / `len()` / `zip()` 照旧可用；切片会退化�
 分数，因为一个子集从未被作为整体测量过。空评估没有分数，读 `score` 会报错。
 
 `await self.worker.ask(prompt)` 按 mvp_doc 的签名返回纯 `str`，失败时抛错。
+要让 Worker 编辑一个目录则用 `await self.worker.edit(working_dir, prompt)`：
+编辑本身是目录的新内容，返回值是它对这次编辑的说明（AHE 的 manifest 就在里面）。
+两者都不提交 Snapshot，版本化由调用方决定。
 回复被包成 `<INS>` 标签还是代码块，是**发问的那个 prompt** 自己决定的，
 所以解析不在 `Agent` 上，而在 [algorithms/_replies.py](flashrsi/algorithms/_replies.py)：
 `tagged(reply, tag)` 取最后一对闭合标签内的整段文本，`fenced(reply)` 取最后一个闭合代码块，
-OPRO、EvoPrompt、GEPA、AHE 共用这一份。传入第二个参数 `working_dir`
-则把一个目录交给能编辑文件的 Worker，返回的是它对这次编辑的说明，编辑本身是目录的新内容。
+OPRO、EvoPrompt、GEPA、AHE 共用这一份。
 **Worker 调用的轨迹记录、凭据脱敏和失败报错由基类自动完成**，算法不为这一笔调 `_record`，
 记录文件统一命名为 `00001-worker.json`；阶段由 prompt 首行的 `[ACE: curate]` 这类标记区分。
 
@@ -177,8 +179,8 @@ fast edit 不能修改或引入 `SLOW_UPDATE_START/END` 保护区；只有 slow 
 纯 LLM Worker 的 `llm` 使用 OpenAI-compatible Chat Completions：
 `model_name`、`api_key`、`base_url` 分别映射到模型与客户端，其他请求参数直接传给 SDK。
 凭据须显式提供；地址留空时使用 `https://api.openai.com/v1`。角色层 `timeout` 默认 300 秒，
-`max_retries` 默认 1；不隐式继承目标配置。该 Worker 无 Snapshot，也不支持带 `working_dir`
-的文件编辑。空回答、截断回答及未完成的工具调用返回 error Trajectory。
+`max_retries` 默认 1；不隐式继承目标配置。该 Worker 无 Snapshot，也不支持 `edit`
+（带 `working_dir` 的文件编辑）。空回答、截断回答及未完成的工具调用返回 error Trajectory。
 
 实验目录包含解析后的配置（含算法默认值）、以版本 ID 命名的初始与候选 Snapshot、
 每次 Worker 调用的 prompt/Trajectory、train/dev 评分轨迹、候选接受记录，以及
@@ -765,11 +767,14 @@ SearchQA 的已有文件和固定来源版本保持不变。完整运行配置�
 
 ## Agent：一个运行入口，自动获取文件版本
 
-调用者使用 `agent = MyAgent(config.agent)` 创建目标 Agent，执行时只使用
-`await agent.run(prompt, working_dir=None)`。提问、任务执行和编辑文件使用同一个入口，
-始终返回完整的 Trajectory；编辑场景可以忽略最终 output，但消息和用量仍然保留。
-算法启动时用 `set_scope` 设置组件的默认可见和编辑权限。Agent 没有独立的 `ask`、
-`edit` 或 checkout 接口，也不记录演化历史。
+调用者使用 `agent = MyAgent(config.agent)` 创建目标 Agent。后端只实现一个
+`_run`，执行入口是 `await agent.run(prompt, working_dir=None)`——提问、任务执行和
+编辑文件走同一条路，始终返回完整的 Trajectory；编辑场景可以忽略最终 output，
+但消息和用量仍然保留。
+在它之上有两个便利入口，各自只要文本、失败即抛错：`await agent.ask(prompt)` 提问，
+`await agent.edit(working_dir, prompt)` 编辑一个目录并返回它对这次编辑的说明。
+两者都不提交 Snapshot。算法启动时用 `set_scope` 设置组件的默认可见和编辑权限。
+Agent 没有 checkout 接口，也不记录演化历史。
 
 ### 当前职责划分
 

@@ -146,18 +146,25 @@ class Agent:
         with selected._export(full=True) as files:
             return await self._execute(prompt, working_dir, selected, files)
 
-    async def ask(self, prompt: str, working_dir: Path | None = None) -> str:
+    async def ask(self, prompt: str) -> str:
         """Answer a prompt as text, raising if this Agent did not finish.
 
         A caller that wants the text wants the call to have worked, so a failed
         run is an exception here rather than a Trajectory to inspect.
+        """
+        return await self._answer(prompt, None)
 
-        Pass working_dir to have the answer produced by editing that directory.
-        This is the one place ask and edit are the same call rather than the two
-        mvp_doc lists: an Agent asked to edit a checkout must also be able to
-        say what it did -- AHE's manifest arrives in exactly that reply -- and
-        an ``edit() -> None`` leaves nowhere for it to go. It mirrors the same
-        merge ``run`` already makes.
+    async def edit(self, working_dir: Path, prompt: str) -> str:
+        """Edit that directory, and say what was done.
+
+        The edit is the directory's new contents; the return value is this
+        Agent's own account of it, which a caller may hold the edit to. Nothing
+        is committed here -- versioning the result belongs to the caller.
+        """
+        return await self._answer(prompt, working_dir)
+
+    async def _answer(self, prompt: str, working_dir: Path | None) -> str:
+        """The half ask and edit share: run, report failure, return the text.
 
         Whoever created this Agent may attach an observer, which is how the
         trajectory reaches an experiment's records and how credentials are

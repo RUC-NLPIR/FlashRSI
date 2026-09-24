@@ -1,6 +1,7 @@
 """Results: what an evaluation knows about itself, and Agent.ask on top of it."""
 
 import asyncio
+import inspect
 from dataclasses import replace
 
 import pytest
@@ -111,13 +112,28 @@ def test_ask_raises_rather_than_handing_back_a_failed_run():
         asyncio.run(Worker("no model configured", status="error").ask("question"))
 
 
-def test_ask_can_produce_its_answer_by_editing_a_directory(tmp_path):
+def test_edit_works_in_the_directory_and_says_what_it_did(tmp_path):
+    """The edit is the directory's new contents; the reply is the account."""
     worker = Worker()
 
-    reply = asyncio.run(worker.ask("edit this", tmp_path))
+    reply = asyncio.run(worker.edit(tmp_path, "edit this"))
 
     assert reply == "<INS>answered</INS>"
     assert worker.directories == [tmp_path.resolve()]
+
+
+def test_ask_does_not_offer_a_directory_and_edit_requires_one():
+    """Two calls, as mvp_doc lists them: a question and an edit."""
+    assert set(inspect.signature(Agent.ask).parameters) == {"self", "prompt"}
+    assert set(inspect.signature(Agent.edit).parameters) == {
+        "self",
+        "working_dir",
+        "prompt",
+    }
+    # A question never touches a directory.
+    worker = Worker()
+    assert asyncio.run(worker.ask("question")) == "<INS>answered</INS>"
+    assert worker.directories == [None]
 
 
 def test_an_observer_sees_every_question_and_supplies_the_error_text():

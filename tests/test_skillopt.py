@@ -181,7 +181,7 @@ def test_multilevel_merge_keeps_sources_separate_until_final_ranking(monkeypatch
 
     # Each prompt announces its own stage on the first line, which is what a
     # real provider sees; there is no out-of-band label to branch on.
-    async def ask(prompt, working_dir=None):
+    async def ask(prompt):
         if prompt.startswith("[SkillOpt: rank]"):
             edits = json.loads(prompt.split("EDITS: ", 1)[1])
             assert len(edits) == 8

@@ -122,12 +122,12 @@ class AHE(Algorithm):
         evidence = await self._diagnose(results)
         working = self._run_dir / "working" if self._run_dir else None
         with current.check_out(working_dir=working) as directory:
-            reply = await self.worker.ask(
+            reply = await self.worker.edit(
+                directory,
                 prompts.EVOLVE.format(
                     rules=self._evidence([dict(current.component_rules)]),
                     evidence=evidence,
                 ),
-                directory,
             )
             # The Evolve Agent ran its own tools in there, so it also left what
             # those tools produce; commit refuses those paths outright.
