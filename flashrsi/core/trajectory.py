@@ -68,9 +68,10 @@ class Results(tuple):
     carries the metric it was graded on, so reading the score needs no help
     from the algorithm.
 
-    This is a tuple, so iterating, ``len()`` and ``zip()`` work as before.
-    Slicing returns a plain tuple and drops the score, which is why a caller
-    that needs a subset scored evaluates that subset.
+    This is a tuple: iterating, ``len()`` and ``zip()`` work as before. A slice
+    is an evaluation too, so it keeps the metric and scores itself over the
+    trajectories it kept -- a method handed ``results[a:b]`` can still read
+    ``.score``, which is what makes the type safe to pass around.
     """
 
     def __new__(cls, trajectories, *, metric: str):
@@ -78,11 +79,28 @@ class Results(tuple):
         # Read once here rather than on each access: a caller that wants both
         # the mean and the per-task scores -- GEPA does -- would otherwise walk
         # the trajectories twice. A tuple subclass cannot declare __slots__, so
-        # this is an ordinary instance attribute.
+        # these are ordinary instance attributes.
+        results._metric = metric
         results._per_task = MappingProxyType(
             {item.task.task_id: item.metrics[metric] for item in results}
         )
         return results
+
+    def __getitem__(self, index):
+        """Keep a slice an evaluation; a single index is still one trajectory."""
+        item = super().__getitem__(index)
+        if isinstance(index, slice):
+            return type(self)(item, metric=self._metric)
+        return item
+
+    def __getnewargs_ex__(self):
+        """Carry the metric through ``copy``, which rebuilds via ``__new__``.
+
+        Without this the rebuild loses the keyword and raises. Deep copies of
+        trajectories fail anyway, on their own immutable mapping views; nothing
+        copies an evaluation, and this is here so that doing so is not a trap.
+        """
+        return (tuple(self),), {"metric": self._metric}
 
     @property
     def score(self) -> float:

@@ -1,6 +1,7 @@
 """Results: what an evaluation knows about itself, and Agent.ask on top of it."""
 
 import asyncio
+import copy
 import inspect
 from dataclasses import replace
 
@@ -45,12 +46,28 @@ def test_an_evaluation_is_still_a_tuple_of_trajectories():
     assert len(list(zip(results, results, strict=True))) == 2
 
 
-def test_slicing_an_evaluation_drops_the_score():
-    """A subset was never measured as one, so it does not claim a score."""
-    results = graded(("a", 1.0), ("b", 0.0))
+def test_a_slice_is_still_an_evaluation_that_scores_itself():
+    """A method handed results[a:b] can still read .score.
 
-    assert isinstance(results[:1], tuple)
-    assert not isinstance(results[:1], Results)
+    SkillOpt slices a training evaluation into reflection minibatches, so a
+    slice that degraded to a plain tuple would make .score unsafe to reach
+    for anywhere a subset might arrive.
+    """
+    results = graded(("a", 1.0), ("b", 0.0), ("c", 0.0), ("d", 1.0))
+
+    batch = results[1:3]
+
+    assert isinstance(batch, Results)
+    assert batch.score == 0.0
+    assert dict(batch.per_task) == {"b": 0.0, "c": 0.0}
+    # Scored over what it kept, not inherited from the whole.
+    assert results.score == 0.5
+    # A single index is one trajectory, not a one-element evaluation.
+    assert isinstance(results[0], Trajectory)
+    assert results[-1].task.task_id == "d"
+    # Nesting holds, and so does a copy.
+    assert results[1:4][0:2].score == 0.0
+    assert copy.copy(results).score == 0.5
 
 
 def test_an_empty_evaluation_has_no_score_rather_than_a_zero_one():
