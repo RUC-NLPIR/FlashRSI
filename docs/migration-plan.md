@@ -2,12 +2,19 @@
 
 状态：建议执行顺序，尚未开始本计划中的新组件实现。2026-09-20。
 
-进度补记（2026-09-23）：上面的状态为计划制定时的起点。当前代码已包含 HotpotQA、
-OPRO、GEPA、EvoPrompt 等后续实现；本轮新增 ACE，offline 与 online 两种模式，
-并通过机制测试及 MiniAgent / Claude Code 本地原生协议测试。远程真实模型 smoke 尚未运行，
-不能据此标记步骤 5 全部验收完成；范围与差异见 [ACE 迁移说明](ace.md)。
-online 消费 train 流，按「先执行计分、后反思更新」记录累积在线分数；
-步骤 8 中 EvoMemBench 各 track 自身的学习/评测时序仍需按该 track 的协议单独设计。
+进度补记（2026-09-24）：上面的状态为计划制定时的起点。当前代码已包含 HotpotQA、
+OPRO、GEPA、EvoPrompt、ACE 等后续实现；本轮新增 AHE，只实现论文默认路径（编辑永远保留，
+逐条判决交给下一个 Evolve Agent），并通过机制测试及真实 Agent Worker 在真实 checkout 中
+编辑的本地原生协议测试。AHE 的首个验证组合是 Terminal-Bench（需 Docker），本轮未运行，
+因此步骤 7 不标记全部验收完成；范围与差异见 [AHE 迁移说明](ahe.md)。
+AHE 是首个要求 `algorithm.worker.type: agent` 的算法，也是首个使用
+`evolve_scope = {"*"}`（target 声明的全部组件）的算法。
+同一轮按 review 意见精简了算法基类：`_evaluate` 返回的结果自带 `score` / `per_task`，
+`worker.ask()` 按 mvp_doc 返回纯 `str`、由基类自动记录与脱敏，回复的解析移到
+`algorithms/_replies.py`（与发问的 prompt 同一层），基类因此去掉 `_ask`、`_score`、
+`_per_task`、`_tagged` 四个方法。
+上一轮的 ACE 见 [ACE 迁移说明](ace.md)：online 消费 train 流，按「先执行计分、后反思更新」
+记录累积在线分数；步骤 8 中 EvoMemBench 各 track 自身的学习/评测时序仍需按该 track 的协议单独设计。
 
 本文安排迁移工作，不替代 `mvp_doc.md`，不新增或变更公共接口。旧版 FlashRSI 的实现、prompt 和测试是迁移参考，不是 Lite 的架构规范。涉及公共契约的调整，先列明具体缺口再由开发者确认。
 

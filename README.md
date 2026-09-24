@@ -2,11 +2,27 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## AHE
+
+新增 [AHE 迁移说明](docs/ahe.md) 与 [小规模示例配置](examples/ahe.yaml)。
+AHE 是目前唯一把 harness 当**目录**整体演化的算法：Worker 拿到 checkout 自己编辑，
+而不是由算法把模型产出的文本写进文件，因此它要求 `algorithm.worker.type: agent`，
+纯 LLM Worker 在启动时报错。每次编辑必须声明改了哪些文件、预测哪些任务会翻转；
+实际改动路径由 diff 算出，声明对不上即拒绝该轮——说不出要修什么的编辑无法被证伪。
+编辑**永远保留**，不设分数门槛：逐条判决（`EFFECTIVE` / `INEFFECTIVE` / `HARMFUL` 等）
+连同原文件内容交给下一个 Evolve Agent，由它决定 KEEP / IMPROVE / ROLLBACK。
+分数只能说明一次编辑没起作用，判决则说明它违背了哪条承诺，所以搜索对自己的过往编辑做推理，
+而不是把它们按分数丢掉。
+演化范围是 target 自己声明的全部 component，两个 harness 的实际可改范围因各自
+`components.yaml` 而不同，算法中没有 harness 分支。
+本地原生协议测试已验证真实 Worker 在真实 checkout 中编辑并使 test 分数改变；
+远程真实模型 smoke、Terminal-Bench 组合与演化收益尚未验证。
 
 ## ACE
 
@@ -57,7 +73,9 @@ runner 不重复加载数据，`evolve()` 直接组织演化流程并返回最�
 
 算法在类上声明 `evolve_scope` 和 `observation_scope`。基类将 observation 中的组件设为
 `r`，evolve 中的组件设为 `rw`，重叠时以 `rw` 为准；未声明组件隐藏。
-SkillOpt 两者均为 `{"skill"}`。组件校验直接由 `Agent.set_scope()` 完成；
+SkillOpt 两者均为 `{"skill"}`。写成 `{"*"}` 表示 target 声明的全部组件，
+供把 harness 当目录整体演化的方法使用（AHE）——这类方法无法枚举组件名，
+因为每个 harness 的文件布局只有它自己知道。组件校验直接由 `Agent.set_scope()` 完成；
 参数类型与取值范围由类上的 `_ranges` 声明，基类在初始化时统一校验，
 `_check()` 只留下需要数据或 target 才能判断的语义前置条件，例如非空 train/dev、
 `instruction_file` 是否落在可演化组件内，不重复检查参数类型或 metric 契约。
@@ -67,7 +85,7 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 
 | 位置 | 职责 |
 | --- | --- |
-| `core/algorithm.py` | 初始化与 `_ranges` 参数校验、`_evaluate`、`_ask`、`_score`、`_instruction_path`、`_promote`、`_evidence`/`_trajectory_evidence`/`_tagged`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
+| `core/algorithm.py` | 初始化与 `_ranges` 参数校验、`_evaluate`、Worker 调用的自动记录、`_instruction_path`、`_promote`、`_evidence`/`_trajectory_evidence`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
 | `algorithms/skillopt/__init__.py` | `evolve` 主流程、反思、合并排序、slow/meta update、接受或拒绝候选 |
 | `algorithms/skillopt/_patch.py` | 编辑响应解析、精确锚点、预算与保护区、slow guidance 应用 |
 | `algorithms/skillopt/_prompts.py` | 算法使用的 prompt 模板 |
@@ -81,27 +99,45 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/ace/__init__.py` | ACE 的训练反思、增量应用、offline 周期验证与最佳版本恢复、online 流式计分 |
 | `algorithms/ace/_playbook.py` | ADD 协议、section、bullet 编号、计数与精确去重 |
 | `algorithms/ace/_prompts.py` | Reflector、Curator 和训练重试提示 |
+| `algorithms/ahe/__init__.py` | AHE 的诊断、目录编辑、逐题归因与判决，以及它自己的 checkout/commit |
+| `algorithms/ahe/_manifest.py` | 修改声明的解析与 diff 校验、逐题归因、判决分级与证伪路径 |
+| `algorithms/ahe/_prompts.py` | Agent Debugger 逐条/综合提示与 Evolve Agent 提示 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
-基类的 `_evaluate` 返回评分后的 Trajectory，不更新目标版本；`_ask` 保留完整 Worker
-轨迹后返回文本。`_candidate` 接收文本文件更新，保留未指定文件，通过 Snapshot 检查
-权限并生成候选，不自动接受。`_read_text` 只读取 observation/evolve 声明的组件，
-二进制资源保留不改。其他算法若需要删除文件或修改二进制，可以直接使用 Snapshot 接口。
+算法要问的东西尽量由它手上的对象回答，而不是由基类再加一个方法。
+
+`_evaluate(snapshot, tasks)` 返回的 `Results` 自带 `score`（benchmark `primary_metric`
+的均值，即算法的适应度）和 `per_task`（逐题分数，供 GEPA 的 Pareto 前沿或 AHE 的编辑归因
+这类无法用均值表达的比较使用），所以算法不接触 `primary_metric`。它同时仍是一个
+Trajectory 的 tuple，`for` / `len()` / `zip()` 照旧可用；切片会退化成普通 tuple 并丢掉
+分数，因为一个子集从未被作为整体测量过。空评估没有分数，读 `score` 会报错。
+
+`await self.worker.ask(prompt)` 按 mvp_doc 的签名返回纯 `str`，失败时抛错。
+回复被包成 `<INS>` 标签还是代码块，是**发问的那个 prompt** 自己决定的，
+所以解析不在 `Agent` 上，而在 [algorithms/_replies.py](flashrsi/algorithms/_replies.py)：
+`tagged(reply, tag)` 取最后一对闭合标签内的整段文本，`fenced(reply)` 取最后一个闭合代码块，
+OPRO、EvoPrompt、GEPA、AHE 共用这一份。传入第二个参数 `working_dir`
+则把一个目录交给能编辑文件的 Worker，返回的是它对这次编辑的说明，编辑本身是目录的新内容。
+**Worker 调用的轨迹记录、凭据脱敏和失败报错由基类自动完成**，算法不为这一笔调 `_record`，
+记录文件统一命名为 `00001-worker.json`；阶段由 prompt 首行的 `[ACE: curate]` 这类标记区分。
+
+基类的 `_evaluate` 不更新目标版本。`_candidate` 接收文本文件更新，保留未指定文件，
+通过 Snapshot 检查权限并生成候选，不自动接受。`_read_text` 只读取 observation/evolve
+声明的组件，二进制资源保留不改。需要删除文件或修改二进制的算法直接使用 Snapshot 接口：
+由 Worker 自己编辑目录的 AHE 就是这样做的，并用 `Snapshot.discard_runtime_files()`
+先丢弃 `__pycache__` 一类已知运行时产物（`commit` 对它们直接拒绝，否则一次编辑白跑），
+真正新增的文件仍由 target 的组件规则分类，归不了类照样拒绝。
 runner 的最终 test 也复用 `_evaluate`；记录与算法内评估采用相同格式。
 
-`_ask(prompt)` 和 `_evaluate(snapshot, tasks)` 可直接调用；可选的关键字参数 `label`
-只用于轨迹文件名和 Worker 错误中的阶段提示，不影响模型输入或算法决策。
-默认分别使用 `worker` 和 `evaluation`，需要区分阶段时可写 `label="reflection"` 或
-`label="candidate_dev"`，记录文件按调用顺序命名为 `00001-<label>.json`。
+`_evaluate` 的可选关键字参数 `label` 只用于轨迹文件名，不影响模型输入或算法决策，
+默认为 `evaluation`；记录文件按调用顺序命名为 `00001-<label>.json`。
 
-算法共享的动作都在基类：`_score(results)` 取 benchmark `primary_metric` 的均值，
-即算法的适应度；`_instruction_path()` 返回 target 自己声明的 `instruction_file`
+其余共享动作在基类：`_instruction_path()` 返回 target 自己声明的 `instruction_file`
 并校验它落在算法可编辑的组件内；`_promote(current, best, **details)` 在搜索结束时
 选中一个版本，写入 `kind: "promote"` 决策记录，`details` 里放算法自己的搜索状态
 （OPRO 的 `history`、GEPA 与 EvoPrompt 的 `population`）。
 写 Worker 提示时，`_evidence(rows)` 把行编码为 JSON 并按 `max_evidence_chars` 截断，
-截断处补省略号；`_trajectory_evidence(traj)` 给出整条轨迹并去掉 `RunConfig`；
-`_tagged(reply, tag)` 取回复中最后一对闭合标签内的整段文本。
+截断处补省略号；`_trajectory_evidence(traj)` 给出整条轨迹并去掉 `RunConfig`。
 选哪些字段进 prompt 仍由算法自己决定，基类只统一编码、上限和解析。
 需要把上游 CLI 的别名规范化时重写 `_normalize()`，它在 `_ranges` 校验之前执行，
 因此保存的配置记录的是实际运行的名字。
