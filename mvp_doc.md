@@ -55,11 +55,12 @@ MVP 的验收目标：两个 benchmark（SearchQA + Terminal-Bench 2.0）、
 ### benchmark端：
 单个任务的数据结构：
 ```python
+@dataclass(frozen=True)
 class Task:
     task_id: str
     question: str                     # 交给 agent 的问题 / 指令
-    ground_truth: Optional[str] = None   # 答案式 bench 的标准答案
-    env: Optional[str] = None            # 环境式 bench 的镜像 / 任务目录
+    ground_truth: str | None = None      # 答案式 bench 的标准答案
+    env: str | None = None               # 环境式 bench 的镜像 / 任务目录
     metadata: Mapping[str, Any] = ...
 ```
 
@@ -67,14 +68,29 @@ class Task:
 ```python
 class Benchmark:
     name: str
-    description: str              
-    metadata: dict # 记录来源等额外信息
+    description: str
+    metadata: Mapping[str, Any]   # 记录来源等额外信息
+    primary_metric: str           # grade() 必定填充的指标名，算法据此判断单条轨迹成败
 
-    def load(self) -> Mapping[str, Tuple[Task, ...]]: ...
+    def __init__(self, config: Mapping[str, Any]) -> None: ...
+        # 接收 config.benchmark；校验 name 与本类一致
+
+    def load(self) -> Mapping[str, tuple[Task, ...]]: ...
         # 读取task，并根据config映射为：{'train': [...], 'dev': .., 'test': ...}
-    def grade(self, trajs: Tuple[Trajectory, ...]) -> Tuple[Trajectory, ...]: ...
+    def grade(self, trajs: tuple[Trajectory, ...]) -> tuple[Trajectory, ...]: ...
         # 在traj的metrics字段填充dict，包含了该轨迹的所有评分信息以及primary_metric
+
+    # 基类统一提供，load() 之后可读；未 load 时访问报错
+    @property
+    def train(self) -> tuple[Task, ...]: ...
+    @property
+    def dev(self) -> tuple[Task, ...]: ...
+    @property
+    def test(self) -> tuple[Task, ...]: ...
 ```
+
+`grade()` 要求每条轨迹带有 Task，因此只接收 `rollout()` 的结果；`ask()` 和 `edit()` 产生的
+Worker 轨迹不属于任何任务，不送去评分。
 
 ### Agent端
 ```python
@@ -88,13 +104,19 @@ class SnapshotFile:
 @dataclass(frozen=True)
 class Snapshot:
     files: Mapping[str, SnapshotFile]
+    component_rules: Mapping[str, tuple[str, ...]]   # component 名称 -> 文件路径规则
 
     # 以下元数据由框架维护，算法无需手动填写
     id: str
     agent_type: str
     root_id: str
     parent_id: str | None
-    format_version: int = 1
+    format_version: int = 2
+
+    # 目录与版本之间的转换
+    def check_out(self, *, working_dir: Path | None = None) -> ContextManager[Path]: ...
+    def commit(self, working_dir: Path) -> Snapshot: ...
+    def changed_paths(self, candidate: Snapshot) -> tuple[str, ...]: ...
 
     def save(self, path: Path) -> None: ...
 
@@ -103,203 +125,198 @@ class Snapshot:
 ```
 
 开源 Agent 的 Snapshot 包含其实际执行的源码和运行资源；闭源 Agent 的 Snapshot 包含 SDK 可控制的配置与扩展文件。FlashRSI 接入代码、依赖环境、凭据、日志和任务工作目录不进入 Snapshot。
-文件映射与文件条目均不可变。普通编辑目录通过 Agent.commit() 转换为 Snapshot；持久化 Snapshot 通过 Snapshot.load() 恢复。
+文件映射与文件条目均不可变。普通编辑目录通过 `Snapshot.commit()` 转换为新的 Snapshot；持久化 Snapshot 通过 `Snapshot.load()` 恢复。
 同一初始 Snapshot 的历史版本和兄弟候选可以切换。加载时检查 Agent 类型、格式和版本来源。
+
+`check_out()` 和 `commit()` 都在 Snapshot 上，基线因此是显式的：`current.commit(workdir)` 的
+父版本就是 `current` 本身。这样同一个版本可以同时存在多个 checkout，种群类算法（GEPA、
+EvoPrompt）也能同时持有多个候选——若把基线记在 Agent 内部，一个 Agent 只能记住一个基线。
+`working_dir` 让临时目录落在实验目录的 `working/` 下。
+
+`component_rules` 参与 Snapshot 的 id 哈希：同样的文件配不同的分类规则是两个不同版本，改过
+`components.yaml` 之后旧候选无法再被 `update` 进来。算法绑定的编辑 scope 反过来**不**参与
+版本身份，同一个版本在不同 scope 下仍是同一个版本。
 
 ```python
 class Agent:
     name: str
     description: str
 
-    # 目标 Agent 必须初始化；纯 LLM worker 不要求持有 Snapshot
+    # 目标 Agent 必须初始化；纯 LLM worker 不持有 Snapshot，访问该属性报错
     snapshot: Snapshot
 
-    # component 名称 -> 文件路径规则
+    # 由适配器旁的 components.yaml 声明，随 Snapshot 一起传递
     component_rules: Mapping[str, tuple[str, ...]]
 
     # 该 harness 视为主指令的文件；整体重写单个指令文件的算法据此定位目标
     instruction_file: str | None = None
 
     # 基类统一提供
-    def set_scope(self, components: set[str]) -> None: ...
-
-    def check_out(
-        self, snapshot: Snapshot | None = None
-    ) -> ContextManager[Path]: ...
-
-    def commit(self, working_dir: Path) -> Snapshot: ...
+    def set_scope(self, scope: Mapping[str, str]) -> None: ...
 
     def update(self, snapshot: Snapshot) -> None: ...
 
     async def rollout(
-        self, tasks,
+        self, tasks, *, snapshot: Snapshot | None = None
     ) -> tuple[Trajectory, ...]: ...
 
-    # 后端按支持的能力实现
-    async def run(
-        self, task: Task, snapshot: Snapshot
-    ) -> Trajectory: ...
+    async def run(self, prompt: str, working_dir: Path | None = None) -> Trajectory: ...
 
     async def ask(self, prompt: str) -> str: ...
 
-    async def edit(
-        self, working_dir: Path, prompt: str
-    ) -> None: ...
+    async def edit(self, working_dir: Path, prompt: str) -> str: ...
+
+    # 后端唯一需要实现的方法
+    async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory: ...
 ```
 
 | 操作 | 必须保证的行为 |
 |---|---|
-| 初始化 | Agent 根据 seed 和自身分类规则建立初始 Snapshot |
-| `set_scope()` | 选择允许修改的 component，不改变文件标签；启动时确定 |
-| `check_out()` | 创建独立目录，并在框架内部记住 checkout 时的基线 |
-| `commit()` | 相对该基线检查编辑，返回候选，不切换当前版本 |
-| `rollout()` | 基于当前版本进行rollout |
+| 初始化 | Agent 从适配器所在目录按 `components.yaml` 自动建立初始 Snapshot |
+| `set_scope()` | 选择各 component 的权限（`rw` / `none`），不改变文件标签；启动时确定 |
+| `Snapshot.check_out()` | 创建独立目录，导出该版本对当前 scope 可见的文件 |
+| `Snapshot.commit()` | 相对该 Snapshot 检查编辑，返回候选，不切换当前版本 |
+| `rollout()` | 基于当前版本或传入的候选执行任务，并把 Task 附回轨迹 |
 | `update()` | 校验并切换当前版本指针，不影响已经启动的执行 |
-| `edit()` | 只修改传入目录，返回 `None`，不提交 target 的 Snapshot |
+| `edit()` | 只修改传入目录，返回该 Agent 对这次编辑的说明，不提交 target 的 Snapshot |
 
-文件归类由目标 Agent 决定，算法只选择 scope。已有文件保留原分类；新增文件按固定规则分类；删除检查原分类；重命名按删除和新增处理。分类冲突或新增路径无法分类时拒绝提交。分类规则不能由 worker 修改。
+接入一个 harness 只需要两件事：在适配器旁放 `components.yaml`，以及实现 `_run`。
+`run` / `ask` / `edit` / `rollout` 都由基类在 `_run` 之上提供，后端不必分别实现，也不管理版本。
+`_run` 通过 `self.files_dir` 拿到本次执行的版本目录，通过 `self.config` 拿到本次固定的角色配置。
+
+`edit()` 返回文本，是为了让编辑可被核对：AHE 用返回的说明对照 `changed_paths()` 的真实改动，
+拒绝与自述不符的编辑。返回值不改变「提交由调用方决定」这一点。
+
+`run()` 接收 prompt 而不是 Task：非环境任务的后端只看到问题文本，Task 由 `rollout()` 在结果上
+附回；环境任务由绑定的执行 integration 处理，它能看到完整 Task。因此 `_run` 内不应假设可以
+读到 `task.metadata`。
+
+文件归类由目标 Agent 决定，算法只选择 scope。已有文件保留原分类；新增文件按固定规则分类；删除检查原分类；重命名按删除和新增处理。分类冲突或新增路径无法分类时拒绝提交。分类规则由 `components.yaml` 声明，不能由 worker 修改。
 scope 和兼容性校验在 commit、候选 rollout、update 入口统一执行。文件级 scope 不表达文件内部某几行的权限。
 
-一个 component 可以包含多个文件，也可以在 seed 中没有任何文件，因此 scope 不足以定位单个文件。`instruction_file` 由 Agent 声明哪个文件是它的主指令，供整体重写单个指令文件的算法使用；未声明时为 `None`。算法通过该属性取得路径，不按 harness 名称分支，也不从文件布局猜测；未声明该属性的 Agent 上，此类算法在启动时报错并要求配置显式指定路径。声明的路径必须可归入该 Agent 自己的组件规则。
+一个 component 可以包含多个文件，也可以在初始版本中没有任何文件，因此 scope 不足以定位单个文件。`instruction_file` 由 Agent 声明哪个文件是它的主指令，供整体重写单个指令文件的算法使用；未声明时为 `None`。算法通过该属性取得路径，不按 harness 名称分支，也不从文件布局猜测；未声明该属性的 Agent 上，此类算法在启动时报错。声明的路径必须可归入该 Agent 自己的组件规则。
 
-
-
-
-最好是一个agent（比如claudecode）就是一个子类，然后一开始就是一个snapshot（用变量储存），这个变量保存整个harness对应的文件树： 开源harness就是整个harness的代码。闭源harness就是一个我们基于sdk翻译出来的文件树。这文件树里面的每个文件包括两个内容：
-1. 文件内容
-2. 文件所属的agent组件类别。这个是便于后面算法指定evolve scope指定。在算法启动的时候，可以通过调用agent内部的方法来实现这种scope的赋值（按照component）。
-
-然后所有agent的基类都有一个check_out方法，就是把当前的这个snapshot变量写到一个文件夹目录下。
-
-这个snapshot可以是一个单独的数据类型，然后agent可以自由的加载不同的snapshot（前提都是自己派生出去的）。
-
-除了check_out之外，agent再实现一个update方法来加载某一个文件路径的snapshot。感觉这样写可能会整齐一点：
-```python
-workdir = self.target.check_out()                    # snapshot -> 目录
-await self.worker.edit(working_dir=workdir, prompt='...')
-candidate = self.target.commit(workdir)              # 目录 -> 新 snapshot（此时还没换）
-
-trajs = self.benchmark.grade(await self.target.rollout(dev, snapshot=candidate))
-if mean(t.metrics[self.metric] for t in trajs) > self.best:
-    self.target.update(candidate)                    # 到这一步才真的换；不调用 = 拒绝
-```
-然后每个hanress就只需实现基本的edit\ask\run功能，以及指定好这个check_out方法以及怎么加载回来
-
-
+组件名称在各 harness 间保持同一套词汇，算法据此表达演化范围：`prompt`、`skill`、`code`、
+`tool`、`agent`、`hook`、`config`。每个 harness 只声明自己实际拥有的那几个。
 
 ```python
+@dataclass(frozen=True)
 class Trajectory:
-    task: Task
-    status: str                       #  "finished" | "error"
-    output: str
-    messages: Tuple[Mapping, ...] = ()  # agent 的中间步骤
-    metrics: Mapping[str, float] = ()  # grade() 之后才有
-    error_message: Optional[str] = None       # status == "error" 时必填
-    usage: dict # 保存轨迹token消耗等信息
+    task: Task | None = None          # Worker 的 ask/edit 轨迹没有 Task
+    status: str = "finished"          #  "finished" | "error"
+    output: str = ""
+    messages: tuple[Mapping, ...] = ()  # agent 的中间步骤
+    metrics: Mapping[str, float] = ... # grade() 之后才有
+    error_message: str | None = None   # status == "error" 时必填
+    usage: Mapping[str, Any] = ...     # 保存轨迹token消耗等信息
 ```
+
+Trajectory、Task、Snapshot、SnapshotFile 都不可变，映射字段在构造时转为只读视图。
 
 ### 算法端
-```python
-class Algorithms
-    name: str
-    description: str
-    def __init__(self, config, *, target, benchmark):
-        self.worker = Agent(config)
-        self.target = Agent(config...)
-        self.benchmark = Benchmark.load_from_config(config)
-    async def evolve(self) -> Agent
-        training_tasks = self.benchmark.train
-        await trajs = self.target.rollout(training_tasks)
-        self.benchmark.grade(trajs)
-        
-        score = mean(t.metrics['main_score'] for t in trajs)
-        if score > self.best: ...            
-            # 基于worker进行edit
-            workdir = self.target.check_out() 
-            await self.worker.edit(working_dir=workdir, prompt='...')
-            candidate = self.target.commit(workdir)              # 目录 -> 新 snapshot（此时还没换）
-
-            trajs = self.benchmark.grade(await self.target.rollout(dev, snapshot=candidate))
-            if mean(t.metrics[self.metric] for t in trajs) > self.best:
-                self.target.update(candidate)                    # 到这一步才真的换；不调用 = 拒绝
-
-        return self.target
-
-```
 ```python
 class Algorithm:
     name: str
     description: str
+
+    # 算法声明要改哪些 component；基类据此调用 target.set_scope()
+    # {"*"} 表示该 target 声明的全部 component
+    evolve_scope = frozenset()
+
+    # 参数的默认值与取值范围，由基类统一校验
+    _defaults = {}
+    _ranges = {}
+
     def __init__(self, config, *, target, worker, benchmark):
         self.config = config
         self.target = target
         self.worker = worker
         self.benchmark = benchmark
 
-    async def evolve(self) -> Snapshot:
-        self.target.set_scope({"skill"})
+    async def evolve(self) -> Snapshot: ...
 
-        metric = self.benchmark.primary_metric
-        dev = self.benchmark.dev
-        current = self.target.snapshot
+    # 可选钩子
+    def _normalize(self) -> None: ...   # 别名规范化，在 _ranges 校验之前
+    def _check(self) -> None: ...       # 需要数据或 target 才能判断的前置条件
 
-        baseline = self.benchmark.grade(
-            await self.target.rollout(dev, snapshot=current)
-        )
-        best = mean(t.metrics[metric] for t in baseline)
-
-        training = self.benchmark.grade(
-            await self.target.rollout(
-                self.benchmark.train, snapshot=current
-            )
-        )
-
-        with self.target.check_out(current) as workdir:
-            await self.worker.edit(
-                working_dir=workdir,
-                prompt=self._build_prompt(training),
-            )
-            candidate = self.target.commit(workdir)
-
-        evaluated = self.benchmark.grade(
-            await self.target.rollout(dev, snapshot=candidate)
-        )
-        score = mean(t.metrics[metric] for t in evaluated)
-
-        if score > best:
-            self.target.update(candidate)
-            best = score
-
-        return self.target
 
 class SkillOpt(Algorithm):                           # 作者写的全部
     name = 'skillopt'
     description = '...'
-    async def evolve(self) -> Agent: ...
+    evolve_scope = {"skill"}
+    async def evolve(self) -> Snapshot: ...
+```
+
+算法作者需要记住的就是基类提供的这几个固定动作：
+
+| 动作 | 用途 |
+|---|---|
+| `await self._evaluate(snapshot, tasks, label=...)` | 评估但不选中；返回的 `Results` 自带 `.score`（primary_metric 均值）和 `.per_task`（逐题分数） |
+| `self._read_text(snapshot)` | 读取可见 component 的文本文件 |
+| `self._candidate(baseline, files)` | 把文本改动写成候选 Snapshot |
+| `self._promote(current, best, **details)` | 搜索结束时选中一个版本并记录决策 |
+| `self._instruction_path()` | target 声明的主指令文件路径，含组件校验 |
+| `self._record(label, payload)` | 写一条实验记录 |
+| `self._evidence(rows)` / `self._trajectory_evidence(traj)` | 组装给 Worker 看的证据，按 `max_evidence_chars` 截断 |
+| `await self.worker.ask(prompt)` | 向 Worker 提问，返回纯文本 |
+| `await self.worker.edit(working_dir, prompt)` | 让 Worker 编辑一个目录，返回它对编辑的说明 |
+
+Worker 调用的轨迹记录、凭据脱敏和失败报错由基类自动完成，算法不再自己记这一笔。
+Worker 回复的解析（`<INS>` 标签、代码块）属于发问的 prompt 自己的知识，放在
+`algorithms/_replies.py`，不在 Agent 上包一层返回类型。
+
+一个典型的演化循环：
+
+```python
+async def evolve(self) -> Snapshot:
+    current = self.target.snapshot
+    best = (await self._evaluate(current, self.benchmark.dev, label="baseline")).score
+
+    training = await self._evaluate(current, self.benchmark.train, label="train")
+
+    with current.check_out() as workdir:
+        await self.worker.edit(workdir, self._build_prompt(training))
+        candidate = current.commit(workdir)
+
+    score = (await self._evaluate(candidate, self.benchmark.dev)).score
+    if score > best:
+        self.target.update(candidate)        # 到这一步才真的换；不调用 = 拒绝
+
+    return self.target.snapshot
 ```
 
 ## 4. 文件清单
+```
 flashrsi/
 ├── core/
 │   ├── snapshot.py
 │   ├── agent.py
 │   ├── benchmark.py
 │   ├── algorithm.py
-│   └── trajectory.py
+│   └── trajectory.py        # Trajectory 与 Results
 ├── agents/
 │   ├── miniagent/
-│   └── claude_code/
+│   ├── claude_code/
+│   └── llm.py               # 纯 LLM Worker
 ├── algorithms/
-│   └── skillopt/
+│   ├── skillopt/  opro/  gepa/  evoprompt/  ace/  ahe/
+│   └── _replies.py          # Worker 回复的解析
 ├── benchmarks/
-│   ├── searchqa/
-│   └── terminal_bench/
+│   ├── searchqa/  hotpotqa/  terminal_bench/  tau3_banking/
+│   ├── _data.py             # 数据读取与确定性划分
+│   ├── _qa.py               # 问答类 benchmark 的共用实现
+│   ├── _archive.py          # 数据集归档下载
+│   └── metrics.py           # EM / F1
 ├── integrations/
-│   └── harbor.py
+│   ├── harbor.py            # Terminal-Bench 容器执行
+│   ├── tau2.py              # τ³ 用户模拟器
+│   └── _container.py
+├── _records.py              # 实验记录与凭据脱敏
+├── _run_summary.py          # 用量统计与结束汇总
 ├── config.py
 ├── runner.py
 └── cli.py
-
+```
 
 ## 5. 严格要求
 
@@ -309,12 +326,14 @@ flashrsi/
 4. 本文档是 MVP 的唯一规范，其他设计文件作为参考
 
 ## 6. MVP计划
-0. 设计好config的配置文件和代码，实现config，包括整个实验的working dir的设计。
-1. 完成cli的代码
-2. 完成benchmark的相关代码，接入searchqa benchmark
-3. 完成其他agent的基类实现。整理清楚思路。
-4. 接入miniagent
-5. 接入claudecode agent
-6. 接入skillopt这个算法
-7. 接入terminial bench
+0. 设计好config的配置文件和代码，实现config，包括整个实验的working dir的设计。 ✅
+1. 完成cli的代码 ✅
+2. 完成benchmark的相关代码，接入searchqa benchmark ✅
+3. 完成其他agent的基类实现。整理清楚思路。 ✅
+4. 接入miniagent ✅
+5. 接入claudecode agent ✅
+6. 接入skillopt这个算法 ✅
+7. 接入terminial bench ⏳ 数据、Harbor 执行与离线测试完成；真实容器与真实模型演化待验证（需 Docker）
 
+已超出 MVP 范围的部分：算法另有 OPRO、GEPA、EvoPrompt、ACE、AHE；benchmark 另有 HotpotQA、
+τ³ Banking。SkillOpt × SearchQA 已在两个 harness 上完成全量实验。
