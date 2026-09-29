@@ -1,0 +1,110 @@
+{
+  "profile": "full",
+  "harness": "claude_code",
+  "fingerprint": "91e678d83be2976524187f97e6e97ab824e3f9c2feac5662c310a4996b9bb019",
+  "config": {
+    "run": {
+      "output_dir": "/root/data/FlashRSI-HotpotQA/runs/hotpotqa-seed42-20260925/skillopt-claude_code/full/claude_code/attempts"
+    },
+    "benchmark": {
+      "name": "hotpotqa",
+      "split": "auto",
+      "data_path": "/root/data/FlashRSI-HotpotQA/runs/hotpotqa-seed42-20260925/skillopt-claude_code/full/data",
+      "seed": 42
+    },
+    "agent": {
+      "name": "claude_code",
+      "llm": {
+        "model_name": "deepseek-flash",
+        "api_key": null,
+        "base_url": "https://api.deepseek.com/anthropic",
+        "max_tokens": 32768,
+        "max_retries": 1,
+        "effort": "high"
+      },
+      "timeout": 600,
+      "max_turns": 10,
+      "tools": [
+        "Skill",
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "allowed_tools": [
+        "Skill",
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "source_dir": "/root/data/FlashRSI-HotpotQA/runs/hotpotqa-seed42-20260925/skillopt-claude_code/full/claude_code/seed"
+    },
+    "algorithm": {
+      "num_epochs": 4,
+      "batch_size": 40,
+      "reflection_minibatch_size": 8,
+      "edit_budget": 4,
+      "merge_batch_size": 8,
+      "seed": 42,
+      "max_steps": null,
+      "success_threshold": 0.0,
+      "use_slow_update": true,
+      "use_meta_skill": true,
+      "slow_update_samples": 20,
+      "worker_concurrency": 4,
+      "invalid_patch_policy": "reject_without_score",
+      "name": "skillopt",
+      "worker": {
+        "type": "llm",
+        "llm": {
+          "model_name": "deepseek-v4-pro",
+          "api_key": null,
+          "base_url": "https://api.deepseek.com",
+          "max_tokens": 65536,
+          "reasoning_effort": "high"
+        },
+        "timeout": 900,
+        "max_retries": 1
+      },
+      "parallel_skillopt_sha256": "62c78f23d6129db388baee2c7bb33b8758ee69e673dca7e7732735b25d8cc68a",
+      "patch_recovery_sha256": "16a8cd36a53abb97a4bf1209f66a48f64803930687238d2c714aee137556563d"
+    }
+  },
+  "split_counts": {
+    "train": 150,
+    "dev": 300,
+    "test": 300
+  },
+  "concurrency": 4,
+  "official_revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+  "recipe": "FlashRSI-Lite SkillOpt constant-edit-budget migration",
+  "primary_metric": "exact_match",
+  "initial_snapshot": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+  "status": "finished",
+  "attempt": "/root/data/FlashRSI-HotpotQA/runs/hotpotqa-seed42-20260925/skillopt-claude_code/full/claude_code/attempts/skillopt-claude_code-hotpotqa-20260926-052854-337277",
+  "finished_at": "2026-09-26T00:52:44.135050+00:00",
+  "final_snapshot": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6719937787817045,
+    "exact_match": 0.5033333333333333
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6471062113267996,
+    "exact_match": 0.51
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 0.6666666666666667,
+    "improved_tasks": 21,
+    "regressed_tasks": 19,
+    "paired_bootstrap_95pct_pp": [
+      -3.3333333333333335,
+      4.666666666666667
+    ]
+  },
+  "accepted_candidates": 2,
+  "candidate_decisions": 19,
+  "test_used_for_selection": false
+}

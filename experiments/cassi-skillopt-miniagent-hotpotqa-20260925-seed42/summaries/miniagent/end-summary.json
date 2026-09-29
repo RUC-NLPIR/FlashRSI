@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-25T20:23:29.714782+00:00",
+  "result": {
+    "status": "finished",
+    "primary_metric": "exact_match",
+    "baseline_test": {
+      "tasks": 300,
+      "finished": 300,
+      "f1": 0.688574033359839,
+      "exact_match": 0.5333333333333333
+    },
+    "evolved_test": {
+      "tasks": 300,
+      "finished": 300,
+      "f1": 0.6614466301672184,
+      "exact_match": 0.52
+    },
+    "paired_comparison": {
+      "delta_percentage_points": -1.3333333333333335,
+      "improved_tasks": 17,
+      "regressed_tasks": 21,
+      "paired_bootstrap_95pct_pp": [
+        -5.333333333333334,
+        2.666666666666667
+      ]
+    },
+    "accepted_candidates": 4,
+    "candidate_decisions": 19,
+    "final_snapshot": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df"
+  },
+  "usage": {
+    "roles": {
+      "target": {
+        "finished": {
+          "input_tokens": 32590355,
+          "output_tokens": 4101717,
+          "cache_read_tokens": 21947230,
+          "cache_write_tokens": 0,
+          "usage_entries": 7332,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 7020,
+          "finished_records": 7020,
+          "failed_records": 0,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        },
+        "failed": {
+          "input_tokens": 57004,
+          "output_tokens": 146204,
+          "cache_read_tokens": 51328,
+          "cache_write_tokens": 0,
+          "usage_entries": 6,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 4,
+          "finished_records": 0,
+          "failed_records": 4,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        }
+      },
+      "worker": {
+        "finished": {
+          "input_tokens": 5320172,
+          "output_tokens": 1472861,
+          "cache_read_tokens": 345984,
+          "cache_write_tokens": 0,
+          "usage_entries": 192,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 192,
+          "finished_records": 192,
+          "failed_records": 0,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        }
+      },
+      "worker_protocol_retry": {
+        "finished": {
+          "input_tokens": 5278,
+          "output_tokens": 2153,
+          "cache_read_tokens": 5248,
+          "cache_write_tokens": 0,
+          "usage_entries": 1,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 1,
+          "finished_records": 1,
+          "failed_records": 0,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        }
+      }
+    },
+    "total": {
+      "input_tokens": 37972809,
+      "output_tokens": 5722935,
+      "cache_read_tokens": 22349790,
+      "cache_write_tokens": 0,
+      "usage_entries": 7531,
+      "usage_entries_missing_tokens": 0,
+      "sdk_cost_entries": 0,
+      "duplicate_usage_entries": 0,
+      "records": 7217,
+      "finished_records": 7213,
+      "failed_records": 4,
+      "sdk_cost_usd": null,
+      "cost_bases": []
+    },
+    "gateway_actual_cost_usd": null,
+    "scope": "canonical_cache"
+  },
+  "models": {
+    "target": "deepseek-flash",
+    "worker": "deepseek-v4-pro"
+  }
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "snapshot_id": "1a0b8e03cb64076c0854862862bbcb2a804a0e9e2e89551ae1f61d4588e1231e",
+    "parent_id": "698d6072ab87527e743148c904c3b19256775e602d8aa53848428009b1ed9a5d",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "2159e8d9c13be9d211bc11ea39136c10274a6ae0bd6fd596bcec413765fbbf2b",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "3b12ced0e26e298a6f9d85c23fac2f6fefa4059a5a81f72250d513404f410da8",
+    "parent_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+    "parent_id": null,
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "6062f35cd1111507d57227a5a50eaa10f129878dc3df8913a47c6498aba73fe6",
+    "parent_id": "687f531391b8782d25978ef62f56b1ae3b0a4e0d5826a0ad5d76a698a20d0d92",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "687f531391b8782d25978ef62f56b1ae3b0a4e0d5826a0ad5d76a698a20d0d92",
+    "parent_id": "698d6072ab87527e743148c904c3b19256775e602d8aa53848428009b1ed9a5d",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "698d6072ab87527e743148c904c3b19256775e602d8aa53848428009b1ed9a5d",
+    "parent_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "6a4e2ce5944dea0b438db7d79c93b0a3ca72718cca24c31ef801073656d25726",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "762b8c4632da6cb37da226f1cb60df1be7d4144775e524499c46307e11548947",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "7db22df3b18b2d179965e8895ce77544b866053f21ea6e87980a4145142194ac",
+    "parent_id": "687f531391b8782d25978ef62f56b1ae3b0a4e0d5826a0ad5d76a698a20d0d92",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "parent_id": "687f531391b8782d25978ef62f56b1ae3b0a4e0d5826a0ad5d76a698a20d0d92",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "8b7842b2c0f3472b6bb89bcc117c28586f82ef94d4a254ac7f03c2613d20d413",
+    "parent_id": "687f531391b8782d25978ef62f56b1ae3b0a4e0d5826a0ad5d76a698a20d0d92",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "a2008a3df35aa70c151236f6d2961b8224410dc1a893c618103806984fea2ec7",
+    "parent_id": "698d6072ab87527e743148c904c3b19256775e602d8aa53848428009b1ed9a5d",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "a230e8665be2a333d5c292a100ae1119520ca75b8eda8fe7feaa03334fd94280",
+    "parent_id": "698d6072ab87527e743148c904c3b19256775e602d8aa53848428009b1ed9a5d",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "c563582781eb177f3c2799f7ceb35b35f2141f16df28a68e1675666e2fa97c6a",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "c5f0b370fca89a556da5d2105b24cd1934e808088eaea2b533d8e7ca880165c1",
+    "parent_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "c75fa374341f64b26bfeebe172cc766bc6a9dca0843126e5734ea2a88bd67cc3",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "d9aa3bef25d588bf7db56e806deca029673e0810d4e75cf8c23d8a85d0d8f033",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "e3ea0e85eda419a0a7b26175bee53ccf2afff7ea917b0d1f38fdaea1d300a3a7",
+    "parent_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "edd30db674012d62ffa973a9a8043c0bf6c2e6da65f488d489f81b03004415a4",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  },
+  {
+    "snapshot_id": "f9e0a9af9a1bd374426881fb279848e9856b2ba3da4c8c5d10127eaa7d509f74",
+    "parent_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "files": [
+      "CLAUDE.md",
+      "skills/hotpotqa/SKILL.md"
+    ]
+  }
+]

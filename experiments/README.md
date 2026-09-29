@@ -6,6 +6,21 @@
 
 该精简版省略完整消息历史和重复缓存，不能直接用来续跑。完整原始文件已在仓库外无损归档；备份校验信息及精简范围见该目录的 `manifest.json` 和 `README.md`。
 
+## cassi 完整实验归档 · 2026-09-25 · seed 42
+
+以下六份提交保留原始配置、结果、失败与恢复记录以及完整日志。归档哈希、大小和文件数见各目录的 `manifest.json`；日志通过 Git LFS 下载。
+
+| 算法 | Agent | Benchmark | 实验记录 |
+| --- | --- | --- | --- |
+| OPRO | MiniAgent | SearchQA | [配置、结果与日志](cassi-opro-miniagent-searchqa-20260925-seed42/README.md) |
+| OPRO | Claude Code | SearchQA | [配置、结果与日志](cassi-opro-claudecode-searchqa-20260925-seed42/README.md) |
+| SkillOpt | MiniAgent | HotpotQA | [配置、结果与日志](cassi-skillopt-miniagent-hotpotqa-20260925-seed42/README.md) |
+| SkillOpt | Claude Code | HotpotQA | [配置、结果与日志](cassi-skillopt-claude_code-hotpotqa-20260925-seed42/README.md) |
+| OPRO | MiniAgent | HotpotQA | [配置、结果与日志](cassi-opro-miniagent-hotpotqa-20260925-seed42/README.md) |
+| OPRO | Claude Code | HotpotQA | [配置、结果与日志](cassi-opro-claude_code-hotpotqa-20260925-seed42/README.md) |
+
+SearchQA 使用 400/200/1400、HotpotQA 使用 150/300/300 的 train/dev/test 划分。各运行的模型、选择规则和预算恢复存在差异，以归档配置和说明为准；这些记录不代表严格等预算对照。`manifest.json` 中的打包 commit 不等同于执行 commit。
+
 ## 完整归档提交
 
 实验执行时继续写到本地 `runs/`，该目录不直接提交。需要分享完整原始记录时，用框架的打包脚本导出到

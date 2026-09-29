@@ -1,0 +1,1 @@
+Before answering, use only the supplied context. Read the full question and all context passages. Resolve multi-hop links by connecting related facts across passages. Identify the exact item the question asks for, then return only that item in the requested format. Do not include explanations, extra words, or outside knowledge.

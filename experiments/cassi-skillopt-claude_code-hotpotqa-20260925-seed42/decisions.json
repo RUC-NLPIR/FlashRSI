@@ -1,0 +1,759 @@
+[
+  {
+    "file": "00017-decision.json",
+    "epoch": 0,
+    "step": 1,
+    "patch": {
+      "reasoning": "Both proposals replace the same placeholder. I kept the failure-priority answer formatting and evidence rules, integrated the non-contradictory success procedure, birth-year/birth-date pattern, and ambiguity check, and dropped the success proposal's looser punctuation phrasing because failure fixes have priority. The merged edit combines support_count 10 (failure) and 6 (success).",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "Use only the supplied context; do not search externally or rely on outside knowledge.\n\n## Answering Rules\n\n- Return only the requested short answer; do not write a sentence, restate the question, add explanations, Markdown, bold, parentheses, or trailing punctuation.\n- Do not infer facts that are not explicitly stated in the supplied context.\n- Copy the exact wording from the relevant context rather than paraphrasing, especially for descriptive phrases, ordinal positions, titles, and numeric/spelled-out forms (e.g., return `four` if the context says `four`, not `4`).\n- Before finalizing, compare the answer with the wording in the relevant context sentence; exact-match grading may require context wording rather than synonyms.\n- For person questions, return the full canonical name from context, including first names and quoted nicknames, rather than a shorter or common version.\n- For questions asking \"who is/was X\" or \"what role does X have\", return only the descriptive phrase from context that identifies the person, not a sentence containing the person's name.\n- If a singular \"who\" question asks for one person but the context gives a compound phrase such as \"produced by X and Y\", return only the first named entity unless the question explicitly asks for all or multiple people.\n- For location questions, return only the location name as stated, without appending associated venue or organization details unless the question asks for them.\n\n## Procedure\n\n1. Read the question carefully and determine the requested short-answer type (e.g., name, date, place, yes/no, description, comparison).\n2. Identify the named entities, bridge clues, and the requested relation or comparison.\n3. Treat all supplied context as a single searchable evidence base; locate the relevant paragraphs by title and scan for explicit dates, names, numbers, and relationships. If the question asks about an entity but that entity's own context block lacks the requested information, scan every other context block for mentions of that entity or closely related entities.\n4. For multi-hop or bridge questions, use a fact from the first entity's paragraph to identify the intermediate entity, then read that entity's paragraph for the answer. Facts about a target entity may appear inside another entity's description, especially in comparisons or shared attributes.\n5. For comparison questions, extract the same comparable property or value for each candidate and compare them directly. For yes/no comparisons, answer \"yes\" only when the context explicitly states the compared attribute for both entities; broad descriptions such as \"multi-instrumentalist\" do not establish a specific instrument, so answer \"no\" if explicit support is missing.\n6. For birth-year or birth-date questions, look for the relevant context block containing `(born ... <year>)` and return only the requested part.\n7. Before answering that something is not stated, verify the requested property under all plausible surface forms and related terms (e.g., area vs. volume, size, capacity); prefer the context's stated value and units.\n8. Return only the short answer requested; no extra explanation, sentences, citations, or surrounding text.\n\n## Checks\n\n- Prefer the supplied context over outside knowledge.\n- If a term is ambiguous, select the paragraph whose relationships match the question.",
+          "target": "(No learned rules yet. Rules will be added through the reflection process.)",
+          "support_count": 16,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+    "candidate_id": "b2cfaf4a20d24b1117d997d2bde6d22e429e69cb784e262c3c57afaefc88365b",
+    "score": 0.8233333333333334,
+    "baseline_score": 0.7433333333333333,
+    "accepted": true
+  },
+  {
+    "file": "00033-decision.json",
+    "epoch": 0,
+    "step": 2,
+    "patch": {
+      "reasoning": "Merged the failure and success proposals for skills/hotpotqa/SKILL.md. The failure edits govern exact answer-form, location qualifier, bridge, and measurement-copying behavior. No success pattern directly contradicts those failure fixes, so failure fixes are retained first, and the success patterns are appended after them to preserve both evidence sources.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For person questions, return the exact name form used in the context passage that directly answers the question. Do not shorten the name used in that passage, do not expand to a longer legal/birth name or quoted nickname unless that fuller form is the one used in the direct evidence, and do not substitute a shorter or common form from a bridge mention when the target person's own context block provides the answer. For pen-name, stage-name, nickname, or alias questions, return only the alias as stated.",
+          "target": "- For person questions, return the full canonical name from context, including first names and quoted nicknames, rather than a shorter or common version.",
+          "support_count": 3,
+          "source_type": "failure"
+        },
+        {
+          "op": "insert_after",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For name/alias answers, compare against the exact surface form in the supporting sentence, including pen/stage names and first-plus-last-name forms. If both a full legal name and a common or alias form are present, use the form from the sentence that directly answers the question.",
+          "target": "- Before finalizing, compare the answer with the wording in the relevant context sentence; exact-match grading may require context wording rather than synonyms.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Answer-Form Calibration\n\n- Before answering, determine whether the expected form is a formal full title or a short common name.\n- For formal names such as treaties, documents, laws, events, or works, return the complete context phrase exactly, including a leading `The` and any year or qualifier that is part of the name; do not shorten by removing articles or dates.\n- For college or university questions, do not over-expand a bare institutional name. If the context lists both a parent university and a component school, choose the shortest conventional name that directly answers the requested institution type rather than automatically appending `University` or `School`.\n- Do not use the short-answer rule either to strip defining parts of a formal title or to add unnecessary generic suffixes to a common name.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Additional Failure Avoidance\n\n- If the question already names the answer category, return only the requested attribute phrase and do not repeat the category noun. Example: for a question asking `What kind of guitar riffs...`, return the adjectives/descriptors only, not `... guitar riffs`.\n- For bridge questions that ask for an entity of a stated type (e.g., a voivodeship, district, album, or similar category), return the full canonical title from the target context block, not the intermediate name used to locate it. The intermediate clue may be a city or person; the requested answer is the target entity described under its own title.\n- When the context states a measurement inside a full sentence or clause, copy that sentence or clause exactly. Do not shorten it to a bare number, insert thousands separators, drop units such as `above sea level`, or rephrase the measurement.",
+          "target": "",
+          "support_count": 3,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "b2cfaf4a20d24b1117d997d2bde6d22e429e69cb784e262c3c57afaefc88365b",
+    "candidate_id": "aa794310f46b3379c2158fc09e66c8b067b6ca17e6cd3e4e01913903c7192184",
+    "score": 0.82,
+    "baseline_score": 0.8233333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00050-decision.json",
+    "epoch": 0,
+    "step": 3,
+    "patch": {
+      "reasoning": "Merged failure and success proposals for skills/hotpotqa/SKILL.md. Applied failure-priority answer-form/entity guidance as a replacement and insertion, kept the separate failure append sections, then appended the combined success patterns. No proposed edits were removed as contradictory; the success patterns supplement the failure guidance and existing procedure without overriding failure fixes.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- Copy the exact wording from the relevant context for descriptive phrases, named entities, titles, ordinal positions, and numeric/spelled-out forms (e.g., return `four` if the context says `four`, not `4`). For attribute/category questions such as `What style/type/genre of ...?` or questions that already name the requested category or unit (e.g., `what genre of films`, `what type of music`), return only the exact requested value from the context. Do not copy the whole descriptive noun phrase, the entity/category head, or the category noun already present in the question.",
+          "target": "- Copy the exact wording from the relevant context rather than paraphrasing, especially for descriptive phrases, ordinal positions, titles, and numeric/spelled-out forms (e.g., return `four` if the context says `four`, not `4`).",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "insert_after",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n- For organization, company, distributor, studio, label, or similar named entities, return the full canonical name exactly as stated in the direct evidence sentence, including suffixes such as `Films`, `Company`, `Corporation`, `Inc.`, or `Ltd.`. Do not shorten the target entity's name to the bare headword, even if a shorter form appears in another context block or in an intermediate bridge mention.",
+          "target": "- Before finalizing, compare the answer with the wording in the relevant context sentence; exact-match grading may require context wording rather than synonyms.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Classification Answer Form\n\n- For classification questions such as `What are X and Y?` or other plural question phrasing, return the singular category noun that the context uses to define each item, not a pluralized form. If the context says each item `is a novel`, answer `novel`, not `novels`, even when the question uses a plural verb such as `are`.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Resolving Anaphoric and Medium Questions\n\n- When the question uses an underspecified referring expression such as `this story`, `this work`, `the story`, or `it`, do not match it to a passage merely because that passage contains the surface word `story`, `book`, or `movie`. First determine the titled work or entity the question is about, then use that work's own context block.\n- For questions asking whether a story or work is or was made into or is a `book`, `movie`, `novel`, `film`, `play`, etc., return the direct medium/format label stated for that titled work. Do not infer a medium from a biography saying a person's story `inspired` a movie or opera; that is an adaptation mention, not a classification of the story itself.\n- If the context gives a specific medium term for the work (e.g., `volume in the ... novel series`, `stand-alone novel`), prefer that exact term over a broader question word such as `book`.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "b2cfaf4a20d24b1117d997d2bde6d22e429e69cb784e262c3c57afaefc88365b",
+    "candidate_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "score": 0.8433333333333334,
+    "baseline_score": 0.8233333333333334,
+    "accepted": true
+  },
+  {
+    "file": "00060-decision.json",
+    "epoch": 0,
+    "step": 4,
+    "patch": {
+      "reasoning": "Merged failure_first and success proposals for skills/hotpotqa/SKILL.md. The overlapping category-answer guidance was resolved with the failure wording prioritized and the success compound-label exception folded into the existing category rule. The remaining failure award/action-predicate calibration was appended separately, while the success disambiguation and additional success patterns were retained. Redundant duplicate category guidance was not appended twice.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "For attribute/category questions such as `What style/type/genre of ...?` or questions that already name the requested category or unit (e.g., `what genre of films`, `what type of music`), return only the exact requested value from the context. Do not copy the whole descriptive noun phrase, the entity/category head, or the category noun already present in the question. Exception: when the context states the requested value as a fixed multiword category label or compound descriptor phrase whose head noun is essential to the classification (e.g., `Moravian and other Slavic folk music`), copy the complete phrase exactly, including the head noun. The rule to return only the requested value still applies to genuine adjective-only attributes such as styles, genres, and types.",
+          "target": "For attribute/category questions such as `What style/type/genre of ...?` or questions that already name the requested category or unit (e.g., `what genre of films`, `what type of music`), return only the exact requested value from the context. Do not copy the whole descriptive noun phrase, the entity/category head, or the category noun already present in the question.",
+          "support_count": 4,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- If a term is ambiguous, select the paragraph whose relationships match the question. If several supplied context blocks share the same name/title, do not settle by title alone; list the candidate blocks and match them against any co-occurring named entity or distinguishing attribute present in the question (e.g., a featured artist, author, creator, year, or type), then answer from the block that contains that companion clue.",
+          "target": "- If a term is ambiguous, select the paragraph whose relationships match the question.",
+          "support_count": 2,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Answer-Form Calibration\n\n- For `what award/prize/medal did X win?` questions, remove an awarding-body or sponsor prefix from the start of the award phrase and return only the standalone award name used in the direct evidence, unless the full prefixed form is the canonical name or the question explicitly asks for the formal sponsored title.\n- For `what did X do?` or `what notable act/achievement/action ...?` questions, copy the complete predicate clause from the direct evidence sentence, including finite verbs, carrier verb phrases, and any subject pronoun that introduces the clause. Do not reduce the source clause to a bare gerund or noun phrase.\n- Before finalizing, compare the candidate surface form to the direct evidence clause and to the answer type. If a short-answer rule would strip or add words relative to the context clause that directly answers the question, adjust to preserve the expected form for that answer type.\n",
+          "target": "",
+          "support_count": 3,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Additional Success Patterns\n\n### Resolving Descriptive or Attribute-Only Entities in Bridge Questions\n\n- When the question identifies an entity by a descriptive phrase, relative clause, profession, time period, nationality, award, title, office, or relationship rather than by name, first locate the exact or near-exact descriptive or attribute match in the supplied context, identify which named entity it describes, then read that entity's own context block for the requested attribute.\n- Do not return the identifying phrase itself as the answer unless the question explicitly asks for that description; use it only to find the named entity and then answer from that entity's facts.\n\n### Temporal Answer Form\n\n- For `on what day`, `in what year`, or similar date/year questions, return only the date or year exactly as stated in the context (e.g., `January 17, 1981`, `1945`).\n- Do not include leading prepositions such as `on` or `in`, and do not convert numeric years to words or words to numeric years.\n\n### Intersection and Shared-Credit Questions\n\n- For questions that ask which person or entity appears in, worked on, or is associated with two named works or groups (e.g., `What star of X also appeared in Y?`), extract the credited members or participants named in each work's own context block and return the common member. Direct co-occurrence in both lists is sufficient; do not require an explicit cross-reference between the works.\n\n### Vague Comparison Terms\n\n- For comparison questions using broad terms such as `wider`, `broader`, `larger`, or `more widely`, treat the comparable dimension as an explicitly stated scope or reach property: geographic reach (global/international/multinational versus regional/local), number of locations or countries, product range, or a similar stated scope phrase. Prefer the exact scope wording in each candidate's own context block and do not infer the dimension from entity type alone.\n\n### Shared-Role Yes/No Comparisons\n\n- For yes/no questions asking whether two people share a role, treat any role named in a person's occupation list or descriptive clause as explicit support. A person described as `singer, songwriter and actor` and another as `singer, guitarist, and songwriter` both explicitly support `singer-songwriter`; answer `yes` when each component is stated, and `no` when the context gives only an unrelated broad description.\n\n### Ordinal Bridge Resolution\n\n- For bridge questions with an ordinal (`first`, `second`, `third`), resolve the ordinal using chronological, term, or explicit context clues before selecting the entity paragraph. Do not confuse the first mentioned or earliest block with the ordinal target; then read the resolved entity's own paragraph for the requested property.\n\n### Plain-Text Alternate Names\n\n- For questions asking what an entity or product is called or referred to as, return the alternate name as plain text, using the context's spelling but without surrounding quotation marks, Markdown, or extra punctuation, even if the context encloses the term in quotes.\n\n### Place-Containment and Administrative Units\n\n- For place-containment questions (e.g., which county/state/province/country a city, venue, or landmark is in), return the full administrative unit exactly as stated, including words like `County`, `Province`, or `State`; do not return only the city or the bare geographic name, and do not omit the unit suffix.\n\n### Numeric Answer Formatting\n\n- For numeric answers, copy the digit string exactly from the direct evidence, preserving commas and decimal points (e.g., return `1,234` as written, not `1234`). Do not add or remove formatting.\n\n### Singular Questions with Compound Sources\n\n- For singular questions that point to a compound source (e.g., a work created by more than one person), if the requested property is explicitly stated for only one of the named people in the supplied context, return that one's property; otherwise follow the single-person rule for compound phrases.\n",
+          "target": "",
+          "support_count": 4,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "ce22d8fcae41b90d03446593e36210b2717f7b8f0b9b69494aeb50de7576e101",
+    "score": 0.8366666666666667,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00075-decision.json",
+    "epoch": 1,
+    "step": 5,
+    "patch": {
+      "reasoning": "Merged failure_first and success proposals for the same HotpotQA skill. The failure fixes were kept with priority and applied to short-answer, location, and compound-category cases. Non-overlapping success fixes were preserved: expanded comparison procedure step, inserted bridge and date clarifications, expanded ambiguity checks, and appended description/direct-answer/selection sections. One success location bullet was omitted as redundant with the higher-priority failure location rule, while the county/state bullet was kept as a specific exception.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- Return only the requested short answer; do not write a sentence, restate the question, add explanations, Markdown, bold, parentheses, or trailing punctuation. Exception: for questions asking what someone did, achieved, or is credited with (e.g., `What notable act did X do?`), return the complete predicate clause from the direct evidence sentence exactly as written, including finite verbs, carrier phrases such as `is credited with`, and any trailing purpose/result phrases. Do not reduce the clause to a bare gerund or noun phrase.",
+          "target": "- Return only the requested short answer; do not write a sentence, restate the question, add explanations, Markdown, bold, parentheses, or trailing punctuation.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For location questions, return the full location phrase exactly as stated in the direct evidence sentence, including comma-separated city, state/region, or country qualifiers that are part of the stated location. Do not truncate a location phrase to the first named place, and do not append venue or organization details unless the question asks for them.",
+          "target": "- For location questions, return only the location name as stated, without appending associated venue or organization details unless the question asks for them.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Category Value with Compound Premodifiers\n\n- For questions asking for a style, type, genre, or other category value, if the direct evidence gives a compound noun phrase with a leading setting, holiday, seasonal, or occasion modifier (e.g., `Christmas comedy`, `holiday drama`, `summer action`), return only the core category term that answers the requested classification.\n- Do not copy the leading modifier unless the question explicitly asks for that specific variant or subcategory.\n- Before finalizing, confirm the answer contains only the requested value class, not an extra descriptor that specifies when or under what theme the work appears.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "5. For comparison questions, extract the same comparable property or value for each candidate and compare them directly. Comparable properties include birth dates, death dates, ages, member/participant counts, sizes, stated categories, and explicit scope properties. For vague scope comparisons such as \"operates more widely/broadly\", \"larger\", or \"more global\", compare an explicitly stated scope property (e.g., multinational/global/international versus regional/local, number of countries or locations, or stated range/product spread) rather than inferring from entity type. When counting members or items, count only those explicitly listed in the candidate's own context block, not people or items mentioned only in other paragraphs. Return the candidate's name exactly as stated, not the property value or an explanation. For yes/no comparisons, answer \"yes\" only when the context explicitly states the compared attribute or category for both candidates; if the compared property is missing for either, answer \"no\". Broad descriptions such as \"multi-instrumentalist\" do not establish a specific instrument, and an explicit contradictory category label is negative evidence. Category membership may be stated through class labels such as `genus`, `species`, `family`, or `is a ...` phrases; do not require the literal category word to be repeated when the context's classification directly supports it.",
+          "target": "5. For comparison questions, extract the same comparable property or value for each candidate and compare them directly. For yes/no comparisons, answer \"yes\" only when the context explicitly states the compared attribute for both entities; broad descriptions such as \"multi-instrumentalist\" do not establish a specific instrument, so answer \"no\" if explicit support is missing.",
+          "support_count": 7,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "fa426cae256eba8182575092998f1aeed3370a6aab67137ac1a0394733e44259",
+    "score": 0.82,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00087-decision.json",
+    "epoch": 1,
+    "step": 6,
+    "patch": {
+      "reasoning": "Merged the failure correction for person-name canonicalization with the success edits. The failure and success proposals touched different targets, so no overlap required conflict resolution. The failure rule was applied to the person-name bullet, and the success expansions were kept for date questions, ambiguity/disambiguation, location/administrative-unit questions, and appended bridge/comparison guidance.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For person questions, return the full canonical name from the context passage that directly identifies or answers the target person, including first names, middle names, and quoted nicknames as stated there. If the person's own context block gives a fuller legal name while another block or a bridging mention uses a shorter or common form, use the fuller form from the person's own block; do not shorten it to the form used only in cross-references.",
+          "target": "- For person questions, return the full canonical name from context, including first names and quoted nicknames, rather than a shorter or common version.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- If a term is ambiguous or multiple supplied context blocks share the same name, select the paragraph whose relationships and co-occurring named entities match the question. Use the question's additional clues (profession, role, work, year, location, organization, or associated person) to disambiguate before applying bridge facts or returning an answer.\n- If several context blocks share a name/title, do not settle by title alone; list the candidate blocks and match the named entity or distinguishing attribute present in the question, then answer from the block that contains that companion clue.",
+          "target": "- If a term is ambiguous, select the paragraph whose relationships match the question.",
+          "support_count": 2,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Resolving Bridge Clues Through Descriptions, Properties, and Relations\n\n- When the question identifies an entity or person by a descriptive phrase rather than by name (e.g., a profession, role, nationality, birth date, relationship, achievement, size/area, sponsor, or other attribute), scan all supplied context blocks for that exact descriptive clue and use it to locate the entity's own context block; then read that target's own block for the requested fact.\n- Descriptive clues include constructions such as `the author of <work>`, `the person who wrote <work>`, `the actress who hosted <event>`, `the entrepreneur best known for <thing>`, and `pioneers of <movement>`.\n- Use the descriptive phrase only to find the target; do not return the phrase itself unless the question asks for that description, category, or classification.\n- If the question names one entity and asks for another entity characterized by a role or attribute, first use the named entity's block to collect candidate names or terms, then match the candidate against the descriptive block before answering.\n- If a numeric, statistical, or date descriptor appears in the question (area, year span, count, birth date), confirm the target context block contains that same descriptor before finalizing. For birth-date clues, match the quoted date against the `(born ... <date>)` parenthetical in candidate blocks.\n- If multiple entities in the context fit the description, match additional co-occurring named entities, dates, professions, roles, works, years, locations, organizations, or distinguishing attributes from the question to choose the correct target.\n- For property-based bridge questions that ask which entity in a named group or context has a stated property or descriptor, first locate the entity whose own context block explicitly contains that property, then confirm the supplied context links that entity to the named group or context before returning its full canonical name. If the named group is mentioned in another entity's block through sibling or shared-attribute statements, treat that as a valid link only when explicitly stated.\n- For partner/route/credited-person relation bridges:\n  - For partner questions such as `Where is X's Y partner based?`, locate the direct partnership sentence in X's own block (e.g., `X partnered with Z to ...`) and use Z as the bridge. Do not substitute an entity only described as developer, publisher, distributor, or owner unless that sentence explicitly calls it a partner.\n  - For a creative work identified by its credited people, resolve each person from their own block using the biographical clue in the question, then find the work block whose direct description names both resolved people; return the requested property from that work block.\n  - For transit/route questions, take the route's own block as the source for the places it passes through, then open the candidate place's own block to verify any additional qualifier before answering.\n- Return the matched entity or requested value in exact context wording. For entity answers, preserve full canonical names and suffixes as stated in the direct evidence.",
+          "target": "",
+          "support_count": 16,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Shared-Property, Intersection, and Geographic Containment\n\n- For questions asking what two named entities have in common, share, or are both known for, collect the requested property from each relevant context block. If an entity's own block lacks the property, scan the other supplied context blocks for an explicit phrase connecting that entity to the property, such as a venue name, organization, event, club, or location.\n- Return the shared value exactly as stated in the direct context, without appending entity names, category heads, or extra words not requested. Do not infer the shared property from entity type alone when no explicit contextual support is present.\n- For mutual industry/field/area or shared-category questions, use the domain label directly stated in at least one entity's block and confirm through the other entity's stated occupations or categories that it belongs to that domain; return the singular domain term, not an occupation word such as `writer` or `novelist`.\n- For `Both X and Y are located in what city?` and similar shared-location questions, extract the common city from each entity's own block and return only that city. Do not add state/province/country unless requested.\n- For compound yes/no questions such as `Do X and Y have property P?`, answer `yes` only when both entities have explicit direct support for P; if either lacks it, answer `no`.\n- For questions asking for the population or census value of the city where an institution is located, first identify the city from the institution's own block, then read that city's own block and copy the numeric value exactly as written, preserving commas. Do not use a similarly named place from another context block.",
+          "target": "",
+          "support_count": 6,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "55bea546d25360a7158b29c6da1b17e6c21b676e0f2cb9ee90e01eb00ff4e2c6",
+    "score": 0.8266666666666667,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00103-decision.json",
+    "epoch": 1,
+    "step": 7,
+    "patch": {
+      "reasoning": "Merged failure and success proposals for skills/hotpotqa/SKILL.md. Applied the failure replace and insert_after first because failure fixes have priority; then appended the non-overlapping failure sections and success candidate/bridge, counting/death-year, intersection, and numeric/attribute sections. No success edit directly overlapped a failure target or contradicted failure measurement/full-title/award rules, so all generalizable evidence was retained.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- Copy the exact wording from the relevant context for descriptive phrases, named entities, titles, ordinal positions, and numeric/spelled-out forms (e.g., return `four` if the context says `four`, not `4`). For attribute/category questions such as `What style/type/genre of ...?` or questions that already name the requested category or unit (e.g., `what genre of films`, `what type of music`), return the requested value from the context. If the context supplies a standalone descriptor or adjective that answers the question, return only that descriptor and do not repeat the category noun from the question. If the context defines the kind by a compound label in which the category noun is part of the label and the descriptor alone is incomplete or not a standalone kind, return the full compound label exactly as stated, including the category noun. Do not copy unrelated descriptive clauses or extra modifiers that are not part of the classification label.",
+          "target": "- Copy the exact wording from the relevant context for descriptive phrases, named entities, titles, ordinal positions, and numeric/spelled-out forms (e.g., return `four` if the context says `four`, not `4`). For attribute/category questions such as `What style/type/genre of ...?` or questions that already name the requested category or unit (e.g., `what genre of films`, `what type of music`), return only the exact requested value from the context. Do not copy the whole descriptive noun phrase, the entity/category head, or the category noun already present in the question.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "insert_after",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For award, prize, medal, or similar honor questions, separate the awarding body or sponsor from the title of the honor. When the direct evidence has the form `<awarding-body> <honor title>` or `<awarding-body> <honor title> award`, and the question asks simply what award or honor the person won, return only the standalone honor title from the direct evidence, omitting the awarding-body or acronym prefix unless the prefix is an inseparable part of the common name or the question explicitly asks for the formal sponsored title. Verify the shorter title is itself a complete standalone name; if not, keep the full context phrase.",
+          "target": "- Before finalizing, compare the answer with the wording in the relevant context sentence; exact-match grading may require context wording rather than synonyms.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Sport/Activity and Occupation-Label Questions\n\n- For questions asking what sport, activity, or type of athlete/performer a person participates in or is, return the exact sport/activity descriptor phrase used in the direct evidence clause (e.g., `track cyclist`, `ice hockey player`, `rally driver`).\n- Do not convert the descriptor into a bare sport name or a gerund. If the context identifies the person as an `ice hockey player`, answer `ice hockey player`, not `hockey`, `ice hockey`, or `playing hockey`.\n- Preserve the actor/agent suffix (`player`, `racer`, `cyclist`, etc.) unless the context itself gives a bare sport name as the direct answer.\n- Remove nationality, league, team, or organization modifiers that are not part of the requested sport/activity descriptor, but do not add synonyms or extra words.\n\n## Full Titles and Subtitles\n\n- When the requested answer is the name/title of a work, periodical, publication, or other titled entity, return the complete title exactly as it appears in the direct evidence sentence, including any subtitle after a colon or dash and original capitalization.\n- Do not reduce the title to a short or common name, even if the question uses a shortened form, the context later refers to it by a short label, or a bridge mention uses only part of the title.\n\n## Measurement and Full-Clause Answers\n\n- For questions that ask for a measured quantity such as height, distance, depth, size, speed, count, or another numeric property, do not reduce the answer to a bare number plus unit. Return the complete measurement clause from the direct evidence exactly as written, including the subject, any superlative or comparison, the measured value, and unit qualifiers such as `above sea level`.\n- If the requested measurement is stated only as part of a full sentence in the supplied context, copy that full sentence rather than shortening it. This is an exception to the short-answer/no-sentence rule for measurement questions because exact-match grading may require the full evidence clause.\n- Preserve the original digit formatting and unit wording; do not add or remove thousands separators, abbreviate units, or rephrase the context wording.\n",
+          "target": "",
+          "support_count": 3,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Candidate and Bridge Resolution from Named or Described Entities\n\n- When the question names two or more candidate works/entities (e.g., `Between A and B, which ...?`), check each candidate's own context block for explicit support for the requested property and return the matching candidate's title/name exactly as stated, not the property value or explanation.\n- When the question describes an entity only by role, profession, nationality, time period, or distinguishing phrase, search the supplied context for that descriptive clue, resolve it to the named entity it modifies, then open that named entity's own context block for the requested fact.\n- If a bridge phrase or descriptive clue yields more than one candidate, choose the candidate whose own context block explicitly supplies the requested property; do not answer from candidates for whom that property is absent or only implied. A shared surface word or co-mention is not enough.\n- For bridge questions that name a place, work, organization, or thing and ask which person/entity is associated with it, read the named entity's own context block first to identify the target person or entity mentioned there, then return that target's canonical name exactly as stated. Do not return the named bridge entity itself.\n- When a named work or place and another entity are linked through a relation, use the relation in the named work/place block only to identify the target entity, then retrieve the final value from the target entity's own block.\n- For relation questions such as `What number/role/attribute of the person for whom X held office, worked, or served?`, use X's own block to identify the principal person, then read that principal's own block and copy the requested ordinal or attribute from there.\n- When the same title appears for a song, album, film, or other work and the question identifies it by work type and/or release year, disambiguate by the requested work type and date, select the matching block, and extract credited people or properties from that block.\n- For product or alternate-name questions where a company/store is identified by a unique attribute such as headquarters, chain, or owner, first resolve the company/store from that attribute, then read the product or alternate-name block and return the name exactly as context wording without added punctuation.\n",
+          "target": "",
+          "support_count": 7,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "77906e88f446a5aeceababe365ed1694dfb71877e75af616b9bc2b3a2f3cd8c8",
+    "score": 0.84,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00117-decision.json",
+    "epoch": 1,
+    "step": 8,
+    "patch": {
+      "reasoning": "Merged the failure_first proposals into the existing hotpotqa skill first because failure fixes have priority. I kept all distinct failure replacements, added the success location span rule, and retained the success bridge/comparison guidance as append sections with cross-references to the failure complete-sentence exception and educational-institution rule so no contradictory instructions remain.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "4. For multi-hop or bridge questions, use a fact from the first entity's paragraph to identify the intermediate entity, then read that entity's paragraph for the answer. Facts about a target entity may appear inside another entity's description, especially in comparisons or shared attributes. After resolving the final target entity, check its own context block for a complete evidence sentence that directly states the answer; if such a sentence is present, copy that whole sentence verbatim as the answer instead of reducing it to a shorter named entity or attribute taken from that sentence or from an earlier bridge mention.",
+          "target": "4. For multi-hop or bridge questions, use a fact from the first entity's paragraph to identify the intermediate entity, then read that entity's paragraph for the answer. Facts about a target entity may appear inside another entity's description, especially in comparisons or shared attributes.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Bridge and Entity Disambiguation\n\n- When several supplied context blocks share the same title or name, do not answer from the first matching title. Match additional clues in the question (co-occurring named entity, date, place, role, work type/medium, or property) and an explicit attribution phrase in a block such as `a three-act play by ...`, `a novel by ...`, or `a musical based on ...`, then use only the selected block.\n- When the question identifies a person or entity indirectly through a named work, group, event, award, relationship, or descriptive phrase such as `a 2012 storm`, `an American brand of hotels`, or `the actor who played <role>`, first locate the context block that contains that description/title and reveals the named entity. If that block lists multiple candidates, use the list only to locate the intermediate entity, then open each candidate entity's own block to verify the requested property. Use the named entity as a bridge and return the candidate whose own block supports the property; do not return the descriptive phrase, persona, title, or a list-item block unless the question explicitly asks for that description or the Procedure's complete-sentence exception applies.\n- When a named work, title, character, or entity is defined in its own context block by an identity phrase such as `whose alter-ego is ...` or `chronicles the adventures of ...`, and the question asks for the person or identity behind that title/persona, read that entity's own block and return the name introduced by the identifying phrase exactly as stated. Do not return the persona/title or a list-item block that merely mentions the work.\n- For questions that supply a birth date or year plus another fact, first find the person block whose `(born ...)` parenthetical matches the supplied date, then confirm the other fact in that person's own block or the linked work block before answering.",
+          "target": "",
+          "support_count": 4,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Multi-Condition and Relation Bridge Extraction\n\n- For questions that identify the answer by two or more independently stated conditions, treat all supplied context blocks as a set of constraints. Scan separate blocks for each condition, collect candidate entities, and return only the entity that satisfies all conditions. Do not answer from a block that satisfies only one stated condition, even if its title or surface wording partially matches the question.\n- When the question uses a relation verb such as `trained`, `graduated`, `included`, or `collected` that does not appear verbatim in the context, match the closest explicitly stated relationship in the source block (e.g., `studied at`, `became champion with`, `supervised the recordings of`, `essays ... collected in`), then confirm the target also satisfies any additional descriptor in the question from its own block.\n- For a bridge question that starts from an attribute or achievement and asks which entity satisfies it, first find the entity whose own block states that attribute/achievement, then return the other named entity from the same direct-evidence sentence, preserving the exact wording, unless the Procedure's complete-sentence exception applies.\n- For creator/work bridges, identify the creator from the work's own context block, then read the creator's block for the requested collection, oeuvre, or property.\n- For `graduated from` or `studied at` questions, extract the institution exactly from the person's education sentence and verify the requested qualifier in that institution's own context block before returning the institution name; follow the educational-institution rule above for whether to keep or omit suffixes such as `University`, `College`, or `Business School`.\n- For questions asking which team or organization a person was part of when they achieved something, use the achievement sentence in the person's own block and return the team/organization named there; do not substitute a team block that omits the person.\n- When the requested answer is the object of a relation in the target entity's own block (e.g., parent company, subsidiary, league, state, location), return that object exactly as stated, preserving full canonical names and suffixes, unless the Procedure's complete-sentence exception applies.",
+          "target": "",
+          "support_count": 4,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Specific Inspiration, Ownership, and Proximity Bridges\n\n- When a question asks what artist, band, song, or work inspired or led to an album, film, or other creative work, prefer an explicit sentence that names a specific artist, group, or work in connection with the work's conception. Do not answer with a broad era or genre phrase when a specific named inspiration is present.\n- For questions asking what park, city, or geographic feature an institution or museum is located by or near, and the institution's own block links it to a parent organization, open that parent organization's block and return the named geographic feature or unit exactly as stated there. Do not return the parent organization or a broader city when the question asks for the adjacent landmark or feature.\n- For chained ownership, operation, or control questions, use the target entity phrase to identify the immediate operator/owner from the target's block, then read that intermediate entity's own block for the ultimate owner or controller. Preserve the exact canonical wording from the final evidence sentence.\n- For a named person with a played role/character, locate the person's own context block and return the work title found in the same clause; confirm against the work's own context block only when the question asks for a property of that work.",
+          "target": "",
+          "support_count": 4,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "f270e5167ff390314fe9eeb97de8467c41eb1277f67cd3452443443c7146c3a7",
+    "score": 0.8333333333333334,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00123-decision.json",
+    "epoch": 1,
+    "kind": "slow",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "51f19f7bc15c8095ef9c2e6abb47a0e0ea89cd6a7e4afb9e0c11162bf9b70446",
+    "score": 0.82,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00138-decision.json",
+    "epoch": 2,
+    "step": 9,
+    "patch": {
+      "reasoning": "Merged the failure and success proposals for the same hotpotqa skill. The failure person-name rule and success location/comparison rules target distinct non-overlapping text, so all were retained. The success comparison candidate-name rule was conditioned to defer to the failure direct-evidence name rule, removing the only cross-source contradiction. All appended sections are distinct and non-redundant.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For person questions, return the person's name exactly as written in the direct evidence sentence that answers the question. If that sentence uses a shorter form while another context block gives a fuller legal form with extra given names, keep the shorter direct-evidence form. Use a fuller canonical form only when the question explicitly asks for the full name or the direct evidence itself uses that fuller form.",
+          "target": "- For person questions, return the full canonical name from context, including first names and quoted nicknames, rather than a shorter or common version.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Answer-Phrase Preservation Exceptions\n\n- When a question asks what someone did, achieved, or is credited with, return the complete direct-evidence predicate clause exactly as written. Keep carrier phrases such as `is credited with`, any introductory pronoun, and trailing purpose or result phrases. Do not reduce the clause to a bare gerund or noun phrase.\n- When a `what kind/type of ...` question is answered by an established fixed compound classification label whose head is the category noun, return the full compound label exactly as stated. Do not strip the head noun merely because the question also names the category; remove only unrelated descriptive material outside the label. If the leading modifier is only an incidental setting, holiday, season, region, or audience modifier, apply the Style/Type/Genre Modifier Stripping rule below instead.\n- After selecting a short candidate, compare it to the direct-evidence phrase and the answer type. If the candidate was formed by dropping words from the evidence phrase and the remaining text is not a complete answer of that type, restore the omitted evidence wording.\n",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Measurement and Full-Sentence Evidence\n\n- For `How high / tall / deep / far / long ...?` questions, locate an explicit measurement sentence in any supplied context block. Treat `mount`, `mountain`, `hilltop`, `peak`, `elevation`, and `height` as related surface forms when searching for elevation facts.\n- If the target entity's own block names or references a related mountain, hill, building, or other measurable feature but does not state the requested measurement, open that named feature's context block and copy the complete measurement sentence exactly as written, including the subject, number, unit, and qualifiers such as `above sea level`.\n- Do not answer `not stated` until all related named features and their context blocks have been checked for an explicit measurement clause.\n- When the requested measurement is stated as a full evidence sentence, return the whole sentence verbatim rather than reducing it to only a number or unit; this is an exception to the short-answer rule because exact-match grading may require the complete evidence clause.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Style/Type/Genre Modifier Stripping\n\n- For questions that ask for a style, type, genre, kind, or similar category value, when the direct evidence uses a compound premodifier plus the requested category noun and the premodifier is only an incidental setting, season, holiday, occasion, region, or target-audience modifier (e.g., `Christmas comedy film`, `summer drama`, `holiday romance`), return only the core style/type term that answers the question (`comedy`, `drama`, `romance`). Omit those incidental leading modifiers and do not repeat the category noun unless the question asks for that noun.\n- Keep a leading modifier only when the question explicitly asks for that specific variant, subcategory, occasion, season, holiday, region, or audience, or when the full phrase is a fixed established genre label whose modifier is essential to the classification.\n- Before finalizing, compare the chosen term with the question's requested value class and remove any extra descriptor that specifies when, where, or for whom the work appears rather than what kind of work it is.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "78a06f7c32cb4b03e1db74563afcb45b143525dc135a0b144212e6e2f18b07ed",
+    "score": 0.8133333333333334,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00153-decision.json",
+    "epoch": 2,
+    "step": 10,
+    "patch": {
+      "reasoning": "Merged the failure-priority proposal set with the success-only proposal set. One cross-source overlap occurs on the location bullet: both proposals replace the same existing location rule. Because failure fixes have priority, I kept the failure location rule as the base and folded in the non-contradictory success-only details (base/station/park/county examples and the named-facility-plus-city example); support_count is summed to 8 so the success evidence is not lost. The unique failure edits (entity/title rule, Procedure step 4, Hard Constraints) are preserved, and the unique success Skill Invocation append is kept.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For organization, company, distributor, studio, label, periodical, publication, treaty, agreement, act, law, work, or similar named/titled entity, return the full canonical title exactly as stated in the direct evidence sentence, including leading articles such as `The`, suffixes such as `Films`, `Company`, `Corporation`, `Inc.`, or `Ltd.`, year/date/ordinal components that are part of the full title (e.g., `of <year>`), and subtitles after a colon or dash. Do not shorten the target entity's full title to a bare headword, common short form, or version stripped of the leading article/year/subtitle, even if a shorter form appears in another context block, in an intermediate bridge mention, or in the question.",
+          "target": "- For organization, company, distributor, studio, label, or similar named entities, return the full canonical name exactly as stated in the direct evidence sentence, including suffixes such as `Films`, `Company`, `Corporation`, `Inc.`, or `Ltd.`. Do not shorten the target entity's name to the bare headword, even if a shorter form appears in another context block or in an intermediate bridge mention.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For location, venue, base, or place questions, return the complete multi-part location/base name phrase exactly as written in the direct evidence sentence, including comma-separated city, state/region, or country qualifiers, or a named airport, base, station, park, venue, or other facility plus its city qualifier when that full phrase is the stated location. Do not truncate a multi-part location/base name to the first named place or drop trailing state/region/country qualifiers, even when the question asks about an airport, station, city, county, base, park, or venue or uses a shorter label. If the evidence pairs a named facility with a following geographic qualifier, keep the full phrase as written (e.g., return `Airport Name, City` rather than only the airport name). Do not append associated venue or organization details unless the question asks for them, and do not delete geographic qualifiers that belong to the canonical place name.",
+          "target": "- For location questions, return only the location name as stated, without appending associated venue or organization details unless the question asks for them.",
+          "support_count": 8,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "95612ea2bacba38de4ccb2f79af25f39b95e0221014e596bd84c35b0ad8ac8b4",
+    "score": 0.8066666666666666,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00167-decision.json",
+    "epoch": 2,
+    "step": 11,
+    "patch": {
+      "reasoning": "Merged the failure_first proposals. The failure-sourced person-name replacement and the success-sourced location replacement target separate existing bullets, so both are retained without overlap. The range/direction, skill invocation, and intersection/earliest-year additions are non-overlapping append-only sections with distinct source types, so they are kept as separate appends to preserve source_type and support_count. Failure priority does not change any edit because no failure and success edits directly conflict on the same target.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For person questions, return the full canonical name from the person's own context block rather than a shorter or common version. If the person's own block or parenthetical introduction provides a fuller legal name, use that fuller form even when the sentence that establishes the answer relationship uses only a shortened first-last form. Include given names and quoted nicknames exactly as stated in that own block, not from bridge/cross-reference sentences or shorter labels used in the question; cross-reference and credit mentions are useful for locating the person but are not authoritative for canonical-name spelling. In comparison questions such as `Who was born later, X or Y?`, first compare the stated birth dates, then return the selected person's full canonical name from their own block rather than a shorter form used elsewhere.",
+          "target": "- For person questions, return the full canonical name from context, including first names and quoted nicknames, rather than a shorter or common version.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Preserving Range and Direction Phrases\n\n- For questions phrased as `from where to where`, `from what to what`, `between ... and ...`, or that ask what an area extends from, copy the complete prepositional phrase from the evidence, including leading words such as `from` and connective words such as `to`.\n- Do not omit leading prepositions under the general short-answer rule; when the requested answer is the phrase itself, function words are part of the exact answer.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For location, venue, base, station, airport, park, or place questions, return the complete multi-part location/base phrase exactly as written in the direct evidence sentence. Keep comma-separated city, state/region, or country qualifiers and named-facility-plus-city forms when they are part of the stated location phrase. Do not truncate a multi-part location/base name to only the first named place, facility, or code. Do not append associated venue or organization details unless the question asks for them.",
+          "target": "- For location questions, return only the location name as stated, without appending associated venue or organization details unless the question asks for them.",
+          "support_count": 4,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Skill Invocation\n\n- When the system prompt instructs you to invoke this skill, call the Skill tool directly and silently at the start of the task. Do not emit an announcement such as `I'll invoke the required skill first.` or any planning text before the tool call.\n- After the skill is loaded, proceed immediately to answer in the requested format.",
+          "target": "",
+          "support_count": 2,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "fedf02085bb0301251b2d097bbedbec8e77473f2c6507cab8cb19b5f27502f37",
+    "score": 0.7966666666666666,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00178-decision.json",
+    "epoch": 2,
+    "step": 12,
+    "patch": {
+      "reasoning": "Merged the failure and success proposals. The overlapping location replacement and Skill Invocation append were combined under failure-source priority, keeping the failure wording as the base and retaining non-contradictory success clarifications; support counts were summed for the combined edits. Non-overlapping success sections and the failure answer-type guards were preserved separately.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For location, venue, base, airport, station, park, or place questions, return the complete multi-part location/base phrase exactly as written in the direct evidence sentence. Keep comma-separated city, state/region, or country qualifiers and named-facility-plus-city forms when they are part of the stated location phrase (e.g., return `[Named Facility], [City]`, not only `[Named Facility]`). A following geographic qualifier is part of the location phrase, not an associated venue or organization detail; keep it. Do not truncate a multi-part location/base name to only the first named place, facility, code, or a shorter label used in the question. Do not append associated venue or organization details unless the question asks for them.",
+          "target": "- For location questions, return only the location name as stated, without appending associated venue or organization details unless the question asks for them.",
+          "support_count": 4,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Work-to-Person and Work-to-Work Bridge Resolution\n\n- When a question names a source work/event and asks for a property of a related named entity (e.g., the artist/creator of a song, the host of an event, the target of a prequel/sequel, or the album on which a work appears), use the source block only to identify the related name. Then open that related entity's own context block and extract the requested property from there.\n- Do not answer from a bridge mention in the source block if it does not directly state the requested property. A shorter or partial name in a bridge mention is not a substitute for the direct evidence in the target entity's own block.\n- For relation terms such as `prequel`, `sequel`, `second single`, `hosted by`, or `from ... album`, first resolve the named work/person that follows the relation, then read that named target's block for the final answer.",
+          "target": "",
+          "support_count": 4,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Indirect, Descriptive, and Member Matching\n\n- When a question identifies the target only by a descriptive relationship (`the actor/actress who hosted ...`, `the singer born on ...`, `which executive worked with ...`), first locate the block that connects that description to a named entity. Then open that named entity's own context block for the answer.\n- If the question asks for a property of that described entity (birth date/year, name, origin, etc.), return the property from the target entity's own block, not from the bridging description unless that same block directly states the property.\n- If the question lists several names/items and asks which one matches a later description, scan the individual named entity/item blocks for the matching description and return the matching named entity/item exactly, not the description itself.",
+          "target": "",
+          "support_count": 4,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Skill Invocation\n\n- When the system prompt instructs you to invoke this skill, call the Skill tool directly and silently at the start of the task without announcing the call or emitting planning text. Do not emit an announcement or planning text before the tool call.\n- After the skill is loaded, proceed immediately to answer in the requested format.",
+          "target": "",
+          "support_count": 5,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "7f5fa8a3540ff255202a52f614ce8a8d2cd13fc697dd439360f65305c6086aa6",
+    "score": 0.8,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00184-decision.json",
+    "epoch": 2,
+    "kind": "slow",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "42fcd4e9782db29a01618a22bb869311c5a9b7b8df642967689d4406a78f1c41",
+    "score": 0.82,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00201-decision.json",
+    "epoch": 3,
+    "step": 13,
+    "patch": {
+      "reasoning": "Merged failure_first replacement/insertion/appending edits with the success append. Kept failure edits for bridge target priority, person names, anaphoric medium tie-breaking, country/place, ordinals/awards, range phrases, and institutions; then appended the broader success evidence sections without overriding those failure-specific priorities.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "4. For multi-hop or bridge questions, use a fact from the first entity's paragraph only to identify the intermediate entity, then read that entity's own paragraph for the answer. When the question asks for a property of that intermediate entity (such as its country, location, or other attribute), prefer the statement in that entity's own paragraph over a conflicting descriptive phrase in the first entity's paragraph. Facts about a target entity may appear inside another entity's description only when the target entity has no own context block or the requested fact is not stated there.",
+          "target": "4. For multi-hop or bridge questions, use a fact from the first entity's paragraph to identify the intermediate entity, then read that entity's paragraph for the answer. Facts about a target entity may appear inside another entity's description, especially in comparisons or shared attributes.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For person questions, use the person's own context block as the canonical name source when the question resolves the person through a bridge mention in another block. If the bridge mention uses a shorter form but the person's own title/introductory sentence contains extra given or middle names, return the fuller form from that own block. If the direct answer relationship is stated in the person's own block with a particular name form, use that form rather than expanding a parenthetical. Include first names, middle names, and quoted nicknames exactly as stated in the canonical source, not from bridge/cross-reference mentions or shorter labels in the question.",
+          "target": "- For person questions, return the full canonical name from context, including first names and quoted nicknames, rather than a shorter or common version.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Ordinal, Rank, and Award Answer Units\n\n- For questions asking for a numbered position (e.g., `What number of President ...?`, `What rank ...?`), return the ordinal form exactly as it appears in the direct evidence sentence, including the suffix (`st`, `nd`, `rd`, `th`) or spelled-out ordinal word. Do not convert it to a cardinal number.\n- For award/prize/title questions, return the bare award proper title requested. If the evidence phrase is `[Awarding Body/Org] [Award Name] awards`, omit the awarding-body prefix and the plural head word `awards`; return only `[Award Name]`. Keep an organization prefix only when it is part of the award's own official title or the question explicitly asks for the full official award name.\n- Before finalizing, check the question's requested unit and compare the candidate to the exact evidence phrase: keep required suffixes and remove only words outside the requested value, such as an awarding organization prefix or plural category word.",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Date and Title Disambiguation for Bridge Questions\n\n- When a question supplies a year, date, ordinal, or title and multiple context blocks have similar names or releases, first select the block that explicitly matches the supplied date/year and type (album, song, publication, event, institution, etc.). Use that selected block as the bridge source; do not answer from a same-title block with a different date or medium.\n- If the selected work/entity block names a related single, album, contributor, or organization, open that related entity's own context block and extract the requested property from there, preserving the exact wording used in the final evidence sentence.\n- When the question gives a birth or death date plus another fact, first find the person block whose `(born ...)` or death date matches the supplied date, then confirm the other fact in the linked work or target block before answering.\n- For questions asking who appeared on, wrote, directed, produced, or otherwise contributed to the selected work, return only the named contributor stated in the relevant evidence sentence from the selected work's own block.\n\n## Resolving Indirect Descriptions and Relational Bridges\n\n- When the question identifies an entity by a descriptive phrase, achievement, relationship, or other indirect wording rather than by name, locate the context block that connects that description to a named entity. Use that named entity as a bridge, then open its own context block for the requested property.\n- For phrases such as `presented by`, `founded by`, `fronted by`, `made his debut in`, `since`, or `came ashore`, match the relation verb or phrase in the evidence to identify the intermediate entity. Do not return the descriptive phrase itself or answer from a bridge mention unless that same sentence directly states the requested value.\n- Do not answer from a block that merely repeats surface wording such as `originally part of`, `later became`, or a descriptive label for a brand or facility. Extract the named entity referred to and verify the requested fact in that entity's own block.\n- For product, brand, work, or place chains, identify the linked organization or entity from the source block, then read the linked entity's own block for the requested property. For example, if a product block names its producer and the question asks when that producer was founded, read the producer's own block for the founding year.\n- When a context block describes an entity being used, mentioned, or connected `in conjunction with`, `alongside`, or as a counterpart to another named entity, treat that other entity as a bridge. Open that other entity's own context block for the requested attribute or classification, and take the answer from there rather than from the original mention block.\n- When a work's or entity's own block gives a long list of names and the question asks for the list member who also satisfies an external descriptor, locate that descriptor in another supplied context block, identify the matching named entity, and return that list member exactly as written in the work/entity evidence sentence.\n- Continue tracing bridge relationships until the requested property is directly and explicitly stated in the target's own block; do not return an intermediate bridge mention as the final answer unless that mention itself directly states the requested property.\n\n## Person-Credit, Contributor, and Epithet Bridges\n\n- For `who wrote/directed/hosted/created ...` questions, use the named work's own block to identify the credited person, then return the person's full canonical name from their own block, not a shorter form used in a bridge mention.\n- If a singular author/creator question points to a work credited to multiple people, return the first named credited person unless the question explicitly asks for all.\n- When the requested answer is a death year reached through an intermediate person, open that person's own block and return only the year from the stated death date.\n- For questions that start from a work and ask about someone who wrote, foreworded, composed, or made a guest appearance on it, first read the work's own context block to identify the person's name. Then read that person's own block for the requested biographical property or quoted epithet/description.\n- If the question asks what the person is often called, return the exact descriptive phrase from the person's own block without adding quotation marks, a sentence frame, or an explanation.\n- If the question asks for the person's nationality, birth date, role, or another biographical attribute, find the explicit predicate in the person's own block and copy only the requested value exactly as stated, preserving diacritics and name forms.\n\n## Institution, Ownership, Location, and Shared-Venue Bridges\n\n- For workplace or employment statistic questions, use the person's block only to identify the current institution, then open that institution's own block for the requested enrollment, staffing, or other statistic.\n- When a question asks what two targets share and one target's own block does not state the property, look for a linked venue, club, team, institution, or event in that block and open that linked target's block; the shared attribute is often stated there.\n- For event-to-place bridges, a named club or venue in the place or event block can establish the shared sport, organization, or activity.\n- If the question asks for an adjacent geographic feature, landmark, city, state, or similar location of an entity, and that entity's own block says it is part of, located by/at/near, or operated by another named entity, open that other entity's own block and return the requested feature exactly as stated there.\n- For chained location questions such as museum/institution -> university/company -> park/landmark, follow each named entity to its own context block until reaching the requested feature. Return only the final named feature, not an intermediate organization or broader region.\n- When the answer is a named park, building, landmark, city, state, region, or similar place, reuse the exact wording from the final evidence sentence and do not append additional venue or organization details unless the question asks for them.\n- If the requested attribute or value is stated in a target block, return that exact wording or number rather than a more general term.\n\n## Comparison and Classification Checks\n\n- For non-yes/no `who/which died earlier/later` or `who was born earlier/later` questions, compare the parseable date or year in each entity's own block and return the selected entity's name exactly as written there.\n- When a question asks `Between X and Y, which ...?`, `X and Y ... which one ...?`, or `X and Y are both ... which one ...?`, evaluate the requested property against each named candidate's own context block, then return the named candidate exactly as stated, not the property, family, genre, class, or type.\n- For compound-subject yes/no questions such as `Do X and Y have P?` or `Are X and Y P?`, answer `yes` only when the context explicitly states the compared property for both named entities. If explicit support is present for only one entity, or one entity has a different or contradictory attribute, answer `no`.\n- If the question asks which of two named candidates belongs to a specified family, genre, class, or type, use each candidate's own definitional or first-sentence evidence and return the candidate whose own block contains the requested label.\n- For yes/no `Are X and Y both names of Z?` classification questions, answer `yes` only when the context supplies an explicit class marker for each target, such as genus/species/botanical name for plants or book/film/novel for works. Incidental mention of a target name is not enough.\n- For numeric bridge answers such as `how many full-time students ...`, copy the number exactly from the target entity's own block, preserving internal comma formatting such as `2,300`.\n\n## Multi-Condition Intersection and Direct-Evidence Stopping\n\n- When a question requires two or more independently stated facts, scan the relevant context blocks separately and collect candidate entities for each condition. Return only the entity that satisfies all conditions.\n- For questions asking which person or entity is associated with both A and B, compare the named people, teams, titles, or works in the two relevant blocks and return the shared entity exactly as stated. Do not answer from a block that matches only the surface wording or only one condition.\n- When a date, capacity, or other numeric clue is given alongside a second fact, use the numeric clue to select the correct block, then confirm the second fact in that same block or in the linked entity's own block.\n- When a question defines the answer by two or more independent conditions, first resolve one distinctive condition to obtain candidate entities, then verify every remaining condition in each candidate's own context block or directly linked block.\n- If the two conditions are stated in different context blocks, verify the candidate name is present in both relevant evidence sentences before answering; a match on only one condition is insufficient.\n- Once an explicit direct-evidence sentence satisfies every stated condition, stop scanning and return the requested short answer; do not keep searching for alternative named entities or infer a different entity from outside knowledge.\n\n## Skill Invocation\n\n- When the system prompt instructs you to invoke this skill, call the Skill tool directly and silently at the start of the task. Do not emit an announcement or planning text before the tool call.\n- After the skill is loaded, proceed immediately to answer in the requested format without restating the question or adding commentary.",
+          "target": "",
+          "support_count": 5,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "c7675c82c720a40c3321728ef35352b6366b463777edb926c83ad2354a57f48b",
+    "score": 0.82,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00214-decision.json",
+    "epoch": 3,
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "reason": "invalid_patch",
+    "error": "edit target must occur exactly once in the skill",
+    "accepted": false,
+    "step": 14,
+    "patch": {
+      "reasoning": "Merged the failure_first proposals. Failure edits were applied for the attribute/category and person-name bullets. Overlapping comparison-rule edit in Procedure step 5 was merged from both failure and success, keeping the failure who-born/died-later/earlier name rule as priority while adding the success non-yes/no, quantitative/frequency, and operational-breadth rules; its source_type is kept as failure due cross-source priority and support_count is aggregated from both proposals. Success-only multi-hop, birth-date, location, and append edits were preserved.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "For attribute/category questions such as `What style/type/genre of ...?` or questions that already name the requested category or unit (e.g., `what genre of films`, `what type of music`), return only the exact requested value from the context. Do not copy the whole descriptive noun phrase or incidental setting/audience modifiers. However, when the context answers with a fixed compound classification label whose head is the requested category noun, return the complete compound label exactly as stated, including the head category noun. Do not strip the head merely because the question also uses that word. For example, if the evidence classifies X as `<modifier> <category>`, return both the modifier and the category noun.",
+          "target": "For attribute/category questions such as `What style/type/genre of ...?` or questions that already name the requested category or unit (e.g., `what genre of films`, `what type of music`), return only the exact requested value from the context. Do not copy the whole descriptive noun phrase, the entity/category head, or the category noun already present in the question.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- For person questions, return the name exactly as stated in the direct evidence sentence that supplies the answer. Include first names, middle names, and quoted nicknames when the direct evidence sentence includes them, rather than substituting a shorter or common version. If the direct evidence sentence uses a shorter first-last form while another context heading or parenthetical introduction gives a fuller legal name with extra given names, return the shorter direct-evidence form; expand to the fuller legal name only when the question explicitly asks for the full legal name or the direct evidence sentence itself uses the fuller form. For identification questions that resolve through a cross-reference in another entity's block, use the name as it appears in that answering sentence rather than substituting the name from the person's own introductory sentence. For comparison questions asking `Who was born/died later/earlier`, first determine the selected person by comparing dates/years, then return that selected person's full canonical name exactly as stated in their own context block or the direct evidence sentence supplying the date, even if the question or bridge sentences use a shorter form. Do not use the shorter option label from the question as the answer.",
+          "target": "- For person questions, return the full canonical name from context, including first names and quoted nicknames, rather than a shorter or common version.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "4. For multi-hop or bridge questions, use a fact from the first entity's paragraph only to identify the intermediate entity, named relation, or described person. Then open that entity's own context block and take the requested value from an explicit evidence sentence there. If that paragraph only points to another named relation, continue following the chain until the requested property is stated directly. When a relationship such as `collaborator`, `winner`, `member`, owner, operator, or an award/role description can point to multiple named candidates, first collect the named candidates from the relationship evidence, then check each candidate's own context block for the requested property and return only the candidate that explicitly satisfies it. Use descriptive bridges such as `the best actress`, `the person who hosted`, `the award winner`, `the actress/actor who plays <role>`, `the composer/author of <work>`, or `the manager of <team>` only to identify the named person or work; then open that person's or work's own block for the requested biographical, property, or next-hop answer. For ownership/operator chains, first identify the operator or parent entity named in the target's own block, then open that entity's own context block and return the owner exactly as stated there; if the question asks for the owner of that operator, keep tracing one bridge step until the requested owner is stated explicitly. Facts about a target entity may appear inside another entity's description, especially in comparisons or shared attributes, but prefer the target block where the requested relation is directly stated. Once an explicit direct-evidence sentence in the target's own block provides the requested fact, stop scanning and return the exact short answer from that sentence; do not keep searching for alternative entities or add outside information.",
+          "target": "4. For multi-hop or bridge questions, use a fact from the first entity's paragraph to identify the intermediate entity, then read that entity's paragraph for the answer. Facts about a target entity may appear inside another entity's description, especially in comparisons or shared attributes.",
+          "support_count": 14,
+          "source_type": "success"
+        },
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "5. For comparison questions, extract the same comparable property or value for each candidate and compare them directly, preferring each candidate's own context block when the property is stated there. For non-yes/no comparison questions such as `Between X and Y, which one ...?`, `Which of X and Y ...?`, `X and Y ... which one ...?`, or `Who had more ...?`, return only the selected candidate's exact name as written in the supplied context, not the property, category, number, unit, or descriptive phrase. For `who was born/died later/earlier` questions, after comparing dates/years, return the selected person's full canonical name exactly as stated in their own context block or the direct evidence sentence supplying the date, not a shorter name from the question or a bridge mention. For yes/no comparisons, answer `yes` only when the context explicitly states the compared attribute for both entities; broad descriptions such as `multi-instrumentalist` do not establish a specific instrument, so answer `no` if explicit support is missing. However, if each target's own context block explicitly lists the required role components separately (e.g., `singer, songwriter`) rather than as an exact compound (`singer-songwriter`), treat that as sufficient for `yes`. For quantitative/frequency comparisons, convert count and frequency expressions in each candidate's own block to numeric values: group-size labels such as `duo`, `trio`, or `quartet`; explicit member counts; statements like `publishes N issues a year`; and frequency words such as `quarterly`, `monthly`, or `weekly`. Prefer the target entity's own block for the compared number or frequency; if not stated there, inspect directly linked blocks. For questions asking which candidate operates more widely or broadly, prefer the candidate whose evidence states multinational, global, or multi-country operations over one limited to a single city or region. If only one candidate has explicit support for the requested property, select that candidate rather than inferring from outside knowledge.",
+          "target": "5. For comparison questions, extract the same comparable property or value for each candidate and compare them directly. For yes/no comparisons, answer `yes` only when the context explicitly states the compared attribute for both entities; broad descriptions such as `multi-instrumentalist` do not establish a specific instrument, so answer `no` if explicit support is missing.",
+          "support_count": 5,
+          "source_type": "failure"
+        }
+      ]
+    }
+  },
+  {
+    "file": "00228-decision.json",
+    "epoch": 3,
+    "step": 15,
+    "patch": {
+      "reasoning": "Merged the failure_first and success proposal groups. The failure edits are kept with source_type=failure and take priority where cross-source guidance overlaps. The success comparison replacement and appended sections are retained with source_type=success, with the Descriptive Predicate section adjusted to defer to the failure role/activity wording rather than contradict it. Redundant overlapping success proposals had already been consolidated, and no SLOW_UPDATE regions were introduced.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "7. Before answering that something is not stated, verify the requested property under all plausible surface forms and related terms (e.g., area vs. volume, size vs. capacity, height vs. elevation vs. altitude, and `mount` vs. `mountain` vs. `peak` vs. `hill`). If the target entity's own block lacks the property, inspect that block for explicit spatial or distance links (`near`, `<N> km from`, `on`, `in`, `part of`, `overlooks`, `situated on`) and open any named geographic feature identified there. If that linked block states the requested property in a complete evidence sentence, return that full evidence measurement phrase exactly (including its subject and units) rather than `not stated` or only the numeric fragment.",
+          "target": "7. Before answering that something is not stated, verify the requested property under all plausible surface forms and related terms (e.g., area vs. volume, size, capacity); prefer the context's stated value and units.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Exact Role and Activity Wording\n\n- When a question asks what sport, activity, profession, or role a person participates in, plays, competes in, or is associated with, locate the context sentence that directly describes the person with `is/was a/an [role]` or similar and return that exact role or predicate noun phrase as written.\n- Do not convert a stated participant or role noun into a gerund or abstract activity form. For example, if the context says `racer`, do not answer `racing`; if it says `player`, do not answer `playing`. The supplied context wording is authoritative even when the question uses the word `sport`.\n- If the same role phrase is stated for multiple people, copy the exact phrase from the direct evidence rather than substituting a synonym, pluralized form, or normalized field name.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Bridge, Distractor, and Own-Block Resolution\n\n- When a question starts from a named work, person, event, or other entity and asks for a property of another named entity linked to it, use the first context block only to identify that linked entity. Then open that linked entity's own context block and take the requested value from an explicit evidence sentence there. Linking may be expressed through possessives, rank terms such as `second`, `first`, or `last`, or relation phrases such as `lead single from`, `found at`, `released by`, `named after`, `published by`, or `used in`.\n- Do not answer from the source block unless that same block directly states the requested property. Do not return an intermediate mention as the final answer unless that same sentence directly states the requested value.\n- If the source work block contains a contributor list or set of participants, first match the requested descriptor to a named contributor, then use that name as a bridge to the contributor's own block.\n- For attributes such as party, team, title, opening year, role, character, nationality, or date, prefer the target entity's own context block over a shorter bridge mention in another block.\n- Multiple context blocks may share the same role word, title word, city name, person name, number, or label. Filter candidates by every constraint supplied in the question, such as year, rank, relationship, title, type, country, or event, and ignore blocks that match only a surface word.\n- When several supplied context blocks share the same name, title, number, or label, select the block whose title or first sentence matches the jurisdiction, state, region, country, date, or type specified in the question. A surface mention of a matching string in another block is insufficient; the chosen block must also match those qualifiers.\n- For chained links, follow the named entities one block at a time until the requested property is stated explicitly.\n",
+          "target": "",
+          "support_count": 15,
+          "source_type": "success"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n\n## Skill Invocation\n\n- When the system prompt instructs you to invoke this skill, call the Skill tool directly and silently at the start of the task. Do not emit an announcement such as `I'll invoke the required skill first.` or any planning text before the tool call.\n- After the skill is loaded, proceed immediately to answer in the requested format.\n",
+          "target": "",
+          "support_count": 8,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "a0f748f41d63a161e5ffdcb55111d2c9c7ff82418ee96fd6225b040cd1a25f04",
+    "score": 0.8333333333333334,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00241-decision.json",
+    "epoch": 3,
+    "step": 16,
+    "patch": {
+      "reasoning": "Merged the overlapping Skill Invocation append from the failure and success groups into one failure-priority edit that keeps the non-conflicting success details other than the duplicate section break. Applied the non-overlapping success and failure replacements, then appended the remaining distinct failure and success sections. No edits were dropped except the duplicate Skill Invocation heading; the remaining sections were retained as complementary evidence.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "- Before finalizing, compare the answer with the wording in the direct evidence sentence and, for bridge questions, with the most specific named entity's own context block. Exact-match grading may require context wording rather than synonyms: preserve middle names, pen-name/pseudonym cue values, and complete descriptive phrases; do not shorten a canonical name or drop words that are part of the evidence phrase.",
+          "target": "- Before finalizing, compare the answer with the wording in the relevant context sentence; exact-match grading may require context wording rather than synonyms.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Most-Specific Block and Name Cues\n\n- When a question names a specific work, person, or member and that entity has its own supplied context block, open that specific block before finalizing. Prefer its wording over a shorter mention in a containing series/group/work block or credit list.\n- For bridge questions that resolve to a person, use the person's own context block as authoritative for name spelling. If its title/introductory sentence gives a full name with middle names before a parenthetical birth/death note, return that full form rather than a shorter first-last form used in a bridge mention.\n- For questions asking what name an author uses or wrote under (`pen name`, `pseudonym`, `alias`, `as`), locate the explicit cue phrase such as `under his pen name of` and return the exact pen name that follows it. Do not replace it with the author's legal name or a work title, and do not omit part of the pen name when the cue phrase includes it.\n",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Skill Invocation\n\n- When the system prompt instructs you to invoke this skill, call the Skill tool directly and silently at the start of the task before reading or answering. Do not emit visible planning text, an announcement (e.g., `I'll invoke the required skill first.`), or any explanatory lead-in before the Skill tool call.\n- After the skill is loaded, proceed immediately with the requested short answer in the requested format, without restating the question or adding commentary.\n",
+          "target": "",
+          "support_count": 9,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/hotpotqa/SKILL.md",
+          "content": "\n## Bridge and Own-Block Resolution\n\n- When a question starts from a named work, event, or person and asks for a property of a related entity, use the source block only to identify the related name, then open that related entity's own context block and take the requested value from an explicit evidence sentence there. Do not answer from the source block unless it directly states the requested property, and do not return an intermediate bridge mention unless that same sentence directly states the requested value.\n- When a question identifies an intermediate entity through a paraphrase or descriptive relationship (e.g., `the event that closed down ...`, `the region where ...`, `the province with area ...`, `the administrative region whose capital is ...`, `the periodical that contained ...`, `the film role of ...`), first locate the context block that explicitly states that descriptive relationship and gives the intermediate entity's name. Use that block only to identify the named target, then open the target entity's own context block when the requested property is stated there.\n- If the target is identified only descriptively (e.g., `the actor born <date>`, `the American professional football player`, `the singer who ...`, `the person who wrote ...`, `the actress who hosted ...`, or `the man who wrote ...`), locate the person/entity block that explicitly matches that descriptor, then answer the final property from that block, not from the source block that merely mentions the descriptor.\n- For relational words such as `prequel`, `sequel`, `lead single`, `second album`, `featured on`, `starring`, `credited as`, `recorded for`, or `also stars`, treat the phrase after the relation as the linked title/name. Read that linked title's or person's own block for the requested date, character, role, or other property.\n- In film/work questions asking for a character played by a named person in a work that also features a described other person, locate the work block that contains both the named person and the described other person, then return the role/character from that same block exactly as written.\n- Prefer the target entity's own block when it states the requested property; use another entity's description only when the target block lacks the property or the question explicitly points to that other description.\n- If the bridge mention uses a shorter name, title, or label, still open the named entity's own block and use its direct evidence wording for the final answer.\n- For questions that supply both a named source and a numeric/descriptive clue, match the clue against all supplied context blocks. If a block explicitly contains the matching descriptor, use it even when the entity's own block does not restate that clue.\n- When the final answer is a named title, treaty, periodical, organization, or location, copy the exact wording from the direct evidence sentence, including leading articles, subtitles, year suffixes, and canonical full names where present.\n- If multiple blocks match the question's surface words, use all supplied qualifiers such as year, medium, rank, jurisdiction, or relationship to select the matching block, and ignore blocks that only repeat a shared word.\n",
+          "target": "",
+          "support_count": 6,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "candidate_id": "cc1078c04fb796c56814074a792b094a54840e130548fdf03b0b69605c3d7c3e",
+    "score": 0.8133333333333334,
+    "baseline_score": 0.8433333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00246-decision.json",
+    "epoch": 3,
+    "kind": "slow",
+    "parent_id": "80d7a3bc655227693f84bb1861aaeb94d26d73f3646124753ca78eb33740d78a",
+    "reason": "invalid_patch",
+    "error": "slow guidance requires an existing text path and string content",
+    "accepted": false,
+    "response": "{\"guidance\":[{\"path\":\"existing/skill.md\",\"content\":\"Update the answering rules with these persistent fixes:\\n- For person questions, return the full canonical name exactly as the person's own context block states, including full first/middle names and quoted nicknames. Example: if the context says `Lee Earle \\\"James\\\" Ellroy`, return `Lee Earle \\\"James\\\" Ellroy`, not `James Ellroy`.\\n- For bridge/comparison questions asking for a well-known college or university where the context lists both `Harvard University` and `Harvard Business School`, return the plain base institution name `Harvard`, not `Harvard University` or `Harvard Business School`, unless the question explicitly asks for the full organizational name.\\n- Keep all existing rules requiring exact context wording and short answers.\"}]}"
+  }
+]

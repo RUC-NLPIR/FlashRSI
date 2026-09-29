@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-opro-miniagent-searchqa-20260925-seed42",
+  "contributor": "cassi",
+  "prepared_at": "2026-09-25T06:18:17.069425+00:00",
+  "framework": {
+    "packaging_commit": "625409a171e2e5c98aff2be41684af87704163b6",
+    "packaging_worktree_dirty": true,
+    "note": "Packaging version only. Execution versions/configurations remain in the saved run; a dirty tree is not reproducible from this commit alone."
+  },
+  "logs": {
+    "path": "logs.tar.gz",
+    "sha256": "5035994df8b63dfc92351e91c70082346638612593cbe7a7920c75a6e772f123",
+    "bytes": 100302082,
+    "uncompressed_bytes": 430831462,
+    "files": 11465
+  },
+  "excluded_transient_files": [
+    "miniagent/process.lock"
+  ],
+  "privacy": "Known local credentials and sk-token patterns checked, including snapshot contents. Original paths/endpoints and prompts are preserved; review before public release."
+}
