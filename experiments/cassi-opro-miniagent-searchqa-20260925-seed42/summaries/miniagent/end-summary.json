@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-25T06:13:20.127809+00:00",
+  "result": {
+    "status": "finished",
+    "primary_metric": "official hard (normalized EM with answer extraction)",
+    "baseline_test": {
+      "tasks": 1400,
+      "finished": 1400,
+      "hard": 0.7721428571428571,
+      "f1": 0.8701858922280513,
+      "exact_match": 0.7721428571428571,
+      "lite_f1": 0.8703077236559973
+    },
+    "evolved_test": {
+      "tasks": 1400,
+      "finished": 1400,
+      "hard": 0.8071428571428572,
+      "f1": 0.8818907148186228,
+      "exact_match": 0.8064285714285714,
+      "lite_f1": 0.8812657148186228
+    },
+    "paired_comparison": {
+      "delta_percentage_points": 3.5000000000000004,
+      "improved_tasks": 82,
+      "regressed_tasks": 33,
+      "paired_bootstrap_95pct_pp": [
+        2.0,
+        5.0
+      ]
+    },
+    "accepted_candidates": 1,
+    "candidate_decisions": 1,
+    "final_snapshot": "446e2ce87574eeb14b65050ee34e10b377b7595e0b22dab840fd3b7b9bd196d4"
+  },
+  "usage": {
+    "roles": {
+      "target": {
+        "finished": {
+          "input_tokens": 22376794,
+          "output_tokens": 3240292,
+          "cache_read_tokens": 9088384,
+          "cache_write_tokens": 0,
+          "usage_entries": 11560,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 11200,
+          "finished_records": 11200,
+          "failed_records": 0,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        },
+        "failed": {
+          "input_tokens": 180754,
+          "output_tokens": 387156,
+          "cache_read_tokens": 137600,
+          "cache_write_tokens": 0,
+          "usage_entries": 37,
+          "usage_entries_missing_tokens": 1,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 22,
+          "finished_records": 0,
+          "failed_records": 22,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        }
+      },
+      "worker": {
+        "finished": {
+          "input_tokens": 95268,
+          "output_tokens": 56487,
+          "cache_read_tokens": 70656,
+          "cache_write_tokens": 0,
+          "usage_entries": 20,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 20,
+          "finished_records": 20,
+          "failed_records": 0,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        }
+      }
+    },
+    "total": {
+      "input_tokens": 22652816,
+      "output_tokens": 3683935,
+      "cache_read_tokens": 9296640,
+      "cache_write_tokens": 0,
+      "usage_entries": 11617,
+      "usage_entries_missing_tokens": 1,
+      "sdk_cost_entries": 0,
+      "duplicate_usage_entries": 0,
+      "records": 11242,
+      "finished_records": 11220,
+      "failed_records": 22,
+      "sdk_cost_usd": null,
+      "cost_bases": []
+    },
+    "gateway_actual_cost_usd": null,
+    "scope": "canonical_cache"
+  },
+  "models": {
+    "target": "deepseek-v4-flash",
+    "worker": "deepseek-v4-pro"
+  }
+}

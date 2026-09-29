@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T05:58:11.867082+00:00",
+  "result": {
+    "status": "finished",
+    "primary_metric": "exact_match",
+    "baseline_test": {
+      "tasks": 300,
+      "finished": 300,
+      "f1": 0.6790484677016646,
+      "exact_match": 0.51
+    },
+    "evolved_test": {
+      "tasks": 300,
+      "finished": 300,
+      "f1": 0.6684401889433859,
+      "exact_match": 0.52
+    },
+    "paired_comparison": {
+      "delta_percentage_points": 1.0,
+      "improved_tasks": 17,
+      "regressed_tasks": 14,
+      "paired_bootstrap_95pct_pp": [
+        -2.666666666666667,
+        4.666666666666667
+      ]
+    },
+    "accepted_candidates": 1,
+    "candidate_decisions": 1,
+    "final_snapshot": "79b09f9f333f920f2dd9e2961794fbe02fbb0f32a90ec45a923ead683f0c689c"
+  },
+  "usage": {
+    "roles": {
+      "target": {
+        "finished": {
+          "input_tokens": 10188633,
+          "output_tokens": 1884718,
+          "cache_read_tokens": 4564168,
+          "cache_write_tokens": 0,
+          "usage_entries": 3992,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 3750,
+          "finished_records": 3750,
+          "failed_records": 0,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        },
+        "failed": {
+          "input_tokens": 132217,
+          "output_tokens": 248567,
+          "cache_read_tokens": 120952,
+          "cache_write_tokens": 0,
+          "usage_entries": 18,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 6,
+          "finished_records": 0,
+          "failed_records": 6,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        }
+      },
+      "worker": {
+        "finished": {
+          "input_tokens": 115964,
+          "output_tokens": 68251,
+          "cache_read_tokens": 85632,
+          "cache_write_tokens": 0,
+          "usage_entries": 20,
+          "usage_entries_missing_tokens": 0,
+          "sdk_cost_entries": 0,
+          "duplicate_usage_entries": 0,
+          "records": 20,
+          "finished_records": 20,
+          "failed_records": 0,
+          "sdk_cost_usd": null,
+          "cost_bases": []
+        }
+      }
+    },
+    "total": {
+      "input_tokens": 10436814,
+      "output_tokens": 2201536,
+      "cache_read_tokens": 4770752,
+      "cache_write_tokens": 0,
+      "usage_entries": 4030,
+      "usage_entries_missing_tokens": 0,
+      "sdk_cost_entries": 0,
+      "duplicate_usage_entries": 0,
+      "records": 3776,
+      "finished_records": 3770,
+      "failed_records": 6,
+      "sdk_cost_usd": null,
+      "cost_bases": []
+    },
+    "gateway_actual_cost_usd": null,
+    "scope": "canonical_cache"
+  },
+  "models": {
+    "target": "deepseek-flash",
+    "worker": "deepseek-v4-pro"
+  }
+}

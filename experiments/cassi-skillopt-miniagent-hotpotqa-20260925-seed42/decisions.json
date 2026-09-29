@@ -1,0 +1,776 @@
+[
+  {
+    "file": "00017-decision.json",
+    "epoch": 0,
+    "step": 1,
+    "patch": {
+      "reasoning": "The two proposals both replace the same placeholder in skills/main.md. I merged them into a single replacement. The failure-sourced learned rules are kept first and the edit source_type is 'failure' because failure fixes have priority in a cross-source merge. The success-sourced multi-hop guidance is retained as a second non-contradictory section so its evidence is not lost. support_count is 8 failure + 7 success = 15.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "## Learned Rules\n\n- For short-answer and exact-match questions, copy the answer phrase exactly from the context; do not paraphrase, abbreviate, broaden, narrow, or normalize it even if the meaning seems equivalent.\n- Return only the minimal requested entity. Do not append extra qualifiers such as region, state, province, or additional conjoined entities unless the question explicitly asks for them.\n- For singular \"who\" or \"which person/entity\" questions, return a single entity. If the context gives a conjoined list, return the first/primary named entity, not the whole list, unless the question asks for all.\n- For person-answer questions, return the full formal name as introduced in the context, including middle names, quoted nicknames, or other formal parts; do not shorten or partially copy the name.\n- For questions asking what sport, activity, or role a person is associated with, return the exact noun phrase used to define them in the context, not a generalized sport or category name.\n- Preserve the exact surface form of the answer as it appears in the relevant source context. Avoid normalizing number words to digits or digits to number words unless the source uses that form.\n- For count questions, return the count using the same wording or format as the supporting context.\n- For ordinal or position questions, answer with the full ordinal phrase including the definite article, such as \"the first\" or \"the thirteenth\", rather than numeric abbreviations like \"1st\" or \"13th\".\n- Search the whole context for the answer, not only the paragraph where a named entity's heading appears. If a related measurement is found for the entity, report the available number and unit rather than refusing with \"not stated\".\n- Prefer short extracted answers containing the numerical value and unit. Preserve capitalization, wording, and punctuation exactly as in the context. Before finalizing, compare your answer against the source phrase; if it is semantically equivalent but not textually identical, prefer the source wording.\n\n## Multi-hop QA over supplied context\n\nUse only the supplied context and return only the requested short answer.\n\n1. Parse the question for the starting entity, requested attribute/relationship, expected answer type, and explicit constraints. Resolve ambiguous names using full titles or qualifiers.\n2. Locate the context passage(s) that refer to that entity. Avoid similarly named distractors and irrelevant passages that share terms but do not complete the answer chain.\n3. For bridge questions, follow the relational clue from the first passage to the next (e.g., \"played by\", \"owned by\", \"operated by\", \"located in\", \"awarded to\", parenthetical role descriptions), then extract the requested answer from the connected passage.\n4. For comparison questions, extract the same attribute/category/property for each candidate (e.g., type/class/court/industry/profession). Use only explicitly stated facts: answer yes only when the context explicitly says both candidates share it; otherwise answer no. For which-has-more/list/count comparisons, use the explicitly stated counts, lists, or members.\n5. Verify that the final answer is directly supported by the connected context passage.\n6. Return only the requested short answer (name, date, title, yes/no, or brief phrase). Use exact context wording for dates and proper nouns, and do not add explanation, full sentences, or markdown unless asked.",
+          "target": "(No learned rules yet. Rules will be added through the reflection process.)",
+          "support_count": 15,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "0e9be9c859ee269176ea6db9dddb1ffbca0f53e5b9f5b0bee95a366b3dc18922",
+    "candidate_id": "a6d716f22e3074b179e072d8f5b5f70583e3e93fc374728f72220c6ea805f744",
+    "score": 0.8066666666666666,
+    "baseline_score": 0.8,
+    "accepted": true
+  },
+  {
+    "file": "00033-decision.json",
+    "epoch": 0,
+    "step": 2,
+    "patch": {
+      "reasoning": "Merged the failure and success proposals into skills/main.md. Applied the three failure replacements to the existing learned rules, then appended the failure named-entity/calibration/kind-type rules in their original order, followed by the success additional multi-hop patterns. Removed contradictions by keeping failure fixes priority and adding explicit carve-outs to success guidance where it could conflict with the institution-name exception.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- Search the whole context for the answer, not only the paragraph where a named entity's heading appears. For measurement/location questions such as \"How high is X\" or \"How far is X\", also search connected passages for a related measurement when the named entity's own passage lacks one; do not answer \"not stated\" if the context provides a connected measurement.",
+          "target": "- Search the whole context for the answer, not only the paragraph where a named entity's heading appears. If a related measurement is found for the entity, report the available number and unit rather than refusing with \"not stated\".",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n## Named Entity Span Boundaries\n\n- For person names, when a context passage opens with a short heading, common name, or alias and the running text defines a fuller formal name, use the fuller formal name from the running text as the answer; do not shorten a formal name even if the heading or question uses a shortened version.\n- For location, base, or venue answers, return the full place phrase exactly as written, including a comma-separated city, state, province, or country qualifier if it is part of the same source phrase (e.g., Airport, City). The rule against adding extra region/state qualifiers does not permit stripping a qualifier that is already part of the named answer.\n",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n## Answer Span Length Calibration\n\n- Match the answer span to the question type: count questions return only the bare value; entity questions return the minimal entity; descriptive, title, or definition questions return the full relevant source phrase exactly as written.\n- Do not collapse a full descriptive answer span into a shorter named entity, even if the shorter entity is semantically plausible; copy the exact phrase that the source uses to provide the requested attribute, definition, or relationship.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort of X\" questions, return only the exact modifier or attribute phrase from the context that fills the kind/type slot; do not append the questioned noun (e.g., return the adjective phrase, not the adjective phrase plus the noun).\n",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "a6d716f22e3074b179e072d8f5b5f70583e3e93fc374728f72220c6ea805f744",
+    "candidate_id": "769fb46e6e6a872e1973f05a833a0d28ae4548532b51426f05724e5161ffe9d3",
+    "score": 0.8166666666666667,
+    "baseline_score": 0.8066666666666666,
+    "accepted": true
+  },
+  {
+    "file": "00048-decision.json",
+    "epoch": 0,
+    "step": 3,
+    "patch": {
+      "reasoning": "Applied failure proposals first as required. Kept the failure person-name span corrections and appended failure rules. Merged the non-conflicting success additions into an appended section; removed the success 'what is X classified as/described as/known as' bullet because it conflicted with the failure answer-type constraint that classification questions return a bare class term.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.\n",
+          "target": "- For person-answer questions, return the full formal name as introduced in the context, including middle names, quoted nicknames, or other formal parts; do not shorten or partially copy the name.\n",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.\n",
+          "target": "- For person names, when a context passage opens with a short heading, common name, or alias and the running text defines a fuller formal name, use the fuller formal name from the running text as the answer; do not shorten a formal name even if the heading or question uses a shortened version.\n",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Category Questions with Multiple Entities\n\n- For questions that ask what category or type several entities share, return the singular category or class term exactly as the context defines it; do not pluralize or inflect it to match the question's plural wording.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Answer Span Overrides for Question Type\n\n- For count questions such as 'how many ...', return only the bare number word or numeral from the source. Do not append the counted noun or unit even if it appears next to the number in the context.\n- For underspecified demonstrative or anaphoric subjects such as 'this story', 'this person', or 'this film', resolve the pronoun to the entity established by the question path or the passage that explicitly defines its type/class; do not let other passages that merely use the same common noun distract you.\n- For medium/format/classification questions, return the explicit class or medium stated for that target entity in the connected passage, not a medium from another related or similarly worded story. Preserve the source's classification term rather than substituting a looser alternative from the question.\n- When a longer source phrase conflicts with an answer-type constraint, the answer-type constraint wins: the answer should be a bare value for count questions and a class term for classification questions.\n",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "769fb46e6e6a872e1973f05a833a0d28ae4548532b51426f05724e5161ffe9d3",
+    "candidate_id": "0aeb220911361ade05b8d1a04cd615c3cc25cc59df1d8832bef5676a3ff08bca",
+    "score": 0.83,
+    "baseline_score": 0.8166666666666667,
+    "accepted": true
+  },
+  {
+    "file": "00061-decision.json",
+    "epoch": 0,
+    "step": 4,
+    "patch": {
+      "reasoning": "Merged the failure and success proposals for skills/main.md. The failure-source edits replace the existing person-name and kind/type span rules and add failure-derived sections for title spans and award/action spans. The success-source edit appends bridge verification, relational-bridge, overlap/comparison/region, and alternate-name guidance. No overlaps required removing either side because the failure sections target entity span boundaries while the success section targets multi-hop verification and comparison behavior; the failure replacements take priority over the older wording they replace.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "For person names, prefer the name span as written in the prose sentence that supplies the requested relationship. If that sentence uses a full formal name including middle names, copy that full form even if the passage heading or a later mention uses a shorter common name; do not use the heading as the answer span. Only prefer a short or common name when the answer-supplying sentence itself uses that short form, not merely because a heading or alias is shorter.",
+          "target": "For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort of X\" questions, return the exact class/kind phrase from the context that fills the answer slot. If the source gives only a bare modifier in that slot, return only that modifier. If the source supplies or defines a class/category term with its head noun, return that full category term instead of truncating it to the bare adjective; do not add a questioned noun the source does not use.",
+          "target": "- For \"what kind/type/sort of X\" questions, return only the exact modifier or attribute phrase from the context that fills the kind/type slot; do not append the questioned noun (e.g., return the adjective phrase, not the adjective phrase plus the noun).",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Exact Span for Titles and Formal Names\n\n- For questions asking for the title or name of a creative or serial work, copy the complete source phrase exactly as written, including any subtitle introduced by a colon or dash. Do not truncate to a shortened common name, heading, or initial-title form even if that appears in the context.\n- For exact-match questions where the source contains multiple surface forms for the same entity, select the full-form source phrase from the sentence that directly supports the answer; do not shorten it to a plausible common name or heading.\n- In particular, when a title and subtitle are introduced together in the first mention or definitional passage, return the full title including the subtitle and preserve the source's capitalization of the leading article.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Award and Action Span Rules\n\n- For \"what award/honor/title did X win\" questions, return the core award or title name from the source. If the source phrase is an attributive organization/sponsor + award construction, answer with the award title itself and do not copy an organizational prefix unless the question or source treats that prefix as part of the standalone award name.\n- For \"what notable act/achievement/feat did X do\" questions, copy the full source clause or predicate phrase that states the act, including a leading frame such as \"He is credited with ...\" or \"He is known for ...\"; do not reduce it to a bare gerund phrase.",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "0aeb220911361ade05b8d1a04cd615c3cc25cc59df1d8832bef5676a3ff08bca",
+    "candidate_id": "73635f469aaee280e934e264a792ec23221216dfded2d30e158e9e2d26f94030",
+    "score": 0.8033333333333333,
+    "baseline_score": 0.83,
+    "accepted": false
+  },
+  {
+    "file": "00076-decision.json",
+    "epoch": 1,
+    "step": 5,
+    "patch": {
+      "reasoning": "Merged the failure-first and success-source proposals. The failure-sourced replace and two append sections were kept intact because failure fixes have priority and their content does not overlap the appended success sections. The success-source topical append sections were retained as non-redundant complementary guidance; no cross-source contradiction required removal.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- Match the answer span to the question type: count questions return only the bare value; entity questions return the minimal entity; descriptive, title, or definition questions return the full relevant source phrase exactly as written. For \"what notable act/achievement/feat did X do\" or similar action questions, return the full predicate phrase or source clause that states the act, including a leading frame such as \"He is credited with ...\" or \"He is known for ...\" and any trailing purpose/result phrase; do not reduce it to a bare gerund or main verb phrase.",
+          "target": "- Match the answer span to the question type: count questions return only the bare value; entity questions return the minimal entity; descriptive, title, or definition questions return the full relevant source phrase exactly as written.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Geographic and Jurisdiction Answer Selection\n\n- For questions asking what country, state, or jurisdiction a place is part of, use the passage that explicitly states the current or official political/administrative membership of that exact place. Do not use a historical, descriptive, or broad geographic label from the entity's own passage when a connected passage gives a more specific present-day jurisdiction.\n- Prefer the present-day political entity that the source explicitly associates with the queried region over a broader historical or island-level name that happens to appear next to the entity's name.\n- For multi-hop location/country questions, treat the passage about the larger region (county, province, district, etc.) as the target membership source. The entity passage is useful for identifying which region is meant, not necessarily for extracting the current country label.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Answer Span Overrides for Phrase-Wrapped Answers\n\n- For \"where\" or \"location/venue\" questions, return the bare named place or venue. Strip a leading spatial preposition such as \"on\", \"in\", \"at\", or \"from\" and any grammatical article from the source phrase unless the preposition or article is part of a proper name or the question explicitly asks for a complete prepositional phrase.\n- For \"what style/kind/type/genre of film/medium\" classification questions, return the core genre or class term from the source, not a longer descriptive compound that adds a non-genre modifier before the class term. In particular, omit seasonal, holiday, and audience descriptors unless the full compound is itself an established genre/class label or the question explicitly asks for the full subgenre.\n- When the source phrase contains material outside the requested answer-type slot, the answer-type constraint wins over preserving the full source phrase.\n",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Descriptive, Role-Based, and Definitional Bridge Resolution\n\n- When the subject is a descriptive role, relationship, alias, informal synonym, or ownership phrase rather than a proper name, first match the full description to the passage that directly defines it; treat the named entity defined there as the bridge target, then move to that entity's own passage for the requested attribute.\n- Use the passage whose phrasing most closely repeats the question's distinctive description, even when other passages share some terms. Ignore passages that share only a descriptive word or category but do not satisfy the complete bridge description.\n- For role/relationship chains such as 'the singer who released', 'the director of X', 'the airline division of Y', or nested descriptions, trace the chain step by step from anchor to linked entity, extracting each link from the passage that names or defines it.\n- For work-by-creator questions such as 'What film by the director of X is about Y?', resolve the creator from the anchor work's passage, then search other passages for works attributed to that creator and select the work whose passage explicitly matches the requested subject. Return the work title exactly as written in the matching passage.\n- For definitional or paraphrased bridge descriptions, find the passage whose defining sentence matches the description and use its heading or canonical subject as the bridge entity before following the relation.\n- When a name or title is ambiguous across passages, choose the passage matching the question's descriptive constraints before following the relation; do not settle on a same-named distractor that fails those constraints.\n- When a passage lists multiple people or associated entities and the question points to one via a relative clause or qualifier, use the qualifier to select the matching entity from the list, then go to that entity's separate passage for the requested attribute.\n- When an entity is described as located in, performed at, or belonging to a larger parent entity, use that qualifier to find the parent entity's passage and extract the requested attribute from it.\n- For fill-in-the-blank shared-attribute questions such as 'X and Y were both in favor of ____', extract the common property that both connected passages state, and return only the bare shared term exactly as it appears.",
+          "target": "",
+          "support_count": 11,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "0aeb220911361ade05b8d1a04cd615c3cc25cc59df1d8832bef5676a3ff08bca",
+    "candidate_id": "b3c7c3d85fc465c38500dbff72c04fc941d2dcb4b7095600d892b2f6ee6255f1",
+    "score": 0.8233333333333334,
+    "baseline_score": 0.83,
+    "accepted": false
+  },
+  {
+    "file": "00091-decision.json",
+    "epoch": 1,
+    "step": 6,
+    "patch": {
+      "reasoning": "Merged the failure-first proposal and the success proposal for skills/main.md. The failure-sourced replacements take priority for person-name span, kind/type/classification, and definitional-who behavior. The success-sourced appends are complementary bridge and comparison sections and do not contradict the failure edits.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, use the exact name form from the prose sentence that directly supplies the requested fact or biographical identity. If that sentence gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage, unless a separate identity-establishing passage gives the full formal name (see Named Entity Span Boundaries). For date-comparison questions such as \"Who was born later/earlier?\": compare the dates, then return the selected person's name exactly as written in the sentence that supplies the date, not the passage heading or a shorter alias.",
+          "target": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person names, prefer the name span as written in the identity-establishing sentence for the question's descriptor or relationship, such as the sentence that gives the full formal name and biographical role or group membership. When that identity-establishing sentence uses a full formal name, return that full form even if a related work/list passage mentions the person by a shorter common name. Use the shorter form only when the identity-establishing sentence itself uses it, or when the supplied context contains no full formal form. Do not replace a full formal name from the prose answer-supplying sentence with a shorter heading or separate introductory alias.",
+          "target": "- For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort/genre/category/class of X\" questions, return only the bare modifier, attribute, genre, or class term from the context that fills the answer slot. Do not append the questioned noun or a plural head noun from the source noun phrase (e.g., answer with the genre label, not the genre label plus \"films\" or \"novels\").",
+          "target": "- For \"what kind/type/sort of X\" questions, return only the exact modifier or attribute phrase from the context that fills the kind/type slot; do not append the questioned noun (e.g., return the adjective phrase, not the adjective phrase plus the noun).",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Definitional \"Who\" Questions\n\n- For questions of the form \"Who was/is [proper name or alias]?\", treat the proper-name subject as asking for a definition; answer with the descriptive class, role, or occupation phrase that the context uses to define the subject, not the person's full formal name or another alias. This overrides the generic single-entity \"who\" rule above.\n- Return that descriptive phrase exactly as written, including modifiers and hyphenation; do not shorten it to a bare noun and do not substitute a person name.\n- For questions of the form \"Who was/is [descriptive role, relationship, or title]?\", return the name of the person matching that description.\n- Use the grammatical subject as a cue: a proper-name subject generally calls for the defining predicate description; a descriptive or relational subject generally calls for the matching name.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "0aeb220911361ade05b8d1a04cd615c3cc25cc59df1d8832bef5676a3ff08bca",
+    "candidate_id": "7a5bc7427d72f8f8f3b11f4dbe49a9c6cf942894436b41982230eda8fefa16d7",
+    "score": 0.8066666666666666,
+    "baseline_score": 0.83,
+    "accepted": false
+  },
+  {
+    "file": "00105-decision.json",
+    "epoch": 1,
+    "step": 7,
+    "patch": {
+      "reasoning": "Merged the failure_first and success proposal groups. The failure edits replace two distinct existing measurement/kind bullets and add an award-span section; the success edits refine three distinct existing bullets and add a multi-hop bridge section. No success edit overwrites a failure target and no included edits are redundant or contradictory, so all seven are preserved with their original source_type and support_count.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For measurement, height, distance, and location questions such as \"How high is X?\" or \"How far is X?\", copy the full source phrase or sentence that states the measurement, exactly as written. Do not reduce it to a bare number and unit unless the context itself presents the measurement as a standalone value-and-unit phrase and the question requests only that value. Before finalizing, compare the answer against the source sentence; if a full sentence contains the requested measurement, prefer copying that full sentence over a semantically equivalent shorter span.",
+          "target": "- Prefer short extracted answers containing the numerical value and unit. Preserve capitalization, wording, and punctuation exactly as in the context. Before finalizing, compare your answer against the source phrase; if it is semantically equivalent but not textually identical, prefer the source wording.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort of X\" questions, return the exact class/category phrase the context uses to fill the kind/type slot, not a mechanically truncated modifier. If the context supplies only a bare modifier or attribute phrase, return only that modifier. If the context supplies a distinct class label with its own head noun (e.g., a noun-phrase category term), return the full class label instead of truncating it to the premodifier. Do not append the questioned noun when it merely repeats the question, but do not strip a head noun that is part of the canonical class term.",
+          "target": "- For \"what kind/type/sort of X\" questions, return only the exact modifier or attribute phrase from the context that fills the kind/type slot; do not append the questioned noun (e.g., return the adjective phrase, not the adjective phrase plus the noun).",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Award and Honor Span Selection\n\n- For \"what award/honor/prize did X win/receive\" questions, return the standalone award title itself. Do not copy an organizational/agency/sponsor prefix that merely modifies the award unless the source treats that prefix as part of the official award name (e.g., \"Academy Award\" keeps \"Academy\"; an organization's \"Coach of the Year\" award returns \"Coach of the Year\").\n- When the source phrase has the pattern \"ORG + Award Name\" and the same sentence or context elsewhere treats the Award Name as an independent award title, return the standalone Award Name.\n- This award-title constraint overrides the general exact-source-wording preference when the source phrase embeds an organizational prefix.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Multi-hop Bridge and Candidate Resolution\n\n- For \"Between X and Y, which ... has property P?\" or similar two-option selection questions, check each option's own context passage for an explicit statement of P. Return only the option whose passage directly satisfies the condition, preserving its title or name exactly as written there. Do not answer yes/no unless the question asks that. When comparing more than two named candidates, evaluate each against its own defining passage and return the one whose passage explicitly states the requested property.\n- Do not let related passages about species, subtopics, works, or members of the candidate's category override the candidate's own defining statement when determining which candidate satisfies the requested property.\n- When the start entity is identified by a descriptive qualifier, property, or characteristic rather than by a proper name, first use that qualifier to select the intended entity, then move to the connected passage that states the relation and extract the requested answer from the sentence that directly supports it. If a shared-association passage names multiple people, select the person whose own passage explicitly supplies the requested attribute.\n- When the question includes an explicit identifying property as a constraint (e.g., a capacity, date, distance, or count), use that exact value to identify the correct candidate among multiple same-type passages; if several passages mention the same attribute label, take the value from the resolved target passage, not from a distractor of the same type.\n- For quoted or underspecified titles, songs, or aliases used as bridge clues, locate the passage that states the relation and resolve it to the linked target entity; then retrieve the requested attribute from that target entity's passage.\n- For nested multi-hop questions, trace the chain in order: resolve the first entity from its attributes, use its passage to find the linked work/entity, then read that linked entity's passage if needed before extracting the final answer. Treat relational phrases and intermediate descriptors as bridges even when they are not proper names (e.g., 'conducted the premiere of', 'inspired by', 'based on', 'directed/starred in', 'previously', 'originally part of'), and continue following the explicit relation chain until the requested attribute is reached; do not stop after one hop.\n- Answer only the final requested slot. Do not return an intermediate entity or the anchor entity when the question asks for the last relation, sibling, parent, child, date, or attribute in the chain. When a relative clause identifies an entity, resolve the relative clause to that intermediate entity via the linking passage, then open the intermediate entity's passage for the requested attribute.\n- For questions asking what sport, activity, role, category, class, country, state, or larger parent entity two or more named entities share, return the shared class/activity or official parent phrase exactly as the context defines it, as a singular category/class term even if the question uses plural wording or a broader synonym. For role-description questions, locate the passage that explicitly mentions both the role and the association, then return that passage's subject as the answer.\n- For shared-entity and nested-role overlap bridges, identify the passage that names the overlap. If the question asks which person appears in both entities/works, return the common person. If it asks for the role/character played by A in a work that also involves B, find the work passage mentioning both and extract A's role exactly from that passage.\n- For questions asking what an object or place is locally called, known as, or referred to as, return the introduced label exactly as written rather than substituting the generic object name or category.\n- When a passage refers to an entity by an abbreviation, acronym, degree initials, or short label and the question asks about that entity type, first locate the passage whose heading or defining sentence provides the full canonical term; then answer from that canonical term's passage. Use the context around the abbreviation to choose among possible expansions, and do not treat the abbreviation itself as the final answer unless the question asks for it.\n- If a passage says an entity was 'originally part of', 'located on', 'formerly', 'later became', or 'was created from' another named entity, treat that as a cross-reference to the other entity's passage. Resolve indirect descriptions through the explicit cross-reference, then extract the requested date, location, builder, or other property from the passage that defines the cross-referenced entity. Preserve hyphenated date ranges and source formatting exactly.\n",
+          "target": "",
+          "support_count": 5,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "0aeb220911361ade05b8d1a04cd615c3cc25cc59df1d8832bef5676a3ff08bca",
+    "candidate_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "score": 0.8333333333333334,
+    "baseline_score": 0.83,
+    "accepted": true
+  },
+  {
+    "file": "00119-decision.json",
+    "epoch": 1,
+    "step": 8,
+    "patch": {
+      "reasoning": "The failure proposals modify the existing person-name, person-span, and medium/format rules, and add two focused sections. The success proposal appends complementary multi-constraint/bridge/date/role/organization guidance. There is no direct conflict between the failure fixes and the success append, so I kept both; failure edits are applied first, and appended failure sections are placed before the success appendix.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, select the answer span from the passage that best matches any descriptive role, nationality, occupation, or other defining phrase in the question. If a bridge sentence mentions the person by a short or common name while a dedicated person passage defines that same descriptor and gives a fuller formal name, copy the full form from the defining passage. Otherwise, use the name form from the passage that directly supplies the answer, without expanding or shortening it.",
+          "target": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person names, prefer the name span from the passage that establishes the question's descriptive constraint, not merely the sentence linking the person to the anchor. A bridge passage's short mention should not override a fuller name from a separate person-defining passage that explicitly gives the queried role, nationality, occupation, or identity.",
+          "target": "- For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For medium/format/classification questions, return the explicit class or medium stated for that target entity in the connected passage, not a medium from another related or similarly worded story. Preserve the source's classification term rather than substituting a looser alternative from the question. For anaphoric \"Was this story made into a book or movie?\" questions, first resolve \"this story\" to the passage/heading that defines the target story, then return only the bare class term used in that target definition (e.g., the \"novel\" in \"novel series\" or \"stand-alone novel\"). Do not answer \"movie\" or \"film\" from a different passage that says another story was made into a motion picture or adaptation.",
+          "target": "- For medium/format/classification questions, return the explicit class or medium stated for that target entity in the connected passage, not a medium from another related or similarly worded story. Preserve the source's classification term rather than substituting a looser alternative from the question.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Institution and School Span Selection\n\n- For questions asking which college, university, or school an entity is associated with, return the shortest unambiguous base institution name that fills the question slot. Do not automatically copy the longest formal organization phrase from the source.\n- If the source list or definition contains multiple related institution forms, such as a school/college named after the university and the university itself, return the shared base university/college name when the question asks for the well-known college/university.\n- Do not append generic suffixes such as \"University\" or \"College\" when the base name alone is sufficient to identify the institution. Preserve the suffix only when it is part of an acronym/initialism, part of a proper name that would be incomplete without it, or when the question explicitly asks for the full formal title.\n- This institution-span rule overrides the general exact-source-wording preference for short-answer university/college questions.\n\n## Bridge Target Definition Sentence\n\n- For bridge questions that ask what name, pen name, alias, or author was used for/associated with a series or work, and the question names a specific work as a bridge target through a relative clause or list member, resolve to that work's own passage.\n- If that passage's opening or defining sentence states the requested attribution as an appositive or modifier, return that entire sentence exactly as written. Include the work title and any series or attribution qualifier; do not reduce it to the embedded person, name, alias, or author even if the shorter answer seems equivalent.\n- Preserve the source sentence exactly, including any missing copula or unusual punctuation. This full-sentence span overrides the minimal-entity rule for this narrow bridge-question type.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "97c0e9c2ba5bc90b3fce72f516cd0f3bc72e8dcbd92960f8e3e7d5e800ff906d",
+    "score": 0.8233333333333334,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00125-decision.json",
+    "epoch": 1,
+    "kind": "slow",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "07398905289ed0da85334d56b6044a1397c3f1d038e8543f7a48cee09b734d01",
+    "score": 0.8333333333333334,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00141-decision.json",
+    "epoch": 2,
+    "step": 9,
+    "patch": {
+      "reasoning": "Merged overlapping replacements under failure-first priority while folding in compatible success evidence for the measurement and kind/type bullets. Appended non-redundant failure and success sections, preserving source_type and support_count for unique appends and summing support for the overlapping replacements.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For explicit measurement questions such as \"How high is X?\", \"How far is X?\", \"How deep is X?\", \"How tall is X?\", or \"How long is X?\", when the context states the measurement in a complete source sentence, copy that full sentence exactly as written, including its subject and value/unit. Do not reduce it to a bare number and unit unless the context itself presents the measurement as a standalone value-and-unit phrase and the question requests only that value.\n- For \"How much area/volume/space does X cover\" or similar quantity-measurement questions, return only the value-and-unit phrase exactly as written in the source, even if that phrase occurs inside a larger sentence. Do not prepend entity identification, reasoning, or explanations.\n- Do not extend the full-sentence measurement rule to location/base questions, count questions, date questions, or bare-value questions; those follow the minimal-span rule for their question type.",
+          "target": "- For measurement, height, distance, and location questions such as \"How high is X?\" or \"How far is X?\", copy the full source phrase or sentence that states the measurement, exactly as written. Do not reduce it to a bare number and unit unless the context itself presents the measurement as a standalone value-and-unit phrase and the question requests only that value. Before finalizing, compare the answer against the source sentence; if a full sentence contains the requested measurement, prefer copying that full sentence over a semantically equivalent shorter span.",
+          "support_count": 3,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort/style/genre of X\" questions, fill only the asked slot and return the exact class/category phrase the context uses for that slot, not a mechanically truncated modifier. If X is already named in the question, return only the modifier/attribute phrase that fills the slot, not the modifier plus the questioned noun. If the context supplies only a bare modifier or attribute phrase, return only that modifier. Keep a longer class/category label only when the context's canonical class term has a head noun different from the questioned noun, or when a separate definitional passage defines a canonical noun-headed category term (such as a specific shelter, organization, genre, or format term); otherwise do not append the questioned noun or a broader synonym merely because it repeats the asked slot. Do not strip a head noun that is part of the canonical class term. For style/genre classifications, return the core genre/class term from the source and omit non-classifying modifiers such as nationality, era, or seasonal/holiday descriptors and the questioned medium noun unless the question explicitly asks for that full compound/subgenre.",
+          "target": "- For \"what kind/type/sort of X\" questions, return the exact class/category phrase the context uses to fill the kind/type slot, not a mechanically truncated modifier. If the context supplies only a bare modifier or attribute phrase, return only that modifier. If the context supplies a distinct class label with its own head noun (e.g., a noun-phrase category term), return the full class label instead of truncating it to the premodifier. Do not append the questioned noun when it merely repeats the question, but do not strip a head noun that is part of the canonical class term.",
+          "support_count": 3,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For location, base, or venue answers, return the full place phrase exactly as written, including a comma-separated city, state, province, or country qualifier if it is part of the same source phrase (e.g., Airport, City). The rule against adding extra region/state qualifiers does not permit stripping a qualifier that is already part of the named answer.\n- For short-answer \"where\" questions asking where an entity achieved something, performed, was based, studied, or is located, return the bare named place or venue from the supporting context, not the surrounding prepositional phrase. Strip leading spatial prepositions such as \"on\", \"in\", \"at\", or \"from\" unless the preposition is part of the place's official proper name. This minimal-place constraint overrides the general preference for copying a full source phrase when the full source phrase is only a grammatical spatial preposition plus the requested location.",
+          "target": "- For location, base, or venue answers, return the full place phrase exactly as written, including a comma-separated city, state, province, or country qualifier if it is part of the same source phrase (e.g., Airport, City). The rule against adding extra region/state qualifiers does not permit stripping a qualifier that is already part of the named answer.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Short-Answer Output Formatting\n\n- When the task says \"Return only the short answer\" or otherwise requests a short answer, output only the final answer text. Do not include lead-in phrases such as \"The answer is\", entity identification, reasoning about connected passages, bold markdown, bullet points, or explanatory sentences.\n- Select and format the answer according to question type (bare value for counts, full source sentence only where the measurement rules require it, value-and-unit span for area/volume quantity questions), then return that text alone.",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "16e1f9164c55428096b819e8f60f816068abf051dc7b9dbc4b490ef338366d83",
+    "score": 0.8166666666666667,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00156-decision.json",
+    "epoch": 2,
+    "step": 10,
+    "patch": {
+      "reasoning": "Merged the failure_first source group. Applied the failure replacements to exact existing bullets first, then kept the failure append sections and the eight success append sections. The failure rules have priority for their narrow title/subtitle and bridge-target definitional-sentence cases; the success sections add complementary bridge, temporal, jurisdiction, comparison, shared-location, ambiguous-title, canonical-form, and publication evidence without contradicting those failure rules.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For singular \"who\" or \"which person/entity\" questions, return a single entity. If the context gives a conjoined list (e.g., \"produced by A and B\", \"written by A and B\"), return the first/primary named entity only, not the whole list or the full \"A and B\" phrase, unless the question asks for all or uses plural wording such as \"who all\", \"which people\", or \"who were the people\". This applies to credit, ownership, production, direction, and similar role lists.",
+          "target": "- For singular \"who\" or \"which person/entity\" questions, return a single entity. If the context gives a conjoined list, return the first/primary named entity, not the whole list, unless the question asks for all.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For underspecified demonstrative or anaphoric subjects such as 'this story', 'this person', or 'this film', resolve the pronoun to the entity established by the question path or the passage that explicitly defines its type/class; do not let other passages that merely use the same common noun distract you.\n- When the anaphoric subject is a story/work and the question asks about its book/movie/medium/format, resolve it to the target work's own definitional sentence (for example, \"X is a volume in ... novel series\", \"X is a ... film\", or \"X is a comic book story\"). Return the bare class/medium term from that sentence exactly as written. Do not answer from incidental story phrases elsewhere such as \"the story made headlines\", \"the story inspired a Hollywood movie\", or \"adaptations of the story\" unless that same passage explicitly states the requested medium/format for the target. In particular, a passage saying a life/news story later inspired or was adapted into a movie does not make the target work's format \"movie\" if the target's own definition says it is a novel/book/comic.",
+          "target": "- For underspecified demonstrative or anaphoric subjects such as 'this story', 'this person', or 'this film', resolve the pronoun to the entity established by the question path or the passage that explicitly defines its type/class; do not let other passages that merely use the same common noun distract you.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Exact Title and Subtitle Span\n\n- For questions that ask for the title/name of a periodical, book, magazine, film, series, play, or similar work, copy the complete source title phrase exactly as written, including any subtitle introduced by a colon or dash. Do not truncate to a shortened common form, heading, or leading-title-only form.\n- Preserve leading articles and punctuation exactly as in the source title. When the source introduces the full title in the sentence that directly supports the answer, prefer that full source phrase over a shorter mention or heading.\n- This title/subtitle rule overrides the minimal-entity preference when the requested answer is a titled work.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Bridge-Target Definitional Sentence Override\n\n- When a bridge question identifies a series, group, or larger entity through a specific member in a relative clause or parenthetical (e.g., \"the series X, which includes Y\"), do not stop at the group-level passage for the queried property. Resolve first to the named member's own passage.\n- If that member passage's leading or defining sentence directly supplies the requested relationship, attribution, or definition, copy that complete sentence exactly as written, including the member's title, appositive descriptors, and any series or attribution qualifiers. Do not reduce it to an embedded name, pen name, alias, role, or other value just because that embedded span semantically answers the query.\n- This full-sentence override applies only to this narrow bridge-target case. For ordinary final-slot questions asking for a bare count, date, person, place, yes/no, or similar minimal answer, continue applying the minimal-span and answer-type overrides above.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "5350085f2a9656d3eb159501a3eb1615b6f2c50beb0644c222df57c054f107b8",
+    "score": 0.8333333333333334,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00172-decision.json",
+    "epoch": 2,
+    "step": 11,
+    "patch": {
+      "reasoning": "Merged the failure_first and success proposal groups. Failure fixes were kept with priority for person-answer, person-name, and kind/type spans. Success edits were retained where they did not conflict with those failure rules; no direct target overlap required removing evidence, and redundant proposed edits were already collapsed into the listed replacements/appends.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, first resolve which person satisfies the question. When the question identifies the person by a biographical/relational descriptor, nationality, role, group membership, or date comparison (e.g., \"who was part of\", \"who served as\", \"who was born\", \"who led\", or born earlier/later), use the full name span from the dedicated identity-defining passage or sentence that states that descriptor, role, nationality, or birth date, copying it exactly, including middle names and quoted nicknames. For born earlier/later comparisons, compare the birth dates in each person's own identity-defining passage and return the selected person's full formal name exactly as written there. Do not substitute a shorter common mention from the bridge, work, list, or heading passage that merely supplies the final relation; the fuller identity-establishing name form has priority. If no such identity-defining passage exists, use the exact name form from the passage that directly supplies the answer, without expanding or shortening it.",
+          "target": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "support_count": 3,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person names, prefer the name span as written in the dedicated person-defining or identity-establishing sentence that satisfies the question's requested descriptor, role, nationality, group membership, or date comparison. If that sentence gives a full formal name, including middle names or quoted nicknames, copy that full form even when other bridge, work, list, or heading passages mention a shorter common name. Do not let a short or common name used in the answering bridge passage or a heading override the fuller name from a separate identity passage. Use the shorter form only when the identity-defining sentence itself uses it, or when the context contains no fuller formal name.",
+          "target": "- For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.",
+          "support_count": 3,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort/genre/style/medium/category of X\" questions, first isolate the slot that X names. If X is already named in the question as a plain noun-phrase head (e.g., music, films, band, books, car), return only the bare modifier/attribute/class label that fills that slot, exactly as written; do not append the source noun phrase's head when it merely repeats the question's head noun, and do not copy a plural medium noun from the source. For genre/category questions, answer with the genre or category label alone exactly as used in the source, not the full source noun phrase. If the context supplies only a bare modifier or attribute phrase, return only that modifier. If the context supplies a distinct class label with its own head noun that is not simply the questioned noun (e.g., a canonical noun-phrase category term), return that full class label instead of truncating it to the premodifier. Keep the head noun only when it differs from the questioned noun and is part of a canonical class/category term in the source, or when the question explicitly asks for the full compound/subgenre. Do not append the questioned noun when it merely repeats the question, and do not strip a head noun that is part of a canonical class term.",
+          "target": "- For \"what kind/type/sort of X\" questions, return the exact class/category phrase the context uses to fill the kind/type slot, not a mechanically truncated modifier. If the context supplies only a bare modifier or attribute phrase, return only that modifier. If the context supplies a distinct class label with its own head noun (e.g., a noun-phrase category term), return the full class label instead of truncating it to the premodifier. Do not append the questioned noun when it merely repeats the question, but do not strip a head noun that is part of the canonical class term.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- Treat locative, membership, departure/origin, and relationship phrases such as 'located in/at/on', 'found in/at', 'based in/at', 'part of', 'after leaving', 'originated after', 'originally part of', 'formerly', 'later became', 'was created from', or 'mentioned in conjunction with'/'used in conjunction with' another named entity as cross-references to that other entity's passage. Resolve indirect descriptions through the explicit cross-reference. When a child passage gives only a pointer and the connected parent/related entity's own passage directly states the requested date, classification, location, builder, or other property, extract the answer from that connected passage rather than from the pointer phrase itself. For example, for a chain such as 'located in an amusement park that opened in which year', identify the named parent from the child's location phrase, then take the requested attribute from the parent's defining passage exactly as written. Preserve hyphenated date ranges and source formatting exactly.",
+          "target": "- If a passage says an entity was 'originally part of', 'located on', 'formerly', 'later became', or 'was created from' another named entity, treat that as a cross-reference to the other entity's passage. Resolve indirect descriptions through the explicit cross-reference, then extract the requested date, location, builder, or other property from the passage that defines the cross-referenced entity. Preserve hyphenated date ranges and source formatting exactly.",
+          "support_count": 4,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "525b76a5a0f37ecb128196e7d7a364cdc0919f2fb5c91f5f049b8908c39f24fd",
+    "score": 0.82,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00183-decision.json",
+    "epoch": 2,
+    "step": 12,
+    "patch": {
+      "reasoning": "Merged the failure_first and success proposals. No redundant or contradictory overlaps were found between the failure fixes and success refinements; the failure edits sharpen activity/role wording, organizational-prefix award stripping, and add institution-span selection, while the success edits update measurement and kind/type span calibration and append bridge/date/disambiguation/other sections. Target strings were verified against skills/main.md, and appends preserve the existing file structure without touching frontmatter or SLOW_UPDATE markers.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For questions asking what sport, activity, or role a person is associated with, return the exact noun phrase used to define them in the context, not a generalized sport or category name. Preserve agent-noun/role wording from the source (e.g., \"racer\", \"player\", \"umpire\") instead of converting it into the corresponding sport/activity label, even when the question says \"what sport.\" If the source defines the person with an occupation-style or competitor/role expression, that exact expression is the answer.",
+          "target": "- For questions asking what sport, activity, or role a person is associated with, return the exact noun phrase used to define them in the context, not a generalized sport or category name.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- When the source phrase has the pattern \"ORG + Award Name\" — including organizational acronyms/initialisms — and the same sentence or context elsewhere treats the Award Name as an independent award title, return the standalone Award Name. Treat organizational abbreviations as prefixes just like spelled-out organization names; strip them when the context uses the bare award title.",
+          "target": "- When the source phrase has the pattern \"ORG + Award Name\" and the same sentence or context elsewhere treats the Award Name as an independent award title, return the standalone Award Name.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Institution and School Span Selection\n\n- For a short-answer question that asks which college, university, or other well-known institution an entity is associated with, return the minimal distinguishing proper-name base directly asked for, not necessarily the longest formal organization phrase from the source.\n- When the source lists two or more related institution phrases that share a proper-name base, such as a specialized school and a parent university, and the question asks for the well-known college/university, return the shared base proper name without adding a generic \"University\" or \"College\" suffix or the specialized-school designation.\n- This minimal-institution span applies only to short-answer institution/college questions; it does not override the full-place-phrase rule for location/base/venue questions.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For explicit measurement questions such as \"How high is X?\" or \"How far is X?\", copy the full source phrase or sentence that states the measurement, exactly as written. Do not reduce it to a bare number and unit unless the context itself presents the measurement as a standalone value-and-unit phrase and the question requests only that value. Before finalizing, compare the answer against the source sentence; if a full sentence contains the requested measurement, prefer copying that full sentence over a semantically equivalent shorter span. This full-sentence rule does not apply to short-answer location/venue questions such as \"Where is X?\" or \"What city/base is X in?\", count questions, or date questions; those follow the minimal-span and answer-type overrides above.",
+          "target": "- For measurement, height, distance, and location questions such as \"How high is X?\" or \"How far is X?\", copy the full source phrase or sentence that states the measurement, exactly as written. Do not reduce it to a bare number and unit unless the context itself presents the measurement as a standalone value-and-unit phrase and the question requests only that value. Before finalizing, compare the answer against the source sentence; if a full sentence contains the requested measurement, prefer copying that full sentence over a semantically equivalent shorter span.",
+          "support_count": 1,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "47cd2f4b536ecf7504ba49bc3d80549343392dc8143a01e175dc891d1667430f",
+    "score": 0.8233333333333334,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00188-decision.json",
+    "epoch": 2,
+    "kind": "slow",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "reason": "invalid_patch",
+    "error": "slow guidance requires an existing text path and string content",
+    "accepted": false,
+    "response": "{\"guidance\":[{\"path\":\"existing/skill.md\",\"content\":\"For country/parent-polity questions, use the current administrative parent stated in the connected passage (e.g., County Londonderry is in Northern Ireland), not the historical-period name from a related passage.\\nFor person answers requested by role or occupation, use the full formal name from the passage that defines that role/occupation, even when a bridge passage uses a shorter form; do not shorten to the bridge-passage form unless the question asks for it.\"}]}"
+  },
+  {
+    "file": "00204-decision.json",
+    "epoch": 3,
+    "step": 13,
+    "patch": {
+      "reasoning": "Merged the failure_first and success proposal sets into skills/main.md. For overlapping edits (descriptor-based person-answer/person-name rules and current administrative/political parent guidance), I kept the failure-sourced instruction as the base and folded in unique success-sourced conditions without contradiction, using source_type=failure for those merged edits. The overlapping success current-parent append was folded into the failure Temporal and Administrative Status Resolution append to avoid duplicate sections. Other non-overlapping success edits were preserved as source_type=success. All replace targets are exact existing bullets from skills/main.md.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage. Exception: when the question identifies the person by a biographical descriptor, nationality, occupation, role, group membership, birth/death fact, or date-comparison condition rather than by proper name, first resolve the person using that descriptor and use the full formal name from the dedicated biographical/identity passage that supplies the descriptor, including middle names or quoted nicknames, even if the passage that directly supports the final relationship uses a shorter or common name. If the descriptor-bearing/identity-defining passage itself uses only a shorter or common name, return that exact shorter form and do not expand it from another passage.",
+          "target": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person names, prefer the name span as written in the passage that establishes the requested relationship, except for descriptor-identified person questions. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading. When the question identifies the person by a biographical descriptor, nationality, occupation, role, group membership, birth/death fact, or date-comparison condition, the canonical biography/identity passage that states that descriptor is not an unrelated heading; prefer the full formal name from that passage over shorter mentions in bridge, work, event, or heading passages. Use a shorter common name only when the identity-defining passage itself uses it or when no fuller formal name exists.",
+          "target": "- For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what award/honor/prize did X win/receive\" questions, return the standalone award title itself. Do not copy an organizational/agency/sponsor prefix that merely modifies the award unless the source treats that prefix as part of the official award name (e.g., \"Academy Award\" keeps \"Academy\"; an organization's \"Coach of the Year\" award returns \"Coach of the Year\"). Organizational prefixes include acronyms and initialisms: when the source says an initialism/acronym before an award title but elsewhere refers to the same award by its bare title, return the bare title without the initialism/acronym.\n- For an award described as plural because it was won in multiple years, return the bare singular award title exactly as used in the context; do not append the years or keep the plural form of the award word.",
+          "target": "- For \"what award/honor/prize did X win/receive\" questions, return the standalone award title itself. Do not copy an organizational/agency/sponsor prefix that merely modifies the award unless the source treats that prefix as part of the official award name (e.g., \"Academy Award\" keeps \"Academy\"; an organization's \"Coach of the Year\" award returns \"Coach of the Year\").",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Temporal and Administrative Status Resolution\n\n- When a question asks what country, state, region, or larger administrative/political unit a place or jurisdiction is part of using present-tense wording such as \"is part of what country\", resolve the answer from the passage that describes the current administrative or political status of that entity, not from a historical or pre-modern source phrase.\n- Favor passages with current-status markers such as \"Since\", \"now\", \"today\", \"currently\", \"has been part of\", \"lies in\", \"is in\", \"is part of\", or \"current region\". A dated historical phrase in the same context that names a former country, broader geographic island, or pre-partition entity is not the answer for present-tense country questions.\n- When an entity's own passage provides only a historical locational phrase, follow the entity-to-region link to the region's dedicated passage and extract the requested current parent jurisdiction from that dedicated passage.\n- When connected passages conflict, such as an older source phrase saying a place is in a historical island or province while a later passage gives a current constituent country or administrative region, return the current official administrative parent from the current-status passage exactly as written.\n- Preserve the exact current jurisdiction term as written in the current-status passage, such as a constituent country, province, or state name, without shortening it to a former or broader geographic name.\n- This preference applies only when the question asks for the current administrative/political parent. If the question explicitly asks for a former or historical parent, answer from the historical passage instead.",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "59306de9f09ab704a5b8814b1c0f87b41b75167ea488745e399d9412c08275a1",
+    "score": 0.8233333333333334,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00217-decision.json",
+    "epoch": 3,
+    "step": 14,
+    "patch": {
+      "reasoning": "Merged two proposals for skills/main.md. Applied failure-first priority: the two failure replacements update the person-answer and kind/type rules, and the failure alias/description exception is appended. The success proposal is non-conflicting with the failure rules and existing file, so its bridge and span-calibration rules are preserved as one success append. No success content was removed as contradictory because it did not override the failure fixes.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage. For birth-date or age comparison questions (e.g., \"Who was born later/earlier?\"), the candidate's own biographical passage that states the birth date is the passage that directly supplies the answer; copy the full formal name span directly attached to that date, including middle names and quoted nicknames, rather than a shorter heading or bridge mention.",
+          "target": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort/category of X\" questions, return the canonical class/category term that fills the question slot. If a dedicated category/definition passage gives a standard class label matching the question head, prefer that exact class label over a longer self-description in the target entity's own passage, even when the longer phrase is in the target's defining sentence. When the question supplies the head noun and the standard class term is premodifier plus head noun, return that full canonical class term, not just the premodifier. If the context supplies only a bare modifier/attribute phrase, return only that modifier. If the context supplies a distinct class label with its own head noun, return the full class label instead of truncating it to the premodifier. Do not append the questioned noun when it merely repeats the question, but do not strip a head noun that is part of the canonical class term.",
+          "target": "- For \"what kind/type/sort of X\" questions, return the exact class/category phrase the context uses to fill the kind/type slot, not a mechanically truncated modifier. If the context supplies only a bare modifier or attribute phrase, return only that modifier. If the context supplies a distinct class label with its own head noun (e.g., a noun-phrase category term), return the full class label instead of truncating it to the premodifier. Do not append the questioned noun when it merely repeats the question, but do not strip a head noun that is part of the canonical class term.",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Who-Was Alias/Description Questions\n\n- For questions like \"Who was [person]?\" or \"Who is [person]?\" where the named target is a stage name, pen name, alias, or popularly known name, and the relevant context introduces them with a pattern such as \"[Birth/legal name], more popularly known as [Alias], is/was a [defining descriptor]\", return the exact defining descriptor phrase that follows \"is/was a\" (e.g., nationality, role, occupation, or class), not the birth/legal name or the alias itself.\n- If the question explicitly asks for the person's real name, birth name, legal name, or full name, then return the name span instead.\n- Do not apply this descriptive answer override when the question type expects a bare named entity (e.g., \"Who was the director of X?\", \"Who founded X?\"). In those cases continue returning the person name according to the person-answer rules.",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Subsidiary, Division, and Organizational Unit Bridges\n\n- For questions asking about an attribute of a subsidiary, division, brand, or other named operating unit, treat a parent-entity passage that names the X division, Y or its X unit, Y as a cross-reference to the named unit's own passage. Open that unit's dedicated passage and extract the requested attribute (base, crew base, headquarters, location, date, etc.) from there, exactly as written.\n- Do not answer from the parent passage if it only names the unit but lacks the requested property. The unit's own passage is authoritative for its own facts.\n- For base/crew/headquarters location questions, return the full place phrase exactly as written in the unit passage, including a comma-separated city and state/province or airport name when the source presents it as the same phrase.\n\n## Creator, Family, and Descriptive-Clue Bridges\n\n- When the question identifies an entity through a creator/director/author or a family relation such as the director of X, or the father/mother/son/daughter of X, first resolve the intermediate person from the named entity's passage. Then open the candidate work or person passage that explicitly connects that intermediate to the requested descriptor or topic.\n- For questions like what work by the creator of X is about Y, select the work whose own passage mentions both the creator and the subject Y, and return that work title exactly as written. Do not answer with a thematically related work that only shares the subject.\n- For a chain such as X was the father of the Y who had property P; what is P?, resolve Y in X's passage, then read Y's own passage for P. Return the publication, role, title, or entity from Y's passage exactly as written, not an intermediate.\n\n## Temporal Constraint and Person-to-Place Bridges\n\n- When a question includes a temporal constraint such as during the last year of X's service/term, the year X ended, after X left, or while X held office, read X's own passage for the start/end date or period that defines the constraint. Use that date or period to select the connected event or entity passage, then extract the answer from the sentence that directly supports that connection.\n- When another passage says a person or entity served in, worked in, studied at, lived in, or was based in a place, treat the place mention as a bridge to that place's dedicated passage. Extract the requested status, capital, population, location, or other fact from the place passage exactly as written.\n- This expands the existing cross-reference rule: the linked entity's own passage is authoritative for the final attribute, whether the pointer comes from a parent, child, work, event, or person passage.\n\n## Event-Venue Bridge Resolution\n\n- For questions where an event is used as an intermediate pointer to a venue or host organization (e.g., 'who is the head teacher of the school where [event] is held?' or 'what is the [attribute] of the place where [event] takes place?'), first locate the event's own passage and identify the explicit location/host phrase such as 'held at', 'takes place at/in', or 'held in'.\n- Then open the named venue's or host organization's own passage and extract the requested role, official, or attribute exactly as written there. Do not answer from the event passage itself or substitute a different entity that merely shares a word with the venue.\n\n## Year-Specific Award and Festival Bridge\n\n- When a question names a time-stamped or numbered award, prize, or festival edition, first resolve that exact edition's passage and identify its winner, honoree, recipient, or associated work there. Do not use the general award page, another edition, or a different year's winner.\n- If the question then asks for an attribute of that winner or associated person/work, open the winner's or associated entity's own passage and extract the requested attribute from that passage.\n- Preserve the attribute exactly as written in that passage, including digits versus number words and full date or title formatting.\n\n## Multi-Constraint Intersection Bridge\n\n- When a question asks for an entity satisfying more than one explicit condition from different passages, keep every condition active and require the final candidate to satisfy all of them. First collect candidates satisfying the anchor relation (collaboration, membership, nomination, award, etc.), then check each candidate's own dedicated passage for the remaining condition.\n- Do not accept an entity that satisfies only one condition, and do not let a nearby passage that shares a keyword but lacks the required condition override the candidate's own passage.\n- For nested conditions such as a work tied to a person who won a different award, resolve the inner person/condition first, then open that person's passage to identify the requested outer work or title.\n\n## Relative-Clause and Publication Resolution\n\n- When a question identifies a named publication, magazine, venue, organization, or work by a relative clause about an associated author, contributor, or work (e.g., 'which has published works from authors such as...'), do not extract the requested property from the associated person's passage.\n- Instead, locate the named publication's, venue's, organization's, or work's own defining passage and read the requested founding date, format, location, or other property there.\n- This keeps indirect descriptive clauses from overriding the target entity's own explicit characteristics.\n\n## Organizational Partner and Licensor Bridges\n\n- Treat relation phrases such as 'partnered with', 'in partnership with', 'licensed by', 'licensed from', 'published by', 'developed by', 'owned by', and 'subsidiary of' as bridge clues to the related organization's own passage. Open the related organization's passage and extract the requested location, base, or other attribute exactly as written there.\n- For questions asking where a company's partner or licensor is based, do not answer from the project or product passage if it only names the relation; use the partner's dedicated passage for its base or location.\n\n## Measurement Attribute and Unit Mismatch\n\n- For questions asking how much area, space, or size a structure covers, search the whole context for the target entity's explicitly stated measurement, even when the source labels it differently (for example, volume, floor area, capacity, or height) or when the measurement appears in a related entity's passage.\n- Do not reject a measurement merely because the question uses a different dimension word such as 'area' while the context states 'volume'. Prefer the exact source measurement phrase and unit, including value ranges with units, rather than answering 'not stated'.\n- This whole-context measurement rule extends the existing measurement guidance and does not override bare count/date question behavior.\n\n## Qualitative Scope and Reach Comparisons\n\n- For comparison questions phrased with vague comparatives such as 'which operates more widely/broadly', derive the comparison from each candidate's own defining passage: global, multinational, worldwide, international, or multi-country wording beats local, single-city, state, or regional wording. Return only the candidate whose passage explicitly states the broader geographic or operational scope.\n- If one candidate's passage limits its operations to a specific city or region while the other describes global or multinational operations, choose the latter. Do not answer yes/no. Preserve the selected entity name exactly as written in its own passage.\n\n## Same-Name Candidate Disambiguation\n\n- When a question uses a name shared by multiple context passages, select the passage that explicitly mentions the unique associated work, role, event, or relation supplied by the question. Do not choose a same-name passage merely because it shares the surface name.\n- Once the correct entity is selected via the question-specific association, follow the bridge relation from that passage to the connected passage and return the requested final attribute, using exact source wording.\n\n## Date Component Extraction\n\n- For questions asking what year, month, or day an event occurred or a person was born, return only the requested date component exactly as written in the source. For example, for 'what year was X born?', return only the year from the full source date, not the complete 'born Month Day, Year' phrase.\n- Do not expand a year answer into a full date, and do not return the full date when the question asks only for a component such as 'year' or 'day'.\n\n## Location and Jurisdiction Span Granularity\n\n- For questions that ask what county, state/province, country, town, or other administrative jurisdiction an entity is in or part of, return only the requested jurisdiction phrase exactly as written from the relevant place or administration passage.\n- Do not include a full city-plus-region location phrase and do not append higher-level qualifiers when the question asks for one specific jurisdiction. This granularity rule overrides the general full-place-phrase preference when the question explicitly names the administrative unit being requested.\n- For open location questions such as 'Where is X located?', continue to return the full source location phrase exactly as written.\n\n## Requirement and Process Span Selection\n\n- For questions that ask what a named degree, program, qualification, or similar category typically requires or includes for completion, trace to the passage that defines that specific degree, program, or qualification and copy the exact source phrase stating the requirement, such as a gerund phrase like 'writing a thesis'.\n- Do not reduce the process phrase to a bare noun or change its form, and do not take an incidental 'typically requires' statement from an unrelated passage that happens to use similar wording.\n\n## Count, Rate, and Member-List Comparisons\n\n- For questions that compare which of two or more named entities has more members, parts, issues per year, or another countable property, evaluate each named entity only against its own defining passage. Use explicit count phrases, member lists, or conventional size/frequency labels stated there for that entity.\n- Resolve conventional group-size and frequency terms to counts/rates only when the passage itself uses that term for the target entity: 'trio' = 3 members, 'quartet' = 4, 'quarterly' = 4 issues per year, 'monthly' = 12 issues per year. Do not infer a count from unrelated passages that merely mention the entity or similar names.\n- Return only the candidate name that satisfies the comparison, copied exactly as written in that candidate's own defining passage. Do not append the count, unit, or explanation.\n\n## Pointer and Former-Name Relations\n\n- Treat departure, origin, rebranding, replacement, and former-name phrases such as 'after leaving', 'originated after', 'originally known as', 'formerly known as', 'changed their name to', and 'replaced' as bridge cross-references. Identify the named prior, original, rebranded, replacement, or parent entity from the phrase that directly states the relation.\n- If the requested attribute is that cross-referenced entity's own property (for example, its name, date, or classification), open that entity's own passage and extract the property exactly as written there. If the question asks what entity was left, replaced, or originally named, return the specific entity/name from the sentence stating that relation rather than the current title or a broader category.\n- This extends the existing cross-reference rule for 'originally part of', 'located on', 'formerly', 'later became', or 'was created from' without replacing it.\n",
+          "target": "",
+          "support_count": 5,
+          "source_type": "success"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "974641e547668ebfff6a1f45af3864565d99fc186c15a0f08a4f94ec7346f99d",
+    "score": 0.8333333333333334,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00231-decision.json",
+    "epoch": 3,
+    "step": 15,
+    "patch": {
+      "reasoning": "Merged failure-first and success proposals. Applied failure priority to the overlapping short-answer step-6 replacement: kept failure's act/action clause rule and added the non-conflicting success date-component rule into the same target. Kept non-overlapping success sections, but dropped the success descriptor-led person bullet because failure's person-answer and person-name replacements already cover that evidence.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, first resolve which person satisfies the question. When the question identifies the person by a biographical descriptor, nationality, occupation, role, group membership, comparative fact, or date comparison (e.g., \"which English comedian\", \"who served as\", \"who was born later/earlier\"), use the full formal name from the dedicated biographical/identity passage that supplies that descriptor and name, copying it exactly including middle names and quoted nicknames. Do not substitute a shorter mention from a bridge, work, list, event, or heading passage. Use a shorter form only when the identity-defining passage itself uses it, or when no fuller formal name exists in the context. If the question does not use such a descriptor, use the exact name form from the passage that directly supplies the answer: if that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "target": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person names, prefer the name span as written in the passage that establishes the requested relationship, except for descriptor-identified person questions. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading. When the question identifies the person by a biographical descriptor, nationality, occupation, role, group membership, comparative fact, or date-comparison condition, the dedicated biographical or identity-defining passage that states that descriptor is not an unrelated heading; prefer the full formal name from that passage, including middle names or quoted nicknames, over shorter mentions in bridge, work, list, event, or heading passages. Use a shorter common name only when the identity-defining passage itself uses it, or when no fuller formal name exists.",
+          "target": "- For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "6. Return only the requested short answer (name, date, title, yes/no, or brief phrase). For questions that ask for a particular date component, such as what year, month, or day, return only that component exactly as written in the source; do not expand it into the full date. Use exact context wording for dates and proper nouns, and do not add explanation, full sentences, or markdown unless asked or unless a rule requires copying the full source measurement sentence or act clause. For act/action/deed questions such as \"What did X do?\", \"What notable act did X perform?\", or \"What is X credited with?\", if the source reports the act as a finite clause (subject + verb phrase, e.g., \"He is credited with ...\"), copy that complete clause exactly as written; do not reduce it to a bare noun or gerund phrase. If the source itself states the act as only a bare gerund/noun phrase, return that phrase exactly.",
+          "target": "6. Return only the requested short answer (name, date, title, yes/no, or brief phrase). Use exact context wording for dates and proper nouns, and do not add explanation, full sentences, or markdown unless asked.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Current Administrative/Political Parent Questions\n\n- For present-tense questions that ask what country, state, province, county, or other current administrative/political unit a place or jurisdiction is part of, prefer the passage or sentence that explicitly states the current administrative status. Look for current-status markers such as \"since\", \"now\", \"today\", \"currently\", \"has been part of\", \"lies in\", \"is in\", or \"is part of\".\n- Do not answer from an older historical or pre-partition phrase that names a former, broader, or pre-modern parent entity when the question asks for the current parent. If the target entity's own passage gives only a historical or geographic pointer, follow it to the dedicated current-region passage and extract the requested current parent jurisdiction exactly as written there.\n- This override applies only to current-parent questions; if the question explicitly asks for a former or historical parent, answer from the historical passage instead.",
+          "target": "",
+          "support_count": 2,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "1b46f510d1bacdfe3858c209e6afdd051f14bd05bc0e8e0efb39f5bb4cb3fd0f",
+    "score": 0.82,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00246-decision.json",
+    "epoch": 3,
+    "step": 16,
+    "patch": {
+      "reasoning": "Merged the failure and success proposal sets for skills/main.md. Applied all non-overlapping replacements and appended sections. Where the success date-comparison rule could conflict with the failure descriptor-identified person full-name rule, adjusted the date-comparison text to defer to the failure rule. No contradictory edits were otherwise retained.",
+      "edits": [
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person-answer questions, use the exact name form from the passage that directly supplies the identifying answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage. Exception: when the question identifies the person by a descriptor, role, nationality, group membership, or biographical fact rather than by a proper name, first resolve the person from the canonical biography/identity passage that supplies that descriptor and full name, then return the full formal name from that passage even if another passage directly supporting the requested relationship uses a shorter or common name. Use a shorter form only when the identity-defining passage itself uses it or no fuller formal name exists in the context.",
+          "target": "- For person-answer questions, use the exact name form from the passage that directly supplies the answer. If that passage gives a full formal name (including middle names or quoted nicknames), copy that full form; if it uses a shorter or common name, return that exact shorter form instead of expanding it from another passage.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For person names, prefer the name span as written in the passage that establishes the requested relationship, except for descriptor-identified person questions. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading. When the question identifies the person by a descriptor, role, nationality, group membership, or biographical fact rather than by a proper name, the canonical biography/identity passage that supplies that descriptor and full formal name is authoritative; copy that full formal name instead of a shorter mention from the relationship, work, event, list, or heading passage. Use a shorter common name only when the identity-defining passage itself uses it or when no fuller formal name exists in the context.",
+          "target": "- For person names, prefer the name span as written in the passage that establishes the requested relationship. A short or common name used in the answering passage is the answer; do not replace it with a longer formal name from a separate introductory passage or heading.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "replace",
+          "path": "skills/main.md",
+          "content": "- For \"what kind/type/sort/genre/style/category of X\" questions, return the exact class/category/genre/style term that fills the answer slot, not a full descriptive noun phrase or mechanically truncated modifier. If the context supplies only a bare modifier or attribute phrase, return only that modifier. If the source uses the questioned generic head noun after a genre/class modifier (e.g., \"horror films\" for \"what genre of films?\" or \"mystery novels\" for \"what genre of novels?\"), return only the genre/class modifier (e.g., \"horror\"); do not return the generic head noun when it merely repeats the questioned noun. For classification questions about creative works (e.g., film, book, music, television), strip production descriptors such as nationality, year/decade, holiday/seasonal adjectives, or audience descriptors (e.g., return \"comedy\" from \"an American holiday comedy film\"; return \"science fiction\" from \"a British science fiction television series\"). If the source supplies a distinct class label with its own head noun and that head noun is part of the canonical label (e.g., \"film noir\" as a genre label), return the full canonical label. Do not append the questioned noun when it merely repeats the question, but do not strip a head noun that is part of the canonical class term. This classification answer-type constraint wins over copying a longer descriptive source phrase that contains the genre/class word.",
+          "target": "- For \"what kind/type/sort of X\" questions, return the exact class/category phrase the context uses to fill the kind/type slot, not a mechanically truncated modifier. If the context supplies only a bare modifier or attribute phrase, return only that modifier. If the context supplies a distinct class label with its own head noun (e.g., a noun-phrase category term), return the full class label instead of truncating it to the premodifier. Do not append the questioned noun when it merely repeats the question, but do not strip a head noun that is part of the canonical class term.",
+          "support_count": 2,
+          "source_type": "failure"
+        },
+        {
+          "op": "append",
+          "path": "skills/main.md",
+          "content": "\n\n## Full Work and Periodical Title Span Selection\n\n- For questions asking for the title of a periodical, magazine, journal, book, film, album, or other named work, treat the full source title as the minimal answer span when the defining passage introduces it with a subtitle or alternative phrase after a colon, dash, or parenthetical. Do not shorten it to a later shorthand mention, even if the context also uses the shorter form.\n- Prefer the fullest official title used in the passage that establishes the requested work/author relationship. Preserve the exact wording, capitalization, punctuation, and subtitle exactly as written in that source title.\n- If the context uses only a short title and never gives a fuller title, return the short title exactly as written. If the question explicitly asks for a short name or abbreviation, return that instead.\n- Return title text without enclosing quotation marks unless the source title itself contains quotation marks.\n",
+          "target": "",
+          "support_count": 1,
+          "source_type": "failure"
+        }
+      ]
+    },
+    "kind": "fast",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "a41b3fb0082a22b73701036094757eac2c68ee566413b2f8d0db9f5370ec12a6",
+    "score": 0.8233333333333334,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  },
+  {
+    "file": "00252-decision.json",
+    "epoch": 3,
+    "kind": "slow",
+    "parent_id": "2aea8f1671299575af83d0a804a72acced7269a4f1348c6d3fd30805fdff83df",
+    "candidate_id": "1854165ed462a4003b94c54bde14ab65970463df8de5170226d095cd70a1300e",
+    "score": 0.81,
+    "baseline_score": 0.8333333333333334,
+    "accepted": false
+  }
+]

@@ -1,0 +1,118 @@
+[
+  {
+    "file": "00042-decision.json",
+    "kind": "promote",
+    "parent_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+    "candidate_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9",
+    "accepted": true,
+    "score": 0.8733333333333333,
+    "baseline_score": 0.8266666666666667,
+    "history": [
+      {
+        "text": "Before answering each question, invoke the Skill tool with skill \"flashrsi:hotpotqa\" and follow that skill. Then answer the question in the requested format.\n",
+        "score": 0.8266666666666667,
+        "snapshot_id": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1"
+      },
+      {
+        "text": "When answering:\n1. Read the entire question and all provided context carefully.\n2. Identify all relevant facts, connecting evidence from multiple passages when needed.\n3. Determine the exact requested output format.\n4. For short-answer questions, return only the answer, with no extra text, punctuation, or explanation.\n",
+        "score": 0.8533333333333334,
+        "snapshot_id": "698d6072ab87527e743148c904c3b19256775e602d8aa53848428009b1ed9a5d"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Read the full question and all supplied context carefully.\n- Extract relevant entities, dates, and relationships.\n- Connect multi-hop facts using only the provided context.\n- Select the shortest exact answer that satisfies the question.\n- Return only the answer in the requested format, using the context's wording when possible.\n- Do not add explanations, notes, or extra formatting.\n",
+        "score": 0.8,
+        "snapshot_id": "3b12ced0e26e298a6f9d85c23fac2f6fefa4059a5a81f72250d513404f410da8"
+      },
+      {
+        "text": "Read the full question and all supplied context before answering. Identify every context passage relevant to the question, including relationships that require connecting multiple pieces of information. Reason step by step internally, then return only the final short answer in the requested format, with no extra words, labels, or explanation.\n",
+        "score": 0.82,
+        "snapshot_id": "e3ea0e85eda419a0a7b26175bee53ccf2afff7ea917b0d1f38fdaea1d300a3a7"
+      },
+      {
+        "text": "For each question, carefully read the supplied context, connect the relevant entities and facts across it to answer the multi-hop question, and return only the short answer in the requested format without explanation.\n",
+        "score": 0.78,
+        "snapshot_id": "c5f0b370fca89a556da5d2105b24cd1934e808088eaea2b533d8e7ca880165c1"
+      },
+      {
+        "text": "# Answering Guidance\n\n- Read the full question and all supplied context before answering.\n- Connect relevant facts across multiple context passages when needed.\n- Use only the supplied context; do not rely on outside knowledge.\n- Identify the shortest exact answer that directly satisfies the question.\n- Return the answer exactly as it appears in the context, preserving capitalization and wording.\n- Output only the final answer in the requested format. Do not include explanations, reasoning, labels, quotes, code fences, extra words, or trailing punctuation.\n",
+        "score": 0.86,
+        "snapshot_id": "a2008a3df35aa70c151236f6d2961b8224410dc1a893c618103806984fea2ec7"
+      },
+      {
+        "text": "# Multi-hop Short-Answer QA\n\n- Read the entire question and all provided context before answering.\n- Identify the question’s target entity and the specific relation being requested.\n- Trace the chain of supporting facts across multiple passages, including bridge entities and alternate names.\n- Require a complete, context-supported chain for any candidate answer, and verify it satisfies all parts of the question.\n- Ignore irrelevant or distractor passages.\n- Choose the shortest exact answer that fully satisfies the question.\n- Return only the final short answer in the requested format, using the context’s wording and no extra text, punctuation, or explanation.\n",
+        "score": 0.8666666666666667,
+        "snapshot_id": "687f531391b8782d25978ef62f56b1ae3b0a4e0d5826a0ad5d76a698a20d0d92"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Read the entire question and all supplied context passages first.\n- Determine exactly what kind of answer the question asks for (person, organization, title, date, etc.).\n- Connect relevant facts across multiple passages, not just a single passage.\n- Use the exact wording of the answer as it appears in the context.\n- Return only that short answer, with no extra words, labels, reasoning, or punctuation.\n- Before finalizing, verify that the answer directly satisfies the question and requested format.\n",
+        "score": 0.8666666666666667,
+        "snapshot_id": "1a0b8e03cb64076c0854862862bbcb2a804a0e9e2e89551ae1f61d4588e1231e"
+      },
+      {
+        "text": "Before answering, use only the supplied context. Read the full question and all context passages. Resolve multi-hop links by connecting related facts across passages. Identify the exact item the question asks for, then return only that item in the requested format. Do not include explanations, extra words, or outside knowledge.\n",
+        "score": 0.8466666666666667,
+        "snapshot_id": "a230e8665be2a333d5c292a100ae1119520ca75b8eda8fe7feaa03334fd94280"
+      },
+      {
+        "text": "# Answering Guidance\n\n- Read the full question and all supplied context passages before answering.\n- Use only the supplied context; do not use outside knowledge.\n- Identify the question's target and the exact answer type (missing word/phrase, yes/no, entity, description, date, etc.).\n- Connect evidence across multiple passages by resolving shared entities, aliases, dates, and references; ignore irrelevant or distractor passages.\n- Build a complete context-supported evidence chain for any candidate and verify it satisfies every part of the question.\n- Prefer the shortest exact span from the context that fully answers the question, preserving original wording, capitalization, and plurality.\n- For yes/no questions, return only Yes or No; for fill-in-the-blank questions, return only the missing word(s).\n- Before finalizing, check the answer against the requested format and remove any extra wording or punctuation.\n- Return only the final answer: no explanations, reasoning, labels, quotes, code fences, extra words, or trailing punctuation.\n",
+        "score": 0.8733333333333333,
+        "snapshot_id": "7f7f9a937fcca46bed5b7f689ad5f4fb3e5fe50e9c29e2e8fdac8dafaf89c1f9"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Use only the supplied context; never use outside knowledge.\n- Read the entire question and all context passages before answering.\n- Identify exactly what is asked for: entity, relation, date, title, or yes/no judgment.\n- Connect supporting facts across all relevant passages, including bridge entities and alternate names.\n- Reject candidate answers unless the context fully supports every part of the question.\n- Choose the shortest exact answer span that satisfies the question, using the context’s wording.\n- For yes/no questions, return only “Yes” or “No”.\n- Output only the final answer in the requested format, with no explanation, reasoning, labels, quotes, extra words, or trailing punctuation.\n",
+        "score": 0.8533333333333334,
+        "snapshot_id": "6062f35cd1111507d57227a5a50eaa10f129878dc3df8913a47c6498aba73fe6"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Read the entire question and all supplied context before answering.\n- Identify the exact answer type and format requested (e.g., short span, title, name, date, yes/no).\n- Use only the supplied context. Connect related facts and entities across multiple passages, resolve alternate names, and ignore distractor passages.\n- Verify each candidate answer against every part of the question and all relevant context.\n- For yes/no questions, check each condition separately; return only \"Yes\" or \"No\".\n- For short answers, use the exact wording and capitalization from the context.\n- Before finalizing, re-read the question to confirm the answer fully satisfies it and follows the requested format.\n- Return only the final answer with no explanations, reasoning, labels, quotes, extra words, or punctuation.\n",
+        "score": 0.86,
+        "snapshot_id": "7db22df3b18b2d179965e8895ce77544b866053f21ea6e87980a4145142194ac"
+      },
+      {
+        "text": "# Multi-hop QA Answering\n\n- Read the entire question and all supplied context before answering.\n- Use only the supplied context; ignore outside knowledge and distractor passages.\n- Identify the exact answer type requested: name, description, date, yes/no, missing phrase, etc.\n- Connect relevant facts across multiple passages through bridge entities and alternate names.\n- Reason internally, and verify any candidate answer against every part of the question.\n- Select the shortest exact answer span from the context that fully satisfies the question.\n- For yes/no questions, return only \"Yes\" or \"No\".\n- For fill-in-the-blank questions, return only the missing term(s), not a full sentence.\n- Preserve the context's exact wording, capitalization, and punctuation.\n- Return only the final answer with no extra text, labels, reasoning, quotes, code fences, or trailing punctuation.\n",
+        "score": 0.8666666666666667,
+        "snapshot_id": "8b7842b2c0f3472b6bb89bcc117c28586f82ef94d4a254ac7f03c2613d20d413"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Read the entire question and all supplied context before answering.\n- Use only the supplied context; ignore outside knowledge and distractor passages.\n- Identify exactly what is being asked for and the required output format (e.g., entity, title, date, numeric value, yes/no, missing phrase).\n- Resolve entities, aliases, and references across relevant passages, and connect all needed facts into a complete evidence chain.\n- For a candidate answer to be accepted, it must fully satisfy every part of the question, including all descriptors and constraints; reject partial or unsupported matches.\n- Select the shortest exact answer span from the context that fully answers the question, preserving the original wording, capitalization, plurality, and punctuation.\n- For yes/no questions return only “Yes” or “No”; for numeric answers return only the numeric value in its expected form; for fill-in-the-blank questions return only the missing word(s).\n- Before finalizing, re-check the question and requested format, and remove any extra words, labels, quotes, reasoning, code fences, or trailing punctuation.\n- Return only the final answer.\n",
+        "score": 0.8466666666666667,
+        "snapshot_id": "762b8c4632da6cb37da226f1cb60df1be7d4144775e524499c46307e11548947"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Read the entire question and all supplied context before answering.\n- Use only the supplied context; never outside knowledge.\n- Identify exactly what value the question asks for and the required output format.\n- Connect relevant facts across multiple passages through bridge entities, aliases, dates, and shared references; ignore distractor passages.\n- Select the shortest exact span from the context that fully satisfies the question, preserving exact wording, capitalization, and punctuation.\n- Do not append a category or unit word already stated in the question unless it is part of the exact answer.\n- For yes/no questions, return only \"Yes\" or \"No\"; for numeric answers, return only the number; for fill-in-the-blank questions, return only the missing term(s).\n- Before finalizing, verify the answer satisfies every part of the question and the requested format.\n- Return only the final answer with no explanations, reasoning, labels, quotes, code fences, extra words, or trailing punctuation.\n",
+        "score": 0.86,
+        "snapshot_id": "d9aa3bef25d588bf7db56e806deca029673e0810d4e75cf8c23d8a85d0d8f033"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Read the entire question and all provided context passages before answering.\n- Use only the provided context; do not use outside knowledge.\n- Identify the question’s target and exact answer type (e.g., entity, date, number, yes/no, missing phrase, style/genre).\n- Connect evidence across multiple passages by resolving shared entities, aliases, dates, and bridge references; ignore distractor passages.\n- For each candidate answer, require a complete context-supported chain and verify it satisfies every part of the question.\n- Prefer the shortest exact span from the context that fully answers, preserving original wording, capitalization, plural form, and punctuation.\n- For style/type/genre questions, return the style/type/genre phrase itself, not the broader noun phrase that appends the described object.\n- For yes/no questions, return only “Yes” or “No”; for fill-in-the-blank questions, return only the missing term(s); for numeric answers, return only the number.\n- Re-read the question before finalizing to confirm the answer matches the requested type and format.\n- Return only the final answer with no explanations, reasoning, labels, quotes, code fences, extra words, or trailing punctuation.\n",
+        "score": 0.8466666666666667,
+        "snapshot_id": "c563582781eb177f3c2799f7ceb35b35f2141f16df28a68e1675666e2fa97c6a"
+      },
+      {
+        "text": "# Answering Protocol\n\n1. Identify the target of the question and the exact answer type/format required.\n2. Read all supplied context. Use only that context; ignore outside knowledge and distractor passages.\n3. Collect and connect supporting facts across passages via shared entities, aliases, dates, and references.\n4. Reject any candidate not backed by a complete context-supported reasoning chain satisfying every part of the question.\n5. Among fully supported candidates, choose the shortest exact answer span from the context, preserving original wording, capitalization, and punctuation.\n6. For yes/no questions, return only \"Yes\" or \"No\"; for fill-in-the-blank questions, return only the missing term(s).\n7. Before finalizing, re-read the question to confirm the answer and output format; remove any extra words or punctuation.\n8. Return only the final answer, with no explanations, reasoning, labels, quotes, code fences, or extra text.\n",
+        "score": 0.8666666666666667,
+        "snapshot_id": "c75fa374341f64b26bfeebe172cc766bc6a9dca0843126e5734ea2a88bd67cc3"
+      },
+      {
+        "text": "# General Answering Guidance\n\n- Read the entire question and all provided context passages before answering.\n- Use only the provided context; ignore outside knowledge and distracting or irrelevant passages.\n- Identify exactly what the question asks for and the required output type (named entity, date, number, yes/no, missing phrase, style/type, etc.).\n- Connect facts across multiple passages by resolving shared entities, aliases, dates, and references. Build a complete evidence chain for any candidate answer.\n- Reject any candidate that is supported by only part of the context or that ignores a question constraint. The final answer must satisfy every part of the question.\n- Choose the shortest exact answer span from the context that fully satisfies the question, preserving the context's original wording, capitalization, plural form, and punctuation.\n- Do not repeat a unit, category, or type word already given in the question unless it is part of the exact answer span.\n- For yes/no questions, return only \"Yes\" or \"No\"; for fill-in-the-blank questions, return only the missing term(s); for numeric answers, return only the number/measurement as written in the context.\n- Before finalizing, reread the question and verify the answer matches the requested type and format. Remove any explanations, labels, reasoning, quotes, code fences, extra words, or trailing punctuation.\n- Return only the final answer.\n",
+        "score": 0.8666666666666667,
+        "snapshot_id": "f9e0a9af9a1bd374426881fb279848e9856b2ba3da4c8c5d10127eaa7d509f74"
+      },
+      {
+        "text": "# Multi-hop Short-Answer QA\n\n- Read the entire question and all supplied context first.\n- Use only the supplied context; do not use outside knowledge.\n- Determine the exact target, answer type, and required format.\n- Resolve coreferences, aliases, and bridge entities across passages; ignore distractor passages and irrelevant similar-name entities.\n- Disambiguate entities by matching every qualifier in the question (dates, numbers, descriptions) against the context.\n- For a candidate to be accepted, it must be supported by a complete context chain and satisfy all parts of the question.\n- Select the shortest exact answer span from the context that fully answers the question, preserving original wording, capitalization, and punctuation.\n- For yes/no questions, return only “Yes” or “No”; for numeric questions, return only the numeric value; for fill-in-the-blank, return only the missing term(s).\n- Before finalizing, re-read the question to confirm the answer and format exactly.\n- Return only the final answer: no explanations, reasoning, labels, quotes, code fences, extra words, or trailing punctuation.\n",
+        "score": 0.8333333333333334,
+        "snapshot_id": "edd30db674012d62ffa973a9a8043c0bf6c2e6da65f488d489f81b03004415a4"
+      },
+      {
+        "text": "# Multi-hop QA Answering\n\n- Read the entire question and all supplied context passages before answering.\n- Use only the supplied context; ignore outside knowledge and distractor passages.\n- Identify the requested answer type and format: entity, title, date, number, yes/no, or missing phrase.\n- Treat every descriptor and constraint in the question as a required filter, and connect facts across passages via shared entities, aliases, dates, and references.\n- For each candidate, build a complete context-supported evidence chain and verify it satisfies all parts of the question; reject partial or unsupported matches.\n- Select the shortest exact span from the context that fully answers, preserving original wording, capitalization, pluralization, and punctuation.\n- For numeric answers return only the number; for yes/no return only “Yes” or “No”; for fill-in-the-blank return only the missing term(s).\n- Do not append units, categories, or words already stated in the question unless they are part of the exact answer.\n- Before finalizing, re-read the question to confirm the answer and format; remove explanations, reasoning, labels, quotes, code fences, extra words, and trailing punctuation.\n- Return only the final answer.\n",
+        "score": 0.8666666666666667,
+        "snapshot_id": "6a4e2ce5944dea0b438db7d79c93b0a3ca72718cca24c31ef801073656d25726"
+      },
+      {
+        "text": "# Answering Guidance\n\n- Read the whole question and all supplied context before answering.\n- Use only the supplied context; do not use outside knowledge.\n- Identify the question’s target and the exact answer type/format required (e.g., entity name, date, number, yes/no, missing phrase).\n- Connect facts across passages through shared entities, aliases, dates, and references; ignore distractor passages.\n- For each candidate answer, require a complete context-supported evidence chain and verify that it satisfies every part of the question.\n- Choose the shortest exact span from the context that directly answers the question, preserving original wording, capitalization, plurality, and punctuation.\n- If a literal value is not stated but the question refers to a named entity in the context, return that entity name; do not output meta-answers such as “not stated.”\n- For yes/no questions, return only “Yes” or “No”; for numeric or date questions, return only the value as written; for fill-in-the-blank questions, return only the missing term(s).\n- Do not add units, categories, or question words unless they are part of the exact answer span.\n- Before finalizing, re-read the question to confirm the answer matches the target and format, then remove explanations, reasoning, labels, quotes, code fences, extra words, and trailing punctuation.\n- Return only the final answer.\n",
+        "score": 0.86,
+        "snapshot_id": "2159e8d9c13be9d211bc11ea39136c10274a6ae0bd6fd596bcec413765fbbf2b"
+      }
+    ]
+  }
+]
