@@ -1,0 +1,29 @@
+{
+  "selected": "12f88507848b7948ca3e3501c426a70bbf40022a863b65c17784e0f2be32fc6f",
+  "candidates": [
+    {
+      "snapshot": "2a5912c23838794fffbfc259aa68f57b19200e412f5aa8a14ca92491804fa065",
+      "exact_match": 0.72
+    },
+    {
+      "snapshot": "12f88507848b7948ca3e3501c426a70bbf40022a863b65c17784e0f2be32fc6f",
+      "exact_match": 0.8233333333333334
+    },
+    {
+      "snapshot": "b9875cac4442b32d54365861fb731a5def94aec387ef68a587a76daa755e243e",
+      "exact_match": 0.8066666666666666
+    },
+    {
+      "snapshot": "66c0839b0148620d86a0a4dd95b901fed1a0d8456cff50fdf771e3423409bd46",
+      "exact_match": 0.8
+    },
+    {
+      "snapshot": "84be53528b994e4ce7dd8908588ed4dba1bf5317ce4703417e05d025831b5b6f",
+      "exact_match": 0.8133333333333334
+    },
+    {
+      "snapshot": "0f0d672e16a7cbdbf121d5ae407244fd9546ca2998a9a897bf1a050e3d3522bc",
+      "exact_match": 0.8166666666666667
+    }
+  ]
+}
