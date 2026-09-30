@@ -1,0 +1,32 @@
+{
+  "status": "finished",
+  "policy": "two_execution_failures_score_zero_v1",
+  "source_attempt": "/root/blockdata/ahe-miniagent-searchqa-20260929-164143-611677/attempts/ahe-miniagent-searchqa-20260929-200345-409069",
+  "final_snapshot": "f893610ee2f71b52eb8699ef6ae37773df98887b3b96cb3bd96304911e9877f2",
+  "baseline_test": {
+    "tasks": 1400,
+    "finished": 1343,
+    "hard": 0.735,
+    "f1": 0.8331899415005074,
+    "exact_match": 0.7357142857142858,
+    "lite_f1": 0.8336230155959464
+  },
+  "evolved_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7857142857142857,
+    "f1": 0.8756886882958311,
+    "exact_match": 0.7857142857142857,
+    "lite_f1": 0.8756886882958311
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 5.071428571428571,
+    "improved_tasks": 152,
+    "regressed_tasks": 81,
+    "paired_bootstrap_95pct_pp": [
+      3.0714285714285716,
+      7.142857142857142
+    ]
+  },
+  "test_used_for_selection": false
+}

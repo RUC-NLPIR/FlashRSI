@@ -1,0 +1,6 @@
+{
+  "scope": "Complete run including historical attempts and invalidated evidence; secrets redacted",
+  "baseline": "1400 tasks;1343 finished;57 failures retained;hard0.735",
+  "final": "1400 finished;hard0.7857142857142857",
+  "provenance": "Training and baseline used earlier gateway; final candidate official endpoint. Running process loaded prior zero-scoring policy despite later source change; final1400 finished, no error outcomes. Historical aggregates retained."
+}
