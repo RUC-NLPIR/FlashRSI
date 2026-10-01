@@ -139,7 +139,8 @@ commit `8b2a55d97590363fe50c3cc6b5e833b020a4bb4c`。该哈希沿用旧版记录�
 - manifest 不合法时拒绝本轮并记录，理由进入下一轮提示；旧版直接抛出并终止整个实验。
 - Debugger 调用失败直接上抛，不做旧版的逐条兜底。Lite 没有断点恢复，坏掉的 Worker 应当可见。
 - 组件规则全表写进 Evolve Agent 提示，这是 Lite 的分类约束带来的新增内容。
-- checkout/commit 是 AHE 自己的私有方法，不在算法基类上：只有它把 harness 当目录演化。
+- checkout 与丢弃运行时产物的调用序列属于 AHE 自己；提交走基类的 `_commit()`
+  （接入 ADAS 时该方法出现第二遍，按约定提到了基类）。
   丢弃运行时产物由 `Snapshot.discard_runtime_files()` 完成，那是 Snapshot 的知识。
 - 演化范围不再需要 `allow_add` / `allow_remove` 开关：`{"*"}` 加上 target 自己的组件规则
   已经表达了同样的边界。

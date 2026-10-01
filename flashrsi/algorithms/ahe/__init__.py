@@ -21,8 +21,6 @@ Port reference: FlashRSI 5efe9b438483710060183c6c3ecbc5062b410a58.
 
 from __future__ import annotations
 
-from pathlib import Path
-
 from flashrsi.algorithms import _replies
 from flashrsi.algorithms.ahe import _manifest as protocol
 from flashrsi.algorithms.ahe import _prompts as prompts
@@ -224,25 +222,6 @@ class AHE(Algorithm):
                 continue
             sources[change.path] = {"existed": True, "content": text[:limit]}
         return sources
-
-    def _commit(self, baseline: Snapshot, directory: Path) -> Snapshot:
-        """Version the edited directory, refusing one that leaked a credential.
-
-        ``_candidate`` covers an algorithm that computed the new text; here the
-        bytes came from a process this algorithm does not control, so they are
-        checked. The scan reads exactly what would be versioned, and the
-        Snapshot is still only in memory until it has passed.
-        """
-        candidate = baseline.commit(directory)
-        secrets = self._runtime_secrets()
-        for path, entry in candidate.files.items():
-            if baseline.files.get(path) == entry:
-                continue
-            text = entry.content.decode("utf-8", errors="ignore")
-            if any(secret in text for secret in secrets):
-                raise ValueError(f"candidate contains a runtime credential: {path}")
-        self._save_snapshot(candidate)
-        return candidate
 
     def _check(self) -> None:
         if not self.benchmark.train:

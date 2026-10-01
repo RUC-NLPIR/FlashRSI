@@ -252,6 +252,25 @@ class Algorithm:
         self._save_snapshot(candidate)
         return candidate
 
+    def _commit(self, baseline: Snapshot, directory: Path) -> Snapshot:
+        """Version a directory an Agent Worker edited, refusing a leaked credential.
+
+        ``_candidate`` covers an algorithm that computed the new text itself.
+        Here the bytes came from a process the algorithm does not control, so
+        they are checked: the scan reads exactly what would be versioned, and
+        the Snapshot is still only in memory until it has passed.
+        """
+        candidate = baseline.commit(directory)
+        secrets = self._runtime_secrets()
+        for path, entry in candidate.files.items():
+            if baseline.files.get(path) == entry:
+                continue
+            text = entry.content.decode("utf-8", errors="ignore")
+            if any(secret in text for secret in secrets):
+                raise ValueError(f"candidate contains a runtime credential: {path}")
+        self._save_snapshot(candidate)
+        return candidate
+
     def _record(self, label: str, payload: Mapping) -> None:
         if self._run_dir is not None:
             self._sequence += 1

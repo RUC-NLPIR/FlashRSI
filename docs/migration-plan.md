@@ -16,6 +16,16 @@ AHE 是首个要求 `algorithm.worker.type: agent` 的算法，也是首个使�
 上一轮的 ACE 见 [ACE 迁移说明](ace.md)：online 消费 train 流，按「先执行计分、后反思更新」
 记录累积在线分数；步骤 8 中 EvoMemBench 各 track 自身的学习/评测时序仍需按该 track 的协议单独设计。
 
+进度补记（2026-09-30）：新增 ADAS（Meta Agent Search），不在本文原定的六个方法之内，
+由用户在评估「还能补哪些演化 agent 的算法」后选定。接入理由是补上一个空格：AHE 之前，
+「结构级改动 + 分数选择」没有任何算法覆盖——五个文本类算法只改 prompt/skill，
+而 AHE 刻意不看分数（靠 manifest 判决）。ADAS 与 AHE 同样把 harness 当目录演化，
+但按 dev 分数入档，两者构成可对照的一组。范围与差异见 [ADAS 迁移说明](adas.md)。
+本轮只交付算法、离线机制测试（17 条）、示例配置与文档，**未运行真实模型 smoke 或任何
+真实 benchmark 演化**；上游 commit 哈希因本机网络受限未能核实，源码中留显式待填标记。
+它是第二个要求 `algorithm.worker.type: agent` 的算法，也是第二个使用
+`evolve_scope = {"*"}` 的算法。
+
 本文安排迁移工作，不替代 `mvp_doc.md`，不新增或变更公共接口。旧版 FlashRSI 的实现、prompt 和测试是迁移参考，不是 Lite 的架构规范。涉及公共契约的调整，先列明具体缺口再由开发者确认。
 
 ## 目标与起点

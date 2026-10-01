@@ -2,11 +2,26 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## ADAS
+
+新增 [ADAS 迁移说明](docs/adas.md) 与 [小规模示例配置](examples/adas.yaml)。
+ADAS（Meta Agent Search）是第二个把 harness 当**目录**演化的算法，但它与 AHE 正交：
+其他算法都从「当前版本」出发推理，ADAS 从**它建过的全部设计**出发——archive 完整进入提示，
+一个分数很低的设计的价值就在于下一轮能看到它低。
+每轮取 archive 中的领先者作为父代交给 meta agent 编辑，按 `num_reflections` 在同一个
+checkout 里自我复查，然后在 dev 上评估。**无论升降都进入 archive**（这是机制而非容错），
+但 incumbent 只在提升时移动，结束时选中 archive 里分数最高的设计。
+与 AHE 的分工是问责方式相反：AHE 保留每个合法编辑并用 manifest 逐条判决，
+ADAS 用分数决定去留。因此它同样要求 `algorithm.worker.type: agent`，
+纯 LLM Worker 在启动时报错；dev 是搜索唯一读的划分，train 不使用。
+本轮只完成离线机制测试（17 条，覆盖双 harness 目录编辑、archive 传递、reflection、
+拒绝路径与启动校验）；**真实模型 smoke、真实 benchmark 演化与上游 commit 核验均未完成。**
 
 ## AHE
 
@@ -85,7 +100,7 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 
 | 位置 | 职责 |
 | --- | --- |
-| `core/algorithm.py` | 初始化与 `_ranges` 参数校验、`_evaluate`、Worker 调用的自动记录、`_instruction_path`、`_promote`、`_evidence`/`_trajectory_evidence`、按 scope 读取文本、候选文件提交、轨迹与 Snapshot 保存 |
+| `core/algorithm.py` | 初始化与 `_ranges` 参数校验、`_evaluate`、Worker 调用的自动记录、`_instruction_path`、`_promote`、`_evidence`/`_trajectory_evidence`、按 scope 读取文本、候选文件提交（`_candidate` 写文本、`_commit` 收下 Worker 编辑过的目录）、轨迹与 Snapshot 保存 |
 | `algorithms/skillopt/__init__.py` | `evolve` 主流程、反思、合并排序、slow/meta update、接受或拒绝候选 |
 | `algorithms/skillopt/_patch.py` | 编辑响应解析、精确锚点、预算与保护区、slow guidance 应用 |
 | `algorithms/skillopt/_prompts.py` | 算法使用的 prompt 模板 |
@@ -99,9 +114,11 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/ace/__init__.py` | ACE 的训练反思、增量应用、offline 周期验证与最佳版本恢复、online 流式计分 |
 | `algorithms/ace/_playbook.py` | ADD 协议、section、bullet 编号、计数与精确去重 |
 | `algorithms/ace/_prompts.py` | Reflector、Curator 和训练重试提示 |
-| `algorithms/ahe/__init__.py` | AHE 的诊断、目录编辑、逐题归因与判决，以及它自己的 checkout/commit |
+| `algorithms/ahe/__init__.py` | AHE 的诊断、目录编辑、逐题归因与判决 |
 | `algorithms/ahe/_manifest.py` | 修改声明的解析与 diff 校验、逐题归因、判决分级与证伪路径 |
 | `algorithms/ahe/_prompts.py` | Agent Debugger 逐条/综合提示与 Evolve Agent 提示 |
+| `algorithms/adas/__init__.py` | ADAS 的 archive 搜索循环、目录编辑与 reflection、按分数入档 |
+| `algorithms/adas/_prompts.py` | meta agent 的产出提示与自我复查提示 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 算法要问的东西尽量由它手上的对象回答，而不是由基类再加一个方法。
@@ -125,10 +142,11 @@ OPRO、EvoPrompt、GEPA、AHE 共用这一份。
 
 基类的 `_evaluate` 不更新目标版本。`_candidate` 接收文本文件更新，保留未指定文件，
 通过 Snapshot 检查权限并生成候选，不自动接受。`_read_text` 只读取 observation/evolve
-声明的组件，二进制资源保留不改。需要删除文件或修改二进制的算法直接使用 Snapshot 接口：
-由 Worker 自己编辑目录的 AHE 就是这样做的，并用 `Snapshot.discard_runtime_files()`
-先丢弃 `__pycache__` 一类已知运行时产物（`commit` 对它们直接拒绝，否则一次编辑白跑），
-真正新增的文件仍由 target 的组件规则分类，归不了类照样拒绝。
+声明的组件，二进制资源保留不改。由 Worker 自己编辑目录的算法（AHE、ADAS）改用
+`_commit`：字节来自算法控制不了的进程，所以提交前扫一遍凭据，扫的正是将被版本化的内容。
+它们先用 `Snapshot.discard_runtime_files()` 丢弃 `__pycache__` 一类已知运行时产物
+（`commit` 对它们直接拒绝，否则一次编辑白跑），真正新增的文件仍由 target 的组件规则分类，
+归不了类照样拒绝。需要删除文件或修改二进制的算法直接使用 Snapshot 接口。
 runner 的最终 test 也复用 `_evaluate`；记录与算法内评估采用相同格式。
 
 `_evaluate` 的可选关键字参数 `label` 只用于轨迹文件名，不影响模型输入或算法决策，
