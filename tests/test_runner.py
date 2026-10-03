@@ -227,3 +227,33 @@ def test_cli_redacts_runtime_exceptions(config, monkeypatch, tmp_path, capsys):
             ]
         )
     assert "worker-private-secret" not in capsys.readouterr().err
+
+
+def test_darwinx_runner_saves_defaults_archive_and_one_heldout_test(
+    config, monkeypatch
+):
+    async def edit(self, prompt, working_dir=None):
+        if working_dir is not None:
+            (working_dir / "skills/main.md").write_text("check evidence")
+            return Trajectory(output="<DESIGN>Check evidence.</DESIGN>")
+        return Trajectory(output="<LEARNINGS>Preserve evidence checking.</LEARNINGS>")
+
+    monkeypatch.setattr(Worker, "_run", edit)
+    monkeypatch.setitem(runner._AGENTS, "offline_worker", Worker)
+    config.algorithm.name = "darwinx"
+    config.algorithm.confirm_samples = 2
+    config.algorithm.worker.type = "agent"
+    config.algorithm.worker.name = "offline_worker"
+    run_dir, result = asyncio.run(runner._run(config))
+    assert result["test_score"] == 1.0
+    assert len(list((run_dir / "trajectories").glob("*-test.json"))) == 1
+    saved = load_config(run_dir / "config.yaml")
+    assert saved.algorithm.regression_tolerance == 0
+    decisions = [
+        json.loads(p.read_text())
+        for p in sorted((run_dir / "trajectories").glob("*-decision.json"))
+    ]
+    assert decisions[0]["accepted"]
+    assert len(decisions[-1]["archive"]) == 2
+    text = "".join(p.read_text() for p in run_dir.rglob("*") if p.is_file())
+    assert "target-private-secret" not in text and "worker-private-secret" not in text

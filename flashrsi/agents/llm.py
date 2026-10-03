@@ -14,6 +14,12 @@ class LLM(Agent):
     name = "llm"
     description = "Generate text without versioned files or file-editing tools."
 
+    def __init__(self, config=None):
+        super().__init__(config)
+        # Direct API callers may omit role metadata. Directory algorithms must
+        # still recognize this adapter as a text Worker before paying for eval.
+        self.config.type = "llm"
+
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         if working_dir is not None:
             raise NotImplementedError(

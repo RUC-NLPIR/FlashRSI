@@ -6,6 +6,16 @@ import pytest
 from flashrsi.agents import LLM
 
 
+@pytest.mark.parametrize("role", [None, "llm", "agent"])
+def test_llm_role_is_text_even_when_metadata_is_missing_or_inconsistent(role):
+    config = {"llm": {"model_name": "worker"}}
+    if role is not None:
+        config["type"] = role
+    worker = LLM(config)
+    assert worker.config.type == "llm"
+    assert config.get("type") == role
+
+
 @pytest.fixture
 def client(monkeypatch):
     openai = pytest.importorskip("openai")

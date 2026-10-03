@@ -10,7 +10,7 @@ from statistics import mean
 from flashrsi._records import _write_record
 from flashrsi._run_summary import _finish_summary
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
-from flashrsi.algorithms import ACE, ADAS, AHE, GEPA, OPRO, EvoPrompt, SkillOpt
+from flashrsi.algorithms import ACE, ADAS, AHE, GEPA, OPRO, DarwinX, EvoPrompt, SkillOpt
 from flashrsi.benchmarks import HotpotQA, SearchQA, Tau3Banking, TerminalBench
 from flashrsi.config import prepare_run_dir
 
@@ -24,6 +24,7 @@ _BENCHMARKS = {
 _ALGORITHMS = {
     "ace": ACE,
     "adas": ADAS,
+    "darwinx": DarwinX,
     "ahe": AHE,
     "skillopt": SkillOpt,
     "opro": OPRO,

@@ -2,11 +2,23 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## DarwinX
+
+新增 [DarwinX 迁移说明](docs/darwinx.md) 与 [示例配置](examples/darwinx.yaml)。
+DarwinX 在 train 池上演化整个 harness：低成本筛选之后做重复确认，按逐任务的
+preserve-and-extend 契约准入；总分提升也不能掩盖已有能力回退。
+种群保留旁系和被拒绝变体的证据，支持从共同祖先重组互补分支，并检查双方任务覆盖的 union。
+每个已测变体都会形成后续可读的共享经验。只有确认通过的成员能成为 mutation 父节点。
+
+这是固定模型下的核心机制移植，已核对并固定官方 Beagle revision；完整 campaign 的
+教师模型、独立 verifier 和跨 benchmark 门禁尚未移植。离线协议测试覆盖两个 harness，
+真实模型效果及论文分数尚未验证。
 
 ## ADAS
 
@@ -119,6 +131,7 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/ahe/_prompts.py` | Agent Debugger 逐条/综合提示与 Evolve Agent 提示 |
 | `algorithms/adas/__init__.py` | ADAS 的 archive 搜索循环、目录编辑与 reflection、按分数入档 |
 | `algorithms/adas/_prompts.py` | meta agent 的产出提示与自我复查提示 |
+| `algorithms/darwinx/__init__.py` | train 种群演化、筛选与重复确认、目录 mutation/recombination、经验蒸馏 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 算法要问的东西尽量由它手上的对象回答，而不是由基类再加一个方法。
@@ -142,7 +155,7 @@ OPRO、EvoPrompt、GEPA、AHE 共用这一份。
 
 基类的 `_evaluate` 不更新目标版本。`_candidate` 接收文本文件更新，保留未指定文件，
 通过 Snapshot 检查权限并生成候选，不自动接受。`_read_text` 只读取 observation/evolve
-声明的组件，二进制资源保留不改。由 Worker 自己编辑目录的算法（AHE、ADAS）改用
+声明的组件，二进制资源保留不改。由 Worker 自己编辑目录的算法（AHE、ADAS、DarwinX）改用
 `_commit`：字节来自算法控制不了的进程，所以提交前扫一遍凭据，扫的正是将被版本化的内容。
 它们先用 `Snapshot.discard_runtime_files()` 丢弃 `__pycache__` 一类已知运行时产物
 （`commit` 对它们直接拒绝，否则一次编辑白跑），真正新增的文件仍由 target 的组件规则分类，
