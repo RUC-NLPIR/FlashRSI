@@ -1,0 +1,29 @@
+# Meta-Harness searches on dev; runner evaluates the selected version on test once.
+# The coding Worker reads historical source and full traces from files, so it
+# must be an agent with file/terminal tools. Target and Worker models are separate.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 30
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-target-api-key
+
+algorithm:
+  name: meta_harness
+  # One candidate per attempt; baseline plus max_steps whole-dev evaluations.
+  max_steps: 3
+  worker:
+    type: agent
+    name: miniagent
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
+    max_turns: 30

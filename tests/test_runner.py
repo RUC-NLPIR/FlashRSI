@@ -257,3 +257,42 @@ def test_darwinx_runner_saves_defaults_archive_and_one_heldout_test(
     assert len(decisions[-1]["archive"]) == 2
     text = "".join(p.read_text() for p in run_dir.rglob("*") if p.is_file())
     assert "target-private-secret" not in text and "worker-private-secret" not in text
+
+
+def test_meta_harness_runner_preserves_history_and_one_heldout_test(
+    config, monkeypatch
+):
+    seen = []
+
+    async def edit(self, prompt, working_dir=None):
+        from test_meta_harness import history
+
+        folder, index = history(prompt, working_dir)
+        seen.append(len(index))
+        records = [
+            json.loads(p.read_text()) for p in (folder / "trajectories").glob("*.json")
+        ]
+        text = json.dumps(records)
+        assert (
+            "target-private-secret" not in text and "worker-private-secret" not in text
+        )
+        assert not list((folder / "trajectories").glob("*-test.json"))
+        (working_dir / "skills/main.md").write_text("check evidence")
+        return Trajectory(output="Reused historical evidence checks.")
+
+    monkeypatch.setattr(Worker, "_run", edit)
+    monkeypatch.setitem(runner._AGENTS, "offline_worker", Worker)
+    config.algorithm.name = "meta_harness"
+    config.algorithm.max_steps = 2
+    config.algorithm.worker.type = "agent"
+    config.algorithm.worker.name = "offline_worker"
+    run_dir, result = asyncio.run(runner._run(config))
+    assert seen == [1, 2]
+    assert result["test_score"] == 1.0
+    assert len(list((run_dir / "trajectories").glob("*-test.json"))) == 1
+    assert load_config(run_dir / "config.yaml").algorithm.name == "meta_harness"
+    assert not list((run_dir / "working").iterdir())
+    final = Snapshot.load(run_dir / "snapshots" / f"{result['snapshot_id']}.json")
+    assert set(final.files) == {"skills/main.md"}
+    text = "".join(p.read_text() for p in run_dir.rglob("*") if p.is_file())
+    assert "target-private-secret" not in text and "worker-private-secret" not in text

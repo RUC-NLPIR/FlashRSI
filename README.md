@@ -2,11 +2,19 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## Meta-Harness
+
+新增 [迁移说明](docs/meta-harness.md) 与 [示例配置](examples/meta_harness.yaml)。
+Meta-Harness 让文件编辑型 Worker 检索全部历史源码、分数与完整轨迹，自主诊断并构造候选。
+退步版本同样保留；历史不压缩进提示词，临时参考目录在提交前清理，版本直接复用 Snapshot。
+在 dev 上搜索并选出主指标最好的版本，runner 最后只评估一次 test。
+已固定官方 revision 并验证离线协议；真实模型效果与论文分数尚未验证。
 
 ## DarwinX
 
@@ -132,6 +140,8 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/adas/__init__.py` | ADAS 的 archive 搜索循环、目录编辑与 reflection、按分数入档 |
 | `algorithms/adas/_prompts.py` | meta agent 的产出提示与自我复查提示 |
 | `algorithms/darwinx/__init__.py` | train 种群演化、筛选与重复确认、目录 mutation/recombination、经验蒸馏 |
+| `algorithms/meta_harness/__init__.py` | 完整历史文件检索、目录候选构造与主指标选优 |
+| `algorithms/meta_harness/_prompts.py` | 历史导航与编辑边界提示 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 算法要问的东西尽量由它手上的对象回答，而不是由基类再加一个方法。
