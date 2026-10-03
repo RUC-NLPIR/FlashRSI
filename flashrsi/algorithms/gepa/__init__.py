@@ -5,9 +5,8 @@ from __future__ import annotations
 import random
 
 from flashrsi.algorithms import _replies
-from flashrsi.algorithms.gepa import _population as pop
+from flashrsi.algorithms.gepa import _pareto as pareto
 from flashrsi.algorithms.gepa import _prompts as prompts
-from flashrsi.algorithms.gepa._population import Member
 from flashrsi.core import Algorithm, Snapshot
 
 
@@ -56,14 +55,14 @@ class GEPA(Algorithm):
 
         results = await self._evaluate(current, dev, label="baseline")
         self._population = [
-            Member(
-                index=0,
-                snapshot=current,
-                text=self._read_text(current).get(self._path, ""),
-                per_task=results.per_task,
-                score=results.score,
-            )
+            {
+                "snapshot_id": current.id,
+                "text": self._read_text(current).get(self._path, ""),
+                "per_task": dict(results.per_task),
+                "score": results.score,
+            }
         ]
+        self._snapshots = {current.id: current}
         self._metric_calls = len(dev)
 
         iteration = 0
@@ -71,66 +70,101 @@ class GEPA(Algorithm):
             await self._iterate(train, dev, iteration)
             iteration += 1
 
-        best = self._population[pop.best_index(self._population)]
+        best = max(self._population, key=lambda row: row["score"])
+        indices = {row["snapshot_id"]: i for i, row in enumerate(self._population)}
+        # Legacy indices are a log format, not a second version graph.
+        population = []
+        for i, row in enumerate(self._population):
+            parent_id = self._snapshots[row["snapshot_id"]].parent_id
+            population.append(
+                {
+                    "index": i,
+                    "snapshot_id": row["snapshot_id"],
+                    "parents": [indices[parent_id]] if parent_id in indices else [],
+                    "text": row["text"],
+                    "score": row["score"],
+                    "per_task": row["per_task"],
+                }
+            )
         return self._promote(
             current,
-            best.snapshot,
+            self._snapshots[best["snapshot_id"]],
             path=self._path,
-            score=best.score,
-            baseline_score=self._population[0].score,
+            score=best["score"],
+            baseline_score=self._population[0]["score"],
             metric_calls=self._metric_calls,
-            population=[
-                {
-                    "index": member.index,
-                    "snapshot_id": member.snapshot.id,
-                    "parents": list(member.parents),
-                    "text": member.text,
-                    "score": member.score,
-                    "per_task": dict(member.per_task),
-                }
-                for member in self._population
-            ],
+            population=population,
         )
 
     async def _iterate(self, train, dev, iteration: int) -> None:
         """One reflective mutation: select, propose, screen, admit."""
         rng = random.Random(self.config.seed + iteration)
-        parent = self._select(rng)
+        parent_index = self._select(rng)
+        parent = self._population[parent_index]
+        snapshot = self._snapshots[parent["snapshot_id"]]
         minibatch = tuple(
             rng.sample(
                 list(train), min(self.config.reflection_minibatch_size, len(train))
             )
         )
-        details = {"iteration": iteration, "parent_index": parent.index}
+        details = {"iteration": iteration, "parent_index": parent_index}
 
         # One rollout serves both purposes: it screens the parent and is the
         # evidence the reflection reads.
-        before = await self._evaluate(parent.snapshot, minibatch, label="parent")
+        before = await self._evaluate(snapshot, minibatch, label="parent")
         self._metric_calls += len(minibatch)
 
         text = await self._propose(parent, before)
         # An empty reply is a Worker or parsing problem, not a search outcome;
         # keep it distinct from a proposal that simply repeated the parent.
+        reason = None
         if not text:
-            return self._reject(details, "empty_proposal")
-        if text == parent.text:
-            return self._reject(details, "unchanged_instruction")
-        if any(text == member.text for member in self._population):
-            return self._reject(details, "duplicate_instruction")
+            reason = "empty_proposal"
+        elif text == parent["text"]:
+            reason = "unchanged_instruction"
+        elif any(text == row["text"] for row in self._population):
+            reason = "duplicate_instruction"
+        if reason:
+            self._record("decision", {**details, "kind": "reject", "reason": reason})
+            return
 
-        candidate = self._candidate(parent.snapshot, {self._path: text})
+        candidate = self._candidate(snapshot, {self._path: text})
         after = await self._evaluate(candidate, minibatch, label="candidate_minibatch")
         self._metric_calls += len(minibatch)
         # Screen on the minibatch before spending a whole validation pass. Both
         # ran the same tasks, so comparing the means compares the sums.
         if after.score <= before.score:
-            return self._reject(details, "failed_minibatch_screen")
+            self._record(
+                "decision",
+                {**details, "kind": "reject", "reason": "failed_minibatch_screen"},
+            )
+            return
 
         results = await self._evaluate(candidate, dev, label="candidate_dev")
         self._metric_calls += len(dev)
-        self._admit(candidate, text, parent, results, details)
+        self._snapshots[candidate.id] = candidate
+        self._population.append(
+            {
+                "snapshot_id": candidate.id,
+                "text": text,
+                "per_task": dict(results.per_task),
+                "score": results.score,
+            }
+        )
+        self._record(
+            "decision",
+            {
+                **details,
+                "kind": "admit",
+                "parent_id": snapshot.id,
+                "candidate_id": candidate.id,
+                "score": results.score,
+                "parent_score": parent["score"],
+                "accepted": True,
+            },
+        )
 
-    async def _propose(self, parent: Member, evidence) -> str:
+    async def _propose(self, parent: dict, evidence) -> str:
         """Reflect on the parent's own trajectories and rewrite the instruction.
 
         Upstream shows each input, the assistant's response and the feedback on
@@ -140,7 +174,7 @@ class GEPA(Algorithm):
         reply = await self.worker.ask(
             prompts.REFLECT.format(
                 path=self._path,
-                instruction=parent.text,
+                instruction=parent["text"],
                 evidence=self._evidence(
                     {
                         "task": item.task.question,
@@ -153,49 +187,16 @@ class GEPA(Algorithm):
         )
         return _replies.fenced(reply)
 
-    def _select(self, rng: random.Random) -> Member:
-        """Pick the parent to mutate: the aggregate best, or from the frontier."""
+    def _select(self, rng: random.Random) -> int:
+        """Pick a population slot: the aggregate best, or from the frontier."""
         population = self._population
-        if self.config.candidate_selection_strategy == "current_best":
-            return population[pop.best_index(population)]
-        front = pop.prune(pop.frontier(population), population)
-        # Sampling the union weights a member by how many tasks it owns.
-        weighted = [index for members in front.values() for index in sorted(members)]
-        if not weighted:
-            return population[pop.best_index(population)]
-        return population[rng.choice(weighted)]
-
-    def _admit(self, snapshot, text, parent, results, details) -> None:
-        """Add a candidate to the population.
-
-        Admission is not promotion: GEPA promotes the aggregate best once, after
-        the budget is spent, so the population holds members that never became
-        the current version.
-        """
-        member = Member(
-            index=len(self._population),
-            snapshot=snapshot,
-            text=text,
-            per_task=results.per_task,
-            score=results.score,
-            parents=(parent.index,),
-        )
-        self._population.append(member)
-        self._record(
-            "decision",
-            {
-                **details,
-                "kind": "admit",
-                "parent_id": parent.snapshot.id,
-                "candidate_id": snapshot.id,
-                "score": member.score,
-                "parent_score": parent.score,
-                "accepted": True,
-            },
-        )
-
-    def _reject(self, details, reason: str) -> None:
-        self._record("decision", {**details, "kind": "reject", "reason": reason})
+        if self.config.candidate_selection_strategy == "pareto":
+            front = pareto.prune(pareto.frontier(population), population)
+            # Keep the original task order and sorted slots: RNG draws depend on it.
+            weighted = [i for members in front.values() for i in sorted(members)]
+            if weighted:
+                return rng.choice(weighted)
+        return max(range(len(population)), key=lambda i: population[i]["score"])
 
     def _check(self) -> None:
         if not self.benchmark.train or not self.benchmark.dev:

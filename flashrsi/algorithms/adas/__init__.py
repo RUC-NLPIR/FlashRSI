@@ -119,21 +119,23 @@ class ADAS(Algorithm):
         rules = self._evidence([dict(self.target.component_rules)])
         working = self._run_dir / "working" if self._run_dir else None
         with parent.check_out(working_dir=working) as directory:
-            account = self._account(
+            account = _replies.tagged(
                 await self.worker.edit(
                     directory,
                     prompts.PROPOSE.format(
                         archive=self._evidence(archive), rules=rules
                     ),
-                )
-            )
+                ),
+                "DESIGN",
+            ).strip()
             for _ in range(self.config.num_reflections):
-                account = self._account(
+                account = _replies.tagged(
                     await self.worker.edit(
                         directory,
                         prompts.REFLECT.format(rules=rules, account=account),
-                    )
-                )
+                    ),
+                    "DESIGN",
+                ).strip()
             # The meta agent ran its own tools in there, so it also left what
             # those tools produce; commit refuses those paths outright.
             discard_runtime_files(directory)
@@ -148,15 +150,6 @@ class ADAS(Algorithm):
             if not parent.changed_paths(candidate):
                 return self._decline(parent, step, "the harness was left unchanged")
         return candidate, account
-
-    def _account(self, reply: str) -> str:
-        """The design description, as prose for the next round to read.
-
-        ``_replies.tagged`` ends its value with a newline because there it
-        usually becomes a whole file's content. This one is a prose field in a
-        JSON record, so the newline is dropped.
-        """
-        return _replies.tagged(reply, "DESIGN").strip()
 
     def _decline(self, parent: Snapshot, step: int, problem: str):
         """Cost one step rather than the experiment.

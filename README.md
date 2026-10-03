@@ -119,7 +119,7 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/opro/__init__.py` | OPRO 的搜索循环、历史排序、候选采样与最终提升 |
 | `algorithms/opro/_prompts.py` | OPRO 的元提示与历史行模板 |
 | `algorithms/gepa/__init__.py` | GEPA 的迭代循环、parent 选择、minibatch 筛选、种群准入与最终提升 |
-| `algorithms/gepa/_population.py` | 种群记录、逐题 Pareto frontier 与支配剪枝 |
+| `algorithms/gepa/_pareto.py` | 逐题 Pareto frontier 与支配剪枝 |
 | `algorithms/gepa/_prompts.py` | GEPA 的反思重写提示 |
 | `algorithms/evoprompt/__init__.py` | EvoPrompt 的种群初始化、GA/DE 单代演化与最终提升 |
 | `algorithms/evoprompt/_prompts.py` | EvoPrompt 的 GA、DE 与 paraphrase 模板 |

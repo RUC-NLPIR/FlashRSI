@@ -7,7 +7,7 @@ import pytest
 
 from flashrsi.agents import ClaudeCode, MiniAgent
 from flashrsi.algorithms import EvoPrompt
-from flashrsi.algorithms.evoprompt import Member, _top_k
+from flashrsi.algorithms.evoprompt import _top_k
 from flashrsi.core import Agent, Benchmark, Snapshot, Task, Trajectory
 
 # Both harnesses load a prompt file, at their own native path.
@@ -102,7 +102,11 @@ def seed_population(algo, snapshot, members):
     snapshot; only the text and score vary between these cases.
     """
     algo._path = "prompts/system.md"
-    algo._population = [Member(snapshot, text, score) for text, score in members]
+    algo._snapshots = {snapshot.id: snapshot}
+    algo._population = [
+        {"snapshot_id": snapshot.id, "text": text, "score": score}
+        for text, score in members
+    ]
 
 
 def decisions(directory):
@@ -204,7 +208,7 @@ def test_the_seed_instruction_is_member_zero_and_is_not_recommitted(monkeypatch)
     asyncio.run(algo._initialize(seed))
 
     # Both members are the seed snapshot itself, scored exactly once.
-    assert [member.snapshot.id for member in algo._population] == [seed.id, seed.id]
+    assert [member["snapshot_id"] for member in algo._population] == [seed.id, seed.id]
     assert [prompt for prompt, _ in calls] == ["dev-only"]
 
 
@@ -218,7 +222,7 @@ def test_an_unusable_reply_keeps_the_parent_without_spending_an_evaluation(monke
 
     # Baseline, plus only the one child that actually carried new text.
     assert [prompt for prompt, _ in calls].count("dev-only") == 2
-    assert [member.score for member in algo._population] == [0.0, 0.0]
+    assert [member["score"] for member in algo._population] == [0.0, 0.0]
 
 
 def test_a_failing_worker_aborts_the_run_rather_than_skipping(monkeypatch):
@@ -282,7 +286,7 @@ def test_ga_topk_keeps_the_population_size_when_children_collapse(monkeypatch):
     asyncio.run(algo.evolve())
 
     assert len(algo._population) == 2
-    assert len({member.text for member in algo._population}) == 2
+    assert len({member["text"] for member in algo._population}) == 2
 
 
 def test_ga_standard_survivors_keep_the_children_even_when_worse(monkeypatch):
@@ -294,10 +298,13 @@ def test_ga_standard_survivors_keep_the_children_even_when_worse(monkeypatch):
     final = asyncio.run(algo.evolve())
 
     # The winner was not carried into the next population...
-    assert [member.text for member in algo._population] == ["weak one\n", "weak two\n"]
+    assert [member["text"] for member in algo._population] == [
+        "weak one\n",
+        "weak two\n",
+    ]
     # ...so the promotion at the end finds no improvement to make.
     assert final.id == target.snapshot.id
-    assert max(member.score for member in algo._population) == 0.0
+    assert max(member["score"] for member in algo._population) == 0.0
 
 
 def test_ga_topk_rescues_a_winning_parent_from_losing_children(monkeypatch):
@@ -308,7 +315,7 @@ def test_ga_topk_rescues_a_winning_parent_from_losing_children(monkeypatch):
     algo = algorithm(target, worker, survivor_selection="topk")
     final = asyncio.run(algo.evolve())
 
-    assert "SOLVED\n" in [member.text for member in algo._population]
+    assert "SOLVED\n" in [member["text"] for member in algo._population]
     assert final.files["prompts/system.md"].content == b"SOLVED\n"
 
 
@@ -376,13 +383,13 @@ def test_an_unusable_reply_keeps_the_parents_snapshot_as_its_own_record(monkeypa
     """
     target, _ = make_target(monkeypatch)
     algo = algorithm(target, ScriptedWorker([]))
-    seed = Member(snapshot=target.snapshot, text="seed", score=1.0)
+    seed = {"snapshot_id": target.snapshot.id, "text": "seed", "score": 1.0}
 
     carried = asyncio.run(algo._member(seed, "", label="child"))
 
     assert carried is not seed
-    assert carried.snapshot is seed.snapshot
-    assert (carried.text, carried.score) == ("seed", 1.0)
+    assert carried["snapshot_id"] == seed["snapshot_id"]
+    assert (carried["text"], carried["score"]) == ("seed", 1.0)
 
 
 def test_de_replaces_only_the_target_a_trial_was_built_from(monkeypatch):
@@ -397,7 +404,7 @@ def test_de_replaces_only_the_target_a_trial_was_built_from(monkeypatch):
     algo = algorithm(target, worker, variant="de", population_size=4)
     final = asyncio.run(algo.evolve())
 
-    texts = [member.text for member in algo._population]
+    texts = [member["text"] for member in algo._population]
     # Exactly one target was displaced; the three losing trials left theirs.
     assert texts.count("SOLVED\n") == 1
     assert "weak a\n" not in texts and "weak b\n" not in texts
@@ -465,7 +472,7 @@ def test_de_keeps_a_target_whose_trial_echoed_its_own_text(monkeypatch):
 
     # Pairwise replacement needs a strict improvement, and an echo ties, so the
     # population is unchanged and nothing is promoted.
-    assert [member.text for member in algo._population] == [
+    assert [member["text"] for member in algo._population] == [
         seed_text + "\n",
         "seed 0\n",
         "seed 1\n",
@@ -521,13 +528,13 @@ def test_a_carried_parent_is_marked_in_the_record(monkeypatch, tmp_path):
 
 
 def member_row(text, score):
-    return Member(snapshot=None, text=text, score=score)
+    return {"snapshot_id": None, "text": text, "score": score}
 
 
 def test_top_k_keeps_the_best_copy_of_each_distinct_prompt():
     pool = [member_row("a", 0.2), member_row("a", 0.9), member_row("b", 0.5)]
 
-    assert [item.score for item in _top_k(pool, 2)] == [0.9, 0.5]
+    assert [item["score"] for item in _top_k(pool, 2)] == [0.9, 0.5]
 
 
 def test_top_k_pads_back_to_the_requested_size_with_duplicates():
@@ -542,7 +549,7 @@ def test_top_k_pads_back_to_the_requested_size_with_duplicates():
     survivors = _top_k(pool, 3)
 
     assert len(survivors) == 3
-    assert [item.score for item in survivors] == [1.0, 0.5, 1.0]
+    assert [item["score"] for item in survivors] == [1.0, 0.5, 1.0]
 
 
 def test_wheel_falls_back_to_uniform_weights_when_every_fitness_is_zero(monkeypatch):

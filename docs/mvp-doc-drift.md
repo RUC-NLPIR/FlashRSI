@@ -34,7 +34,7 @@ mvp_doc L154 要求 `check_out()`「在框架内部记住 checkout 时的基线�
 Agent 只能记住一个**。但实际用法里同时存在多个基线：
 
 - [test_snapshot_files.py:64](../tests/test_snapshot_files.py#L64) 覆盖同一 snapshot 并发 checkout 两次；
-- GEPA 和 EvoPrompt 是种群算法，手上同时握着多个候选版本（[gepa/_population.py](../flashrsi/algorithms/gepa/_population.py)）。
+- GEPA 和 EvoPrompt 是种群算法，手上同时握着多个候选版本（[gepa/__init__.py](../flashrsi/algorithms/gepa/__init__.py)）。
 
 两个 checkout 同时存在时，Agent 记住的「那一个」基线就是错的。放在 Snapshot 上则基线天然显式：
 

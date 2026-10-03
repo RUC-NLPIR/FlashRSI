@@ -7,7 +7,7 @@ import pytest
 
 from flashrsi.agents import ClaudeCode, MiniAgent
 from flashrsi.algorithms import GEPA
-from flashrsi.algorithms.gepa._population import Member, frontier, prune
+from flashrsi.algorithms.gepa._pareto import frontier, prune
 from flashrsi.core import Agent, Benchmark, Snapshot, Task, Trajectory
 
 # Both harnesses load a prompt file, at their own native path.
@@ -95,15 +95,13 @@ def algorithm(target, worker, *, cls=MiniAgent, **config):
     )
 
 
-def member(index, per_task, score, text="", parents=()):
-    return Member(
-        index=index,
-        snapshot=None,
-        text=text or str(index),
-        per_task=per_task,
-        score=score,
-        parents=parents,
-    )
+def member(index, per_task, score, text=""):
+    return {
+        "snapshot_id": str(index),
+        "text": text or str(index),
+        "per_task": per_task,
+        "score": score,
+    }
 
 
 # -- the loop --------------------------------------------------------------
@@ -143,8 +141,8 @@ def test_claude_code_starts_from_an_absent_instruction_file(monkeypatch):
     algo = algorithm(target, worker, cls=ClaudeCode)
     final = asyncio.run(algo.evolve())
 
-    assert algo._population[0].text == ""
-    assert [member.score for member in algo._population] == [0.0, 1.0]
+    assert algo._population[0]["text"] == ""
+    assert [member["score"] for member in algo._population] == [0.0, 1.0]
     assert final.files["CLAUDE.md"].content == b"SOLVED\n"
 
 
@@ -204,8 +202,8 @@ def test_the_current_version_never_moves_during_the_search(monkeypatch):
     assert updates == [(3, final.id)]
     assert final.id != original.id
     assert final.files["prompts/system.md"].content == b"SOLVED\n"
-    assert algo._population[1].snapshot.id == final.id
-    assert algo._population[1].parents == (0,)
+    assert algo._population[1]["snapshot_id"] == final.id
+    assert algo._snapshots[final.id].parent_id == original.id
 
 
 def test_a_search_without_improvement_keeps_the_original_version(monkeypatch):
@@ -247,7 +245,8 @@ def test_a_proposal_matching_another_member_is_dropped_before_evaluation(
         member(0, {"dev-only": 1.0}, 1.0, text=""),
         member(1, {"dev-only": 0.0}, 0.0, text="SOLVED\n"),
     ]
-    algo._population[0] = replace(algo._population[0], snapshot=target.snapshot)
+    algo._population[0]["snapshot_id"] = target.snapshot.id
+    algo._snapshots = {target.snapshot.id: target.snapshot}
     algo._metric_calls = 0
 
     asyncio.run(algo._iterate(algo.benchmark.train, algo.benchmark.dev, 0))
@@ -379,7 +378,7 @@ def test_a_member_that_wins_one_task_stays_selectable(monkeypatch):
         member(1, {"task-a": 0.0, "task-b": 1.0}, 0.5),
     ]
 
-    chosen = {algo._select(random.Random(seed)).index for seed in range(20)}
+    chosen = {algo._select(random.Random(seed)) for seed in range(20)}
 
     assert chosen == {0, 1}
 
@@ -392,7 +391,7 @@ def test_a_dominated_member_is_pruned_out_of_the_frontier(monkeypatch):
         member(1, {"task-a": 1.0, "task-b": 1.0}, 1.0),
     ]
 
-    chosen = {algo._select(random.Random(seed)).index for seed in range(20)}
+    chosen = {algo._select(random.Random(seed)) for seed in range(20)}
 
     # Member 1 ties on task-a and wins task-b, so member 0 owns nothing.
     assert chosen == {1}
@@ -408,7 +407,7 @@ def test_current_best_ignores_the_frontier(monkeypatch):
         member(1, {"task-a": 0.0, "task-b": 1.0}, 0.9),
     ]
 
-    assert {algo._select(random.Random(seed)).index for seed in range(20)} == {1}
+    assert {algo._select(random.Random(seed)) for seed in range(20)} == {1}
 
 
 def test_the_frontier_maps_each_task_to_its_best_members():

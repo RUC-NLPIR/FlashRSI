@@ -143,8 +143,8 @@ def test_claude_code_starts_from_an_absent_instruction_file(monkeypatch):
     algo = algorithm(target, worker, cls=ClaudeCode)
     final = asyncio.run(algo.evolve())
 
-    assert algo._history[0].text == ""
-    assert [item.score for item in algo._history] == [0.0, 1.0]
+    assert algo._history[0]["text"] == ""
+    assert [item["score"] for item in algo._history] == [0.0, 1.0]
     assert final.files["CLAUDE.md"].content == b"SOLVED\n"
 
 
@@ -158,21 +158,23 @@ def test_incumbent_never_moves_and_the_global_best_is_promoted_once(monkeypatch)
     algo = algorithm(target, worker, max_steps=3)
     final = asyncio.run(algo.evolve())
 
-    assert [item.score for item in algo._history] == [0.0, 1.0, 0.0, 0.0]
+    assert [item["score"] for item in algo._history] == [0.0, 1.0, 0.0, 0.0]
     # Candidates branch from the best so far, so the two regressions descend
     # from the winner rather than replacing it.
     winner = algo._history[1]
-    assert [item.snapshot.parent_id for item in algo._history[1:]] == [
+    assert [
+        algo._snapshots[item["snapshot_id"]].parent_id for item in algo._history[1:]
+    ] == [
         original.id,
-        winner.snapshot.id,
-        winner.snapshot.id,
+        winner["snapshot_id"],
+        winner["snapshot_id"],
     ]
     assert final.files["prompts/system.md"].content == b"SOLVED first\n"
-    assert final.id == winner.snapshot.id
+    assert final.id == winner["snapshot_id"]
     # Promotion is a pointer move, not a rerun: the last execution belongs to
     # the final regression, and the winner was only ever scored once.
     assert [snapshot for _, snapshot in calls].count(final.id) == 2
-    assert calls[-1][1] == algo._history[-1].snapshot.id != final.id
+    assert calls[-1][1] == algo._history[-1]["snapshot_id"] != final.id
 
 
 def test_promotion_is_recorded_with_the_whole_pool(monkeypatch, tmp_path):
@@ -208,10 +210,10 @@ def test_history_rows_ascend_and_honor_threshold_and_size(monkeypatch):
     algo = algorithm(target, ScriptedWorker([]), history_size=2, score_threshold=0.5)
     snapshot = target.snapshot
     algo._history = [
-        _scored(algo, "low", 0.25, snapshot),
-        _scored(algo, "high", 1.0, snapshot),
-        _scored(algo, "middle", 0.5, snapshot),
-        _scored(algo, "upper", 0.75, snapshot),
+        _scored("low", 0.25, snapshot),
+        _scored("high", 1.0, snapshot),
+        _scored("middle", 0.5, snapshot),
+        _scored("upper", 0.75, snapshot),
     ]
 
     rendered = algo._render_history()
@@ -221,7 +223,7 @@ def test_history_rows_ascend_and_honor_threshold_and_size(monkeypatch):
     assert rendered.index("upper") < rendered.index("high")  # Ascending.
     assert "score:\n75" in rendered and "score:\n100" in rendered
 
-    algo._history = [_scored(algo, "low", 0.25, snapshot)]
+    algo._history = [_scored("low", 0.25, snapshot)]
     assert algo._render_history() == "\n(none above threshold)\n"
 
 
@@ -268,10 +270,12 @@ def test_several_candidates_in_one_step_branch_from_the_same_parent(monkeypatch)
     algo = algorithm(target, worker, num_candidates=2)
     final = asyncio.run(algo.evolve())
 
-    assert [item.score for item in algo._history] == [0.0, 0.5, 1.0]
+    assert [item["score"] for item in algo._history] == [0.0, 0.5, 1.0]
     # Both candidates descend from the step's parent: the incumbent does not
     # move mid-step, so the stronger one is not built on top of the weaker.
-    assert [item.snapshot.parent_id for item in algo._history[1:]] == [original.id] * 2
+    assert [
+        algo._snapshots[item["snapshot_id"]].parent_id for item in algo._history[1:]
+    ] == [original.id] * 2
     assert final.files["prompts/system.md"].content == b"STRONG\n"
 
 
@@ -303,12 +307,12 @@ def test_evidence_follows_the_best_candidate_found_within_a_step(monkeypatch):
     algo = algorithm(target, worker, max_steps=2, num_candidates=2)
     final = asyncio.run(algo.evolve())
 
-    assert [item.score for item in algo._history] == [0.0, 1.0, 1.0, 0.0, 0.0]
+    assert [item["score"] for item in algo._history] == [0.0, 1.0, 1.0, 0.0, 0.0]
     # The tie is broken toward FIRST, both for promotion...
     assert final.files["prompts/system.md"].content == b"FIRST\n"
     # ...and for the evidence, which must stay on FIRST's own run. A >=
     # comparison would hand it to TIED and desynchronise the two.
-    assert algo._best().snapshot.id == algo._history[1].snapshot.id
+    assert algo._best()["snapshot_id"] == algo._history[1]["snapshot_id"]
     produced = {
         message["ran"]
         for item in algo._leader
@@ -392,7 +396,5 @@ def test_an_unusable_declared_instruction_file_is_rejected(
     assert not calls
 
 
-def _scored(algo, text, score, snapshot):
-    from flashrsi.algorithms.opro import _Scored
-
-    return _Scored(text, score, snapshot)
+def _scored(text, score, snapshot):
+    return {"text": text, "score": score, "snapshot_id": snapshot.id}
