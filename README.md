@@ -2,11 +2,20 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## ModularRSI
+
+见 [迁移说明](docs/modular-rsi.md) 与 [示例配置](examples/modular_rsi.yaml)。
+在独立演化任务上对比同任务的成功/失败轨迹，五个功能模块从共同 seed 独立演化，
+再由 Worker 读取原生分支 checkout 集成并修复模块交互。Worker 使用自己的运行版本；
+文件范围、diff review 和执行检查约束修改。直接复用 Snapshot，不引入新的版本管理类。
+TerminalBench 可通过 `evolution_data_path` 加载独立 Harbor 演化任务。
+已固定官方 revision 并完成离线协议验证；真实模型和论文结果尚未验证。
 
 ## Meta-Harness
 
@@ -142,6 +151,7 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/darwinx/__init__.py` | train 种群演化、筛选与重复确认、目录 mutation/recombination、经验蒸馏 |
 | `algorithms/meta_harness/__init__.py` | 完整历史文件检索、目录候选构造与主指标选优 |
 | `algorithms/meta_harness/_prompts.py` | 历史导航与编辑边界提示 |
+| `algorithms/modular_rsi/__init__.py` | 轨迹对比、模块独立演化、验证与集成 |
 | `runner.py` | 实例化组件、创建实验目录、运行演化与最终 test、保存摘要 |
 
 算法要问的东西尽量由它手上的对象回答，而不是由基类再加一个方法。

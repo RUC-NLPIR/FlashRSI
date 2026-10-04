@@ -54,7 +54,37 @@ class TerminalBench(Benchmark):
     def load(self) -> Mapping[str, tuple[Task, ...]]:
         """Load local native tasks or the pinned Hugging Face task archive."""
         if self._splits is None:
-            self._splits = _split_tasks(self._iter_tasks(), self.config)
+            splits = _split_tasks(self._iter_tasks(), self.config)
+            evolution_path = self.config.get("evolution_data_path")
+            if evolution_path is not None:
+                # The independent collection uses the same Harbor grading
+                # contract. Reuse this loader; never repartition downstream
+                # benchmark instances into an alleged external evolution set.
+                external = TerminalBench(
+                    {
+                        "data_path": evolution_path,
+                        "split": {"train": 1, "dev": 0, "test": 0},
+                        "seed": self.config.get("seed", 0),
+                        "limit": self.config.get("evolution_limit"),
+                    }
+                )
+                evolution = external.load()["train"]
+                downstream = [task for tasks in splits.values() for task in tasks]
+                if any(
+                    a.task_id == b.task_id
+                    or a.question.strip() == b.question.strip()
+                    or a.metadata["task_checksum"] == b.metadata["task_checksum"]
+                    for a in evolution
+                    for b in downstream
+                ):
+                    raise ValueError(
+                        "external evolution tasks overlap downstream benchmark tasks"
+                    )
+                splits = MappingProxyType({**splits, "train": evolution})
+                self.metadata = MappingProxyType(
+                    {**self.metadata, "evolution_source": dict(external.metadata)}
+                )
+            self._splits = splits
             self._tasks_by_id = {
                 task.task_id: task for split in self._splits.values() for task in split
             }

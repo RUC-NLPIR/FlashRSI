@@ -87,6 +87,50 @@ def test_flat_directory_uses_reproducible_disjoint_splits_and_limit(tmp_path, ha
         assert limited[name][0] in full[name]
 
 
+def test_external_evolution_collection_replaces_train_and_preserves_downstream(
+    tmp_path, harbor
+):
+    downstream, external = tmp_path / "downstream", tmp_path / "external"
+    for i in range(6):
+        _task_dir(downstream, f"eval-{i}")
+    for i in range(3):
+        _task_dir(external, f"evo-{i}")
+    base = TerminalBench({"data_path": downstream, "seed": 11}).load()
+    benchmark = TerminalBench(
+        {
+            "data_path": downstream,
+            "evolution_data_path": external,
+            "evolution_limit": 2,
+            "seed": 11,
+        }
+    )
+    splits = benchmark.load()
+    assert splits["dev"] == base["dev"] and splits["test"] == base["test"]
+    assert len(splits["train"]) == 2
+    assert all(t.task_id.startswith("evo-") for t in splits["train"])
+    assert benchmark.metadata["evolution_source"]["data_path"] == str(external)
+    failed = Trajectory(
+        task=splits["train"][0], status="error", error_message="runtime error"
+    )
+    assert benchmark.grade((failed,))[0].metrics["reward"] == 0
+
+
+def test_external_evolution_rejects_renamed_duplicate_and_repeated_load(
+    tmp_path, harbor
+):
+    downstream = _task_dir(tmp_path / "downstream", "eval-one")
+    external = _task_dir(tmp_path / "external", "different-id")
+    (external / "instruction.md").write_bytes(
+        (downstream / "instruction.md").read_bytes()
+    )
+    benchmark = TerminalBench(
+        {**_single_config(downstream), "evolution_data_path": external}
+    )
+    for _ in range(2):
+        with pytest.raises(ValueError, match="overlap"):
+            benchmark.load()
+
+
 def test_single_task_auto_requires_explicit_partition(tmp_path, harbor):
     directory = _task_dir(tmp_path)
     with pytest.raises(ValueError, match="enough training/unassigned tasks"):

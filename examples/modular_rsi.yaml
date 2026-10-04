@@ -1,0 +1,37 @@
+# Download/extract the official independent Harbor evolution tasks first.
+# All data paths below resolve from the command's current working directory.
+run:
+  output_dir: ../runs
+benchmark:
+  name: terminal_bench
+  data_path: /absolute/path/to/terminal-bench-2
+  evolution_data_path: /absolute/path/to/ModularRSI_2000_Instances/tb
+  evolution_limit: 10
+  split: {train: 0, dev: 0, test: 1}
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: your-model
+    api_key: your-api-key
+algorithm:
+  name: modular_rsi
+  num_epochs: 1
+  integration_epochs: 1
+  num_rollouts: 3
+  batch_size: 10
+  worker:
+    type: agent
+    name: miniagent
+    max_turns: 30
+    llm:
+      model_name: your-model
+      api_key: your-api-key
+  # File boundaries use native Snapshot resources. Several modules may share
+  # a file; their functional boundaries are prompt constraints, not AST rules.
+  modules:
+    agent_loop: [runtime/agent.py]
+    tool_use: [runtime/agent.py, tools/shell.py]
+    observation_management: [runtime/agent.py, runtime/tool_result.py]
+    context_management: [runtime/agent.py]
+    task_completion_detection: [runtime/agent.py]

@@ -19,6 +19,7 @@ from flashrsi.algorithms import (
     DarwinX,
     EvoPrompt,
     MetaHarness,
+    ModularRSI,
     SkillOpt,
 )
 from flashrsi.benchmarks import HotpotQA, SearchQA, Tau3Banking, TerminalBench
@@ -36,6 +37,7 @@ _ALGORITHMS = {
     "adas": ADAS,
     "darwinx": DarwinX,
     "meta_harness": MetaHarness,
+    "modular_rsi": ModularRSI,
     "ahe": AHE,
     "skillopt": SkillOpt,
     "opro": OPRO,

@@ -56,6 +56,141 @@ def _chat_reply(body, text="Paris", *, tool=None):
     }
 
 
+def test_modular_rsi_edits_native_checkouts_and_merges_real_runtime(model_server):
+    import ast
+
+    from test_modular_rsi import ExternalTasks
+
+    from flashrsi.algorithms import ModularRSI
+
+    names = {
+        "agent_loop": "run",
+        "tool_use": "_dispatch",
+        "observation_management": "_normalize_tool_result",
+        "context_management": "_middleware_additions",
+        "task_completion_detection": "_run_before_final_hooks",
+    }
+    modules = {module: ["runtime/agent.py"] for module in names}
+
+    def reply(request):
+        body = request["body"]
+        messages = body["messages"]
+        prompt = next(m["content"] for m in messages if m["role"] == "user")
+        if prompt.startswith("[ModularRSI: analyze]"):
+            module = next(
+                line[8:] for line in prompt.splitlines() if line.startswith("Module: ")
+            )
+            text = json.dumps(
+                [
+                    {
+                        "target": modules[module][0],
+                        "task_ids": ["e0"],
+                        "rationale": "Reusable control improvement",
+                        "change": "Document the mechanism",
+                    }
+                ]
+            )
+            return 200, _chat_reply(body, text)
+        if prompt.startswith("[ModularRSI: edit]"):
+            module = next(
+                line[8:] for line in prompt.splitlines() if line.startswith("Module: ")
+            )
+            path, name = modules[module][0], names[module]
+            tools = [m for m in messages if m["role"] == "tool"]
+            if not tools:
+                return 200, _chat_reply(body, tool=("read_file", {"path": path}))
+            if len(tools) == 1:
+                source = tools[0]["content"]
+                definition = next(
+                    n
+                    for n in ast.parse(source).body
+                    if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                    and n.name == name
+                )
+                first = definition.body[0]
+                lines = source.splitlines(keepends=True)
+                lines.insert(
+                    first.lineno - 1,
+                    " " * first.col_offset + f"# OFFLINE_MODULE_{module}\n",
+                )
+                return 200, _chat_reply(
+                    body, tool=("write_file", {"path": path, "content": "".join(lines)})
+                )
+            return 200, _chat_reply(body, "Documented the reusable mechanism.")
+        if prompt.startswith("[ModularRSI: merge]"):
+            sources = json.loads(
+                prompt.split("Module reference directories (do not edit): ")[1]
+            )
+            tools = [m for m in messages if m["role"] == "tool"]
+            paths = [sources[module] + "/runtime/agent.py" for module in modules]
+            if len(tools) < len(paths):
+                return 200, _chat_reply(
+                    body, tool=("read_file", {"path": paths[len(tools)]})
+                )
+            if len(tools) == len(paths):
+                source = tools[0]["content"]
+                # The fake model integrates each branch's distinct annotation.
+                # Production code only exposes native checkout directories.
+                for module, record in zip(modules, tools):
+                    marker = f"# OFFLINE_MODULE_{module}"
+                    assert marker in record["content"]
+                    if marker in source:
+                        continue
+                    definition = next(
+                        n
+                        for n in ast.parse(source).body
+                        if getattr(n, "name", None) == names[module]
+                    )
+                    first = definition.body[0]
+                    lines = source.splitlines(keepends=True)
+                    lines.insert(
+                        first.lineno - 1, " " * first.col_offset + marker + "\n"
+                    )
+                    source = "".join(lines)
+                return 200, _chat_reply(
+                    body,
+                    tool=(
+                        "write_file",
+                        {"path": "runtime/agent.py", "content": source},
+                    ),
+                )
+            return 200, _chat_reply(
+                body, "Integrated the independent module annotations."
+            )
+        if prompt.startswith("[ModularRSI: review]"):
+            return 200, _chat_reply(
+                body, '{"accept": true, "reason": "Reusable documentation change"}'
+            )
+        if prompt.startswith("[ModularRSI: integrate]"):
+            return 200, _chat_reply(
+                body, "The independently edited modules are compatible."
+            )
+        return 200, _chat_reply(body, "1")
+
+    model_server.reply = reply
+    benchmark = ExternalTasks()
+    benchmark.load()["train"] = (Task("e0", "e0"),)
+    target, worker = (
+        MiniAgent(_config(model_server)),
+        MiniAgent({**_config(model_server), "max_turns": 10}),
+    )
+    original_worker = worker.snapshot
+    algo = ModularRSI(
+        {"modules": modules, "num_epochs": 1, "batch_size": 1, "num_rollouts": 2},
+        target=target,
+        worker=worker,
+        benchmark=benchmark,
+    )
+    final = asyncio.run(algo.evolve())
+    content = final.files["runtime/agent.py"].content
+    assert all(f"OFFLINE_MODULE_{module}".encode() in content for module in modules)
+    assert worker.snapshot == original_worker
+    assert not any(
+        "test-private" in json.dumps(request["body"])
+        for request in model_server.requests
+    )
+
+
 def _responses_reply(body, text="Paris"):
     return {
         "id": "resp_local",

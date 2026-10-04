@@ -7,6 +7,7 @@ from flashrsi.algorithms.darwinx import DarwinX
 from flashrsi.algorithms.evoprompt import EvoPrompt
 from flashrsi.algorithms.gepa import GEPA
 from flashrsi.algorithms.meta_harness import MetaHarness
+from flashrsi.algorithms.modular_rsi import ModularRSI
 from flashrsi.algorithms.opro import OPRO
 from flashrsi.algorithms.skillopt import SkillOpt
 
@@ -18,6 +19,7 @@ __all__ = [
     "EvoPrompt",
     "GEPA",
     "MetaHarness",
+    "ModularRSI",
     "OPRO",
     "SkillOpt",
 ]
