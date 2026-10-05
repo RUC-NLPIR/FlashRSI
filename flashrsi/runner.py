@@ -17,6 +17,7 @@ from flashrsi.algorithms import (
     GEPA,
     OPRO,
     DarwinX,
+    EvoHarness,
     EvoPrompt,
     MetaHarness,
     ModularRSI,
@@ -34,6 +35,7 @@ _BENCHMARKS = {
 }
 _ALGORITHMS = {
     "ace": ACE,
+    "evo_harness": EvoHarness,
     "adas": ADAS,
     "darwinx": DarwinX,
     "meta_harness": MetaHarness,

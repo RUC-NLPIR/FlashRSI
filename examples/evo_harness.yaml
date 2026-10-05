@@ -1,0 +1,30 @@
+# One-shot online native skill compilation. Fill in both models and credentials.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 30
+
+agent:
+  name: miniagent
+  max_turns: 10
+  llm:
+    model_name: your-target-model
+    api_key: your-target-api-key
+
+algorithm:
+  name: evo_harness
+  batch_size: 4
+  max_steps: 2
+  # Train is consumed once; runner evaluates the final native Snapshot on test.
+  general_min_tasks: 3
+  worker:
+    type: agent
+    name: miniagent
+    max_turns: 10
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

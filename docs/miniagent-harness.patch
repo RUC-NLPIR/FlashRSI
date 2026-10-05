@@ -883,9 +883,116 @@ diff --git a/runtime/web_config.py b/runtime/web_config.py
 diff --git a/runtime/workspace.py b/runtime/workspace.py
 --- a/runtime/workspace.py
 +++ b/runtime/workspace.py
-@@ -162,4 +162,4 @@
+@@ -10,6 +10,7 @@
+   tools/<name>.py             (optional, exports `async def call(args, ctx) -> str`)
+   middleware/<name>.py        (optional, exports any lifecycle hook)
+   skills/<name>.md            (optional, inlined into system prompt)
++  skills/<name>/SKILL.md      (optional, catalog + read_skill tool)
+   sub_agents/<name>.py        (optional, exports `async def run(input, ctx) -> str`)
+ """
+
+@@ -17,6 +18,7 @@
+
+ import importlib.util
+ import json
++import re
+ from dataclasses import dataclass, field
+ from pathlib import Path
+ from typing import TYPE_CHECKING, Any, Awaitable, Callable
+@@ -96,17 +98,33 @@
+     system_prompt = _read_text(system_path)
+     extract_prompt = _read_text(extract_path)
+
+-    # Skills — inlined into system prompt under "## Skill: <name>"
+-    skill_names = cfg.get("skills") or []
++    # Configured flat skills retain their original inline behavior. Directory
++    # skills are discovered from files so adding/removing one needs no config edit.
+     skill_blocks: list[str] = []
+-    for name in skill_names:
++    for name in cfg.get("skills") or []:
+         path = root / "skills" / f"{name}.md"
+         skill_blocks.append(f"\n\n## Skill: {name}\n\n{_read_text(path)}")
++    directories = sorted((root / "skills").glob("*/SKILL.md"))
++    for path in directories:
++        name = path.parent.name
++        if (path.parent.parent / f"{name}.md").exists():
++            raise ValueError(f"directory skill {name} shadows a flat skill")
++        text = _read_text(path)
++        match = re.match(r"^---\r?\n(.*?)\r?\n---(?:\r?\n|$)", text, re.DOTALL)
++        meta = yaml.safe_load(match[1]) if match else {}
++        if not isinstance(meta, dict) or not meta.get("description"):
++            raise ValueError(f"directory skill {name} requires a description")
++        skill_blocks.append(
++            f"\n\n## Available skill: {name}\n{meta['description']}\n"
++            f"Use read_skill with skill={name!r} only if relevant to the task."
++        )
+     if skill_blocks:
+         system_prompt = system_prompt.rstrip() + "".join(skill_blocks)
+
+-    # Tools (descriptions + optional impl)
++    # The directory catalog and its reader appear together, only when needed.
+     tool_names: list[str] = list(cfg.get("tools") or [])
++    if directories and "read_skill" not in tool_names:
++        tool_names.append("read_skill")
+     tool_schemas: list[dict] = []
+     extra_tools: dict[str, ToolCall] = {}
+     for name in tool_names:
+@@ -114,6 +132,8 @@
+         desc = json.loads(_read_text(desc_path))
+         tool_schemas.append({"type": "function", "function": desc})
+         impl_path = root / "tools" / f"{name}.py"
++        if directories and name == "read_skill" and not impl_path.is_file():
++            raise FileNotFoundError(f"directory skills require {impl_path}")
+         if impl_path.exists():
+             if name in BUILTIN_TOOL_NAMES:
+                 raise AttributeError(
+@@ -162,4 +182,4 @@
      )
 
 
 -SEED_WORKSPACE: Path = Path(__file__).parent / "seed_workspace"
 +SEED_WORKSPACE: Path = Path(__file__).parent.parent
+diff --git a/tools/read_skill.py b/tools/read_skill.py
+new file mode 100644
+--- /dev/null
++++ b/tools/read_skill.py
+@@ -0,0 +1,22 @@
++"""Load a discovered directory skill from this native workspace."""
++
++import re
++
++
++async def call(args, ctx) -> str:
++    name = args.get("skill")
++    root = ctx.workspace.root
++    skills_dir = (root / "skills").resolve()
++    if not isinstance(name, str):
++        raise ValueError("skill must name a discovered workspace skill")
++    path = (skills_dir / name / "SKILL.md").resolve()
++    if (
++        path.parent.parent != skills_dir
++        or path.parent.name != name
++        or not path.is_file()
++    ):
++        raise ValueError("skill must name a discovered workspace skill")
++    text = path.read_text(encoding="utf-8")
++    # Provenance metadata is for the curator; execution needs the procedure.
++    match = re.match(r"^---\r?\n.*?\r?\n---(?:\r?\n|$)", text, re.DOTALL)
++    return text[match.end() :].strip() if match else text
+diff --git a/tool_descriptions/read_skill.json b/tool_descriptions/read_skill.json
+new file mode 100644
+--- /dev/null
++++ b/tool_descriptions/read_skill.json
+@@ -0,0 +1,12 @@
++{
++  "name": "read_skill",
++  "description": "Read the complete procedure of a relevant directory skill listed in the system instructions. Skills are discovered from this workspace. Choose relevant skills by their description; loading irrelevant procedures wastes context.",
++  "parameters": {
++    "type": "object",
++    "properties": {
++      "skill": {"type": "string", "description": "Exact discovered skill directory name from the system instructions."}
++    },
++    "required": ["skill"],
++    "additionalProperties": false
++  }
++}

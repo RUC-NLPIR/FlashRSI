@@ -2,11 +2,21 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、Evo-Harness、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## Evo-Harness
+
+见 [接入说明](docs/evo-harness.md) 与 [示例配置](examples/evo_harness.yaml)。
+单次执行训练任务流，失败后反思，批次结束编译 topic/general 两级 skill，供后续任务选择和使用。
+合法更新持续采用；记录更新前在线分数，最终冻结库做独立 test，test 不参与学习。
+Curator 通过 Agent Worker 编辑原生 skill 与启用配置，复用标准评分和 Snapshot 提交；最终版本
+保存、恢复后可直接 rollout，solver 原生选择与加载 skill。提交前校验原生启用关系，
+保护既有技能、配置字段及两级编译边界。反思读取轨迹，未续接原生会话。
+固定官方 revision，双 harness 本地协议已验证，真实模型效果尚未验证。
 
 ## ModularRSI
 
@@ -143,6 +153,8 @@ scope 控制目标快照的编辑目录；目标执行任务仍使用完整版�
 | `algorithms/ace/__init__.py` | ACE 的训练反思、增量应用、offline 周期验证与最佳版本恢复、online 流式计分 |
 | `algorithms/ace/_playbook.py` | ADD 协议、section、bullet 编号、计数与精确去重 |
 | `algorithms/ace/_prompts.py` | Reflector、Curator 和训练重试提示 |
+| `algorithms/evo_harness/__init__.py` | 单次在线流、失败反思、两级技能编译、来源/预算约束和标准 Snapshot 提交 |
+| `algorithms/evo_harness/_prompts.py` | Reflector、Topic/General 文件编辑 Curator 提示 |
 | `algorithms/ahe/__init__.py` | AHE 的诊断、目录编辑、逐题归因与判决 |
 | `algorithms/ahe/_manifest.py` | 修改声明的解析与 diff 校验、逐题归因、判决分级与证伪路径 |
 | `algorithms/ahe/_prompts.py` | Agent Debugger 逐条/综合提示与 Evolve Agent 提示 |
@@ -1221,7 +1233,11 @@ MiniAgent 的资源布局和 Snapshot 组件如下：
 [harness 改动清单](docs/agent-integration.md#harness-的小改动) 和
 [原生差异文件](docs/miniagent-harness.patch)，原生函数接收普通字典，不依赖框架 Config 类或运行时 monkey patch。
 未搬入旧框架的 registry、演化算法、ArtifactStore 或评测脚本。
-默认资源来自旧版的文本 seed。Web 工具代码保留，但默认关闭，需要自行添加原生 schema
+默认资源来自旧版的文本 seed。既有平铺 `.md` skill 仍全文内联；可选目录型
+`skills/<name>/SKILL.md` 由原生 loader 自动发现，并在存在目录型 skill 时提供
+`read_skill` 按需读取正文。目录型 skill 只向 system prompt 提供 description，
+新增或删除不需要修改 `agent.yaml`；没有目录型 skill 时原有行为保持不变。
+Web 工具代码保留，但默认关闭，需要自行添加原生 schema
 及配置搜索/浏览服务；本阶段不验证真实 Web 服务。
 
 本阶段集成测试使用真实本地子进程、真实 OpenAI SDK 和本地模拟 HTTP 服务，验证两种

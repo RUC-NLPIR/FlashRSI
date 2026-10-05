@@ -113,7 +113,8 @@ MiniAgent._run → 子进程 _entry.py → 原生 run → Trajectory
 | `agent.py`、`editor.py` | 增加可选编辑目录，Context 向工具提供任务工作目录；保留自身指令；原生返回已有 messages，保留失败时已产生的输出和用量；检查工具是否启用 |
 | `llm.py` | 移除 provider 专用默认值和未使用的 analyzer/LiteLLM 路由；统一使用 OpenAI SDK，保留 Chat/Responses；推理设置和 `extra_body` 显式传入；SDK 重试交给原生循环管理 |
 | `trace.py` | 用显式配置和运行环境中的密钥对原生日志脱敏 |
-| `workspace.py` | 默认资源目录改为本包的 `agent.yaml` 所在目录 |
+| `workspace.py` | 默认资源目录改为本包的 `agent.yaml` 所在目录；自动发现目录型 SKILL.md，只展示 description 并提供按需读取工具；平铺 skill 继续内联 |
+| `tools/read_skill.py`、`tool_descriptions/read_skill.json` | 存在目录型 skill 时自动提供的原生工具，按需读取发现的 skill 正文，不返回 frontmatter；与 workspace 配合，不依赖框架或算法 |
 | `tools/shell.py`、`tool_descriptions/shell.json`、`agent.yaml` | 默认启用原生 shell 工具，支持工作目录、超时和有界输出收集；正常完成时保留后台服务，超时或取消清理当前命令进程组；随 Snapshot 版本化，不依赖框架或 benchmark |
 
 `web_config.py` 改为读取传入的 `web` 字典；`reader.py`、`tools.py`、`tool_result.py` 保持原生逻辑。
@@ -122,6 +123,13 @@ MiniAgent._run → 子进程 _entry.py → 原生 run → Trajectory
 原生差异集中在 [miniagent-harness.patch](miniagent-harness.patch)，对比来源是旧 FlashRSI
 提交 `5efe9b438483710060183c6c3ecbc5062b410a58` 的 `miniagent/harness/*.py`。
 对比前对基线使用同样的 Ruff 格式化，以排除纯格式差异。
+
+目录型 skill 的发现与加载属于 MiniAgent 原生 workspace 能力：扫描
+`skills/<name>/SKILL.md`，展示 description，按需读取正文。目录存在时提供 `read_skill`，
+删除最后一个目录后工具随之移除（原生配置显式启用的工具仍保留）。配置中的
+`skills` 列表仍只负责原有平铺 `.md` 的全文内联；同名目录和平铺文件会明确报错。
+Evo-Harness 只编辑 skill 文件，配置由既有 Snapshot 权限保持只读，无需额外激活声明。
+自定义来源目录需要自行保留相应的原生发现和加载能力；算法不会改写其 runtime。
 
 Review 顺序：`components.yaml` → 适配类 `_run` → `_entry.py` → 上述差异文件。
 进程桥接在收到终止信号时取消原生执行；适配类给工具最多两秒完成清理，再强制终止。
