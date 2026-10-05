@@ -1,0 +1,40 @@
+{
+  "run_root": "/root/blockdata/evoprompt-miniagent-searchqa-20260930-164426-520953",
+  "archive": "/root/blockdata/evoprompt-searchqa-archives/evoprompt-miniagent-searchqa-20260930-164426-520953.tar.gz",
+  "sha256": "544e1a8f6361ebb567f2401aed01c7c01116ac9b3813170489b290313c8b86c7",
+  "bytes": 54101856,
+  "files": 10192,
+  "checks": {
+    "initial-test": {
+      "count": 1400,
+      "scores_recomputed": true,
+      "ids_match": true,
+      "paired_order_match": true
+    },
+    "final-test": {
+      "count": 1400,
+      "scores_recomputed": true,
+      "ids_match": true,
+      "paired_order_match": true
+    }
+  },
+  "baseline": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7642857142857142,
+    "f1": 0.8657981545566118,
+    "exact_match": 0.7642857142857142,
+    "lite_f1": 0.8659047305203306
+  },
+  "evolved": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7671428571428571,
+    "f1": 0.8654479921863005,
+    "exact_match": 0.7671428571428571,
+    "lite_f1": 0.8650925492831865
+  },
+  "local_archive": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI-Lite-sync\\experiments\\cassi-evoprompt-miniagent-searchqa-20260930-seed42\\full-run.tar.gz",
+  "verified_files": 10192,
+  "verified_at": "2026-09-30T18:25:58.417874+00:00"
+}

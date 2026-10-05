@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-evoprompt-de-claude_code-hotpotqa-20261001-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 216298642,
+    "sha256": "c3eb863dc23ca39d459cdd7f58345dfea52e3ae732652668247fe20b0f9c55f8",
+    "files": 11648,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:39.739391+00:00"
+}

@@ -1,0 +1,32 @@
+{
+  "run_root": "/root/blockdata/gepa-claude_code-hotpotqa-20261003-134710-686480",
+  "status": "finished",
+  "archive_sha256": "38a75b6ce94a04682b1ddaaa3b1ffffc65281eb346ec953b4f56bda05a135a5e",
+  "archive_bytes": 158491607,
+  "verified_files": 5617,
+  "source_verification": {},
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/gepa-claude_code-hotpotqa-20261003-134741-179806/trajectories/00155-initial-test.json",
+      "tasks": 300,
+      "metrics_recomputed": {
+        "f1": 0.6531352474051978,
+        "exact_match": 0.49333333333333335
+      },
+      "non_finished_tasks": []
+    },
+    "final-test": {
+      "file": "attempts/gepa-claude_code-hotpotqa-20261003-134741-179806/trajectories/00156-final-test.json",
+      "tasks": 300,
+      "metrics_recomputed": {
+        "f1": 0.6832031112063082,
+        "exact_match": 0.5333333333333333
+      },
+      "non_finished_tasks": []
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "Official DeepSeek API; 1 epoch; sealed dev-only selection; complete run and isolated runtime source.",
+  "verified_at": "2026-10-03T07:42:35.298065+00:00"
+}

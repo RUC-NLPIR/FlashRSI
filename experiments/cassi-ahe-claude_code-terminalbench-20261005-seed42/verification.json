@@ -1,0 +1,46 @@
+{
+  "run_root": "/root/data/FlashRSI-TerminalQA/runs/ahe-claude_code-terminalbench-20261004-223758-160860",
+  "status": "finished",
+  "archive_sha256": "96c5f55bc41207046385c23b2f3f686fae8175cec82a9875075a9d93d0e0734e",
+  "archive_bytes": 811007284,
+  "verified_files": 2916,
+  "source_verification": {},
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/ahe-claude_code-terminal_bench-20261004-223944-546921/trajectories/00036-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.7
+      },
+      "non_finished_tasks": [
+        "sam-cell-seg",
+        "rstan-to-pystan",
+        "caffe-cifar-10",
+        "pytorch-model-recovery",
+        "filter-js-from-html",
+        "make-mips-interpreter",
+        "install-windows-3.11"
+      ]
+    },
+    "final-test": {
+      "file": "attempts/ahe-claude_code-terminal_bench-20261004-223944-546921/trajectories/00037-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.7
+      },
+      "non_finished_tasks": [
+        "sam-cell-seg",
+        "rstan-to-pystan",
+        "caffe-cifar-10",
+        "pytorch-model-recovery",
+        "filter-js-from-html",
+        "make-mips-interpreter",
+        "install-windows-3.11"
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "AHE + Claude Code + Terminal-Bench. Official Flash target, Pro worker, Flash integrity judge; two outer iterations, target10 diagnostic worker8. Dev selected the unchanged initial snapshot. Initial sealed test21/30 reward0.7 independently verified; reported final test reuses the same evaluation, reward0.7 and delta0. Snapshot/test IDs and all passing review records checked. No new model calls for report correction or archival. Superseded separately executed test traces retained only as process evidence; no second independent evaluation claimed. Finished2026-10-05 07:46:03 Beijing.",
+  "verified_at": "2026-10-05T02:17:57.115319+00:00"
+}

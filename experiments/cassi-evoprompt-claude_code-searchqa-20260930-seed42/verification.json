@@ -1,0 +1,40 @@
+{
+  "run_root": "/root/blockdata/evoprompt-claude_code-searchqa-20260930-215605-943668",
+  "archive": "/root/blockdata/evoprompt-searchqa-archives/evoprompt-claude_code-searchqa-20260930-215605-943668.tar.gz",
+  "sha256": "c38228f08b523f0c4af97506eef1f69869dba65b11669f607bba66bdaa8257e9",
+  "bytes": 160123167,
+  "files": 10174,
+  "checks": {
+    "initial-test": {
+      "count": 1400,
+      "scores_recomputed": true,
+      "ids_match": true,
+      "paired_order_match": true
+    },
+    "final-test": {
+      "count": 1400,
+      "scores_recomputed": true,
+      "ids_match": true,
+      "paired_order_match": true
+    }
+  },
+  "baseline": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7471428571428571,
+    "f1": 0.8493104486119408,
+    "exact_match": 0.7464285714285714,
+    "lite_f1": 0.8489455548894403
+  },
+  "evolved": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7407142857142858,
+    "f1": 0.8503671131408359,
+    "exact_match": 0.7407142857142858,
+    "lite_f1": 0.8500242782035773
+  },
+  "local_archive": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI-Lite-sync\\experiments\\cassi-evoprompt-claude_code-searchqa-20260930-seed42\\full-run.tar.gz",
+  "verified_files": 10174,
+  "verified_at": "2026-09-30T18:26:08.851712+00:00"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "finished",
+  "pid": 57921,
+  "attempt": "/root/blockdata/ace-miniagent-searchqa-20260930-prepare/attempts/ace-miniagent-searchqa-20260930-133415-799035",
+  "started_at": "2026-09-30T05:34:15.801111+00:00",
+  "initial_snapshot": "8ceaa47f57d1d4c5af6ad454b115870efd58f3b38461156d28cb4c22459b66b1",
+  "final_snapshot": "28238a9143dc4217db3ee4c85dec9e3d8c55edff5db40c38deaa18a133c29f44",
+  "baseline_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7614285714285715,
+    "f1": 0.8623005077930636,
+    "exact_match": 0.7614285714285715,
+    "lite_f1": 0.8623714342785863
+  },
+  "evolved_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.8471428571428572,
+    "f1": 0.9104455782312925,
+    "exact_match": 0.8464285714285714,
+    "lite_f1": 0.9097594191522763
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 8.571428571428571,
+    "improved_tasks": 134,
+    "regressed_tasks": 14,
+    "paired_bootstrap_95pct_pp": [
+      6.857142857142858,
+      10.214285714285715
+    ]
+  },
+  "test_used_for_selection": false,
+  "finished_at": "2026-09-30T15:41:32.549401+00:00"
+}

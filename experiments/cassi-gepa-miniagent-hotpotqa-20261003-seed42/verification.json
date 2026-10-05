@@ -1,0 +1,37 @@
+{
+  "run_root": "/root/blockdata/gepa-miniagent-hotpotqa-20261003-110108-361079",
+  "status": "finished",
+  "archive_sha256": "9808efdd8362a8e5c1fdc3f1b5d905f735812408bdbfdbc75742f7bdb7ab6800",
+  "archive_bytes": 38732477,
+  "verified_files": 5963,
+  "source_verification": {},
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/gepa-miniagent-hotpotqa-20261003-110206-686382/trajectories/00162-initial-test.json",
+      "tasks": 300,
+      "metrics_recomputed": {
+        "f1": 0.7157321158803357,
+        "exact_match": 0.55
+      },
+      "non_finished_tasks": []
+    },
+    "final-test": {
+      "file": "attempts/gepa-miniagent-hotpotqa-20261003-110206-686382/trajectories/00163-final-test.json",
+      "tasks": 300,
+      "metrics_recomputed": {
+        "f1": 0.6763438172229874,
+        "exact_match": 0.52
+      },
+      "non_finished_tasks": [
+        "5a8ae5d355429970aeb70325",
+        "5ae780a55542997b22f6a79f",
+        "5adc1ae5554299438c868d5c",
+        "5adbfb6b55429947ff17388d"
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "Official DeepSeek API; corrected reflection without supporting facts; 1 epoch; dev-only selection and sealed test.",
+  "verified_at": "2026-10-03T07:44:01.402570+00:00"
+}

@@ -1,0 +1,90 @@
+{
+  "status": "finished",
+  "archive_sha256": "1b4e17130b60ada21b57fc2540b1625edae76b1ff102535e86421eb36e388718",
+  "archive_bytes": 100322274,
+  "verified_files": 3847,
+  "score_policy": "confirmed_benchmark_answer_access_zero_v1",
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/skillopt-miniagent-terminal_bench-20261001-082948-591342/trajectories/00080-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.5333333333333333
+      },
+      "task_ids": [
+        "regex-log",
+        "sparql-university",
+        "sam-cell-seg",
+        "mteb-retrieve",
+        "rstan-to-pystan",
+        "overfull-hbox",
+        "custom-memory-heap-crash",
+        "extract-moves-from-video",
+        "db-wal-recovery",
+        "chess-best-move",
+        "caffe-cifar-10",
+        "feal-linear-cryptanalysis",
+        "pytorch-model-recovery",
+        "bn-fit-modify",
+        "raman-fitting",
+        "dna-insert",
+        "password-recovery",
+        "filter-js-from-html",
+        "openssl-selfsigned-cert",
+        "fix-git",
+        "make-mips-interpreter",
+        "circuit-fibsqrt",
+        "cancel-async-tasks",
+        "path-tracing-reverse",
+        "pypi-server",
+        "headless-terminal",
+        "build-pov-ray",
+        "install-windows-3.11",
+        "qemu-startup",
+        "git-multibranch"
+      ]
+    },
+    "final-test": {
+      "file": "attempts/skillopt-miniagent-terminal_bench-20261001-082948-591342/trajectories/00081-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6666666666666666
+      },
+      "task_ids": [
+        "regex-log",
+        "sparql-university",
+        "sam-cell-seg",
+        "mteb-retrieve",
+        "rstan-to-pystan",
+        "overfull-hbox",
+        "custom-memory-heap-crash",
+        "extract-moves-from-video",
+        "db-wal-recovery",
+        "chess-best-move",
+        "caffe-cifar-10",
+        "feal-linear-cryptanalysis",
+        "pytorch-model-recovery",
+        "bn-fit-modify",
+        "raman-fitting",
+        "dna-insert",
+        "password-recovery",
+        "filter-js-from-html",
+        "openssl-selfsigned-cert",
+        "fix-git",
+        "make-mips-interpreter",
+        "circuit-fibsqrt",
+        "cancel-async-tasks",
+        "path-tracing-reverse",
+        "pypi-server",
+        "headless-terminal",
+        "build-pov-ray",
+        "install-windows-3.11",
+        "qemu-startup",
+        "git-multibranch"
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "selection_not_replayed": true,
+  "verified_at": "2026-10-04T15:33:49.612781+00:00"
+}

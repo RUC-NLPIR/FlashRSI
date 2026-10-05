@@ -1,0 +1,31 @@
+{
+  "run_root": "/root/blockdata/evoprompt-miniagent-hotpotqa-20261001-022240-260386",
+  "local_archive": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI-Lite-sync\\experiments\\cassi-evoprompt-de-miniagent-hotpotqa-20261001-seed42\\full-run.tar.gz",
+  "archive_sha256": "bdf3ad017c0ff07541271fda751c384b0c3318b206d5ba6f3c3aaff2bce81142",
+  "archive_bytes": 87539004,
+  "verified_files": 11758,
+  "all_source_hashes_match": true,
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "tasks": 300,
+      "all_finished": true,
+      "score_recomputed": 0.52,
+      "f1_recomputed": 0.6797595769627739,
+      "all_per_task_metrics_recomputed": true,
+      "budget_zero_tasks": []
+    },
+    "final-test": {
+      "tasks": 300,
+      "all_finished": true,
+      "score_recomputed": 0.55,
+      "f1_recomputed": 0.7235678721036777,
+      "all_per_task_metrics_recomputed": true,
+      "budget_zero_tasks": [
+        "5ae6545f5542991bbc9760c2"
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "verified_at": "2026-10-01T10:47:52.544834+00:00"
+}
