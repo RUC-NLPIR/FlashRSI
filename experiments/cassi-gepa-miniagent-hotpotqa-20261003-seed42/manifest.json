@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-gepa-miniagent-hotpotqa-20261003-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 38732477,
+    "sha256": "9808efdd8362a8e5c1fdc3f1b5d905f735812408bdbfdbc75742f7bdb7ab6800",
+    "files": 5964,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:39.979744+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-skillopt-miniagent-terminalbench-20261001-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 100322274,
+    "sha256": "1b4e17130b60ada21b57fc2540b1625edae76b1ff102535e86421eb36e388718",
+    "files": 3848,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:57.420576+00:00"
+}

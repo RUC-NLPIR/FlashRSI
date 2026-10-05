@@ -1,0 +1,34 @@
+{
+  "status": "finished",
+  "pid": 10362,
+  "attempt": "/root/blockdata/gepa-miniagent-hotpotqa-20261003-110108-361079/attempts/gepa-miniagent-hotpotqa-20261003-110206-686382",
+  "started_at": "2026-10-03T03:02:06.687963+00:00",
+  "infrastructure_retry_policy": "infra_retry_until_completion_or_native_budget_v1",
+  "initial_snapshot": "8ceaa47f57d1d4c5af6ad454b115870efd58f3b38461156d28cb4c22459b66b1",
+  "final_snapshot": "0be0ce1bd521eafd7da4de7c22ee58b5e0c087bc8406fa21bde67434aeaa0b1a",
+  "num_epochs": 1,
+  "metric_calls": 5016,
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.7157321158803357,
+    "exact_match": 0.55
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 296,
+    "f1": 0.6763438172229874,
+    "exact_match": 0.52
+  },
+  "paired_comparison": {
+    "delta_percentage_points": -3.0,
+    "improved_tasks": 20,
+    "regressed_tasks": 29,
+    "paired_bootstrap_95pct_pp": [
+      -7.666666666666666,
+      1.6666666666666667
+    ]
+  },
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-03T05:30:33.766271+00:00"
+}

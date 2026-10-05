@@ -1,0 +1,64 @@
+{
+  "run_root": "/root/blockdata/FlashRSI-Tau3/runs/ahe-claude_code-tau3_banking-20261004-180500-418273",
+  "status": "finished",
+  "archive_sha256": "ec6f09b8440432916184cdf9ba43d8cab9761d51fb231f13a88f9aff6d339948",
+  "archive_bytes": 1506330525,
+  "verified_files": 577,
+  "source_verification": {
+    "run_ahe_claude_tau3_20261004.py": {
+      "expected": "22d857cf72f1357f71b3c6d61ccb36f012a6b3c9b49cabbbc987ff1777cd4289",
+      "actual": "22d857cf72f1357f71b3c6d61ccb36f012a6b3c9b49cabbbc987ff1777cd4289",
+      "matches": true
+    },
+    "run_ahe_tau3_judge_recovery_20261004.py": {
+      "expected": "79cfe25c327b154ebad8c0e90e9958b16d7a24f207181242ca46975050a0d6eb",
+      "actual": "79cfe25c327b154ebad8c0e90e9958b16d7a24f207181242ca46975050a0d6eb",
+      "matches": true
+    },
+    "scripts/_infra_retry.py": {
+      "expected": "df550549631ebc791b8ef1c7a3d2ee09beae4ba7c3d302226fac0cd26f730466",
+      "actual": "df550549631ebc791b8ef1c7a3d2ee09beae4ba7c3d302226fac0cd26f730466",
+      "matches": true
+    },
+    "scripts/_target_budget_policy.py": {
+      "expected": "72d1b755f486781f7fc1cc6a98dbebf490e5bda02213548aa5ba7c3101e3d05b",
+      "actual": "72d1b755f486781f7fc1cc6a98dbebf490e5bda02213548aa5ba7c3101e3d05b",
+      "matches": true
+    },
+    "flashrsi/integrations/_tau2_nl_judge.py": {
+      "expected": "e969c084c6f4b348d32826a9a8fc14962c8ba19e950d87c9ea51b18da44833ff",
+      "actual": "e969c084c6f4b348d32826a9a8fc14962c8ba19e950d87c9ea51b18da44833ff",
+      "matches": true
+    }
+  },
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/ahe-claude_code-tau3_banking-20261004-180311-340700/trajectories/00036-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.23333333333333334
+      },
+      "non_finished_tasks": []
+    },
+    "final-test": {
+      "file": "attempts/ahe-claude_code-tau3_banking-20261004-180311-340700/trajectories/00037-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.2
+      },
+      "non_finished_tasks": [
+        "task_071",
+        "task_058",
+        "task_090",
+        "task_097",
+        "task_056",
+        "task_067",
+        "task_073"
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "Completed AHE + Claude Code + Tau3 Banking, official DeepSeek Flash target/user simulator/NL judge and Pro worker. Two outer iterations; target concurrency10, diagnosis concurrency6. Train/dev/test20/15/30, dev-only selection of second candidate. Initial test7/30; selected test6/30, including7 native token-limit zero outcomes. Independent test evaluations, all30 scored; no model calls for archival. Finished2026-10-04 23:08:10 Beijing. Preserve all snapshots, trajectories, retry/failure evidence and source; redact credentials.",
+  "verified_at": "2026-10-04T15:24:50.803075+00:00"
+}

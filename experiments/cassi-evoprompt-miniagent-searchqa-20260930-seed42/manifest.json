@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-evoprompt-miniagent-searchqa-20260930-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 54101856,
+    "sha256": "544e1a8f6361ebb567f2401aed01c7c01116ac9b3813170489b290313c8b86c7",
+    "files": 10193,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:39.849369+00:00"
+}

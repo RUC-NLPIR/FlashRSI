@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-ace-claude_code-hotpotqa-20261004-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 197330826,
+    "sha256": "d8474f7afcc9d34724e894de4c87966d6ecbecd41320a5905272b452b848113c",
+    "files": 3064,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:39.427569+00:00"
+}

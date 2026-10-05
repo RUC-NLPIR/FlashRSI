@@ -1,0 +1,25 @@
+{
+  "run_root": "/root/blockdata/ace-claude_code-searchqa-20260930-prepare",
+  "local_archive": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI-Lite-sync\\experiments\\cassi-ace-claude_code-searchqa-20261001-seed42\\full-run.tar.gz",
+  "archive_sha256": "b72dc4534e9b8a836a8b805ac64f7b038a8542ef2248863bfdb1b3ad7c94f585",
+  "archive_bytes": 342792526,
+  "verified_files": 8652,
+  "all_source_hashes_match": true,
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "tasks": 1400,
+      "all_finished": true,
+      "score_recomputed": 0.7478571428571429
+    },
+    "final-test": {
+      "tasks": 1400,
+      "all_finished": true,
+      "score_recomputed": 0.8392857142857143
+    }
+  },
+  "paired_task_order_matches": true,
+  "verified_at": "2026-10-01T09:47:49.201352+00:00",
+  "server_archive_sha256": "b72dc4534e9b8a836a8b805ac64f7b038a8542ef2248863bfdb1b3ad7c94f585",
+  "server_archive_sha256_matches": true
+}

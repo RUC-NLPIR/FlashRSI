@@ -1,0 +1,35 @@
+{
+  "status": "finished",
+  "pid": 59817,
+  "attempt": "/root/blockdata/ace-claude_code-searchqa-20260930-prepare/attempts/ace-claude_code-searchqa-20261001-082951-308268",
+  "started_at": "2026-10-01T00:29:51.310414+00:00",
+  "initial_snapshot": "13771b0eecfc15ffdfe4c00e05ff4a311352a9837d2ceede45fbcaaa2135c8e4",
+  "final_snapshot": "5638fec680fc36cd359a31441a0636cf33c7f9a58cd4a9ba14e339cd1ca9b672",
+  "baseline_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7478571428571429,
+    "f1": 0.8504543647560782,
+    "exact_match": 0.7478571428571429,
+    "lite_f1": 0.850614720887044
+  },
+  "evolved_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.8392857142857143,
+    "f1": 0.9070374149659864,
+    "exact_match": 0.8378571428571429,
+    "lite_f1": 0.9060361939647654
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 9.142857142857142,
+    "improved_tasks": 154,
+    "regressed_tasks": 26,
+    "paired_bootstrap_95pct_pp": [
+      7.285714285714286,
+      10.928571428571429
+    ]
+  },
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-01T06:54:21.070957+00:00"
+}

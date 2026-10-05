@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-gepa-claude_code-hotpotqa-20261003-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 158491607,
+    "sha256": "38a75b6ce94a04682b1ddaaa3b1ffffc65281eb346ec953b4f56bda05a135a5e",
+    "files": 5618,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:39.885369+00:00"
+}

@@ -1,0 +1,104 @@
+{
+  "status": "finished",
+  "pid": 49849,
+  "attempt": "/root/blockdata/evoprompt-claude_code-hotpotqa-20261001-185417-543397/attempts/evoprompt-claude_code-hotpotqa-20261001-185433-733277",
+  "config": {
+    "run": {
+      "output_dir": "/root/blockdata/evoprompt-claude_code-hotpotqa-20261001-185417-543397/attempts"
+    },
+    "benchmark": {
+      "name": "hotpotqa",
+      "split": "auto",
+      "data_path": "/root/blockdata/evoprompt-claude_code-hotpotqa-20261001-185417-543397/data",
+      "seed": 42
+    },
+    "agent": {
+      "name": "claude_code",
+      "llm": {
+        "model_name": "deepseek-flash",
+        "api_key": null,
+        "base_url": "https://api.deepseek.com/anthropic",
+        "max_tokens": 32768,
+        "max_retries": 1,
+        "effort": "high"
+      },
+      "timeout": 600,
+      "max_turns": 10,
+      "tools": [
+        "Skill",
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "allowed_tools": [
+        "Skill",
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "source_dir": "/root/blockdata/evoprompt-claude_code-hotpotqa-20261001-185417-543397/seed"
+    },
+    "algorithm": {
+      "variant": "de",
+      "population_size": 6,
+      "max_steps": 5,
+      "selection": "wheel",
+      "survivor_selection": "topk",
+      "donor_random": false,
+      "seed": 42,
+      "name": "evoprompt",
+      "worker": {
+        "type": "agent",
+        "llm": {
+          "model_name": "deepseek-v4-pro",
+          "api_key": null,
+          "base_url": "https://api.deepseek.com/anthropic",
+          "max_tokens": 65536,
+          "effort": "high",
+          "max_retries": 1
+        },
+        "timeout": 900,
+        "max_retries": 1,
+        "name": "claude_code",
+        "max_turns": 10,
+        "source_dir": "/root/blockdata/FlashRSI-Lite/flashrsi/agents/claude_code",
+        "tools": [
+          "Read",
+          "Glob",
+          "Grep"
+        ],
+        "allowed_tools": [
+          "Read",
+          "Glob",
+          "Grep"
+        ]
+      }
+    }
+  },
+  "started_at": "2026-10-01T10:54:33.735388+00:00",
+  "initial_snapshot": "5b90f0c8cefa445fa0997bfde004a969203e9a69a57b72fbc62f21a6e9bc73c1",
+  "final_snapshot": "05a7ced79b692fb35e9e99279b2c4307bb76ce0f0ce4607ccc4461f10f2576bc",
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6694689924246666,
+    "exact_match": 0.5033333333333333
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6778666651847228,
+    "exact_match": 0.52
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 1.6666666666666667,
+    "improved_tasks": 16,
+    "regressed_tasks": 11,
+    "paired_bootstrap_95pct_pp": [
+      -1.6666666666666667,
+      5.0
+    ]
+  },
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-01T14:08:42.356926+00:00"
+}

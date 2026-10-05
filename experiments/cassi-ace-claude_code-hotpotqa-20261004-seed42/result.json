@@ -1,0 +1,32 @@
+{
+  "status": "finished",
+  "pid": 513,
+  "attempt": "/root/blockdata/ace-claude_code-hotpotqa-20261003-230903-911845/attempts/ace-claude_code-hotpotqa-20261003-231529-489307",
+  "started_at": "2026-10-03T15:15:29.491782+00:00",
+  "infrastructure_retry_policy": "infra_retry_until_completion_or_native_budget_v1",
+  "initial_snapshot": "2a5912c23838794fffbfc259aa68f57b19200e412f5aa8a14ca92491804fa065",
+  "final_snapshot": "10e6ebb969bc5e6cf653305d27ad0d241a9f864f188e35ff972b1f4ddeea5522",
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6655560105774049,
+    "exact_match": 0.49333333333333335
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6937443847475817,
+    "exact_match": 0.55
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 5.666666666666666,
+    "improved_tasks": 24,
+    "regressed_tasks": 7,
+    "paired_bootstrap_95pct_pp": [
+      2.3333333333333335,
+      9.333333333333334
+    ]
+  },
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-03T19:38:26.485147+00:00"
+}

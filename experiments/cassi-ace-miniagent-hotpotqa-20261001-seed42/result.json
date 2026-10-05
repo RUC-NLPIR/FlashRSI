@@ -1,0 +1,35 @@
+{
+  "status": "finished",
+  "policy": "output_budget_zero_v1",
+  "source_attempt": "/root/blockdata/ace-miniagent-hotpotqa-20261001-183212-241020/attempts/ace-miniagent-hotpotqa-20261001-183744-264836",
+  "final_snapshot": "9c201a817e6c881d5c2a279c1cdc7ab004d59708ee44f5b9c6e75fe0560b4019",
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6961996226740809,
+    "exact_match": 0.5366666666666666
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 299,
+    "f1": 0.7120681867129565,
+    "exact_match": 0.5666666666666667
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 3.0,
+    "improved_tasks": 25,
+    "regressed_tasks": 16,
+    "paired_bootstrap_95pct_pp": [
+      -1.3333333333333335,
+      7.333333333333333
+    ]
+  },
+  "test_used_for_selection": false,
+  "scored_tasks": 300,
+  "budget_zero_tasks": [
+    "5a89cc99554299669944a5ae"
+  ],
+  "reused_final_tasks": 299,
+  "new_model_calls": 0,
+  "worker_calls": 0
+}

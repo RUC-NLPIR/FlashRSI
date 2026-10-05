@@ -1,0 +1,23 @@
+{
+  "status": "finished",
+  "pid": 1599,
+  "attempt": "/root/blockdata/FlashRSI-Tau3/runs/ahe-claude_code-tau3_banking-20261004-180500-418273/attempts/ahe-claude_code-tau3_banking-20261004-180311-340700",
+  "started_at": "2026-10-04T10:03:11.347203+00:00",
+  "max_steps": 2,
+  "initial_snapshot": "3f4edb8d8d5f84cef7d53e72649280846a85a9c61c52256839a6ef97b4cfac2d",
+  "final_snapshot": "e112eea328e0d87dfbaaeca896a30dbeff83bc4034848e6ea039e05be604dcb7",
+  "baseline_test": {
+    "tasks": 30,
+    "finished": 30,
+    "reward": 0.23333333333333334
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "finished": 23,
+    "reward": 0.2
+  },
+  "final_test_reused_initial": false,
+  "delta_percentage_points": -3.3333333333333326,
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-04T15:08:10.645643+00:00"
+}

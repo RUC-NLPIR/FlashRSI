@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-ace-miniagent-hotpotqa-20261001-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 50011250,
+    "sha256": "2a1d072d98f7e2538c8483928c986d8cc14636fa245935a76652bae506d4b156",
+    "files": 2761,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:39.498181+00:00"
+}

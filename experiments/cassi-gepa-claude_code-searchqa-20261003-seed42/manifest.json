@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-gepa-claude_code-searchqa-20261003-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 296555838,
+    "sha256": "83ef9a27ae11cf16924c0b45d93bcf5b703ed691a3435372c800e95244cb4f72",
+    "files": 10487,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-05T08:36:39.942761+00:00"
+}

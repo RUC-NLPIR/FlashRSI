@@ -1,0 +1,48 @@
+{
+  "status": "stopped",
+  "pid": 7605,
+  "attempt": "/root/blockdata/FlashRSI-Tau3/runs/ahe-miniagent-tau3_banking-20261004-112443-294719/attempts/ahe-miniagent-tau3_banking-20261004-112455-887418",
+  "started_at": "2026-10-04T03:24:55.893209+00:00",
+  "max_steps": 2,
+  "resumed_at": "2026-10-04T07:05:30.227760+00:00",
+  "recovery_policy": "reuse_two_committed_candidates_reassess_host_judge_affected_task_v1",
+  "candidate_error_policy": "candidate_request_format_zero_v1",
+  "nl_judge_model": "deepseek-flash",
+  "stopped_at": "2026-10-04T09:43:10.747381+00:00",
+  "stop_reason": "user_requested_stop_duplicate_final_test_selected_initial_harness",
+  "selected_snapshot": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+  "baseline_test_score": 0.16666666666666666,
+  "final_test_complete": false,
+  "algorithm": "ahe",
+  "harness": "miniagent",
+  "benchmark": "tau3_banking",
+  "api_source": "official DeepSeek",
+  "test_used_for_selection": false,
+  "initial_snapshot": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+  "final_snapshot": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+  "baseline_train": {
+    "tasks": 20,
+    "reward": 0.35
+  },
+  "selected_dev": {
+    "tasks": 15,
+    "reward": 0.2
+  },
+  "baseline_test": {
+    "tasks": 30,
+    "finished": 28,
+    "reward": 0.16666666666666666
+  },
+  "selected_test": {
+    "tasks": 30,
+    "reward": 0.16666666666666666,
+    "evaluation_source": "reused_initial_test_unchanged_snapshot"
+  },
+  "full_benchmark": {
+    "tasks": 65,
+    "successful_tasks": 15,
+    "reward": 0.23076923076923078
+  },
+  "independent_final_test_complete": false,
+  "note": "Duplicate final test stopped by user; selected snapshot equals initial snapshot. Selected test reuses completed initial test and is not a completed independent rerun."
+}

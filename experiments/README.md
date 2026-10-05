@@ -87,3 +87,27 @@ tar -xzf experiments/alice-skillopt-searchqa-deepseek-20260920-seed42/logs.tar.g
 ```
 
 目前原始运行目录仍有两种内部格式，统一的是上面的提交包格式；无需为提交改写已有实验轨迹。
+
+
+## 2026-10-05 补充归档
+
+- [cassi-ace-claude_code-hotpotqa-20261004-seed42](cassi-ace-claude_code-hotpotqa-20261004-seed42/README.md)
+- [cassi-ace-claude_code-searchqa-20261001-seed42](cassi-ace-claude_code-searchqa-20261001-seed42/README.md)
+- [cassi-ace-miniagent-hotpotqa-20261001-seed42](cassi-ace-miniagent-hotpotqa-20261001-seed42/README.md)
+- [cassi-ace-miniagent-searchqa-20260930-seed42](cassi-ace-miniagent-searchqa-20260930-seed42/README.md)
+- [cassi-ahe-claude_code-tau3_banking-20261004-seed42](cassi-ahe-claude_code-tau3_banking-20261004-seed42/README.md)
+- [cassi-ahe-claude_code-terminalbench-20261005-seed42](cassi-ahe-claude_code-terminalbench-20261005-seed42/README.md)
+- [cassi-ahe-miniagent-tau3_banking-20261004-seed42](cassi-ahe-miniagent-tau3_banking-20261004-seed42/README.md)
+- [cassi-ahe-miniagent-terminalbench-20261004-seed42](cassi-ahe-miniagent-terminalbench-20261004-seed42/README.md)
+- [cassi-evoprompt-claude_code-searchqa-20260930-seed42](cassi-evoprompt-claude_code-searchqa-20260930-seed42/README.md)
+- [cassi-evoprompt-de-claude_code-hotpotqa-20261001-seed42](cassi-evoprompt-de-claude_code-hotpotqa-20261001-seed42/README.md)
+- [cassi-evoprompt-de-miniagent-hotpotqa-20261001-seed42](cassi-evoprompt-de-miniagent-hotpotqa-20261001-seed42/README.md)
+- [cassi-evoprompt-miniagent-searchqa-20260930-seed42](cassi-evoprompt-miniagent-searchqa-20260930-seed42/README.md)
+- [cassi-gepa-claude_code-hotpotqa-20261003-seed42](cassi-gepa-claude_code-hotpotqa-20261003-seed42/README.md)
+- [cassi-gepa-claude_code-searchqa-20261003-seed42](cassi-gepa-claude_code-searchqa-20261003-seed42/README.md)
+- [cassi-gepa-miniagent-hotpotqa-20261003-seed42](cassi-gepa-miniagent-hotpotqa-20261003-seed42/README.md)
+- [cassi-gepa-miniagent-searchqa-20261003-seed42](cassi-gepa-miniagent-searchqa-20261003-seed42/README.md)
+- [cassi-skillopt-claude_code-tau3_banking-20261004-seed42](cassi-skillopt-claude_code-tau3_banking-20261004-seed42/README.md)
+- [cassi-skillopt-claude_code-terminalbench-20261004-seed42](cassi-skillopt-claude_code-terminalbench-20261004-seed42/README.md)
+- [cassi-skillopt-miniagent-tau3_banking-20261002-seed42](cassi-skillopt-miniagent-tau3_banking-20261002-seed42/README.md)
+- [cassi-skillopt-miniagent-terminalbench-20261001-seed42](cassi-skillopt-miniagent-terminalbench-20261001-seed42/README.md)
