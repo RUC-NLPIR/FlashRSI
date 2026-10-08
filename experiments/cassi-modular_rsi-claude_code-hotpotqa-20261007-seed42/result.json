@@ -1,0 +1,34 @@
+{
+  "status": "finished",
+  "pid": 59608,
+  "attempt": "/root/blockdata/FlashRSI-Lite/runs/modular_rsi-claude_code-hotpotqa-20261007-122520-113282/attempts/modular_rsi-claude_code-hotpotqa-20261007-122525-008678",
+  "started_at": "2026-10-07T04:25:25.010826+00:00",
+  "initial_snapshot": "1a53e59137028020d4b7690602f54f74ddca28580083f3824a0d5b2cca602ae7",
+  "final_snapshot": "2d4bbfff1bb2583eb7051a93a06ebc4dbede4ef832aa78aa5815967f274d2825",
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6742725641281638,
+    "exact_match": 0.5033333333333333
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 299,
+    "f1": 0.6334069492785672,
+    "exact_match": 0.48333333333333334
+  },
+  "paired_comparison": {
+    "delta_percentage_points": -2.0,
+    "improved_tasks": 15,
+    "regressed_tasks": 21,
+    "paired_bootstrap_95pct_pp": [
+      -5.666666666666666,
+      2.0
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "peak_target_concurrency": 16,
+  "finished_at": "2026-10-07T06:32:11.449675+00:00"
+}

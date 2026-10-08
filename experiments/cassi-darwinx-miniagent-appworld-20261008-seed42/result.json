@@ -1,0 +1,96 @@
+{
+  "status": "finished",
+  "pid": 59538,
+  "attempt": "/root/blockdata/FlashRSI-AppWorld/runs/darwinx-miniagent-appworld-dev-ceil-20261007-132220-130004/attempts/darwinx-miniagent-appworld-20261007-212255-315051",
+  "started_at": "2026-10-07T13:22:55.346155+00:00",
+  "source_run": "/root/blockdata/FlashRSI-AppWorld/runs/darwinx-miniagent-appworld-20261007-165627-414470",
+  "phase": "final-test",
+  "dev_max_regressions": 3,
+  "final_snapshot": "426625c0f24d4d1b926c92ef59df4194445d410a92c9e87a50b7b208ea4e738c",
+  "selected_dev_score": 0.9122807017543859,
+  "initial_snapshot": "9ddcd270388e1c18b47dce1fcf9b3b0419f3bb6eba457e95d6db2c36fc31d1df",
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 164,
+    "reward": 0.6309523809523809,
+    "scenario_success": 0.375,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 162,
+    "reward": 0.6904761904761905,
+    "scenario_success": 0.4107142857142857,
+    "scenarios": 56
+  },
+  "dev_selection_scores": [
+    {
+      "snapshot_id": "9ddcd270388e1c18b47dce1fcf9b3b0419f3bb6eba457e95d6db2c36fc31d1df",
+      "dev_score": 0.8596491228070176,
+      "gate_admitted": true
+    },
+    {
+      "snapshot_id": "1d1102c8d85edfeb9b8bbc3fdee74bc12b6da32737a240e1da14a6042ba3ae1f",
+      "dev_score": 0.47368421052631576,
+      "gate_admitted": false
+    },
+    {
+      "snapshot_id": "c51a39c119b61bcf7e9b56bc4994f29fdd3f84a1803bb4e861e0beaa9b4a84b4",
+      "dev_score": 0.7017543859649122,
+      "gate_admitted": false
+    },
+    {
+      "snapshot_id": "79164acb196e70311260fd46ed01b79928fffd98ca3c365c8af72deaf8d6a5b4",
+      "dev_score": 0.6140350877192983,
+      "gate_admitted": false
+    },
+    {
+      "snapshot_id": "de60debfe2c354ce310f90d7b3bc0b4c0a535781a96c2e2a3af1cfabeeb2e1e4",
+      "dev_score": 0.43859649122807015,
+      "gate_admitted": false
+    },
+    {
+      "snapshot_id": "1f541ee3c12c595a116982642d9634aed1b68b50e222260aec7f9a53767bf08f",
+      "dev_score": 0.8596491228070176,
+      "gate_admitted": false
+    },
+    {
+      "snapshot_id": "426625c0f24d4d1b926c92ef59df4194445d410a92c9e87a50b7b208ea4e738c",
+      "dev_score": 0.9122807017543859,
+      "gate_admitted": true
+    },
+    {
+      "snapshot_id": "060b6333f4e927c07e2b3715aff38a2039c159d2ce192d3e821f4ce2b4856a4e",
+      "dev_score": 0.6491228070175439,
+      "gate_admitted": false
+    },
+    {
+      "snapshot_id": "d6330cf4350c8d47554957fa42089edcdb55f697088df8aebf024299423ebb5e",
+      "dev_score": 0.8070175438596491,
+      "gate_admitted": false
+    },
+    {
+      "snapshot_id": "e6f2e7d1089a8908dc0c497c60e2389558580f85b52f9572ba26091f1c6ff889",
+      "dev_score": 0.8421052631578947,
+      "gate_admitted": false
+    }
+  ],
+  "paired_comparison": {
+    "delta_percentage_points": 5.952380952380952,
+    "improved_tasks": 32,
+    "regressed_tasks": 22,
+    "paired_bootstrap_95pct_pp": [
+      -2.976190476190476,
+      14.285714285714285
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "initial_test_reused": true,
+  "reused_search_rounds": 10,
+  "reused_dev_evaluations": 10,
+  "new_worker_calls": 0,
+  "new_dev_calls": 0,
+  "finished_at": "2026-10-07T13:39:49.163680+00:00"
+}

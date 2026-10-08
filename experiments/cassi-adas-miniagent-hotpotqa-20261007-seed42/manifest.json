@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-adas-miniagent-hotpotqa-20261007-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 26469116,
+    "sha256": "2c5b5a97ee3351484cf48431315c8d966c881de7473a827ddaf287cd31183f60",
+    "files": 3531,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-08T04:02:51.421700+00:00"
+}

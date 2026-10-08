@@ -1,0 +1,38 @@
+{
+  "status": "finished",
+  "pid": 64991,
+  "attempt": "/root/blockdata/FlashRSI-Lite/runs/modular_rsi-claude_code-searchqa-20261006-111328-169524/attempts/modular_rsi-claude_code-searchqa-20261006-111411-335300",
+  "started_at": "2026-10-06T03:14:11.337382+00:00",
+  "initial_snapshot": "1a53e59137028020d4b7690602f54f74ddca28580083f3824a0d5b2cca602ae7",
+  "final_snapshot": "0970067d6ce513ca83d2ed723270aaa3f8286ef842cf2351f83adfd3a2722fea",
+  "baseline_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7378571428571429,
+    "f1": 0.8463274293296287,
+    "exact_match": 0.7385714285714285,
+    "lite_f1": 0.8468818085610651
+  },
+  "evolved_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.8107142857142857,
+    "f1": 0.8827789115646258,
+    "exact_match": 0.8107142857142857,
+    "lite_f1": 0.8827789115646258
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 7.285714285714286,
+    "improved_tasks": 130,
+    "regressed_tasks": 28,
+    "paired_bootstrap_95pct_pp": [
+      5.642857142857142,
+      9.0
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "peak_target_concurrency": 16,
+  "finished_at": "2026-10-06T08:36:36.771988+00:00"
+}

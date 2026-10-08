@@ -1,0 +1,35 @@
+{
+  "status": "finished",
+  "pid": 46240,
+  "attempt": "/root/blockdata/FlashRSI-AppWorld/runs/adas-miniagent-appworld-20261008-010610-039749/attempts/adas-miniagent-appworld-20261008-010611-369424",
+  "started_at": "2026-10-07T17:06:11.371120+00:00",
+  "initial_snapshot": "9ddcd270388e1c18b47dce1fcf9b3b0419f3bb6eba457e95d6db2c36fc31d1df",
+  "final_snapshot": "5a7d450d283910f01e7b5d0e59b4e1c7b64e3f998252a487af516b1c451074cd",
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 165,
+    "reward": 0.6785714285714286,
+    "scenario_success": 0.42857142857142855,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 163,
+    "reward": 0.7976190476190477,
+    "scenario_success": 0.6071428571428571,
+    "scenarios": 56
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 11.904761904761903,
+    "improved_tasks": 32,
+    "regressed_tasks": 12,
+    "paired_bootstrap_95pct_pp": [
+      4.761904761904762,
+      19.642857142857142
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "finished_at": "2026-10-07T20:44:48.495253+00:00"
+}

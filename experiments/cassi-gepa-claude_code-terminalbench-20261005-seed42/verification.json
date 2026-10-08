@@ -1,0 +1,48 @@
+{
+  "run_root": "/root/data/FlashRSI-TerminalQA/runs/gepa-claude_code-terminalbench-20261005-170103-645618",
+  "status": "finished",
+  "archive_sha256": "197d0dce48a1809cc0949f292e645e9dad128ebb0ec4902a43652f0f462e3aa6",
+  "archive_bytes": 622379460,
+  "verified_files": 2442,
+  "source_verification": {},
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/gepa-claude_code-terminal_bench-20261005-170148-499460/trajectories/00028-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6333333333333333
+      },
+      "non_finished_tasks": [
+        "rstan-to-pystan",
+        "overfull-hbox",
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "pytorch-model-recovery",
+        "filter-js-from-html",
+        "make-mips-interpreter",
+        "build-pov-ray"
+      ]
+    },
+    "final-test": {
+      "file": "attempts/gepa-claude_code-terminal_bench-20261005-170148-499460/trajectories/00029-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6666666666666666
+      },
+      "non_finished_tasks": [
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "filter-js-from-html",
+        "make-mips-interpreter",
+        "circuit-fibsqrt",
+        "build-pov-ray",
+        "install-windows-3.11",
+        "qemu-startup"
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "GEPA + Claude Code + Terminal-Bench. Full completed run; reward baseline19/30 to final20/30. Supporting live source is archival context; Snapshots define the evaluated candidates.",
+  "verified_at": "2026-10-07T08:05:25.604271+00:00"
+}

@@ -1,0 +1,47 @@
+{
+  "run_root": "/root/blockdata/FlashRSI-Lite/runs/meta_harness-miniagent-searchqa-20261005-220452-253417",
+  "status": "finished",
+  "archive_sha256": "576877654de88dbbb0be0c56d13b5d08fdec60f1b180cadba2ef9403f8096447",
+  "archive_bytes": 45535073,
+  "verified_files": 9446,
+  "source_verification": {},
+  "credential_redacted_files": [
+    "attempts/meta_harness-miniagent-searchqa-20261005-220509-501905/trajectories/00003-worker.json",
+    "attempts/meta_harness-miniagent-searchqa-20261005-220509-501905/trajectories/00006-worker.json",
+    "attempts/meta_harness-miniagent-searchqa-20261005-220509-501905/trajectories/00009-worker.json",
+    "attempts/meta_harness-miniagent-searchqa-20261005-220509-501905/trajectories/00012-worker.json",
+    "attempts/meta_harness-miniagent-searchqa-20261005-220509-501905/trajectories/00027-worker.json",
+    "cache/errors/worker/miniagent/infra-12ffaf2c9cbe1855b5dc59d62218ba919b23d1d799a10259c5a041c6c11da9b6-1-63f3c6935b984ae584348e4ff6fd58f6.json",
+    "cache/errors/worker/miniagent/infra-3cbc772579b25f5a4dcb29ce8cedce24e12ad392596c8b6ce846ddaf61d201f4-1-c22fbde54ba84be595770199eea26cbc.json",
+    "cache/errors/worker/miniagent/infra-3cbc772579b25f5a4dcb29ce8cedce24e12ad392596c8b6ce846ddaf61d201f4-2-40115b1393b344a4b7197dbf63a609f2.json",
+    "cache/errors/worker/miniagent/infra-3cbc772579b25f5a4dcb29ce8cedce24e12ad392596c8b6ce846ddaf61d201f4-3-244cb3187c524948b2c0aedaf72dbd59.json",
+    "cache/errors/worker/miniagent/infra-ede5a59d71a8fa135d8848167508d52422a78185bd83cf2dd7df80c9658cc99c-6-0d6ed98ff17145f3ba1472df742e29d0.json"
+  ],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/meta_harness-miniagent-searchqa-20261005-220509-501905/trajectories/00044-initial-test.json",
+      "tasks": 1400,
+      "metrics_recomputed": {
+        "hard": 0.7664285714285715,
+        "f1": 0.8656306207623217,
+        "exact_match": 0.7664285714285715,
+        "lite_f1": 0.8652622528919514
+      },
+      "non_finished_tasks": []
+    },
+    "final-test": {
+      "file": "attempts/meta_harness-miniagent-searchqa-20261005-220509-501905/trajectories/00045-final-test.json",
+      "tasks": 1400,
+      "metrics_recomputed": {
+        "hard": 0.7914285714285715,
+        "f1": 0.873433673469387,
+        "exact_match": 0.7914285714285715,
+        "lite_f1": 0.873433673469387
+      },
+      "non_finished_tasks": []
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "Latest completed selection is authoritative; prior completed evolution/extension/recovery roots retained under history. Live project source is supporting context; archived Snapshots define candidate content.",
+  "verified_at": "2026-10-07T07:27:22.494046+00:00"
+}

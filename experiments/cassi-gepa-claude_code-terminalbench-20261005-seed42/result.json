@@ -1,0 +1,24 @@
+{
+  "status": "finished",
+  "pid": 30209,
+  "attempt": "/root/data/FlashRSI-TerminalQA/runs/gepa-claude_code-terminalbench-20261005-170103-645618/attempts/gepa-claude_code-terminal_bench-20261005-170148-499460",
+  "started_at": "2026-10-05T09:01:48.506760+00:00",
+  "num_epochs": 1,
+  "initial_snapshot": "524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b",
+  "final_snapshot": "5e8195b4279eca65633dbc49b9430b5d358a3232506a72e46c883f177497cac4",
+  "baseline_test": {
+    "tasks": 30,
+    "finished": 22,
+    "reward": 0.6333333333333333
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "finished": 22,
+    "reward": 0.6666666666666666
+  },
+  "delta_percentage_points": 3.3333333333333326,
+  "test_used_for_selection": false,
+  "final_test_reused_initial": false,
+  "independent_final_test": true,
+  "finished_at": "2026-10-05T17:55:37.479126+00:00"
+}

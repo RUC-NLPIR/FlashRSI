@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-modular_rsi-claude_code-searchqa-20261007-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 277940579,
+    "sha256": "b3a096e607a2f45dd23531017bbd128efbba05c904036db216f1a3f56ba57cb5",
+    "files": 17756,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-08T04:02:55.850360+00:00"
+}

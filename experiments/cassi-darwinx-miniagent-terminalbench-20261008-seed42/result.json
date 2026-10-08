@@ -1,0 +1,24 @@
+{
+  "status": "finished",
+  "pid": 53091,
+  "attempt": "/root/blockdata/FlashRSI-TerminalQA/runs/darwinx-miniagent-terminalbench-recovery-20261006-222116-946196/attempts/darwinx-miniagent-terminal_bench-20261007-210725-995549",
+  "started_at": "2026-10-07T13:07:26.000629+00:00",
+  "max_steps": 5,
+  "initial_snapshot": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+  "final_snapshot": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+  "baseline_test": {
+    "tasks": 30,
+    "finished": 26,
+    "reward": 0.6666666666666666
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "finished": 26,
+    "reward": 0.6666666666666666
+  },
+  "delta_percentage_points": 0.0,
+  "test_used_for_selection": false,
+  "final_test_reused_initial": true,
+  "independent_final_test": false,
+  "finished_at": "2026-10-07T15:04:36.713144+00:00"
+}

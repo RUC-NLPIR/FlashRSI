@@ -1,0 +1,86 @@
+{
+  "status": "finished",
+  "pid": 44765,
+  "attempt": "/root/blockdata/FlashRSI-Lite/runs/darwinx-claude_code-searchqa-20261006-144419-385987/attempts/darwinx-claude_code-searchqa-20261006-144429-294829",
+  "started_at": "2026-10-06T06:44:29.314696+00:00",
+  "source_root": "/root/blockdata/FlashRSI-Lite/runs/darwinx-claude_code-searchqa-20261006-130630-717456",
+  "mode": "fixed_archive_dev_gate_reselection",
+  "max_steps": 10,
+  "initial_snapshot": "13771b0eecfc15ffdfe4c00e05ff4a311352a9837d2ceede45fbcaaa2135c8e4",
+  "final_snapshot": "52f4678ab416c53a6a547c2fb7ac03b2d600ad354b241f2dd99c902f3c1690ce",
+  "baseline_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.74,
+    "f1": 0.848062014753147,
+    "exact_match": 0.74,
+    "lite_f1": 0.8483139135003561
+  },
+  "evolved_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.805,
+    "f1": 0.8793724489795919,
+    "exact_match": 0.805,
+    "lite_f1": 0.8793724489795919
+  },
+  "dev_selection_scores": [
+    {
+      "snapshot_id": "13771b0eecfc15ffdfe4c00e05ff4a311352a9837d2ceede45fbcaaa2135c8e4",
+      "dev_score": 0.685
+    },
+    {
+      "snapshot_id": "5c9a34d0feb3ffea334ddf428df7a473a8624845e65720a9fe58154cab445934",
+      "dev_score": 0.765
+    },
+    {
+      "snapshot_id": "b9b427a999be50e7698593bdc759cb70cf17988fa0835e6e0ace44b1c45b309b",
+      "dev_score": 0.73
+    },
+    {
+      "snapshot_id": "6056bb4bcf879ef7931b1196d71ac8c2a0b401445790562f7f3832992d73d639",
+      "dev_score": 0.745
+    },
+    {
+      "snapshot_id": "803cb64e8aef8508e16c4bb6fd5cc70ee665d358547786cbf22357a3442332b5",
+      "dev_score": 0.735
+    },
+    {
+      "snapshot_id": "332ca4273e7a13243db5e17a2cdd5ed704940a27cd23499e3fb69986ce8044d4",
+      "dev_score": 0.72
+    },
+    {
+      "snapshot_id": "6f04977234d58a6a7122435c13b64b4989dfaf8a12b1cce27bc813eb53a48417",
+      "dev_score": 0.74
+    },
+    {
+      "snapshot_id": "5cb3af930d0cfe7a14856b4ee7d9ae7602b7b717d4b9cdd5e7d32ddb4fe70447",
+      "dev_score": 0.74
+    },
+    {
+      "snapshot_id": "52f4678ab416c53a6a547c2fb7ac03b2d600ad354b241f2dd99c902f3c1690ce",
+      "dev_score": 0.77
+    },
+    {
+      "snapshot_id": "1a8db4e623fac666c8542fa3298e5efbddc7f9e65fcb004958cf7aedf94a4aa8",
+      "dev_score": 0.77
+    }
+  ],
+  "paired_comparison": {
+    "delta_percentage_points": 6.5,
+    "improved_tasks": 126,
+    "regressed_tasks": 35,
+    "paired_bootstrap_95pct_pp": [
+      4.785714285714286,
+      8.214285714285714
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "initial_test_new_model_calls": 0,
+  "gate_fraction": 0.05,
+  "samples": 1,
+  "new_proposals": 0,
+  "gate_split": "dev",
+  "finished_at": "2026-10-06T07:01:22.208196+00:00"
+}

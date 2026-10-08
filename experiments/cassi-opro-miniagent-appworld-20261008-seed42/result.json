@@ -1,0 +1,21 @@
+{
+  "status": "finished",
+  "initial_snapshot": "9ddcd270388e1c18b47dce1fcf9b3b0419f3bb6eba457e95d6db2c36fc31d1df",
+  "final_snapshot": "6eb044c91a1315dbe9b8d209efdc94b53a7575cbc4620411fb6d5713aa6e58f3",
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 164,
+    "reward": 0.6547619047619048,
+    "scenario_success": 0.42857142857142855,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 164,
+    "reward": 0.5952380952380952,
+    "scenario_success": 0.32142857142857145,
+    "scenarios": 56
+  },
+  "independent_final_test": true,
+  "test_used_for_selection": false
+}
