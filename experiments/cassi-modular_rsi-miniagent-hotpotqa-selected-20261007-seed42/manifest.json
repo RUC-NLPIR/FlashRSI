@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-modular_rsi-miniagent-hotpotqa-selected-20261007-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 66287392,
+    "sha256": "6849644e5ffc0afda88d3794efed54ee183b7dc7863050d919ca1643bcbd6ef0",
+    "files": 28903,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-08T04:02:56.378124+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "status": "finished",
+  "pid": 970,
+  "attempt": "/root/blockdata/FlashRSI-Lite/runs/adas-miniagent-searchqa-20261005-192131-489976/attempts/adas-miniagent-searchqa-20261005-192226-148631",
+  "started_at": "2026-10-05T11:22:26.150230+00:00",
+  "initial_snapshot": "b37a7ff201fa697d7382dbe4f70be61e18af8e7d638d0d4074d53cd1ec0ccc52",
+  "final_snapshot": "93709b2cf4afd80b08364f7b28bf73ec0ebbfb8c05907ef7505c023ef869430e",
+  "baseline_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7671428571428571,
+    "f1": 0.8663457674165984,
+    "exact_match": 0.7671428571428571,
+    "lite_f1": 0.8663736912041972
+  },
+  "evolved_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.8485714285714285,
+    "f1": 0.9097227891156463,
+    "exact_match": 0.8485714285714285,
+    "lite_f1": 0.9097227891156463
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 8.142857142857144,
+    "improved_tasks": 128,
+    "regressed_tasks": 14,
+    "paired_bootstrap_95pct_pp": [
+      6.571428571428571,
+      9.785714285714285
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "finished_at": "2026-10-05T16:56:53.527522+00:00"
+}

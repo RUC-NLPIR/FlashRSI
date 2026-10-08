@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-darwinx-miniagent-appworld-20261008-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 103155476,
+    "sha256": "83abdbd489241825b44f0753702933078396a574a886641b515bc4c53a0678a1",
+    "files": 28164,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-08T04:02:52.317228+00:00"
+}

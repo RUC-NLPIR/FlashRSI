@@ -1,0 +1,37 @@
+{
+  "status": "finished",
+  "pid": 57780,
+  "attempt": "/root/blockdata/FlashRSI-Lite/runs/modular_rsi-miniagent-hotpotqa-dev-tie-20261007-120411-203116/attempts/modular_rsi-miniagent-hotpotqa-20261007-120411-204634",
+  "started_at": "2026-10-07T04:04:11.218307+00:00",
+  "source_run": "/root/blockdata/FlashRSI-Lite/runs/modular_rsi-miniagent-hotpotqa-recovery-20261006-214236-088827",
+  "selected_snapshot": "4ccbc04be73c3ce6de41a06f92b9c1a4557ad58a6b43dda9a7bb3dfd1b5a5306",
+  "selected_dev": 0.8033333333333333,
+  "selection_rule": "best_dev_then_evolved_then_later_candidate_v1",
+  "initial_snapshot": "b37a7ff201fa697d7382dbe4f70be61e18af8e7d638d0d4074d53cd1ec0ccc52",
+  "final_snapshot": "4ccbc04be73c3ce6de41a06f92b9c1a4557ad58a6b43dda9a7bb3dfd1b5a5306",
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6974675597207567,
+    "exact_match": 0.5333333333333333
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6925959593975434,
+    "exact_match": 0.52
+  },
+  "paired_comparison": {
+    "delta_percentage_points": -1.3333333333333335,
+    "improved_tasks": 5,
+    "regressed_tasks": 9,
+    "paired_bootstrap_95pct_pp": [
+      -4.0,
+      1.0
+    ]
+  },
+  "baseline_test_reused": true,
+  "independent_final_test": true,
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-07T04:12:30.925678+00:00"
+}

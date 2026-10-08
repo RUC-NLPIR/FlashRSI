@@ -1,0 +1,37 @@
+{
+  "status": "finished",
+  "pid": 57173,
+  "attempt": "/root/data/FlashRSI-TerminalQA/runs/ace-miniagent-terminalbench-final-playbook-20261007-215421-617175/attempts/ace-miniagent-terminal_bench-20261007-215510-957178",
+  "source_run": "/root/data/FlashRSI-TerminalQA/runs/ace-miniagent-terminalbench-20261007-112554-088329",
+  "started_at": "2026-10-07T13:55:10.993658+00:00",
+  "num_epochs": 2,
+  "phase": "final-test",
+  "final_snapshot": "1cedbb7049c0fabc9212e7934ed9c59fb1ba85def266dc155e13c5f226497fe2",
+  "selected_dev_score": 0.8,
+  "selection_policy": "last_training_playbook",
+  "dev_used_for_selection": false,
+  "partial_test_source": "/root/data/FlashRSI-TerminalQA/runs/ace-miniagent-terminalbench-dev-tie-20261007-213637-714013",
+  "reused_final_test_tasks": 4,
+  "new_test_tasks": 26,
+  "initial_snapshot": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+  "baseline_test": {
+    "tasks": 30,
+    "finished": 27,
+    "reward": 0.6666666666666666
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "finished": 25,
+    "reward": 0.7
+  },
+  "delta_percentage_points": 3.3333333333333326,
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "initial_test_reused": true,
+  "reused_train_batches": 20,
+  "reused_dev_evaluations": 3,
+  "new_worker_calls": 0,
+  "new_dev_calls": 0,
+  "finished_at": "2026-10-07T14:54:22.630077+00:00"
+}

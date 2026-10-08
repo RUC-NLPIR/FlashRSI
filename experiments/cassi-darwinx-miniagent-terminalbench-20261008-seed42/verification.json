@@ -1,0 +1,60 @@
+{
+  "run_root": "/root/blockdata/FlashRSI-TerminalQA/runs/darwinx-miniagent-terminalbench-recovery-20261006-222116-946196",
+  "status": "finished",
+  "archive_sha256": "d48db0cd3537fb11f6d7e7c1dd41227e6087fa6e147b462874fc24d7ab1325e1",
+  "archive_bytes": 84754625,
+  "verified_files": 15332,
+  "source_verification": {},
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/darwinx-miniagent-terminal_bench-20261007-210725-995549/trajectories/00014-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6666666666666666
+      },
+      "non_finished_tasks": [
+        "rstan-to-pystan",
+        "overfull-hbox",
+        "caffe-cifar-10",
+        "filter-js-from-html"
+      ],
+      "official_grade_count": 0
+    },
+    "final-test": {
+      "file": "attempts/darwinx-miniagent-terminal_bench-20261007-210725-995549/trajectories/00014-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6666666666666666
+      },
+      "non_finished_tasks": [
+        "rstan-to-pystan",
+        "overfull-hbox",
+        "caffe-cifar-10",
+        "filter-js-from-html"
+      ],
+      "official_grade_count": 0
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "Only the user-selected seven experiments. Latest completed result is authoritative; directly dependent search/recovery records are retained under history. Live supporting source is archival context; Snapshots define evaluated candidates. Original validity and audit annotations are preserved.",
+  "verified_at": "2026-10-08T03:48:00.072923+00:00",
+  "snapshot_checks": {
+    "initial": {
+      "id": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+      "file": "attempts/darwinx-miniagent-terminal_bench-20261007-210725-995549/snapshots/ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7.json",
+      "content_identity_verified": true,
+      "encoded_resources_key_pattern_scan": "passed"
+    },
+    "selected": {
+      "id": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+      "file": "attempts/darwinx-miniagent-terminal_bench-20261007-210725-995549/snapshots/ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7.json",
+      "content_identity_verified": true,
+      "encoded_resources_key_pattern_scan": "passed"
+    }
+  },
+  "history_roots": [
+    "/root/blockdata/FlashRSI-TerminalQA/runs/darwinx-miniagent-terminalbench-20261006-211554-431035"
+  ],
+  "finalized_at": "2026-10-08T03:52:02.703603+00:00"
+}

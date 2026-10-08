@@ -1,0 +1,37 @@
+{
+  "status": "finished",
+  "pid": 34499,
+  "attempt": "/root/blockdata/FlashRSI-Lite/runs/adas-claude_code-searchqa-20261006-104818-432795/attempts/adas-claude_code-searchqa-20261006-104924-335449",
+  "started_at": "2026-10-06T02:49:24.337144+00:00",
+  "initial_snapshot": "13771b0eecfc15ffdfe4c00e05ff4a311352a9837d2ceede45fbcaaa2135c8e4",
+  "final_snapshot": "2fe6e7b394a21e6dcca46b1dbe247ce138e260b0d13168ab7d75b709fcd130f3",
+  "baseline_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.7364285714285714,
+    "f1": 0.8464178291461548,
+    "exact_match": 0.7364285714285714,
+    "lite_f1": 0.8459856978998438
+  },
+  "evolved_test": {
+    "tasks": 1400,
+    "finished": 1400,
+    "hard": 0.8135714285714286,
+    "f1": 0.8877704081632654,
+    "exact_match": 0.8135714285714286,
+    "lite_f1": 0.8877704081632654
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 7.7142857142857135,
+    "improved_tasks": 144,
+    "regressed_tasks": 36,
+    "paired_bootstrap_95pct_pp": [
+      5.785714285714286,
+      9.5
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "finished_at": "2026-10-06T06:14:18.268354+00:00"
+}

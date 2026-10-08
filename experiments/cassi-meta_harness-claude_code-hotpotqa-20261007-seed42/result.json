@@ -1,0 +1,33 @@
+{
+  "status": "finished",
+  "pid": 63859,
+  "attempt": "/root/blockdata/FlashRSI-Lite/runs/meta_harness-claude_code-hotpotqa-20261006-160434-123625/attempts/meta_harness-claude_code-hotpotqa-20261006-160434-439105",
+  "started_at": "2026-10-06T08:04:34.440826+00:00",
+  "initial_snapshot": "13771b0eecfc15ffdfe4c00e05ff4a311352a9837d2ceede45fbcaaa2135c8e4",
+  "final_snapshot": "39fae2d1f9674d44daeea6624e95cf896971a5893d3a2a96e11bffeba073a7c0",
+  "baseline_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6744737836285151,
+    "exact_match": 0.5066666666666667
+  },
+  "evolved_test": {
+    "tasks": 300,
+    "finished": 300,
+    "f1": 0.6336679426711396,
+    "exact_match": 0.5033333333333333
+  },
+  "paired_comparison": {
+    "delta_percentage_points": -0.33333333333333337,
+    "improved_tasks": 16,
+    "regressed_tasks": 17,
+    "paired_bootstrap_95pct_pp": [
+      -4.333333333333334,
+      3.3333333333333335
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "finished_at": "2026-10-06T09:09:40.490218+00:00"
+}

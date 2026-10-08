@@ -1,0 +1,35 @@
+{
+  "run_root": "/root/blockdata/FlashRSI-Lite/runs/meta_harness-miniagent-hotpotqa-20261006-131928-461908",
+  "status": "finished",
+  "archive_sha256": "82b7afe7865ac21cf906be02af5c8b756b1cfced177c5133ff323037efe88b96",
+  "archive_bytes": 37202890,
+  "verified_files": 5781,
+  "source_verification": {},
+  "credential_redacted_files": [],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/meta_harness-miniagent-hotpotqa-20261006-131928-788181/trajectories/00045-initial-test.json",
+      "tasks": 300,
+      "metrics_recomputed": {
+        "f1": 0.6464038654341832,
+        "exact_match": 0.48
+      },
+      "non_finished_tasks": []
+    },
+    "final-test": {
+      "file": "attempts/meta_harness-miniagent-hotpotqa-20261006-131928-788181/trajectories/00046-final-test.json",
+      "tasks": 300,
+      "metrics_recomputed": {
+        "f1": 0.6652788132820106,
+        "exact_match": 0.5066666666666667
+      },
+      "non_finished_tasks": [
+        "5ac2e97d554299657fa290c0",
+        "5a84c89a5542992a431d1a9c"
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "Latest completed selection is authoritative; prior completed evolution/extension/recovery roots retained under history. Live project source is supporting context; archived Snapshots define candidate content.",
+  "verified_at": "2026-10-07T07:26:29.188183+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-ahe-miniagent-appworld-20261008-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 94399530,
+    "sha256": "9b00a7dd92bbaf6e9f52e2730ccd160880fef6a66e18fca94df58af531735b94",
+    "files": 25350,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-08T04:02:51.675271+00:00"
+}

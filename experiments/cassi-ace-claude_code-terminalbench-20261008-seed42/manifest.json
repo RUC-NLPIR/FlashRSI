@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-ace-claude_code-terminalbench-20261008-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 518451038,
+    "sha256": "0a493a509c8f3f28b3ba075cbad698f4463718959d4c186b85201e18ad15ec6a",
+    "files": 2372,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-08T04:02:50.871020+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "cassi-darwinx-miniagent-terminalbench-20261008-seed42",
+  "contributor": "cassi",
+  "archive": {
+    "file": "logs.tar.gz",
+    "bytes": 84754625,
+    "sha256": "d48db0cd3537fb11f6d7e7c1dd41227e6087fa6e147b462874fc24d7ab1325e1",
+    "files": 15333,
+    "parts": []
+  },
+  "privacy_scan": "passed",
+  "source": "existing verified local archive; experiment scores unchanged",
+  "published_at": "2026-10-08T04:02:52.640861+00:00"
+}
