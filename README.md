@@ -2,11 +2,21 @@
 
 按 [mvp_doc.md](mvp_doc.md) 逐步实现。当前完成配置、实验目录、CLI 准备流程、
 Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 MiniAgent 和 Claude Code 后端。
-现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、Evo-Harness、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
+现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、Evo-Harness、RRSI、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](docs/terminal-bench.md)。
 SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
+
+## RRSI
+
+见 [接入说明](docs/rrsi.md) 与 [示例配置](examples/rrsi.yaml)。
+演化整个 harness，通过逐任务 digester、结构化分析、提案预测及评测后归因形成反馈。
+用退火预算、完整历史、停滞探索、剪枝建议及 critic 约束提案；组件标签由实际 diff
+归一化，同轮候选共享固定证据。候选经原生 smoke 后，按噪声 floor、token 成本和
+可配置领域约束选择；支持重复基线校准及 Benchmark 提供的评分权重。
+train 用于演化，runner 最后只测一次 test；各 trial 需要完整 token 统计。
+已固定官方 revision 并完成离线及原生本地协议验证；真实模型收益与论文结果尚未验证。
 
 ## Evo-Harness
 

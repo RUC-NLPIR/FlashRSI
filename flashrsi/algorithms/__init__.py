@@ -10,6 +10,7 @@ from flashrsi.algorithms.gepa import GEPA
 from flashrsi.algorithms.meta_harness import MetaHarness
 from flashrsi.algorithms.modular_rsi import ModularRSI
 from flashrsi.algorithms.opro import OPRO
+from flashrsi.algorithms.rrsi import RRSI
 from flashrsi.algorithms.skillopt import SkillOpt
 
 __all__ = [
@@ -23,5 +24,6 @@ __all__ = [
     "MetaHarness",
     "ModularRSI",
     "OPRO",
+    "RRSI",
     "SkillOpt",
 ]

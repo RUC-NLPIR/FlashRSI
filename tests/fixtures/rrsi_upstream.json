@@ -1,0 +1,2741 @@
+{
+  "revision": "be50316e1db05914068a973f322770ef08ed7ba1",
+  "source": "google-research/rrsi: selection, schedule, components, calibrate",
+  "selection": [
+    {
+      "score": 0.6936388382401228,
+      "base": 0.6921344669282712,
+      "best": 0.6921344669282712,
+      "cost": 77,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "output_plumbing",
+      "accepted": [
+        "skill",
+        "output_plumbing",
+        "memory",
+        "client_tool",
+        "prompt",
+        "config"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.00150437131185166,
+        "delta_C": -0.23
+      }
+    },
+    {
+      "score": 0.7477847600171048,
+      "base": 0.7465757602642429,
+      "best": 0.7465757602642429,
+      "cost": 73,
+      "basecost": 100,
+      "delta": 0,
+      "component": "memory",
+      "accepted": [
+        "context_mgmt",
+        "config",
+        "prompt",
+        "memory",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.0012089997528619278,
+        "delta_C": -0.27
+      }
+    },
+    {
+      "score": 0.7942769969216416,
+      "base": 0.7624043724678686,
+      "best": 0.7724043724678686,
+      "cost": 84,
+      "basecost": 100,
+      "delta": 0,
+      "component": "subagent",
+      "accepted": [
+        "control_flow",
+        "prompt",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.031872624453772924,
+        "delta_C": -0.16
+      }
+    },
+    {
+      "score": 0.7668397466902583,
+      "base": 0.7407646337061706,
+      "best": 0.7807646337061707,
+      "cost": 87,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "client_tool",
+      "accepted": [
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.02607511298408771,
+        "delta_C": -0.13
+      }
+    },
+    {
+      "score": 0.7077114803588201,
+      "base": 0.7101159617739714,
+      "best": 0.7201159617739714,
+      "cost": 177,
+      "basecost": 100,
+      "delta": 0,
+      "component": "context_mgmt",
+      "accepted": [
+        "subagent",
+        "config",
+        "client_tool",
+        "prompt",
+        "memory",
+        "context_mgmt",
+        "skill",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.0024044814151512606,
+        "delta_C": 0.77
+      }
+    },
+    {
+      "score": 0.8663011051685184,
+      "base": 0.8281267264808452,
+      "best": 0.8681267264808452,
+      "cost": 65,
+      "basecost": 100,
+      "delta": 0,
+      "component": "output_plumbing",
+      "accepted": [
+        "control_flow",
+        "context_mgmt",
+        "client_tool",
+        "skill"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.03817437868767326,
+        "delta_C": -0.35
+      }
+    },
+    {
+      "score": 0.6676131666732078,
+      "base": 0.6931054747793344,
+      "best": 0.7331054747793344,
+      "cost": 123,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "control_flow",
+      "accepted": [
+        "skill",
+        "client_tool",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.02549230810612657,
+        "delta_C": 0.23
+      }
+    },
+    {
+      "score": 0.7171776121357623,
+      "base": 0.6784007694176466,
+      "best": 0.7184007694176466,
+      "cost": 59,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "client_tool",
+      "accepted": [
+        "prompt",
+        "control_flow",
+        "context_mgmt",
+        "subagent",
+        "client_tool",
+        "output_plumbing",
+        "skill",
+        "memory",
+        "config"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.038776842718115656,
+        "delta_C": -0.41
+      }
+    },
+    {
+      "score": 0.22676408083816557,
+      "base": 0.2512882797036108,
+      "best": 0.2612882797036108,
+      "cost": 148,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "context_mgmt",
+      "accepted": [
+        "prompt",
+        "output_plumbing",
+        "context_mgmt",
+        "control_flow",
+        "client_tool",
+        "subagent",
+        "skill",
+        "config",
+        "memory"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.024524198865445213,
+        "delta_C": 0.48
+      }
+    },
+    {
+      "score": 0.5484714081926644,
+      "base": 0.549944146168029,
+      "best": 0.559944146168029,
+      "cost": 126,
+      "basecost": 100,
+      "delta": 0,
+      "component": "config",
+      "accepted": [
+        "subagent",
+        "client_tool",
+        "output_plumbing",
+        "memory",
+        "control_flow",
+        "skill",
+        "context_mgmt",
+        "prompt",
+        "config"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.0014727379753646241,
+        "delta_C": 0.26
+      }
+    },
+    {
+      "score": 0.48515862269052024,
+      "base": 0.4554088979025202,
+      "best": 0.4954088979025202,
+      "cost": 85,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "client_tool",
+      "accepted": [
+        "client_tool",
+        "skill",
+        "memory"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.02974972478800003,
+        "delta_C": -0.15
+      }
+    },
+    {
+      "score": 0.7889434951322075,
+      "base": 0.7991809983271758,
+      "best": 0.8391809983271759,
+      "cost": 169,
+      "basecost": 100,
+      "delta": 0,
+      "component": "prompt",
+      "accepted": [
+        "prompt",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.0102375031949683,
+        "delta_C": 0.69
+      }
+    },
+    {
+      "score": 0.27010223222299506,
+      "base": 0.2542080430094527,
+      "best": 0.2942080430094527,
+      "cost": 175,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "memory",
+      "accepted": [
+        "context_mgmt",
+        "subagent",
+        "prompt",
+        "client_tool",
+        "output_plumbing",
+        "memory"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.015894189213542353,
+        "delta_C": 0.75
+      }
+    },
+    {
+      "score": 0.29887070820695244,
+      "base": 0.27337037562696054,
+      "best": 0.27337037562696054,
+      "cost": 127,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "memory",
+      "accepted": [
+        "subagent",
+        "memory",
+        "skill",
+        "control_flow",
+        "client_tool",
+        "context_mgmt",
+        "prompt",
+        "config",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.025500332579991902,
+        "delta_C": 0.27
+      }
+    },
+    {
+      "score": 0.6105167627274096,
+      "base": 0.6054102991527506,
+      "best": 0.6154102991527506,
+      "cost": 180,
+      "basecost": 100,
+      "delta": 0,
+      "component": "output_plumbing",
+      "accepted": [
+        "skill",
+        "memory"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.005106463574659048,
+        "delta_C": 0.8
+      }
+    },
+    {
+      "score": 0.4386508339591986,
+      "base": 0.4234544901788364,
+      "best": 0.4334544901788364,
+      "cost": 83,
+      "basecost": 100,
+      "delta": 0,
+      "component": "subagent",
+      "accepted": [],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.01519634378036222,
+        "delta_C": -0.17
+      }
+    },
+    {
+      "score": 0.236270841454091,
+      "base": 0.21654228004639395,
+      "best": 0.22654228004639396,
+      "cost": 120,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "output_plumbing",
+      "accepted": [
+        "output_plumbing",
+        "memory",
+        "prompt",
+        "client_tool",
+        "context_mgmt",
+        "subagent",
+        "control_flow",
+        "config"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.01972856140769705,
+        "delta_C": 0.2
+      }
+    },
+    {
+      "score": 0.3953561113503932,
+      "base": 0.3918595801526228,
+      "best": 0.43185958015262277,
+      "cost": 101,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "context_mgmt",
+      "accepted": [
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.003496531197770436,
+        "delta_C": 0.01
+      }
+    },
+    {
+      "score": 0.7302171667658832,
+      "base": 0.7419597856666176,
+      "best": 0.7519597856666176,
+      "cost": 151,
+      "basecost": 100,
+      "delta": 0,
+      "component": "context_mgmt",
+      "accepted": [
+        "config",
+        "skill",
+        "memory",
+        "output_plumbing",
+        "prompt",
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.011742618900734358,
+        "delta_C": 0.51
+      }
+    },
+    {
+      "score": 0.6802315614831825,
+      "base": 0.6518711259943051,
+      "best": 0.6518711259943051,
+      "cost": 108,
+      "basecost": 100,
+      "delta": 0,
+      "component": "prompt",
+      "accepted": [
+        "control_flow",
+        "prompt",
+        "skill"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.028360435488877456,
+        "delta_C": 0.08
+      }
+    },
+    {
+      "score": 0.47774112610622094,
+      "base": 0.4980325376055014,
+      "best": 0.5080325376055014,
+      "cost": 71,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "output_plumbing",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.020291411499280487,
+        "delta_C": -0.29
+      }
+    },
+    {
+      "score": 0.4111928906877168,
+      "base": 0.37315213554865045,
+      "best": 0.38315213554865046,
+      "cost": 65,
+      "basecost": 100,
+      "delta": 0,
+      "component": "output_plumbing",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.03804075513906635,
+        "delta_C": -0.35
+      }
+    },
+    {
+      "score": 0.55786194974989,
+      "base": 0.5402454767794798,
+      "best": 0.5802454767794798,
+      "cost": 109,
+      "basecost": 100,
+      "delta": 0,
+      "component": "context_mgmt",
+      "accepted": [
+        "output_plumbing",
+        "memory",
+        "subagent",
+        "client_tool",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.017616472970410246,
+        "delta_C": 0.09
+      }
+    },
+    {
+      "score": 0.6871811978718911,
+      "base": 0.6785067423254074,
+      "best": 0.6885067423254074,
+      "cost": 109,
+      "basecost": 100,
+      "delta": 0,
+      "component": "config",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.008674455546483717,
+        "delta_C": 0.09
+      }
+    },
+    {
+      "score": 0.6909259376471787,
+      "base": 0.717829535326935,
+      "best": 0.7578295353269351,
+      "cost": 132,
+      "basecost": 100,
+      "delta": 0,
+      "component": "config",
+      "accepted": [
+        "context_mgmt",
+        "memory",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.026903597679756364,
+        "delta_C": 0.32
+      }
+    },
+    {
+      "score": 0.31372063961694724,
+      "base": 0.32871510654933184,
+      "best": 0.3687151065493318,
+      "cost": 168,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "subagent",
+      "accepted": [
+        "memory",
+        "context_mgmt",
+        "subagent",
+        "config",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.014994466932384598,
+        "delta_C": 0.68
+      }
+    },
+    {
+      "score": 0.7323089926157103,
+      "base": 0.7211247353375552,
+      "best": 0.7311247353375552,
+      "cost": 76,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "memory",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.011184257278155085,
+        "delta_C": -0.24
+      }
+    },
+    {
+      "score": 0.5605920961408376,
+      "base": 0.571952583599324,
+      "best": 0.581952583599324,
+      "cost": 142,
+      "basecost": 100,
+      "delta": 0,
+      "component": "control_flow",
+      "accepted": [
+        "context_mgmt",
+        "skill"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.01136048745848639,
+        "delta_C": 0.42
+      }
+    },
+    {
+      "score": 0.26072283967039894,
+      "base": 0.26737033337133675,
+      "best": 0.27737033337133676,
+      "cost": 172,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "context_mgmt",
+      "accepted": [
+        "client_tool",
+        "memory",
+        "skill",
+        "output_plumbing",
+        "config",
+        "prompt",
+        "subagent",
+        "context_mgmt",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.006647493700937812,
+        "delta_C": 0.72
+      }
+    },
+    {
+      "score": 0.5040244223412897,
+      "base": 0.47811269492146885,
+      "best": 0.48811269492146886,
+      "cost": 98,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "context_mgmt",
+      "accepted": [
+        "skill",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.025911727419820896,
+        "delta_C": -0.02
+      }
+    },
+    {
+      "score": 0.5121918035738318,
+      "base": 0.49965767507301073,
+      "best": 0.49965767507301073,
+      "cost": 159,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "memory",
+      "accepted": [
+        "config",
+        "context_mgmt",
+        "prompt",
+        "subagent",
+        "control_flow",
+        "skill",
+        "memory",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.012534128500821029,
+        "delta_C": 0.59
+      }
+    },
+    {
+      "score": 0.2544433059880319,
+      "base": 0.23953944269126487,
+      "best": 0.24953944269126488,
+      "cost": 109,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "output_plumbing",
+      "accepted": [
+        "prompt",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.014903863296767017,
+        "delta_C": 0.09
+      }
+    },
+    {
+      "score": 0.7216972877857393,
+      "base": 0.7487273327629671,
+      "best": 0.7587273327629671,
+      "cost": 157,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "prompt",
+      "accepted": [
+        "control_flow",
+        "client_tool",
+        "config",
+        "memory"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.02703004497722783,
+        "delta_C": 0.57
+      }
+    },
+    {
+      "score": 0.2910078157401886,
+      "base": 0.28711869930213446,
+      "best": 0.32711869930213444,
+      "cost": 54,
+      "basecost": 100,
+      "delta": 0,
+      "component": "client_tool",
+      "accepted": [
+        "config",
+        "output_plumbing",
+        "skill",
+        "control_flow",
+        "subagent",
+        "client_tool",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.0038891164380541188,
+        "delta_C": -0.46
+      }
+    },
+    {
+      "score": 0.41408345881553693,
+      "base": 0.3891087480184482,
+      "best": 0.42910874801844817,
+      "cost": 157,
+      "basecost": 100,
+      "delta": 0,
+      "component": "skill",
+      "accepted": [],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": 0.02497471079708874,
+        "delta_C": 0.57
+      }
+    },
+    {
+      "score": 0.19068990416242873,
+      "base": 0.20294751526313384,
+      "best": 0.20294751526313384,
+      "cost": 71,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "context_mgmt",
+      "accepted": [
+        "prompt",
+        "subagent",
+        "client_tool",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": -0.012257611100705113,
+        "delta_C": -0.29
+      }
+    },
+    {
+      "score": 0.2455608659487491,
+      "base": 0.2414618396083492,
+      "best": 0.25146183960834917,
+      "cost": 165,
+      "basecost": 100,
+      "delta": 0,
+      "component": "memory",
+      "accepted": [
+        "subagent",
+        "control_flow",
+        "memory",
+        "client_tool",
+        "config",
+        "context_mgmt",
+        "prompt",
+        "skill"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.004099026340399908,
+        "delta_C": 0.65
+      }
+    },
+    {
+      "score": 0.3057136034406395,
+      "base": 0.27414686652108333,
+      "best": 0.27414686652108333,
+      "cost": 174,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "control_flow",
+      "accepted": [
+        "context_mgmt",
+        "control_flow",
+        "prompt",
+        "output_plumbing",
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.03156673691955619,
+        "delta_C": 0.74
+      }
+    },
+    {
+      "score": 0.7712886754665097,
+      "base": 0.7596370446554079,
+      "best": 0.799637044655408,
+      "cost": 137,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "prompt",
+      "accepted": [
+        "config",
+        "client_tool",
+        "subagent",
+        "skill",
+        "memory"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.011651630811101765,
+        "delta_C": 0.37
+      }
+    },
+    {
+      "score": 0.5591012974129503,
+      "base": 0.5426364363276557,
+      "best": 0.5526364363276557,
+      "cost": 173,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "prompt",
+      "accepted": [
+        "prompt",
+        "subagent",
+        "config",
+        "control_flow",
+        "memory"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.016464861085294658,
+        "delta_C": 0.73
+      }
+    },
+    {
+      "score": 0.7048083866572542,
+      "base": 0.7237855028341889,
+      "best": 0.7637855028341889,
+      "cost": 132,
+      "basecost": 100,
+      "delta": 0,
+      "component": "skill",
+      "accepted": [
+        "client_tool",
+        "config",
+        "context_mgmt",
+        "memory",
+        "skill",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.01897711617693465,
+        "delta_C": 0.32
+      }
+    },
+    {
+      "score": 0.27326920862313936,
+      "base": 0.29122349171619816,
+      "best": 0.29122349171619816,
+      "cost": 50,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "skill",
+      "accepted": [
+        "output_plumbing",
+        "client_tool",
+        "subagent",
+        "memory",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": -0.017954283093058798,
+        "delta_C": -0.5
+      }
+    },
+    {
+      "score": 0.8089345364498963,
+      "base": 0.796714127301513,
+      "best": 0.806714127301513,
+      "cost": 173,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "memory",
+      "accepted": [
+        "prompt",
+        "control_flow",
+        "memory",
+        "output_plumbing",
+        "skill",
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.012220409148383293,
+        "delta_C": 0.73
+      }
+    },
+    {
+      "score": 0.4897184900868568,
+      "base": 0.5066797979347117,
+      "best": 0.5166797979347117,
+      "cost": 149,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "config",
+      "accepted": [
+        "memory",
+        "output_plumbing",
+        "subagent",
+        "client_tool",
+        "control_flow",
+        "config",
+        "skill"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.016961307847854934,
+        "delta_C": 0.49
+      }
+    },
+    {
+      "score": 0.4365614032593632,
+      "base": 0.4559696670163376,
+      "best": 0.4559696670163376,
+      "cost": 70,
+      "basecost": 100,
+      "delta": 0,
+      "component": "subagent",
+      "accepted": [
+        "control_flow",
+        "context_mgmt",
+        "memory",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": -0.01940826375697441,
+        "delta_C": -0.3
+      }
+    },
+    {
+      "score": 0.6466591573532975,
+      "base": 0.6584599149829169,
+      "best": 0.6584599149829169,
+      "cost": 89,
+      "basecost": 100,
+      "delta": 0,
+      "component": "subagent",
+      "accepted": [
+        "context_mgmt",
+        "client_tool",
+        "memory",
+        "prompt",
+        "control_flow",
+        "skill"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": -0.011800757629619407,
+        "delta_C": -0.11
+      }
+    },
+    {
+      "score": 0.3962499695777151,
+      "base": 0.38637128532975035,
+      "best": 0.4263712853297503,
+      "cost": 150,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "client_tool",
+      "accepted": [],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": 0.00987868424796473,
+        "delta_C": 0.5
+      }
+    },
+    {
+      "score": 0.8861494727025687,
+      "base": 0.872812039472487,
+      "best": 0.912812039472487,
+      "cost": 83,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "output_plumbing",
+      "accepted": [
+        "client_tool",
+        "subagent",
+        "context_mgmt",
+        "skill",
+        "control_flow",
+        "prompt",
+        "config",
+        "output_plumbing",
+        "memory"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.013337433230081741,
+        "delta_C": -0.17
+      }
+    },
+    {
+      "score": 0.9202807073051998,
+      "base": 0.8933362033241043,
+      "best": 0.9333362033241044,
+      "cost": 120,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "prompt",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.02694450398109549,
+        "delta_C": 0.2
+      }
+    },
+    {
+      "score": 0.8129504754601717,
+      "base": 0.8030013889162582,
+      "best": 0.8130013889162582,
+      "cost": 136,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "output_plumbing",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.009949086543913577,
+        "delta_C": 0.36
+      }
+    },
+    {
+      "score": 0.2187468509760574,
+      "base": 0.20479564805026318,
+      "best": 0.20479564805026318,
+      "cost": 125,
+      "basecost": 100,
+      "delta": 0,
+      "component": "output_plumbing",
+      "accepted": [
+        "prompt",
+        "output_plumbing",
+        "context_mgmt",
+        "client_tool",
+        "skill",
+        "subagent",
+        "memory",
+        "config",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.013951202925794215,
+        "delta_C": 0.25
+      }
+    },
+    {
+      "score": 0.7454393733238327,
+      "base": 0.7543603780919135,
+      "best": 0.7543603780919135,
+      "cost": 116,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "config",
+      "accepted": [
+        "output_plumbing",
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.008921004768080776,
+        "delta_C": 0.16
+      }
+    },
+    {
+      "score": 0.46024279472968466,
+      "base": 0.42903180763590254,
+      "best": 0.43903180763590255,
+      "cost": 165,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "subagent",
+      "accepted": [
+        "memory",
+        "output_plumbing",
+        "context_mgmt",
+        "skill",
+        "prompt",
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.031210987093782117,
+        "delta_C": 0.65
+      }
+    },
+    {
+      "score": 0.42028587767544673,
+      "base": 0.42650803664479103,
+      "best": 0.42650803664479103,
+      "cost": 114,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "control_flow",
+      "accepted": [
+        "context_mgmt",
+        "prompt",
+        "control_flow",
+        "output_plumbing",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.006222158969344305,
+        "delta_C": 0.14
+      }
+    },
+    {
+      "score": 0.6269614578663709,
+      "base": 0.6548268867582332,
+      "best": 0.6648268867582332,
+      "cost": 102,
+      "basecost": 100,
+      "delta": 0,
+      "component": "output_plumbing",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.027865428891862276,
+        "delta_C": 0.02
+      }
+    },
+    {
+      "score": 0.709030167139056,
+      "base": 0.7355895882563399,
+      "best": 0.7455895882563399,
+      "cost": 120,
+      "basecost": 100,
+      "delta": 0,
+      "component": "skill",
+      "accepted": [
+        "client_tool",
+        "prompt",
+        "memory",
+        "context_mgmt",
+        "config"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": -0.026559421117283932,
+        "delta_C": 0.2
+      }
+    },
+    {
+      "score": 0.5047991802432966,
+      "base": 0.4739827067109772,
+      "best": 0.4739827067109772,
+      "cost": 66,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "output_plumbing",
+      "accepted": [
+        "memory",
+        "prompt",
+        "control_flow",
+        "config",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.03081647353231942,
+        "delta_C": -0.34
+      }
+    },
+    {
+      "score": 0.47627537202257597,
+      "base": 0.4591200044812831,
+      "best": 0.4991200044812831,
+      "cost": 132,
+      "basecost": 100,
+      "delta": 0,
+      "component": "memory",
+      "accepted": [
+        "client_tool",
+        "memory",
+        "config",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.017155367541292876,
+        "delta_C": 0.32
+      }
+    },
+    {
+      "score": 0.8700691272946256,
+      "base": 0.8950972712883851,
+      "best": 0.9050972712883851,
+      "cost": 105,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "subagent",
+      "accepted": [
+        "output_plumbing",
+        "memory",
+        "context_mgmt",
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": -0.025028143993759522,
+        "delta_C": 0.05
+      }
+    },
+    {
+      "score": 0.2629729467494037,
+      "base": 0.28925309853141573,
+      "best": 0.28925309853141573,
+      "cost": 50,
+      "basecost": 100,
+      "delta": 0,
+      "component": "prompt",
+      "accepted": [
+        "control_flow",
+        "skill",
+        "output_plumbing",
+        "context_mgmt",
+        "memory",
+        "subagent",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.02628015178201204,
+        "delta_C": -0.5
+      }
+    },
+    {
+      "score": 0.6734227542426335,
+      "base": 0.6784777766565857,
+      "best": 0.6784777766565857,
+      "cost": 70,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "client_tool",
+      "accepted": [
+        "skill",
+        "prompt",
+        "context_mgmt",
+        "client_tool",
+        "output_plumbing",
+        "memory"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": -0.0050550224139521704,
+        "delta_C": -0.3
+      }
+    },
+    {
+      "score": 0.23586790102739869,
+      "base": 0.21419802050321451,
+      "best": 0.2541980205032145,
+      "cost": 170,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "memory",
+      "accepted": [
+        "prompt",
+        "context_mgmt",
+        "subagent",
+        "client_tool",
+        "memory",
+        "control_flow",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.02166988052418417,
+        "delta_C": 0.7
+      }
+    },
+    {
+      "score": 0.5627442098963858,
+      "base": 0.5365157048746013,
+      "best": 0.5465157048746013,
+      "cost": 167,
+      "basecost": 100,
+      "delta": 0,
+      "component": "control_flow",
+      "accepted": [
+        "skill",
+        "prompt",
+        "config",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.02622850502178453,
+        "delta_C": 0.67
+      }
+    },
+    {
+      "score": 0.902735304354574,
+      "base": 0.8744786949818382,
+      "best": 0.8744786949818382,
+      "cost": 62,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "output_plumbing",
+      "accepted": [
+        "context_mgmt",
+        "subagent",
+        "control_flow",
+        "client_tool",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.028256609372735886,
+        "delta_C": -0.38
+      }
+    },
+    {
+      "score": 0.6124286686844025,
+      "base": 0.5930413331166251,
+      "best": 0.6030413331166251,
+      "cost": 123,
+      "basecost": 100,
+      "delta": 0,
+      "component": "subagent",
+      "accepted": [
+        "prompt",
+        "context_mgmt",
+        "client_tool",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.019387335567777386,
+        "delta_C": 0.23
+      }
+    },
+    {
+      "score": 0.5050532698431743,
+      "base": 0.48474613063352806,
+      "best": 0.48474613063352806,
+      "cost": 179,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "output_plumbing",
+      "accepted": [
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.020307139209646274,
+        "delta_C": 0.79
+      }
+    },
+    {
+      "score": 0.8336862711457268,
+      "base": 0.806879240872828,
+      "best": 0.806879240872828,
+      "cost": 178,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "prompt",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.02680703027289877,
+        "delta_C": 0.78
+      }
+    },
+    {
+      "score": 0.2713224974119612,
+      "base": 0.2972402496368685,
+      "best": 0.2972402496368685,
+      "cost": 161,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "control_flow",
+      "accepted": [
+        "memory",
+        "control_flow",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.02591775222490733,
+        "delta_C": 0.61
+      }
+    },
+    {
+      "score": 0.2710180420317155,
+      "base": 0.2798003515570387,
+      "best": 0.2798003515570387,
+      "cost": 75,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "skill",
+      "accepted": [
+        "output_plumbing",
+        "prompt",
+        "context_mgmt",
+        "subagent",
+        "memory"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": -0.008782309525323218,
+        "delta_C": -0.25
+      }
+    },
+    {
+      "score": 0.8409886032311504,
+      "base": 0.8167640213491922,
+      "best": 0.8167640213491922,
+      "cost": 158,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "memory",
+      "accepted": [
+        "context_mgmt",
+        "prompt",
+        "config",
+        "memory",
+        "control_flow",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.024224581881958196,
+        "delta_C": 0.58
+      }
+    },
+    {
+      "score": 0.7396018478915871,
+      "base": 0.7484302460125913,
+      "best": 0.7484302460125913,
+      "cost": 70,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "context_mgmt",
+      "accepted": [
+        "output_plumbing",
+        "client_tool",
+        "subagent",
+        "config",
+        "skill"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": -0.008828398121004222,
+        "delta_C": -0.3
+      }
+    },
+    {
+      "score": 0.515336172408952,
+      "base": 0.5055545084775903,
+      "best": 0.5455545084775903,
+      "cost": 124,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "client_tool",
+      "accepted": [],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": 0.009781663931361706,
+        "delta_C": 0.24
+      }
+    },
+    {
+      "score": 0.3219139847870505,
+      "base": 0.30324783265270105,
+      "best": 0.34324783265270103,
+      "cost": 168,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "context_mgmt",
+      "accepted": [
+        "output_plumbing",
+        "prompt",
+        "memory",
+        "control_flow",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.018666152134349467,
+        "delta_C": 0.68
+      }
+    },
+    {
+      "score": 0.8473642262393186,
+      "base": 0.8431424075099723,
+      "best": 0.8831424075099723,
+      "cost": 96,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "memory",
+      "accepted": [
+        "subagent",
+        "control_flow",
+        "config",
+        "output_plumbing",
+        "client_tool"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": 0.004221818729346349,
+        "delta_C": -0.04
+      }
+    },
+    {
+      "score": 0.8819440627978709,
+      "base": 0.8950833082674619,
+      "best": 0.9350833082674619,
+      "cost": 148,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "skill",
+      "accepted": [
+        "output_plumbing",
+        "skill",
+        "prompt",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.013139245469590999,
+        "delta_C": 0.48
+      }
+    },
+    {
+      "score": 0.731391991599019,
+      "base": 0.7255117333412304,
+      "best": 0.7255117333412304,
+      "cost": 160,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "memory",
+      "accepted": [
+        "config",
+        "control_flow",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": 0.005880258257788595,
+        "delta_C": 0.6
+      }
+    },
+    {
+      "score": 0.2080593436052401,
+      "base": 0.22194933311533122,
+      "best": 0.22194933311533122,
+      "cost": 104,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "client_tool",
+      "accepted": [
+        "prompt",
+        "output_plumbing",
+        "context_mgmt",
+        "subagent",
+        "client_tool",
+        "skill",
+        "memory",
+        "control_flow",
+        "config"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.013889989510091127,
+        "delta_C": 0.04
+      }
+    },
+    {
+      "score": 0.40425906042504733,
+      "base": 0.4023176213025934,
+      "best": 0.4423176213025934,
+      "cost": 132,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "skill",
+      "accepted": [
+        "memory",
+        "client_tool",
+        "context_mgmt",
+        "subagent",
+        "config",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": 0.0019414391224539251,
+        "delta_C": 0.32
+      }
+    },
+    {
+      "score": 0.464704834379676,
+      "base": 0.4605529398098083,
+      "best": 0.47055293980980833,
+      "cost": 153,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "control_flow",
+      "accepted": [
+        "control_flow",
+        "memory"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.004151894569867698,
+        "delta_C": 0.53
+      }
+    },
+    {
+      "score": 0.4108040449369496,
+      "base": 0.40251442182872743,
+      "best": 0.40251442182872743,
+      "cost": 71,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "skill",
+      "accepted": [
+        "control_flow",
+        "subagent",
+        "output_plumbing",
+        "memory",
+        "config",
+        "context_mgmt",
+        "client_tool",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.008289623108222177,
+        "delta_C": -0.29
+      }
+    },
+    {
+      "score": 0.5429156207734008,
+      "base": 0.5161716923078743,
+      "best": 0.5561716923078743,
+      "cost": 144,
+      "basecost": 100,
+      "delta": 0,
+      "component": "skill",
+      "accepted": [
+        "context_mgmt",
+        "subagent",
+        "prompt",
+        "memory",
+        "config",
+        "client_tool",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": 0.026743928465526534,
+        "delta_C": 0.44
+      }
+    },
+    {
+      "score": 0.6548170282276324,
+      "base": 0.6582207778104026,
+      "best": 0.6682207778104026,
+      "cost": 155,
+      "basecost": 100,
+      "delta": 0,
+      "component": "control_flow",
+      "accepted": [
+        "output_plumbing",
+        "memory",
+        "skill",
+        "subagent",
+        "prompt",
+        "config"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.0034037495827701214,
+        "delta_C": 0.55
+      }
+    },
+    {
+      "score": 0.47693534267350707,
+      "base": 0.4896571602279172,
+      "best": 0.49965716022791723,
+      "cost": 171,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "subagent",
+      "accepted": [
+        "control_flow",
+        "skill",
+        "client_tool",
+        "config",
+        "context_mgmt",
+        "subagent",
+        "memory",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.012721817554410153,
+        "delta_C": 0.71
+      }
+    },
+    {
+      "score": 0.6611121722596677,
+      "base": 0.6321932082802626,
+      "best": 0.6321932082802626,
+      "cost": 135,
+      "basecost": 100,
+      "delta": 0,
+      "component": "subagent",
+      "accepted": [
+        "control_flow",
+        "context_mgmt",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.028918963979405077,
+        "delta_C": 0.35
+      }
+    },
+    {
+      "score": 0.8254445167364918,
+      "base": 0.800186873776167,
+      "best": 0.8401868737761671,
+      "cost": 100,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "control_flow",
+      "accepted": [
+        "control_flow",
+        "subagent",
+        "client_tool",
+        "skill",
+        "config",
+        "memory",
+        "context_mgmt",
+        "output_plumbing",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.025257642960324733,
+        "delta_C": 0.0
+      }
+    },
+    {
+      "score": 0.651134268524696,
+      "base": 0.6513014490467044,
+      "best": 0.6913014490467044,
+      "cost": 63,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "subagent",
+      "accepted": [
+        "client_tool",
+        "config",
+        "memory",
+        "prompt",
+        "subagent",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.00016718052200836997,
+        "delta_C": -0.37
+      }
+    },
+    {
+      "score": 0.5549873677736649,
+      "base": 0.5261710736174894,
+      "best": 0.5661710736174894,
+      "cost": 73,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "subagent",
+      "accepted": [
+        "control_flow",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.02881629415617548,
+        "delta_C": -0.27
+      }
+    },
+    {
+      "score": 0.8293126564141435,
+      "base": 0.8383699267261049,
+      "best": 0.8483699267261049,
+      "cost": 71,
+      "basecost": 100,
+      "delta": 0,
+      "component": "subagent",
+      "accepted": [
+        "config",
+        "output_plumbing",
+        "control_flow",
+        "client_tool",
+        "prompt",
+        "memory",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.009057270311961352,
+        "delta_C": -0.29
+      }
+    },
+    {
+      "score": 0.24098676548238365,
+      "base": 0.26193130708283463,
+      "best": 0.3019313070828346,
+      "cost": 71,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "memory",
+      "accepted": [
+        "skill",
+        "memory",
+        "client_tool",
+        "subagent",
+        "output_plumbing",
+        "context_mgmt",
+        "config"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.020944541600450978,
+        "delta_C": -0.29
+      }
+    },
+    {
+      "score": 0.8773494529684716,
+      "base": 0.8837882472809355,
+      "best": 0.9237882472809356,
+      "cost": 100,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "output_plumbing",
+      "accepted": [
+        "prompt",
+        "control_flow"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.006438794312463969,
+        "delta_C": 0.0
+      }
+    },
+    {
+      "score": 0.3276606843705278,
+      "base": 0.31875528074270104,
+      "best": 0.358755280742701,
+      "cost": 67,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "memory",
+      "accepted": [
+        "prompt",
+        "context_mgmt",
+        "skill",
+        "config",
+        "client_tool",
+        "control_flow",
+        "output_plumbing",
+        "memory",
+        "subagent"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.008905403627826769,
+        "delta_C": -0.33
+      }
+    },
+    {
+      "score": 0.6799649474586337,
+      "base": 0.6615279842139363,
+      "best": 0.6615279842139363,
+      "cost": 92,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "client_tool",
+      "accepted": [
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.018436963244697346,
+        "delta_C": -0.08
+      }
+    },
+    {
+      "score": 0.26491421434243706,
+      "base": 0.2420666385008337,
+      "best": 0.2520666385008337,
+      "cost": 106,
+      "basecost": 100,
+      "delta": 0,
+      "component": "memory",
+      "accepted": [
+        "prompt",
+        "output_plumbing",
+        "skill"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 1,
+        "delta_S": 0.02284757584160335,
+        "delta_C": 0.06
+      }
+    },
+    {
+      "score": 0.2536104538970145,
+      "base": 0.2618286879832961,
+      "best": 0.3018286879832961,
+      "cost": 176,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "memory",
+      "accepted": [],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 1,
+        "delta_S": -0.00821823408628164,
+        "delta_C": 0.76
+      }
+    },
+    {
+      "score": 0.5690563782227227,
+      "base": 0.5770698181498339,
+      "best": 0.5770698181498339,
+      "cost": 92,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "client_tool",
+      "accepted": [
+        "prompt",
+        "memory",
+        "control_flow",
+        "client_tool",
+        "skill",
+        "config",
+        "subagent",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": -0.008013439927111232,
+        "delta_C": -0.08
+      }
+    },
+    {
+      "score": 0.8998799449493246,
+      "base": 0.8987477788938825,
+      "best": 0.9087477788938825,
+      "cost": 69,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "memory",
+      "accepted": [
+        "memory",
+        "skill",
+        "subagent",
+        "config",
+        "output_plumbing"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.0011321660554420854,
+        "delta_C": -0.31
+      }
+    },
+    {
+      "score": 0.6475012296499031,
+      "base": 0.6312096832674856,
+      "best": 0.6712096832674856,
+      "cost": 117,
+      "basecost": 100,
+      "delta": 0.02,
+      "component": "context_mgmt",
+      "accepted": [
+        "client_tool",
+        "subagent",
+        "output_plumbing",
+        "skill",
+        "control_flow",
+        "context_mgmt",
+        "prompt"
+      ],
+      "config": {
+        "w_s": 0,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": 0.016291546382417477,
+        "delta_C": 0.17
+      }
+    },
+    {
+      "score": 0.3824937140880809,
+      "base": 0.39972282023365924,
+      "best": 0.39972282023365924,
+      "cost": 76,
+      "basecost": 100,
+      "delta": 0.017,
+      "component": "prompt",
+      "accepted": [
+        "client_tool",
+        "skill",
+        "prompt",
+        "context_mgmt"
+      ],
+      "config": {
+        "w_s": 100,
+        "beta1": 40
+      },
+      "expected": {
+        "admissible": false,
+        "novelty": 0,
+        "delta_S": -0.01722910614557832,
+        "delta_C": -0.24
+      }
+    },
+    {
+      "score": 0.5412715812587405,
+      "base": 0.5250450581650805,
+      "best": 0.5350450581650805,
+      "cost": 167,
+      "basecost": 100,
+      "delta": 0,
+      "component": "prompt",
+      "accepted": [],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.016226523093660017,
+        "delta_C": 0.67
+      }
+    },
+    {
+      "score": 0.6102724513885294,
+      "base": 0.5742149682233528,
+      "best": 0.5742149682233528,
+      "cost": 158,
+      "basecost": 100,
+      "delta": 0,
+      "component": "prompt",
+      "accepted": [],
+      "config": {
+        "w_s": 100,
+        "beta1": 44.5
+      },
+      "expected": {
+        "admissible": true,
+        "novelty": 0,
+        "delta_S": 0.03605748316517654,
+        "delta_C": 0.58
+      }
+    }
+  ],
+  "calibration": [
+    {
+      "evaluations": [
+        [
+          {
+            "rewards": [
+              0,
+              1
+            ],
+            "weights": [
+              1,
+              1
+            ]
+          },
+          {
+            "rewards": [
+              1,
+              1
+            ],
+            "weights": [
+              1,
+              1
+            ]
+          }
+        ]
+      ],
+      "expected_delta": 0.496455
+    },
+    {
+      "evaluations": [
+        [
+          {
+            "rewards": [
+              0,
+              1
+            ],
+            "weights": [
+              1,
+              1
+            ]
+          },
+          {
+            "rewards": [
+              1,
+              1
+            ],
+            "weights": [
+              100,
+              100
+            ]
+          }
+        ]
+      ],
+      "expected_delta": 0.009831
+    },
+    {
+      "evaluations": [
+        [
+          {
+            "rewards": [
+              0
+            ],
+            "weights": [
+              1
+            ]
+          }
+        ],
+        [
+          {
+            "rewards": [
+              1
+            ],
+            "weights": [
+              1
+            ]
+          }
+        ]
+      ],
+      "expected_delta": 2.0
+    },
+    {
+      "evaluations": [
+        [
+          {
+            "rewards": [
+              0,
+              1
+            ],
+            "weights": [
+              1,
+              1
+            ]
+          }
+        ],
+        [
+          {
+            "rewards": [
+              0,
+              1
+            ],
+            "weights": [
+              1,
+              1
+            ]
+          }
+        ]
+      ],
+      "expected_delta": 0.986294
+    }
+  ],
+  "tags": [
+    {
+      "declared": "memory",
+      "diff": "--- a/runtime.py\n+++ b/runtime.py\n@@ -1 +1 @@\n-# hint\n+# new hint\n",
+      "expected": "prompt"
+    },
+    {
+      "declared": "memory",
+      "diff": "+store = Memory()\n",
+      "expected": "memory"
+    },
+    {
+      "declared": "subagent",
+      "diff": "+answer = subcall(prompt)\n",
+      "expected": "subagent"
+    },
+    {
+      "declared": "skill",
+      "diff": "+++ b/skills/new.md\n+Reusable procedure\n",
+      "expected": "skill"
+    },
+    {
+      "declared": "skill",
+      "diff": "+CLIENT_TOOLS = ToolRegistry()\n",
+      "expected": "client_tool"
+    },
+    {
+      "declared": "client_tool",
+      "diff": "+value = 1\n",
+      "expected": "prompt"
+    },
+    {
+      "declared": "control_flow",
+      "diff": "+if done: break\n",
+      "expected": "prompt"
+    }
+  ],
+  "schedule": [
+    {
+      "T": 1,
+      "budgets": [
+        4
+      ]
+    },
+    {
+      "T": 2,
+      "budgets": [
+        4,
+        3
+      ]
+    },
+    {
+      "T": 3,
+      "budgets": [
+        4,
+        4,
+        2
+      ]
+    },
+    {
+      "T": 7,
+      "budgets": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        2,
+        2
+      ]
+    },
+    {
+      "T": 20,
+      "budgets": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    }
+  ]
+}
