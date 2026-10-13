@@ -1,0 +1,28 @@
+{
+  "status": "finished",
+  "algorithm": "evoprompt",
+  "harness": "miniagent",
+  "initial_snapshot": "9ddcd270388e1c18b47dce1fcf9b3b0419f3bb6eba457e95d6db2c36fc31d1df",
+  "final_snapshot": "78d443230f10500245b3f5f51d2f76b56066df97c9569e2d95581bf7b201ce1a",
+  "selected_dev_score": 0.9649122807017544,
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 164,
+    "reward": 0.6785714285714286,
+    "scenario_success": 0.39285714285714285,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 161,
+    "reward": 0.6428571428571429,
+    "scenario_success": 0.3392857142857143,
+    "scenarios": 56
+  },
+  "independent_final_test": true,
+  "final_test_new_calls": 168,
+  "test_used_for_selection": false,
+  "started_at": "2026-10-08T14:46:31.117179+00:00",
+  "finished_at": "2026-10-08T16:19:37.777055+00:00",
+  "attempt": "/root/blockdata/FlashRSI-AppWorld/runs/evoprompt-miniagent-appworld-20261008-180839-579894/attempts/evoprompt-miniagent-appworld-20261008-224631-121756"
+}

@@ -1,0 +1,28 @@
+{
+  "status": "finished",
+  "initial_snapshot": "2f4a0dcda0e2bdfee4a8fa897f09fe220ad8ff599eb2b633626a665faab947a8",
+  "final_snapshot": "220a12497d9906f3cc6ebe17747d18da4cb8a8182bd7e6c7d761b0fa2814ec08",
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 160,
+    "reward": 0.6904761904761905,
+    "scenario_success": 0.4107142857142857,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 162,
+    "reward": 0.9107142857142857,
+    "scenario_success": 0.8214285714285714,
+    "scenarios": 56
+  },
+  "independent_final_test": true,
+  "test_used_for_selection": false,
+  "dev_used_for_selection": false,
+  "selection_policy": "last_training_playbook",
+  "completed_train_batches": 90,
+  "started_at": "2026-10-08T12:44:41.146037+00:00",
+  "finished_at": "2026-10-08T18:49:14.864624+00:00",
+  "attempt": "/root/blockdata/FlashRSI-AppWorld/runs/ace-claude_code-appworld-20261008-204439-987663/attempts/ace-claude_code-appworld-20261008-225014-776768",
+  "pid": 3495
+}

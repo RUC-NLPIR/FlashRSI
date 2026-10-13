@@ -1,0 +1,1 @@
+{"mcpServers": {"appworld": {"command": "/root/blockdata/FlashRSI-Lite/.venv/bin/python", "args": ["${CLAUDE_PLUGIN_ROOT}/servers/appworld.py"]}}}

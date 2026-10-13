@@ -1,0 +1,113 @@
+{
+  "snapshot_id": "9cfcb8dbe234b04f3c0145da9adda34f477eeb481a17d57a60d4e8873325f94f",
+  "files": {
+    "agent.yaml": {
+      "sha256": "24fde761a34b5b185d41d352ab4d979dc0479471bce0506623b0a89f4352f926",
+      "bytes": 137,
+      "component": "config",
+      "executable": false
+    },
+    "prompts/extract.md": {
+      "sha256": "ce951189af6dad9bf2d1e958918b490f724761db4e3a7ecc68f05fff8fd4f11c",
+      "bytes": 156,
+      "component": "prompt",
+      "executable": false
+    },
+    "prompts/system.md": {
+      "sha256": "f6722d194bb48aa67aafb7e8486d701a482b95934fa43f1fdf533e2dbafaedf3",
+      "bytes": 32188,
+      "component": "prompt",
+      "executable": false
+    },
+    "runtime/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/agent.py": {
+      "sha256": "185b316089617775805b631d6759095809dbe391a2fd350995afa2fac8f3aefe",
+      "bytes": 52899,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/editor.py": {
+      "sha256": "e5d64c63872cba7c0954ab02f65c699a0e4fe7cfe891c2d8224c8cd7df73910f",
+      "bytes": 4619,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/llm.py": {
+      "sha256": "cd9e0eb5dfb6514a798b4fc6adb0f076fd4d12a254dfdf02660cdbc900f2da35",
+      "bytes": 11620,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/reader.py": {
+      "sha256": "fe8fafe528a6770948a19ae65c6dab101ea6a877de3b837d474844d374692a5b",
+      "bytes": 1562,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/tool_result.py": {
+      "sha256": "e0a9e2ef08ba0b2b74abe8498f71e1648e716660e09cbfef319d9f69b590111d",
+      "bytes": 542,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/tools.py": {
+      "sha256": "4da702029130e6e0ef0a0fba3c393823bb4c4ad7b32c075ed2755946d3c3ffe7",
+      "bytes": 4519,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/trace.py": {
+      "sha256": "d5996308e741d37191bacf6c470950f4b779a86da297666d93601e9334189541",
+      "bytes": 5243,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/web_config.py": {
+      "sha256": "7eeab99eaa1b7756f049f8e684251a13346f0bb7d66cbcdb827cfb8c40b7ae58",
+      "bytes": 1561,
+      "component": "code",
+      "executable": false
+    },
+    "runtime/workspace.py": {
+      "sha256": "a99046dea56899b7cf6a4b4fbb95cbd720230952d240eb98429196195951f799",
+      "bytes": 6142,
+      "component": "code",
+      "executable": false
+    },
+    "skills/main.md": {
+      "sha256": "9cfca9584e24ccc9fdb95ab43200f4266226168fc7b3e4a10b05c2797d8dae9d",
+      "bytes": 319,
+      "component": "skill",
+      "executable": false
+    },
+    "tool_descriptions/appworld_execute.json": {
+      "sha256": "a62b5ecf5538fc572fd4f5cb202c3c8b18e0a721e1a37581f4e89b6cb5f2f50d",
+      "bytes": 370,
+      "component": "tool",
+      "executable": false
+    },
+    "tool_descriptions/shell.json": {
+      "sha256": "b8388397cfdc03e359c05c0fd85590049ab7e57f88b443885f373a930269be4d",
+      "bytes": 1320,
+      "component": "tool",
+      "executable": false
+    },
+    "tools/appworld_execute.py": {
+      "sha256": "33039f190e6393b13b6adcc89e6a0bc0658a2772652cf53d3ea72799f3ce2a5a",
+      "bytes": 583,
+      "component": "tool",
+      "executable": false
+    },
+    "tools/shell.py": {
+      "sha256": "ed80d8f69c11772715a901390ab138c5ecc9ce599188290b663773b1f4f26251",
+      "bytes": 3812,
+      "component": "tool",
+      "executable": false
+    }
+  }
+}
