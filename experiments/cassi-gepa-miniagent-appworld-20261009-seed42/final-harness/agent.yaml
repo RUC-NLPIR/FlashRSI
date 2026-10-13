@@ -1,0 +1,8 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools:
+  - appworld_execute
+middlewares: []
+skills: []
+sub_agents: []

@@ -1,0 +1,42 @@
+{
+  "status": "finished",
+  "pid": 58255,
+  "attempt": "/root/blockdata/FlashRSI-AppWorld/runs/meta_harness-miniagent-appworld-20261008-124015-356881/attempts/meta_harness-miniagent-appworld-20261008-170341-940228",
+  "started_at": "2026-10-08T09:03:41.948343+00:00",
+  "phase": "final-test",
+  "resumed_from_attempt": "/root/blockdata/FlashRSI-AppWorld/runs/meta_harness-miniagent-appworld-20261008-124015-356881/attempts/meta_harness-miniagent-appworld-20261008-124017-640515",
+  "initial_snapshot": "9ddcd270388e1c18b47dce1fcf9b3b0419f3bb6eba457e95d6db2c36fc31d1df",
+  "final_snapshot": "f4d189c8e096b1d75920ea7a4a30f248058957f678549bb2dd842493ebe7de20",
+  "resumed_final_tasks_reused": 18,
+  "resumed_failed_tasks_scored_zero": 1,
+  "budget_failure_policy": "confirmed_native_budget_failure_zero_v1",
+  "policy_confirmed_after_partial_test": true,
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 163,
+    "reward": 0.6428571428571429,
+    "scenario_success": 0.42857142857142855,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 162,
+    "reward": 0.8809523809523809,
+    "scenario_success": 0.8214285714285714,
+    "scenarios": 56
+  },
+  "paired_comparison": {
+    "delta_percentage_points": 23.809523809523807,
+    "improved_tasks": 48,
+    "regressed_tasks": 8,
+    "paired_bootstrap_95pct_pp": [
+      15.476190476190476,
+      32.142857142857146
+    ]
+  },
+  "test_used_for_selection": false,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "initial_test_reused": true,
+  "finished_at": "2026-10-08T09:15:46.672916+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "status": "finished",
+  "phase": "complete",
+  "pid": 992,
+  "started_at": "2026-10-10T16:12:54.151040+00:00",
+  "algorithm": "modular_rsi",
+  "target": "claude_code",
+  "worker_invoked": false,
+  "snapshot_id": "9cf5cca95b01503bc34455a157499d5c1dbbe44d5da88d09452b99d423b8297e",
+  "tasks_total": 168,
+  "tasks_completed": 168,
+  "new_evolution_calls": 0,
+  "new_worker_calls": 0,
+  "target_concurrency": 8,
+  "run_root": "/root/data/FlashRSI-AppWorld/runs/modular_rsi-claude_code-appworld-first-merge-test-20261011-000433-692666",
+  "successes_completed": 95.0,
+  "finished_at": "2026-10-10T16:37:02.624048+00:00",
+  "baseline_test": {
+    "tasks": 168,
+    "successes": 98,
+    "reward": 0.5833333333333334,
+    "reused_historical_complete_record": true
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 159,
+    "reward": 0.5654761904761905,
+    "scenario_success": 0.23214285714285715,
+    "scenarios": 56
+  },
+  "baseline_snapshot": "9c51f7dd4612f4f1a337bf9f86f474f8b9269ca1ec0d2fe034cb87d3eac4d5d0",
+  "evaluation_kind": "posthoc_user_frozen_first_merge_test",
+  "original_gate_passed": false,
+  "original_experiment_unchanged": true,
+  "test_used_for_selection_in_this_run": false,
+  "initial_test_repeated": false
+}

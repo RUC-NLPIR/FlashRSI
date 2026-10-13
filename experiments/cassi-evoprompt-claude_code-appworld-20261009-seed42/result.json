@@ -1,0 +1,28 @@
+{
+  "status": "finished",
+  "algorithm": "evoprompt",
+  "harness": "claude_code",
+  "initial_snapshot": "4637fbe95a36b06b1f46d9f6b02d225365a89d5625ab6bf29ed3949d311c9dac",
+  "final_snapshot": "9d8e030235a38d270436f630c07a98786667b08498313f53cbafefc2003e0617",
+  "selected_dev_score": 0.8947368421052632,
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 145,
+    "reward": 0.6488095238095238,
+    "scenario_success": 0.32142857142857145,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 148,
+    "reward": 0.6190476190476191,
+    "scenario_success": 0.35714285714285715,
+    "scenarios": 56
+  },
+  "independent_final_test": true,
+  "final_test_new_calls": 168,
+  "test_used_for_selection": false,
+  "started_at": "2026-10-09T02:27:37.200014+00:00",
+  "finished_at": "2026-10-09T07:08:53.964379+00:00",
+  "attempt": "/root/blockdata/FlashRSI-AppWorld/runs/evoprompt-claude_code-appworld-20261009-101945-204394/attempts/evoprompt-claude_code-appworld-20261009-102737-203320"
+}

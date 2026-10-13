@@ -1,0 +1,28 @@
+{
+  "status": "finished",
+  "initial_snapshot": "9ddcd270388e1c18b47dce1fcf9b3b0419f3bb6eba457e95d6db2c36fc31d1df",
+  "final_snapshot": "9cfcb8dbe234b04f3c0145da9adda34f477eeb481a17d57a60d4e8873325f94f",
+  "baseline_test": {
+    "tasks": 168,
+    "finished": 164,
+    "reward": 0.6904761904761905,
+    "scenario_success": 0.4107142857142857,
+    "scenarios": 56
+  },
+  "evolved_test": {
+    "tasks": 168,
+    "finished": 166,
+    "reward": 0.9166666666666666,
+    "scenario_success": 0.8571428571428571,
+    "scenarios": 56
+  },
+  "independent_final_test": true,
+  "test_used_for_selection": false,
+  "dev_used_for_selection": false,
+  "selection_policy": "last_training_playbook",
+  "completed_train_batches": 90,
+  "started_at": "2026-10-08T05:35:18.383334+00:00",
+  "finished_at": "2026-10-08T10:04:49.638091+00:00",
+  "attempt": "/root/blockdata/FlashRSI-AppWorld/runs/ace-miniagent-appworld-20261008-133516-634436/attempts/ace-miniagent-appworld-20261008-133518-387757",
+  "pid": 50559
+}

@@ -1,0 +1,59 @@
+{
+  "snapshot_id": "9c51f7dd4612f4f1a337bf9f86f474f8b9269ca1ec0d2fe034cb87d3eac4d5d0",
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "bytes": 129,
+      "sha256": "3352bf55a93b3ff4909a07f3584be123e354afcd4d2b88fe3ec57d93645bdc94",
+      "component": "config",
+      "executable": false
+    },
+    ".mcp.json": {
+      "bytes": 146,
+      "sha256": "e935fdef55951d89d4f8ab32186e959c5666d1c105f91b813b299994e2714e0c",
+      "component": "tool",
+      "executable": false
+    },
+    "CLAUDE.md": {
+      "bytes": 67,
+      "sha256": "cc7e425fbed980df9e7a4c99a36a03de65bca38f66c740e0407a7a7141ebe77a",
+      "component": "prompt",
+      "executable": false
+    },
+    "hooks/completion_check.py": {
+      "bytes": 219,
+      "sha256": "ffa6c5aff8dc0c76b2047b7554aa55ea866c60ff0a15761c1ab4f95d2799e25d",
+      "component": "hook",
+      "executable": false
+    },
+    "hooks/hooks.json": {
+      "bytes": 778,
+      "sha256": "ff937de83b234cda3aaedefc50032d8847c56044766e3d273730cf60b285b9be",
+      "component": "hook",
+      "executable": false
+    },
+    "hooks/tool_interaction.py": {
+      "bytes": 219,
+      "sha256": "ffa6c5aff8dc0c76b2047b7554aa55ea866c60ff0a15761c1ab4f95d2799e25d",
+      "component": "hook",
+      "executable": false
+    },
+    "servers/appworld.py": {
+      "bytes": 2296,
+      "sha256": "524f9d198419c8b935f13581b00cc3f4f9f6262ef48294181df38352db121961",
+      "component": "tool",
+      "executable": false
+    },
+    "settings.json": {
+      "bytes": 4,
+      "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+      "component": "config",
+      "executable": false
+    },
+    "skills/appworld/SKILL.md": {
+      "bytes": 497,
+      "sha256": "80c1b55a8b0f8124444db1a70da3c18cd224b2512c36d195ca777c146b7e7ead",
+      "component": "skill",
+      "executable": false
+    }
+  }
+}

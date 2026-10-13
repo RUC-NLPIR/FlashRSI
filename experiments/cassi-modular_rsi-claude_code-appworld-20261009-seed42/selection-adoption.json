@@ -1,0 +1,33 @@
+{
+  "status": "adopted",
+  "adopted_at": "2026-10-11T07:11:53.615930+00:00",
+  "algorithm": "modular_rsi",
+  "target": "claude_code",
+  "benchmark": "appworld",
+  "previous_saved_snapshot": "9c51f7dd4612f4f1a337bf9f86f474f8b9269ca1ec0d2fe034cb87d3eac4d5d0",
+  "selected_snapshot": "9cf5cca95b01503bc34455a157499d5c1dbbe44d5da88d09452b99d423b8297e",
+  "selection_authority": "explicit_user_instruction",
+  "user_reason": "之前超参设置的问题，保存为后续选的Snapshot，直接替换；MiniAgent不动",
+  "selection_kind": "user_override_of_saved_artifact",
+  "test_results_known_at_adoption": true,
+  "original_algorithm_selection_preserved": true,
+  "original_gate_passed": false,
+  "original_gate_failure": "3 of 90 train tasks reached 30 turns",
+  "original_gate_not_reclassified": true,
+  "hyperparameter_cause": "user-stated reason; not independently reclassified",
+  "historical_records": "selection-history/user-adoption-20261011-071153-615930",
+  "evaluation_source": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI-Lite-sync\\exports\\modular-claude-appworld-first-merge-20261011",
+  "evaluation_finished_at": "2026-10-10T16:37:02.624048+00:00",
+  "snapshot_sha256": "8ff08d59f969d413a8e4189174f27cf4cca2d68318be5b4d0737c17b389cab2c",
+  "new_model_calls": 0,
+  "new_worker_calls": 0,
+  "miniagent_modified": false,
+  "archive_unchanged": true,
+  "archive_sha256": "235ce239827af5fbdc8ea658bbafcf63b3c3eabacafad3120f2d2e4d704e6051",
+  "protected_files_sha256": {
+    "initial-snapshot.json": "8722768ef2b449f181f0693389afb551927b72c4e79cc31b39918ccbeba7d504",
+    "file-manifest.json": "86bbe16ea31874111cb91317c818a21eafddcd47f180a7589ac9992e2311d145",
+    "full-run.tar.gz": "235ce239827af5fbdc8ea658bbafcf63b3c3eabacafad3120f2d2e4d704e6051"
+  },
+  "miniagent_verified_unchanged_files": 29
+}
