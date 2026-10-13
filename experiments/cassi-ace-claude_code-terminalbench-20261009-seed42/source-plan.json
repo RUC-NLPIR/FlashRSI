@@ -1,0 +1,170 @@
+{
+  "config": {
+    "run": {
+      "output_dir": "/root/data/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261006-130240-288168/attempts"
+    },
+    "benchmark": {
+      "name": "terminal_bench",
+      "split": "auto",
+      "data_path": "/root/data/experiment-data/terminal-bench-20-15-30-seed42-v1/tasks",
+      "seed": 42
+    },
+    "agent": {
+      "name": "claude_code",
+      "llm": {
+        "model_name": "deepseek-v4-flash",
+        "api_key": null,
+        "base_url": "https://api.deepseek.com/anthropic",
+        "max_tokens": 65535,
+        "reasoning_effort": "high",
+        "llm_max_retries": 1,
+        "effort": "high"
+      },
+      "source_dir": "/root/data/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261006-130240-288168/seed",
+      "max_turns": 100,
+      "harbor": {
+        "remote_docker": true,
+        "uv_install_source": "github",
+        "setup_timeout": 600,
+        "environment_env": {
+          "http_proxy": "http://10.5.22.200:3128",
+          "https_proxy": "http://10.5.22.200:3128",
+          "no_proxy": "127.0.0.1,localhost,api.deepseek.com,35.220.164.252,mirrors.tuna.tsinghua.edu.cn,deb.debian.org",
+          "UV_INDEX_URL": "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple",
+          "UV_HTTP_TIMEOUT": "120"
+        },
+        "integrity_review": {
+          "llm": {
+            "model_name": "deepseek-flash",
+            "base_url": "https://api.deepseek.com/v1",
+            "api_key": null
+          },
+          "records_dir": "/root/data/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261006-130240-288168/integrity-review-records"
+        }
+      },
+      "permission_mode": "acceptEdits",
+      "allowed_tools": [
+        "Bash",
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Skill"
+      ]
+    },
+    "algorithm": {
+      "name": "ace",
+      "worker": {
+        "type": "llm",
+        "llm": {
+          "model_name": "deepseek-v4-pro",
+          "api_key": null,
+          "base_url": "https://api.deepseek.com",
+          "max_tokens": 65536,
+          "reasoning_effort": "high"
+        },
+        "timeout": 900,
+        "max_retries": 1
+      },
+      "mode": "offline",
+      "num_epochs": 2,
+      "batch_size": 2,
+      "max_steps": null,
+      "eval_steps": 10,
+      "max_reflection_rounds": 1,
+      "curator_frequency": 1,
+      "edit_budget": 4,
+      "playbook_token_budget": 80000,
+      "max_evidence_chars": 24000,
+      "seed": 42
+    }
+  },
+  "initial_snapshot": "524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b",
+  "splits": {
+    "train": [
+      "log-summary-date-ranges",
+      "query-optimize",
+      "sqlite-db-truncate",
+      "large-scale-text-editing",
+      "adaptive-rejection-sampler",
+      "sanitize-git-repo",
+      "fix-ocaml-gc",
+      "make-doom-for-mips",
+      "winning-avg-corewars",
+      "nginx-request-logging",
+      "multi-source-data-merger",
+      "hf-model-inference",
+      "build-cython-ext",
+      "gcode-to-text",
+      "feal-differential-cryptanalysis",
+      "count-dataset-tokens",
+      "protein-assembly",
+      "polyglot-rust-c",
+      "git-leak-recovery",
+      "compile-compcert"
+    ],
+    "dev": [
+      "mteb-leaderboard",
+      "crack-7z-hash",
+      "torch-pipeline-parallelism",
+      "build-pmars",
+      "qemu-alpine-ssh",
+      "financial-document-processor",
+      "mcmc-sampling-stan",
+      "reshard-c4-data",
+      "modernize-scientific-stack",
+      "break-filter-js-from-html",
+      "prove-plus-comm",
+      "gpt2-codegolf",
+      "torch-tensor-parallelism",
+      "polyglot-c-py",
+      "mailman"
+    ],
+    "test": [
+      "regex-log",
+      "sparql-university",
+      "sam-cell-seg",
+      "mteb-retrieve",
+      "rstan-to-pystan",
+      "overfull-hbox",
+      "custom-memory-heap-crash",
+      "extract-moves-from-video",
+      "db-wal-recovery",
+      "chess-best-move",
+      "caffe-cifar-10",
+      "feal-linear-cryptanalysis",
+      "pytorch-model-recovery",
+      "bn-fit-modify",
+      "raman-fitting",
+      "dna-insert",
+      "password-recovery",
+      "filter-js-from-html",
+      "openssl-selfsigned-cert",
+      "fix-git",
+      "make-mips-interpreter",
+      "circuit-fibsqrt",
+      "cancel-async-tasks",
+      "path-tracing-reverse",
+      "pypi-server",
+      "headless-terminal",
+      "build-pov-ray",
+      "install-windows-3.11",
+      "qemu-startup",
+      "git-multibranch"
+    ]
+  },
+  "target_concurrency": 10,
+  "worker_execution": "serial LLM reflection",
+  "num_epochs": 2,
+  "update_opportunities": 20,
+  "batch_size": 2,
+  "eval_steps": 10,
+  "worker_concurrency": 1,
+  "test_used_for_selection": false,
+  "infrastructure_retry_policy": "infra_retry_until_completion_or_native_budget_v1",
+  "reference_experiment": "/root/data/FlashRSI-TerminalQA/runs/gepa-miniagent-terminalbench-20261005-103203-575744",
+  "same_snapshot_test_policy": "reuse_initial_test",
+  "reflection_source": "training question, score, output and on-disk solver trajectory without RunConfig",
+  "launcher_sha256": "de9202da0d5bf695868fcdf49e5c1d540c21038f2e55d0a5abb0d3b31792f2a5"
+}

@@ -1,0 +1,202 @@
+{
+  "checked_at": "2026-10-09T03:24:22.190204+00:00",
+  "result": {
+    "status": "finished",
+    "phase": "complete",
+    "pid": 51635,
+    "attempt": "/root/blockdata/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261009-002049-704918/attempts/ace-claude_code-terminal_bench-20261009-002704-572643",
+    "started_at": "2026-10-08T16:27:04.714969+00:00",
+    "resumed_at": "2026-10-09T03:17:29.557026+00:00",
+    "initial_snapshot": "524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b",
+    "final_snapshot": "10b3f0350e3c153c1b7543e162d8d290d59860e2ff2a22ea8cacbf9290af3631",
+    "completed": 30,
+    "total": 30,
+    "source_run": "/root/data/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261006-130240-288168",
+    "preserved_unresolved_tasks": [],
+    "last_completed_task": "filter-js-from-html",
+    "updated_at": "2026-10-09T03:22:42.397569+00:00",
+    "unresolved_tasks": [],
+    "grading_only": true,
+    "new_solver_calls": 0,
+    "finished_at": "2026-10-09T03:22:42.397569+00:00",
+    "baseline_test": {
+      "reward": 0.6,
+      "successes": 18,
+      "tasks": 30
+    },
+    "final_test": {
+      "reward": 0.6666666666666666,
+      "successes": 20.0,
+      "tasks": 30
+    },
+    "selection_policy": "last_valid_training_playbook",
+    "dev_used_for_selection": false,
+    "independent_final_test": true,
+    "new_worker_calls": 0,
+    "new_dev_calls": 0,
+    "new_solver_calls_for_grading_recovery": 0,
+    "test_record": "/root/blockdata/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261009-002049-704918/attempts/ace-claude_code-terminal_bench-20261009-002704-572643/trajectories/00001-final-test.json",
+    "grader_recovery_evidence": "/root/blockdata/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261009-002049-704918/diagnostics/filter-grader-evidence-20261009-110648-605352",
+    "prior_faults_preserved": [
+      "DownloadVerifierDirError"
+    ]
+  },
+  "preserved_29_unchanged": true,
+  "original_solver_trace_output_usage_unchanged": true,
+  "tests_hashes_unchanged": true,
+  "snapshot_consistent": true,
+  "baseline_successes": 18,
+  "final_successes": 20.0,
+  "test_tasks": 30,
+  "official_filter_reward": {
+    "reward": 0.0
+  },
+  "official_test_summary": {
+    "tests": 2,
+    "passed": 0,
+    "failed": 2,
+    "skipped": 0,
+    "pending": 0,
+    "other": 0,
+    "start": 1791516055.2806826,
+    "stop": 1791516159.1116743
+  },
+  "official_test_outcomes": [
+    {
+      "name": "test_outputs.py::test_filter_blocks_xss",
+      "status": "failed",
+      "message_excerpt": "The test failed in the call phase due to an assertion error"
+    },
+    {
+      "name": "test_outputs.py::test_clean_html_unchanged",
+      "status": "failed",
+      "message_excerpt": "The test failed in the call phase due to an assertion error"
+    }
+  ],
+  "per_task_metrics": [
+    {
+      "task_id": "regex-log",
+      "reward": 1.0
+    },
+    {
+      "task_id": "sparql-university",
+      "reward": 1.0
+    },
+    {
+      "task_id": "sam-cell-seg",
+      "reward": 0.0
+    },
+    {
+      "task_id": "mteb-retrieve",
+      "reward": 0.0
+    },
+    {
+      "task_id": "rstan-to-pystan",
+      "reward": 0.0
+    },
+    {
+      "task_id": "overfull-hbox",
+      "reward": 0.0
+    },
+    {
+      "task_id": "custom-memory-heap-crash",
+      "reward": 1.0
+    },
+    {
+      "task_id": "extract-moves-from-video",
+      "reward": 0.0
+    },
+    {
+      "task_id": "db-wal-recovery",
+      "reward": 1.0
+    },
+    {
+      "task_id": "chess-best-move",
+      "reward": 1.0
+    },
+    {
+      "task_id": "caffe-cifar-10",
+      "reward": 0.0
+    },
+    {
+      "task_id": "feal-linear-cryptanalysis",
+      "reward": 1.0
+    },
+    {
+      "task_id": "pytorch-model-recovery",
+      "reward": 0.0
+    },
+    {
+      "task_id": "bn-fit-modify",
+      "reward": 1.0
+    },
+    {
+      "task_id": "raman-fitting",
+      "reward": 0.0
+    },
+    {
+      "task_id": "dna-insert",
+      "reward": 1.0
+    },
+    {
+      "task_id": "password-recovery",
+      "reward": 1.0
+    },
+    {
+      "task_id": "filter-js-from-html",
+      "reward": 0.0
+    },
+    {
+      "task_id": "openssl-selfsigned-cert",
+      "reward": 1.0
+    },
+    {
+      "task_id": "fix-git",
+      "reward": 1.0
+    },
+    {
+      "task_id": "make-mips-interpreter",
+      "reward": 1.0
+    },
+    {
+      "task_id": "circuit-fibsqrt",
+      "reward": 1.0
+    },
+    {
+      "task_id": "cancel-async-tasks",
+      "reward": 1.0
+    },
+    {
+      "task_id": "path-tracing-reverse",
+      "reward": 1.0
+    },
+    {
+      "task_id": "pypi-server",
+      "reward": 1.0
+    },
+    {
+      "task_id": "headless-terminal",
+      "reward": 1.0
+    },
+    {
+      "task_id": "build-pov-ray",
+      "reward": 1.0
+    },
+    {
+      "task_id": "install-windows-3.11",
+      "reward": 0.0
+    },
+    {
+      "task_id": "qemu-startup",
+      "reward": 1.0
+    },
+    {
+      "task_id": "git-multibranch",
+      "reward": 1.0
+    }
+  ],
+  "new_solver_calls": 0,
+  "new_worker_calls": 0,
+  "new_integrity_model_calls": 0,
+  "remote_full_records": "/root/blockdata/FlashRSI-TerminalQA/runs/ace-claude_code-terminalbench-20261009-002049-704918/attempts/ace-claude_code-terminal_bench-20261009-002704-572643/trajectories/00001-final-test.json"
+}
