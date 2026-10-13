@@ -1,0 +1,32 @@
+{
+  "status": "finished",
+  "pid": 5178,
+  "target_solves_completed": 294,
+  "started_at": "2026-10-11T19:22:31.528204+00:00",
+  "updated_at": "2026-10-13T14:43:42.841680+00:00",
+  "module": "integration",
+  "phase": "complete",
+  "snapshot_id": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+  "tasks_total": 30,
+  "tasks_completed": 30,
+  "parent_snapshot": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+  "candidate_snapshot": "25b6dbac65d023da1437c5148f4e8ceb9359140afd0c3347ad65105558b03bba",
+  "controlled_recovery": "/root/blockdata/FlashRSI-TerminalQA/runs/modular_rsi-miniagent-terminalbench-20261012-031538-043971/diagnostics/original-machine-resource-recovery-20261013-184919-614364",
+  "resumed_at": "2026-10-13T11:08:10.084329+00:00",
+  "initial_snapshot": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+  "final_snapshot": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+  "baseline_test": {
+    "tasks": 30,
+    "reward": 0.7,
+    "successes": 21.0
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "reward": 0.7,
+    "successes": 21.0
+  },
+  "independent_final_test": false,
+  "dev_evaluated": false,
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-13T14:43:42.870962+00:00"
+}
