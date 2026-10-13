@@ -1,0 +1,52 @@
+{
+  "status": "finished",
+  "pid": 46827,
+  "controlled_recovery": "/root/blockdata/FlashRSI-ADAS-Terminal/runs/adas-claude_code-terminalbench-20261011-163815-296976/diagnostics/task-oom-zero-closeout-20261012-120319-437714",
+  "resumed_at": "2026-10-12T04:03:30.355635+00:00",
+  "original_started_at": "2026-10-11T15:55:11.331466+00:00",
+  "attempt": "/root/blockdata/FlashRSI-ADAS-Terminal/runs/adas-claude_code-terminalbench-20261011-163815-296976/attempts/adas-claude_code-terminal_bench-20261011-164955-201469",
+  "started_at": "2026-10-11T18:35:06.641488+00:00",
+  "phase": "complete",
+  "iteration": 5,
+  "snapshot_id": "87b1fd3612e28afaad3197d6c4e142d8779cc8d97ad677ee89b2dd5bd2a5dd13",
+  "tasks_total": 30,
+  "dev_evaluation": {
+    "pruned": true,
+    "successes": 9,
+    "tasks_total": 15,
+    "tasks_completed": 13,
+    "upper_bound_successes": 11,
+    "incumbent_successes": 13,
+    "stop_trigger": {
+      "completed_when_stopped": 10,
+      "upper_bound_when_stopped": 13,
+      "already_running_when_stopped": 3
+    },
+    "snapshot_id": "d572c4ddc9425dfd07b8e6ebfbf66a976aa2b78b99054a49ac95c41d5c0527eb",
+    "policy": "stop_new_dispatch_when_upper_bound_lte_incumbent",
+    "omitted_task_ids": [
+      "polyglot-c-py",
+      "mailman"
+    ],
+    "partial_score": 0.6923076923076923,
+    "full_dev_score": null
+  },
+  "tasks_completed": 30,
+  "initial_snapshot": "26a1fb7c061e3aec310e5fb266d9083c5b5ab8a754dec4b4ae292a1792357f3b",
+  "final_snapshot": "87b1fd3612e28afaad3197d6c4e142d8779cc8d97ad677ee89b2dd5bd2a5dd13",
+  "baseline_test": {
+    "tasks": 30,
+    "reward": 0.7333333333333333,
+    "successes": 22.0,
+    "finished": 25
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "reward": 0.7333333333333333,
+    "successes": 22.0,
+    "finished": 26
+  },
+  "independent_final_test": true,
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-12T04:03:52.449838+00:00"
+}

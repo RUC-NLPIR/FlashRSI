@@ -1,0 +1,30 @@
+{
+  "snapshot_id": "87b1fd3612e28afaad3197d6c4e142d8779cc8d97ad677ee89b2dd5bd2a5dd13",
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "bytes": 124,
+      "sha256": "57eea60cd2d1cec5dbd273ac48c72e20a166d331a1f9b855970b4942be255d25",
+      "executable": false
+    },
+    ".mcp.json": {
+      "bytes": 23,
+      "sha256": "d8e397af03b5b032f21d0aa967086f0c78b33c87b76f2e9898ae0a144df7de02",
+      "executable": false
+    },
+    "CLAUDE.md": {
+      "bytes": 2185,
+      "sha256": "47750000add3c3e1390b7ff37080d5ddaad20dbfd3c7dd240c3b5a94470493d2",
+      "executable": false
+    },
+    "hooks/hooks.json": {
+      "bytes": 18,
+      "sha256": "78922a784ee78e9e50587e93628cd3b9d4dfbe49087adc4514e6781cea38cbb9",
+      "executable": false
+    },
+    "settings.json": {
+      "bytes": 207,
+      "sha256": "5b4767510085eb5b643950fccf2023da09957451d6d3fe3927783f1a342d0d38",
+      "executable": false
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "finished",
+  "pid": 24621,
+  "target_solves_completed": 246,
+  "controlled_recovery": "/root/blockdata/FlashRSI-TerminalQA/runs/modular_rsi-claude_code-terminalbench-20261011-011226-393307/diagnostics/last-test-recovery-20261012-021709-898824",
+  "started_at": "2026-10-11T03:20:59.935913+00:00",
+  "updated_at": "2026-10-11T18:50:19.004782+00:00",
+  "module": "integration",
+  "phase": "complete",
+  "snapshot_id": "1c31a98f034f4e2c32837dda7379827623bfe7df41403a88bca7b601d3902875",
+  "tasks_total": 30,
+  "tasks_completed": 30,
+  "parent_snapshot": "1c31a98f034f4e2c32837dda7379827623bfe7df41403a88bca7b601d3902875",
+  "candidate_snapshot": "1c31a98f034f4e2c32837dda7379827623bfe7df41403a88bca7b601d3902875",
+  "resumed_at": "2026-10-11T18:19:02.271098+00:00",
+  "initial_snapshot": "a7d2400fdd03c6d0608ed4c980297a4ca6930a29620419901133a9ce0e3d6085",
+  "final_snapshot": "1c31a98f034f4e2c32837dda7379827623bfe7df41403a88bca7b601d3902875",
+  "baseline_test": {
+    "tasks": 30,
+    "reward": 0.7,
+    "successes": 21.0
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "reward": 0.6,
+    "successes": 18.0
+  },
+  "independent_final_test": true,
+  "dev_evaluated": false,
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-11T18:50:19.217399+00:00"
+}

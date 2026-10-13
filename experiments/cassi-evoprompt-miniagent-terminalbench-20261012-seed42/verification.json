@@ -1,0 +1,541 @@
+{
+  "status": "finished",
+  "run_root": "/root/data/FlashRSI-TerminalQA/runs/evoprompt-miniagent-terminalbench-20261010-162910-852426",
+  "archive_bytes": 230891593,
+  "archive_sha256": "85c76a808e6c97968602e27515f4d33a2b224f61d4a748afc914ab683a535c4a",
+  "verified_files": 9490,
+  "snapshots_verified": 16,
+  "sealed_test_checks": {
+    "initial-test": {
+      "folder": "attempts/evoprompt-miniagent-terminal_bench-20261010-163242-858977/per-task/00036-initial-test",
+      "tasks": 30,
+      "score_recomputed": 0.6333333333333333,
+      "non_finished_tasks": [
+        "rstan-to-pystan",
+        "caffe-cifar-10"
+      ],
+      "rows": [
+        {
+          "filename": "000.json",
+          "task_id": "regex-log",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "da907c5a5e07fc0d41369d7bd86f2168a96243ce23902e38771acbe4c3ff73f9"
+        },
+        {
+          "filename": "001.json",
+          "task_id": "sparql-university",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "1a1ff07a27bb4058e9b1c71bf45563d47458269bd1f04799f34db50cdfbeae33"
+        },
+        {
+          "filename": "002.json",
+          "task_id": "sam-cell-seg",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "d80a2c7783b7dd98d518f02612715c1f6ced4bcdee45ca75273d8aa3bac5e1e1"
+        },
+        {
+          "filename": "003.json",
+          "task_id": "mteb-retrieve",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "c17f5486d6a70da5f9b35c8bbc07e5743f02e8a2dfe03c5d913bca6acc347302"
+        },
+        {
+          "filename": "004.json",
+          "task_id": "rstan-to-pystan",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "4da4ab8e81ac04f8fe384c6f78a1e17601c4a3f67750000efac05176ebb79a69"
+        },
+        {
+          "filename": "005.json",
+          "task_id": "overfull-hbox",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "7f2ea63f37d99be53af91e9d2d318fd5e364e29e876ffac801bc0f29a44e11b7"
+        },
+        {
+          "filename": "006.json",
+          "task_id": "custom-memory-heap-crash",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "e176dc69ea79b1629c7c22171c58043ac921be238901962d6a2acf8b33dbc242"
+        },
+        {
+          "filename": "007.json",
+          "task_id": "extract-moves-from-video",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "a9867cd7d2af7ba030a69aba90038f89914afd3d1606a0f879f3e2e74b9d5b80"
+        },
+        {
+          "filename": "008.json",
+          "task_id": "db-wal-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5ca77067c127d904c90bf810cb9ed1ba0a37258526b7de7a1d12a3a938f5448c"
+        },
+        {
+          "filename": "009.json",
+          "task_id": "chess-best-move",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "ed3b0d28adad546ac3c4197c8a0338ca8c10a4ab3c83b9a11b86492bb74606a8"
+        },
+        {
+          "filename": "010.json",
+          "task_id": "caffe-cifar-10",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "d14f85c5be4266db0a432566e581fd032d46e3811d305f15ffe5930fbdf471b5"
+        },
+        {
+          "filename": "011.json",
+          "task_id": "feal-linear-cryptanalysis",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "981ffb2bfde3207c50e368e1259581f13f6d95f144a1826537186299d0c6e093"
+        },
+        {
+          "filename": "012.json",
+          "task_id": "pytorch-model-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "cf7a0831a578fb8b351f1f7a54820400e5a61cef0e42bdf4c5f2b8588fd55810"
+        },
+        {
+          "filename": "013.json",
+          "task_id": "bn-fit-modify",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "f2fa7cf96f1effd545e093929ae7ab5f96841f72562f6ef5aeebde73b7316a86"
+        },
+        {
+          "filename": "014.json",
+          "task_id": "raman-fitting",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "b1cc5a287d0ce66354219da129d774d88c45ac309990e868f7b7df48008565dc"
+        },
+        {
+          "filename": "015.json",
+          "task_id": "dna-insert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5df5af134db6230a1ab084f4501b9e24707280c56302af30ebaf6461d0b1c54c"
+        },
+        {
+          "filename": "016.json",
+          "task_id": "password-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "e8357b5568d295546927017e18fc0ef8f60d8ac0da5bc7ba61847229cd04e956"
+        },
+        {
+          "filename": "017.json",
+          "task_id": "filter-js-from-html",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "ae5aab862dd3894288d93b25d4f52e571b624f5395447a96a11371f11e51d711"
+        },
+        {
+          "filename": "018.json",
+          "task_id": "openssl-selfsigned-cert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5e6ece441b946acbd67fb63c3a0855c6550a1923ade67f997b4a21100f3aff36"
+        },
+        {
+          "filename": "019.json",
+          "task_id": "fix-git",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "0431c7c8ef606cd3350df26d61f65e6d565f0b5d024102f7964deb2a574c759f"
+        },
+        {
+          "filename": "020.json",
+          "task_id": "make-mips-interpreter",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "f2078d1dcc7807532d46d2ab53faa86e2c4aa1772888751cff7f82a265720ec0"
+        },
+        {
+          "filename": "021.json",
+          "task_id": "circuit-fibsqrt",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "3728909cb091b70112f96a91f9e345ee2f1997f503487f7c50452406b28af751"
+        },
+        {
+          "filename": "022.json",
+          "task_id": "cancel-async-tasks",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "e332ab2203e0d1c22e891cc3369b401b5404f02eedf27e2c260cada001697276"
+        },
+        {
+          "filename": "023.json",
+          "task_id": "path-tracing-reverse",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "55c4619d040596d3ba26eb62302e8ab4f1ca0015f6a6f1b8dfae8ce108c5042c"
+        },
+        {
+          "filename": "024.json",
+          "task_id": "pypi-server",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "10c8c32f2e9b768f414f3587a757a7f34873f3f10f882f7095e98c3ee67c5c56"
+        },
+        {
+          "filename": "025.json",
+          "task_id": "headless-terminal",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "3c2213bab330ae0baf91709c96e3a0eee2024f0d874c5ded107f46b5f8a8f6b1"
+        },
+        {
+          "filename": "026.json",
+          "task_id": "build-pov-ray",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "8c1d52a20627666238f4ec76a640e23d07e82b08dc92d6f87f1dd2d85ede0615"
+        },
+        {
+          "filename": "027.json",
+          "task_id": "install-windows-3.11",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "fb5f82a0cc99b7bce275fbf444dc673eadc808654933781ade4da8eee46f28f6"
+        },
+        {
+          "filename": "028.json",
+          "task_id": "qemu-startup",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "f57f54752f86f652ce2be2c440d9c2b2c9c3fa9812cf62522067e6781f04f74b"
+        },
+        {
+          "filename": "029.json",
+          "task_id": "git-multibranch",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "86666a8752ba6a1c62b871096c99b566933dce67fb24fba79c86a87f9b44ab69"
+        }
+      ]
+    },
+    "final-test": {
+      "folder": "attempts/evoprompt-miniagent-terminal_bench-20261010-163242-858977/per-task/00037-final-test",
+      "tasks": 30,
+      "score_recomputed": 0.7666666666666667,
+      "non_finished_tasks": [
+        "caffe-cifar-10",
+        "raman-fitting"
+      ],
+      "rows": [
+        {
+          "filename": "000.json",
+          "task_id": "regex-log",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "07dc966f44f0162ead25af5edaa51f75c16c8a3b527bf7bbaa3371d066e06264"
+        },
+        {
+          "filename": "001.json",
+          "task_id": "sparql-university",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5bc68b5ccdc6d0877d061666000f030d9bd9b5c7c3cad2f8629ae4a3a1190c65"
+        },
+        {
+          "filename": "002.json",
+          "task_id": "sam-cell-seg",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "5b7edf040eec4f5f8f000bfdd07d378c675f6f5dd5688c4b5fc0d5a4b17441ea"
+        },
+        {
+          "filename": "003.json",
+          "task_id": "mteb-retrieve",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "7562ec4b5e23bf537bb66e4120877051aed15b6152b12a6993c0c3b793eab4cf"
+        },
+        {
+          "filename": "004.json",
+          "task_id": "rstan-to-pystan",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "c66555bc9e91570edbb127959e1da0364fc0a1da2ed74b0bf882a85942aa9462"
+        },
+        {
+          "filename": "005.json",
+          "task_id": "overfull-hbox",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "2ae6fe24ca7134a824f6dd8456197e0834252d9e879d650c1f54850b0fcea6fb"
+        },
+        {
+          "filename": "006.json",
+          "task_id": "custom-memory-heap-crash",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "7baab3ea03a78c346708ecc656eb6ce9474efbbb9cc4b55b11fb946d2ad91af2"
+        },
+        {
+          "filename": "007.json",
+          "task_id": "extract-moves-from-video",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "f74895512ec3614a8d8cafa60f563d36a93664cdd3194310716890a276b8495d"
+        },
+        {
+          "filename": "008.json",
+          "task_id": "db-wal-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "b85160dc52f28415ba9df88d35917a0946ef7a0c8d8c19339a83dafdf2743724"
+        },
+        {
+          "filename": "009.json",
+          "task_id": "chess-best-move",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "cf4540f6a5f23f788df70cce834e21a75f92267d436c3edc5dc5af9c9ea7680f"
+        },
+        {
+          "filename": "010.json",
+          "task_id": "caffe-cifar-10",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "fe7fc2f1c26a2d673237df89fe706649148f147a77fb41fb5dcc229d687d1c89"
+        },
+        {
+          "filename": "011.json",
+          "task_id": "feal-linear-cryptanalysis",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "273bafcf48a1a3cfd9a5c6a1d673a866a213e595253e47d31e92b2721243ac6d"
+        },
+        {
+          "filename": "012.json",
+          "task_id": "pytorch-model-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "0f7d28cdba3d93847a8d1e0cb0e3a0187056781a67a6322b70f0b52e07d7008e"
+        },
+        {
+          "filename": "013.json",
+          "task_id": "bn-fit-modify",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5d53a8c65e5adab49c1e56e99413c766fddbe6bb272a7768f68c91a89be99c15"
+        },
+        {
+          "filename": "014.json",
+          "task_id": "raman-fitting",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "5a52330b69bc145c31083cde4461da048fdeda28a95b0799b75249e40ea95d47"
+        },
+        {
+          "filename": "015.json",
+          "task_id": "dna-insert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "6b367c44991dc70d8077b57ea1a1ac908837be2fd403b53698f63edfcb75877b"
+        },
+        {
+          "filename": "016.json",
+          "task_id": "password-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "abb155c640b9da893747258e05275084e39e0fb18736c20cfc16a1be583109b8"
+        },
+        {
+          "filename": "017.json",
+          "task_id": "filter-js-from-html",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "4263fed3c62106c554980f08b6d85dbbcfb4dec1afa3bed73054fe376378ab8b"
+        },
+        {
+          "filename": "018.json",
+          "task_id": "openssl-selfsigned-cert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "8b1e6b6610cf59fd4a274e2cd9159577ccc12a1ede366e6271d327539ea2c4d3"
+        },
+        {
+          "filename": "019.json",
+          "task_id": "fix-git",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "0ffd80f6241502b91853072cb9f2dc8f43534d8b7089d9154d7c154281d40fe7"
+        },
+        {
+          "filename": "020.json",
+          "task_id": "make-mips-interpreter",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "67ac538d83fceeabd1db74b842f2413d812fc5cb04a2200ab49579c1b310542a"
+        },
+        {
+          "filename": "021.json",
+          "task_id": "circuit-fibsqrt",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "3208b87edc192dc48772478a16afaac1f6c45b177353b3676eb9cef774ef1fa7"
+        },
+        {
+          "filename": "022.json",
+          "task_id": "cancel-async-tasks",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "60ec0b72435eae76ecee9b820ec239be5ed6f848ab733c82b6d33571b105797a"
+        },
+        {
+          "filename": "023.json",
+          "task_id": "path-tracing-reverse",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "4a838e9bb2cdb351a7c6ee893926ceff9f58c3696a0143419f2f748a1ed928ec"
+        },
+        {
+          "filename": "024.json",
+          "task_id": "pypi-server",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "f32402c7bd2e061b8a6dd0ddbc84c6cd05492e3ab0b1f546974f72aa468bf154"
+        },
+        {
+          "filename": "025.json",
+          "task_id": "headless-terminal",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "7d36152b0f208531038a94da4f73030e286b82029bfa9a854bb4b07f2870ffb2"
+        },
+        {
+          "filename": "026.json",
+          "task_id": "build-pov-ray",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "13561fe3c779a0b464457e384b43a1cd7f85bda7f5e65d761883c3387abaa0f7"
+        },
+        {
+          "filename": "027.json",
+          "task_id": "install-windows-3.11",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "007869f97de5efb7bc0a36a27c88c675f299791f1ee533be04b5d514d1e003c4"
+        },
+        {
+          "filename": "028.json",
+          "task_id": "qemu-startup",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "d75495ff1456c8c79c9f87afc2539aedc86cf9b4342d93f1e37ff4f276e19884"
+        },
+        {
+          "filename": "029.json",
+          "task_id": "git-multibranch",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "2c030e8320925768635e252f50a19832bae606e0da9ef6c59dd15b449c0b53c7"
+        }
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "credential_redacted_files": [
+    "attempts/evoprompt-miniagent-terminal_bench-20261010-163242-858977/harbor-trials/extract-moves-from-video__E9grHdg/agent/flashrsi.json",
+    "attempts/evoprompt-miniagent-terminal_bench-20261010-163242-858977/per-task/00036-initial-test/007.json",
+    "attempts/evoprompt-miniagent-terminal_bench-20261010-163242-858977/trajectories/00036-initial-test.json",
+    "cache/target/miniagent/0da248e8c506f571b4839c89162433a703e68b3e36a155b4465aa60e6219bc6f.json",
+    "diagnostics/api-timeout-recovery-20261010-172559-162193/before-evidence.json",
+    "integrity-review-records/5009b9fb4a4848a19bbb474f7392075d.json",
+    "seed/runtime/web_config.py",
+    "source/flashrsi/agents/claude_code/__init__.py",
+    "source/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/flashrsi/integrations/tau2.py",
+    "source/check_terminal_gateway.py",
+    "source/continue_terminal_gateway.py",
+    "source/prepare_terminal_token_recovery.py",
+    "source/resume_scored_exhaustion.py",
+    "source/resume_terminal_turn30.py",
+    "source/terminal65-browser-runtime.py",
+    "source/terminal65-cache-repair-probe.py",
+    "source/terminal65-cached-harness-acceptance.py",
+    "source/terminal65-installer-repair.py",
+    "source/terminal65-installer-repair2.py",
+    "source/terminal65-native-installer-repair.py",
+    "source/terminal65-reliability-stage2.py",
+    "source/terminal65-reliability.py",
+    "source/terminal65-startup-diagnostic.py",
+    "source/terminal65-startup-diagnostic2.py",
+    "source/terminal_dependency_preflight.py",
+    "source/terminal_dependency_preflight_ca.py",
+    "source/terminal_dependency_preflight_debian.py",
+    "source/terminal_dependency_preflight_integrated.py",
+    "source/terminal_dependency_preflight_pytorch.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/launch-reservation.json",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/launch.json",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-0/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-0/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-0/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-0-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-0-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-0-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-1/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-1/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-1/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-1-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-1-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-1-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-2/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-2/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-2/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-2-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-2-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-2-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-3/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-3/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-3/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-3-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-3-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-3-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-4/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-4/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-4/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-4-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-4-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-4-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-5/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-5/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-5/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-5-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-5-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-5-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-6/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-6/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-6/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-6-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-6-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-6-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-7/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-7/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-7/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-7-prior-import-failure/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-7-prior-import-failure/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/offline-target-7-prior-import-failure/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/evoprompt-claude-terminal-20261012-021230-831771/verify_prompt_worker.py"
+  ],
+  "source_verification": {},
+  "source_scope": "Run-bundled sources plus current host support sources. Snapshot identities verified; current support sources are not asserted byte-identical to original launch unless separately recorded.",
+  "model_calls": 0,
+  "remote_experiment_modified": false,
+  "verified_at": "2026-10-12T04:21:46.468232+00:00"
+}

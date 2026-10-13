@@ -4,3 +4,4 @@ experiments/**/full-run.tar.gz filter=lfs diff=lfs merge=lfs -text
 experiments/**/final-harness/** -text
 experiments/cassi-modular_rsi-claude_code-appworld-20261009-seed42/adopted-test-evidence/initial-test.json filter=lfs diff=lfs merge=lfs -text
 experiments/cassi-modular_rsi-claude_code-appworld-20261009-seed42/adopted-test-evidence/final-test.json filter=lfs diff=lfs merge=lfs -text
+experiments/**/full-run.tar.gz.part* filter=lfs diff=lfs merge=lfs -text

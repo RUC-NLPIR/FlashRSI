@@ -1,0 +1,127 @@
+{
+  "run_root": "/root/blockdata/FlashRSI-TerminalQA/runs/meta_harness-miniagent-terminalbench-20261009-120718-172819",
+  "status": "finished",
+  "archive_sha256": "014b0954fbc02daca8b62966b8703edae1575b030487d9e4147becc646da887f",
+  "archive_bytes": 1537133683,
+  "verified_files": 4385,
+  "source_verification": {},
+  "credential_redacted_files": [
+    "diagnostics/filter-verifier-recovery-20261010-001512-290937/payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/filter-verifier-recovery-20261010-001512-290937/payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/filter-verifier-recovery-20261010-001512-290937/payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/filter-verifier-recovery-20261010-002949-470825/payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/filter-verifier-recovery-20261010-002949-470825/payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/filter-verifier-recovery-20261010-002949-470825/payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-25001516dba2450dbd0c6e2ebcaba2cc/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-25001516dba2450dbd0c6e2ebcaba2cc/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-25001516dba2450dbd0c6e2ebcaba2cc/package/flashrsi/integrations/tau2.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-31328141399344c7a0cabc5c2fa99707/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-31328141399344c7a0cabc5c2fa99707/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-31328141399344c7a0cabc5c2fa99707/package/flashrsi/integrations/tau2.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-75520c19f5d74e189f2edd6f4c33af45/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-75520c19f5d74e189f2edd6f4c33af45/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/sam-and-final-resume-20261010-005325-417501/sam-payload-75520c19f5d74e189f2edd6f4c33af45/package/flashrsi/integrations/tau2.py",
+    "diagnostics/sam-final-verifier-recovery-20261010-143825-903591/payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/sam-final-verifier-recovery-20261010-143825-903591/payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/sam-final-verifier-recovery-20261010-143825-903591/payload/package/flashrsi/integrations/tau2.py",
+    "seed/runtime/web_config.py",
+    "source/flashrsi/agents/claude_code/__init__.py",
+    "source/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/flashrsi/integrations/tau2.py"
+  ],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/trajectories/00018-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.7666666666666667
+      },
+      "non_finished_tasks": [
+        "extract-moves-from-video",
+        "caffe-cifar-10"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    },
+    "final-test": {
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/trajectories/00019-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.7333333333333333
+      },
+      "non_finished_tasks": [
+        "caffe-cifar-10",
+        "raman-fitting",
+        "filter-js-from-html",
+        "qemu-startup"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "User-authorized full local archive of completed MetaHarness Terminal experiment. Train selection, 5 candidates, no dev. Scores and recovery annotations unchanged; archiving is not a new validity audit.",
+  "verified_at": "2026-10-11T07:57:38.286890+00:00",
+  "snapshot_checks": {
+    "initial": {
+      "id": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7.json",
+      "content_identity_verified": true
+    },
+    "selected": {
+      "id": "856360ed6ac65d0ada08688697c2c115281c0262137b76958eafffb4dafdc0fd",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/856360ed6ac65d0ada08688697c2c115281c0262137b76958eafffb4dafdc0fd.json",
+      "content_identity_verified": true
+    }
+  },
+  "all_snapshot_identities_verified": [
+    {
+      "id": "0f9f870bf560bc69379d175e91fb8ed6ea24a49d460eb0a318b3abdd99eaa9e4",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/0f9f870bf560bc69379d175e91fb8ed6ea24a49d460eb0a318b3abdd99eaa9e4.json"
+    },
+    {
+      "id": "786a157e0edc371b9532e619ea4fff419356b757a784a237412475a20638ed1c",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/786a157e0edc371b9532e619ea4fff419356b757a784a237412475a20638ed1c.json"
+    },
+    {
+      "id": "856360ed6ac65d0ada08688697c2c115281c0262137b76958eafffb4dafdc0fd",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/856360ed6ac65d0ada08688697c2c115281c0262137b76958eafffb4dafdc0fd.json"
+    },
+    {
+      "id": "d8d6d4907f3e9b26ab9c105cd5c9fa2f381523a5e49b6b48a9c5af5beec7c02b",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/d8d6d4907f3e9b26ab9c105cd5c9fa2f381523a5e49b6b48a9c5af5beec7c02b.json"
+    },
+    {
+      "id": "e89a11ec5c69db105b577a18153f242545ce29687c46774cbac3f5c74a6f6462",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/e89a11ec5c69db105b577a18153f242545ce29687c46774cbac3f5c74a6f6462.json"
+    },
+    {
+      "id": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+      "file": "attempts/meta_harness-miniagent-terminal_bench-20261009-120810-492172/snapshots/ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7.json"
+    }
+  ],
+  "snapshot_count": 6,
+  "materialized_harness_byte_identity_verified": true,
+  "selection_split": "train",
+  "dev_evaluated": false,
+  "full_local_archive": true,
+  "final_selected_only": true,
+  "excluded_dependency_paths": [
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/native-cache.tar.gz",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/native-cache.part0",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/native-cache.part1",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/native-cache.part2",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/native-cache.part3",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/python-runtime.tar.gz",
+    "diagnostics/mteb-verifier-recovery-20261010-130406-897729/uv"
+  ],
+  "finalized_at": "2026-10-11T08:01:40.001926+00:00"
+}

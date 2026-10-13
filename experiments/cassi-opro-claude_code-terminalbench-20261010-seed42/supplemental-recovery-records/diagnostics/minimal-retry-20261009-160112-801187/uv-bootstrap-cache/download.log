@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/root/data/FlashRSI-TerminalQA/runs/opro-claude_code-terminalbench-20261008-203444-163873/diagnostics/minimal-retry-20261009-160112-801187/uv-bootstrap-cache/download.py", line 10, in <module>
+    assert p.returncode==0,p.stderr.decode(errors='replace')[-200:]
+           ^^^^^^^^^^^^^^^
+AssertionError: curl: (28) Operation timed out after 29664 milliseconds with 6815744 out of 21370871 bytes received
+
