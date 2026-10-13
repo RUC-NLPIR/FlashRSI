@@ -1,0 +1,32 @@
+{
+  "status": "finished",
+  "pid": 8577,
+  "attempt": "/root/blockdata/FlashRSI-TerminalQA/runs/meta_harness-claude_code-terminalbench-20261010-150123-908227/attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660",
+  "started_at": "2026-10-10T07:09:03.013383+00:00",
+  "phase": "complete",
+  "candidate_count": 6,
+  "iteration": 5,
+  "recovery": "/root/blockdata/FlashRSI-TerminalQA/runs/meta_harness-claude_code-terminalbench-20261010-150123-908227/diagnostics/oom-recovery-20261010-230459-524015",
+  "resumed_at": "2026-10-10T15:17:14.505048+00:00",
+  "snapshot_id": "21333bac185b190c7d64e66ace6f11f64d19964d614f61e6541cc1daf99ff5e6",
+  "tasks_total": 30,
+  "tasks_completed": 30,
+  "initial_snapshot": "26a1fb7c061e3aec310e5fb266d9083c5b5ab8a754dec4b4ae292a1792357f3b",
+  "final_snapshot": "21333bac185b190c7d64e66ace6f11f64d19964d614f61e6541cc1daf99ff5e6",
+  "selection_split": "train",
+  "dev_evaluated": false,
+  "test_used_for_selection": false,
+  "baseline_test": {
+    "tasks": 30,
+    "reward": 0.6333333333333333,
+    "successes": 19.0
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "reward": 0.7,
+    "successes": 21.0
+  },
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "finished_at": "2026-10-10T16:31:48.670912+00:00"
+}

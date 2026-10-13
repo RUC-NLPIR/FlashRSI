@@ -1,0 +1,24 @@
+{
+  "run_root": "/root/data/FlashRSI-TerminalQA/runs/opro-claude_code-terminalbench-20261008-203444-163873",
+  "purpose": "Preserve bootstrap diagnostic status, downloader and log separately from excluded reinstallable dependency payloads. No experiment changes.",
+  "files": {
+    "diagnostics/minimal-retry-20261009-160112-801187/uv-bootstrap-cache/download.log": {
+      "bytes": 448,
+      "sha256": "568a4f6e92b94e3f2ffffa2b01b7e376dc161aa7aa11f477fa1973ede2648639",
+      "source_sha256": "568a4f6e92b94e3f2ffffa2b01b7e376dc161aa7aa11f477fa1973ede2648639",
+      "credential_redacted": false
+    },
+    "diagnostics/minimal-retry-20261009-160112-801187/uv-bootstrap-cache/download.py": {
+      "bytes": 1071,
+      "sha256": "40f2e09e18a6387f7a26fe368b15f200cbd2e0c99443ead0df92ce10e905eed7",
+      "source_sha256": "40f2e09e18a6387f7a26fe368b15f200cbd2e0c99443ead0df92ce10e905eed7",
+      "credential_redacted": false
+    },
+    "diagnostics/minimal-retry-20261009-160112-801187/uv-bootstrap-cache/status.json": {
+      "bytes": 331,
+      "sha256": "46c331fdf9f6c61d52067e193d81e3e0dc5ae1c79ed42020acf0e76034f524b4",
+      "source_sha256": "46c331fdf9f6c61d52067e193d81e3e0dc5ae1c79ed42020acf0e76034f524b4",
+      "credential_redacted": false
+    }
+  }
+}

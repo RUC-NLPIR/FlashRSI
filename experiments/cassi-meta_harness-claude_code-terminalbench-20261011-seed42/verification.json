@@ -1,0 +1,95 @@
+{
+  "run_root": "/root/blockdata/FlashRSI-TerminalQA/runs/meta_harness-claude_code-terminalbench-20261010-150123-908227",
+  "status": "finished",
+  "archive_sha256": "0d6d51ee9c7a0449c09eb4b06082a817ae73da3d202d4550b9ece9d0dffbf5b5",
+  "archive_bytes": 1193273882,
+  "verified_files": 3226,
+  "source_verification": {},
+  "credential_redacted_files": [
+    "seed/__init__.py",
+    "source/flashrsi/agents/claude_code/__init__.py",
+    "source/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/flashrsi/integrations/tau2.py"
+  ],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/trajectories/00018-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6333333333333333
+      },
+      "non_finished_tasks": [
+        "sam-cell-seg",
+        "rstan-to-pystan",
+        "make-mips-interpreter",
+        "install-windows-3.11"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    },
+    "final-test": {
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/trajectories/00019-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.7
+      },
+      "non_finished_tasks": [
+        "make-mips-interpreter",
+        "build-pov-ray"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "User-authorized full local archive of completed MetaHarness Terminal experiment. Train selection, 5 candidates, no dev. Scores and recovery annotations unchanged; archiving is not a new validity audit.",
+  "verified_at": "2026-10-11T08:01:32.920523+00:00",
+  "snapshot_checks": {
+    "initial": {
+      "id": "26a1fb7c061e3aec310e5fb266d9083c5b5ab8a754dec4b4ae292a1792357f3b",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/26a1fb7c061e3aec310e5fb266d9083c5b5ab8a754dec4b4ae292a1792357f3b.json",
+      "content_identity_verified": true
+    },
+    "selected": {
+      "id": "21333bac185b190c7d64e66ace6f11f64d19964d614f61e6541cc1daf99ff5e6",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/21333bac185b190c7d64e66ace6f11f64d19964d614f61e6541cc1daf99ff5e6.json",
+      "content_identity_verified": true
+    }
+  },
+  "all_snapshot_identities_verified": [
+    {
+      "id": "21333bac185b190c7d64e66ace6f11f64d19964d614f61e6541cc1daf99ff5e6",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/21333bac185b190c7d64e66ace6f11f64d19964d614f61e6541cc1daf99ff5e6.json"
+    },
+    {
+      "id": "26a1fb7c061e3aec310e5fb266d9083c5b5ab8a754dec4b4ae292a1792357f3b",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/26a1fb7c061e3aec310e5fb266d9083c5b5ab8a754dec4b4ae292a1792357f3b.json"
+    },
+    {
+      "id": "8aa010f1e8a0886c92b49942b9554b16672cb3944547cb640b4ccb459627db0a",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/8aa010f1e8a0886c92b49942b9554b16672cb3944547cb640b4ccb459627db0a.json"
+    },
+    {
+      "id": "a8a98e9043b48ea18f5d489249785bef583160ed62b617c4034d5e0eae22caaa",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/a8a98e9043b48ea18f5d489249785bef583160ed62b617c4034d5e0eae22caaa.json"
+    },
+    {
+      "id": "d876670e8d66b404aaee1c40ab8bc0698e5592a92c60f1ce1f58d98ab1c6be72",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/d876670e8d66b404aaee1c40ab8bc0698e5592a92c60f1ce1f58d98ab1c6be72.json"
+    },
+    {
+      "id": "f37cdb36380de6997dc6b2bb6b6996d15305e390793976eeee775eee0c010973",
+      "file": "attempts/meta_harness-claude_code-terminal_bench-20261010-150903-010660/snapshots/f37cdb36380de6997dc6b2bb6b6996d15305e390793976eeee775eee0c010973.json"
+    }
+  ],
+  "snapshot_count": 6,
+  "materialized_harness_byte_identity_verified": true,
+  "selection_split": "train",
+  "dev_evaluated": false,
+  "full_local_archive": true,
+  "final_selected_only": true,
+  "excluded_dependency_paths": [],
+  "finalized_at": "2026-10-11T08:01:50.351137+00:00"
+}

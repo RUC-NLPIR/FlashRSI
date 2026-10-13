@@ -1,0 +1,78 @@
+{
+  "run_root": "/root/data/FlashRSI-TerminalQA/runs/opro-miniagent-terminalbench-20261008-013022-955410",
+  "status": "finished",
+  "archive_sha256": "62ae3ba8023fdde15615b8b6b696cb644fcc268e767985ea4611645170f0be04",
+  "archive_bytes": 141515748,
+  "verified_files": 6067,
+  "source_verification": {},
+  "credential_redacted_files": [
+    "attempts/opro-miniagent-terminal_bench-20261008-013100-743469/harbor-trials/qemu-alpine-ssh__yvhDiDe/agent/flashrsi.json",
+    "attempts/opro-miniagent-terminal_bench-20261008-013100-743469/per-task/00021-selection-dev-1/004.json",
+    "attempts/opro-miniagent-terminal_bench-20261008-013100-743469/trajectories/00021-selection-dev-1.json",
+    "cache/target/miniagent/827309a37ddebf18016ea26efd795ae0fc8b0c84d059a02c0d08597400f080dc.json",
+    "integrity-review-records/80f0536139594937adc7778be9edd118.json",
+    "seed/runtime/web_config.py",
+    "source/flashrsi/agents/claude_code/__init__.py",
+    "source/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/flashrsi/integrations/tau2.py"
+  ],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/opro-miniagent-terminal_bench-20261008-013100-743469/trajectories/00030-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6666666666666666
+      },
+      "non_finished_tasks": [
+        "mteb-retrieve",
+        "rstan-to-pystan",
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "filter-js-from-html"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    },
+    "final-test": {
+      "file": "attempts/opro-miniagent-terminal_bench-20261008-013100-743469/trajectories/00031-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6666666666666666
+      },
+      "non_finished_tasks": [
+        "mteb-retrieve",
+        "rstan-to-pystan",
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "filter-js-from-html"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "Final user-selected run only. Superseded completed experiments are excluded. Existing validity, scoring and protocol annotations are preserved; archiving does not validate results.",
+  "verified_at": "2026-10-09T02:28:40.199572+00:00",
+  "snapshot_checks": {
+    "selected": {
+      "id": "d3035731f06884a8e6dfe8bfa68e64589debc7e01796f148ce0839eb21b44aa1",
+      "file": "attempts/opro-miniagent-terminal_bench-20261008-013100-743469/snapshots/d3035731f06884a8e6dfe8bfa68e64589debc7e01796f148ce0839eb21b44aa1.json",
+      "content_identity_verified": true,
+      "encoded_resources_key_pattern_scan": "passed"
+    },
+    "initial": {
+      "id": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+      "file": "attempts/opro-miniagent-terminal_bench-20261008-013100-743469/snapshots/ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7.json",
+      "content_identity_verified": true,
+      "encoded_resources_key_pattern_scan": "passed"
+    }
+  },
+  "history_roots": [],
+  "historical_only": false,
+  "finalized_at": "2026-10-09T02:30:21.734315+00:00",
+  "materialized_harness_byte_identity_verified": true,
+  "final_selected_only": true,
+  "excluded_superseded_completed_runs": true
+}

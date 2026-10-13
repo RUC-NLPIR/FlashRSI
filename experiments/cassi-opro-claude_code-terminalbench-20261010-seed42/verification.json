@@ -1,0 +1,137 @@
+{
+  "run_root": "/root/data/FlashRSI-TerminalQA/runs/opro-claude_code-terminalbench-20261008-203444-163873",
+  "status": "finished",
+  "archive_sha256": "d07aa3da08f2a23dc8b321d5641fd36642f0ce4d74cbbd2eca73a186a192de33",
+  "archive_bytes": 2160475410,
+  "verified_files": 7816,
+  "source_verification": {},
+  "credential_redacted_files": [
+    "diagnostics/hourly-fault-20261010-0150/tmpey005qph/payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/hourly-fault-20261010-0150/tmpey005qph/payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/hourly-fault-20261010-0150/tmpey005qph/payload/package/flashrsi/integrations/tau2.py",
+    "seed/__init__.py",
+    "source/flashrsi/agents/claude_code/__init__.py",
+    "source/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/flashrsi/integrations/tau2.py"
+  ],
+  "sealed_test_checks": {
+    "initial-test": {
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/trajectories/00029-initial-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6
+      },
+      "non_finished_tasks": [
+        "sam-cell-seg",
+        "rstan-to-pystan",
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "make-mips-interpreter",
+        "build-pov-ray",
+        "qemu-startup"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    },
+    "final-test": {
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/trajectories/00030-final-test.json",
+      "tasks": 30,
+      "metrics_recomputed": {
+        "reward": 0.6333333333333333
+      },
+      "non_finished_tasks": [
+        "rstan-to-pystan",
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "make-mips-interpreter",
+        "build-pov-ray"
+      ],
+      "official_grade_count": 0,
+      "grade_record_count": 0,
+      "confirmed_budget_zeros": []
+    }
+  },
+  "paired_task_order_matches": true,
+  "note": "User-authorized local archive of the final selected OPRO Claude Code Terminal experiment, including its own recovery records. No superseded experiments, model calls, remote experiment modifications or GitHub uploads.",
+  "verified_at": "2026-10-10T04:47:45.507394+00:00",
+  "snapshot_checks": {
+    "initial": {
+      "id": "524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b.json",
+      "content_identity_verified": true,
+      "encoded_resources_key_pattern_scan": "passed"
+    },
+    "selected": {
+      "id": "891726bb7bf9f7126b27a0f4f26860f7549c1a874740960db4c1205e614e3e6f",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/891726bb7bf9f7126b27a0f4f26860f7549c1a874740960db4c1205e614e3e6f.json",
+      "content_identity_verified": true,
+      "encoded_resources_key_pattern_scan": "passed"
+    }
+  },
+  "all_snapshot_identities_verified": [
+    {
+      "id": "13626b1531ec2026b283590d820c594c98766d3563d5ffc3d8ddcfecf3cdf360",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/13626b1531ec2026b283590d820c594c98766d3563d5ffc3d8ddcfecf3cdf360.json"
+    },
+    {
+      "id": "2cae877dae45758c82811ce03751c448ecf7e37bcc43f149590bc43dacc8aa9f",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/2cae877dae45758c82811ce03751c448ecf7e37bcc43f149590bc43dacc8aa9f.json"
+    },
+    {
+      "id": "45e0dd820775085f37df7975bde332c3148d40e2ea26fdb1d63654d7bbc32de8",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/45e0dd820775085f37df7975bde332c3148d40e2ea26fdb1d63654d7bbc32de8.json"
+    },
+    {
+      "id": "524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b.json"
+    },
+    {
+      "id": "57ad93c3a2907f83f7d1d07f530a08aa213af276707b03b95e34da614a5da299",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/57ad93c3a2907f83f7d1d07f530a08aa213af276707b03b95e34da614a5da299.json"
+    },
+    {
+      "id": "891726bb7bf9f7126b27a0f4f26860f7549c1a874740960db4c1205e614e3e6f",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/891726bb7bf9f7126b27a0f4f26860f7549c1a874740960db4c1205e614e3e6f.json"
+    },
+    {
+      "id": "8cb82c96eb277cb24f1b37491db951dd89b84d292eb79d9a7f6b847dc52ff7ad",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/8cb82c96eb277cb24f1b37491db951dd89b84d292eb79d9a7f6b847dc52ff7ad.json"
+    },
+    {
+      "id": "975b3f835b392c78e4a1e3331759d33f69be3f3b1ba8bab66d89698caa13179d",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/975b3f835b392c78e4a1e3331759d33f69be3f3b1ba8bab66d89698caa13179d.json"
+    },
+    {
+      "id": "beab2de7452f25f1dcfcaf011b107b4af9026bb953e6a26d4f1f198c68ce7490",
+      "file": "attempts/opro-claude_code-terminal_bench-20261008-211107-609607/snapshots/beab2de7452f25f1dcfcaf011b107b4af9026bb953e6a26d4f1f198c68ce7490.json"
+    }
+  ],
+  "snapshot_count": 9,
+  "trajectory_batch_count": 30,
+  "materialized_harness_byte_identity_verified": true,
+  "sealed_dev_selection_verified": true,
+  "selected_candidate_order": 8,
+  "excluded_dependency_paths": [
+    "diagnostics/test-restart-20261009-223439-306213/provisional-dependency-cache",
+    "diagnostics/test-restart-20261009-223439-306213/native-dependency-warmup/python-runtime",
+    "diagnostics/test-restart-20261009-223439-306213/native-dependency-warmup/native-cache-before-relocation.tar.gz",
+    "diagnostics/test-restart-20261009-223439-306213/native-dependency-warmup/native-cache.tar.gz",
+    "diagnostics/test-restart-20261009-223439-306213/native-dependency-warmup/native-cache-partial-154838.tar.gz",
+    "diagnostics/final-windows-recovery-20261010-0655/public-grader-cache",
+    "diagnostics/final-windows-recovery-20261010-0655/public-package-validation",
+    "diagnostics/final-windows-recovery-20261010-0655/uv-0.9.5",
+    "diagnostics/hourly-fault-20261010-0150/public-native-package-cache",
+    "diagnostics/minimal-retry-20261009-160112-801187/uv-bootstrap-cache"
+  ],
+  "history_roots": [],
+  "historical_only": false,
+  "final_selected_only": true,
+  "full_local_archive": true,
+  "finalized_at": "2026-10-10T04:48:21.316174+00:00",
+  "supplemental_recovery_records": {
+    "manifest": "supplemental-recovery-records-manifest.json",
+    "manifest_sha256": "fc7511c961f95747670e651f5ecee5889f7691fcf725ce6a6e391b7b87b2f39d",
+    "verified_files": 3
+  }
+}

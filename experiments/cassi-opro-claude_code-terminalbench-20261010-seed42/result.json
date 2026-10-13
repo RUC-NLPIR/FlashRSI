@@ -1,0 +1,85 @@
+{
+  "status": "finished",
+  "pid": 18491,
+  "attempt": "/root/data/FlashRSI-TerminalQA/runs/opro-claude_code-terminalbench-20261008-203444-163873/attempts/opro-claude_code-terminal_bench-20261008-211107-609607",
+  "started_at": "2026-10-08T13:11:07.615834+00:00",
+  "phase": "complete",
+  "max_steps": 2,
+  "num_candidates": 4,
+  "resumed_at": "2026-10-09T23:03:19.295082+00:00",
+  "candidate_count": 9,
+  "candidate_order": null,
+  "completed": 30,
+  "total": 30,
+  "controlled_recovery": "/root/data/FlashRSI-TerminalQA/runs/opro-claude_code-terminalbench-20261008-203444-163873/diagnostics/final-windows-recovery-20261010-0655",
+  "evaluation_label": "final-test",
+  "last_completed_task": "install-windows-3.11",
+  "updated_at": "2026-10-09T23:25:26.135131+00:00",
+  "final_snapshot": "891726bb7bf9f7126b27a0f4f26860f7549c1a874740960db4c1205e614e3e6f",
+  "initial_snapshot": "524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b",
+  "baseline_test": {
+    "tasks": 30,
+    "finished": 23,
+    "reward": 0.6
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "finished": 25,
+    "reward": 0.6333333333333333
+  },
+  "delta_percentage_points": 3.3333333333333326,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "dev_scores": [
+    {
+      "snapshot_id": "524d5ada19ad79e7db416570fe192a21f429050c3320e29fe4ced9e4d6253b0b",
+      "dev_score": 0.4666666666666667,
+      "candidate_order": 0
+    },
+    {
+      "snapshot_id": "45e0dd820775085f37df7975bde332c3148d40e2ea26fdb1d63654d7bbc32de8",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 1
+    },
+    {
+      "snapshot_id": "57ad93c3a2907f83f7d1d07f530a08aa213af276707b03b95e34da614a5da299",
+      "dev_score": 0.6666666666666666,
+      "candidate_order": 2
+    },
+    {
+      "snapshot_id": "2cae877dae45758c82811ce03751c448ecf7e37bcc43f149590bc43dacc8aa9f",
+      "dev_score": 0.6,
+      "candidate_order": 3
+    },
+    {
+      "snapshot_id": "beab2de7452f25f1dcfcaf011b107b4af9026bb953e6a26d4f1f198c68ce7490",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 4
+    },
+    {
+      "snapshot_id": "975b3f835b392c78e4a1e3331759d33f69be3f3b1ba8bab66d89698caa13179d",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 5
+    },
+    {
+      "snapshot_id": "8cb82c96eb277cb24f1b37491db951dd89b84d292eb79d9a7f6b847dc52ff7ad",
+      "dev_score": 0.6666666666666666,
+      "candidate_order": 6
+    },
+    {
+      "snapshot_id": "13626b1531ec2026b283590d820c594c98766d3563d5ffc3d8ddcfecf3cdf360",
+      "dev_score": 0.6666666666666666,
+      "candidate_order": 7
+    },
+    {
+      "snapshot_id": "891726bb7bf9f7126b27a0f4f26860f7549c1a874740960db4c1205e614e3e6f",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 8
+    }
+  ],
+  "test_used_for_selection": false,
+  "finished_at": "2026-10-09T23:25:26.578976+00:00",
+  "search_reused_without_worker_calls": true,
+  "baseline_test_reused_complete": true,
+  "prior_final_test_records_reused": 29
+}

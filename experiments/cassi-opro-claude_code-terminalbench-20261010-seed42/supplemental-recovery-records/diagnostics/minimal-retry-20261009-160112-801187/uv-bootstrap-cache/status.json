@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "pid": 17938,
+  "model_calls": 0,
+  "url": "https://github.com/astral-sh/uv/releases/download/0.9.5/uv-x86_64-unknown-linux-gnu.tar.gz",
+  "checked_at": "2026-10-09T16:14:23.903788+00:00",
+  "error": "curl: (28) Operation timed out after 29664 milliseconds with 6815744 out of 21370871 bytes received\n"
+}

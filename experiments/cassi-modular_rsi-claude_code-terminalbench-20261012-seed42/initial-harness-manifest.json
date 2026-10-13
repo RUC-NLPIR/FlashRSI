@@ -1,0 +1,40 @@
+{
+  "snapshot_id": "a7d2400fdd03c6d0608ed4c980297a4ca6930a29620419901133a9ce0e3d6085",
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "bytes": 124,
+      "sha256": "57eea60cd2d1cec5dbd273ac48c72e20a166d331a1f9b855970b4942be255d25",
+      "executable": false
+    },
+    ".mcp.json": {
+      "bytes": 23,
+      "sha256": "d8e397af03b5b032f21d0aa967086f0c78b33c87b76f2e9898ae0a144df7de02",
+      "executable": false
+    },
+    "hooks/completion_check.py": {
+      "bytes": 137,
+      "sha256": "5dcbef0a4a8aedaff0af7a8ffecdc7fc2d97083ed75af367e96cd31ee7a8473d",
+      "executable": false
+    },
+    "hooks/hooks.json": {
+      "bytes": 778,
+      "sha256": "ff937de83b234cda3aaedefc50032d8847c56044766e3d273730cf60b285b9be",
+      "executable": false
+    },
+    "hooks/tool_interaction.py": {
+      "bytes": 137,
+      "sha256": "5dcbef0a4a8aedaff0af7a8ffecdc7fc2d97083ed75af367e96cd31ee7a8473d",
+      "executable": false
+    },
+    "settings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "executable": false
+    },
+    "skills/terminal/SKILL.md": {
+      "bytes": 119,
+      "sha256": "c8ada96408a55c5e1952064bdc31f77418b3ff3d93ab8a866b7ea3faf26e02f4",
+      "executable": false
+    }
+  }
+}

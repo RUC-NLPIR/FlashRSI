@@ -1,0 +1,77 @@
+{
+  "status": "finished",
+  "pid": 61709,
+  "attempt": "/root/data/FlashRSI-TerminalQA/runs/opro-miniagent-terminalbench-20261008-013022-955410/attempts/opro-miniagent-terminal_bench-20261008-013100-743469",
+  "started_at": "2026-10-07T17:31:04.736453+00:00",
+  "phase": "complete",
+  "max_steps": 2,
+  "num_candidates": 4,
+  "candidate_count": 9,
+  "resumed_at": "2026-10-08T02:54:23.041398+00:00",
+  "initial_snapshot": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+  "final_snapshot": "d3035731f06884a8e6dfe8bfa68e64589debc7e01796f148ce0839eb21b44aa1",
+  "baseline_test": {
+    "tasks": 30,
+    "finished": 25,
+    "reward": 0.6666666666666666
+  },
+  "evolved_test": {
+    "tasks": 30,
+    "finished": 25,
+    "reward": 0.6666666666666666
+  },
+  "delta_percentage_points": 0.0,
+  "independent_final_test": true,
+  "final_test_reused_initial": false,
+  "test_used_for_selection": false,
+  "dev_scores": [
+    {
+      "snapshot_id": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 0
+    },
+    {
+      "snapshot_id": "218309292ce2ab8bb5b410b8b228694793dd3e1847783014e68099a22965fc8a",
+      "dev_score": 0.8,
+      "candidate_order": 1
+    },
+    {
+      "snapshot_id": "d3035731f06884a8e6dfe8bfa68e64589debc7e01796f148ce0839eb21b44aa1",
+      "dev_score": 0.8666666666666667,
+      "candidate_order": 2
+    },
+    {
+      "snapshot_id": "692eb4a9448369e9408b043b2f93f279397c64b6ca93ce660e9dbe2e9345d705",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 3
+    },
+    {
+      "snapshot_id": "dc50dace065a4c296a0ab6b1e5987f79e0f1e1019f0d9e71d3497b6201571dd2",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 4
+    },
+    {
+      "snapshot_id": "a41fb07cc83fafa79e237ed2663b4f6c8fdc206cb46b4bd17bfe29e4a5935c14",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 5
+    },
+    {
+      "snapshot_id": "94f61de8acf42cfc575ea81de9cfe5a07649914b1844943301a430ed51a40356",
+      "dev_score": 0.7333333333333333,
+      "candidate_order": 6
+    },
+    {
+      "snapshot_id": "8ed52c0d652114b6e68ff789d6bfc598043d395cb6b2a3c66392301782cfd3a3",
+      "dev_score": 0.5333333333333333,
+      "candidate_order": 7
+    },
+    {
+      "snapshot_id": "98406c04087758a4939dcffb386332b8f2d20f0f30ccec106507801ce269011c",
+      "dev_score": 0.6666666666666666,
+      "candidate_order": 8
+    }
+  ],
+  "finished_at": "2026-10-08T11:58:20.390949+00:00",
+  "search_reused_without_worker_calls": true,
+  "docker_recovery": "/root/data/FlashRSI-TerminalQA/docker-recovery-20261008-012737-686620"
+}

@@ -1,0 +1,563 @@
+{
+  "status": "finished",
+  "run_root": "/root/data/FlashRSI-ADAS-Terminal/runs/adas-claude_code-terminalbench-20261011-163815-296976",
+  "archive_bytes": 808090576,
+  "archive_sha256": "69e5198b74456301ea11d6c359fcb7194ac8273d038a0be1cd16f48b5da310da",
+  "verified_files": 5535,
+  "snapshots_verified": 6,
+  "sealed_test_checks": {
+    "initial-test": {
+      "folder": "attempts/adas-claude_code-terminal_bench-20261011-164955-201469/per-task/00028-initial-test",
+      "tasks": 30,
+      "score_recomputed": 0.7333333333333333,
+      "non_finished_tasks": [
+        "sam-cell-seg",
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "raman-fitting",
+        "install-windows-3.11"
+      ],
+      "rows": [
+        {
+          "filename": "000.json",
+          "task_id": "regex-log",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "b4c63bc844c26e9bf7bfd01def0dc8da4d448e8f077ec4d153dbdd986e154fe7"
+        },
+        {
+          "filename": "001.json",
+          "task_id": "sparql-university",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "408be9a8220e9be546113422370bc5cc9bc288145f0ac839ec8bceec528ed446"
+        },
+        {
+          "filename": "002.json",
+          "task_id": "sam-cell-seg",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "f2cac158f991a04536d154a5c19cca336d5f20ec438d268a40365cdd46d3cebe"
+        },
+        {
+          "filename": "003.json",
+          "task_id": "mteb-retrieve",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "2bc24c4120e07216109433fb40a99aaa23f7bf142b66c726f0366d8264b8bc8e"
+        },
+        {
+          "filename": "004.json",
+          "task_id": "rstan-to-pystan",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "225130a16198534d1c5d01d8f99f67516c7f0eb71dc3f4b661e5399362ac3121"
+        },
+        {
+          "filename": "005.json",
+          "task_id": "overfull-hbox",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "84bbdf26549b4a03b51dbaabfcf39ac8556610dff83d66740649e6861762a8b9"
+        },
+        {
+          "filename": "006.json",
+          "task_id": "custom-memory-heap-crash",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "200a694a2990d7036ecf3e3fb12822d658788af80c272f67d73766f1d2ef33b2"
+        },
+        {
+          "filename": "007.json",
+          "task_id": "extract-moves-from-video",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "fa76e55b72844a0171cba6656c8243643f1e73d1fccadfad0fb2a8ddb7638f03"
+        },
+        {
+          "filename": "008.json",
+          "task_id": "db-wal-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "bc2b54b991e2c489b6badcdf533314455311cbbe15508bb7e770b2c9c1f29c7e"
+        },
+        {
+          "filename": "009.json",
+          "task_id": "chess-best-move",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "72ec8f90d4d1b6fc7c053015af702a63ba62791190842a789335c8538d4beccd"
+        },
+        {
+          "filename": "010.json",
+          "task_id": "caffe-cifar-10",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "ed0383335fb4807f9a5b0da8c353fb1cb96eab33c2b0b0319589f3aae54845b9"
+        },
+        {
+          "filename": "011.json",
+          "task_id": "feal-linear-cryptanalysis",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "0d378d02360e57527867ee1e3b9f09eb8ecfbb094e605b18928f26de57bfadc3"
+        },
+        {
+          "filename": "012.json",
+          "task_id": "pytorch-model-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "50a33389661d857739a5e55467718572759b400fb6981ebd1586ef7cbc00f087"
+        },
+        {
+          "filename": "013.json",
+          "task_id": "bn-fit-modify",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "69ca5b120029702c61339b41ab5c908a4dd93bfcc0a42aacaf0a6a298c55ded1"
+        },
+        {
+          "filename": "014.json",
+          "task_id": "raman-fitting",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "39fb03737ba04f7df2185a2929d0c156d38ff8f796d39d3c81ef47e5ebb35082"
+        },
+        {
+          "filename": "015.json",
+          "task_id": "dna-insert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "fb7e3cb10d68c85775a8014b1cf11b2917168e13a6a1160b5901a85b4ddf5274"
+        },
+        {
+          "filename": "016.json",
+          "task_id": "password-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "982fb15b7e6b42377bc2d181aa8b845df680954cd0c40854fbf1d07822f21291"
+        },
+        {
+          "filename": "017.json",
+          "task_id": "filter-js-from-html",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "423007b4631994e02c40b344ffee26f7d77985c195e5acb4406abb40ae564259"
+        },
+        {
+          "filename": "018.json",
+          "task_id": "openssl-selfsigned-cert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "e91f8fb5e0a1aa038c85b97c36a71f8842d74acd01da979506377431c3053dfc"
+        },
+        {
+          "filename": "019.json",
+          "task_id": "fix-git",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "c8345411fdc4d4625713948f7d7fa6c40bae7c2e0da204572a8794e611fede45"
+        },
+        {
+          "filename": "020.json",
+          "task_id": "make-mips-interpreter",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "a08a3419028710d6b8fd160b2be85a83dc39817a0766840a927e383522b29b31"
+        },
+        {
+          "filename": "021.json",
+          "task_id": "circuit-fibsqrt",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5427c942e49a24dca1a4e001332c4d1934dbbfc96ca53e8ce017b746fcb27a46"
+        },
+        {
+          "filename": "022.json",
+          "task_id": "cancel-async-tasks",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "4adfb861369a9f28242797a8c97b22ee370da34e056e9fd96becb24aa5f0855f"
+        },
+        {
+          "filename": "023.json",
+          "task_id": "path-tracing-reverse",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "c49a3c3663f3de9b79bebd241a6fdc9933f1a7c81a6eadde45d4ed127c0b8c4e"
+        },
+        {
+          "filename": "024.json",
+          "task_id": "pypi-server",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "6ac1f4b4c7a8a83ca0922cff1aa21628cb9bb8e2f16321aa4c6690d3d0e4fb1c"
+        },
+        {
+          "filename": "025.json",
+          "task_id": "headless-terminal",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "7f63bc055a105b683abba11632e707d5d2d255b5b8c4c029a9a2b23c2750a28f"
+        },
+        {
+          "filename": "026.json",
+          "task_id": "build-pov-ray",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "2f076c537adc52e5116ba1201eff350a1fce665014251a8bcd740bcea22898b5"
+        },
+        {
+          "filename": "027.json",
+          "task_id": "install-windows-3.11",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "5de3dda05f2766c72e634951c8222b8f5d2aeacb5060f4e6dcfd4e3c3ddcb884"
+        },
+        {
+          "filename": "028.json",
+          "task_id": "qemu-startup",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "08bd4e70464fe3cc415f3d81cb9f59abfe79b19c4f19e1d5482f7a1bb47a2650"
+        },
+        {
+          "filename": "029.json",
+          "task_id": "git-multibranch",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "f68822ecf513e9bfa0c47060564596763d8d49e72ecf0eb526c3ce142689435e"
+        }
+      ]
+    },
+    "final-test": {
+      "folder": "attempts/adas-claude_code-terminal_bench-20261011-164955-201469/per-task/00029-final-test",
+      "tasks": 30,
+      "score_recomputed": 0.7333333333333333,
+      "non_finished_tasks": [
+        "extract-moves-from-video",
+        "caffe-cifar-10",
+        "make-mips-interpreter",
+        "install-windows-3.11"
+      ],
+      "rows": [
+        {
+          "filename": "000.json",
+          "task_id": "regex-log",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5892f95876614909ee088c8c6b87dea3fe957ec49fa9ff0da37203948a4fe92e"
+        },
+        {
+          "filename": "001.json",
+          "task_id": "sparql-university",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "9f579393f9966e54fd33bdf028feba0c413c335611eca2eb9d86074ee68c6bd2"
+        },
+        {
+          "filename": "002.json",
+          "task_id": "sam-cell-seg",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "15cc5c11efa341204ed024dcfedd21ba86e5e04d829eaccc103e9dcd393aee5a"
+        },
+        {
+          "filename": "003.json",
+          "task_id": "mteb-retrieve",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "1661151300a40832262e389d084a1f2910e9326d044e15475d2f12c0d9ab7154"
+        },
+        {
+          "filename": "004.json",
+          "task_id": "rstan-to-pystan",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "c00cf9d7514eb72f678b268bdc3b906e5e294db8f02781263601aa573fdf6751"
+        },
+        {
+          "filename": "005.json",
+          "task_id": "overfull-hbox",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "114ad25951f027e0d367bea4db711d3166462939254f2cb73501e604ceb214bf"
+        },
+        {
+          "filename": "006.json",
+          "task_id": "custom-memory-heap-crash",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "34a957f4175f1bd5152e21cc2691185906eb764b18803dafb6d65a13079cb2b3"
+        },
+        {
+          "filename": "007.json",
+          "task_id": "extract-moves-from-video",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "3c4cf0b87d61c85ff513d6b6bd0fd645df15ac7fb97ea7f1eb9a3d07784aad9b"
+        },
+        {
+          "filename": "008.json",
+          "task_id": "db-wal-recovery",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "f2d207af418bef2aa1ca0eb3ee04e46d78078784913c5ebd245cdea1cc0e688c"
+        },
+        {
+          "filename": "009.json",
+          "task_id": "chess-best-move",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "7a7ec37d537b88dc860a9a7020a5d81356b74fb69c42d9ba64b6d0b45a4cffe7"
+        },
+        {
+          "filename": "010.json",
+          "task_id": "caffe-cifar-10",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "137bd26588b3f423170568a29212ff3f3babca5dd8fdb893b2ec6858a91e84f1"
+        },
+        {
+          "filename": "011.json",
+          "task_id": "feal-linear-cryptanalysis",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "f742ff837dc1908d5c7d6b6e227620acdd63fc8bb203ab83175d3570f037fa2c"
+        },
+        {
+          "filename": "012.json",
+          "task_id": "pytorch-model-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "b40e2cfb3548a33077a54f00d05dd48794f6d188d38bff37ca3e62b73942b2dc"
+        },
+        {
+          "filename": "013.json",
+          "task_id": "bn-fit-modify",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "16ef533f0c79f6a692ab4cf6c76266c5df5da6f67d19a4f190999116c50348a0"
+        },
+        {
+          "filename": "014.json",
+          "task_id": "raman-fitting",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "b3e7e14d156d6039501f1eef6abdcb98941deb8cd260ef194a8dd5d8fccfee85"
+        },
+        {
+          "filename": "015.json",
+          "task_id": "dna-insert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "5facccb9886675767a140f376b997872e3a2c519180f61877f62b738f0c30872"
+        },
+        {
+          "filename": "016.json",
+          "task_id": "password-recovery",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "77468af9ac929b3d3d24abe8537cab3c4afc61f1cccbfb9c625ceaa328106e7e"
+        },
+        {
+          "filename": "017.json",
+          "task_id": "filter-js-from-html",
+          "status": "finished",
+          "reward": 0.0,
+          "sha256": "af2942a4dbcfa77db00e038284f67178d1aaeb03fa33d249a09981808858e943"
+        },
+        {
+          "filename": "018.json",
+          "task_id": "openssl-selfsigned-cert",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "3b0c9c15d0cbd48161c2cd38583d9cbb8852827087724f9f44d20e906cfd2b83"
+        },
+        {
+          "filename": "019.json",
+          "task_id": "fix-git",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "9a1ed735cc7b0591a6621f0f5448166f9082c4a4927971288a50d3035c72277a"
+        },
+        {
+          "filename": "020.json",
+          "task_id": "make-mips-interpreter",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "01e7cdc68a61e60f7759137a09786355dc2fabeaf2a8eac12408392d40388970"
+        },
+        {
+          "filename": "021.json",
+          "task_id": "circuit-fibsqrt",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "ac40f1ab418d810ffe6e1117a96fe9545319ec9709b26a7d3641eec114ae7b3e"
+        },
+        {
+          "filename": "022.json",
+          "task_id": "cancel-async-tasks",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "9f37cedadc1dd7f9eb82a54981d80564f4bee7edbb7b8e7fd23811470f045bff"
+        },
+        {
+          "filename": "023.json",
+          "task_id": "path-tracing-reverse",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "27441e76565a26abbba484978c35cdc7a2e38b33d4935a2a3fd333e66651bad2"
+        },
+        {
+          "filename": "024.json",
+          "task_id": "pypi-server",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "54e9fa5b586a92bd8a3ddd3ec5a3e4746f5ff505b20b16419c242d306e76dc4e"
+        },
+        {
+          "filename": "025.json",
+          "task_id": "headless-terminal",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "0789b0cccdfcd0f24ec9126be5a347b63f99563280a81a6b9561c4515b61d61e"
+        },
+        {
+          "filename": "026.json",
+          "task_id": "build-pov-ray",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "7069f4ed5188ed74271cdcba1bc95a5379e02dc32759720305f19ab61289cfa1"
+        },
+        {
+          "filename": "027.json",
+          "task_id": "install-windows-3.11",
+          "status": "error",
+          "reward": 0.0,
+          "sha256": "e7e9f0acfe03583e0f9f436db93997d85e57305f3304f56fd0cc0dd32173594d"
+        },
+        {
+          "filename": "028.json",
+          "task_id": "qemu-startup",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "64dde3ab71ca6cef46c6aa067e38aeed34bb10fbd67b49ff90723aa330220f89"
+        },
+        {
+          "filename": "029.json",
+          "task_id": "git-multibranch",
+          "status": "finished",
+          "reward": 1.0,
+          "sha256": "a39f0bf7d616838d20682d4428482a6f2b3567b8fe85d45ba0e5a7379ecaa15c"
+        }
+      ]
+    }
+  },
+  "paired_task_order_matches": true,
+  "credential_redacted_files": [
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/checkpoint-launch.json",
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/monitor-current.json",
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/reservation.json",
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/runtime-monitor-current.json",
+    "diagnostics/authorized-lost-state-rerun-20261011-213118-901706/verify_worker_recovery.py",
+    "diagnostics/backend-candidate-recovery-20261011-183518-636668/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/backend-candidate-recovery-20261011-183518-636668/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/backend-candidate-recovery-20261011-183518-636668/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/backend-candidate-recovery-20261011-183518-636668/verify_worker_recovery.py",
+    "diagnostics/backend-loss-recovery-20261011-195303-483991/verify_worker_recovery.py",
+    "diagnostics/backend3-recovery-20261012-020840-042889/backend3_launch.py",
+    "diagnostics/backend3-recovery-20261012-020840-042889/checkpoint-launch.json",
+    "diagnostics/backend3-recovery-20261012-020840-042889/monitor-current.json",
+    "diagnostics/backend3-recovery-20261012-020840-042889/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/backend3-recovery-20261012-020840-042889/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/backend3-recovery-20261012-020840-042889/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/backend3-recovery-20261012-020840-042889/reservation.json",
+    "diagnostics/backend3-recovery-20261012-020840-042889/verify_worker_recovery.py",
+    "diagnostics/backend4-recovery-20261012-041043-600746/backend3_launch.py",
+    "diagnostics/backend4-recovery-20261012-041043-600746/checkpoint-launch.json",
+    "diagnostics/backend4-recovery-20261012-041043-600746/launch-final.py",
+    "diagnostics/backend4-recovery-20261012-041043-600746/launch.py",
+    "diagnostics/backend4-recovery-20261012-041043-600746/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/backend4-recovery-20261012-041043-600746/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/backend4-recovery-20261012-041043-600746/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/backend4-recovery-20261012-041043-600746/reservation.json",
+    "diagnostics/backend4-recovery-20261012-041043-600746/verify_worker_recovery.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/checkpoint-launch.json",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/monitor-current.json",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/build-pmars-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/build-pmars-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/build-pmars-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/qemu-alpine-ssh-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/qemu-alpine-ssh-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/qemu-alpine-ssh-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/torch-pipeline-parallelism-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/torch-pipeline-parallelism-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v4/torch-pipeline-parallelism-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v5/torch-pipeline-parallelism-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v5/torch-pipeline-parallelism-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/network-preparation-v5/torch-pipeline-parallelism-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/reservation.json",
+    "diagnostics/dependency-bootstrap-recovery-20261011-232957-274396/verify_worker_recovery.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation/build-pmars-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation/build-pmars-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation/build-pmars-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v2/build-pmars-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v2/build-pmars-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v2/build-pmars-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v3/build-pmars-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v3/build-pmars-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v3/build-pmars-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v3/torch-pipeline-parallelism-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v3/torch-pipeline-parallelism-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/bootstrap-preparation-v3/torch-pipeline-parallelism-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/checkpoint-launch.json",
+    "diagnostics/hourly-recovery-20261011-225843-437869/monitor-current.json",
+    "diagnostics/hourly-recovery-20261011-225843-437869/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/hourly-recovery-20261011-225843-437869/reservation.json",
+    "diagnostics/hourly-recovery-20261011-225843-437869/verify_worker_recovery.py",
+    "diagnostics/last-test-recovery-20261012-082631-922106/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/last-test-recovery-20261012-082631-922106/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/last-test-recovery-20261012-082631-922106/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/native-output-recovery-20261012-101454-320542/offline-caffe-payload-fixed/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/native-output-recovery-20261012-101454-320542/offline-caffe-payload-fixed/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/native-output-recovery-20261012-101454-320542/offline-caffe-payload-fixed/package/flashrsi/integrations/tau2.py",
+    "diagnostics/native-output-recovery-20261012-101454-320542/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/native-output-recovery-20261012-101454-320542/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/native-output-recovery-20261012-101454-320542/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/native-routing-recovery-20261011-235419-775171/checkpoint-launch.json",
+    "diagnostics/native-routing-recovery-20261011-235419-775171/monitor-current.json",
+    "diagnostics/native-routing-recovery-20261011-235419-775171/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/native-routing-recovery-20261011-235419-775171/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/native-routing-recovery-20261011-235419-775171/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/native-routing-recovery-20261011-235419-775171/reservation.json",
+    "diagnostics/native-routing-recovery-20261011-235419-775171/verify_worker_recovery.py",
+    "diagnostics/sdk-upload-recovery-20261011-174328-921170/offline-qemu-payload/package/flashrsi/agents/claude_code/__init__.py",
+    "diagnostics/sdk-upload-recovery-20261011-174328-921170/offline-qemu-payload/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "diagnostics/sdk-upload-recovery-20261011-174328-921170/offline-qemu-payload/package/flashrsi/integrations/tau2.py",
+    "diagnostics/sdk-upload-recovery-20261011-174328-921170/verify_worker_recovery.py",
+    "source/flashrsi/agents/claude_code/__init__.py",
+    "source/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/flashrsi/integrations/tau2.py",
+    "source/meta_terminal_isolated.py",
+    "source/terminal_official_smoke.py",
+    "source/verify_preflight.py",
+    "source/experiment-adapter/adas-claude-terminal-20261011-163815-296976/offline-target-payload-3/package/flashrsi/agents/claude_code/__init__.py",
+    "source/experiment-adapter/adas-claude-terminal-20261011-163815-296976/offline-target-payload-3/package/flashrsi/agents/miniagent/runtime/web_config.py",
+    "source/experiment-adapter/adas-claude-terminal-20261011-163815-296976/offline-target-payload-3/package/flashrsi/integrations/tau2.py",
+    "source/experiment-adapter/adas-claude-terminal-20261011-163815-296976/verify_worker.py"
+  ],
+  "source_verification": {},
+  "source_scope": "Run-bundled sources plus current host support sources. Snapshot identities verified; current support sources are not asserted byte-identical to original launch unless separately recorded.",
+  "model_calls": 0,
+  "remote_experiment_modified": false,
+  "verified_at": "2026-10-12T04:23:54.054397+00:00"
+}
