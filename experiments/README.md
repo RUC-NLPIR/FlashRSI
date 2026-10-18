@@ -140,3 +140,8 @@ tar -xzf experiments/alice-skillopt-searchqa-deepseek-20260920-seed42/logs.tar.g
 - [cassi-modular_rsi-miniagent-hotpotqa-selected-20261007-seed42](cassi-modular_rsi-miniagent-hotpotqa-selected-20261007-seed42/README.md)
 - [cassi-modular_rsi-miniagent-searchqa-20261007-seed42](cassi-modular_rsi-miniagent-searchqa-20261007-seed42/README.md)
 - [cassi-opro-miniagent-appworld-20261008-seed42](cassi-opro-miniagent-appworld-20261008-seed42/README.md)
+
+
+## 2026-10-18 DarwinX Terminal 后续组替换
+
+- [DarwinX + Claude Code + Terminal-Bench：后续独立重跑](cassi-darwinx-claude_code-terminalbench-20261015-020453-223515-rerun31556/README.md)：替换原 `cassi-darwinx-claude_code-terminalbench-20261009-seed42`，本次实测及用户采用的统计口径为 19/30 → 19/30（63.33% → 63.33%）。最终一题超时按用户明确决定计失败；原官方异常、未评分记录和事后协议修订一并保留。完整恢复链、原生轨迹、候选与费用证据通过 Git LFS 分卷保存。

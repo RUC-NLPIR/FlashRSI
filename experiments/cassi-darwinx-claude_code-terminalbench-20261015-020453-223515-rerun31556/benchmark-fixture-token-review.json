@@ -1,0 +1,15 @@
+{
+  "status": "exact_value_present_in_original_benchmark_image_not_runtime_credential",
+  "task": "sanitize-git-repo",
+  "image_archive_sha256": "a01e03fd2a4b9c06edb1feacdbb3a45f4bf3f4908109aa47c0f6c692e688d8e2",
+  "fixture_token_sha256": "9d6060e21ef8d5daec9cfe4a44b1b1bc9792246bfad28210edaaa1782a8a676a",
+  "matches": [
+    {
+      "layer": "627a9beabece8327bc218461cd22e1a94be317dac0922c53cf1961a42642fed4/layer.tar",
+      "path": "app/dclm/ray_processing/ray_cluster.yaml",
+      "file_sha256": "f2f729be7044681535df6b9e87905b239a8ec04e058b41c088c36286e37a9ca6",
+      "token_sha256": "9d6060e21ef8d5daec9cfe4a44b1b1bc9792246bfad28210edaaa1782a8a676a"
+    }
+  ],
+  "no_token_values_printed": true
+}
