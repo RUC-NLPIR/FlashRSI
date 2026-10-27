@@ -1,0 +1,197 @@
+{
+  "at": "2026-10-27T22:23:26.808457",
+  "passed": true,
+  "groups": [
+    {
+      "group": "cassi-restricted-ahe-appworld-20261027",
+      "assets": 2,
+      "archive_sha256": "e543859f9f88c06714fd3ce37ae021947611b735034b00bc2466f7efe571455f",
+      "metadata_blobs_verified": 6,
+      "machine": "ahewo"
+    },
+    {
+      "group": "cassi-restricted-ahe-hotpotqa-20261027",
+      "assets": 3,
+      "archive_sha256": "c6658dec4884bb0a867539113c897a1a8c0557a29e55d942e29d4617ccac733b",
+      "metadata_blobs_verified": 6,
+      "machine": "ahewo"
+    },
+    {
+      "group": "cassi-restricted-ahe-searchqa-20261027",
+      "assets": 2,
+      "archive_sha256": "0b1b0f704ba089ec2db806af29eecb9494874f246bea3760fcb534832261f50b",
+      "metadata_blobs_verified": 6,
+      "machine": "ahewo"
+    },
+    {
+      "group": "cassi-restricted-ahe-terminalbench-20261027",
+      "assets": 12,
+      "archive_sha256": "a7318953dbadce952a9d9e038354922ce191dc31e4e25a804a61e58c3186f897",
+      "metadata_blobs_verified": 7,
+      "machine": "ahewo"
+    },
+    {
+      "group": "cassi-restricted-ahe-terminalbench-external-evidence-20261027",
+      "assets": 19,
+      "archive_sha256": "461481be7058e668194582ab06a7a8de6c98b2729e4ee06df3b4ca54d0c88ec3",
+      "metadata_blobs_verified": 7,
+      "machine": "ahewo"
+    },
+    {
+      "group": "cassi-restricted-darwinx-appworld-20261027",
+      "assets": 2,
+      "archive_sha256": "7c7573c0173196359241f45b8b8280b07f7898153f07d47db65d097e05253304",
+      "metadata_blobs_verified": 6,
+      "machine": "searchqa"
+    },
+    {
+      "group": "cassi-restricted-darwinx-appworld-external-evidence-20261027",
+      "assets": 2,
+      "archive_sha256": "6e7766101f4284159f1661d3394c212c7f0fe5ebf085abc6f1014e5fa1b75122",
+      "metadata_blobs_verified": 6,
+      "machine": "searchqa"
+    },
+    {
+      "group": "cassi-restricted-darwinx-hotpotqa-20261027",
+      "assets": 2,
+      "archive_sha256": "2c96ecbe93bbc357f5e47dfa5d761673a49b2093597af6e77a561df944ddd8b0",
+      "metadata_blobs_verified": 6,
+      "machine": "searchqa"
+    },
+    {
+      "group": "cassi-restricted-darwinx-searchqa-20261027",
+      "assets": 2,
+      "archive_sha256": "2c61578e0cb1be6d826be2c61bf36c2506446679703e7358369c14f37e32de06",
+      "metadata_blobs_verified": 6,
+      "machine": "searchqa"
+    },
+    {
+      "group": "cassi-restricted-darwinx-terminalbench-20261027",
+      "assets": 28,
+      "archive_sha256": "d8b161db8b995bf5eac6fd0583576a6660f8ffde751e4d38193459be2cba0693",
+      "metadata_blobs_verified": 6,
+      "machine": "darwin-rerun31556"
+    },
+    {
+      "group": "cassi-restricted-darwinx-terminalbench-external-evidence-20261027",
+      "assets": 14,
+      "archive_sha256": "d1dbf8caa2133fb3042c570027147bdfc79ac58accd0e29990f743db9c091af2",
+      "metadata_blobs_verified": 7,
+      "machine": "darwin-rerun31556"
+    },
+    {
+      "group": "cassi-restricted-meta_harness-appworld-20261027",
+      "assets": 2,
+      "archive_sha256": "be7ea502baccb00e0c99b35095ef8da8cd66e1b841e3357894302a4187b139fc",
+      "metadata_blobs_verified": 6,
+      "machine": "hotpotqa"
+    },
+    {
+      "group": "cassi-restricted-meta_harness-hotpotqa-20261027",
+      "assets": 2,
+      "archive_sha256": "9b3daa0dabc6eebd30a7a9877923fbaa1a9f0660c4b52dbc5a8044ab1c036a58",
+      "metadata_blobs_verified": 6,
+      "machine": "hotpotqa"
+    },
+    {
+      "group": "cassi-restricted-meta_harness-searchqa-20261027",
+      "assets": 2,
+      "archive_sha256": "0341616b04ae4106a749f0f02264d77756285ec921c2fb9c34f4f0c73fc00843",
+      "metadata_blobs_verified": 6,
+      "machine": "hotpotqa"
+    },
+    {
+      "group": "cassi-restricted-meta_harness-terminalbench-20261027",
+      "assets": 40,
+      "archive_sha256": "9ff9cda55353bb427165b89553b3b56a0e3d92c16302433c255fe43b4fbf53ff",
+      "metadata_blobs_verified": 5,
+      "machine": "ahewo"
+    },
+    {
+      "group": "cassi-rrsi-claude_code-appworld-20261020-seed42",
+      "assets": 4,
+      "archive_sha256": "575cf46d4be2468d58ae8f7cdb9d6a47c1319f410bc1b3200d5d9263d56554e1",
+      "metadata_blobs_verified": 8,
+      "machine": "local_original_rrsi"
+    },
+    {
+      "group": "cassi-rrsi-claude_code-hotpotqa-20261020-seed42",
+      "assets": 2,
+      "archive_sha256": "219e341a43f912214a1520baade8110c76c742cccdb36ab2d43e4b6799c7b77c",
+      "metadata_blobs_verified": 8,
+      "machine": "local_original_rrsi"
+    },
+    {
+      "group": "cassi-rrsi-claude_code-searchqa-20261020-seed42",
+      "assets": 2,
+      "archive_sha256": "8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac",
+      "metadata_blobs_verified": 8,
+      "machine": "local_original_rrsi"
+    },
+    {
+      "group": "cassi-rrsi-claude_code-terminalbench-20261019-seed42",
+      "assets": 7,
+      "archive_sha256": "a0e42a42c213a2df3cbf78b2ed3ee76300582ccd205892d3389cc7745ec2ed95",
+      "metadata_blobs_verified": 15,
+      "machine": "local_original_rrsi"
+    },
+    {
+      "group": "cassi-rrsi-miniagent-appworld-20261021-seed42",
+      "assets": 2,
+      "archive_sha256": "5dac89258deec7bc14b9e0b9198e1dd01cee20e7128c02fae60eeb30c1dc2458",
+      "metadata_blobs_verified": 11,
+      "machine": "local_original_rrsi"
+    },
+    {
+      "group": "cassi-rrsi-miniagent-hotpotqa-20261020-seed42",
+      "assets": 2,
+      "archive_sha256": "6313fffe0ae9345140a9a78c6ce8bcc0721cf136ade9eed6594f418f9deef317",
+      "metadata_blobs_verified": 9,
+      "machine": "local_original_rrsi"
+    },
+    {
+      "group": "cassi-rrsi-miniagent-searchqa-20261020-seed42",
+      "assets": 2,
+      "archive_sha256": "b106aad634290ee12f33e38c42cf935488076b982b8c3052df2603cdc66c6531",
+      "metadata_blobs_verified": 8,
+      "machine": "local_original_rrsi"
+    },
+    {
+      "group": "cassi-rrsi-miniagent-terminalbench-20261021-seed42",
+      "assets": 8,
+      "archive_sha256": "d36c5d3bda46eaff76cea39f0eebaf5ad6cb565a32e0ed23d5b8917b59d4b1fc",
+      "metadata_blobs_verified": 14,
+      "machine": "local_original_rrsi"
+    }
+  ],
+  "group_count": 23,
+  "unique_assets": 163,
+  "receipt_proof": "receipt-check-20261027-221948-609170.json",
+  "external_closures": [
+    {
+      "group": "cassi-restricted-ahe-terminalbench-external-evidence-20261027",
+      "machine": "ahewo",
+      "source_roots_verified": 9,
+      "external_pointer_records": 9
+    },
+    {
+      "group": "cassi-restricted-darwinx-appworld-external-evidence-20261027",
+      "machine": "searchqa",
+      "source_roots_verified": 2510,
+      "external_pointer_records": 2510
+    },
+    {
+      "group": "cassi-restricted-darwinx-terminalbench-external-evidence-20261027",
+      "machine": "darwin-rerun31556",
+      "source_roots_verified": 4,
+      "external_pointer_records": 4
+    }
+  ],
+  "archive_payloads_downloaded_by_this_audit": 0,
+  "new_model_calls": 0,
+  "new_grading_calls": 0,
+  "draft": true,
+  "main_merged": false,
+  "source_retirement_allowed": false,
+  "before_final_documentation_commit": "28e3f1ba536acf45aa42310744699b2ad4142b10"
+}

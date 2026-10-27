@@ -1,1 +1,1 @@
-Archive assets for this group are uploaded and remotely checksum-verified. The overall multi-machine publication may still be in progress; consult the root publication index before retiring source machines.
+All 23 publication groups are complete. This group’s archive parts and compressed manifest have verified server sizes and SHA-256; branch metadata was read back and Git blob hashes verified. See ../RESTRICTED_RRSI_20261027.md and the final publication proof. The Release remains a draft and human merge is pending. Source machine retirement is not authorized.
