@@ -1,3 +1,1 @@
-# Partial publication: metadata only
-
-The archive has passed local source/manifest/readback checks, but GitHub rejected its LFS upload with HTTP403 (repository LFS budget exceeded). Archive parts and compressed file manifest remain preserved locally; their presence here is pending the storage decision. Do not merge this upload as complete or delete source machines until final remote verification is recorded.
+Archive assets for this group are uploaded and remotely checksum-verified. The overall multi-machine publication may still be in progress; consult the root publication index before retiring source machines.
