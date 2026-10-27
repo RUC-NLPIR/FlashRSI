@@ -1,0 +1,32 @@
+{
+  "status": "built",
+  "finished_at": "2026-10-19T06:41:34.163801+00:00",
+  "archive": "/root/rrsi-terminal-cc-archive-20261019/full-run.tar.gz",
+  "archive_sha256": "a0e42a42c213a2df3cbf78b2ed3ee76300582ccd205892d3389cc7745ec2ed95",
+  "archive_bytes": 5193141011,
+  "files": 152289,
+  "source_bytes": 57306930736,
+  "unique_payload_bytes": 12923553159,
+  "deduplicated_files": 71392,
+  "snapshot_ids": {
+    "initial": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+    "selected": "af2f711153587f81712049a34a37047511ccc9ccde77feaab97088557c54e4e6"
+  },
+  "model_calls": 0,
+  "source_roots": [
+    "/root/data/rrsi-terminal-preparation-20261017/runs/rrsi-claude_code-terminal_bench-20261017-225448-329219",
+    "/root/data/rrsi-terminal-preparation-20261017/user-epoch2-20261018-203628-590250",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/sam-final-git-transport-20261019-1002",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/terminal-network-20261019-0655",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/css-original-20261019-125339-267916",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/terminal-test-only-20261019-0601",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/protein-remaining-then-original-rrsi-20261018-161731-876325",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/chrome-exit-20261019-1205",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/cc-missing-ledger-user-rerun-20261018-113100-398611",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/cc-count-then-three-user-20261018-145717-958138",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/filter-qemu-official-20261019-0755",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/native-turn-baseline-split-20261018-032425-957781",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/terminal-final-git-resumed-20261019-1010",
+    "/root/data/rrsi-terminal-preparation-20261017/recoveries/terminal-final-transport-20261019-0810"
+  ]
+}

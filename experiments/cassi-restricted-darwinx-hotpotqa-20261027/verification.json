@@ -1,0 +1,13 @@
+{
+  "experiment": "cassi-restricted-darwinx-hotpotqa-20261027",
+  "archive_sha256": "2c96ecbe93bbc357f5e47dfa5d761673a49b2093597af6e77a561df944ddd8b0",
+  "archive_bytes": 156983392,
+  "source_files": 10922,
+  "source_file_bytes": 881030798,
+  "unique_payload_files": 10488,
+  "credential_redacted_files": 0,
+  "source_roots_untouched": true,
+  "snapshots_unchanged": true,
+  "at": 1793073987.0639994,
+  "model_calls": 0
+}

@@ -1,0 +1,1193 @@
+{
+  "checked_at": "2026-10-20T17:21:14.890109+00:00",
+  "status": "completed_by_native_budget_reconciliation",
+  "tasks": 168,
+  "successes": 142,
+  "accuracy": 0.8452380952380952,
+  "accuracy_percent": 84.52380952380952,
+  "snapshot": "31d8c6ba48f652c24c4a4494de0641ba76212d9d4c905e361b56cdd2a70d9e28",
+  "native_finished": 167,
+  "native_budget_exhausted": 1,
+  "all_168_usage_complete": true,
+  "new_model_calls": 0,
+  "unchanged_frozen_grade_all_168_verified": true,
+  "original_controller_status_preserved": true,
+  "rows": [
+    {
+      "position": 0,
+      "task_id": "3d9a636_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 1,
+      "task_id": "3d9a636_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 2,
+      "task_id": "3d9a636_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 3,
+      "task_id": "fd1f8fa_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 4,
+      "task_id": "fd1f8fa_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 5,
+      "task_id": "fd1f8fa_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 6,
+      "task_id": "325d6ec_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 7,
+      "task_id": "325d6ec_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 8,
+      "task_id": "325d6ec_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 9,
+      "task_id": "29a7b7e_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 10,
+      "task_id": "29a7b7e_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 11,
+      "task_id": "29a7b7e_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 12,
+      "task_id": "21abae1_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 13,
+      "task_id": "21abae1_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 14,
+      "task_id": "21abae1_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 15,
+      "task_id": "634f342_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 16,
+      "task_id": "634f342_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 17,
+      "task_id": "634f342_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 18,
+      "task_id": "8749218_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 19,
+      "task_id": "8749218_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 20,
+      "task_id": "8749218_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 21,
+      "task_id": "2d9f728_1",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 22,
+      "task_id": "2d9f728_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 23,
+      "task_id": "2d9f728_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 24,
+      "task_id": "6f4b9a5_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 25,
+      "task_id": "6f4b9a5_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 26,
+      "task_id": "6f4b9a5_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 27,
+      "task_id": "d6ac34d_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 28,
+      "task_id": "d6ac34d_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 29,
+      "task_id": "d6ac34d_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 30,
+      "task_id": "0d01c76_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 31,
+      "task_id": "0d01c76_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 32,
+      "task_id": "0d01c76_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 33,
+      "task_id": "ff58e36_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 34,
+      "task_id": "ff58e36_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 35,
+      "task_id": "ff58e36_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 36,
+      "task_id": "d18139b_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 37,
+      "task_id": "d18139b_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 38,
+      "task_id": "d18139b_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 39,
+      "task_id": "5a83b05_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 40,
+      "task_id": "5a83b05_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 41,
+      "task_id": "5a83b05_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 42,
+      "task_id": "042a9fc_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 43,
+      "task_id": "042a9fc_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 44,
+      "task_id": "042a9fc_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 45,
+      "task_id": "cef9191_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 46,
+      "task_id": "cef9191_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 47,
+      "task_id": "cef9191_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 48,
+      "task_id": "3b8fb7a_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 49,
+      "task_id": "3b8fb7a_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 50,
+      "task_id": "3b8fb7a_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 51,
+      "task_id": "afc4005_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 52,
+      "task_id": "afc4005_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 53,
+      "task_id": "afc4005_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 54,
+      "task_id": "9dabbc9_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 55,
+      "task_id": "9dabbc9_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 56,
+      "task_id": "9dabbc9_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 57,
+      "task_id": "425a494_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 58,
+      "task_id": "425a494_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 59,
+      "task_id": "425a494_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 60,
+      "task_id": "a30375d_1",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 61,
+      "task_id": "a30375d_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 62,
+      "task_id": "a30375d_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 63,
+      "task_id": "09b0ee6_1",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 64,
+      "task_id": "09b0ee6_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 65,
+      "task_id": "09b0ee6_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 66,
+      "task_id": "d194965_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 67,
+      "task_id": "d194965_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 68,
+      "task_id": "d194965_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 69,
+      "task_id": "7847649_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 70,
+      "task_id": "7847649_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 71,
+      "task_id": "7847649_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 72,
+      "task_id": "552869a_1",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 73,
+      "task_id": "552869a_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 74,
+      "task_id": "552869a_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 75,
+      "task_id": "652485c_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 76,
+      "task_id": "652485c_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 77,
+      "task_id": "652485c_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 78,
+      "task_id": "ccf4b82_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 79,
+      "task_id": "ccf4b82_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 80,
+      "task_id": "ccf4b82_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 81,
+      "task_id": "522e5e5_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 82,
+      "task_id": "522e5e5_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 83,
+      "task_id": "522e5e5_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 84,
+      "task_id": "0de03ea_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 85,
+      "task_id": "0de03ea_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 86,
+      "task_id": "0de03ea_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 87,
+      "task_id": "2c544f9_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 88,
+      "task_id": "2c544f9_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 89,
+      "task_id": "2c544f9_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 90,
+      "task_id": "270f1ff_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 91,
+      "task_id": "270f1ff_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 92,
+      "task_id": "270f1ff_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 93,
+      "task_id": "024c982_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 94,
+      "task_id": "024c982_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 95,
+      "task_id": "024c982_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 96,
+      "task_id": "9ef798c_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 97,
+      "task_id": "9ef798c_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 98,
+      "task_id": "9ef798c_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 99,
+      "task_id": "b9c5c9a_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 100,
+      "task_id": "b9c5c9a_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 101,
+      "task_id": "b9c5c9a_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 102,
+      "task_id": "90adc3f_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 103,
+      "task_id": "90adc3f_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 104,
+      "task_id": "90adc3f_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 105,
+      "task_id": "c77c005_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 106,
+      "task_id": "c77c005_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 107,
+      "task_id": "c77c005_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 108,
+      "task_id": "f323bae_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 109,
+      "task_id": "f323bae_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 110,
+      "task_id": "f323bae_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 111,
+      "task_id": "13547f5_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 112,
+      "task_id": "13547f5_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 113,
+      "task_id": "13547f5_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 114,
+      "task_id": "1150ed6_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 115,
+      "task_id": "1150ed6_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 116,
+      "task_id": "1150ed6_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 117,
+      "task_id": "31dc501_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 118,
+      "task_id": "31dc501_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 119,
+      "task_id": "31dc501_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 120,
+      "task_id": "59fae45_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 121,
+      "task_id": "59fae45_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 122,
+      "task_id": "59fae45_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 123,
+      "task_id": "b6d1104_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 124,
+      "task_id": "b6d1104_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 125,
+      "task_id": "b6d1104_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 126,
+      "task_id": "f861c32_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 127,
+      "task_id": "f861c32_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 128,
+      "task_id": "f861c32_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 129,
+      "task_id": "0a9d82a_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 130,
+      "task_id": "0a9d82a_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 131,
+      "task_id": "0a9d82a_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 132,
+      "task_id": "166f4ff_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 133,
+      "task_id": "166f4ff_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 134,
+      "task_id": "166f4ff_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 135,
+      "task_id": "9016950_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 136,
+      "task_id": "9016950_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 137,
+      "task_id": "9016950_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 138,
+      "task_id": "dac78d9_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 139,
+      "task_id": "dac78d9_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 140,
+      "task_id": "dac78d9_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 141,
+      "task_id": "f3f60f0_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 142,
+      "task_id": "f3f60f0_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 143,
+      "task_id": "f3f60f0_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 144,
+      "task_id": "ffe6d5e_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 145,
+      "task_id": "ffe6d5e_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 146,
+      "task_id": "ffe6d5e_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 147,
+      "task_id": "8ce6779_1",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 148,
+      "task_id": "8ce6779_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 149,
+      "task_id": "8ce6779_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 150,
+      "task_id": "83a7951_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 151,
+      "task_id": "83a7951_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 152,
+      "task_id": "83a7951_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 153,
+      "task_id": "3aa1a22_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 154,
+      "task_id": "3aa1a22_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 155,
+      "task_id": "3aa1a22_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 156,
+      "task_id": "32616b5_1",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 157,
+      "task_id": "32616b5_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 158,
+      "task_id": "32616b5_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 159,
+      "task_id": "986aa4e_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 160,
+      "task_id": "986aa4e_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 161,
+      "task_id": "986aa4e_3",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 162,
+      "task_id": "6b6ca61_1",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 163,
+      "task_id": "6b6ca61_2",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 164,
+      "task_id": "6b6ca61_3",
+      "reward": 1.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 165,
+      "task_id": "bde252e_1",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 166,
+      "task_id": "bde252e_2",
+      "reward": 0.0,
+      "native_status": "finished",
+      "complete_usage": true
+    },
+    {
+      "position": 167,
+      "task_id": "bde252e_3",
+      "reward": 0.0,
+      "native_status": "error",
+      "complete_usage": true
+    }
+  ]
+}

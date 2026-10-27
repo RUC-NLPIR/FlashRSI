@@ -1,0 +1,25 @@
+{
+  "experiment": "cassi-restricted-ahe-appworld-20261027",
+  "archive_sha256": "e543859f9f88c06714fd3ce37ae021947611b735034b00bc2466f7efe571455f",
+  "archive_bytes": 201421845,
+  "source_files": 21304,
+  "source_file_bytes": 1737007698,
+  "unique_payload_files": 10018,
+  "credential_redacted_files": 0,
+  "source_roots_untouched": true,
+  "snapshots_unchanged": true,
+  "at": 1793073876.1764672,
+  "model_calls": 0,
+  "machine": "ahewo",
+  "download_sha256_verified": true,
+  "every_manifest_file_or_hardlink_readback_verified": 21304,
+  "regular_members_scanned_including_nested_archives": 10019,
+  "credential_scan": "passed",
+  "parts": [
+    {
+      "name": "full-run.tar.gz",
+      "bytes": 201421845,
+      "sha256": "e543859f9f88c06714fd3ce37ae021947611b735034b00bc2466f7efe571455f"
+    }
+  ]
+}

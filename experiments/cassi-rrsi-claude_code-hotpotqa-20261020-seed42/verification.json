@@ -1,0 +1,27 @@
+{
+  "machine": "hotpotqa",
+  "status": "local_archive_sha256_verified",
+  "group": "hotpotqa-claude_code",
+  "archive": "/root/rrsi-archive-trial-20261020-155604-029086/hotpotqa-claude_code/full-run.tar.gz",
+  "archive_bytes": 356673093,
+  "archive_sha256": "219e341a43f912214a1520baade8110c76c742cccdb36ab2d43e4b6799c7b77c",
+  "raw_file_bytes": 2586760104,
+  "unique_payload_bytes": 2586642093,
+  "verified_entries": 18654,
+  "verified_files": 15104,
+  "mismatches": [],
+  "changing_files": [],
+  "result_sha256": "07d114f9e2bf0431a7e9748791d5792d964435970f089d5fcf9d0747fe758b77",
+  "local_downloaded": true,
+  "originals_deleted": false,
+  "omissions": [
+    "OOD experiments (NQ/MuSiQue/BFCL)",
+    "Shared installed environments, wheel caches, Docker images and benchmark installation (AppWorld data)",
+    "Unrelated/live Mini runs on AppWorld",
+    "Routine duplicated hourly audit exports on AppWorld"
+  ],
+  "completed_at": "2026-10-20T07:59:23.589966+00:00",
+  "local_archive": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI-Lite-sync\\experiments\\cassi-rrsi-claude_code-hotpotqa-20261020-seed42\\full-run.tar.gz",
+  "verified_at": "2026-10-20T08:20:17.101057+00:00",
+  "remote_originals_preserved": true
+}

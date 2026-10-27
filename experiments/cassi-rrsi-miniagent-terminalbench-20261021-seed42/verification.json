@@ -1,0 +1,36 @@
+{
+  "status": "local_full_archive_and_every_file_sha256_verified",
+  "group": "terminalbench-miniagent",
+  "archive": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI-Lite-sync\\experiments\\cassi-rrsi-miniagent-terminalbench-20261021-seed42\\full-run.tar.gz",
+  "archive_bytes": 6790173625,
+  "archive_sha256": "d36c5d3bda46eaff76cea39f0eebaf5ad6cb565a32e0ed23d5b8917b59d4b1fc",
+  "raw_file_bytes": 24210827185,
+  "unique_payload_bytes": 15263917165,
+  "verified_entries": 149144,
+  "verified_files": 133935,
+  "credential_redacted_files": 11,
+  "mismatches": [],
+  "changing_files": [],
+  "result_sha256": "612bf99aee0bb5118e654c4896d916232b8e88ee732826b0ccf585a6497787a3",
+  "local_downloaded": true,
+  "originals_deleted": false,
+  "omissions": [
+    "Previously archived Claude Code group and its cleared payloads",
+    "SWE and all other OOD experiments",
+    "Docker engine storage/installed images, registry transfer cache, virtualenvs, wheelhouses and benchmark installation",
+    "Routine duplicate full hourly/checkpoint audit exports and provider credentials"
+  ],
+  "completed_at": "2026-10-21T06:38:57.836231+00:00",
+  "verified_at": "2026-10-21T06:48:31.640785+00:00",
+  "verified_entries_local": 149144,
+  "remote_originals_preserved": true,
+  "selected_snapshot_sha256": "2a5a914d0117e5b114e2da86a9abfb0ca9c331839e47c1c6bdf97344038ebb6d",
+  "initial_snapshot_sha256": "e25d2bac3f0c013e02b5380d93279d289da7619742386f5b8e010157df8a017f",
+  "selected_snapshot": "1dd56206dc1f497f48720d2c4394d35850588bba8b82af80c5aed2ef912d09ca",
+  "initial_snapshot": "15844806600d7865c28a9fc41b1024c20f8c80d3adb6c77efbe36dfc670418d5",
+  "final_test": {
+    "tasks": 30,
+    "successes": 23,
+    "accuracy": 0.7666666666666667
+  }
+}
