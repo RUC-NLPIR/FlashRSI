@@ -1,0 +1,13 @@
+{
+  "public_protocol_name": "sk-ecdsa-sha2-nistp256-cert-v01@openssh.com",
+  "matched_prefix_sha256": "3ba30ddc57c5e012f28276fa224e3485067a139cd220da03b730060afb01b2b9",
+  "official_source": "https://github.com/openssh/openssh-portable/blob/master/PROTOCOL.u2f",
+  "observed_matches": 11,
+  "qcow2_sha256": "a7b98df287382a6d50c7c5107d8fb4368d4ed5d335cd7fd1b643772bb87aded4",
+  "known_secret_matches": 0,
+  "only_exact_public_name_allowed": true,
+  "unlisted_token_negative_control": "blocked",
+  "known_secret_control": "still blocked",
+  "source_bytes_changed": false,
+  "full_manifest_privacy_readback_still_required": true
+}

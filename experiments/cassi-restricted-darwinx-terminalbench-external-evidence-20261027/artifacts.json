@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "storage": "GitHub draft Release assets",
+  "release_id": 425045362,
+  "release_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/tag/untagged-be5c775d902c78a5f06f",
+  "draft": true,
+  "experiment": "cassi-restricted-darwinx-terminalbench-external-evidence-20261027",
+  "source_archive_sha256": "d1dbf8caa2133fb3042c570027147bdfc79ac58accd0e29990f743db9c091af2",
+  "archive_parts_in_order": [
+    {
+      "name": "full-run.tar.gz.part001",
+      "bytes": 1000000000,
+      "sha256": "0b94e42ab3f3794b6a3f36a44359cb914e7309b58b54da7eb45ae188f63b022c"
+    },
+    {
+      "name": "full-run.tar.gz.part002",
+      "bytes": 1000000000,
+      "sha256": "109a5298458e710eac42f61a7df5620eb9f5371e66677b4edc27f6e3fd1b456b"
+    },
+    {
+      "name": "full-run.tar.gz.part003",
+      "bytes": 1000000000,
+      "sha256": "c8ae76e0fad7de151b998b303c6a007e3ccec5f27035a375a4504299889d6480"
+    },
+    {
+      "name": "full-run.tar.gz.part004",
+      "bytes": 1000000000,
+      "sha256": "eb3c9fe9ddb5c2105496b53849d0329ace3107b32bcb9d96bb88124ed43dd9ab"
+    },
+    {
+      "name": "full-run.tar.gz.part005",
+      "bytes": 1000000000,
+      "sha256": "948dfa8573eda62e26adb148c1d4e070f92e149e941e58e55cf0d154c8689545"
+    },
+    {
+      "name": "full-run.tar.gz.part006",
+      "bytes": 1000000000,
+      "sha256": "a06093d79a7ffa048c21dcc321e1d190d8a2e301d74461a65f2d588d668564d9"
+    },
+    {
+      "name": "full-run.tar.gz.part007",
+      "bytes": 1000000000,
+      "sha256": "a9560caba8b2e80111491dd56d59cdf68b46539cc4a52cd756810add6fdf95c0"
+    },
+    {
+      "name": "full-run.tar.gz.part008",
+      "bytes": 1000000000,
+      "sha256": "adb1dabca3100bd5159e4019edc81680a9de1b7711228d51a33f37529dd5c9b3"
+    },
+    {
+      "name": "full-run.tar.gz.part009",
+      "bytes": 1000000000,
+      "sha256": "1b51fcf6100e34c755f8b10577c8cd114ac8d582064a9beb4341bdeff0da2bef"
+    },
+    {
+      "name": "full-run.tar.gz.part010",
+      "bytes": 1000000000,
+      "sha256": "38c9e1e61f013d2760fdebf4d647af9353cdc735ee015bc25e188d72ff585516"
+    },
+    {
+      "name": "full-run.tar.gz.part011",
+      "bytes": 1000000000,
+      "sha256": "eb15a96b3e3aa3a0c3df8b3242fad1cc82557a5a04c83a65620ecdadb0dc2481"
+    },
+    {
+      "name": "full-run.tar.gz.part012",
+      "bytes": 1000000000,
+      "sha256": "706a5a0dba8b535cbdfb7bc49b3287e2deafb28b52404e4a726a16e2b34a6d96"
+    },
+    {
+      "name": "full-run.tar.gz.part013",
+      "bytes": 738102368,
+      "sha256": "6abb9ad2be0458c501794c1d9f3a68c4d122f4c25fdb4614d702d7825dcc64b6"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": 681437745,
+      "release_id": 425045362,
+      "name": "cassi-restricted-darwinx-terminalbench-external-evidence-20261027--file-manifest.json.gz",
+      "relative_path": "experiments/cassi-restricted-darwinx-terminalbench-external-evidence-20261027/file-manifest.json.gz",
+      "bytes": 626,
+      "sha256": "534bd53e30f4259bd5650187e5c0a4232da65528f48feb8a8c09963d6272c9ee",
+      "github_server_digest": "sha256:534bd53e30f4259bd5650187e5c0a4232da65528f48feb8a8c09963d6272c9ee",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/681437745",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-restricted-darwinx-terminalbench-external-evidence-20261027--file-manifest.json.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793101614.3829663
+    }
+  ],
+  "download_note": "Draft access requires repository push permission. Download via the release UI or authenticated assets API; concatenate archive parts lexically. Verify each SHA-256 before extraction. Git clone does not fetch release assets.",
+  "verified": "Every asset size and GitHub-computed SHA-256 matches the local verified file. A small pilot evidence archive was fully downloaded and hashed; full large-archive download readback is not claimed.",
+  "model_calls": 0
+}
