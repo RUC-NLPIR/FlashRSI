@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "storage": "GitHub draft Release assets",
+  "release_id": 425045362,
+  "release_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/tag/untagged-be5c775d902c78a5f06f",
+  "draft": true,
+  "experiment": "cassi-rrsi-claude_code-appworld-20261020-seed42",
+  "source_archive_sha256": "575cf46d4be2468d58ae8f7cdb9d6a47c1319f410bc1b3200d5d9263d56554e1",
+  "archive_parts_in_order": [
+    {
+      "name": "full-run.tar.gz.part001",
+      "bytes": 1000000000,
+      "sha256": "b79ddd48f274da3433afca9d0b0e75aeb648e2c29696f8efce938480978e5c9d"
+    },
+    {
+      "name": "full-run.tar.gz.part002",
+      "bytes": 1000000000,
+      "sha256": "a52f586b396c98e23834acd6a3468390a70a3a113641b322031248df804fe0d7"
+    },
+    {
+      "name": "full-run.tar.gz.part003",
+      "bytes": 697909841,
+      "sha256": "7d4761980fc7266e8292454684495ec7e46b2d6632c2462bda5303603d25491e"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": 680588040,
+      "release_id": 425045362,
+      "name": "cassi-rrsi-claude_code-appworld-20261020-seed42--full-run.tar.gz.part001",
+      "relative_path": "experiments/cassi-rrsi-claude_code-appworld-20261020-seed42/full-run.tar.gz.part001",
+      "bytes": 1000000000,
+      "sha256": "b79ddd48f274da3433afca9d0b0e75aeb648e2c29696f8efce938480978e5c9d",
+      "github_server_digest": "sha256:b79ddd48f274da3433afca9d0b0e75aeb648e2c29696f8efce938480978e5c9d",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680588040",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-rrsi-claude_code-appworld-20261020-seed42--full-run.tar.gz.part001",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793079921.8588605
+    },
+    {
+      "asset_id": 680588029,
+      "release_id": 425045362,
+      "name": "cassi-rrsi-claude_code-appworld-20261020-seed42--full-run.tar.gz.part002",
+      "relative_path": "experiments/cassi-rrsi-claude_code-appworld-20261020-seed42/full-run.tar.gz.part002",
+      "bytes": 1000000000,
+      "sha256": "a52f586b396c98e23834acd6a3468390a70a3a113641b322031248df804fe0d7",
+      "github_server_digest": "sha256:a52f586b396c98e23834acd6a3468390a70a3a113641b322031248df804fe0d7",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680588029",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-rrsi-claude_code-appworld-20261020-seed42--full-run.tar.gz.part002",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793079872.1006532
+    },
+    {
+      "asset_id": 680656095,
+      "release_id": 425045362,
+      "name": "cassi-rrsi-claude_code-appworld-20261020-seed42--full-run.tar.gz.part003",
+      "relative_path": "experiments/cassi-rrsi-claude_code-appworld-20261020-seed42/full-run.tar.gz.part003",
+      "bytes": 697909841,
+      "sha256": "7d4761980fc7266e8292454684495ec7e46b2d6632c2462bda5303603d25491e",
+      "github_server_digest": "sha256:7d4761980fc7266e8292454684495ec7e46b2d6632c2462bda5303603d25491e",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680656095",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-rrsi-claude_code-appworld-20261020-seed42--full-run.tar.gz.part003",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793081869.7276492
+    },
+    {
+      "asset_id": 680652680,
+      "release_id": 425045362,
+      "name": "cassi-rrsi-claude_code-appworld-20261020-seed42--manifest.json.gz",
+      "relative_path": "experiments/cassi-rrsi-claude_code-appworld-20261020-seed42/manifest.json.gz",
+      "bytes": 2189637,
+      "sha256": "7cb7bfbfbcef1f3598d34ab8af5fac240329f0f6aa4357d3dea4f80b6dab1687",
+      "github_server_digest": "sha256:7cb7bfbfbcef1f3598d34ab8af5fac240329f0f6aa4357d3dea4f80b6dab1687",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680652680",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-rrsi-claude_code-appworld-20261020-seed42--manifest.json.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793081596.945214
+    }
+  ],
+  "download_note": "Draft access requires repository push permission. Download via the release UI or authenticated assets API; concatenate archive parts lexically. Verify each SHA-256 before extraction. Git clone does not fetch release assets.",
+  "verified": "Every asset size and GitHub-computed SHA-256 matches the local verified file. A small pilot evidence archive was fully downloaded and hashed; full large-archive download readback is not claimed.",
+  "model_calls": 0
+}
