@@ -1,0 +1,21 @@
+{
+  "experiment": "cassi-rrsi-claude_code-searchqa-20261020-seed42",
+  "source_archive_sha256": "8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac",
+  "source_archive_bytes": 722020321,
+  "archive_readback_scanned_regular_members_including_nested_archives": 49704,
+  "known_credentials_and_snapshot_components_scan": "passed",
+  "parts": [
+    {
+      "name": "full-run.tar.gz",
+      "bytes": 722020321,
+      "sha256": "8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac"
+    }
+  ],
+  "synthetic_unit_test_token_sha256_allowlist": [
+    "1a754d0bf904d9eb1ce81bc0f0d04f73d4ceceab1fb3c62aff6e6f3097bcf3dd",
+    "1ae7a88571bf9695777caee1ec5693eb5b8d31264b3267bb2f98f884b6ff5a51"
+  ],
+  "source_unchanged": true,
+  "model_calls": 0,
+  "at": 1793076570.2849917
+}
