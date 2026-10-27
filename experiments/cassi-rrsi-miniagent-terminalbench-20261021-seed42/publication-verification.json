@@ -1,0 +1,61 @@
+{
+  "experiment": "cassi-rrsi-miniagent-terminalbench-20261021-seed42",
+  "source_archive_sha256": "d36c5d3bda46eaff76cea39f0eebaf5ad6cb565a32e0ed23d5b8917b59d4b1fc",
+  "source_archive_bytes": 6790173625,
+  "archive_readback_scanned_regular_members_including_nested_archives": 55612,
+  "known_credentials_and_snapshot_components_scan": "passed",
+  "parts": [
+    {
+      "name": "full-run.tar.gz.part001",
+      "bytes": 1000000000,
+      "sha256": "66a94490b3ae7b6e1834b7ab98b89c0ad4c4b7958de39e2316e2a1f147a0c575"
+    },
+    {
+      "name": "full-run.tar.gz.part002",
+      "bytes": 1000000000,
+      "sha256": "43e2f0ee4af89903715c6833be135a9d7b43cf91406069f452bfd3d3650ac2b8"
+    },
+    {
+      "name": "full-run.tar.gz.part003",
+      "bytes": 1000000000,
+      "sha256": "5d970a88ea038f18e0bd33164882ac94bd8bee2b93b3a0f848b71e18fd8a42c7"
+    },
+    {
+      "name": "full-run.tar.gz.part004",
+      "bytes": 1000000000,
+      "sha256": "74b79af7ac7e30dd72f051178ad67a83690ac1440cd2382bc3296bdf7cacda16"
+    },
+    {
+      "name": "full-run.tar.gz.part005",
+      "bytes": 1000000000,
+      "sha256": "9627c33331f7f27ff60dfb945cae2ab9e561f9b318a3a4d6dbd77ea0372af707"
+    },
+    {
+      "name": "full-run.tar.gz.part006",
+      "bytes": 1000000000,
+      "sha256": "22ee8d4197b34ea464bc10b077b0a98145f71134cb36e39002a149bd6bb577ec"
+    },
+    {
+      "name": "full-run.tar.gz.part007",
+      "bytes": 790173625,
+      "sha256": "72b61c742f4fc1b74d82fa5ad7d9b8bb56d0198a2bbc673f17d388155f716734"
+    }
+  ],
+  "synthetic_unit_test_token_sha256_allowlist": [
+    "1a754d0bf904d9eb1ce81bc0f0d04f73d4ceceab1fb3c62aff6e6f3097bcf3dd",
+    "1ae7a88571bf9695777caee1ec5693eb5b8d31264b3267bb2f98f884b6ff5a51",
+    "98fcb50cc171a81cb8965489f906ee377c4663d313c3f87c157f651f429dabac"
+  ],
+  "historical_incomplete_downloads": [
+    {
+      "member": "records/recoveries/mini-mteb-resumed-20261020-1645/attempt/diagnostics/checkpoints/target-0006-010-caffe-cifar-10/agent-workspace/files/dl/cifar-10-binary.tar.gz",
+      "bytes": 16448000,
+      "sha256": "e71c8736b840c31c1708771efaf439d8eef213dcb8fa9e2de1cea8691c9e290f",
+      "original_nested_error": "unexpected end of data",
+      "handling": "Original historical interrupted dataset download preserved unchanged. Readable decompressed prefix and all raw member bytes scanned; nested tar is incomplete, not represented as restorable."
+    }
+  ],
+  "source_unchanged": true,
+  "model_calls": 0,
+  "at": 1793078763.7887664
+}

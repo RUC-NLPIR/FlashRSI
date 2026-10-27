@@ -1,0 +1,9 @@
+[
+  {
+    "member": "records/recoveries/mini-mteb-resumed-20261020-1645/attempt/diagnostics/checkpoints/target-0006-010-caffe-cifar-10/agent-workspace/files/dl/cifar-10-binary.tar.gz",
+    "bytes": 16448000,
+    "sha256": "e71c8736b840c31c1708771efaf439d8eef213dcb8fa9e2de1cea8691c9e290f",
+    "original_nested_error": "unexpected end of data",
+    "handling": "Original historical interrupted dataset download preserved unchanged. Readable decompressed prefix and all raw member bytes scanned; nested tar is incomplete, not represented as restorable."
+  }
+]
