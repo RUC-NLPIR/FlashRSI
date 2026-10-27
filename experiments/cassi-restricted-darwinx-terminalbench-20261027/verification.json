@@ -1,0 +1,13 @@
+{
+  "experiment": "cassi-restricted-darwinx-terminalbench-20261027",
+  "archive_sha256": "d8b161db8b995bf5eac6fd0583576a6660f8ffde751e4d38193459be2cba0693",
+  "archive_bytes": 26228015936,
+  "source_files": 16347,
+  "source_file_bytes": 38022001062,
+  "unique_payload_files": 9227,
+  "credential_redacted_files": 0,
+  "source_roots_untouched": true,
+  "snapshots_unchanged": true,
+  "at": 1793076589.6361794,
+  "model_calls": 0
+}
