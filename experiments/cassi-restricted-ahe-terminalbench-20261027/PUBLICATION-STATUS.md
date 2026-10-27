@@ -1,0 +1,1 @@
+Archive assets for this group are uploaded and remotely checksum-verified. The overall multi-machine publication may still be in progress; consult the root publication index before retiring source machines.
