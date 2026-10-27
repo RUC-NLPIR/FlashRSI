@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "storage": "GitHub draft Release assets",
+  "release_id": 425045362,
+  "release_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/tag/untagged-be5c775d902c78a5f06f",
+  "draft": true,
+  "experiment": "cassi-restricted-meta_harness-appworld-20261027",
+  "source_archive_sha256": "be7ea502baccb00e0c99b35095ef8da8cd66e1b841e3357894302a4187b139fc",
+  "archive_parts_in_order": [
+    {
+      "name": "full-run.tar.gz",
+      "bytes": 295165987,
+      "sha256": "be7ea502baccb00e0c99b35095ef8da8cd66e1b841e3357894302a4187b139fc"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": 680572434,
+      "release_id": 425045362,
+      "name": "cassi-restricted-meta_harness-appworld-20261027--file-manifest.json.gz",
+      "relative_path": "experiments/cassi-restricted-meta_harness-appworld-20261027/file-manifest.json.gz",
+      "bytes": 2038440,
+      "sha256": "c0d41f8fb4171ee47e1f19486db76b342841651156508e08ae359679ae8c3be8",
+      "github_server_digest": "sha256:c0d41f8fb4171ee47e1f19486db76b342841651156508e08ae359679ae8c3be8",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680572434",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-restricted-meta_harness-appworld-20261027--file-manifest.json.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793079170.4246833
+    },
+    {
+      "asset_id": 680572379,
+      "release_id": 425045362,
+      "name": "cassi-restricted-meta_harness-appworld-20261027--full-run.tar.gz",
+      "relative_path": "experiments/cassi-restricted-meta_harness-appworld-20261027/full-run.tar.gz",
+      "bytes": 295165987,
+      "sha256": "be7ea502baccb00e0c99b35095ef8da8cd66e1b841e3357894302a4187b139fc",
+      "github_server_digest": "sha256:be7ea502baccb00e0c99b35095ef8da8cd66e1b841e3357894302a4187b139fc",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680572379",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-restricted-meta_harness-appworld-20261027--full-run.tar.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793079229.956639
+    }
+  ],
+  "download_note": "Draft access requires repository push permission. Download via the release UI or authenticated assets API; concatenate archive parts lexically. Verify each SHA-256 before extraction. Git clone does not fetch release assets.",
+  "verified": "Every asset size and GitHub-computed SHA-256 matches the local verified file. A small pilot evidence archive was fully downloaded and hashed; full large-archive download readback is not claimed.",
+  "model_calls": 0
+}

@@ -1,3 +1,1 @@
-# Publication pending large archive transport
-
-These are the preserved local experiment metadata and original local verification records. The complete archive remains preserved locally and has not been uploaded: GitHub currently rejects LFS requests with HTTP403 because the repository exceeded its LFS budget. Do not merge this partial publication as complete or delete the source machines. Full publication verification will be committed after the selected transport succeeds.
+All 23 publication groups are complete. This group’s archive parts and compressed manifest have verified server sizes and SHA-256; branch metadata was read back and Git blob hashes verified. See ../RESTRICTED_RRSI_20261027.md and the final publication proof. The Release remains a draft and human merge is pending. Source machine retirement is not authorized.

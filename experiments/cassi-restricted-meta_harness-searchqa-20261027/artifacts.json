@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "storage": "GitHub draft Release assets",
+  "release_id": 425045362,
+  "release_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/tag/untagged-be5c775d902c78a5f06f",
+  "draft": true,
+  "experiment": "cassi-restricted-meta_harness-searchqa-20261027",
+  "source_archive_sha256": "0341616b04ae4106a749f0f02264d77756285ec921c2fb9c34f4f0c73fc00843",
+  "archive_parts_in_order": [
+    {
+      "name": "full-run.tar.gz",
+      "bytes": 517683133,
+      "sha256": "0341616b04ae4106a749f0f02264d77756285ec921c2fb9c34f4f0c73fc00843"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": 680581970,
+      "release_id": 425045362,
+      "name": "cassi-restricted-meta_harness-searchqa-20261027--file-manifest.json.gz",
+      "relative_path": "experiments/cassi-restricted-meta_harness-searchqa-20261027/file-manifest.json.gz",
+      "bytes": 2742784,
+      "sha256": "a2f8036c766cece5f5666340bd96ee86e307984acb2f643a8aaf03044541250b",
+      "github_server_digest": "sha256:a2f8036c766cece5f5666340bd96ee86e307984acb2f643a8aaf03044541250b",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680581970",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-restricted-meta_harness-searchqa-20261027--file-manifest.json.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793079421.3616982
+    },
+    {
+      "asset_id": 680582055,
+      "release_id": 425045362,
+      "name": "cassi-restricted-meta_harness-searchqa-20261027--full-run.tar.gz",
+      "relative_path": "experiments/cassi-restricted-meta_harness-searchqa-20261027/full-run.tar.gz",
+      "bytes": 517683133,
+      "sha256": "0341616b04ae4106a749f0f02264d77756285ec921c2fb9c34f4f0c73fc00843",
+      "github_server_digest": "sha256:0341616b04ae4106a749f0f02264d77756285ec921c2fb9c34f4f0c73fc00843",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680582055",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-restricted-meta_harness-searchqa-20261027--full-run.tar.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793079537.558364
+    }
+  ],
+  "download_note": "Draft access requires repository push permission. Download via the release UI or authenticated assets API; concatenate archive parts lexically. Verify each SHA-256 before extraction. Git clone does not fetch release assets.",
+  "verified": "Every asset size and GitHub-computed SHA-256 matches the local verified file. A small pilot evidence archive was fully downloaded and hashed; full large-archive download readback is not claimed.",
+  "model_calls": 0
+}

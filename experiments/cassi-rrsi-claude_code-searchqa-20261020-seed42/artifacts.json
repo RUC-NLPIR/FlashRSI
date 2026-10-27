@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "storage": "GitHub draft Release assets",
+  "release_id": 425045362,
+  "release_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/tag/untagged-be5c775d902c78a5f06f",
+  "draft": true,
+  "experiment": "cassi-rrsi-claude_code-searchqa-20261020-seed42",
+  "source_archive_sha256": "8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac",
+  "archive_parts_in_order": [
+    {
+      "name": "full-run.tar.gz",
+      "bytes": 722020321,
+      "sha256": "8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": 680936014,
+      "release_id": 425045362,
+      "name": "cassi-rrsi-claude_code-searchqa-20261020-seed42--full-run.tar.gz",
+      "relative_path": "experiments/cassi-rrsi-claude_code-searchqa-20261020-seed42/full-run.tar.gz",
+      "bytes": 722020321,
+      "sha256": "8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac",
+      "github_server_digest": "sha256:8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680936014",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-rrsi-claude_code-searchqa-20261020-seed42--full-run.tar.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793089616.6638002
+    },
+    {
+      "asset_id": 680923287,
+      "release_id": 425045362,
+      "name": "cassi-rrsi-claude_code-searchqa-20261020-seed42--manifest.json.gz",
+      "relative_path": "experiments/cassi-rrsi-claude_code-searchqa-20261020-seed42/manifest.json.gz",
+      "bytes": 3475028,
+      "sha256": "40564663fc5d189013b14464edb2aad333f6753c74c3cffe1b96bcd2844592b1",
+      "github_server_digest": "sha256:40564663fc5d189013b14464edb2aad333f6753c74c3cffe1b96bcd2844592b1",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/680923287",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-rrsi-claude_code-searchqa-20261020-seed42--manifest.json.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793089128.8301675
+    }
+  ],
+  "download_note": "Draft access requires repository push permission. Download via the release UI or authenticated assets API; concatenate archive parts lexically. Verify each SHA-256 before extraction. Git clone does not fetch release assets.",
+  "verified": "Every asset size and GitHub-computed SHA-256 matches the local verified file. A small pilot evidence archive was fully downloaded and hashed; full large-archive download readback is not claimed.",
+  "model_calls": 0
+}

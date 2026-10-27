@@ -1,3 +1,1 @@
-# Partial publication: metadata only
-
-The archive has passed local source/manifest/readback checks, but GitHub rejected its LFS upload with HTTP403 (repository LFS budget exceeded). Archive parts and compressed file manifest remain preserved locally; their presence here is pending the storage decision. Do not merge this upload as complete or delete source machines until final remote verification is recorded.
+All 23 publication groups are complete. This group’s archive parts and compressed manifest have verified server sizes and SHA-256; branch metadata was read back and Git blob hashes verified. See ../RESTRICTED_RRSI_20261027.md and the final publication proof. The Release remains a draft and human merge is pending. Source machine retirement is not authorized.
