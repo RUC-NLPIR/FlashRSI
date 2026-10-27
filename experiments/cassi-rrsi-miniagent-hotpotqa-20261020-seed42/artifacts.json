@@ -27,6 +27,20 @@
       "server_checksum_verified": true,
       "full_download_readback_verified": false,
       "at": 1793090719.902069
+    },
+    {
+      "asset_id": 681807401,
+      "release_id": 425045362,
+      "name": "cassi-rrsi-miniagent-hotpotqa-20261020-seed42--file-manifest.json.gz",
+      "relative_path": "experiments/cassi-rrsi-miniagent-hotpotqa-20261020-seed42/file-manifest.json.gz",
+      "bytes": 596727,
+      "sha256": "978a28ff69f4fb611eb3f7da50604691f60cec0698dc4ab598b5d8147c68bd28",
+      "github_server_digest": "sha256:978a28ff69f4fb611eb3f7da50604691f60cec0698dc4ab598b5d8147c68bd28",
+      "api_url": "https://api.github.com/repos/ignorejjj/FlashRSI-Lite/releases/assets/681807401",
+      "browser_download_url": "https://github.com/ignorejjj/FlashRSI-Lite/releases/download/untagged-be5c775d902c78a5f06f/cassi-rrsi-miniagent-hotpotqa-20261020-seed42--file-manifest.json.gz",
+      "server_checksum_verified": true,
+      "full_download_readback_verified": false,
+      "at": 1793110698.7518463
     }
   ],
   "download_note": "Draft access requires repository push permission. Download via the release UI or authenticated assets API; concatenate archive parts lexically. Verify each SHA-256 before extraction. Git clone does not fetch release assets.",
