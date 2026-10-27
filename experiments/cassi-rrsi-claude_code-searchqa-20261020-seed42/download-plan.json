@@ -1,0 +1,28 @@
+{
+  "authorized_by_user": "可以下载下来",
+  "source": {
+    "machine": "searchqa",
+    "status": "remote_archive_verified",
+    "group": "searchqa-claude_code",
+    "archive": "/root/rrsi-archive-trial-20261020-155604-029086/searchqa-claude_code/full-run.tar.gz",
+    "archive_bytes": 722020321,
+    "archive_sha256": "8b9f561d67d35b050b62ffa8493882f482ff475899e42760733db4c6d13c9cac",
+    "raw_file_bytes": 5649768691,
+    "unique_payload_bytes": 5649588623,
+    "verified_entries": 60871,
+    "verified_files": 49732,
+    "mismatches": [],
+    "changing_files": [],
+    "result_sha256": "c563fdd56e061ae47d282d2429581e83677808c2286b0bc35ad6740a7a491927",
+    "local_downloaded": false,
+    "originals_deleted": false,
+    "omissions": [
+      "OOD experiments (NQ/MuSiQue/BFCL)",
+      "Shared installed environments, wheel caches, Docker images and benchmark installation (AppWorld data)",
+      "Unrelated/live Mini runs on AppWorld",
+      "Routine duplicated hourly audit exports on AppWorld"
+    ],
+    "completed_at": "2026-10-20T08:01:43.229836+00:00"
+  },
+  "created_at": "2026-10-20T08:20:16.603273+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "status": "finished",
+  "pid": 41387,
+  "benchmark": "terminal_bench",
+  "harness": "miniagent",
+  "run_dir": "/root/data/rrsi-terminal-preparation-20261017/recoveries/mini-filter-finalized-20261020-1940/attempt",
+  "started_at": "2026-10-20T11:37:11.728867+00:00",
+  "finished_at": "2026-10-20T11:37:21.922248+00:00",
+  "selected_at": "2026-10-20T11:37:21.652105+00:00",
+  "initial_snapshot": "15844806600d7865c28a9fc41b1024c20f8c80d3adb6c77efbe36dfc670418d5",
+  "selected_snapshot": "1dd56206dc1f497f48720d2c4394d35850588bba8b82af80c5aed2ef912d09ca",
+  "selection": "native final incumbent",
+  "dev_used_for_selection": false,
+  "test_used_for_selection": false,
+  "baseline_test": null,
+  "baseline_test_skipped_by_user": true,
+  "evolved_test": {
+    "tasks": 30,
+    "successes": 23.0,
+    "reward": 0.7666666666666667
+  },
+  "independent_final_test": null,
+  "final_test_new_calls": 30,
+  "initial_test_new_calls": 0,
+  "evaluation_policy": "selected_snapshot_test_only",
+  "dev_evaluations": 0,
+  "train_tasks": 20,
+  "test_tasks": 30
+}
