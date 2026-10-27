@@ -1,0 +1,126 @@
+{
+  "experiment": "cassi-restricted-ahe-terminalbench-external-evidence-20261027",
+  "archive_sha256": "461481be7058e668194582ab06a7a8de6c98b2729e4ee06df3b4ca54d0c88ec3",
+  "archive_bytes": 17632125021,
+  "source_files": 9,
+  "source_file_bytes": 17715273028,
+  "unique_payload_files": 9,
+  "credential_redacted_files": 0,
+  "source_roots_untouched": true,
+  "snapshots_unchanged": true,
+  "at": 1793090249.9411626,
+  "model_calls": 0,
+  "machine": "ahewo",
+  "download_sha256_verified": true,
+  "every_manifest_file_or_hardlink_readback_verified": 9,
+  "regular_members_scanned_including_nested_archives": 156216,
+  "credential_scan": "passed",
+  "parts": [
+    {
+      "name": "full-run.tar.gz.part001",
+      "bytes": 1000000000,
+      "sha256": "d99d152511c6c0856d1194e4f118b624cca4de4c281ef118a9e2c31247bd6ec4"
+    },
+    {
+      "name": "full-run.tar.gz.part002",
+      "bytes": 1000000000,
+      "sha256": "3698055a72226fe8a7f4edc1c858fd49d53342137962060c51586aeb82ba7d6f"
+    },
+    {
+      "name": "full-run.tar.gz.part003",
+      "bytes": 1000000000,
+      "sha256": "13391b15b6ca202592cfdebc8a0c4450b3a00136f2c42c75b92d2004042e0add"
+    },
+    {
+      "name": "full-run.tar.gz.part004",
+      "bytes": 1000000000,
+      "sha256": "70f2d68af70734c63eac9f855ed33bcfdf6d30aa845bd4fbbd284dcce5cd9f92"
+    },
+    {
+      "name": "full-run.tar.gz.part005",
+      "bytes": 1000000000,
+      "sha256": "654e8c51217fe6692224cfc708f2a1ad7949cb8cd6b1bb73d033e3d437d9c536"
+    },
+    {
+      "name": "full-run.tar.gz.part006",
+      "bytes": 1000000000,
+      "sha256": "2eb02c80044ce1f81aa5fba0cb5120a912405991977b098dd1717533a2d41b4f"
+    },
+    {
+      "name": "full-run.tar.gz.part007",
+      "bytes": 1000000000,
+      "sha256": "e93222d2e3928bdf725bb15cdbd7e1a98fdf167ccf9ed2983db125bdb6264b32"
+    },
+    {
+      "name": "full-run.tar.gz.part008",
+      "bytes": 1000000000,
+      "sha256": "1197eb367dc2c624e19526381c3427f361469a79ac2cbffcb9ecb9eea0b89edb"
+    },
+    {
+      "name": "full-run.tar.gz.part009",
+      "bytes": 1000000000,
+      "sha256": "bf2d33f4dddf727a1c563ff53d242770dc96368770d4a79cbe15af1e00d9708c"
+    },
+    {
+      "name": "full-run.tar.gz.part010",
+      "bytes": 1000000000,
+      "sha256": "a47e6da80424644855609d54a3be69eddbd4060048a8c9a93849efdb8a1f9cc9"
+    },
+    {
+      "name": "full-run.tar.gz.part011",
+      "bytes": 1000000000,
+      "sha256": "f7507c224278f9260c895498197544dc73ee6cccd37a8ab70e7b5b653b37b15c"
+    },
+    {
+      "name": "full-run.tar.gz.part012",
+      "bytes": 1000000000,
+      "sha256": "c7cb8b09185b500c413af55ab445e1fa61971e6606464882f0028807b6f350f0"
+    },
+    {
+      "name": "full-run.tar.gz.part013",
+      "bytes": 1000000000,
+      "sha256": "811a6ba7879de1668c6f70f69221cb6fd1ea531e15ff867208fadee7c9e4268b"
+    },
+    {
+      "name": "full-run.tar.gz.part014",
+      "bytes": 1000000000,
+      "sha256": "cdefa9d22d5717c242ca7e4acfea6986937ffe898622cfc6c3a7d38a31b04ba2"
+    },
+    {
+      "name": "full-run.tar.gz.part015",
+      "bytes": 1000000000,
+      "sha256": "b552587acc81544bec8807b8fa026bcec6950f153047baca0e7097157e5e9b54"
+    },
+    {
+      "name": "full-run.tar.gz.part016",
+      "bytes": 1000000000,
+      "sha256": "7a2eb2c7f07ec982a2797fb5e615bec4d05a4afc2eee4026423f2b6ef60e4bb5"
+    },
+    {
+      "name": "full-run.tar.gz.part017",
+      "bytes": 1000000000,
+      "sha256": "75f24abc02ebff850110b2f4f5869469a8cb39079e3fba8351be0e12009f4aef"
+    },
+    {
+      "name": "full-run.tar.gz.part018",
+      "bytes": 632125021,
+      "sha256": "d50c22768fa297ec18df1d92e6e2bd68fe22afb02b840dd5360f4cfb58b5d3bc"
+    }
+  ],
+  "historical_incomplete_downloads": [
+    {
+      "member": "sources/ahe-miniagent-terminal_bench-20261022-102223-766815.tar.gz!checkpoints/target-0006-010-caffe-cifar-10/agent-workspace/files/data/cifar-10-binary.tar.gz",
+      "bytes": 11677696,
+      "sha256": "030619b9f0190f3eed5f2d1f72e53bf45612c83c742abff6f7e18602f1ede903",
+      "original_nested_error": "unexpected end of data",
+      "handling": "Original historical interrupted dataset download preserved unchanged. Readable decompressed prefix and all raw member bytes scanned; nested tar is incomplete, not represented as restorable."
+    },
+    {
+      "member": "sources/ahe-miniagent-terminal_bench-20261022-175233-263500.tar.gz!checkpoints/target-0003-010-caffe-cifar-10/agent-workspace/files/caffe/data/cifar10/cifar-10-binary.tar.gz",
+      "bytes": 37490688,
+      "sha256": "b7eb6025e6a28558f9a30e6bff577d7feac0984a5d04ea8dfcb37eee4d6835e1",
+      "original_nested_error": "unexpected end of data",
+      "handling": "Original historical interrupted dataset download preserved unchanged. Readable decompressed prefix and all raw member bytes scanned; nested tar is incomplete, not represented as restorable."
+    }
+  ]
+}

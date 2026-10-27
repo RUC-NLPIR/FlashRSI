@@ -1,0 +1,16 @@
+[
+  {
+    "member": "sources/ahe-miniagent-terminal_bench-20261022-102223-766815.tar.gz!checkpoints/target-0006-010-caffe-cifar-10/agent-workspace/files/data/cifar-10-binary.tar.gz",
+    "bytes": 11677696,
+    "sha256": "030619b9f0190f3eed5f2d1f72e53bf45612c83c742abff6f7e18602f1ede903",
+    "original_nested_error": "unexpected end of data",
+    "handling": "Original historical interrupted dataset download preserved unchanged. Readable decompressed prefix and all raw member bytes scanned; nested tar is incomplete, not represented as restorable."
+  },
+  {
+    "member": "sources/ahe-miniagent-terminal_bench-20261022-175233-263500.tar.gz!checkpoints/target-0003-010-caffe-cifar-10/agent-workspace/files/caffe/data/cifar10/cifar-10-binary.tar.gz",
+    "bytes": 37490688,
+    "sha256": "b7eb6025e6a28558f9a30e6bff577d7feac0984a5d04ea8dfcb37eee4d6835e1",
+    "original_nested_error": "unexpected end of data",
+    "handling": "Original historical interrupted dataset download preserved unchanged. Readable decompressed prefix and all raw member bytes scanned; nested tar is incomplete, not represented as restorable."
+  }
+]
