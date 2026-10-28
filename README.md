@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cover.svg" alt="FlashRSI: a white wordmark and a small blue-white particle spiral on a plain dark background." width="100%">
+  <img src="assets/readme/cover.svg" alt="FlashRSI: a white wordmark beside three branching paths that converge, on a plain dark background." width="100%">
 </p>
 
 <h1 align="center">FlashRSI</h1>

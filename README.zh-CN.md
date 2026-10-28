@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cover.svg" alt="FlashRSI 品牌封面：纯深色背景上的白色字标与小型蓝白星点旋臂。" width="100%">
+  <img src="assets/readme/cover.svg" alt="FlashRSI 品牌封面：纯深色背景上的白色字标，以及分开探索后重新汇合的三条路径。" width="100%">
 </p>
 
 <h1 align="center">FlashRSI</h1>
