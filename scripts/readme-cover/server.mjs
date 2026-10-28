@@ -21,7 +21,10 @@ const result = await build({
 const assets = new Map(result.outputFiles.map(file => ['/' + basename(file.path), file.contents]));
 assets.set('/', await readFile(join(root, 'index.html')));
 assets.set('/base.svg', await readFile(join(root, 'base.svg')));
-const types = { '/': 'text/html', '/app.js': 'text/javascript', '/app.css': 'text/css', '/base.svg': 'image/svg+xml' };
+const base = await readFile(join(root, 'base.svg'), 'utf8');
+// A transparent copy lets ElectricLogo trace the same vector glyphs as the base.
+assets.set('/wordmark.svg', base.replace(/<rect[^>]*\/>/, ''));
+const types = { '/': 'text/html', '/app.js': 'text/javascript', '/app.css': 'text/css', '/base.svg': 'image/svg+xml', '/wordmark.svg': 'image/svg+xml' };
 
 const server = createServer(async (req, res) => {
   try {
@@ -59,7 +62,7 @@ const server = createServer(async (req, res) => {
         await writeFile(join(directory, `frame-${String(body.index).padStart(3, '0')}.png`), Buffer.from(body.png.split(',')[1], 'base64'));
         response = { ok: true };
       } else if (path === '/api/complete') {
-        await writeFile(join(directory, 'capture.json'), JSON.stringify({ count: body.count, frameMs: 80, component: 'React Bits ElectricLogo' }, null, 2) + '\n');
+        await writeFile(join(directory, 'capture.json'), JSON.stringify({ count: body.count, frameMs: body.frameMs, component: 'React Bits ElectricLogo, bolt + wordmark' }, null, 2) + '\n');
         response = { directory, count: body.count };
         console.log(JSON.stringify({ capture: 'complete', ...response }));
       } else {

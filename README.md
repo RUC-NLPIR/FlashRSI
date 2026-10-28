@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cover.gif" alt="FlashRSI: a large white wordmark beside a blue-white ElectricLogo lightning mark on a deep black background." width="100%">
+  <img src="assets/readme/cover.gif" alt="FlashRSI: blue-white electric arcs trace a lightning logo and the large white wordmark on a deep black background." width="100%">
 </p>
 
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>

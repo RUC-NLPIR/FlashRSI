@@ -5,8 +5,8 @@ import './styles.css';
 
 const WIDTH = 1600;
 const HEIGHT = 360;
-const FRAME_COUNT = 48;
-const FRAME_INTERVAL = 80;
+const FRAME_COUNT = 64;
+const FRAME_INTERVAL = 60;
 
 async function postJSON(path, body) {
   const response = await fetch(path, {
@@ -23,6 +23,9 @@ function App() {
   const previewRef = useRef(null);
   const baseImageRef = useRef(null);
   const outputRef = useRef(null);
+  const logoFrameRef = useRef(null);
+  const wordmarkFrameRef = useRef(null);
+  const autoStartedRef = useRef(false);
   const sessionRef = useRef(null);
   const firstRenderRef = useRef(null);
   const readyRef = useRef(false);
@@ -70,7 +73,7 @@ function App() {
     try {
       await Promise.all(session.pending);
       if (session.error) throw session.error;
-      const result = await postJSON('/api/complete', { id: session.id, count: FRAME_COUNT });
+      const result = await postJSON('/api/complete', { id: session.id, count: FRAME_COUNT, frameMs: FRAME_INTERVAL });
       setStatus(`Saved ${result.count} frames to ${result.directory}`);
     } catch (failure) {
       setError(failure.message);
@@ -79,6 +82,18 @@ function App() {
       busyRef.current = false;
       setBusy(false);
     }
+  }, []);
+
+  const onLogoRender = useCallback(canvas => {
+    if (!logoFrameRef.current) logoFrameRef.current = document.createElement('canvas');
+    const frame = logoFrameRef.current;
+    if (frame.width !== canvas.width || frame.height !== canvas.height) {
+      frame.width = canvas.width;
+      frame.height = canvas.height;
+    }
+    const context = frame.getContext('2d');
+    context.clearRect(0, 0, frame.width, frame.height);
+    context.drawImage(canvas, 0, 0);
   }, []);
 
   const onRender = useCallback(canvas => {
@@ -90,20 +105,36 @@ function App() {
       setStatus('Ready to record the actual ElectricLogo component.');
     }
     const session = sessionRef.current;
-    if (!session || now - session.lastFrame < FRAME_INTERVAL || !baseImageRef.current) return;
+    if (!session || now - session.lastFrame < FRAME_INTERVAL || !baseImageRef.current || !logoFrameRef.current) return;
     session.lastFrame = now;
     try {
       // Copy immediately: the WebGL drawing buffer is not preserved after onRender.
       const output = outputRef.current;
       const context = output.getContext('2d');
       context.setTransform(2, 0, 0, 2, 0, 0);
+      context.globalCompositeOperation = 'source-over';
       context.drawImage(baseImageRef.current, 0, 0, WIDTH, HEIGHT);
-      context.save();
-      context.beginPath();
-      context.rect(70, 0, 350, HEIGHT);
-      context.clip();
-      context.drawImage(canvas, 70, 0, 400, HEIGHT);
-      context.restore();
+      context.globalCompositeOperation = 'screen';
+      context.drawImage(logoFrameRef.current, 70, 0, 400, HEIGHT);
+      // Feather the broad wordmark glow before compositing its light over the
+      // white vector letters. This keeps the background continuous at all edges.
+      if (!wordmarkFrameRef.current) wordmarkFrameRef.current = document.createElement('canvas');
+      const layer = wordmarkFrameRef.current;
+      layer.width = canvas.width;
+      layer.height = canvas.height;
+      const light = layer.getContext('2d');
+      light.drawImage(canvas, 0, 0);
+      light.globalCompositeOperation = 'destination-in';
+      for (const [x, y, low, high] of [[layer.width, 0, 0.06, 0.94], [0, layer.height, 0.12, 0.88]]) {
+        const fade = light.createLinearGradient(0, 0, x, y);
+        fade.addColorStop(0, 'transparent');
+        fade.addColorStop(low, '#fff');
+        fade.addColorStop(high, '#fff');
+        fade.addColorStop(1, 'transparent');
+        light.fillStyle = fade;
+        light.fillRect(0, 0, layer.width, layer.height);
+      }
+      context.drawImage(layer, 366, 0, 1200, HEIGHT);
       const png = output.toDataURL('image/png');
       const index = session.count++;
       session.pending.push(
@@ -125,7 +156,7 @@ function App() {
     }
   }, [finish]);
 
-  const record = async () => {
+  const record = useCallback(async () => {
     if (busyRef.current || !readyRef.current || !baseImageRef.current) return;
     busyRef.current = true;
     setBusy(true);
@@ -141,7 +172,14 @@ function App() {
       setBusy(false);
       setError(failure.message);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (ready && baseReady && !autoStartedRef.current && new URLSearchParams(location.search).has('capture')) {
+      autoStartedRef.current = true;
+      record();
+    }
+  }, [ready, baseReady, record]);
 
   return (
     <main>
@@ -152,20 +190,41 @@ function App() {
       <div className="preview" ref={previewRef}>
         <div className="scene" style={{ transform: `scale(${previewScale})` }}>
           <img className="base" src="/base.svg" width={WIDTH} height={HEIGHT} alt="FlashRSI cover title" draggable={false} />
-          <div className="effect">
+          <div className="effect logo-effect">
             <ElectricLogo
               color="#e6f2ff"
-              glowColor="#628fe8"
+              glowColor="#508cff"
               scale={0.72}
+              intensity={1.1}
+              strands={4}
+              glow={1.15}
+              thickness={1.5}
+              bend={0.6}
+              crackle={1.5}
+              arcs={1.4}
+              flicker={0.45}
+              fill={0.035}
+              speed={2.3}
+              interactive={false}
+              onRender={onLogoRender}
+            />
+          </div>
+          <div className="effect wordmark-effect">
+            <ElectricLogo
+              src="/wordmark.svg"
+              color="#c4e7ff"
+              glowColor="#367fff"
+              scale={0.88}
+              intensity={0.85}
               strands={3}
-              glow={0.65}
-              thickness={1.4}
-              bend={0.35}
-              crackle={0.85}
-              arcs={0.35}
-              flicker={0.2}
-              fill={0.025}
-              speed={1.4}
+              glow={0.22}
+              thickness={0.65}
+              bend={0.22}
+              crackle={0.8}
+              arcs={0.8}
+              flicker={0.15}
+              fill={0}
+              speed={1.9}
               interactive={false}
               onRender={onRender}
             />

@@ -84,26 +84,46 @@ def main():
         elif frame.size != SIZE:
             parser.error(f"Unexpected frame size in {path.name}: {frame.size}")
         frames.append(frame)
-    wordmark = frames[0].crop(WORDMARK_BOX)
-    if any(
-        ImageChops.difference(wordmark, frame.crop(WORDMARK_BOX)).getbbox()
-        for frame in frames[1:]
-    ):
-        parser.error("The static wordmark changed during capture.")
+    if args.reframe_original:
+        wordmark = frames[0].crop(WORDMARK_BOX)
+        if any(
+            ImageChops.difference(wordmark, frame.crop(WORDMARK_BOX)).getbbox()
+            for frame in frames[1:]
+        ):
+            parser.error("The static wordmark changed during legacy reframing.")
     args.output_dir.mkdir(parents=True, exist_ok=True)
     poster = frames[len(frames) // 2]
     poster.save(args.output_dir / "cover.png", optimize=True)
-    palette = poster.quantize(colors=224)
-    # Keep the background and wordmark colors exact in the GIF palette.
-    colors = palette.getpalette()
-    for index in range(224):
-        for color in ((8, 11, 16), (243, 245, 247)):
-            if max(abs(colors[index * 3 + c] - color[c]) for c in range(3)) <= 2:
-                colors[index * 3 : index * 3 + 3] = color
+    # Sample every frame so transient blue arcs also contribute to the palette.
+    # Nearest-neighbor sampling keeps their actual colors instead of blending
+    # thin electric strokes into the background before quantization.
+    sample_size = (SIZE[0] // 2, SIZE[1] // 2)
+    palette_source = Image.new("RGB", (sample_size[0], sample_size[1] * len(frames)))
+    for index, frame in enumerate(frames):
+        palette_source.paste(
+            frame.resize(sample_size, Image.Resampling.NEAREST),
+            (0, index * sample_size[1]),
+        )
+    palette = palette_source.quantize(colors=254)
+    # Reserve exact brand colors alongside the shared animation colors.
+    colors = palette.getpalette()[: 254 * 3] + [8, 11, 16, 243, 245, 247]
     palette.putpalette(colors)
     encoded = [
         frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in frames
     ]
+    if not args.reframe_original:
+        # Reuse pixels with small glow fluctuations so GIF delta frames compress
+        # well. Compare against the encoded frame so gradual changes accumulate.
+        for index in range(1, len(encoded)):
+            red, green, blue = ImageChops.difference(
+                encoded[index].convert("RGB"), encoded[index - 1].convert("RGB")
+            ).split()
+            changed = ImageChops.lighter(ImageChops.lighter(red, green), blue).point(
+                lambda value: 255 if value > 8 else 0
+            )
+            encoded[index] = Image.composite(
+                encoded[index], encoded[index - 1], changed
+            )
     loop = encoded + encoded[-2:0:-1]
     destination = args.output_dir / "cover.gif"
     loop[0].save(

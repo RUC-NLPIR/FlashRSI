@@ -14,7 +14,14 @@ header p { margin: 0; color: #8290a3; font-size: 14px; }
 .preview { position: relative; width: 100%; aspect-ratio: 40 / 9; overflow: hidden; background: #080b10; }
 .scene { position: absolute; width: 1600px; height: 360px; transform-origin: top left; }
 .base { display: block; position: absolute; inset: 0; }
-.effect { position: absolute; left: 70px; top: 0; width: 400px; height: 360px; clip-path: inset(0 50px 0 0); }
+.effect { position: absolute; top: 0; height: 360px; pointer-events: none; mix-blend-mode: screen; }
+.logo-effect { left: 70px; width: 400px; }
+.wordmark-effect {
+  left: 366px;
+  width: 1200px;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent), linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-composite: intersect;
+}
 .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 24px; }
 button { padding: 11px 18px; border: 1px solid #41628e; border-radius: 7px; color: #edf5ff; background: #223953; cursor: pointer; font: inherit; font-size: 14px; }
 button:hover:enabled { background: #2c4767; }

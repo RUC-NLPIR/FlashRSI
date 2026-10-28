@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cover.gif" alt="FlashRSI 动态封面：深黑背景上，左侧 ElectricLogo 蓝白闪电与右侧大号白色字标并排。" width="100%">
+  <img src="assets/readme/cover.gif" alt="FlashRSI 动态封面：深黑背景上，蓝白电弧沿左侧闪电和右侧大号白色字标流动。" width="100%">
 </p>
 
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
