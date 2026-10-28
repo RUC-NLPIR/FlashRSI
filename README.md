@@ -28,8 +28,8 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick start</a> &nbsp;/&nbsp;
   <a href="#demo">Demo</a> &nbsp;/&nbsp;
+  <a href="#quick-start">Quick start</a> &nbsp;/&nbsp;
   <a href="#how-it-works">How it works</a> &nbsp;/&nbsp;
   <a href="#supported-components">Supported components</a> &nbsp;/&nbsp;
   <a href="#extend-flashrsi">Extend</a> &nbsp;/&nbsp;
@@ -41,6 +41,14 @@
 FlashRSI brings recursive self-improvement (RSI) methods to existing agents. Use it to compare instruction search, skill learning, and harness evolution on the same target, or reuse a compatible method with another native harness.
 
 Each experiment keeps the agent resources, search decisions, and evaluation evidence together. You can inspect the changes, compare candidates, and freeze a selected version for assessment on new tasks.
+
+## Demo
+
+<p align="center">
+  <img src="assets/readme/slot-machine.gif" alt="FlashRSI: benchmark, algorithm, and harness reels advance one step and settle, then illustrative Training, Held-out, Near-domain, and OOD-domain curves appear below." width="100%">
+</p>
+
+Training, Held-out, Near-domain, and OOD-domain curves are illustrative.
 
 ## Quick start
 
@@ -126,14 +134,6 @@ For another harness or task suite, start with a matching configuration:
 | τ³ Banking | [examples/tau3_banking.yaml](examples/tau3_banking.yaml) | `tau2` and the upstream benchmark |
 
 Install the extras for each selected role. Environment benchmarks have additional setup; follow their integration notes below.
-
-## Demo
-
-<p align="center">
-  <img src="assets/readme/slot-machine.gif" alt="FlashRSI: benchmark, algorithm, and harness reels advance one step and settle, then illustrative Training, Held-out, Near-domain, and OOD-domain curves appear below." width="100%">
-</p>
-
-Training, Held-out, Near-domain, and OOD-domain curves are illustrative.
 
 ## How it works
 

@@ -1,6 +1,6 @@
 # FlashRSI cover
 
-The cover is an original animated SVG. Arbor's README informed the page hierarchy: a short brand cover first, quick start next, and the functional demo farther down the page.
+The cover is an original animated SVG. Arbor's README inspired the wide brand cover. The functional demo follows the introduction, before Quick start.
 
 The large FlashRSI wordmark and coral lightning carry the identity. Connected glass modules, branching paths, and orbital trails suggest the different agent variants that the framework can construct and evaluate. The illustration carries no benchmark results or claims about supported combinations.
 

@@ -28,8 +28,8 @@
 </p>
 
 <p align="center">
-  <a href="#快速开始">快速开始</a> &nbsp;/&nbsp;
   <a href="#演示">演示</a> &nbsp;/&nbsp;
+  <a href="#快速开始">快速开始</a> &nbsp;/&nbsp;
   <a href="#工作原理">工作原理</a> &nbsp;/&nbsp;
   <a href="#支持组件">支持组件</a> &nbsp;/&nbsp;
   <a href="#扩展-flashrsi">扩展接入</a> &nbsp;/&nbsp;
@@ -41,6 +41,14 @@
 FlashRSI 将递归自我改进（RSI）方法接入已有的 Agent。你可以在同一个目标上比较指令搜索、技能学习和 harness 演化，也可以将兼容的方法用于另一个原生 harness。
 
 每次实验都会保留 Agent 资源、搜索决策和评估证据。你可以查看具体修改、比较候选版本，再冻结选中的版本，在新任务上检验效果。
+
+## 演示
+
+<p align="center">
+  <img src="assets/readme/slot-machine.gif" alt="FlashRSI：benchmark、算法和 harness 三个转轮各前进一格并停稳，随后依次绘制 Training、Held-out、Near-domain 和 OOD-domain 示意曲线。" width="100%">
+</p>
+
+Training、Held-out、Near-domain 和 OOD-domain 曲线均为示意。
 
 ## 快速开始
 
@@ -126,14 +134,6 @@ uv run flashrsi run --config examples/quickstart.yaml \
 | τ³ Banking | [examples/tau3_banking.yaml](examples/tau3_banking.yaml) | `tau2` 和上游 benchmark |
 
 请为选中的每个角色安装相应 extras。环境类 benchmark 还需要额外准备，具体见下方接入说明。
-
-## 演示
-
-<p align="center">
-  <img src="assets/readme/slot-machine.gif" alt="FlashRSI：benchmark、算法和 harness 三个转轮各前进一格并停稳，随后依次绘制 Training、Held-out、Near-domain 和 OOD-domain 示意曲线。" width="100%">
-</p>
-
-Training、Held-out、Near-domain 和 OOD-domain 曲线均为示意。
 
 ## 工作原理
 
