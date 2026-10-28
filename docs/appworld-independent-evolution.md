@@ -14,6 +14,7 @@ scenario ID 和规范化原始 instruction 的重合，然后才按 seed 和
 pool_checksum 绑定完整外部池的任务及原生文件树校验和。来源中保留
 native_split、published_evaluation 角色、池大小与校验和。
 
-示例见 `examples/modular_rsi_appworld.yaml`。需要已有完整原生数据目录，
-环境镜像及连接仍使用现有 AppWorld 配置。离线来源/测试或入口准备成功
-不代表算法×Target 的真实实验通过。
+示例见 `examples/modular_rsi_appworld.yaml`。通过一键启动器运行时，默认自动
+下载并缓存完整原生数据、准备运行镜像。复用已有数据时，显式设置
+`benchmark.data_path` 为原生 `data/` 目录；直接使用 `flashrsi` CLI 时也需提供该路径。
+离线来源/测试或入口准备成功不代表算法×Target 的真实实验通过。

@@ -8,7 +8,7 @@
 
 | 领域 | Registry ID | 完整示例 | 额外准备 / 接入边界 |
 | --- | --- | --- | --- |
-| Working / Tool Use | `appworld` | [modular_rsi_appworld.yaml](../examples/modular_rsi_appworld.yaml) | 原生数据及 Docker 镜像 |
+| Working / Tool Use | `appworld` | [modular_rsi_appworld.yaml](../examples/modular_rsi_appworld.yaml) | 启动器自动准备原生数据及默认 Docker 镜像；显式 `data_path` 只使用已有本地数据 |
 | Working / Tool Use | `workbench` | [workbench_opro.yaml](../examples/workbench_opro.yaml) | 原生数据库；独立 NumPy 1.x 环境 |
 | Working / Tool Use | `bfcl` | [bfcl_opro.yaml](../examples/bfcl_opro.yaml) | Docker；Multi-Turn Base 范围 |
 | Working / Tool Use | `harvey_lab` | [harvey_lab_opro.yaml](../examples/harvey_lab_opro.yaml) | 法律文档语料；独立 Anthropic / OpenAI Judge |

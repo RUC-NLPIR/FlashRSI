@@ -2,7 +2,8 @@ run:
   output_dir: ../runs
 benchmark:
   name: appworld
-  data_path: ../data/appworld/data
+  # The launcher downloads and caches native data when data_path is omitted.
+  # To reuse an existing dataset, set data_path to its native data/ directory.
   test_set: test_normal
   evolution_test_set: test_challenge
   evolution_limit: 1
