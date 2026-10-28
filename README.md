@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cover.gif" alt="FlashRSI: a white wordmark beside a blue-white lightning bolt animated with React Bits ElectricLogo." width="100%">
+  <img src="assets/readme/cover.gif" alt="FlashRSI: a large white wordmark beside a blue-white ElectricLogo lightning mark on a deep black background." width="100%">
 </p>
 
 <h1 align="center">FlashRSI</h1>

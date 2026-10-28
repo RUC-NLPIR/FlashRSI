@@ -4,7 +4,7 @@ import ElectricLogo from './ElectricLogo';
 import './styles.css';
 
 const WIDTH = 1600;
-const HEIGHT = 440;
+const HEIGHT = 360;
 const FRAME_COUNT = 48;
 const FRAME_INTERVAL = 80;
 
@@ -98,7 +98,12 @@ function App() {
       const context = output.getContext('2d');
       context.setTransform(2, 0, 0, 2, 0, 0);
       context.drawImage(baseImageRef.current, 0, 0, WIDTH, HEIGHT);
-      context.drawImage(canvas, 900, 0, 600, HEIGHT);
+      context.save();
+      context.beginPath();
+      context.rect(70, 0, 350, HEIGHT);
+      context.clip();
+      context.drawImage(canvas, 70, 0, 400, HEIGHT);
+      context.restore();
       const png = output.toDataURL('image/png');
       const index = session.count++;
       session.pending.push(
@@ -151,7 +156,7 @@ function App() {
             <ElectricLogo
               color="#e6f2ff"
               glowColor="#628fe8"
-              scale={0.52}
+              scale={0.72}
               strands={3}
               glow={0.65}
               thickness={1.4}
