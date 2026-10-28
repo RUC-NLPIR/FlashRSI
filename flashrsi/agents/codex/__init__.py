@@ -1,4 +1,4 @@
-"""Run native Codex exec with the selected version's instructions and extensions."""
+"""Run pinned native Codex core source and resources from the selected Snapshot."""
 
 from __future__ import annotations
 
@@ -12,21 +12,24 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from flashrsi._records import _redact, _secrets
+from flashrsi.agents.codex._build import build_core
 from flashrsi.core import Agent, Trajectory
 
 
 class Codex(Agent):
-    """Use a fresh native CLI process and resource home for every task or edit."""
+    """Build the selected core version and use a fresh native session per call."""
 
     name = "codex"
-    description = "Codex with versioned native instructions, skills and extensions."
+    description = (
+        "Codex with versioned native core source, instructions and extensions."
+    )
     instruction_file = "AGENTS.md"
     _container_extra = "codex"
 
     def _check_container(self) -> None:
         super()._check_container()
         if self.config.get("cli_path"):
-            raise ValueError("Container execution installs its own CLI; omit cli_path")
+            raise ValueError("Container execution builds Snapshot core; omit cli_path")
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         config, llm = self.config, self.config["llm"]
@@ -65,7 +68,28 @@ class Codex(Agent):
                     error = f"Invalid Codex JSONL event: {exc}"
                     continue
                 messages.append(_redact(event, secrets))
-                if event.get("type") == "item.completed":
+                if event.get("type") == "flashrsi.core.completed":
+                    completed = True
+                    output = event.get("output", "")
+                    native = event.get("usage") or {}
+                    usage = {
+                        "prompt_tokens": native.get("input_tokens", 0),
+                        "completion_tokens": native.get("output_tokens", 0),
+                        "prompt_tokens_details": {
+                            "cached_tokens": native.get("cached_input_tokens", 0)
+                        },
+                    }
+                    if event.get("status") != "finished":
+                        error = (
+                            error
+                            or event.get("error_message")
+                            or "Codex core turn failed"
+                        )
+                        # Native exec only exposes usage on turn.completed.
+                        # Keep the same public failure contract; raw token-count
+                        # events remain available in messages for inspection.
+                        usage = {}
+                elif event.get("type") == "item.completed":
                     item = event.get("item", {})
                     if not isinstance(item, dict):
                         error = "Invalid Codex item.completed event"
@@ -111,19 +135,45 @@ class Codex(Agent):
                 task_dir.mkdir()
             try:
                 deadline = started + config.get("timeout", 300)
-                binary, path_dir = _binary(config)
-                shutil.copytree(self.files_dir, resource_home)
+                shutil.copytree(
+                    self.files_dir,
+                    resource_home,
+                    ignore=lambda directory, names: (
+                        {"runtime"} if Path(directory) == self.files_dir else set()
+                    ),
+                )
                 overrides, env, native = _settings(
                     config,
                     resource_home,
                     task_dir,
                     source_root=getattr(self, "_container_source_dir", None),
                 )
+                native_cli = bool(config.get("cli_path"))
+                if native_cli:
+                    binary = str(Path(config["cli_path"]).expanduser().resolve())
+                    path_dir = None
+                else:
+                    from codex_cli_bin import bundled_path_dir
+
+                    path_dir = bundled_path_dir()
+                    build_started = asyncio.get_running_loop().time()
+                    binary = str(await build_core(self.files_dir / "runtime"))
+                    # Compilation prepares an execution environment. Exclude it
+                    # from the task budget, while still counting other setup.
+                    deadline += asyncio.get_running_loop().time() - build_started
+                    build_record = Path(binary).with_name("build.json")
+                    messages.append(
+                        {
+                            "type": "CoreBuild",
+                            **json.loads(build_record.read_text()),
+                            "snapshot_id": self.snapshot.id,
+                        }
+                    )
                 if path_dir is not None:
                     env["PATH"] = str(path_dir) + os.pathsep + env.get("PATH", "")
                 # Native Codex discovers AGENTS.md, skills/ and rules/ in this
                 # home. Auth, caches and transcripts are confined to the copy.
-                command = [
+                cli_command = [
                     binary,
                     "exec",
                     "--json",
@@ -143,11 +193,31 @@ class Codex(Agent):
                 # Snapshot. Native trust keys include the temporary home, so a
                 # prior home's trust records cannot authorize this copy. Task
                 # project hooks remain disabled by its untrusted project config.
-                if native.get("hooks") or any(resource_home.rglob("hooks.json")):
-                    command.append("--dangerously-bypass-hook-trust")
+                bypass_hook_trust = bool(
+                    native.get("hooks") or any(resource_home.rglob("hooks.json"))
+                )
+                if bypass_hook_trust:
+                    cli_command.append("--dangerously-bypass-hook-trust")
                 for key, value in overrides.items():
-                    command.extend(["-c", f"{key}={_toml(value)}"])
-                command.append("-")
+                    cli_command.extend(["-c", f"{key}={_toml(value)}"])
+                cli_command.append("-")
+                command = cli_command if native_cli else [binary]
+                core_request = {
+                    "prompt": prompt,
+                    "cwd": str(task_dir),
+                    "codex_home": str(resource_home),
+                    "model": llm["model_name"],
+                    "sandbox": config.get("sandbox", "workspace-write"),
+                    "overrides": [
+                        [key, _toml(value)] for key, value in overrides.items()
+                    ],
+                    "bypass_hook_trust": bypass_hook_trust,
+                }
+                if not native_cli:
+                    zsh = Path(path_dir).parent / "codex-resources" / "zsh" / "zsh"
+                    if zsh.is_file():
+                        core_request["default_zsh_path"] = str(zsh)
+                request = prompt if native_cli else json.dumps(core_request) + "\n"
                 # Count preparation and process startup toward the same call
                 # budget. Synchronous preparation cannot be interrupted, but
                 # must not start a native process after its deadline has passed.
@@ -168,7 +238,7 @@ class Codex(Agent):
                         asyncio.create_task(events(process.stdout)),
                         asyncio.create_task(diagnostics(process.stderr)),
                     ]
-                    process.stdin.write(prompt.encode("utf-8"))
+                    process.stdin.write(request.encode("utf-8"))
                     await process.stdin.drain()
                     process.stdin.close()
                     await process.wait()
@@ -182,7 +252,11 @@ class Codex(Agent):
                         if message.get("type") == "error"
                     ]
                     error = error or next(filter(None, reversed(failures)), None)
-                    error = error or "Codex ended without turn.completed"
+                    error = error or (
+                        "Codex ended without turn.completed"
+                        if native_cli
+                        else "Codex core ended without a completed turn"
+                    )
             except TimeoutError:
                 error = f"Codex timed out after {config.get('timeout', 300):g}s"
             except Exception as exc:
@@ -211,21 +285,9 @@ class Codex(Agent):
             status="error" if error else "finished",
             output=_redact(output, secrets) if not error else "",
             messages=_redact(messages, secrets),
-            usage=usage,
+            usage={} if error else usage,
             error_message=_redact(error, secrets),
         )
-
-
-def _binary(config):
-    if config.get("cli_path"):
-        return str(Path(config["cli_path"]).expanduser().resolve()), None
-    try:
-        from codex_cli_bin import bundled_codex_path, bundled_path_dir
-    except ImportError as exc:
-        raise ValueError(
-            "Install flashrsi-lite[codex], or set cli_path to a native Codex executable"
-        ) from exc
-    return str(bundled_codex_path()), bundled_path_dir()
 
 
 def _settings(config, resource_home, task_dir, *, source_root=None):

@@ -35,9 +35,6 @@
 <p align="center">
   <img src="assets/readme/slot-machine.gif" alt="Benchmark、RSI 算法和 harness 三个转轮停在一组组合，随后绘制 Training、Held-out、Near-domain 和 OOD-domain 示意曲线。" width="100%">
 </p>
-<p align="center">
-  <sub>曲线均为示意。OpenHands、Pi、Hermes 为计划接入的 harness。</sub>
-</p>
 
 ## 主要特性
 

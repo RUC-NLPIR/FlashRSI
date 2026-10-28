@@ -6,16 +6,18 @@ import shlex
 import sys
 from pathlib import Path
 
+import pytest
+from test_codex_core_parity import upstream_codex as upstream_codex
 from test_codex_native import _config, _source
-from test_codex_native import codex_binary as codex_binary
 from test_codex_native import responses_server as responses_server
 
 from flashrsi.agents import Codex
 from flashrsi.core import Task
 
 
+@pytest.mark.parametrize("backend", ["upstream", "core"])
 def test_native_plugin_skill_and_hook_use_candidate_bundle(
-    responses_server, codex_binary, tmp_path, monkeypatch
+    responses_server, upstream_codex, tmp_path, monkeypatch, backend
 ):
     # Native plugin discovery also refreshes its public catalog. Keep those
     # background requests offline while the model talks only to our fixture.
@@ -81,7 +83,10 @@ def test_native_plugin_skill_and_hook_use_candidate_bundle(
         '[plugins."demo@flashrsi"]\nenabled = true\n'
     )
 
-    agent = Codex(_config(responses_server, codex_binary, source_dir=source))
+    config = _config(responses_server, upstream_codex, source_dir=source)
+    if backend == "core":
+        config.pop("cli_path")
+    agent = Codex(config)
     agent.set_scope({"plugin": "rw"})
     baseline = agent.snapshot
     assert (

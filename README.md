@@ -35,9 +35,6 @@
 <p align="center">
   <img src="assets/readme/slot-machine.gif" alt="Benchmark, RSI algorithm, and harness reels settle on a combination, followed by illustrative Training, Held-out, Near-domain, and OOD-domain curves." width="100%">
 </p>
-<p align="center">
-  <sub>Curves are illustrative. OpenHands, Pi, and Hermes are planned adapters.</sub>
-</p>
 
 ## Features
 

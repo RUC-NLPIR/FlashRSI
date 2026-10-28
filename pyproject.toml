@@ -29,11 +29,14 @@ tau2 = ["rank_bm25>=0.2,<1"]
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["flashrsi*"]
+# Native source fixtures are data. Treating their Python scripts as namespace
+# packages strips upstream executable bits during build_py.
+exclude = ["flashrsi.agents.codex.runtime*", "flashrsi.agents.codex._bridge*"]
 
 [tool.setuptools.package-data]
 "flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
 "flashrsi.agents.claude_code" = ["*.yaml", "*.md", "settings.json", ".mcp.json", ".lsp.json", ".claude-plugin/*.json", "skills/**/*", "commands/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "output-styles/**/*"]
-"flashrsi.agents.codex" = ["components.yaml", "config.toml", "AGENTS.md", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*"]
+"flashrsi.agents.codex" = ["components.yaml", "config.toml", "_companion.json", "AGENTS.md", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*", "runtime/**/*", "runtime/**/.*", "runtime/.cargo/*", "_bridge/**/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -42,7 +45,7 @@ addopts = "-q"
 
 [tool.ruff]
 target-version = "py311"
-extend-exclude = ["mvp_doc.md"]
+extend-exclude = ["mvp_doc.md", "flashrsi/agents/codex/runtime"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]

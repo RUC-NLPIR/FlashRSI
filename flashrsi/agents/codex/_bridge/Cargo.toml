@@ -1,0 +1,60 @@
+[package]
+name = "flashrsi-codex-core"
+version = "0.147.0"
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[[bin]]
+name = "flashrsi-codex-core"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = { workspace = true }
+codex-analytics = { workspace = true }
+codex-arg0 = { workspace = true }
+codex-cloud-config = { workspace = true }
+codex-config = { workspace = true }
+codex-core = { workspace = true }
+codex-home = { workspace = true }
+codex-http-client = { workspace = true }
+codex-exec-server = { workspace = true }
+codex-extension-api = { workspace = true }
+codex-features = { workspace = true }
+codex-goal-extension = { workspace = true }
+codex-git-attribution = { workspace = true }
+codex-git-utils = { workspace = true }
+codex-guardian = { workspace = true }
+codex-login = { workspace = true }
+codex-image-generation-extension = { workspace = true }
+codex-memories-extension = { workspace = true }
+codex-mcp-extension = { workspace = true }
+codex-models-manager = { workspace = true }
+codex-otel = { workspace = true }
+codex-protocol = { workspace = true }
+codex-skills-extension = { workspace = true }
+codex-web-search-extension = { workspace = true }
+codex-utils-absolute-path = { workspace = true }
+# The upstream CLI enables these features through its UI/product dependencies.
+# Keep their effects in the core after removing those entry points. In particular,
+# serde_json object order and image TIFF support are observable by the model.
+# Versions absent from workspace.dependencies are pinned to the upstream lock.
+clap = { workspace = true, features = ["env", "wrap_help"] }
+hashbrown = "=0.17.1"
+hyper = { version = "=1.8.1", features = ["full"] }
+image = { workspace = true, features = ["tiff"] }
+mio = "=1.2.0"
+rustix = { version = "=1.1.4", features = ["stdio", "termios"] }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, features = ["preserve_order"] }
+tokio = { workspace = true, features = ["io-std", "io-util", "macros", "signal"] }
+tokio-stream = { workspace = true, features = ["sync"] }
+tokio-util = { workspace = true, features = ["time"] }
+toml = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter", "json"] }
+zerocopy = { version = "=0.8.37", features = ["derive"] }
+
+[target.'cfg(target_vendor = "apple")'.dependencies]
+objc2 = "=0.6.3"
+objc2-core-foundation = { version = "=0.3.2", default-features = false, features = ["std"] }

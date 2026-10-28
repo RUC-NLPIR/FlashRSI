@@ -1,3 +1,5 @@
+code:
+  - runtime/**
 prompt:
   - AGENTS.md
 skill:
