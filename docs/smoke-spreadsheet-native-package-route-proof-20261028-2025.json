@@ -1,0 +1,31 @@
+{
+  "model_calls": 0,
+  "package": {
+    "url": "http://deb.debian.org/debian/pool/main/a/argon2/libargon2-1_0%7e20171227-0.2_amd64.deb",
+    "filename": "libargon2-1_0~20171227-0.2_amd64.deb",
+    "size": 19640,
+    "sha256": "0d2be32c122d26bbd9b604fbe0072265e4978e07b0e1b7149ba364ba3cc5a302",
+    "package": "libargon2-1",
+    "version": "0~20171227-0.2"
+  },
+  "routes": [
+    {
+      "route": "original_https",
+      "url": "https://deb.debian.org/debian/pool/main/a/argon2/libargon2-1_0%7e20171227-0.2_amd64.deb",
+      "returncode": 0,
+      "http_status": "200",
+      "stderr": "",
+      "actual_bytes": 19640,
+      "expected_sha256_matched": true
+    },
+    {
+      "route": "official_archive",
+      "url": "https://archive.debian.org/debian/pool/main/a/argon2/libargon2-1_0%7e20171227-0.2_amd64.deb",
+      "returncode": 35,
+      "http_status": "000",
+      "stderr": "curl: (35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to archive.debian.org:443 \n",
+      "actual_bytes": 0,
+      "expected_sha256_matched": false
+    }
+  ]
+}

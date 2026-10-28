@@ -1,0 +1,112 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-27T22:41:28.493088+00:00",
+  "items": [
+    {
+      "id": "retail100-gepa-miniagent",
+      "root": "/root/flashrsi-tau2-airline-public-20261026",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/.cache/retail-mini100-0625/gepa-miniagent.local.yaml",
+      "health_config": "/root/.cache/retail-mini100-0625/gepa-miniagent.local.yaml",
+      "audit_source": "/root/flashrsi-tau2-airline-public-20261026/public-bench24-20261026/audit.py",
+      "proxy": "http://127.0.0.1:33618",
+      "environment": {
+        "HF_HUB_OFFLINE": "1"
+      },
+      "report": "smoke-tau2-retail-native100-gepa-miniagent-20261028.json",
+      "status": "flow_passed",
+      "budget_changes": [
+        {
+          "path": "agent.max_steps",
+          "before": 8,
+          "after": 100
+        }
+      ],
+      "judge_role_note": "Same explicit authorized independent native DeepSeek role as passed Retail representative; historical private Judge parameter equality not claimed.",
+      "phase": "experiment",
+      "updated_at": "2026-10-27T22:37:37.523222+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/.cache/retail-mini100-0625/experiments/gepa/gepa-miniagent-tau2-20261028-063744-342615",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "88",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "88",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-candidate_dev.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "84",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-27T22:41:28.491290+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User authorized existing tau smoke and native limit increases. Retail original train88/dev1/test84 preserved; native max_steps100. Independent native NL Judge explicitly copied from existing authorized Banking DeepSeek role. Old Retail private Judge parameters unavailable and not claimed identical. Algorithm gates/native scorer/target and Worker LLM/timeouts preserved; one attempt per configuration after passed representative."
+}

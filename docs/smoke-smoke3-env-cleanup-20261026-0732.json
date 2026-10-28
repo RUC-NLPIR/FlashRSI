@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-26T00:13:19.279512+00:00",
+  "host": "smoke3",
+  "removed_envs": [
+    {
+      "name": "fd9bd9916f10-30967d84f67f-py312",
+      "owner": "/root/flashrsi-tau2-airline-public-20261026",
+      "logical_bytes": 876549943
+    },
+    {
+      "name": "19d2d4411efa-30967d84f67f-py312",
+      "owner": "/root/flashrsi-tau2-airline-public-20261026",
+      "logical_bytes": 871949447
+    },
+    {
+      "name": "6d48a3043dc2-30967d84f67f-py312",
+      "owner": "/root/flashrsi-tau2-airline-public-20261026",
+      "logical_bytes": 871949447
+    },
+    {
+      "name": "013b314c779d-bfbe332efec2-py312",
+      "owner": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026",
+      "logical_bytes": 768007150
+    }
+  ],
+  "removed_count": 4,
+  "actual_bytes_freed": 3623186432,
+  "free_gib_before": 1.66,
+  "free_gib_after": 5.03,
+  "protected_project_ids": [
+    "b45c06a49485",
+    "78cc5b939728"
+  ],
+  "manifest_directory": "/root/.cache/env-cleanup-0732",
+  "preserved": "all current/future envs, bootstrap, controllers, source, experiments, trajectories, usage, original data, HF/PIP caches, Docker images, Smoke docs"
+}

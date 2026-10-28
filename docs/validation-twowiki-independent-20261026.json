@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-25T22:41:37.337304+00:00",
+  "change": "Public evolution_split/evolution_limit using native complete split pools; raw-question and ID overlap guard before sampling, only train replaced",
+  "module": "flashrsi/benchmarks/twowiki_multihopqa/__init__.py",
+  "module_sha256": "490f968d971927856fce8a5b0b20e90fbfade8cda0d03d7beb54e00043d7df28",
+  "regression_passed": 30,
+  "red_test_log": ".cache/tw-evo-red-0627.log",
+  "green_test_log": ".cache/tw-evo-green2-0627.log",
+  "ruff": "passed",
+  "format": "passed",
+  "wheel_sha256": "ca6c1a724d2fee6984cdfc444f2a8e7521b2e712a62f9531bf4a0cfe80aee090",
+  "fresh_wheel_cli_help": "passed",
+  "installed_module_identity": "site-packages verified",
+  "installed_wheel_native_schema_grading": "passed offline fixtures",
+  "heldout_preservation_and_full_pool_guard": "passed offline fixtures",
+  "new_model_calls_by_validation": 0,
+  "real_native_data_check": "Both Target configurations passed public --plan and --check-only Ready1/1/1, full-pool checks retained; unique supervisor now preparing first public experiment. HF streaming SSL/timeouts remain intermittent.",
+  "algorithm_gate_budget_unchanged": true,
+  "fresh_wheel_prepare_only": "passed; zero model calls",
+  "entrypoint_validation_history": [
+    "Console run --plan rejected correctly because --plan belongs to scripts/run_experiment.py, not the installed console command. Rechecked installed console run --help and --prepare-only successfully. No product change."
+  ]
+}

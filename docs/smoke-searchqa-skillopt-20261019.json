@@ -1,0 +1,136 @@
+{
+  "verified_at": "2026-10-23",
+  "run_dir": "runs/skillopt-miniagent-searchqa-20261019-211328-570476",
+  "scope": "Historical local real run. Fast update observed; current-source rerun not performed.",
+  "result": {
+    "status": "finished",
+    "snapshot_id": "46a58a8f2d2f5cf26358979913c3aaa238e3910f490703871110e1bf5e98039f",
+    "primary_metric": "exact_match",
+    "test_score": 0.6666666666666666,
+    "test_tasks": 6,
+    "test_metrics": {
+      "exact_match": 0.6666666666666666,
+      "f1": 0.9111111111111111
+    },
+    "benchmark": {
+      "source": "kyunghyuncho/search_qa",
+      "config": "train_test_val",
+      "revision": "06907e45883b7cae435453b65d598447039fde79",
+      "mode": "context",
+      "scoring": "text_em_f1"
+    }
+  },
+  "records": [
+    {
+      "file": "00001-baseline.json",
+      "statuses": [
+        "finished",
+        "finished",
+        "finished"
+      ],
+      "snapshot_id": "9626816fd8fe56861299cc14124aff70a6418a70e20069d8b6decac2960bbc74"
+    },
+    {
+      "file": "00002-train.json",
+      "statuses": [
+        "finished",
+        "finished",
+        "finished",
+        "finished",
+        "finished",
+        "finished",
+        "finished",
+        "finished"
+      ],
+      "snapshot_id": "9626816fd8fe56861299cc14124aff70a6418a70e20069d8b6decac2960bbc74"
+    },
+    {
+      "file": "00003-worker.json",
+      "statuses": [
+        "finished"
+      ]
+    },
+    {
+      "file": "00004-worker.json",
+      "statuses": [
+        "finished"
+      ]
+    },
+    {
+      "file": "00005-worker.json",
+      "statuses": [
+        "finished"
+      ]
+    },
+    {
+      "file": "00006-worker.json",
+      "statuses": [
+        "finished"
+      ]
+    },
+    {
+      "file": "00007-worker.json",
+      "statuses": [
+        "finished"
+      ]
+    },
+    {
+      "file": "00008-worker.json",
+      "statuses": [
+        "finished"
+      ]
+    },
+    {
+      "file": "00009-worker.json",
+      "statuses": [
+        "finished"
+      ]
+    },
+    {
+      "file": "00010-candidate_dev.json",
+      "statuses": [
+        "finished",
+        "finished",
+        "finished"
+      ],
+      "snapshot_id": "46a58a8f2d2f5cf26358979913c3aaa238e3910f490703871110e1bf5e98039f"
+    },
+    {
+      "file": "00011-decision.json",
+      "statuses": [],
+      "kind": "fast",
+      "accepted": true,
+      "score": 0.3333333333333333,
+      "baseline_score": 0.0,
+      "parent_id": "9626816fd8fe56861299cc14124aff70a6418a70e20069d8b6decac2960bbc74",
+      "candidate_id": "46a58a8f2d2f5cf26358979913c3aaa238e3910f490703871110e1bf5e98039f"
+    },
+    {
+      "file": "00012-test.json",
+      "statuses": [
+        "finished",
+        "finished",
+        "finished",
+        "finished",
+        "finished",
+        "finished"
+      ],
+      "snapshot_id": "46a58a8f2d2f5cf26358979913c3aaa238e3910f490703871110e1bf5e98039f"
+    }
+  ],
+  "usage": {
+    "input_tokens": 162921,
+    "output_tokens": 21032,
+    "cache_read_tokens": 25344,
+    "cache_write_tokens": 0,
+    "usage_entries": 30,
+    "usage_entries_missing_tokens": 0,
+    "sdk_cost_entries": 0,
+    "duplicate_usage_entries": 0,
+    "records": 27,
+    "finished_records": 27,
+    "failed_records": 0,
+    "sdk_cost_usd": null,
+    "cost_bases": []
+  }
+}

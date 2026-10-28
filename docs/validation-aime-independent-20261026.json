@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-26",
+  "capability": "AIME explicit independent evolution_year",
+  "native_data_report": "validation-aime-independent-native-20261026.json",
+  "wheel_report": "validation-aime-independent-wheel-20261026.json",
+  "test_initial": {
+    "passed": 116,
+    "failed": 1,
+    "failure": "Windows long-path fixture snapshot tempfile creation"
+  },
+  "targeted_extended_path_rerun": {
+    "passed": 1,
+    "product_path_fallback_added": false
+  },
+  "new_tests": 7,
+  "public_preflight": {
+    "miniagent": "passed",
+    "claude_code": "passed",
+    "train": 1,
+    "dev": 1,
+    "test": 1,
+    "model_calls": 0
+  },
+  "real_modular_smoke": {
+    "status": "queued after WorkBench",
+    "count": 2,
+    "report": "smoke-aime2026-modular-independent-original-20261026.json"
+  },
+  "algorithm_gate_changes": false,
+  "active_frozen_code_hot_changes": false
+}

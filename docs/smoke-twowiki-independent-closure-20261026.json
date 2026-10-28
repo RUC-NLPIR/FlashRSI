@@ -1,0 +1,84 @@
+{
+  "checked_at": "2026-10-26T00:02:49.604279+00:00",
+  "independent_data_available_and_executed": true,
+  "native_answer_protocol": "canonical EM/F1 only; no v1.1 entity aliases/support/evidence/joint score claim",
+  "experimental_partition": "complete native validation pool, custom1/1/1; full native train evolution; full-pool ID/raw question guard before selection",
+  "items": [
+    {
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "status": "flow_passed",
+      "experiment_path": "/root/flashrsi-twowiki-evolution-public-20261026/batch-runs/modular_rsi-miniagent/modular_rsi-miniagent-twowiki_multihopqa-20261026-070737-299836",
+      "target_stages": 16,
+      "worker_stages": 8,
+      "all_finished": true,
+      "all_usage_recorded": true,
+      "benchmark": {
+        "source": "framolfese/2WikiMultihopQA",
+        "config": "default",
+        "revision": "fe713bfbd1afbca1a65246741a75890405d56a3a",
+        "splits": [
+          "validation"
+        ],
+        "mode": "context",
+        "scoring": "answer_text",
+        "evolution_source": {
+          "source": "framolfese/2WikiMultihopQA",
+          "revision": "fe713bfbd1afbca1a65246741a75890405d56a3a",
+          "config": "default",
+          "splits": [
+            "train"
+          ],
+          "upstream": "https://github.com/Alab-NII/2wikimultihop",
+          "answer_protocol_revision": "13800e5be57df1b4040b9b1588c6c811779e69e9",
+          "split_policy": "user-configured",
+          "native_split": "train",
+          "experiment_role": "external_evolution",
+          "pool_size": 167454,
+          "pool_checksum": "0c35f7a7a2a4097155a1da1c386b38d96a00f0f6409806634d02a68ea16bff82"
+        }
+      },
+      "source_changes": [],
+      "test_score": 1.0
+    },
+    {
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "status": "flow_passed",
+      "experiment_path": "/root/flashrsi-twowiki-evolution-public-20261026/batch-runs/modular_rsi-claude_code/modular_rsi-claude_code-twowiki_multihopqa-20261026-072517-823092",
+      "target_stages": 11,
+      "worker_stages": 5,
+      "all_finished": true,
+      "all_usage_recorded": true,
+      "benchmark": {
+        "source": "framolfese/2WikiMultihopQA",
+        "config": "default",
+        "revision": "fe713bfbd1afbca1a65246741a75890405d56a3a",
+        "splits": [
+          "validation"
+        ],
+        "mode": "context",
+        "scoring": "answer_text",
+        "evolution_source": {
+          "source": "framolfese/2WikiMultihopQA",
+          "revision": "fe713bfbd1afbca1a65246741a75890405d56a3a",
+          "config": "default",
+          "splits": [
+            "train"
+          ],
+          "upstream": "https://github.com/Alab-NII/2wikimultihop",
+          "answer_protocol_revision": "13800e5be57df1b4040b9b1588c6c811779e69e9",
+          "split_policy": "user-configured",
+          "native_split": "train",
+          "experiment_role": "external_evolution",
+          "pool_size": 167454,
+          "pool_checksum": "0c35f7a7a2a4097155a1da1c386b38d96a00f0f6409806634d02a68ea16bff82"
+        }
+      },
+      "source_changes": [],
+      "test_score": 1.0
+    }
+  ],
+  "new_model_calls_by_review": 0,
+  "historical_two_default_rejections_preserved": true
+}

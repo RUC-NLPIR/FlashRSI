@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-25T20:40:34.034447+00:00",
+  "algorithm": "skillopt",
+  "target": "miniagent",
+  "raw_status": "execution_failed",
+  "classification": "failed_invalid_worker_edit",
+  "native_error": {
+    "status": "error",
+    "error": "append edit requires non-empty content"
+  },
+  "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-supergpqa-20261026-042741-283374",
+  "baseline_train_worker_finished": true,
+  "final_result_exists": false,
+  "new_model_calls": 0,
+  "repair_queue": "/root/flashrsi-supergpqa-skillopt-fix-20261026/skillopt-mini-retry-20261026",
+  "repair_paid_attempt_limit": 1,
+  "reason": "Same tested _PatchError validation boundary as original DeepSearch empty insert_after; original frozen source unchanged; no extra Worker retry/dev gate change"
+}

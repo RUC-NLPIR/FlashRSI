@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-26T05:57:10.290026+00:00",
+  "status": "passed",
+  "new_model_calls": 0,
+  "scope": "SearchQA public native TriviaQA external evolution source, unchanged text EM/F1 and downstream dev/test",
+  "new_tests": 12,
+  "before_implementation_failed": 11,
+  "before_implementation_passed": 1,
+  "related_regression_passed": 106,
+  "ruff": "affected source/tests clean",
+  "format": "affected source/tests clean",
+  "wheel": {
+    "sha256": "f03f51bb8d0cf78b6cd85aaab4515de4fb8606fc901445458d6d67a30983f59c",
+    "independent_install": true,
+    "installed_module_byte_identity": true,
+    "cli_help": true,
+    "cli_prepare_only": true,
+    "dependency_scope": "Fresh wheel installed with declared existing dependencies linked via .pth; not cold network dependency validation"
+  },
+  "native_identity_research": "smoke-searchqa-trivia-native-source-research-original-20261026.json",
+  "original_native_overlap_preserved": "smoke-searchqa-native-pool-overlap-20261026.json",
+  "setup_history": [
+    {
+      "scope": "zero-model wheel installation",
+      "errors": [
+        "Default uv cache ACL denied",
+        "Default Windows temporary directory ACL denied; first env partially installed, so not used"
+      ],
+      "resolution": "Fresh separate installed env, task-local uv cache and temporary directory; CLI/fixtures/identity then all passed"
+    }
+  ]
+}

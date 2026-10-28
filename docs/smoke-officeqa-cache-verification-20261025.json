@@ -1,0 +1,16 @@
+{
+  "dataset": "databricks/officeqa",
+  "revision": "763a8366abf2a3605c381d53586d844dc60fa756",
+  "questions": 133,
+  "corpus_documents": 697,
+  "verified_data_entries": 698,
+  "metadata_members": [
+    "data-manifest.json",
+    "test-task-manifest.json"
+  ],
+  "mismatches": [],
+  "missing": [],
+  "archive_sha256": "39b38d5c984eae325f1c550be27dc90a813af40eb158ab40c915e552ff06b401",
+  "source_archive": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI-Lite-sync\\.cache\\officeqa38312-prepare\\officeqa-pro-data.tar.gz",
+  "original_directory_modified": false
+}

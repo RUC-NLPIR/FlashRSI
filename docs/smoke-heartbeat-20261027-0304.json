@@ -1,0 +1,195 @@
+{
+  "observed_at": "2026-10-27T03:09:10+08:00",
+  "new_benchmarks": [],
+  "new_passes": [],
+  "matrix_counts": {
+    "pass": 428,
+    "partial": 123,
+    "failed": 25,
+    "blocked": 24,
+    "pending": 24
+  },
+  "machines": {
+    "original": {
+      "utc": "2026-10-26T19:08:56.513296+00:00",
+      "jobs": [
+        {
+          "id": "aime2026-modular-mini",
+          "status": "flow_passed",
+          "phase": "experiment",
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.max_turns",
+              "before": 60,
+              "after": 120
+            },
+            {
+              "path": "algorithm.worker.timeout",
+              "before": 600,
+              "after": 1200
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "finished": 21
+          },
+          "worker_statuses": {
+            "finished": 19
+          },
+          "missing_usage": 0,
+          "active_process_present": false,
+          "paid_marker": true
+        },
+        {
+          "id": "math500-modular-mini",
+          "status": "execution_failed",
+          "phase": "experiment",
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.llm.max_tokens",
+              "before": 8192,
+              "after": 16384
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "finished": 16
+          },
+          "worker_statuses": {
+            "finished": 16,
+            "error": 1
+          },
+          "missing_usage": 0,
+          "active_process_present": false,
+          "paid_marker": true
+        },
+        {
+          "id": "appworld-modular-mini",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 57072,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.max_turns",
+              "before": 60,
+              "after": 120
+            },
+            {
+              "path": "algorithm.worker.timeout",
+              "before": 600,
+              "after": 1200
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "finished": 6
+          },
+          "worker_statuses": {
+            "finished": 6
+          },
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1627004928
+    },
+    "smoke2": {
+      "utc": "2026-10-26T19:09:02.635077+00:00",
+      "jobs": [
+        {
+          "id": "browsecomp-opro-cc",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 899,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 3516801024
+    },
+    "smoke3": {
+      "utc": "2026-10-26T19:09:08.597053+00:00",
+      "jobs": [
+        {
+          "id": "widesearch-opro-cc-judge8192",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 16244,
+          "budget_changes": [
+            {
+              "path": "benchmark.judge.llm.max_tokens",
+              "before": 4096,
+              "after": 8192
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 2591551488
+    }
+  },
+  "math_followup": {
+    "status": "waiting_for_appworld"
+  },
+  "math_followup_plan": [
+    {
+      "id": "math500-modular-mini-turn120",
+      "oldroot": "/root/flashrsi-math-evolution-public-20261026",
+      "oldcontrol": "independent-math2-20261026",
+      "root": "/root/flashrsi-math-evolution-public-20261026",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "report": "smoke-math500-worker-turn-budget-20261027.json",
+      "proxy": "http://127.0.0.1:33617",
+      "config": "/root/.cache/math-turn-budget-0304/math.local.yaml",
+      "status": "pending",
+      "budget_changes": [
+        {
+          "path": "algorithm.worker.max_turns",
+          "before": 60,
+          "after": 120
+        },
+        {
+          "path": "algorithm.worker.timeout",
+          "before": 600,
+          "after": 1200
+        }
+      ],
+      "audit_source": "/root/flashrsi-math-evolution-public-20261026/independent-math2-20261026/audit.py",
+      "previous_status": "execution_failed",
+      "source_file_count": 284,
+      "health_config": "/root/flashrsi-math-evolution-public-20261026/independent-math2-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "audit_python": "/root/.cache/FlashRSI/envs/ad30767cf091-17c6fe50def2-py312/bin/python",
+      "preparation_repair": "Use original verified MATH independent-loader root; Search JSON root lacked MATH external loader. No paid attempt so far.",
+      "evidence": "Prior output16384 attempt reached Worker60 with usage; retain output16384 and increase only exhausted turn/time budget."
+    }
+  ],
+  "note": "2026-10-27 03:09实查：本轮新增完整通过0，无新增Benchmark。MATH输出16384复测达到Worker60轮，16Target+16Worker finished后1Worker error，usage齐；SWE输出16384复测Worker60轮，另有候选TraceWriter.event重复kind参数错误，一条Target usage未知。Wide OPRO/CC三阶段Judge失败，新真实事件证明3个finish_reason=length/completion4096；已用真实launcher环境完成离线审计，保留初次审计环境缺依赖日志。原机AppWorld/ModularMini仍运行（6Target+6Worker finished），唯一MATH120轮后续等待；smoke2 BrowseComp/OPRO/CC 80轮/2400秒新尝试运行；smoke3 Wide OPRO/CC Judge8192新尝试运行，其他参数保留。未修改产品源码、未清环境，旧结果不覆盖。\n\n"
+}

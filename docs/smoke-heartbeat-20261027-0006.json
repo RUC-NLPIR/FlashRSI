@@ -1,0 +1,45 @@
+{
+  "checked_at_cst": "2026-10-27 00:06:35",
+  "new_benchmarks": [],
+  "new_passes": 0,
+  "duplicate_dispatches": 0,
+  "original": {
+    "current": "BBEH/ModularRSI/MiniAgent",
+    "ended": 0,
+    "model_running": 1,
+    "pending": 1,
+    "next": "SearchQA/ModularRSI/Claude Code",
+    "target_finished": 5,
+    "worker_finished": 5,
+    "recorded_missing_usage": [],
+    "recorded_errors": [],
+    "source_files": {"bbeh": 275, "searchqa": 284},
+    "source_changes": [],
+    "disk_free_bytes": 2346147840,
+    "actual_public_runner_and_sdk_present": true
+  },
+  "smoke2": {
+    "current": "MuSiQue/ModularRSI/MiniAgent",
+    "ended": 0,
+    "model_running": 1,
+    "pending": 0,
+    "target_finished": 13,
+    "worker_finished": 6,
+    "recorded_missing_usage": [],
+    "recorded_errors": [],
+    "source_files": 270,
+    "source_changes": [],
+    "disk_free_bytes": 5166989312,
+    "actual_public_runner_and_sdk_present": true
+  },
+  "smoke3": {
+    "current": "No new paid validation assigned",
+    "model_running": 0,
+    "pending": 0,
+    "actual_public_runner_controller_sdk_present": false,
+    "disk_free_bytes": 3445374976
+  },
+  "next_action": "Existing original sequence automatically starts SearchQA after BBEH terminal state; do not duplicate. Observe final native scoring, usage, source and credential audit before upgrading cells.",
+  "constraints": "Original budgets and data unchanged. Each authorized attempt once. No source research, new development, extra model replay or cleanup this heartbeat.",
+  "matrix": "No pass upgrades; prior failure evidence retained while new attempts are active."
+}

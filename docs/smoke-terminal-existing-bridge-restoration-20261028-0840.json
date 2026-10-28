@@ -1,0 +1,14 @@
+{
+  "restored_existing_unmodified_helper": true,
+  "pid": 45902,
+  "docker_host": "tcp://127.0.0.1:46935",
+  "upstream": "unix:///var/ebcloud/be737058-d631-4b3b-bfee-90c1933574af/dind/docker.sock",
+  "old_probe_engine": "88f71a60-f1cf-4c56-a785-4dbf79c0337d",
+  "current_engine": "389a2b6d-4921-43e1-a805-eddbe6116e81",
+  "engine_change_recorded_not_hidden": true,
+  "cached3_original_image_and_layers_reverified": true,
+  "old_listener_dead": true,
+  "loopback_only": true,
+  "model_calls": 0,
+  "no_engine_reset_issued": true
+}

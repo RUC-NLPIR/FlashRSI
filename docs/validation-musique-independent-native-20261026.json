@@ -1,0 +1,123 @@
+{
+  "checked_at": "2026-10-25T21:38:41.949904+00:00",
+  "new_model_calls": 0,
+  "reference_replay_only": true,
+  "not_real_smoke": true,
+  "modes": [
+    {
+      "mode": "context",
+      "metadata": {
+        "source": "bdsaglam/musique",
+        "config": "musique_ans_v1.0",
+        "revision": "22873a405dd809893b22ada0b499299fb612d2df",
+        "splits": [
+          "dev"
+        ],
+        "mode": "context",
+        "scoring": "official",
+        "scorer_revision": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+        "evolution_source": {
+          "source": "bdsaglam/musique",
+          "config": "musique_ans_v1.0",
+          "revision": "22873a405dd809893b22ada0b499299fb612d2df",
+          "upstream": "https://github.com/StonyBrookNLP/musique",
+          "split_policy": "user-configured",
+          "scorer_revision": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+          "splits": [
+            "train"
+          ],
+          "native_split": "train",
+          "experiment_role": "external_evolution",
+          "pool_size": 19938,
+          "pool_checksum": "7b8b03c7552c531a87c6cf5fafebded6071786ab995236145ca7bc0b782c60ce"
+        }
+      },
+      "scores": [
+        {
+          "task_id": "2hop__92405_64652",
+          "source_split": "train",
+          "metrics": {
+            "exact_match": 1.0,
+            "f1": 1.0
+          }
+        },
+        {
+          "task_id": "3hop1__652852_2053_52946",
+          "source_split": "dev",
+          "metrics": {
+            "exact_match": 1.0,
+            "f1": 1.0
+          }
+        },
+        {
+          "task_id": "2hop__75207_46837",
+          "source_split": "dev",
+          "metrics": {
+            "exact_match": 1.0,
+            "f1": 1.0
+          }
+        }
+      ],
+      "dev_test_membership_unchanged": true
+    },
+    {
+      "mode": "answer_support",
+      "metadata": {
+        "source": "bdsaglam/musique",
+        "config": "musique_ans_v1.0",
+        "revision": "22873a405dd809893b22ada0b499299fb612d2df",
+        "splits": [
+          "dev"
+        ],
+        "mode": "answer_support",
+        "scoring": "official",
+        "scorer_revision": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+        "evolution_source": {
+          "source": "bdsaglam/musique",
+          "config": "musique_ans_v1.0",
+          "revision": "22873a405dd809893b22ada0b499299fb612d2df",
+          "upstream": "https://github.com/StonyBrookNLP/musique",
+          "split_policy": "user-configured",
+          "scorer_revision": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+          "splits": [
+            "train"
+          ],
+          "native_split": "train",
+          "experiment_role": "external_evolution",
+          "pool_size": 19938,
+          "pool_checksum": "90c6219b5e83139cb041c18663b392ddb9c02dc4a26dde16915b76b1893030d8"
+        }
+      },
+      "scores": [
+        {
+          "task_id": "2hop__92405_64652",
+          "source_split": "train",
+          "metrics": {
+            "answer_em": 1.0,
+            "answer_f1": 1.0,
+            "support_f1": 1.0
+          }
+        },
+        {
+          "task_id": "3hop1__652852_2053_52946",
+          "source_split": "dev",
+          "metrics": {
+            "answer_em": 1.0,
+            "answer_f1": 1.0,
+            "support_f1": 1.0
+          }
+        },
+        {
+          "task_id": "2hop__75207_46837",
+          "source_split": "dev",
+          "metrics": {
+            "answer_em": 1.0,
+            "answer_f1": 1.0,
+            "support_f1": 1.0
+          }
+        }
+      ],
+      "dev_test_membership_unchanged": true
+    }
+  ]
+}

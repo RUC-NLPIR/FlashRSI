@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-28",
+  "status": "interface_only_offline_validated",
+  "requested_scope": "Provide DeepSWE interface only; no benchmark download or experiment.",
+  "benchmark": "deepswe",
+  "upstream": "https://github.com/datacurve-ai/deep-swe",
+  "revision": "0b9fabbb63b9104d678fe965e1632f2dd9eaa2ea",
+  "version": "1.1",
+  "runtime": "existing harbor==0.23.0",
+  "metric": "reward",
+  "source_verification": "Git ls-remote HEAD, official README and one task schema/instruction read remotely; no repository clone or dataset materialization.",
+  "tests": {
+    "source_affected": {
+      "passed": 46,
+      "description": "synthetic native task fixtures, launcher, Terminal versions and SpreadsheetBench2 regressions"
+    },
+    "installed_wheel": {
+      "passed": 15,
+      "description": "copied DeepSWE tests outside source tree with isolated Python import"
+    },
+    "ruff_check": "passed",
+    "ruff_format": {
+      "passed": true,
+      "files": 246
+    }
+  },
+  "wheel": {
+    "wheel_sha256": "01b085ac2a54beb96516466bca9d203669c0037c60c5830b40872d057939d5a0",
+    "installed_wheel_import": true,
+    "changed_python_files_match_source": true,
+    "cli_help": true,
+    "plan": {
+      "algorithm": "opro",
+      "agent": "miniagent",
+      "worker": "llm",
+      "benchmark": "deepswe",
+      "extras": [
+        "harbor",
+        "llm",
+        "miniagent"
+      ],
+      "requirements": [],
+      "data": "download/reuse native upstream data",
+      "prerequisites": [
+        "Git for upstream installation/data preparation",
+        "Docker CLI and a running Linux daemon",
+        "Python >=3.12",
+        "Docker Compose"
+      ]
+    },
+    "registered_benchmarks": 29,
+    "real_dataset_loads": 0,
+    "model_calls": 0,
+    "docker_calls": 0
+  },
+  "coverage": [
+    "lazy initialization and pinned download dispatch (mocked)",
+    "local checkout/tasks/single-task layouts without downloading",
+    "native namespaced task IDs and explicit deterministic splits",
+    "v1.1 separate-verifier/collect/no-network contract rejection",
+    "host reward mapping and loaded task integrity",
+    "model endpoint allowlist changes between executions",
+    "Harbor native network policy: model hosts only during agent phase, verifier stays no-network",
+    "CLI help and selected dependency plan from installed wheel"
+  ],
+  "real_dataset_downloads": 0,
+  "image_pulls": 0,
+  "container_runs": 0,
+  "model_calls": 0,
+  "limitations": [
+    "No real DeepSWE task loading, Docker execution, evaluation or algorithm smoke per user scope.",
+    "No claim of reproducing Pier/Modal leaderboard settings.",
+    "Harbor reports artifact-overlap warnings for the native-style explicit model.patch plus convention artifacts directory; retained without rewriting upstream task semantics.",
+    "Remote endpoint/proxy connectivity and real task images remain untested."
+  ]
+}

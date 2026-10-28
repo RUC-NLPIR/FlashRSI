@@ -1,0 +1,146 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-26T18:15:06.159702+00:00",
+  "items": [
+    {
+      "id": "crux-rrsi-cc",
+      "root": "/root/flashrsi-cruxeval-public-20261026",
+      "config": "/root/.cache/budget-smoke-0209/crux-rrsi-cc.local.yaml",
+      "health_config": "/root/flashrsi-cruxeval-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "status": "flow_passed",
+      "report": "smoke-crux-rrsi-budget-retry-20261027.json",
+      "proxy": "http://127.0.0.1:33618",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "budget_changes": [
+        {
+          "path": "algorithm.worker.llm.max_tokens",
+          "before": 8192,
+          "after": 16384
+        }
+      ],
+      "audit_source": "/root/flashrsi-cruxeval-public-20261026/public-bench24-20261026/audit.py",
+      "phase": "experiment",
+      "updated_at": "2026-10-26T18:11:57.413418+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-cruxeval-public-20261026/budget-runs-20261027/rrsi-cc-output16384/rrsi-claude_code-cruxeval_output-20261027-021157-907066",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "sample_223",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "sample_223",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00013-smoke.json",
+            "task_id": "sample_223",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "sample_223",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-candidate.json",
+            "task_id": "sample_223",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-test.json",
+            "task_id": "sample_113",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 27,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-26T18:15:06.159351+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User explicitly authorized increased budgets; one attempt per configuration; original 1/1/1 tasks and scoring preserved."
+}

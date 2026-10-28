@@ -1,0 +1,34 @@
+{
+  "status": "completed_data_only",
+  "checked_at": "2026-10-26T11:39:00.941983+00:00",
+  "source": "https://github.com/olly-styles/WorkBench",
+  "revision": "49c7dfd00c03d384ec59ea57374f50b766aa5613",
+  "model_calls": 0,
+  "source_files": 24,
+  "downstream_rows": 690,
+  "candidates": {
+    "v1": {
+      "rows": 690,
+      "unique_raw_questions": 690,
+      "overlap_with_complete_downstream": 634,
+      "decision": "reject_entire_pool",
+      "native_outcomes_present": 690
+    },
+    "v2026-05-17": {
+      "rows": 690,
+      "unique_raw_questions": 690,
+      "overlap_with_complete_downstream": 651,
+      "decision": "reject_entire_pool",
+      "native_outcomes_present": 690
+    },
+    "v2026-05-19": {
+      "rows": 690,
+      "unique_raw_questions": 690,
+      "overlap_with_complete_downstream": 679,
+      "decision": "reject_entire_pool",
+      "native_outcomes_present": 690
+    }
+  },
+  "rows_removed": 0,
+  "questions_modified": false
+}

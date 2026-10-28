@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-25T23:52:03.601937+00:00",
+  "classification": "partial_postprocessing_or_scoring_error",
+  "native_baseline_scoring_completed": true,
+  "candidate_and_final_target_finished_but_postprocess_failed": true,
+  "native_error_message": "TravelPlanner postprocessing/scoring failed (ValueError)",
+  "original_converter_response_not_persisted": "Cannot attribute exact failing parser/scorer step without guessing; no paid diagnosis calls",
+  "postprocess_usage_for_error_stages": "not recorded; missing is not zero",
+  "private_collector_repaired": true,
+  "new_model_calls_by_reaudit": 0,
+  "failed_combination_not_repeated": true,
+  "continue_only_unrun_combinations": true
+}

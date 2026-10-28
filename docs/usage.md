@@ -65,6 +65,8 @@ pip install -e '.[miniagent,llm]'
 
 Use `flashrsi` in place of `uv run flashrsi` in subsequent commands.
 
+See also the [30-benchmark configuration index](benchmark-quickstart.md) and [automatic launcher guide](experiment-launcher.zh-CN.md).
+
 ## Native harnesses
 
 | Harness | Execution | Versioned resources |

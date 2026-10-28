@@ -1,0 +1,147 @@
+{
+  "checked_at": "2026-10-28T20:57:20.188173+08:00",
+  "new_passes": 0,
+  "new_benchmarks": 0,
+  "totals": {
+    "pass": 552,
+    "failed": 12,
+    "blocked": 10,
+    "partial": 26,
+    "pending": 24
+  },
+  "travel_counts": {
+    "pass": 21,
+    "failed": 3
+  },
+  "main_counts": {
+    "pass": 472,
+    "partial": 2,
+    "failed": 4,
+    "historical_independent_rejections": 2,
+    "total": 480,
+    "remaining": 8
+  },
+  "combined_counts": {
+    "existing_pass": 493,
+    "planned_total": 528,
+    "remaining": 35,
+    "not_added_to_historical624_matrix_yet": "SpreadsheetBench2 registration is not an integration or model result"
+  },
+  "live_queues": {
+    "smoke2": {
+      "control": "bfcl-modular-mini16-worker120-2005",
+      "jobs": [
+        {
+          "id": "bfcl-modular-mini16-worker120",
+          "algorithm": "ModularRSI",
+          "target": "miniagent",
+          "status": "execution_failed",
+          "phase": "experiment",
+          "report": "smoke-bfcl-modular-mini16-worker120-20261028.json",
+          "paid": true
+        }
+      ],
+      "source_audit": {
+        "/root/flashrsi-workbench-modular-same-source-public-20261028": {
+          "files": 230,
+          "changed": []
+        }
+      },
+      "processes": [],
+      "free_bytes": 1074651136,
+      "proxy_listener": true
+    },
+    "smoke4": {
+      "control": "browse-modular-budget240-2005",
+      "jobs": [
+        {
+          "id": "browse-modular-miniagent-budget240-group",
+          "algorithm": "ModularRSI",
+          "target": "miniagent",
+          "status": "execution_failed",
+          "phase": "experiment",
+          "report": "smoke-browse-modular-miniagent-budget240-group-20261028.json",
+          "paid": true
+        },
+        {
+          "id": "browse-modular-claude_code-budget240-group",
+          "algorithm": "ModularRSI",
+          "target": "claude_code",
+          "status": "pending",
+          "report": "smoke-browse-modular-claude_code-budget240-group-20261028.json",
+          "paid": false
+        }
+      ],
+      "source_audit": {
+        "/root/flashrsi-browse-modular-same-source-public-20261028": {
+          "files": 265,
+          "changed": []
+        }
+      },
+      "processes": [],
+      "free_bytes": 20023812096,
+      "proxy_listener": true
+    },
+    "smoke5": {
+      "control": "travel-modular-cc-output16384-2050",
+      "jobs": [
+        {
+          "id": "travel-modular-cc-worker-output16384",
+          "algorithm": "ModularRSI",
+          "target": "claude_code",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 48088,
+          "report": "smoke-travel-modular-cc-worker-output16384-20261028.json",
+          "paid": true
+        }
+      ],
+      "source_audit": {
+        "/root/flashrsi-travel-modular-same-source-public-20261028": {
+          "files": 266,
+          "changed": []
+        }
+      },
+      "processes": [
+        {
+          "pid": 48018,
+          "kind": "controller",
+          "control": "travel-modular-cc-output16384-2050"
+        },
+        {
+          "pid": 48088,
+          "kind": "public",
+          "control": "travel-modular-cc-output16384-2050"
+        },
+        {
+          "pid": 48089,
+          "kind": "public",
+          "control": "travel-modular-cc-output16384-2050"
+        },
+        {
+          "pid": 48090,
+          "kind": "public",
+          "control": "travel-modular-cc-output16384-2050"
+        }
+      ],
+      "free_bytes": 18683174912,
+      "proxy_listener": true
+    },
+    "smoke3": {
+      "jobs": [],
+      "status": "model_idle",
+      "free_bytes": 1734868992,
+      "proxy_listener": true
+    }
+  },
+  "old_failure_audit": "smoke-travel-modular-cc-output8192-failure-audit-20261028.json",
+  "actual_failure": "00016-worker Claude SDK response exceeded8192 output maximum",
+  "old_target_count": 6,
+  "old_worker_count": 6,
+  "old_usage_complete": true,
+  "old_source_files": 266,
+  "old_credential_files": 23,
+  "new_configuration": "Only CC Worker llm.max_tokens8192to16384, SDK env mapping asserted; Target40/1200 Worker60/600 and original native scoring unchanged",
+  "product_source_changes": 0,
+  "cleanup": 0
+}

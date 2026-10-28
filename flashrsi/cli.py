@@ -34,9 +34,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error(str(exc))
 
     if not args.prepare_only:
-        from flashrsi.runner import _run
+        from flashrsi.runner import _prepare, _run
 
         try:
+            if args.check_only:
+                algorithm = asyncio.run(_prepare(config))
+                counts = ", ".join(
+                    f"{role}={len(getattr(algorithm.benchmark, role))}"
+                    for role in ("train", "dev", "test")
+                )
+                print(f"Startup checks passed: {counts}")
+                print(
+                    "No tasks or model calls were run; no experiment directory created."
+                )
+                print(
+                    "Remote API authentication and model availability were not tested."
+                )
+                return 0
             run_dir, result = asyncio.run(_run(config))
         except Exception as exc:
             parser.error(_redact(str(exc), _secrets(config) + _secrets(os.environ)))
@@ -86,10 +100,19 @@ def _parser() -> argparse.ArgumentParser:
         default=[],
         help="Set a dotted configuration path to a YAML value; repeat for more settings",
     )
-    run.add_argument(
+    preparation = run.add_mutually_exclusive_group()
+    preparation.add_argument(
         "--prepare-only",
         action="store_true",
         help="Validate configuration and create a run directory without executing tasks",
+    )
+    preparation.add_argument(
+        "--check-only",
+        action="store_true",
+        help=(
+            "Check dependencies, local services, data and algorithm setup without "
+            "running tasks or models; may download native data"
+        ),
     )
     return parser
 

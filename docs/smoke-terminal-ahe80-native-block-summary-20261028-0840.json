@@ -1,0 +1,20 @@
+{
+  "remote_docker_option": true,
+  "harbor_option_names": [
+    "environment_env",
+    "remote_docker",
+    "setup_timeout",
+    "uv_install_source"
+  ],
+  "engine_now": "389a2b6d-4921-43e1-a805-eddbe6116e81",
+  "native_before": "389a2b6d-4921-43e1-a805-eddbe6116e81",
+  "error_flags": {
+    "connection_reset": false,
+    "missing_path": false,
+    "setup": true,
+    "docker_create": false,
+    "bind_mounts": false,
+    "image_missing": false,
+    "proxy_unavailable": false
+  }
+}

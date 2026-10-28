@@ -9,15 +9,10 @@ import os
 import shlex
 import shutil
 import sys
-from collections.abc import Mapping
 from dataclasses import replace
-from importlib.metadata import metadata, requires, version
+from importlib.metadata import version
 from pathlib import Path
 from tempfile import TemporaryDirectory
-
-import yaml
-from packaging.markers import default_environment
-from packaging.requirements import Requirement
 
 if sys.version_info < (3, 12):
     raise ImportError("Harbor execution requires Python 3.12 or newer")
@@ -31,6 +26,7 @@ try:
         EnvironmentConfig,
         TaskConfig,
         TrialConfig,
+        VerifierConfig,
     )
     from harbor.trial.trial import Trial
 except ImportError as exc:
@@ -39,6 +35,8 @@ except ImportError as exc:
 from flashrsi._records import _config_record, _redact, _secrets
 from flashrsi.core import Trajectory
 from flashrsi.integrations._container import _agent_class
+from flashrsi.integrations._container_payload import _plain, _setup_script
+from flashrsi.integrations._container_payload import _stage as _stage_payload
 
 _ROOT = "/opt/flashrsi-lite"
 
@@ -51,6 +49,9 @@ def bind(agent):
     in _container_dependencies. No task or model is executed here.
     """
     agent._check_container()
+    from flashrsi.integrations._terminal_integrity import validate
+
+    validate(agent.config.get("harbor", {}).get("integrity_review"))
     agent.snapshot  # Container execution requires a versioned harness.
     cls = type(agent)
     if _agent_class(f"{cls.__module__}:{cls.__qualname__}") is not cls:
@@ -58,7 +59,7 @@ def bind(agent):
     agent._env_runner = _run
 
 
-async def _run(agent, task):
+async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
     """The caller's rollout has already pinned its Snapshot and configuration."""
     if shutil.which("docker") is None:
         raise ValueError("Harbor execution requires Docker with the Compose plugin")
@@ -75,6 +76,19 @@ async def _run(agent, task):
     snapshot = agent.snapshot
     config = copy.deepcopy(agent.config)
     options = config.get("harbor", {})
+    from flashrsi.integrations._terminal_integrity import validate
+
+    validate(options.get("integrity_review"))
+    remote_docker = options.get("remote_docker", False)
+    if not isinstance(remote_docker, bool):
+        raise ValueError("harbor.remote_docker must be a boolean")
+    install_source = options.get("uv_install_source", "astral")
+    installers = {
+        "astral": "https://astral.sh/uv/0.11.4/install.sh",
+        "github": "https://github.com/astral-sh/uv/releases/download/0.11.4/uv-installer.sh",
+    }
+    if not isinstance(install_source, str) or install_source not in installers:
+        raise ValueError("harbor.uv_install_source must be astral or github")
     timeout = _positive(
         config.get("timeout", native.config.agent.timeout_sec or 300), "timeout"
     )
@@ -82,7 +96,9 @@ async def _run(agent, task):
     grace = _positive(options.get("cleanup_grace", 30), "harbor.cleanup_grace")
     config["timeout"] = timeout
     secrets = sorted(
-        set(_secrets(config) + _secrets(os.environ)), key=len, reverse=True
+        set(_secrets(config) + _secrets(os.environ) + _secrets(verifier_env)),
+        key=len,
+        reverse=True,
     )
     record = {
         "type": "RunConfig",
@@ -112,9 +128,23 @@ async def _run(agent, task):
                         model_name=config["llm"]["model_name"],
                         override_timeout_sec=timeout + grace,
                         override_setup_timeout_sec=setup_timeout,
-                        kwargs={"payload_dir": str(payload)},
+                        extra_allowed_hosts=agent_allowed_hosts or [],
+                        kwargs={
+                            "payload_dir": str(payload),
+                            "uv_installer_url": installers[install_source],
+                        },
                     ),
-                    environment=EnvironmentConfig(type="docker", delete=True),
+                    environment=EnvironmentConfig(
+                        type="docker",
+                        delete=True,
+                        env=_plain(options.get("environment_env", {})),
+                        import_path=(
+                            "flashrsi.integrations._harbor_remote:_RemoteDockerEnvironment"
+                            if remote_docker
+                            else None
+                        ),
+                    ),
+                    verifier=VerifierConfig(env=verifier_env or {}),
                 )
             )
             # Harbor owns environment setup, phase deadlines, verifier and cleanup.
@@ -143,6 +173,7 @@ async def _run(agent, task):
             event["stdout"] = _read_log(trial.paths.test_stdout_path)
             event["stderr"] = _read_log(trial.paths.test_stderr_path)
             if result.exception_info is not None:
+                event["exception_type"] = result.exception_info.exception_type
                 error = (
                     result.exception_info.exception_message
                     or result.exception_info.exception_type
@@ -159,6 +190,24 @@ async def _run(agent, task):
             error = str(exc) or type(exc).__name__
             event["error"] = error
             trajectory = replace(trajectory, status="error", error_message=error)
+        review_options = options.get("integrity_review")
+        if review_options is not None:
+            from flashrsi.integrations._terminal_integrity import review
+
+            # Outside the solver exception path: retry the judge, not the task.
+            event = _redact(event, secrets)
+            await review(
+                task,
+                replace(
+                    trajectory,
+                    output=_redact(trajectory.output, secrets),
+                    messages=_redact(trajectory.messages, secrets),
+                    usage=_redact(trajectory.usage, secrets),
+                    error_message=_redact(trajectory.error_message, secrets),
+                ),
+                event,
+                review_options,
+            )
         return replace(
             trajectory,
             output=_redact(trajectory.output, secrets),
@@ -179,85 +228,38 @@ def _read_log(path):
 
 
 def _stage(directory, agent, config, prompt):
-    # Copy the adapter code separately from evolvable files. Linux dependencies
-    # are installed in the container; never copy a host virtual environment.
-    shutil.copytree(
-        Path(__file__).parents[1],
-        directory / "package" / "flashrsi",
-        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".env"),
+    config = copy.deepcopy(config)
+    config.get("harbor", {}).pop("integrity_review", None)
+    # Keep evaluation rules outside the candidate's mutable snapshot. Public
+    # benchmark repositories expose hidden tests and oracle answers online.
+    prompt += (
+        "\n\nEvaluation integrity rules: Solve the task independently. Do not "
+        "search for, download, read, or use benchmark-specific reference solutions, "
+        "hidden verifier tests, expected answers, or other agents' task solutions "
+        "from benchmark repositories, mirrors, datasets, or discussion threads. "
+        "Do not modify the verifier or forge reward files. Internet access for "
+        "ordinary documentation, dependencies, and resources requested by the task "
+        "is permitted. Tests and source files explicitly supplied as task inputs "
+        "may be inspected; this does not permit fetching hidden benchmark files."
     )
-    agent.snapshot.save(directory / "snapshot.json")
-    cls = type(agent)
-    runtime_config = _plain(config)
-    source = runtime_config.get("source_dir")
-    if source is None:
-        module_file = getattr(sys.modules[cls.__module__], "__file__", None)
-        if module_file is not None:
-            source = Path(module_file).resolve().parent
-    if source is not None:
-        # The container keeps this host path only as private provenance for
-        # relocating native resource references, never as a file source to load.
-        runtime_config["source_dir"] = str(Path(source).expanduser().resolve())
-    request = directory / "request.json"
-    request.write_text(
-        json.dumps(
-            {
-                "agent_class": f"{cls.__module__}:{cls.__qualname__}",
-                "config_yaml": yaml.safe_dump(runtime_config),
-                "snapshot_path": f"{_ROOT}/snapshot.json",
-                "prompt": prompt,
-            },
-        )
-    )
-    request.chmod(0o600)
-    (directory / "requirements.txt").write_text(
-        "".join(f"{package}=={version(package)}\n" for package in _dependencies(agent))
-    )
-
-
-def _dependencies(agent):
-    """Read built-in dependency names from installed wheel metadata."""
-    packages = ["PyYAML", *(agent._container_dependencies or ())]
-    extra = agent._container_extra
-    if extra is not None:
-        if extra not in metadata("flashrsi-lite").get_all("Provides-Extra", []):
-            raise ValueError(f"Unknown flashrsi-lite container extra: {extra}")
-        environment = {
-            **default_environment(),
-            "sys_platform": "linux",
-            "platform_system": "Linux",
-            "os_name": "posix",
-            "python_version": "3.12",
-            "python_full_version": "3.12.0",
-        }
-        for value in requires("flashrsi-lite") or ():
-            requirement = Requirement(value)
-            marker = requirement.marker
-            if (
-                marker is not None
-                and marker.evaluate({**environment, "extra": extra})
-                and not marker.evaluate({**environment, "extra": ""})
-            ):
-                packages.append(requirement.name)
-    return dict.fromkeys(packages)
-
-
-def _plain(value):
-    if isinstance(value, Path):
-        return str(value)
-    if isinstance(value, Mapping):
-        return {key: _plain(item) for key, item in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [_plain(item) for item in value]
-    return value
+    _stage_payload(directory, agent, config, prompt)
 
 
 class _SnapshotAgent(BaseAgent):
     """Harbor adapter for our existing, independently versioned harness adapter."""
 
-    def __init__(self, *args, payload_dir, **kwargs):
+    def __init__(
+        self,
+        *args,
+        payload_dir,
+        uv_installer_url="https://astral.sh/uv/0.11.4/install.sh",
+        working_dir=None,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
         self.payload_dir = Path(payload_dir)
+        self.uv_installer_url = uv_installer_url
+        self.working_dir = working_dir
 
     @staticmethod
     def name():
@@ -270,20 +272,7 @@ class _SnapshotAgent(BaseAgent):
         await environment.upload_dir(self.payload_dir, _ROOT)
         # uv installs the requested Python independently of a task's Python.
         # Minimal Debian/Ubuntu task images may not include a downloader yet.
-        command = f"""set -eu
-if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
-    apt-get update
-    DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl
-fi
-if command -v curl >/dev/null 2>&1; then
-    curl -LsSf https://astral.sh/uv/0.11.4/install.sh -o {_ROOT}/install-uv.sh
-else
-    wget -q https://astral.sh/uv/0.11.4/install.sh -O {_ROOT}/install-uv.sh
-fi
-UV_INSTALL_DIR={_ROOT}/bin UV_NO_MODIFY_PATH=1 sh {_ROOT}/install-uv.sh
-{_ROOT}/bin/uv venv --python 3.12 --managed-python {_ROOT}/venv
-{_ROOT}/bin/uv pip install --python {_ROOT}/venv/bin/python -r {_ROOT}/requirements.txt
-"""
+        command = _setup_script(self.uv_installer_url)
         result = await environment.exec(command)
         if result.return_code:
             raise RuntimeError(
@@ -303,10 +292,13 @@ UV_INSTALL_DIR={_ROOT}/bin UV_NO_MODIFY_PATH=1 sh {_ROOT}/install-uv.sh
                 str(self.environment_logs_dir / "flashrsi.json"),
             ]
         )
+        command = getattr(self, "_command_prefix", "") + command
         # Isolate bridge imports without changing the task's cwd or PYTHONPATH;
         # native tools inherit the image's environment. The entry point removes
         # request.json before starting the harness.
-        result = await environment.exec(command)
+        result = await environment.exec(
+            command, **({"cwd": self.working_dir} if self.working_dir else {})
+        )
         if not environment.capabilities.mounted and await environment.is_file(
             str(self.environment_logs_dir / "flashrsi.json")
         ):

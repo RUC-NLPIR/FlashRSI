@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-25T09:20:02.487692+00:00",
+  "component": "AppWorld automatic downloader directory",
+  "status": "confirmed_public_path_gap",
+  "evidence": [
+    "Default framework AppWorld Dockerfile sets APPWORLD_ROOT=/world but no WORKDIR.",
+    "Native appworld download data returned0 and wrote ./data under default cwd/, producing /data.",
+    "Public _launch.py mounts /world and expects /world/data, without --workdir /world."
+  ],
+  "impact": "Automatic default data preparation can fail on standard Docker too; separate from platform bind-mount namespace limitation.",
+  "suggested_public_fix": "Run native downloader with explicit --workdir /world, preserving public API, native data and verifier.",
+  "current_smoke_mode": "Use declared benchmark.data_path with unchanged full native cache copied from actual /data; this validates that supported mode, not automatic-download path.",
+  "product_code_changed": false,
+  "resolution": {
+    "date": "2026-10-25",
+    "status": "implemented_locally_with_scoped_validation",
+    "source": "flashrsi/_launch.py",
+    "change": "Add --workdir /world to native downloader Docker run; no public API/native data/scorer changes.",
+    "regression_before_fix": "Native cwd-aware cache simulation reproduced previous exit0-without-mounted-data failure.",
+    "regression_after_fix": {
+      "passed": 25,
+      "skipped": 1
+    },
+    "native_cli_path_probe": "validation-appworld-workingdir-native-20261025.json",
+    "installed_latest_wheel_validation": "validation-appworld-workingdir-wheel-20261025.json",
+    "wheel_sha256": "337b3d2ad11c09e8c7f303d4d2c2ece058db3c2d13a2c103a30f83dac95f2935",
+    "full_default_native_download_verified": false,
+    "existing_remote_source_queues_unchanged": true
+  }
+}

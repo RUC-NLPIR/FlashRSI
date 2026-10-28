@@ -1,0 +1,1759 @@
+{
+  "generated_at": "2026-10-19T13:50:28.779828+00:00",
+  "scope": "Core runtime package; experiments, results, downloaded datasets, caches, mirrors and virtual environments are excluded.",
+  "sources": {
+    "local_directory": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI-Lite-sync",
+    "github_url": "https://github.com/ignorejjj/FlashRSI-Lite",
+    "github_commit": "d8d5e35e77e1c0360a1df55505db3cfb2b113cd0"
+  },
+  "summary": {
+    "current_package_files": 206,
+    "local_source_package_files": 191,
+    "local_source_missing_files": [],
+    "local_source_unchanged_text_files": 177,
+    "local_source_intentional_changes": 14,
+    "upstream_package_files": 88,
+    "upstream_same_path_files": 87,
+    "new_algorithm_source_files": 12,
+    "new_algorithm_files_match_upstream": true,
+    "algorithms": [
+      "ace",
+      "adas",
+      "ahe",
+      "darwinx",
+      "evo_harness",
+      "evoprompt",
+      "gepa",
+      "meta_harness",
+      "modular_rsi",
+      "opro",
+      "rrsi",
+      "skillopt"
+    ],
+    "benchmarks": [
+      "appworld",
+      "bfcl",
+      "browsecomp",
+      "deepsearchqa",
+      "harvey_lab",
+      "hle",
+      "hotpotqa",
+      "jobbench",
+      "livemathbench",
+      "math",
+      "musique",
+      "nq",
+      "officeqa_pro",
+      "searchqa",
+      "swe_bench",
+      "swe_bench_pro",
+      "tau3_banking",
+      "terminal_bench",
+      "travelplanner",
+      "triviaqa",
+      "widesearch"
+    ],
+    "agents": [
+      "claude_code",
+      "miniagent"
+    ]
+  },
+  "local_source_changes": {
+    "flashrsi/_run_summary.py": "Include recorded judge/postprocess usage and provider cache token formats.",
+    "flashrsi/_startup.py": "Allow resource preparation before image checks; repair documentation references.",
+    "flashrsi/agents/llm.py": "Mark the text-only adapter as llm so file-editing algorithms reject it before execution.",
+    "flashrsi/agents/miniagent/runtime/workspace.py": "Keep flat skills and add directory SKILL.md discovery/read_skill support required by EvoHarness.",
+    "flashrsi/algorithms/__init__.py": "Export the six added upstream algorithms and record their source commit.",
+    "flashrsi/algorithms/ahe/__init__.py": "Move the existing _commit credential guard into Algorithm for reuse; preserve implementation.",
+    "flashrsi/benchmarks/_data.py": "Bound memory during limited native split sampling while preserving selected tasks and proportions.",
+    "flashrsi/benchmarks/searchqa/__init__.py": "Accept native null snippets and integer IDs; namespace native integer IDs by split.",
+    "flashrsi/benchmarks/terminal_bench/__init__.py": "Support independent evolution_data_path with overlap checks; retain existing source and grading.",
+    "flashrsi/core/algorithm.py": "Add the unchanged AHE _commit guard for shared directory-editing algorithms.",
+    "flashrsi/integrations/_travelplanner_grade.py": "Point prerequisite errors to the current README.",
+    "flashrsi/integrations/harvey_lab.py": "Point prerequisite errors to the current README.",
+    "flashrsi/integrations/travelplanner.py": "Point prerequisite errors to the current README.",
+    "flashrsi/runner.py": "Register the six added algorithms; retain the existing 21 benchmark bindings and preparation."
+  },
+  "equivalent_replacements": [
+    {
+      "source": "flashrsi/algorithms/gepa/_pareto.py",
+      "current": "flashrsi/algorithms/gepa/_population.py",
+      "reason": "Same frontier and pruning rules, using typed Member records instead of mappings; both tested with 5000 generated populations. Existing local GEPA enhancements retained."
+    }
+  ],
+  "relocated_upstream_helpers": {
+    "flashrsi/integrations/harbor.py:_dependencies": "flashrsi/integrations/_container_payload.py:_dependencies",
+    "flashrsi/integrations/harbor.py:_plain": "flashrsi/integrations/_container_payload.py:_plain",
+    "flashrsi/benchmarks/terminal_bench/__init__.py:_task_from_directory": "flashrsi/benchmarks/_harbor.py:_task_from_directory"
+  },
+  "verification": {
+    "core_public_method_signatures_removed": [],
+    "core_public_method_signatures_changed": [],
+    "ahe_commit_guard_ast_unchanged": true,
+    "gepa_equivalence_populations": 5000,
+    "last_code_regression": {
+      "passed": 428,
+      "skipped_windows_posix_permissions": 4,
+      "subtests_passed": 3,
+      "note": "Completed before this read-only source audit; runtime code unchanged by this audit."
+    }
+  },
+  "files": [
+    {
+      "path": "flashrsi/__init__.py",
+      "current_sha256": "a052e7c0096db16dda9128a37aba50b57b5ce33a6d292a6b92af836c2b62bcb1",
+      "local_source_sha256": "a052e7c0096db16dda9128a37aba50b57b5ce33a6d292a6b92af836c2b62bcb1",
+      "upstream_sha256": "a052e7c0096db16dda9128a37aba50b57b5ce33a6d292a6b92af836c2b62bcb1",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/__main__.py",
+      "current_sha256": "6c83348224348f603a61246f1c105bceb5eb485538f925af321d40e4eaca91c9",
+      "local_source_sha256": "6c83348224348f603a61246f1c105bceb5eb485538f925af321d40e4eaca91c9",
+      "upstream_sha256": "6c83348224348f603a61246f1c105bceb5eb485538f925af321d40e4eaca91c9",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/_launch.py",
+      "current_sha256": "2d9cb6bf32b1c0d6aba649f71f537ee63a440be46e9757026b197af43a463b1b",
+      "local_source_sha256": null,
+      "upstream_sha256": null,
+      "same_text_as_local": null,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/_records.py",
+      "current_sha256": "6a33174eee2b8b067a19a5898811430c1e7594d208c338b2d35d80a342c265d6",
+      "local_source_sha256": "6a33174eee2b8b067a19a5898811430c1e7594d208c338b2d35d80a342c265d6",
+      "upstream_sha256": "6a33174eee2b8b067a19a5898811430c1e7594d208c338b2d35d80a342c265d6",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/_run_summary.py",
+      "current_sha256": "44d09f06ddc9b7e41e8b4bce1ab2bd63d7a3d9542586e5af377875d267c8b8f4",
+      "local_source_sha256": "852b5361c630dd67f44886b25b5266e50e3095d4fafa82ec7aa123c732900dcd",
+      "upstream_sha256": "33994ed1d13861ece69875e2f771ab15a0cf169515ffaaa4ee67370b8f5a5be8",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/_startup.py",
+      "current_sha256": "2d820e06cf2ff5e982ddf80be52a0bf474cb28a710b08e37ad1b5bad3bf64890",
+      "local_source_sha256": "51c51d7d1de5cc0c11aceedb3225bfe201e1d5c0a605dd40bcc1ab888b4cffdc",
+      "upstream_sha256": null,
+      "same_text_as_local": false,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/agents/__init__.py",
+      "current_sha256": "60ba1b2c8145882e051f4fffa605f4918b266ea91d0bce58b10c59128b3203bc",
+      "local_source_sha256": "60ba1b2c8145882e051f4fffa605f4918b266ea91d0bce58b10c59128b3203bc",
+      "upstream_sha256": "60ba1b2c8145882e051f4fffa605f4918b266ea91d0bce58b10c59128b3203bc",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/claude_code/.claude-plugin/plugin.json",
+      "current_sha256": "3352bf55a93b3ff4909a07f3584be123e354afcd4d2b88fe3ec57d93645bdc94",
+      "local_source_sha256": "3352bf55a93b3ff4909a07f3584be123e354afcd4d2b88fe3ec57d93645bdc94",
+      "upstream_sha256": "3352bf55a93b3ff4909a07f3584be123e354afcd4d2b88fe3ec57d93645bdc94",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/claude_code/.mcp.json",
+      "current_sha256": "e5b29621496d551a5b93b06367d793e13ec5c2c2fb4f4acd8579390bdcba2872",
+      "local_source_sha256": "e5b29621496d551a5b93b06367d793e13ec5c2c2fb4f4acd8579390bdcba2872",
+      "upstream_sha256": "e5b29621496d551a5b93b06367d793e13ec5c2c2fb4f4acd8579390bdcba2872",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/claude_code/__init__.py",
+      "current_sha256": "2f787d1f90e6796d2f2f8c5774082caa7e3ee76fcf7929c3d7930c2a5cc919fc",
+      "local_source_sha256": "2f787d1f90e6796d2f2f8c5774082caa7e3ee76fcf7929c3d7930c2a5cc919fc",
+      "upstream_sha256": "b4e7bd469c60dfceb4a93bb27825fae29f4fd35251f8da46ccd7924a9f17b4e9",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/agents/claude_code/components.yaml",
+      "current_sha256": "57691d5e1fb926884b6bf09a417bfef70fededc6b60921ad268d2a2d347d9e8b",
+      "local_source_sha256": "57691d5e1fb926884b6bf09a417bfef70fededc6b60921ad268d2a2d347d9e8b",
+      "upstream_sha256": "57691d5e1fb926884b6bf09a417bfef70fededc6b60921ad268d2a2d347d9e8b",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/claude_code/hooks/hooks.json",
+      "current_sha256": "b56c9265773cc456d686833a5102f34eae5da1dba76a822276974d1c5f7fa4d9",
+      "local_source_sha256": "b56c9265773cc456d686833a5102f34eae5da1dba76a822276974d1c5f7fa4d9",
+      "upstream_sha256": "b56c9265773cc456d686833a5102f34eae5da1dba76a822276974d1c5f7fa4d9",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/claude_code/settings.json",
+      "current_sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+      "local_source_sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+      "upstream_sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/llm.py",
+      "current_sha256": "ebfb93bcbe6e20e9f62273378913e66485a9fdc0970f62969b9a25a5aaff92e4",
+      "local_source_sha256": "0419e43e4b906696bca39aeb57bbf480f0072886d9f2e2db02b802f7294b42e3",
+      "upstream_sha256": "4485b477daccf5803f73704a1a34dc9940ecea29f252ea8d97095e55045f00a9",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/agents/miniagent/__init__.py",
+      "current_sha256": "a0ffe1654185a2b7b4dff167e9ff9b6b1508293f297921c47a125a34f98f56bf",
+      "local_source_sha256": "a0ffe1654185a2b7b4dff167e9ff9b6b1508293f297921c47a125a34f98f56bf",
+      "upstream_sha256": "a0ffe1654185a2b7b4dff167e9ff9b6b1508293f297921c47a125a34f98f56bf",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/_entry.py",
+      "current_sha256": "d100f63766060ba5601b7a9e5699446c7098d724994b76f38f095a9db42f811b",
+      "local_source_sha256": "d100f63766060ba5601b7a9e5699446c7098d724994b76f38f095a9db42f811b",
+      "upstream_sha256": "d100f63766060ba5601b7a9e5699446c7098d724994b76f38f095a9db42f811b",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/agent.yaml",
+      "current_sha256": "8802690708961c86bc1cfd9441080f8e3db0c06732da1f65935ce0b15dc23e95",
+      "local_source_sha256": "8802690708961c86bc1cfd9441080f8e3db0c06732da1f65935ce0b15dc23e95",
+      "upstream_sha256": "8802690708961c86bc1cfd9441080f8e3db0c06732da1f65935ce0b15dc23e95",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/components.yaml",
+      "current_sha256": "705f35696052198a1db847b43bf8c279f190f7ce5c58ce45befefba52e6bd645",
+      "local_source_sha256": "705f35696052198a1db847b43bf8c279f190f7ce5c58ce45befefba52e6bd645",
+      "upstream_sha256": "705f35696052198a1db847b43bf8c279f190f7ce5c58ce45befefba52e6bd645",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/prompts/extract.md",
+      "current_sha256": "ce951189af6dad9bf2d1e958918b490f724761db4e3a7ecc68f05fff8fd4f11c",
+      "local_source_sha256": "ce951189af6dad9bf2d1e958918b490f724761db4e3a7ecc68f05fff8fd4f11c",
+      "upstream_sha256": "ce951189af6dad9bf2d1e958918b490f724761db4e3a7ecc68f05fff8fd4f11c",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/prompts/system.md",
+      "current_sha256": "91ddf6bd841e6016f219d0989c78311ab5b41c54e1e041d7db69f1169cf50f46",
+      "local_source_sha256": "91ddf6bd841e6016f219d0989c78311ab5b41c54e1e041d7db69f1169cf50f46",
+      "upstream_sha256": "91ddf6bd841e6016f219d0989c78311ab5b41c54e1e041d7db69f1169cf50f46",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/__init__.py",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "local_source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/agent.py",
+      "current_sha256": "224e57a5181fa55cdd89874794ff2763e343abc987fc4dcae57bc175a64e3772",
+      "local_source_sha256": "224e57a5181fa55cdd89874794ff2763e343abc987fc4dcae57bc175a64e3772",
+      "upstream_sha256": "185b316089617775805b631d6759095809dbe391a2fd350995afa2fac8f3aefe",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/editor.py",
+      "current_sha256": "e5d64c63872cba7c0954ab02f65c699a0e4fe7cfe891c2d8224c8cd7df73910f",
+      "local_source_sha256": "e5d64c63872cba7c0954ab02f65c699a0e4fe7cfe891c2d8224c8cd7df73910f",
+      "upstream_sha256": "e5d64c63872cba7c0954ab02f65c699a0e4fe7cfe891c2d8224c8cd7df73910f",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/llm.py",
+      "current_sha256": "cd9e0eb5dfb6514a798b4fc6adb0f076fd4d12a254dfdf02660cdbc900f2da35",
+      "local_source_sha256": "cd9e0eb5dfb6514a798b4fc6adb0f076fd4d12a254dfdf02660cdbc900f2da35",
+      "upstream_sha256": "cd9e0eb5dfb6514a798b4fc6adb0f076fd4d12a254dfdf02660cdbc900f2da35",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/reader.py",
+      "current_sha256": "fe8fafe528a6770948a19ae65c6dab101ea6a877de3b837d474844d374692a5b",
+      "local_source_sha256": "fe8fafe528a6770948a19ae65c6dab101ea6a877de3b837d474844d374692a5b",
+      "upstream_sha256": "fe8fafe528a6770948a19ae65c6dab101ea6a877de3b837d474844d374692a5b",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/tool_result.py",
+      "current_sha256": "e0a9e2ef08ba0b2b74abe8498f71e1648e716660e09cbfef319d9f69b590111d",
+      "local_source_sha256": "e0a9e2ef08ba0b2b74abe8498f71e1648e716660e09cbfef319d9f69b590111d",
+      "upstream_sha256": "e0a9e2ef08ba0b2b74abe8498f71e1648e716660e09cbfef319d9f69b590111d",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/tools.py",
+      "current_sha256": "4da702029130e6e0ef0a0fba3c393823bb4c4ad7b32c075ed2755946d3c3ffe7",
+      "local_source_sha256": "4da702029130e6e0ef0a0fba3c393823bb4c4ad7b32c075ed2755946d3c3ffe7",
+      "upstream_sha256": "4da702029130e6e0ef0a0fba3c393823bb4c4ad7b32c075ed2755946d3c3ffe7",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/trace.py",
+      "current_sha256": "d5996308e741d37191bacf6c470950f4b779a86da297666d93601e9334189541",
+      "local_source_sha256": "d5996308e741d37191bacf6c470950f4b779a86da297666d93601e9334189541",
+      "upstream_sha256": "d5996308e741d37191bacf6c470950f4b779a86da297666d93601e9334189541",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/web_config.py",
+      "current_sha256": "7eeab99eaa1b7756f049f8e684251a13346f0bb7d66cbcdb827cfb8c40b7ae58",
+      "local_source_sha256": "7eeab99eaa1b7756f049f8e684251a13346f0bb7d66cbcdb827cfb8c40b7ae58",
+      "upstream_sha256": "7eeab99eaa1b7756f049f8e684251a13346f0bb7d66cbcdb827cfb8c40b7ae58",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/runtime/workspace.py",
+      "current_sha256": "8fd375f17706e808339679b1e307c159f6c24a60a53794219f2d9c5322d54a57",
+      "local_source_sha256": "a99046dea56899b7cf6a4b4fbb95cbd720230952d240eb98429196195951f799",
+      "upstream_sha256": "8fd375f17706e808339679b1e307c159f6c24a60a53794219f2d9c5322d54a57",
+      "same_text_as_local": false,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/skills/main.md",
+      "current_sha256": "9cfca9584e24ccc9fdb95ab43200f4266226168fc7b3e4a10b05c2797d8dae9d",
+      "local_source_sha256": "9cfca9584e24ccc9fdb95ab43200f4266226168fc7b3e4a10b05c2797d8dae9d",
+      "upstream_sha256": "9cfca9584e24ccc9fdb95ab43200f4266226168fc7b3e4a10b05c2797d8dae9d",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/tool_descriptions/read_skill.json",
+      "current_sha256": "5ab65f49ade9a370868da6039ca10c5f4879f629dca7e3d8c1ff4cf0cf93194b",
+      "local_source_sha256": null,
+      "upstream_sha256": "5ab65f49ade9a370868da6039ca10c5f4879f629dca7e3d8c1ff4cf0cf93194b",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/tool_descriptions/shell.json",
+      "current_sha256": "b8388397cfdc03e359c05c0fd85590049ab7e57f88b443885f373a930269be4d",
+      "local_source_sha256": "b8388397cfdc03e359c05c0fd85590049ab7e57f88b443885f373a930269be4d",
+      "upstream_sha256": "b8388397cfdc03e359c05c0fd85590049ab7e57f88b443885f373a930269be4d",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/tools/read_skill.py",
+      "current_sha256": "f4b669a036744e3548959ed6ef89c510951490c79c6a07629a6df69257187147",
+      "local_source_sha256": null,
+      "upstream_sha256": "f4b669a036744e3548959ed6ef89c510951490c79c6a07629a6df69257187147",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/agents/miniagent/tools/shell.py",
+      "current_sha256": "ed80d8f69c11772715a901390ab138c5ecc9ce599188290b663773b1f4f26251",
+      "local_source_sha256": "ed80d8f69c11772715a901390ab138c5ecc9ce599188290b663773b1f4f26251",
+      "upstream_sha256": "ed80d8f69c11772715a901390ab138c5ecc9ce599188290b663773b1f4f26251",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/__init__.py",
+      "current_sha256": "6a73ded822663744e7dec6b43495ed1f2e4694402b6532985ce66233426e9e91",
+      "local_source_sha256": "91a1cc0422f92f500cbc3b02c53af8636a2819c2e335b626e38a9642f770bf4f",
+      "upstream_sha256": "4d85e95e0bdcb4a7f857d76925bdddbc3d7671d8d2c39a24680018d20726f8da",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/algorithms/_budgets.py",
+      "current_sha256": "00518c7e193cca322958f8ead1d85e378a6ee497bb9f01fb320b0d18d81aad29",
+      "local_source_sha256": "00518c7e193cca322958f8ead1d85e378a6ee497bb9f01fb320b0d18d81aad29",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/algorithms/_replies.py",
+      "current_sha256": "1439d5ced35a0c6a5e16a1d7bee0629c46bb83f01762ed5ccf5d886e119594d2",
+      "local_source_sha256": "1439d5ced35a0c6a5e16a1d7bee0629c46bb83f01762ed5ccf5d886e119594d2",
+      "upstream_sha256": "1439d5ced35a0c6a5e16a1d7bee0629c46bb83f01762ed5ccf5d886e119594d2",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/ace/__init__.py",
+      "current_sha256": "73ddf91ccd24ebe214284baa94f613eb9d034ab65219f8da885ffac07f5fbcf5",
+      "local_source_sha256": "73ddf91ccd24ebe214284baa94f613eb9d034ab65219f8da885ffac07f5fbcf5",
+      "upstream_sha256": "3d38188a30f428ea5dde7dc12a57071c985115c5dce006520fae24acc3134f5a",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/algorithms/ace/_playbook.py",
+      "current_sha256": "2aabf852f629b4a0eecfc878dfb4ec4853462f278e8deed31f43071a02debba4",
+      "local_source_sha256": "2aabf852f629b4a0eecfc878dfb4ec4853462f278e8deed31f43071a02debba4",
+      "upstream_sha256": "2aabf852f629b4a0eecfc878dfb4ec4853462f278e8deed31f43071a02debba4",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/ace/_prompts.py",
+      "current_sha256": "c456c95bc8d42ec74f8a1f22609a5043bb543c46e420cb8584d223fb52890468",
+      "local_source_sha256": "c456c95bc8d42ec74f8a1f22609a5043bb543c46e420cb8584d223fb52890468",
+      "upstream_sha256": "c456c95bc8d42ec74f8a1f22609a5043bb543c46e420cb8584d223fb52890468",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/adas/__init__.py",
+      "current_sha256": "cbdbe35a2f3e9a05a7ec11c4b1f093d2da2e32433a20d0deeba7bbc359c83adc",
+      "local_source_sha256": null,
+      "upstream_sha256": "cbdbe35a2f3e9a05a7ec11c4b1f093d2da2e32433a20d0deeba7bbc359c83adc",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/adas/_prompts.py",
+      "current_sha256": "2ea68466e7bead028bace7e20892c7d262f27c9ee173fb8b62605c08ef4f802d",
+      "local_source_sha256": null,
+      "upstream_sha256": "2ea68466e7bead028bace7e20892c7d262f27c9ee173fb8b62605c08ef4f802d",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/ahe/__init__.py",
+      "current_sha256": "d321f6aeb11ed7928eb1b2c204ac4d0a844989b271edb45121c61dc7be0e8a20",
+      "local_source_sha256": "e3916b40277d1f92ce60dd385459998c09254c99c9e85c5d587d0efcde60f8d9",
+      "upstream_sha256": "d321f6aeb11ed7928eb1b2c204ac4d0a844989b271edb45121c61dc7be0e8a20",
+      "same_text_as_local": false,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/ahe/_manifest.py",
+      "current_sha256": "b1e6d44502fe37e2c8d4f02066f96bb4addaba80151301d1df2e07be9ca55e70",
+      "local_source_sha256": "b1e6d44502fe37e2c8d4f02066f96bb4addaba80151301d1df2e07be9ca55e70",
+      "upstream_sha256": "b1e6d44502fe37e2c8d4f02066f96bb4addaba80151301d1df2e07be9ca55e70",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/ahe/_prompts.py",
+      "current_sha256": "301162bfe9881932f10f23ac781545c141154003624eb4fcbf01080281ccf2b9",
+      "local_source_sha256": "301162bfe9881932f10f23ac781545c141154003624eb4fcbf01080281ccf2b9",
+      "upstream_sha256": "301162bfe9881932f10f23ac781545c141154003624eb4fcbf01080281ccf2b9",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/darwinx/__init__.py",
+      "current_sha256": "14b5326cb2193811f0c26f70150ed90ab6e68345689929c5d4a3c29b49d1996c",
+      "local_source_sha256": null,
+      "upstream_sha256": "14b5326cb2193811f0c26f70150ed90ab6e68345689929c5d4a3c29b49d1996c",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/darwinx/_prompts.py",
+      "current_sha256": "62aa47d14b24545c1f1099a68e1a8615338469378d8ddd9ea11256fb368b780f",
+      "local_source_sha256": null,
+      "upstream_sha256": "62aa47d14b24545c1f1099a68e1a8615338469378d8ddd9ea11256fb368b780f",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/evo_harness/__init__.py",
+      "current_sha256": "6249b8cc92ed3924a33c81c2e7cd929ea60a8d8464a7fa82fcf552352bdf5171",
+      "local_source_sha256": null,
+      "upstream_sha256": "6249b8cc92ed3924a33c81c2e7cd929ea60a8d8464a7fa82fcf552352bdf5171",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/evo_harness/_prompts.py",
+      "current_sha256": "9b45a9ab96253f944c4f9089163fc93fb7368097b6b5647f22bdae5bddedb860",
+      "local_source_sha256": null,
+      "upstream_sha256": "9b45a9ab96253f944c4f9089163fc93fb7368097b6b5647f22bdae5bddedb860",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/evoprompt/__init__.py",
+      "current_sha256": "ae571d13b8dc8f9a9119a73cd4d72e64d3282feed657f864cf995e45dd34df58",
+      "local_source_sha256": "ae571d13b8dc8f9a9119a73cd4d72e64d3282feed657f864cf995e45dd34df58",
+      "upstream_sha256": "b2da30b97045334bd76bb899feaa939a6ea361f36a4df2b7ec78bde2240f2e58",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/algorithms/evoprompt/_prompts.py",
+      "current_sha256": "31d37ec4c59f0a95cdd6d12f651057b062d904d60aa1ffab993ab12679217280",
+      "local_source_sha256": "31d37ec4c59f0a95cdd6d12f651057b062d904d60aa1ffab993ab12679217280",
+      "upstream_sha256": "31d37ec4c59f0a95cdd6d12f651057b062d904d60aa1ffab993ab12679217280",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/gepa/__init__.py",
+      "current_sha256": "33a856b323d2797856d237ab40d373b169e4f5c13373461de18568bf6c632866",
+      "local_source_sha256": "33a856b323d2797856d237ab40d373b169e4f5c13373461de18568bf6c632866",
+      "upstream_sha256": "15f92c0967604fc1b59b4f7f1e408ee52df2578e0a7ca4648be5eb6a002b5494",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/algorithms/gepa/_pareto.py",
+      "current_sha256": null,
+      "local_source_sha256": null,
+      "upstream_sha256": "9839d3dbc05536ba43c73831e9b9ee9507df777b81414b0acb6076547d02d6bb",
+      "same_text_as_local": null,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/algorithms/gepa/_population.py",
+      "current_sha256": "8c8cca0b27724cd559954f479883c2b95f1675fd466bd6b5819a2af4279521a0",
+      "local_source_sha256": "8c8cca0b27724cd559954f479883c2b95f1675fd466bd6b5819a2af4279521a0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/algorithms/gepa/_prompts.py",
+      "current_sha256": "461b8283182142db4ee44ca43cb840c275001a9ae2f994784774b6d29099e718",
+      "local_source_sha256": "461b8283182142db4ee44ca43cb840c275001a9ae2f994784774b6d29099e718",
+      "upstream_sha256": "a603cec828d234a400be38369d28b6079f8abbe610fa40d71a846567cf328e00",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/algorithms/meta_harness/__init__.py",
+      "current_sha256": "df1d087d791a39427298947cdfaae1af0d83334d8c70810a2b6a5596baa4714a",
+      "local_source_sha256": null,
+      "upstream_sha256": "df1d087d791a39427298947cdfaae1af0d83334d8c70810a2b6a5596baa4714a",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/meta_harness/_prompts.py",
+      "current_sha256": "50c4511713281aefcc351daed6b602d81dde67a3ea076be8a4a8ee240ab54621",
+      "local_source_sha256": null,
+      "upstream_sha256": "50c4511713281aefcc351daed6b602d81dde67a3ea076be8a4a8ee240ab54621",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/modular_rsi/__init__.py",
+      "current_sha256": "0000a3f0a8dc35180acab64fd7ea290c917eecb957d33ff6757d9afea61c5ce8",
+      "local_source_sha256": null,
+      "upstream_sha256": "0000a3f0a8dc35180acab64fd7ea290c917eecb957d33ff6757d9afea61c5ce8",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/modular_rsi/_prompts.py",
+      "current_sha256": "b7fc9e491c50f9e0a14c08c282f2b9a8a338680084c4fd8c3077e9ad3b5c6aaa",
+      "local_source_sha256": null,
+      "upstream_sha256": "b7fc9e491c50f9e0a14c08c282f2b9a8a338680084c4fd8c3077e9ad3b5c6aaa",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/opro/__init__.py",
+      "current_sha256": "535849942da2805592972062d2adf08015125895500710fe58586fe32b7a908c",
+      "local_source_sha256": "535849942da2805592972062d2adf08015125895500710fe58586fe32b7a908c",
+      "upstream_sha256": "b98cf33826fbd56be4566453c749d696d180d8d570aa5bc3894c52740c4ae758",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/algorithms/opro/_prompts.py",
+      "current_sha256": "42c5c459b2a00f16aa36fb435b7f8e5dfa7debab252219af209188532ff2d0b3",
+      "local_source_sha256": "42c5c459b2a00f16aa36fb435b7f8e5dfa7debab252219af209188532ff2d0b3",
+      "upstream_sha256": "42c5c459b2a00f16aa36fb435b7f8e5dfa7debab252219af209188532ff2d0b3",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/rrsi/__init__.py",
+      "current_sha256": "7dd6addb66a520a7db00e9b25d12aa44d5a2030bfd17611f30564ab8429d2631",
+      "local_source_sha256": null,
+      "upstream_sha256": "7dd6addb66a520a7db00e9b25d12aa44d5a2030bfd17611f30564ab8429d2631",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/rrsi/_prompts.py",
+      "current_sha256": "84105f2f12b98821e5818a922cc537e49d6a1c4ff666345d2f6a2e7c0b361b21",
+      "local_source_sha256": null,
+      "upstream_sha256": "84105f2f12b98821e5818a922cc537e49d6a1c4ff666345d2f6a2e7c0b361b21",
+      "same_text_as_local": null,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/skillopt/__init__.py",
+      "current_sha256": "359326e4f696e9ea4142134c4d740a195f491452d74664b95534ae7d67dce191",
+      "local_source_sha256": "359326e4f696e9ea4142134c4d740a195f491452d74664b95534ae7d67dce191",
+      "upstream_sha256": "64ab7c91438d779386a2e3186952e1f1d79a20de883549eb6928df25a9760d56",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/algorithms/skillopt/_patch.py",
+      "current_sha256": "c47cfe8869bc619581dab81a9251f5d38116497b4d8157e2ae82529f33e8fd05",
+      "local_source_sha256": "c47cfe8869bc619581dab81a9251f5d38116497b4d8157e2ae82529f33e8fd05",
+      "upstream_sha256": "c47cfe8869bc619581dab81a9251f5d38116497b4d8157e2ae82529f33e8fd05",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/algorithms/skillopt/_prompts.py",
+      "current_sha256": "8792d6329e9e14799c503c261be03e06b7c808fbe5bb967dc6c06020a5a07407",
+      "local_source_sha256": "8792d6329e9e14799c503c261be03e06b7c808fbe5bb967dc6c06020a5a07407",
+      "upstream_sha256": "8792d6329e9e14799c503c261be03e06b7c808fbe5bb967dc6c06020a5a07407",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/benchmarks/__init__.py",
+      "current_sha256": "267e0768eb364c52bb88ba0637e9cfef14a2e6d81f7533adf66355e4d9dda96e",
+      "local_source_sha256": "267e0768eb364c52bb88ba0637e9cfef14a2e6d81f7533adf66355e4d9dda96e",
+      "upstream_sha256": "7e309a63788b29e5b188da9e87c1c3deeecae4b0f0fefa158a4affcbd59a2ed1",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/_archive.py",
+      "current_sha256": "e46a21274856e5c2d6f13ca34f6627dce0e7cde74b139ac3edaf7452be26ed11",
+      "local_source_sha256": "e46a21274856e5c2d6f13ca34f6627dce0e7cde74b139ac3edaf7452be26ed11",
+      "upstream_sha256": "e46a21274856e5c2d6f13ca34f6627dce0e7cde74b139ac3edaf7452be26ed11",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/benchmarks/_data.py",
+      "current_sha256": "747f0622b268b1e6ed66e5ba8819be8aad382a1509c5f9e0bb5dd5fe5aa148a8",
+      "local_source_sha256": "ecdd2292ce98eccddddeeab9ad3568386e344e57259c40318b31fd5a344746fd",
+      "upstream_sha256": "2b6ad456a3ec25f2c8b0ad6ee6e9625bdc7adb49215165a4a02d4fe8f3423491",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/_git.py",
+      "current_sha256": "581c36d00050a39a3126cb98a7cce6f11caeba6b1104c0d7637b63fbd26a8455",
+      "local_source_sha256": "581c36d00050a39a3126cb98a7cce6f11caeba6b1104c0d7637b63fbd26a8455",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_harbor.py",
+      "current_sha256": "e8373487d4f911a4e7d118a107c489ae7cadcb5d64672b5e6cb4fd6f60aa3212",
+      "local_source_sha256": "e8373487d4f911a4e7d118a107c489ae7cadcb5d64672b5e6cb4fd6f60aa3212",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_native.py",
+      "current_sha256": "381d95dc42a2f23b2e9e2b20576f6f8b2cb8002c54b3a8d4c294fceba2f62a9a",
+      "local_source_sha256": "381d95dc42a2f23b2e9e2b20576f6f8b2cb8002c54b3a8d4c294fceba2f62a9a",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/LICENSE-APACHE",
+      "current_sha256": "5cc548335f22310a53877044624711ac3e20e5ed1117617c1fd3fc462c54330e",
+      "local_source_sha256": "5cc548335f22310a53877044624711ac3e20e5ed1117617c1fd3fc462c54330e",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/LICENSE-MUSIQUE",
+      "current_sha256": "cce5d01fa4a83b794271bd2c28cffdf99afd43c803e6ddefddae39b591ea7448",
+      "local_source_sha256": "cce5d01fa4a83b794271bd2c28cffdf99afd43c803e6ddefddae39b591ea7448",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/NOTICE",
+      "current_sha256": "03460e7869a410a5f76d46e4382d35e410826a89ccb5161702a5d25a28c5ef60",
+      "local_source_sha256": "03460e7869a410a5f76d46e4382d35e410826a89ccb5161702a5d25a28c5ef60",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/__init__.py",
+      "current_sha256": "332f246053cb8be235fa2a8dee53096207ef6755c583334c41640229f7873f56",
+      "local_source_sha256": "332f246053cb8be235fa2a8dee53096207ef6755c583334c41640229f7873f56",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/_hotpot.py",
+      "current_sha256": "90bd5a9df7ae40f93a210c3ccb092999e67638c96490e18984e085b8b2c90b3a",
+      "local_source_sha256": "90bd5a9df7ae40f93a210c3ccb092999e67638c96490e18984e085b8b2c90b3a",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/_metric.py",
+      "current_sha256": "a6f6826d69798c67f4eefc194c95a0b6be8636f8e75c054b97efd4bde04f5ed8",
+      "local_source_sha256": "a6f6826d69798c67f4eefc194c95a0b6be8636f8e75c054b97efd4bde04f5ed8",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/_musique_answer.py",
+      "current_sha256": "88050cf8e2c6b422595c07919571e8f40267fdf90fe21dc2636cae977ad4705a",
+      "local_source_sha256": "88050cf8e2c6b422595c07919571e8f40267fdf90fe21dc2636cae977ad4705a",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/_musique_support.py",
+      "current_sha256": "571f185261a997358c3e7a7cd81355fc8acd95e2cdbc054122cd98065e598ce7",
+      "local_source_sha256": "571f185261a997358c3e7a7cd81355fc8acd95e2cdbc054122cd98065e598ce7",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_official_qa/_triviaqa.py",
+      "current_sha256": "466b61759ce74ac1dc3ee26ebc845137dc87f3b70686e8f3d639aae282cb63a8",
+      "local_source_sha256": "466b61759ce74ac1dc3ee26ebc845137dc87f3b70686e8f3d639aae282cb63a8",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/_qa.py",
+      "current_sha256": "b40f86bd99fb4be340ced06d9ac39b47daf7e48639408b3c48a74a90cec9c2dd",
+      "local_source_sha256": "b40f86bd99fb4be340ced06d9ac39b47daf7e48639408b3c48a74a90cec9c2dd",
+      "upstream_sha256": "6f373333f9ae2272f650f182fb68a1d367298718740ca53653fee1089911e61c",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/appworld/__init__.py",
+      "current_sha256": "0c0e484e36e8d28a1dffb385603d153b31a77a4be68f1faebd3b25c4a3455d08",
+      "local_source_sha256": "0c0e484e36e8d28a1dffb385603d153b31a77a4be68f1faebd3b25c4a3455d08",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/bfcl/__init__.py",
+      "current_sha256": "5ee112449df921c89ba14f2c799b8167286eae62e026fbd4c3df3c75ff1c7b04",
+      "local_source_sha256": "5ee112449df921c89ba14f2c799b8167286eae62e026fbd4c3df3c75ff1c7b04",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/browsecomp/LICENSE-MIT",
+      "current_sha256": "d831db55645e47ca8e491c5a0e37f1ee744d7b10bf5aa8d50146c795ac0176c0",
+      "local_source_sha256": "d831db55645e47ca8e491c5a0e37f1ee744d7b10bf5aa8d50146c795ac0176c0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/browsecomp/__init__.py",
+      "current_sha256": "1e2fa86dd180513ccb84fbcdd23aa6470650bfb26f73cd6f9d2dc602386e5aef",
+      "local_source_sha256": "1e2fa86dd180513ccb84fbcdd23aa6470650bfb26f73cd6f9d2dc602386e5aef",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/browsecomp/_official.py",
+      "current_sha256": "c110710df8587deb3ba857e7a02b49abf0c68b0a485c7cdaf6e8afd1d704ae0f",
+      "local_source_sha256": "c110710df8587deb3ba857e7a02b49abf0c68b0a485c7cdaf6e8afd1d704ae0f",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/deepsearchqa/NOTICE",
+      "current_sha256": "7d0d013180771964acb2609a295ba13d8431c7a2064a84dcaa771731ddc078d5",
+      "local_source_sha256": "7d0d013180771964acb2609a295ba13d8431c7a2064a84dcaa771731ddc078d5",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/deepsearchqa/__init__.py",
+      "current_sha256": "3c45ab8c601cd9830a8328e533eeb77794b016a7f3fffdc520824c824d55d1ba",
+      "local_source_sha256": "3c45ab8c601cd9830a8328e533eeb77794b016a7f3fffdc520824c824d55d1ba",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/deepsearchqa/_official.py",
+      "current_sha256": "12184f26774dc617a4d8ba5a162d767e2b072d57b198a48c7da304c3b3670684",
+      "local_source_sha256": "12184f26774dc617a4d8ba5a162d767e2b072d57b198a48c7da304c3b3670684",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/harvey_lab/LICENSE-MIT",
+      "current_sha256": "f92627d2ebe80fc0add3b171b2d7eee5e28a98dd0d0a4a5ee5829314243bb3b9",
+      "local_source_sha256": "f92627d2ebe80fc0add3b171b2d7eee5e28a98dd0d0a4a5ee5829314243bb3b9",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/harvey_lab/NOTICE",
+      "current_sha256": "8b7054cf31bda4dffee81138ec0c04bc979470a2c55603023a9fbbd66e0bec3f",
+      "local_source_sha256": "8b7054cf31bda4dffee81138ec0c04bc979470a2c55603023a9fbbd66e0bec3f",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/harvey_lab/__init__.py",
+      "current_sha256": "c56ae9729831518b4e8f9f95da2e58b81bed8e633193465a6df6b64aecb22dae",
+      "local_source_sha256": "c56ae9729831518b4e8f9f95da2e58b81bed8e633193465a6df6b64aecb22dae",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/harvey_lab/upstream.json",
+      "current_sha256": "664a4be077d47326b7ce43e6670ab3a493798cd17403ef4fcff282b6e7c37d03",
+      "local_source_sha256": "664a4be077d47326b7ce43e6670ab3a493798cd17403ef4fcff282b6e7c37d03",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/hle/__init__.py",
+      "current_sha256": "fcfea519686e1555fb88dce6b414fc6bb9f8908a1de9ee18272038643602679c",
+      "local_source_sha256": "fcfea519686e1555fb88dce6b414fc6bb9f8908a1de9ee18272038643602679c",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/hotpotqa/__init__.py",
+      "current_sha256": "ac6e956837f1429c46a745bf3a0477c1e051f475f0e3eeeed5322e058a33750c",
+      "local_source_sha256": "ac6e956837f1429c46a745bf3a0477c1e051f475f0e3eeeed5322e058a33750c",
+      "upstream_sha256": "f2c78345631ce88bc19b4f1aa3c3b4bf55c8401277588364ee97e473563b8786",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/jobbench/__init__.py",
+      "current_sha256": "f9a06ecf684bf3a774b9eed7a6fe9b6ee297997471defc522d7a40bf7730a8ad",
+      "local_source_sha256": "f9a06ecf684bf3a774b9eed7a6fe9b6ee297997471defc522d7a40bf7730a8ad",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/jobbench/_data.py",
+      "current_sha256": "87b21460bb3a263e7db672c28bc2a79fb3811945ecea90c3e0f40f7cb151d527",
+      "local_source_sha256": "87b21460bb3a263e7db672c28bc2a79fb3811945ecea90c3e0f40f7cb151d527",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/jobbench/_prepare.py",
+      "current_sha256": "66f5433eab996f922a5ae928399148ceabc23bf8513e361307befde2159a97cc",
+      "local_source_sha256": "66f5433eab996f922a5ae928399148ceabc23bf8513e361307befde2159a97cc",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/LICENSE-APACHE",
+      "current_sha256": "ba92da766daca067645bd126edb60c63ff55079316bacc91d4831e61fed6d7b0",
+      "local_source_sha256": "ba92da766daca067645bd126edb60c63ff55079316bacc91d4831e61fed6d7b0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/NOTICE",
+      "current_sha256": "335417a7b1c8058d112c9efae9ca51d822e7b3475864958292d509a107ef88c9",
+      "local_source_sha256": "335417a7b1c8058d112c9efae9ca51d822e7b3475864958292d509a107ef88c9",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/__init__.py",
+      "current_sha256": "68e9f38bc619861c2c58c46eeecaf245ffc793b99f92f47b76b8a1bf50904598",
+      "local_source_sha256": "68e9f38bc619861c2c58c46eeecaf245ffc793b99f92f47b76b8a1bf50904598",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/_extract.py",
+      "current_sha256": "c7948aae7ad4e0dfcff46ecf5e672d9ae7799838aa14f9003c787c8678e392d0",
+      "local_source_sha256": "c7948aae7ad4e0dfcff46ecf5e672d9ae7799838aa14f9003c787c8678e392d0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/_label.py",
+      "current_sha256": "0757570bf5f6e91b192070e3fd66982ba1ec43d12d727a7828679940e90d2fcc",
+      "local_source_sha256": "0757570bf5f6e91b192070e3fd66982ba1ec43d12d727a7828679940e90d2fcc",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/_metrics.py",
+      "current_sha256": "e180d6bb7aba87928e22ca06d56e10567501fef61642ea25061a070267155670",
+      "local_source_sha256": "e180d6bb7aba87928e22ca06d56e10567501fef61642ea25061a070267155670",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/_prompts.py",
+      "current_sha256": "2a3c7d0c1f5a8af8683db9d03e8003cbc2c888af9323d7e4193f5fb3feac42f1",
+      "local_source_sha256": "2a3c7d0c1f5a8af8683db9d03e8003cbc2c888af9323d7e4193f5fb3feac42f1",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/livemathbench/upstream.json",
+      "current_sha256": "bad3d06b96c1a67135ca60a04436280f6ecd54e4ff35f8b809091f38c32b7897",
+      "local_source_sha256": "bad3d06b96c1a67135ca60a04436280f6ecd54e4ff35f8b809091f38c32b7897",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/math/__init__.py",
+      "current_sha256": "03dcfb9eb7b0492717383eb400a10df80efd8935b0237f3b9ee88d8d38be05c4",
+      "local_source_sha256": "03dcfb9eb7b0492717383eb400a10df80efd8935b0237f3b9ee88d8d38be05c4",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/math/_grade.py",
+      "current_sha256": "49b9a3c12a8b74b1bafedafa7a9ae1807abee09448d25f59a24d7b6311bc08e4",
+      "local_source_sha256": "49b9a3c12a8b74b1bafedafa7a9ae1807abee09448d25f59a24d7b6311bc08e4",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/metrics.py",
+      "current_sha256": "0bc4e4c65a7b7426ef93044d1481971130e93ecd6c309393d91a7f2aea955ef5",
+      "local_source_sha256": "0bc4e4c65a7b7426ef93044d1481971130e93ecd6c309393d91a7f2aea955ef5",
+      "upstream_sha256": "0bc4e4c65a7b7426ef93044d1481971130e93ecd6c309393d91a7f2aea955ef5",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/benchmarks/musique/__init__.py",
+      "current_sha256": "1aea557c9956d51ae4c8887188f527ed87f6560630ca839950e567d564d3fcfb",
+      "local_source_sha256": "1aea557c9956d51ae4c8887188f527ed87f6560630ca839950e567d564d3fcfb",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/nq/__init__.py",
+      "current_sha256": "78c8c9178858fe5344f9ff013be5d7a20a0f4bd2a86fc47ec386ed8ad750b752",
+      "local_source_sha256": "78c8c9178858fe5344f9ff013be5d7a20a0f4bd2a86fc47ec386ed8ad750b752",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/officeqa_pro/LICENSE-APACHE",
+      "current_sha256": "6b2f6dacb88fe48ed9b055e8e80aad90b61d46a7b94bdafe0eb3cebec36566b8",
+      "local_source_sha256": "6b2f6dacb88fe48ed9b055e8e80aad90b61d46a7b94bdafe0eb3cebec36566b8",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/officeqa_pro/NOTICE",
+      "current_sha256": "f9f8333a26c3ccef086df6984b33ca7a369734d794486581b74c528b9f99050d",
+      "local_source_sha256": "f9f8333a26c3ccef086df6984b33ca7a369734d794486581b74c528b9f99050d",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/officeqa_pro/__init__.py",
+      "current_sha256": "3bd24cdc8ea756e3f69f5f4ff50fd712f5cc8ff3c3b30e7dc2f0bd114c6f1657",
+      "local_source_sha256": "3bd24cdc8ea756e3f69f5f4ff50fd712f5cc8ff3c3b30e7dc2f0bd114c6f1657",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/officeqa_pro/_reward.py",
+      "current_sha256": "c39c5608fecd53467c158beb1bebd06fdc94fed57cf46a05a0be5154fdea3de7",
+      "local_source_sha256": "c39c5608fecd53467c158beb1bebd06fdc94fed57cf46a05a0be5154fdea3de7",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/searchqa/__init__.py",
+      "current_sha256": "23f1aa0731fd06ac19a7ef7eb87705508dd6b6a000c27e1da6a69ea51b3d81cc",
+      "local_source_sha256": "4772736c4d683324a2c2dc09b04420b085a763232a806e3d3ca35f8650d945e5",
+      "upstream_sha256": "4f5899cc6d640f00df1da41ee0202255d554b3ea0f3ebf727d9b917cfda279d3",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/swe_bench/__init__.py",
+      "current_sha256": "afdda96e85a274fbaa378c649ce3efadb5c1449e7e332f83b2c8c48917f22629",
+      "local_source_sha256": "afdda96e85a274fbaa378c649ce3efadb5c1449e7e332f83b2c8c48917f22629",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/swe_bench_pro/__init__.py",
+      "current_sha256": "8cc0ed492171104687452a0fbdffcc103b00298b8425058639f0a3eb6ecf1af7",
+      "local_source_sha256": "8cc0ed492171104687452a0fbdffcc103b00298b8425058639f0a3eb6ecf1af7",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/tau3_banking/__init__.py",
+      "current_sha256": "0e4ace259073cd227f79d21bdc354ac1cd445dd472eeaab4378fcbe902f7f6a9",
+      "local_source_sha256": "0e4ace259073cd227f79d21bdc354ac1cd445dd472eeaab4378fcbe902f7f6a9",
+      "upstream_sha256": "6da88eed2fae648d7c3cd2bd97e50963bbe4e61058fa3c87ac171422663233a5",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/tau3_banking/_data.py",
+      "current_sha256": "bd7609c09ab1137a253847e13f010ab4786eb0b48dd594e5aa8cbb12d40c1d85",
+      "local_source_sha256": "bd7609c09ab1137a253847e13f010ab4786eb0b48dd594e5aa8cbb12d40c1d85",
+      "upstream_sha256": "54e5a4fcf3aff65e47172338efcb564c6d4660dccc3aab80f3f6c7c650c15bed",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/tau3_banking/_policy.py",
+      "current_sha256": "cbb507fc1bcb04ca8f41b9655a86c15bc07aeee1c017a46e7bc6514c34d47b23",
+      "local_source_sha256": "cbb507fc1bcb04ca8f41b9655a86c15bc07aeee1c017a46e7bc6514c34d47b23",
+      "upstream_sha256": "cbb507fc1bcb04ca8f41b9655a86c15bc07aeee1c017a46e7bc6514c34d47b23",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/benchmarks/terminal_bench/__init__.py",
+      "current_sha256": "f219ad2522ade6dc7100db083c290fb6fd5f88b293e6b618e31614e8612f8a75",
+      "local_source_sha256": "e465a597bd84cc9ea6df73dd74b22242a7522097d98fa59b725b13f5be2956d0",
+      "upstream_sha256": "89dddc58aa860650043c229fe8d463254d59e67cc17cdf924585370281c2e08e",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/terminal_bench/_data.py",
+      "current_sha256": "ea40b7b84366c57058f567aa727005d35f8bd154888f42c4389db54f668b81f6",
+      "local_source_sha256": "ea40b7b84366c57058f567aa727005d35f8bd154888f42c4389db54f668b81f6",
+      "upstream_sha256": "1cd1390ad508878d955be2ded6e14aadd66f51b1834504ff58c4fadb6f36d26b",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/LICENSE-MIT",
+      "current_sha256": "ee849813ec87f9d8fd7f140a8de408c838b531a4b084a2a58ac5aa0403bc97f0",
+      "local_source_sha256": "ee849813ec87f9d8fd7f140a8de408c838b531a4b084a2a58ac5aa0403bc97f0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/NOTICE",
+      "current_sha256": "a975d3ee7124e0ce62f668f33725acf9b3b19932562e8ca05bb8c47a8291a16b",
+      "local_source_sha256": "a975d3ee7124e0ce62f668f33725acf9b3b19932562e8ca05bb8c47a8291a16b",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/__init__.py",
+      "current_sha256": "0f8c6a57268df03ac27beeeea901e86bd7983ff23b48adc927fe5b8321d483e3",
+      "local_source_sha256": "0f8c6a57268df03ac27beeeea901e86bd7983ff23b48adc927fe5b8321d483e3",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/__init__.py",
+      "current_sha256": "58641150a89b31826477f5cd1620a6cb15e2a01616eb2709b4ee36cab45b8e65",
+      "local_source_sha256": "58641150a89b31826477f5cd1620a6cb15e2a01616eb2709b4ee36cab45b8e65",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/accommodations.py",
+      "current_sha256": "4ebd4b8f1679bd7e2ca5d1d237e829e588949d1b7527f5532fb11919899b6614",
+      "local_source_sha256": "4ebd4b8f1679bd7e2ca5d1d237e829e588949d1b7527f5532fb11919899b6614",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/attractions.py",
+      "current_sha256": "7c05cf7e4f8b23172594c77ecf0bbca064cd99c2668d5a6598310a10c901cd6d",
+      "local_source_sha256": "7c05cf7e4f8b23172594c77ecf0bbca064cd99c2668d5a6598310a10c901cd6d",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/commonsense_constraint.py",
+      "current_sha256": "bf339f78c99bc1361f38cb7eb9409ac8f1f3d79c3e19341a7f7c05cc6ac6ce8c",
+      "local_source_sha256": "bf339f78c99bc1361f38cb7eb9409ac8f1f3d79c3e19341a7f7c05cc6ac6ce8c",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/flights.py",
+      "current_sha256": "aba2bd463fd677eaef9cfc5223247a4ad2e754a24469195b250defd9550c38cb",
+      "local_source_sha256": "aba2bd463fd677eaef9cfc5223247a4ad2e754a24469195b250defd9550c38cb",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/googleDistanceMatrix.py",
+      "current_sha256": "e52313919653b304a81dc8b23e180aab38d6b466db8edefa7dc29b97be77f0d8",
+      "local_source_sha256": "e52313919653b304a81dc8b23e180aab38d6b466db8edefa7dc29b97be77f0d8",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/hard_constraint.py",
+      "current_sha256": "6bb18d1bf1fd4ddd23c5f60ad476ba2ae74d1b25a679ab4190dbf3fd8884ddf1",
+      "local_source_sha256": "6bb18d1bf1fd4ddd23c5f60ad476ba2ae74d1b25a679ab4190dbf3fd8884ddf1",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/helpers.py",
+      "current_sha256": "1f38390ee54d96d79b4a4df982d88de71fd5076de80e2be2156648ceb97b6c0c",
+      "local_source_sha256": "1f38390ee54d96d79b4a4df982d88de71fd5076de80e2be2156648ceb97b6c0c",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_official/restaurants.py",
+      "current_sha256": "5480c9f6b94e10f987a9bece09c0516db942e499bf5832c48f6328f4bcf734e0",
+      "local_source_sha256": "5480c9f6b94e10f987a9bece09c0516db942e499bf5832c48f6328f4bcf734e0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/_prompts.py",
+      "current_sha256": "760b098be4b8e4916c0856ef9af2344af54f34fd24a6d47a4ba56650809a58da",
+      "local_source_sha256": "760b098be4b8e4916c0856ef9af2344af54f34fd24a6d47a4ba56650809a58da",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/travelplanner/upstream.json",
+      "current_sha256": "60fb5876dea9b93ef723110bc096faff2e4210fb70ae6c14576fe8eb53a02193",
+      "local_source_sha256": "60fb5876dea9b93ef723110bc096faff2e4210fb70ae6c14576fe8eb53a02193",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/triviaqa/__init__.py",
+      "current_sha256": "e4d940c246eaa73a300aa5885647b9f683e662f3debff70c9af70f29d5e2ae93",
+      "local_source_sha256": "e4d940c246eaa73a300aa5885647b9f683e662f3debff70c9af70f29d5e2ae93",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/LICENSE-MIT",
+      "current_sha256": "85f7708bd9998d5f81e1f5523b68acc43123cb6b5abd7d8dd08fa133e68a795d",
+      "local_source_sha256": "85f7708bd9998d5f81e1f5523b68acc43123cb6b5abd7d8dd08fa133e68a795d",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/__init__.py",
+      "current_sha256": "707f82bea791c546552e563e11bb663a80837851b151dde0125f3a541ad61d6b",
+      "local_source_sha256": "707f82bea791c546552e563e11bb663a80837851b151dde0125f3a541ad61d6b",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/_vendor/__init__.py",
+      "current_sha256": "534dc50b89d448663236dcc7f0760313baa57c0e7babed2c713f0293462389d0",
+      "local_source_sha256": "534dc50b89d448663236dcc7f0760313baa57c0e7babed2c713f0293462389d0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/_vendor/_llm.py",
+      "current_sha256": "29f234f1061f65befac60c84afd41d764559f5b7af2ab16a0f0b74f6baa31aee",
+      "local_source_sha256": "29f234f1061f65befac60c84afd41d764559f5b7af2ab16a0f0b74f6baa31aee",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/_vendor/data_loader.py",
+      "current_sha256": "fcc75f16d697b108011c15a1b390365bee4dcf157c13e875ff02c6f69a5bdb87",
+      "local_source_sha256": "fcc75f16d697b108011c15a1b390365bee4dcf157c13e875ff02c6f69a5bdb87",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/_vendor/evaluation.py",
+      "current_sha256": "b267b0c643d02af1d2c226784b0f5e3f2caf81dbdb05b4ac7d31ae68e2cedab0",
+      "local_source_sha256": "b267b0c643d02af1d2c226784b0f5e3f2caf81dbdb05b4ac7d31ae68e2cedab0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/_vendor/metric_utils.py",
+      "current_sha256": "c7a256e2b7d2af78081a59a7d28b2a38c60e0fd7c6e825f85c4a396784878ff0",
+      "local_source_sha256": "c7a256e2b7d2af78081a59a7d28b2a38c60e0fd7c6e825f85c4a396784878ff0",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/_vendor/utils.py",
+      "current_sha256": "1d055c9a1c92ac3e689725eb4642d9e105a0e8e54772a0989ad53056b71aa05a",
+      "local_source_sha256": "1d055c9a1c92ac3e689725eb4642d9e105a0e8e54772a0989ad53056b71aa05a",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/benchmarks/widesearch/upstream.json",
+      "current_sha256": "b862b5b9a5799d39edd6ef5f75a491c96d4ddf12c782c838e9b22d9a3b4fb031",
+      "local_source_sha256": "b862b5b9a5799d39edd6ef5f75a491c96d4ddf12c782c838e9b22d9a3b4fb031",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/cli.py",
+      "current_sha256": "793d8f12bddc525725afc4ed748c813dd7fbe7f8d7cddcfc55c9f0e73a1f1099",
+      "local_source_sha256": "793d8f12bddc525725afc4ed748c813dd7fbe7f8d7cddcfc55c9f0e73a1f1099",
+      "upstream_sha256": "edda3060b986fe7508ab069f474ebc509a98bb2d565bb06de127c58c9df5cbeb",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/config.py",
+      "current_sha256": "513ef5013255868ed3f259b35a688c42cc8ba8ca4a856d73020b0fba6c80fe0e",
+      "local_source_sha256": "513ef5013255868ed3f259b35a688c42cc8ba8ca4a856d73020b0fba6c80fe0e",
+      "upstream_sha256": "513ef5013255868ed3f259b35a688c42cc8ba8ca4a856d73020b0fba6c80fe0e",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/core/__init__.py",
+      "current_sha256": "d959fda079f0283fff8cd98e89cab6c2dda49471d7d26d8da30bfba0dd745b3d",
+      "local_source_sha256": "d959fda079f0283fff8cd98e89cab6c2dda49471d7d26d8da30bfba0dd745b3d",
+      "upstream_sha256": "d959fda079f0283fff8cd98e89cab6c2dda49471d7d26d8da30bfba0dd745b3d",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/core/agent.py",
+      "current_sha256": "55732efe85fb657439e67bd375f45d201000521e3f24fb11ba3b21e4fff779fd",
+      "local_source_sha256": "55732efe85fb657439e67bd375f45d201000521e3f24fb11ba3b21e4fff779fd",
+      "upstream_sha256": "55732efe85fb657439e67bd375f45d201000521e3f24fb11ba3b21e4fff779fd",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/core/algorithm.py",
+      "current_sha256": "5edd43d1a9b65b3f446e8b9467ca3a7ba64c830cd0d2dab9993714098d75b28e",
+      "local_source_sha256": "1933c41cb61252c0023469fec0eb365088d8b7da73182ff17bde32cd292cb46a",
+      "upstream_sha256": "06ac21d115531eea641607631fe51dbbf6a77796b3b8c7855568cc84c31ab8fd",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/core/benchmark.py",
+      "current_sha256": "e60639a6860849c67cf3330d0b37dfd5c66f13c130034ef06a225da6cc255eef",
+      "local_source_sha256": "e60639a6860849c67cf3330d0b37dfd5c66f13c130034ef06a225da6cc255eef",
+      "upstream_sha256": "e60639a6860849c67cf3330d0b37dfd5c66f13c130034ef06a225da6cc255eef",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/core/snapshot.py",
+      "current_sha256": "3b4029a1afc63cf165b20a15abe1fb26173f9b6e73ed772369c0eda5d106bd01",
+      "local_source_sha256": "3b4029a1afc63cf165b20a15abe1fb26173f9b6e73ed772369c0eda5d106bd01",
+      "upstream_sha256": "3b4029a1afc63cf165b20a15abe1fb26173f9b6e73ed772369c0eda5d106bd01",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/core/trajectory.py",
+      "current_sha256": "dc3a156f92b851a8c3c9f2460704db1b14deeee3e5c0074e9d2b01bab3571bad",
+      "local_source_sha256": "dc3a156f92b851a8c3c9f2460704db1b14deeee3e5c0074e9d2b01bab3571bad",
+      "upstream_sha256": "dc3a156f92b851a8c3c9f2460704db1b14deeee3e5c0074e9d2b01bab3571bad",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/integrations/HLE-LICENSE",
+      "current_sha256": "f402878026b8008bd53f2f038b5c9e3e6b7c1a690e05e2ca6ddbc9019aa3c08e",
+      "local_source_sha256": "f402878026b8008bd53f2f038b5c9e3e6b7c1a690e05e2ca6ddbc9019aa3c08e",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/__init__.py",
+      "current_sha256": "5a0f9f64288640b1c3f3dc43a936f7af63c178efc95a85355ea2479d9a465f8f",
+      "local_source_sha256": "5a0f9f64288640b1c3f3dc43a936f7af63c178efc95a85355ea2479d9a465f8f",
+      "upstream_sha256": "5a0f9f64288640b1c3f3dc43a936f7af63c178efc95a85355ea2479d9a465f8f",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/integrations/_appworld_client.py",
+      "current_sha256": "60dbb2b8b503c46509e3755dd6ffd22a34e7772ff34a36e21c57bc1650f6f35e",
+      "local_source_sha256": "60dbb2b8b503c46509e3755dd6ffd22a34e7772ff34a36e21c57bc1650f6f35e",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_appworld_grade.py",
+      "current_sha256": "000c7096f561b2ccee73bd0c72b335e9f23b7a04cca0ef104b797b0952f93e4b",
+      "local_source_sha256": "000c7096f561b2ccee73bd0c72b335e9f23b7a04cca0ef104b797b0952f93e4b",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_appworld_server.py",
+      "current_sha256": "b0ca286379eaf83bf17ec55f01b529fd4466315d678379068b732fc3354aaaa8",
+      "local_source_sha256": "b0ca286379eaf83bf17ec55f01b529fd4466315d678379068b732fc3354aaaa8",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_bfcl_client.py",
+      "current_sha256": "67501fc4f24357e1a14387c524a2e87f5462067abe04f27949daab4d14795b0c",
+      "local_source_sha256": "67501fc4f24357e1a14387c524a2e87f5462067abe04f27949daab4d14795b0c",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_bfcl_grade.py",
+      "current_sha256": "cd51bdefa1f5d14b409a89ad5fd321715f79f44190143ecc26778ce27e04677e",
+      "local_source_sha256": "cd51bdefa1f5d14b409a89ad5fd321715f79f44190143ecc26778ce27e04677e",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_bfcl_native.py",
+      "current_sha256": "1a4bccbfc89921dfda37d106710f19785295da17e59c0ae8a41f2028fd3b91cc",
+      "local_source_sha256": "1a4bccbfc89921dfda37d106710f19785295da17e59c0ae8a41f2028fd3b91cc",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_bfcl_server.py",
+      "current_sha256": "5a62d62e1e1f664eb223fb460f755ecc77c929e403cf625007748977c4a7f6a4",
+      "local_source_sha256": "5a62d62e1e1f664eb223fb460f755ecc77c929e403cf625007748977c4a7f6a4",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_bfcl_session.py",
+      "current_sha256": "f17122082e5cd42c0b6b675491ee7184778f40c6d741abc1c15b7fcec91790e1",
+      "local_source_sha256": "f17122082e5cd42c0b6b675491ee7184778f40c6d741abc1c15b7fcec91790e1",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_browsecomp_client.py",
+      "current_sha256": "8e8adb756137b53cf05dc9bbe2ed161294e238066f061f6b94cdb074b0d51a27",
+      "local_source_sha256": "8e8adb756137b53cf05dc9bbe2ed161294e238066f061f6b94cdb074b0d51a27",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_browsecomp_judge.py",
+      "current_sha256": "16840cab51b2f32355d0c6c36689b570a7d4d05afbb15490915352d7aaec72a5",
+      "local_source_sha256": "16840cab51b2f32355d0c6c36689b570a7d4d05afbb15490915352d7aaec72a5",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_browsecomp_web.py",
+      "current_sha256": "e6474729256a9307e2597148b5122e00bebd89b745b2f98a917ddaea789256cb",
+      "local_source_sha256": "e6474729256a9307e2597148b5122e00bebd89b745b2f98a917ddaea789256cb",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_container.py",
+      "current_sha256": "a7e522ef0afbff8a89e3947fceefe0e27aa57e844b2f730dc2a76dc8740b93cf",
+      "local_source_sha256": "a7e522ef0afbff8a89e3947fceefe0e27aa57e844b2f730dc2a76dc8740b93cf",
+      "upstream_sha256": "a7e522ef0afbff8a89e3947fceefe0e27aa57e844b2f730dc2a76dc8740b93cf",
+      "same_text_as_local": true,
+      "same_text_as_upstream": true
+    },
+    {
+      "path": "flashrsi/integrations/_container_payload.py",
+      "current_sha256": "e8da29d28cf36067ee9c4258f3213a168d5e81bb52d63e060fa092053997b6f8",
+      "local_source_sha256": "e8da29d28cf36067ee9c4258f3213a168d5e81bb52d63e060fa092053997b6f8",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_deepsearchqa_judge.py",
+      "current_sha256": "3e5a5afb289b56002a7766624d51c01f2640d7618b611e095792266c478e3605",
+      "local_source_sha256": "3e5a5afb289b56002a7766624d51c01f2640d7618b611e095792266c478e3605",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_docker.py",
+      "current_sha256": "5f51401107f1f999366678d012a7d3b26031199bb1903c8c6812809962bdfe53",
+      "local_source_sha256": "5f51401107f1f999366678d012a7d3b26031199bb1903c8c6812809962bdfe53",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_docker_harness.py",
+      "current_sha256": "2ead5fd0487e3cb0cc33e1ef7fec57bdae4a5e2f6c3b1178069e0c7a0f9e5094",
+      "local_source_sha256": "2ead5fd0487e3cb0cc33e1ef7fec57bdae4a5e2f6c3b1178069e0c7a0f9e5094",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_harbor_remote.py",
+      "current_sha256": "d285c24fb99b36afa5d3f804f17c42f86b825dd078dd6358452974f4f8805de4",
+      "local_source_sha256": "d285c24fb99b36afa5d3f804f17c42f86b825dd078dd6358452974f4f8805de4",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_harvey_lab_grade.py",
+      "current_sha256": "0aefb50708ccd543db0ee6310b5be712546bb506d4ffe64e3b87a006db288f76",
+      "local_source_sha256": "0aefb50708ccd543db0ee6310b5be712546bb506d4ffe64e3b87a006db288f76",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_hle_judge.py",
+      "current_sha256": "8fb1289fda705d49ddcccc3aee902fe45743065ac91ea8fd32f6cafbf76fb0d5",
+      "local_source_sha256": "8fb1289fda705d49ddcccc3aee902fe45743065ac91ea8fd32f6cafbf76fb0d5",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_hotpot_client.py",
+      "current_sha256": "5f51ed7a70bf30bd635e444d96c7bed09496dda020827996773cfe1109497e4e",
+      "local_source_sha256": "5f51ed7a70bf30bd635e444d96c7bed09496dda020827996773cfe1109497e4e",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_livemathbench_judge.py",
+      "current_sha256": "03e455e0a2e9c43f40322b7cf8eea74e09a404d67cf70f218c5e7e1807301ac5",
+      "local_source_sha256": "03e455e0a2e9c43f40322b7cf8eea74e09a404d67cf70f218c5e7e1807301ac5",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_swe_grade.py",
+      "current_sha256": "376097fd2852df95cd3e9f87bbd62ae904b58806dc79c5bf5ad793157e59382a",
+      "local_source_sha256": "376097fd2852df95cd3e9f87bbd62ae904b58806dc79c5bf5ad793157e59382a",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_tau2_evidence.py",
+      "current_sha256": "1fedb90c5d2662bfb8ce860382717c2f0a3d174d9358e9821f3c5715637beae4",
+      "local_source_sha256": "1fedb90c5d2662bfb8ce860382717c2f0a3d174d9358e9821f3c5715637beae4",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_tau2_task.py",
+      "current_sha256": "e3e971855234018049aad8edd4dc2cd0e7c4f5f5f2a086739c0aa72b48e58a0a",
+      "local_source_sha256": "e3e971855234018049aad8edd4dc2cd0e7c4f5f5f2a086739c0aa72b48e58a0a",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_terminal_integrity.py",
+      "current_sha256": "44fe54cca9300eb8c76c7ec935eb6775779a9011ac92f00efcf8d37adff248d9",
+      "local_source_sha256": "44fe54cca9300eb8c76c7ec935eb6775779a9011ac92f00efcf8d37adff248d9",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_travelplanner_grade.py",
+      "current_sha256": "52fde920a69ff2d43dd9bde77d0ec9a0239ee283dda2ab3d4a4490b619530b4b",
+      "local_source_sha256": "a26fdc9d2174028d05cc47302909ade7bef7831db7daa96d9136f69d9596cecf",
+      "upstream_sha256": null,
+      "same_text_as_local": false,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_travelplanner_postprocess.py",
+      "current_sha256": "a36ee1f65c61a5277abdcc78c15ce6dfa8cd8e976aa8a7d2825898e64d9de217",
+      "local_source_sha256": "a36ee1f65c61a5277abdcc78c15ce6dfa8cd8e976aa8a7d2825898e64d9de217",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_web_tools.py",
+      "current_sha256": "5175b0ff9596b99103bb1bd8bc0a8345d6272624c3fff7e3474de8668408bf74",
+      "local_source_sha256": "5175b0ff9596b99103bb1bd8bc0a8345d6272624c3fff7e3474de8668408bf74",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/_widesearch_grade.py",
+      "current_sha256": "cafcb308244d59a11471739fd18587d6c6f6b134f56a48574a1ca6e9bce3df31",
+      "local_source_sha256": "cafcb308244d59a11471739fd18587d6c6f6b134f56a48574a1ca6e9bce3df31",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/appworld.Dockerfile",
+      "current_sha256": "905852516af959485b9f88fdda2b6fadcea082a76909fb150c5a4712c09eee53",
+      "local_source_sha256": "905852516af959485b9f88fdda2b6fadcea082a76909fb150c5a4712c09eee53",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/appworld.py",
+      "current_sha256": "1992506ab75e7d42a0a92eec13fd1c34f96074269262badfd260b071da940196",
+      "local_source_sha256": "1992506ab75e7d42a0a92eec13fd1c34f96074269262badfd260b071da940196",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/bfcl.Dockerfile",
+      "current_sha256": "ed9acb2593abe9a9aa45e6c7582f60054cb96881e5a52c2b7a1057486da7fa43",
+      "local_source_sha256": "ed9acb2593abe9a9aa45e6c7582f60054cb96881e5a52c2b7a1057486da7fa43",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/bfcl.py",
+      "current_sha256": "e1e98f713eca172f6e180bf8504978e30bde657c7ee8feab2d409a0f64ac784c",
+      "local_source_sha256": "e1e98f713eca172f6e180bf8504978e30bde657c7ee8feab2d409a0f64ac784c",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/browsecomp.py",
+      "current_sha256": "ec1ab32d4c028e20431d60f67d51dd8cda58df687e64d1f26500bb07b2b4af2f",
+      "local_source_sha256": "ec1ab32d4c028e20431d60f67d51dd8cda58df687e64d1f26500bb07b2b4af2f",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/deepsearchqa.py",
+      "current_sha256": "f865f40f7671d8863c446c4783b83e84acc2bd40b803763a9dab407bd61dd3f7",
+      "local_source_sha256": "f865f40f7671d8863c446c4783b83e84acc2bd40b803763a9dab407bd61dd3f7",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/harbor.py",
+      "current_sha256": "d2b664ee5d18f4fa045f135a650240eeb2a2a8c8a067554eadc2b680699748dc",
+      "local_source_sha256": "d2b664ee5d18f4fa045f135a650240eeb2a2a8c8a067554eadc2b680699748dc",
+      "upstream_sha256": "e06fec765bb7b2c2acf6143b038f374797d5726836337a321f9ef6784b0b6d1c",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/integrations/harvey_lab.py",
+      "current_sha256": "0fa681b4351011cc14efe5f0386026ba3f057aa175b1e5c04a31f0993306b448",
+      "local_source_sha256": "7ae2a1580d5f01a9281fe55e2c4aef44d03c2ef3a1be95da4b06350c9fbce993",
+      "upstream_sha256": null,
+      "same_text_as_local": false,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/hle.py",
+      "current_sha256": "131d32e7fa5c8aa26d555b35b838ffb64b1f113755ad62783c445275181c0c12",
+      "local_source_sha256": "131d32e7fa5c8aa26d555b35b838ffb64b1f113755ad62783c445275181c0c12",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/hotpotqa.py",
+      "current_sha256": "76392ec9d85d71141cf92554bd495fdbcd2072aaf2ef288dddb8abe663ba03e1",
+      "local_source_sha256": "76392ec9d85d71141cf92554bd495fdbcd2072aaf2ef288dddb8abe663ba03e1",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/jobbench.py",
+      "current_sha256": "abc083c08a66eb0541c1af86e66fa0174c6ae272d3e8660a09e8beec020a0062",
+      "local_source_sha256": "abc083c08a66eb0541c1af86e66fa0174c6ae272d3e8660a09e8beec020a0062",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/livemathbench.py",
+      "current_sha256": "890160664337e89cd237d9205e40430c6300299fccd1ec18ccc3b03931da0c67",
+      "local_source_sha256": "890160664337e89cd237d9205e40430c6300299fccd1ec18ccc3b03931da0c67",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/officeqa_pro.py",
+      "current_sha256": "60feb71cf9aa5ba30b5e2c1a7c7869b029f50451ffecc510d356a90444afe1ce",
+      "local_source_sha256": "60feb71cf9aa5ba30b5e2c1a7c7869b029f50451ffecc510d356a90444afe1ce",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/swe_bench.py",
+      "current_sha256": "af61daa995479f70d100f90d0e81742f0c7a3fc5eb62790e545b9a4088d2648d",
+      "local_source_sha256": "af61daa995479f70d100f90d0e81742f0c7a3fc5eb62790e545b9a4088d2648d",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/swe_bench_pro.py",
+      "current_sha256": "fdace6040b0bc861ece1eedc0145912d8e14bd3c634ce4195f633f55b7e5b47b",
+      "local_source_sha256": "fdace6040b0bc861ece1eedc0145912d8e14bd3c634ce4195f633f55b7e5b47b",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/tau2.py",
+      "current_sha256": "5635a4201eb85f2dffd38cbb52348bab052ce0652f30f5ca670ef02b508b4bb9",
+      "local_source_sha256": "5635a4201eb85f2dffd38cbb52348bab052ce0652f30f5ca670ef02b508b4bb9",
+      "upstream_sha256": "cf6c0fb28b34717fb1319812fef20bcb83974358fba2f6672cfc0d6feb4477f4",
+      "same_text_as_local": true,
+      "same_text_as_upstream": false
+    },
+    {
+      "path": "flashrsi/integrations/travelplanner.py",
+      "current_sha256": "c404ff25ab2ef0461462f5669a87fb791702fc79f3093234998e5dcb52a00969",
+      "local_source_sha256": "c8a2e1f78de6a5203691d4ab3b88b4f572d9e3cb99880d0f32eec16005e6e883",
+      "upstream_sha256": null,
+      "same_text_as_local": false,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/integrations/widesearch.py",
+      "current_sha256": "96b3e591eb8ac4b8702b4cb919411f528b1e6fdcff4cdc4f3c43cedb4a48c1da",
+      "local_source_sha256": "96b3e591eb8ac4b8702b4cb919411f528b1e6fdcff4cdc4f3c43cedb4a48c1da",
+      "upstream_sha256": null,
+      "same_text_as_local": true,
+      "same_text_as_upstream": null
+    },
+    {
+      "path": "flashrsi/runner.py",
+      "current_sha256": "c9b7f3991a36a8f9f53acee7d233ce3d4cdb74937771b3f1f81fb0b7213f08e6",
+      "local_source_sha256": "9a0193f66c5227b877ecd1d2af392ae7515d9b02aca922c9ee5417bd7f1eca97",
+      "upstream_sha256": "eef294dc197e0ca70481367b44bdcb0ea528f03e40fe4d90a62e35a9554d9899",
+      "same_text_as_local": false,
+      "same_text_as_upstream": false
+    }
+  ]
+}

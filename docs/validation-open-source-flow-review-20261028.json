@@ -1,0 +1,113 @@
+{
+  "checked_at": "2026-10-28T17:11:45.516996+08:00",
+  "status": "reviewed_one_runtime_blocker_fixed_not_full_release_certification",
+  "scope": "Current checkout and freshly built wheel; historical frozen smoke roots unchanged",
+  "fixed": [
+    {
+      "id": "spreadsheet-separate-verifier-build-context",
+      "severity": "runtime_blocker",
+      "trigger": "Harbor separate verifier constructs its image from tests/; no prebuilt image is configured",
+      "before": "Generated tests/ lacked Dockerfile. Native require_agent_environment_definition raises FileNotFoundError even with healthy network/Docker.",
+      "after": "Generate tests/Dockerfile from unchanged official native recipe plus tqdm, independently of the agent image; golden data remains outside agent build context.",
+      "regression": "tests/test_spreadsheetbench2.py::test_separate_verifier_has_native_build_context",
+      "before_log": ".cache/release-review-verifier-before.log",
+      "after_log": ".cache/release-review-harbor.log",
+      "changes_native_scoring": false
+    }
+  ],
+  "verification": {
+    "full_suite": {
+      "passed": 801,
+      "skipped": 44,
+      "subtests_passed": 3,
+      "failed": 0,
+      "log": ".cache/release-review-full-final.log",
+      "note": "Optional dependencies and opt-in integration tests are skipped; not all native environments covered."
+    },
+    "harbor_spreadsheet_launcher_tests": {
+      "passed": 31,
+      "failed": 0,
+      "runtime": ".cache/coding-working-expansion/env",
+      "log": ".cache/release-review-harbor.log"
+    },
+    "ruff": {
+      "check": "passed",
+      "format_check": "passed",
+      "files": 246
+    },
+    "installed_wheel_cli": {
+      "status": "passed",
+      "wheel_sha256": "6be24dfb069aede60e85ba9e8e07c6f08214d76afbb63e8f6ad2ba19be041870",
+      "installed_source_files_verified": 225,
+      "import_origin": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\.cache\\coding-working-expansion\\env\\Lib\\site-packages\\flashrsi\\__init__.py",
+      "check_only_requests": 0,
+      "completed_distinct_experiments": 2,
+      "local_scripted_http_requests": 8,
+      "paid_model_calls": 0,
+      "roles_called": [
+        "review-target",
+        "review-worker"
+      ],
+      "scope": "installed CLI, real MiniAgent subprocess, LLM HTTP client, native HotpotQA scorer, OPRO proposal and selection, sealed test, records and redaction",
+      "not_a_benchmark_model_pass": true,
+      "dependency_install": "reused isolated dependencies; fresh wheel force-installed; not cold installation"
+    },
+    "readme_local_links": "all checked links resolve",
+    "isolated_environment_dependency_check": "106 packages compatible; reused dependencies, not cold installation"
+  },
+  "open_findings": [
+    {
+      "id": "spreadsheet-container-verification",
+      "status": "not_yet_proven",
+      "detail": "The current Harbor adapter and both generated container contexts still need real build/setup/recalculation/native grading and a model smoke. Earlier host-only scoring controls and base-image imports do not establish this."
+    },
+    {
+      "id": "harbor-deliverable-retention",
+      "status": "reproducibility_gap",
+      "evidence": "flashrsi/integrations/harbor.py: _run uses TemporaryDirectory and returns rewards/stdout/stderr; artifacts and native-result.json remain in the deleted trial directory.",
+      "detail": "Persisted Trajectory supports reward inspection but cannot alone regrade a generated workbook after the trial. No false claim of durable workbook evidence."
+    },
+    {
+      "id": "modular-analysis-example",
+      "status": "protocol_improvement_not_applied",
+      "detail": "ANALYZE requests a findings list but illustrates one object; SWE real reply was a single object. Recommend a full array example while preserving strict parser/task references/gates. Existing paid failure not retried."
+    },
+    {
+      "id": "windows-long-path",
+      "status": "documented_environment_requirement",
+      "detail": "A runner snapshot write fails under legacy MAX_PATH with long output directories. The same test passes using extended path; final full suite used extended path. README now recommends short outputs or long-path support."
+    },
+    {
+      "id": "python-venv-system-package",
+      "status": "documented_environment_requirement",
+      "detail": "Public launcher requires Python venv with pip; stripped Linux installations need the distribution venv package. Real previous setup failures were not model failures."
+    }
+  ],
+  "attempt_history": [
+    "Initial full run used a Windows Temp location rejected by filesystem permissions; repeated fixture errors were setup errors, not claimed product defects.",
+    "Workspace-local run had 799 pass, 30 skip and one MAX_PATH failure; same failing case passed with extended path; final complete run passed.",
+    "First new regression fixture omitted dev/test split keys; fixture corrected before reproducing the actual missing verifier Dockerfile.",
+    "Validation venv has no pip module; used uv pip with explicit existing interpreter and no dependency changes to install fresh wheel."
+  ],
+  "product_files_changed_this_review": [
+    "flashrsi/benchmarks/spreadsheetbench2/_data.py",
+    "tests/test_spreadsheetbench2.py",
+    "README.md",
+    "docs/coding-working-benchmarks.md"
+  ],
+  "source_sha256": {
+    "pyproject.toml": "38115b97dcc7f33c13b4aa9b6c10eca279e6afd1ca4fd7c1fe3a90d1f8516ab0",
+    "flashrsi/benchmarks/spreadsheetbench2/_data.py": "8249deb7987e9410d63e1ca816d9c0843feb905659f761a326910045d132a9b0",
+    "tests/test_spreadsheetbench2.py": "e1967ac0d68d43a40e5e678b99544a65ca7997e785426d2d9f6a68e45305f3e9"
+  },
+  "paid_calls_started_by_review": 0,
+  "smoke_results": {
+    "newly_reconciled_existing_jobs": 3,
+    "total_pass": 545,
+    "main_historical_pass": 472,
+    "main_historical_total": 480,
+    "travel_pass": 14,
+    "proof": "smoke-travel-sdk-progress-20261028-1655.json"
+  },
+  "current_source_warning": "Current checkout removes CRUX and adds SpreadsheetBench2/Terminal2.1/DeepSWE. Historical smoke counts are version-specific, not certification of current registrations."
+}

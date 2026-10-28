@@ -1,0 +1,42 @@
+{
+  "status": "execution_failed",
+  "updated_at": "2026-10-27T06:00:07.257092+00:00",
+  "items": [
+    {
+      "id": "deepsearch-rrsi-budget-1352",
+      "root": "/root/flashrsi-deepsearchqa-public-20261025",
+      "config": "/root/.cache/deepsearch-rrsi-budget-1352/smoke.local.yaml",
+      "health_config": "/root/.cache/deepsearch-rrsi-budget-1352/smoke.local.yaml",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "status": "execution_failed",
+      "report": "smoke-deepsearch-rrsi-budget-retry-20261027.json",
+      "proxy": "http://127.0.0.1:33616",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "audit_source": "/root/flashrsi-deepsearchqa-public-20261025/public-bench24-20261025/audit.py",
+      "judge_scope": "Existing explicit custom DeepSeek Judge; not official model leaderboard",
+      "phase": "experiment",
+      "updated_at": "2026-10-27T05:52:38.849484+00:00",
+      "exit_code": 1,
+      "ended_at": "2026-10-27T06:00:07.255386+00:00"
+    }
+  ],
+  "counts": {
+    "execution_failed": 1
+  },
+  "budget_authorization": "User explicitly authorized increased budgets; one attempt per configuration; original 1/1/1 tasks and scoring preserved."
+}

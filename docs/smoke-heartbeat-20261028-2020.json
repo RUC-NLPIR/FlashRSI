@@ -1,0 +1,196 @@
+{
+  "checked_at": "2026-10-28T20:19:52.213304+08:00",
+  "new_passes": 0,
+  "new_benchmarks": 0,
+  "totals": {
+    "pass": 551,
+    "failed": 12,
+    "blocked": 11,
+    "partial": 26,
+    "pending": 24
+  },
+  "combined_counts": {
+    "existing_pass": 492,
+    "planned_total": 528,
+    "remaining": 36,
+    "not_added_to_historical624_matrix_yet": "SpreadsheetBench2 registration is not an integration or model result"
+  },
+  "live_queues": {
+    "smoke2": {
+      "control": "bfcl-modular-mini16-worker120-2005",
+      "jobs": [
+        {
+          "id": "bfcl-modular-mini16-worker120",
+          "algorithm": "ModularRSI",
+          "target": "miniagent",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 15509,
+          "report": "smoke-bfcl-modular-mini16-worker120-20261028.json",
+          "paid": true
+        }
+      ],
+      "source_audit": {
+        "/root/flashrsi-workbench-modular-same-source-public-20261028": {
+          "files": 230,
+          "changed": []
+        }
+      },
+      "processes": [
+        {
+          "pid": 15419,
+          "kind": "controller",
+          "control": "bfcl-modular-mini16-worker120-2005"
+        },
+        {
+          "pid": 15509,
+          "kind": "public",
+          "control": "bfcl-modular-mini16-worker120-2005"
+        },
+        {
+          "pid": 15510,
+          "kind": "public",
+          "control": "bfcl-modular-mini16-worker120-2005"
+        },
+        {
+          "pid": 15511,
+          "kind": "public",
+          "control": "bfcl-modular-mini16-worker120-2005"
+        }
+      ],
+      "free_bytes": 1110212608,
+      "proxy_listener": true
+    },
+    "smoke4": {
+      "control": "browse-modular-budget240-2005",
+      "jobs": [
+        {
+          "id": "browse-modular-miniagent-budget240-group",
+          "algorithm": "ModularRSI",
+          "target": "miniagent",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 12184,
+          "report": "smoke-browse-modular-miniagent-budget240-group-20261028.json",
+          "paid": true
+        },
+        {
+          "id": "browse-modular-claude_code-budget240-group",
+          "algorithm": "ModularRSI",
+          "target": "claude_code",
+          "status": "pending",
+          "report": "smoke-browse-modular-claude_code-budget240-group-20261028.json",
+          "paid": false
+        }
+      ],
+      "source_audit": {
+        "/root/flashrsi-browse-modular-same-source-public-20261028": {
+          "files": 265,
+          "changed": []
+        }
+      },
+      "processes": [
+        {
+          "pid": 12178,
+          "kind": "controller",
+          "control": "browse-modular-budget240-2005"
+        },
+        {
+          "pid": 12184,
+          "kind": "public",
+          "control": "browse-modular-budget240-2005"
+        },
+        {
+          "pid": 12185,
+          "kind": "public",
+          "control": "browse-modular-budget240-2005"
+        },
+        {
+          "pid": 12186,
+          "kind": "public",
+          "control": "browse-modular-budget240-2005"
+        }
+      ],
+      "free_bytes": 20072230912,
+      "proxy_listener": true
+    },
+    "smoke5": {
+      "control": "travel-modular-output16384-1935",
+      "jobs": [
+        {
+          "id": "travel-modular-miniagent-output16384-group",
+          "algorithm": "ModularRSI",
+          "target": "miniagent",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 42022,
+          "report": "smoke-travel-modular-miniagent-output16384-group-20261028.json",
+          "paid": true
+        },
+        {
+          "id": "travel-modular-claude_code-output16384-group",
+          "algorithm": "ModularRSI",
+          "target": "claude_code",
+          "status": "pending",
+          "report": "smoke-travel-modular-claude_code-output16384-group-20261028.json",
+          "paid": false
+        }
+      ],
+      "source_audit": {
+        "/root/flashrsi-travel-modular-same-source-public-20261028": {
+          "files": 266,
+          "changed": []
+        }
+      },
+      "processes": [
+        {
+          "pid": 41952,
+          "kind": "controller",
+          "control": "travel-modular-output16384-1935"
+        },
+        {
+          "pid": 42022,
+          "kind": "public",
+          "control": "travel-modular-output16384-1935"
+        },
+        {
+          "pid": 42023,
+          "kind": "public",
+          "control": "travel-modular-output16384-1935"
+        },
+        {
+          "pid": 42024,
+          "kind": "public",
+          "control": "travel-modular-output16384-1935"
+        }
+      ],
+      "free_bytes": 18743287808,
+      "proxy_listener": true
+    },
+    "smoke3": {
+      "status": "model_idle",
+      "jobs": [],
+      "proxy_listener": true,
+      "free_bytes": 1734868992
+    }
+  },
+  "native_package_preparation": {
+    "status": "preparation_blocked_no_automatic_retry",
+    "model_calls": 0,
+    "phase": "host_parallel_cache",
+    "automatic_build": false,
+    "updated_at": "2026-10-28T12:19:45.956249+00:00",
+    "package_count": 556,
+    "expected_bytes": 516294778,
+    "completed": 0,
+    "completed_bytes": 0,
+    "parallel": 4,
+    "total_timeout_seconds": 1200,
+    "per_package_timeout_seconds": 180,
+    "error_type": "AssertionError",
+    "reason": "Native package download failed for libargon2-1"
+  },
+  "scope": "Real signed apt package plan and bounded4-way same-version/SHA verified cache; no recipe change, automatic image build or model call",
+  "product_source_changes": 0,
+  "cleanup": 0
+}

@@ -1,0 +1,334 @@
+{
+  "checked_at": "2026-10-28T17:42:02.068698+08:00",
+  "new_passes": [
+    {
+      "benchmark": "TravelPlanner",
+      "target": "MiniAgent",
+      "algorithm": "DarwinX",
+      "prior_cell": "[×][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "修复后的冻结Travel包装兼容；原Task/native scorer保持；3的ADAS/Meta仅Worker16384输出，Darwin仅Worker120/1200，旧真实上限证据齐；5的CC组只output_dir变化，非通过即停",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_host": "smoke3",
+      "control": "travel-mini-sdk-budget-1600",
+      "execution_state": "flow_passed",
+      "last_checked_at": "2026-10-28T16:32:13.578825+08:00",
+      "report": "smoke-travel-json-darwinx-mini-budget-20261028.json",
+      "reference": "TPJB28MDX",
+      "completed_at": "2026-10-28T17:18:27.517145+08:00",
+      "targets": 6,
+      "workers": 2,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 18
+    },
+    {
+      "benchmark": "TravelPlanner",
+      "target": "Claude Code",
+      "algorithm": "DarwinX",
+      "prior_cell": "[△][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "修复后的冻结Travel包装兼容；原Task/native scorer保持；3的ADAS/Meta仅Worker16384输出，Darwin仅Worker120/1200，旧真实上限证据齐；5的CC组只output_dir变化，非通过即停",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_host": "smoke5",
+      "control": "travel-cc-sdk-1625",
+      "execution_state": "flow_passed",
+      "last_checked_at": "2026-10-28T16:32:13.578825+08:00",
+      "report": "smoke-travel-json-darwinx-claude-code-sdk-20261028.json",
+      "reference": "TPJB28CDX",
+      "completed_at": "2026-10-28T17:18:27.517145+08:00",
+      "targets": 6,
+      "workers": 2,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 18
+    },
+    {
+      "benchmark": "TravelPlanner",
+      "target": "Claude Code",
+      "algorithm": "MetaHarness",
+      "prior_cell": "[△][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "修复后的冻结Travel包装兼容；原Task/native scorer保持；3的ADAS/Meta仅Worker16384输出，Darwin仅Worker120/1200，旧真实上限证据齐；5的CC组只output_dir变化，非通过即停",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_host": "smoke5",
+      "control": "travel-cc-sdk-1625",
+      "execution_state": "flow_passed",
+      "last_checked_at": "2026-10-28T16:32:13.578825+08:00",
+      "report": "smoke-travel-json-meta_harness-claude-code-sdk-20261028.json",
+      "reference": "TPJB28CMH",
+      "completed_at": "2026-10-28T17:18:27.517145+08:00",
+      "targets": 3,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 14
+    },
+    {
+      "benchmark": "TravelPlanner",
+      "target": "Claude Code",
+      "algorithm": "EvoHarness",
+      "prior_cell": "[△][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "修复后的冻结Travel包装兼容；原Task/native scorer保持；3的ADAS/Meta仅Worker16384输出，Darwin仅Worker120/1200，旧真实上限证据齐；5的CC组只output_dir变化，非通过即停",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_host": "smoke5",
+      "control": "travel-cc-sdk-1625",
+      "execution_state": "flow_passed",
+      "last_checked_at": "2026-10-28T16:32:13.578825+08:00",
+      "report": "smoke-travel-json-evo_harness-claude-code-sdk-20261028.json",
+      "reference": "TPJB28CEH",
+      "completed_at": "2026-10-28T17:18:27.517145+08:00",
+      "targets": 2,
+      "workers": 0,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 9
+    },
+    {
+      "benchmark": "TravelPlanner",
+      "target": "MiniAgent",
+      "algorithm": "AHE",
+      "prior_cell": "[△][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "先解决共享Judge/回复协议阻塞；原生拒绝保持，未证明恢复不整组付费",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_state": "flow_passed",
+      "report": "smoke-travel-json-ahe-mini-rest-20261028.json",
+      "reference": "TPJR28MAH",
+      "completed_at": "2026-10-28T17:33:37.371389+08:00",
+      "targets": 2,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 11
+    },
+    {
+      "benchmark": "TravelPlanner",
+      "target": "MiniAgent",
+      "algorithm": "EvoHarness",
+      "prior_cell": "[△][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "先解决共享Judge/回复协议阻塞；原生拒绝保持，未证明恢复不整组付费",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_state": "flow_passed",
+      "report": "smoke-travel-json-evo_harness-mini-rest-20261028.json",
+      "reference": "TPJR28MEH",
+      "completed_at": "2026-10-28T17:33:37.371389+08:00",
+      "targets": 2,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 10
+    }
+  ],
+  "totals": {
+    "pass": 551,
+    "failed": 10,
+    "blocked": 14,
+    "partial": 25,
+    "pending": 24
+  },
+  "main_counts": {
+    "pass": 472,
+    "partial": 1,
+    "failed": 3,
+    "historical_independent_rejections": 4,
+    "total": 480,
+    "remaining": 8
+  },
+  "travel": {
+    "already_integrated": true,
+    "passed": 20,
+    "remaining": 4,
+    "shared_issue": "JSON包装兼容已有11格真实通过；Mini/CC后续组按原生审计接续，ADAS/Mini16384已通过；评分保持"
+  },
+  "focused_remaining": 36,
+  "live_queues": {
+    "smoke2": {
+      "model_running": false,
+      "preparation": "BFCL task image + original three native worlds passed; Agent harness setup remains",
+      "proof": "smoke-native-preparation-20261028-1735.json"
+    },
+    "smoke3": {
+      "model_running": false,
+      "completed_control": "travel-mini-rest-1720",
+      "completed_jobs": [
+        "ahe/miniagent",
+        "evo_harness/miniagent"
+      ],
+      "status": "flow_passed"
+    },
+    "smoke4": {
+      "control": "browse-modular-same-source-1310",
+      "public_pid": 3578,
+      "paid": true,
+      "status": "running",
+      "pending_unpaid": [
+        "miniagent"
+      ],
+      "saved_finished": 15,
+      "saved_error": 1,
+      "last_saved_age_seconds_at_1738": 2119,
+      "not_terminal": true
+    },
+    "smoke5": {
+      "model_running": false,
+      "completed_control": "travel-cc-sdk-1625",
+      "preparation_control": "/root/.cache/spreadsheetbench2-native-preflight-1225/apt-proxy-recovery-1740",
+      "preparation_pid": 35822,
+      "status": "preparation_blocked_no_model",
+      "prior_build": "pip passed, apt direct Debian download failed; unchanged official recipe",
+      "preparation_process_active": false,
+      "reason": "apt index 8706kB complete through lowercase proxy, selected libreoffice-script-provider-python 7.0.4-4+deb11u13 package HTTP404; no second build"
+    }
+  },
+  "native_preparation": {
+    "checked_at": "2026-10-28T17:38:46.593032+08:00",
+    "model_calls_for_preparation": 0,
+    "smoke2": {
+      "/root/.cache/bfcl-same-source-readiness-1345/native-proxy-recovery-1720/state.json": {
+        "status": "native_task_image_ready_not_harness_or_model",
+        "model_calls": 0,
+        "phase": "complete",
+        "budgeted_attempts": 1,
+        "engine_before": "194c6a2b-831c-4ea5-a5ec-b23645072a61",
+        "gateway": {
+          "host": "10.236.224.92",
+          "port": 42281,
+          "pid": 9753,
+          "upstream_loopback_port": 33618,
+          "bind_scope": "private_IP_only",
+          "models": 0
+        },
+        "updated_at": "2026-10-28T09:24:22.472625+00:00",
+        "package_proof": {
+          "package": "mpmath-1.3.0-py3-none-any.whl",
+          "bytes": 536198,
+          "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+          "all_bytes_verified": true
+        },
+        "task_image_id": "sha256:5d656d2dbd2b1df08fbdcbabe94e2912753d90c29a91f4b16fd383c29c08c71e",
+        "image_is_not_public_model_verification": true,
+        "engine_after": "194c6a2b-831c-4ea5-a5ec-b23645072a61"
+      },
+      "/root/.cache/bfcl-same-source-readiness-1345/native-world-1730/proof.json": {
+        "model_calls": 0,
+        "status": "native_world_ready_harness_setup_still_required",
+        "tasks": [
+          {
+            "split": "train",
+            "task_id": "multi_turn_base_41",
+            "checksum": "745b2339ada7dfe062a89b40e2dfe48ec0b642da736d09dfaf538c9c2fa62578",
+            "native_prepare": true,
+            "world_started": true,
+            "current_and_tools": true,
+            "golden_isolated": true,
+            "status": "passed"
+          },
+          {
+            "split": "dev",
+            "task_id": "multi_turn_base_61",
+            "checksum": "032bf3c57e51174ecb3abf2bcdd613ff38bde81f37ea492f3e073a1fae812a47",
+            "native_prepare": true,
+            "world_started": true,
+            "current_and_tools": true,
+            "golden_isolated": true,
+            "status": "passed"
+          },
+          {
+            "split": "test",
+            "task_id": "multi_turn_base_29",
+            "checksum": "54579ffbaa6bcca9e5b8f64a1d609e537539a9aeec71bd565de8567f87cd7675",
+            "native_prepare": true,
+            "world_started": true,
+            "current_and_tools": true,
+            "golden_isolated": true,
+            "status": "passed"
+          }
+        ],
+        "agent_run_called": false,
+        "engine_before": "194c6a2b-831c-4ea5-a5ec-b23645072a61",
+        "engine_after": "194c6a2b-831c-4ea5-a5ec-b23645072a61",
+        "checked_at": "2026-10-28T09:35:04.387609+00:00"
+      }
+    },
+    "smoke5": {
+      "/root/.cache/spreadsheetbench2-native-preflight-1225/native-proxy-recovery-1720/state.json": {
+        "status": "preparation_blocked_stop_no_automatic_retry",
+        "model_calls": 0,
+        "phase": "original_recipe_build_with_verified_proxy",
+        "budgeted_attempts": 1,
+        "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+        "gateway": {
+          "host": "10.238.228.79",
+          "port": 55075,
+          "pid": 35667,
+          "upstream_loopback_port": 33620,
+          "bind_scope": "private_IP_only",
+          "models": 0
+        },
+        "updated_at": "2026-10-28T09:37:53.938178+00:00",
+        "package_proof": {
+          "package": "mpmath-1.3.0-py3-none-any.whl",
+          "bytes": 536198,
+          "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+          "all_bytes_verified": true
+        },
+        "error_type": "AssertionError",
+        "reason": "Native recipe build failed; see preserved log",
+        "engine_after": "56de49e7-b367-4d12-a606-a40946e32334"
+      }
+    },
+    "browse": {
+      "control": "browse-modular-same-source-1310",
+      "public_pid": 3578,
+      "status": "running",
+      "paid": true,
+      "pending_unpaid": "MiniAgent",
+      "output_dir": "/root/.cache/browse-modular-same-source-1310/experiments-claude_code",
+      "saved_trace_files": 25,
+      "finished_trajectories": 15,
+      "error_trajectories": 1,
+      "latest_saved_trace_age_seconds_at_1738": 2119,
+      "not_terminal_or_pass": true
+    }
+  },
+  "new_benchmarks": 0,
+  "product_code_changes_this_heartbeat": 0,
+  "cleanup_this_heartbeat": false,
+  "release_caveat": "Historical frozen-source smoke does not establish current source or new Harbor adapter passes.",
+  "spreadsheet_latest_1745": {
+    "model_calls": 0,
+    "status": "preparation_blocked_stop_no_automatic_retry",
+    "phase": "apt_proxy_full_package_probe",
+    "apt_index_bytes_reported": "8706kB",
+    "package": "libreoffice-script-provider-python_7.0.4-4%2bdeb11u13_all.deb",
+    "http_status": 404,
+    "build_repeated": false
+  }
+}

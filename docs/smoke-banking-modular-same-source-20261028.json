@@ -1,0 +1,193 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-28T03:34:17.701525+00:00",
+  "items": [
+    {
+      "id": "banking-modular-cc-same-source",
+      "algorithm": "ModularRSI",
+      "target": "Claude Code",
+      "benchmark": "tau3_banking",
+      "status": "flow_passed",
+      "root": "/root/flashrsi-banking-modular-same-source-public-20261028",
+      "config": "/root/.cache/banking-modular-same-source-1040/smoke.local.yaml",
+      "proxy": "http://127.0.0.1:33619",
+      "health_config": "/root/.cache/banking-modular-same-source-1040/smoke.local.yaml",
+      "audit_source": "/root/.cache/banking-modular-same-source-1040/audit.py",
+      "audit_python": "/root/.cache/FlashRSI/envs/fd9bd9916f10-961fcba4daae-py312/bin/python",
+      "report": "smoke-banking-modular-same-source-20261028.json",
+      "environment": {
+        "TAU2_DATA_DIR": "/root/.cache/FlashRSI/huggingface/flashrsi/upstream/tau2-bench/fc0055dc4e0a316c3f83133267fbd6faaa770992/data"
+      },
+      "further_automatic_budget_escalation": false,
+      "phase": "experiment",
+      "updated_at": "2026-10-28T02:57:14.051593+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/.cache/banking-modular-same-source-1040/experiments/modular_rsi-claude_code-tau3_banking-20261028-105718-902178",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-execution_gate.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00018-contrast.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "task_008",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-test.json",
+            "task_id": "task_004",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 230,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 32,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native",
+        "source_policy": "ordinary_same_source_train_dev_test",
+        "benchmark_metadata": {
+          "source": "local",
+          "data_path": "/root/flashrsi-banking-bm25-public-20261027/data/banking_knowledge",
+          "variant": "bm25"
+        }
+      },
+      "ended_at": "2026-10-28T03:34:17.700868+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User requested verification of their same-source ModularRSI change. Ordinary Banking BM25 train/dev/test, separate task IDs, public Claude extension example seed; Target40/1200 Worker60/600 and native session100; one attempt, no automatic escalation."
+}

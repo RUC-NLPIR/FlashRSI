@@ -1,0 +1,382 @@
+{
+  "checked_at": "2026-10-23T09:47:28.676607+00:00",
+  "combination": {
+    "algorithm": "evo_harness",
+    "target": "miniagent",
+    "worker": "miniagent",
+    "worker_type": "agent",
+    "benchmark": "hotpotqa",
+    "mode": "context",
+    "model": "deepseek-flash"
+  },
+  "status": "flow_passed_with_quality_limits",
+  "source_matches_local": true,
+  "source_changes": [],
+  "budget": {
+    "max_steps": 1,
+    "success_threshold": 1.0,
+    "general_min_tasks": 3,
+    "worker_max_turns": 20,
+    "target_max_turns": 3,
+    "initial_split_counts": [
+      1,
+      1,
+      1
+    ],
+    "final_split_counts": [
+      3,
+      1,
+      1
+    ],
+    "reason_for_larger_batch": "Initial native training examples passed, so the algorithm correctly skipped reflection. Next three source rows were used without answer filtering, threshold changes or moving test data into train."
+  },
+  "data": {
+    "prior_report": "smoke-qa-20261023.json",
+    "row4": {
+      "benchmark": "hotpotqa",
+      "repository": "hotpotqa/hotpot_qa",
+      "config": "fullwiki",
+      "revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+      "source_split": "train",
+      "source_row_index": 3,
+      "selection": "Next native source row after the original three smoke records; chosen before model execution, not by answer or score. Dev/test are unchanged and disjoint.",
+      "task_id": "5a82171f5542990a1d231f4a",
+      "sha256": "d1d299fb27206b3bfc3e5fc5eb146f64f380538842a77ec75199dfd1b2a5fd71"
+    },
+    "batch3": {
+      "benchmark": "hotpotqa",
+      "repository": "hotpotqa/hotpot_qa",
+      "config": "fullwiki",
+      "revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+      "source_split": "train",
+      "source_row_indices": [
+        4,
+        5,
+        6
+      ],
+      "selection": "Next three native rows in source order; no task or answer filtering. Separate run with 3/1/1 partitions and one batch.",
+      "task_ids": [
+        "5a84dd955542997b5ce3ff79",
+        "5a7e36045542991319bc9440",
+        "5adf44985542993a75d2646d"
+      ],
+      "sha256": "4bb6fb48dcba2870612e0a2601684c0a2ba3688a7c22bd298f0f98ffdaee54e8"
+    }
+  },
+  "runs": [
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/editing-smoke-20261023-evoharness/runs/evo_harness-miniagent-hotpotqa-20261023-173715-662758",
+      "process_exit_code": 0,
+      "status": "partial_no_failure_no_compilation",
+      "split_counts": {
+        "train": 1,
+        "dev": 1,
+        "test": 1
+      },
+      "split_task_ids": {
+        "train": [
+          "5a7a06935542990198eaf050"
+        ],
+        "dev": [
+          "5a879ab05542996e4f30887e"
+        ],
+        "test": [
+          "5a8d7341554299441c6b9fe5"
+        ]
+      },
+      "train_metrics": [
+        {
+          "exact_match": 1.0,
+          "f1": 1.0
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "worker_records": 0,
+      "compile_decisions": [],
+      "changed_paths": [],
+      "test_uses_final_snapshot": true,
+      "all_trajectories_finished": true,
+      "credentials_found": false,
+      "usage": {
+        "input_tokens": 4457,
+        "output_tokens": 5,
+        "cache_read_tokens": 4096,
+        "cache_write_tokens": 0,
+        "usage_entries": 2,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 2,
+        "finished_records": 2,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    },
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/editing-smoke-20261023-evoharness-row4/runs/evo_harness-miniagent-hotpotqa-20261023-174018-812542",
+      "process_exit_code": 0,
+      "status": "partial_no_failure_no_compilation",
+      "split_counts": {
+        "train": 1,
+        "dev": 1,
+        "test": 1
+      },
+      "split_task_ids": {
+        "train": [
+          "5a82171f5542990a1d231f4a"
+        ],
+        "dev": [
+          "5a879ab05542996e4f30887e"
+        ],
+        "test": [
+          "5a8d7341554299441c6b9fe5"
+        ]
+      },
+      "train_metrics": [
+        {
+          "exact_match": 1.0,
+          "f1": 1.0
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "worker_records": 0,
+      "compile_decisions": [],
+      "changed_paths": [],
+      "test_uses_final_snapshot": true,
+      "all_trajectories_finished": true,
+      "credentials_found": false,
+      "usage": {
+        "input_tokens": 4126,
+        "output_tokens": 3,
+        "cache_read_tokens": 2944,
+        "cache_write_tokens": 0,
+        "usage_entries": 2,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 2,
+        "finished_records": 2,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    },
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/editing-smoke-20261023-evoharness-batch3/runs/evo_harness-miniagent-hotpotqa-20261023-174248-918020",
+      "process_exit_code": 0,
+      "status": "flow_passed",
+      "split_counts": {
+        "train": 3,
+        "dev": 1,
+        "test": 1
+      },
+      "split_task_ids": {
+        "train": [
+          "5a84dd955542997b5ce3ff79",
+          "5a7e36045542991319bc9440",
+          "5adf44985542993a75d2646d"
+        ],
+        "dev": [
+          "5a879ab05542996e4f30887e"
+        ],
+        "test": [
+          "5a8d7341554299441c6b9fe5"
+        ]
+      },
+      "train_metrics": [
+        {
+          "exact_match": 0.0,
+          "f1": 0.5
+        },
+        {
+          "exact_match": 0.0,
+          "f1": 0.33333333333333337
+        },
+        {
+          "exact_match": 0.0,
+          "f1": 0
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "worker_records": 5,
+      "compile_decisions": [
+        {
+          "kind": "compile",
+          "level": "topic",
+          "step": 1,
+          "parent_id": "8f195dec804e59af289f325af13440ab457df2fab0d6f6ff8245e25657615f27",
+          "candidate_id": "9c1c4bbde6309bead1632308dd051e05cf2f68bd41b8de7d7f5b2a30018cb7d1",
+          "accepted": true,
+          "changed_paths": [
+            "skills/short-answer-extraction/SKILL.md"
+          ]
+        },
+        {
+          "kind": "compile",
+          "level": "general",
+          "step": 1,
+          "parent_id": "9c1c4bbde6309bead1632308dd051e05cf2f68bd41b8de7d7f5b2a30018cb7d1",
+          "candidate_id": "501a28573038369a51d8734901b88c30382b3f6c7d37db7b00dc70343a8f608a",
+          "accepted": true,
+          "changed_paths": [
+            "skills/ambiguous-slot-resolution/SKILL.md",
+            "skills/evidence-surface-fidelity/SKILL.md",
+            "skills/strict-answer-formatting/SKILL.md"
+          ]
+        }
+      ],
+      "changed_paths": [
+        "skills/ambiguous-slot-resolution/SKILL.md",
+        "skills/evidence-surface-fidelity/SKILL.md",
+        "skills/short-answer-extraction/SKILL.md",
+        "skills/strict-answer-formatting/SKILL.md"
+      ],
+      "test_uses_final_snapshot": true,
+      "all_trajectories_finished": true,
+      "credentials_found": false,
+      "usage": {
+        "input_tokens": 56086,
+        "output_tokens": 4591,
+        "cache_read_tokens": 32256,
+        "cache_write_tokens": 0,
+        "usage_entries": 17,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 9,
+        "finished_records": 9,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      },
+      "skills": [
+        {
+          "path": "skills/ambiguous-slot-resolution/SKILL.md",
+          "name": "ambiguous-slot-resolution",
+          "level": "general",
+          "source_task_ids": [
+            "5adf44985542993a75d2646d",
+            "5a84dd955542997b5ce3ff79",
+            "5a7e36045542991319bc9440"
+          ],
+          "body_chars": 865,
+          "catalog_visible_in_test": true,
+          "body_contains_training_ids": true
+        },
+        {
+          "path": "skills/evidence-surface-fidelity/SKILL.md",
+          "name": "evidence-surface-fidelity",
+          "level": "general",
+          "source_task_ids": [
+            "5a84dd955542997b5ce3ff79",
+            "5a7e36045542991319bc9440",
+            "5adf44985542993a75d2646d"
+          ],
+          "body_chars": 978,
+          "catalog_visible_in_test": true,
+          "body_contains_training_ids": true
+        },
+        {
+          "path": "skills/short-answer-extraction/SKILL.md",
+          "name": "short-answer-extraction",
+          "level": "topic",
+          "source_task_ids": [
+            "5a84dd955542997b5ce3ff79",
+            "5a7e36045542991319bc9440",
+            "5adf44985542993a75d2646d"
+          ],
+          "body_chars": 1396,
+          "catalog_visible_in_test": true,
+          "body_contains_training_ids": true
+        },
+        {
+          "path": "skills/strict-answer-formatting/SKILL.md",
+          "name": "strict-answer-formatting",
+          "level": "general",
+          "source_task_ids": [
+            "5a7e36045542991319bc9440",
+            "5a84dd955542997b5ce3ff79",
+            "5adf44985542993a75d2646d"
+          ],
+          "body_chars": 1035,
+          "catalog_visible_in_test": true,
+          "body_contains_training_ids": true
+        }
+      ],
+      "test_read_skill_calls": 0
+    }
+  ],
+  "limitations": [
+    "One batch only; no later training batch demonstrated skill reuse, merging, revision or deletion.",
+    "No dev selection and no before/after re-evaluation of the same train tasks; no effectiveness improvement claimed.",
+    "Benchmark test displayed all four native skill descriptions but did not call read_skill; explicit independent probe verifies tool loading only.",
+    "Curated topic skill retained a concrete training answer example, and skill bodies retained training task IDs. This conflicts with the prompt intent to compile reusable procedures without retaining case answers; schema/provenance checks do not enforce semantic generalization. No automatic content filter or relaxed validation was introduced.",
+    "No source code change was needed for this smoke; previously completed offline suite was not rerun.",
+    "Remote HF automatic download and Claude Code EvoHarness remain unverified.",
+    "GEPA and ACE real reruns are deferred per user instruction; existing caveats remain in the matrix."
+  ],
+  "native_skill_probe": {
+    "record": "/root/flashrsi-twowiki-check-20261023-a1/editing-smoke-20261023-evoharness-batch3/native-skill-probe.json",
+    "scope": "Separate explicit request to read one skill from reloaded final Snapshot, ordinary Agent.run; not benchmark performance",
+    "status": "finished",
+    "turns": 2,
+    "read_skill_calls": 1,
+    "body_returned_exactly": true,
+    "usage": {
+      "model_calls": [
+        {
+          "role": "primary",
+          "turn": 1,
+          "model": "deepseek-flash",
+          "call_id": "0b6d08de-4970-4494-9f12-5c1f1efb7c74",
+          "latency_seconds": 1.1367155127227306,
+          "usage": {
+            "completion_tokens": 42,
+            "prompt_tokens": 1013,
+            "total_tokens": 1055,
+            "prompt_tokens_details": {
+              "cached_tokens": 768
+            },
+            "prompt_cache_hit_tokens": 768,
+            "prompt_cache_miss_tokens": 245
+          }
+        },
+        {
+          "role": "primary",
+          "turn": 2,
+          "model": "deepseek-flash",
+          "call_id": "f63ed2fd-8468-4daa-bb92-c8cc7675d56e",
+          "latency_seconds": 1.7901711128652096,
+          "usage": {
+            "completion_tokens": 255,
+            "prompt_tokens": 1406,
+            "total_tokens": 1661,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024
+            },
+            "prompt_cache_hit_tokens": 1024,
+            "prompt_cache_miss_tokens": 382
+          }
+        }
+      ],
+      "turns": 2
+    }
+  },
+  "source_sha256": {
+    "flashrsi/algorithms/evo_harness/__init__.py": "6249b8cc92ed3924a33c81c2e7cd929ea60a8d8464a7fa82fcf552352bdf5171",
+    "flashrsi/algorithms/evo_harness/_prompts.py": "9b45a9ab96253f944c4f9089163fc93fb7368097b6b5647f22bdae5bddedb860",
+    "flashrsi/agents/miniagent/runtime/agent.py": "afca1deae453581e715f9be359d6de38efe32cf8ae34e6cd37510bd7403e39be",
+    "flashrsi/agents/miniagent/runtime/workspace.py": "8fd375f17706e808339679b1e307c159f6c24a60a53794219f2d9c5322d54a57",
+    "flashrsi/agents/miniagent/tools/read_skill.py": "f4b669a036744e3548959ed6ef89c510951490c79c6a07629a6df69257187147"
+  }
+}

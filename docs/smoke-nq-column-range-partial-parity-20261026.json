@@ -1,0 +1,10 @@
+{
+  "completed_shards": 8,
+  "records": 8568,
+  "historical_parity_comparable": 4284,
+  "historical_parity_mismatch": 0,
+  "old_partial_invalid_lines": 0,
+  "full_pool_completed": false,
+  "overlap_conclusion": null,
+  "new_model_calls": 0
+}

@@ -1,0 +1,67 @@
+{
+  "checked_at": "2026-10-28T17:33:37.371389+08:00",
+  "new_passes": [
+    {
+      "benchmark": "TravelPlanner",
+      "target": "MiniAgent",
+      "algorithm": "AHE",
+      "prior_cell": "[△][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "先解决共享Judge/回复协议阻塞；原生拒绝保持，未证明恢复不整组付费",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_state": "flow_passed",
+      "report": "smoke-travel-json-ahe-mini-rest-20261028.json",
+      "reference": "TPJR28MAH",
+      "completed_at": "2026-10-28T17:33:37.371389+08:00",
+      "targets": 2,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 11
+    },
+    {
+      "benchmark": "TravelPlanner",
+      "target": "MiniAgent",
+      "algorithm": "EvoHarness",
+      "prior_cell": "[△][TP26]",
+      "status": "flow_passed",
+      "planned_window_cst": "10-28 11:30-22:30",
+      "action": "先解决共享Judge/回复协议阻塞；原生拒绝保持，未证明恢复不整组付费",
+      "model_dispatch": "paid",
+      "recovery_window_cst": "10-28 20:00-22:30",
+      "final_audit_cst": "10-28 22:30-23:59",
+      "priority_today": "focused",
+      "execution_state": "flow_passed",
+      "report": "smoke-travel-json-evo_harness-mini-rest-20261028.json",
+      "reference": "TPJR28MEH",
+      "completed_at": "2026-10-28T17:33:37.371389+08:00",
+      "targets": 2,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 266,
+      "credential_files": 10
+    }
+  ],
+  "totals": {
+    "pass": 551,
+    "failed": 10,
+    "blocked": 14,
+    "partial": 25,
+    "pending": 24
+  },
+  "travel_counts": {
+    "pass": 20,
+    "blocked": 2,
+    "failed": 2
+  },
+  "combined_counts": {
+    "existing_pass": 492,
+    "planned_total": 528,
+    "remaining": 36,
+    "not_added_to_historical624_matrix_yet": "SpreadsheetBench2 registration is not an integration or model result"
+  }
+}

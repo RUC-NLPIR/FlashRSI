@@ -1,0 +1,18 @@
+{
+  "model_calls": 0,
+  "status": "preparation_blocked_stop_no_automatic_retry",
+  "phase": "original_recipe_build_after_apt_proof",
+  "gateway_reused": {
+    "host": "10.238.228.79",
+    "port": 41613,
+    "purpose": "HTTP307 to HTTPS official sources; Debian pool deb to exact path archive; native signed apt package verification unchanged",
+    "bind_scope": "private_IP_only",
+    "pid": 37723,
+    "upstream": 33620
+  },
+  "budgeted_attempts": 1,
+  "updated_at": "2026-10-28T10:40:56.267955+00:00",
+  "apt_package_download_verified": true,
+  "error_type": "TimeoutExpired",
+  "reason": "Command '['docker', 'build', '--pull=false', '--build-arg', 'HTTP_PROXY=http://10.238.228.79:41613', '--build-arg', 'HTTPS_PROXY=http://10.238.228.79:41613', '--build-arg', 'http_proxy=http://10.238.2"
+}

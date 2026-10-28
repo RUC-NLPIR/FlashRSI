@@ -1471,6 +1471,6 @@ CLI 已支持 SkillOpt 演化与最终测试；Terminal-Bench 的接入及验证
 
 ### 协作者提交实验
 
-参见 [统一实验提交规范](../experiments/README.md)。运行目录仍写入被 Git 忽略的 `runs/`；
+参见 [统一实验提交规范](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/README.md)。运行目录仍写入被 Git 忽略的 `runs/`；
 使用 `scripts/prepare_experiment_submission.py` 导出统一的 `experiments/<run-id>/`，
 配置与汇总直接进 Git，完整日志压缩包使用 Git LFS。

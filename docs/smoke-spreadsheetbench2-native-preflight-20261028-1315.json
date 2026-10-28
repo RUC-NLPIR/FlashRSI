@@ -1,0 +1,325 @@
+{
+  "source-proof.json": {
+    "status": "source_inspection_only",
+    "model_calls": 0,
+    "repository": "https://github.com/RUCKBReasoning/SpreadsheetBench-2",
+    "revision": "a7bdc2d358e052d35a94768e1f487c0d9e9c0011",
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 6267,
+        "sha256": "1cf89f583d77a984c2cf5882957b54e3191f5fa850d70c15776b0f5ba41dcd64"
+      },
+      {
+        "path": "SWE-agent/config/spreadsheet.yaml",
+        "bytes": 4515,
+        "sha256": "749fed4ecb9a414b6cc44f69d2726413fe93998f476364a76221ec406bf95209"
+      },
+      {
+        "path": "SWE-agent/config/visualisation.yaml",
+        "bytes": 5696,
+        "sha256": "cc27888e6bfd09a35451ce4b41fb0b7156364d5b01b2957be27e34895958f1e6"
+      },
+      {
+        "path": "SWE-agent/pyproject.toml",
+        "bytes": 6450,
+        "sha256": "31d6661af9e97f6e07ace40fac3449c33532c9b1dd33dda040642a65a51e8a28"
+      },
+      {
+        "path": "SWE-agent/scripts/example.sh",
+        "bytes": 305,
+        "sha256": "d1c41a79e0d29d3e3129714fbd17526dd93d1adba9b583ed92609e89e0e67a3c"
+      },
+      {
+        "path": "SWE-agent/spreadsheet.Dockerfile",
+        "bytes": 738,
+        "sha256": "8b77ecacdf08884aa5ee3353506850b1d991390e73c7ea8b4147685eeef77913"
+      },
+      {
+        "path": "evaluation/evaluation.py",
+        "bytes": 24154,
+        "sha256": "04a2a75b29805ab40efe93e202384c365d1d32b9c924c1a4aed56e41249facb0"
+      },
+      {
+        "path": "evaluation/open_spreadsheet.py",
+        "bytes": 11214,
+        "sha256": "9f50ca883067c99dbd254f2b6620dd97157c1f56ae24e0ec692d30813a82dba1"
+      },
+      {
+        "path": "evaluation/run_visual_vlm_checklist_eval.py",
+        "bytes": 58970,
+        "sha256": "8d32fa3a895edf205f3749aaeaba46e6ff79f39c3eb8f7dff1888e92e390d703"
+      }
+    ],
+    "dockerfiles": [
+      "SWE-agent/spreadsheet.Dockerfile"
+    ],
+    "official_spreadsheet_dockerfile_present": true,
+    "dataset": {
+      "repository": "KAKA22/SpreadsheetBench-v2",
+      "revision": "5a2215ed4121945ab09d8723df2995602090b042",
+      "gated": false,
+      "files": [
+        {
+          "path": ".gitattributes",
+          "bytes": 2504
+        },
+        {
+          "path": "README.md",
+          "bytes": 1228
+        },
+        {
+          "path": "data_example_05_11.zip",
+          "bytes": 15007033
+        },
+        {
+          "path": "spreadsheetbench-v2-09-10.zip",
+          "bytes": 134232213
+        },
+        {
+          "path": "spreadsheetbench-v2.zip",
+          "bytes": 134207025
+        },
+        {
+          "path": "trajectory_example.zip",
+          "bytes": 158619774
+        }
+      ]
+    }
+  },
+  "state.json": {
+    "status": "preparation_blocked",
+    "model_calls": 0,
+    "dataset_revision": "5a2215ed4121945ab09d8723df2995602090b042",
+    "dataset_file": "spreadsheetbench-v2-09-10.zip",
+    "native_code_revision": "a7bdc2d358e052d35a94768e1f487c0d9e9c0011",
+    "checks": [
+      {
+        "phase": "dataset_size_lfs_sha256",
+        "exit_code": 0
+      },
+      {
+        "phase": "evaluation-venv",
+        "exit_code": 0
+      },
+      {
+        "phase": "evaluation-dependencies",
+        "exit_code": 0
+      },
+      {
+        "phase": "native-uno-check",
+        "exit_code": 1
+      }
+    ],
+    "phase": "native-uno-check",
+    "downloaded_bytes": 134232213,
+    "dataset_sha256": "52699c974c30aced7125f3d12cdaabbbcbba8db804373d7397a5d3bdf68e5b3e",
+    "datasets": [
+      {
+        "path": "spreadsheetbench-v2/Debugging/dataset.json",
+        "rows": 100,
+        "fields": [
+          "answer_position",
+          "golden_response_path",
+          "id",
+          "instruction",
+          "spreadsheet_path"
+        ],
+        "first_id": "01_01"
+      },
+      {
+        "path": "spreadsheetbench-v2/Template/dataset.json",
+        "rows": 97,
+        "fields": [
+          "answer_position",
+          "golden_response_path",
+          "id",
+          "instruction",
+          "spreadsheet_path"
+        ],
+        "first_id": "01_01"
+      },
+      {
+        "path": "spreadsheetbench-v2/Visualization/dataset.json",
+        "rows": 24,
+        "fields": [
+          "category",
+          "criteria",
+          "golden_response_path",
+          "id",
+          "instruction",
+          "spreadsheet_path",
+          "task_id"
+        ],
+        "first_id": "Task 96"
+      },
+      {
+        "path": "spreadsheetbench-v2/Financial_Model/dataset.json",
+        "rows": 100,
+        "fields": [
+          "answer_position",
+          "golden_response_path",
+          "id",
+          "instruction",
+          "spreadsheet_path"
+        ],
+        "first_id": "01_01"
+      }
+    ],
+    "error_type": "AssertionError"
+  },
+  "scoring-free/state.json": {
+    "status": "native_numeric_scoring_controls_passed_no_model",
+    "model_calls": 0,
+    "checks": [
+      {
+        "phase": "native-uno-package-install",
+        "exit_code": 0
+      },
+      {
+        "phase": "system-uno-import",
+        "exit_code": 0
+      },
+      {
+        "phase": "official-recalculation-and-native-controls",
+        "exit_code": 0
+      }
+    ],
+    "scope": "Official numeric evaluator reference/negative/missing-file controls; not model smoke",
+    "phase": "official-recalculation-and-native-controls",
+    "product_adapter_implemented": false,
+    "spreadsheet_model_smoke": false
+  },
+  "scoring-free/native-controls-proof.json": {
+    "status": "native_numeric_controls_passed",
+    "model_calls": 0,
+    "upstream_modified": false,
+    "raw_dataset_unchanged": true,
+    "items": [
+      {
+        "category": "Debugging",
+        "native_id": "01_01",
+        "golden_control": {
+          "id": "01_01",
+          "error_message": "",
+          "regression_accuracy": 1.0,
+          "modification_accuracy": 1.0,
+          "accuracy": 1.0,
+          "interaction_turns": 0
+        },
+        "unmodified_input_control": {
+          "id": "01_01",
+          "error_message": "Modification error at Ex 1 - LBO!AC20: answer=0, output=-130.666114561455",
+          "regression_accuracy": 1.0,
+          "modification_accuracy": 0.0,
+          "accuracy": 0.0,
+          "interaction_turns": 0
+        },
+        "missing_output_control": {
+          "id": "01_01",
+          "error_message": "output file not exist",
+          "regression_accuracy": 0.0,
+          "modification_accuracy": 0.0,
+          "accuracy": 0.0,
+          "interaction_turns": 0
+        },
+        "raw_input_sha256": "e6d8eb78c3c91d352c054a5c043493861954ffa1cf75f80076a1b2d062709c10",
+        "raw_golden_sha256": "4ea318ac60b4266a0b752d92d8174c7e526c99570d987764e20bcacfde68c151",
+        "prepared_input_sha256": "1bfe633dcdf1e99e40158324c20794899ad7a9e0bad2cb3432b9ed140e84be74",
+        "prepared_golden_sha256": "fada5352a13180baad727b84dfa6091b20cc93dedeb428b5d003c1c708fbc928"
+      },
+      {
+        "category": "Financial_Model",
+        "native_id": "01_01",
+        "golden_control": {
+          "id": "01_01",
+          "error_message": "",
+          "regression_accuracy": 1.0,
+          "modification_accuracy": 1.0,
+          "accuracy": 1.0,
+          "interaction_turns": 0
+        },
+        "unmodified_input_control": {
+          "id": "01_01",
+          "error_message": "Modification error at DCF Valuation!C22: answer=2425.91653544975, output=4440.18535205689",
+          "regression_accuracy": 1.0,
+          "modification_accuracy": 0.0,
+          "accuracy": 0.0,
+          "interaction_turns": 0
+        },
+        "missing_output_control": {
+          "id": "01_01",
+          "error_message": "output file not exist",
+          "regression_accuracy": 0.0,
+          "modification_accuracy": 0.0,
+          "accuracy": 0.0,
+          "interaction_turns": 0
+        },
+        "raw_input_sha256": "a01657c0cc7116569be1d649bb259d32073d3fa6261d7d9da22c461875e1080c",
+        "raw_golden_sha256": "02538233e6cf415ca7b374ef4a2118c88b100cfb351ad9fc5043754b0bf68364",
+        "prepared_input_sha256": "6d5f9f806acb63c885faff72efff375f85f4e1f06a95076a8a4f2064f020e182",
+        "prepared_golden_sha256": "9c3a556a15102b10959e11b83a10afab394a4e36aa2c20fc5e4ed25ad0b5a94c"
+      },
+      {
+        "category": "Template",
+        "native_id": "01_01",
+        "golden_control": {
+          "id": "01_01",
+          "error_message": "",
+          "regression_accuracy": 1.0,
+          "modification_accuracy": 1.0,
+          "accuracy": 1.0,
+          "interaction_turns": 0
+        },
+        "unmodified_input_control": {
+          "id": "01_01",
+          "error_message": "Modification error at BondAccounting!C7: answer=405.064555233701, output=None",
+          "regression_accuracy": 1.0,
+          "modification_accuracy": 0.0,
+          "accuracy": 0.0,
+          "interaction_turns": 0
+        },
+        "missing_output_control": {
+          "id": "01_01",
+          "error_message": "output file not exist",
+          "regression_accuracy": 0.0,
+          "modification_accuracy": 0.0,
+          "accuracy": 0.0,
+          "interaction_turns": 0
+        },
+        "raw_input_sha256": "3d64bbbf4c1f9be0c36371c5cae038e65c83f53d50bf2226b041277c671c2c4e",
+        "raw_golden_sha256": "dfd14fdf2c5e9864932c860bf8b0b7c5dca9335aaade1b8a89542817cb736d58",
+        "prepared_input_sha256": "6637a8b936d48838d1c36fa4f0c9de0d291ec096e983b0de7d8e9d99b0a9e3c3",
+        "prepared_golden_sha256": "0af15eb7b3cdaa1be526001197776bf887fbe0d4e208a090bff7ada53d3a045c"
+      }
+    ]
+  },
+  "image-free/state.json": {
+    "status": "preparation_blocked",
+    "model_calls": 0,
+    "official_dockerfile_sha256": "8b77ecacdf08884aa5ee3353506850b1d991390e73c7ea8b4147685eeef77913",
+    "recipe_modified": false,
+    "checks": [
+      {
+        "phase": "official-base-image-pull",
+        "exit_code": 1
+      }
+    ],
+    "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+    "phase": "official-base-image-pull",
+    "error_type": "AssertionError"
+  },
+  "image-host-proxy-recovery-1315/state.json": {
+    "status": "preparation_blocked",
+    "model_calls": 0,
+    "recovery_scope": "host-proxy-download-of-immutable-official-image",
+    "checks": [],
+    "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+    "error_type": "URLError",
+    "updated_at": "2026-10-28T05:06:23.488923+00:00"
+  },
+  "checked_at": "2026-10-28T13:27:21.629171+08:00",
+  "model_calls": 0,
+  "model_smoke_pass": false,
+  "adapter_implemented": false
+}

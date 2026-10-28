@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-25T20:40:54.615828+00:00",
+  "source": {
+    "source": "HuggingFaceH4/MATH-500",
+    "revision": "6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be",
+    "scorer": "math-verify==0.9.0",
+    "answer_extraction": "last-boxed",
+    "evolution_source": {
+      "source": "EleutherAI/hendrycks_math",
+      "revision": "21a5633873b6a120296cce3e2df9d5550074f4a3",
+      "configs": [
+        "geometry"
+      ],
+      "scorer": "math-verify==0.9.0",
+      "answer_extraction": "last-boxed",
+      "native_split": "train",
+      "experiment_role": "external_evolution",
+      "pool_size": 870,
+      "pool_checksum": "bb96118f2f8b930ff4aa3eb57251dc5434a0b39325e3bd6712ccd3a60ee6dbab"
+    }
+  },
+  "split_counts": {
+    "train": 1,
+    "dev": 1,
+    "test": 1
+  },
+  "roles": [
+    {
+      "task_id": "c60df9615e29232559f981c4c17110bb7b1979b8c36e8187b0f8fad97c0e3f3f",
+      "native_split": "train",
+      "metrics": {
+        "accuracy": 1.0
+      }
+    },
+    {
+      "task_id": "test/number_theory/1185.json",
+      "native_split": "test",
+      "metrics": {
+        "accuracy": 1.0
+      }
+    },
+    {
+      "task_id": "test/intermediate_algebra/1232.json",
+      "native_split": "test",
+      "metrics": {
+        "accuracy": 1.0
+      }
+    }
+  ],
+  "dev_test_membership_unchanged": true,
+  "reference_answer_replay_only": true,
+  "new_model_calls": 0,
+  "not_real_combination_smoke": true
+}

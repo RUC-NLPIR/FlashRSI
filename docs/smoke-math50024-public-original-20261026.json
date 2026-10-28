@@ -1,0 +1,2663 @@
+{
+  "host": "original",
+  "benchmark": "math",
+  "judge_profile": "native Math-Verify 0.9.0, last-boxed, MATH-500 custom partition",
+  "status": "completed",
+  "updated_at": "2026-10-25T20:01:40.736303+00:00",
+  "counts": {
+    "flow_passed": 22,
+    "unsupported_configuration": 2
+  },
+  "items": [
+    {
+      "benchmark": "math",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:10:14.062899+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:10:14.063896+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:10:14.298994+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:10:14.301329+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:10:26.741013+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:10:26.749742+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:10:51.921964+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/opro-miniagent/opro-miniagent-math-20261026-031035-902490",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:10:59.841902+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:10:59.843061+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:10:59.844944+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:11:00.088346+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:11:00.090913+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:11:44.629984+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:11:44.632925+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:12:11.664315+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/opro-claude_code/opro-claude_code-math-20261026-031151-392795",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:12:21.716055+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:12:21.717293+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:12:21.718743+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:12:21.953199+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:12:21.956849+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:12:29.049328+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:12:29.051887+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:12:56.835154+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-math-20261026-031236-512248",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:13:05.445988+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:13:05.447498+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:13:05.448920+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:13:05.708173+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:13:05.712012+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:13:13.543249+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:13:13.582300+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:13:37.747007+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/skillopt-claude_code/skillopt-claude_code-math-20261026-031321-129015",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 10,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:13:46.213897+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:13:46.215666+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:13:46.217596+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:13:46.480802+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:13:46.484493+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:14:31.951241+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:14:31.972352+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:15:21.362256+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-math-20261026-031439-092529",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:15:35.040405+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:15:35.042435+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:15:35.044830+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:15:35.294541+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:15:35.300348+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:16:19.672348+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:16:19.681636+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:18:35.432222+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-math-20261026-031627-050258",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:18:49.720440+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "ace",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:18:49.722525+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:18:49.727002+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:18:49.994808+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:18:50.004179+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:18:57.588401+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:18:57.609167+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:19:27.334649+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/ace-miniagent/ace-miniagent-math-20261026-031904-751593",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:19:36.909551+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "ace",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:19:36.912124+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:19:36.918439+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:19:37.107222+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:19:37.112921+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:19:47.826943+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:19:47.833876+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:20:24.490379+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/ace-claude_code/ace-claude_code-math-20261026-031954-761096",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:20:35.723030+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:20:35.725663+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:20:35.728092+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:20:35.962517+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:20:35.967432+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:20:44.181317+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:20:44.186726+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:21:17.270786+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/evoprompt-miniagent/evoprompt-miniagent-math-20261026-032051-070602",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:21:26.123302+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:21:26.126788+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:21:26.133265+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:21:26.347176+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:21:26.354767+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:21:34.348798+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:21:34.358334+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:22:12.771372+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/evoprompt-claude_code/evoprompt-claude_code-math-20261026-032141-163946",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:22:24.525949+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:22:24.530905+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:22:24.535765+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:22:24.772463+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:22:24.784209+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:22:32.608596+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:22:32.619759+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:23:01.362269+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/gepa-miniagent/gepa-miniagent-math-20261026-032240-100780",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:23:09.561334+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:23:09.565001+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:23:09.652349+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:23:09.869177+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:23:09.881984+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:23:20.841570+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:23:20.851263+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:23:54.532028+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/gepa-claude_code/gepa-claude_code-math-20261026-032328-193120",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:24:03.236730+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "adas",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:24:03.241352+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:24:03.285861+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:24:03.541465+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:24:03.549916+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:24:14.121749+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:24:14.132886+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:27:19.874509+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/adas-miniagent/adas-miniagent-math-20261026-032420-864927",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:27:37.221357+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:27:37.225229+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:27:37.233696+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:27:37.431262+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:27:37.441710+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:27:53.658835+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:27:53.672201+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:29:02.551354+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/adas-claude_code/adas-claude_code-math-20261026-032800-950152",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:29:18.418148+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:29:18.427872+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:29:18.434493+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:29:18.690139+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:29:18.701794+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:29:32.109748+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:29:32.118009+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:31:37.659673+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-math-20261026-032941-615890",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:31:54.884443+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:31:54.888725+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:31:54.893600+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:31:55.253762+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:31:55.263443+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:32:06.334832+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:32:06.343098+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:34:38.679950+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-math-20261026-033213-079431",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:34:50.923156+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:34:50.930113+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:34:50.934280+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:34:51.166596+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:34:51.177662+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:35:01.787353+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:35:01.810105+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:39:33.240009+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/meta_harness-miniagent/meta_harness-miniagent-math-20261026-033508-476883",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:39:47.781140+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:39:47.785807+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:39:47.813772+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:39:48.087471+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:39:48.102304+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:39:58.342581+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:39:58.357034+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:42:32.051548+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/meta_harness-claude_code/meta_harness-claude_code-math-20261026-034005-128773",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "test/number_theory/1185.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:42:44.024403+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:42:44.029362+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:42:44.042827+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:42:44.248603+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:42:44.264868+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:42:54.059081+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:42:54.071573+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:43:19.800128+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/evo_harness-miniagent/evo_harness-miniagent-math-20261026-034310-546652",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:44:12.513678+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:44:12.518646+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:44:12.526952+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:44:12.770467+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:44:12.783120+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:47:26.930684+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:47:26.952917+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:48:29.548807+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/evo_harness-claude_code/evo_harness-claude_code-math-20261026-034817-617462",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:50:26.061817+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:50:26.072651+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:50:26.077779+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:50:26.286299+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:50:26.296468+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:50:35.748115+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:50:35.764976+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:54:25.727442+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/rrsi-miniagent/rrsi-miniagent-math-20261026-035043-376233",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00012-smoke.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00014-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00019-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 26,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:54:36.928361+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:54:36.934734+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:54:36.940031+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:54:37.174519+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:54:37.195431+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:54:47.248317+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:54:47.260012+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:01:14.557667+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-math500-public-20261026/batch-runs/rrsi-claude_code/rrsi-claude_code-math-20261026-035453-900781",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00018-smoke.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00021-candidate.json",
+            "task_id": "test/intermediate_algebra/986.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-test.json",
+            "task_id": "test/intermediate_algebra/1232.json",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00015-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00016-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 33,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:01:25.116768+00:00"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:01:25.122476+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:01:25.127808+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:01:25.340909+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:01:25.353714+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T20:01:33.346354+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T20:01:33.352784+00:00",
+      "log_path": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/modular_rsi-miniagent/check-only.log"
+    },
+    {
+      "benchmark": "math",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:01:33.358427+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:01:33.364015+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:01:33.565182+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-math500-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-math500-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:01:33.576444+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T20:01:40.719745+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T20:01:40.727598+00:00",
+      "log_path": "/root/flashrsi-math500-public-20261026/public-bench24-20261026/modular_rsi-claude_code/check-only.log"
+    }
+  ]
+}

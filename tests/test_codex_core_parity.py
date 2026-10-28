@@ -24,6 +24,11 @@ import pytest
 from flashrsi.agents import Codex
 from flashrsi.core import Snapshot, Task
 
+pytestmark = pytest.mark.skipif(
+    shutil.which("cargo") is None or shutil.which("rustc") is None,
+    reason="Native Codex source parity requires Cargo and Rust 1.95.0",
+)
+
 _UUID = re.compile(
     r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
     re.IGNORECASE,

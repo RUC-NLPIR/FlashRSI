@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-25T21:26:02.991705+00:00",
+  "new_model_calls": 0,
+  "independent_data_precondition": "resolved for both Targets, full geometry/train870 versus MATH-500500; original refusal history retained",
+  "items": [
+    {
+      "target": "miniagent",
+      "raw_status": "execution_failed",
+      "experiment_path": "/root/flashrsi-math-evolution-public-20261026/batch-runs/modular_rsi-miniagent/modular_rsi-miniagent-math-20261026-043903-441575",
+      "target_stage_count": 8,
+      "worker_stage_count": 7,
+      "native_errors": [
+        {
+          "file": "00020-worker.json",
+          "status": "error",
+          "error_message": "API Error: Claude's response exceeded the 8192 output token maximum. To configure this behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable.\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "usage_recorded": true,
+          "metrics": {}
+        }
+      ],
+      "all_saved_stages_have_usage": true,
+      "final_result_exists": false,
+      "source_changes": [],
+      "classification": "failed_native_worker_output_limit",
+      "automatic_retry": false
+    },
+    {
+      "target": "claude_code",
+      "raw_status": "flow_passed",
+      "experiment_path": "/root/flashrsi-math-evolution-public-20261026/batch-runs/modular_rsi-claude_code/modular_rsi-claude_code-math-20261026-045634-690371",
+      "target_stage_count": 11,
+      "worker_stage_count": 5,
+      "native_errors": [],
+      "all_saved_stages_have_usage": true,
+      "final_result_exists": true,
+      "source_changes": [],
+      "classification": "passed",
+      "automatic_retry": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "model_calls": 0,
+  "selected_task_parity": true,
+  "items": [
+    {
+      "split": "train",
+      "task_id": "pydicom__pydicom-1256",
+      "image": "swebench/sweb.eval.x86_64.pydicom_1776_pydicom-1256:latest",
+      "base_commit": "49a3da4a3d9c24d7e8427a25048a1c7d5c4f7724",
+      "checksum": "d7c73de78b03506b7ebfbe1d94b562878b43fd7c087359d3c9d77aed7123a410"
+    },
+    {
+      "split": "dev",
+      "task_id": "django__django-16116",
+      "image": "swebench/sweb.eval.x86_64.django_1776_django-16116:latest",
+      "base_commit": "5d36a8266c7d5d1994d7a7eeb4016f80d9cb0401",
+      "checksum": "09dc859f8e2f8fa7df74abdf78e8fb4565c0d2fe82ed0efd53cd54eef47e871a"
+    },
+    {
+      "split": "test",
+      "task_id": "django__django-15037",
+      "image": "swebench/sweb.eval.x86_64.django_1776_django-15037:latest",
+      "base_commit": "dab48b7482295956973879d15bfd4d3bb0718772",
+      "checksum": "4201297eed9185a0a4d57c365ff7062ab585cabad1476c9c1c17334fe26d1084"
+    }
+  ]
+}

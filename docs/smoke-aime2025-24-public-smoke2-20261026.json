@@ -1,0 +1,3067 @@
+{
+  "host": "smoke2",
+  "benchmark": "aime",
+  "judge_profile": "AIME2025 integer_exact; native public pool custom 1/1/1; Modular external AIME2026 complete pool",
+  "status": "completed",
+  "updated_at": "2026-10-25T22:20:47.772110+00:00",
+  "counts": {
+    "flow_passed": 23,
+    "execution_failed": 1
+  },
+  "items": [
+    {
+      "benchmark": "aime",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:37:02.981044+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:37:02.982594+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:37:03.197072+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:37:03.201577+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:37:03.619610+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:37:03.624678+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:38:47.599867+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/opro-miniagent/opro-miniagent-aime-20261026-043704-015085",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:38:48.184681+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:38:48.186064+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:38:48.188125+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:38:48.433151+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:38:48.436522+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:39:23.029318+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:39:23.032219+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:00.637036+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/opro-claude_code/opro-claude_code-aime-20261026-043923-517353",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:41:01.470869+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:41:01.472155+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:41:01.474535+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:01.686706+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:41:01.693791+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:02.206567+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:41:02.211366+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:42:04.392705+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-aime-20261026-044102-574100",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:42:04.615059+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+      "status": "execution_failed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:42:04.616763+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:42:04.619618+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:42:04.828813+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:42:04.835324+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:42:05.247109+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:42:05.258717+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T20:43:38.555014+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T20:43:38.558000+00:00",
+      "log_path": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/skillopt-claude_code/experiment.log"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:43:38.567075+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:43:38.575065+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:43:38.793808+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:43:38.799416+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:44:13.583630+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:44:13.605286+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:46:25.400978+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-aime-20261026-044414-501892",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:46:25.923402+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:46:25.925372+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:46:25.927869+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:46:26.132124+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:46:26.138639+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:47:00.411727+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:47:00.422178+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:48:34.576064+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-aime-20261026-044700-913626",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:48:35.088880+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "ace",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:48:35.091367+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:48:35.095020+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:48:35.301808+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:48:35.309348+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:48:36.188992+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:48:36.195965+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:49:29.751225+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/ace-miniagent/ace-miniagent-aime-20261026-044836-566277",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:49:29.977701+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "ace",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:49:29.980431+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:49:29.983148+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:49:30.183796+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:49:30.189135+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:49:31.009759+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:49:31.020123+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:51:37.609462+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/ace-claude_code/ace-claude_code-aime-20261026-044931-385406",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:51:38.347342+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:51:38.350204+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:51:38.361809+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:51:38.617878+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:51:38.626165+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:51:39.180345+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:51:39.191762+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:52:50.041753+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/evoprompt-miniagent/evoprompt-miniagent-aime-20261026-045139-554788",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:52:50.282774+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:52:50.287565+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:52:50.292763+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:52:50.499464+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:52:50.511016+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:52:50.920300+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:52:50.929263+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:58:12.698613+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/evoprompt-claude_code/evoprompt-claude_code-aime-20261026-045251-305936",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:58:13.800195+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:58:13.805266+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:58:13.812423+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:58:14.037917+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:58:14.045953+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:58:14.495284+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:58:14.509040+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:59:58.749208+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/gepa-miniagent/gepa-miniagent-aime-20261026-045814-885853",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-candidate_dev.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:59:58.983045+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:59:58.989215+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:59:58.994029+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:59:59.202801+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:59:59.216987+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:59:59.703204+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:59:59.713023+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:02:37.299243+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/gepa-claude_code/gepa-claude_code-aime-20261026-050000-085749",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:02:37.633581+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "adas",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:02:37.638504+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:02:37.646630+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:02:37.846955+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:02:37.858281+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:02:38.856119+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:02:38.873907+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:05:00.980959+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/adas-miniagent/adas-miniagent-aime-20261026-050239-261478",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:05:01.284529+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:05:01.290038+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:05:01.295335+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:05:01.533505+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:05:01.550036+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:05:02.613501+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:05:02.627438+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:08:18.992743+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/adas-claude_code/adas-claude_code-aime-20261026-050503-007920",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:08:19.508669+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:08:19.514745+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:08:19.538479+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:08:19.916000+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:08:19.929058+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:08:20.367107+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:08:20.381027+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:11:15.707478+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-aime-20261026-050820-801341",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:11:16.044213+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:11:16.052514+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:11:16.059802+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:11:16.313964+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:11:16.337155+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:11:17.050951+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:11:17.066240+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:13:59.564187+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-aime-20261026-051117-442438",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:13:59.978027+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:13:59.984828+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:13:59.991496+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:14:00.210165+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:14:00.232374+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:14:00.641053+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:14:00.654672+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:17:24.229753+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/meta_harness-miniagent/meta_harness-miniagent-aime-20261026-051401-031695",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:17:24.529396+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:17:24.533917+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:17:24.538090+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:17:24.737266+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:17:24.751105+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:17:25.204914+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:17:25.226628+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:22:00.484289+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/meta_harness-claude_code/meta_harness-claude_code-aime-20261026-051725-594315",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "aime2025:19",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:22:00.947039+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:22:00.958080+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:22:00.966224+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:22:01.192968+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:22:01.207444+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:22:01.695350+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:22:01.720879+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:23:20.199198+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/evo_harness-miniagent/evo_harness-miniagent-aime-20261026-052202-097333",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:23:20.444106+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:23:20.452612+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:23:20.459545+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:23:20.667105+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:23:20.692017+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:23:21.123407+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:23:21.142438+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:23:56.911783+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/evo_harness-claude_code/evo_harness-claude_code-aime-20261026-052321-519823",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:23:57.175851+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:23:57.186460+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:23:57.247921+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:23:57.456440+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:23:57.484911+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:23:57.926197+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:23:57.943048+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:30:14.583459+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/rrsi-miniagent/rrsi-miniagent-aime-20261026-052358-324254",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00012-smoke.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00014-candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00019-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 26,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:30:15.114163+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:30:15.121970+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:30:15.132355+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:30:15.370488+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:30:15.392644+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:30:15.928311+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:30:15.953221+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:38:40.611180+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/rrsi-claude_code/rrsi-claude_code-aime-20261026-053016-340177",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00014-smoke.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-candidate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00021-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 28,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:38:42.019660+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:38:42.032179+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:38:42.039874+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:38:42.339022+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:38:42.373881+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:38:45.006624+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:38:45.022776+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T22:14:13.162235+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/modular_rsi-miniagent/modular_rsi-miniagent-aime-20261026-053845-400616",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00012-execution_gate.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00023-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00029-execution_gate.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00032-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00033-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00039-execution_gate.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00041-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00042-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00047-execution_gate.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00050-execution_gate.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00053-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00018-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00019-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00025-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00026-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00027-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00035-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00036-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00037-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00044-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00045-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 64,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T22:14:14.795295+00:00"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T22:14:14.806673+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T22:14:14.817124+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T22:14:15.102993+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T22:14:15.120511+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T22:14:15.945697+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-aime2025-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime2025-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T22:14:15.958325+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T22:20:47.332459+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime2025-public-20261026/batch-runs/modular_rsi-claude_code/modular_rsi-claude_code-aime-20261026-061416-338338",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-execution_gate.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00018-contrast.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "aime2026:17",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-test.json",
+            "task_id": "aime2025:0",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 32,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T22:20:47.764197+00:00"
+    }
+  ]
+}

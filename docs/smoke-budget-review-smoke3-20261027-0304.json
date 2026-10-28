@@ -1,0 +1,102 @@
+{
+  "utc": "2026-10-26T19:08:07.548830+00:00",
+  "new_model_calls_for_review": 0,
+  "rows": [
+    {
+      "id": "widesearch-opro-cc",
+      "status": "needs_attention",
+      "errors": [
+        {
+          "file": "00003-candidate.json",
+          "error": "WideSearch judge failed (_JudgeError)",
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "error": "WideSearch judge failed (_JudgeError)",
+          "usage_recorded": true
+        },
+        {
+          "file": "00005-test.json",
+          "error": "WideSearch judge failed (_JudgeError)",
+          "usage_recorded": true
+        }
+      ],
+      "judge": [
+        {
+          "file": "00003-candidate.json",
+          "status": "error",
+          "error": "WideSearch judge request failed",
+          "responses": [
+            {
+              "finish_reasons": [
+                "length"
+              ],
+              "usage": {
+                "prompt_tokens": 2092,
+                "completion_tokens": 4096,
+                "total_tokens": 6188
+              }
+            }
+          ]
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "error",
+          "error": "WideSearch judge request failed",
+          "responses": [
+            {
+              "finish_reasons": [
+                "stop"
+              ],
+              "usage": {
+                "prompt_tokens": 421,
+                "completion_tokens": 325,
+                "total_tokens": 746
+              }
+            },
+            {
+              "finish_reasons": [
+                "length"
+              ],
+              "usage": {
+                "prompt_tokens": 1420,
+                "completion_tokens": 4096,
+                "total_tokens": 5516
+              }
+            }
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "status": "error",
+          "error": "WideSearch judge request failed",
+          "responses": [
+            {
+              "finish_reasons": [
+                "length"
+              ],
+              "usage": {
+                "prompt_tokens": 1185,
+                "completion_tokens": 4096,
+                "total_tokens": 5281
+              }
+            }
+          ]
+        }
+      ],
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ]
+    }
+  ]
+}

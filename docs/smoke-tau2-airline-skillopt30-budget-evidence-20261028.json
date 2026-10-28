@@ -1,0 +1,34 @@
+{
+  "prior_control": "/root/.cache/tau2-airline-rest30-mini-0335",
+  "stages": [
+    {
+      "file": "00001-baseline.json",
+      "termination_reason": "TerminationReason.USER_STOP",
+      "usage_recorded": true,
+      "business_checks_present": true,
+      "native_max_steps": 30
+    },
+    {
+      "file": "00002-train.json",
+      "termination_reason": "TerminationReason.USER_STOP",
+      "usage_recorded": true,
+      "business_checks_present": true,
+      "native_max_steps": 30
+    },
+    {
+      "file": "00004-candidate_dev.json",
+      "termination_reason": "TerminationReason.USER_STOP",
+      "usage_recorded": true,
+      "business_checks_present": true,
+      "native_max_steps": 30
+    },
+    {
+      "file": "00006-test.json",
+      "termination_reason": "TerminationReason.MAX_STEPS",
+      "usage_recorded": true,
+      "business_checks_present": false,
+      "native_max_steps": 30
+    }
+  ],
+  "retained_old_8_step_evidence": "/root/.cache/tau2-airline-rest30-mini-0335/native-budget-evidence.json"
+}

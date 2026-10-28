@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-25T21:33:52.395623+00:00",
+  "capability": "MuSiQue independent native train/dev evolution; full-pool ID/raw-question checksum check shared with HotpotQA in QA base",
+  "scope": "Only benchmark data loading and common QA source validation, original context/support scorers and algorithm gates unchanged",
+  "public_example": "examples/modular_rsi_musique.yaml",
+  "tests": {
+    "red_missing_capability": 7,
+    "passed_after_implementation": 78,
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "fresh_wheel_install_cli_help": "passed",
+    "installed_wheel_musique_context_support_grading_and_overlap_guard": "passed",
+    "installed_wheel_hotpot_context_fullwiki_regression": "passed"
+  },
+  "wheel_sha256": "957246bc40c68caa1e1e9895a63a6bbc826763afd54946668336a07c19e7bb0d",
+  "module_hashes": {
+    "flashrsi\\benchmarks\\_qa.py": "0d8e8f735555747cf52f387ae687dadc4219651c41507e883d61c55670e59e52",
+    "flashrsi\\benchmarks\\hotpotqa\\__init__.py": "79041673ac8a4fff5e02272543a859fef1c2dc78f5195faa0eb0c7f205f52b96",
+    "flashrsi\\benchmarks\\musique\\__init__.py": "718876fa940a5b6e84e8dfbd1aaddd47bb97e2e2e43cad924abbfa0275394327"
+  },
+  "new_root": "/root/flashrsi-musique-evolution-public-20261026",
+  "source_files": 269,
+  "real_native_data": "Both public --plan/--check-only passed Ready1/1/1 with complete native train19938 and dev2417, no ID or normalized raw-question overlap",
+  "real_model_smoke": "queued after AIME2025 batch and its tested SkillOpt repair1",
+  "new_model_calls_for_tests": 0,
+  "active_frozen_sources_modified": false,
+  "native_report": "validation-musique-independent-native-20261026.json",
+  "native_context_support_reference_grading": "3/3 per mode passed and dev/test membership unchanged; zero model reference replay only"
+}

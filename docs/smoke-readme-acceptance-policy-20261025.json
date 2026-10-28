@@ -1,0 +1,50 @@
+{
+  "updated_on": "2026-10-25",
+  "purpose": "First-time user smoke through documented public README commands",
+  "automatic_dispatch": "On every hourly check, assign an authorized next task to each verified idle host; avoid duplicate active jobs",
+  "scope": [
+    "searchqa",
+    "hotpotqa",
+    "terminal_bench",
+    "appworld",
+    "nq",
+    "twowiki_multihopqa",
+    "swe_bench",
+    "bfcl",
+    "officeqa_pro",
+    "deepsearchqa"
+  ],
+  "public_entry": "python scripts/run_experiment.py",
+  "steps": [
+    "Freeze clean source identity and record system prerequisites",
+    "Generate or copy a committed public example configuration; fill independent model/API roles and declared tiny budget",
+    "Run public --plan and --check-only; record preparation separately",
+    "Run the public experiment command without private adaptation",
+    "Verify saved result, native target/Worker trajectories and benchmark scoring; preserve failures and usage"
+  ],
+  "allowed_orchestration": [
+    "Dispatch unchanged public commands",
+    "Wait and inspect actual processes",
+    "Collect original evidence and merge reports"
+  ],
+  "forbidden_acceptance_dependencies": [
+    "Changing algorithm/gates/tasks/grading or model replies to obtain a pass",
+    "Private product patches required because the public native integration cannot run in a standard infrastructure-complete environment",
+    "Claiming a custom configuration or cached/local data test proves a different default/automatic-download mode"
+  ],
+  "infrastructure": "Dependency installation, official image/data caches, VPN/proxy and platform Docker connectivity may be prepared externally and documented. Do not modify product algorithms, harness semantics, tasks or graders to compensate for infrastructure.",
+  "existing_evidence": "Retain valid prior integration passes. Cold-cache first-user experience is supplementary coverage, not a prerequisite for retaining all earlier passed cells.",
+  "no_gain_required": true,
+  "legal_noop": "A valid no-update/tie/skip outcome can pass the runnable-flow criterion; unexercised branches remain separately reported",
+  "required_evidence": [
+    "source identity",
+    "public configuration source and redacted saved config",
+    "exact commands",
+    "dependency/data preparation and cold/warm cache distinction",
+    "native result/trajectories/scoring",
+    "limitations or blockers"
+  ],
+  "product_failures": "Record original public-path failure and minimal reproduction; do not add silent smoke-specific adaptation",
+  "inflight_jobs": "Preserve current paid executions and evidence; restore remaining original unique queues after their ownership is released. No duplicate paid runs.",
+  "user_clarification": "Original requirement: the repository must run through public configuration and the native integration in an infrastructure-complete environment. Prior valid integration smoke remains valid; environment preparation is acceptable and does not require wholesale revalidation."
+}

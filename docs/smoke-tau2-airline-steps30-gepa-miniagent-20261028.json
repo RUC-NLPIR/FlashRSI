@@ -1,0 +1,32 @@
+{
+  "status": "pending",
+  "updated_at": "2026-10-27T19:35:02.565664+00:00",
+  "items": [
+    {
+      "id": "airline30-gepa-miniagent",
+      "root": "/root/flashrsi-tau2-airline-public-20261026",
+      "config": "/root/.cache/tau2-airline-rest30-mini-0335/gepa-miniagent.local.yaml",
+      "health_config": "/root/.cache/tau2-airline-rest30-mini-0335/gepa-miniagent.local.yaml",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "status": "pending",
+      "report": "smoke-tau2-airline-steps30-gepa-miniagent-20261028.json",
+      "proxy": "http://127.0.0.1:33616",
+      "environment": {
+        "HF_HUB_OFFLINE": "1"
+      },
+      "audit_source": "/root/flashrsi-tau2-airline-public-20261026/public-bench24-20261026/audit.py",
+      "budget_changes": [
+        {
+          "path": "agent.max_steps",
+          "before": 8,
+          "after": 30
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "pending": 1
+  },
+  "budget_authorization": "User authorized native tau2 max_steps8 to30 after observed exhaustion; original111,Worker,LLM,timeouts and scorer unchanged; one independent attempt per cell."
+}

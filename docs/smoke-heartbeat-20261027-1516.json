@@ -1,0 +1,6 @@
+{
+  "observed_at": "2026-10-27T15:16:00+08:00",
+  "note": "2026-10-27 15:16实查：OfficeACE1445已needs_attention，2Targetfinished2validation80轮error、2Workerfinished，usage齐/source未变，不加该格预算。无新增通过/无新增Benchmark，总账441pass113partial22fail24前置24待不变。smoke2唯一OfficeEvoPrompt1515 controller21043/public21050真实experiment paid存在；唯一OfficeGEPA1515 followup21044等待、未paid，原40轮错误均已核，仅Target80/2400，111其他角色评分不改。原机SSH31447连接失败，状态不可新核，不称无模型。smoke3无queueprocess，Wide1418中断usage未知仍保留；新零模型process-survival-1516后台15秒存活完成（pid121），pid namespace4026538823/boot68152de2-51ee-4fc6-9c52-cd352fd55869，说明当前短时后台存活正常，不足证明旧中断原因或可重试原paid。未再派Wide1418，未改产品未清理。",
+  "new_passes": 0,
+  "new_benchmarks": []
+}

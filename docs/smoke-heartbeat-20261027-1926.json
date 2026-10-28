@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-27T19:26:00+08:00",
+  "counts": {
+    "pass": 443,
+    "partial": 111,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "new_pass": 0,
+  "new_benchmark": 0,
+  "smoke2": {
+    "evoprompt160": "needs_attention: baseline ECONNRESET, other4Target3Worker finished, usage complete",
+    "gepa1820": "experiment public32140",
+    "adas1926": "followup32365 pending unpaid"
+  },
+  "smoke3": {
+    "proxy33616": "restored; free auth200",
+    "deepsearch_rrsi_worker120_1924": "experiment public895, paid",
+    "worker_budget": "120 turns/1200sec",
+    "target_budget": "unchanged80/2400"
+  },
+  "original": "not refreshed; previous SSH refused"
+}

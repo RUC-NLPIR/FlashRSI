@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-27T21:13:22.930952+00:00",
+  "user_authorized_smoke_raw_cleanup": true,
+  "free_before": 934031360,
+  "items": [
+    {
+      "path": "/root/flashrsi-widesearch-evidence-public-20261026/budget-runs-20261027/opro-cc-judge8192",
+      "bytes": 56110177,
+      "report": "/root/flashrsi-widesearch-evidence-public-20261026/docs/smoke-widesearch-judge-budget-retry-20261027.json",
+      "status": "needs_attention",
+      "native_audit": true,
+      "usage_complete": true,
+      "process_references": [],
+      "future_references": [],
+      "exact_resolve": true
+    },
+    {
+      "path": "/root/flashrsi-widesearch-evidence-public-20261026/budget-runs-20261027/opro-cc-80",
+      "bytes": 50874876,
+      "report": "/root/flashrsi-widesearch-evidence-public-20261026/docs/smoke-widesearch-opro-cc-budget-retry-20261027.json",
+      "status": "needs_attention",
+      "native_audit": true,
+      "usage_complete": true,
+      "process_references": [],
+      "future_references": [],
+      "exact_resolve": true
+    },
+    {
+      "path": "/root/flashrsi-deepsearchqa-public-20261025/budget-runs-20261027/deepsearch-evoprompt-budget-0705",
+      "bytes": 38640882,
+      "report": "/root/flashrsi-deepsearchqa-public-20261025/docs/smoke-deepsearch-evoprompt-budget-retry-20261027.json",
+      "status": "needs_attention",
+      "native_audit": true,
+      "usage_complete": true,
+      "process_references": [],
+      "future_references": [],
+      "exact_resolve": true
+    },
+    {
+      "path": "/root/flashrsi-deepsearchqa-public-20261025/budget-runs-20261027/deepsearch-adas-budget-0952",
+      "bytes": 25615532,
+      "report": "/root/flashrsi-deepsearchqa-public-20261025/docs/smoke-deepsearch-adas-budget-retry-20261027.json",
+      "status": "needs_attention",
+      "native_audit": true,
+      "usage_complete": true,
+      "process_references": [],
+      "future_references": [],
+      "exact_resolve": true
+    }
+  ],
+  "source_config_paid_data_preserved": true,
+  "deleted": true,
+  "free_after": 1105477632,
+  "released_bytes": 171241467
+}

@@ -1,0 +1,37 @@
+{
+  "native_fresh_container_proof": {
+    "status": "passed",
+    "updated_at": "2026-10-26T09:24:53.910477+00:00",
+    "new_model_calls": 0,
+    "native_setup_sha256": "9e66f96945849a7ca7d00107eb59fa6373d00ce4db77219278a04fc3d0c3adaa",
+    "items": [
+      {
+        "role": "miniagent",
+        "status": "passed",
+        "native_setup": true,
+        "pip_check": true,
+        "python_version": "Python 3.12.13",
+        "container": "flashrsi-swe-5fb4f281691d48e0b70db6e3a89b5254",
+        "stopped_preserved": true,
+        "no_task_repository_or_model_run": true
+      },
+      {
+        "role": "claude_code",
+        "status": "passed",
+        "native_setup": true,
+        "pip_check": true,
+        "python_version": "Python 3.12.13",
+        "container": "flashrsi-swe-a25f37caa66a4d669adf2a43337942af",
+        "stopped_preserved": true,
+        "no_task_repository_or_model_run": true
+      }
+    ]
+  },
+  "previous_free_attempts_preserved": true,
+  "initial_runtime_failure": "Astral direct SSL/reset; old private upstream PyPI CONNECT403",
+  "repair": "Machine-side private Docker proxy to existing loopback33618 plus official uv0.11.4 cache copied only to new SWE task containers; native setup script unchanged",
+  "initial_paid_attempt_preserved": "/root/flashrsi-swe-lite-evolution-public-20261026/independent-swe2-20261026",
+  "recovery_paid_attempts_max": 1,
+  "task_images_and_source_unchanged": true,
+  "no_model_in_free_proof": true
+}

@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-26",
+  "benchmark": "workbench",
+  "upstream": "https://github.com/olly-styles/WorkBench",
+  "revision": "49c7dfd00c03d384ec59ea57374f50b766aa5613",
+  "ground_truth_version": "v2",
+  "native_tasks_loaded": 690,
+  "interface": "public Benchmark + runner binding + python scripts/run_experiment.py",
+  "native_execution": "isolated task process, original tools, all native tool descriptions, native fixed clock",
+  "metrics": [
+    "correct",
+    "exact_match",
+    "unwanted_side_effects"
+  ],
+  "tests": {
+    "command": "uv run --extra workbench pytest tests/test_workbench.py tests/test_generic_launcher.py tests/test_searchqa_launcher.py tests/test_algorithm.py",
+    "environment": "FLASHRSI_WORKBENCH_UPSTREAM points to official fixed-commit archive",
+    "passed": 44,
+    "skipped": 1,
+    "native_workbench_tests_skipped": 0,
+    "coverage": [
+      "explicit experimental splits, reference hidden",
+      "host verifier provenance",
+      "two independent native database processes",
+      "actual native read/write tool calls",
+      "correct outcome and unwanted side effects",
+      "authenticated task bridge, no solver-accessible grader",
+      "credential/token redaction and usage preservation",
+      "all 690 native rows loaded",
+      "public dependency registry and launcher regressions"
+    ]
+  },
+  "lint": {
+    "ruff_check": "passed (flashrsi + tests/test_workbench.py)",
+    "affected_files_format_check": "passed"
+  },
+  "public_plan": {
+    "status": "passed",
+    "extras": [
+      "llm",
+      "miniagent",
+      "workbench"
+    ],
+    "model_calls": 0
+  },
+  "wheel": {
+    "sha256": "741055ba60e469fdf6ddc677fda576998a0d50c3072d445b0229a642d6d22cd5",
+    "cli_help": "passed",
+    "cli_prepare_only": "passed",
+    "native_tool_and_scorer_from_installed_package": "passed",
+    "installed_module": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\.cache\\workbench-wheel-env\\Lib\\site-packages\\flashrsi\\__init__.py",
+    "source_content_identity_verified": [
+      "flashrsi/benchmarks/workbench/__init__.py",
+      "flashrsi/integrations/workbench.py",
+      "flashrsi/integrations/_workbench_process.py",
+      "flashrsi/integrations/_workbench_client.py",
+      "flashrsi/runner.py",
+      "flashrsi/_launch.py",
+      "flashrsi/benchmarks/__init__.py"
+    ],
+    "outside_source_import": true,
+    "model_calls": 0
+  },
+  "data_acquisition": {
+    "official_fixed_commit_archive": "downloaded and native data exercised",
+    "public_git_cache_attempts": "blocked locally by Windows cache creation/rename PermissionError (WinError 5)",
+    "product_network_fallback_added": false,
+    "default_automatic_download_end_to_end": "not established on this host"
+  },
+  "real_algorithm_target_smoke": {
+    "status": "pending",
+    "model_calls": 0,
+    "existing_remote_queues_modified": false
+  },
+  "limits": [
+    "No real model combo passes are claimed",
+    "No independent ModularRSI evolution source supplied",
+    "Local harness tool workspace does not provide adversarial OS isolation",
+    "Native analytics create_plot records simulated paths; no real PNG is generated",
+    "Explicit local data is recorded separately from pinned-upstream automatic download"
+  ],
+  "remote_public_entry_real_smoke": {
+    "report": "smoke-workbench24-public-original-20261026.json",
+    "status": "running",
+    "counts": {
+      "flow_passed": 16,
+      "running": 1,
+      "pending": 7
+    },
+    "source_file_count": 263,
+    "native_default_download": "passed on original Linux developer host",
+    "no_manual_data_path_or_harness_adapter": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "new_model_calls": 0,
+  "heldout_membership_unchanged": true,
+  "tasks": {
+    "train": [
+      "aime2025:10"
+    ],
+    "dev": [
+      "aime2026:22"
+    ],
+    "test": [
+      "aime2026:6"
+    ]
+  },
+  "evolution_source": {
+    "source": "math-ai/aime25",
+    "revision": "563bb8404243c5f09de6ec262f2db674fe5bce9b",
+    "filename": "test.jsonl",
+    "year": 2025,
+    "splits": [
+      "test"
+    ],
+    "aggregation": "sample_mean",
+    "answer_protocol": "final_integer_v1",
+    "data_license": "Apache-2.0 (dataset card)",
+    "pool_checksum": "a82c95ef16949fe97ecd9245a098a397dc55b3f99bf72c6841ed8eb3b955c631",
+    "native_split": "test",
+    "experiment_role": "external_evolution"
+  },
+  "raw_files": {
+    "2025": {
+      "path": "/root/.cache/FlashRSI/huggingface/hub/datasets--math-ai--aime25/snapshots/563bb8404243c5f09de6ec262f2db674fe5bce9b/test.jsonl",
+      "sha256": "b4e273c02d3e7fe1b74b59eae768fc8230bfb0f79539890cb56f4361caac0331",
+      "bytes": 15813
+    },
+    "2026": {
+      "path": "/root/.cache/FlashRSI/huggingface/hub/datasets--math-ai--aime26/snapshots/79037aebdb6580008fb960d17cb21fd3099083e3/aime2026.jsonl",
+      "sha256": "52822957957a3f577d1e9706c36a66a8108a3f99b6aff424cfb72dff0094a9ee",
+      "bytes": 13101
+    }
+  }
+}

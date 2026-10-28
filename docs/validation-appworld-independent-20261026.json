@@ -1,0 +1,37 @@
+{
+  "updated_at": "2026-10-26T11:47:36.416296+00:00",
+  "status": "public_loader_and_wheel_validated_real_smoke_in_progress",
+  "product_changes": [
+    "flashrsi/benchmarks/appworld/__init__.py"
+  ],
+  "public_options": [
+    "evolution_test_set",
+    "evolution_limit"
+  ],
+  "semantics": "Only the unselected published native test set may supply external evolution; whole downstream and external task ID/scenario/raw instruction guard before selection. Native Task env/groundtruth/checksum/scorer and main heldout retained.",
+  "tests": {
+    "new_initial_failures": 10,
+    "related_passed": 66,
+    "linux_installed_wheel_passed": 10,
+    "ruff": "passed",
+    "format": "passed"
+  },
+  "validation_history": [
+    "First related run: 65 passed, one Windows long-path FileNotFoundError; all 66 passed with extended workspace path.",
+    "Linux secondary wheel environment initially saw an existing same-version package through its dependency pth. Failure log retained; ignore-installed installation plus exact site-packages byte verification then 10 passed.",
+    "Original-host uv executable was unavailable before installation; isolated venv wheel installation with explicit warmed controller dependency pth succeeded. Not a cold dependency test."
+  ],
+  "wheel_sha256": "c72af71ac5fed1027799a7182178a2b6881a1333434556834aa8bfc254b05ac0",
+  "module_sha256": "614a1384eaf1293ea6a4adcbd3499f61e594a4f607602327e745737bcbc8cfe3",
+  "source_file_count": 286,
+  "source_archive_sha256": "3c112a3d560a4c7298d3fe1d5b254fb82a597e6750d0c063c9ba8f7f1ff33046",
+  "fresh_wheel_checks": [
+    "isolated Windows installation/module identity/CLI help/prepare-only",
+    "isolated Linux installation/module identity/CLI help/complete native pool/heldout identity",
+    "secondary Linux installed-wheel 10 regressions"
+  ],
+  "native_report": "validation-appworld-independent-native-20261026.json",
+  "infrastructure": "Original engine ID and host private IP changed relative to historical records; old images absent and old private services unavailable. Task did not reset engine. Restored existing cached base and unchanged AppWorld Dockerfile; one bounded build recovery only after failed Debian transfers independently succeeded. Both fresh native harness setups/pip checks and public check-only passed before paid dispatch.",
+  "new_model_calls_by_validation": 0,
+  "real_smoke_report": "smoke-appworld-modular-independent-original-20261026.json"
+}

@@ -1,0 +1,332 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-28T04:42:29.652872+00:00",
+  "items": [
+    {
+      "id": "workbench-modular-miniagent-same-source",
+      "algorithm": "ModularRSI",
+      "target": "miniagent",
+      "benchmark": "workbench",
+      "status": "flow_passed",
+      "root": "/root/flashrsi-workbench-modular-same-source-public-20261028",
+      "config": "/root/.cache/workbench-modular-same-source-1150/miniagent.local.yaml",
+      "health_config": "/root/.cache/workbench-modular-same-source-1150/miniagent.local.yaml",
+      "proxy": "http://127.0.0.1:33618",
+      "audit_source": "/root/.cache/workbench-modular-same-source-1150/audit.py",
+      "report": "smoke-workbench-modular-miniagent-same-source-20261028.json",
+      "further_automatic_budget_escalation": false,
+      "audit_python": "/root/.cache/FlashRSI/envs/008722bd2789-baf16df02a61-py312/bin/python",
+      "phase": "experiment",
+      "updated_at": "2026-10-28T04:06:15.629171+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/.cache/workbench-modular-same-source-1150/experiments-miniagent/modular_rsi-miniagent-workbench-20261028-120616-006623",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00012-execution_gate.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00015-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00016-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 0.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00025-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00026-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00029-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 0.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00030-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00036-execution_gate.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00041-execution_gate.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00043-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00044-contrast.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 0.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 1.0
+            }
+          },
+          {
+            "file": "00048-execution_gate.json",
+            "task_id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 0.0,
+              "unwanted_side_effects": 0.0
+            }
+          },
+          {
+            "file": "00051-test.json",
+            "task_id": "3da9818a467c62727cda639ee1ca2b0a73cf00b2ca6da09cb0d7b9487d21522b",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "correct": 1.0,
+              "exact_match": 1.0,
+              "unwanted_side_effects": 0.0
+            }
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00018-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00019-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00028-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00032-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00033-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00034-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00039-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00046-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "problems": [],
+        "source_file_count": 230,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 62,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "source_policy": "ordinary_same_source_train_dev_test",
+        "benchmark_metadata": {
+          "source": "https://github.com/olly-styles/WorkBench",
+          "revision": "49c7dfd00c03d384ec59ea57374f50b766aa5613",
+          "ground_truth_version": "v2",
+          "execution": "native-harness-local-tools",
+          "scoring": "native-database-state",
+          "native_splits": [
+            "unassigned"
+          ],
+          "data_path": "/root/.cache/FlashRSI/huggingface/flashrsi/upstream/WorkBench/49c7dfd00c03d384ec59ea57374f50b766aa5613/data",
+          "data_checksum": "f95b6b2a8a108866e8dd3b87ccbe29e12250ae84388bc3bd9f147a84c803215e",
+          "data_mode": "pinned-upstream",
+          "domains": [
+            "analytics",
+            "calendar",
+            "customer_relationship_manager",
+            "email",
+            "multi_domain",
+            "project_management"
+          ]
+        }
+      },
+      "ended_at": "2026-10-28T04:32:14.887311+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User authorized same-source ModularRSI; originalWorkBench native690/seed42/111/heldout andv2database-state scoring. Mini8/600 CC40/1200 separateClaudeWorker60/600, one new configuration each; no automatic escalation."
+}

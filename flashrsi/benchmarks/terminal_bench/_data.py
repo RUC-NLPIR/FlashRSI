@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from flashrsi.benchmarks._archive import _download_archive, _has_only_plain_files
+from flashrsi.benchmarks._git import _download_git
 
 _SCHEMA = "flashrsi.terminal_bench.v1"
 _ARCHIVE = "terminal_bench/tasks.tar.gz"
@@ -15,6 +16,17 @@ _LABEL = "Terminal-Bench"
 
 def _download_tasks(source: Mapping[str, Any]) -> tuple[tuple[Path, str], ...]:
     """Return each cached task directory with its expected Harbor checksum."""
+    if source["source"] == source["upstream"]["git_url"]:
+        from harbor.models.task.task import Task as HarborTask
+
+        task_path = source["upstream"].get("path", ".")
+        root = _download_git(source["source"], source["revision"], [task_path])
+        root /= task_path
+        return tuple(
+            (directory, HarborTask(directory).checksum)
+            for directory in sorted(root.iterdir())
+            if (directory / "task.toml").is_file()
+        )
     extracted, tasks = _download_archive(
         source,
         schema=_SCHEMA,

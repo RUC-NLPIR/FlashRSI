@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-26T00:31:18.885889+00:00",
+  "change": "Preserve original converter reply and actual SDK usage on invalid TravelPlanner conversion; retain conversion usage on scorer failure; redact credentials and reject forged host events",
+  "files": [
+    "flashrsi/integrations/_travelplanner_postprocess.py",
+    "flashrsi/integrations/travelplanner.py",
+    "tests/test_travelplanner_conversion_evidence.py"
+  ],
+  "validation": {
+    "targeted_tests_passed": 7,
+    "ruff_check": "passed",
+    "ruff_format": "passed",
+    "fresh_wheel_installed_identity": "passed for both affected modules",
+    "installed_cli_help": "passed",
+    "installed_prepare_only": "passed",
+    "model_calls": 0
+  },
+  "wheel_sha256": "bd8db912eb651076b747c823564b23900563def81a5a4b7869bcc8f956353955",
+  "unchanged": [
+    "native prompt",
+    "native fenced parser and plan validation",
+    "native scoring",
+    "algorithm gates and budgets"
+  ],
+  "limitations": [
+    "No deployment into active frozen TravelPlanner queue",
+    "Old missing converter responses and usage cannot be reconstructed",
+    "No paid model smoke on this new wheel"
+  ],
+  "test_log": ".cache/travel-evidence-final2-0732.log"
+}

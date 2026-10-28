@@ -11,6 +11,7 @@ from flashrsi.algorithms.skillopt._patch import (
     _apply_guidance,
     _field,
     _Patch,
+    _PatchError,
     _ranked,
 )
 from flashrsi.core import Algorithm, Snapshot
@@ -45,6 +46,7 @@ class SkillOpt(Algorithm):
         "use_slow_update": True,
         "use_meta_skill": True,
         "slow_update_samples": 20,
+        "max_evidence_chars": 30000,
     }
     _ranges = {
         "num_epochs": (int, 1),
@@ -59,6 +61,7 @@ class SkillOpt(Algorithm):
         "use_slow_update": bool,
         "use_meta_skill": bool,
         "slow_update_samples": (int, 1),
+        "max_evidence_chars": (int, 1),
     }
 
     async def evolve(self) -> Snapshot:
@@ -92,16 +95,32 @@ class SkillOpt(Algorithm):
     async def _fast_update(self, current, batch, epoch, step):
         training = await self._evaluate(current, batch, label="train")
         files = self._read_text(current)
-        proposals = await self._reflect(current, files, training)
-        patch = await self._consolidate(files, proposals)
         details = {"epoch": epoch, "step": step}
+        try:
+            proposals = await self._reflect(current, files, training)
+            patch = await self._consolidate(files, proposals)
+            updated = patch.apply(files, self.config.edit_budget)
+        except _PatchError as error:
+            # A malformed proposal rejects this update, not the incumbent.
+            # Worker execution failures still propagate with their native trace.
+            self._record(
+                "decision",
+                {
+                    **details,
+                    "kind": "fast",
+                    "reason": "invalid_patch",
+                    "error": str(error),
+                    "accepted": False,
+                    "parent_id": current.id,
+                },
+            )
+            return current
         if not patch.edits:
             self._record(
                 "decision",
                 {**details, "kind": "fast", "reason": "empty_patch", "accepted": False},
             )
             return current
-        updated = patch.apply(files, self.config.edit_budget)
         candidate = self._candidate(current, updated)
         return await self._select(
             current, candidate, "fast", {**details, "patch": patch.as_mapping()}
@@ -130,7 +149,7 @@ class SkillOpt(Algorithm):
                     templates[source].format(
                         files=_dump(files),
                         rules=_dump(list(snapshot.component_rules["skill"])),
-                        evidence=_dump(
+                        evidence=self._evidence(
                             [self._trajectory_evidence(item) for item in group]
                         ),
                         rejected=_dump(self._rejected),
@@ -201,7 +220,7 @@ class SkillOpt(Algorithm):
         fields = {
             "previous": _dump(self._read_text(previous)),
             "current": _dump(self._read_text(current)),
-            "comparison": _dump(comparison),
+            "comparison": self._evidence(comparison),
         }
         if self.config.use_meta_skill:
             self._meta_skill = _field(

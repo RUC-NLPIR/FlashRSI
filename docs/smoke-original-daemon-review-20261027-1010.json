@@ -1,0 +1,17 @@
+{
+  "free": 1742409728,
+  "engine": {
+    "returncode": 0,
+    "output": [
+      "c70c50d1-b854-45a5-a1ff-ee417de50a92"
+    ]
+  },
+  "images": {
+    "returncode": 0,
+    "output": []
+  },
+  "containers": {
+    "returncode": 0,
+    "output": []
+  }
+}

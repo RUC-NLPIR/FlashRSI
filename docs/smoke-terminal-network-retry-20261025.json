@@ -1,0 +1,39 @@
+{
+  "status": "completed",
+  "updated_at": "2026-10-25T08:06:57.690079+00:00",
+  "benchmark": "terminal_bench",
+  "host": "original",
+  "plan": [
+    {
+      "benchmark": "terminal_bench",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "max_wall_seconds": 10800,
+      "session": "smoke-tn25-modular_rsi-claude_code-02",
+      "status": "environment_blocked",
+      "previous_session": "smoke-tr25-modular_rsi-claude_code-01",
+      "reason": "Bounded retest after repairing10-second infra relay timeout; same tasks/model/budgets and approved3 modules.",
+      "started_utc": "2026-10-25T08:05:02.970452+00:00",
+      "ended_utc": "2026-10-25T08:15:27.601463+00:00"
+    }
+  ],
+  "attempts": [
+    {
+      "session": "smoke-tn25-modular_rsi-claude_code-02",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "benchmark": "terminal_bench",
+      "status": "environment_blocked",
+      "error_record": {
+        "status": "error",
+        "error": "claude_code failed: API Error: Connection dropped (ECONNRESET)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+      },
+      "strict_audit_error_original": "[Errno 2] No such file or directory: '/root/flashrsi-new20-20261024/smoke-tn25-modular_rsi-claude_code-02/runs/modular_rsi-claude_code-terminal_bench-20261025-160504-261487/result.json'",
+      "infrastructure_evidence": "Private relay connected to absent SSH loopback forward; forward restored and authenticated official model-list endpoint now200",
+      "counts_as_real_smoke_pass": false
+    }
+  ],
+  "reason": "Bounded retest after repairing10-second infra relay timeout; same tasks/model/budgets and approved3 modules.",
+  "source_changes": [],
+  "error": "[Errno 2] No such file or directory: '/root/flashrsi-new20-20261024/smoke-tn25-modular_rsi-claude_code-02/runs/modular_rsi-claude_code-terminal_bench-20261025-160504-261487/result.json'"
+}

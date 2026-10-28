@@ -1,0 +1,306 @@
+{
+  "checked_at": "2026-10-23T10:47:20.174009+00:00",
+  "combination": {
+    "algorithm": "evo_harness",
+    "target": "claude_code",
+    "worker": "miniagent",
+    "benchmark": "hotpotqa",
+    "model": "deepseek-flash"
+  },
+  "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/smoke-20261023-evo_harness-claude/runs/evo_harness-claude_code-hotpotqa-20261023-184504-116925",
+  "status": "flow_passed_with_skill_content_limitation",
+  "budget": {
+    "batch_size": 3,
+    "max_steps": 1
+  },
+  "worker_max_turns": 20,
+  "result": {
+    "status": "finished",
+    "snapshot_id": "d2c35160144e61369f9493943b68bfb73dd515b7cd564ffa30273afb9a0a8485",
+    "primary_metric": "exact_match",
+    "test_score": 0.0,
+    "test_tasks": 1,
+    "test_metrics": {
+      "exact_match": 0.0,
+      "f1": 0.8
+    },
+    "benchmark": {
+      "source": "local",
+      "data_path": {
+        "dev": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/hotpotqa/dev.json",
+        "test": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/hotpotqa/test.json",
+        "train": "/root/.cache/FlashRSI/data/evoharness-20261023/train-rows-000004-000006.json"
+      },
+      "mode": "context",
+      "scoring": "official",
+      "scorer_revision": "3635853403a8735609ee997664e1528f4480762a"
+    }
+  },
+  "evaluations": [
+    {
+      "file": "00001-train.json",
+      "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+      "statuses": [
+        "finished",
+        "finished",
+        "finished"
+      ],
+      "metrics": [
+        {
+          "exact_match": 0.0,
+          "f1": 0.5
+        },
+        {
+          "exact_match": 1.0,
+          "f1": 1.0
+        },
+        {
+          "exact_match": 0.0,
+          "f1": 0
+        }
+      ],
+      "errors": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "file": "00009-test.json",
+      "snapshot_id": "d2c35160144e61369f9493943b68bfb73dd515b7cd564ffa30273afb9a0a8485",
+      "statuses": [
+        "finished"
+      ],
+      "metrics": [
+        {
+          "exact_match": 0.0,
+          "f1": 0.8
+        }
+      ],
+      "errors": [
+        null
+      ]
+    }
+  ],
+  "workers": [
+    {
+      "file": "00002-worker.json",
+      "status": "finished",
+      "turns": 1,
+      "error": null,
+      "tool_calls": 0,
+      "history_tool_calls": 0,
+      "output_excerpt": "{\"lesson\": \"When a short-answer bridge question asks for the alias of an entity identified by a property, verify the property against the target entity's context first (e.g., 'slightly soluble in alcohol' for cadmium chloride), then answer with the canonical alias form that matches the source passage's own phrasing rather than an expanded or parenthetical variant; keep the final output to a single minimal string.\", \"trigger\": \"Multi-hop short-answer questions requiring an alias/common name, graded by exact match or F1 against a single-word gold answer, where the supporting context offers several synonymous names (e.g., 'Ethanol, also called alcohol, ethyl alcohol...').\", \"evidence\": \"The context states cadmium chloride is 'slightly soluble in alcohol' and describes ethanol as 'also called alcohol, ethyl alcohol'. The solver reasoned to 'ethyl alcohol' and returned 'Ethyl alcohol (alcohol)' — combining two names plus a parenthetical — while the gold answer was 'alcohol'; exact_match was 0.0 and F1 0.5, showing the extra alias and formatting caused the mismatch despite correct entity identification.\", \"scope_hint\": \"Short-answer Wikipedia multi-hop QA with exact-match/F1 grading, especially bridge-type questions where the correct entity has multiple common names; not applicable to free-form or expository answer formats.\"}"
+    },
+    {
+      "file": "00003-worker.json",
+      "status": "finished",
+      "turns": 1,
+      "error": null,
+      "tool_calls": 0,
+      "history_tool_calls": 0,
+      "output_excerpt": "d in that entity and satisfying the final constraint ('contains only one species'), and answer with the single requested short form. Do not skip the intermediate resolution or answer from the first superficially matching item.\", \"trigger\": \"Short-answer multi-hop Wikipedia QA where the question refers to an entity by a superlative/ordinal description rather than by name, and several candidate genus/species passages are supplied.\", \"evidence\": \"The supplied context contains the resolution chain explicitly: 'India: ... It is the seventh-largest country by area' and 'Geography of India: ... the seventh-largest country in the world', plus one-species Indian genera such as 'Indogrammodes ... contains only one species, Indogrammodes pectinicornalis, which is found in India' and 'Nepita ... consists of only one species, Nepita conferta, which can be found in India and Sri Lanka'. These two Indian one-species genera conflict, so the execution's negative evaluation points to resolving the descriptor and constraint precisely rather than guessing. NOTE: the record contains only the prompt, system init messages and thinking-token counters — the solver's actual answer and the specific correctness feedback are truncated/absent, so the exact failure mode beyond 'did not correctly produce/justify the single short answer' cannot be reconstructed.\", \"scope_hint\": \"Closed-context multi-hop QA tasks requiring a single short entity answer; not applicable to open-ended or tool-grounded research.\"}"
+    },
+    {
+      "file": "00004-worker.json",
+      "status": "finished",
+      "turns": 4,
+      "error": null,
+      "tool_calls": 4,
+      "history_tool_calls": 0,
+      "output_excerpt": "I created one topic skill and made no other changes.\n\n**Added `skills/multi-hop-short-answer-qa/SKILL.md`** (topic level, `flashrsi.algorithm: evo_harness`, sources: `5a84dd955542997b5ce3ff79`, `5adf44985542993a75d2646d`), covering closed-context multi-hop QA with single short answers graded by exact match/F1:\n- resolve indirect descriptors/superlative descriptions to the entity before matching, instead of taking the first superficially matching passage;\n- enumerate all candidate passages and filter against every constraint;\n- answer with the source passage's own minimal wording, without appended aliases or parentheticals (the `alcohol` vs. `Ethyl alcohol (alcohol)` failure);\n- a short verification pass before emitting.\n\nThe two lessons were merged into a single coherent procedure rather than two near-duplicate skills; no previous library existed, so nothing needed revising or deleting. Configuration, plugin manifest, and runtime files were left untouched, and no logs or notes were written."
+    },
+    {
+      "file": "00006-worker.json",
+      "status": "finished",
+      "turns": 5,
+      "error": null,
+      "tool_calls": 4,
+      "history_tool_calls": 0,
+      "output_excerpt": "No general-level edit was made; the checkout is unchanged in substance.\n\n**Reasoning:** Both candidate memories describe the same task family (closed-context, short-answer multi-hop QA over supplied Wikipedia-style passages) and restate the same two lessons — resolve bridges/descriptors before answering, and emit one minimal answer string in the source's own phrasing. That is a recurring *interface/epistemic* pattern for a specific task type, not a cross-task shared planning/tool-use/verification pattern: with only two distinct task ids, the general level's 3-distinct-task evidence threshold is not met, and folding these into a general skill would just duplicate the topic skill.\n\n**State:** `skills/multi-hop-short-answer-qa/SKILL.md` already carries both supporting memories for this batch (`5a84dd955542997b5ce3ff79`, `5adf44985542993a75d2646d`), states the resolution chain, candidate filtering, the minimal-form rule (e.g. `alcohol`, not `Ethyl alcohol (alcohol)`), and end verification. I wrote it back with identical content to confirm no drift; metadata, configuration (`settings.json`, `.claude-plugin/plugin.json`) and discovery layout are untouched, and no logs or notes were added."
+    }
+  ],
+  "decisions": [
+    {
+      "file": "00005-decision.json",
+      "kind": "compile",
+      "level": "topic",
+      "step": 1,
+      "parent_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+      "candidate_id": "d2c35160144e61369f9493943b68bfb73dd515b7cd564ffa30273afb9a0a8485",
+      "accepted": true,
+      "changed_paths": [
+        "skills/multi-hop-short-answer-qa/SKILL.md"
+      ]
+    },
+    {
+      "file": "00007-decision.json",
+      "kind": "compile",
+      "level": "general",
+      "step": 1,
+      "parent_id": "d2c35160144e61369f9493943b68bfb73dd515b7cd564ffa30273afb9a0a8485",
+      "candidate_id": "9142e1b459b2f0aea839712f8afd1f5ff039ce53fba660639df45e91b7fd4a1f",
+      "accepted": false,
+      "changed_paths": []
+    },
+    {
+      "file": "00008-decision.json",
+      "kind": "stream",
+      "snapshot_id": "d2c35160144e61369f9493943b68bfb73dd515b7cd564ffa30273afb9a0a8485",
+      "online_score": 0.3333333333333333,
+      "online_tasks": 3
+    }
+  ],
+  "changed_paths_from_initial": {
+    "d2c35160144e61369f9493943b68bfb73dd515b7cd564ffa30273afb9a0a8485": [
+      "skills/multi-hop-short-answer-qa/SKILL.md"
+    ]
+  },
+  "checks": {
+    "exit_zero": true,
+    "all_target_calls_finished": true,
+    "all_worker_calls_finished": true,
+    "changed_snapshot_evaluated": true,
+    "test_uses_selected_snapshot": true,
+    "history_not_in_snapshots": true,
+    "credentials_found": false,
+    "versioned_instructions_loaded": true,
+    "final_test_invoked_native_skill": true
+  },
+  "usage": {
+    "input_tokens": 69601,
+    "output_tokens": 3345,
+    "cache_read_tokens": 28800,
+    "cache_write_tokens": 0,
+    "usage_entries": 15,
+    "usage_entries_missing_tokens": 0,
+    "sdk_cost_entries": 4,
+    "duplicate_usage_entries": 0,
+    "records": 8,
+    "finished_records": 8,
+    "failed_records": 0,
+    "sdk_cost_usd": 0.0913272,
+    "cost_bases": [
+      "unknown"
+    ]
+  },
+  "notes": [
+    "HotpotQA context 3/1/1, one batch, train EM 1/3 produced two failure reflections.",
+    "Topic compiler added one native SKILL.md with source metadata for two training task IDs. General compiler made no change because only two supporting tasks were available (default min_tasks 3).",
+    "Final test EM 0 F1 0.8; no next-batch reuse or performance improvement claim.",
+    "Final benchmark test autonomously called Skill flashrsi:multi-hop-short-answer-qa. No forced probe was needed.",
+    "Generated body retained training-specific phrases and the concrete alcohol answer example, contrary to generalization intent. Raw generated skill retained; flow pass does not imply generalization."
+  ],
+  "source_sha256": {
+    "flashrsi/algorithms/evo_harness/__init__.py": "6249b8cc92ed3924a33c81c2e7cd929ea60a8d8464a7fa82fcf552352bdf5171",
+    "flashrsi/agents/claude_code/__init__.py": "2f787d1f90e6796d2f2f8c5774082caa7e3ee76fcf7929c3d7930c2a5cc919fc"
+  },
+  "target_native_tools": [
+    {
+      "file": "00001-train.json",
+      "task_id": "5a84dd955542997b5ce3ff79",
+      "available_skills": [
+        "deep-research",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "claude-api",
+        "workflow-authoring",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "tool_uses": []
+    },
+    {
+      "file": "00001-train.json",
+      "task_id": "5a7e36045542991319bc9440",
+      "available_skills": [
+        "deep-research",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "claude-api",
+        "workflow-authoring",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "tool_uses": []
+    },
+    {
+      "file": "00001-train.json",
+      "task_id": "5adf44985542993a75d2646d",
+      "available_skills": [
+        "deep-research",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "claude-api",
+        "workflow-authoring",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "tool_uses": []
+    },
+    {
+      "file": "00009-test.json",
+      "task_id": "5a8d7341554299441c6b9fe5",
+      "available_skills": [
+        "deep-research",
+        "flashrsi:multi-hop-short-answer-qa",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "claude-api",
+        "workflow-authoring",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "tool_uses": [
+        {
+          "name": "Skill",
+          "skill": "flashrsi:multi-hop-short-answer-qa"
+        }
+      ]
+    }
+  ]
+}

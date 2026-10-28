@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-26T19:07:55.253103+00:00",
+  "new_model_calls_for_review": 0,
+  "rows": [
+    {
+      "id": "math500-modular-mini",
+      "status": "execution_failed",
+      "errors": [
+        {
+          "file": "00052-worker.json",
+          "error": "Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "usage_recorded": true
+        }
+      ],
+      "judge": [],
+      "budget_changes": [
+        {
+          "path": "algorithm.worker.llm.max_tokens",
+          "before": 8192,
+          "after": 16384
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "checked_at": "2026-10-26T02:33:49.887526+00:00",
+  "scope_benchmarks": 25,
+  "scope_cells": 600,
+  "matrix_counts": {
+    "pass": 409,
+    "partial_or_running": 89,
+    "failed": 17,
+    "unsupported": 26,
+    "pending": 59
+  },
+  "machines": {
+    "WorkBench": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T18:18:02.063148+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "OfficeQAPro": {
+      "raw_counts": {
+        "flow_passed": 10,
+        "needs_attention": 11,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T17:58:07.530644+00:00",
+      "effective_counts": {
+        "flow_passed": 10,
+        "needs_attention": 11,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "DeepSearchQA": {
+      "raw_counts": {
+        "flow_passed_with_limitations": 1,
+        "flow_passed_custom_judge": 12,
+        "execution_failed": 1,
+        "needs_attention": 8,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T20:25:19.539459+00:00",
+      "effective_counts": {
+        "flow_passed_with_limitations": 1,
+        "flow_passed_custom_judge": 12,
+        "execution_failed": 1,
+        "needs_attention": 8,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "BBEH": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "needs_attention": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T18:58:27.592624+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "needs_attention": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "SuperGPQA": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T21:21:21.030472+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "CRUXEval-O": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T19:36:23.192981+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "MATH-500": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T20:01:40.736303+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "MuSiQue": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T20:28:28.379726+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "AIME 2025": {
+      "raw_counts": {
+        "flow_passed": 23,
+        "execution_failed": 1
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T22:20:47.772110+00:00",
+      "effective_counts": {
+        "flow_passed": 23,
+        "execution_failed": 1
+      },
+      "current": []
+    },
+    "TriviaQA": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-26T00:26:46.147679+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "τ² Airline": {
+      "raw_counts": {
+        "flow_passed": 1,
+        "needs_attention": 20,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T22:58:37.257705+00:00",
+      "effective_counts": {
+        "partial": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "TravelPlanner": {
+      "raw_counts": {
+        "needs_attention": 17,
+        "execution_failed": 5,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-26T01:41:40.641214+00:00",
+      "effective_counts": {
+        "needs_attention": 17,
+        "execution_failed": 5,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "BrowseComp": {
+      "raw_counts": {
+        "flow_passed_custom_judge": 7,
+        "needs_attention": 4,
+        "running": 1,
+        "pending": 12
+      },
+      "status": "running",
+      "updated_at": "2026-10-26T02:22:59.922321+00:00",
+      "effective_counts": {
+        "flow_passed_custom_judge": 7,
+        "needs_attention": 4,
+        "running": 1,
+        "pending": 12
+      },
+      "current": [
+        {
+          "algorithm": "gepa",
+          "target": "claude_code"
+        }
+      ]
+    },
+    "LiveMathBench AMC/en": {
+      "raw_counts": {
+        "pending": 24
+      },
+      "status": "preparation_blocked",
+      "updated_at": "2026-10-26T00:33:03.608123+00:00",
+      "effective_counts": {
+        "pending": 24
+      },
+      "current": []
+    },
+    "τ² Retail": {
+      "raw_counts": {
+        "needs_attention": 19,
+        "execution_failed": 3,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-26T02:16:14.168812+00:00",
+      "effective_counts": {
+        "needs_attention": 19,
+        "execution_failed": 3,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "WideSearch": {
+      "raw_counts": {
+        "needs_attention": 1,
+        "running": 1,
+        "pending": 22
+      },
+      "status": "running",
+      "updated_at": "2026-10-26T02:20:09.835935+00:00",
+      "effective_counts": {
+        "needs_attention": 1,
+        "running": 1,
+        "pending": 22
+      },
+      "current": [
+        {
+          "algorithm": "opro",
+          "target": "claude_code"
+        }
+      ]
+    }
+  },
+  "aime_independent": {
+    "status": "completed",
+    "counts": {
+      "execution_failed": 1,
+      "flow_passed": 1
+    },
+    "updated_at": "2026-10-25T19:10:03.586535+00:00"
+  },
+  "new_benchmarks_this_check": [
+    "WideSearch"
+  ],
+  "math_independent": {
+    "status": "completed",
+    "counts": {
+      "execution_failed": 1,
+      "flow_passed": 1
+    },
+    "updated_at": "2026-10-25T21:04:22.043721+00:00"
+  },
+  "hotpot_independent": {
+    "status": "completed",
+    "counts": {
+      "flow_passed": 2
+    },
+    "updated_at": "2026-10-25T20:28:09.373615+00:00"
+  },
+  "musique_independent": {
+    "status": "completed",
+    "counts": {
+      "execution_failed": 1,
+      "flow_passed": 1
+    },
+    "updated_at": "2026-10-25T22:26:37.688103+00:00"
+  },
+  "repair_queues": {
+    "DeepSearchQA": {
+      "status": "completed",
+      "counts": {
+        "needs_attention": 1
+      },
+      "updated_at": "2026-10-25T21:41:02.504603+00:00"
+    },
+    "SuperGPQA": {
+      "status": "completed",
+      "counts": {
+        "flow_passed": 1
+      },
+      "updated_at": "2026-10-25T21:41:31.735738+00:00"
+    },
+    "AIME 2025": {
+      "status": "completed",
+      "counts": {
+        "flow_passed": 1
+      },
+      "updated_at": "2026-10-25T22:23:49.494007+00:00"
+    }
+  },
+  "new_model_calls_by_audit": 0,
+  "current_machine_reports": {
+    "original": "smoke-bbeh-modular-independent-original-20261026.json",
+    "smoke2": "smoke-browsecomp24-public-smoke2-20261026.json",
+    "smoke3": "smoke-widesearch24-cachefix-public-smoke3-20261026.json"
+  },
+  "completed_batches": {
+    "retail": {
+      "partial": 19,
+      "worker_budget_failed": 3,
+      "unsupported": 2
+    },
+    "travelplanner": {
+      "partial": 17,
+      "worker_budget_failed": 5,
+      "unsupported": 2
+    },
+    "travelplanner_recording_repair": {
+      "status": "recording_evidence_passed_benchmark_not_passed",
+      "observed": "Three unfenced JSON arrays rejected by native parser; actual raw replies and SDKusage retained"
+    }
+  },
+  "validations": [
+    "validation-bbeh-independent-20261026.json",
+    "validation-native-cache-file-format-20261026.json"
+  ],
+  "notes": [
+    "BBEH private dispatcher had two zero-model setup errors inherited OPRO-only authpath then Path symbol; histories preserved, exact auth expression and GET200 checked before only first real model run",
+    "No active frozen source hot-replaced; BBH source274 and WideSearch cachefix266 are distinct new roots",
+    "WideSearch Judge errors are not valid zero scores; no unknown failure usage fabricated",
+    "New benchmark WideSearch; independent BBEH2 replaces existing cells"
+  ]
+}

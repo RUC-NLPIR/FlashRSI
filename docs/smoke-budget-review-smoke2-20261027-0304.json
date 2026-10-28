@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-26T19:08:01.694319+00:00",
+  "new_model_calls_for_review": 0,
+  "rows": [
+    {
+      "id": "swe-modular-mini",
+      "status": "execution_failed",
+      "errors": [
+        {
+          "file": "00015-execution_gate.json",
+          "error": "MiniAgent process exited with 1: Turn budget low (turn=6, turns_left=3, reserved=3, edits_applied=0)\nTraceback (most recent call last):\n  File \"/opt/flashrsi-lite/package/flashrsi/agents/miniagent/_entry.py\", line 29, in <module>\n    asyncio.run(_main())\n  File \"/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py\", line 195, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/package/flashrsi/agents/miniagent/_entry.py\", line 24, in _main\n    result = await run(**request)\n             ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/checkout-7rjtv4lj/runtime/agent.py\", line 1390, in run\n    _record_budget_directive(ctx, policy_directive)\n  File \"/tmp/checkout-7rjtv4lj/runtime/agent.py\", line 834, in _record_budget_directive\n    ctx.trace.event(\nTypeError: TraceWriter.event() got multiple values for argument 'kind'",
+          "usage_recorded": false
+        },
+        {
+          "file": "00032-worker.json",
+          "error": "Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "usage_recorded": true
+        }
+      ],
+      "judge": [],
+      "budget_changes": [
+        {
+          "path": "algorithm.worker.llm.max_tokens",
+          "before": 8192,
+          "after": 16384
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "checked_at": "2026-10-28T08:52:57.326678+08:00",
+  "new_passes": [
+    {
+      "key": [
+        "τ² Retail",
+        "MiniAgent",
+        "RRSI"
+      ],
+      "ref": "TR28RRSIM100",
+      "report": "smoke-tau2-retail-native100-rrsi-miniagent-20261028.json",
+      "targets": 6,
+      "workers": 7,
+      "source_files": 265,
+      "test": 1.0,
+      "credential_scan": {
+        "files": 31,
+        "hits": []
+      }
+    },
+    {
+      "key": [
+        "τ² Retail",
+        "Claude Code",
+        "RRSI"
+      ],
+      "ref": "TR28RRSICC100",
+      "report": "smoke-tau2-retail-native100-rrsi-claude_code-20261028.json",
+      "targets": 6,
+      "workers": 6,
+      "source_files": 265,
+      "test": 1.0,
+      "credential_scan": {
+        "files": 27,
+        "hits": []
+      }
+    },
+    {
+      "key": [
+        "SWE-bench",
+        "Claude Code",
+        "RRSI"
+      ],
+      "ref": "SW28RRSICCW120",
+      "report": "smoke-swe-rrsicc-worker120-20261028.json",
+      "targets": 6,
+      "workers": 6,
+      "source_files": 273,
+      "test": 1.0,
+      "credential_scan": {
+        "files": 27,
+        "hits": []
+      }
+    }
+  ],
+  "totals": {
+    "pass": 521,
+    "partial": 42,
+    "failed": 13,
+    "blocked": 24,
+    "pending": 24
+  },
+  "remaining": 103,
+  "live_queues": {
+    "smoke2": [
+      {
+        "status": "idle",
+        "reason": "SWE RRSICC audited pass; no other safe paid successor"
+      }
+    ],
+    "smoke3": [
+      {
+        "control": "terminal-ahe-target80-0840",
+        "status": "free_preparation",
+        "native_pid": 47045,
+        "followup_pid": 47046,
+        "paid": false,
+        "native_ready": 1,
+        "native_total": 3
+      }
+    ],
+    "smoke4": [
+      {
+        "status": "idle",
+        "reason": "Retail9 all passed; truefailed3 need independent new condition"
+      }
+    ]
+  },
+  "audit_fix": "SWE nonModularRRSI external evolution_source KeyError; native metadata recorded, old audit kept, no model calls",
+  "terminal_preparation": {
+    "host": "smoke3",
+    "control": "terminal-ahe-target80-0840",
+    "root": "/root/flashrsi-terminal-public-20261028",
+    "source_files": 273,
+    "status": "waiting_native_install_only_unpaid",
+    "dispatcher_disabled": true,
+    "public_preflight_pid": 44392,
+    "task_cache_count": 89,
+    "cached_original_images": 3,
+    "old_harbor_env_protected": "5af70c61c795-ff02ae85235b-py312",
+    "preparation_report": "smoke-terminal-ahe80-preparation-20261028-0840.json",
+    "original_report": "smoke-terminal-ahe-transport-smoke3-20261025.json",
+    "selected_parity": "compare actual native originalConfig to newConfig all3; retained historical train/test hashes, old dev execution not claimed",
+    "old_RRSI80_paid": "do not repeat; deletedoriginal unavailable not probed",
+    "model_calls": 0,
+    "full_native_setup": "not yet proven",
+    "public_preflight_status": "plan0/check-only0; native original3Task parity",
+    "actual_project_env_protected": "5af70c61c795-96de576fe7e2-py312",
+    "native_probe_pid": 47045,
+    "followup_pid": 47046,
+    "proof_file": "/root/.cache/terminal-ahe-target80-0840/native-free-attempt05-proof.json",
+    "native_ready_items": 1,
+    "native_remaining_items": 2,
+    "public_preflight_report": "smoke-terminal-ahe80-public-preflight-20261028-0840.json",
+    "current_native_report": "smoke-terminal-ahe80-native-current-proxy-20261028-0840.json",
+    "docker_engine": "389a2b6d-4921-43e1-a805-eddbe6116e81",
+    "old_engine_change_not_hidden": "88f71a60→389a2; no reset issued; images gone and cache-only stream restore",
+    "cache_transfer_report": "smoke-terminal-cached-image-transfer-20261028-0840.json",
+    "loopback_docker_bridge": "tcp://127.0.0.1:46935",
+    "bridge_pid": 45902,
+    "private_gateway_pid": 47040,
+    "private_gateway": "10.239.91.9:45539 → loopback33616; no publicbind",
+    "network_repair_report": "smoke-terminal-private-gateway-restoration-20261028-0840.json",
+    "dispatch_gate": "all3native install_only passed0models + fullimageIDs/engine/source273/900MB/hostlock; exclusive once",
+    "initial_free_probe_api_correction": "first2 omitted Trialnative result init; corrected officialinstall_only, no solver/Verifier, not product fault"
+  },
+  "new_paid_dispatches": 0,
+  "new_benchmarks": 0,
+  "product_changes": 0,
+  "cleanup": 0,
+  "final_checked_at": "2026-10-28T10:05:39.503988+08:00",
+  "wide_status": "needs_attention_candidate80",
+  "wide_targets": 3,
+  "wide_workers": 1,
+  "wide_test": 0,
+  "machine_infrastructure_changes": [
+    "existing Docker bridge restored loopback, unmodified source",
+    "cached3 officialTask images streamedfromsmoke2, exactIDs/layers after observed enginechange",
+    "existing privategateway endpoint repaired via currentloopbackProxy, no publicbind"
+  ]
+}

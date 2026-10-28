@@ -1,0 +1,163 @@
+{
+  "observed_at": "2026-10-27T02:18:00+08:00",
+  "new_benchmarks": [],
+  "new_passes": [
+    "AIME2026/ModularRSI/Mini",
+    "CRUXEval-O/RRSI/CC"
+  ],
+  "matrix_counts": {
+    "pass": 428,
+    "partial": 123,
+    "failed": 25,
+    "blocked": 24,
+    "pending": 24
+  },
+  "machines": {
+    "original": {
+      "utc": "2026-10-26T18:17:07.268646+00:00",
+      "jobs": [
+        {
+          "id": "aime2026-modular-mini",
+          "status": "flow_passed",
+          "phase": "experiment",
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.max_turns",
+              "before": 60,
+              "after": 120
+            },
+            {
+              "path": "algorithm.worker.timeout",
+              "before": 600,
+              "after": 1200
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "finished": 21
+          },
+          "worker_statuses": {
+            "finished": 19
+          },
+          "missing_usage": 0,
+          "active_process_present": false,
+          "paid_marker": true
+        },
+        {
+          "id": "math500-modular-mini",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 55419,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.llm.max_tokens",
+              "before": 8192,
+              "after": 16384
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "finished": 2
+          },
+          "worker_statuses": {
+            "finished": 1
+          },
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        },
+        {
+          "id": "appworld-modular-mini",
+          "status": "pending",
+          "phase": null,
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.max_turns",
+              "before": 60,
+              "after": 120
+            },
+            {
+              "path": "algorithm.worker.timeout",
+              "before": 600,
+              "after": 1200
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": false,
+          "paid_marker": false
+        }
+      ],
+      "disk_free": 2029101056
+    },
+    "smoke2": {
+      "utc": "2026-10-26T18:17:12.853792+00:00",
+      "jobs": [
+        {
+          "id": "crux-rrsi-cc",
+          "status": "flow_passed",
+          "phase": "experiment",
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.llm.max_tokens",
+              "before": 8192,
+              "after": 16384
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "finished": 6
+          },
+          "worker_statuses": {
+            "finished": 6
+          },
+          "missing_usage": 0,
+          "active_process_present": false,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 3589472256
+    },
+    "smoke3": {
+      "utc": "2026-10-26T18:17:18.549583+00:00",
+      "jobs": [
+        {
+          "id": "widesearch-opro-cc",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 14960,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 2644127744
+    }
+  },
+  "swe_followup": {
+    "status": "dispatched",
+    "pid": 61607
+  },
+  "swe_active_public_pid_observed": 61745,
+  "note": "2026-10-27 02:18实查：新增AIME2026/ModularRSI/Mini（21Target+19Worker）和CRUXEval-O/RRSI/CC（6Target+6Worker）两格审计通过，原预算失败保留。本轮无新增Benchmark。原机MATH500/Mini真实运行、AppWorld/Mini顺序待；smoke2 CRUX已完成、SWE/ModularRSI/Mini已自动接上真实运行；smoke3 WideSearch/OPRO/CC真实运行。MATH两次零模型预检错误由私有调度强制离线和选错源码根引起，原日志保留，已恢复联网并改回原验证MATH根，不改产品源码。WideSearch除40轮外还有旧Judge ValueError，此次使用已验证267证据记录能力，Judge预算和评分不变，不预先宣称已修好。\n\n"
+}

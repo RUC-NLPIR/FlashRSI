@@ -1,0 +1,18 @@
+{
+  "scope": "Independent service probe, not algorithm smoke",
+  "model_calls": 0,
+  "results": [
+    {
+      "action": "search",
+      "status": "passed",
+      "results_count": 1,
+      "content_chars": 0
+    },
+    {
+      "action": "read",
+      "status": "passed",
+      "results_count": 0,
+      "content_chars": 460
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-26T19:09:02.635077+00:00",
+  "jobs": [
+    {
+      "id": "browsecomp-opro-cc",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 899,
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "source_changes": [],
+      "target_statuses": {},
+      "worker_statuses": {},
+      "missing_usage": 0,
+      "active_process_present": true,
+      "paid_marker": true
+    }
+  ],
+  "disk_free": 3516801024
+}

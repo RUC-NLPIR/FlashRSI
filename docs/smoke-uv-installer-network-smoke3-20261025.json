@@ -1,0 +1,42 @@
+{
+  "status": "completed",
+  "scope": "Independent native task-image installer network probe; no benchmark execution/model calls/score",
+  "model_calls": 0,
+  "tests": [
+    {
+      "url": "https://github.com/astral-sh/uv/releases/download/0.11.4/uv-installer.sh",
+      "returncode": 0,
+      "http_code": "200",
+      "stderr_tail": "",
+      "seconds": 3.347,
+      "sha256": "02370e084ac61419a69268d368f8fb840eb5ba4fda8682a6047b1d39ace73704"
+    },
+    {
+      "url": "https://astral.sh/uv/0.11.4/install.sh",
+      "returncode": 0,
+      "http_code": "200",
+      "stderr_tail": "",
+      "seconds": 3.486,
+      "sha256": "02370e084ac61419a69268d368f8fb840eb5ba4fda8682a6047b1d39ace73704"
+    },
+    {
+      "url": "https://github.com/astral-sh/uv/releases/download/0.11.4/uv-installer.sh",
+      "returncode": 0,
+      "http_code": "200",
+      "stderr_tail": "",
+      "seconds": 7.234,
+      "sha256": "02370e084ac61419a69268d368f8fb840eb5ba4fda8682a6047b1d39ace73704"
+    },
+    {
+      "url": "https://astral.sh/uv/0.11.4/install.sh",
+      "returncode": 0,
+      "http_code": "200",
+      "stderr_tail": "",
+      "seconds": 4.541,
+      "sha256": "02370e084ac61419a69268d368f8fb840eb5ba4fda8682a6047b1d39ace73704"
+    }
+  ],
+  "container": "flashrsi-uv-network-probe-5aee72fb",
+  "image": "alexgshaw/adaptive-rejection-sampler:20251031",
+  "scratch_container_cleanup_returncode": 0
+}

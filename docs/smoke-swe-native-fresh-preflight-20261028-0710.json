@@ -1,0 +1,26 @@
+{
+  "status": "preparation_blocked",
+  "at": "2026-10-27T23:15:27.534443+00:00",
+  "model_calls": 0,
+  "engine_before": "194c6a2b-831c-4ea5-a5ec-b23645072a61",
+  "native_setup_sha256": "9e66f96945849a7ca7d00107eb59fa6373d00ce4db77219278a04fc3d0c3adaa",
+  "requirements_sha256": "4692d24fcaf123b3a8926b2f5081114d56f9cc518747ba04cf18e859f23722ce",
+  "items": [
+    {
+      "split": "train",
+      "task_id": "pydicom__pydicom-1256",
+      "image": "swebench/sweb.eval.x86_64.pydicom_1776_pydicom-1256:latest",
+      "base_commit": "49a3da4a3d9c24d7e8427a25048a1c7d5c4f7724",
+      "container": "flashrsi-swe-free0710-train-1c298a9e",
+      "status": "preparing",
+      "image_id_before": "sha256:067c0e6e808262ace138a11bd049ded8d46de79a911eda9eac15d4df73fe964b",
+      "native_repo_reset_verified": true,
+      "own_free_container_removed": true
+    }
+  ],
+  "no_task_question_snapshot_or_request_payload": true,
+  "official_images_not_modified": true,
+  "source_files": 273,
+  "error_type": "CalledProcessError",
+  "error_returncode": 1
+}

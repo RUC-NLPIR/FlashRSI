@@ -19,6 +19,19 @@ miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
 claude-code = ["claude-agent-sdk>=0.2.153,<0.3"]
 codex = ["openai-codex-cli-bin==0.147.0"]
 harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
+swe-bench = ["packaging>=24", "swebench @ git+https://github.com/SWE-bench/SWE-bench.git@02e7a74ffd0b707aab73d203fe87bdc7c76afc8e"]
+appworld = ["packaging>=24"]
+bfcl = ["packaging>=24"]
+alfworld = ["alfworld==0.4.2; sys_platform != 'win32' and python_version < '3.13'", "textworld[pddl]==1.7.0; sys_platform != 'win32' and python_version < '3.13'"]
+workbench = ["pandas>=2.1,<3", "numpy>=1.26,<2"]
+math = ["math-verify[antlr4_13_2]==0.9.0"]
+hle = ["openai>=2,<3"]
+travelplanner = ["openai>=2,<3", "pandas>=2.1,<3", "numpy>=1.26,<3", "requests>=2.32,<3"]
+harvey-lab = ["lab-core @ https://github.com/harveyai/harvey-labs/releases/download/v1.2.0/lab_core-1.2.0-py3-none-any.whl#sha256=5bfd70664a99c16a97a35bf61a3845a9890477168d11978d58864f986c9f53ba ; python_version >= '3.12' and python_version < '3.14'", "anthropic==0.88.0; python_version >= '3.12' and python_version < '3.14'"]
+livemathbench = ["openai>=2,<3"]
+browsecomp = ["openai>=2,<3"]
+deepsearchqa = ["google-genai>=1.75,<2", "openai>=2,<3"]
+widesearch = ["openai>=2,<3", "pandas==2.3.1", "numpy==2.3.2", "dateparser==1.2.2", "loguru==0.7.3"]
 # tau2-bench is not published on PyPI, so it cannot be a dependency here.
 # Install it alongside this package, in its own environment:
 #   uv pip install "tau2 @ git+https://github.com/sierra-research/tau2-bench.git@v1.0.1" rank_bm25
@@ -34,6 +47,16 @@ include = ["flashrsi*"]
 exclude = ["flashrsi.agents.codex.runtime*", "flashrsi.agents.codex._bridge*"]
 
 [tool.setuptools.package-data]
+"flashrsi.benchmarks.bbeh" = ["LICENSE", "NOTICE"]
+"flashrsi.integrations" = ["appworld.Dockerfile", "bfcl.Dockerfile", "HLE-LICENSE"]
+"flashrsi.benchmarks.officeqa_pro" = ["LICENSE-APACHE", "NOTICE"]
+"flashrsi.benchmarks.harvey_lab" = ["LICENSE-MIT", "NOTICE", "upstream.json"]
+"flashrsi.benchmarks.travelplanner" = ["LICENSE-MIT", "NOTICE", "upstream.json"]
+"flashrsi.benchmarks.browsecomp" = ["LICENSE-MIT"]
+"flashrsi.benchmarks.deepsearchqa" = ["NOTICE"]
+"flashrsi.benchmarks.widesearch" = ["LICENSE-MIT", "upstream.json"]
+"flashrsi.benchmarks.livemathbench" = ["LICENSE-APACHE", "NOTICE", "upstream.json"]
+"flashrsi.benchmarks._official_qa" = ["LICENSE-APACHE", "LICENSE-MUSIQUE", "NOTICE"]
 "flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
 "flashrsi.agents.claude_code" = ["*.yaml", "*.md", "settings.json", ".mcp.json", ".lsp.json", ".claude-plugin/*.json", "skills/**/*", "commands/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "output-styles/**/*"]
 "flashrsi.agents.codex" = ["components.yaml", "config.toml", "_companion.json", "AGENTS.md", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*", "runtime/**/*", "runtime/**/.*", "runtime/.cargo/*", "_bridge/**/*"]
@@ -45,7 +68,13 @@ addopts = "-q"
 
 [tool.ruff]
 target-version = "py311"
-extend-exclude = ["mvp_doc.md", "flashrsi/agents/codex/runtime"]
+# Also work in source archives without .git, where Ruff cannot apply .gitignore.
+extend-exclude = ["mvp_doc.md", "flashrsi/agents/codex/runtime", ".cache", "runs", "experiments", "pytest-of-*"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.uv]
+# Native WorkBench and WideSearch require different NumPy major versions.
+# The public launcher selects a separate dependency environment per benchmark.
+conflicts = [[{extra = "workbench"}, {extra = "widesearch"}]]

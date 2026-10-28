@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-10-26T13:36:13.951089+00:00",
+  "status": "running",
+  "counts": {
+    "running": 1
+  },
+  "public_runner_pids": [
+    14127,
+    14128,
+    14129
+  ],
+  "native_rows": [
+    {
+      "file": "00002-worker.json",
+      "status": "finished",
+      "usage_present": true,
+      "host_error_events": 0,
+      "judge_requests": null
+    },
+    {
+      "file": "00003-candidate.json",
+      "status": "finished",
+      "usage_present": true,
+      "host_error_events": 0,
+      "judge_requests": 7
+    },
+    {
+      "file": "00001-baseline.json",
+      "status": "finished",
+      "usage_present": true,
+      "host_error_events": 0,
+      "judge_requests": 7
+    }
+  ],
+  "source_count": 267,
+  "source_changes": [],
+  "disk_free": 3447185408
+}

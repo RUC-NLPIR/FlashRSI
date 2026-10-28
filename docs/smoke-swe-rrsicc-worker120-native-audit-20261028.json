@@ -1,0 +1,114 @@
+{
+  "status": "flow_passed",
+  "experiment_path": "/root/.cache/swe-rrsicc-worker120-0800/experiments/rrsi-claude_code-swe_bench-20261028-074701-473370",
+  "native_grade_recomputed": true,
+  "new_model_calls": 0,
+  "native_benchmark_metadata": {
+    "source": "local",
+    "data_path": "/root/flashrsi-smoke2-20261025/.cache/swe-verified.parquet"
+  },
+  "target_stages": [
+    {
+      "file": "00001-baseline.json",
+      "task_id": "sympy__sympy-16450",
+      "status": "finished",
+      "metrics": {
+        "resolved": 1.0
+      },
+      "usage_recorded": true,
+      "judge_events": []
+    },
+    {
+      "file": "00002-baseline.json",
+      "task_id": "sympy__sympy-16450",
+      "status": "finished",
+      "metrics": {
+        "resolved": 1.0
+      },
+      "usage_recorded": true,
+      "judge_events": []
+    },
+    {
+      "file": "00013-smoke.json",
+      "task_id": "sympy__sympy-16450",
+      "status": "finished",
+      "metrics": {
+        "resolved": 1.0
+      },
+      "usage_recorded": true,
+      "judge_events": []
+    },
+    {
+      "file": "00015-candidate.json",
+      "task_id": "sympy__sympy-16450",
+      "status": "finished",
+      "metrics": {
+        "resolved": 1.0
+      },
+      "usage_recorded": true,
+      "judge_events": []
+    },
+    {
+      "file": "00016-candidate.json",
+      "task_id": "sympy__sympy-16450",
+      "status": "finished",
+      "metrics": {
+        "resolved": 1.0
+      },
+      "usage_recorded": true,
+      "judge_events": []
+    },
+    {
+      "file": "00020-test.json",
+      "task_id": "django__django-15037",
+      "status": "finished",
+      "metrics": {
+        "resolved": 1.0
+      },
+      "usage_recorded": true,
+      "judge_events": []
+    }
+  ],
+  "worker_stages": [
+    {
+      "file": "00005-worker.json",
+      "status": "finished",
+      "usage_recorded": true
+    },
+    {
+      "file": "00006-worker.json",
+      "status": "finished",
+      "usage_recorded": true
+    },
+    {
+      "file": "00007-worker.json",
+      "status": "finished",
+      "usage_recorded": true
+    },
+    {
+      "file": "00008-worker.json",
+      "status": "finished",
+      "usage_recorded": true
+    },
+    {
+      "file": "00010-worker.json",
+      "status": "finished",
+      "usage_recorded": true
+    },
+    {
+      "file": "00011-worker.json",
+      "status": "finished",
+      "usage_recorded": true
+    }
+  ],
+  "web_actions": [],
+  "problems": [],
+  "source_file_count": 273,
+  "source_changes": [],
+  "credential_scan": {
+    "files": 27,
+    "hits": []
+  },
+  "test_score": 1.0,
+  "judge_profile": "native"
+}

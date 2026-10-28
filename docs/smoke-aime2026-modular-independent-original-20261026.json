@@ -1,0 +1,271 @@
+{
+  "host": "original",
+  "benchmark": "aime",
+  "judge_profile": "native integer with independent AIME2025",
+  "status": "completed",
+  "updated_at": "2026-10-25T19:10:03.586535+00:00",
+  "counts": {
+    "execution_failed": 1,
+    "flow_passed": 1
+  },
+  "items": [
+    {
+      "benchmark": "aime",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "execution_failed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:18:09.734324+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-aime-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:18:09.735107+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:18:09.947848+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-aime-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:18:09.950045+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:18:10.771972+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-aime-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:18:10.773921+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T19:02:50.584728+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T19:02:50.593497+00:00",
+      "log_path": "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/modular_rsi-miniagent/experiment.log"
+    },
+    {
+      "benchmark": "aime",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T19:02:50.594061+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-aime-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T19:02:50.594703+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:02:50.909683+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-aime-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T19:02:50.916124+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:02:52.082377+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-aime-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T19:02:52.085274+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T19:10:02.685949+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-aime-evolution-public-20261026/batch-runs/modular_rsi-claude_code/modular_rsi-claude_code-aime-20261026-030252-453118",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-execution_gate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00018-contrast.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "aime2025:10",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-test.json",
+            "task_id": "aime2026:6",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 32,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T19:10:03.585278+00:00"
+    }
+  ]
+}

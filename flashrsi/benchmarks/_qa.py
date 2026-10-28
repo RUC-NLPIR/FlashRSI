@@ -1,15 +1,18 @@
 """Shared scaffolding for question-answering benchmarks.
 
-SearchQA and HotpotQA differ only in how a source row becomes a Task: both
-load rows through the same dataset plumbing, apply the same configured splits,
-and score answers with the same normalized EM/F1 metrics. This base owns that
-common half so each benchmark file is just its own data contract.
+QA benchmarks map their own source rows to Tasks, apply the same configured
+splits, and select their own scorer. This base
+owns the common half so each benchmark file is just its own data contract.
 """
 
 from __future__ import annotations
 
+import copy
+import hashlib
+import json
 from collections.abc import Iterable, Mapping
 from dataclasses import replace
+from types import MappingProxyType
 from typing import Any
 
 from flashrsi.benchmarks._data import _load_rows, _split_tasks
@@ -26,6 +29,9 @@ class QABenchmark(Benchmark):
     """
 
     primary_metric = "exact_match"
+    _default_scoring = "official"
+    _scoring_modes = ("official", "legacy")
+    _modes = ("context",)
 
     def __init__(self, config: Mapping[str, Any]) -> None:
         super().__init__()
@@ -35,6 +41,12 @@ class QABenchmark(Benchmark):
                 f"{type(self).__name__} requires benchmark.name: {self.name}"
             )
         self._tasks_by_id: dict[str, Task] = {}
+        self.mode = self.config.get("mode", "context")
+        if self.mode not in self._modes:
+            raise ValueError(f"benchmark.mode must be one of {self._modes}")
+        self.scoring = self.config.get("scoring", self._default_scoring)
+        if self.scoring not in self._scoring_modes:
+            raise ValueError(f"benchmark.scoring must be one of {self._scoring_modes}")
 
     def load(self) -> Mapping[str, tuple[Task, ...]]:
         """Load the pinned dataset (or local data), then apply configured splits."""
@@ -43,10 +55,15 @@ class QABenchmark(Benchmark):
             self._tasks_by_id = {
                 task.task_id: task for split in self._splits.values() for task in split
             }
+            metadata = {**self.metadata, "mode": self.mode, "scoring": self.scoring}
+            metadata.pop("scorer_revision", None)
+            if self.scoring == "official" and getattr(self, "_scorer_revision", None):
+                metadata["scorer_revision"] = self._scorer_revision
+            self.metadata = MappingProxyType(metadata)
         return self._splits
 
     def grade(self, trajs: tuple[Trajectory, ...]) -> tuple[Trajectory, ...]:
-        """Score the best EM/F1 over references; failed runs score zero."""
+        """Apply the selected protocol; failed runs score zero."""
         if self._splits is None:
             raise RuntimeError(f"{self.name} has not been loaded; call load() first")
         graded = []
@@ -63,24 +80,113 @@ class QABenchmark(Benchmark):
                     f"{trajectory.task.task_id}"
                 ) from error
             scores = (
-                qa_metrics(trajectory.output, task.metadata["answers"])
+                self._score(trajectory.output, task)
                 if trajectory.status == "finished"
-                else {"exact_match": 0.0, "f1": 0.0}
+                else self._zero_scores()
             )
             graded.append(replace(trajectory, metrics={**trajectory.metrics, **scores}))
         return tuple(graded)
+
+    def _score(self, prediction, task):
+        return qa_metrics(prediction, task.metadata["answers"])
+
+    def _zero_scores(self):
+        return {"exact_match": 0.0, "f1": 0.0}
+
+    def _prepare_task(self, task, row):
+        return task
 
     def _iter_tasks(self) -> Iterable[Task]:
         for source, row in self._load_source_rows():
             if not isinstance(row, Mapping):
                 raise ValueError(f"{type(self).__name__} rows must be mappings")
-            yield self._task_from_row(row, source)
+            yield self._prepare_task(self._task_from_row(row, source), row)
 
     def _load_source_rows(self) -> Iterable[tuple[str, Mapping[str, Any]]]:
         rows, self.metadata = _load_rows(
-            self.config.get("data_path"), type(self).metadata
+            self.config.get("data_path"), self._source_metadata()
         )
         return rows
+
+    def _source_metadata(self):
+        source = self.config.get("dataset", type(self).metadata)
+        if (
+            not isinstance(source, Mapping)
+            or not source.get("source")
+            or not source.get("revision")
+        ):
+            raise ValueError("benchmark.dataset needs source and revision")
+        return MappingProxyType(copy.deepcopy(dict(source)))
+
+    def _load_evolution(self, external, source_split):
+        """Replace train from an independent native pool, retaining scorer ownership.
+
+        Both loaders supply a question_checksum from the raw question rather than
+        its context or rendered prompt. Subclasses retain their own evidence maps.
+        """
+        ids, questions = set(), set()
+
+        def downstream():
+            for task in self._iter_tasks():
+                ids.add(task.task_id)
+                questions.add(task.metadata["question_checksum"])
+                yield task
+
+        splits = _split_tasks(downstream(), self.config)
+        digest = hashlib.sha256()
+        count = 0
+
+        def evolution_pool():
+            nonlocal count
+            # Check the complete sources before limiting a tiny run; different
+            # IDs or paragraphs must not hide the same held-out question.
+            for task in external._iter_tasks():
+                if (
+                    task.task_id in ids
+                    or task.metadata["question_checksum"] in questions
+                ):
+                    raise ValueError(
+                        f"{type(self).__name__} evolution pool overlaps downstream tasks"
+                    )
+                digest.update(
+                    json.dumps(
+                        (task.task_id, task.question, task.ground_truth),
+                        ensure_ascii=False,
+                    ).encode()
+                    + b"\n"
+                )
+                count += 1
+                yield task
+
+        evolution = _split_tasks(
+            evolution_pool(),
+            {
+                "split": {"train": 1, "dev": 0, "test": 0},
+                "limit": self.config.get("evolution_limit"),
+                "seed": self.config.get("seed", 0),
+            },
+        )["train"]
+        metadata = {**self.metadata, "mode": self.mode, "scoring": self.scoring}
+        metadata.pop("scorer_revision", None)
+        if self.scoring == "official" and getattr(self, "_scorer_revision", None):
+            metadata["scorer_revision"] = self._scorer_revision
+        self.metadata = MappingProxyType(
+            {
+                **metadata,
+                "evolution_source": {
+                    **external.metadata,
+                    "native_split": source_split,
+                    "experiment_role": "external_evolution",
+                    "pool_size": count,
+                    "pool_checksum": digest.hexdigest(),
+                },
+            }
+        )
+        self._splits = MappingProxyType({**splits, "train": evolution})
+        self._tasks_by_id = {
+            task.task_id: task for group in self._splits.values() for task in group
+        }
+        return evolution
 
     @staticmethod
     def _task_from_row(row: Mapping[str, Any], source_split: str) -> Task:

@@ -1,0 +1,25 @@
+{
+  "host": "smoke2",
+  "checked_at": "2026-10-25T18:35:17.336267+00:00",
+  "new_model_calls": 0,
+  "items": [
+    {
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "classification": "partial_native_target_budget",
+      "errors": [
+        {
+          "file": "00001-baseline.json",
+          "message": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "usage_recorded": true
+        }
+      ],
+      "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-bbeh-20261026-022111-899869",
+      "final_test_finished": true,
+      "complete_native_scoring": false,
+      "automatic_retry": false,
+      "source_changes": []
+    }
+  ]
+}

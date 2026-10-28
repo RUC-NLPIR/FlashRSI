@@ -1,0 +1,2761 @@
+{
+  "host": "original",
+  "benchmark": "musique",
+  "judge_profile": "official MuSiQue-Ans v1.0 contextual EM/F1, supplied paragraphs; custom partition",
+  "status": "completed",
+  "updated_at": "2026-10-25T20:28:28.379726+00:00",
+  "counts": {
+    "flow_passed": 22,
+    "unsupported_configuration": 2
+  },
+  "items": [
+    {
+      "benchmark": "musique",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:01:46.909560+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:01:46.910766+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:01:47.158641+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:01:47.160937+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:01:49.355556+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:01:49.359656+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:02:01.505608+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/opro-miniagent/opro-miniagent-musique-20261026-040150-923508",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.6666666666666666
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:02:03.420984+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:02:03.422358+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:02:03.424607+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:02:03.613654+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:02:03.616266+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:02:36.079071+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:02:36.110087+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:02:48.778841+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/opro-claude_code/opro-claude_code-musique-20261026-040237-663049",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3157894736842105
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:02:50.582433+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:02:50.584071+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:02:50.585613+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:02:50.790928+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:02:50.794217+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:02:52.503580+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:02:52.507004+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:03:05.397429+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-musique-20261026-040254-043788",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.375
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:03:06.914931+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:03:06.917140+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:03:06.919017+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:03:07.113928+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:03:07.117723+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:03:08.795349+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:03:08.803096+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:03:24.733150+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/skillopt-claude_code/skillopt-claude_code-musique-20261026-040310-449330",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3529411764705882
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:03:26.174549+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:03:26.177267+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:03:26.179726+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:03:26.368370+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:03:26.372072+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:03:59.350687+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:03:59.373377+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:07:00.812292+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-musique-20261026-040401-040640",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:07:02.399773+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:07:02.401971+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:07:02.404142+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:07:02.590920+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:07:02.595700+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:07:32.733254+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:07:32.740849+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:08:57.258186+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-musique-20261026-040734-520180",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:08:58.860653+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "ace",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:08:58.863523+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:08:58.866044+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:08:59.080848+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:08:59.089107+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:01.338144+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:09:01.343702+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:17.580906+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/ace-miniagent/ace-miniagent-musique-20261026-040902-879471",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:09:19.012377+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "ace",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:09:19.015992+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:09:19.019429+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:19.214289+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:09:19.219058+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:20.960113+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:09:20.965345+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:37.659858+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/ace-claude_code/ace-claude_code-musique-20261026-040922-530418",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-validation.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:09:39.081233+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:09:39.085330+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:09:39.088986+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:39.278727+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:09:39.285885+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:40.883632+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:09:40.895243+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:09:59.168533+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/evoprompt-miniagent/evoprompt-miniagent-musique-20261026-040942-404224",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:10:00.610282+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:10:00.614206+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:10:00.623208+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:00.817019+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:10:00.824248+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:02.418220+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:10:02.426027+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:25.258095+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/evoprompt-claude_code/evoprompt-claude_code-musique-20261026-041003-982214",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.6666666666666666
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:10:26.653210+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:10:26.657428+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:10:26.667937+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:26.868353+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:10:26.876577+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:28.428881+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:10:28.443134+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:44.208104+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/gepa-miniagent/gepa-miniagent-musique-20261026-041029-951790",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3529411764705882
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:10:45.657232+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:10:45.661466+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:10:45.672703+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:45.867078+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:10:45.875929+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:10:47.452359+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:10:47.461263+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:11:06.573963+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/gepa-claude_code/gepa-claude_code-musique-20261026-041049-005297",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5454545454545454
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.8
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:11:08.009637+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "adas",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:11:08.014693+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:11:08.023200+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:11:08.207920+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:11:08.217183+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:11:09.887111+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:11:09.937229+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:14:53.277539+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/adas-miniagent/adas-miniagent-musique-20261026-041111-479786",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:14:55.385126+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:14:55.393223+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:14:55.397776+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:14:55.586106+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:14:55.593787+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:14:57.213113+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:14:57.220866+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:16:58.774426+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/adas-claude_code/adas-claude_code-musique-20261026-041458-803751",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.33333333333333326
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:17:01.412274+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:17:01.417256+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:17:01.447928+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:17:01.658400+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:17:01.676563+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:17:03.327495+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:17:03.356533+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:18:26.365412+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-musique-20261026-041704-841645",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.2666666666666667
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:18:27.794987+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:18:27.802675+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:18:27.807681+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:18:28.002498+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:18:28.019890+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:18:29.578334+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:18:29.589093+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:19:21.460792+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-musique-20261026-041831-108274",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.2727272727272727
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:19:22.881994+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:19:22.887720+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:19:22.893399+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:19:23.091066+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:19:23.108934+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:19:24.781051+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:19:24.792582+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:22:07.260503+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/meta_harness-miniagent/meta_harness-miniagent-musique-20261026-041926-301583",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.4
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:22:08.940859+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:22:08.948826+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:22:09.006364+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:22:09.190960+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:22:09.202215+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:22:10.866271+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:22:10.878139+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:16.045836+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/meta_harness-claude_code/meta_harness-claude_code-musique-20261026-042212-506027",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "2hop__145939_86343",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.33333333333333326
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:23:17.469150+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:23:17.476159+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:23:17.482643+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:17.672042+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:23:17.683222+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:19.309231+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:23:19.336712+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:46.409823+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/evo_harness-miniagent/evo_harness-miniagent-musique-20261026-042320-916893",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.6666666666666666
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.5
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:23:47.866407+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:23:47.872069+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:23:47.881351+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:48.074181+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:23:48.084844+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:49.725489+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:23:49.774171+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:56.759627+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/evo_harness-claude_code/evo_harness-claude_code-musique-20261026-042351-336001",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3157894736842105
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:23:58.196057+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:23:58.204753+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:23:58.212992+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:23:58.402279+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:23:58.428789+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:24:00.031313+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:24:00.052299+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:25:50.090816+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/rrsi-miniagent/rrsi-miniagent-musique-20261026-042401-605971",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00013-smoke.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3529411764705882
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 27,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:25:51.548946+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:25:51.557400+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:25:51.566199+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:25:51.753659+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:25:51.909472+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:25:53.525210+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:25:53.566432+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:28:23.210770+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-musique-cachefix-public-20261026/batch-runs/rrsi-claude_code/rrsi-claude_code-musique-20261026-042555-192554",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00013-smoke.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-candidate.json",
+            "task_id": "2hop__92405_64652",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-test.json",
+            "task_id": "2hop__28770_89953",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3529411764705882
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 27,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:28:24.684555+00:00"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:28:24.698315+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:28:24.707784+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:28:24.899396+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:28:24.917800+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T20:28:26.522155+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T20:28:26.529740+00:00",
+      "log_path": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/modular_rsi-miniagent/check-only.log"
+    },
+    {
+      "benchmark": "musique",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:28:26.536681+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:28:26.543870+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:28:26.741420+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-musique-cachefix-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:28:26.758721+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T20:28:28.367053+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T20:28:28.373873+00:00",
+      "log_path": "/root/flashrsi-musique-cachefix-public-20261026/public-bench24-20261026/modular_rsi-claude_code/check-only.log"
+    }
+  ]
+}

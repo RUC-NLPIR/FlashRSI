@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-25T12:47:31.372991+00:00",
+  "scope": "Infrastructure-only Docker TCP-to-native-socket bridge repair; repository source/harness/algorithm/tasks/grading unchanged",
+  "old_idle_seconds": 720,
+  "new_idle_timeout": null,
+  "old_pid": 35678,
+  "new_pid": 13283,
+  "old_endpoint": "tcp://127.0.0.1:44685",
+  "new_endpoint": "tcp://127.0.0.1:40133",
+  "native_socket": "unix:///var/ebcloud/1a19514a-da83-44bf-ad67-397ede8f865f/dind/docker.sock",
+  "engine_id": "9fd1cb5b-99b4-4dc0-ac98-e7249b1e1a89",
+  "code_before_sha256": "714df130f267280a518b8abdd4caa2e3240e0208cb19f2a64845001a3baea281",
+  "code_after_sha256": "5feca14125702cf5c6fee7a2b40bd50fc8bea5660a94f52bf059f2ff2407c0a0",
+  "model_calls": 0,
+  "reason": "Scaled native Docker experiment reproduced premature exit0 with missing marker at idle cutoff; disabling idle cutoff awaited marker. Raw benchmark failures retained."
+}

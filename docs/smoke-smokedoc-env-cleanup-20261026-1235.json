@@ -1,0 +1,41 @@
+{
+  "host": "original",
+  "ssh_port": 31447,
+  "started_at": "2026-10-26T04:59:09.941602+00:00",
+  "before": {
+    "total": 31526391808,
+    "used": 26306363392,
+    "free": 3592638464
+  },
+  "owner_queue": "completed",
+  "scope": "Only ended Banking rebuildable dependency envs; all current/future source/data/results/usage/cache/images/docs preserved",
+  "removed": [
+    {
+      "name": "19d2d4411efa-91a230fa01e7-py312",
+      "manifest": "/root/.cache/env-cleanup-1235/19d2d4411efa-91a230fa01e7-py312.json",
+      "freed_bytes_delta": 999768064
+    },
+    {
+      "name": "6d48a3043dc2-91a230fa01e7-py312",
+      "manifest": "/root/.cache/env-cleanup-1235/6d48a3043dc2-91a230fa01e7-py312.json",
+      "freed_bytes_delta": 999735296
+    },
+    {
+      "name": "cf0d41121315-91a230fa01e7-py312",
+      "manifest": "/root/.cache/env-cleanup-1235/cf0d41121315-91a230fa01e7-py312.json",
+      "freed_bytes_delta": 681709568
+    },
+    {
+      "name": "fd9bd9916f10-91a230fa01e7-py312",
+      "manifest": "/root/.cache/env-cleanup-1235/fd9bd9916f10-91a230fa01e7-py312.json",
+      "freed_bytes_delta": 1007124480
+    }
+  ],
+  "skipped": [],
+  "after": {
+    "total": 31526391808,
+    "used": 22618062848,
+    "free": 7280939008
+  },
+  "finished_at": "2026-10-26T04:59:18.336872+00:00"
+}

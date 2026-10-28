@@ -1,0 +1,29 @@
+{
+  "status": "read_only_evidence_diagnosis_completed",
+  "checked_at": "2026-10-26T09:50:58.250445+00:00",
+  "new_model_calls": 0,
+  "source_modified": false,
+  "counts": {
+    "judge_value_error": 30,
+    "finished_with_host_verifier": 17,
+    "target_40_turns": 20,
+    "target_timeout": 2,
+    "other_native_error": 1
+  },
+  "missing_target_usage_unknown_not_zero": [
+    {
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "file": "00006-test.json",
+      "error_type": "target_timeout"
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "file": "00005-child.json",
+      "error_type": "target_timeout"
+    }
+  ],
+  "finding": "Some judge failures store only ValueError without SDK reply/usage; this evidence gap does not prove one common underlying cause. No prompt/parser/scorer/budget change or paid retry.",
+  "next_step": "Independent minimal recording-only repair with necessary tests/wheel before a new root; original records retained"
+}

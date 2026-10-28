@@ -1,0 +1,2752 @@
+{
+  "host": "smoke2",
+  "benchmark": "bbeh",
+  "judge_profile": "native BBEH filtered evaluation pool",
+  "status": "completed",
+  "updated_at": "2026-10-25T18:58:27.592624+00:00",
+  "counts": {
+    "flow_passed": 21,
+    "needs_attention": 1,
+    "unsupported_configuration": 2
+  },
+  "items": [
+    {
+      "benchmark": "bbeh",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:58:14.185995+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:58:14.187048+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:58:14.497140+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:58:14.499026+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:58:15.895144+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:58:15.900023+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:58:32.718991+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T17:58:33.201854+00:00",
+      "audit_history": [
+        {
+          "raw_status": "completed_pending_audit",
+          "reason": "collector used wrong task identity field; native execution already completed",
+          "review": "smoke-bbeh-collector-review-20261026.json",
+          "new_model_calls": 0
+        }
+      ],
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/opro-miniagent/opro-miniagent-bbeh-20261026-015816-447466",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      }
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:58:33.203066+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:58:33.261048+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:58:33.458402+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:58:33.460880+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:59:10.448689+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:59:10.453106+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:59:57.764061+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T17:59:58.284107+00:00",
+      "audit_history": [
+        {
+          "raw_status": "completed_pending_audit",
+          "reason": "collector used wrong task identity field; native execution already completed",
+          "review": "smoke-bbeh-collector-review-20261026.json",
+          "new_model_calls": 0
+        }
+      ],
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/opro-claude_code/opro-claude_code-bbeh-20261026-015911-065746",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      }
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:59:58.285333+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:59:58.287391+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:59:58.490483+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:59:58.494754+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:59:59.160143+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:59:59.167330+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:00:16.215450+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T18:00:16.602964+00:00",
+      "audit_history": [
+        {
+          "raw_status": "completed_pending_audit",
+          "reason": "collector used wrong task identity field; native execution already completed",
+          "review": "smoke-bbeh-collector-review-20261026.json",
+          "new_model_calls": 0
+        }
+      ],
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-bbeh-20261026-015959-709739",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      }
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:00:16.604302+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:00:16.606061+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:00:16.806804+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:00:16.809468+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:00:17.392384+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:00:17.398051+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:00:53.749021+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T18:00:54.142431+00:00",
+      "audit_history": [
+        {
+          "raw_status": "completed_pending_audit",
+          "reason": "collector used wrong task identity field; native execution already completed",
+          "review": "smoke-bbeh-collector-review-20261026.json",
+          "new_model_calls": 0
+        }
+      ],
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/skillopt-claude_code/skillopt-claude_code-bbeh-20261026-020017-931069",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      }
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:00:54.143806+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:00:54.146301+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:00:54.339042+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:00:54.345821+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:01:30.563077+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:01:30.604316+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:02:55.812789+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-bbeh-20261026-020131-482477",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:02:56.229697+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:02:56.231382+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:02:56.233712+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:02:56.439436+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:02:56.444443+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:03:29.577332+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:03:29.607968+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:05:06.890705+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-bbeh-20261026-020330-420899",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:05:07.477476+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "ace",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:05:07.479304+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:05:07.482545+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:05:07.668741+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:05:07.672171+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:05:08.991006+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:05:08.999018+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:05:31.411040+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/ace-miniagent/ace-miniagent-bbeh-20261026-020509-534373",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:05:31.826556+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "ace",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:05:31.829301+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:05:31.832071+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:05:32.042524+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:05:32.051831+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:05:33.286970+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:05:33.291497+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:06:11.382474+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/ace-claude_code/ace-claude_code-bbeh-20261026-020533-840188",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:06:12.231946+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:06:12.234244+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:06:12.236358+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:06:12.477748+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:06:12.486460+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:06:13.167058+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:06:13.187549+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:06:34.103712+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/evoprompt-miniagent/evoprompt-miniagent-bbeh-20261026-020613-728781",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:06:34.501442+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:06:34.508688+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:06:34.513184+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:06:34.708948+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:06:34.718739+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:06:35.458616+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:06:35.471986+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:07:28.699424+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/evoprompt-claude_code/evoprompt-claude_code-bbeh-20261026-020636-016834",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:07:29.132604+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:07:29.135588+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:07:29.139932+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:07:29.351093+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:07:29.362322+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:07:29.956283+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:07:29.964413+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:07:50.562912+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/gepa-miniagent/gepa-miniagent-bbeh-20261026-020730-509068",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:07:50.979687+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:07:50.984505+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:07:50.988651+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:07:51.182955+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:07:51.194857+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:07:51.787914+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:07:51.796537+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:09:51.658079+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/gepa-claude_code/gepa-claude_code-bbeh-20261026-020752-335969",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:09:52.093692+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "adas",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:09:52.099889+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:09:52.105044+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:09:52.306669+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:09:52.319249+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:09:53.337288+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:09:53.350401+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:16:57.582513+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/adas-miniagent/adas-miniagent-bbeh-20261026-020953-913530",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:16:58.229657+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:16:58.237088+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:16:58.242960+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:16:58.435422+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:16:58.449012+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:16:59.619292+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:16:59.629468+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:18:48.437561+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/adas-claude_code/adas-claude_code-bbeh-20261026-021700-165490",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:18:48.898337+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:18:48.908328+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:18:48.914578+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:18:49.110157+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:18:49.119682+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:18:49.790665+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:18:49.803155+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:21:09.713836+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-bbeh-20261026-021850-349239",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:21:10.268635+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:21:10.274721+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:21:10.281471+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:21:10.502648+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:21:10.513934+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:21:11.342397+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:21:11.357350+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:28:56.053225+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-bbeh-20261026-022111-899869",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00001-baseline.json:target_error"
+        ],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:28:57.105808+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:28:57.111235+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:28:57.120517+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:28:57.362242+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:28:57.379806+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:28:58.469304+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:28:58.482712+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:31:36.050676+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/meta_harness-miniagent/meta_harness-miniagent-bbeh-20261026-022859-030773",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:31:36.809758+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:31:36.819515+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:31:36.826077+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:31:37.072511+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:31:37.088027+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:31:38.112488+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:31:38.134846+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:33:41.522554+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/meta_harness-claude_code/meta_harness-claude_code-bbeh-20261026-023138-681009",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:33:42.012632+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:33:42.019342+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:33:42.029897+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:33:42.249212+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:33:42.264854+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:33:42.887803+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:33:42.906697+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:34:17.925015+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/evo_harness-miniagent/evo_harness-miniagent-bbeh-20261026-023343-471463",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:34:18.333114+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:34:18.337342+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:34:18.344227+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:34:18.540139+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:34:18.557790+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:34:19.170387+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:34:19.196053+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:34:49.567760+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/evo_harness-claude_code/evo_harness-claude_code-bbeh-20261026-023419-742861",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 10,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:34:50.024298+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:34:50.031028+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:34:50.043000+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:34:50.236440+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:34:50.257836+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:34:50.854661+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:34:50.891756+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:41:33.496315+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/rrsi-miniagent/rrsi-miniagent-bbeh-20261026-023451-445144",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-smoke.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00019-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00024-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00014-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00015-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 32,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:41:34.023677+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:41:34.031829+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:41:34.039763+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:41:34.246925+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:41:34.273062+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:41:34.857781+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T18:41:34.872685+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:58:23.102938+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-public-20261026/batch-runs/rrsi-claude_code/rrsi-claude_code-bbeh-20261026-024135-431435",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-smoke.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00023-candidate.json",
+            "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00027-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00014-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00017-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00018-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 36,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T18:58:24.909679+00:00"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:58:24.922505+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:58:24.931262+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:58:25.180333+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:58:25.197128+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T18:58:26.342101+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T18:58:26.351877+00:00",
+      "log_path": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/modular_rsi-miniagent/check-only.log"
+    },
+    {
+      "benchmark": "bbeh",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T18:58:26.356563+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T18:58:26.361582+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T18:58:26.551061+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-bbeh-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T18:58:26.565416+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T18:58:27.561428+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T18:58:27.574066+00:00",
+      "log_path": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/modular_rsi-claude_code/check-only.log"
+    }
+  ],
+  "original_queue_counts": {
+    "completed_pending_audit": 4,
+    "flow_passed": 17,
+    "needs_attention": 1,
+    "unsupported_configuration": 2
+  },
+  "collector_merge_at": "2026-10-25T19:22:07.326803+00:00"
+}

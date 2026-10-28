@@ -1,0 +1,22 @@
+[
+  {
+    "profile": "cf0d41121315",
+    "existing_fingerprint_matches": true,
+    "cache_ready": true
+  },
+  {
+    "profile": "19d2d4411efa",
+    "existing_fingerprint_matches": false,
+    "cache_ready": false
+  },
+  {
+    "profile": "6d48a3043dc2",
+    "existing_fingerprint_matches": false,
+    "cache_ready": false
+  },
+  {
+    "profile": "fd9bd9916f10",
+    "existing_fingerprint_matches": false,
+    "cache_ready": false
+  }
+]

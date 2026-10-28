@@ -1,0 +1,516 @@
+{
+  "host": "smoke2",
+  "benchmark": "twowiki_multihopqa",
+  "judge_profile": "Canonical-answer EM/F1 only; native validation custom1/1/1, independent full native train",
+  "status": "completed",
+  "updated_at": "2026-10-25T23:35:41.324750+00:00",
+  "counts": {
+    "flow_passed": 2
+  },
+  "items": [
+    {
+      "benchmark": "twowiki_multihopqa",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T22:56:03.064132+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T22:56:03.065174+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T22:56:03.348026+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T22:56:03.349847+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T23:03:00.969766+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T23:03:00.972507+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T23:11:28.538713+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-twowiki-evolution-public-20261026/batch-runs/modular_rsi-miniagent/modular_rsi-miniagent-twowiki_multihopqa-20261026-070737-299836",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00013-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00014-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00018-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00023-execution_gate.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00026-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00031-execution_gate.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00034-execution_gate.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00037-test.json",
+            "task_id": "f7ccb422088311ebbd6dac1f6bf848b6",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00016-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00021-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00028-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00029-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 271,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 45,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T23:16:01.927782+00:00"
+    },
+    {
+      "benchmark": "twowiki_multihopqa",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T23:16:01.932496+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T23:16:01.933754+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T23:16:02.412322+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T23:16:02.416108+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T23:20:36.345088+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/configs/modular_rsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T23:20:36.348408+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T23:27:48.658607+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-twowiki-evolution-public-20261026/batch-runs/modular_rsi-claude_code/modular_rsi-claude_code-twowiki_multihopqa-20261026-072517-823092",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-execution_gate.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00018-contrast.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "18488c340bdc11eba7f7acde48001122",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-test.json",
+            "task_id": "f7ccb422088311ebbd6dac1f6bf848b6",
+            "status": "finished",
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 271,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 32,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T23:35:41.323071+00:00"
+    }
+  ]
+}

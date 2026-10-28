@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-10-25T19:29:01.595546+00:00",
+  "capability": "HotpotQA evolution_split selects an independent pinned native source split; full pools checked before limiting",
+  "public_example": "examples/modular_rsi_hotpotqa.yaml",
+  "implementation_scope": "Benchmark loader and task question fingerprint only; native scoring and ModularRSI gates unchanged",
+  "tests": {
+    "passed": 68,
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "fresh_wheel_install_and_cli_help": "passed",
+    "installed_wheel_context_fullwiki_grading_and_overlap_guard": "passed"
+  },
+  "wheel_sha256": "70e6a2b2162f02d39953c218a391a4cf3740b1545cc8420b7c3184ac79ee334d",
+  "affected_module_sha256": "df8bcf0759aa356cdf192fa6988ca8ffd7de24bde8942674793a2c1bc8b9afb7",
+  "real_native_data": "Both Targets passed public --plan and --check-only with complete pinned official train/validation pools and whole-pool overlap guard",
+  "real_model_smoke": "in progress, not yet passed",
+  "new_model_calls_for_tests": 0,
+  "new_root": "/root/flashrsi-hotpot-evolution-public-20261026",
+  "control": "independent-hotpot2-20261026",
+  "source_files": 267,
+  "old_frozen_sources_modified": false,
+  "downstream_protocol": "official validation pool custom 1/1/1, train replaced by official independent train, dev/test membership unchanged",
+  "native_report": "validation-hotpot-independent-native-20261026.json"
+}

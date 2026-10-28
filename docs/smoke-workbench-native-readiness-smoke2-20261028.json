@@ -1,0 +1,59 @@
+{
+  "status": "native_data_ready_no_model",
+  "model_calls": 0,
+  "free_bytes": 1483284480,
+  "tasks": {
+    "train": [
+      {
+        "id": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+        "question_sha256": "fc8488a27e0b3b37cdecf66f215edd294158374b71e32a10a2bb371b55920e8e",
+        "checksum": "6eb34c29f43774d96cc1d1b8c6887360b5a82747b018d5395aadfcb17d85c6b3"
+      }
+    ],
+    "dev": [
+      {
+        "id": "7ba7d77ae5c8dd61448d72ecf481d0d849f875e349637de9f947b01bc1cce18f",
+        "question_sha256": "7ba7d77ae5c8dd61448d72ecf481d0d849f875e349637de9f947b01bc1cce18f",
+        "checksum": "018c05a2f19ddec39ed1744476be1168ee2f600f97d764be5e71db6fee985c56"
+      }
+    ],
+    "test": [
+      {
+        "id": "3da9818a467c62727cda639ee1ca2b0a73cf00b2ca6da09cb0d7b9487d21522b",
+        "question_sha256": "3da9818a467c62727cda639ee1ca2b0a73cf00b2ca6da09cb0d7b9487d21522b",
+        "checksum": "789687c8102af5dda376a75498d950669175a0d309752015ca7017c4018a97fe"
+      }
+    ]
+  },
+  "native_data_files": 12,
+  "data_checksum": "f95b6b2a8a108866e8dd3b87ccbe29e12250ae84388bc3bd9f147a84c803215e",
+  "upstream_root": "/root/.cache/FlashRSI/huggingface/flashrsi/upstream/WorkBench/49c7dfd00c03d384ec59ea57374f50b766aa5613",
+  "data_root": "/root/.cache/FlashRSI/huggingface/flashrsi/upstream/WorkBench/49c7dfd00c03d384ec59ea57374f50b766aa5613/data",
+  "source_version": {
+    "source": "https://github.com/olly-styles/WorkBench",
+    "revision": "49c7dfd00c03d384ec59ea57374f50b766aa5613",
+    "ground_truth_version": "v2",
+    "execution": "native-harness-local-tools",
+    "scoring": "native-database-state",
+    "native_splits": [
+      "unassigned"
+    ],
+    "data_path": "/root/.cache/FlashRSI/huggingface/flashrsi/upstream/WorkBench/49c7dfd00c03d384ec59ea57374f50b766aa5613/data",
+    "data_checksum": "f95b6b2a8a108866e8dd3b87ccbe29e12250ae84388bc3bd9f147a84c803215e",
+    "data_mode": "pinned-upstream",
+    "domains": [
+      "analytics",
+      "calendar",
+      "customer_relationship_manager",
+      "email",
+      "multi_domain",
+      "project_management"
+    ]
+  },
+  "package_capabilities": {
+    "pandas": true,
+    "numpy": true,
+    "openai": true,
+    "claude_agent_sdk": true
+  }
+}

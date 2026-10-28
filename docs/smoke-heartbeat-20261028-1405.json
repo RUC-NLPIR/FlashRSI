@@ -1,0 +1,217 @@
+{
+  "checked_at": "2026-10-28T14:20:42.434938+08:00",
+  "new_passes": [
+    {
+      "benchmark": "NQ",
+      "target": "Claude Code",
+      "algorithm": "ModularRSI",
+      "report": "smoke-nq-modular-claude_code-same-source-20261028.json",
+      "reference": "NMS28C",
+      "status": "flow_passed",
+      "targets": 11,
+      "workers": 5,
+      "credential_files": 32,
+      "source_files": 230,
+      "test_score": 0.0,
+      "completed_at": "2026-10-28T14:06:55.864636+08:00"
+    },
+    {
+      "benchmark": "NQ",
+      "target": "MiniAgent",
+      "algorithm": "ModularRSI",
+      "report": "smoke-nq-modular-miniagent-same-source-20261028.json",
+      "reference": "NMS28M",
+      "status": "flow_passed",
+      "targets": 17,
+      "workers": 15,
+      "credential_files": 61,
+      "source_files": 230,
+      "test_score": 0.0,
+      "completed_at": "2026-10-28T14:06:55.864636+08:00"
+    }
+  ],
+  "totals": {
+    "pass": 530,
+    "failed": 14,
+    "blocked": 14,
+    "partial": 42,
+    "pending": 24
+  },
+  "main_pass": 471,
+  "main_remaining": 9,
+  "focused_remaining_with_additions": 57,
+  "new_benchmarks": 0,
+  "product_source_changes": 0,
+  "live_queues": {
+    "smoke2": [],
+    "smoke3": [],
+    "smoke4": [
+      {
+        "control": "browse-modular-same-source-1310",
+        "id": "browse-modular-claude_code-same-source",
+        "target": "claude_code",
+        "status": "running",
+        "phase": "experiment",
+        "active_pid": 3578,
+        "report": "smoke-browse-modular-claude_code-same-source-20261028.json"
+      },
+      {
+        "control": "browse-modular-same-source-1310",
+        "id": "browse-modular-miniagent-same-source",
+        "target": "miniagent",
+        "status": "pending",
+        "phase": null,
+        "active_pid": null,
+        "report": "smoke-browse-modular-miniagent-same-source-20261028.json"
+      }
+    ],
+    "smoke5": []
+  },
+  "nq_readiness": "smoke-nq-modular-same-source-readiness-20261028-1400.json",
+  "new_failures": [
+    {
+      "benchmark": "τ² Airline",
+      "target": "MiniAgent",
+      "algorithm": "ModularRSI",
+      "config": "Worker120/1200",
+      "reason": "Claude8192 output limit",
+      "report": "smoke-airline-modular-mini-worker120-20261028.json",
+      "native_failure_proof": "smoke-airline-modular-mini-worker120-failure-audit-20261028.json"
+    }
+  ],
+  "free_preparation": [
+    {
+      "proof": "smoke-bfcl-native-readiness-20261028-1400.json",
+      "model_calls": 0,
+      "state": "native_data_ready_unpaid",
+      "image_state": {
+        "status": "preparation_blocked",
+        "model_calls": 0,
+        "native_dockerfile_sha256": "ed9acb2593abe9a9aa45e6c7582f60054cb96881e5a52c2b7a1057486da7fa43",
+        "recipe_modified": false,
+        "engine_before": "194c6a2b-831c-4ea5-a5ec-b23645072a61",
+        "build_exit_code": 1,
+        "error_type": "AssertionError"
+      }
+    },
+    {
+      "proof": "smoke-spreadsheetbench2-native-preflight-20261028-1315.json",
+      "model_calls": 0,
+      "native_numeric_controls_proven": true,
+      "image_state": {
+        "status": "preparation_blocked",
+        "model_calls": 0,
+        "recovery_scope": "host-proxy-download-of-immutable-official-image",
+        "checks": [],
+        "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+        "error_type": "URLError",
+        "updated_at": "2026-10-28T05:06:23.488923+00:00"
+      },
+      "image_proof": "smoke-spreadsheetbench2-image-readiness-20261028-1400.json",
+      "latest_image_states": {
+        "registry-network-diagnostic-1335.json": {
+          "model_calls": 0,
+          "requests": [
+            {
+              "service": "registry",
+              "http_status": 401
+            },
+            {
+              "service": "anonymous-auth",
+              "status": 200
+            }
+          ],
+          "checked_at": "2026-10-28T05:35:11.929833+00:00"
+        },
+        "image-host-proxy-recovery-1340/state.json": {
+          "previous_block_retained": true,
+          "new_condition": "fresh registry401 and anonymous-auth200 over existingproxy",
+          "status": "preparation_blocked",
+          "model_calls": 0,
+          "recovery_scope": "host-proxy-download-of-immutable-official-image",
+          "checks": [],
+          "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+          "registry_proxy_http": 401,
+          "error_type": "TimeoutError",
+          "updated_at": "2026-10-28T05:37:34.394600+00:00"
+        },
+        "manifest-http1-probe-1350/state.json": {
+          "status": "official_immutable_manifest_proven",
+          "model_calls": 0,
+          "transport": "curl HTTP1.1 existing loopbackproxy; bounded once",
+          "phase": "official-amd64-manifest",
+          "auth_http_success": true,
+          "manifest_digest": "sha256:7a7e4379c9646c52161f03292380b8254adc51d8a44ebffbd03262d02736108e",
+          "image_config_digest": "sha256:ce5a577cc7b127c5dc3f2f29a5de15b5127814b3b8a27ed784d418624ac9e5c1",
+          "layer_bytes": 351852720
+        },
+        "image-http1-proven-1355/state.json": {
+          "status": "preparation_blocked",
+          "model_calls": 0,
+          "checks": [
+            {
+              "phase": "install-host-skopeo",
+              "exit_code": 0
+            },
+            {
+              "phase": "official-immutable-base-copy",
+              "exit_code": 1
+            }
+          ],
+          "manifest_digest": "sha256:7a7e4379c9646c52161f03292380b8254adc51d8a44ebffbd03262d02736108e",
+          "image_config_digest": "sha256:ce5a577cc7b127c5dc3f2f29a5de15b5127814b3b8a27ed784d418624ac9e5c1",
+          "new_condition": "complete immutable manifest verified via HTTP1.1",
+          "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+          "phase": "official-immutable-base-copy",
+          "error_type": "AssertionError"
+        },
+        "checked_at": "2026-10-28T14:04:13.193652+08:00",
+        "model_calls": 0,
+        "model_smoke_pass": false
+      }
+    }
+  ],
+  "spreadsheet_image_transport": {
+    "checked_at": "2026-10-28T14:20:42.434938+08:00",
+    "model_calls": 0,
+    "model_smoke_pass": false,
+    "states": {
+      "image-archive-import-1410/state.json": {
+        "status": "preparation_blocked",
+        "model_calls": 0,
+        "checks": [
+          {
+            "phase": "existing-host-skopeo",
+            "exit_code": 0
+          },
+          {
+            "phase": "official-immutable-base-copy",
+            "exit_code": 1
+          }
+        ],
+        "manifest_digest": "sha256:7a7e4379c9646c52161f03292380b8254adc51d8a44ebffbd03262d02736108e",
+        "image_config_digest": "sha256:ce5a577cc7b127c5dc3f2f29a5de15b5127814b3b8a27ed784d418624ac9e5c1",
+        "new_condition": "complete immutable manifest verified via HTTP1.1",
+        "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+        "phase": "official-immutable-base-copy",
+        "error_type": "AssertionError"
+      },
+      "verified-curl-oci-1415/state.json": {
+        "status": "preparation_blocked",
+        "model_calls": 0,
+        "new_condition": "Go registry transport EOF despite verified complete curl HTTP1.1 manifests; download each official blob once with SHA256 verification",
+        "completed_blobs": [],
+        "checks": [],
+        "manifest_digest": "sha256:7a7e4379c9646c52161f03292380b8254adc51d8a44ebffbd03262d02736108e",
+        "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+        "phase": "download_official_blob",
+        "current_blob": "sha256:ce5a577cc7b127c5dc3f2f29a5de15b5127814b3b8a27ed784d418624ac9e5c1",
+        "current_blob_bytes": 6176,
+        "error_type": "AssertionError",
+        "updated_at": "2026-10-28T06:19:47.271254+00:00"
+      }
+    },
+    "original_evaluator_proof": "smoke-spreadsheetbench2-native-preflight-20261028-1315.json",
+    "manifest_proof": "smoke-spreadsheetbench2-image-readiness-20261028-1400.json"
+  }
+}

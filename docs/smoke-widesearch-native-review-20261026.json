@@ -1,0 +1,503 @@
+{
+  "checked_at": "2026-10-26T05:15:49.899675+00:00",
+  "items": [
+    {
+      "algorithm": "opro",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 7,
+            "prompt_tokens": 3184,
+            "completion_tokens": 1605,
+            "total_tokens": 4789
+          },
+          "error": null
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        },
+        {
+          "file": "00005-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "opro",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Reached maximum number of turns (40)"
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        },
+        {
+          "file": "00005-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 401,
+            "completion_tokens": 37,
+            "total_tokens": 438
+          },
+          "error": null
+        },
+        {
+          "file": "00002-train.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 401,
+            "completion_tokens": 42,
+            "total_tokens": 443
+          },
+          "error": null
+        },
+        {
+          "file": "00006-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Reached maximum number of turns (40)"
+        },
+        {
+          "file": "00002-train.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Reached maximum number of turns (40)"
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Reached maximum number of turns (40)"
+        },
+        {
+          "file": "00006-test.json",
+          "status": "error",
+          "usage_present": false,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Claude Code timed out after 1200s"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 7,
+            "prompt_tokens": 3184,
+            "completion_tokens": 2736,
+            "total_tokens": 5920
+          },
+          "error": null
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        },
+        {
+          "file": "00005-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Reached maximum number of turns (40)"
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        },
+        {
+          "file": "00005-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "ace",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-validation.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 410,
+            "completion_tokens": 514,
+            "total_tokens": 924
+          },
+          "error": null
+        },
+        {
+          "file": "00002-train.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        },
+        {
+          "file": "00006-validation.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 401,
+            "completion_tokens": 50,
+            "total_tokens": 451
+          },
+          "error": null
+        },
+        {
+          "file": "00008-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        },
+        {
+          "file": "00004-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "ace",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-validation.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "API Error: Connection dropped (ECONNRESET)"
+        },
+        {
+          "file": "00002-train.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        },
+        {
+          "file": "00006-validation.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Reached maximum number of turns (40)"
+        },
+        {
+          "file": "00008-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "Reached maximum number of turns (40)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        },
+        {
+          "file": "00004-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 403,
+            "completion_tokens": 245,
+            "total_tokens": 648
+          },
+          "error": null
+        },
+        {
+          "file": "00003-seed.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 401,
+            "completion_tokens": 42,
+            "total_tokens": 443
+          },
+          "error": null
+        },
+        {
+          "file": "00005-child.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 401,
+            "completion_tokens": 77,
+            "total_tokens": 478
+          },
+          "error": null
+        },
+        {
+          "file": "00007-child.json",
+          "status": "finished",
+          "usage_present": true,
+          "verifier_events": 1,
+          "judge_usage": {
+            "requests": 1,
+            "prompt_tokens": 401,
+            "completion_tokens": 66,
+            "total_tokens": 467
+          },
+          "error": null
+        },
+        {
+          "file": "00010-test.json",
+          "status": "error",
+          "usage_present": true,
+          "verifier_events": 0,
+          "judge_usage": null,
+          "error": "WideSearch judge failed (ValueError)"
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        },
+        {
+          "file": "00004-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        },
+        {
+          "file": "00006-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "error": null
+        }
+      ],
+      "reason": "Native errors are retained; absence of verifier is not a successful zero score. Judge ValueError underlying cause is not recoverable from this frozen version."
+    }
+  ],
+  "new_model_calls": 0,
+  "native_records_changed": false,
+  "queue_counts_at_review": {
+    "needs_attention": 9,
+    "running": 1,
+    "pending": 14
+  }
+}

@@ -1,0 +1,444 @@
+{
+  "checked_at": "2026-10-25T23:01:22.057745+00:00",
+  "scope_benchmarks": 21,
+  "scope_cells": 504,
+  "matrix_counts": {
+    "pass": 385,
+    "partial_or_running": 47,
+    "failed": 9,
+    "unsupported": 22,
+    "pending": 41
+  },
+  "machines": {
+    "WorkBench": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T18:18:02.063148+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "OfficeQAPro": {
+      "raw_counts": {
+        "flow_passed": 10,
+        "needs_attention": 11,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T17:58:07.530644+00:00",
+      "effective_counts": {
+        "flow_passed": 10,
+        "needs_attention": 11,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "DeepSearchQA": {
+      "raw_counts": {
+        "flow_passed_with_limitations": 1,
+        "flow_passed_custom_judge": 12,
+        "execution_failed": 1,
+        "needs_attention": 8,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T20:25:19.539459+00:00",
+      "effective_counts": {
+        "flow_passed_with_limitations": 1,
+        "flow_passed_custom_judge": 12,
+        "execution_failed": 1,
+        "needs_attention": 8,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "BBEH": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "needs_attention": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T18:58:27.592624+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "needs_attention": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "SuperGPQA": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T21:21:21.030472+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "CRUXEval-O": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T19:36:23.192981+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "MATH-500": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T20:01:40.736303+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "MuSiQue": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T20:28:28.379726+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "AIME 2025": {
+      "raw_counts": {
+        "flow_passed": 23,
+        "execution_failed": 1
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T22:20:47.772110+00:00",
+      "effective_counts": {
+        "flow_passed": 23,
+        "execution_failed": 1
+      },
+      "current": []
+    },
+    "TriviaQA": {
+      "raw_counts": {
+        "flow_passed": 7,
+        "preparing": 1,
+        "pending": 16
+      },
+      "status": "running",
+      "updated_at": "2026-10-25T22:59:44.059486+00:00",
+      "effective_counts": {
+        "flow_passed": 7,
+        "preparing": 1,
+        "pending": 16
+      },
+      "current": []
+    },
+    "τ² Airline": {
+      "raw_counts": {
+        "flow_passed": 1,
+        "needs_attention": 20,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T22:58:37.257705+00:00",
+      "effective_counts": {
+        "partial": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "TravelPlanner": {
+      "raw_counts": {
+        "pending": 24
+      },
+      "status": "preparation_blocked",
+      "updated_at": "2026-10-25T23:01:12.827539+00:00",
+      "effective_counts": {
+        "pending": 24
+      },
+      "current": []
+    }
+  },
+  "aime_independent": {
+    "status": "completed",
+    "counts": {
+      "execution_failed": 1,
+      "flow_passed": 1
+    },
+    "updated_at": "2026-10-25T19:10:03.586535+00:00"
+  },
+  "new_benchmarks_this_check": [
+    "TravelPlanner"
+  ],
+  "math_independent": {
+    "status": "completed",
+    "counts": {
+      "execution_failed": 1,
+      "flow_passed": 1
+    },
+    "updated_at": "2026-10-25T21:04:22.043721+00:00"
+  },
+  "hotpot_independent": {
+    "status": "completed",
+    "counts": {
+      "flow_passed": 2
+    },
+    "updated_at": "2026-10-25T20:28:09.373615+00:00"
+  },
+  "musique_independent": {
+    "status": "completed",
+    "counts": {
+      "execution_failed": 1,
+      "flow_passed": 1
+    },
+    "updated_at": "2026-10-25T22:26:37.688103+00:00"
+  },
+  "repair_queues": {
+    "DeepSearchQA": {
+      "status": "completed",
+      "counts": {
+        "needs_attention": 1
+      },
+      "updated_at": "2026-10-25T21:41:02.504603+00:00"
+    },
+    "SuperGPQA": {
+      "status": "completed",
+      "counts": {
+        "flow_passed": 1
+      },
+      "updated_at": "2026-10-25T21:41:31.735738+00:00"
+    },
+    "AIME 2025": {
+      "status": "completed",
+      "counts": {
+        "flow_passed": 1
+      },
+      "updated_at": "2026-10-25T22:23:49.494007+00:00"
+    }
+  },
+  "new_model_calls_by_audit": 0,
+  "live_hosts": {
+    "original": {
+      "host": "original",
+      "checked_at": "2026-10-25T22:59:51.671950+00:00",
+      "disk_free_gib": 10.68,
+      "queues": [
+        {
+          "root": "/root/flashrsi-triviaqa-public-20261026",
+          "counts": {
+            "flow_passed": 7,
+            "preparing": 1,
+            "pending": 16
+          },
+          "current": [
+            {
+              "algorithm": "ace",
+              "target": "claude_code",
+              "status": "preparing"
+            }
+          ],
+          "source_changes": [],
+          "followup-state.json": {
+            "status": "dispatched",
+            "updated_at": "2026-10-25T21:39:54.838158+00:00",
+            "new_model_calls": 0,
+            "supervisor_pid": 30282,
+            "paid_attempt_limit_per_case": 1
+          }
+        }
+      ],
+      "processes": [
+        {
+          "pid": 30282,
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-triviaqa-public-20261026/public-bench24-20261026/supervisor.py"
+          ],
+          "cwd": "/root/flashrsi-triviaqa-public-20261026"
+        },
+        {
+          "pid": 32524,
+          "argv": [
+            "/root/.cache/FlashRSI/envs/0c11d02d809b-16fcef5c9432-py312/bin/python",
+            "/root/flashrsi-triviaqa-public-20261026/scripts/run_experiment.py"
+          ],
+          "cwd": "/root/flashrsi-triviaqa-public-20261026"
+        },
+        {
+          "pid": 32525,
+          "argv": [
+            "/root/.cache/FlashRSI/envs/bootstrap-py312/bin/python",
+            "-I"
+          ],
+          "cwd": "/root/flashrsi-triviaqa-public-20261026"
+        },
+        {
+          "pid": 32526,
+          "argv": [
+            "/root/.cache/FlashRSI/envs/f2d8249ce0a9-ce7d466ea47d-py312/bin/python",
+            "-I"
+          ],
+          "cwd": "/root/flashrsi-triviaqa-public-20261026"
+        }
+      ]
+    },
+    "smoke2": {
+      "host": "smoke2",
+      "checked_at": "2026-10-25T22:59:51.712698+00:00",
+      "disk_free_gib": 4.11,
+      "queues": [
+        {
+          "root": "/root/flashrsi-twowiki-evolution-public-20261026",
+          "counts": {
+            "preparing": 1,
+            "pending": 1
+          },
+          "current": [
+            {
+              "algorithm": "modular_rsi",
+              "target": "miniagent",
+              "status": "preparing"
+            }
+          ],
+          "source_changes": [],
+          "followup-state.json": {
+            "status": "dispatched",
+            "updated_at": "2026-10-25T22:56:03.029754+00:00",
+            "new_model_calls": 0,
+            "supervisor_pid": 36189,
+            "paid_attempt_limit_per_case": 1
+          }
+        }
+      ],
+      "processes": [
+        {
+          "pid": 36189,
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/independent-twowiki2-20261026/supervisor.py"
+          ],
+          "cwd": "/root/flashrsi-twowiki-evolution-public-20261026"
+        },
+        {
+          "pid": 36192,
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-twowiki-evolution-public-20261026/scripts/run_experiment.py"
+          ],
+          "cwd": "/root/flashrsi-twowiki-evolution-public-20261026"
+        },
+        {
+          "pid": 36193,
+          "argv": [
+            "/root/.cache/FlashRSI/envs/bootstrap-py312/bin/python",
+            "-I"
+          ],
+          "cwd": "/root/flashrsi-twowiki-evolution-public-20261026"
+        },
+        {
+          "pid": 36194,
+          "argv": [
+            "/root/.cache/FlashRSI/envs/4d10427e7d60-fae284dc65d5-py312/bin/python",
+            "-I"
+          ],
+          "cwd": "/root/flashrsi-twowiki-evolution-public-20261026"
+        }
+      ]
+    },
+    "smoke3": {
+      "host": "smoke3",
+      "checked_at": "2026-10-25T22:59:51.690104+00:00",
+      "disk_free_gib": 4.2,
+      "queues": [
+        {
+          "root": "/root/flashrsi-tau2-airline-public-20261026",
+          "counts": {
+            "flow_passed": 1,
+            "needs_attention": 20,
+            "execution_failed": 1,
+            "unsupported_configuration": 2
+          },
+          "current": [],
+          "source_changes": [],
+          "followup-state.json": {
+            "status": "dispatched",
+            "updated_at": "2026-10-25T21:41:46.464897+00:00",
+            "new_model_calls": 0,
+            "supervisor_pid": 34373,
+            "paid_attempt_limit_per_case": 1
+          }
+        },
+        {
+          "root": "/root/flashrsi-travelplanner-public-20261026",
+          "counts": {
+            "pending": 24
+          },
+          "current": [],
+          "source_changes": [],
+          "followup-state.json": {
+            "status": "preparation_blocked",
+            "updated_at": "2026-10-25T22:58:25.922433+00:00",
+            "new_model_calls": 0,
+            "algorithm": "opro",
+            "target": "miniagent",
+            "phase": "check-only",
+            "exit_code": 1
+          },
+          "network-resume-state.json": {
+            "checked_at": "2026-10-25T22:57:53.814329+00:00",
+            "status": "bounded_preparation_retry_dispatched",
+            "free_probes": [
+              {
+                "attempt": 1,
+                "status": 200
+              }
+            ],
+            "max_probes": 10,
+            "paid_model_calls_by_monitor": 0,
+            "followup_pid": 48632,
+            "max_automatic_retries": 1
+          }
+        }
+      ],
+      "processes": []
+    }
+  },
+  "new_capabilities": [
+    "TwoWiki evolution_split/evolution_limit; both public Target checks passed",
+    "SearchQA evolution_split/evolution_limit; native split overlap rejection confirmed, no paid runs"
+  ],
+  "product_validation": "35relatedtests, affected Ruff/format, fresh wheel installed module/native schema grading and CLI help/prepare-only passed",
+  "native_pool_overlap": {
+    "train_validation": 439,
+    "train_test": 145,
+    "validation_test": 23
+  },
+  "travelplanner_preparation": "HF SSL EOF twice, zero model calls, bounded preparation retry exhausted; no new private adapter"
+}

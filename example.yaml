@@ -4,7 +4,8 @@ run:
 
 benchmark:
   name: searchqa
-  split: auto
+  split: auto # Preserve native splits; missing dev/test stay empty.
+  # To define your experiment, see examples/benchmark-partitions.yaml.
 
 agent:
   name: miniagent

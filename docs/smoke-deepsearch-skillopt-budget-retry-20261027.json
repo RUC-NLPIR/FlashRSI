@@ -1,0 +1,361 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-26T20:27:52.880774+00:00",
+  "items": [
+    {
+      "id": "deepsearch-skillopt-cc",
+      "root": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026",
+      "config": "/root/.cache/deepsearch-skillopt-budget-0405/smoke.local.yaml",
+      "health_config": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/skillopt-claude-retry-20261026/configs/skillopt-claude_code.local.yaml",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "status": "flow_passed",
+      "report": "smoke-deepsearch-skillopt-budget-retry-20261027.json",
+      "proxy": "http://127.0.0.1:33616",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "audit_source": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/skillopt-claude-retry-20261026/audit.py",
+      "judge_scope": "Existing explicit custom DeepSeek Judge; not official model leaderboard",
+      "phase": "experiment",
+      "updated_at": "2026-10-26T20:08:30.109042+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/budget-runs-20261027/deepsearch-skillopt-cc/skillopt-claude_code-deepsearchqa-20261027-040830-512915",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "deepsearchqa-4780b3d2b29da01ed98574a7c0dade596025740a3a2d3c5be2679c6637a8d632",
+            "status": "finished",
+            "metrics": {
+              "precision": 1.0,
+              "recall": 0.25,
+              "f1_score": 0.4,
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": "openai",
+                "profile": "custom"
+              }
+            ]
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "deepsearchqa-64dc224dcbe300f7cec4782c039f806462d7d9f8dc06e433a936de28aea33bd5",
+            "status": "finished",
+            "metrics": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1_score": 1.0,
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": "openai",
+                "profile": "custom"
+              }
+            ]
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "deepsearchqa-51e08fd8b7c8581d148c886a5d3c24a1a92f6230c4ba78a70df562140a91b959",
+            "status": "finished",
+            "metrics": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1_score": 1.0,
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": "openai",
+                "profile": "custom"
+              }
+            ]
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          }
+        ],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 10,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "openai"
+      },
+      "ended_at": "2026-10-26T20:27:52.880084+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User explicitly authorized increased budgets; one attempt per configuration; original 1/1/1 tasks and scoring preserved."
+}

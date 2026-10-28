@@ -1,0 +1,256 @@
+{
+  "status": "execution_failed",
+  "updated_at": "2026-10-28T05:08:59.585729+00:00",
+  "items": [
+    {
+      "id": "airline-modular-miniagent-same-source",
+      "algorithm": "ModularRSI",
+      "target": "miniagent",
+      "benchmark": "tau2",
+      "status": "execution_failed",
+      "root": "/root/flashrsi-modular-focus-public-20261028",
+      "config": "/root/.cache/airline-modular-same-source-1205/miniagent.local.yaml",
+      "health_config": "/root/.cache/airline-modular-same-source-1205/miniagent.local.yaml",
+      "proxy": "http://127.0.0.1:33620",
+      "audit_source": "/root/.cache/airline-modular-same-source-1205/audit.py",
+      "report": "smoke-airline-modular-miniagent-same-source-20261028.json",
+      "further_automatic_budget_escalation": false,
+      "environment": {
+        "TAU2_DATA_DIR": "/root/.cache/FlashRSI/huggingface/flashrsi/upstream/tau2-bench/fc0055dc4e0a316c3f83133267fbd6faaa770992/data"
+      },
+      "audit_python": "/root/.cache/FlashRSI/envs/6d48a3043dc2-ca2dd2666077-py312/bin/python",
+      "phase": "experiment",
+      "updated_at": "2026-10-28T04:30:03.695119+00:00",
+      "exit_code": 1,
+      "ended_at": "2026-10-28T05:08:59.564331+00:00",
+      "failure_audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/.cache/airline-modular-same-source-1205/experiments-miniagent/modular_rsi-miniagent-tau2-20261028-123008-040649",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00026-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00032-execution_gate.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00035-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00036-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00018-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00019-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00028-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00029-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00030-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00038-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00039-worker.json",
+            "status": "error",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00039-worker.json:worker_error",
+          "result_not_finished",
+          "no_test"
+        ],
+        "source_file_count": 230,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 49,
+          "hits": []
+        },
+        "test_score": null,
+        "judge_profile": "native",
+        "source_policy": "ordinary_same_source_train_dev_test",
+        "benchmark_metadata": {
+          "source": "https://github.com/sierra-research/tau2-bench.git",
+          "revision": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+          "tag": "v1.0.1",
+          "domain": "airline",
+          "task_split": "train",
+          "mode": "text",
+          "aggregation": "single_trial_mean_reward"
+        }
+      }
+    }
+  ],
+  "counts": {
+    "execution_failed": 1
+  },
+  "budget_authorization": "User authorized same-source ModularRSI. OriginalAirline tasks/111/seed42, native session100 already shared22nonMod passed; CC40/1200 Mini8/600 independentClaudeWorker60/600. One new configuration each, no automatic escalation."
+}

@@ -1,0 +1,35 @@
+{
+  "utc": "2026-10-27T00:06:25.506309+00:00",
+  "jobs": [
+    {
+      "id": "deepsearch-evoprompt-budget-0705",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 18871,
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "source_changes": [],
+      "target_statuses": {
+        "error": 3,
+        "finished": 1
+      },
+      "worker_statuses": {
+        "finished": 3
+      },
+      "missing_usage": 0,
+      "active_process_present": true,
+      "paid_marker": true
+    }
+  ],
+  "disk_free": 1359224832
+}

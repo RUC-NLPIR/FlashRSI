@@ -1,0 +1,23 @@
+{
+  "engine": "389a2b6d-4921-43e1-a805-eddbe6116e81",
+  "previous_free_probe_engine": "88f71a60-f1cf-4c56-a785-4dbf79c0337d",
+  "images": [
+    {
+      "name": "alexgshaw/adaptive-rejection-sampler:20251031",
+      "present": false,
+      "id_matches_original": false
+    },
+    {
+      "name": "alexgshaw/polyglot-rust-c:20251031",
+      "present": false,
+      "id_matches_original": false
+    },
+    {
+      "name": "alexgshaw/llm-inference-batching-scheduler:20251031",
+      "present": false,
+      "id_matches_original": false
+    }
+  ],
+  "model_calls": 0,
+  "no_engine_reset_issued": true
+}

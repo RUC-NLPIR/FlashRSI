@@ -1,0 +1,85 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-27T23:19:18.866843+00:00",
+  "items": [
+    {
+      "root": "/root/flashrsi-banking-bm25-public-20261027",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "proxy": "http://127.0.0.1:33619",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "audit_source": "/root/.cache/banking-bm25-2238/audit.py",
+      "id": "banking100-meta_harness-claude_code",
+      "config": "/root/.cache/banking-metaharness-worker120-0620/meta_harness-claude_code.local.yaml",
+      "health_config": "/root/.cache/banking-metaharness-worker120-0620/meta_harness-claude_code.local.yaml",
+      "report": "smoke-banking-bm25-steps100-meta_harness-claude_code-20261028.json",
+      "status": "flow_passed",
+      "budget_changes": [],
+      "phase": "experiment",
+      "updated_at": "2026-10-27T22:27:28.342057+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/.cache/banking-metaharness-worker120-0620/experiments/meta_harness-claude_code/meta_harness-claude_code-tau3_banking-20261028-062732-742675",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "task_019",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "task_019",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "task_004",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 193,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-27T22:40:38.025791+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User explicitly authorized native Banking BM25 variant; original 1/1/1 and role budgets preserved; one attempt per configuration. MetaMini Worker120/1200 authorized after trueWorker60 limit; others original budgets."
+}

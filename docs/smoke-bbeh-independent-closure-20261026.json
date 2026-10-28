@@ -1,0 +1,314 @@
+{
+  "checked_at": "2026-10-26T02:56:33.030470+00:00",
+  "items": [
+    {
+      "target": "miniagent",
+      "raw_status": "execution_failed",
+      "stages": {
+        "worker_finished": 3,
+        "target_finished": 2
+      },
+      "terminal_error": {
+        "status": "error",
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "result": null,
+      "audit": null
+    },
+    {
+      "target": "claude_code",
+      "raw_status": "flow_passed",
+      "stages": {
+        "target_finished": 15,
+        "worker_finished": 13
+      },
+      "terminal_error": null,
+      "result": {
+        "status": "finished",
+        "snapshot_id": "4ad8230ac8da2590320534d3ca86311621f837db8ecd0bc97481c416cff2853b",
+        "primary_metric": "accuracy",
+        "test_score": 1.0,
+        "test_tasks": 1,
+        "test_metrics": {
+          "accuracy": 1.0
+        },
+        "benchmark": {
+          "source": "BBEH/bbeh",
+          "revision": "08e07a803851822c04399782ece3c4a07ce419f9",
+          "upstream": "https://github.com/google-deepmind/bbeh",
+          "splits": [
+            "test"
+          ],
+          "aggregation": "sample_mean",
+          "data_license": "CC-BY-4.0",
+          "duplicate_questions": "exclude",
+          "source_row_count": 4520,
+          "excluded_duplicate_rows": 9,
+          "excluded_question_ids": [
+            "35e30459a7b9e9059a94baa4aad624ed4d3724aea97a5bcbccda545d65dbd288",
+            "f1efb33207b7818365d8219609f3a5537cf6d70cd839a96dbee0cb7730ab2073"
+          ],
+          "mode": "context",
+          "scoring": "official",
+          "scorer_revision": "80d12ca916b7158f22293fcf3144f4d3d854d4be",
+          "evolution_source": {
+            "source": "https://github.com/suzgunmirac/BIG-Bench-Hard",
+            "revision": "9ee07bd481feebf959a6b59d61ea57bdcf30964d",
+            "data_license": "MIT",
+            "answer_scoring": "BBEH correctness evaluator for external evolution",
+            "tasks": [
+              "word_sorting"
+            ],
+            "duplicate_questions": "error",
+            "source_row_count": 250,
+            "excluded_duplicate_rows": 0,
+            "excluded_question_ids": [],
+            "native_split": "published_evaluation",
+            "experiment_role": "external_evolution",
+            "pool_size": 250,
+            "pool_checksum": "792164d072249b07c74fc1aa4ba4bf5a35b5976911af6c0b236dcdea192dd9c9"
+          }
+        }
+      },
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-bbeh-evolution-public-20261026/batch-runs/modular_rsi-claude_code/modular_rsi-claude_code-bbeh-20261026-103418-811149",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-execution_gate.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00011-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00012-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00018-execution_gate.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00021-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00028-execution_gate.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00034-execution_gate.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00036-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00037-contrast.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00042-execution_gate.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00045-execution_gate.json",
+            "task_id": "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00048-test.json",
+            "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00014-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00015-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00016-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00024-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00025-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00026-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00031-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00032-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00039-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00040-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 274,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 59,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      }
+    }
+  ],
+  "new_model_calls": 0,
+  "independent_source_available_both": true,
+  "mini_failure_kind": "Worker reply JSON decoding, not missingdata, budget, or network",
+  "old_default_refusals_retained": true
+}

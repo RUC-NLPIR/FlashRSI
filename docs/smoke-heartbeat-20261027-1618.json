@@ -1,0 +1,6 @@
+{
+  "observed_at": "2026-10-27T16:18:00+08:00",
+  "note": "2026-10-27 16:18实查：OfficeGEPA1515 needs_attention，3Targetfinished1error、1Workerfinished，usage齐source不变，无新增通过/Benchmark，总账441/113/22/24/24保持。smoke2唯一OfficeADAS1615 controller24188/public24196真实experiment paid存在；DarwinX1615 followup24189与SkillOpt1615 followup24190依次等待，均未paid且pending纳入等待，旧Target40轮均核，三配置只Target80/2400、原111/Worker/评分不改。smoke3 loopback33616仍可用、旧最小后台存活验证完成；新WideMetaHarness1618 controller193/checkonly196在公开check-only、尚未paid，旧两Target40错误已核，只Target80/2400，沿用evidence267原Judge4096；report smoke-widesearch-metaharness-budget-retry-20261027.json。当前smoke3磁盘966856704bytes接近900MBguard，先查预检/磁盘不得盲清env。原机31447仍拒绝连接，当前状态未知。WideEvoPrompt1418中断paid/usage未知原样保留未重派。无产品修改无清理。",
+  "new_passes": 0,
+  "new_benchmarks": []
+}

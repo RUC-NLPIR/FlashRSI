@@ -1,0 +1,20 @@
+[
+  {
+    "file": "00005-test.json",
+    "termination": "TerminationReason.USER_STOP",
+    "native_business_checks": true,
+    "usage": true
+  },
+  {
+    "file": "00001-baseline.json",
+    "termination": "TerminationReason.USER_STOP",
+    "native_business_checks": true,
+    "usage": true
+  },
+  {
+    "file": "00003-candidate.json",
+    "termination": "TerminationReason.USER_STOP",
+    "native_business_checks": true,
+    "usage": true
+  }
+]

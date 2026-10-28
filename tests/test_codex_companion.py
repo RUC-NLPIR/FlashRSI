@@ -78,7 +78,12 @@ def test_relevant_change_forces_source_compilation(
     async def compile_selected(*command, **kwargs):
         calls.append(command)
         assert kwargs["env"]["V8_FROM_SOURCE"] == "1"
-        output = target / "release/codex-code-mode-host"
+        name = (
+            "codex-code-mode-host.exe"
+            if sys.platform == "win32"
+            else "codex-code-mode-host"
+        )
+        output = target / "release" / name
         output.parent.mkdir(parents=True)
         output.write_bytes(b"compiled selected source")
 
@@ -102,6 +107,8 @@ def test_relevant_change_forces_source_compilation(
 
 @pytest.mark.parametrize("change", ["add", "remove", "executable", "symlink"])
 def test_closure_presence_permissions_and_links_are_checked(selected_host, change):
+    if sys.platform == "win32" and change in {"executable", "symlink"}:
+        pytest.skip("POSIX permissions / unprivileged symlink fixture")
     runtime, metadata = selected_host
     source = runtime / "code-mode-host/src/lib.rs"
     if change == "add":
@@ -119,6 +126,8 @@ def test_closure_presence_permissions_and_links_are_checked(selected_host, chang
 
 @pytest.mark.parametrize("change", ["add", "remove", "executable"])
 def test_manifests_outside_the_host_closure_cannot_change(selected_host, change):
+    if sys.platform == "win32" and change == "executable":
+        pytest.skip("POSIX executable permission bits")
     runtime, metadata = selected_host
     manifest = runtime / "models-manager/Cargo.toml"
     if change == "add":

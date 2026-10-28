@@ -1,0 +1,578 @@
+{
+  "checked_at": "2026-10-28T13:27:21.629171+08:00",
+  "new_passes": [
+    {
+      "benchmark": "WorkBench",
+      "target": "MiniAgent",
+      "algorithm": "ModularRSI",
+      "report": "smoke-workbench-modular-miniagent-same-source-20261028.json",
+      "reference": "WMS28M",
+      "targets": 18,
+      "workers": 13,
+      "test_score": 1.0,
+      "credential_files": 62,
+      "status": "flow_passed",
+      "completed_at": "2026-10-28T13:02:39.642899+08:00"
+    },
+    {
+      "benchmark": "WorkBench",
+      "target": "Claude Code",
+      "algorithm": "ModularRSI",
+      "report": "smoke-workbench-modular-claude_code-same-source-20261028.json",
+      "reference": "WMS28C",
+      "targets": 15,
+      "workers": 13,
+      "test_score": 1.0,
+      "credential_files": 59,
+      "status": "flow_passed",
+      "completed_at": "2026-10-28T13:02:39.642899+08:00"
+    },
+    {
+      "benchmark": "τ² Airline",
+      "target": "Claude Code",
+      "algorithm": "ModularRSI",
+      "report": "smoke-airline-modular-claude_code-same-source-20261028.json",
+      "reference": "AMS28C",
+      "targets": 11,
+      "workers": 5,
+      "test_score": 0.0,
+      "credential_files": 32,
+      "status": "flow_passed",
+      "completed_at": "2026-10-28T13:02:39.642899+08:00"
+    },
+    {
+      "benchmark": "Terminal-Bench 2.0",
+      "target": "Claude Code",
+      "algorithm": "AHE",
+      "report": "smoke-terminal-ahe-target80-20261028.json",
+      "reference": "TAH28",
+      "targets": 3,
+      "workers": 3,
+      "test_score": 1.0,
+      "credential_files": 14,
+      "status": "flow_passed",
+      "completed_at": "2026-10-28T13:02:39.642899+08:00"
+    }
+  ],
+  "partial_updates": [
+    {
+      "benchmark": "τ³ Banking",
+      "target": "MiniAgent",
+      "algorithm": "ModularRSI",
+      "report": "smoke-banking-modular-mini-same-source-20261028.json",
+      "missing_usage": [
+        "00032-execution_gate.json"
+      ],
+      "error_origin": "evolved_candidate_runtime",
+      "native_decline_and_fallback": true
+    }
+  ],
+  "totals": {
+    "pass": 528,
+    "partial": 42,
+    "failed": 14,
+    "blocked": 16,
+    "pending": 24
+  },
+  "main_pass": 469,
+  "main_remaining": 11,
+  "focused_remaining_with_additions": 59,
+  "active_or_preparing": {
+    "smoke2": [],
+    "smoke3": [],
+    "smoke4": [
+      {
+        "control": "browse-modular-same-source-1310",
+        "id": "browse-modular-claude_code-same-source",
+        "target": "claude_code",
+        "status": "running",
+        "phase": "experiment",
+        "active_pid": 3578,
+        "report": "smoke-browse-modular-claude_code-same-source-20261028.json"
+      },
+      {
+        "control": "browse-modular-same-source-1310",
+        "id": "browse-modular-miniagent-same-source",
+        "target": "miniagent",
+        "status": "pending",
+        "phase": null,
+        "active_pid": null,
+        "report": "smoke-browse-modular-miniagent-same-source-20261028.json"
+      }
+    ],
+    "smoke5": [
+      {
+        "control": "airline-modular-mini-worker120-1325",
+        "id": "airline-modular-mini-worker120",
+        "status": "running",
+        "phase": "experiment",
+        "active_pid": 20207,
+        "report": "smoke-airline-modular-mini-worker120-20261028.json"
+      }
+    ]
+  },
+  "new_benchmarks": 0,
+  "product_source_changes": 0,
+  "browse_preparation": {
+    "source-data-transfer.json": {
+      "source": {
+        "archive": "/root/.cache/browse-source-for-host4-1310.tgz",
+        "sha256": "035d9dec1cb2153e958c2745db6635fe97227dfdb0ab05ebcb05d1518afa6d0c",
+        "files": 271,
+        "parent_files": 271
+      },
+      "official_cache": {
+        "path": "/root/.cache/FlashRSI/huggingface/assets/flashrsi-lite/browsecomp/7b24471cd5b3eb2a46830a14802b5c029ea62f488ff75a0f88af7923d1454abf/browse_comp_test_set.csv",
+        "sha256": "7b24471cd5b3eb2a46830a14802b5c029ea62f488ff75a0f88af7923d1454abf",
+        "bytes": 1196283
+      },
+      "only_code_replacement": "flashrsi/algorithms/modular_rsi/__init__.py",
+      "module_sha256": "b20febba1b1554c3852937d719f1f3c9c6dc0498021fa92eaf3a2ccac96a469f"
+    },
+    "full-source-archive-proof.json": {
+      "status": "all_original_archive_files_verified",
+      "source_files_checked": 271,
+      "frozen_runtime_manifest_files": 265,
+      "additional_unchanged_original_files": [
+        "docs/coding-math-benchmarks.md",
+        "docs/hotpot-independent-evolution.md",
+        "docs/musique-independent-evolution.md",
+        "docs/twowiki-independent-evolution.md",
+        "docs/workbench.md",
+        "uv.lock"
+      ],
+      "only_code_replacement": "flashrsi/algorithms/modular_rsi/__init__.py",
+      "new_model_calls": 0
+    },
+    "preparation-state.json": {
+      "status": "public_ready_unpaid",
+      "checks": [
+        {
+          "phase": "public-plan-miniagent-attempt02",
+          "exit_code": 0
+        },
+        {
+          "phase": "runtime-venv-miniagent",
+          "exit_code": 0
+        },
+        {
+          "phase": "runtime-pip-miniagent",
+          "exit_code": 0
+        },
+        {
+          "phase": "public-check-only-miniagent",
+          "exit_code": 0
+        },
+        {
+          "phase": "public-plan-claude_code-attempt02",
+          "exit_code": 0
+        },
+        {
+          "phase": "runtime-venv-claude_code",
+          "exit_code": 0
+        },
+        {
+          "phase": "runtime-pip-claude_code",
+          "exit_code": 0
+        },
+        {
+          "phase": "public-check-only-claude_code",
+          "exit_code": 0
+        }
+      ],
+      "model_calls": 0,
+      "phase": "public-check-only-claude_code",
+      "profiles": {
+        "miniagent": {
+          "python": "/root/.cache/FlashRSI/envs/6ffdf22e3ba8-5cec08595891-py312/bin/python",
+          "fingerprint": "a2d3f1c72f9fec41b8bb9bd86a1ef4309c20102dd38589657ed1ce2f9c4d9d4d"
+        },
+        "claude_code": {
+          "python": "/root/.cache/FlashRSI/envs/efec2137c223-5cec08595891-py312/bin/python",
+          "fingerprint": "b177a1a9a7393e3b9969e8cb58cdc7a0ee6c0304f36a8e5dbcf83c08fd5dac11"
+        }
+      },
+      "source_files": 265,
+      "new_model_calls": 0
+    },
+    "native-same-source-proof.json": {
+      "status": "native_prepared_unpaid",
+      "new_model_calls": 0,
+      "items": [
+        {
+          "target": "miniagent",
+          "task_ids": {
+            "train": [
+              "browsecomp-75a3be23bd7d4de01652e262f9dfd713c4c7b43e60d8f9508bceb9fdbc516a88"
+            ],
+            "dev": [
+              "browsecomp-2381769cc5aff3908bc83e2a2769322194c5fbf5d8c5a8fc8e245c2a13dbee2e"
+            ],
+            "test": [
+              "browsecomp-49ac39bd2e07ad10fc8200faa2fdb8204a05b5593b18c67a25d5befb2e1c806a"
+            ]
+          },
+          "original_task_parity": true,
+          "same_source": true,
+          "modules_verified": true,
+          "separate_worker": true,
+          "max_turns": 8,
+          "worker_max_turns": 60
+        },
+        {
+          "target": "claude_code",
+          "task_ids": {
+            "train": [
+              "browsecomp-75a3be23bd7d4de01652e262f9dfd713c4c7b43e60d8f9508bceb9fdbc516a88"
+            ],
+            "dev": [
+              "browsecomp-2381769cc5aff3908bc83e2a2769322194c5fbf5d8c5a8fc8e245c2a13dbee2e"
+            ],
+            "test": [
+              "browsecomp-49ac39bd2e07ad10fc8200faa2fdb8204a05b5593b18c67a25d5befb2e1c806a"
+            ]
+          },
+          "original_task_parity": true,
+          "same_source": true,
+          "modules_verified": true,
+          "separate_worker": true,
+          "max_turns": 160,
+          "worker_max_turns": 60
+        }
+      ]
+    },
+    "followup-state.json": {
+      "status": "dispatched_once_after_native_preflight",
+      "checked_at": "2026-10-28T05:06:32.269526+00:00",
+      "controller_pid": 3572,
+      "model_calls_during_preparation": 0
+    },
+    "jobs": [
+      {
+        "id": "browse-modular-claude_code-same-source",
+        "target": "claude_code",
+        "status": "running",
+        "phase": "experiment",
+        "active_pid": 3578,
+        "report": "smoke-browse-modular-claude_code-same-source-20261028.json"
+      },
+      {
+        "id": "browse-modular-miniagent-same-source",
+        "target": "miniagent",
+        "status": "pending",
+        "phase": null,
+        "active_pid": null,
+        "report": "smoke-browse-modular-miniagent-same-source-20261028.json"
+      }
+    ],
+    "checked_at": "2026-10-28T13:27:21.629171+08:00",
+    "host": "smoke4",
+    "control": "browse-modular-same-source-1310",
+    "model_smoke_pass": false
+  },
+  "spreadsheet_native_preparation": {
+    "proof": "smoke-spreadsheetbench2-native-preflight-20261028-1315.json",
+    "model_calls": 0,
+    "native_numeric_controls_proven": true,
+    "image_state": {
+      "status": "preparation_blocked",
+      "model_calls": 0,
+      "recovery_scope": "host-proxy-download-of-immutable-official-image",
+      "checks": [],
+      "engine_before": "56de49e7-b367-4d12-a606-a40946e32334",
+      "error_type": "URLError",
+      "updated_at": "2026-10-28T05:06:23.488923+00:00"
+    }
+  },
+  "new_failures": [
+    {
+      "benchmark": "τ² Airline",
+      "algorithm": "ModularRSI",
+      "target": "MiniAgent",
+      "report": "smoke-airline-modular-miniagent-same-source-20261028.json",
+      "targets": 12,
+      "workers": 14,
+      "reason": "Worker60 turn limit",
+      "native_audit_complete": true,
+      "has_final_test": false
+    }
+  ],
+  "airline_worker120_readiness": {
+    "checked_at": "2026-10-28T13:26:38.382976+08:00",
+    "host": "smoke5",
+    "control": "/root/.cache/airline-modular-mini-worker120-1325",
+    "preparation": {
+      "status": "dispatched_once_after_native_preflight",
+      "checks": [
+        {
+          "phase": "public-plan",
+          "exit_code": 0
+        },
+        {
+          "phase": "public-check-only",
+          "exit_code": 0
+        },
+        {
+          "phase": "native-proof",
+          "exit_code": 0
+        }
+      ],
+      "model_calls": 0,
+      "phase": "native-proof",
+      "controller_pid": 20133
+    },
+    "job": {
+      "id": "airline-modular-mini-worker120",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 20207,
+      "report": "smoke-airline-modular-mini-worker120-20261028.json"
+    },
+    "budget_evidence": {
+      "source_control": "/root/.cache/airline-modular-same-source-1205",
+      "old_paid_preserved": true,
+      "observed_error": "00039-worker.json Reached maximum number of turns (60)",
+      "failure_native_audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/.cache/airline-modular-same-source-1205/experiments-miniagent/modular_rsi-miniagent-tau2-20261028-123008-040649",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00025-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00026-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00032-execution_gate.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00035-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00036-contrast.json",
+            "task_id": "1",
+            "status": "finished",
+            "metrics": {
+              "reward": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00018-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00019-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00028-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00029-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00030-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00038-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00039-worker.json",
+            "status": "error",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00039-worker.json:worker_error",
+          "result_not_finished",
+          "no_test"
+        ],
+        "source_file_count": 230,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 49,
+          "hits": []
+        },
+        "test_score": null,
+        "judge_profile": "native",
+        "source_policy": "ordinary_same_source_train_dev_test",
+        "benchmark_metadata": {
+          "source": "https://github.com/sierra-research/tau2-bench.git",
+          "revision": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+          "tag": "v1.0.1",
+          "domain": "airline",
+          "task_split": "train",
+          "mode": "text",
+          "aggregation": "single_trial_mean_reward"
+        }
+      },
+      "only_budget_changes": {
+        "algorithm.worker.max_turns": [
+          60,
+          120
+        ],
+        "algorithm.worker.timeout": [
+          600,
+          1200
+        ]
+      },
+      "target_budget_unchanged": {
+        "max_turns": 8,
+        "timeout": 600
+      },
+      "native_session_steps": 100,
+      "further_automatic_escalation": false
+    },
+    "model_smoke_pass": false
+  }
+}

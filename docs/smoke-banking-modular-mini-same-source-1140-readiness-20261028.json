@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-10-28T12:15:35.226100+08:00",
+  "host": "smoke4",
+  "control": "banking-modular-mini-same-source-1140",
+  "preparation": {
+    "status": "dispatched_once_after_native_preflight",
+    "model_calls": 0,
+    "checks": [
+      {
+        "phase": "public-plan",
+        "exit_code": 0
+      },
+      {
+        "phase": "runtime-venv",
+        "exit_code": 0
+      },
+      {
+        "phase": "runtime-pip",
+        "exit_code": 0
+      },
+      {
+        "phase": "public-check-only",
+        "exit_code": 0
+      },
+      {
+        "phase": "native-task-and-module-proof",
+        "exit_code": 0
+      }
+    ],
+    "phase": "native-task-and-module-proof",
+    "runtime_python": "/root/.cache/FlashRSI/envs/6d48a3043dc2-961fcba4daae-py312/bin/python",
+    "fingerprint": "0c140682ad9b7810a1c11edcb7ec1cd86c5f55dd7d881aae4d11b1af7e7eb99f",
+    "controller_pid": 478
+  },
+  "items": [
+    {
+      "id": "banking-modular-mini-same-source",
+      "algorithm": "ModularRSI",
+      "target": "MiniAgent",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 548,
+      "audit_python": "/root/.cache/FlashRSI/envs/6d48a3043dc2-961fcba4daae-py312/bin/python",
+      "report": "smoke-banking-modular-mini-same-source-20261028.json"
+    }
+  ],
+  "native-same-source-proof.json": {
+    "status": "native_prepared_unpaid",
+    "model_calls": 0,
+    "task_ids": {
+      "train": [
+        "task_008"
+      ],
+      "dev": [
+        "task_019"
+      ],
+      "test": [
+        "task_004"
+      ]
+    },
+    "same_policy": true,
+    "same_environment": true,
+    "evolution_source_required": false,
+    "distinct_worker": true,
+    "module_files_present": true,
+    "source_file_count": 230,
+    "target_max_turns": 8,
+    "worker_max_turns": 60,
+    "native_session_steps": 100
+  },
+  "model_smoke_pass": false
+}

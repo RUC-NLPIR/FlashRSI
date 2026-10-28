@@ -1,0 +1,915 @@
+{
+  "status": "needs_attention",
+  "updated_at": "2026-10-28T00:53:08.524249+00:00",
+  "items": [
+    {
+      "root": "/root/flashrsi-widesearch-evidence-public-20261026",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "proxy": "http://127.0.0.1:33616",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "audit_python": "/root/.cache/FlashRSI/envs/6e88081dafce-cea1a4fd1dbb-py312/bin/python",
+      "id": "wide-meta-judge8192-worker120",
+      "config": "/root/.cache/wide-meta-judge8192-worker120-0800/smoke.local.yaml",
+      "health_config": "/root/.cache/wide-meta-judge8192-worker120-0800/smoke.local.yaml",
+      "audit_source": "/root/.cache/wide-meta-judge8192-worker120-0800/audit.py",
+      "status": "needs_attention",
+      "report": "smoke-widesearch-meta-judge8192-worker120-20261028.json",
+      "budget_changes": [
+        {
+          "path": "benchmark.judge.llm.max_tokens",
+          "before": 4096,
+          "after": 8192
+        },
+        {
+          "path": "algorithm.worker.max_turns",
+          "before": 60,
+          "after": 120
+        },
+        {
+          "path": "algorithm.worker.timeout",
+          "before": 600,
+          "after": 1200
+        }
+      ],
+      "phase": "experiment",
+      "updated_at": "2026-10-27T23:47:05.388941+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/.cache/wide-meta-judge8192-worker120-0800/experiments/meta_harness-claude_code-widesearch-20261028-074707-141777",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "ws_en_036",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.0,
+              "recall_by_row": 0.0,
+              "f1_by_row": 0.0,
+              "precision_by_item": 0.06639839034205232,
+              "recall_by_item": 0.39285714285714285,
+              "f1_by_item": 0.11359724612736662
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "ws_en_036",
+            "status": "error",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.0,
+              "recall_by_row": 0.0,
+              "f1_by_row": 0.0,
+              "precision_by_item": 0.0,
+              "recall_by_item": 0.0,
+              "f1_by_item": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "ws_zh_093",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.603448275862069,
+              "recall_by_row": 0.603448275862069,
+              "f1_by_row": 0.603448275862069,
+              "precision_by_item": 0.853448275862069,
+              "recall_by_item": 0.853448275862069,
+              "f1_by_item": 0.853448275862069
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          }
+        ],
+        "problems": [
+          "00004-candidate.json:target_error"
+        ],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "custom-deepseek"
+      },
+      "ended_at": "2026-10-28T00:53:08.523088+00:00"
+    }
+  ],
+  "counts": {
+    "needs_attention": 1
+  },
+  "budget_authorization": "Wide MetaHarness CC one bounded configuration after retained Judge finish_reason length and Worker60 actual limits. Judge8192 and Worker120/1200; Target80/2400 unchanged; original111/tasks/Judge7metrics/scorer/prompts/gates/retry/timeouts unchanged. Not a group retry; no further automatic escalation."
+}

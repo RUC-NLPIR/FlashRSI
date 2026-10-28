@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-26T00:13:16.701441+00:00",
+  "host": "smoke2",
+  "removed_envs": [
+    {
+      "name": "4d10427e7d60-2a9e4fba7f09-py312",
+      "owner": "/root/flashrsi-aime2025-public-20261026",
+      "logical_bytes": 828442487
+    },
+    {
+      "name": "4d10427e7d60-bf2e411382bf-py312",
+      "owner": "/root/flashrsi-musique-evolution-public-20261026",
+      "logical_bytes": 754291294
+    },
+    {
+      "name": "f2d8249ce0a9-ff00931d127c-py312",
+      "owner": "/root/flashrsi-aime2025-skillopt-fix-20261026",
+      "logical_bytes": 754287217
+    }
+  ],
+  "removed_count": 3,
+  "actual_bytes_freed": 2467295232,
+  "free_gib_before": 2.86,
+  "free_gib_after": 5.16,
+  "protected_project_ids": [
+    "e5c2b547a25d",
+    "fae284dc65d5"
+  ],
+  "manifest_directory": "/root/.cache/env-cleanup-0732",
+  "preserved": "all current/future envs, bootstrap, controllers, source, experiments, trajectories, usage, original data, HF/PIP caches, Docker images, Smoke docs"
+}

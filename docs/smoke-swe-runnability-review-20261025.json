@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-25",
+  "basis": "User accepts native rejection/fallback as normal algorithm execution; score improvement is not required. A final result alone is insufficient.",
+  "counts": {
+    "flow_completed": 21,
+    "worker_budget_interrupted": 1,
+    "missing_independent_evolution_data": 2
+  },
+  "strict_counts_preserved": {
+    "flow_passed": 16,
+    "flow_failed": 3,
+    "partial": 3,
+    "unsupported": 2
+  },
+  "reviewed_candidates": [
+    {
+      "algorithm": "adas",
+      "target": "miniagent",
+      "session": "smoke-sw2-adas-miniagent-01",
+      "strict_audit_status": "flow_failed",
+      "runnable_flow_status": "passed_rejected_candidate",
+      "selected_snapshot": "8f195dec804e59af289f325af13440ab457df2fab0d6f6ff8245e25657615f27",
+      "candidate_errors": [
+        {
+          "stage": "00003-candidate",
+          "error": "llm_error: Error code: 400 - {'error': {'message': 'Tool names must be unique. (request_id: 61412590-2b5f-4966-aab9-bb9fb67c1d42)', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}"
+        }
+      ],
+      "evidence": "Verified promotion retained initial Snapshot, valid baseline and final official grading."
+    },
+    {
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "session": "smoke-sw2-darwinx-miniagent-01",
+      "strict_audit_status": "flow_failed",
+      "runnable_flow_status": "passed_rejected_candidate",
+      "selected_snapshot": "8f195dec804e59af289f325af13440ab457df2fab0d6f6ff8245e25657615f27",
+      "candidate_errors": [
+        {
+          "stage": "00004-screen_candidate",
+          "error": "MiniAgent process exited with 1: Traceback (most recent call last):\n  File \"/opt/flashrsi-lite/package/flashrsi/agents/miniagent/_entry.py\", line 29, in <module>\n    asyncio.run(_main())\n  File \"/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py\", line 195, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/package/flashrsi/agents/miniagent/_entry.py\", line 24, in _main\n    result = await run(**request)\n             ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/checkout-h4vzft2u/runtime/agent.py\", line 863, in run\n    bundle = ws_mod.load(workspace_dir or ws_mod.SEED_WORKSPACE)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/checkout-h4vzft2u/runtime/workspace.py\", line 114, in load\n    meta = yaml.safe_load(match[1]) if match else {}\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/__init__.py\", line 125, in safe_load\n    return load(stream, SafeLoader)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/__init__.py\", line 81, in load\n    return loader.get_single_data()\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/constructor.py\", line 49, in get_single_data\n    node = self.get_single_node()\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/composer.py\", line 36, in get_single_node\n    document = self.compose_document()\n               ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/composer.py\", line 55, in compose_document\n    node = self.compose_node(None, None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/composer.py\", line 84, in compose_node\n    node = self.compose_mapping_node(anchor)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/composer.py\", line 127, in compose_mapping_node\n    while not self.check_event(MappingEndEvent):\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/parser.py\", line 98, in check_event\n    self.current_event = self.state()\n                         ^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/parser.py\", line 428, in parse_block_mapping_key\n    if self.check_token(KeyToken):\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/scanner.py\", line 116, in check_token\n    self.fetch_more_tokens()\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/scanner.py\", line 223, in fetch_more_tokens\n    return self.fetch_value()\n           ^^^^^^^^^^^^^^^^^^\n  File \"/opt/flashrsi-lite/venv/lib/python3.12/site-packages/yaml/scanner.py\", line 577, in fetch_value\n    raise ScannerError(None, None,\nyaml.scanner.ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 2, column 104:\n     ...  a checked-out source repository: reproduce the reported behavio ... \n                                         ^"
+        }
+      ],
+      "evidence": "Verified promotion retained initial Snapshot, valid baseline and final official grading."
+    }
+  ],
+  "modular_support_note": "Original two startup refusals remain historical. New local SWEBench evolution_data_path support requires independently sourced native SWE rows and real validation; no passing status inferred from offline tests."
+}

@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-27T21:28:13.859180+00:00",
+  "candidates": [
+    "/root/.cache/FlashRSI/envs/searchqa-14d935d7e8b8-py312",
+    "/root/.cache/FlashRSI/envs/searchqa-0bdde50cce08-py312",
+    "/root/.cache/FlashRSI/envs/4d10427e7d60-0bdde50cce08-py312",
+    "/root/.cache/FlashRSI/envs/2fc1ad96fca1-0bdde50cce08-py312"
+  ],
+  "process_references": [],
+  "pth_references": [],
+  "future_references": [],
+  "errors": [],
+  "pth_count": 6,
+  "pruned_nonruntime_dirs": [
+    "/root/eb-public",
+    "/root/.cache/pip",
+    "/root/.cache/huggingface",
+    "/root/.cache/FlashRSI/huggingface"
+  ],
+  "deleted": true,
+  "scope": "All local task runtime environments under/root; platform shared public datasets/courses on separate filesystem excluded. Current/future task configurations use local runtime roots.",
+  "shared_mount_device": 2544643042,
+  "local_runtime_device": 1048712,
+  "unreadable_processes": [],
+  "audit_completed": true,
+  "safe_to_delete": true,
+  "free_before": 166293504,
+  "user_authorized_reconstructable_ended_runtime_cleanup": true,
+  "prior_audit_attempts": "binary model .pth wrongly included once; bounded shared-data scans timed out without deletion; transient unreadable sftp-server was own audit transport and closed before final complete scan",
+  "free_after": 2676817920,
+  "at_deleted": "2026-10-27T21:28:19.173044+00:00"
+}

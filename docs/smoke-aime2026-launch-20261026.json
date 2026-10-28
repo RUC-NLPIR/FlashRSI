@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-26",
+  "authorization": "User explicitly selected AIME2026 1/1/1 for original host",
+  "benchmark": "aime",
+  "year": 2026,
+  "partition": {
+    "train": 1,
+    "dev": 1,
+    "test": 1
+  },
+  "partition_scope": "Custom partition of public native test question pool, not official unseen evaluation",
+  "root": "/root/flashrsi-aime2026-public-20261026",
+  "source_files": 256,
+  "source_archive_sha256": "47dbf1cd28c9c32261c9767548aff79fd28e74c7fb61895fcd162469cb14383a",
+  "code_changes": [],
+  "public_entry": "python scripts/run_experiment.py --config <private config> --plan / --check-only / normal run",
+  "queue": "public-bench24-20261026",
+  "combinations": 24,
+  "models": "Existing independently configured official DeepSeek Target and Worker roles",
+  "limits": "Mini8/600;Claude40/1200;AgentWorker60/600;LLMWorker existing180; no automatic paid repeats",
+  "preparation_history": "Dispatcher initially lacked docs directory before any public command/model call; setup fixed and history retained",
+  "swe_independent_attempt": "smoke-swe-modular-independent-original-20261026.json",
+  "first_combo": "OPRO/MiniAgent and OPRO/Claude Code completed with native integer grading/usage and unchanged source; queue continues",
+  "current_queue_counts": {
+    "flow_passed": 4,
+    "running": 1,
+    "pending": 19
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "checked_at": "2026-10-28T19:28:21.362730+08:00",
+  "new_passes": 0,
+  "control": "/root/.cache/travel-modular-output16384-1935",
+  "native-budget-evidence.json": {
+    "basis": "Actual failed Worker response exceeded8192 output maximum",
+    "stages": [
+      {
+        "file": "00001-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00002-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00004-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00005-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00006-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00008-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00009-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00011-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00012-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00013-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00015-execution_gate.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00018-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00019-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00021-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00022-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00023-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00025-execution_gate.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00028-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00029-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00031-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00032-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00033-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00035-execution_gate.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00038-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00039-contrast.json",
+        "kind": "target",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00041-worker.json",
+        "kind": "worker",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00042-worker.json",
+        "kind": "worker",
+        "status": "error",
+        "usage_recorded": true
+      }
+    ],
+    "errors": [
+      {
+        "file": "00042-worker.json",
+        "actual_worker_output8192": true
+      }
+    ],
+    "all_usage_recorded": true,
+    "source_files": 266,
+    "source_changes": [],
+    "old_native_failure_audit_status": "pending_offline_recompute_not_counted_pass",
+    "new_only_change": "Mini Worker llm.max_tokens8192->16384; output_dir isolated",
+    "worker_turns": 120,
+    "target_turns": 8,
+    "cc_budget_unchanged": true,
+    "further_automatic_escalation": false
+  },
+  "registration.json": {
+    "controller_pid": 41952,
+    "control": "/root/.cache/travel-modular-output16384-1935",
+    "new_only_worker_output_limit": 16384,
+    "cc_transferred_unpaid": true,
+    "status": "public_preflight_before_paid"
+  },
+  "plan.json": [
+    {
+      "id": "travel-modular-miniagent-output16384-group",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 42022,
+      "report": "smoke-travel-modular-miniagent-output16384-group-20261028.json"
+    },
+    {
+      "id": "travel-modular-claude_code-output16384-group",
+      "status": "pending",
+      "phase": null,
+      "active_pid": null,
+      "report": "smoke-travel-modular-claude_code-output16384-group-20261028.json"
+    }
+  ],
+  "old_failure_audit": "completed",
+  "actual": [
+    {
+      "id": "travel-modular-miniagent-output16384-group",
+      "paid": true,
+      "status": "running",
+      "pid_live": true,
+      "active_pid": 42022
+    },
+    {
+      "id": "travel-modular-claude_code-output16384-group",
+      "paid": false,
+      "status": "pending",
+      "pid_live": false,
+      "active_pid": null
+    }
+  ],
+  "totals": {
+    "pass": 551,
+    "failed": 11,
+    "blocked": 13,
+    "partial": 25,
+    "pending": 24
+  },
+  "combined_counts": {
+    "existing_pass": 492,
+    "planned_total": 528,
+    "remaining": 36,
+    "not_added_to_historical624_matrix_yet": "SpreadsheetBench2 registration is not an integration or model result"
+  },
+  "browse_progress": {
+    "trajectory_files": 31,
+    "finished": 17,
+    "error": 2,
+    "status": "running_not_passed"
+  },
+  "bfcl_progress": {
+    "trajectory_files": 24,
+    "finished": 8,
+    "error": 7,
+    "status": "running_not_passed"
+  },
+  "product_source_changes": 0
+}

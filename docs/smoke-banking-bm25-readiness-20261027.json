@@ -1,0 +1,22 @@
+{
+  "time": "2026-10-27T14:42:43.811529+00:00",
+  "variant": "bm25",
+  "native_tools_initialized": true,
+  "search_returned_documents": true,
+  "openai_key_present": false,
+  "embedding_calls": 0,
+  "chat_model_calls": 0,
+  "splits": {
+    "train": [
+      "task_008"
+    ],
+    "dev": [
+      "task_019"
+    ],
+    "test": [
+      "task_004"
+    ]
+  },
+  "same_old_splits": true,
+  "source_changes": 0
+}

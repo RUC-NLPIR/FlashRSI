@@ -1,0 +1,194 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-28T06:03:46.149884+00:00",
+  "items": [
+    {
+      "id": "nq-modular-claude_code-same-source",
+      "algorithm": "ModularRSI",
+      "target": "claude_code",
+      "benchmark": "nq",
+      "status": "flow_passed",
+      "root": "/root/flashrsi-modular-focus-public-20261028",
+      "config": "/root/.cache/nq-modular-same-source-1340/claude_code.local.yaml",
+      "health_config": "/root/.cache/nq-modular-same-source-1340/claude_code.local.yaml",
+      "proxy": "http://127.0.0.1:33620",
+      "audit_source": "/root/.cache/nq-modular-same-source-1340/audit.py",
+      "report": "smoke-nq-modular-claude_code-same-source-20261028.json",
+      "further_automatic_budget_escalation": false,
+      "audit_python": "/root/.cache/FlashRSI/envs/2fc1ad96fca1-ca2dd2666077-py312/bin/python",
+      "phase": "experiment",
+      "updated_at": "2026-10-28T05:46:55.347464+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/.cache/nq-modular-same-source-1340/experiments-claude_code/modular_rsi-claude_code-nq-20261028-134655-718813",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00002-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00005-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00006-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00009-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.3333333333333333
+            }
+          },
+          {
+            "file": "00010-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00015-execution_gate.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00017-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00018-contrast.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00022-execution_gate.json",
+            "task_id": "4549465242785278785",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          },
+          {
+            "file": "00025-test.json",
+            "task_id": "5847589205369456560",
+            "status": "finished",
+            "usage_recorded": true,
+            "metrics": {
+              "exact_match": 0.0,
+              "f1": 0.0
+            }
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00013-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00020-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "problems": [],
+        "source_file_count": 230,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 32,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "source_policy": "ordinary_same_source_train_dev_test",
+        "benchmark_metadata": {
+          "source": "local",
+          "data_path": {
+            "train": "/root/.cache/nq-modular-same-source-1340/data/train.json",
+            "dev": "/root/.cache/nq-modular-same-source-1340/data/dev.json",
+            "test": "/root/.cache/nq-modular-same-source-1340/data/test.json"
+          },
+          "subset": "any-short-answer-or-yes-no",
+          "mode": "context",
+          "scoring": "short_answer_text"
+        }
+      },
+      "ended_at": "2026-10-28T05:48:44.464911+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User authorized ordinary same-source ModularRSI. NQ original full contextual rows/Task/checksum/111/seed42/native short-answer scoring retained. CC40/1200 Mini8/600 independentClaudeWorker60/600. One new configuration each, no automatic escalation."
+}

@@ -1,0 +1,19 @@
+{
+  "observed_at": "2026-10-27T14:04:00+08:00",
+  "note": "2026-10-27 14:04实查：新增DeepSearchQA/EvoHarness/CC限定flow_passed：2Target finished、usage齐、native重算/source229未变、凭据9文件0hits，train1触发原生跳过反思，Worker0为合法无更新，明确未覆盖Worker分支，test F1=2/3；customJudge/Target80轮2400秒限定。总账440通过114部分22失败24前置24待/624，11范围全通，本轮无新增Benchmark。smoke2 BrowseRRSICC1315 public14824真实experiment；smoke3 DeepRRSICC1352 controller28069/public28075真实experiment，已2Target1Worker finished，唯一新80/2400尝试。原机1355原生容器apt/curl/uv0.11.4免费安装证明通过，官方GitHub installer与SHA校验缓存镜像供下载，随后自动恢复真实experiment在Docker compose创建容器时再次socket reset，2Target error且usage未知，无Worker，不计通过。engine由c70c50d1变334d5078，未主动reset。已启动terminal-engine-diagnosis-1402零模型校验重导入及compose复现，不重复派1355。无产品修改/无清理。",
+  "counts": {
+    "pass": 440,
+    "partial": 114,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "new_benchmarks": [],
+  "terminal_compose_zero_model_reproduced": true,
+  "queued_followup": {
+    "host": "smoke2",
+    "control": "/root/.cache/office-opro-budget-1407",
+    "pid": 16163,
+    "paid": false
+  }
+}

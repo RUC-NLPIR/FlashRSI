@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-26T04:51:54.225625+00:00",
+  "status": "passed",
+  "new_model_calls": 0,
+  "scope": "Public TriviaQA independent native split/streaming source configuration; existing alias scorer and heldout unchanged",
+  "new_tests": 11,
+  "before_implementation_failed": 11,
+  "related_regression_passed": 89,
+  "ruff": "affected source/tests clean",
+  "format": "affected source/tests clean",
+  "wheel": {
+    "sha256": "4f402641d7f6fb556c98a1798103e567d45e66a9fe044bcf5dc228312708ce17",
+    "independent_install": true,
+    "installed_module_byte_identity": true,
+    "cli_help": true,
+    "cli_prepare_only": true,
+    "dependency_scope": "Installed fresh wheel with existing declared dependencies linked via .pth; hot dependency validation, not cold network"
+  },
+  "wheel_validation": "validation-triviaqa-independent-wheel-20261026.json",
+  "native_pool_report": "smoke-triviaqa-independent-native-pool-original-20261026.json",
+  "native_schema_reference_probe": "smoke-triviaqa-native-reference-probe-original-20261026.json",
+  "frozen_existing_source_changed": false,
+  "setup_history": [
+    {
+      "scope": "zero-model cached local dataset builder probe",
+      "error": "rc.wikipedia config not found; local Parquet exposes default",
+      "resolution": "Explicit public dataset config default for local directory; preserve first failed probe logs/report; no data or parser change"
+    }
+  ]
+}

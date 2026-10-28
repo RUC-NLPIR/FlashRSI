@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-26T13:34:54.241142+00:00",
+  "status": "recording_repair_validated_one_real_flow_passed",
+  "scope": "Preserve actual SDK usage and response choices for native judge/evaluator rejection. No prompt/parser/scorer/gate/budget change. No inference of historical failure reasons or backfill of missing usage.",
+  "product_files": [
+    "flashrsi/integrations/_widesearch_grade.py",
+    "flashrsi/integrations/widesearch.py"
+  ],
+  "new_tests": 7,
+  "related_tests_total": 14,
+  "ruff": "passed",
+  "format": "passed",
+  "wheel_sha256": "a0f76a6e495909bcd0105230eba3f96780530d45158c78cea155178498214ba6",
+  "linux_installed_wheel_tests": 7,
+  "linux_module_identity_and_cli_hosts": 2,
+  "cold_dependency_test": false,
+  "setup_history": [
+    "smoke2 pip initially skipped same-version installation; retained install log, ignore-installed from isolated cwd then module-byte identity passed.",
+    "smoke3 first regression invocation lacked pytest; retained log and added explicit warmed validation dependency path; installed new FlashRSI byte identity and seven tests passed."
+  ],
+  "frozen_deployment_root": "/root/flashrsi-widesearch-evidence-public-20261026",
+  "source_files": 267,
+  "original_source_266_unchanged": true,
+  "paid_attempt_limit": 1,
+  "real_smoke_report": "smoke-widesearch-judge-evidence-model-smoke3-20261026.json",
+  "unit_fixtures_are_not_model_results": true,
+  "failure_recording_branch_in_real_run": false
+}

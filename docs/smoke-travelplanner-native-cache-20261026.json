@@ -1,0 +1,113 @@
+{
+  "checked_at": "2026-10-25T23:42:03.789513+00:00",
+  "mode": "public data_path and database_path; complete original fixed-revision files",
+  "files": [
+    {
+      "kind": "datasets",
+      "repo": "osunlp/TravelPlanner",
+      "revision": "8736504ecfc31b7f8b7e40122873c337e83fff7c",
+      "rfilename": "train.csv",
+      "blobId": "bc966af566d88543552713c5f9ac33a9063a003b",
+      "size": 1306372,
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlanner\\train.csv",
+      "sha256": "2c02c4a31bf08599ea84013565a05d9a1a0a1b0c7613ded0ca932fb964780da1",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlanner/train.csv"
+    },
+    {
+      "kind": "datasets",
+      "repo": "osunlp/TravelPlanner",
+      "revision": "8736504ecfc31b7f8b7e40122873c337e83fff7c",
+      "rfilename": "validation.csv",
+      "blobId": "e4bc90de9a6396beb726f23593d551f742279944",
+      "size": 4833771,
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlanner\\validation.csv",
+      "sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlanner/validation.csv"
+    },
+    {
+      "kind": "spaces",
+      "repo": "osunlp/TravelPlannerEnvironment",
+      "revision": "f2183898e2b9547ed2a6f5356ae4cbc3f3431bf4",
+      "rfilename": "database/accommodations/clean_accommodations_2022.csv",
+      "blobId": "1a3144dc7ec77e247f4eefd089f5104fc65caebe",
+      "size": 520458,
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlannerEnvironment\\database\\accommodations\\clean_accommodations_2022.csv",
+      "sha256": "7e70cc8cb573e824267be47153a3cf7934c839f01c955fb523d18be405921d86",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlannerEnvironment/database/accommodations/clean_accommodations_2022.csv"
+    },
+    {
+      "kind": "spaces",
+      "repo": "osunlp/TravelPlannerEnvironment",
+      "revision": "f2183898e2b9547ed2a6f5356ae4cbc3f3431bf4",
+      "rfilename": "database/attractions/attractions.csv",
+      "blobId": "3a194729fc2f24253b9ce4806265706609cc5c17",
+      "size": 817982,
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlannerEnvironment\\database\\attractions\\attractions.csv",
+      "sha256": "8007fa851ba5b3adb205fbd298169c95116b297cef7ccd21dbea26ecce2605d8",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlannerEnvironment/database/attractions/attractions.csv"
+    },
+    {
+      "kind": "spaces",
+      "repo": "osunlp/TravelPlannerEnvironment",
+      "revision": "f2183898e2b9547ed2a6f5356ae4cbc3f3431bf4",
+      "rfilename": "database/background/citySet_with_states.txt",
+      "blobId": "92f6c0a084ee5d7794199f978cd2bd22288694ea",
+      "size": 5921,
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlannerEnvironment\\database\\background\\citySet_with_states.txt",
+      "sha256": "a3d18b5c692857cd561cbb4ad8d221ac3eb6c47af7c787a3489e3ffa184ca4d6",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlannerEnvironment/database/background/citySet_with_states.txt"
+    },
+    {
+      "kind": "spaces",
+      "repo": "osunlp/TravelPlannerEnvironment",
+      "revision": "f2183898e2b9547ed2a6f5356ae4cbc3f3431bf4",
+      "rfilename": "database/flights/clean_Flights_2022.csv",
+      "blobId": "56dd4b07463a85b52b9fac99f52bbfa48e52645c",
+      "size": 304807007,
+      "lfs": {
+        "sha256": "8dafdb0e3f8b79ce599a1e612a772865295bc226b46e5fb278368f7255b11cee",
+        "size": 304807007,
+        "pointerSize": 134
+      },
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlannerEnvironment\\database\\flights\\clean_Flights_2022.csv",
+      "sha256": "8dafdb0e3f8b79ce599a1e612a772865295bc226b46e5fb278368f7255b11cee",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlannerEnvironment/database/flights/clean_Flights_2022.csv"
+    },
+    {
+      "kind": "spaces",
+      "repo": "osunlp/TravelPlannerEnvironment",
+      "revision": "f2183898e2b9547ed2a6f5356ae4cbc3f3431bf4",
+      "rfilename": "database/googleDistanceMatrix/distance.csv",
+      "blobId": "ef9b46c6bd1b5596cbba8b7485a91366309759d7",
+      "size": 777824,
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlannerEnvironment\\database\\googleDistanceMatrix\\distance.csv",
+      "sha256": "44726ca74a335fd2d4824fc748f8832813550bfead37376fd51d6521a93a8b3b",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlannerEnvironment/database/googleDistanceMatrix/distance.csv"
+    },
+    {
+      "kind": "spaces",
+      "repo": "osunlp/TravelPlannerEnvironment",
+      "revision": "f2183898e2b9547ed2a6f5356ae4cbc3f3431bf4",
+      "rfilename": "database/restaurants/clean_restaurant_2022.csv",
+      "blobId": "0fae68836f282b47bb57334d8efbc9ec9885dbcb",
+      "size": 683023,
+      "local_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\official-native-cache-0732\\TravelPlannerEnvironment\\database\\restaurants\\clean_restaurant_2022.csv",
+      "sha256": "a38ef00a3398b1ef78306a9b1851c491723d27899c6a1d4a3d6fe042929c0f26",
+      "verified": true,
+      "remote_path": "/root/.cache/flashrsi-official-native-cache-20261026/TravelPlannerEnvironment/database/restaurants/clean_restaurant_2022.csv"
+    }
+  ],
+  "total_bytes": 313752358,
+  "remote_sha256_verified": true,
+  "models_previously_called": 0,
+  "subject_source_unchanged": true,
+  "no_private_task_conversion": true,
+  "scope": "Native train/validation full CSVs, complete official required database; custom1/1/1 and explicit custom DeepSeek converter"
+}

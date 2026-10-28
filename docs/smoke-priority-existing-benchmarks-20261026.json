@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-10-26T03:19:53.863163+00:00",
+  "source": "用户最新明确排期要求",
+  "priority": "现有在途队列收尾后，优先补齐已有通过记录的Benchmark的组合和证据，不扩展尚未验证的新Benchmark。",
+  "finish_current_unique_queues": true,
+  "repeat_passed_cells": false,
+  "expand_unvalidated_benchmarks": false,
+  "deferred_new_benchmarks": [
+    "HLE",
+    "HarveyLAB",
+    "JobBench",
+    "SWE-bench Pro"
+  ],
+  "constraints": [
+    "预算、原生流程和评分不变",
+    "失败或partial须先诊断，有依据的新配置才有界验证",
+    "独立演化数据真实且防重合",
+    "真实受阻保留，不为完备性伪造通过"
+  ],
+  "this_change_is_scheduling_only": true
+}

@@ -1,0 +1,115 @@
+{
+  "checked_at": "2026-10-26T04:04:23.370652+00:00",
+  "scope": "Read-only installed pinned upstream source and original native errors; zero model calls",
+  "upstream_runtime_commit": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+  "variant": "alltools",
+  "evidence": [
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 33,
+      "code": "from tau2.domains.banking_knowledge.data_model import KnowledgeBase, TransactionalDB\nfrom tau2.domains.banking_knowledge.retrieval_toolkits import (\n    KnowledgeToolsAllTools,\n    KnowledgeToolsPlain,\n    KnowledgeToolsWithGrep,\n    KnowledgeToolsWithKBSearch,\n    KnowledgeToolsWithKBSearchAndGrep,"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 59,
+      "code": "\n# Default variant used when no explicit retrieval_variant is provided.\nDEFAULT_RETRIEVAL_VARIANT = \"alltools\"\n\nDEFAULT_DENSE_EMBEDDING_MODEL_OPENAI = \"text-embedding-3-large\"\nDEFAULT_DENSE_EMBEDDING_MODEL_OPENROUTER = \"qwen3-embedding-8b\"\n"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 66,
+      "code": "\ndef format_all_tools_dense_instructions(variant: \"RetrievalVariant\") -> str:\n    \"\"\"Markdown snippet describing the dense retrieval backend for the AllTools prompt.\"\"\"\n    if variant.kb_search_dense is None:\n        return \"\"\n\n    embedder_type = variant.kb_search_dense.embedder_type"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 401,
+      "code": "    build_prompt: PromptBuilder\n    kb_search: Optional[PipelineSpec] = None  # None -> no KB_search tool\n    kb_search_bm25: Optional[PipelineSpec] = None  # AllTools: BM25 KB_search_bm25\n    kb_search_dense: Optional[PipelineSpec] = None  # AllTools: dense KB_search_dense\n    grep: Optional[GrepSpec] = None  # None -> no grep tool\n    shell: Optional[ShellSpec] = None  # None -> no shell tool\n    supports_top_k: bool = False"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 402,
+      "code": "    kb_search: Optional[PipelineSpec] = None  # None -> no KB_search tool\n    kb_search_bm25: Optional[PipelineSpec] = None  # AllTools: BM25 KB_search_bm25\n    kb_search_dense: Optional[PipelineSpec] = None  # AllTools: dense KB_search_dense\n    grep: Optional[GrepSpec] = None  # None -> no grep tool\n    shell: Optional[ShellSpec] = None  # None -> no shell tool\n    supports_top_k: bool = False\n"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 414,
+      "code": "    embedder_model: str,\n) -> RetrievalVariant:\n    \"\"\"Create an AllTools variant with a concrete dense embedding backend.\"\"\"\n    return RetrievalVariant(\n        name=name,\n        prompt_template=PROMPTS_DIR / \"all_tools.md\",\n        build_prompt=standard_prompt,"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 595,
+      "code": "        shell=ShellSpec(allow_writes=True),\n    ),\n    \"alltools\": all_tools_variant(\n        \"alltools\",\n        embedder_type=\"openai\",\n        embedder_model=DEFAULT_DENSE_EMBEDDING_MODEL_OPENAI,\n    ),"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 596,
+      "code": "    ),\n    \"alltools\": all_tools_variant(\n        \"alltools\",\n        embedder_type=\"openai\",\n        embedder_model=DEFAULT_DENSE_EMBEDDING_MODEL_OPENAI,\n    ),\n    \"alltools-qwen\": all_tools_variant("
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 600,
+      "code": "        embedder_model=DEFAULT_DENSE_EMBEDDING_MODEL_OPENAI,\n    ),\n    \"alltools-qwen\": all_tools_variant(\n        \"alltools-qwen\",\n        embedder_type=\"openrouter\",\n        embedder_model=DEFAULT_DENSE_EMBEDDING_MODEL_OPENROUTER,\n    ),"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 601,
+      "code": "    ),\n    \"alltools-qwen\": all_tools_variant(\n        \"alltools-qwen\",\n        embedder_type=\"openrouter\",\n        embedder_model=DEFAULT_DENSE_EMBEDDING_MODEL_OPENROUTER,\n    ),\n}"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 608,
+      "code": "\nRETRIEVAL_VARIANT_ALIASES = {\n    \"AllTools\": \"alltools\",\n}\n\n\n# ---------------------------------------------------------------------------"
+    },
+    {
+      "file": "domains/banking_knowledge/retrieval.py",
+      "file_sha256": "daa5b514532dd13c6f5caa04195282d6fe80f3af4f2d1ab139949bf208dfe2cd",
+      "line": 766,
+      "code": "        dense_pipeline = _create_kb_pipeline(variant.kb_search_dense, knowledge_base)\n        sandbox = _create_sandbox(knowledge_base, variant.shell)\n        tools = KnowledgeToolsAllTools(db, bm25_pipeline, dense_pipeline, sandbox)\n    else:\n        has_kb = variant.kb_search is not None\n        has_grep = variant.grep is not None\n        has_shell = variant.shell is not None"
+    },
+    {
+      "file": "knowledge/embedders/openai_embedder.py",
+      "file_sha256": "3da18207179a790930e507464d94d97be9f2cdbfdccb712df10a75c6f9cb47f9",
+      "line": 27,
+      "code": "        \"\"\"\n        self.model = model\n        self.client = OpenAI(api_key=api_key or os.getenv(\"OPENAI_API_KEY\"))\n\n    def embed(self, texts: List[str]) -> np.ndarray:\n        \"\"\"\n        Embed texts using OpenAI API."
+    },
+    {
+      "file": "knowledge/embeddings_cache.py",
+      "file_sha256": "9e7d82bff25eb88129a4f90d7c6b1b185bc71c0e7bd21503dcf5f83815a4919d",
+      "line": 624,
+      "code": "        \"openai_embeddings\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"openai_embeddings_reranker\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"alltools\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"AllTools\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"alltools-qwen\": (\"openrouter\", {\"model\": \"qwen3-embedding-8b\"}),\n    }\n"
+    },
+    {
+      "file": "knowledge/embeddings_cache.py",
+      "file_sha256": "9e7d82bff25eb88129a4f90d7c6b1b185bc71c0e7bd21503dcf5f83815a4919d",
+      "line": 625,
+      "code": "        \"openai_embeddings_reranker\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"alltools\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"AllTools\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"alltools-qwen\": (\"openrouter\", {\"model\": \"qwen3-embedding-8b\"}),\n    }\n\n    seen = set()"
+    },
+    {
+      "file": "knowledge/embeddings_cache.py",
+      "file_sha256": "9e7d82bff25eb88129a4f90d7c6b1b185bc71c0e7bd21503dcf5f83815a4919d",
+      "line": 626,
+      "code": "        \"alltools\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"AllTools\": (\"openai\", {\"model\": \"text-embedding-3-large\"}),\n        \"alltools-qwen\": (\"openrouter\", {\"model\": \"qwen3-embedding-8b\"}),\n    }\n\n    seen = set()\n    unique_configs = []"
+    }
+  ],
+  "observed_target_error": "Missing credentials. Please pass an api_key, workload_identity, admin_api_key, or set OPENAI_API_KEY or OPENAI_ADMIN_KEY",
+  "interpretation": "Native alltools includes OpenAI text-embedding-3-large retrieval; its independent OpenAI client reads OPENAI_API_KEY. DeepSeek chat/User/Judge credentials do not supply native embedding service credentials. Original target stages did not complete business simulation or grading. No fake key or alternate model inserted.",
+  "raw_counts": {
+    "needs_attention": 17,
+    "execution_failed": 5,
+    "unsupported_configuration": 2
+  },
+  "new_model_calls": 0,
+  "product_changes": 0,
+  "paid_retry_scheduled": false,
+  "priority": "Retain concrete shared service prerequisite; existing passed Bench gaps first."
+}

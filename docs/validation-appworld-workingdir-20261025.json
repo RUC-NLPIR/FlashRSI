@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-25",
+  "scope": "Small public downloader working-directory correction, not a new algorithm smoke",
+  "code_changes": [
+    "flashrsi/_launch.py",
+    "tests/test_generic_launcher.py"
+  ],
+  "api_changes": [],
+  "tests": {
+    "regression_before_fix": {
+      "failed": 1,
+      "expected_reproduction": true
+    },
+    "related_after_fix": {
+      "passed": 25,
+      "skipped": 1
+    },
+    "ruff_changed_files": "passed"
+  },
+  "native_probe": {
+    "scope": "Native appworld0.1.3.post1 CLI root resolution only, no data download/model/benchmark smoke",
+    "model_calls": 0,
+    "tests": [
+      {
+        "working_directory": "/",
+        "returncode": 0,
+        "stdout": "{\"cwd\": \"/\", \"root\": \".\", \"data\": \"./data\"}",
+        "stderr": "",
+        "resolved_native_data_path": "/data"
+      },
+      {
+        "working_directory": "/world",
+        "returncode": 0,
+        "stdout": "{\"cwd\": \"/world\", \"root\": \".\", \"data\": \"./data\"}",
+        "stderr": "",
+        "resolved_native_data_path": "/world/data"
+      }
+    ]
+  },
+  "wheel": "validation-appworld-workingdir-wheel-20261025.json",
+  "model_calls": 0,
+  "new_real_combination_passes": 0,
+  "limitations": "Full default automatic data download on a standard shared-filesystem Docker host has not been rerun. Native cwd behavior and complete-cache publication/reuse regression plus installed wheel CLI are verified. Existing22 AppWorld flows remain evidence for explicit full native cache mode."
+}

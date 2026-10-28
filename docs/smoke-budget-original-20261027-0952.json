@@ -1,0 +1,32 @@
+{
+  "utc": "2026-10-27T01:58:12.066649+00:00",
+  "jobs": [
+    {
+      "id": "terminal-rrsi-cache-recovery",
+      "status": "execution_failed",
+      "phase": "experiment",
+      "active_pid": null,
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "source_changes": [],
+      "target_statuses": {
+        "error": 2
+      },
+      "worker_statuses": {},
+      "missing_usage": 2,
+      "active_process_present": false,
+      "paid_marker": true
+    }
+  ],
+  "disk_free": 1742422016
+}

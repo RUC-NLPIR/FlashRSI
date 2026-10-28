@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-26T19:09:08.597053+00:00",
+  "jobs": [
+    {
+      "id": "widesearch-opro-cc-judge8192",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 16244,
+      "budget_changes": [
+        {
+          "path": "benchmark.judge.llm.max_tokens",
+          "before": 4096,
+          "after": 8192
+        }
+      ],
+      "source_changes": [],
+      "target_statuses": {},
+      "worker_statuses": {},
+      "missing_usage": 0,
+      "active_process_present": true,
+      "paid_marker": true
+    }
+  ],
+  "disk_free": 2591551488
+}

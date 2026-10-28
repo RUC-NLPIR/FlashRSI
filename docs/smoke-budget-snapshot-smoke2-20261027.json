@@ -1,0 +1,54 @@
+{
+  "utc": "2026-10-26T17:24:29.658628+00:00",
+  "jobs": [
+    {
+      "id": "bbeh-darwinx-cc",
+      "status": "flow_passed",
+      "phase": "experiment",
+      "active_pid": null,
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "targets": [
+        {
+          "status": "finished",
+          "usage": true
+        },
+        {
+          "status": "finished",
+          "usage": true
+        },
+        {
+          "status": "finished",
+          "usage": true
+        },
+        {
+          "status": "finished",
+          "usage": true
+        }
+      ],
+      "workers": [
+        {
+          "status": "finished",
+          "usage": true
+        },
+        {
+          "status": "finished",
+          "usage": true
+        }
+      ],
+      "paid_attempt": true,
+      "source_changes": []
+    }
+  ],
+  "disk_free": 4373766144
+}

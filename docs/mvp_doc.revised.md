@@ -58,9 +58,9 @@ MVP 的验收目标：两个 benchmark（SearchQA + Terminal-Bench 2.0）、
 @dataclass(frozen=True)
 class Task:
     task_id: str
-    question: str                     # 交给 agent 的问题 / 指令
-    ground_truth: str | None = None      # 答案式 bench 的标准答案
-    env: str | None = None               # 环境式 bench 的镜像 / 任务目录
+    question: str  # 交给 agent 的问题 / 指令
+    ground_truth: str | None = None  # 答案式 bench 的标准答案
+    env: str | None = None  # 环境式 bench 的镜像 / 任务目录
     metadata: Mapping[str, Any] = ...
 ```
 
@@ -69,15 +69,19 @@ class Task:
 class Benchmark:
     name: str
     description: str
-    metadata: Mapping[str, Any]   # 记录来源等额外信息
-    primary_metric: str           # grade() 必定填充的指标名，算法据此判断单条轨迹成败
+    metadata: Mapping[str, Any]  # 记录来源等额外信息
+    primary_metric: str  # grade() 必定填充的指标名，算法据此判断单条轨迹成败
 
-    def __init__(self, config: Mapping[str, Any]) -> None: ...
+    def __init__(self, config: Mapping[str, Any]) -> None:
+        ...
         # 接收 config.benchmark；校验 name 与本类一致
 
-    def load(self) -> Mapping[str, tuple[Task, ...]]: ...
+    def load(self) -> Mapping[str, tuple[Task, ...]]:
+        ...
         # 读取task，并根据config映射为：{'train': [...], 'dev': .., 'test': ...}
-    def grade(self, trajs: tuple[Trajectory, ...]) -> tuple[Trajectory, ...]: ...
+
+    def grade(self, trajs: tuple[Trajectory, ...]) -> tuple[Trajectory, ...]:
+        ...
         # 在traj的metrics字段填充dict，包含了该轨迹的所有评分信息以及primary_metric
 
     # 基类统一提供，load() 之后可读；未 load 时访问报错
@@ -104,7 +108,7 @@ class SnapshotFile:
 @dataclass(frozen=True)
 class Snapshot:
     files: Mapping[str, SnapshotFile]
-    component_rules: Mapping[str, tuple[str, ...]]   # component 名称 -> 文件路径规则
+    component_rules: Mapping[str, tuple[str, ...]]  # component 名称 -> 文件路径规则
 
     # 以下元数据由框架维护，算法无需手动填写
     id: str
@@ -167,7 +171,9 @@ class Agent:
     async def edit(self, working_dir: Path, prompt: str) -> str: ...
 
     # 后端唯一需要实现的方法
-    async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory: ...
+    async def _run(
+        self, prompt: str, working_dir: Path | None = None
+    ) -> Trajectory: ...
 ```
 
 | 操作 | 必须保证的行为 |
@@ -202,13 +208,13 @@ scope 和兼容性校验在 commit、候选 rollout、update 入口统一执行�
 ```python
 @dataclass(frozen=True)
 class Trajectory:
-    task: Task | None = None          # Worker 的 ask/edit 轨迹没有 Task
-    status: str = "finished"          #  "finished" | "error"
+    task: Task | None = None  # Worker 的 ask/edit 轨迹没有 Task
+    status: str = "finished"  #  "finished" | "error"
     output: str = ""
     messages: tuple[Mapping, ...] = ()  # agent 的中间步骤
-    metrics: Mapping[str, float] = ... # grade() 之后才有
-    error_message: str | None = None   # status == "error" 时必填
-    usage: Mapping[str, Any] = ...     # 保存轨迹token消耗等信息
+    metrics: Mapping[str, float] = ...  # grade() 之后才有
+    error_message: str | None = None  # status == "error" 时必填
+    usage: Mapping[str, Any] = ...  # 保存轨迹token消耗等信息
 ```
 
 Trajectory、Task、Snapshot、SnapshotFile 都不可变，映射字段在构造时转为只读视图。
@@ -236,14 +242,15 @@ class Algorithm:
     async def evolve(self) -> Snapshot: ...
 
     # 可选钩子
-    def _normalize(self) -> None: ...   # 别名规范化，在 _ranges 校验之前
-    def _check(self) -> None: ...       # 需要数据或 target 才能判断的前置条件
+    def _normalize(self) -> None: ...  # 别名规范化，在 _ranges 校验之前
+    def _check(self) -> None: ...  # 需要数据或 target 才能判断的前置条件
 
 
-class SkillOpt(Algorithm):                           # 作者写的全部
-    name = 'skillopt'
-    description = '...'
+class SkillOpt(Algorithm):  # 作者写的全部
+    name = "skillopt"
+    description = "..."
     evolve_scope = {"skill"}
+
     async def evolve(self) -> Snapshot: ...
 ```
 
@@ -280,7 +287,7 @@ async def evolve(self) -> Snapshot:
 
     score = (await self._evaluate(candidate, self.benchmark.dev)).score
     if score > best:
-        self.target.update(candidate)        # 到这一步才真的换；不调用 = 拒绝
+        self.target.update(candidate)  # 到这一步才真的换；不调用 = 拒绝
 
     return self.target.snapshot
 ```

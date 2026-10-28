@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-10-28T14:33:55.296299+08:00",
+  "host": "smoke5",
+  "control": "/root/.cache/airline-modular-mini-output16384-1430",
+  "authorization": {
+    "authorized_at": "2026-10-28T06:31:49.695362+00:00",
+    "human_instruction": "耗尽输出上限的我们可以调高点，这个问题不大；输出预算由实验者处理。",
+    "one_independent_configuration": true,
+    "previous_control": "/root/.cache/airline-modular-mini-worker120-1325",
+    "previous_paid_failure_preserved": true,
+    "only_budget_change": {
+      "algorithm.worker.llm.max_tokens": {
+        "configured_before": 8192,
+        "observed_native_limit": 8192,
+        "after": 16384
+      }
+    },
+    "target_turns": 8,
+    "target_timeout": 600,
+    "worker_turns": 120,
+    "worker_timeout": 1200,
+    "native_session_steps": 100,
+    "source_files": 230,
+    "further_automatic_escalation": false
+  },
+  "preparation": {
+    "status": "dispatched_once_after_native_preflight",
+    "checks": [
+      {
+        "phase": "public-plan",
+        "exit_code": 0
+      },
+      {
+        "phase": "public-check-only",
+        "exit_code": 0
+      },
+      {
+        "phase": "native-proof",
+        "exit_code": 0
+      }
+    ],
+    "model_calls": 0,
+    "phase": "native-proof",
+    "controller_pid": 23096
+  },
+  "job": {
+    "id": "airline-modular-mini-output16384",
+    "status": "running",
+    "phase": "experiment",
+    "active_pid": 23170,
+    "report": "smoke-airline-modular-mini-output16384-20261028.json"
+  },
+  "paid": true,
+  "model_smoke_pass": false
+}

@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-28T15:23:14.548584+08:00",
+  "current_protocol_failures": [
+    {
+      "scope": "TravelPlanner custom converter",
+      "observed": "3 preserved actual replies are complete bare JSON arrays; old fenced-only extraction rejected them",
+      "resolution": "Implemented wrapper compatibility; exact reply replay and native schema tests passed; new OPRO/Mini model in progress",
+      "historical_scope_limit": "Old17 partial and5 failures do not all have preserved converter replies; do not retroactively attribute every failure to wrapping"
+    },
+    {
+      "scope": "SWE-bench / ModularRSI / MiniAgent",
+      "observed": "00014-worker.json returned a single JSON object with target/task_ids/rationale/change; required top-level list",
+      "proposed": "Change analyze prompt example to explicit [{...}] and reiterate singleton still a list; retain parser/task references/gates, then bounded new validation",
+      "implemented": false
+    }
+  ],
+  "separate_failure_types": [
+    {
+      "scope": "Banking / ModularRSI / Mini",
+      "reason": "Candidate runtime TraceWriter.event duplicate kind; gate rejected; one execution_gate usage unknown",
+      "category": "candidate runtime and evidence completeness, not converter protocol"
+    },
+    {
+      "scope": "Airline / ModularRSI / Mini",
+      "reason": "Worker8192 output cap; new16384 run active",
+      "category": "budget"
+    },
+    {
+      "scope": "TravelPlanner ADAS/Mini and MetaHarness/Mini",
+      "reason": "Old public logs explicitly8192 Worker output cap",
+      "category": "budget; new16384 config permissible after converter representative succeeds"
+    },
+    {
+      "scope": "TravelPlanner DarwinX/Mini",
+      "reason": "Old public log Worker60 turns",
+      "category": "budget"
+    },
+    {
+      "scope": "TravelPlanner RRSI Mini/CC",
+      "reason": "too many failed trials",
+      "category": "native stopping condition; per-trial root cause not established by preserved top-level log; do not simply raise failed-trial gate"
+    },
+    {
+      "scope": "BFCL and SpreadsheetBench2",
+      "reason": "DockerHub blob/image transfer blocked; no exact image cached on any4 current engines",
+      "category": "infrastructure, zero model preparation"
+    }
+  ]
+}

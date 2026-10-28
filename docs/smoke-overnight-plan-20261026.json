@@ -1,0 +1,3611 @@
+{
+  "checked_at": "2026-10-25T18:00:14.035022+00:00",
+  "new_benchmarks_this_continuation": [
+    "BBEH",
+    "SuperGPQA"
+  ],
+  "new_capability": "AIME distinct evolution_year with full-pool overlap protection",
+  "source_reports": {
+    "AIME 2026": {
+      "status": "completed",
+      "counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "updated_at": "2026-10-25T17:22:58.166845+00:00"
+    },
+    "WorkBench": {
+      "status": "running",
+      "counts": {
+        "flow_passed": 16,
+        "running": 1,
+        "pending": 7
+      },
+      "updated_at": "2026-10-25T17:55:41.806795+00:00"
+    },
+    "OfficeQAPro": {
+      "status": "completed",
+      "counts": {
+        "flow_passed": 10,
+        "needs_attention": 11,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "updated_at": "2026-10-25T17:58:07.530644+00:00"
+    },
+    "DeepSearchQA": {
+      "status": "running",
+      "counts": {
+        "flow_passed_with_limitations": 1,
+        "flow_passed_custom_judge": 7,
+        "execution_failed": 1,
+        "needs_attention": 2,
+        "running": 1,
+        "pending": 12
+      },
+      "updated_at": "2026-10-25T17:54:53.493484+00:00"
+    },
+    "BBEH": {
+      "status": "running",
+      "counts": {
+        "completed_pending_audit": 1,
+        "preparing": 1,
+        "pending": 22
+      },
+      "updated_at": "2026-10-25T17:58:33.459654+00:00"
+    },
+    "SuperGPQA": {
+      "status": "waiting_for_previous_queue",
+      "counts": {
+        "pending": 24
+      },
+      "updated_at": "2026-10-25T17:44:48.027270+00:00"
+    }
+  },
+  "independent_aime_followup": {
+    "status": "waiting_for_previous_queue",
+    "counts": {
+      "pending": 2
+    }
+  },
+  "matrix_counts": {
+    "passed": 235,
+    "unsupported_configuration": 16,
+    "partial_or_running": 17,
+    "failed": 5,
+    "pending": 63
+  },
+  "paid_queues_run_in_sequence": true,
+  "original_rejections_preserved": true,
+  "updated_at": "2026-10-26T02:33:49.887526+00:00",
+  "bbeh_collector_review": {
+    "passed_cases": 4,
+    "new_model_calls": 0,
+    "raw_history_retained": true
+  },
+  "latest_checked_at": "2026-10-26T04:25:44.227172+00:00",
+  "scope_benchmarks": 26,
+  "scope_cells": 624,
+  "latest_matrix_counts": {
+    "pass": 413,
+    "partial_or_running": 114,
+    "failed": 24,
+    "unsupported": 26,
+    "pending": 47
+  },
+  "new_benchmarks_this_check": [
+    "WideSearch"
+  ],
+  "latest_source_reports": {
+    "WorkBench": {
+      "raw_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T18:18:02.063148+00:00",
+      "effective_counts": {
+        "flow_passed": 22,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "OfficeQAPro": {
+      "raw_counts": {
+        "flow_passed": 10,
+        "needs_attention": 11,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T17:58:07.530644+00:00",
+      "effective_counts": {
+        "flow_passed": 10,
+        "needs_attention": 11,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "DeepSearchQA": {
+      "raw_counts": {
+        "flow_passed_with_limitations": 1,
+        "flow_passed_custom_judge": 12,
+        "execution_failed": 1,
+        "needs_attention": 7,
+        "running": 1,
+        "pending": 2
+      },
+      "status": "running",
+      "updated_at": "2026-10-25T19:55:12.651294+00:00",
+      "effective_counts": {
+        "flow_passed_with_limitations": 1,
+        "flow_passed_custom_judge": 12,
+        "execution_failed": 1,
+        "needs_attention": 7,
+        "running": 1,
+        "pending": 2
+      },
+      "current": [
+        {
+          "algorithm": "rrsi",
+          "target": "claude_code"
+        }
+      ]
+    },
+    "BBEH": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "needs_attention": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T18:58:27.592624+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "needs_attention": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "SuperGPQA": {
+      "raw_counts": {
+        "pending": 24
+      },
+      "status": "waiting_for_previous_queue",
+      "updated_at": "2026-10-25T17:44:48.027270+00:00",
+      "effective_counts": {
+        "pending": 24
+      },
+      "current": []
+    },
+    "CRUXEval-O": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "status": "completed",
+      "updated_at": "2026-10-25T19:36:23.192981+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "execution_failed": 1,
+        "unsupported_configuration": 2
+      },
+      "current": []
+    },
+    "MATH-500": {
+      "raw_counts": {
+        "flow_passed": 21,
+        "running": 1,
+        "pending": 2
+      },
+      "status": "running",
+      "updated_at": "2026-10-25T19:54:47.254284+00:00",
+      "effective_counts": {
+        "flow_passed": 21,
+        "running": 1,
+        "pending": 2
+      },
+      "current": [
+        {
+          "algorithm": "rrsi",
+          "target": "claude_code"
+        }
+      ]
+    },
+    "MuSiQue": {
+      "raw_counts": {
+        "pending": 24
+      },
+      "status": "waiting_for_previous_queue",
+      "updated_at": "2026-10-25T19:37:53.798915+00:00",
+      "effective_counts": {
+        "pending": 24
+      },
+      "current": []
+    }
+  },
+  "additional_followups": {
+    "original": "MATH-50024 -> MuSiQue24 (cachefix source, initial zero-model failure retained)",
+    "smoke2": "CRUXEval-O complete -> Hotpot Modular independent2 running",
+    "smoke3": "DeepSearchQA24 -> SuperGPQA24 -> tested SkillOpt/Claude repair1"
+  },
+  "disk_cleanup_report": "smoke-smokedoc-disk-cleanup-20261026.json",
+  "latest_queues": {
+    "original": [
+      "TriviaQA24 continues"
+    ],
+    "smoke2": [
+      "AIME2025 and SkillOpt repair and MuSiQue2 completed",
+      "2Wiki independent2 both public prechecks passed; unique queue preparing"
+    ],
+    "smoke3": [
+      "Tau2Airline24 completed21budget partial/1Worker failure/2missingdata",
+      "SearchQA native independence rejected; complete split intersections439/145/23",
+      "TravelPlanner24 first public prep and one bounded retry failedSSL, zero models"
+    ]
+  },
+  "latest_new_benchmarks": [],
+  "latest_snapshot": "smoke-heartbeat-20261026-0627.json",
+  "latest_data_capability": "TwoWiki and SearchQA public evolution_split/loaders, full source guards;35relatedtests/freshwheel passed. SearchQA real native splits overlap, not claimed runnable.",
+  "latest_0732": {
+    "original": {
+      "benchmark": "LiveMathBench AMC/en",
+      "phase": "preparation_blocked",
+      "ended": 0,
+      "running": 0,
+      "pending": 24,
+      "reason": "Public HF401; requires approved access or native full cache",
+      "previous_triviaqa": {
+        "ended": 24,
+        "passed": 22,
+        "unsupported": 2
+      }
+    },
+    "smoke2": {
+      "benchmark": "BrowseComp",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "ended": 3,
+      "running": 1,
+      "pending": 20,
+      "passed_custom": 2,
+      "partial": 1
+    },
+    "smoke3": {
+      "benchmark": "TravelPlanner",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "ended": 9,
+      "running": 1,
+      "pending": 14,
+      "passed": 0,
+      "needs_attention": 9
+    }
+  },
+  "latest_0836": {
+    "original": {
+      "report": "smoke-tau2-retail24-public-original-20261026.json",
+      "counts": {
+        "needs_attention": 3,
+        "running": 1,
+        "pending": 20
+      },
+      "status": "running",
+      "current": [
+        {
+          "algorithm": "skillopt",
+          "target": "claude_code",
+          "phase": "experiment",
+          "status": "running"
+        }
+      ]
+    },
+    "smoke2": {
+      "report": "smoke-browsecomp24-public-smoke2-20261026.json",
+      "counts": {
+        "flow_passed_custom_judge": 3,
+        "needs_attention": 2,
+        "running": 1,
+        "pending": 18
+      },
+      "status": "running",
+      "current": [
+        {
+          "algorithm": "ahe",
+          "target": "claude_code",
+          "phase": "experiment",
+          "status": "running"
+        }
+      ]
+    },
+    "smoke3": {
+      "report": "smoke-travelplanner24-public-smoke3-20261026.json",
+      "counts": {
+        "needs_attention": 12,
+        "running": 1,
+        "pending": 11
+      },
+      "status": "running",
+      "current": [
+        {
+          "algorithm": "adas",
+          "target": "miniagent",
+          "phase": "experiment",
+          "status": "running"
+        }
+      ]
+    }
+  },
+  "followup_repair_0836": {
+    "report": "smoke-travelplanner-conversion-evidence-model-smoke3-20261026.json",
+    "scope": "one OPRO/Mini case, tested evidence-only repair; new source266",
+    "status": "waiting_for_previous_queue",
+    "paid_attempt_limit": 1,
+    "extra_matrix_cells": 0
+  },
+  "latest_0933": {
+    "original": "smoke-bbeh-modular-independent-original-20261026.json",
+    "smoke2": "smoke-browsecomp24-public-smoke2-20261026.json",
+    "smoke3": "smoke-widesearch24-cachefix-public-smoke3-20261026.json"
+  },
+  "completed_0933": {
+    "retail": {
+      "partial": 19,
+      "worker_budget_failed": 3,
+      "unsupported": 2
+    },
+    "travelplanner": {
+      "partial": 17,
+      "worker_budget_failed": 5,
+      "unsupported": 2
+    },
+    "travelplanner_recording_repair": {
+      "status": "recording_evidence_passed_benchmark_not_passed",
+      "observed": "Three unfenced JSON arrays rejected by native parser; actual raw replies and SDKusage retained"
+    }
+  },
+  "scheduling_priority_override": {
+    "recorded_at": "2026-10-26T03:19:53.863163+00:00",
+    "source": "用户最新明确排期要求",
+    "priority": "现有在途队列收尾后，优先补齐已有通过记录的Benchmark的组合和证据，不扩展尚未验证的新Benchmark。",
+    "finish_current_unique_queues": true,
+    "repeat_passed_cells": false,
+    "expand_unvalidated_benchmarks": false,
+    "deferred_new_benchmarks": [
+      "HLE",
+      "HarveyLAB",
+      "JobBench",
+      "SWE-bench Pro"
+    ],
+    "constraints": [
+      "预算、原生流程和评分不变",
+      "失败或partial须先诊断，有依据的新配置才有界验证",
+      "独立演化数据真实且防重合",
+      "真实受阻保留，不为完备性伪造通过"
+    ],
+    "this_change_is_scheduling_only": true,
+    "idle_policy": "空闲机立即领取已有Benchmark的可执行补齐、数据准备、诊断或必要公开修复任务；保持唯一顺序付费队列，不重复通过或原配置失败。"
+  },
+  "latest_1127": {
+    "checked_at": "2026-10-26T03:33:56.128329+00:00",
+    "original": {
+      "benchmark": "tau3_banking",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "ended": 14,
+      "running": 1,
+      "pending": 9,
+      "free_bytes_after_cleanup": 8925171712
+    },
+    "smoke2": {
+      "benchmark": "browsecomp",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "ended": 13,
+      "running": 1,
+      "pending": 10
+    },
+    "smoke3": {
+      "benchmark": "widesearch",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "ended": 3,
+      "running": 1,
+      "pending": 20
+    },
+    "new_benchmarks": [],
+    "cleanup_report": "smoke-smokedoc-env-cleanup-20261026-1127.json"
+  },
+  "latest_1134": {
+    "checked_at": "2026-10-26T04:20:16.405448+00:00",
+    "new_benchmarks": [],
+    "supergpqa_independent": {
+      "status": "flow_passed_both",
+      "report": "smoke-supergpqa-modular-independent-original-20261026.json",
+      "closure": "smoke-supergpqa-independent-closure-20261026.json",
+      "source_files": 277,
+      "project_id": "e0fc65d0bd7b",
+      "native_source": "ARC-Challenge/train1119 vs SuperGPQA26529, fixed revisions, one native train repeated question preserved",
+      "old_real_dev_test_unchanged": true
+    },
+    "current_workloads": {
+      "original": {
+        "kind": "data_preparation_no_model",
+        "benchmark": "TriviaQA",
+        "root": "/root/flashrsi-triviaqa-independent-data-20261026",
+        "control": "full-native-pool-probe-20261026",
+        "pidfile": "probe.pid",
+        "status": "downloading_native_shard",
+        "report": "smoke-triviaqa-independent-native-pool-original-20261026.json",
+        "new_model_calls": 0,
+        "full_train_bytes": 1837106748,
+        "completed_shards": 3,
+        "total_shards": 7,
+        "free_bytes": 6170611712,
+        "next_model_target": null
+      },
+      "smoke2": {
+        "host": "smoke2",
+        "root": "/root/flashrsi-browsecomp-public-20261026",
+        "control": "/root/flashrsi-browsecomp-public-20261026/public-bench24-20261026",
+        "checked_at": "2026-10-26T03:58:42.404638+00:00",
+        "status": "running",
+        "counts": {
+          "flow_passed_custom_judge": 8,
+          "needs_attention": 7,
+          "execution_failed": 1,
+          "running": 1,
+          "pending": 7
+        },
+        "current": [
+          {
+            "algorithm": "meta_harness",
+            "target": "miniagent",
+            "phase": "experiment"
+          }
+        ],
+        "free_bytes": 9070370816,
+        "pids": {
+          "supervisor.pid": {
+            "pid": "37453",
+            "alive": true,
+            "public_entry": false,
+            "controller": true
+          },
+          "active-command.pid": {
+            "pid": "45467",
+            "alive": true,
+            "public_entry": true,
+            "controller": false
+          }
+        },
+        "source_file_count": 271,
+        "source_changes": [],
+        "latest_native": [
+          {
+            "file": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-browsecomp-20261026-114323-817320/trajectories/00002-worker.json",
+            "mtime": 1792986606.7211833,
+            "stages": [
+              {
+                "status": "finished",
+                "usage_recorded": true,
+                "metrics": {},
+                "native_verifiers": []
+              }
+            ]
+          },
+          {
+            "file": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-browsecomp-20261026-114323-817320/trajectories/00001-baseline.json",
+            "mtime": 1792986535.4421716,
+            "stages": [
+              {
+                "status": "error",
+                "usage_recorded": true,
+                "metrics": {
+                  "accuracy": 0.0
+                },
+                "native_verifiers": []
+              }
+            ]
+          },
+          {
+            "file": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-browsecomp-20261026-113803-380409/trajectories/00009-test.json",
+            "mtime": 1792986201.6879218,
+            "stages": [
+              {
+                "status": "finished",
+                "usage_recorded": true,
+                "metrics": {
+                  "accuracy": 0.0
+                },
+                "native_verifiers": [
+                  "BrowseCompVerifier"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "smoke3": {
+        "host": "smoke3",
+        "root": "/root/flashrsi-widesearch-cachefix-public-20261026",
+        "control": "/root/flashrsi-widesearch-cachefix-public-20261026/public-bench24-20261026",
+        "checked_at": "2026-10-26T03:58:42.348889+00:00",
+        "status": "running",
+        "counts": {
+          "needs_attention": 7,
+          "running": 1,
+          "pending": 16
+        },
+        "current": [
+          {
+            "algorithm": "ace",
+            "target": "claude_code",
+            "phase": "experiment"
+          }
+        ],
+        "free_bytes": 4457906176,
+        "pids": {
+          "supervisor.pid": {
+            "pid": "56851",
+            "alive": true,
+            "public_entry": false,
+            "controller": true
+          },
+          "active-command.pid": {
+            "pid": "61410",
+            "alive": true,
+            "public_entry": true,
+            "controller": false
+          }
+        },
+        "source_file_count": 266,
+        "source_changes": [],
+        "latest_native": [
+          {
+            "file": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-widesearch-20261026-115413-824094/trajectories/00001-baseline.json",
+            "mtime": 1792987083.0076115,
+            "stages": [
+              {
+                "status": "error",
+                "usage_recorded": true,
+                "metrics": {
+                  "score": 0.0,
+                  "precision_by_row": 0.0,
+                  "recall_by_row": 0.0,
+                  "f1_by_row": 0.0,
+                  "precision_by_item": 0.0,
+                  "recall_by_item": 0.0,
+                  "f1_by_item": 0.0
+                },
+                "native_verifiers": []
+              }
+            ]
+          },
+          {
+            "file": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-widesearch-20261026-114658-834209/trajectories/00005-test.json",
+            "mtime": 1792986794.2806683,
+            "stages": [
+              {
+                "status": "error",
+                "usage_recorded": true,
+                "metrics": {
+                  "score": 0.0,
+                  "precision_by_row": 0.0,
+                  "recall_by_row": 0.0,
+                  "f1_by_row": 0.0,
+                  "precision_by_item": 0.0,
+                  "recall_by_item": 0.0,
+                  "f1_by_item": 0.0
+                },
+                "native_verifiers": []
+              }
+            ]
+          },
+          {
+            "file": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-widesearch-20261026-114658-834209/trajectories/00003-candidate.json",
+            "mtime": 1792986682.6087596,
+            "stages": [
+              {
+                "status": "error",
+                "usage_recorded": true,
+                "metrics": {
+                  "score": 0.0,
+                  "precision_by_row": 0.0,
+                  "recall_by_row": 0.0,
+                  "f1_by_row": 0.0,
+                  "precision_by_item": 0.0,
+                  "recall_by_item": 0.0,
+                  "f1_by_item": 0.0
+                },
+                "native_verifiers": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "banking_final": {
+      "raw_counts": {
+        "needs_attention": 17,
+        "execution_failed": 5,
+        "unsupported_configuration": 2
+      },
+      "shared_service_gap": "Native alltools OpenAI embedding client requires separate usable credentials; target errors Missing credentials, not MAX_STEPS business grading. No pass.",
+      "worker_limits": {
+        "adas_mini": "60 turns",
+        "darwinx_mini": "600 seconds",
+        "meta_harness_mini": "600 seconds"
+      },
+      "rrsi_both": "complete positive policy-token accounting is required for every trial",
+      "report": "smoke-tau3-banking-native-service-gap-20261026.json"
+    },
+    "validation": {
+      "new_tests": 10,
+      "related_passed": 78,
+      "wheel_sha256": "dda613389baa2ea6d32898f038dd7893e33f43b032d2d71355a678dad950aa44",
+      "report": "validation-supergpqa-independent-20261026.json"
+    },
+    "new_paid_retries_of_passed_cases": 0
+  },
+  "latest_1235": {
+    "checked_at": "2026-10-26T05:20:44.988376+00:00",
+    "scope_benchmarks": 26,
+    "scope_cells": 624,
+    "matrix_counts": {
+      "pass": 416,
+      "partial_or_running": 119,
+      "failed": 24,
+      "unsupported": 24,
+      "pending": 41
+    },
+    "machines": {
+      "WorkBench": {
+        "raw_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T18:18:02.063148+00:00",
+        "effective_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "OfficeQAPro": {
+        "raw_counts": {
+          "flow_passed": 10,
+          "needs_attention": 11,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T17:58:07.530644+00:00",
+        "effective_counts": {
+          "flow_passed": 10,
+          "needs_attention": 11,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "DeepSearchQA": {
+        "raw_counts": {
+          "flow_passed_with_limitations": 1,
+          "flow_passed_custom_judge": 12,
+          "execution_failed": 1,
+          "needs_attention": 8,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T20:25:19.539459+00:00",
+        "effective_counts": {
+          "flow_passed_with_limitations": 1,
+          "flow_passed_custom_judge": 12,
+          "execution_failed": 1,
+          "needs_attention": 8,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "BBEH": {
+        "raw_counts": {
+          "flow_passed": 21,
+          "needs_attention": 1,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T18:58:27.592624+00:00",
+        "effective_counts": {
+          "flow_passed": 21,
+          "needs_attention": 1,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "SuperGPQA": {
+        "raw_counts": {
+          "flow_passed": 21,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T21:21:21.030472+00:00",
+        "effective_counts": {
+          "flow_passed": 21,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "CRUXEval-O": {
+        "raw_counts": {
+          "flow_passed": 21,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T19:36:23.192981+00:00",
+        "effective_counts": {
+          "flow_passed": 21,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "MATH-500": {
+        "raw_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T20:01:40.736303+00:00",
+        "effective_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "MuSiQue": {
+        "raw_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T20:28:28.379726+00:00",
+        "effective_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "AIME 2025": {
+        "raw_counts": {
+          "flow_passed": 23,
+          "execution_failed": 1
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T22:20:47.772110+00:00",
+        "effective_counts": {
+          "flow_passed": 23,
+          "execution_failed": 1
+        },
+        "current": []
+      },
+      "TriviaQA": {
+        "raw_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-26T00:26:46.147679+00:00",
+        "effective_counts": {
+          "flow_passed": 22,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "τ² Airline": {
+        "raw_counts": {
+          "flow_passed": 1,
+          "needs_attention": 20,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-25T22:58:37.257705+00:00",
+        "effective_counts": {
+          "partial": 21,
+          "execution_failed": 1,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "TravelPlanner": {
+        "raw_counts": {
+          "needs_attention": 17,
+          "execution_failed": 5,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-26T01:41:40.641214+00:00",
+        "effective_counts": {
+          "needs_attention": 17,
+          "execution_failed": 5,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "BrowseComp": {
+        "raw_counts": {
+          "flow_passed_custom_judge": 10,
+          "needs_attention": 9,
+          "execution_failed": 1,
+          "running": 1,
+          "pending": 3
+        },
+        "status": "running",
+        "updated_at": "2026-10-26T05:14:23.255810+00:00",
+        "effective_counts": {
+          "flow_passed_custom_judge": 10,
+          "needs_attention": 9,
+          "execution_failed": 1,
+          "running": 1,
+          "pending": 3
+        },
+        "current": [
+          {
+            "algorithm": "rrsi",
+            "target": "miniagent"
+          }
+        ]
+      },
+      "LiveMathBench AMC/en": {
+        "raw_counts": {
+          "pending": 24
+        },
+        "status": "preparation_blocked",
+        "updated_at": "2026-10-26T00:33:03.608123+00:00",
+        "effective_counts": {
+          "pending": 24
+        },
+        "current": []
+      },
+      "τ² Retail": {
+        "raw_counts": {
+          "needs_attention": 19,
+          "execution_failed": 3,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-26T02:16:14.168812+00:00",
+        "effective_counts": {
+          "needs_attention": 19,
+          "execution_failed": 3,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      },
+      "WideSearch": {
+        "raw_counts": {
+          "needs_attention": 9,
+          "running": 1,
+          "pending": 14
+        },
+        "status": "running",
+        "updated_at": "2026-10-26T04:49:00.238125+00:00",
+        "effective_counts": {
+          "needs_attention": 9,
+          "running": 1,
+          "pending": 14
+        },
+        "current": [
+          {
+            "algorithm": "evoprompt",
+            "target": "claude_code"
+          }
+        ]
+      },
+      "τ³ Banking": {
+        "raw_counts": {
+          "needs_attention": 17,
+          "execution_failed": 5,
+          "unsupported_configuration": 2
+        },
+        "status": "completed",
+        "updated_at": "2026-10-26T03:55:15.033713+00:00",
+        "effective_counts": {
+          "needs_attention": 17,
+          "execution_failed": 5,
+          "unsupported_configuration": 2
+        },
+        "current": []
+      }
+    },
+    "aime_independent": {
+      "status": "completed",
+      "counts": {
+        "execution_failed": 1,
+        "flow_passed": 1
+      },
+      "updated_at": "2026-10-25T19:10:03.586535+00:00"
+    },
+    "new_benchmarks_this_check": [],
+    "math_independent": {
+      "status": "completed",
+      "counts": {
+        "execution_failed": 1,
+        "flow_passed": 1
+      },
+      "updated_at": "2026-10-25T21:04:22.043721+00:00"
+    },
+    "hotpot_independent": {
+      "status": "completed",
+      "counts": {
+        "flow_passed": 2
+      },
+      "updated_at": "2026-10-25T20:28:09.373615+00:00"
+    },
+    "musique_independent": {
+      "status": "completed",
+      "counts": {
+        "execution_failed": 1,
+        "flow_passed": 1
+      },
+      "updated_at": "2026-10-25T22:26:37.688103+00:00"
+    },
+    "repair_queues": {
+      "DeepSearchQA": {
+        "status": "completed",
+        "counts": {
+          "needs_attention": 1
+        },
+        "updated_at": "2026-10-25T21:41:02.504603+00:00"
+      },
+      "SuperGPQA": {
+        "status": "completed",
+        "counts": {
+          "flow_passed": 1
+        },
+        "updated_at": "2026-10-25T21:41:31.735738+00:00"
+      },
+      "AIME 2025": {
+        "status": "completed",
+        "counts": {
+          "flow_passed": 1
+        },
+        "updated_at": "2026-10-25T22:23:49.494007+00:00"
+      }
+    },
+    "new_model_calls_by_audit": 0,
+    "snapshot_note": "Browse/Wide process/native checks through13:23 CST; original new Mini audit pass and CC native records confirmed13:27 CST.",
+    "trivia_independent": {
+      "status": "running",
+      "counts": {
+        "flow_passed": 1,
+        "running": 1
+      },
+      "updated_at": "2026-10-26T05:25:37.558337+00:00"
+    },
+    "current_workloads": {
+      "original": {
+        "root": "/root/flashrsi-triviaqa-evolution-public-20261026",
+        "control": "independent-triviaqa2-20261026",
+        "benchmark": "TriviaQA",
+        "algorithm": "modular_rsi",
+        "target": "claude_code",
+        "ended": 1,
+        "running": 1,
+        "pending": 0,
+        "native_finished_target": 18,
+        "native_finished_worker": 15,
+        "missing_usage_in_read_records": 0,
+        "source_file_count": 280,
+        "source_changes": [],
+        "disk_free_bytes": 7203512320,
+        "next": "Registered zero-model whole SearchQA vs native Trivia train identity research after current queue exits; no duplicate paid dispatcher",
+        "native_finished_counts_scope": "Audited completed Mini item only, not current Claude totals",
+        "phase": "Claude normal public experiment; contrast/Worker native records already present"
+      },
+      "smoke2": {
+        "root": "/root/flashrsi-browsecomp-public-20261026",
+        "benchmark": "BrowseComp",
+        "algorithm": "rrsi",
+        "target": "miniagent",
+        "ended": 20,
+        "running": 1,
+        "pending": 3,
+        "passed_custom": 10,
+        "partial": 9,
+        "failed": 1,
+        "source_file_count": 271,
+        "source_changes": [],
+        "disk_free_bytes": 8916131840,
+        "next": "Continue unique sequential queue; fixed-budget errors retained"
+      },
+      "smoke3": {
+        "root": "/root/flashrsi-widesearch-cachefix-public-20261026",
+        "benchmark": "WideSearch",
+        "algorithm": "evoprompt",
+        "target": "claude_code",
+        "ended": 9,
+        "running": 1,
+        "pending": 14,
+        "passed": 0,
+        "partial": 9,
+        "source_file_count": 266,
+        "source_changes": [],
+        "disk_free_bytes": 4360015872,
+        "native_process_tree_checked": true,
+        "next": "Continue current queue; preserve failed Judge evidence, no budget increase or hot source replacement"
+      }
+    },
+    "new_results": [
+      "TriviaQA complete native independent pool and public preparation validated; actual first Modular experiment running, no pass yet",
+      "BrowseComp MetaHarness/Mini and EvoHarness/Mini complete custom Judge flows passed",
+      "Original safely removed four ended Banking dependency environments only",
+      "TriviaQA ModularRSI/Mini full flow_passed after actual audit:18Target15Worker finished, native aliasEM/F1/usage complete, test1; CC now running"
+    ],
+    "validation": {
+      "new_tests": 11,
+      "related_regression_passed": 89,
+      "fresh_wheel_sha256": "4f402641d7f6fb556c98a1798103e567d45e66a9fe044bcf5dc228312708ce17",
+      "new_model_calls_by_offline_validation": 0,
+      "native_main_dev_test_unchanged": true
+    },
+    "queued_data_research": {
+      "root": "/root/flashrsi-searchqa-external-research-20261026",
+      "control": "full-trivia-native-overlap-20261026",
+      "followup_pid_reference": 35522,
+      "status": "waiting_for_previous_queue",
+      "max_automatic_paid_attempts": 0,
+      "native_searchqa_records": 216136,
+      "native_trivia_train_records": 61888,
+      "whole_candidate_reject_on_overlap": true
+    },
+    "resource_incident": {
+      "scope": "Zero-model SearchQA manifest generation only",
+      "initial_probe": "Eager archive hashing caused cgroup memory pressure and SSH delay; initial PID65295 terminated, attempt01 script/log preserved",
+      "repair": "Stream archive SHA with 1MiB chunks; rerun zero-model manifest completed with peakRSS161832960",
+      "cgroup_oom_kill_seen_after": 0,
+      "model_restart": false,
+      "impact_on_native_calls": "No per-call causal attribution; current native Claude child and tool subprocess still active, original stage errors retained"
+    },
+    "checked_at_final_original": "2026-10-26T05:27:39Z"
+  },
+  "current_workloads": {
+    "original": "SSH refused, state unknown",
+    "smoke2": "Office EvoPrompt160 experiment; GEPA160 queued",
+    "smoke3": "disk blocked; reference audit incomplete; no env deletion"
+  },
+  "latest_priority": "Finish current queues, then fill existing passed benchmark gaps. No new Benchmark this round.",
+  "latest_1602": {
+    "checked_at": "2026-10-26T09:55:42.725652+00:00",
+    "scope_benchmarks": 26,
+    "scope_cells": 624,
+    "matrix_counts": {
+      "pass": 419,
+      "failed": 29,
+      "partial_or_running": 126,
+      "unsupported": 26,
+      "pending": 24
+    },
+    "fully_passed_scopes": [
+      "HotpotQA",
+      "2WikiMultiHopQA",
+      "SuperGPQA",
+      "TriviaQA",
+      "AIME 2025"
+    ],
+    "new_benchmarks_this_check": [],
+    "updated_reports": {
+      "TriviaQA": {
+        "status": "completed",
+        "counts": {
+          "flow_passed": 2
+        },
+        "updated_at": "2026-10-26T05:33:08.222022+00:00"
+      },
+      "SearchQA": {
+        "status": "completed",
+        "counts": {
+          "flow_passed": 1,
+          "execution_failed": 1
+        },
+        "updated_at": "2026-10-26T06:41:23.742572+00:00"
+      },
+      "SWE-bench": {
+        "status": "running",
+        "counts": {
+          "execution_failed": 1,
+          "running": 1
+        },
+        "updated_at": "2026-10-26T09:39:38.853330+00:00"
+      },
+      "BrowseComp": {
+        "status": "completed",
+        "counts": {
+          "flow_passed_custom_judge": 11,
+          "needs_attention": 9,
+          "execution_failed": 2,
+          "unsupported_configuration": 2
+        },
+        "updated_at": "2026-10-26T05:44:26.609670+00:00"
+      },
+      "WideSearch": {
+        "status": "completed",
+        "counts": {
+          "needs_attention": 20,
+          "execution_failed": 2,
+          "unsupported_configuration": 2
+        },
+        "updated_at": "2026-10-26T09:07:26.169200+00:00"
+      }
+    },
+    "only_responsible_cells_updated": true,
+    "new_model_calls_by_audit": 0,
+    "current_workloads": {
+      "31447": {
+        "model_running": false,
+        "latest_paid_queue": "SearchQA ModularRSI 2",
+        "ended": 2,
+        "running": 0,
+        "pending": 0,
+        "counts": {
+          "flow_passed": 1,
+          "execution_failed_protocol": 1
+        },
+        "current_preparation": "AppWorld complete native normal/challenge Task contract and ID/scenario/instruction isolation confirmed, zero models",
+        "next": "Public independent published-split option, whole-pool guards, required tests/fresh wheel then a unique real 2-cell queue",
+        "disk_free_bytes": 5106319360
+      },
+      "37411": {
+        "model_running": true,
+        "benchmark": "SWE-bench",
+        "algorithm": "ModularRSI",
+        "target": "claude_code",
+        "control": "/root/flashrsi-swe-lite-evolution-public-20261026/runtime-recovery-swe2-20261026",
+        "ended": 1,
+        "running": 1,
+        "pending": 0,
+        "mini_result": "2 finished native SWEBenchVerifier stages and usage, second Worker 8192 output limit, no final; no retry/budget increase",
+        "claude_latest_stages": "7 Target all finished/native verifier/usage, 4 Worker; current final not yet audited",
+        "runtime_repair": "Both roles fresh-container unchanged native setup/pip check passed; original failure and paid workers preserved",
+        "disk_free_bytes": 5999706112
+      },
+      "38944": {
+        "model_running": false,
+        "latest_paid_queue": "WideSearch 24",
+        "ended": 24,
+        "running": 0,
+        "pending": 0,
+        "counts": {
+          "needs_attention": 20,
+          "execution_failed": 2,
+          "unsupported_configuration": 2
+        },
+        "current_preparation": "Native error audit completed; two zero-HTTP offline fixtures reproduce missing SDK reply/usage on rejected judge response",
+        "next": "Independent recording-only fix/test/wheel; no native prompt/parser/scorer/budget relaxation or duplicate paid run",
+        "disk_free_bytes": 3990175744
+      }
+    },
+    "current_workloads_checked_at": "2026-10-26T10:04:03Z",
+    "no_benchmark_added": true,
+    "data_only_probes": {
+      "AppWorld": "315 normal-scope Tasks and 564 challenge-scope Tasks loaded unchanged; candidate external only challenge417, original train90/dev57/testnormal168 preserved; id/scenario/raw instruction overlap0",
+      "BFCL": "Base200 vs alternate complete200 each first-turn overlap194/189/117; archived composite200 overlap48, all whole candidates rejected",
+      "NQ": "7424 partial rows hit 256MiB transfer guard, no complete pool conclusion"
+    }
+  },
+  "priority": "Complete existing previously passed Benchmarks; no unvalidated new Benchmarks, no repeated passing cells or increased budgets",
+  "latest_1823": {
+    "checked_at": "2026-10-26T11:47:36.416296+00:00",
+    "new_benchmarks_this_check": [],
+    "scope_benchmarks": 26,
+    "scope_cells": 624,
+    "matrix_counts": {
+      "pass": 420,
+      "failed": 29,
+      "partial_or_running": 126,
+      "pending": 25,
+      "unsupported": 24
+    },
+    "fully_audited_24_of_24_scopes": [
+      "HotpotQA",
+      "2WikiMultiHopQA",
+      "SuperGPQA",
+      "TriviaQA",
+      "AIME 2025"
+    ],
+    "user_confirmed_prior_full_experiment_scopes": [
+      "SearchQA",
+      "HotpotQA",
+      "Terminal-Bench 2.0",
+      "τ³",
+      "NQ",
+      "TriviaQA",
+      "MuSiQue",
+      "SWE-bench",
+      "BFCL Multi-Turn",
+      "OfficeQA Pro",
+      "DeepSearchQA",
+      "WorkBench"
+    ],
+    "project_completion_classification_total": 15,
+    "raw_smoke_evidence_preserved": true,
+    "updated_reports": {
+      "SWE-bench": {
+        "status": "completed",
+        "counts": {
+          "execution_failed": 1,
+          "flow_passed": 1
+        },
+        "updated_at": "2026-10-26T10:21:04.040614+00:00"
+      },
+      "AppWorld": {
+        "status": "running",
+        "counts": {
+          "running": 1,
+          "pending": 1
+        },
+        "updated_at": "2026-10-26T11:42:04.977384+00:00"
+      }
+    },
+    "source_changes_this_check": [
+      "AppWorld loader, tests, example, documentation"
+    ],
+    "current_workloads": {
+      "original": {
+        "benchmark": "AppWorld",
+        "algorithm": "ModularRSI",
+        "target": "MiniAgent",
+        "ended": 0,
+        "running": 1,
+        "pending": 1,
+        "note": "Real native contrast finished with usage observed; CC awaits sequential dispatch"
+      },
+      "smoke2": {
+        "benchmark": "SWE-bench",
+        "ended": 2,
+        "running": 0,
+        "pending": 0,
+        "note": "CC passed/Mini output limit failed. WorkBench native archived-version isolation research finished; all three candidates rejected for overlap, no paid retry."
+      },
+      "smoke3": {
+        "benchmark": "WideSearch",
+        "ended": 24,
+        "running": 0,
+        "pending": 0,
+        "note": "20 partial/2 execution failures/2 unsupported retained. New AppWorld installed-wheel Linux regressions 10 passed; zero model."
+      }
+    },
+    "real_machine_snapshots": [
+      {
+        "host": "original",
+        "checked_at": "2026-10-26T11:50:31.895789+00:00",
+        "source_file_count": 286,
+        "source_changes": [],
+        "public_control_processes": [
+          {
+            "pid": 40426,
+            "entry": "/root/flashrsi-appworld-evolution-public-20261026/independent-appworld2-20261026/supervisor.py"
+          },
+          {
+            "pid": 40511,
+            "entry": "/root/flashrsi-appworld-evolution-public-20261026/scripts/run_experiment.py"
+          },
+          {
+            "pid": 40512,
+            "entry": "/root/flashrsi-appworld-evolution-public-20261026/scripts/run_experiment.py"
+          },
+          {
+            "pid": 40513,
+            "entry": "/root/flashrsi-appworld-evolution-public-20261026/scripts/run_experiment.py"
+          }
+        ],
+        "disk_free": 3306164224
+      },
+      {
+        "host": "smoke2",
+        "checked_at": "2026-10-26T11:50:31.916795+00:00",
+        "source_file_count": 273,
+        "source_changes": [],
+        "public_control_processes": [],
+        "disk_free": 5996486656
+      },
+      {
+        "host": "smoke3",
+        "checked_at": "2026-10-26T11:50:31.852464+00:00",
+        "source_file_count": 266,
+        "source_changes": [],
+        "public_control_processes": [],
+        "disk_free": 3949453312
+      }
+    ],
+    "final_checked_at": "2026-10-26T11:50:31Z"
+  },
+  "user_acceptance_20261026": [
+    "SearchQA",
+    "HotpotQA",
+    "Terminal-Bench 2.0",
+    "τ³",
+    "NQ",
+    "TriviaQA",
+    "MuSiQue",
+    "SWE-bench",
+    "BFCL Multi-Turn",
+    "OfficeQA Pro",
+    "DeepSearchQA",
+    "WorkBench"
+  ],
+  "latest_2000": {
+    "checked_at": "2026-10-26T12:29:32Z",
+    "new_benchmarks_this_check": [],
+    "matrix_counts": {
+      "pass": 420,
+      "failed": 30,
+      "partial_or_running": 126,
+      "unsupported": 24,
+      "pending": 24
+    },
+    "scope_cells": 624,
+    "project_handled_scopes_user_and_audit": 15,
+    "fully_audited_24_of_24_scopes": [
+      "HotpotQA",
+      "2WikiMultiHopQA",
+      "AIME2025",
+      "SuperGPQA",
+      "TriviaQA"
+    ],
+    "current_workloads": {
+      "original": {
+        "benchmark": "AppWorld",
+        "algorithm": "ModularRSI",
+        "target": "Claude Code",
+        "ended": 1,
+        "model_running": 1,
+        "pending": 0,
+        "mini_result": "Worker reached maximum number of turns (60); 14 Target finished, 13 Worker finished then one Worker error, all usage present; no final. No retry.",
+        "cc_progress": "3 Target and 1 Worker finished, usage present, no final yet",
+        "disk_free_bytes": 2959273984
+      },
+      "smoke2": {
+        "benchmark": "SWE-bench / CRUXEval-O source research",
+        "ended_paid": 2,
+        "model_running": 0,
+        "pending_paid": 0,
+        "research_status": "completed_data_only",
+        "research_result": "Pinned official HF and GitHub files are byte-identical 800-row pools; rejected as independent source. Initial transfer timeout preserved; complete original files obtained through local authorized proxy and transferred.",
+        "disk_free_bytes_at_2000": 5996486656
+      },
+      "smoke3": {
+        "benchmark": "WideSearch / CRUXEval-O source research",
+        "ended_paid": 24,
+        "model_running": 0,
+        "pending_paid": 0,
+        "research_status": "completed_data_only",
+        "research_result": "Complete native MBPP 427 rows are not directly compatible with current CRUXEval f(input) contract; no transformation, code execution, overlap conclusion or paid dispatch. GitHub API rate limit preserved; official Git HEAD pinned before fetching raw source.",
+        "disk_free_bytes_at_2000": 3949453312
+      }
+    },
+    "product_changes_this_check": [],
+    "new_paid_dispatches_by_this_check": 0,
+    "note": "Existing AppWorld controller automatically dispatched CC after Mini ended. Research completion is not smoke completion. Idle hosts have no active model after these bounded research tasks finished."
+  },
+  "latest_2100": {
+    "checked_at": "2026-10-26T13:34:54.241142+00:00",
+    "new_benchmarks_this_check": [],
+    "matrix_counts": {
+      "pass": 422,
+      "failed": 30,
+      "partial_or_running": 124,
+      "unsupported": 24,
+      "pending": 24
+    },
+    "scope_cells": 624,
+    "handled_project_scopes": 15,
+    "strict_full_scopes": [
+      "HotpotQA",
+      "2WikiMultiHopQA",
+      "AIME2025",
+      "SuperGPQA",
+      "TriviaQA"
+    ],
+    "new_complete_cell": "AppWorld/ModularRSI/Claude Code",
+    "current_workloads": {
+      "original": {
+        "benchmark": "AppWorld",
+        "algorithm": "ModularRSI",
+        "ended": 2,
+        "model_running": 0,
+        "pending": 0,
+        "status": "CC full pass; Mini Worker60 failure preserved; closure complete"
+      },
+      "smoke2": {
+        "benchmark": "SWE-bench / WideSearch wheel validation",
+        "ended_paid": 2,
+        "model_running": 0,
+        "pending": 0,
+        "status": "SWE recovery complete; new wheel independent installation, module identity and CLI passed, zero models"
+      },
+      "smoke3": {
+        "benchmark": "WideSearch",
+        "algorithm": "OPRO",
+        "target": "MiniAgent",
+        "ended_current_attempt": 1,
+        "model_running": 0,
+        "pending": 0,
+        "status": "New one-cell attempt full native custom-Judge flow pass; failure-recording branch not observed; no repeat allowed"
+      }
+    },
+    "original_source_roots_unchanged": true,
+    "new_paid_attempts_this_check": 1,
+    "new_source_count": 267,
+    "machine_snapshots": [
+      {
+        "host": "original",
+        "checked_at": "2026-10-26T13:37:07.109727+00:00",
+        "source_count": 286,
+        "source_changes": [],
+        "public_runner_pids": [],
+        "disk_free": 3225300992
+      },
+      {
+        "host": "smoke2",
+        "checked_at": "2026-10-26T13:37:06.936015+00:00",
+        "source_count": 273,
+        "source_changes": [],
+        "public_runner_pids": [],
+        "disk_free": 5975248896
+      },
+      {
+        "host": "smoke3",
+        "checked_at": "2026-10-26T13:37:07.046107+00:00",
+        "source_count": 266,
+        "source_changes": [],
+        "public_runner_pids": [],
+        "disk_free": 3446206464
+      }
+    ],
+    "wide_new_root": {
+      "checked_at": "2026-10-26T13:36:13.951089+00:00",
+      "status": "running",
+      "counts": {
+        "running": 1
+      },
+      "public_runner_pids": [
+        14127,
+        14128,
+        14129
+      ],
+      "native_rows": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_present": true,
+          "host_error_events": 0,
+          "judge_requests": null
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "usage_present": true,
+          "host_error_events": 0,
+          "judge_requests": 7
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "usage_present": true,
+          "host_error_events": 0,
+          "judge_requests": 7
+        }
+      ],
+      "source_count": 267,
+      "source_changes": [],
+      "disk_free": 3447185408
+    },
+    "final_checked_at": "2026-10-26T13:38:00Z",
+    "new_complete_cells": [
+      "AppWorld/ModularRSI/Claude Code",
+      "WideSearch/OPRO/MiniAgent"
+    ],
+    "wide_closure": {
+      "status": "flow_passed_custom_judge",
+      "native_audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-widesearch-evidence-public-20261026/batch-runs/opro-miniagent/opro-miniagent-widesearch-20261026-213225-235560",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "ws_zh_040",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.0,
+              "recall_by_row": 0.0,
+              "f1_by_row": 0.0,
+              "precision_by_item": 0.0,
+              "recall_by_item": 0.0,
+              "f1_by_item": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "ws_zh_040",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.0,
+              "recall_by_row": 0.0,
+              "f1_by_row": 0.0,
+              "precision_by_item": 0.0,
+              "recall_by_item": 0.0,
+              "f1_by_item": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "ws_zh_093",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.16981132075471697,
+              "recall_by_row": 0.15517241379310345,
+              "f1_by_row": 0.16216216216216214,
+              "precision_by_item": 0.589622641509434,
+              "recall_by_item": 0.5387931034482759,
+              "f1_by_item": 0.5630630630630631
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          }
+        ],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "custom-deepseek"
+      },
+      "target_finished": 3,
+      "worker_finished": 1,
+      "test_score": 0,
+      "recording_failure_branch_observed_in_model_run": false,
+      "failure_branch_coverage": "seven offline regression cases only; do not force another paid attempt",
+      "repair_does_not_explain_historical_judge_errors": true,
+      "historical_original_partial_preserved": true,
+      "original_prompt_parser_scorer_budget_unchanged": true
+    }
+  },
+  "latest_2200": {
+    "checked_at": "2026-10-26T14:33:29.350878+00:00",
+    "new_benchmarks_this_check": [],
+    "new_model_calls": 0,
+    "new_passed_cells": 0,
+    "scope_cells": 624,
+    "matrix_counts": {
+      "pass": 422,
+      "failed": 30,
+      "partial_or_running": 124,
+      "unsupported": 24,
+      "pending": 24
+    },
+    "handled_project_scopes": 15,
+    "strict_full_scopes": [
+      "HotpotQA",
+      "2WikiMultiHopQA",
+      "AIME2025",
+      "SuperGPQA",
+      "TriviaQA"
+    ],
+    "current_workloads": {
+      "original": {
+        "benchmark": "NQ",
+        "algorithm": null,
+        "target": null,
+        "kind": "zero-model full-source identity research",
+        "completed_files": 1,
+        "assigned_files": 98,
+        "uncompleted_files": 97,
+        "model_running": 0,
+        "data_probe_running": false,
+        "status": "preparation_blocked",
+        "blocker": "bounded native range request or decode failed",
+        "latest_machine_snapshot": {
+          "partition": 0,
+          "status": "preparation_blocked",
+          "checked_at": "2026-10-26T14:19:21.650596+00:00",
+          "assigned_files": 98,
+          "current_file": "default/train-00003-of-00287.parquet",
+          "transfer_bytes": 85351,
+          "requests": 2,
+          "elapsed_seconds": 15.073042500764132,
+          "error_type": "URLError",
+          "reason": "bounded native range request or decode failed",
+          "peak_rss_bytes": 73900032,
+          "completed_files": 1,
+          "completed_records": 1071,
+          "probe_alive": false,
+          "probe_pid": 50060,
+          "disk_free": 3225034752,
+          "observed_at": "2026-10-26T14:29:33.577057+00:00",
+          "model_calls": 0
+        }
+      },
+      "smoke2": {
+        "benchmark": "NQ",
+        "algorithm": null,
+        "target": null,
+        "kind": "zero-model full-source identity research",
+        "completed_files": 1,
+        "assigned_files": 98,
+        "uncompleted_files": 97,
+        "model_running": 0,
+        "data_probe_running": false,
+        "status": "preparation_blocked",
+        "blocker": "curl_range_exit_35",
+        "latest_machine_snapshot": {
+          "partition": 1,
+          "status": "preparation_blocked",
+          "checked_at": "2026-10-26T14:28:15.124495+00:00",
+          "assigned_files": 98,
+          "current_file": "default/train-00004-of-00287.parquet",
+          "transfer_bytes": 247017,
+          "requests": 9,
+          "elapsed_seconds": 51.295409329235554,
+          "error_type": "RuntimeError",
+          "reason": "curl_range_exit_35",
+          "peak_rss_bytes": 87871488,
+          "completed_files": 1,
+          "completed_records": 1071,
+          "probe_alive": false,
+          "probe_pid": 60042,
+          "disk_free": 5974798336,
+          "observed_at": "2026-10-26T14:29:33.551611+00:00",
+          "model_calls": 0
+        }
+      },
+      "smoke3": {
+        "benchmark": "NQ",
+        "algorithm": null,
+        "target": null,
+        "kind": "zero-model full-source identity research",
+        "completed_files": 6,
+        "assigned_files": 98,
+        "uncompleted_files": 92,
+        "model_running": 0,
+        "data_probe_running": false,
+        "status": "preparation_blocked",
+        "blocker": "bounded native range request or decode failed",
+        "latest_machine_snapshot": {
+          "partition": 2,
+          "status": "preparation_blocked",
+          "checked_at": "2026-10-26T14:22:19.753808+00:00",
+          "assigned_files": 98,
+          "current_file": "default/train-00020-of-00287.parquet",
+          "transfer_bytes": 835698,
+          "requests": 32,
+          "elapsed_seconds": 180.92345937900245,
+          "error_type": "URLError",
+          "reason": "bounded native range request or decode failed",
+          "peak_rss_bytes": 89305088,
+          "completed_files": 6,
+          "completed_records": 6426,
+          "probe_alive": false,
+          "probe_pid": 14578,
+          "disk_free": 3445379072,
+          "observed_at": "2026-10-26T14:29:33.551324+00:00",
+          "model_calls": 0
+        }
+      }
+    },
+    "nq_source_revision": "e8103d566bef4154c2c12b17c6095ec5275840cc",
+    "native_files_total": 294,
+    "native_tree_sha256": "6856087f383fafe841bd68e95a0693133ba7f4832de6911e88837a74f1a74979",
+    "range_research": {
+      "completed_shards": 8,
+      "records": 8568,
+      "historical_parity_comparable": 4284,
+      "historical_parity_mismatch": 0,
+      "old_partial_invalid_lines": 0,
+      "full_pool_completed": false,
+      "overlap_conclusion": null,
+      "new_model_calls": 0
+    },
+    "full_blob_sha_verified": false,
+    "full_native_task_contract_validated": false,
+    "source_changes_this_check": [],
+    "notes": [
+      "Exact HTTP206 Content-Range and size required before accepting bytes; only id/question.text projected, no model Task conversion.",
+      "Pilot complete shard1071 rows used124622 response bytes, peakRSS85041152.",
+      "Each partition max80MiB completed range payload, max768MiB RSS, max3600seconds; no automatic request retries.",
+      "Original and smoke3 stopped on urllib SSL EOF. Original curl transfer proof timed out and was not restarted. smoke2 exact failed-file footer curl proof passed, one bounded curl transport recovery completed one shard then stopped on curl35 TLS error.",
+      "Complete local manifest SHA checks and4284 historical comparable identity/question hashes match; 8568 total rows from8 disjoint shards do not establish full-pool isolation.",
+      "No product source, data labels, budgets, native evaluation or model replies changed; no cleanup performed."
+    ]
+  },
+  "latest_0102": {
+    "observed_at": "2026-10-27T01:24:30+08:00",
+    "authorization": "用户明确允许提高预算补smoke",
+    "new_benchmarks": [],
+    "max_paid_attempts_per_job": 1,
+    "plans": {
+      "original": [
+        {
+          "id": "aime2026-modular-mini",
+          "oldroot": "/root/flashrsi-aime-evolution-public-20261026",
+          "oldcontrol": "independent-aime2-20261026",
+          "root": "/root/flashrsi-searchqa-json-retry-public-20261026",
+          "algorithm": "modular_rsi",
+          "target": "miniagent",
+          "report": "smoke-aime2026-budget-retry-20261027.json",
+          "proxy": "http://127.0.0.1:33617",
+          "config": "/root/.cache/budget-smoke-0102/aime2026-modular-mini.local.yaml",
+          "status": "running",
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.max_turns",
+              "before": 60,
+              "after": 120
+            },
+            {
+              "path": "algorithm.worker.timeout",
+              "before": 600,
+              "after": 1200
+            }
+          ],
+          "audit_source": "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/audit.py",
+          "previous_status": "execution_failed",
+          "source_file_count": 284,
+          "health_config": "/root/flashrsi-aime-evolution-public-20261026/independent-aime2-20261026/configs/modular_rsi-miniagent.local.yaml",
+          "phase": "experiment",
+          "updated_at": "2026-10-26T17:11:37.465824+00:00",
+          "exit_code": 0,
+          "active_pid": 52412
+        },
+        {
+          "id": "math500-modular-mini",
+          "oldroot": "/root/flashrsi-math-evolution-public-20261026",
+          "oldcontrol": "independent-math2-20261026",
+          "root": "/root/flashrsi-searchqa-json-retry-public-20261026",
+          "algorithm": "modular_rsi",
+          "target": "miniagent",
+          "report": "smoke-math500-budget-retry-20261027.json",
+          "proxy": "http://127.0.0.1:33617",
+          "config": "/root/.cache/budget-smoke-0102/math500-modular-mini.local.yaml",
+          "status": "pending",
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.llm.max_tokens",
+              "before": 8192,
+              "after": 16384
+            }
+          ],
+          "audit_source": "/root/flashrsi-math-evolution-public-20261026/independent-math2-20261026/audit.py",
+          "previous_status": "execution_failed",
+          "source_file_count": 284,
+          "health_config": "/root/flashrsi-math-evolution-public-20261026/independent-math2-20261026/configs/modular_rsi-miniagent.local.yaml"
+        },
+        {
+          "id": "appworld-modular-mini",
+          "oldroot": "/root/flashrsi-appworld-evolution-public-20261026",
+          "oldcontrol": "independent-appworld2-20261026",
+          "root": "/root/flashrsi-appworld-evolution-public-20261026",
+          "algorithm": "modular_rsi",
+          "target": "miniagent",
+          "report": "smoke-appworld-budget-retry-20261027.json",
+          "proxy": "http://127.0.0.1:33617",
+          "environment": {
+            "DOCKER_HOST": "unix:///var/ebcloud/1a19514a-da83-44bf-ad67-397ede8f865f/dind/docker.sock"
+          },
+          "config": "/root/.cache/budget-smoke-0102/appworld-modular-mini.local.yaml",
+          "status": "pending",
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.max_turns",
+              "before": 60,
+              "after": 120
+            },
+            {
+              "path": "algorithm.worker.timeout",
+              "before": 600,
+              "after": 1200
+            }
+          ],
+          "audit_source": "/root/flashrsi-appworld-evolution-public-20261026/independent-appworld2-20261026/audit.py",
+          "previous_status": "execution_failed",
+          "source_file_count": 286,
+          "health_config": "/root/flashrsi-appworld-evolution-public-20261026/independent-appworld2-20261026/configs/modular_rsi-miniagent.local.yaml"
+        }
+      ],
+      "smoke2": [
+        {
+          "id": "bbeh-darwinx-cc",
+          "oldroot": "/root/flashrsi-bbeh-public-20261026",
+          "oldcontrol": "public-bench24-20261026",
+          "root": "/root/flashrsi-bbeh-public-20261026",
+          "algorithm": "darwinx",
+          "target": "claude_code",
+          "report": "smoke-bbeh-darwinx-budget-retry-20261027.json",
+          "proxy": "http://127.0.0.1:33618",
+          "config": "/root/.cache/budget-smoke-0102/bbeh-darwinx-cc.local.yaml",
+          "status": "flow_passed",
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "audit_source": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/audit.py",
+          "previous_status": "needs_attention",
+          "source_file_count": 265,
+          "health_config": "/root/flashrsi-bbeh-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+          "phase": "experiment",
+          "updated_at": "2026-10-26T17:12:23.105914+00:00",
+          "exit_code": 0,
+          "audit": {
+            "status": "flow_passed",
+            "experiment_path": "/root/flashrsi-bbeh-public-20261026/budget-runs-20261027/bbeh-darwinx-cc/darwinx-claude_code-bbeh-20261027-011223-702668",
+            "native_grade_recomputed": true,
+            "new_model_calls": 0,
+            "target_stages": [
+              {
+                "file": "00001-baseline.json",
+                "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+                "status": "finished",
+                "metrics": {
+                  "accuracy": 0.0
+                },
+                "usage_recorded": true,
+                "judge_events": []
+              },
+              {
+                "file": "00003-screen_parent.json",
+                "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+                "status": "finished",
+                "metrics": {
+                  "accuracy": 0.0
+                },
+                "usage_recorded": true,
+                "judge_events": []
+              },
+              {
+                "file": "00004-screen_candidate.json",
+                "task_id": "b46d13a81f82803b6d23451eaed97e3babd53709a5f76d6dcc3fc1a76e449d89",
+                "status": "finished",
+                "metrics": {
+                  "accuracy": 0.0
+                },
+                "usage_recorded": true,
+                "judge_events": []
+              },
+              {
+                "file": "00009-test.json",
+                "task_id": "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47",
+                "status": "finished",
+                "metrics": {
+                  "accuracy": 0.0
+                },
+                "usage_recorded": true,
+                "judge_events": []
+              }
+            ],
+            "worker_stages": [
+              {
+                "file": "00002-worker.json",
+                "status": "finished",
+                "usage_recorded": true
+              },
+              {
+                "file": "00006-worker.json",
+                "status": "finished",
+                "usage_recorded": true
+              }
+            ],
+            "web_actions": [],
+            "problems": [],
+            "source_file_count": 265,
+            "source_changes": [],
+            "credential_scan": {
+              "files": 16,
+              "hits": []
+            },
+            "test_score": 0.0,
+            "judge_profile": "native"
+          },
+          "ended_at": "2026-10-26T17:15:54.654551+00:00"
+        }
+      ]
+    },
+    "snapshots": {
+      "original": {
+        "utc": "2026-10-26T17:24:26.871772+00:00",
+        "jobs": [
+          {
+            "id": "aime2026-modular-mini",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 52412,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "targets": [
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              }
+            ],
+            "workers": [
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              }
+            ],
+            "paid_attempt": true,
+            "source_changes": [],
+            "process_present": true
+          },
+          {
+            "id": "math500-modular-mini",
+            "status": "pending",
+            "phase": null,
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.llm.max_tokens",
+                "before": 8192,
+                "after": 16384
+              }
+            ],
+            "targets": [],
+            "workers": [],
+            "paid_attempt": false,
+            "source_changes": []
+          },
+          {
+            "id": "appworld-modular-mini",
+            "status": "pending",
+            "phase": null,
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "targets": [],
+            "workers": [],
+            "paid_attempt": false,
+            "source_changes": []
+          }
+        ],
+        "disk_free": 3042037760
+      },
+      "smoke2": {
+        "utc": "2026-10-26T17:24:29.658628+00:00",
+        "jobs": [
+          {
+            "id": "bbeh-darwinx-cc",
+            "status": "flow_passed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "targets": [
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              }
+            ],
+            "workers": [
+              {
+                "status": "finished",
+                "usage": true
+              },
+              {
+                "status": "finished",
+                "usage": true
+              }
+            ],
+            "paid_attempt": true,
+            "source_changes": []
+          }
+        ],
+        "disk_free": 4373766144
+      }
+    },
+    "smoke3": {
+      "observed_at": "2026-10-27T01:13:45+08:00",
+      "models": 0,
+      "public_runners": 0,
+      "disk_free": 3445374976
+    },
+    "matrix_counts": {
+      "pass": 426,
+      "partial": 123,
+      "failed": 27,
+      "blocked": 24,
+      "pending": 24
+    },
+    "full_scopes": [
+      "HotpotQA",
+      "2WikiMultiHopQA",
+      "AIME2025",
+      "SuperGPQA",
+      "TriviaQA",
+      "MuSiQue",
+      "SearchQA",
+      "BBEH"
+    ],
+    "qualification": "BBEH DarwinX/CC uses newly authorized 80 turns/2400 seconds; original budget history retained."
+  },
+  "latest_0209": {
+    "observed_at": "2026-10-27T02:18:00+08:00",
+    "new_benchmarks": [],
+    "new_passes": [
+      "AIME2026/ModularRSI/Mini",
+      "CRUXEval-O/RRSI/CC"
+    ],
+    "matrix_counts": {
+      "pass": 428,
+      "partial": 123,
+      "failed": 25,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "original": {
+        "utc": "2026-10-26T18:17:07.268646+00:00",
+        "jobs": [
+          {
+            "id": "aime2026-modular-mini",
+            "status": "flow_passed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 21
+            },
+            "worker_statuses": {
+              "finished": 19
+            },
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": true
+          },
+          {
+            "id": "math500-modular-mini",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 55419,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.llm.max_tokens",
+                "before": 8192,
+                "after": 16384
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 2
+            },
+            "worker_statuses": {
+              "finished": 1
+            },
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          },
+          {
+            "id": "appworld-modular-mini",
+            "status": "pending",
+            "phase": null,
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": false
+          }
+        ],
+        "disk_free": 2029101056
+      },
+      "smoke2": {
+        "utc": "2026-10-26T18:17:12.853792+00:00",
+        "jobs": [
+          {
+            "id": "crux-rrsi-cc",
+            "status": "flow_passed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.llm.max_tokens",
+                "before": 8192,
+                "after": 16384
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 6
+            },
+            "worker_statuses": {
+              "finished": 6
+            },
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3589472256
+      },
+      "smoke3": {
+        "utc": "2026-10-26T18:17:18.549583+00:00",
+        "jobs": [
+          {
+            "id": "widesearch-opro-cc",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 14960,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 2644127744
+      }
+    },
+    "swe_followup": {
+      "status": "dispatched",
+      "pid": 61607
+    },
+    "swe_active_public_pid_observed": 61745,
+    "note": "2026-10-27 02:18实查：新增AIME2026/ModularRSI/Mini（21Target+19Worker）和CRUXEval-O/RRSI/CC（6Target+6Worker）两格审计通过，原预算失败保留。本轮无新增Benchmark。原机MATH500/Mini真实运行、AppWorld/Mini顺序待；smoke2 CRUX已完成、SWE/ModularRSI/Mini已自动接上真实运行；smoke3 WideSearch/OPRO/CC真实运行。MATH两次零模型预检错误由私有调度强制离线和选错源码根引起，原日志保留，已恢复联网并改回原验证MATH根，不改产品源码。WideSearch除40轮外还有旧Judge ValueError，此次使用已验证267证据记录能力，Judge预算和评分不变，不预先宣称已修好。\n\n"
+  },
+  "latest_0304": {
+    "observed_at": "2026-10-27T03:09:10+08:00",
+    "new_benchmarks": [],
+    "new_passes": [],
+    "matrix_counts": {
+      "pass": 428,
+      "partial": 123,
+      "failed": 25,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "original": {
+        "utc": "2026-10-26T19:08:56.513296+00:00",
+        "jobs": [
+          {
+            "id": "aime2026-modular-mini",
+            "status": "flow_passed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 21
+            },
+            "worker_statuses": {
+              "finished": 19
+            },
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": true
+          },
+          {
+            "id": "math500-modular-mini",
+            "status": "execution_failed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.llm.max_tokens",
+                "before": 8192,
+                "after": 16384
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 16
+            },
+            "worker_statuses": {
+              "finished": 16,
+              "error": 1
+            },
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": true
+          },
+          {
+            "id": "appworld-modular-mini",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 57072,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 6
+            },
+            "worker_statuses": {
+              "finished": 6
+            },
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1627004928
+      },
+      "smoke2": {
+        "utc": "2026-10-26T19:09:02.635077+00:00",
+        "jobs": [
+          {
+            "id": "browsecomp-opro-cc",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 899,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3516801024
+      },
+      "smoke3": {
+        "utc": "2026-10-26T19:09:08.597053+00:00",
+        "jobs": [
+          {
+            "id": "widesearch-opro-cc-judge8192",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 16244,
+            "budget_changes": [
+              {
+                "path": "benchmark.judge.llm.max_tokens",
+                "before": 4096,
+                "after": 8192
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 2591551488
+      }
+    },
+    "math_followup": {
+      "status": "waiting_for_appworld"
+    },
+    "math_followup_plan": [
+      {
+        "id": "math500-modular-mini-turn120",
+        "oldroot": "/root/flashrsi-math-evolution-public-20261026",
+        "oldcontrol": "independent-math2-20261026",
+        "root": "/root/flashrsi-math-evolution-public-20261026",
+        "algorithm": "modular_rsi",
+        "target": "miniagent",
+        "report": "smoke-math500-worker-turn-budget-20261027.json",
+        "proxy": "http://127.0.0.1:33617",
+        "config": "/root/.cache/math-turn-budget-0304/math.local.yaml",
+        "status": "pending",
+        "budget_changes": [
+          {
+            "path": "algorithm.worker.max_turns",
+            "before": 60,
+            "after": 120
+          },
+          {
+            "path": "algorithm.worker.timeout",
+            "before": 600,
+            "after": 1200
+          }
+        ],
+        "audit_source": "/root/flashrsi-math-evolution-public-20261026/independent-math2-20261026/audit.py",
+        "previous_status": "execution_failed",
+        "source_file_count": 284,
+        "health_config": "/root/flashrsi-math-evolution-public-20261026/independent-math2-20261026/configs/modular_rsi-miniagent.local.yaml",
+        "environment": {
+          "HF_HUB_OFFLINE": "0"
+        },
+        "audit_python": "/root/.cache/FlashRSI/envs/ad30767cf091-17c6fe50def2-py312/bin/python",
+        "preparation_repair": "Use original verified MATH independent-loader root; Search JSON root lacked MATH external loader. No paid attempt so far.",
+        "evidence": "Prior output16384 attempt reached Worker60 with usage; retain output16384 and increase only exhausted turn/time budget."
+      }
+    ],
+    "note": "2026-10-27 03:09实查：本轮新增完整通过0，无新增Benchmark。MATH输出16384复测达到Worker60轮，16Target+16Worker finished后1Worker error，usage齐；SWE输出16384复测Worker60轮，另有候选TraceWriter.event重复kind参数错误，一条Target usage未知。Wide OPRO/CC三阶段Judge失败，新真实事件证明3个finish_reason=length/completion4096；已用真实launcher环境完成离线审计，保留初次审计环境缺依赖日志。原机AppWorld/ModularMini仍运行（6Target+6Worker finished），唯一MATH120轮后续等待；smoke2 BrowseComp/OPRO/CC 80轮/2400秒新尝试运行；smoke3 Wide OPRO/CC Judge8192新尝试运行，其他参数保留。未修改产品源码、未清环境，旧结果不覆盖。\n\n"
+  },
+  "latest_0405": {
+    "observed_at": "2026-10-27T04:09:15+08:00",
+    "new_benchmarks": [],
+    "new_passes": [
+      "AppWorld/ModularRSI/Mini"
+    ],
+    "matrix_counts": {
+      "pass": 429,
+      "partial": 123,
+      "failed": 24,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "original": {
+        "utc": "2026-10-26T20:09:02.120025+00:00",
+        "jobs": [
+          {
+            "id": "math500-modular-mini-turn120",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 64469,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 12
+            },
+            "worker_statuses": {
+              "finished": 11
+            },
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1784782848
+      },
+      "smoke2": {
+        "utc": "2026-10-26T20:09:07.323121+00:00",
+        "jobs": [
+          {
+            "id": "browsecomp-adas-mini",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 1988,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 1
+            },
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3462934528
+      },
+      "smoke3": {
+        "utc": "2026-10-26T20:09:12.804187+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-skillopt-cc",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 17359,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1720918016
+      }
+    },
+    "note": "2026-10-27 04:09实查：AppWorld/ModularRSI/Mini新增完整通过（20Target+17Worker，原生评分重算/usage/源码286/凭据76文件0命中，test0正常），成为第10个24格通过范围，Worker120轮/1200秒限定单列。本轮无新增Benchmark。原机MATH500/Mini120轮复测仍运行（12Target+11Worker已finished），smoke2 BrowseComp/ADAS/Mini Worker120轮新尝试真实运行，smoke3 DeepSearchQA/SkillOpt/CC Target80轮新尝试真实运行。上一轮Browse OPRO/CC候选仍触及80轮，baseline/final正常；Wide OPRO/CC Judge8192仍三阶段length截断，两项保留partial并停止继续循环加预算。没有产品改动或环境清理。\n\n",
+    "completed_partial_review": {
+      "BrowseComp/OPRO/CC": {
+        "target_finished": 2,
+        "target_error": 1,
+        "worker_finished": 1,
+        "error": "candidate maximum turns80",
+        "missing_usage": 0
+      },
+      "WideSearch/OPRO/CC": {
+        "target_error": 3,
+        "worker_finished": 1,
+        "missing_usage": 0,
+        "native_judge_length_completion_tokens": [
+          8192,
+          8192,
+          8192
+        ],
+        "final_judge_prior_stop_completion_tokens": [
+          4218,
+          1729,
+          4942
+        ]
+      }
+    }
+  },
+  "latest_0505": {
+    "observed_at": "2026-10-27T05:07:38+08:00",
+    "new_benchmarks": [],
+    "new_passes": [
+      "smoke-math500-worker-turn-budget-20261027.json",
+      "smoke-browsecomp-adas-budget-retry-20261027.json",
+      "smoke-deepsearch-skillopt-budget-retry-20261027.json"
+    ],
+    "matrix_counts": {
+      "pass": 432,
+      "partial": 122,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "original": {
+        "utc": "2026-10-26T21:07:38.056556+00:00",
+        "jobs": [
+          {
+            "id": "math500-modular-mini-turn120",
+            "status": "flow_passed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 18
+            },
+            "worker_statuses": {
+              "finished": 17
+            },
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1746550784
+      },
+      "smoke2": {
+        "utc": "2026-10-26T21:09:50.143247+00:00",
+        "jobs": [
+          {
+            "id": "browsecomp-ace-cc",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 2326,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3455664128
+      },
+      "smoke3": {
+        "utc": "2026-10-26T21:07:37.731227+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-skillopt-cc",
+            "status": "flow_passed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 3
+            },
+            "worker_statuses": {
+              "finished": 1
+            },
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1634938880
+      }
+    },
+    "note": "2026-10-27 05:07实查：新增MATH500/ModularRSI/Mini、BrowseComp/ADAS/Mini、DeepSearchQA/SkillOpt/CC三格完整审计通过，分别18Target+17Worker、3Target+1Worker、3Target+1Worker；usage齐、原生评分重算、源码不变、凭据扫描无命中。MATH500成为第11个24/24范围；预算及custom DeepSeek Judge限定保留。本轮无新增Benchmark。三项原队列均结束。下一项BrowseComp/ACE/CC只调整Target40/1200至80/2400，原两阶段40轮错误已核；零模型配置层级错误保留并纠正，真实状态见本轮报告。没有产品修改或环境清理。",
+    "next_active_smoke2": {
+      "utc": "2026-10-26T21:09:50.143247+00:00",
+      "jobs": [
+        {
+          "id": "browsecomp-ace-cc",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 2326,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 3455664128
+    }
+  },
+  "latest_0607": {
+    "observed_at": "2026-10-27T06:09:00+08:00",
+    "new_benchmarks": [],
+    "new_passes": [],
+    "matrix_counts": {
+      "pass": 432,
+      "partial": 122,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "original": {
+        "utc": "2026-10-26T22:07:54.895141+00:00",
+        "jobs": [
+          {
+            "id": "math500-modular-mini-turn120",
+            "status": "flow_passed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "algorithm.worker.max_turns",
+                "before": 60,
+                "after": 120
+              },
+              {
+                "path": "algorithm.worker.timeout",
+                "before": 600,
+                "after": 1200
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 18
+            },
+            "worker_statuses": {
+              "finished": 17
+            },
+            "missing_usage": 0,
+            "active_process_present": false,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1746550784
+      },
+      "smoke2": {
+        "utc": "2026-10-26T22:08:58.738458+00:00",
+        "jobs": [
+          {
+            "id": "browse-evoprompt-budget-0607",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 3740,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3352457216
+      },
+      "smoke3": {
+        "utc": "2026-10-26T22:08:58.684114+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-ace-budget-0607",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 18089,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1634603008
+      }
+    },
+    "note": "2026-10-27 06:09实查：本轮无新增通过、无新增Benchmark。BrowseComp/ACE/CC80轮复测结束：3Target finished、1test触及80轮、2Worker finished，usage齐/source271未变，保留partial不再循环加预算。smoke2已接BrowseComp/EvoPrompt/CC、smoke3已接DeepSearchQA/ACE/CC，两项原40轮错误已核，仅Target80轮/2400秒，公开预检及免费认证后真实experiment。原机无模型：Terminal/RRSI/CC旧两baseline40轮错误已核，但旧source-current清单与当前ModularRSI模块及README有两处差异，尚待版本核对，未启动或新增付费。未改产品、未清环境。",
+    "terminal_source_differences": [
+      "flashrsi/algorithms/modular_rsi/__init__.py",
+      "README.md"
+    ]
+  },
+  "latest_0705": {
+    "observed_at": "2026-10-27T07:07:07+08:00",
+    "new_benchmarks": [],
+    "new_passes": [
+      "BrowseComp/EvoPrompt/CC",
+      "DeepSearchQA/ACE/CC"
+    ],
+    "matrix_counts": {
+      "pass": 434,
+      "partial": 120,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "smoke2": {
+        "utc": "2026-10-26T23:07:06.801045+00:00",
+        "jobs": [
+          {
+            "id": "browse-gepa-budget-0705",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 4338,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3304321024
+      },
+      "smoke3": {
+        "utc": "2026-10-26T23:07:06.762988+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-evoprompt-budget-0705",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 18871,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1545691136
+      },
+      "original": {
+        "phase": "check-only",
+        "model_calls": 0,
+        "pid": 1868,
+        "source_review": "/root/.cache/terminal-budget-readiness-0607/source-review.json",
+        "paid_dispatch": false,
+        "process_present": true,
+        "log_bytes": 2836,
+        "ready": false,
+        "error_lines": [],
+        "disk_free": 1627230208
+      }
+    },
+    "note": "2026-10-27 07:07实查：BrowseComp/EvoPrompt/CC（5Target+3Worker）与DeepSearchQA/ACE/CC（4Target+2Worker）新增完整通过，usage齐、native重算、source未变、凭据扫描0命中，两项test1，customDeepSeekJudge/80轮2400秒限定保留。本轮无新增Benchmark。smoke2已接BrowseComp/GEPA/CC，smoke3已接DeepSearchQA/EvoPrompt/CC，原40轮错误确认后只Target80/2400，均真实experiment。原机无模型，Terminal/RRSI/CC公开check-only零模型预检中；相关源码与旧清单一致，但整根仍有ModularRSI模块和README两处旧差异，不能称整根未变。未修改产品或清环境。"
+  },
+  "latest_0805": {
+    "observed_at": "2026-10-27T08:07:00+08:00",
+    "new_benchmarks": [],
+    "new_passes": [],
+    "matrix_counts": {
+      "pass": 434,
+      "partial": 120,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "smoke2": {
+        "utc": "2026-10-27T00:06:25.258370+00:00",
+        "jobs": [
+          {
+            "id": "browse-skillopt-budget-0805",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 5474,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3250094080
+      },
+      "smoke3": {
+        "utc": "2026-10-27T00:06:25.506309+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-evoprompt-budget-0705",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 18871,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "error": 3,
+              "finished": 1
+            },
+            "worker_statuses": {
+              "finished": 3
+            },
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1359224832
+      },
+      "original": {
+        "phase": "check-only-native-docker",
+        "pid": 2093,
+        "model_calls": 0,
+        "paid_dispatch": false,
+        "disk_free": 302923776,
+        "process_present": false,
+        "ready": true,
+        "safe_tail": [
+          "Selected: rrsi + claude_code + terminal_bench",
+          "[1/3] Reusing Python environment: /root/.cache/FlashRSI/envs/5af70c61c795-16fcef5c9432-py312",
+          "[2/3] Preparing terminal_bench resources and native data...",
+          "[3/3] Ready: train=1, dev=1, test=1. No model calls or experiment directory created."
+        ]
+      }
+    },
+    "note": "2026-10-27 08:07实查：本轮无新增通过、无新增Benchmark。BrowseComp/GEPA/CC80轮已结束，4Target finished、1parent80轮error、1Worker finished，usage齐/source未变，保留partial不循环加预算。smoke2已真实接SkillOpt/CC80轮2400秒，旧train/test40轮已核；smoke3 DeepSearchQA/EvoPrompt/CC仍真实运行，已有3Target error/1finished及3Worker finished，未提前判终结。原机Terminal/RRSI/CC依赖完成后旧Docker端点不可达，原日志保存；原生UDS免费docker info成功后只改DOCKER_HOST进行零模型预检，已Ready111。原机仅302923776bytes可用，未付费派发，待安全空间准备；原根既有两处源码差异仍保留。无产品改动、无环境清理。"
+  },
+  "latest_0906": {
+    "observed_at": "2026-10-27T09:10:00+08:00",
+    "new_benchmarks": [],
+    "new_passes": [
+      "BrowseComp/SkillOpt/CC"
+    ],
+    "matrix_counts": {
+      "pass": 435,
+      "partial": 119,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "original": {
+        "utc": "2026-10-27T01:09:25.422462+00:00",
+        "jobs": [
+          {
+            "id": "terminal-rrsi-cc",
+            "status": "execution_failed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "error": 2
+            },
+            "worker_statuses": {},
+            "missing_usage": 2,
+            "active_process_present": false,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 2083856384
+      },
+      "smoke2": {
+        "utc": "2026-10-27T01:09:25.422304+00:00",
+        "jobs": [
+          {
+            "id": "browse-adas-cc-budget-0906",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 6458,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 3197362176
+      },
+      "smoke3": {
+        "utc": "2026-10-27T01:09:25.358794+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-gepa-budget-0906",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 20910,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1354092544
+      }
+    },
+    "note": "2026-10-27 09:10实查：BrowseComp/SkillOpt/CC新增完整通过（4Target+1Worker，usage/native重算/source/凭据12文件0命中，test1，customJudge80轮限定）。DeepSearch/EvoPrompt80轮结束仍3Target预算error、2finished、3Workerfinished，保留partial。smoke2已接ADAS/CC、smoke3已接GEPA/CC，均旧40轮错误确认后仅Target80/2400，真实experiment。原机清理2个已结束无proc/pth引用Search环境释放1781121024bytes，清单保存；Terminal/RRSI/CC80轮尝试已结束，两baseline均DockerHub拉取alexgshaw/adaptive-rejection-sampler:20251031超时，usage缺失未知，未评分不通过。原生daemon只有AppWorld及Python镜像，先准备网络/官方镜像再考虑有界恢复，不能盲重跑。该新run控制目录冻结228文件并保留旧Modular/README差异，未改产品。无新增Benchmark。"
+  },
+  "latest_0952": {
+    "observed_at": "2026-10-27T09:59:00+08:00",
+    "new_benchmarks": [],
+    "new_passes": [
+      "BrowseComp/ADAS/CC",
+      "DeepSearchQA/GEPA/CC"
+    ],
+    "matrix_counts": {
+      "pass": 437,
+      "partial": 117,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "machines": {
+      "original": {
+        "utc": "2026-10-27T01:58:12.066649+00:00",
+        "jobs": [
+          {
+            "id": "terminal-rrsi-cache-recovery",
+            "status": "execution_failed",
+            "phase": "experiment",
+            "active_pid": null,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "error": 2
+            },
+            "worker_statuses": {},
+            "missing_usage": 2,
+            "active_process_present": false,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1742422016
+      },
+      "smoke2": {
+        "utc": "2026-10-27T01:56:02.329176+00:00",
+        "jobs": [
+          {
+            "id": "browse-darwinx-budget-0952",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 6963,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 2828763136
+      },
+      "smoke3": {
+        "utc": "2026-10-27T01:56:02.349180+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-adas-budget-0952",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 21986,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {},
+            "worker_statuses": {},
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1330749440
+      }
+    },
+    "note": "2026-10-27 09:59实查：新增BrowseComp/ADAS/CC（2Target+1Worker）与DeepSearchQA/GEPA/CC（4Target+1Worker）完整审计通过，usage/native重算/source/凭据齐、test1，customJudge80轮限定。总账437通过117部分22失败24前置24待，11范围全通。本轮无新增Benchmark。smoke2已接DarwinX/CC，smoke3已接ADAS/CC，旧40轮错误确认后仅Target80/2400，真实experiment。原机已从smoke2导入三个现有原生任务镜像，341206918bytes SHA256 0a88d1e6427c49b4d10232d07b6dd25edd8e1144bf14b6212021e467513c7024，逐imageID/RootFS层一致且三个零网络容器启动通过。Terminal/RRSI/CC一次基础设施恢复已实际执行，但创建任务容器时Docker socket连接reset，随后daemon不可达，两baseline无usage未知。之后docker info返回engine c70c50d1-b854-45a5-a1ff-ee417de50a92，与之前03f20045不同；本任务没有reset engine，不能归因产品或继续盲付费。缓存原包/失败/证明保留。\n"
+  },
+  "latest_1010": {
+    "observed_at": "2026-10-27T10:12:00+08:00",
+    "new_passes": [],
+    "new_benchmarks": [],
+    "note": "2026-10-27 10:12实查：本轮无新增通过、无新增Benchmark，总账437通过117部分22失败24前置24待/624，11范围全通。smoke2 BrowseComp/DarwinX/CC仍真实运行，已1Target+1Worker finished/usage齐；smoke3 DeepSearchQA/ADAS/CC仍真实运行，已1Target error+1Worker finished/usage齐，未结束不升级。已分别登记唯一顺序后续BrowseComp/MetaHarness/CC及DeepSearchQA/DarwinX/CC，旧test40轮错误核实，Target80/2400，其余111及角色参数不变；followup等待当前队列终结/锁释放，非预算错误则阻塞，不重复派。原机无模型，Docker新engine c70c50d1...可达但镜像/容器均空；只读资源记录memory.max2147483648/current1989050368、oom_kill0，不能据此断言重启根因。原机缓存导入证明/恢复失败保留，不继续盲付费。未改产品、未清理。\n",
+    "machines": {
+      "smoke2": {
+        "utc": "2026-10-27T02:10:31.563541+00:00",
+        "jobs": [
+          {
+            "id": "browse-darwinx-budget-0952",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 6963,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "finished": 1
+            },
+            "worker_statuses": {
+              "finished": 1
+            },
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 2816999424
+      },
+      "smoke3": {
+        "utc": "2026-10-27T02:10:31.265935+00:00",
+        "jobs": [
+          {
+            "id": "deepsearch-adas-budget-0952",
+            "status": "running",
+            "phase": "experiment",
+            "active_pid": 21986,
+            "budget_changes": [
+              {
+                "path": "agent.max_turns",
+                "before": 40,
+                "after": 80
+              },
+              {
+                "path": "agent.timeout",
+                "before": 1200,
+                "after": 2400
+              }
+            ],
+            "source_changes": [],
+            "target_statuses": {
+              "error": 1
+            },
+            "worker_statuses": {
+              "finished": 1
+            },
+            "missing_usage": 0,
+            "active_process_present": true,
+            "paid_marker": true
+          }
+        ],
+        "disk_free": 1313529856
+      },
+      "original": {
+        "free": 1742409728,
+        "engine": {
+          "returncode": 0,
+          "output": [
+            "c70c50d1-b854-45a5-a1ff-ee417de50a92"
+          ]
+        },
+        "images": {
+          "returncode": 0,
+          "output": []
+        },
+        "containers": {
+          "returncode": 0,
+          "output": []
+        }
+      }
+    },
+    "matrix_counts": {
+      "pass": 437,
+      "partial": 117,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    }
+  },
+  "latest_1016": {
+    "note": "最新10:16CST用户明确新授权“更换了就重新传，别停”。已重新把本地远端现有校验tar导入原机c70c50d1-b854-45a5-a1ff-ee417de50a92新engine，三任务imageID/RootFSlayers匹配，taskimage以原1CPU/2Gmemory启动零网络shell成功、engine前后不变；不是完整Harbor评分。proof /root/.cache/terminal-image-transfer-0952/new-engine-proof.json。按本次新授权仅一次新根控制/root/.cache/terminal-rrsi-newengine-authorized-1020 controller5958/public6140已真实experiment/paidmarker，TerminalRRSICC同80/2400原111与评分预算不变，原root source228controlmanifest未变，output独立；report smoke-terminal-rrsi-newengine-authorized-20261027.json。授权authorization.json保存，旧0906镜像超时与0952engine连接reset/usage未知全部保留，不重启旧controller。当前1.740GB可用。自动audit仍为completed_pending_native_audit占位，必须人工原生Verifier/usage/source审计才能通过，不能凭finished升级。本地1016start/proof/report已同步，matrix437pass不变，本轮无新增Benchmark。两其他机在途与1010唯一followup照常检查，不重复派。若新engine再变化不要伪称恢复成功，保存真实故障并机器侧诊断。\n",
+    "original": {
+      "utc": "2026-10-27T02:16:16.539607+00:00",
+      "jobs": [
+        {
+          "id": "terminal-rrsi-newengine-authorized",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 6140,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1740300288
+    }
+  },
+  "latest_1101": {
+    "observed_at": "2026-10-27T11:01:00+08:00",
+    "note": "2026-10-27 11:01实查：本轮无新增通过、无新增Benchmark，总账437通过117部分22失败24前置24待/624不变。原机Terminal/RRSI/CC新engine授权尝试已execution_failed：两个baseline在容器依赖安装时连接旧代理10.236.152.161:47795超时，usage未知，无Worker；engine c70c50d1保持。零模型检查现有私有代理10.236.152.237:38161，apt HTTP源返回502；直接经现有loopback代理检查Ubuntu InRelease，HTTP失败而HTTPS200，下一步机器侧解决软件源传输后免费完整setup验证，未再付费。readiness /root/.cache/terminal-proxy-readiness-1058保留。smoke2 BrowseDarwinX仍真实运行（2Targetfinished1error1Workerfinished，usage齐），MetaHarness唯一followup等待；smoke3 DeepADAS已needs_attention（2Targeterror1finished1Workerfinished，usage齐source未变），DarwinX followup已自动派发controller24548/public24554真实experiment。检查频率确认ACTIVE每30分钟，无产品修改无清理。\n",
+    "new_passes": [],
+    "new_benchmarks": [],
+    "counts": {
+      "pass": 437,
+      "partial": 117,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    }
+  },
+  "latest_1250": {
+    "observed_at": "2026-10-27T12:50:00+08:00",
+    "note": "2026-10-27 12:50实查：新增BrowseComp/MetaHarness/CC与DeepSearchQA/DarwinX/CC完整通过，分别3Target1Worker与4Target2Worker全finished/usage齐/native重算/source未变/凭据14和16文件0hits；test分别1与2/3，customJudge、Target80/2400限定保留。总账439通过115部分22失败24前置24待/624，11范围全通。本轮无新增Benchmark。smoke2唯一browse-evoharness-budget-1249 controller13932/public13938真实experiment；smoke3唯一deepsearch-metaharness-budget-1249 controller25409/public25415真实experiment；旧Target40轮错误已逐条核实，本次只Target80/2400，原111/Worker/评分不变。原机1110免费setup失败0模型，已保存；新terminal-https-recovery-1250 proxy8253/supervisor8255正在零模型完整依赖安装验证，官方同源HTTPS传输先完整缓存校验，有限传输重试且apt索引任一失败即拒绝，不以部分索引派付费；成功后唯一terminal-rrsi-https-recovery-1250独立恢复，不能重复派。无产品修改无清理。\n",
+    "counts": {
+      "pass": 439,
+      "partial": 115,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "new_benchmarks": []
+  },
+  "latest_1317": {
+    "observed_at": "2026-10-27T13:17:00+08:00",
+    "note": "2026-10-27 13:17实查：无新增通过/无新增Benchmark，总账439pass115partial22fail24前置24待/624保持。smoke2 BrowseEvoHarnessCC唯一1249真实experiment13938，1Targeterror3Workerfinished usage齐；smoke3 DeepMetaHarnessCC唯一1249真实experiment25415，1Targeterror1Workerfinished usage齐；均source未变未结束。已核原40轮错误并登记唯一后续：smoke2/root/.cache/browse-rrsi-budget-1315 followup14589等待前项，smoke3/root/.cache/deepsearch-evoharness-budget-1315 followup26839等待前项，均未paid，只Target80/2400，原111/其他角色/评分不变，原RRSI failed保留。原机1250免费setup600秒超时0模型，已完整下载33.6MB apt索引后在packages下载阶段超时。1315恢复复用1250官方完整HTTP缓存与存活代理8253，/root/.cache/terminal-https-recovery-1315/recover.py supervisor8375真实零模型setup中，已进入包下载；成功后自动且一次派terminal-rrsi-https-recovery-1315，不重复派、不启动1110/1250旧控制。没有产品修改/环境清理。",
+    "new_passes": [],
+    "new_benchmarks": [],
+    "counts": {
+      "pass": 439,
+      "partial": 115,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    }
+  },
+  "latest_1404": {
+    "observed_at": "2026-10-27T14:04:00+08:00",
+    "note": "2026-10-27 14:04实查：新增DeepSearchQA/EvoHarness/CC限定flow_passed：2Target finished、usage齐、native重算/source229未变、凭据9文件0hits，train1触发原生跳过反思，Worker0为合法无更新，明确未覆盖Worker分支，test F1=2/3；customJudge/Target80轮2400秒限定。总账440通过114部分22失败24前置24待/624，11范围全通，本轮无新增Benchmark。smoke2 BrowseRRSICC1315 public14824真实experiment；smoke3 DeepRRSICC1352 controller28069/public28075真实experiment，已2Target1Worker finished，唯一新80/2400尝试。原机1355原生容器apt/curl/uv0.11.4免费安装证明通过，官方GitHub installer与SHA校验缓存镜像供下载，随后自动恢复真实experiment在Docker compose创建容器时再次socket reset，2Target error且usage未知，无Worker，不计通过。engine由c70c50d1变334d5078，未主动reset。已启动terminal-engine-diagnosis-1402零模型校验重导入及compose复现，不重复派1355。无产品修改/无清理。",
+    "counts": {
+      "pass": 440,
+      "partial": 114,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "new_benchmarks": []
+  },
+  "latest_1418": {
+    "observed_at": "2026-10-27T14:18:00+08:00",
+    "note": "2026-10-27 14:18实查：本轮无新增通过/无新增Benchmark，440通过114部分22失败24前置24待/624保持。DeepSearchRRSI1352已execution_failed：2Target finished、1Worker finished、1Worker60轮error，usage齐source未变，保留原partial及本次失败，不循环扩大。smoke3已接唯一/root/.cache/wide-evoprompt-budget-1418 controller28509/public28588真实experiment/paidmarker；旧EvoPrompt全部错误为Target40轮或1200秒，沿用已验证Wide证据source267，只Target80/2400，原Judge4096及111/Worker不改，report smoke-widesearch-evoprompt-budget-retry-20261027.json。smoke2 OfficeOPRO1407 public16400真实experiment，唯一OfficeAHE1415 followup16819等待，未paid，原test40轮已核，只Target80/2400。原机publicrunner0、1.702GB，无模型；最小Compose连接reset证据保持，未重派Terminal。smoke3可用1.237GB，未清理/未改产品。",
+    "new_passes": 0,
+    "new_benchmarks": []
+  },
+  "latest_1447": {
+    "observed_at": "2026-10-27T14:47:00+08:00",
+    "note": "2026-10-27 14:47实查：新增OfficeQA/AHE/CC flow_passed，3Target1Worker全finished、usage齐/native重算/source229未变/凭据12文件0hits，test0有效，Target80/2400限定。总账441通过113部分22失败24前置24待/624，11范围全通，本轮无新增Benchmark。OfficeOPRO1407 needs_attention，1Targeterror2finished1Workerfinished，usage齐，不再加预算。smoke2唯一OfficeACE1445 controller19655/public19661真实experiment paid存在，旧Target40错误已核，只Target80/2400。smoke3 WideEvoPrompt1418原controller28509/public28588均不在，轨迹0、usage未知，计划已改interrupted_unknown，interruption-review.json保留，无OOM证据不推定原因，不重派；一次分类看到claude71随后消失，不能称仍有模型。原机此前Compose零模型也reset，Terminal不重派。本轮无产品改动无清理。下一轮先核主机/SSH执行环境稳定和真实队列，保留paidmarker，不把失联或中断当完成。",
+    "counts": {
+      "pass": 441,
+      "partial": 113,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    },
+    "new_benchmarks": []
+  },
+  "latest_1516": {
+    "observed_at": "2026-10-27T15:16:00+08:00",
+    "note": "2026-10-27 15:16实查：OfficeACE1445已needs_attention，2Targetfinished2validation80轮error、2Workerfinished，usage齐/source未变，不加该格预算。无新增通过/无新增Benchmark，总账441pass113partial22fail24前置24待不变。smoke2唯一OfficeEvoPrompt1515 controller21043/public21050真实experiment paid存在；唯一OfficeGEPA1515 followup21044等待、未paid，原40轮错误均已核，仅Target80/2400，111其他角色评分不改。原机SSH31447连接失败，状态不可新核，不称无模型。smoke3无queueprocess，Wide1418中断usage未知仍保留；新零模型process-survival-1516后台15秒存活完成（pid121），pid namespace4026538823/boot68152de2-51ee-4fc6-9c52-cd352fd55869，说明当前短时后台存活正常，不足证明旧中断原因或可重试原paid。未再派Wide1418，未改产品未清理。",
+    "new_passes": 0,
+    "new_benchmarks": []
+  },
+  "latest_1548": {
+    "observed_at": "2026-10-27T15:48:00+08:00",
+    "note": "2026-10-27 15:48实查：无新增通过/无新增Benchmark，总账441/113/22/24/24保持。OfficeEvoPrompt1515已needs_attention，2Targetfinished3Target80轮error、3Workerfinished，usage齐source未变。OfficeGEPA1515原followup因前项短暂pending误记blocked_previous_status，已保存attempt01-pending-race，外部调度脚本仅把pending纳入等待（非产品改动），确认无paid/dispatch后恢复；现controller由followup23068派发、public23075真实experiment且唯一paid。原机31447仍SSH连接拒绝，当前模型状态未知。smoke3无队列，pidnamespace与bootid保持；查到loopback33616不在，已重建唯一SSH reverse转本地7897（本地session70690），免费models200通过、0模型，proof process-survival-1516/network-recovery.json。Wide1418仍interrupted_unknown/usage未知，不自动重派；网络恢复不能反推旧中断原因。无环境清理/无产品改动。",
+    "new_passes": 0,
+    "new_benchmarks": []
+  },
+  "latest_1618": {
+    "observed_at": "2026-10-27T16:18:00+08:00",
+    "note": "2026-10-27 16:18实查：OfficeGEPA1515 needs_attention，3Targetfinished1error、1Workerfinished，usage齐source不变，无新增通过/Benchmark，总账441/113/22/24/24保持。smoke2唯一OfficeADAS1615 controller24188/public24196真实experiment paid存在；DarwinX1615 followup24189与SkillOpt1615 followup24190依次等待，均未paid且pending纳入等待，旧Target40轮均核，三配置只Target80/2400、原111/Worker/评分不改。smoke3 loopback33616仍可用、旧最小后台存活验证完成；新WideMetaHarness1618 controller193/checkonly196在公开check-only、尚未paid，旧两Target40错误已核，只Target80/2400，沿用evidence267原Judge4096；report smoke-widesearch-metaharness-budget-retry-20261027.json。当前smoke3磁盘966856704bytes接近900MBguard，先查预检/磁盘不得盲清env。原机31447仍拒绝连接，当前状态未知。WideEvoPrompt1418中断paid/usage未知原样保留未重派。无产品修改无清理。",
+    "new_passes": 0,
+    "new_benchmarks": []
+  },
+  "latest_1647": {
+    "observed_at": "2026-10-27T16:47:00+08:00",
+    "note": "2026-10-27 16:47实查：无新增通过/Benchmark，总账441/113/22/24/24。OfficeADAS1615 needs_attention（1Targeterror2finished1Workerfinished，usage齐source未变）；DarwinX1615 public25297真实running已3Target2Workerfinished，SkillOpt1615仍pending未paid，顺序followup保留。WideMetaHarness1618已execution_failed，1Target JudgeError+1Worker60轮error，usage齐source267未变，paidmarker保留不重派；磁盘416837632bytes，暂不派新模型。已启动env-cleanup-review-1645旧searchqa环境proc/pth引用只读核查，但SSH读通道超时，未确认完整结果，未删任何env；下轮先查references.json及真实进程，确认已完成可重建、全部引用和未来配置保护后才清。原机SSH31447仍连接拒绝，状态未知。OfficeADAS及WideMetaHarness终结报告已SFTP保存，无产品修改/无清理。",
+    "new_passes": 0,
+    "new_benchmarks": []
+  },
+  "latest_1822": {
+    "note": "2026-10-27 18:22复核：OfficeQA/ACE/CC在Target160轮/4800秒限定下通过，4Target及2Worker全finished、usage齐、原生评分重算、229源文件未变、凭据14文件0命中，test=0为有效流程通过。旧80轮失败保留。总账443通过111部分22失败24前置24待，本轮无新增Benchmark。EvoPrompt160轮已自动接续experiment；GEPA160轮唯一followup30556已登记等待，尚未paid。原机SSH仍拒绝；smoke3磁盘416829440bytes，引用检查尚不完整，未删除环境。",
+    "counts": {
+      "pass": 443,
+      "partial": 111,
+      "failed": 22,
+      "blocked": 24,
+      "pending": 24
+    }
+  }
+}

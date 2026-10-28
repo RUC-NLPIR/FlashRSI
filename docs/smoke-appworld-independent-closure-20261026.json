@@ -1,0 +1,183 @@
+{
+  "checked_at": "2026-10-26T13:34:54.241142+00:00",
+  "status": "completed",
+  "counts": {
+    "execution_failed": 1,
+    "flow_passed": 1
+  },
+  "claude_native_audit": {
+    "status": "flow_passed",
+    "experiment_path": "/root/flashrsi-appworld-evolution-public-20261026/batch-runs/modular_rsi-claude_code/modular_rsi-claude_code-appworld-20261026-202043-876155",
+    "native_grade_recomputed": true,
+    "new_model_calls": 0,
+    "evolution_source": {
+      "source": "local-appworld",
+      "data_path": "/root/flashrsi-new20-20261024/retry-appworld-20261025/appworld-data",
+      "native_split": "test_challenge",
+      "native_role": "published_evaluation",
+      "experiment_role": "external_evolution",
+      "pool_size": 417,
+      "pool_checksum": "44916ded4cd694d4e5e8842cbc6848271b8f0c54acbe6a0c52f70f0a16b811d5"
+    },
+    "target_stages": [
+      {
+        "file": "00001-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00002-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00005-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00006-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00009-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00010-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00015-execution_gate.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00017-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00018-contrast.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00022-execution_gate.json",
+        "task_id": "906f2c7_3",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00025-test.json",
+        "task_id": "f861c32_1",
+        "status": "finished",
+        "metrics": {
+          "reward": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      }
+    ],
+    "worker_stages": [
+      {
+        "file": "00004-worker.json",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00008-worker.json",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00012-worker.json",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00013-worker.json",
+        "status": "finished",
+        "usage_recorded": true
+      },
+      {
+        "file": "00020-worker.json",
+        "status": "finished",
+        "usage_recorded": true
+      }
+    ],
+    "web_actions": [],
+    "problems": [],
+    "source_file_count": 286,
+    "source_changes": [],
+    "credential_scan": {
+      "files": 32,
+      "hits": []
+    },
+    "test_score": 1.0,
+    "judge_profile": "native"
+  },
+  "claude_target_finished": 11,
+  "claude_worker_finished": 5,
+  "claude_native_verifiers": 11,
+  "mini_status": "execution_failed",
+  "mini_error": "Reached maximum number of turns (60)",
+  "source_file_count": 286,
+  "source_changes": [],
+  "native_usage_missing": 0,
+  "benchmark_latest_complete_cells": 23,
+  "historical_failures_preserved": true,
+  "automatic_budget_retry": false
+}

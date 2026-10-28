@@ -1,0 +1,32 @@
+{
+  "model_calls": 0,
+  "source": "google-research-datasets/natural_questions",
+  "revision": "e8103d566bef4154c2c12b17c6095ec5275840cc",
+  "tree_sha256": "6856087f383fafe841bd68e95a0693133ba7f4832de6911e88837a74f1a74979",
+  "partition": 0,
+  "assigned_files": 98,
+  "max_response_bytes": 8388608,
+  "max_transfer_bytes": 83886080,
+  "max_seconds": 900,
+  "max_rss_bytes": 805306368,
+  "scope": "id and original question.text only; includes all native rows, not annotated task validation",
+  "full_blob_sha_verified": false,
+  "lfs_identity_from_pinned_tree": true,
+  "status": "pilot_completed",
+  "checked_at": "2026-10-26T14:15:23.323066+00:00",
+  "transfer_bytes": 124622,
+  "requests": 5,
+  "completed": [
+    {
+      "path": "default/train-00000-of-00287.parquet",
+      "records": 1071,
+      "lfs_oid": "54d085c361f96b3f0cf13f1192d99bb332942e747ccc629bf96240a10e4fee76",
+      "manifest": "/root/flashrsi-nq-independent-research-20261026/column-range-2200/train-00000-of-00287.jsonl",
+      "manifest_sha256": "fa04f45a37f506c296d334284b0ee8c8d566eeb6bc595544ced1c6d81445fe0f"
+    }
+  ],
+  "elapsed_seconds": 25.752416972070932,
+  "current_file": "default/train-00000-of-00287.parquet",
+  "total_records": 1071,
+  "peak_rss_bytes": 85041152
+}

@@ -1,0 +1,95 @@
+{
+  "observed_at": "2026-10-27T08:07:00+08:00",
+  "new_benchmarks": [],
+  "new_passes": [],
+  "matrix_counts": {
+    "pass": 434,
+    "partial": 120,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "machines": {
+    "smoke2": {
+      "utc": "2026-10-27T00:06:25.258370+00:00",
+      "jobs": [
+        {
+          "id": "browse-skillopt-budget-0805",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 5474,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 3250094080
+    },
+    "smoke3": {
+      "utc": "2026-10-27T00:06:25.506309+00:00",
+      "jobs": [
+        {
+          "id": "deepsearch-evoprompt-budget-0705",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 18871,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "error": 3,
+            "finished": 1
+          },
+          "worker_statuses": {
+            "finished": 3
+          },
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1359224832
+    },
+    "original": {
+      "phase": "check-only-native-docker",
+      "pid": 2093,
+      "model_calls": 0,
+      "paid_dispatch": false,
+      "disk_free": 302923776,
+      "process_present": false,
+      "ready": true,
+      "safe_tail": [
+        "Selected: rrsi + claude_code + terminal_bench",
+        "[1/3] Reusing Python environment: /root/.cache/FlashRSI/envs/5af70c61c795-16fcef5c9432-py312",
+        "[2/3] Preparing terminal_bench resources and native data...",
+        "[3/3] Ready: train=1, dev=1, test=1. No model calls or experiment directory created."
+      ]
+    }
+  },
+  "note": "2026-10-27 08:07实查：本轮无新增通过、无新增Benchmark。BrowseComp/GEPA/CC80轮已结束，4Target finished、1parent80轮error、1Worker finished，usage齐/source未变，保留partial不循环加预算。smoke2已真实接SkillOpt/CC80轮2400秒，旧train/test40轮已核；smoke3 DeepSearchQA/EvoPrompt/CC仍真实运行，已有3Target error/1finished及3Worker finished，未提前判终结。原机Terminal/RRSI/CC依赖完成后旧Docker端点不可达，原日志保存；原生UDS免费docker info成功后只改DOCKER_HOST进行零模型预检，已Ready111。原机仅302923776bytes可用，未付费派发，待安全空间准备；原根既有两处源码差异仍保留。无产品改动、无环境清理。"
+}

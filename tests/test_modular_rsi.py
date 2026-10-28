@@ -67,9 +67,11 @@ def setup(tmp_path, script, **options):
     source = tmp_path / "source"
     (source / "code").mkdir(parents=True)
     (source / "assets").mkdir()
-    (source / "components.yaml").write_text("code: ['code/**']\nasset: ['assets/**']")
+    (source / "components.yaml").write_text(
+        "code: ['code/**']\nasset: ['assets/**']", newline="\n"
+    )
     (source / "code/main.py").write_text(
-        "\n\n".join(f"def f{i}():\n    return 0" for i in range(5)) + "\n"
+        "\n\n".join(f"def f{i}():\n    return 0" for i in range(5)) + "\n", newline="\n"
     )
     (source / "assets/binary").write_bytes(b"\x00\xff")
     (source / "assets/binary").chmod(0o755)
@@ -132,7 +134,8 @@ def script(prompt, directory):
         path.write_text(
             path.read_text().replace(
                 f"def f{i}():\n    return 0", f"def f{i}():\n    return 1"
-            )
+            ),
+            newline="\n",
         )
         return Trajectory(output="Applied general improvement.")
     if prompt.startswith("[ModularRSI: merge]"):
@@ -147,7 +150,7 @@ def script(prompt, directory):
             before = prefix + content.split(prefix)[1].split("\n\n")[0]
             after = prefix + branch.split(prefix)[1].split("\n\n")[0]
             content = content.replace(before, after)
-        path.write_text(content)
+        path.write_text(content, newline="\n")
         return Trajectory(output="Integrated every module's changes.")
     if prompt.startswith("[ModularRSI: review]"):
         return Trajectory(
@@ -214,7 +217,8 @@ def test_current_module_checkouts_evolve_without_switching_worker(tmp_path):
                 path.read_text().replace(
                     f"def f0():\n    return {value - 1}",
                     f"def f0():\n    return {value}",
-                )
+                ),
+                newline="\n",
             )
             return Trajectory(output="Improved the current module checkout.")
         return script(prompt, directory)
@@ -242,8 +246,8 @@ def test_worker_can_use_a_different_harness_without_target_updates(
     algo = setup(tmp_path, script)
     source = tmp_path / "editor"
     source.mkdir()
-    (source / "components.yaml").write_text("editor: ['editor.py']")
-    (source / "editor.py").write_text("# Independent editor resources\n")
+    (source / "components.yaml").write_text("editor: ['editor.py']", newline="\n")
+    (source / "editor.py").write_text("# Independent editor resources\n", newline="\n")
     worker = Editor({"type": "agent", "role": "worker", "source_dir": str(source)})
     original = worker.snapshot
     assert original.agent_type != algo.target.snapshot.agent_type
@@ -298,7 +302,7 @@ def test_gates_reject_candidates_without_changing_module_seed(tmp_path, problem)
                 content = content.replace("return 1", 'return "target-secret"')
             elif problem == "runtime":
                 content = content.replace("return 1", "return 1 # BROKEN_RUNTIME")
-            path.write_text(content)
+            path.write_text(content, newline="\n")
             return result
         if problem == "review" and prompt.startswith("[ModularRSI: review]"):
             return Trajectory(
@@ -318,7 +322,8 @@ def test_failed_combination_is_not_promoted(tmp_path):
         if prompt.startswith("[ModularRSI: edit]"):
             path = directory / "code/main.py"
             path.write_text(
-                path.read_text().replace("return 1", "return 1 # INCOMPATIBLE")
+                path.read_text().replace("return 1", "return 1 # INCOMPATIBLE"),
+                newline="\n",
             )
         return result
 
@@ -334,11 +339,14 @@ def test_integration_can_repair_a_broken_combination_with_independent_worker(tmp
         if prompt.startswith("[ModularRSI: edit]"):
             path = directory / "code/main.py"
             path.write_text(
-                path.read_text().replace("return 1", "return 1 # INCOMPATIBLE")
+                path.read_text().replace("return 1", "return 1 # INCOMPATIBLE"),
+                newline="\n",
             )
         if prompt.startswith("[ModularRSI: integrate]"):
             path = directory / "code/main.py"
-            path.write_text(path.read_text().replace(" # INCOMPATIBLE", ""))
+            path.write_text(
+                path.read_text().replace(" # INCOMPATIBLE", ""), newline="\n"
+            )
         return result
 
     algo = setup(tmp_path, edit)
@@ -432,19 +440,45 @@ def test_parameter_validation(tmp_path, field, value):
         setup(tmp_path, script, **{field: value})
 
 
-def test_requires_external_source_and_existing_module_files(tmp_path):
+def test_accepts_regular_train_and_requires_existing_module_files(tmp_path):
     algo = setup(tmp_path, script)
     algo.benchmark.metadata = {}
-    with pytest.raises(ValueError, match="external train"):
-        algo._check()
-    algo.benchmark.metadata = ExternalTasks.metadata
+    algo._check()
     algo.config.modules.tool_use = ["missing.py"]
     with pytest.raises(ValueError, match="module file"):
         algo._check()
     algo.config.modules.tool_use = ["code/main.py"]
     algo._check()  # Shared files are integrated from independent native checkouts.
-    algo.benchmark._splits["test"] = (Task("other-id", "e0"),)
+    algo.benchmark._splits["test"] = (Task("e0", "different prompt"),)
     with pytest.raises(ValueError, match="disjoint"):
+        algo._check()
+
+
+def test_same_dataset_tasks_can_share_policy_and_environment(tmp_path):
+    algo = setup(tmp_path, script)
+    algo.benchmark.metadata = {}
+    algo.benchmark._splits = {
+        role: tuple(
+            replace(t, question="Shared domain policy", env="/domain") for t in tasks
+        )
+        for role, tasks in algo.benchmark._splits.items()
+    }
+    algo._check()
+
+
+@pytest.mark.parametrize("damage", ["empty-train", "duplicate-train", "dev", "test"])
+def test_regular_train_still_requires_unique_heldout_task_ids(tmp_path, damage):
+    algo = setup(tmp_path, script)
+    algo.benchmark.metadata = {}
+    if damage == "empty-train":
+        algo.benchmark._splits["train"] = ()
+    elif damage == "duplicate-train":
+        algo.benchmark._splits["train"] += (algo.benchmark.train[0],)
+    else:
+        algo.benchmark._splits[damage] = (
+            replace(algo.benchmark.train[0], question="Different"),
+        )
+    with pytest.raises(ValueError, match="train|disjoint"):
         algo._check()
 
 
@@ -452,6 +486,7 @@ def test_runner_freezes_modules_before_one_downstream_test(tmp_path, monkeypatch
     from flashrsi import runner
     from flashrsi.config import load_config
 
+    monkeypatch.setattr(ExternalTasks, "metadata", {})
     algo = setup(tmp_path, script)
     monkeypatch.setitem(runner._AGENTS, Harness.name, Harness)
     monkeypatch.setitem(
@@ -495,6 +530,133 @@ def test_example_files_resolve_against_native_miniagent():
     assert len(algo.config.modules) == 5
 
 
+def test_claude_extension_branches_edit_merge_and_freeze(tmp_path, monkeypatch):
+    from pathlib import Path
+
+    from flashrsi._launch import _load
+    from flashrsi.agents import ClaudeCode
+
+    config = _load(
+        Path(__file__).parent.parent / "examples/modular_rsi_claude_code.yaml"
+    )
+    config.algorithm.batch_size = 3
+    target = ClaudeCode(config.agent)
+    modules = config.algorithm.modules
+    seed = target.snapshot
+    branch_inputs, evaluated = {}, []
+
+    async def run(prompt, working_dir=None):
+        evaluated.append(target.snapshot.id)
+        return Trajectory(output="1")
+
+    # Exercise real Claude resource snapshots without making SDK/model calls.
+    monkeypatch.setattr(target, "_run", run)
+
+    def edit(prompt, directory):
+        if prompt.startswith("[ModularRSI: analyze]"):
+            module = module_name(prompt)
+            return Trajectory(
+                output=json.dumps(
+                    [
+                        {
+                            "target": modules[module][0],
+                            "task_ids": ["e0"],
+                            "rationale": "Reusable workflow improvement",
+                            "change": "Clarify the extension's behavior",
+                        }
+                    ]
+                )
+            )
+        if prompt.startswith("[ModularRSI: edit]"):
+            module = module_name(prompt)
+            branch_inputs[module] = {
+                path: (directory / path).read_bytes()
+                for paths in modules.values()
+                for path in paths
+            }
+            path = directory / modules[module][0]
+            if module == "hook":
+                path.write_text(
+                    json.dumps(
+                        {
+                            "hooks": {
+                                "Stop": [
+                                    {
+                                        "hooks": [
+                                            {
+                                                "type": "prompt",
+                                                "prompt": "Check task completion.",
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    )
+                )
+            else:
+                path.write_text(path.read_text() + "\nCheck completion evidence.\n")
+            return Trajectory(output="Updated one extension.")
+        if prompt.startswith("[ModularRSI: merge]"):
+            sources = json.loads(
+                prompt.split("Module reference directories (do not edit): ")[1]
+            )
+            assert set(sources) == set(modules)
+            for module, paths in modules.items():
+                for path in paths:
+                    (directory / path).write_bytes(
+                        (directory / sources[module] / path).read_bytes()
+                    )
+            return Trajectory(output="Integrated the three extension branches.")
+        if prompt.startswith("[ModularRSI: review]"):
+            return Trajectory(output='{"accept": true, "reason": "Reusable"}')
+        return Trajectory(output="No further changes.")
+
+    worker = setup(tmp_path, edit).worker
+    worker_seed = worker.snapshot
+    algo = ModularRSI(
+        config.algorithm, target=target, worker=worker, benchmark=ExternalTasks()
+    )
+    final = asyncio.run(algo.evolve())
+    paths = {path for files in modules.values() for path in files}
+    assert set(branch_inputs) == {"prompt", "skill", "hook"}
+    for files in branch_inputs.values():
+        assert files == {path: seed.files[path].content for path in paths}
+    assert set(seed.changed_paths(final)) == paths
+    assert final.id in evaluated and target.snapshot == final
+    assert worker.snapshot == worker_seed
+    for prompt, _ in worker.seen:
+        assert "dev-private" not in prompt and "test-private" not in prompt
+
+
+@pytest.mark.parametrize(
+    "modules",
+    [{}, {"prompt": ["code/main.py"]}, {"integration": ["code/main.py"]}],
+)
+def test_requires_complete_runtime_or_extension_module_set(tmp_path, modules):
+    with pytest.raises(ValueError, match="five runtime modules.*three extension"):
+        setup(tmp_path, script, modules=modules)
+
+
+def test_extension_edit_cannot_change_other_module(tmp_path):
+    algo = setup(
+        tmp_path,
+        script,
+        modules={
+            "prompt": ["code/main.py"],
+            "skill": ["assets/binary"],
+            "hook": ["assets/binary"],
+        },
+    )
+
+    def illegal_edit(prompt, directory):
+        (directory / "assets/binary").write_bytes(b"changed")
+        return Trajectory(output="Changed another module.")
+
+    algo.worker.script = illegal_edit
+    assert asyncio.run(algo._edit(algo.target.snapshot, "prompt", "edit")) is None
+
+
 def test_malformed_candidate_output_fails_execution_gate(tmp_path, monkeypatch):
     algo = setup(tmp_path, script)
 
@@ -517,11 +679,12 @@ def test_integration_protocol_errors_reach_independent_worker(
         if prompt.startswith("[ModularRSI: edit]"):
             path = directory / "code/main.py"
             path.write_text(
-                path.read_text().replace("return 1", "return 1 # MALFORMED")
+                path.read_text().replace("return 1", "return 1 # MALFORMED"),
+                newline="\n",
             )
         if repair and prompt.startswith("[ModularRSI: integrate]"):
             path = directory / "code/main.py"
-            path.write_text(path.read_text().replace(" # MALFORMED", ""))
+            path.write_text(path.read_text().replace(" # MALFORMED", ""), newline="\n")
         return result
 
     algo = setup(tmp_path, edit)
@@ -563,7 +726,8 @@ def test_partial_integration_does_not_disable_next_worker_repair(
         if prompt.startswith("[ModularRSI: edit]"):
             path = directory / "code/main.py"
             path.write_text(
-                path.read_text().replace("return 1", "return 1 # TOOL_BROKEN")
+                path.read_text().replace("return 1", "return 1 # TOOL_BROKEN"),
+                newline="\n",
             )
         if prompt.startswith("[ModularRSI: integrate]"):
             repairs.append(algo.worker.snapshot.id)
@@ -578,7 +742,7 @@ def test_partial_integration_does_not_disable_next_worker_repair(
                     .replace("; partial repair", "")
                     .replace(" # TOOL_BROKEN", "")
                 )
-            path.write_text(content)
+            path.write_text(content, newline="\n")
         return result
 
     algo = setup(tmp_path, edit, integration_epochs=2)
@@ -630,7 +794,8 @@ def test_module_runtime_error_does_not_disable_independent_worker(
                 old = f"def f0():\n    return {value}"
                 if old in content:
                     path.write_text(
-                        content.replace(old, f"def f0():\n    return {value + 1}")
+                        content.replace(old, f"def f0():\n    return {value + 1}"),
+                        newline="\n",
                     )
                     return Trajectory(output="Updated the loop.")
         return script(prompt, directory)
@@ -669,7 +834,8 @@ def test_failed_integration_keeps_fully_validated_merge(tmp_path, monkeypatch):
         if prompt.startswith("[ModularRSI: integrate]"):
             path = directory / "code/main.py"
             path.write_text(
-                path.read_text().replace("return 1", "return 1 # PARTIAL_BREAK", 1)
+                path.read_text().replace("return 1", "return 1 # PARTIAL_BREAK", 1),
+                newline="\n",
             )
         return result
 

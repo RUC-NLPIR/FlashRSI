@@ -1,0 +1,737 @@
+{
+  "status": "flow_passed",
+  "runs": [
+    {
+      "checked_at": "2026-10-23T11:17:46.182050+00:00",
+      "combination": {
+        "algorithm": "opro",
+        "target": "claude_code",
+        "worker": "llm",
+        "benchmark": "searchqa",
+        "model": "deepseek-flash"
+      },
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/smoke-20261023-opro-claude-searchqa/runs/opro-claude_code-searchqa-20261023-191601-706384",
+      "status": "flow_passed",
+      "budget": {
+        "few_shot_size": 1,
+        "max_steps": 1,
+        "num_candidates": 1
+      },
+      "worker_max_turns": null,
+      "result": {
+        "status": "finished",
+        "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+        "primary_metric": "exact_match",
+        "test_score": 1.0,
+        "test_tasks": 1,
+        "test_metrics": {
+          "exact_match": 1.0,
+          "f1": 1.0
+        },
+        "benchmark": {
+          "source": "local",
+          "data_path": {
+            "dev": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/searchqa/dev.json",
+            "test": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/searchqa/test.json",
+            "train": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/searchqa/train.json"
+          },
+          "mode": "context",
+          "scoring": "text_em_f1"
+        }
+      },
+      "evaluations": [
+        {
+          "file": "00001-baseline.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "snapshot_id": "aafac4374d7716610b33ec59734de70e324951caff13ac76b09f8433155c8aa9",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        }
+      ],
+      "workers": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "turns": null,
+          "error": null,
+          "tool_calls": 0,
+          "history_tool_calls": 0,
+          "output_excerpt": "<INS>Extract the answer directly from the provided context: locate the sentence or phrase that explicitly answers the question, prefer the most specific named entity or fact stated in the context, and respond with only that short answer—no explanation, no restatement of the question, and no added punctuation beyond what is necessary.</INS>"
+        }
+      ],
+      "decisions": [
+        {
+          "file": "00004-decision.json",
+          "kind": "promote",
+          "parent_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "candidate_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "accepted": false,
+          "score": 1.0,
+          "baseline_score": 1.0,
+          "history": [
+            {
+              "text": "",
+              "score": 1.0,
+              "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01"
+            },
+            {
+              "text": "Extract the answer directly from the provided context: locate the sentence or phrase that explicitly answers the question, prefer the most specific named entity or fact stated in the context, and respond with only that short answer—no explanation, no restatement of the question, and no added punctuation beyond what is necessary.\n",
+              "score": 1.0,
+              "snapshot_id": "aafac4374d7716610b33ec59734de70e324951caff13ac76b09f8433155c8aa9"
+            }
+          ]
+        }
+      ],
+      "changed_paths_from_initial": {
+        "aafac4374d7716610b33ec59734de70e324951caff13ac76b09f8433155c8aa9": [
+          "CLAUDE.md"
+        ]
+      },
+      "checks": {
+        "exit_zero": true,
+        "all_target_calls_finished": true,
+        "all_worker_calls_finished": true,
+        "changed_snapshot_evaluated": true,
+        "test_uses_selected_snapshot": true,
+        "history_not_in_snapshots": true,
+        "credentials_found": false,
+        "versioned_instructions_loaded": true
+      },
+      "usage": {
+        "input_tokens": 26183,
+        "output_tokens": 171,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "usage_entries": 4,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 3,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": 0.081608,
+        "cost_bases": [
+          "unknown"
+        ]
+      },
+      "notes": [
+        "SearchQA native snippets context 1/1/1, one OPRO candidate.",
+        "Train 1 to 1, retained seed on tie; dev loaded but not used for OPRO selection.",
+        "Target Claude Code official DeepSeek Anthropic endpoint; Worker text LLM Chat Completions. Test EM1 F1 1.",
+        "Data used locally prepared pinned native samples; remote automatic HF download not validated."
+      ],
+      "source_sha256": {
+        "flashrsi/algorithms/opro/__init__.py": "535849942da2805592972062d2adf08015125895500710fe58586fe32b7a908c",
+        "flashrsi/agents/claude_code/__init__.py": "2f787d1f90e6796d2f2f8c5774082caa7e3ee76fcf7929c3d7930c2a5cc919fc",
+        "flashrsi/algorithms/opro/_prompts.py": "42c5c459b2a00f16aa36fb435b7f8e5dfa7debab252219af209188532ff2d0b3",
+        "flashrsi/algorithms/_replies.py": "95e2e775dea9a7a507e3967f4427beee3bdca884928a08dbe91f4c3e7849a5c9"
+      },
+      "target_native_tools": [
+        {
+          "file": "00001-baseline.json",
+          "task_id": "train:0",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        },
+        {
+          "file": "00003-candidate.json",
+          "task_id": "train:0",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        },
+        {
+          "file": "00005-test.json",
+          "task_id": "test:56",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        }
+      ],
+      "protocol_events": []
+    },
+    {
+      "checked_at": "2026-10-23T11:18:27.482233+00:00",
+      "combination": {
+        "algorithm": "opro",
+        "target": "claude_code",
+        "worker": "llm",
+        "benchmark": "nq",
+        "model": "deepseek-flash"
+      },
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/smoke-20261023-opro-claude-nq/runs/opro-claude_code-nq-20261023-191747-204518",
+      "status": "flow_passed",
+      "budget": {
+        "few_shot_size": 1,
+        "max_steps": 1,
+        "num_candidates": 1
+      },
+      "worker_max_turns": null,
+      "result": {
+        "status": "finished",
+        "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+        "primary_metric": "exact_match",
+        "test_score": 0.0,
+        "test_tasks": 1,
+        "test_metrics": {
+          "exact_match": 0.0,
+          "f1": 0.0
+        },
+        "benchmark": {
+          "source": "local",
+          "data_path": {
+            "dev": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/nq/dev.json",
+            "test": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/nq/test.json",
+            "train": "/root/.cache/FlashRSI/data/smoke-qa-20261023-b1/nq/train.json"
+          },
+          "subset": "any-short-answer-or-yes-no",
+          "mode": "context",
+          "scoring": "short_answer_text"
+        }
+      },
+      "evaluations": [
+        {
+          "file": "00001-baseline.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "snapshot_id": "abaf28cef0ab1cdb6c7ed1c3530644828ecfa20cc9e8beafd8805cc99b2d186d",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        }
+      ],
+      "workers": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "turns": null,
+          "error": null,
+          "tool_calls": 0,
+          "history_tool_calls": 0,
+          "output_excerpt": "<INS>You are a precise, context-grounded question-answering assistant. Read the provided context carefully, then answer the question using only information explicitly stated or directly inferable from it—never rely on outside knowledge. Follow the requested output format exactly: return only the answer with no explanation, preamble, or quotation marks. If the question asks for a short answer, give the minimal correct span(s) verbatim from the context. If multiple answer spans are requested, list them all in the order they appear in the context, separated by single spaces. For yes/no questions, respond with exactly \"yes\" or \"no\". If the context does not contain the answer, state that it is not found rather than guessing.</INS>"
+        }
+      ],
+      "decisions": [
+        {
+          "file": "00004-decision.json",
+          "kind": "promote",
+          "parent_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "candidate_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "accepted": false,
+          "score": 1.0,
+          "baseline_score": 1.0,
+          "history": [
+            {
+              "text": "",
+              "score": 1.0,
+              "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01"
+            },
+            {
+              "text": "You are a precise, context-grounded question-answering assistant. Read the provided context carefully, then answer the question using only information explicitly stated or directly inferable from it—never rely on outside knowledge. Follow the requested output format exactly: return only the answer with no explanation, preamble, or quotation marks. If the question asks for a short answer, give the minimal correct span(s) verbatim from the context. If multiple answer spans are requested, list them all in the order they appear in the context, separated by single spaces. For yes/no questions, respond with exactly \"yes\" or \"no\". If the context does not contain the answer, state that it is not found rather than guessing.\n",
+              "score": 0.0,
+              "snapshot_id": "abaf28cef0ab1cdb6c7ed1c3530644828ecfa20cc9e8beafd8805cc99b2d186d"
+            }
+          ]
+        }
+      ],
+      "changed_paths_from_initial": {
+        "abaf28cef0ab1cdb6c7ed1c3530644828ecfa20cc9e8beafd8805cc99b2d186d": [
+          "CLAUDE.md"
+        ]
+      },
+      "checks": {
+        "exit_zero": true,
+        "all_target_calls_finished": true,
+        "all_worker_calls_finished": true,
+        "changed_snapshot_evaluated": true,
+        "test_uses_selected_snapshot": true,
+        "history_not_in_snapshots": true,
+        "credentials_found": false,
+        "versioned_instructions_loaded": true
+      },
+      "usage": {
+        "input_tokens": 65150,
+        "output_tokens": 884,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "usage_entries": 4,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 3,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": 0.250056,
+        "cost_bases": [
+          "unknown"
+        ]
+      },
+      "notes": [
+        "NQ original-page context 1/1/1, one OPRO candidate.",
+        "Train 1 to 0, candidate rejected and seed retained; dev not used for OPRO selection.",
+        "Target Claude Code official DeepSeek Anthropic endpoint; Worker text LLM Chat Completions. Test EM0 F1 0.",
+        "Data used locally prepared pinned native samples; remote automatic HF download not validated."
+      ],
+      "source_sha256": {
+        "flashrsi/algorithms/opro/__init__.py": "535849942da2805592972062d2adf08015125895500710fe58586fe32b7a908c",
+        "flashrsi/agents/claude_code/__init__.py": "2f787d1f90e6796d2f2f8c5774082caa7e3ee76fcf7929c3d7930c2a5cc919fc",
+        "flashrsi/algorithms/opro/_prompts.py": "42c5c459b2a00f16aa36fb435b7f8e5dfa7debab252219af209188532ff2d0b3",
+        "flashrsi/algorithms/_replies.py": "95e2e775dea9a7a507e3967f4427beee3bdca884928a08dbe91f4c3e7849a5c9"
+      },
+      "target_native_tools": [
+        {
+          "file": "00001-baseline.json",
+          "task_id": "4549465242785278785",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        },
+        {
+          "file": "00003-candidate.json",
+          "task_id": "4549465242785278785",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        },
+        {
+          "file": "00005-test.json",
+          "task_id": "5847589205369456560",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        }
+      ],
+      "protocol_events": []
+    },
+    {
+      "checked_at": "2026-10-23T11:19:34.411510+00:00",
+      "combination": {
+        "algorithm": "opro",
+        "target": "claude_code",
+        "worker": "llm",
+        "benchmark": "twowiki_multihopqa",
+        "model": "deepseek-flash"
+      },
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/smoke-20261023-opro-claude-twowiki_multihopqa/runs/opro-claude_code-twowiki_multihopqa-20261023-191830-414932",
+      "status": "flow_passed",
+      "budget": {
+        "few_shot_size": 1,
+        "max_steps": 1,
+        "num_candidates": 1
+      },
+      "worker_max_turns": null,
+      "result": {
+        "status": "finished",
+        "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+        "primary_metric": "exact_match",
+        "test_score": 1.0,
+        "test_tasks": 1,
+        "test_metrics": {
+          "exact_match": 1.0,
+          "f1": 1.0
+        },
+        "benchmark": {
+          "source": "local",
+          "data_path": "/root/.cache/FlashRSI/data/twowiki-fe713bfbd1af/validation.parquet",
+          "mode": "context",
+          "scoring": "answer_text"
+        }
+      },
+      "evaluations": [
+        {
+          "file": "00001-baseline.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "snapshot_id": "c9d461e15b2cb6792fcd42a205d087f954c6ef35ef14403eb6f51bfa820ce9de",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ],
+          "errors": [
+            null
+          ]
+        }
+      ],
+      "workers": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "turns": null,
+          "error": null,
+          "tool_calls": 0,
+          "history_tool_calls": 0,
+          "output_excerpt": "<INS>\nYou are a precise question-answering agent. Follow these rules for every task:\n\n1. Read the full prompt carefully, including all provided context passages. Identify exactly what is being asked and what output format is required.\n2. For questions requiring extraction or reasoning over supplied context, locate the relevant evidence by matching names and facts across passages. If a question asks about a relative of an entity (e.g., a person's father, mother, spouse, or child), first identify that entity in the context, then find the linked relative, then answer the question about the relative using the same context.\n3. Reason step by step internally, but only return what the task requests—no explanations, no extra text, and no citations unless explicitly asked.\n4. Respect any stated constraints (e.g., \"Return only the short answer\", word limits, formatting). If no format is specified, give the most direct, minimal correct answer.\n5. Base answers strictly on the provided context or well-established knowledge as appropriate to the task; do not invent details. If the context is insufficient, state briefly that the answer cannot be determined rather than guessing.\n6. For multiple-choice or classification tasks, select the single best option. For open-ended answers, be concise and exact (e.g., proper names, nationalities, dates) as the question implies.\n</INS>"
+        }
+      ],
+      "decisions": [
+        {
+          "file": "00004-decision.json",
+          "kind": "promote",
+          "parent_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "candidate_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "accepted": false,
+          "score": 0.0,
+          "baseline_score": 0.0,
+          "history": [
+            {
+              "text": "",
+              "score": 0.0,
+              "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01"
+            },
+            {
+              "text": "You are a precise question-answering agent. Follow these rules for every task:\n\n1. Read the full prompt carefully, including all provided context passages. Identify exactly what is being asked and what output format is required.\n2. For questions requiring extraction or reasoning over supplied context, locate the relevant evidence by matching names and facts across passages. If a question asks about a relative of an entity (e.g., a person's father, mother, spouse, or child), first identify that entity in the context, then find the linked relative, then answer the question about the relative using the same context.\n3. Reason step by step internally, but only return what the task requests—no explanations, no extra text, and no citations unless explicitly asked.\n4. Respect any stated constraints (e.g., \"Return only the short answer\", word limits, formatting). If no format is specified, give the most direct, minimal correct answer.\n5. Base answers strictly on the provided context or well-established knowledge as appropriate to the task; do not invent details. If the context is insufficient, state briefly that the answer cannot be determined rather than guessing.\n6. For multiple-choice or classification tasks, select the single best option. For open-ended answers, be concise and exact (e.g., proper names, nationalities, dates) as the question implies.\n",
+              "score": 0.0,
+              "snapshot_id": "c9d461e15b2cb6792fcd42a205d087f954c6ef35ef14403eb6f51bfa820ce9de"
+            }
+          ]
+        }
+      ],
+      "changed_paths_from_initial": {
+        "c9d461e15b2cb6792fcd42a205d087f954c6ef35ef14403eb6f51bfa820ce9de": [
+          "CLAUDE.md"
+        ]
+      },
+      "checks": {
+        "exit_zero": true,
+        "all_target_calls_finished": true,
+        "all_worker_calls_finished": true,
+        "changed_snapshot_evaluated": true,
+        "test_uses_selected_snapshot": true,
+        "history_not_in_snapshots": true,
+        "credentials_found": false,
+        "versioned_instructions_loaded": true
+      },
+      "usage": {
+        "input_tokens": 8089,
+        "output_tokens": 440,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "usage_entries": 4,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 3,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": 0.030552,
+        "cost_bases": [
+          "unknown"
+        ]
+      },
+      "notes": [
+        "2WikiMultiHopQA context answer_text, 1/1/1 split_counts seed42 from pinned native validation.parquet, one OPRO candidate.",
+        "Train 0 to 0, retained seed on tie; dev loaded but not used for OPRO selection.",
+        "Target Claude Code official DeepSeek Anthropic endpoint; Worker text LLM Chat Completions. Test EM1 F1 1.",
+        "Remote automatic HF download not validated; same local native file as earlier MiniAgent smoke."
+      ],
+      "source_sha256": {
+        "flashrsi/algorithms/opro/__init__.py": "535849942da2805592972062d2adf08015125895500710fe58586fe32b7a908c",
+        "flashrsi/agents/claude_code/__init__.py": "2f787d1f90e6796d2f2f8c5774082caa7e3ee76fcf7929c3d7930c2a5cc919fc",
+        "flashrsi/algorithms/opro/_prompts.py": "42c5c459b2a00f16aa36fb435b7f8e5dfa7debab252219af209188532ff2d0b3",
+        "flashrsi/algorithms/_replies.py": "95e2e775dea9a7a507e3967f4427beee3bdca884928a08dbe91f4c3e7849a5c9"
+      },
+      "target_native_tools": [
+        {
+          "file": "00001-baseline.json",
+          "task_id": "1118315c0bdd11eba7f7acde48001122",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        },
+        {
+          "file": "00003-candidate.json",
+          "task_id": "1118315c0bdd11eba7f7acde48001122",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        },
+        {
+          "file": "00005-test.json",
+          "task_id": "f7ccb422088311ebbd6dac1f6bf848b6",
+          "available_skills": [
+            "deep-research",
+            "design",
+            "design-sync",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "plugin-authoring"
+          ],
+          "tool_uses": []
+        }
+      ],
+      "protocol_events": []
+    }
+  ]
+}

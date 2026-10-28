@@ -1,0 +1,70 @@
+{
+  "source": "mandarjoshi/trivia_qa",
+  "revision": "0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+  "scope": "Complete native rc.wikipedia train vs complete native validation, machine-side preparation only",
+  "new_model_calls": 0,
+  "completed_shards": [
+    {
+      "path": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia/train-00000-of-00007.parquet",
+      "sha256": "d4f952bc93e9b8ff8306d712a6dbc11a60ac90ad17807c34320164b1dc060cb2",
+      "bytes": 240036659,
+      "rows": 8842,
+      "reused_native_blob": false
+    },
+    {
+      "path": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia/train-00001-of-00007.parquet",
+      "sha256": "55cd82902467361c86f350f95c408e741bef13d23ad3ecbc07cb6eca2d9def59",
+      "bytes": 260772194,
+      "rows": 8841,
+      "reused_native_blob": false
+    },
+    {
+      "path": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia/train-00002-of-00007.parquet",
+      "sha256": "ebb999da6a4fb3da87cb747b6ad50f277daf75d26fb11017822cfc6ea9dfabe3",
+      "bytes": 318599085,
+      "rows": 8841,
+      "reused_native_blob": false
+    },
+    {
+      "path": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia/train-00003-of-00007.parquet",
+      "sha256": "d97825bc6a92c6b050995a678df25085639536200c45d0323270f5ef02c0d91d",
+      "bytes": 265912308,
+      "rows": 8841,
+      "reused_native_blob": false
+    },
+    {
+      "path": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia/train-00004-of-00007.parquet",
+      "sha256": "54fc211994cef077a0d07d985ecdc35d34defdad80d8a3a00ae06fe4c45ba542",
+      "bytes": 240380758,
+      "rows": 8841,
+      "reused_native_blob": false
+    },
+    {
+      "path": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia/train-00005-of-00007.parquet",
+      "sha256": "6d47faf88d279a5378eea2e3392a59fc29c90d99f25bcf9d2b0877413d590f52",
+      "bytes": 258630104,
+      "rows": 8841,
+      "reused_native_blob": false
+    },
+    {
+      "path": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia/train-00006-of-00007.parquet",
+      "sha256": "da55db2ce980a69563af2a61cb63d831ba56c49b8d0673f586b233bcb042cfc0",
+      "bytes": 252775640,
+      "rows": 8841,
+      "reused_native_blob": false
+    }
+  ],
+  "status": "independent_pool_confirmed_data_only",
+  "updated_at": "2026-10-26T04:32:54.725413+00:00",
+  "active_file": "rc.wikipedia/train-00006-of-00007.parquet",
+  "full_train_bytes": 1837106748,
+  "train_rows": 61888,
+  "validation_rows": 7993,
+  "cross_pool_id_overlap": 0,
+  "cross_pool_raw_question_overlap": 0,
+  "native_train_duplicate_questions_preserved": 0,
+  "native_train_duplicate_ids_preserved": 0,
+  "peak_rss_bytes": 416636928,
+  "free_bytes": 5297090560,
+  "decision": "Complete native sources checked before sampling. No row dropped or renamed. This is data evidence only, not public ModularRSI support or a model pass."
+}

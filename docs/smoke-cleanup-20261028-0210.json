@@ -1,0 +1,21 @@
+{
+  "time": "2026-10-27T18:07:46.342316+00:00",
+  "authorization": "User permits ended unreferenced smoke raw cleanup",
+  "records": [
+    {
+      "deleted": "/root/.cache/deepsearch-metaharness-budget-2201/experiments",
+      "freed_bytes": null,
+      "note": "First deletion completed before second path guard stopped attempt; original minimal report retained; exact released bytes unknown",
+      "raw_reaudit_available": false
+    },
+    {
+      "deleted": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/budget-runs-20261027/deepsearch-skillopt-cc",
+      "report_kept": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/docs/smoke-deepsearch-skillopt-budget-retry-20261027.json",
+      "free_before": 926216192,
+      "free_after": 941191168,
+      "references": [],
+      "raw_reaudit_available": false
+    }
+  ],
+  "free_after": 941191168
+}

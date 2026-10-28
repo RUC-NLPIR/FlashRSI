@@ -1,0 +1,141 @@
+{
+  "checked_at": "2026-10-23T08:50:34.922475+00:00",
+  "scope": "Restore earlier-incumbent dev ties in ACE and GEPA; one ADAS + MiniAgent target + MiniAgent editing Worker smoke on native HotpotQA context samples (1/1/1), one design, zero reflections, 30 Worker turns.",
+  "policy": {
+    "dev_tie": "retain earlier selected version",
+    "gates": "unchanged",
+    "historical_runs": "preserved; no reselection",
+    "darwinx_historical_exception": "unchanged"
+  },
+  "validation": {
+    "local_affected_tests": "54 passed before native runtime change",
+    "native_finalization_regressions": "7 passed",
+    "remote_full_suite": "464 passed, 1 skipped, 3 subtests passed; 7 existing datetime.utcnow deprecation warnings",
+    "installed_launcher": "Skipped optional test separately passed after warming its selected dependency profile (1 passed); first invocation rebuilt that profile and failed the test precondition requiring environment reuse.",
+    "ruff": "check and format passed (208 files)"
+  },
+  "fix": {
+    "path": "flashrsi/agents/miniagent/runtime/agent.py",
+    "problem": "Residual DeepSeek DSML calls markup, including whitespace-prefixed calls, escaped the existing tool_calls-only cleaner and was treated as a final design account.",
+    "change": "Recognize both forms in the existing cleaner; reuse existing forced-answer finalization and fail if no final answer remains.",
+    "verification": "Deterministic native-loop tests cover closed/unclosed variants, finalization, usage recording and failure. Real rerun completed with ordinary prose and did not need forced finalization."
+  },
+  "runs": [
+    {
+      "phase": "before_runtime_fix",
+      "path": "/root/flashrsi-twowiki-check-20261023-a1/editing-smoke-20261023-adas/runs/adas-miniagent-hotpotqa-20261023-164110-482325",
+      "exit_code": 0,
+      "saved_record_statuses": [
+        "finished",
+        "finished",
+        "finished",
+        "finished"
+      ],
+      "dev_baseline": 1.0,
+      "dev_candidate": 1.0,
+      "candidate_selected": false,
+      "selected_initial": true,
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "changed_paths": [
+        "agent.yaml",
+        "middleware/answer_discipline.py",
+        "middleware/final_answer.py",
+        "prompts/extract.md",
+        "prompts/system.md",
+        "runtime/agent.py",
+        "runtime/workspace.py",
+        "skills/main.md",
+        "sub_agents/plan.py",
+        "sub_agents/verify.py"
+      ],
+      "changed_python_syntax_valid": true,
+      "worker_turns": 30,
+      "worker_account_has_dsml": true,
+      "worker_forced_answer_calls": 0,
+      "artifact_credentials_found": false,
+      "usage": {
+        "input_tokens": 799558,
+        "output_tokens": 11821,
+        "cache_read_tokens": 730496,
+        "cache_write_tokens": 0,
+        "usage_entries": 33,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    },
+    {
+      "phase": "after_runtime_fix",
+      "path": "/root/flashrsi-twowiki-check-20261023-a1/editing-smoke-20261023-adas-fixed/runs/adas-miniagent-hotpotqa-20261023-164640-009546",
+      "exit_code": 0,
+      "saved_record_statuses": [
+        "finished",
+        "finished",
+        "finished",
+        "finished"
+      ],
+      "dev_baseline": 1.0,
+      "dev_candidate": 0.0,
+      "candidate_selected": false,
+      "selected_initial": true,
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "changed_paths": [
+        "agent.yaml",
+        "middleware/budget_steer.py",
+        "prompts/extract.md",
+        "prompts/system.md",
+        "skills/main.md",
+        "tool_descriptions/check_answer.json",
+        "tool_descriptions/search_evidence.json",
+        "tools/check_answer.py",
+        "tools/search_evidence.py"
+      ],
+      "changed_python_syntax_valid": true,
+      "worker_turns": 30,
+      "worker_account_has_dsml": false,
+      "worker_forced_answer_calls": 0,
+      "artifact_credentials_found": false,
+      "usage": {
+        "input_tokens": 844981,
+        "output_tokens": 11197,
+        "cache_read_tokens": 767360,
+        "cache_write_tokens": 0,
+        "usage_entries": 33,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    }
+  ],
+  "limitations": [
+    "Tiny samples validate integration, not algorithm quality.",
+    "30-turn code-editing Workers use substantially more tokens than text-only workers.",
+    "ADAS accepts unbracketed prose by its existing contract; the rerun account was brief and unbracketed.",
+    "No reflection pass, additional algorithms, Claude Code ADAS target, or Docker-dependent benchmark was exercised in this stage."
+  ],
+  "source_sha256": {
+    "AGENTS.md": "b52f75b4919209406109254f055fa2c176ba37df3f78c8508a2789e17ee083bf",
+    "flashrsi/algorithms/ace/__init__.py": "f2185ebbf52676807e65a1cb3ec13f83fba849877d959865a2e7b51f8c2678f5",
+    "flashrsi/algorithms/gepa/__init__.py": "a3218511cd37b34cad82a10036c7000ba2716ac6af55c9f8326297b02f84f3d5",
+    "flashrsi/agents/miniagent/runtime/agent.py": "3cf645398ac3f9d421492b6c639c978f98fc10e5f3381c42b11d4ee93a551ad4",
+    "tests/test_ace_selection.py": "49daa4df21b8d500f3449298456aa0efa87b1fd3dc22dd11062ebeb73857145c",
+    "tests/test_gepa_selection.py": "ff77acebd83356037bb090c6962a2eb55880436c193e050007c9726e4bcdd425",
+    "tests/test_miniagent_final_answer.py": "226b7d0b99f6a85c9ea0cb0def9db87c84ee97dd2a7c546dbb7b9b9f0ceed95a"
+  }
+}

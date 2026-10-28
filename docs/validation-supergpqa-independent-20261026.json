@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-26T03:49:37.638363+00:00",
+  "status": "passed",
+  "scope": "SuperGPQA explicit native external ARC evolution data; no algorithm/gate/scorer/heldout changes",
+  "new_model_calls": 0,
+  "new_tests": 10,
+  "red_before_implementation": {
+    "failed": 10
+  },
+  "related_regression": {
+    "passed": 78,
+    "files": [
+      "test_supergpqa_evolution.py",
+      "test_lightweight_benchmarks.py",
+      "test_bbeh_evolution.py",
+      "test_hotpot_evolution.py",
+      "test_musique_evolution.py"
+    ]
+  },
+  "ruff": "affected module and tests passed after import sorting fix",
+  "wheel": {
+    "path": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\dist\\flashrsi_lite-0.1.0-py3-none-any.whl",
+    "sha256": "dda613389baa2ea6d32898f038dd7893e33f43b032d2d71355a678dad950aa44",
+    "independent_install": true,
+    "installed_module_byte_identity": true,
+    "cli_help": true,
+    "cli_prepare_only": true,
+    "dependency_scope": "Fresh wheel package with existing declared dependencies linked via .pth; hot dependency validation, not fresh cold network"
+  },
+  "native_probe": "validation-supergpqa-independent-native-20261026.json",
+  "source_research": "smoke-supergpqa-independent-source-research-20261026.json",
+  "previous_candidate": "MMLU-Pro validation rejected whole due one downstream overlap; never filtered",
+  "setup_history": [
+    {
+      "scope": "offline native probe reporter",
+      "error": "MappingProxyType not JSON serializable in report metrics",
+      "resolution": "serialized metrics with dict; zero model calls, no product change"
+    }
+  ],
+  "existing_frozen_remote_sources_modified": false
+}

@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-27T22:07:23.065572+00:00",
+  "candidates": [
+    "/root/.cache/FlashRSI/envs/4d10427e7d60-ff02ae85235b-py312",
+    "/root/.cache/FlashRSI/envs/2fc1ad96fca1-ff02ae85235b-py312",
+    "/root/.cache/FlashRSI/envs/f2df23680b9a-ce3261b64af1-py312"
+  ],
+  "process_references": [],
+  "pth_references": [],
+  "future_references": [],
+  "errors": [],
+  "pth_count": 6,
+  "pruned_nonruntime_dirs": [
+    "/root/eb-public",
+    "/root/.cache/pip",
+    "/root/.cache/huggingface",
+    "/root/.cache/FlashRSI/huggingface"
+  ],
+  "deleted": true,
+  "scope": "All local task runtime environments under/root; platform shared public datasets/courses on separate filesystem excluded. Current/future task configurations use local runtime roots.",
+  "shared_mount_device": 2544643042,
+  "local_runtime_device": 1048712,
+  "unreadable_processes": [],
+  "audit_completed": true,
+  "safe_to_delete": true,
+  "free_before": 702226432,
+  "free_after": 2777010176,
+  "at_deleted": "2026-10-27T22:07:30.607983+00:00",
+  "reason": "Ended oldsource runtime cache; no active or future/proc/pth references. Keep current Tau native profiles, fingerprints/packages inventories preserved."
+}

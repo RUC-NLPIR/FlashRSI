@@ -1,0 +1,12 @@
+{
+  "phase": "check-only",
+  "model_calls": 0,
+  "pid": 1868,
+  "source_review": "/root/.cache/terminal-budget-readiness-0607/source-review.json",
+  "paid_dispatch": false,
+  "process_present": true,
+  "log_bytes": 2836,
+  "ready": false,
+  "error_lines": [],
+  "disk_free": 1627230208
+}

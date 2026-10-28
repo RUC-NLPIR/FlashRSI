@@ -1,0 +1,109 @@
+{
+  "observed_at": "2026-10-27T09:10:00+08:00",
+  "new_benchmarks": [],
+  "new_passes": [
+    "BrowseComp/SkillOpt/CC"
+  ],
+  "matrix_counts": {
+    "pass": 435,
+    "partial": 119,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "machines": {
+    "original": {
+      "utc": "2026-10-27T01:09:25.422462+00:00",
+      "jobs": [
+        {
+          "id": "terminal-rrsi-cc",
+          "status": "execution_failed",
+          "phase": "experiment",
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "error": 2
+          },
+          "worker_statuses": {},
+          "missing_usage": 2,
+          "active_process_present": false,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 2083856384
+    },
+    "smoke2": {
+      "utc": "2026-10-27T01:09:25.422304+00:00",
+      "jobs": [
+        {
+          "id": "browse-adas-cc-budget-0906",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 6458,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 3197362176
+    },
+    "smoke3": {
+      "utc": "2026-10-27T01:09:25.358794+00:00",
+      "jobs": [
+        {
+          "id": "deepsearch-gepa-budget-0906",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 20910,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1354092544
+    }
+  },
+  "note": "2026-10-27 09:10实查：BrowseComp/SkillOpt/CC新增完整通过（4Target+1Worker，usage/native重算/source/凭据12文件0命中，test1，customJudge80轮限定）。DeepSearch/EvoPrompt80轮结束仍3Target预算error、2finished、3Workerfinished，保留partial。smoke2已接ADAS/CC、smoke3已接GEPA/CC，均旧40轮错误确认后仅Target80/2400，真实experiment。原机清理2个已结束无proc/pth引用Search环境释放1781121024bytes，清单保存；Terminal/RRSI/CC80轮尝试已结束，两baseline均DockerHub拉取alexgshaw/adaptive-rejection-sampler:20251031超时，usage缺失未知，未评分不通过。原生daemon只有AppWorld及Python镜像，先准备网络/官方镜像再考虑有界恢复，不能盲重跑。该新run控制目录冻结228文件并保留旧Modular/README差异，未改产品。无新增Benchmark。"
+}

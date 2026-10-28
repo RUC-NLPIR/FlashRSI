@@ -1,0 +1,110 @@
+{
+  "observed_at": "2026-10-27T09:59:00+08:00",
+  "new_benchmarks": [],
+  "new_passes": [
+    "BrowseComp/ADAS/CC",
+    "DeepSearchQA/GEPA/CC"
+  ],
+  "matrix_counts": {
+    "pass": 437,
+    "partial": 117,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "machines": {
+    "original": {
+      "utc": "2026-10-27T01:58:12.066649+00:00",
+      "jobs": [
+        {
+          "id": "terminal-rrsi-cache-recovery",
+          "status": "execution_failed",
+          "phase": "experiment",
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "error": 2
+          },
+          "worker_statuses": {},
+          "missing_usage": 2,
+          "active_process_present": false,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1742422016
+    },
+    "smoke2": {
+      "utc": "2026-10-27T01:56:02.329176+00:00",
+      "jobs": [
+        {
+          "id": "browse-darwinx-budget-0952",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 6963,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 2828763136
+    },
+    "smoke3": {
+      "utc": "2026-10-27T01:56:02.349180+00:00",
+      "jobs": [
+        {
+          "id": "deepsearch-adas-budget-0952",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 21986,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1330749440
+    }
+  },
+  "note": "2026-10-27 09:59实查：新增BrowseComp/ADAS/CC（2Target+1Worker）与DeepSearchQA/GEPA/CC（4Target+1Worker）完整审计通过，usage/native重算/source/凭据齐、test1，customJudge80轮限定。总账437通过117部分22失败24前置24待，11范围全通。本轮无新增Benchmark。smoke2已接DarwinX/CC，smoke3已接ADAS/CC，旧40轮错误确认后仅Target80/2400，真实experiment。原机已从smoke2导入三个现有原生任务镜像，341206918bytes SHA256 0a88d1e6427c49b4d10232d07b6dd25edd8e1144bf14b6212021e467513c7024，逐imageID/RootFS层一致且三个零网络容器启动通过。Terminal/RRSI/CC一次基础设施恢复已实际执行，但创建任务容器时Docker socket连接reset，随后daemon不可达，两baseline无usage未知。之后docker info返回engine c70c50d1-b854-45a5-a1ff-ee417de50a92，与之前03f20045不同；本任务没有reset engine，不能归因产品或继续盲付费。缓存原包/失败/证明保留。\n"
+}

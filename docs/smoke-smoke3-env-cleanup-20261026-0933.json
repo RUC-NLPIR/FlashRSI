@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-26T02:02:12.936058+00:00",
+  "host": "smoke3",
+  "removed_envs": [
+    {
+      "name": "15456e8d5ac9-b45c06a49485-py312",
+      "owner": "/root/flashrsi-travelplanner-public-20261026"
+    },
+    {
+      "name": "3a0ecbf6fb95-b45c06a49485-py312",
+      "owner": "/root/flashrsi-travelplanner-public-20261026"
+    },
+    {
+      "name": "3cbe2963b76d-59e0166badfd-py312",
+      "owner": "/root/flashrsi-travelplanner-evidence-public-20261026"
+    },
+    {
+      "name": "3cbe2963b76d-b45c06a49485-py312",
+      "owner": "/root/flashrsi-travelplanner-public-20261026"
+    },
+    {
+      "name": "dd4b70553038-b45c06a49485-py312",
+      "owner": "/root/flashrsi-travelplanner-public-20261026"
+    }
+  ],
+  "actual_bytes_freed": 3313557504,
+  "free_gib_before": 3.89,
+  "free_gib_after": 6.97,
+  "protected_project_ids": [
+    "78cc5b939728",
+    "aded2ad37083"
+  ],
+  "proc_checks": "all cmdline/maps/environ, checked again before each deletion",
+  "manifests": "/root/.cache/env-cleanup-0933",
+  "preserved": "all source, experiments, trajectories, real usage, data, HF/PIPcache, Docker images, docs, current/future envs and controllers"
+}

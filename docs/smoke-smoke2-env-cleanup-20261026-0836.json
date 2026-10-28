@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-26T00:47:01.504097+00:00",
+  "host": "smoke2",
+  "removed_envs": [
+    {
+      "name": "2fc1ad96fca1-1a55c504f6ff-py312",
+      "owner": "/root/flashrsi-cruxeval-public-20261026"
+    },
+    {
+      "name": "2fc1ad96fca1-84466edb3867-py312",
+      "owner": "/root/flashrsi-bbeh-public-20261026"
+    },
+    {
+      "name": "2fc1ad96fca1-fae284dc65d5-py312",
+      "owner": "/root/flashrsi-twowiki-evolution-public-20261026"
+    },
+    {
+      "name": "4d10427e7d60-1a55c504f6ff-py312",
+      "owner": "/root/flashrsi-cruxeval-public-20261026"
+    },
+    {
+      "name": "4d10427e7d60-84466edb3867-py312",
+      "owner": "/root/flashrsi-bbeh-public-20261026"
+    },
+    {
+      "name": "4d10427e7d60-fae284dc65d5-py312",
+      "owner": "/root/flashrsi-twowiki-evolution-public-20261026"
+    },
+    {
+      "name": "f2d8249ce0a9-1a55c504f6ff-py312",
+      "owner": "/root/flashrsi-cruxeval-public-20261026"
+    }
+  ],
+  "actual_bytes_freed": 5498064896,
+  "free_gib_before": 3.62,
+  "free_gib_after": 8.74,
+  "protected_project_ids": [
+    "e5c2b547a25d"
+  ],
+  "proc_checks": "all cmdline/maps/environ and immediate per-env recheck",
+  "manifest_directory": "/root/.cache/env-cleanup-0836",
+  "preserved": "all source, active/future envs and controllers, experiments, usage, data, HF/PIP cache, images, docs"
+}

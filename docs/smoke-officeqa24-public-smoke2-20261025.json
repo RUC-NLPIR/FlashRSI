@@ -1,0 +1,2552 @@
+{
+  "host": "smoke2",
+  "benchmark": "officeqa_pro",
+  "judge_profile": "native Databricks reward",
+  "status": "completed",
+  "updated_at": "2026-10-25T17:58:07.530644+00:00",
+  "counts": {
+    "flow_passed": 10,
+    "needs_attention": 11,
+    "execution_failed": 1,
+    "unsupported_configuration": 2
+  },
+  "items": [
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/opro-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": "/root/flashrsi-officeqa-public-20261025/docs/smoke-officeqa-public-smoke2-20261025.json"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/opro-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T15:44:23.742635+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/opro-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T15:44:23.743529+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:44:23.952030+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/opro-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T15:44:23.955333+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:44:58.501263+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/opro-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T15:44:58.508565+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:49:02.592316+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/opro-claude_code/opro-claude_code-officeqa_pro-20261025-234458-974824",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00005-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T15:49:03.983761+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T15:49:03.985119+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T15:49:03.986563+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:49:04.258677+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T15:49:04.261226+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:49:05.154175+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T15:49:05.156474+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:50:19.064171+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/skillopt-miniagent/skillopt-miniagent-officeqa_pro-20261025-234905-541368",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T15:50:19.854737+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T15:50:19.856269+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T15:50:19.858372+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:50:20.113160+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T15:50:20.119984+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:50:21.148892+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/skillopt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T15:50:21.162133+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:57:41.858683+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/skillopt-claude_code/skillopt-claude_code-officeqa_pro-20261025-235021-552303",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00001-baseline.json:target_error",
+          "00004-candidate_dev.json:target_error",
+          "00006-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T15:57:43.544874+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T15:57:43.546923+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T15:57:43.549784+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:57:43.847238+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T15:57:43.852866+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T15:58:17.933433+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T15:58:17.939453+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:00:15.961879+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/ahe-miniagent/ahe-miniagent-officeqa_pro-20261025-235818-419939",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:00:16.702143+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:00:16.704208+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:00:16.706523+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:00:16.955884+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:00:16.961852+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:00:50.380697+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ahe-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:00:50.385848+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:05:15.062862+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/ahe-claude_code/ahe-claude_code-officeqa_pro-20261026-000051-027587",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00005-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:05:15.813436+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "ace",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:05:15.815628+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:05:15.817691+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:05:16.089963+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:05:16.098721+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:05:17.064015+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:05:17.069852+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:06:38.196015+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/ace-miniagent/ace-miniagent-officeqa_pro-20261026-000517-452628",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:06:38.840418+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "ace",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:06:38.843065+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:06:38.846610+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:06:39.085813+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:06:39.091417+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:06:39.954165+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/ace-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:06:39.964059+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:16:04.750393+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/ace-claude_code/ace-claude_code-officeqa_pro-20261026-000640-346145",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-validation.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00001-validation.json:target_error",
+          "00005-validation.json:target_error",
+          "00007-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:16:06.013628+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:16:06.017003+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:16:06.035763+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:16:06.311867+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:16:06.318704+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:16:07.231624+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:16:07.238472+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:17:45.830433+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/evoprompt-miniagent/evoprompt-miniagent-officeqa_pro-20261026-001607-620311",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:17:46.482822+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:17:46.486742+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:17:46.490604+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:17:46.782533+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:17:46.789444+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:17:47.594316+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evoprompt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:17:47.606278+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:29:39.510212+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/evoprompt-claude_code/evoprompt-claude_code-officeqa_pro-20261026-001747-983999",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00001-baseline.json:target_error",
+          "00003-seed.json:target_error",
+          "00005-child.json:target_error",
+          "00007-child.json:target_error",
+          "00010-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:29:40.959285+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:29:40.967638+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:29:40.990128+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:29:41.259889+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:29:41.269023+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:29:42.302384+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:29:42.314956+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:31:07.064761+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/gepa-miniagent/gepa-miniagent-officeqa_pro-20261026-002942-692739",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:31:07.755991+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:31:07.759609+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:31:07.763052+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:31:08.016108+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:31:08.026808+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:31:08.766198+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/gepa-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:31:08.779185+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:36:54.822754+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/gepa-claude_code/gepa-claude_code-officeqa_pro-20261026-003109-163773",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00001-baseline.json:target_error",
+          "00007-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:36:56.163013+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "adas",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-miniagent.local.yaml",
+      "status": "execution_failed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:36:56.167569+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:36:56.172803+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:36:56.436116+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:36:56.442740+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:36:57.471050+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:36:57.484940+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T16:41:50.051432+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T16:41:50.059733+00:00",
+      "log_path": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/adas-miniagent/experiment.log"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:41:50.067517+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:41:50.076218+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:41:50.286928+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:41:50.301826+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:41:51.270447+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/adas-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:41:51.278355+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:52:42.934351+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/adas-claude_code/adas-claude_code-officeqa_pro-20261026-004151-664818",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00001-seed.json:target_error",
+          "00003-candidate.json:target_error",
+          "00006-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:52:44.346160+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:52:44.356941+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:52:44.363042+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:52:44.617785+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:52:44.630939+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:52:45.528050+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:52:45.546829+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:56:35.567234+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/darwinx-miniagent/darwinx-miniagent-officeqa_pro-20261026-005245-934633",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T16:56:36.511287+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T16:56:36.519916+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T16:56:36.524306+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:56:36.781010+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T16:56:36.800842+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T16:56:37.857035+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/darwinx-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T16:56:37.875876+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:08:52.137469+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/darwinx-claude_code/darwinx-claude_code-officeqa_pro-20261026-005638-263247",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00009-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T17:08:54.388280+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:08:54.394509+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:08:54.416962+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:08:54.686694+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:08:54.703956+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:08:55.680267+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:08:55.692312+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:16:42.383928+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/meta_harness-miniagent/meta_harness-miniagent-officeqa_pro-20261026-010856-083052",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T17:16:43.323662+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:16:43.334765+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:16:43.341498+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:16:43.609004+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:16:43.623764+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:16:44.598089+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/meta_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:16:44.618991+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:29:01.087742+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/meta_harness-claude_code/meta_harness-claude_code-officeqa_pro-20261026-011645-004733",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0193",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "UID0193",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00001-baseline.json:target_error",
+          "00007-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T17:29:02.483326+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:29:02.491612+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:29:02.502205+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:29:02.786135+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:29:02.806119+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:29:03.851401+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:29:03.868713+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:29:42.171804+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/evo_harness-miniagent/evo_harness-miniagent-officeqa_pro-20261026-012904-279790",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T17:29:42.713736+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:29:42.718827+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:29:42.733173+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:29:42.971548+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:29:42.992390+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:29:44.035808+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/evo_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:29:44.058435+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:32:56.421463+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/evo_harness-claude_code/evo_harness-claude_code-officeqa_pro-20261026-012944-451231",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [
+          "00003-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T17:32:57.801577+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:32:57.809454+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:32:57.821637+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:32:58.081850+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:32:58.102945+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:32:59.004302+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:32:59.026060+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:39:32.465324+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/rrsi-miniagent/rrsi-miniagent-officeqa_pro-20261026-013259-422995",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00013-smoke.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 27,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T17:39:33.558256+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:39:33.568441+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:39:33.581823+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:39:33.859870+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:39:33.884582+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:39:34.958395+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/rrsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T17:39:34.973131+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:58:02.942972+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-officeqa-public-20261025/batch-runs/rrsi-claude_code/rrsi-claude_code-officeqa_pro-20261026-013935-356057",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00014-smoke.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00017-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00021-test.json",
+            "task_id": "UID0244",
+            "status": "error",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00012-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [
+          "00021-test.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 28,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T17:58:04.850991+00:00"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/modular_rsi-miniagent.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:58:04.859800+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:58:04.867737+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:58:05.114540+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:58:05.141907+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T17:58:06.362445+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T17:58:06.369555+00:00",
+      "log_path": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/modular_rsi-miniagent/check-only.log"
+    },
+    {
+      "benchmark": "officeqa_pro",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/modular_rsi-claude_code.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T17:58:06.379410+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T17:58:06.387353+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T17:58:06.575105+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T17:58:06.593077+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T17:58:07.503019+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T17:58:07.518856+00:00",
+      "log_path": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/modular_rsi-claude_code/check-only.log"
+    }
+  ]
+}

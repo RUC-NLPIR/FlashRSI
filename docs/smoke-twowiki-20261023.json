@@ -1,0 +1,94 @@
+{
+  "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/runs/opro-miniagent-twowiki_multihopqa-20261023-150723-158869",
+  "result": {
+    "status": "finished",
+    "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+    "primary_metric": "exact_match",
+    "test_score": 1.0,
+    "test_tasks": 1,
+    "test_metrics": {
+      "exact_match": 1.0,
+      "f1": 1.0
+    },
+    "benchmark": {
+      "source": "local",
+      "data_path": "/root/.cache/FlashRSI/data/twowiki-fe713bfbd1af/validation.parquet",
+      "mode": "context",
+      "scoring": "answer_text"
+    }
+  },
+  "records": [
+    {
+      "file": "00001-baseline.json",
+      "statuses": [
+        "finished"
+      ],
+      "metrics": [
+        {
+          "exact_match": 0.0,
+          "f1": 0
+        }
+      ],
+      "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab"
+    },
+    {
+      "file": "00002-worker.json",
+      "statuses": [
+        "finished"
+      ],
+      "metrics": [
+        {}
+      ]
+    },
+    {
+      "file": "00003-candidate.json",
+      "statuses": [
+        "finished"
+      ],
+      "metrics": [
+        {
+          "exact_match": 0.0,
+          "f1": 0
+        }
+      ],
+      "snapshot_id": "07d4e3a74ba2d1a18946622156313672702e230463ee0d8e0640c959e378ef49"
+    },
+    {
+      "file": "00004-decision.json",
+      "statuses": [],
+      "metrics": [],
+      "kind": "promote",
+      "accepted": false,
+      "parent_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+      "candidate_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab"
+    },
+    {
+      "file": "00005-test.json",
+      "statuses": [
+        "finished"
+      ],
+      "metrics": [
+        {
+          "exact_match": 1.0,
+          "f1": 1.0
+        }
+      ],
+      "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab"
+    }
+  ],
+  "usage": {
+    "input_tokens": 6688,
+    "output_tokens": 103,
+    "cache_read_tokens": 384,
+    "cache_write_tokens": 0,
+    "usage_entries": 4,
+    "usage_entries_missing_tokens": 0,
+    "sdk_cost_entries": 0,
+    "duplicate_usage_entries": 0,
+    "records": 4,
+    "finished_records": 4,
+    "failed_records": 0,
+    "sdk_cost_usd": null,
+    "cost_bases": []
+  }
+}

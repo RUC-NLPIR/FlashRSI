@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-27T02:16:16.539607+00:00",
+  "jobs": [
+    {
+      "id": "terminal-rrsi-newengine-authorized",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 6140,
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "source_changes": [],
+      "target_statuses": {},
+      "worker_statuses": {},
+      "missing_usage": 0,
+      "active_process_present": true,
+      "paid_marker": true
+    }
+  ],
+  "disk_free": 1740300288
+}

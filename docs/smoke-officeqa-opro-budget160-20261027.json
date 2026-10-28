@@ -1,0 +1,96 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-27T13:10:33.770449+00:00",
+  "items": [
+    {
+      "id": "office-opro-budget-1954",
+      "root": "/root/flashrsi-officeqa-public-20261025",
+      "config": "/root/.cache/office-opro-budget-1954/smoke.local.yaml",
+      "health_config": "/root/.cache/office-opro-budget-1407/smoke.local.yaml",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "status": "flow_passed",
+      "report": "smoke-officeqa-opro-budget160-20261027.json",
+      "proxy": "http://127.0.0.1:33618",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 80,
+          "after": 160
+        },
+        {
+          "path": "agent.timeout",
+          "before": 2400,
+          "after": 4800
+        }
+      ],
+      "audit_source": "/root/flashrsi-officeqa-public-20261025/public-bench24-20261025/audit.py",
+      "phase": "experiment",
+      "updated_at": "2026-10-27T12:53:17.543806+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/.cache/office-opro-budget-1954/experiments/opro-claude_code-officeqa_pro-20261027-205317-936852",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "UID0187",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "UID0244",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-27T13:10:33.770042+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "User explicitly authorized increased budgets; one attempt per configuration; original 1/1/1 tasks and scoring preserved."
+}

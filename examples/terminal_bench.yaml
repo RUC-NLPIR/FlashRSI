@@ -3,9 +3,9 @@ run:
 
 benchmark:
   name: terminal_bench
-  split: auto
+  # Explicit experiment partitions, not official benchmark splits.
+  split_counts: {train: 2, dev: 2, test: 2}
   seed: 42
-  limit: 6
 
 agent:
   name: claude_code

@@ -1,0 +1,102 @@
+{
+  "checked_at": "2026-10-26T01:51:52.324930+00:00",
+  "public_config": [
+    "evolution_bbh_tasks",
+    "evolution_limit"
+  ],
+  "changed_product_file": "flashrsi/benchmarks/bbeh/__init__.py",
+  "new_tests": 9,
+  "related_unique_tests_passed": 74,
+  "test_runs": [
+    {
+      "passed": 30,
+      "scope": "newBBEH+TwoWiki+Hotpot+Mu independent"
+    },
+    {
+      "passed": 53,
+      "scope": "newBBEH+default lightweight benchmarks;9 overlap previous run"
+    }
+  ],
+  "ruff_check": "passed",
+  "ruff_format": "passed",
+  "wheel_sha256": "dfb73ac07a0f37b16308017fbb3b867021e6f0d0af25d017eec97987290d1a1e",
+  "installed_wheel_identity": [
+    "BBEH module",
+    "shared QA module"
+  ],
+  "installed_wheel_native_probe": "250external fullpool;3reference scores1;heldout unchanged",
+  "installed_cli": [
+    "help",
+    "run prepare-only"
+  ],
+  "public_script_plan": "passed",
+  "new_model_calls": 0,
+  "source_file_count": 274,
+  "source_archive_sha256": "e1e68a76c089b9abe9f2e558508973b36028b069abc97698ceec78eef3931170",
+  "native_probe": {
+    "checked_at": "2026-10-26T01:46:19.969205+00:00",
+    "benchmark": "bbeh",
+    "source": {
+      "source": "local",
+      "data_path": "C:\\Users\\cassi\\OneDrive\\\u684c\u9762\\Self-evolving\\FlashRSI\\.cache\\bbeh-independent-0933\\bbeh_data.json",
+      "duplicate_questions": "exclude",
+      "source_row_count": 4520,
+      "excluded_duplicate_rows": 9,
+      "excluded_question_ids": [
+        "35e30459a7b9e9059a94baa4aad624ed4d3724aea97a5bcbccda545d65dbd288",
+        "f1efb33207b7818365d8219609f3a5537cf6d70cd839a96dbee0cb7730ab2073"
+      ],
+      "mode": "context",
+      "scoring": "official",
+      "scorer_revision": "80d12ca916b7158f22293fcf3144f4d3d854d4be",
+      "evolution_source": {
+        "source": "https://github.com/suzgunmirac/BIG-Bench-Hard",
+        "revision": "9ee07bd481feebf959a6b59d61ea57bdcf30964d",
+        "data_license": "MIT",
+        "answer_scoring": "BBEH correctness evaluator for external evolution",
+        "tasks": [
+          "word_sorting"
+        ],
+        "duplicate_questions": "error",
+        "source_row_count": 250,
+        "excluded_duplicate_rows": 0,
+        "excluded_question_ids": [],
+        "native_split": "published_evaluation",
+        "experiment_role": "external_evolution",
+        "pool_size": 250,
+        "pool_checksum": "792164d072249b07c74fc1aa4ba4bf5a35b5976911af6c0b236dcdea192dd9c9"
+      }
+    },
+    "task_ids": {
+      "train": [
+        "151b50ad0d20fffd06addafbf367793693d71b928ee1d325c29482779e30a278"
+      ],
+      "dev": [
+        "bdb596264649b54215f206c173f8340d7b228343130b891bb2b792e2e5310232"
+      ],
+      "test": [
+        "e2f9d1f326f9de3130575ff16b53cbc072ce833a2f6321b8dce4acd1a656de47"
+      ]
+    },
+    "native_reference_scores": [
+      {
+        "accuracy": 1.0
+      },
+      {
+        "accuracy": 1.0
+      },
+      {
+        "accuracy": 1.0
+      }
+    ],
+    "heldout_unchanged": true,
+    "new_model_calls": 0,
+    "downstream_raw_sha256": "0ba5d1607221fcbd3a5fc2d6de69c21c43e61bc6867b47f2de2022623566d73d",
+    "scope": "Complete native BBH word_sorting external pool vs complete effective BBEH pool before limit; official BBEH duplicate-exclude scope preserved"
+  },
+  "limits": [
+    "BBH published evaluation used as explicit external evolution, not official train",
+    "BBEH duplicate-exclude9 scope unchanged",
+    "No paid Modular validation yet; no active frozen root changed"
+  ]
+}

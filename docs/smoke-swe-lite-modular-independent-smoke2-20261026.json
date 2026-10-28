@@ -1,0 +1,69 @@
+{
+  "host": "smoke2",
+  "benchmark": "swe_bench",
+  "status": "needs_attention",
+  "updated_at": "2026-10-26T07:43:29.411038+00:00",
+  "counts": {
+    "execution_failed": 1,
+    "pending": 1
+  },
+  "items": [
+    {
+      "benchmark": "swe_bench",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-swe-lite-evolution-public-20261026/independent-swe2-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "execution_failed",
+      "initial_evidence": {
+        "previous_status": "unsupported_configuration",
+        "report": "smoke-swe-runnability-review-20261025.json",
+        "old_full_train_preparation_refusal": "smoke-swe-modular-independent-original-20261026.json"
+      },
+      "started_at": "2026-10-26T06:49:51.269246+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-swe-lite-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-swe-lite-evolution-public-20261026/independent-swe2-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-26T06:49:51.270196+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-26T06:49:51.655905+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-swe-lite-evolution-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-swe-lite-evolution-public-20261026/independent-swe2-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-26T06:49:51.710057+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-26T06:49:54.111350+00:00"
+        }
+      ],
+      "phase": "environment_preparation_interrupted",
+      "environment_review": "Verified native setup boundary interrupted; actual Worker usage preserved, target setup usage absent remains unknown",
+      "ended_at": "2026-10-26T07:43:29.411031+00:00"
+    },
+    {
+      "benchmark": "swe_bench",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-swe-lite-evolution-public-20261026/independent-swe2-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": {
+        "previous_status": "unsupported_configuration",
+        "report": "smoke-swe-runnability-review-20261025.json",
+        "old_full_train_preparation_refusal": "smoke-swe-modular-independent-original-20261026.json"
+      }
+    }
+  ],
+  "dispatcher_disabled": true
+}

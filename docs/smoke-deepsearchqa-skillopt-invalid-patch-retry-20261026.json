@@ -1,0 +1,532 @@
+{
+  "host": "smoke3",
+  "benchmark": "deepsearchqa",
+  "judge_profile": "custom DeepSeek",
+  "status": "completed",
+  "updated_at": "2026-10-25T21:41:02.504603+00:00",
+  "counts": {
+    "needs_attention": 1
+  },
+  "items": [
+    {
+      "benchmark": "deepsearchqa",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/skillopt-claude-retry-20261026/configs/skillopt-claude_code.local.yaml",
+      "status": "needs_attention",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:21:23.512263+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/skillopt-claude-retry-20261026/configs/skillopt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:21:23.512930+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:21:23.712183+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/skillopt-claude-retry-20261026/configs/skillopt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:21:23.715966+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:21:24.891776+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/skillopt-claude-retry-20261026/configs/skillopt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:21:24.893794+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:41:01.191036+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "needs_attention",
+        "experiment_path": "/root/flashrsi-deepsearchqa-skillopt-fix-20261026/batch-runs/skillopt-claude_code/skillopt-claude_code-deepsearchqa-20261026-052125-309206",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "deepsearchqa-4780b3d2b29da01ed98574a7c0dade596025740a3a2d3c5be2679c6637a8d632",
+            "status": "error",
+            "metrics": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1_score": 0.0,
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "deepsearchqa-64dc224dcbe300f7cec4782c039f806462d7d9f8dc06e433a936de28aea33bd5",
+            "status": "finished",
+            "metrics": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1_score": 1.0,
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": "openai",
+                "profile": "custom"
+              }
+            ]
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "deepsearchqa-4780b3d2b29da01ed98574a7c0dade596025740a3a2d3c5be2679c6637a8d632",
+            "status": "error",
+            "metrics": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1_score": 0.0,
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "deepsearchqa-51e08fd8b7c8581d148c886a5d3c24a1a92f6230c4ba78a70df562140a91b959",
+            "status": "finished",
+            "metrics": {
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1_score": 0.6666666666666666,
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": "openai",
+                "profile": "custom"
+              }
+            ]
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "read",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          }
+        ],
+        "problems": [
+          "00001-baseline.json:target_error",
+          "00004-candidate_dev.json:target_error"
+        ],
+        "source_file_count": 229,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 0.6666666666666666,
+        "judge_profile": "openai"
+      },
+      "ended_at": "2026-10-25T21:41:02.500406+00:00"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "status": "flow_passed",
+  "updated_at": "2026-10-28T08:47:33.270820+00:00",
+  "items": [
+    {
+      "id": "travel-sdk-meta_harness-miniagent",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "benchmark": "travelplanner",
+      "root": "/root/flashrsi-travelplanner-json-public-20261028",
+      "config": "/root/.cache/travel-mini-sdk-budget-1600/meta_harness.local.yaml",
+      "health_config": "/root/.cache/travel-mini-sdk-budget-1600/meta_harness.local.yaml",
+      "status": "flow_passed",
+      "proxy": "http://127.0.0.1:33616",
+      "audit_source": "/root/.cache/travel-mini-sdk-budget-1600/audit.py",
+      "audit_python": "/root/.cache/travel-json-compat-1510/wheel-env/bin/python",
+      "report": "smoke-travel-json-meta_harness-mini-budget-20261028.json",
+      "budget_changes": [
+        {
+          "path": "algorithm.worker.llm.max_tokens",
+          "configured_before": 8192,
+          "observed_before": 8192,
+          "after": 16384
+        }
+      ],
+      "further_automatic_budget_escalation": false,
+      "phase": "experiment",
+      "updated_at": "2026-10-28T08:27:26.481204+00:00",
+      "exit_code": 0,
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/.cache/travel-mini-sdk-budget-1600/experiments/meta_harness/meta_harness-miniagent-travelplanner-20261028-162727-817207",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "81c0ff90a65df1700e96ba05d9c65631f5c4b758abe40526e81640b3efa13659",
+            "status": "finished",
+            "metrics": {
+              "delivery_rate": 1.0,
+              "commonsense_pass_rate": 0.0,
+              "hard_pass_rate": 0.0,
+              "final_pass_rate": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "81c0ff90a65df1700e96ba05d9c65631f5c4b758abe40526e81640b3efa13659",
+            "status": "finished",
+            "metrics": {
+              "delivery_rate": 1.0,
+              "commonsense_pass_rate": 1.0,
+              "hard_pass_rate": 1.0,
+              "final_pass_rate": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "8d34a6ea25dc3d6075078c0ca2b9c85ddf8bcbbd68f4f4e5a9cb45b18fb5d975",
+            "status": "finished",
+            "metrics": {
+              "delivery_rate": 1.0,
+              "commonsense_pass_rate": 1.0,
+              "hard_pass_rate": 0.0,
+              "final_pass_rate": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 266,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-28T08:38:48.779708+00:00"
+    }
+  ],
+  "counts": {
+    "flow_passed": 1
+  },
+  "budget_authorization": "Human authorized TravelPlanner compatibility repair and resuming idle hosts. Tested complete JSON wrapper compatibility plus role budgets only where old logs prove8192 output or60 turns exhausted; original native scorer/prompt/tasks/111/gates unchanged; bounded one new configuration per combination. Prior failures retained. Representative first, stop any non-pass."
+}

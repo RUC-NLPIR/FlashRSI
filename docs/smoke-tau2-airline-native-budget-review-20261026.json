@@ -1,0 +1,1753 @@
+{
+  "checked_at": "2026-10-25T23:01:12.807033+00:00",
+  "new_model_calls": 0,
+  "reason": "Native MAX_STEPS premature rule zero lacks DB/COMMUNICATE verification; keep partial, raw results preserved",
+  "active_plan_not_overwritten": true,
+  "items": [
+    {
+      "algorithm": "opro",
+      "target": "miniagent",
+      "raw_status": "flow_passed",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00005-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "opro",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00005-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00002-train.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00006-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00002-train.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00006-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00005-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "ace",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00001-validation.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00002-train.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00006-validation.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00008-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "ace",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00001-validation.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00002-train.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00006-validation.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00008-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00007-child.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00010-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00003-seed.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00005-child.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00007-child.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00010-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00003-seed.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00005-child.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-candidate_minibatch.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00002-parent.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00007-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-candidate_minibatch.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00002-parent.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00007-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "adas",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00006-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-seed.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "adas",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00006-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-seed.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-screen_candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00003-screen_parent.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00009-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-screen_candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00003-screen_parent.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00009-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00007-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00007-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-train.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00004-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-train.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00002-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00019-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00018-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00023-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00016-smoke.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    },
+    {
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "status": "partial",
+      "classification": "partial_native_simulation_budget_without_business_verifier",
+      "native_stages": [
+        {
+          "file": "00019-test.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00002-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00012-smoke.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00014-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        },
+        {
+          "file": "00015-candidate.json",
+          "status": "finished",
+          "termination_reason": "TerminationReason.MAX_STEPS",
+          "reward_info": {
+            "reward": 0.0,
+            "db_check": null,
+            "env_assertions": null,
+            "action_checks": null,
+            "nl_assertions": null,
+            "communicate_checks": null,
+            "reward_basis": null,
+            "reward_breakdown": null,
+            "info": {
+              "note": "Simulation terminated prematurely. Termination reason: max_steps"
+            }
+          },
+          "usage_recorded": true
+        }
+      ],
+      "budget_unchanged": true,
+      "new_model_calls": 0
+    }
+  ],
+  "failures": [
+    {
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "error": "claude_code failed: Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+    }
+  ],
+  "batch_completed": true,
+  "effective_counts": {
+    "partial_native_budget": 21,
+    "worker_budget_failure": 1,
+    "unsupported_configuration": 2
+  }
+}

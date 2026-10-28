@@ -1,0 +1,16 @@
+{
+  "archive_sha256": "dd14a5faf5033c1cba6e332c8798115f7db8f3fd3e329103abbf0149408963bd",
+  "archive_bytes": 267726095,
+  "profile": "19d2d4411efa",
+  "source_identity_suffix": "30967d84f67f",
+  "pip_check": 0,
+  "fingerprint_file_sha256": "a72b893e45f9712e56a61ac4c1db34475f0e408ec974a6cb74553d191cc7fca6",
+  "warm_transfer_not_cold": true,
+  "actual_sdk_environment_transferred": true,
+  "canonical_marker_not_modified": true,
+  "source": "smoke3",
+  "destination": "smoke2",
+  "model_calls": 0,
+  "public_check_only": "next,before eligibility claim",
+  "free_after": 1579581440
+}

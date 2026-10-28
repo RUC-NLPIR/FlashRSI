@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-25T19:43:01.489835+00:00",
+  "source": "hotpotqa/hotpot_qa",
+  "config": "fullwiki",
+  "revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+  "downstream_native_pool": "validation",
+  "evolution_native_pool": "train",
+  "experiment_partition": {
+    "train": 1,
+    "dev": 1,
+    "test": 1
+  },
+  "whole_pool_id_and_normalized_question_guard_passed": true,
+  "check_only": [
+    {
+      "target": "miniagent",
+      "public_plan": "/root/flashrsi-hotpot-evolution-public-20261026/independent-hotpot2-20261026/preflight-modular_rsi-miniagent/plan.log",
+      "public_check_only": "/root/flashrsi-hotpot-evolution-public-20261026/independent-hotpot2-20261026/preflight-modular_rsi-miniagent/check-only.log",
+      "ready": true,
+      "new_model_calls": 0
+    },
+    {
+      "target": "claude_code",
+      "public_plan": "/root/flashrsi-hotpot-evolution-public-20261026/independent-hotpot2-20261026/preflight-modular_rsi-claude_code/plan.log",
+      "public_check_only": "/root/flashrsi-hotpot-evolution-public-20261026/independent-hotpot2-20261026/preflight-modular_rsi-claude_code/check-only.log",
+      "ready": true,
+      "new_model_calls": 0
+    }
+  ],
+  "new_model_calls_for_preparation": 0,
+  "not_real_smoke": true,
+  "current_queue": {
+    "running": 1,
+    "pending": 1
+  }
+}

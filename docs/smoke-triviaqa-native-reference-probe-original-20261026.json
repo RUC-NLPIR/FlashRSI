@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "scope": "All original native train rows parsed by unchanged TriviaQA Task builder and original alias scorer; zero model calls",
+  "new_model_calls": 0,
+  "rows": 61888,
+  "reference_exact_match": 61888,
+  "peak_rss_bytes": 765431808,
+  "updated_at": "2026-10-26T04:41:32.743951+00:00"
+}

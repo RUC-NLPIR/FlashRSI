@@ -1,0 +1,9 @@
+{
+  "host": "smoke3",
+  "benchmark": "supergpqa",
+  "checked_at": "2026-10-25T18:02:07.835564+00:00",
+  "collector_only_change": true,
+  "new_model_calls": 0,
+  "reason": "QA tasks use native id/question/reference identity, not OfficeQA task_checksum field",
+  "items": []
+}

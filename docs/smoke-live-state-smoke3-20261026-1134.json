@@ -1,0 +1,98 @@
+{
+  "host": "smoke3",
+  "root": "/root/flashrsi-widesearch-cachefix-public-20261026",
+  "control": "/root/flashrsi-widesearch-cachefix-public-20261026/public-bench24-20261026",
+  "checked_at": "2026-10-26T03:58:42.348889+00:00",
+  "status": "running",
+  "counts": {
+    "needs_attention": 5,
+    "running": 1,
+    "pending": 18
+  },
+  "current": [
+    {
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "phase": "experiment"
+    }
+  ],
+  "free_bytes": 4457906176,
+  "pids": {
+    "supervisor.pid": {
+      "pid": "56851",
+      "alive": true,
+      "public_entry": false,
+      "controller": true
+    },
+    "active-command.pid": {
+      "pid": "61410",
+      "alive": true,
+      "public_entry": true,
+      "controller": false
+    }
+  },
+  "source_file_count": 266,
+  "source_changes": [],
+  "latest_native": [
+    {
+      "file": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-widesearch-20261026-115413-824094/trajectories/00001-baseline.json",
+      "mtime": 1792987083.0076115,
+      "stages": [
+        {
+          "status": "error",
+          "usage_recorded": true,
+          "metrics": {
+            "score": 0.0,
+            "precision_by_row": 0.0,
+            "recall_by_row": 0.0,
+            "f1_by_row": 0.0,
+            "precision_by_item": 0.0,
+            "recall_by_item": 0.0,
+            "f1_by_item": 0.0
+          },
+          "native_verifiers": []
+        }
+      ]
+    },
+    {
+      "file": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-widesearch-20261026-114658-834209/trajectories/00005-test.json",
+      "mtime": 1792986794.2806683,
+      "stages": [
+        {
+          "status": "error",
+          "usage_recorded": true,
+          "metrics": {
+            "score": 0.0,
+            "precision_by_row": 0.0,
+            "recall_by_row": 0.0,
+            "f1_by_row": 0.0,
+            "precision_by_item": 0.0,
+            "recall_by_item": 0.0,
+            "f1_by_item": 0.0
+          },
+          "native_verifiers": []
+        }
+      ]
+    },
+    {
+      "file": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-widesearch-20261026-114658-834209/trajectories/00003-candidate.json",
+      "mtime": 1792986682.6087596,
+      "stages": [
+        {
+          "status": "error",
+          "usage_recorded": true,
+          "metrics": {
+            "score": 0.0,
+            "precision_by_row": 0.0,
+            "recall_by_row": 0.0,
+            "f1_by_row": 0.0,
+            "precision_by_item": 0.0,
+            "recall_by_item": 0.0,
+            "f1_by_item": 0.0
+          },
+          "native_verifiers": []
+        }
+      ]
+    }
+  ]
+}

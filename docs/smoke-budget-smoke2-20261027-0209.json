@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-26T18:17:12.853792+00:00",
+  "jobs": [
+    {
+      "id": "crux-rrsi-cc",
+      "status": "flow_passed",
+      "phase": "experiment",
+      "active_pid": null,
+      "budget_changes": [
+        {
+          "path": "algorithm.worker.llm.max_tokens",
+          "before": 8192,
+          "after": 16384
+        }
+      ],
+      "source_changes": [],
+      "target_statuses": {
+        "finished": 6
+      },
+      "worker_statuses": {
+        "finished": 6
+      },
+      "missing_usage": 0,
+      "active_process_present": false,
+      "paid_marker": true
+    }
+  ],
+  "disk_free": 3589472256
+}

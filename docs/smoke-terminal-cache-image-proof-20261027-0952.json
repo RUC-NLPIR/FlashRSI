@@ -1,0 +1,24 @@
+{
+  "model_calls": 0,
+  "images": [
+    {
+      "name": "alexgshaw/adaptive-rejection-sampler:20251031",
+      "id": "sha256:65b25be2c34967a7db2332794da5a1f6d8235e1792a1d747aff46b5bff77b9d7",
+      "container": "flashrsi-image-proof-0952-0",
+      "startup_exit": 0
+    },
+    {
+      "name": "alexgshaw/polyglot-rust-c:20251031",
+      "id": "sha256:42e1c101034156ab6a0cbefc63ee654ab7fccb668e1580a090abba89244f6a93",
+      "container": "flashrsi-image-proof-0952-1",
+      "startup_exit": 0
+    },
+    {
+      "name": "alexgshaw/llm-inference-batching-scheduler:20251031",
+      "id": "sha256:0aff6db1f586c1b1e14999750d1cdf8fb94f11bc69c700fcad9b43a7c2ef5686",
+      "container": "flashrsi-image-proof-0952-2",
+      "startup_exit": 0
+    }
+  ],
+  "sha256": "0a88d1e6427c49b4d10232d07b6dd25edd8e1144bf14b6212021e467513c7024"
+}

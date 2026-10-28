@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-27T23:00:00+08:00",
+  "totals": {
+    "pass": 447,
+    "partial": 107,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "new_pass": "OfficeQA RRSI CC160/4800",
+  "audit": {
+    "target": 6,
+    "worker": 8,
+    "usage": true,
+    "native_recomputed": true,
+    "source_changes": 0,
+    "credential_hits": 0,
+    "test_score": 0
+  },
+  "live_queues": {
+    "smoke2": [
+      "office-metaharness-budget-2225 RUNNING public38365",
+      "office-evoharness-budget-2225 WAITING followup37454",
+      "office-adas-mini-worker120-2300 WAITING followup39594",
+      "browse-gepa-budget-2300 WAITING followup39595"
+    ],
+    "smoke3": [
+      "deepsearch-adas-budget-2200 RUNNING public7327",
+      "deepsearch-metaharness-budget-2201 WAITING followup7469",
+      "deepsearch-evoprompt-budget-2230 WAITING followup8355",
+      "banking-bm25-2238 WAITING followup9536; 22 cells registered, first OPRO/Mini, stop on nonpass"
+    ],
+    "original": [
+      "SSH31447 refused10061; exclude from promised capacity until recovered"
+    ]
+  },
+  "disk": {
+    "smoke2": 2282520576,
+    "smoke3": 1126236160
+  },
+  "new_benchmarks": 0,
+  "product_changes": 0,
+  "cleanup": 0
+}

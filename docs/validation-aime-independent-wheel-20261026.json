@@ -1,0 +1,56 @@
+{
+  "model_calls": 0,
+  "wheel_sha256": "0015c2ca442594fc7428a60e21e9593172c2df032892f404636943da185c5a7b",
+  "installed_native_data_check": {
+    "module": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\.cache\\workbench-wheel-env\\Lib\\site-packages\\flashrsi\\__init__.py",
+    "tasks": {
+      "train": [
+        "aime2025:10"
+      ],
+      "dev": [
+        "aime2026:22"
+      ],
+      "test": [
+        "aime2026:6"
+      ]
+    },
+    "evolution_source": {
+      "source": "math-ai/aime25",
+      "revision": "563bb8404243c5f09de6ec262f2db674fe5bce9b",
+      "filename": "test.jsonl",
+      "year": 2025,
+      "splits": [
+        "test"
+      ],
+      "aggregation": "sample_mean",
+      "answer_protocol": "final_integer_v1",
+      "data_license": "Apache-2.0 (dataset card)",
+      "pool_checksum": "a82c95ef16949fe97ecd9245a098a397dc55b3f99bf72c6841ed8eb3b955c631",
+      "native_split": "test",
+      "experiment_role": "external_evolution"
+    }
+  },
+  "cli": [
+    {
+      "args": [
+        "run",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: flashrsi run [-h] [--config PATH] [--benchmark BENCHMARK]\n                    [--algorithm ALGORITHM] [--agent AGENT] [--model MODEL]\n                    [--worker-model WORKER_MODEL] [--output-dir PATH]\n                    [--set PATH=VALUE] [--prepare-only | --check-only]\n\noptions:\n  -h, --help            show this help message and exit\n  --config PATH, -c PATH\n                        Read configuration from YAML\n  --benchmark BENCHMARK\n                        Override benchmark.name\n  --algorithm ALGORITHM\n                        Override algorithm.name\n  --agent AGENT         Override agent.name\n  --model MODEL         Override agent.llm.model_name\n  --worker-model WORKER_MODEL\n                        Override algorithm.worker.llm.model_name\n  --output-dir PATH     Override run.output_dir\n  --set PATH=VALUE      Set a dotted configuration path to a YAML value;\n                        repeat for more settings\n  --prepare-only        Validate configuration and create a run directory\n                        without executing tasks\n  --check-only          Check dependencies, local services, data and algorithm\n                        setup without running tasks or models; may download\n                        native data\n\nAny configuration field accepts --path.to.key VALUE or --path.to.key=VALUE,\ne.g. --algorithm.worker.llm.temperature 0.7. Values use YAML syntax. Dotted\noptions and --set override named flags; the last setting wins.\n"
+    },
+    {
+      "args": [
+        "run",
+        "--config",
+        "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\examples\\modular_rsi_aime.yaml",
+        "--prepare-only",
+        "--output-dir",
+        "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\.cache\\aime-evolution-wheel-validation\\outputs"
+      ],
+      "exit_code": 0,
+      "stdout": "Prepared experiment: C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\.cache\\aime-evolution-wheel-validation\\outputs\\modular_rsi-miniagent-aime-20261026-015134-271914\nConfiguration: C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\.cache\\aime-evolution-wheel-validation\\outputs\\modular_rsi-miniagent-aime-20261026-015134-271914\\config.yaml\nPreparation only; no tasks or model calls were run.\n"
+    }
+  ],
+  "source_identity_verified": true
+}

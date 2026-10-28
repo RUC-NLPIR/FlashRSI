@@ -1,0 +1,81 @@
+{
+  "checked_at": "2026-10-25T14:35:00Z",
+  "scope": "Current heartbeat batch, not cumulative per-host benchmark counts",
+  "machines": [
+    {
+      "host": "original",
+      "benchmark": "Terminal-Bench2.0",
+      "latest_combinations": [
+        "OPRO/Claude Code",
+        "RRSI/Claude Code"
+      ],
+      "ended": 2,
+      "running": 0,
+      "queued": 0,
+      "results": {
+        "opro": "passed_budget_limited",
+        "rrsi": "failed_native40_turn_baseline_trials"
+      },
+      "next": "No unchanged paid rerun; retain fixed-budget limit and original errors"
+    },
+    {
+      "host": "smoke2",
+      "benchmark": "Terminal-Bench2.0",
+      "latest_combinations": [
+        "EvoHarness/Claude Code"
+      ],
+      "ended": 1,
+      "running": 0,
+      "queued": 0,
+      "results": {
+        "evo_harness": "passed_budget_limited_compiled_snapshot_executed"
+      },
+      "extra": "New AppWorld working-directory wheel installed CLI/resource regression passed, zero model calls",
+      "next": "No duplicate passed run; independent SWE evolution data remains unavailable"
+    },
+    {
+      "host": "smoke3",
+      "benchmark": "Terminal-Bench2.0",
+      "latest_combinations": [
+        "AHE/Claude Code"
+      ],
+      "ended": 1,
+      "running": 0,
+      "queued": 0,
+      "results": {
+        "ahe": "partial_environment_blocked_github_ssl_before_candidate_model"
+      },
+      "extra": "Zero-model native installer GETs succeeded four times, later HTTP error still observed; no stable repair proved",
+      "next": "Await durable network condition or missing OfficeQA corpus/access and DeepSearch search/Judge credentials"
+    }
+  ],
+  "priority_matrix_counts": {
+    "passed": 174,
+    "unsupported": 14,
+    "partial": 1,
+    "failed": 3,
+    "pending": 48
+  },
+  "pending_real_combinations": 48,
+  "missing_inputs": [
+    "OfficeQA corpus_path; official HF page also declares gated file access, remote authorization not tested",
+    "DeepSearch retrieval API key and independent Gemini Judge configuration"
+  ],
+  "office_metadata_probe": {
+    "official_page": "https://huggingface.co/datasets/databricks/officeqa",
+    "page_declares_gated_access": true,
+    "remote_probe": "Network is unreachable without proxy in that diagnostic process; not evidence of authorization rejection"
+  },
+  "product_change": {
+    "files": [
+      "flashrsi/_launch.py",
+      "tests/test_generic_launcher.py"
+    ],
+    "appworld_download_workdir": "/world",
+    "validation": "validation-appworld-workingdir-20261025.json",
+    "model_calls": 0,
+    "full_default_download_verified": false
+  },
+  "frozen_remote_sources_changed": false,
+  "automatic_paid_retries_dispatched_after_batch": 0
+}

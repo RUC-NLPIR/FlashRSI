@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-28T05:35:02.130136+08:00",
+  "status": "preparation_blocked",
+  "model_calls": 0,
+  "source": "smoke3 frozen Airline source265, cloned existing OPRO config with domain retail; no product edits",
+  "reason": "Native Tau2Benchmark.load rejects selectedRetail NL assertions without independent benchmark.judge.llm.model_name; Airline config lacks that role",
+  "prior_original_task_ids": {
+    "train": "88",
+    "dev": "1",
+    "test": "84"
+  },
+  "split_parity_verified": false,
+  "public_check_only_run": false,
+  "paid": false,
+  "first_attempt": "SyntaxError before execution,0models; corrected",
+  "recovery_condition": "Recover an appropriate existing authorized independent native Judge role configuration, keep original splits and native scorer, prove offline readiness before dispatch. Do not invent missing credentials or call this a model pass."
+}

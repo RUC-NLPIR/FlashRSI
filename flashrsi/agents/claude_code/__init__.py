@@ -144,9 +144,12 @@ class ClaudeCode(Agent):
                 env=env,
                 permission_mode=config.get("permission_mode", "acceptEdits"),
                 allowed_tools=config.get("allowed_tools", ["Read", "Glob", "Grep"]),
+                disallowed_tools=config.get("disallowed_tools", []),
                 tools=config.get("tools"),
                 max_turns=config.get("max_turns", 10),
                 max_budget_usd=config.get("max_budget_usd"),
+                # Tool output and long reasoning can exceed the SDK's 1 MiB default.
+                max_buffer_size=config.get("max_buffer_size", 32 * 1024 * 1024),
                 effort=llm.get("effort"),
                 cli_path=Path(config["cli_path"]).expanduser().resolve()
                 if config.get("cli_path")
@@ -228,6 +231,18 @@ def _authentication_env(llm):
     # explicit native login, not cloud-provider routing inherited from the CLI.
     env.update({name: "" for name in _PROVIDER_ENV})
     env["ANTHROPIC_BASE_URL"] = llm.get("base_url") or "https://api.anthropic.com"
+    for field, variable in (
+        ("max_tokens", "CLAUDE_CODE_MAX_OUTPUT_TOKENS"),
+        ("max_retries", "CLAUDE_CODE_MAX_RETRIES"),
+    ):
+        if field in llm:
+            value = llm[field]
+            minimum = 1 if field == "max_tokens" else 0
+            if type(value) is not int or value < minimum:
+                raise ValueError(
+                    f"Claude Code llm.{field} must be an integer >= {minimum}"
+                )
+            env[variable] = str(value)
     for name in provided:
         if not isinstance(llm[name], str) or not llm[name].strip():
             raise ValueError(f"Claude Code llm.{name} must be a non-empty string")

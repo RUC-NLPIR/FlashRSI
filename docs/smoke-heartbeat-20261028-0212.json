@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-28T02:11:42.852517+08:00",
+  "totals": {
+    "pass": 453,
+    "partial": 102,
+    "failed": 21,
+    "blocked": 24,
+    "pending": 24
+  },
+  "new_passes": 0,
+  "new_benchmarks": 0,
+  "banking8": {
+    "status": "needs_attention",
+    "targets": 3,
+    "workers": 1,
+    "usage": true,
+    "native_recomputed": true,
+    "source193_unchanged": true,
+    "credential_hits": 0,
+    "reason": "baseline/candidate native MAX_STEPS8; test USER_STOP business checks available;test0"
+  },
+  "banking30": {
+    "status": "running",
+    "public_pid": 655,
+    "paid": true,
+    "other21": "paused"
+  },
+  "smoke2": "BrowseOPRO43155 running;DX/EH/RRSIwaiting",
+  "smoke3": "DeepEvo12685running4finished;Airline30waiting",
+  "cleanup": [
+    "smoke-cleanup-20261028-0210.json",
+    "smoke-cleanup-20261028-0212.json"
+  ],
+  "smoke3_free": 969007104,
+  "product_changes": 0
+}

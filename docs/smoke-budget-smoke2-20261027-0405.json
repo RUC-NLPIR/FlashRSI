@@ -1,0 +1,32 @@
+{
+  "utc": "2026-10-26T20:09:07.323121+00:00",
+  "jobs": [
+    {
+      "id": "browsecomp-adas-mini",
+      "status": "running",
+      "phase": "experiment",
+      "active_pid": 1988,
+      "budget_changes": [
+        {
+          "path": "algorithm.worker.max_turns",
+          "before": 60,
+          "after": 120
+        },
+        {
+          "path": "algorithm.worker.timeout",
+          "before": 600,
+          "after": 1200
+        }
+      ],
+      "source_changes": [],
+      "target_statuses": {
+        "finished": 1
+      },
+      "worker_statuses": {},
+      "missing_usage": 0,
+      "active_process_present": true,
+      "paid_marker": true
+    }
+  ],
+  "disk_free": 3462934528
+}

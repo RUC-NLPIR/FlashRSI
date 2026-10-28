@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-27T22:44:37.097737+00:00",
+  "model_calls": 0,
+  "original_worker60_failure": "docs/smoke-swe-free-diagnostic-20261028-0640.json actual00032-worker error withusage;other10workers finished",
+  "source_files": 273,
+  "source_changes": [],
+  "docker_readonly_probes": [
+    {
+      "socket": "/var/ebcloud/8e80b15a-a0bd-4f13-95b0-9dba2d2e33c1/dind/docker.sock",
+      "ping_status": 200,
+      "ping_ok": true,
+      "info_status": 200,
+      "engine_id": "194c6a2b-831c-4ea5-a5ec-b23645072a61",
+      "cached_image_count": 7
+    }
+  ],
+  "native_task_setup_verified": false,
+  "full_public_preflight_verified": false,
+  "new_worker_budget_config_registered": true,
+  "paid": false,
+  "reason_not_dispatched": "Require selected task image/data/native setup/source/entry preflight before paid, then one host queue after existingRetail; engine ping alone is not sufficient.",
+  "target_prior_error": "00015-execution_gate:MiniAgent exited1 Turnbudgetlow turn6/turns_left3/reserved3/edits0;usageunknown/noVerifier; preserveunknown",
+  "new_configuration_scope": "TargetMini16/1200 +Worker120/1200,originalWorkeroutput16384; one new configuration after realdualrole limits",
+  "dispatcher_disabled_until_native_proof": true
+}

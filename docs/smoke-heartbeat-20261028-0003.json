@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-28T00:02:20.491976+08:00",
+  "totals": {
+    "pass": 450,
+    "partial": 105,
+    "failed": 21,
+    "blocked": 24,
+    "pending": 24
+  },
+  "new_passes": [
+    "OfficeQA MetaHarness CC160",
+    "OfficeQA EvoHarness CC160 (native no Worker branch)",
+    "OfficeQA ADAS Mini Worker120"
+  ],
+  "new_benchmarks": 0,
+  "smoke2": [
+    "browse-gepa-budget-2300 RUNNING public41160",
+    "browse-ace-budget-2350 WAITING followup41413"
+  ],
+  "smoke3": [
+    "deepsearch-metaharness-budget-2201 followup resumed10869; awaiting dispatch confirmation",
+    "deepsearch-evoprompt-budget-2230 WAITING followup8355",
+    "banking-bm25-2238 WAITING followup9536; first public plan/check-only passed,22 cells registered"
+  ],
+  "deep_adas": "needs_attention; candidate160-turn error,3Target1Worker usage/native/source audit complete; external audit selects sole result directory",
+  "banking": "native BM25 and public plan/check-only passed0model; exact native source/profile fingerprint matches existing cf env, cache alias reuse; partial installation preserved; three other role profiles still need readiness",
+  "disk_last": {
+    "smoke2": 2596941824,
+    "smoke3": 964562944
+  },
+  "product_changes": 0,
+  "cleanup": "No deletions; own0model incomplete setup processes stopped and partial env renamed/preserved"
+}

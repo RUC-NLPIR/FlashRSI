@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-25T19:53:43.279970+00:00",
+  "host": "smoke2",
+  "algorithm": "rrsi",
+  "target": "claude_code",
+  "original_status": "execution_failed",
+  "classification": "failed_native_worker_output_limit",
+  "native_error": {
+    "status": "error",
+    "error": "claude_code failed: API Error: Claude's response exceeded the 8192 output token maximum. To configure this behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable.\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+  },
+  "experiment_path": "/root/flashrsi-cruxeval-public-20261026/batch-runs/rrsi-claude_code/rrsi-claude_code-cruxeval_output-20261026-033006-928489",
+  "native_worker_output_limit": 8192,
+  "final_test_completed": false,
+  "automatic_retry": false,
+  "new_model_calls_for_review": 0
+}

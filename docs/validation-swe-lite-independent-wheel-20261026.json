@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-26T06:37:08.892856+00:00",
+  "new_model_calls": 0,
+  "installed_module_byte_identity": true,
+  "module_sha256": "87283aac566d9d3f85cf6a810df753655d3fae5b285cae967b847c0a412255ba",
+  "native_full_verified_rows": 500,
+  "native_full_lite_dev_rows": 23,
+  "source_pool_checksum": "7a75cf1c4b22e8a3745b3cdefd845916e27a5d06e668361c16145a47dfbf5734",
+  "heldout_unchanged": true,
+  "selected_evolution_task": "pydicom__pydicom-1256",
+  "native_eval_scripts_and_images_unmodified": true,
+  "scope": "Installed latest wheel complete native source loading/independence/selection only; no Docker run or official task score and no synthetic verdict generated"
+}

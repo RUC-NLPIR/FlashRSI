@@ -16,8 +16,7 @@ class LLM(Agent):
 
     def __init__(self, config=None):
         super().__init__(config)
-        # Direct API callers may omit role metadata. Directory algorithms must
-        # still recognize this adapter as a text Worker before paying for eval.
+        # Direct callers may omit the role, but this adapter cannot edit files.
         self.config.type = "llm"
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:

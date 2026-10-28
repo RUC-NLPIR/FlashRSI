@@ -1,0 +1,1429 @@
+{
+  "checked_at": "2026-10-26T09:35:20.043314+00:00",
+  "report": "smoke-browsecomp24-public-smoke2-20261026.json",
+  "new_model_calls": 0,
+  "raw_statuses_preserved": true,
+  "items": [
+    {
+      "algorithm": "opro",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/opro-miniagent/opro-miniagent-browsecomp-20261026-074022-128221",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "opro",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/opro-claude_code/opro-claude_code-browsecomp-20261026-074347-788131",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-browsecomp-20261026-080837-144286",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00002-train.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00006-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/skillopt-claude_code/skillopt-claude_code-browsecomp-20261026-081253-379651",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00002-train.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00006-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-browsecomp-20261026-083836-266619",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-browsecomp-20261026-084357-025450",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "ace",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/ace-miniagent/ace-miniagent-browsecomp-20261026-090556-548963",
+      "target_stages": [
+        {
+          "file": "00001-validation.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00002-train.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00006-validation.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00008-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00004-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "ace",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/ace-claude_code/ace-claude_code-browsecomp-20261026-090938-578820",
+      "target_stages": [
+        {
+          "file": "00001-validation.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00002-train.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00005-validation.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00007-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00004-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/evoprompt-miniagent/evoprompt-miniagent-browsecomp-20261026-093853-583021",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00003-seed.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00005-child.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00007-child.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00010-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00004-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00006-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/evoprompt-claude_code/evoprompt-claude_code-browsecomp-20261026-094329-588094",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00003-seed.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00005-child.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00007-child.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00010-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00004-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00006-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/gepa-miniagent/gepa-miniagent-browsecomp-20261026-101814-717935",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00002-parent.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00004-candidate_minibatch.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00007-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/gepa-claude_code/gepa-claude_code-browsecomp-20261026-102300-429424",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00002-parent.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00004-candidate_minibatch.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00007-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "adas",
+      "target": "miniagent",
+      "raw_status": "execution_failed",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/adas-miniagent/adas-miniagent-browsecomp-20261026-110420-439682",
+      "target_stages": [
+        {
+          "file": "00001-seed.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "error",
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+        }
+      ],
+      "result_present": false,
+      "error_present": true,
+      "native_error": {
+        "status": "error",
+        "error": "claude_code failed: Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+      }
+    },
+    {
+      "algorithm": "adas",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/adas-claude_code/adas-claude_code-browsecomp-20261026-111112-948207",
+      "target_stages": [
+        {
+          "file": "00001-seed.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00006-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-browsecomp-20261026-113803-380409",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00003-screen_parent.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00004-screen_candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00009-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00006-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-browsecomp-20261026-114323-817320",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00003-screen_parent.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00004-screen_candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00005-confirmation_parent.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00006-confirmation_candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00011-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00008-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/meta_harness-miniagent/meta_harness-miniagent-browsecomp-20261026-121812-454103",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00004-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00007-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/meta_harness-claude_code/meta_harness-claude_code-browsecomp-20261026-122616-669726",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00004-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 1.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00007-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/evo_harness-miniagent/evo_harness-miniagent-browsecomp-20261026-124809-279443",
+      "target_stages": [
+        {
+          "file": "00001-train.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00008-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00005-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/evo_harness-claude_code/evo_harness-claude_code-browsecomp-20261026-125029-573736",
+      "target_stages": [
+        {
+          "file": "00001-train.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00008-test.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00002-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00005-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "raw_status": "flow_passed_custom_judge",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/rrsi-miniagent/rrsi-miniagent-browsecomp-20261026-131423-792177",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00002-baseline.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00014-smoke.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00016-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00017-candidate.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        },
+        {
+          "file": "00021-test.json",
+          "status": "finished",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "",
+          "verifier_event_types": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ],
+      "worker_stages": [
+        {
+          "file": "00005-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00006-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00007-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00008-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00009-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00011-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        },
+        {
+          "file": "00012-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "error": ""
+        }
+      ],
+      "result_present": true,
+      "error_present": false
+    },
+    {
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "raw_status": "execution_failed",
+      "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/rrsi-claude_code/rrsi-claude_code-browsecomp-20261026-132753-879759",
+      "target_stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        },
+        {
+          "file": "00002-baseline.json",
+          "status": "error",
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "usage_recorded": true,
+          "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+          "verifier_event_types": []
+        }
+      ],
+      "worker_stages": [],
+      "result_present": false,
+      "error_present": true,
+      "native_error": {
+        "status": "error",
+        "error": "too many failed trials"
+      }
+    },
+    {
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "raw_status": "unsupported_configuration",
+      "experiment_path": null,
+      "target_stages": [],
+      "worker_stages": []
+    },
+    {
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "raw_status": "unsupported_configuration",
+      "experiment_path": null,
+      "target_stages": [],
+      "worker_stages": []
+    }
+  ],
+  "source_file_count": 271,
+  "source_changes": []
+}

@@ -1,0 +1,454 @@
+{
+  "checked_at": "2026-10-28T03:33:08.633243+08:00",
+  "new_passes": [
+    {
+      "benchmark": "BrowseComp",
+      "target": "Claude Code",
+      "algorithm": "OPRO",
+      "report": "smoke-browse-opro-budget160-20261028.json",
+      "targets": 3,
+      "workers": 1,
+      "test_score": 1.0,
+      "source_files": 271,
+      "credential_files": 11
+    },
+    {
+      "benchmark": "τ³ Banking",
+      "target": "MiniAgent",
+      "algorithm": "OPRO",
+      "report": "smoke-banking-bm25-opro-mini-steps100-20261028.json",
+      "targets": 3,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 193,
+      "credential_files": 11
+    },
+    {
+      "benchmark": "τ³ Banking",
+      "target": "MiniAgent",
+      "algorithm": "SkillOpt",
+      "report": "smoke-banking-bm25-steps100-skillopt-miniagent-20261028.json",
+      "targets": 4,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 193,
+      "credential_files": 12
+    },
+    {
+      "benchmark": "τ³ Banking",
+      "target": "MiniAgent",
+      "algorithm": "ACE",
+      "report": "smoke-banking-bm25-steps100-ace-miniagent-20261028.json",
+      "targets": 4,
+      "workers": 2,
+      "test_score": 0.0,
+      "source_files": 193,
+      "credential_files": 14
+    },
+    {
+      "benchmark": "τ² Airline",
+      "target": "MiniAgent",
+      "algorithm": "OPRO",
+      "report": "smoke-tau2-airline-opro-mini-steps30-20261028.json",
+      "targets": 3,
+      "workers": 1,
+      "test_score": 0.0,
+      "source_files": 265,
+      "credential_files": 11
+    }
+  ],
+  "totals": {
+    "pass": 458,
+    "partial": 97,
+    "failed": 21,
+    "blocked": 24,
+    "pending": 24
+  },
+  "remaining": 166,
+  "new_benchmarks": 0,
+  "product_changes": 0,
+  "hosts": {
+    "smoke2": {
+      "free_bytes": 2282819584,
+      "controls": {
+        "browse-darwinx-budget-0040": {
+          "jobs": [
+            {
+              "id": "browse-darwinx-budget-0040",
+              "algorithm": "darwinx",
+              "target": "claude_code",
+              "status": "running",
+              "phase": "experiment",
+              "report": "smoke-browse-darwinx-budget160-20261028.json",
+              "paid": true,
+              "audit_status": null
+            }
+          ],
+          "followup-state.json": {
+            "status": "dispatched",
+            "controller_pid": 44501
+          }
+        },
+        "browse-evoharness-budget-0110": {
+          "jobs": [
+            {
+              "id": "browse-evoharness-budget-0110",
+              "algorithm": "evo_harness",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-browse-evoharness-budget160-20261028.json",
+              "paid": false,
+              "audit_status": null
+            }
+          ],
+          "followup-state.json": {
+            "status": "waiting_for_previous_queue"
+          }
+        },
+        "browse-rrsi-budget-0110": {
+          "jobs": [
+            {
+              "id": "browse-rrsi-budget-0110",
+              "algorithm": "rrsi",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-browse-rrsi-budget160-20261028.json",
+              "paid": false,
+              "audit_status": null
+            }
+          ],
+          "followup-state.json": {
+            "status": "waiting_for_previous_queue"
+          }
+        }
+      },
+      "processes": [
+        {
+          "pid": 43330,
+          "kind": "followup",
+          "control": "browse-evoharness-budget-0110"
+        },
+        {
+          "pid": 43331,
+          "kind": "followup",
+          "control": "browse-rrsi-budget-0110"
+        },
+        {
+          "pid": 44501,
+          "kind": "controller",
+          "control": "browse-darwinx-budget-0040"
+        },
+        {
+          "pid": 44507,
+          "kind": "public",
+          "control": "browse-darwinx-budget-0040"
+        },
+        {
+          "pid": 44508,
+          "kind": "public",
+          "control": "browse-darwinx-budget-0040"
+        },
+        {
+          "pid": 44509,
+          "kind": "public",
+          "control": "browse-darwinx-budget-0040"
+        }
+      ],
+      "proxy_listener": true
+    },
+    "smoke3": {
+      "free_bytes": 946315264,
+      "controls": {
+        "tau2-airline-steps30-0140": {
+          "jobs": [
+            {
+              "id": "tau2-airline-steps30-0140",
+              "algorithm": "opro",
+              "target": "miniagent",
+              "status": "flow_passed",
+              "phase": "experiment",
+              "report": "smoke-tau2-airline-opro-mini-steps30-20261028.json",
+              "paid": true,
+              "audit_status": "flow_passed"
+            }
+          ],
+          "followup-state.json": {
+            "status": "dispatched",
+            "controller_pid": 15993
+          }
+        }
+      },
+      "processes": [],
+      "proxy_listener": true
+    },
+    "smoke4": {
+      "free_bytes": 25091067904,
+      "controls": {
+        "banking-rest100-mini-0320": {
+          "jobs": [
+            {
+              "id": "banking100-skillopt-miniagent",
+              "algorithm": "skillopt",
+              "target": "miniagent",
+              "status": "flow_passed",
+              "phase": "experiment",
+              "report": "smoke-banking-bm25-steps100-skillopt-miniagent-20261028.json",
+              "paid": true,
+              "audit_status": "flow_passed"
+            },
+            {
+              "id": "banking100-ace-miniagent",
+              "algorithm": "ace",
+              "target": "miniagent",
+              "status": "flow_passed",
+              "phase": "experiment",
+              "report": "smoke-banking-bm25-steps100-ace-miniagent-20261028.json",
+              "paid": true,
+              "audit_status": "flow_passed"
+            },
+            {
+              "id": "banking100-evoprompt-miniagent",
+              "algorithm": "evoprompt",
+              "target": "miniagent",
+              "status": "preparing",
+              "phase": "check-only",
+              "report": "smoke-banking-bm25-steps100-evoprompt-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-gepa-miniagent",
+              "algorithm": "gepa",
+              "target": "miniagent",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-gepa-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            }
+          ]
+        },
+        "banking-rest100-sdk-0320": {
+          "jobs": [
+            {
+              "id": "banking100-opro-claude_code",
+              "algorithm": "opro",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-opro-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-skillopt-claude_code",
+              "algorithm": "skillopt",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-skillopt-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-ahe-miniagent",
+              "algorithm": "ahe",
+              "target": "miniagent",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-ahe-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-ahe-claude_code",
+              "algorithm": "ahe",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-ahe-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-ace-claude_code",
+              "algorithm": "ace",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-ace-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-evoprompt-claude_code",
+              "algorithm": "evoprompt",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-evoprompt-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-gepa-claude_code",
+              "algorithm": "gepa",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-gepa-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-adas-miniagent",
+              "algorithm": "adas",
+              "target": "miniagent",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-adas-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-adas-claude_code",
+              "algorithm": "adas",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-adas-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-darwinx-miniagent",
+              "algorithm": "darwinx",
+              "target": "miniagent",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-darwinx-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-darwinx-claude_code",
+              "algorithm": "darwinx",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-darwinx-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-meta_harness-miniagent",
+              "algorithm": "meta_harness",
+              "target": "miniagent",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-meta_harness-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-meta_harness-claude_code",
+              "algorithm": "meta_harness",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-meta_harness-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-evo_harness-miniagent",
+              "algorithm": "evo_harness",
+              "target": "miniagent",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-evo_harness-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-evo_harness-claude_code",
+              "algorithm": "evo_harness",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-evo_harness-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-rrsi-miniagent",
+              "algorithm": "rrsi",
+              "target": "miniagent",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-rrsi-miniagent-20261028.json",
+              "paid": false,
+              "audit_status": null
+            },
+            {
+              "id": "banking100-rrsi-claude_code",
+              "algorithm": "rrsi",
+              "target": "claude_code",
+              "status": "pending",
+              "report": "smoke-banking-bm25-steps100-rrsi-claude_code-20261028.json",
+              "paid": false,
+              "audit_status": null
+            }
+          ],
+          "followup-state.json": {
+            "status": "waiting_short_group"
+          }
+        }
+      },
+      "processes": [
+        {
+          "pid": 1680,
+          "kind": "controller",
+          "control": "banking-rest100-mini-0320"
+        },
+        {
+          "pid": 2422,
+          "kind": "followup",
+          "control": "banking-rest100-sdk-0320"
+        },
+        {
+          "pid": 3383,
+          "kind": "public",
+          "control": "banking-rest100-mini-0320"
+        },
+        {
+          "pid": 3384,
+          "kind": "public",
+          "control": "banking-rest100-mini-0320"
+        },
+        {
+          "pid": 3385,
+          "kind": "public",
+          "control": "banking-rest100-mini-0320"
+        }
+      ],
+      "proxy_listener": true,
+      "role_preflight": {
+        "phase": "finished",
+        "model_calls": 0,
+        "results": [
+          {
+            "profile": "19d2d4411efa",
+            "exit_code": 0
+          },
+          {
+            "profile": "6d48a3043dc2",
+            "exit_code": 0
+          },
+          {
+            "profile": "fd9bd9916f10",
+            "exit_code": 0
+          }
+        ]
+      }
+    }
+  },
+  "new_airline_queue": {
+    "control": "tau2-airline-rest30-mini-0335",
+    "controller": 16610,
+    "public": 16688,
+    "paid": true,
+    "remaining_unpaid": 3
+  },
+  "cleanup": "smoke-cleanup-20261028-0315.json",
+  "business_proofs": [
+    "smoke-banking-bm25-steps100-business-proof-20261028.json",
+    "smoke-tau2-airline-steps30-business-proof-20261028.json"
+  ],
+  "banking_role_preflight": "smoke-banking-role-preflight-20261028.json",
+  "deep_evoprompt": "needs_attention: candidate160 turn exhaustion; raw deleted after audit",
+  "note": "Airline source count265; Banking193. Native100 is explicit Banking configuration, upstream helper default100 versus config class default200. Original8/30 failures preserved. Failed free status probe (role plan had no id) had no mutations/model calls and was corrected."
+}

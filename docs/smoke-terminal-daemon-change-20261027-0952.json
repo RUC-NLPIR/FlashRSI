@@ -1,0 +1,7 @@
+[
+  {
+    "socket": "/var/ebcloud/1a19514a-da83-44bf-ad67-397ede8f865f/dind/docker.sock",
+    "returncode": 0,
+    "engine_id": "c70c50d1-b854-45a5-a1ff-ee417de50a92"
+  }
+]

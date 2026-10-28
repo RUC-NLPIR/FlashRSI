@@ -1,0 +1,377 @@
+{
+  "checked_at": "2026-10-26T05:23:06.107355+00:00",
+  "scope": "New native complete BrowseComp flows, explicit DeepSeek custom Judge; tiny1/1/1 not model leaderboard",
+  "items": [
+    {
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "status": "flow_passed_custom_judge",
+      "ended_at": "2026-10-26T04:26:14.915388+00:00",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/meta_harness-miniagent/meta_harness-miniagent-browsecomp-20261026-121812-454103",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "browsecomp-2381769cc5aff3908bc83e2a2769322194c5fbf5d8c5a8fc8e245c2a13dbee2e",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "browsecomp-2381769cc5aff3908bc83e2a2769322194c5fbf5d8c5a8fc8e245c2a13dbee2e",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "browsecomp-49ac39bd2e07ad10fc8200faa2fdb8204a05b5593b18c67a25d5befb2e1c806a",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": true
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          }
+        ],
+        "problems": [],
+        "source_file_count": 271,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "custom-deepseek"
+      }
+    },
+    {
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "status": "flow_passed_custom_judge",
+      "ended_at": "2026-10-26T04:50:28.149636+00:00",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-browsecomp-public-20261026/batch-runs/evo_harness-miniagent/evo_harness-miniagent-browsecomp-20261026-124809-279443",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "browsecomp-75a3be23bd7d4de01652e262f9dfd713c4c7b43e60d8f9508bceb9fdbc516a88",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "browsecomp-49ac39bd2e07ad10fc8200faa2fdb8204a05b5593b18c67a25d5befb2e1c806a",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          }
+        ],
+        "problems": [],
+        "source_file_count": 271,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "custom-deepseek"
+      }
+    }
+  ],
+  "new_model_calls_by_review": 0
+}

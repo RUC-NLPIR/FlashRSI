@@ -1,0 +1,278 @@
+{
+  "checked_at": "2026-10-23T15:32:44.043462+08:00",
+  "scope": "Real OPRO + MiniAgent smoke with 1 train / 1 dev / 1 test, one proposed candidate. OPRO uses train for selection; dev is loaded but not evaluated.",
+  "model": "deepseek-flash",
+  "base_url": "https://api.deepseek.com",
+  "thinking": "disabled",
+  "environment": "Remote Linux, Python 3.12.3",
+  "data_preparation": "Pinned native records prepared locally and transferred with manifests because remote HF network access is blocked. This does not validate remote automatic download or full-dataset loading.",
+  "runs": [
+    {
+      "benchmark": "searchqa",
+      "status": "passed",
+      "checks": {
+        "exit_zero": true,
+        "result_finished": true,
+        "baseline_candidate_test_present": true,
+        "worker_finished": true,
+        "candidate_created": true,
+        "decision_recorded": true,
+        "all_trajectories_finished": true,
+        "one_task_per_evaluation": true,
+        "all_metrics_finite": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "test_result_matches_trajectory": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true,
+        "split_counts_111": true,
+        "disjoint_tasks": true,
+        "data_checksum_verified": true
+      },
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/qa-smoke-20261023-b1/runs/opro-miniagent-searchqa-20261023-152907-087459",
+      "source_manifest": {
+        "benchmark": "searchqa",
+        "source": {
+          "source": "kyunghyuncho/search_qa",
+          "config": "train_test_val",
+          "revision": "06907e45883b7cae435453b65d598447039fde79"
+        },
+        "inspected": 3,
+        "selection": "First eligible records in pinned source order; no model-based selection. SearchQA preserves native roles; other datasets use custom train/dev/test roles from first 3 eligible train rows.",
+        "records": [
+          {
+            "role": "train",
+            "source_split": "train",
+            "task_id": "train:0",
+            "sha256": "e73988ebbb72f0772b5f1308e8af3181ecda46dec84db5893600283a715f4da8"
+          },
+          {
+            "role": "dev",
+            "source_split": "dev",
+            "task_id": "dev:475",
+            "sha256": "0448100c2e67aa8d958134bbae40173fa991116e69d8cd6565a841baf89413b3"
+          },
+          {
+            "role": "test",
+            "source_split": "test",
+            "task_id": "test:56",
+            "sha256": "6c5bac69736f523b4232a36df5da9a6bd6fc0fa3448849355a48c2ffc4899687"
+          }
+        ]
+      },
+      "baseline_train_metrics": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      },
+      "candidate_train_metrics": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      },
+      "candidate_selected": false,
+      "test_metrics": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      },
+      "usage": {
+        "input_tokens": 25024,
+        "output_tokens": 86,
+        "cache_read_tokens": 768,
+        "cache_write_tokens": 0,
+        "usage_entries": 4,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    },
+    {
+      "benchmark": "hotpotqa",
+      "status": "passed",
+      "checks": {
+        "exit_zero": true,
+        "result_finished": true,
+        "baseline_candidate_test_present": true,
+        "worker_finished": true,
+        "candidate_created": true,
+        "decision_recorded": true,
+        "all_trajectories_finished": true,
+        "one_task_per_evaluation": true,
+        "all_metrics_finite": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "test_result_matches_trajectory": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true,
+        "split_counts_111": true,
+        "disjoint_tasks": true,
+        "data_checksum_verified": true
+      },
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/qa-smoke-20261023-b1/runs/opro-miniagent-hotpotqa-20261023-152915-224789",
+      "source_manifest": {
+        "benchmark": "hotpotqa",
+        "source": {
+          "source": "hotpotqa/hotpot_qa",
+          "config": "fullwiki",
+          "revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+          "splits": [
+            "train",
+            "validation"
+          ],
+          "scorer_revision": "3635853403a8735609ee997664e1528f4480762a"
+        },
+        "inspected": 3,
+        "selection": "First eligible records in pinned source order; no model-based selection. SearchQA preserves native roles; other datasets use custom train/dev/test roles from first 3 eligible train rows.",
+        "records": [
+          {
+            "role": "train",
+            "source_split": "train",
+            "task_id": "5a7a06935542990198eaf050",
+            "sha256": "86d32d3e8f2b7c9a9349808d28b0f84edb65164705a970669fa3af28437d2d7a"
+          },
+          {
+            "role": "dev",
+            "source_split": "train",
+            "task_id": "5a879ab05542996e4f30887e",
+            "sha256": "ad8c0ffa73c0b2230fd922b827e0144040ee89c79acf6abaf9a44e7db8f16792"
+          },
+          {
+            "role": "test",
+            "source_split": "train",
+            "task_id": "5a8d7341554299441c6b9fe5",
+            "sha256": "3649612903bc407a69bedb005275702a35c1bb6c3dcc31e76c76404a4c500b77"
+          }
+        ]
+      },
+      "baseline_train_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "candidate_train_metrics": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      },
+      "candidate_selected": true,
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "usage": {
+        "input_tokens": 7581,
+        "output_tokens": 57,
+        "cache_read_tokens": 768,
+        "cache_write_tokens": 0,
+        "usage_entries": 4,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    },
+    {
+      "benchmark": "nq",
+      "status": "passed",
+      "checks": {
+        "exit_zero": true,
+        "result_finished": true,
+        "baseline_candidate_test_present": true,
+        "worker_finished": true,
+        "candidate_created": true,
+        "decision_recorded": true,
+        "all_trajectories_finished": true,
+        "one_task_per_evaluation": true,
+        "all_metrics_finite": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "test_result_matches_trajectory": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true,
+        "split_counts_111": true,
+        "disjoint_tasks": true,
+        "data_checksum_verified": true
+      },
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/qa-smoke-20261023-b1/runs/opro-miniagent-nq-20261023-152922-769699",
+      "source_manifest": {
+        "benchmark": "nq",
+        "source": {
+          "source": "google-research-datasets/natural_questions",
+          "config": "default",
+          "revision": "e8103d566bef4154c2c12b17c6095ec5275840cc",
+          "subset": "any-short-answer-or-yes-no",
+          "split_policy": "user-configured",
+          "splits": [
+            "train",
+            "validation"
+          ]
+        },
+        "inspected": 7,
+        "selection": "First eligible records in pinned source order; no model-based selection. SearchQA preserves native roles; other datasets use custom train/dev/test roles from first 3 eligible train rows.",
+        "records": [
+          {
+            "role": "train",
+            "source_split": "train",
+            "task_id": "4549465242785278785",
+            "sha256": "288bcc257fe1ca25203c47443303598db4873b9ee44b71b8d2c8be7ea30db288"
+          },
+          {
+            "role": "dev",
+            "source_split": "train",
+            "task_id": "-2543388002166163252",
+            "sha256": "cf9e4e26b725bf83fbd9773c04adb3f58d9077bed2de4247cd6617b0dfcca488"
+          },
+          {
+            "role": "test",
+            "source_split": "train",
+            "task_id": "5847589205369456560",
+            "sha256": "e62981f8e7c529dd8bc974644666feca44f6927f16e5647a0337b5809ae74377"
+          }
+        ]
+      },
+      "baseline_train_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.3333333333333333
+      },
+      "candidate_train_metrics": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      },
+      "candidate_selected": true,
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.0
+      },
+      "usage": {
+        "input_tokens": 56168,
+        "output_tokens": 102,
+        "cache_read_tokens": 896,
+        "cache_write_tokens": 0,
+        "usage_entries": 4,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    }
+  ],
+  "remote_source_matches_local": true,
+  "source_differences": [],
+  "fixes_applied": [],
+  "remaining_limits": [
+    "No remote HF automatic download validation",
+    "No full 12-algorithm or Claude Code coverage",
+    "OPRO selects on train; no dev evaluation",
+    "No effectiveness conclusion from one test task",
+    "Full NQ context can consume many tokens even for 1/1/1"
+  ]
+}

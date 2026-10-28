@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-28T00:08:58.133675+08:00",
+  "new_passes": 0,
+  "new_benchmarks": 0,
+  "totals": {
+    "pass": 450,
+    "partial": 105,
+    "failed": 21,
+    "blocked": 24,
+    "pending": 24
+  },
+  "live_queues": {
+    "smoke2": [
+      "browse-gepa-budget-2300 RUNNING public41160",
+      "browse-ace-budget-2350 WAITING followup41413"
+    ],
+    "smoke3": [
+      "deepsearch-metaharness-budget-2201 RUNNING public10876 paid",
+      "deepsearch-evoprompt-budget-2230 WAITING followup8355",
+      "banking-bm25-2238 WAITING followup9536; 22 registered, representative first"
+    ]
+  },
+  "running": 2,
+  "cleanup_proof": "smoke-cleanup-20261028-0008.json",
+  "released": 96452608,
+  "smoke3_free": 1055006720,
+  "product_changes": 0,
+  "original_host": "retired; not probed"
+}

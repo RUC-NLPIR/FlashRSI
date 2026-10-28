@@ -1,0 +1,27 @@
+{
+  "benchmark": "terminal_bench",
+  "algorithm": "rrsi",
+  "target": "claude_code",
+  "target_max_turns": 40,
+  "source_manifest_exists": false,
+  "disk_free": 1746550784,
+  "docker_sockets": [
+    "/var/ebcloud/1a19514a-da83-44bf-ad67-397ede8f865f/dind/docker.sock"
+  ],
+  "errors": [
+    {
+      "file": "00001-baseline.json",
+      "message": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+    },
+    {
+      "file": "00002-baseline.json",
+      "message": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+    }
+  ],
+  "root_files": [
+    "bfcl-source",
+    "bfcl-source.tar.gz",
+    "source-current.json",
+    "terminal-modular-source.json"
+  ]
+}

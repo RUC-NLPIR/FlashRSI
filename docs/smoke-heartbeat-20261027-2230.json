@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-27T22:30:00+08:00",
+  "totals": {
+    "pass": 446,
+    "partial": 108,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "new_passes": 0,
+  "new_benchmarks": 0,
+  "running": 2,
+  "queued": 4,
+  "smoke2": {
+    "rrsi_finished": 5,
+    "public_pid": 37152,
+    "disk_free": 2716307456
+  },
+  "smoke3": {
+    "adas_finished": 2,
+    "public_pid": 7327,
+    "new_followup": 8355,
+    "disk_after_cleanup": 1156059136
+  },
+  "cleanup": {
+    "released": 158322688,
+    "deleted": "only ended unreferenced DeepSearchRRSI1924 and2054 experiments",
+    "raw_reaudit_available": false,
+    "minimal_reports_and_paid_controls": "preserved"
+  },
+  "product_changes": 0
+}

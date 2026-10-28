@@ -1,0 +1,47 @@
+{
+  "phase": "native_contract_and_overlap_check",
+  "status": "preparation_blocked",
+  "model_calls": 0,
+  "source_repo": "SWE-bench/SWE-bench",
+  "source_revision": "9bf0b39a1d4ce5a1338856877724c850fb077720",
+  "source_split": "train",
+  "selection": "first native published train row, fixed before reading labels; no replacement for score/image availability",
+  "downstream_repo": "SWE-bench/SWE-bench_Verified",
+  "downstream_revision": "78f471bf655a3137b2e8a75af1501690ec009ec3",
+  "updated_at": "2026-10-25T16:18:25.425579+00:00",
+  "current_file_bytes": 6304616,
+  "evolution_file": {
+    "path": "/root/flashrsi-swe-evolution-public-20261026/independent-data-20261026/evolution.parquet",
+    "bytes": 106842373,
+    "sha256": "f11ea95812edb6b562bb92bf20bb38fbc17cb2bc2428a5e294feed1f7ec83c1c"
+  },
+  "downstream_file": {
+    "path": "/root/flashrsi-swe-evolution-public-20261026/independent-data-20261026/downstream.parquet",
+    "bytes": 6304616,
+    "sha256": "030cfd7f2a704c4c0226e7f104c725a3b41230b1d3517f9c915ad7ea5be3fa25"
+  },
+  "train_rows": 19008,
+  "downstream_rows": 500,
+  "selected_instance_id": "DataDog__integrations-core-10093",
+  "selected_image": "",
+  "field_types": {
+    "FAIL_TO_PASS": "str",
+    "PASS_TO_PASS": "str",
+    "image": "str",
+    "eval_script": "str",
+    "log_parser": "str"
+  },
+  "overlap_all_verified": {
+    "id": false,
+    "problem": false,
+    "image": false
+  },
+  "error_type": "ValueError",
+  "error": "SWEBench row requires non-empty image",
+  "collection_execution_field_counts": {
+    "image": 0,
+    "eval_script": 0,
+    "log_parser": 0
+  },
+  "train_rows_scanned": 19008
+}

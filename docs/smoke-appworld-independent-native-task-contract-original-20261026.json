@@ -1,0 +1,29 @@
+{
+  "status": "native_task_contract_confirmed_data_only",
+  "updated_at": "2026-10-26T09:58:49.982719+00:00",
+  "new_model_calls": 0,
+  "data_modified": false,
+  "source_modified": false,
+  "purpose": "Verify unmodified public AppWorld native Task loading/checksums for complete normal/challenge pools; no evolution interface or model pass claimed",
+  "loaded_groups": {
+    "test_normal": {
+      "split_counts": {
+        "train": 90,
+        "dev": 57,
+        "test": 168
+      },
+      "all_tasks": 315
+    },
+    "test_challenge": {
+      "split_counts": {
+        "train": 90,
+        "dev": 57,
+        "test": 417
+      },
+      "all_tasks": 564
+    }
+  },
+  "manifest_sha256": "66af7a12cb6afeab1fb56b5325a8ec839b132b0a2078b1f417ed6de7ed6cb0ae",
+  "peak_rss": 60649472,
+  "next_step": "Implement a small explicit external published-split evolution option with whole-pool ID/scenario/raw-instruction guard, necessary regression and fresh-wheel verification; then independent real queue. Never reuse main heldout or weaken guard."
+}

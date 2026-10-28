@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "new_model_calls": 0,
+  "module": "C:\\Users\\cassi\\OneDrive\\桌面\\Self-evolving\\FlashRSI\\.cache\\trivia-wheel-validation-1235\\env\\Lib\\site-packages\\flashrsi\\benchmarks\\triviaqa\\__init__.py",
+  "module_sha256": "117e1960d5248a239d082c6afb464a26fc39d648231d99b35034604d1664f53f",
+  "installed_module_identity": true,
+  "scope": "Installed-wheel native row fixtures: official aliases, selected train references, heldout identity, complete raw-question guard; separate full real-data probe recorded remotely"
+}

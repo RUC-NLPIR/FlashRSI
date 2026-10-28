@@ -1,0 +1,565 @@
+{
+  "checked_at": "2026-10-25T14:46:30Z",
+  "trigger": "flashrsi-smoke hourly 2026-10-25T14:42:31.716Z",
+  "scope": "Recheck existing final records; no new model execution",
+  "new_real_combination_passes": 0,
+  "new_paid_runs": 0,
+  "machines": [
+    {
+      "host": "original",
+      "latest_benchmark": "Terminal-Bench2.0",
+      "latest_combinations": [
+        "OPRO/Claude Code",
+        "RRSI/Claude Code"
+      ],
+      "ended_in_latest_batch": 2,
+      "running": 0,
+      "queued": 0,
+      "status": "OPRO passed with native budget caveat; RRSI failed after native40-turn baseline trials",
+      "process_and_control_checks": [
+        {
+          "jobs": []
+        },
+        {
+          "file": "smoke-terminal-opro-transport-retry-20261025.json",
+          "status": "flow_passed_budget_limited",
+          "mtime": 1792935604.6808217,
+          "review": null,
+          "final_result_exists": null
+        },
+        {
+          "file": "smoke-terminal-rrsi-retry-20261025.json",
+          "status": "flow_failed",
+          "mtime": 1792939004.3901796,
+          "review": null,
+          "final_result_exists": false
+        },
+        {
+          "control": "terminal-opro-claude-transport-retry-20261025",
+          "files": [
+            {
+              "name": "supervisor.log",
+              "mtime": 1792932684.3615284,
+              "size": 0
+            },
+            {
+              "name": "queue-result.json",
+              "mtime": 1792935604.6808217,
+              "size": 29733
+            },
+            {
+              "name": "supervisor.pid",
+              "mtime": 1792932684.3615284,
+              "size": 5
+            },
+            {
+              "name": "active-command.pid",
+              "mtime": 1792933262.043557,
+              "size": 5
+            },
+            {
+              "name": "evidence.json",
+              "mtime": 1792935604.6808217,
+              "size": 27733
+            }
+          ]
+        },
+        {
+          "control": "terminal-rrsi-claude-retry-20261025",
+          "files": [
+            {
+              "name": "supervisor.log",
+              "mtime": 1792937557.651243,
+              "size": 454
+            },
+            {
+              "name": "queue-result.json",
+              "mtime": 1792939004.3901796,
+              "size": 2330
+            },
+            {
+              "name": "supervisor.pid",
+              "mtime": 1792936372.761511,
+              "size": 5
+            },
+            {
+              "name": "active-command.pid",
+              "mtime": 1792936377.153478,
+              "size": 5
+            },
+            {
+              "name": "evidence.json",
+              "mtime": 1792939004.3901796,
+              "size": 2330
+            }
+          ]
+        }
+      ],
+      "native_record_checks": [
+        {
+          "report": "smoke-terminal-opro-transport-retry-20261025.json",
+          "experiment": "smoke-to25-opro-claude_code-03/runs/opro-claude_code-terminal_bench-20261025-210103-170540",
+          "terminal": {
+            "result.json": {
+              "sha256": "681da70f78e7397b6c022cd895695014ce13e2a7b3fc66a791242eefe5e84741",
+              "status": "finished",
+              "error": null
+            }
+          },
+          "traces": [
+            {
+              "name": "00001-baseline.json",
+              "sha256": "f17297ddc70ac6f2d0f2a26ad5ac5766ba2e0d994fe71e130dff86543ec20850",
+              "rows": 1,
+              "statuses": [
+                "finished"
+              ],
+              "metrics": [
+                {
+                  "reward": 0
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            },
+            {
+              "name": "00002-worker.json",
+              "sha256": "481262c585be865a2794ebcfe2e8ffb23ae34f0ba51c15b29cc223b328af1eb8",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00003-candidate.json",
+              "sha256": "049efbc58b7ad7d8561618aedb1525d288ad3879707bf1f4b1a20c3ffab7159a",
+              "rows": 1,
+              "statuses": [
+                "error"
+              ],
+              "metrics": [
+                {
+                  "reward": 0
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            },
+            {
+              "name": "00004-decision.json",
+              "sha256": "6133830f578bc02fccba77a07a17c5936b15712f940f1c0c937682acbe2007d7",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00005-test.json",
+              "sha256": "f44da23178d9f493c0e91ec8f4f649ad2ce597bb50b9f0aba18114a5e55c3e82",
+              "rows": 1,
+              "statuses": [
+                "finished"
+              ],
+              "metrics": [
+                {
+                  "reward": 1
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "report": "smoke-terminal-rrsi-retry-20261025.json",
+          "experiment": "smoke-trr25-rrsi-claude_code-02/runs/rrsi-claude_code-terminal_bench-20261025-215258-278493",
+          "terminal": {
+            "error.json": {
+              "sha256": "7feefb298c08662647324753e632d6272a90040726ae0489a6f2531421720d9e",
+              "status": "error",
+              "error": "too many failed trials"
+            }
+          },
+          "traces": [
+            {
+              "name": "00001-baseline.json",
+              "sha256": "79eaf208e12cf8da1c5930fa2d14fc5193ce52d512edec774686740a80bdd220",
+              "rows": 1,
+              "statuses": [
+                "error"
+              ],
+              "metrics": [
+                {
+                  "reward": 0
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            },
+            {
+              "name": "00002-baseline.json",
+              "sha256": "bfd16539081b8132957ecd7987142245d9475d975ee43f8e8379fa82494e2f1e",
+              "rows": 1,
+              "statuses": [
+                "error"
+              ],
+              "metrics": [
+                {
+                  "reward": 0
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "source_check": {
+        "baseline_files": 212,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "host": "smoke2",
+      "latest_benchmark": "Terminal-Bench2.0",
+      "latest_combinations": [
+        "EvoHarness/Claude Code"
+      ],
+      "ended_in_latest_batch": 1,
+      "running": 0,
+      "queued": 0,
+      "status": "EvoHarness passed with native budget caveat; compiled snapshot executed in test",
+      "process_and_control_checks": [
+        {
+          "jobs": []
+        },
+        {
+          "file": "smoke-terminal-evo-transport-smoke2-20261025.json",
+          "status": "flow_passed_budget_limited",
+          "mtime": 1792936051.0318813,
+          "review": null,
+          "final_result_exists": null
+        },
+        {
+          "control": "smoke2-terminal-evo-transport-20261025",
+          "files": [
+            {
+              "name": "active-command.pid",
+              "mtime": 1792933267.7398086,
+              "size": 5
+            },
+            {
+              "name": "queue-result.json",
+              "mtime": 1792936051.0318813,
+              "size": 13134
+            },
+            {
+              "name": "supervisor.pid",
+              "mtime": 1792932687.4838283,
+              "size": 5
+            },
+            {
+              "name": "supervisor.log",
+              "mtime": 1792933263.0438368,
+              "size": 199
+            }
+          ]
+        }
+      ],
+      "native_record_checks": [
+        {
+          "report": "smoke-terminal-evo-transport-smoke2-20261025.json",
+          "experiment": "smoke-s2-terminal-evo_harness-claude_code-03/runs/evo_harness-claude_code-terminal_bench-20261025-210108-914903",
+          "terminal": {
+            "result.json": {
+              "sha256": "bdf7bcdf1dbe9737a6879911a328cf99927be68777b30fe0473779ab4eaf05a7",
+              "status": "finished",
+              "error": null
+            }
+          },
+          "traces": [
+            {
+              "name": "00001-train.json",
+              "sha256": "458a522bc4d07056917e56055daff0557b1d86765e7166dc3c56bcf109165c93",
+              "rows": 1,
+              "statuses": [
+                "error"
+              ],
+              "metrics": [
+                {
+                  "reward": 0
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            },
+            {
+              "name": "00002-worker.json",
+              "sha256": "1574d4c20500664aa8e271b52f6bde9fa80fa2e028317d194f87165a3b15813e",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00003-worker.json",
+              "sha256": "b292c0def50b639d2970199540070c78c787843163fe7951a6dbf9de628c03c0",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00004-decision.json",
+              "sha256": "3ecbd5373c4a87fa36b167b2088a453d574a39a584eedf398b2e69bb8250a6e1",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00005-worker.json",
+              "sha256": "482233ac35e5de1dc4a72454ddcd5a6e73fd6faf3bc990c251c500f872074f32",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00006-decision.json",
+              "sha256": "1bdf7b77fcd4889db1d8169968c37dab16bbefc03638def81ff95ff462260281",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00007-decision.json",
+              "sha256": "ca5e09c0dcba36a7c44134153ef4101114ed30c9c8dbc8afbc3e6e4b49cd09bc",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00008-test.json",
+              "sha256": "d25afe49258a1967e076e26f955532e1e53cc4aa2729167961548789b4871081",
+              "rows": 1,
+              "statuses": [
+                "finished"
+              ],
+              "metrics": [
+                {
+                  "reward": 1
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "source_check": {
+        "baseline_files": 231,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "host": "smoke3",
+      "latest_benchmark": "Terminal-Bench2.0",
+      "latest_combinations": [
+        "AHE/Claude Code"
+      ],
+      "ended_in_latest_batch": 1,
+      "running": 0,
+      "queued": 0,
+      "status": "AHE partial environment coverage, GitHub SSL failure before candidate model; final test complete",
+      "process_and_control_checks": [
+        {
+          "jobs": []
+        },
+        {
+          "file": "smoke-terminal-ahe-transport-smoke3-20261025.json",
+          "status": "flow_failed",
+          "mtime": 1792936525.2276556,
+          "review": "partial_environment_blocked",
+          "final_result_exists": null
+        },
+        {
+          "file": "smoke-officeqa-preflight-smoke3-20261025.json",
+          "status": "preparation_blocked",
+          "mtime": 1792929223.3544202,
+          "review": null,
+          "final_result_exists": null
+        },
+        {
+          "file": "smoke-deepsearchqa-preflight-smoke3-20261025.json",
+          "status": "preparation_blocked",
+          "mtime": 1792929265.5741775,
+          "review": null,
+          "final_result_exists": null
+        },
+        {
+          "control": "smoke3-terminal-ahe-transport-20261025",
+          "files": [
+            {
+              "name": "supervisor.log",
+              "mtime": 1792933262.8477423,
+              "size": 199
+            },
+            {
+              "name": "queue-result.json",
+              "mtime": 1792936525.2276556,
+              "size": 43178
+            },
+            {
+              "name": "supervisor.pid",
+              "mtime": 1792932687.372469,
+              "size": 5
+            },
+            {
+              "name": "active-command.pid",
+              "mtime": 1792933266.1437616,
+              "size": 5
+            }
+          ]
+        }
+      ],
+      "native_record_checks": [
+        {
+          "report": "smoke-terminal-ahe-transport-smoke3-20261025.json",
+          "experiment": "smoke-s3-terminal-ahe-claude_code-03/runs/ahe-claude_code-terminal_bench-20261025-210107-324986",
+          "terminal": {
+            "result.json": {
+              "sha256": "c7734487b349c5e1e9fa055ad36b0a8446e664cba879fe6ad90770f5d44eea0f",
+              "status": "finished",
+              "error": null
+            }
+          },
+          "traces": [
+            {
+              "name": "00001-baseline.json",
+              "sha256": "786d42963df64a8d2536692ee5c03d2f881f8296e332a6fa2140e23fbee43f38",
+              "rows": 1,
+              "statuses": [
+                "error"
+              ],
+              "metrics": [
+                {
+                  "reward": 0
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            },
+            {
+              "name": "00002-worker.json",
+              "sha256": "7b9aba776b470e9472e486a265be45672a6411b43586dc8a7f90dd1c4fa3e12f",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00003-worker.json",
+              "sha256": "915aaa4b5383ac26d77aaf0c32b9f18834c2032d9da37775743fad27701fb583",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00004-worker.json",
+              "sha256": "ef265882a72810704925f18fb17d82907793e268a8896b82bc5d2941afd15b6f",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00005-candidate.json",
+              "sha256": "492f318bf94803453fb84f88dface54fe5e8bf73649519221c4d70482c528d02",
+              "rows": 1,
+              "statuses": [
+                "error"
+              ],
+              "metrics": [
+                {
+                  "reward": 0
+                }
+              ],
+              "usage_present": [
+                false
+              ]
+            },
+            {
+              "name": "00006-decision.json",
+              "sha256": "bd0819faa425300c586a780d0e072d436ca9db9ba2b2ba59b0d47870c9872709",
+              "rows": 0,
+              "statuses": [],
+              "metrics": [],
+              "usage_present": []
+            },
+            {
+              "name": "00007-test.json",
+              "sha256": "9c9a374384528c4a30be4c3fff0f52632940c4a09cc779d7977efd44cc702c82",
+              "rows": 1,
+              "statuses": [
+                "finished"
+              ],
+              "metrics": [
+                {
+                  "reward": 1
+                }
+              ],
+              "usage_present": [
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "source_check": {
+        "baseline_files": 253,
+        "changed": [],
+        "missing": []
+      }
+    }
+  ],
+  "priority_matrix_counts": {
+    "passed": 174,
+    "partial": 1,
+    "failed": 3,
+    "unsupported_configuration": 14,
+    "pending": 48
+  },
+  "remaining_conditions": {
+    "ahe": "No stable network repair demonstrated; no additional paid repeat",
+    "fixed_budget_failures": [
+      "Terminal RRSI/Claude Code baseline trials exhausted",
+      "Terminal ModularRSI/MiniAgent Worker budget exhausted",
+      "SWE RRSI/Claude Code Worker budget exhausted"
+    ],
+    "officeqa": "Current public config still lacks corpus_path; no authorized corpus/access newly supplied",
+    "deepsearchqa": "Current public config still lacks retrieval key and independent Judge key",
+    "independent_evolution_data": "No new independent SWE evolution collection supplied; previous unsupported records are not passes"
+  },
+  "actions": [
+    "Verified real /proc entries and no active public controller/Claude execution",
+    "Re-read trajectories, result/error records and usage-presence flags; retained raw statuses",
+    "Recomputed frozen source identities:212/231/253 files all unchanged",
+    "No product edits, budget changes, regrading or paid reruns",
+    "No full-table overwrite from remote"
+  ],
+  "next": "Continue bounded evidence/environment checks; start a unique public-entry task only when actual remaining conditions become available"
+}

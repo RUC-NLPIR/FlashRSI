@@ -1,13 +1,11 @@
-# Download/extract the official independent Harbor evolution tasks first.
-# All data paths below resolve from the command's current working directory.
+# Partition one native Harbor task collection for evolution and held-out evaluation.
+# The one-command launcher resolves relative data paths from this YAML directory.
 run:
   output_dir: ../runs
 benchmark:
   name: terminal_bench
   data_path: /absolute/path/to/terminal-bench-2
-  evolution_data_path: /absolute/path/to/ModularRSI_2000_Instances/tb
-  evolution_limit: 10
-  split: {train: 0, dev: 0, test: 1}
+  split_counts: {train: 1, dev: 1, test: 1}
   seed: 42
 agent:
   name: miniagent

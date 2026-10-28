@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-28T20:27:36.471933+08:00",
+  "model_calls": 0,
+  "package": "libuno-salhelpergcc3-3",
+  "version": "1:7.0.4-4+deb11u13",
+  "expected_bytes": 211508,
+  "actual_bytes": 211508,
+  "expected_sha256": "8b7cbb64cc5be07880f26e7ec2ccfc40f363f54b949263e6a5540b8fa5b55859",
+  "sha256_matches": true,
+  "returncode": 0,
+  "http_status": "200",
+  "error": "",
+  "official_archive_url": "https://archive.debian.org/debian-security/pool/updates/main/libr/libreoffice/libuno-salhelpergcc3-3_7.0.4-4%2bdeb11u13_amd64.deb",
+  "tls_certificate_validation_unchanged": true
+}

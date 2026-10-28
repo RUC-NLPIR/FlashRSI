@@ -1,0 +1,29 @@
+{
+  "status": "preparation_blocked",
+  "started_at": "2026-10-28T01:03:44.521827+00:00",
+  "model_calls": 0,
+  "engine_before": "88f71a60-f1cf-4c56-a785-4dbf79c0337d",
+  "items": [
+    {
+      "split": "train",
+      "task_id": "adaptive-rejection-sampler",
+      "task_checksum": "4fde6e809c475b000ae3ea4135f906ffe4775bccae7dafd0b123f4ecc9fcf697",
+      "status": "preparing",
+      "phase": "native_install_only_environment_and_adapter_setup",
+      "trial": "flashrsi-terminal-free0840i-train-6fa71c",
+      "own_native_trial_cleanup_requested": true
+    }
+  ],
+  "native_methods": [
+    "Trial.create",
+    "_setup_agent_environment",
+    "_setup_agent",
+    "_stop_agent_environment"
+  ],
+  "no_Agent_run": true,
+  "native_Trial_run_install_only": true,
+  "prior_free_probe_error": "first2free probes omitted native Trialresult initialization before private preparation; no environment started; corrected official install_only lifecycle, not infrastructure fault",
+  "diagnostic_context_private_file": "/root/.cache/terminal-ahe-target80-0840/native-free-attempt03/error-context.redacted.private.txt",
+  "error_type": "RuntimeError",
+  "blocked_phase": "native_install_only_environment_and_adapter_setup"
+}

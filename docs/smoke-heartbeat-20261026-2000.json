@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-26T12:29:32Z",
+  "new_benchmarks_this_check": [],
+  "matrix_counts": {
+    "pass": 420,
+    "failed": 30,
+    "partial_or_running": 126,
+    "unsupported": 24,
+    "pending": 24
+  },
+  "scope_cells": 624,
+  "project_handled_scopes_user_and_audit": 15,
+  "fully_audited_24_of_24_scopes": [
+    "HotpotQA",
+    "2WikiMultiHopQA",
+    "AIME2025",
+    "SuperGPQA",
+    "TriviaQA"
+  ],
+  "current_workloads": {
+    "original": {
+      "benchmark": "AppWorld",
+      "algorithm": "ModularRSI",
+      "target": "Claude Code",
+      "ended": 1,
+      "model_running": 1,
+      "pending": 0,
+      "mini_result": "Worker reached maximum number of turns (60); 14 Target finished, 13 Worker finished then one Worker error, all usage present; no final. No retry.",
+      "cc_progress": "3 Target and 1 Worker finished, usage present, no final yet",
+      "disk_free_bytes": 2959273984
+    },
+    "smoke2": {
+      "benchmark": "SWE-bench / CRUXEval-O source research",
+      "ended_paid": 2,
+      "model_running": 0,
+      "pending_paid": 0,
+      "research_status": "completed_data_only",
+      "research_result": "Pinned official HF and GitHub files are byte-identical 800-row pools; rejected as independent source. Initial transfer timeout preserved; complete original files obtained through local authorized proxy and transferred.",
+      "disk_free_bytes_at_2000": 5996486656
+    },
+    "smoke3": {
+      "benchmark": "WideSearch / CRUXEval-O source research",
+      "ended_paid": 24,
+      "model_running": 0,
+      "pending_paid": 0,
+      "research_status": "completed_data_only",
+      "research_result": "Complete native MBPP 427 rows are not directly compatible with current CRUXEval f(input) contract; no transformation, code execution, overlap conclusion or paid dispatch. GitHub API rate limit preserved; official Git HEAD pinned before fetching raw source.",
+      "disk_free_bytes_at_2000": 3949453312
+    }
+  },
+  "product_changes_this_check": [],
+  "new_paid_dispatches_by_this_check": 0,
+  "note": "Existing AppWorld controller automatically dispatched CC after Mini ended. Research completion is not smoke completion. Idle hosts have no active model after these bounded research tasks finished."
+}

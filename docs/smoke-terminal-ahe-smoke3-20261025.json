@@ -1,0 +1,259 @@
+{
+  "host": "smoke3",
+  "benchmark": "terminal_bench",
+  "algorithm": "ahe",
+  "target": "claude_code",
+  "session": "smoke-s3-terminal-ahe-claude_code-02",
+  "status": "flow_failed",
+  "updated_at": "2026-10-25T11:42:49.700851+00:00",
+  "counts_as_real_smoke_pass": false,
+  "mode": "Public launcher with unchanged full native task cache and verified original task images",
+  "fixed_budget": "Target40 turns1200s; Agent Worker60 turns600s; native1/1/1; no score-based task selection",
+  "experiment_dirs": [
+    "/root/flashrsi-smoke3-20261025/smoke-s3-terminal-ahe-claude_code-02/runs/ahe-claude_code-terminal_bench-20261025-190110-395100"
+  ],
+  "source_changes": [],
+  "evidence": {
+    "session": "smoke-s3-terminal-ahe-claude_code-02",
+    "algorithm": "ahe",
+    "target": "claude_code",
+    "benchmark": "terminal_bench",
+    "run_dir": "/root/flashrsi-smoke3-20261025/smoke-s3-terminal-ahe-claude_code-02/runs/ahe-claude_code-terminal_bench-20261025-190110-395100",
+    "status": "flow_failed",
+    "result": {
+      "status": "finished",
+      "snapshot_id": "02b5f15763f34f10fb59fc98302e739ecdcb032c92d3d4803dcc2d375feaa623",
+      "primary_metric": "reward",
+      "test_score": 0.0,
+      "test_tasks": 1,
+      "test_metrics": {
+        "reward": 0.0
+      },
+      "benchmark": {
+        "source": "local",
+        "data_path": "/root/flashrsi-smoke3-20261025/.cache/terminal-native"
+      }
+    },
+    "baseline_present": true,
+    "changed_candidate_evaluations": 1,
+    "compiled_snapshot_executed_in_final_test": false,
+    "compile_decisions": [],
+    "all_trajectories_finished": false,
+    "all_valid_native_terminal_states": false,
+    "native_budget_terminations": 1,
+    "budget_scope_note": "Native Claude SDK error_max_turns with recorded turns and official pytest is a qualified execution-path pass, not successful task completion; raw error statuses are preserved.",
+    "sealed_test_verified": true,
+    "official_verifier_checks": false,
+    "target_evaluations": [
+      {
+        "stage": "00001-baseline",
+        "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+        "task_id": "adaptive-rejection-sampler",
+        "task_checksum": "4fde6e809c475b000ae3ea4135f906ffe4775bccae7dafd0b123f4ecc9fcf697",
+        "status": "error",
+        "native_budget_termination": true,
+        "error": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+        "reward": null,
+        "official_verifier": {
+          "type": "HarborVerifier",
+          "task_id": "adaptive-rejection-sampler",
+          "task_checksum": "4fde6e809c475b000ae3ea4135f906ffe4775bccae7dafd0b123f4ecc9fcf697",
+          "trial_id": "17ecf103-de27-41f8-bdb8-f7b999aa8f41",
+          "rewards": {
+            "reward": 1.0
+          },
+          "stdout": "Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]\nGet:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]\nGet:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]\nGet:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]\nFetched 634 kB in 1s (1042 kB/s)\nReading package lists...\nReading package lists...\nBuilding dependency tree...\nReading state information...\ncurl is already the newest version (8.5.0-2ubuntu10.16).\n0 upgraded, 0 newly installed, 0 to remove and 29 not upgraded.\ndownloading uv 0.9.5 x86_64-unknown-linux-gnu\nno checksums to verify\ninstalling to /root/.local/bin\n  uv\n  uvx\neverything's installed!\n\nTo add $HOME/.local/bin to your PATH, either restart your shell or run:\n\n    source $HOME/.local/bin/env (sh, bash, zsh)\n    source $HOME/.local/bin/env.fish (fish)\nDownloading cpython-3.13.9-linux-x86_64-gnu (download) (32.0MiB)\n Downloading cpython-3.13.9-linux-x86_64-gnu (download)\nDownloading scipy (34.0MiB)\nDownloading pygments (1.2MiB)\nDownloading numpy (15.9MiB)\n Downloading pygments\n Downloading numpy\n Downloading scipy\nInstalled 8 packages in 337ms\n============================= test session starts ==============================\nplatform linux -- Python 3.13.9, pytest-8.4.1, pluggy-1.7.0\nrootdir: /tests\nplugins: json-ctrf-0.3.5\ncollected 9 items\n\n../tests/test_outputs.py .........                                       [100%]\n\n==================================== PASSES ====================================\n=========================== short test summary info ============================\nPASSED ../tests/test_outputs.py::test_ars_function_exists\nPASSED ../tests/test_outputs.py::test_can_generate_standard_distribution_samples\nPASSED ../tests/test_outputs.py::test_has_test_function\nPASSED ../tests/test_outputs.py::test_formal_testing_with_known_truth\nPASSED ../tests/test_outputs.py::test_sample_files_generated\nPASSED ../tests/test_outputs.py::test_implementation_is_modular\nPASSED ../tests/test_outputs.py::test_implementation_handles_errors\nPASSED ../tests/test_outputs.py::test_input_validation_functionality\nPASSED ../tests/test_outputs.py::test_log_concavity_functionality\n============================== 9 passed in 3.92s ===============================\n",
+          "stderr": "",
+          "exception_type": "NonZeroAgentExitCodeError",
+          "error": "Container agent exited with 1: "
+        },
+        "official_scoring_verified": true,
+        "model_calls": null,
+        "native_num_turns": 41,
+        "tool_calls": 0
+      },
+      {
+        "stage": "00005-candidate",
+        "snapshot_id": "02b5f15763f34f10fb59fc98302e739ecdcb032c92d3d4803dcc2d375feaa623",
+        "task_id": "adaptive-rejection-sampler",
+        "task_checksum": "4fde6e809c475b000ae3ea4135f906ffe4775bccae7dafd0b123f4ecc9fcf697",
+        "status": "error",
+        "native_budget_termination": false,
+        "error": "Harbor agent ended without a FlashRSI trajectory",
+        "reward": null,
+        "official_verifier": {
+          "type": "HarborVerifier",
+          "task_id": "adaptive-rejection-sampler",
+          "task_checksum": "4fde6e809c475b000ae3ea4135f906ffe4775bccae7dafd0b123f4ecc9fcf697",
+          "error": "Harbor agent ended without a FlashRSI trajectory"
+        },
+        "official_scoring_verified": false,
+        "model_calls": null,
+        "native_num_turns": null,
+        "tool_calls": 0
+      },
+      {
+        "stage": "00007-test",
+        "snapshot_id": "02b5f15763f34f10fb59fc98302e739ecdcb032c92d3d4803dcc2d375feaa623",
+        "task_id": "llm-inference-batching-scheduler",
+        "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+        "status": "error",
+        "native_budget_termination": false,
+        "error": "Harbor agent ended without a FlashRSI trajectory",
+        "reward": null,
+        "official_verifier": {
+          "type": "HarborVerifier",
+          "task_id": "llm-inference-batching-scheduler",
+          "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+          "error": "Harbor agent ended without a FlashRSI trajectory"
+        },
+        "official_scoring_verified": false,
+        "model_calls": null,
+        "native_num_turns": null,
+        "tool_calls": 0
+      }
+    ],
+    "worker_evaluations": [
+      {
+        "stage": "00002-worker",
+        "status": "finished",
+        "error": null
+      },
+      {
+        "stage": "00003-worker",
+        "status": "finished",
+        "error": null
+      },
+      {
+        "stage": "00004-worker",
+        "status": "finished",
+        "error": null
+      }
+    ],
+    "decisions": [
+      {
+        "step": 0,
+        "kind": "keep",
+        "parent_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+        "candidate_id": "02b5f15763f34f10fb59fc98302e739ecdcb032c92d3d4803dcc2d375feaa623",
+        "accepted": true,
+        "parent_score": 0.0,
+        "candidate_score": 0.0,
+        "tasks": {
+          "adaptive-rejection-sampler": {
+            "before": 0.0,
+            "after": 0.0,
+            "delta": 0.0,
+            "flip": "unchanged"
+          }
+        },
+        "changes": [
+          {
+            "path": "CLAUDE.md",
+            "predicted_fixes": [
+              "adaptive-rejection-sampler"
+            ],
+            "actually_fixed": [],
+            "still_failed": [
+              "adaptive-rejection-sampler"
+            ],
+            "predicted_risks": [],
+            "risk_realized": [],
+            "verdict": "INEFFECTIVE"
+          },
+          {
+            "path": "skills/algorithm-implementation/SKILL.md",
+            "predicted_fixes": [
+              "adaptive-rejection-sampler"
+            ],
+            "actually_fixed": [],
+            "still_failed": [
+              "adaptive-rejection-sampler"
+            ],
+            "predicted_risks": [],
+            "risk_realized": [],
+            "verdict": "INEFFECTIVE"
+          },
+          {
+            "path": "settings.json",
+            "predicted_fixes": [
+              "adaptive-rejection-sampler"
+            ],
+            "actually_fixed": [],
+            "still_failed": [
+              "adaptive-rejection-sampler"
+            ],
+            "predicted_risks": [],
+            "risk_realized": [],
+            "verdict": "INEFFECTIVE"
+          }
+        ],
+        "unattributed_regressions": [],
+        "manifest": {
+          "failure_evidence": [
+            "adaptive-rejection-sampler: error_message 'Reached maximum number of turns (40)' \u2014 the rollout exhausted the entire turn budget without producing a deliverable.",
+            "adaptive-rejection-sampler: trace contains ~100 consecutive SystemMessage subtype 'thinking_tokens' (deltas 1-3, cumulative 1->140) and no tool_use, tool_result, or assistant text \u2014 turns were spent reasoning instead of acting.",
+            "adaptive-rejection-sampler: no Write/Edit to /app/ars.R, no Bash Rscript run, and no TEST_NAME: PASS/FAIL output is evidenced, while grading is purely artifact-based (file must exist with ars() and test()).",
+            "adaptive-rejection-sampler init: permissionMode acceptEdits and tools [Bash, Edit, Glob, Grep, Read, Skill, Write] \u2014 capability existed, so the blocker was action/loop discipline, not permissions."
+          ],
+          "root_cause": "The harness shipped with no execution guidance at all (empty CLAUDE.md, empty hooks/settings), so the agent had no instruction to convert reasoning into tool calls. Under a weak/unrecognized backend model it emitted thinking-token telemetry turn after turn, never wrote the required artifact or ran tests, and the fixed 40-turn cap terminated the run before any file existed. Secondary: with no permission allowlist, interactive tool use could stall in a headless run.",
+          "targeted_fix": "Added an always-loaded CLAUDE.md execution protocol that mandates a tool call in the first response, forbids consecutive non-tool turns, requires a runnable skeleton of every required output path within the first few calls, time-boxes environment setup, and reserves final turns for artifact verification. Added the algorithm-implementation skill encoding a reusable skeleton-first, validate-inputs, modular, seeded-statistical-test workflow with exact TEST_NAME: PASS/FAIL output. Added a permissions allowlist so Bash/Read/Write/Edit/Glob/Grep never block the run.",
+          "changes": [
+            {
+              "path": "CLAUDE.md",
+              "predicted_fix_tasks": [
+                "adaptive-rejection-sampler"
+              ],
+              "risk_tasks": []
+            },
+            {
+              "path": "skills/algorithm-implementation/SKILL.md",
+              "predicted_fix_tasks": [
+                "adaptive-rejection-sampler"
+              ],
+              "risk_tasks": []
+            },
+            {
+              "path": "settings.json",
+              "predicted_fix_tasks": [
+                "adaptive-rejection-sampler"
+              ],
+              "risk_tasks": []
+            }
+          ]
+        },
+        "rollback_sources": {
+          "CLAUDE.md": {
+            "existed": false,
+            "content": null
+          },
+          "skills/algorithm-implementation/SKILL.md": {
+            "existed": false,
+            "content": null
+          },
+          "settings.json": {
+            "existed": true,
+            "content": "{}\r\n"
+          }
+        }
+      }
+    ],
+    "changed_paths": {
+      "02b5f15763f34f10fb59fc98302e739ecdcb032c92d3d4803dcc2d375feaa623": [
+        "CLAUDE.md",
+        "settings.json",
+        "skills/algorithm-implementation/SKILL.md"
+      ]
+    },
+    "snapshot_ids": [
+      "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+      "1d12cd450b18f23e676c75e0f1db3a331baa2151b9c06a631a4d7164d4499e3b",
+      "02b5f15763f34f10fb59fc98302e739ecdcb032c92d3d4803dcc2d375feaa623"
+    ],
+    "snapshot_files": 15,
+    "source_files_checked": 253,
+    "source_changes": [],
+    "credential_hits": [],
+    "cache_artifact_hits": []
+  }
+}

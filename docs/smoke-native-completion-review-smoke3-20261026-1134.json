@@ -1,0 +1,409 @@
+{
+  "checked_at": "2026-10-26T03:53:22.044499+00:00",
+  "host": "smoke3",
+  "benchmark": "widesearch",
+  "scope": "Read-only native terminal records; no new model calls or changes to original statuses",
+  "new_model_calls": 0,
+  "items": [
+    {
+      "algorithm": "opro",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "experiments": [
+        {
+          "experiment_path": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/opro-miniagent/opro-miniagent-widesearch-20261026-101531-342614",
+          "target_stages": [
+            {
+              "file": "00001-baseline.json",
+              "status": "finished",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "",
+              "native_events": [
+                {
+                  "type": "WideSearchVerifier",
+                  "termination_reason": "None",
+                  "premature": false,
+                  "reward_check_fields": []
+                }
+              ]
+            },
+            {
+              "file": "00003-candidate.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            },
+            {
+              "file": "00005-test.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            }
+          ],
+          "worker_stages": [
+            {
+              "file": "00002-worker.json",
+              "status": "finished",
+              "usage_recorded": true,
+              "error_message": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "algorithm": "opro",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiments": [
+        {
+          "experiment_path": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/opro-claude_code/opro-claude_code-widesearch-20261026-102011-654574",
+          "target_stages": [
+            {
+              "file": "00001-baseline.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_se",
+              "native_events": []
+            },
+            {
+              "file": "00003-candidate.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            },
+            {
+              "file": "00005-test.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            }
+          ],
+          "worker_stages": [
+            {
+              "file": "00002-worker.json",
+              "status": "finished",
+              "usage_recorded": true,
+              "error_message": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "experiments": [
+        {
+          "experiment_path": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-widesearch-20261026-105212-388588",
+          "target_stages": [
+            {
+              "file": "00001-baseline.json",
+              "status": "finished",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "",
+              "native_events": [
+                {
+                  "type": "WideSearchVerifier",
+                  "termination_reason": "None",
+                  "premature": false,
+                  "reward_check_fields": []
+                }
+              ]
+            },
+            {
+              "file": "00002-train.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            },
+            {
+              "file": "00004-candidate_dev.json",
+              "status": "finished",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "",
+              "native_events": [
+                {
+                  "type": "WideSearchVerifier",
+                  "termination_reason": "None",
+                  "premature": false,
+                  "reward_check_fields": []
+                }
+              ]
+            },
+            {
+              "file": "00006-test.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            }
+          ],
+          "worker_stages": [
+            {
+              "file": "00003-worker.json",
+              "status": "finished",
+              "usage_recorded": true,
+              "error_message": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "raw_status": "needs_attention",
+      "experiments": [
+        {
+          "experiment_path": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/skillopt-claude_code/skillopt-claude_code-widesearch-20261026-105914-152267",
+          "target_stages": [
+            {
+              "file": "00001-baseline.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_se",
+              "native_events": []
+            },
+            {
+              "file": "00002-train.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_se",
+              "native_events": []
+            },
+            {
+              "file": "00004-candidate_dev.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "Reached maximum number of turns (40)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_se",
+              "native_events": []
+            },
+            {
+              "file": "00006-test.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": false,
+              "error_message": "Claude Code timed out after 1200s\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_sessi",
+              "native_events": []
+            }
+          ],
+          "worker_stages": [
+            {
+              "file": "00003-worker.json",
+              "status": "finished",
+              "usage_recorded": true,
+              "error_message": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "raw_status": "needs_attention",
+      "experiments": [
+        {
+          "experiment_path": "/root/flashrsi-widesearch-cachefix-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-widesearch-20261026-114658-834209",
+          "target_stages": [
+            {
+              "file": "00001-baseline.json",
+              "status": "finished",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "",
+              "native_events": [
+                {
+                  "type": "WideSearchVerifier",
+                  "termination_reason": "None",
+                  "premature": false,
+                  "reward_check_fields": []
+                }
+              ]
+            },
+            {
+              "file": "00003-candidate.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            },
+            {
+              "file": "00005-test.json",
+              "status": "error",
+              "metrics": {
+                "score": 0.0,
+                "precision_by_row": 0.0,
+                "recall_by_row": 0.0,
+                "f1_by_row": 0.0,
+                "precision_by_item": 0.0,
+                "recall_by_item": 0.0,
+                "f1_by_item": 0.0
+              },
+              "usage_recorded": true,
+              "error_message": "WideSearch judge failed (ValueError)",
+              "native_events": []
+            }
+          ],
+          "worker_stages": [
+            {
+              "file": "00002-worker.json",
+              "status": "finished",
+              "usage_recorded": true,
+              "error_message": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

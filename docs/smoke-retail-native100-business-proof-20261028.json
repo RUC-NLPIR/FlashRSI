@@ -1,0 +1,41 @@
+[
+  {
+    "file": "00001-baseline.json",
+    "task_id": "88",
+    "termination_reason": "TerminationReason.USER_STOP",
+    "business_fields": [
+      "db_check",
+      "env_assertions",
+      "action_checks",
+      "nl_assertions",
+      "reward_breakdown"
+    ],
+    "native_nl_assertions_field_present": true
+  },
+  {
+    "file": "00003-candidate.json",
+    "task_id": "88",
+    "termination_reason": "TerminationReason.USER_STOP",
+    "business_fields": [
+      "db_check",
+      "env_assertions",
+      "action_checks",
+      "nl_assertions",
+      "reward_breakdown"
+    ],
+    "native_nl_assertions_field_present": true
+  },
+  {
+    "file": "00005-test.json",
+    "task_id": "84",
+    "termination_reason": "TerminationReason.USER_STOP",
+    "business_fields": [
+      "db_check",
+      "env_assertions",
+      "action_checks",
+      "nl_assertions",
+      "reward_breakdown"
+    ],
+    "native_nl_assertions_field_present": true
+  }
+]

@@ -1,0 +1,2585 @@
+{
+  "host": "smoke3",
+  "benchmark": "supergpqa",
+  "judge_profile": "explicit final_letter_v1",
+  "status": "completed",
+  "updated_at": "2026-10-25T21:21:21.030472+00:00",
+  "counts": {
+    "flow_passed": 21,
+    "execution_failed": 1,
+    "unsupported_configuration": 2
+  },
+  "items": [
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:25:20.773012+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:25:20.779700+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:25:21.121505+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:25:21.124075+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:25:22.726252+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:25:22.741429+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:26:07.007260+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/opro-miniagent/opro-miniagent-supergpqa-20261026-042523-490364",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:26:07.707667+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:26:07.708827+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:26:07.710500+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:26:07.909176+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:26:07.911851+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:26:43.009376+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:26:43.014267+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:27:38.658411+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/opro-claude_code/opro-claude_code-supergpqa-20261026-042643-769722",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:27:39.439671+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+      "status": "execution_failed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:27:39.441198+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:27:39.442996+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:27:39.646486+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:27:39.650336+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:27:40.540524+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:27:40.553382+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T20:28:02.579776+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "ended_at": "2026-10-25T20:28:02.582071+00:00",
+      "log_path": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/skillopt-miniagent/experiment.log"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:28:02.584186+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:28:02.595784+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:28:02.803022+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:28:02.806173+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:28:03.597955+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:28:03.605071+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:31:34.022150+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/skillopt-claude_code/skillopt-claude_code-supergpqa-20261026-042804-344902",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_dev.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:31:34.713812+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:31:34.715438+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:31:34.721362+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:31:34.933378+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:31:34.966567+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:32:11.551363+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:32:11.556119+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:32:45.458435+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/ahe-miniagent/ahe-miniagent-supergpqa-20261026-043212-542656",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:32:46.163028+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:32:46.164877+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:32:46.166775+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:32:46.367486+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:32:46.375242+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:33:20.281593+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:33:20.289355+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:38:59.176620+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/ahe-claude_code/ahe-claude_code-supergpqa-20261026-043321-069423",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 12,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:38:59.903795+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "ace",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:38:59.906104+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:38:59.922882+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:39:00.195720+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:39:00.217863+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:39:01.083929+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:39:01.089245+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:39:34.699607+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/ace-miniagent/ace-miniagent-supergpqa-20261026-043901-814834",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:39:36.310539+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "ace",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:39:36.314015+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:39:36.317886+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:39:36.738076+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:39:36.752049+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:39:38.377858+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:39:38.386107+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:40:41.797008+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/ace-claude_code/ace-claude_code-supergpqa-20261026-043939-116112",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-validation.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-train.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-validation.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00008-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:40:42.456747+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:40:42.459253+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:40:42.467070+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:40:42.668129+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:40:42.673979+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:40:43.471213+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:40:43.483352+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:08.141495+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/evoprompt-miniagent/evoprompt-miniagent-supergpqa-20261026-044044-228893",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:41:08.705934+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:41:08.710024+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:41:08.715158+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:08.935294+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:41:08.946709+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:09.723107+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:41:09.753387+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:58.525549+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/evoprompt-claude_code/evoprompt-claude_code-supergpqa-20261026-044110-491424",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-seed.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00005-child.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-child.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00010-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00004-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 18,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:41:59.104560+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:41:59.111883+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:41:59.115739+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:41:59.316316+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:41:59.322781+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:42:00.101974+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:42:00.111601+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:42:23.225670+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/gepa-miniagent/gepa-miniagent-supergpqa-20261026-044200-842190",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:42:23.788631+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:42:23.793188+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:42:23.814579+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:42:24.015011+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:42:24.024363+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:42:24.800030+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:42:24.813616+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:44:20.674484+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/gepa-claude_code/gepa-claude_code-supergpqa-20261026-044225-549239",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-parent.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate_minibatch.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:44:21.294500+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "adas",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:44:21.299460+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:44:21.318934+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:44:21.538479+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:44:21.553965+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:44:22.787307+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:44:22.798081+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:48:10.687699+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/adas-miniagent/adas-miniagent-supergpqa-20261026-044423-531895",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:48:11.377509+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:48:11.385395+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:48:11.395702+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:48:11.590139+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:48:11.604666+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:48:12.966539+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:48:12.973902+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:49:40.741178+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/adas-claude_code/adas-claude_code-supergpqa-20261026-044813-690830",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-seed.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00006-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 13,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:49:41.633811+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:49:41.639558+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:49:41.645502+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:49:41.899219+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:49:41.914951+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:49:42.747073+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:49:42.759329+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:50:38.465226+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-supergpqa-20261026-044943-493359",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:50:39.036112+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:50:39.042465+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:50:39.051228+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:50:39.250606+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:50:39.266912+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:50:40.047346+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:50:40.062648+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:54:22.670329+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-supergpqa-20261026-045040-785250",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-screen_parent.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-screen_candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00009-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 16,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:54:23.385566+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:54:23.399448+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:54:23.405890+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:54:23.603767+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:54:23.623550+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:54:24.414504+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:54:24.426694+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:58:56.255527+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/meta_harness-miniagent/meta_harness-miniagent-supergpqa-20261026-045425-159023",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T20:58:56.921260+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T20:58:56.934298+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T20:58:56.940713+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:58:57.137098+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T20:58:57.159173+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T20:58:57.984547+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T20:58:58.006072+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:00:51.614440+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/meta_harness-claude_code/meta_harness-claude_code-supergpqa-20261026-045858-739372",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00004-candidate.json",
+            "task_id": "c3a375752d6f4fb8be3953ef66e01464",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00007-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00003-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 14,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:00:52.211815+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:00:52.218879+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:00:52.228390+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:00:52.431787+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:00:52.445408+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:00:53.250350+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:00:53.290936+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:01:03.220253+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/evo_harness-miniagent/evo_harness-miniagent-supergpqa-20261026-050054-031284",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:01:03.802607+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:01:03.809619+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:01:03.818049+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:01:04.016291+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:01:04.031382+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:01:04.805077+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:01:04.823371+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:02:24.422828+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/evo_harness-claude_code/evo_harness-claude_code-supergpqa-20261026-050105-576875",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-train.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00003-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 9,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:02:25.021842+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:02:25.029828+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:02:25.035461+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:02:25.241466+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:02:25.253280+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:02:26.038673+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:02:26.056368+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:04:58.203290+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/rrsi-miniagent/rrsi-miniagent-supergpqa-20261026-050226-791473",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00012-smoke.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00014-candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00019-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00009-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 26,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:04:58.783092+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+      "status": "flow_passed",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:04:58.795299+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:04:58.809190+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:04:59.011073+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:04:59.038696+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:04:59.811103+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml"
+          ],
+          "started_at": "2026-10-25T21:04:59.825313+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:21:18.096642+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-supergpqa-public-20261026/batch-runs/rrsi-claude_code/rrsi-claude_code-supergpqa-20261026-050500-574701",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00002-baseline.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00013-smoke.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00015-candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00016-candidate.json",
+            "task_id": "d6c8084b7c4948dabafe2b2c59280141",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          },
+          {
+            "file": "00020-test.json",
+            "task_id": "0247b5f25d5547b1b61e8114e8ea43db",
+            "status": "finished",
+            "metrics": {
+              "accuracy": 1.0
+            },
+            "usage_recorded": true,
+            "judge_events": []
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00005-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00006-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00007-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00008-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00010-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          },
+          {
+            "file": "00011-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [],
+        "problems": [],
+        "source_file_count": 265,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 27,
+          "hits": []
+        },
+        "test_score": 1.0,
+        "judge_profile": "native"
+      },
+      "ended_at": "2026-10-25T21:21:18.907839+00:00"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:21:18.915939+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:21:18.927968+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:21:19.151078+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:21:19.181533+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T21:21:19.969865+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T21:21:19.975948+00:00",
+      "log_path": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/modular_rsi-miniagent/check-only.log"
+    },
+    {
+      "benchmark": "supergpqa",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "unsupported_configuration",
+      "initial_evidence": null,
+      "started_at": "2026-10-25T21:21:19.988206+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-25T21:21:19.998864+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-25T21:21:20.197682+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-supergpqa-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-25T21:21:20.218482+00:00",
+          "exit_code": 1,
+          "ended_at": "2026-10-25T21:21:21.016843+00:00"
+        }
+      ],
+      "phase": "check-only",
+      "ended_at": "2026-10-25T21:21:21.024248+00:00",
+      "log_path": "/root/flashrsi-supergpqa-public-20261026/public-bench24-20261026/modular_rsi-claude_code/check-only.log"
+    }
+  ]
+}

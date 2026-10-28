@@ -1,0 +1,14 @@
+{
+  "smoke2": {
+    "control": "/root/.cache/bfcl-modular-worker-output16384-2100",
+    "controller_pid": 19035,
+    "status": "public_preflight_before_paid",
+    "mode": "bfcl"
+  },
+  "smoke4": {
+    "control": "/root/.cache/browse-modular-worker120-output16384-2100",
+    "controller_pid": 12903,
+    "status": "public_preflight_before_paid",
+    "mode": "browse"
+  }
+}

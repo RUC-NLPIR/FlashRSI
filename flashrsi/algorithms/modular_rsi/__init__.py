@@ -17,7 +17,6 @@ from difflib import unified_diff
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from flashrsi.algorithms import _replies
 from flashrsi.algorithms.modular_rsi import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
 from flashrsi.core.snapshot import discard_runtime_files
@@ -31,11 +30,21 @@ MODULES = (
 )
 
 
+def _json_reply(reply):
+    # JSON strings may themselves contain code fences. Only remove the outer
+    # wrapper, never search for the last fence inside the serialized payload.
+    text = reply.strip()
+    opening, newline, body = text.partition("\n")
+    if newline and opening.strip() in ("```", "```json") and body.endswith("```"):
+        text = body[:-3].strip()
+    return json.loads(text)
+
+
 class ModularRSI(Algorithm):
-    """Contrast repeated executions; evolve five isolated branches from one seed.
+    """Contrast repeated executions; evolve isolated module branches from one seed.
 
     Runtime/diff gates retain general executable changes rather than requiring
-    a dev-score increase. Only external evolution tasks inform the search.
+    a dev-score increase. Search uses the benchmark's training tasks.
     """
 
     name = "modular_rsi"
@@ -69,7 +78,7 @@ class ModularRSI(Algorithm):
         seed = self.target.snapshot
         branches, histories = {}, {}
         rng = random.Random(self.config.seed)
-        for module in MODULES:
+        for module in self.config.modules:
             branches[module], histories[module] = await self._evolve_branch(
                 seed, module, rng
             )
@@ -279,7 +288,7 @@ class ModularRSI(Algorithm):
             limit //= 2
 
     def _findings(self, reply, module, tasks):
-        values = json.loads(_replies.fenced(reply))
+        values = _json_reply(reply)
         if not isinstance(values, list):
             raise ValueError("ModularRSI analysis must return a list of findings")
         task_ids, consolidated = {task.task_id for task in tasks}, {}
@@ -346,7 +355,7 @@ class ModularRSI(Algorithm):
                 allowed = (
                     self.config.modules[module]
                     if module != "integration"
-                    else [s for m in MODULES for s in self.config.modules[m]]
+                    else [s for files in self.config.modules.values() for s in files]
                 )
                 changed = parent.changed_paths(candidate)
                 if set(changed) - set(allowed):
@@ -412,7 +421,7 @@ class ModularRSI(Algorithm):
                 changes=self._evidence(changes),
             )
         )
-        verdict = json.loads(_replies.fenced(reply))
+        verdict = _json_reply(reply)
         if (
             not isinstance(verdict, dict)
             or set(verdict) != {"accept", "reason"}
@@ -465,25 +474,18 @@ class ModularRSI(Algorithm):
         return gate["passed"]
 
     def _check(self):
-        if not self.benchmark.train or not self.benchmark.metadata.get(
-            "evolution_source"
-        ):
-            raise ValueError(
-                "ModularRSI requires external train tasks and benchmark.metadata.evolution_source; TerminalBench supports evolution_data_path"
-            )
+        if not self.benchmark.train:
+            raise ValueError("ModularRSI requires non-empty benchmark.train")
         evolution, heldout = (
             self.benchmark.train,
             (*self.benchmark.dev, *self.benchmark.test),
         )
         ids = {t.task_id for t in evolution}
-        questions = {t.question.strip() for t in evolution}
-        environments = {t.env for t in evolution if t.env is not None}
-        if len(ids) != len(evolution) or any(
-            t.task_id in ids or t.question.strip() in questions or t.env in environments
-            for t in heldout
-        ):
+        # Distinct tasks may share a domain policy or environment directory.
+        # Source-level independence is optional; held-out task IDs stay sealed.
+        if len(ids) != len(evolution) or any(t.task_id in ids for t in heldout):
             raise ValueError(
-                "ModularRSI evolution tasks must be unique and disjoint from downstream tasks"
+                "ModularRSI train task IDs must be unique and disjoint from dev/test"
             )
         if (
             self.worker.config.get("type", "agent") != "agent"
@@ -493,11 +495,15 @@ class ModularRSI(Algorithm):
                 "ModularRSI requires a separate agent Worker for file editing"
             )
         modules = self.config.modules
-        if not isinstance(modules, Mapping) or set(modules) != set(MODULES):
+        if not isinstance(modules, Mapping) or set(modules) not in (
+            set(MODULES),
+            {"prompt", "skill", "hook"},
+        ):
             raise ValueError(
-                "algorithm.modules must map all five ModularRSI modules to files"
+                "algorithm.modules must map the five runtime modules or "
+                "the three extension modules (prompt, skill, hook) to files"
             )
-        for module in MODULES:
+        for module in modules:
             if (
                 not isinstance(modules[module], list)
                 or not modules[module]

@@ -1,0 +1,62 @@
+{
+  "checked_at": "2026-10-25T23:59:51.857798+00:00",
+  "private_forward_rebuilt": true,
+  "free_models_get": 200,
+  "affected_combinations": [
+    [
+      "gepa",
+      "miniagent"
+    ],
+    [
+      "gepa",
+      "claude_code"
+    ],
+    [
+      "adas",
+      "miniagent"
+    ],
+    [
+      "adas",
+      "claude_code"
+    ],
+    [
+      "darwinx",
+      "miniagent"
+    ],
+    [
+      "darwinx",
+      "claude_code"
+    ],
+    [
+      "meta_harness",
+      "miniagent"
+    ],
+    [
+      "meta_harness",
+      "claude_code"
+    ],
+    [
+      "evo_harness",
+      "miniagent"
+    ],
+    [
+      "evo_harness",
+      "claude_code"
+    ],
+    [
+      "rrsi",
+      "miniagent"
+    ],
+    [
+      "rrsi",
+      "claude_code"
+    ]
+  ],
+  "max_network_repair_retry_per_affected_combination": 1,
+  "raw_failures_and_original_experiments_retained": true,
+  "finished_model_trajectories_in_failed_attempts": 0,
+  "unrecorded_usage_is_not_assumed_zero": true,
+  "private_dispatcher_guard": "free GET models immediately before each experiment; pause future dispatch on model connection refusal",
+  "main_source_changed": false,
+  "procedural_issue": "Queue resumed after SSH recovery without first discovering lost model forward; future dispatch stopped and guarded"
+}

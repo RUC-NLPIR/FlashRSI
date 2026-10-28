@@ -18,14 +18,14 @@
 
 | # | 契约 | mvp_doc | 实现 | 建议 |
 |---|---|---|---|---|
-| A1 | `check_out()` / `commit()` 的归属 | L126-130 在 `Agent` 上；L172-186 整段按 Agent 叙述 | 在 `Snapshot` 上（[snapshot.py:216](../flashrsi/core/snapshot.py#L216)、[:270](../flashrsi/core/snapshot.py#L270)）；[test_agent.py:75](../tests/test_agent.py#L75) 断言 Agent **没有**这两个方法 | **文档**，理由见 A1 详述 |
+| A1 | `check_out()` / `commit()` 的归属 | L126-130 在 `Agent` 上；L172-186 整段按 Agent 叙述 | 在 `Snapshot` 上（[snapshot.py:216](../flashrsi/core/snapshot.py#L216)、[:270](../flashrsi/core/snapshot.py#L270)）；[test_agent.py:75](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/tests/test_agent.py#L75) 断言 Agent **没有**这两个方法 | **文档**，理由见 A1 详述 |
 | A2 | `edit()` 返回值 | L145-147 与 L158 表格明确「返回 `None`」 | 返回 `str`（[agent.py:157](../flashrsi/core/agent.py#L157)） | **文档**，理由见 A2 详述 |
 | A3 | `set_scope` 签名与 `r` 级别 | L124 `set_scope(components: set[str])`；L153 表格「选择允许修改的 component」 | `set_scope(scope: Mapping[str, str])`，`rw`/`r`/`none` 三级（[agent.py:116](../flashrsi/core/agent.py#L116)） | 签名 **文档**；`r` 级别 **待定**，见 H4 |
 | A4 | 谁调 `set_scope` | L240 算法自己调 `self.target.set_scope({"skill"})` | 算法只声明 `evolve_scope`/`observation_scope`，基类代调（[algorithm.py:55](../flashrsi/core/algorithm.py#L55)）；六个算法无一自己调用 | **文档**（声明式写法正是目标 1） |
 | A5 | `run()` 签名 | L139-141 `run(task: Task, snapshot: Snapshot)` | `run(prompt: str, working_dir: Path \| None)`（[agent.py:132](../flashrsi/core/agent.py#L132)）；版本由 `rollout` 固定在执行上下文里 | **文档**，附带说明见 A5 详述 |
 | A6 | 后端实现哪些方法 | L138「后端按支持的能力实现」下列 `run`/`ask`/`edit` 三个 | 后端只实现 `_run` 一个钩子；`run`/`ask`/`edit`/`rollout` 全是基类的 | **文档**（比文档自己的目标 3 更彻底） |
 | A7 | `component_rules` | L118 类属性 `Mapping[str, tuple[str, ...]]` | 从 `components.yaml` 读、由 Snapshot 持有、Agent 转发的只读属性（[agent.py:100](../flashrsi/core/agent.py#L100)） | **文档**（结构上保证 worker 改不了规则，对应 L160「分类规则不能由 worker 修改」） |
-| A8 | 初始 Snapshot 从哪来 | L152 表格「Agent 根据 **seed** 和自身分类规则建立」 | 从适配器所在目录 + `components.yaml` 自动 capture（[agent.py:270](../flashrsi/core/agent.py#L270)）；无 `seed` 概念，[test_agent.py:75](../tests/test_agent.py#L75) 断言没有 | **文档**：接入方零代码；且 "seed" 与 `benchmark.seed`、`algorithm.seed` 撞名，建议文档里换词 |
+| A8 | 初始 Snapshot 从哪来 | L152 表格「Agent 根据 **seed** 和自身分类规则建立」 | 从适配器所在目录 + `components.yaml` 自动 capture（[agent.py:270](../flashrsi/core/agent.py#L270)）；无 `seed` 概念，[test_agent.py:75](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/tests/test_agent.py#L75) 断言没有 | **文档**：接入方零代码；且 "seed" 与 `benchmark.seed`、`algorithm.seed` 撞名，建议文档里换词 |
 | A9 | `snapshot` 属性 | L115 普通字段 | 属性；纯 LLM Worker 无版本文件时访问会 raise（[agent.py:92](../flashrsi/core/agent.py#L92)） | **文档**（L114 注释已是对的，签名没跟上） |
 
 ### A1 详述：基线放在 Snapshot 上避免了一个文档写法做不到的事
@@ -33,15 +33,15 @@
 mvp_doc L154 要求 `check_out()`「在框架内部记住 checkout 时的基线」——这是隐藏状态，且**每个
 Agent 只能记住一个**。但实际用法里同时存在多个基线：
 
-- [test_snapshot_files.py:64](../tests/test_snapshot_files.py#L64) 覆盖同一 snapshot 并发 checkout 两次；
+- [test_snapshot_files.py:64](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/tests/test_snapshot_files.py#L64) 覆盖同一 snapshot 并发 checkout 两次；
 - GEPA 和 EvoPrompt 是种群算法，手上同时握着多个候选版本（[gepa/__init__.py](../flashrsi/algorithms/gepa/__init__.py)）。
 
 两个 checkout 同时存在时，Agent 记住的「那一个」基线就是错的。放在 Snapshot 上则基线天然显式：
 
 ```python
-with current.check_out(working_dir=working) as directory:   # 基线就是 current
+with current.check_out(working_dir=working) as directory:  # 基线就是 current
     reply = await self.worker.edit(directory, prompt)
-    candidate = current.commit(directory)                   # 从哪个版本分叉，读一眼就知道
+    candidate = current.commit(directory)  # 从哪个版本分叉，读一眼就知道
 ```
 
 比 L178 的 `self.target.check_out()` → `self.target.commit(workdir)` 更能回答「这个候选是谁的

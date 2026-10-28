@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-10-25T22:41:14.312280+00:00",
+  "new_model_calls": 0,
+  "items": [
+    {
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "status": "flow_passed",
+      "stages": [
+        {
+          "file": "00001-baseline.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "metrics": {
+            "accuracy": 1.0
+          }
+        },
+        {
+          "file": "00002-train.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "metrics": {
+            "accuracy": 1.0
+          }
+        },
+        {
+          "file": "00003-worker.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "metrics": {}
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "metrics": {
+            "accuracy": 1.0
+          }
+        },
+        {
+          "file": "00006-test.json",
+          "status": "finished",
+          "usage_recorded": true,
+          "metrics": {
+            "accuracy": 1.0
+          }
+        }
+      ],
+      "errors": [],
+      "invalid_patch_observed": false
+    }
+  ],
+  "source_changes": [],
+  "history_preserved": true,
+  "coverage_note": "All Target and Worker stages finished with native integer grading. Successful valid edit; invalid-patch rejection branch not forced or claimed."
+}

@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-10-26T02:15:59.447222+00:00",
+  "recording_repair": "passed_actual_reply_and_sdk_usage_persisted",
+  "benchmark_flow": "not_passed",
+  "root_cause_observed_this_attempt": "Custom DeepSeek converter produced unfenced JSON arrays; unchanged native fenced-literal parser rejected them",
+  "scope": "3actual stages in one bounded OPRO/Mini experiment, cannot reconstruct prior missing responses",
+  "stages": [
+    {
+      "file": "00001-baseline.json",
+      "error": "TravelPlanner converter must return a fenced literal plan",
+      "reply_length": 2001,
+      "has_json_fence": false,
+      "has_any_code_fence": false,
+      "starts_as_json_array": true,
+      "sdk_usage": {
+        "completion_tokens": 3269,
+        "prompt_tokens": 1582,
+        "total_tokens": 4851,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 2646,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1070,
+        "requests": 1
+      },
+      "has_native_verifier": false
+    },
+    {
+      "file": "00003-candidate.json",
+      "error": "TravelPlanner converter must return a fenced literal plan",
+      "reply_length": 1964,
+      "has_json_fence": false,
+      "has_any_code_fence": false,
+      "starts_as_json_array": true,
+      "sdk_usage": {
+        "completion_tokens": 2575,
+        "prompt_tokens": 1563,
+        "total_tokens": 4138,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1975,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 1179,
+        "requests": 1
+      },
+      "has_native_verifier": false
+    },
+    {
+      "file": "00005-test.json",
+      "error": "TravelPlanner converter must return a fenced literal plan",
+      "reply_length": 1184,
+      "has_json_fence": false,
+      "has_any_code_fence": false,
+      "starts_as_json_array": true,
+      "sdk_usage": {
+        "completion_tokens": 3504,
+        "prompt_tokens": 1664,
+        "total_tokens": 5168,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 3155,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 1280,
+        "requests": 1
+      },
+      "has_native_verifier": false
+    }
+  ],
+  "native_parser_prompt_scoring_unchanged": true,
+  "additional_model_calls_by_diagnosis": 0
+}

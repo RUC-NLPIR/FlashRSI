@@ -1,0 +1,141 @@
+{
+  "host": "smoke2",
+  "benchmark": "officeqa_pro",
+  "algorithm": "opro",
+  "target": "miniagent",
+  "judge_profile": "native Databricks numeric/text reward",
+  "status": "flow_passed",
+  "updated_at": "2026-10-25T15:34:59.157251+00:00",
+  "model_experiment_started": true,
+  "counts_as_real_smoke_pass": true,
+  "commands": [
+    {
+      "phase": "plan",
+      "argv": [
+        "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+        "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+        "--config",
+        "/root/flashrsi-officeqa-public-20261025/officeqa.local.yaml",
+        "--plan"
+      ],
+      "started_at": "2026-10-25T15:29:54.615509+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-10-25T15:29:54.831394+00:00"
+    },
+    {
+      "phase": "check-only",
+      "argv": [
+        "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+        "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+        "--config",
+        "/root/flashrsi-officeqa-public-20261025/officeqa.local.yaml",
+        "--check-only"
+      ],
+      "started_at": "2026-10-25T15:29:54.832332+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-10-25T15:29:55.297908+00:00"
+    },
+    {
+      "phase": "experiment",
+      "argv": [
+        "/root/flashrsi-smoke2-20261025/.cache/controller-venv/bin/python",
+        "/root/flashrsi-officeqa-public-20261025/scripts/run_experiment.py",
+        "--config",
+        "/root/flashrsi-officeqa-public-20261025/officeqa.local.yaml"
+      ],
+      "started_at": "2026-10-25T15:29:55.299302+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-10-25T15:30:51.800613+00:00"
+    }
+  ],
+  "experiment_dirs": [
+    {
+      "path": "/root/flashrsi-officeqa-public-20261025/runs/opro-miniagent-officeqa_pro-20261025-232955-704360",
+      "record_files": [
+        {
+          "name": "result.json",
+          "sha256": "734e958968a5e4de45bb62fc95950431fa90851e486426d799d0e76fbbb8cfe9"
+        }
+      ],
+      "trajectory_files": [
+        {
+          "name": "00001-baseline.json",
+          "sha256": "abde2323ee81b3ec8838a99b343c56de5187c7f879541749a1d1b9e597e2e3db"
+        },
+        {
+          "name": "00002-worker.json",
+          "sha256": "2636405de965acad05852f33d13c5ff36034650313292270ed03e67bc07d937d"
+        },
+        {
+          "name": "00003-candidate.json",
+          "sha256": "0d99544cd7fd7baec1873065501695f143702f46e82082a4c256f39b9a24f517"
+        },
+        {
+          "name": "00004-decision.json",
+          "sha256": "86acbb8bcbd395a80ee0b6c542c60a616b0ce350f0e72fe5eddb6d038f79b06d"
+        },
+        {
+          "name": "00005-test.json",
+          "sha256": "7fb26dcb2eb62e4a1047c4cb7078e1add22768fe9f035cb45f4d6bf991340ba0"
+        }
+      ]
+    }
+  ],
+  "phase": "experiment",
+  "source_changes": [],
+  "audit": {
+    "status": "flow_passed",
+    "experiment_path": "/root/flashrsi-officeqa-public-20261025/runs/opro-miniagent-officeqa_pro-20261025-232955-704360",
+    "native_grade_recomputed": true,
+    "new_model_calls": 0,
+    "target_stages": [
+      {
+        "file": "00001-baseline.json",
+        "task_id": "UID0187",
+        "status": "finished",
+        "metrics": {
+          "accuracy": 0.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00003-candidate.json",
+        "task_id": "UID0187",
+        "status": "finished",
+        "metrics": {
+          "accuracy": 1.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      },
+      {
+        "file": "00005-test.json",
+        "task_id": "UID0244",
+        "status": "finished",
+        "metrics": {
+          "accuracy": 0.0
+        },
+        "usage_recorded": true,
+        "judge_events": []
+      }
+    ],
+    "worker_stages": [
+      {
+        "file": "00002-worker.json",
+        "status": "finished",
+        "usage_recorded": true
+      }
+    ],
+    "web_actions": [],
+    "problems": [],
+    "source_file_count": 229,
+    "source_changes": [],
+    "credential_scan": {
+      "files": 11,
+      "hits": []
+    },
+    "test_score": 0.0,
+    "judge_profile": "native"
+  }
+}

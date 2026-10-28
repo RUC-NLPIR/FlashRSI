@@ -1,0 +1,82 @@
+{
+  "host": "smoke2",
+  "root": "/root/flashrsi-browsecomp-public-20261026",
+  "control": "/root/flashrsi-browsecomp-public-20261026/public-bench24-20261026",
+  "checked_at": "2026-10-26T03:58:42.404638+00:00",
+  "status": "running",
+  "counts": {
+    "flow_passed_custom_judge": 8,
+    "needs_attention": 6,
+    "execution_failed": 1,
+    "running": 1,
+    "pending": 8
+  },
+  "current": [
+    {
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "phase": "experiment"
+    }
+  ],
+  "free_bytes": 9070370816,
+  "pids": {
+    "supervisor.pid": {
+      "pid": "37453",
+      "alive": true,
+      "public_entry": false,
+      "controller": true
+    },
+    "active-command.pid": {
+      "pid": "45467",
+      "alive": true,
+      "public_entry": true,
+      "controller": false
+    }
+  },
+  "source_file_count": 271,
+  "source_changes": [],
+  "latest_native": [
+    {
+      "file": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-browsecomp-20261026-114323-817320/trajectories/00002-worker.json",
+      "mtime": 1792986606.7211833,
+      "stages": [
+        {
+          "status": "finished",
+          "usage_recorded": true,
+          "metrics": {},
+          "native_verifiers": []
+        }
+      ]
+    },
+    {
+      "file": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-claude_code/darwinx-claude_code-browsecomp-20261026-114323-817320/trajectories/00001-baseline.json",
+      "mtime": 1792986535.4421716,
+      "stages": [
+        {
+          "status": "error",
+          "usage_recorded": true,
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "native_verifiers": []
+        }
+      ]
+    },
+    {
+      "file": "/root/flashrsi-browsecomp-public-20261026/batch-runs/darwinx-miniagent/darwinx-miniagent-browsecomp-20261026-113803-380409/trajectories/00009-test.json",
+      "mtime": 1792986201.6879218,
+      "stages": [
+        {
+          "status": "finished",
+          "usage_recorded": true,
+          "metrics": {
+            "accuracy": 0.0
+          },
+          "native_verifiers": [
+            "BrowseCompVerifier"
+          ]
+        }
+      ]
+    }
+  ]
+}

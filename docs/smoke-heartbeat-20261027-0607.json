@@ -1,0 +1,113 @@
+{
+  "observed_at": "2026-10-27T06:09:00+08:00",
+  "new_benchmarks": [],
+  "new_passes": [],
+  "matrix_counts": {
+    "pass": 432,
+    "partial": 122,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "machines": {
+    "original": {
+      "utc": "2026-10-26T22:07:54.895141+00:00",
+      "jobs": [
+        {
+          "id": "math500-modular-mini-turn120",
+          "status": "flow_passed",
+          "phase": "experiment",
+          "active_pid": null,
+          "budget_changes": [
+            {
+              "path": "algorithm.worker.max_turns",
+              "before": 60,
+              "after": 120
+            },
+            {
+              "path": "algorithm.worker.timeout",
+              "before": 600,
+              "after": 1200
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {
+            "finished": 18
+          },
+          "worker_statuses": {
+            "finished": 17
+          },
+          "missing_usage": 0,
+          "active_process_present": false,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1746550784
+    },
+    "smoke2": {
+      "utc": "2026-10-26T22:08:58.738458+00:00",
+      "jobs": [
+        {
+          "id": "browse-evoprompt-budget-0607",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 3740,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 3352457216
+    },
+    "smoke3": {
+      "utc": "2026-10-26T22:08:58.684114+00:00",
+      "jobs": [
+        {
+          "id": "deepsearch-ace-budget-0607",
+          "status": "running",
+          "phase": "experiment",
+          "active_pid": 18089,
+          "budget_changes": [
+            {
+              "path": "agent.max_turns",
+              "before": 40,
+              "after": 80
+            },
+            {
+              "path": "agent.timeout",
+              "before": 1200,
+              "after": 2400
+            }
+          ],
+          "source_changes": [],
+          "target_statuses": {},
+          "worker_statuses": {},
+          "missing_usage": 0,
+          "active_process_present": true,
+          "paid_marker": true
+        }
+      ],
+      "disk_free": 1634603008
+    }
+  },
+  "note": "2026-10-27 06:09实查：本轮无新增通过、无新增Benchmark。BrowseComp/ACE/CC80轮复测结束：3Target finished、1test触及80轮、2Worker finished，usage齐/source271未变，保留partial不再循环加预算。smoke2已接BrowseComp/EvoPrompt/CC、smoke3已接DeepSearchQA/ACE/CC，两项原40轮错误已核，仅Target80轮/2400秒，公开预检及免费认证后真实experiment。原机无模型：Terminal/RRSI/CC旧两baseline40轮错误已核，但旧source-current清单与当前ModularRSI模块及README有两处差异，尚待版本核对，未启动或新增付费。未改产品、未清环境。",
+  "terminal_source_differences": [
+    "flashrsi/algorithms/modular_rsi/__init__.py",
+    "README.md"
+  ]
+}

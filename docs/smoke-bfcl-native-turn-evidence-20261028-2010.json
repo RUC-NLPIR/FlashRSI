@@ -1,0 +1,86 @@
+{
+  "targets": [
+    {
+      "file": "00001-contrast.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00018-execution_gate.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00012-contrast.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00032-contrast.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00002-contrast.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00031-contrast.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00021-contrast.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00022-contrast.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00028-execution_gate.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": false,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    },
+    {
+      "file": "00008-execution_gate.json",
+      "original_turns": 8,
+      "mini_native_exhausted_marker": true,
+      "recorded_turns": 8,
+      "error": "BFCL conversation incomplete or interrupted: incomplete",
+      "usage_present": true
+    }
+  ],
+  "all_incomplete_targets_have_real_budget_marker": false,
+  "worker_limit": "00035-worker Reached maximum number of turns (60)"
+}

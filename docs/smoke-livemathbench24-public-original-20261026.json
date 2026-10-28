@@ -1,0 +1,213 @@
+{
+  "host": "original",
+  "benchmark": "livemathbench",
+  "status": "preparation_blocked",
+  "updated_at": "2026-10-26T00:33:03.608123+00:00",
+  "counts": {
+    "pending": 24
+  },
+  "items": [
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/opro-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "opro",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/opro-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/skillopt-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/skillopt-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/ahe-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/ahe-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "ace",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/ace-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "ace",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/ace-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/evoprompt-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/evoprompt-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/gepa-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/gepa-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "adas",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/adas-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "adas",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/adas-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/darwinx-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/darwinx-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/meta_harness-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/meta_harness-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/evo_harness-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/evo_harness-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/rrsi-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/rrsi-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/modular_rsi-miniagent.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    },
+    {
+      "benchmark": "livemathbench",
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "config": "/root/flashrsi-livemathbench-public-20261026/public-bench24-20261026/configs/modular_rsi-claude_code.local.yaml",
+      "status": "pending",
+      "initial_evidence": null
+    }
+  ],
+  "reason": "Actual public check-only HTTP401 for gated LiveMathBench.py; requires authorized HF access or complete native data, no model calls",
+  "preflight": {
+    "status": "preparation_blocked",
+    "updated_at": "2026-10-26T00:31:23.643175+00:00",
+    "new_model_calls": 0,
+    "algorithm": "opro",
+    "target": "miniagent",
+    "phase": "check-only",
+    "exit_code": 1
+  }
+}

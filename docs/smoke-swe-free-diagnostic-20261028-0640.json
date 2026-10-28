@@ -1,0 +1,95 @@
+{
+  "at": "2026-10-27T22:41:01.514859+00:00",
+  "model_calls": 0,
+  "status": "execution_failed",
+  "log_present": true,
+  "sanitized_exception_lines": [
+    "\u72b6\u6001\uff1aerror\uff1b\u751f\u6210\u65f6\u95f4\uff1a2026-10-26T18:51:15.054830+00:00",
+    "| target / failed | 1 | 0 | 0 | 0 | 0 | \u672a\u8bb0\u5f55 |",
+    "| worker / failed | 1 | 3,186,319 | 59,756 | 3,133,696 | 0 | 2.032351 |",
+    "Experiment failed: claude_code failed: Reached maximum number of turns (60)"
+  ],
+  "workers": [
+    {
+      "file": "00022-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00011-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00021-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00004-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00013-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00012-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00006-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00005-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00031-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    },
+    {
+      "file": "00032-worker.json",
+      "status": "error",
+      "usage_recorded": true,
+      "error": "Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+    },
+    {
+      "file": "00023-worker.json",
+      "status": "finished",
+      "usage_recorded": true,
+      "error": ""
+    }
+  ],
+  "source_modified": false,
+  "model_retry_started": false,
+  "preparation_attempt": "First diagnostic treated None error_message as text and failed; no mutation or modelcall.",
+  "target_count": 10,
+  "target_errors": [
+    {
+      "file": "00015-execution_gate.json",
+      "status": "error",
+      "usage_recorded": false,
+      "has_native_verifier": false,
+      "sanitized_error_first_line": "MiniAgent process exited with 1: Turn budget low (turn=6, turns_left=3, reserved=3, edits_applied=0)"
+    }
+  ],
+  "target_usage_complete": false,
+  "scope_note": "Terminal exception is Worker60. Earlier Target error/usage gap must also be diagnosed before any paid recovery; do not assume raising Worker alone fixes whole flow."
+}

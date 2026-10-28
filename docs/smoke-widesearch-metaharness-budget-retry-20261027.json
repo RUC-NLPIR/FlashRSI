@@ -1,0 +1,44 @@
+{
+  "status": "execution_failed",
+  "updated_at": "2026-10-27T08:31:19.590158+00:00",
+  "items": [
+    {
+      "id": "wide-metaharness-budget-1618",
+      "root": "/root/flashrsi-widesearch-evidence-public-20261026",
+      "config": "/root/.cache/wide-metaharness-budget-1618/smoke.local.yaml",
+      "health_config": "/root/.cache/wide-metaharness-budget-1618/smoke.local.yaml",
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "status": "execution_failed",
+      "report": "smoke-widesearch-metaharness-budget-retry-20261027.json",
+      "proxy": "http://127.0.0.1:33616",
+      "environment": {
+        "HF_HUB_OFFLINE": "0"
+      },
+      "budget_changes": [
+        {
+          "path": "agent.max_turns",
+          "before": 40,
+          "after": 80
+        },
+        {
+          "path": "agent.timeout",
+          "before": 1200,
+          "after": 2400
+        }
+      ],
+      "audit_source": "/root/flashrsi-widesearch-evidence-public-20261026/opro-mini-evidence-20261026/audit.py",
+      "scope": "Target40 budget plus prior Judge ValueError; use already validated evidence267; Judge budget and parser unchanged; no claim Judge failure fixed.",
+      "audit_python": "/root/.cache/FlashRSI/envs/6e88081dafce-cea1a4fd1dbb-py312/bin/python",
+      "evidence": "Three native Judge replies finish_reason=length and completion_tokens4096; no prompt/parser/evaluator changes.",
+      "phase": "experiment",
+      "updated_at": "2026-10-27T08:18:11.279723+00:00",
+      "exit_code": 1,
+      "ended_at": "2026-10-27T08:31:19.588352+00:00"
+    }
+  ],
+  "counts": {
+    "execution_failed": 1
+  },
+  "budget_authorization": "User explicitly authorized increased budgets; one attempt per configuration; original 1/1/1 tasks and scoring preserved."
+}

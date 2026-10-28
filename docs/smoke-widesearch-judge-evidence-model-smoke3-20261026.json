@@ -1,0 +1,198 @@
+{
+  "host": "smoke3",
+  "benchmark": "widesearch",
+  "judge_profile": "Official WideSearch evaluation pipeline and private gold CSVs; Serper/Jina and explicit custom DeepSeek judge/max_tokens4096; custom111 not official model leaderboard",
+  "status": "completed",
+  "updated_at": "2026-10-26T13:36:46.106650+00:00",
+  "counts": {
+    "flow_passed_custom_judge": 1
+  },
+  "items": [
+    {
+      "benchmark": "widesearch",
+      "algorithm": "opro",
+      "target": "miniagent",
+      "config": "/root/flashrsi-widesearch-evidence-public-20261026/opro-mini-evidence-20261026/configs/opro-miniagent.local.yaml",
+      "status": "flow_passed_custom_judge",
+      "started_at": "2026-10-26T13:31:41.927605+00:00",
+      "commands": [
+        {
+          "phase": "plan",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-widesearch-evidence-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-widesearch-evidence-public-20261026/opro-mini-evidence-20261026/configs/opro-miniagent.local.yaml",
+            "--plan"
+          ],
+          "started_at": "2026-10-26T13:31:41.928386+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-26T13:31:42.164324+00:00"
+        },
+        {
+          "phase": "check-only",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-widesearch-evidence-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-widesearch-evidence-public-20261026/opro-mini-evidence-20261026/configs/opro-miniagent.local.yaml",
+            "--check-only"
+          ],
+          "started_at": "2026-10-26T13:31:42.166272+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-26T13:32:23.130473+00:00"
+        },
+        {
+          "phase": "experiment",
+          "argv": [
+            "/root/flashrsi-smoke3-20261025/.cache/controller-venv/bin/python",
+            "/root/flashrsi-widesearch-evidence-public-20261026/scripts/run_experiment.py",
+            "--config",
+            "/root/flashrsi-widesearch-evidence-public-20261026/opro-mini-evidence-20261026/configs/opro-miniagent.local.yaml"
+          ],
+          "started_at": "2026-10-26T13:32:23.517837+00:00",
+          "exit_code": 0,
+          "ended_at": "2026-10-26T13:36:44.258542+00:00"
+        }
+      ],
+      "phase": "experiment",
+      "audit": {
+        "status": "flow_passed",
+        "experiment_path": "/root/flashrsi-widesearch-evidence-public-20261026/batch-runs/opro-miniagent/opro-miniagent-widesearch-20261026-213225-235560",
+        "native_grade_recomputed": true,
+        "new_model_calls": 0,
+        "target_stages": [
+          {
+            "file": "00001-baseline.json",
+            "task_id": "ws_zh_040",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.0,
+              "recall_by_row": 0.0,
+              "f1_by_row": 0.0,
+              "precision_by_item": 0.0,
+              "recall_by_item": 0.0,
+              "f1_by_item": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00003-candidate.json",
+            "task_id": "ws_zh_040",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.0,
+              "recall_by_row": 0.0,
+              "f1_by_row": 0.0,
+              "precision_by_item": 0.0,
+              "recall_by_item": 0.0,
+              "f1_by_item": 0.0
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          },
+          {
+            "file": "00005-test.json",
+            "task_id": "ws_zh_093",
+            "status": "finished",
+            "metrics": {
+              "score": 0.0,
+              "precision_by_row": 0.16981132075471697,
+              "recall_by_row": 0.15517241379310345,
+              "f1_by_row": 0.16216216216216214,
+              "precision_by_item": 0.589622641509434,
+              "recall_by_item": 0.5387931034482759,
+              "f1_by_item": 0.5630630630630631
+            },
+            "usage_recorded": true,
+            "judge_events": [
+              {
+                "model": "deepseek-flash",
+                "provider": null,
+                "profile": null
+              }
+            ]
+          }
+        ],
+        "worker_stages": [
+          {
+            "file": "00002-worker.json",
+            "status": "finished",
+            "usage_recorded": true
+          }
+        ],
+        "web_actions": [
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "search",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          },
+          {
+            "action": "read",
+            "error": false
+          }
+        ],
+        "problems": [],
+        "source_file_count": 267,
+        "source_changes": [],
+        "credential_scan": {
+          "files": 11,
+          "hits": []
+        },
+        "test_score": 0.0,
+        "judge_profile": "custom-deepseek"
+      },
+      "ended_at": "2026-10-26T13:36:46.105666+00:00"
+    }
+  ]
+}

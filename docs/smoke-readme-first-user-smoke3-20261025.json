@@ -1,0 +1,74 @@
+{
+  "host": "smoke3",
+  "benchmark": "searchqa",
+  "algorithm": "skillopt",
+  "target": "miniagent",
+  "validation_mode": "readme_first_time_public_entry",
+  "status": "completed",
+  "updated_at": "2026-10-25T09:10:05.295714+00:00",
+  "source_manifest": "/root/flashrsi-smoke3-20261025/readme-first-user-20261025/source-before.json",
+  "cold_cache": false,
+  "initial_cache": "Initially cold; retry reuses automatically prepared dependencies after HF CAS network failure",
+  "infrastructure_environment": {
+    "HF_HUB_DISABLE_XET": "1"
+  },
+  "commands": [
+    "python3 scripts/run_experiment.py --cache-dir /root/.cache/FlashRSI-readme-smoke3",
+    "python3 scripts/run_experiment.py --cache-dir /root/.cache/FlashRSI-readme-smoke3 --plan",
+    "python3 scripts/run_experiment.py --cache-dir /root/.cache/FlashRSI-readme-smoke3 --check-only",
+    "python3 scripts/run_experiment.py --cache-dir /root/.cache/FlashRSI-readme-smoke3"
+  ],
+  "adaptation_used": false,
+  "source_edits": false,
+  "configuration_changes": "Fill separate model/API roles and tiny data/iteration budget in generated experiment.local.yaml; no local data_path or custom Worker seed.",
+  "system_prerequisites": "System Python3.12 with venv and standard PIP mirror/HTTPS_PROXY; no Docker used.",
+  "counts_as_readme_pass": true,
+  "native_cache_provenance": "/root/flashrsi-smoke3-20261025/readme-first-user-20261025/native-cache-transfer.json",
+  "experiment_dir": "/root/flashrsi-readme-smoke3-20261025/runs/skillopt-miniagent-searchqa-20261025-170950-729690",
+  "target_evaluations": [
+    {
+      "stage": "00001-baseline",
+      "status": "finished",
+      "metrics": {
+        "exact_match": 0.0,
+        "f1": 0.0
+      },
+      "task_id": "validation:120412"
+    },
+    {
+      "stage": "00002-train",
+      "status": "finished",
+      "metrics": {
+        "exact_match": 0.0,
+        "f1": 0.28571428571428575
+      },
+      "task_id": "train:150495"
+    },
+    {
+      "stage": "00004-candidate_dev",
+      "status": "finished",
+      "metrics": {
+        "exact_match": 0.0,
+        "f1": 0.0
+      },
+      "task_id": "validation:120412"
+    },
+    {
+      "stage": "00006-test",
+      "status": "finished",
+      "metrics": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      },
+      "task_id": "test:139234"
+    }
+  ],
+  "worker_evaluations": [
+    {
+      "stage": "00003-worker",
+      "status": "finished"
+    }
+  ],
+  "score_gain_required": false,
+  "validation_scope": "Public entry, automatic dependencies, unchanged complete verified native cache, real evolution and final test. Initial cold download retries recorded separately; do not claim uncached network preparation passed."
+}

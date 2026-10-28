@@ -1,0 +1,35 @@
+[
+  {
+    "file": "00001-baseline.json",
+    "termination_reason": "TerminationReason.USER_STOP",
+    "business_fields": [
+      "db_check",
+      "env_assertions",
+      "action_checks",
+      "reward_breakdown"
+    ],
+    "has_business_checks": true
+  },
+  {
+    "file": "00003-candidate.json",
+    "termination_reason": "TerminationReason.USER_STOP",
+    "business_fields": [
+      "db_check",
+      "env_assertions",
+      "action_checks",
+      "reward_breakdown"
+    ],
+    "has_business_checks": true
+  },
+  {
+    "file": "00005-test.json",
+    "termination_reason": "TerminationReason.USER_STOP",
+    "business_fields": [
+      "db_check",
+      "env_assertions",
+      "action_checks",
+      "reward_breakdown"
+    ],
+    "has_business_checks": true
+  }
+]

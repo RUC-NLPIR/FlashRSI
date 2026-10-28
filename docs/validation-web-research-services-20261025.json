@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-25",
+  "scope": "Public Serper/Jina configuration and user-authorized custom OpenAI-compatible DeepSearchQA Judge",
+  "changed_source": [
+    "flashrsi/integrations/_web_tools.py",
+    "flashrsi/integrations/_browsecomp_web.py",
+    "flashrsi/integrations/deepsearchqa.py",
+    "flashrsi/integrations/_deepsearchqa_judge.py",
+    "flashrsi/benchmarks/deepsearchqa/__init__.py",
+    "pyproject.toml",
+    "uv.lock"
+  ],
+  "tests": {
+    "related_passed": 24,
+    "ruff_affected_files": "passed",
+    "wheel": "validation-web-services-wheel-20261025.json"
+  },
+  "native_service_probe": "smoke-web-services-probe-20261025.json",
+  "office_cache": "smoke-officeqa-cache-verification-20261025.json",
+  "real_first_runs": [
+    "smoke-officeqa-public-smoke2-20261025.json",
+    "smoke-deepsearchqa-public-smoke3-20261025.json"
+  ],
+  "judge_scope": "Explicit custom DeepSeek with pinned prompt/parser/formulas; not official Gemini result",
+  "new_passes": 3,
+  "original_sibling_modified": false,
+  "frozen_old_remote_sources_modified": false,
+  "source_files": 229,
+  "source_archive_sha256": "651a3c7e640ea8d3fd963500a1ae7a5f7daaa8051e3cf0d655f3613d0db546fb",
+  "current_matrix_counts": {
+    "passed": 177,
+    "unsupported": 14,
+    "partial_or_running": 4,
+    "failed": 3,
+    "pending": 42
+  },
+  "limitations": [
+    "DeepSearchQA first run returned13 web-tool errors while native stages and custom Judge completed",
+    "Default HF OfficeQA download not retested; this run uses verified complete native local cache",
+    "First preparation accidentally combined limit with split_counts; zero model calls, preserved history, corrected to split_counts only",
+    "Fresh wheel isolated venv initially lacked yaml; dependency setup history retained, CLI checks passed after explicit controller third-party dependency reuse"
+  ],
+  "continuing_queue_evidence": [
+    "smoke-officeqa24-public-smoke2-20261025.json",
+    "smoke-deepsearchqa24-public-smoke3-20261025.json"
+  ]
+}

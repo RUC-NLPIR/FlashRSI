@@ -1,0 +1,268 @@
+{
+  "date": "2026-10-25",
+  "kind": "data_native_runtime_and_offline_validation",
+  "real_model_smoke": false,
+  "model_api_calls": 0,
+  "source": {
+    "repository": "https://github.com/sierra-research/tau2-bench",
+    "tag": "v1.0.1",
+    "revision": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+    "license": "MIT",
+    "scope": "Maintained v1.0.1 standard text domains; not the original 2025 paper data snapshot or current 2.0 multilingual/voice modes.",
+    "acquisition": "Official GitHub codeload ZIP, extracted locally; native tau2 package installed into an isolated Python 3.12.5 environment.",
+    "archive_bytes": 92885834,
+    "archive_sha256": "b3da0677f8c3fb11bc68016810f30c36c7b547b44f733b4779147db84ebe82ae",
+    "git_download": "Attempt failed on this host/network. Local data_path and official ZIP acquisition were validated; automatic Git fetching was not."
+  },
+  "data": [
+    {
+      "domain": "airline",
+      "all_rows": 50,
+      "split_counts": {
+        "train": 30,
+        "test": 20,
+        "base": 50
+      },
+      "files": [
+        {
+          "name": "tasks.json",
+          "bytes": 155528,
+          "sha256": "ccd8ba737b4cc371415af70151187788f728d6108d0916e73bb4317b40542052"
+        },
+        {
+          "name": "split_tasks.json",
+          "bytes": 1443,
+          "sha256": "b22ced4d9a9850ac9aea31c53bdcb6d6009058140bd9acc7db37c1d36222ba8b"
+        }
+      ]
+    },
+    {
+      "domain": "retail",
+      "all_rows": 114,
+      "split_counts": {
+        "train": 74,
+        "test": 40,
+        "base": 114
+      },
+      "files": [
+        {
+          "name": "tasks.json",
+          "bytes": 345982,
+          "sha256": "8e03ebce7901bd6218e7a7dc3105faa9324091a68058f7fe61c65262868812e8"
+        },
+        {
+          "name": "split_tasks.json",
+          "bytes": 3263,
+          "sha256": "ed0580ec52575b63fbf76568af42490da6ee7783ecb4aa81af46961291358f20"
+        }
+      ]
+    },
+    {
+      "domain": "telecom",
+      "all_rows": 2285,
+      "split_counts": {
+        "small": 20,
+        "train": 74,
+        "test": 40,
+        "full": 2285,
+        "base": 114
+      },
+      "files": [
+        {
+          "name": "tasks.json",
+          "bytes": 13977063,
+          "sha256": "37e562e1ae3242577407e1303b1548bc64e7ea68e37d36173e6747990ceaf8a4"
+        },
+        {
+          "name": "split_tasks.json",
+          "bytes": 356149,
+          "sha256": "605b488bb9a6acb3c7f4505240a855fdc8681d09aadb16a8f38b2efcfc5c3aec"
+        }
+      ]
+    }
+  ],
+  "runtime_cases": [
+    {
+      "case": "native data, task schema and exact policy for each domain",
+      "domains": [
+        "airline",
+        "retail",
+        "telecom"
+      ],
+      "passed": true
+    },
+    {
+      "case": "telecom dual control",
+      "task_id": "[mobile_data_issue]airplane_mode_on|user_abroad_roaming_enabled_off[PERSONA:None]",
+      "agent_tool": "get_customer_by_phone",
+      "user_tools": [
+        "toggle_airplane_mode",
+        "toggle_roaming"
+      ],
+      "reward_with_user_actions": 1.0,
+      "reward_without_user_actions": 0.0,
+      "native_loop_environment_and_evaluator": true,
+      "replies": "Scripted target and user; no model API"
+    },
+    {
+      "case": "airline refusal",
+      "task_id": "0",
+      "reward": 1.0,
+      "native_loop_environment_and_evaluator": true,
+      "replies": "Scripted target and user; no model API"
+    },
+    {
+      "case": "retail full episode including independent NL assertions Judge",
+      "task_id": "24",
+      "reward_when_judge_accepts": 1.0,
+      "reward_when_judge_rejects": 0.0,
+      "native_loop_environment_and_evaluator": true,
+      "replies": "Scripted target, user and Judge; no model API"
+    },
+    {
+      "case": "native Judge routing, global restoration, credential redaction and mutated task rejection",
+      "passed": true
+    },
+    {
+      "case": "existing Banking native task schema, domain path restoration, variant and shared reward mapping",
+      "passed": true
+    }
+  ],
+  "tests": {
+    "full_regression": {
+      "command": "uv run pytest --basetemp <extended-length workspace temp path>",
+      "passed": 647,
+      "skipped": 18,
+      "subtests_passed": 3,
+      "warnings": 16,
+      "seconds": 231.13,
+      "log": ".cache/tau2-expansion/pytest-full.log",
+      "skips_note": "Includes 9 optional native tau2 cases absent from the base environment; these passed separately in the isolated native environment."
+    },
+    "native_and_targeted_regression": {
+      "command": "<isolated tau2 Python> -m pytest tests/test_tau2_native.py tests/test_tau2_benchmark.py tests/test_generic_launcher.py -q",
+      "passed": 40,
+      "native_cases": 9,
+      "model_api_calls": 0,
+      "environment": {
+        "python": "3.12.5",
+        "tau2": "1.0.1",
+        "PYTHONUTF8": "1",
+        "TAU2_DATA_DIR": "<pinned checkout>/data"
+      },
+      "log": ".cache/tau2-expansion/native-tests-final.log"
+    },
+    "lint": {
+      "command": "uv run ruff check flashrsi tests scripts",
+      "exit_code": 0
+    },
+    "format": {
+      "command": "uv run ruff format --check flashrsi tests scripts",
+      "exit_code": 0,
+      "files": 216
+    },
+    "scope_note": "Source export has no .git directory; root Ruff scans include generated caches. Checks explicitly cover all source, tests and scripts."
+  },
+  "wheel_validation": {
+    "wheel": ".cache\\tau2-expansion\\dist\\flashrsi_lite-0.1.0-py3-none-any.whl",
+    "sha256": "91b7098194ae111b1e65950e54f9d19af2f324658223c425469193c672d54c32",
+    "installed": {
+      "module": ".cache\\tau2-expansion\\env\\Lib\\site-packages\\flashrsi\\__init__.py",
+      "benchmarks": [
+        "tau2",
+        "aime",
+        "cruxeval_output",
+        "bbeh",
+        "supergpqa",
+        "twowiki_multihopqa",
+        "travelplanner",
+        "harvey_lab",
+        "bfcl",
+        "browsecomp",
+        "deepsearchqa",
+        "widesearch",
+        "appworld",
+        "searchqa",
+        "hotpotqa",
+        "musique",
+        "triviaqa",
+        "nq",
+        "math",
+        "livemathbench",
+        "hle",
+        "officeqa_pro",
+        "swe_bench",
+        "swe_bench_pro",
+        "terminal_bench",
+        "jobbench",
+        "tau3_banking"
+      ]
+    },
+    "checks": [
+      {
+        "benchmark": "tau2",
+        "domain": "airline",
+        "exit_code": 0,
+        "stdout": "Startup checks passed: train=4, dev=2, test=2\nNo tasks or model calls were run; no experiment directory created.\nRemote API authentication and model availability were not tested.",
+        "log": ".cache\\tau2-expansion\\wheel-airline.log",
+        "model_calls": 0
+      },
+      {
+        "benchmark": "tau2",
+        "domain": "retail",
+        "exit_code": 0,
+        "stdout": "Startup checks passed: train=4, dev=2, test=2\nNo tasks or model calls were run; no experiment directory created.\nRemote API authentication and model availability were not tested.",
+        "log": ".cache\\tau2-expansion\\wheel-retail.log",
+        "model_calls": 0
+      },
+      {
+        "benchmark": "tau2",
+        "domain": "telecom",
+        "exit_code": 0,
+        "stdout": "Startup checks passed: train=4, dev=2, test=2\nNo tasks or model calls were run; no experiment directory created.\nRemote API authentication and model availability were not tested.",
+        "log": ".cache\\tau2-expansion\\wheel-telecom.log",
+        "model_calls": 0
+      },
+      {
+        "benchmark": "tau3_banking",
+        "domain": "banking_knowledge",
+        "exit_code": 0,
+        "stdout": "Startup checks passed: train=4, dev=2, test=2\nNo tasks or model calls were run; no experiment directory created.\nRemote API authentication and model availability were not tested.",
+        "log": ".cache\\tau2-expansion\\wheel-banking_knowledge.log",
+        "model_calls": 0
+      }
+    ],
+    "wheel_source_files_match": 220
+  },
+  "repairs_and_rechecks": [
+    {
+      "issue": "Existing launcher TAU2_DATA_DIR included an extra tau2 directory.",
+      "resolution": "Set checkout/data; both tau2 and Banking covered by regression and wheel startup checks."
+    },
+    {
+      "issue": "Pinned native telecom manual failed under the Windows GBK default.",
+      "resolution": "Use the launcher existing UTF-8 subprocess setting; direct CLI now clearly requires PYTHONUTF8=1. Native and wheel checks passed with UTF-8."
+    },
+    {
+      "issue": "Existing text bridge omitted MultiToolMessage tool results.",
+      "resolution": "Render nested native tool messages. The telecom integration test asserts the actual customer lookup result reaches the target."
+    },
+    {
+      "issue": "Initial native test selected a telecom variant outside the default base pool; 36 passed, 2 failed.",
+      "resolution": "Select a real base task with two required user actions; recheck 38 passed, then add two retail episode cases, final 40 passed.",
+      "initial_log": ".cache/tau2-expansion/native-tests.log"
+    },
+    {
+      "issue": "Initial unit configuration fixture lacked required role model names.",
+      "resolution": "Supply explicit fixture target/worker names; all 31 unit/launcher cases passed before native checks."
+    }
+  ],
+  "limitations": [
+    "No real model or Algorithm x Target x Benchmark smoke: role API credentials are not configured.",
+    "One rollout per task, mean native reward; no pass^k aggregation.",
+    "Only standard airline, retail and telecom text domains; no voice, multilingual, solo or telecom workflow modes.",
+    "Native global paths/Judge defaults are scoped with a per-simulation lock; execution is serialized within a process.",
+    "Hard task_timeout remains POSIX-only and was not revalidated on this Windows host.",
+    "Local task directories are not a security sandbox for file-capable agents."
+  ]
+}

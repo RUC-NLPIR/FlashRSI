@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-25T19:22:08.932181+00:00",
+  "new_model_calls": 0,
+  "classification": "failed_native_worker_budget",
+  "original_status": "execution_failed",
+  "experiment_path": "/root/flashrsi-aime-evolution-public-20261026/batch-runs/modular_rsi-miniagent/modular_rsi-miniagent-aime-20261026-021811-159627",
+  "counts": {
+    "target_finished": 17,
+    "worker_finished": 16,
+    "worker_error": 1
+  },
+  "errors": [
+    {
+      "file": "00055-worker.json",
+      "message": "Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}",
+      "usage_recorded": true
+    }
+  ],
+  "native_error": {
+    "status": "error",
+    "error": "claude_code failed: Reached maximum number of turns (60)\nClaude Code stderr (tail):\n[claude-code:unrecognized_model] {\"model\":\"deepseek-flash\",\"query_source\":\"generate_session_title\"}"
+  },
+  "final_test_completed": false,
+  "independent_data_preparation_resolved": true,
+  "automatic_retry": false
+}

@@ -1,0 +1,826 @@
+{
+  "checked_at": "2026-10-23T16:28:02.392049+08:00",
+  "scope": "Offline contracts, constructor compatibility and bounded real text-optimization runs on 1/1/1 native HotpotQA samples. Not a full algorithm x harness cross-product.",
+  "offline_before": "441 passed, 3 subtests passed in 32.63s",
+  "offline_after": "448 passed, 3 subtests passed in 30.42s",
+  "constructor_checks": [
+    {
+      "algorithm": "adas",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "adas",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "darwinx",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "darwinx",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "evo_harness",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "evo_harness",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "meta_harness",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "meta_harness",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "modular_rsi",
+      "target": "miniagent",
+      "status": "requirements_unmet",
+      "reason": "ModularRSI requires external train tasks and benchmark.metadata.evolution_source; TerminalBench supports evolution_data_path"
+    },
+    {
+      "algorithm": "modular_rsi",
+      "target": "claude_code",
+      "status": "requirements_unmet",
+      "reason": "ModularRSI requires external train tasks and benchmark.metadata.evolution_source; TerminalBench supports evolution_data_path"
+    },
+    {
+      "algorithm": "rrsi",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "rrsi",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "ace",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "ace",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "ahe",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "ahe",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "skillopt",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "opro",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "opro",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "gepa",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "gepa",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "miniagent",
+      "status": "initialization_passed"
+    },
+    {
+      "algorithm": "evoprompt",
+      "target": "claude_code",
+      "status": "initialization_passed"
+    }
+  ],
+  "runs": [
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/runs/ace-miniagent-hotpotqa-20261023-160815-429178",
+      "status": "flow_passed",
+      "checks": {
+        "result_finished": true,
+        "worker_calls_completed": true,
+        "all_target_calls_completed": true,
+        "changed_version_evaluated": true,
+        "decisions_recorded": true,
+        "test_completed": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "all_metrics_finite": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true
+      },
+      "evaluations": [
+        {
+          "file": "00001-validation.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00002-train.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00006-validation.json",
+          "snapshot_id": "9f8b8205bf1c2e4ee7a90244cdb973e45af0f8708c7b7ab4965f600cd55d0c3f",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00008-test.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.5
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "curate",
+          "accepted": true,
+          "parent_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "candidate_id": "9f8b8205bf1c2e4ee7a90244cdb973e45af0f8708c7b7ab4965f600cd55d0c3f"
+        },
+        {
+          "kind": "promote",
+          "accepted": true,
+          "score": 1.0,
+          "parent_id": "9f8b8205bf1c2e4ee7a90244cdb973e45af0f8708c7b7ab4965f600cd55d0c3f",
+          "candidate_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab"
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.5
+      },
+      "usage": {
+        "input_tokens": 10919,
+        "output_tokens": 377,
+        "cache_read_tokens": 2304,
+        "cache_write_tokens": 0,
+        "usage_entries": 6,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 6,
+        "finished_records": 6,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      },
+      "selection_policy": "before_fix",
+      "selection_matches_policy": false
+    },
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/runs/ace-miniagent-hotpotqa-20261023-162443-190636",
+      "status": "flow_passed",
+      "checks": {
+        "result_finished": true,
+        "worker_calls_completed": true,
+        "all_target_calls_completed": true,
+        "changed_version_evaluated": true,
+        "decisions_recorded": true,
+        "test_completed": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "all_metrics_finite": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true
+      },
+      "evaluations": [
+        {
+          "file": "00001-validation.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.6666666666666666
+            }
+          ]
+        },
+        {
+          "file": "00002-train.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00006-validation.json",
+          "snapshot_id": "478ecf9ae223f8a52edb1b7d404129d8cf0ab0ce78df09e99ddc5cb5111d1341",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00008-test.json",
+          "snapshot_id": "478ecf9ae223f8a52edb1b7d404129d8cf0ab0ce78df09e99ddc5cb5111d1341",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.4444444444444444
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "curate",
+          "accepted": true,
+          "parent_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "candidate_id": "478ecf9ae223f8a52edb1b7d404129d8cf0ab0ce78df09e99ddc5cb5111d1341"
+        },
+        {
+          "kind": "promote",
+          "accepted": false,
+          "score": 1.0,
+          "parent_id": "478ecf9ae223f8a52edb1b7d404129d8cf0ab0ce78df09e99ddc5cb5111d1341",
+          "candidate_id": "478ecf9ae223f8a52edb1b7d404129d8cf0ab0ce78df09e99ddc5cb5111d1341"
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.4444444444444444
+      },
+      "usage": {
+        "input_tokens": 10958,
+        "output_tokens": 398,
+        "cache_read_tokens": 4864,
+        "cache_write_tokens": 0,
+        "usage_entries": 6,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 6,
+        "finished_records": 6,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      },
+      "selection_policy": "after_fix",
+      "selection_matches_policy": true
+    },
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/runs/evoprompt-miniagent-hotpotqa-20261023-160841-557220",
+      "status": "flow_passed",
+      "checks": {
+        "result_finished": true,
+        "worker_calls_completed": true,
+        "all_target_calls_completed": true,
+        "changed_version_evaluated": true,
+        "decisions_recorded": true,
+        "test_completed": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "all_metrics_finite": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true
+      },
+      "evaluations": [
+        {
+          "file": "00001-baseline.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00003-seed.json",
+          "snapshot_id": "d4ca8f29b2c7592de22c74dfd1625ddfbe0f92e1720d4ca167febbf6ca6b890c",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00005-child.json",
+          "snapshot_id": "66eeec11de291b0fd044f35178d892fff8bc139e8a3002659b567aac94138959",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00007-child.json",
+          "snapshot_id": "8c25be88bdaabf8853f08c68f8612edadac6c3abbc71128515ca8a2dc2d74409",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00010-test.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.8
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "generation"
+        },
+        {
+          "kind": "promote",
+          "accepted": false,
+          "score": 1.0,
+          "baseline_score": 1.0,
+          "parent_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "candidate_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab"
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "usage": {
+        "input_tokens": 10963,
+        "output_tokens": 1329,
+        "cache_read_tokens": 4224,
+        "cache_write_tokens": 0,
+        "usage_entries": 8,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 8,
+        "finished_records": 8,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    },
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/runs/gepa-miniagent-hotpotqa-20261023-160828-418211",
+      "status": "flow_passed",
+      "checks": {
+        "result_finished": true,
+        "worker_calls_completed": true,
+        "all_target_calls_completed": true,
+        "changed_version_evaluated": true,
+        "decisions_recorded": true,
+        "test_completed": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "all_metrics_finite": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true
+      },
+      "evaluations": [
+        {
+          "file": "00001-baseline.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00002-parent.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.8
+            }
+          ]
+        },
+        {
+          "file": "00004-candidate_minibatch.json",
+          "snapshot_id": "d328151633dc263ada50979ba8bf6515de478214392651026dfc834323f7446a",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00005-candidate_dev.json",
+          "snapshot_id": "d328151633dc263ada50979ba8bf6515de478214392651026dfc834323f7446a",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00008-test.json",
+          "snapshot_id": "d328151633dc263ada50979ba8bf6515de478214392651026dfc834323f7446a",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.8
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "admit",
+          "accepted": true,
+          "score": 1.0,
+          "parent_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "candidate_id": "d328151633dc263ada50979ba8bf6515de478214392651026dfc834323f7446a"
+        },
+        {
+          "kind": "promote",
+          "accepted": true,
+          "score": 1.0,
+          "baseline_score": 1.0,
+          "parent_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "candidate_id": "d328151633dc263ada50979ba8bf6515de478214392651026dfc834323f7446a"
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.8
+      },
+      "usage": {
+        "input_tokens": 13227,
+        "output_tokens": 275,
+        "cache_read_tokens": 4352,
+        "cache_write_tokens": 0,
+        "usage_entries": 6,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 6,
+        "finished_records": 6,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    },
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/runs/opro-claude_code-hotpotqa-20261023-161709-645818",
+      "status": "flow_passed",
+      "checks": {
+        "result_finished": true,
+        "worker_calls_completed": true,
+        "all_target_calls_completed": true,
+        "changed_version_evaluated": true,
+        "decisions_recorded": true,
+        "test_completed": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "all_metrics_finite": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true
+      },
+      "evaluations": [
+        {
+          "file": "00001-baseline.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00003-candidate.json",
+          "snapshot_id": "f0a4f9c725c9cb5f6a8e0a25d5f2ad5a1aa11bef1bbfc764c9db8473116e1351",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00005-test.json",
+          "snapshot_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.4444444444444444
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "promote",
+          "accepted": false,
+          "score": 1.0,
+          "baseline_score": 1.0,
+          "parent_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+          "candidate_id": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01"
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.4444444444444444
+      },
+      "usage": {
+        "input_tokens": 8857,
+        "output_tokens": 263,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "usage_entries": 4,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 3,
+        "duplicate_usage_entries": 0,
+        "records": 4,
+        "finished_records": 4,
+        "failed_records": 0,
+        "sdk_cost_usd": 0.033256,
+        "cost_bases": [
+          "unknown"
+        ]
+      }
+    },
+    {
+      "remote_run_dir": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/runs/skillopt-miniagent-hotpotqa-20261023-160903-116456",
+      "status": "flow_passed",
+      "checks": {
+        "result_finished": true,
+        "worker_calls_completed": true,
+        "all_target_calls_completed": true,
+        "changed_version_evaluated": true,
+        "decisions_recorded": true,
+        "test_completed": true,
+        "snapshots_saved": true,
+        "test_uses_selected_snapshot": true,
+        "all_metrics_finite": true,
+        "zero_failed_records": true,
+        "artifacts_redacted": true
+      },
+      "evaluations": [
+        {
+          "file": "00001-baseline.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00002-train.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00004-candidate_dev.json",
+          "snapshot_id": "bcac054b8870a206a43a30e193e39f89bcebaf3721aeadbd2fabd86bfe38dc7b",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        },
+        {
+          "file": "00006-test.json",
+          "snapshot_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "statuses": [
+            "finished"
+          ],
+          "metrics": [
+            {
+              "exact_match": 0.0,
+              "f1": 0.5
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "fast",
+          "accepted": false,
+          "score": 1.0,
+          "baseline_score": 1.0,
+          "parent_id": "eff37ee01706faf878d25b83e1ab7a5bfdaffdef1c28b4d41b4a3e494fe8ceab",
+          "candidate_id": "bcac054b8870a206a43a30e193e39f89bcebaf3721aeadbd2fabd86bfe38dc7b"
+        }
+      ],
+      "test_metrics": {
+        "exact_match": 0.0,
+        "f1": 0.5
+      },
+      "usage": {
+        "input_tokens": 11160,
+        "output_tokens": 241,
+        "cache_read_tokens": 5632,
+        "cache_write_tokens": 0,
+        "usage_entries": 5,
+        "usage_entries_missing_tokens": 0,
+        "sdk_cost_entries": 0,
+        "duplicate_usage_entries": 0,
+        "records": 5,
+        "finished_records": 5,
+        "failed_records": 0,
+        "sdk_cost_usd": null,
+        "cost_bases": []
+      }
+    }
+  ],
+  "file_edit_probes": [
+    {
+      "result": {
+        "harness": "miniagent",
+        "status": "passed",
+        "files": [
+          "status.txt"
+        ]
+      },
+      "record": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/miniagent-edit.json",
+      "statuses": [
+        "finished"
+      ],
+      "prior_probe": "File edit succeeded but diagnostic serializer failed; prior call usage was not retained. This record is a separate verification."
+    },
+    {
+      "result": {
+        "harness": "claude_code",
+        "status": "passed",
+        "files": [
+          "status.txt"
+        ]
+      },
+      "record": "/root/flashrsi-twowiki-check-20261023-a1/algorithm-smoke-20261023/claude-code-edit.json",
+      "statuses": [
+        "finished"
+      ],
+      "prior_probe": null
+    }
+  ],
+  "fix": {
+    "file": "flashrsi/algorithms/ace/__init__.py",
+    "behavior": "Offline ACE selects the later valid playbook when dev scores tie. Lower-scoring or invalid updates do not win.",
+    "regression_tests": "tests/test_ace_selection.py",
+    "before_fix_new_tests": "4 failed, 3 passed",
+    "after_fix_targeted_tests": "27 passed",
+    "historical_runs": "preserved; new real ACE run recorded separately"
+  },
+  "not_yet_real_evolution_tested": [
+    "ahe",
+    "adas",
+    "darwinx",
+    "evo_harness",
+    "meta_harness",
+    "modular_rsi",
+    "rrsi"
+  ],
+  "limitations": [
+    "Constructor checks are offline and do not establish provider/tool compatibility.",
+    "SkillOpt fast update only; EvoPrompt GA only; GEPA one iteration.",
+    "Directory-edit probes verify file writes, not complete directory-edit algorithm protocols.",
+    "ModularRSI requires independent evolution tasks and module mapping; QA configuration does not satisfy this.",
+    "One earlier MiniAgent file-write probe succeeded but diagnostic serialization failed, so its token usage was not retained.",
+    "Docker benchmarks remain deferred."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-25T21:45:57.209280+00:00",
+  "classification": "passed",
+  "raw_status": "flow_passed",
+  "experiment_path": "/root/flashrsi-supergpqa-skillopt-fix-20261026/batch-runs/skillopt-miniagent/skillopt-miniagent-supergpqa-20261026-054110-951700",
+  "target_stage_count": 4,
+  "all_target_stages_finished": true,
+  "workers_finished": true,
+  "source_changes": [],
+  "invalid_patch_branch_triggered": false,
+  "branch_evidence": [],
+  "branch_note": "Successful real flow on repaired public code. If no invalid_patch decision is present, malformed-edit rejection remains regression-test coverage only; no paid repeat to force the branch.",
+  "new_model_calls": 0
+}

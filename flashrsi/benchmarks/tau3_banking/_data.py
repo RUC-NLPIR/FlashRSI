@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from flashrsi.benchmarks._archive import _download_archive, _has_only_plain_files
+from flashrsi.benchmarks._git import _download_git
 
 _SCHEMA = "flashrsi.tau3_banking.v1"
 _ARCHIVE = "tau3_banking/domain.tar.gz"
@@ -16,6 +17,11 @@ _LABEL = "tau3 Banking"
 
 def _download_domain(source: Mapping[str, Any]) -> tuple[Path, ...]:
     """Return the task file paths inside the cached domain directory."""
+    if source["source"] == source["upstream"]["git_url"]:
+        root = _download_git(source["source"], source["revision"], ["data/tau2"])
+        return tuple(
+            sorted((root / source["upstream"]["domain"] / "tasks").glob("task_*.json"))
+        )
     extracted, tasks = _download_archive(
         source,
         schema=_SCHEMA,

@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-27T17:23:00+08:00",
+  "counts": {
+    "pass": 441,
+    "partial": 113,
+    "failed": 22,
+    "blocked": 24,
+    "pending": 24
+  },
+  "new_pass": 0,
+  "new_benchmark": 0,
+  "smoke2": {
+    "network": "loopback33618 restored; free models200",
+    "new_control": "/root/.cache/office-darwinx-budget-1723",
+    "status": "running",
+    "phase": "experiment",
+    "public_pid": 27571,
+    "paid": true,
+    "target_max_turns": 160,
+    "target_timeout": 4800,
+    "previous_darwinx": "test max80, needs_attention",
+    "previous_skillopt": "baseline max80 and test connection refused, needs_attention"
+  },
+  "smoke3": {
+    "free_disk_bytes": 416833536,
+    "references_json": "missing; no deletion"
+  },
+  "original": {
+    "ssh": "connection refused",
+    "model_state": "unknown"
+  }
+}

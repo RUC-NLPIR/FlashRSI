@@ -1,0 +1,18 @@
+{
+  "scope": "Zero-model infrastructure validation: native Docker exec remains connected longer than former720s idle limit; not a benchmark smoke pass",
+  "status": "passed",
+  "started_at": "2026-10-25T12:48:47.307184+00:00",
+  "sleep_seconds": 730,
+  "model_calls": 0,
+  "container": "flashrsi-long-transport-probe-ba53469e",
+  "fixed_bridge": "tcp://127.0.0.1:40743",
+  "tests": [],
+  "elapsed_seconds": 730.111,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "marker_present_on_return": true,
+  "marker_content": "complete",
+  "ended_at": "2026-10-25T13:00:57.800234+00:00",
+  "scratch_container_cleanup_returncode": 0
+}

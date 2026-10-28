@@ -1,0 +1,22 @@
+{
+  "host": "smoke3",
+  "benchmark": "deepsearchqa",
+  "algorithm": "opro",
+  "target": "miniagent",
+  "status": "preparation_blocked",
+  "updated_at": "2026-10-25T11:53:15.265770+00:00",
+  "session": "smoke-s3-deepsearchqa-opro-miniagent-preflight-01",
+  "scope": "Shared prerequisites for prospective DeepSearchQA24; public plan/check-only only, zero model calls, not a real combination pass",
+  "model_calls": 0,
+  "counts_as_real_smoke_pass": false,
+  "phase": "check-only",
+  "exit_code": 1,
+  "search_and_independent_judge_provided": false,
+  "note": "Original error preserved in public command log; native data access, search service and independent official Gemini judge prerequisites need diagnosis; no normal experiment or model call dispatched.",
+  "blocker": "missing_search_service_credential",
+  "original_error": "Tavily requires benchmark.retrieval.api_key",
+  "independent_gemini_judge_configured": false,
+  "judge_startup_check_reached": false,
+  "source_files_checked": 253,
+  "source_changes": []
+}

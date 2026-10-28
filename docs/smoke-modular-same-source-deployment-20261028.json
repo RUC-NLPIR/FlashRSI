@@ -1,0 +1,13 @@
+{
+  "parent": "/root/flashrsi-banking-bm25-public-20261027",
+  "source_files": 193,
+  "changed_from_parent": [
+    "flashrsi/algorithms/modular_rsi/__init__.py"
+  ],
+  "module_sha256": "b20febba1b1554c3852937d719f1f3c9c6dc0498021fa92eaf3a2ccac96a469f",
+  "deltas": "user same-source guard and earlier JSON outer-fence fix; no other source changes",
+  "old_parent_untouched": true,
+  "benchmark": "nativeBankingBM25 train008/dev019/test004/seed42",
+  "roles": "originalModCC Target40/1200 Worker60/600 separate SDK configs; nativeBank100 session previously authorized",
+  "new_paid": 0
+}

@@ -1,0 +1,16 @@
+{
+  "status": "preparation_blocked_no_automatic_retry",
+  "model_calls": 0,
+  "phase": "host_parallel_cache",
+  "automatic_build": false,
+  "updated_at": "2026-10-28T12:19:45.956249+00:00",
+  "package_count": 556,
+  "expected_bytes": 516294778,
+  "completed": 0,
+  "completed_bytes": 0,
+  "parallel": 4,
+  "total_timeout_seconds": 1200,
+  "per_package_timeout_seconds": 180,
+  "error_type": "AssertionError",
+  "reason": "Native package download failed for libargon2-1"
+}

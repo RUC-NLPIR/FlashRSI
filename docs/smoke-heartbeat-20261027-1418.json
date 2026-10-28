@@ -1,0 +1,6 @@
+{
+  "observed_at": "2026-10-27T14:18:00+08:00",
+  "note": "2026-10-27 14:18实查：本轮无新增通过/无新增Benchmark，440通过114部分22失败24前置24待/624保持。DeepSearchRRSI1352已execution_failed：2Target finished、1Worker finished、1Worker60轮error，usage齐source未变，保留原partial及本次失败，不循环扩大。smoke3已接唯一/root/.cache/wide-evoprompt-budget-1418 controller28509/public28588真实experiment/paidmarker；旧EvoPrompt全部错误为Target40轮或1200秒，沿用已验证Wide证据source267，只Target80/2400，原Judge4096及111/Worker不改，report smoke-widesearch-evoprompt-budget-retry-20261027.json。smoke2 OfficeOPRO1407 public16400真实experiment，唯一OfficeAHE1415 followup16819等待，未paid，原test40轮已核，只Target80/2400。原机publicrunner0、1.702GB，无模型；最小Compose连接reset证据保持，未重派Terminal。smoke3可用1.237GB，未清理/未改产品。",
+  "new_passes": 0,
+  "new_benchmarks": []
+}

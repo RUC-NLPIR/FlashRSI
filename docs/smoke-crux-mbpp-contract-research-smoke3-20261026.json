@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-26T12:27:58.130328+00:00",
+  "model_calls": 0,
+  "new_benchmark": false,
+  "purpose": "CRUXEval-O independent evolution source research only; no execution, generated answers, filtering or source mutation",
+  "status": "completed_data_only",
+  "source": "google-research/google-research/mbpp/sanitized-mbpp.json",
+  "revision": "0f585ccae259c32a877edfd48362c18a0010545f",
+  "sha256": "ca95deaa9a01ef0a6f439f88bcf0dd3db3563d22f22aad6cae04ebb9a8d8c8e9",
+  "native_contract": {
+    "rows": 427,
+    "code_defines_f": 0,
+    "first_assert_direct_f_literal": 0
+  },
+  "unsupported_counts": {
+    "AssertionError": 427
+  },
+  "code_executed": false,
+  "rows_transformed": 0,
+  "overlap_checked": false,
+  "candidate_decision": "not_directly_compatible_with_current_CRUXEval_f_input_output_contract",
+  "paid_dispatch_allowed": false
+}

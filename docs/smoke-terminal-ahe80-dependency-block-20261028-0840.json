@@ -1,0 +1,32 @@
+{
+  "status": "preparation_blocked",
+  "model_calls": 0,
+  "native_setup_diagnostics": [
+    "Container dependency setup failed: Ign:1 http://archive.ubuntu.com/ubuntu noble InRelease"
+  ],
+  "known_flags": {
+    "certificate": true,
+    "download": true,
+    "uv_python": false,
+    "pip_index": true,
+    "connection": true,
+    "installer": false,
+    "permission": false,
+    "native_sdk_import": false
+  },
+  "source_method": "official Harbor install_only; no solver/Verifier/model calls",
+  "engine_stable_after_cached_images": true,
+  "paid_dispatch_disabled": true,
+  "apt_diagnostics": [
+    "Err:1 http://archive.ubuntu.com/ubuntu noble InRelease",
+    "Err:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease",
+    "Err:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease",
+    "W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/noble/InRelease  Could not connect to 10.239.91.9:45539 (10.239.91.9). - connect (111: Connection refused)",
+    "W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/noble-updates/InRelease  Unable to connect to 10.239.91.9:45539:",
+    "W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/noble-backports/InRelease  Unable to connect to 10.239.91.9:45539:",
+    "W: Failed to fetch http://security.ubuntu.com/ubuntu/dists/noble-security/InRelease  Could not connect to 10.239.91.9:45539 (10.239.91.9). - connect (111: Connection refused)",
+    "W: Some index files failed to download. They have been ignored, or old ones used instead.",
+    "E: Package 'ca-certificates' has no installation candidate",
+    "E: Unable to locate package curl"
+  ]
+}

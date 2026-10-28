@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "new_model_calls": 0,
+  "scope": "Actual public full native streaming loaders and original scorer using verified complete original Parquet cache",
+  "checked_at": "2026-10-26T04:54:56.871854+00:00",
+  "peak_rss_bytes": 1465929728,
+  "source": {
+    "source": "/root/.cache/flashrsi-official-native-cache-20261026/trivia_qa/rc.wikipedia",
+    "config": "default",
+    "revision": "0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+    "split_policy": "user-configured",
+    "splits": [
+      "train"
+    ],
+    "scorer_revision": "ca43b5820b107f3970cf4b7d67f7db7a98117b79",
+    "native_split": "train",
+    "experiment_role": "external_evolution",
+    "pool_size": 61888,
+    "pool_checksum": "a9991836f0255fb9500d95a0c8a275a02c395eabfec0bd2ba71306131e5739aa"
+  },
+  "heldout_unchanged": true,
+  "prior_real_smoke_heldout_ids_matched": true,
+  "tasks": [
+    {
+      "task_id": "qb_10080",
+      "question_sha256": "26ff09f0438f941de2f16879c16000058e3898f2e265efc0c3426deff828c7e8",
+      "reference_grade": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      }
+    },
+    {
+      "task_id": "sfq_1461",
+      "question_sha256": "a5c7b64f3ac3ef17addf23bff34db4005e679980e3d1e51a436d0aeef130f253",
+      "reference_grade": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      }
+    },
+    {
+      "task_id": "sfq_5135",
+      "question_sha256": "37163f0dfca38368581c253caa93143c366127bf182ac9872eabe0f22d3696ec",
+      "reference_grade": {
+        "exact_match": 1.0,
+        "f1": 1.0
+      }
+    }
+  ],
+  "source_file_count": 280
+}
