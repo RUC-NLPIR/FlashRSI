@@ -16,9 +16,10 @@ from __future__ import annotations
 
 import argparse
 import math
+import random
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageColor, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageColor, ImageDraw, ImageFilter, ImageFont
 
 WIDTH, HEIGHT, SCALE = 1360, 790, 2
 FRAME_MS = 80
@@ -28,10 +29,10 @@ SETTLE_MS = 160
 CHART_MS = 2800
 PLAYBACK_SPEED = 2.028
 CHART_WIDTH, CHART_STEP = 291, 313
-INK = "#242521"
-MUTED = "#807E76"
-ACCENT = "#EA6039"
-PAPER = "#F8F7F3"
+INK = "#F5FAFF"
+MUTED = "#8498AB"
+ACCENT = "#F2A16B"
+PAPER = "#03080D"
 FONT_PATHS = (
     "/System/Library/Fonts/SFNS.ttf",
     "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
@@ -69,10 +70,10 @@ COMBINATIONS = tuple(
     (phase % 4, (3 + phase) % 12, (2 + phase) % 6) for phase in range(12)
 )
 CHARTS = (
-    ("Training", "#647B96", "#EFF2F7"),
-    ("Held-out", "#EA6039", "#FEF2EB"),
-    ("Near-domain", "#B98A35", "#FAF5E8"),
-    ("OOD-domain", "#71847B", "#EFF3EF"),
+    ("Training", "#76CFFF", "#0C1D2A"),
+    ("Held-out", "#F2A16B", "#231A19"),
+    ("Near-domain", "#C7E9FF", "#15212C"),
+    ("OOD-domain", "#8C9DB8", "#141B28"),
 )
 # Synthetic shapes, deliberately including OOD plateaus and regressions.
 # These values are never shown as measurements or percentage scores.
@@ -148,30 +149,101 @@ class Hero:
         )
 
     def background(self):
-        image = Image.new("RGB", (WIDTH * SCALE, HEIGHT * SCALE), PAPER)
-        draw = ImageDraw.Draw(image)
-        self.box(draw, (1, 1, WIDTH - 2, HEIGHT - 2), 25, PAPER, "#E7E3DA")
-        bolt = ((89, 44), (63, 77), (80, 77), (72, 100), (103, 63), (85, 63))
-        draw.polygon([(x * SCALE, y * SCALE) for x, y in bolt], fill=ACCENT)
-        self.text(draw, (117, 46), "FlashRSI", 48, bold=True)
-        self.text(draw, (65, 116), "Choose. Improve. Evaluate.", 23, "#62625B")
+        # One deterministic sky is shared by every frame, so the GIF can retain
+        # its particle detail without encoding a full-screen flicker each tick.
+        image = Image.new("RGBA", (WIDTH * SCALE, HEIGHT * SCALE), PAPER)
+        particles = Image.new("RGBA", image.size)
+        glow = Image.new("RGBA", image.size)
+        stars, halos = ImageDraw.Draw(particles), ImageDraw.Draw(glow)
+        rng = random.Random(17)
+        star_colors = ((118, 207, 255), (245, 250, 255), (242, 161, 107))
+
+        def star(x, y, radius, color, brightness=220):
+            bounds = tuple(
+                value * SCALE
+                for value in (x - radius, y - radius, x + radius, y + radius)
+            )
+            stars.ellipse(bounds, fill=(*color, brightness))
+            if radius > 1.15:
+                reach = radius * 3.8
+                halos.ellipse(
+                    tuple(
+                        value * SCALE
+                        for value in (x - reach, y - reach, x + reach, y + reach)
+                    ),
+                    fill=(*color, round(brightness * 0.3)),
+                )
+
+        for _ in range(600):
+            star(
+                rng.uniform(0, WIDTH),
+                rng.uniform(0, HEIGHT),
+                rng.uniform(0.25, 0.8),
+                rng.choice(star_colors),
+                rng.randrange(30, 120),
+            )
+        # A tilted, two-arm spiral remains visible in the open header and in
+        # the gaps around the panels. The warm particles follow the same arms.
+        for _ in range(5100):
+            radius = 555 * rng.random() ** 0.72
+            arm = rng.choice((0, math.pi))
+            angle = arm + radius / 103 + rng.gauss(0, 0.17 + radius / 2100)
+            gx = radius * math.cos(angle)
+            gy = radius * 0.49 * math.sin(angle)
+            rotation = -0.36
+            x = 953 + gx * math.cos(rotation) - gy * math.sin(rotation)
+            y = 149 + gx * math.sin(rotation) + gy * math.cos(rotation)
+            size = rng.uniform(0.3, 0.72)
+            if rng.random() < 0.055:
+                size = rng.uniform(1.1, 2.05)
+            star(x, y, size, rng.choices(star_colors, (6, 3, 2))[0])
+        for _ in range(240):
+            radius = abs(rng.gauss(0, 21))
+            angle = rng.uniform(0, math.tau)
+            star(
+                953 + radius * math.cos(angle),
+                149 + radius * 0.66 * math.sin(angle),
+                rng.uniform(0.65, 1.7),
+                star_colors[1],
+            )
+        image = Image.alpha_composite(image, glow.filter(ImageFilter.GaussianBlur(8)))
+        image = Image.alpha_composite(image, glow.filter(ImageFilter.GaussianBlur(3)))
+        image = Image.alpha_composite(image, particles)
+        # Restrained dark glass keeps the labels legible while the sky carries
+        # through both the selection and the evaluation portions of the image.
+        glass = Image.new("RGBA", image.size)
+        draw = ImageDraw.Draw(glass)
+        self.box(draw, (1, 1, WIDTH - 2, HEIGHT - 2), 25, None, "#16232D")
+        self.text(draw, (65, 46), "FlashRSI", 49)
+        self.text(draw, (65, 116), "Choose. Improve. Evaluate.", 23, "#A1B6C8")
         draw.line(
             (65 * SCALE, 160 * SCALE, 1295 * SCALE, 160 * SCALE),
-            fill="#E3DFD6",
+            fill=(92, 128, 151, 70),
             width=SCALE,
         )
         for column, (label, _) in enumerate(REELS):
             x = 65 + 420 * column
-            self.tracked(draw, (x + 2, 185), label, 12, spacing=1.9)
-            self.box(draw, (x, 222, x + 390, 402), 19, "#ECE8E0")
-            self.box(draw, (x, 218, x + 390, 397), 19, "#FFFFFF", "#DCD8CF")
-            self.box(draw, (x + 10, 276, x + 380, 338), 10, "#FFF5EC")
+            self.tracked(draw, (x + 2, 185), label, 12, "#A1B6C8", spacing=1.9)
+            self.box(
+                draw,
+                (x, 218, x + 390, 397),
+                19,
+                (4, 12, 20, 231),
+                "#243643",
+            )
+            self.box(
+                draw,
+                (x + 10, 276, x + 380, 338),
+                10,
+                (19, 39, 54, 238),
+                "#294B63",
+            )
             self.box(draw, (x + 11, 288, x + 14, 325), 1, ACCENT)
         for x in (470, 890):
-            self.text(draw, (x, 309), "×", 26, "#B7B3AA", anchor="mm")
+            self.text(draw, (x, 309), "×", 26, "#7E9DB4", anchor="mm")
         draw.line(
             (65 * SCALE, 444 * SCALE, 1295 * SCALE, 444 * SCALE),
-            fill="#E3DFD6",
+            fill=(92, 128, 151, 70),
             width=SCALE,
         )
         self.text(
@@ -179,12 +251,18 @@ class Hero:
             (65, 472),
             "Training & evaluation · Illustrative curves",
             18,
-            "#77766D",
+            "#A1B6C8",
         )
         for column, (title, color, _) in enumerate(CHARTS):
             x = 65 + CHART_STEP * column
-            self.box(draw, (x, 510, x + CHART_WIDTH, 751), 16, "#FFFFFF", "#E2DED5")
-            self.text(draw, (x + 19, 530), title, 18, bold=True)
+            self.box(
+                draw,
+                (x, 510, x + CHART_WIDTH, 751),
+                16,
+                (4, 12, 20, 234),
+                "#243643",
+            )
+            self.text(draw, (x + 19, 530), title, 18)
             draw.ellipse(
                 (
                     (x + CHART_WIDTH - 27) * SCALE,
@@ -203,7 +281,7 @@ class Hero:
                         (x + CHART_WIDTH - 19) * SCALE,
                         grid_y * SCALE,
                     ),
-                    fill="#EFECE6",
+                    fill=(91, 121, 144, 38),
                     width=SCALE,
                 )
             self.text(
@@ -214,7 +292,7 @@ class Hero:
                 MUTED,
                 anchor="mm",
             )
-        return image
+        return Image.alpha_composite(image, glass).convert("RGB")
 
     def reel(self, image, column, position):
         names = REELS[column][1]
@@ -237,7 +315,7 @@ class Hero:
                 (width / 2 + 4, center + offset),
                 name,
                 size,
-                (36, 37, 33, alpha),
+                (245, 250, 255, alpha),
                 bold=selected,
                 anchor="mm",
             )
@@ -283,7 +361,11 @@ class Hero:
             ],
             fill=tint,
         )
-        draw.line(points, fill=color, width=3 * SCALE, joint="curve")
+        rgb = ImageColor.getrgb(color)
+        for line_width, intensity in ((9, 0.11), (5, 0.27)):
+            glow_color = tuple(round(channel * intensity) for channel in rgb)
+            draw.line(points, fill=glow_color, width=line_width * SCALE, joint="curve")
+        draw.line(points, fill=color, width=2 * SCALE, joint="curve")
         for index, value in enumerate(values):
             fraction = index / (len(values) - 1)
             if fraction > progress:
@@ -296,7 +378,7 @@ class Hero:
                     (dot_x + 2.3) * SCALE,
                     (dot_y + 2.3) * SCALE,
                 ),
-                fill="#FFFFFF",
+                fill=INK,
                 outline=color,
                 width=SCALE,
             )
@@ -318,7 +400,7 @@ class Hero:
         draw = ImageDraw.Draw(image)
         for column in range(3):
             x = 440 + 420 * column
-            color = ACCENT if column in moving else "#B9B6AD"
+            color = ACCENT if column in moving else "#76CFFF"
             draw.ellipse(
                 (x * SCALE, 187 * SCALE, (x + 6) * SCALE, 193 * SCALE), fill=color
             )

@@ -1,7 +1,7 @@
 # FlashRSI cover
 
-The cover is an original animated SVG. Arbor's README inspired the wide brand cover. The functional demo follows the introduction, before Quick start.
+The cover is an original particle-galaxy SVG, styled after the user's deep-space reference. The functional demo uses the same near-black, ice-blue, white, and warm-orange palette and remains before Quick start.
 
-The large FlashRSI wordmark and coral lightning carry the identity. Connected glass modules, branching paths, and orbital trails suggest the different agent variants that the framework can construct and evaluate. The illustration carries no benchmark results or claims about supported combinations.
+Plain white FlashRSI lettering sits in open space on the left. Thousands of small stars form a tilted spiral galaxy on the right, with a dense white core, sparse surrounding stars, and soft blue and orange stellar halos. The particle positions are deterministic. The artwork contains no benchmark results or claims about supported combinations.
 
-Edit [cover.svg](cover.svg) directly. [cover.png](cover.png) is its static preview. The SVG includes a reduced-motion style and uses no scripts, external fonts, or remote assets.
+Run `uv run python scripts/render_readme_cover.py` to regenerate [cover.svg](cover.svg), or edit the SVG directly. [cover.png](cover.png) is a static rasterized preview of the same SVG. Only stellar halo opacity animates; the wordmark and star positions remain still. The SVG includes a reduced-motion style and uses no scripts, external fonts, or remote assets.

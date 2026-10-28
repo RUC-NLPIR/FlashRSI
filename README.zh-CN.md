@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cover.svg" alt="FlashRSI 品牌封面：闪电与相互连接的模块化 Agent 版本。" width="100%">
+  <img src="assets/readme/cover.svg" alt="FlashRSI 品牌封面：深空中的蓝白与琥珀色粒子星系。" width="100%">
 </p>
 
 <h1 align="center">FlashRSI</h1>
@@ -285,7 +285,7 @@ uv run ruff check .
 uv run ruff format --check .
 ```
 
-封面使用[可编辑的动态 SVG](assets/readme/cover.svg) 制作，附[静态预览](assets/readme/cover.png)和[设计说明](assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
+粒子星系封面使用[可编辑的动态 SVG](assets/readme/cover.svg)，由 [scripts/render_readme_cover.py](scripts/render_readme_cover.py) 生成，附[静态预览](assets/readme/cover.png)和[设计说明](assets/readme/cover-design.md)。同风格的演示 GIF 由 [scripts/render_readme_hero.py](scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
 
 </details>
 
