@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520" role="img" aria-labelledby="cover-title cover-desc">
+  <title id="cover-title">FlashRSI — Improve the agent you already have.</title>
+  <desc id="cover-desc">A coral lightning bolt and a luminous FlashRSI wordmark surrounded by connected modular agent variants, branching paths, and orbital trails on a dark background.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#15221d"/>
+      <stop offset=".5" stop-color="#111713"/>
+      <stop offset="1" stop-color="#1e1c19"/>
+    </linearGradient>
+    <radialGradient id="coral-haze">
+      <stop stop-color="#e96039" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#e96039" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mint-haze">
+      <stop stop-color="#75b89b" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#75b89b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ivory" x2="0" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset=".52" stop-color="#f8f7f0"/>
+      <stop offset="1" stop-color="#d6dcd3"/>
+    </linearGradient>
+    <linearGradient id="coral" x1="0" y1="0" x2=".85" y2="1">
+      <stop stop-color="#ffc298"/>
+      <stop offset=".45" stop-color="#fb8256"/>
+      <stop offset="1" stop-color="#ea6039"/>
+    </linearGradient>
+    <linearGradient id="glass" x2="1" y2="1">
+      <stop stop-color="#75998b" stop-opacity=".2"/>
+      <stop offset=".5" stop-color="#34463c" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#18211c" stop-opacity=".8"/>
+    </linearGradient>
+    <linearGradient id="glass-edge" x2="1" y2="1">
+      <stop stop-color="#bdcfc0" stop-opacity=".65"/>
+      <stop offset=".45" stop-color="#6e8a79" stop-opacity=".15"/>
+      <stop offset="1" stop-color="#ea6039" stop-opacity=".45"/>
+    </linearGradient>
+    <linearGradient id="orbit" x2="1" y2=".3">
+      <stop stop-color="#ea6039" stop-opacity=".02"/>
+      <stop offset=".3" stop-color="#f3946d" stop-opacity=".28"/>
+      <stop offset=".7" stop-color="#f9aa83" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#ea6039" stop-opacity=".02"/>
+    </linearGradient>
+    <linearGradient id="sheen">
+      <stop stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#9eb8a3" stroke-opacity=".07" stroke-width=".6"/>
+    </pattern>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="soft-glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="tile-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+    <clipPath id="canvas">
+      <rect width="1600" height="520" rx="26"/>
+    </clipPath>
+    <clipPath id="wordmark">
+      <text x="880" y="294" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="184" font-weight="700" letter-spacing="-8">FlashRSI</text>
+    </clipPath>
+  </defs>
+  <style>
+    .flow { animation: flow 16s linear infinite; }
+    .flow-reverse { animation: flow 21s linear infinite reverse; }
+    .sheen { transform: translateX(-900px); animation: sheen 8s ease-in-out infinite; }
+    .float { animation: float 7s ease-in-out infinite; }
+    .float-late { animation: float 9s ease-in-out -3s infinite; }
+    .pulse { animation: pulse 5s ease-in-out infinite; }
+    @keyframes flow { to { stroke-dashoffset: -960; } }
+    @keyframes sheen { 0%, 30% { transform: translateX(-900px); } 70%, 100% { transform: translateX(1300px); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes pulse { 0%, 100% { opacity: .3; } 50% { opacity: .8; } }
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .flow-reverse, .sheen, .float, .float-late, .pulse { animation: none; }
+    }
+  </style>
+  <g clip-path="url(#canvas)">
+    <rect width="1600" height="520" fill="url(#background)"/>
+    <ellipse cx="580" cy="440" rx="610" ry="340" fill="url(#coral-haze)"/>
+    <ellipse cx="1310" cy="85" rx="580" ry="350" fill="url(#mint-haze)"/>
+    <rect width="1600" height="520" fill="url(#grid)"/>
+
+    <!-- Recursive paths connect independent modules around the central identity. -->
+    <g fill="none" stroke-linecap="round">
+      <ellipse cx="800" cy="266" rx="662" ry="157" transform="rotate(-12 800 266)" stroke="url(#orbit)" stroke-width="1.2"/>
+      <ellipse cx="800" cy="266" rx="690" ry="185" transform="rotate(-12 800 266)" stroke="#78917d" stroke-opacity=".12" stroke-width=".8"/>
+      <ellipse cx="800" cy="266" rx="615" ry="137" transform="rotate(-12 800 266)" stroke="#c49877" stroke-opacity=".09" stroke-dasharray="2 9"/>
+      <ellipse class="flow" cx="800" cy="266" rx="662" ry="157" transform="rotate(-12 800 266)" stroke="#ffac7c" stroke-opacity=".8" stroke-width="2" stroke-dasharray="28 1210"/>
+      <path d="M197 171H278L331 118H574M1402 168H1322L1263 109H1090M241 390H327L370 432H637M1417 387H1318L1277 428H1112" stroke="#6f8d79" stroke-opacity=".26"/>
+      <path d="M109 308H204L255 257H319M1479 290H1393L1348 245H1298" stroke="#ea6039" stroke-opacity=".28"/>
+      <path class="flow" d="M197 171H278L331 118H574" stroke="#a6c7b1" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="14 490"/>
+      <path class="flow-reverse" d="M1417 387H1318L1277 428H1112" stroke="#ffab7b" stroke-opacity=".65" stroke-width="1.5" stroke-dasharray="14 490"/>
+    </g>
+
+    <g fill="#a4bca9" opacity=".3">
+      <circle cx="109" cy="308" r="2"/><circle cx="278" cy="171" r="2"/>
+      <circle cx="331" cy="118" r="2"/><circle cx="574" cy="118" r="2"/>
+      <circle cx="1322" cy="168" r="2"/><circle cx="1263" cy="109" r="2"/>
+      <circle cx="1090" cy="109" r="2"/><circle cx="1479" cy="290" r="2"/>
+      <circle cx="327" cy="390" r="2"/><circle cx="370" cy="432" r="2"/>
+      <circle cx="1277" cy="428" r="2"/><circle cx="1112" cy="428" r="2"/>
+    </g>
+    <g fill="#e4c2a2" opacity=".35">
+      <circle cx="112" cy="92" r="1.4"/><circle cx="289" cy="63" r="1"/>
+      <circle cx="545" cy="62" r="1.3"/><circle cx="1268" cy="60" r="1.4"/>
+      <circle cx="1512" cy="113" r="1"/><circle cx="1528" cy="439" r="1.5"/>
+      <circle cx="93" cy="444" r="1"/><circle cx="863" cy="455" r="1.4"/>
+      <circle cx="1043" cy="75" r="1"/><circle cx="746" cy="90" r="1.1"/>
+    </g>
+
+    <!-- Each glass tile is a different editable or executable building block. -->
+    <g transform="translate(154 117) rotate(-12 44 44)">
+      <g class="float" filter="url(#tile-shadow)">
+        <rect width="88" height="88" rx="20" fill="url(#glass)" stroke="url(#glass-edge)"/>
+        <path d="m25 31 12 12-12 12m21 2h17" fill="none" stroke="#b3cfbe" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19 8H61" stroke="#cfdbc9" stroke-opacity=".35" stroke-linecap="round"/>
+      </g>
+    </g>
+    <g transform="translate(214 352) rotate(11 33 33)">
+      <g class="float-late" filter="url(#tile-shadow)">
+        <rect width="66" height="66" rx="16" fill="url(#glass)" stroke="url(#glass-edge)"/>
+        <path d="m20 24 13-7 13 7-13 7zm0 10 13 7 13-7m-26 10 13 7 13-7" fill="none" stroke="#f5a17c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </g>
+    <g transform="translate(1357 112) rotate(13 46 46)">
+      <g class="float-late" filter="url(#tile-shadow)">
+        <rect width="92" height="92" rx="21" fill="url(#glass)" stroke="url(#glass-edge)"/>
+        <path d="M31 28v36m0-18h20a10 10 0 0 0 10-10v-8" fill="none" stroke="#c3d6c7" stroke-width="2.5" stroke-linecap="round"/>
+        <g fill="#171e19" stroke="#c3d6c7" stroke-width="2"><circle cx="31" cy="27" r="5"/><circle cx="31" cy="65" r="5"/><circle cx="61" cy="27" r="5"/></g>
+        <path d="M20 8H64" stroke="#cfdbc9" stroke-opacity=".35" stroke-linecap="round"/>
+      </g>
+    </g>
+    <g transform="translate(1383 347) rotate(-10 34 34)">
+      <g class="float" filter="url(#tile-shadow)">
+        <rect width="68" height="68" rx="16" fill="url(#glass)" stroke="url(#glass-edge)"/>
+        <path d="m34 17 15 9v17l-15 9-15-9V26zm0 18 15-9M34 35l-15-9m15 9v17" fill="none" stroke="#f2aa85" stroke-width="2" stroke-linejoin="round"/>
+      </g>
+    </g>
+
+    <g>
+      <circle class="pulse" cx="304" cy="333" r="16" fill="#ed8151" filter="url(#glow)"/>
+      <circle cx="304" cy="333" r="4" fill="#ffc39a"/>
+      <circle cx="304" cy="333" r="9" fill="none" stroke="#f7a575" stroke-opacity=".3"/>
+      <circle class="pulse" cx="1276" cy="162" r="14" fill="#e98053" filter="url(#glow)"/>
+      <circle cx="1276" cy="162" r="3.5" fill="#ffc39a"/>
+      <circle cx="1276" cy="162" r="8" fill="none" stroke="#f7a575" stroke-opacity=".3"/>
+    </g>
+
+    <!-- The bolt and wordmark stay opaque and readable over every animation frame. -->
+    <path d="m426 156-72 101h53l-20 64 98-119h-57l28-46z" fill="#ed7543" opacity=".35" filter="url(#soft-glow)"/>
+    <path d="m426 156-72 101h53l-20 64 98-119h-57l28-46z" fill="url(#coral)"/>
+    <path d="m426 156-72 101h53" fill="none" stroke="#ffd2a7" stroke-opacity=".65" stroke-width="1.2"/>
+    <text x="880" y="294" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="184" font-weight="700" letter-spacing="-8" fill="url(#ivory)">Flash<tspan fill="url(#coral)">RSI</tspan></text>
+    <g clip-path="url(#wordmark)">
+      <rect class="sheen" x="300" y="110" width="240" height="220" fill="url(#sheen)" opacity=".6"/>
+    </g>
+    <text x="800" y="355" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" letter-spacing=".5" fill="#aebdb1">Improve the agent you already have.</text>
+
+    <rect x=".5" y=".5" width="1599" height="519" rx="25.5" fill="none" stroke="#9cae98" stroke-opacity=".16"/>
+  </g>
+</svg>

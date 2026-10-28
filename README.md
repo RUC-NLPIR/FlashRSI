@@ -1,10 +1,5 @@
 <p align="center">
-  <img src="assets/readme/slot-machine.gif" alt="FlashRSI: benchmark, algorithm, and harness reels advance one step and settle, then illustrative Training, Held-out, Near-domain, and OOD-domain curves appear below." width="100%">
-</p>
-
-<p align="center">
-  <b>12</b> RSI algorithms &nbsp;·&nbsp; <b>3</b> native harnesses &nbsp;·&nbsp; <b>4</b> benchmark adapters<br>
-  <sub>Planned harness adapters: OpenHands · Pi · Hermes</sub>
+  <img src="assets/readme/cover.svg" alt="FlashRSI: lightning and connected modular agent variants." width="100%">
 </p>
 
 <h1 align="center">FlashRSI</h1>
@@ -24,11 +19,17 @@
 </p>
 
 <p align="center">
+  <b>12</b> RSI algorithms &nbsp;·&nbsp; <b>3</b> native harnesses &nbsp;·&nbsp; <b>4</b> benchmark adapters<br>
+  <sub>Planned harness adapters: OpenHands · Pi · Hermes</sub>
+</p>
+
+<p align="center">
   <b>English</b> · <a href="README.zh-CN.md">简体中文</a>
 </p>
 
 <p align="center">
   <a href="#quick-start">Quick start</a> &nbsp;/&nbsp;
+  <a href="#demo">Demo</a> &nbsp;/&nbsp;
   <a href="#how-it-works">How it works</a> &nbsp;/&nbsp;
   <a href="#supported-components">Supported components</a> &nbsp;/&nbsp;
   <a href="#extend-flashrsi">Extend</a> &nbsp;/&nbsp;
@@ -126,6 +127,14 @@ For another harness or task suite, start with a matching configuration:
 
 Install the extras for each selected role. Environment benchmarks have additional setup; follow their integration notes below.
 
+## Demo
+
+<p align="center">
+  <img src="assets/readme/slot-machine.gif" alt="FlashRSI: benchmark, algorithm, and harness reels advance one step and settle, then illustrative Training, Held-out, Near-domain, and OOD-domain curves appear below." width="100%">
+</p>
+
+Training, Held-out, Near-domain, and OOD-domain curves are illustrative.
+
 ## How it works
 
 <p align="center">
@@ -181,7 +190,7 @@ These are adaptations to the framework's resource and evaluation interfaces. Met
 | [Claude Code](docs/agent-integration.md) | Official Agent SDK | Instructions, skills, commands, agents, hooks, MCP/LSP registrations, and settings |
 | [Codex](docs/codex.md) | Native `codex exec` CLI | Instructions, skills, agents, hooks, MCP servers, plugin bundles, memory resources, rules, and configuration |
 
-**Planned adapters:** OpenHands, Pi, and Hermes, also previewed in the banner.
+**Planned adapters:** OpenHands, Pi, and Hermes, also previewed in the demo.
 
 The same Agent interface supports a target that solves tasks and a Worker that edits files. A plain **LLM Worker** is also available for methods that request text or structured edit proposals.
 
@@ -264,7 +273,7 @@ uv run python examples/agents/native_adapters.py
 It uses a local subprocess and an explicitly simulated SDK. For detailed earlier implementation records, see the [archived notes](docs/implementation-notes.zh-CN.md).
 
 <details>
-<summary>Development checks and regenerating the banner</summary>
+<summary>Development checks and image generation</summary>
 
 ```bash
 uv sync --extra dev
@@ -273,7 +282,7 @@ uv run ruff check .
 uv run ruff format --check .
 ```
 
-The banner is generated from [scripts/render_readme_hero.py](scripts/render_readme_hero.py) using Pillow. Its training and evaluation curves are schematic. The generated GIF and static poster are checked into `assets/readme/`, so viewing the README needs no renderer.
+The cover is an [editable animated SVG](assets/readme/cover.svg), with a [static preview](assets/readme/cover.png) and [design notes](assets/readme/cover-design.md). The demo GIF is generated from [scripts/render_readme_hero.py](scripts/render_readme_hero.py) using Pillow. Its training and evaluation curves are schematic. Images are checked into `assets/readme/`, so viewing the README needs no renderer.
 
 </details>
 

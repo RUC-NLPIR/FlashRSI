@@ -1,10 +1,5 @@
 <p align="center">
-  <img src="assets/readme/slot-machine.gif" alt="FlashRSI：benchmark、算法和 harness 三个转轮各前进一格并停稳，随后依次绘制 Training、Held-out、Near-domain 和 OOD-domain 示意曲线。" width="100%">
-</p>
-
-<p align="center">
-  <b>12</b> 种 RSI 算法 &nbsp;·&nbsp; <b>3</b> 个原生 harness &nbsp;·&nbsp; <b>4</b> 个 benchmark 接入<br>
-  <sub>计划接入的 harness：OpenHands · Pi · Hermes</sub>
+  <img src="assets/readme/cover.svg" alt="FlashRSI 品牌封面：闪电与相互连接的模块化 Agent 版本。" width="100%">
 </p>
 
 <h1 align="center">FlashRSI</h1>
@@ -24,11 +19,17 @@
 </p>
 
 <p align="center">
+  <b>12</b> 种 RSI 算法 &nbsp;·&nbsp; <b>3</b> 个原生 harness &nbsp;·&nbsp; <b>4</b> 个 benchmark 接入<br>
+  <sub>计划接入的 harness：OpenHands · Pi · Hermes</sub>
+</p>
+
+<p align="center">
   <a href="README.md">English</a> · <b>简体中文</b>
 </p>
 
 <p align="center">
   <a href="#快速开始">快速开始</a> &nbsp;/&nbsp;
+  <a href="#演示">演示</a> &nbsp;/&nbsp;
   <a href="#工作原理">工作原理</a> &nbsp;/&nbsp;
   <a href="#支持组件">支持组件</a> &nbsp;/&nbsp;
   <a href="#扩展-flashrsi">扩展接入</a> &nbsp;/&nbsp;
@@ -126,6 +127,14 @@ uv run flashrsi run --config examples/quickstart.yaml \
 
 请为选中的每个角色安装相应 extras。环境类 benchmark 还需要额外准备，具体见下方接入说明。
 
+## 演示
+
+<p align="center">
+  <img src="assets/readme/slot-machine.gif" alt="FlashRSI：benchmark、算法和 harness 三个转轮各前进一格并停稳，随后依次绘制 Training、Held-out、Near-domain 和 OOD-domain 示意曲线。" width="100%">
+</p>
+
+Training、Held-out、Near-domain 和 OOD-domain 曲线均为示意。
+
 ## 工作原理
 
 <p align="center">
@@ -181,7 +190,7 @@ Benchmark 提供分数、逐题结果、轨迹及可用的用量统计。算法�
 | [Claude Code](docs/agent-integration.md) | 官方 Agent SDK | 指令、skills、commands、agents、hooks、MCP/LSP 注册及 settings |
 | [Codex](docs/codex.md) | 原生 `codex exec` CLI | 指令、skills、agents、hooks、MCP 服务、插件 bundle、记忆资源、规则和配置 |
 
-**计划接入：** OpenHands、Pi、Hermes，横幅中一并展示。
+**计划接入：** OpenHands、Pi、Hermes，演示中一并展示。
 
 同一个 Agent 接口既可以作为解题的 Target，也可以作为编辑文件的 Worker。对于请求文本或结构化编辑建议的方法，还可以使用纯 **LLM Worker**。
 
@@ -264,7 +273,7 @@ uv run python examples/agents/native_adapters.py
 示例使用本地子进程和明确模拟的 SDK。更详细的早期实现记录见[归档说明](docs/implementation-notes.zh-CN.md)。
 
 <details>
-<summary>开发检查与横幅生成</summary>
+<summary>开发检查与图片生成</summary>
 
 ```bash
 uv sync --extra dev
@@ -273,7 +282,7 @@ uv run ruff check .
 uv run ruff format --check .
 ```
 
-横幅由 [scripts/render_readme_hero.py](scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。GIF 和静态海报已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
+封面使用[可编辑的动态 SVG](assets/readme/cover.svg) 制作，附[静态预览](assets/readme/cover.png)和[设计说明](assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
 
 </details>
 
