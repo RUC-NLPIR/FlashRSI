@@ -14,9 +14,13 @@ Across tasks, identify recurring behavioral
 deficiencies which changing THIS module could remedy. Do not equate involvement
 in a failure with a causal defect. Return [] if no justified change exists.
 
-Return JSON only: a list of findings, each with exactly these fields:
-{{"target": "one exact editable file path", "task_ids": ["supporting task ID"],
-  "rationale": "cross-task diagnosis", "change": "general reusable change"}}.
+Return JSON only: exactly one array. Each finding has exactly these fields.
+Example with a justified finding:
+[{{"target": "one exact editable file path", "task_ids": ["supporting task ID"],
+  "rationale": "cross-task diagnosis", "change": "general reusable change"}}]
+No justified findings:
+[]
+Do not include Markdown fences, headings, explanations or a bare JSON object.
 Only cite task IDs in the supplied evidence. Findings aimed at the same target
 will be consolidated and ranked by the number of distinct supporting tasks.
 Do not propose task-specific answers, conditions or grader changes.
