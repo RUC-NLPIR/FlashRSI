@@ -4,8 +4,10 @@
 
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
 
+<p align="center"><i>One click to reproduce any RSI algorithm with any benchmark and harness.</i></p>
+
 <p align="center">
-  FlashRSI brings RSI algorithms, benchmarks, and native agent harnesses into one framework for developing and evaluating agent self-improvement. It supports <b>12 algorithms</b> and <b>3 harnesses</b>—MiniAgent, Claude Code, and Codex—with <b>30 benchmark adapters</b> registered in this local integration.
+  FlashRSI brings together <b>12 RSI algorithms</b>, <b>30 benchmarks</b>, and <b>3 harnesses</b>—MiniAgent, Claude Code, and Codex—to reproduce, compare, and develop agent self-improvement methods.
 </p>
 
 <!-- TODO: add paper, project page, and discussion links; set the license before release. -->
@@ -38,51 +40,50 @@
 
 ## Features
 
-- **Combine methods with native harnesses.** Select an algorithm and a compatible harness independently. MiniAgent, Claude Code, and Codex keep their native execution and resource loading.
-- **Control what evolves.** Restrict edits to instructions, skills, tools, or harness code. A Snapshot keeps the complete candidate resources so local changes are evaluated in context.
-- **Keep each method's search logic.** Algorithms share candidate construction, execution, and feedback while controlling their own populations, search history, and selection rules.
-- **Inspect the improvement.** Separate train, dev, and test; retain resource versions, task trajectories, and available usage. Freeze a selected Snapshot for held-out evaluation or transfer experiments.
+- 🧩 **Mix and match.** Choose your RSI algorithm, benchmark, and harness.
+- 🎯 **Control what evolves.** Improve instructions, skills, tools, or harness code.
+- 📸 **Version each candidate.** Keep its resources together in a Snapshot.
+- 📊 **Evaluate generalization.** Track held-out scores, task trajectories, and usage.
 
-See the [usage guide](docs/usage.md) for the framework overview, harness resources, Python API, and extension interfaces.
+[Documentation →](docs/usage.md)
 
 ## Quick start
 
 ### 1. Install
 
-Use **Linux / WSL + Python 3.12** and [uv](https://docs.astral.sh/uv/):
+Use Linux / WSL with Python 3.12. These commands check out code and documentation, omitting `experiments/` and LFS downloads.
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/ignorejjj/FlashRSI.git
+GIT_LFS_SKIP_SMUDGE=1 git clone --filter=blob:none --sparse https://github.com/ignorejjj/FlashRSI.git
 cd FlashRSI
-uv sync --extra miniagent --extra llm
+git sparse-checkout set flashrsi docs examples scripts tests assets
+pip install -e .
 ```
 
 ### 2. Run
 
-In [examples/quickstart.yaml](examples/quickstart.yaml), set the model and API key for **both** `agent.llm` (the target) and `algorithm.worker.llm` (the optimizer). For a custom endpoint, set each role's `base_url` as well. Then run:
+**Command line**
+
+Set `TARGET_API_KEY` and `WORKER_API_KEY` in your shell for the two independent roles. For custom endpoints, also set each role's `llm.base_url`.
 
 ```bash
-uv run flashrsi run --config examples/quickstart.yaml
-```
-
-This runs **SkillOpt × MiniAgent** on a bundled 12-question QA example: one training batch, candidate selection on dev, and final evaluation on test. No dataset download is needed. Snapshots, trajectories, and results are saved under `runs/`.
-
-<details>
-<summary>Pass models and API keys from your shell</summary>
-
-Set `TARGET_MODEL`, `WORKER_MODEL`, `TARGET_API_KEY`, and `WORKER_API_KEY` in your shell, then pass them explicitly:
-
-```bash
-uv run flashrsi run --config examples/quickstart.yaml \
-  --model "$TARGET_MODEL" \
-  --worker-model "$WORKER_MODEL" \
+flashrsi run \
+  --algorithm skillopt --benchmark searchqa --agent miniagent \
+  --model gpt-5-mini --worker-model gpt-5-mini \
   --agent.llm.api_key "$TARGET_API_KEY" \
-  --algorithm.worker.llm.api_key "$WORKER_API_KEY"
+  --algorithm.worker.llm.api_key "$WORKER_API_KEY" \
+  --benchmark.data_path examples/data/quickstart.jsonl \
+  --benchmark.split '{train: 0.5, dev: 0.25, test: 0.25}' \
+  --algorithm.num_epochs 1 --algorithm.max_steps 1
 ```
 
-</details>
+**YAML**
 
-For pip installation, preparation without model calls, different combinations, and custom experiments, see the [usage guide](docs/usage.md).
+Set the model, API key and optional endpoint for both `agent.llm` and `algorithm.worker.llm` in [examples/quickstart.yaml](examples/quickstart.yaml), then run:
+
+```bash
+flashrsi run --config examples/quickstart.yaml
+```
 
 ### Automatically prepare selected dependencies
 

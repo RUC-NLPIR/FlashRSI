@@ -44,26 +44,26 @@ uv run flashrsi run --config examples/quickstart.yaml \
 
 使用其他 harness 或任务集时，可以从对应配置开始：
 
-| 尝试内容 | 配置 | 额外依赖 |
+| 尝试内容 | 配置 | 环境准备 |
 | --- | --- | --- |
-| Codex 同时作为 Target 和 Worker | [examples/codex.yaml](../examples/codex.yaml) | `codex`；运行环境见 [Codex 接入说明](codex.md) |
-| 多跳问答 | [examples/hotpotqa.yaml](../examples/hotpotqa.yaml) | Target 和 Worker 对应的 extras |
+| Codex 同时作为 Target 和 Worker | [examples/codex.yaml](../examples/codex.yaml) | 运行环境见 [Codex 接入说明](codex.md) |
+| 多跳问答 | [examples/hotpotqa.yaml](../examples/hotpotqa.yaml) | 默认安装已包含 |
 | Terminal-Bench 2.0 | [examples/terminal_bench.yaml](../examples/terminal_bench.yaml) | `harbor`、Python 3.12+、Docker |
 | τ³ Banking | [examples/tau3_banking.yaml](../examples/tau3_banking.yaml) | `tau2` 和上游 benchmark |
 
-请为选中的每个角色安装相应 extras。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
+默认安装已包含 MiniAgent、Claude Code 和 LLM Worker 的 Python 依赖。Codex 另需 `codex` extra 及原生构建环境。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
 
-### 使用 pip 安装
+### 使用独立环境安装
 
-除了 README 中的 uv 安装方式，也可以使用 pip：
+如需独立的虚拟环境：
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e '.[miniagent,llm]'
+pip install -e .
 ```
 
-后续命令中的 `uv run flashrsi` 相应改为 `flashrsi`。
+使用 uv 时，运行 `uv sync` 即可。下文使用 `uv run flashrsi`；在激活的 pip 环境中，直接使用 `flashrsi`。
 
 ## 原生 harness
 

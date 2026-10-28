@@ -4,8 +4,10 @@
 
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
 
+<p align="center"><i>One click to reproduce any RSI algorithm with any benchmark and harness.</i></p>
+
 <p align="center">
-  FlashRSI 将 RSI 算法、benchmark 和原生 Agent harness 接入同一个框架，用于开发和评测 Agent 自我改进方法。目前支持 <b>12 种算法</b>和 <b>3 个 harness</b>（MiniAgent、Claude Code、Codex），当前本地整合版本注册 <b>30 个 benchmark 适配器</b>。
+  FlashRSI 集成 <b>12 种 RSI 算法</b>、<b>30 个 benchmark</b> 和 <b>3 个 harness</b>（MiniAgent、Claude Code、Codex），用于复现、比较和开发 Agent 自我改进方法。
 </p>
 
 <!-- TODO: 发布前补充论文、项目主页、讨论区链接和许可证信息。 -->
@@ -38,51 +40,50 @@
 
 ## 主要特性
 
-- **组合算法与原生 harness。** 独立选择算法和兼容的 harness；MiniAgent、Claude Code、Codex 保留各自的原生执行与资源加载方式。
-- **控制改进范围。** 将编辑限制在指令、skills、工具或 harness 代码中。Snapshot 保留完整的候选资源，让局部修改在原有上下文中接受评估。
-- **保留算法自己的搜索逻辑。** 共用候选构造、执行和反馈设施，由各方法自行组织种群、搜索历史与筛选规则。
-- **查看改进效果与过程。** 分离 train、dev、test，记录资源版本、任务轨迹与可用的用量统计；冻结选中的 Snapshot，开展 held-out 评估或迁移实验。
+- 🧩 **自由组合。** 独立选择 RSI 算法、benchmark 和 harness。
+- 🎯 **控制改进范围。** 演化指令、skills、工具或 harness 代码。
+- 📸 **记录候选版本。** 用 Snapshot 保存完整的候选资源。
+- 📊 **检验泛化效果。** 追踪独立测试分数、任务轨迹与开销。
 
-框架机制、harness 资源、Python API 与扩展接口见[使用指南](docs/usage.zh-CN.md)。
+[使用文档 →](docs/usage.zh-CN.md)
 
 ## 快速开始
 
 ### 1. 安装
 
-使用 **Linux / WSL + Python 3.12** 和 [uv](https://docs.astral.sh/uv/)：
+推荐 Linux / WSL + Python 3.12。以下命令只展开代码和文档，跳过 `experiments/` 与 LFS 大文件。
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/ignorejjj/FlashRSI.git
+GIT_LFS_SKIP_SMUDGE=1 git clone --filter=blob:none --sparse https://github.com/ignorejjj/FlashRSI.git
 cd FlashRSI
-uv sync --extra miniagent --extra llm
+git sparse-checkout set flashrsi docs examples scripts tests assets
+pip install -e .
 ```
 
 ### 2. 一键运行
 
-在 [examples/quickstart.yaml](examples/quickstart.yaml) 中，为 `agent.llm`（解题的 Target）和 `algorithm.worker.llm`（执行改进的 Worker）**分别**填写模型与 API key。使用自定义端点时，还需分别设置 `base_url`。然后运行：
+**命令行**
+
+先在 shell 中设置 `TARGET_API_KEY` 和 `WORKER_API_KEY`，分别对应 Target 和 Worker；两者互不继承。自定义端点还需分别设置各角色的 `llm.base_url`。
 
 ```bash
-uv run flashrsi run --config examples/quickstart.yaml
-```
-
-示例采用 **SkillOpt × MiniAgent**，在附带的 12 道本地 QA 题目上执行一个训练 batch、dev 候选筛选与最终 test 评估，无需下载数据集。Snapshot、轨迹和结果保存在 `runs/` 下。
-
-<details>
-<summary>从 shell 传入模型和 API key</summary>
-
-在 shell 中设置 `TARGET_MODEL`、`WORKER_MODEL`、`TARGET_API_KEY` 和 `WORKER_API_KEY`，再显式传入：
-
-```bash
-uv run flashrsi run --config examples/quickstart.yaml \
-  --model "$TARGET_MODEL" \
-  --worker-model "$WORKER_MODEL" \
+flashrsi run \
+  --algorithm skillopt --benchmark searchqa --agent miniagent \
+  --model gpt-5-mini --worker-model gpt-5-mini \
   --agent.llm.api_key "$TARGET_API_KEY" \
-  --algorithm.worker.llm.api_key "$WORKER_API_KEY"
+  --algorithm.worker.llm.api_key "$WORKER_API_KEY" \
+  --benchmark.data_path examples/data/quickstart.jsonl \
+  --benchmark.split '{train: 0.5, dev: 0.25, test: 0.25}' \
+  --algorithm.num_epochs 1 --algorithm.max_steps 1
 ```
 
-</details>
+**YAML**
 
-使用 pip 安装、不调用模型的实验准备、更换组合与自定义实验，见[使用指南](docs/usage.zh-CN.md)。
+在 [examples/quickstart.yaml](examples/quickstart.yaml) 中分别填写 `agent.llm` 和 `algorithm.worker.llm` 的模型、密钥及可选端点，再运行：
+
+```bash
+flashrsi run --config examples/quickstart.yaml
+```
 
 ### 自动配置依赖的入口
 
