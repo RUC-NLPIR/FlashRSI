@@ -17,7 +17,7 @@ agent:
   name: miniagent
   max_turns: 6
   llm:
-    model_name: your-target-model
+    model_name: gpt-5-mini
     api_key: null
     base_url: null
 
@@ -31,6 +31,6 @@ algorithm:
   worker:
     type: llm
     llm:
-      model_name: your-worker-model
+      model_name: gpt-5-mini
       api_key: null
       base_url: null

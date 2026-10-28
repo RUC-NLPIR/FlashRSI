@@ -44,26 +44,26 @@ uv run flashrsi run --config examples/quickstart.yaml \
 
 For another harness or task suite, start with a matching configuration:
 
-| Try | Configuration | Extra dependency |
+| Try | Configuration | Environment setup |
 | --- | --- | --- |
-| Codex as Target and Worker | [examples/codex.yaml](../examples/codex.yaml) | `codex`; see the [runtime setup](codex.md) |
-| Multi-hop question answering | [examples/hotpotqa.yaml](../examples/hotpotqa.yaml) | Target and Worker extras |
+| Codex as Target and Worker | [examples/codex.yaml](../examples/codex.yaml) | See the [runtime setup](codex.md) |
+| Multi-hop question answering | [examples/hotpotqa.yaml](../examples/hotpotqa.yaml) | Included |
 | Terminal-Bench 2.0 | [examples/terminal_bench.yaml](../examples/terminal_bench.yaml) | `harbor`, Python 3.12+, Docker |
 | τ³ Banking | [examples/tau3_banking.yaml](../examples/tau3_banking.yaml) | `tau2` and the upstream benchmark |
 
-Install the extras for each selected role. Harbor and tau2 need separate environments because their upstream dependencies conflict. See the [Terminal-Bench guide](terminal-bench.md), [Codex guide](codex.md), and linked configurations for setup and validation coverage.
+The default installation includes the Python dependencies for the harnesses and LLM Worker. Harbor and tau2 need separate environments because their upstream dependencies conflict. See the [Terminal-Bench guide](terminal-bench.md), [Codex guide](codex.md), and linked configurations for setup and validation coverage.
 
-### Install with pip
+### Isolated installation
 
-As an alternative to the README's uv installation:
+To use a dedicated virtual environment:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e '.[miniagent,llm]'
+pip install -e .
 ```
 
-Use `flashrsi` in place of `uv run flashrsi` in subsequent commands.
+For uv, use `uv sync` instead. Commands below use `uv run flashrsi`; use `flashrsi` directly in an activated pip environment.
 
 ## Native harnesses
 
