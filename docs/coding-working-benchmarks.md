@@ -62,6 +62,8 @@ revision `5a2215ed4121945ab09d8723df2995602090b042` 的 `spreadsheetbench-v2-09-
 Harbor 将交付物转交独立评分容器，评分容器重新计算原始输入、标准答案和交付物，调用官方
 `evaluation.py` 的 `process_single_item`。两个官方 Python 文件原样复制，未重写评分规则；
 Agent 与独立评分容器分别从 `environment/` 和 `tests/` 构建；两个目录均提供基于官方 recipe 的 Dockerfile。
+独立 verifier 的 Dockerfile 将私有 `tests/` 上下文复制到 `/tests/`，因为 Harbor 的 separate
+模式不会再上传评分文件。标准工作簿只进入评分镜像，不进入 Agent 的构建上下文。
 保留 Debugging 文件名驱动的 Color / Embedded 模式和原生容差。
 原生 LibreOffice helper 会吞掉部分错误，接入层通过保存时间检查检测未成功重算，明确报错。
 

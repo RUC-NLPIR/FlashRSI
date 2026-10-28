@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import math
 import os
@@ -110,6 +111,7 @@ async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
         "type": "HarborVerifier",
         "task_id": task.task_id,
         "task_checksum": checksum,
+        "snapshot_id": snapshot.id,
     }
 
     with TemporaryDirectory(prefix="flashrsi-harbor-") as temporary:
@@ -122,7 +124,11 @@ async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
             trial = await Trial.create(
                 TrialConfig(
                     task=TaskConfig(path=Path(task.env)),
-                    trials_dir=root / "trials",
+                    trials_dir=(
+                        Path(options["trials_dir"]).expanduser().resolve()
+                        if options.get("trials_dir")
+                        else root / "trials"
+                    ),
                     agent=AgentConfig(
                         import_path="flashrsi.integrations.harbor:_SnapshotAgent",
                         model_name=config["llm"]["model_name"],
@@ -193,6 +199,24 @@ async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
         finally:
             if trial is not None:
                 try:
+                    if options.get("trials_dir"):
+                        # Use Harbor's own collected outputs, outside the temporary payload
+                        # and Snapshot. Bind retained bytes to the evaluated version/task.
+                        directory = trial.paths.trial_dir.resolve()
+                        event["trial_directory"] = str(directory)
+                        event["files"] = {
+                            str(file.relative_to(directory)): hashlib.sha256(
+                                file.read_bytes()
+                            ).hexdigest()
+                            for folder in (
+                                trial.paths.artifacts_dir,
+                                trial.paths.verifier_dir,
+                            )
+                            for file in sorted(folder.rglob("*"))
+                            if file.is_file()
+                            and not file.is_symlink()
+                            and file.resolve().is_relative_to(directory)
+                        }
                     event["artifacts"] = _archive_trial(
                         trial,
                         options.get("artifacts_dir", "runs/artifacts/harbor"),
@@ -300,6 +324,7 @@ def _stage(directory, agent, config, prompt):
     config = copy.deepcopy(config)
     config.get("harbor", {}).pop("integrity_review", None)
     config.get("harbor", {}).pop("artifacts_dir", None)
+    config.get("harbor", {}).pop("trials_dir", None)
     # Keep evaluation rules outside the candidate's mutable snapshot. Public
     # benchmark repositories expose hidden tests and oracle answers online.
     prompt += (

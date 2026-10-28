@@ -150,9 +150,13 @@ def _materialize(category, row, workbook, golden, native, dockerfile):
         "environment/open_spreadsheet.py": native["open_spreadsheet.py"],
         "environment/_recalculate.py": recalculate,
         # Harbor builds a separate verifier from tests/, not environment/.
-        # Install the same native tools there; Harbor uploads private grading
-        # files only to that container, never into the agent's image.
-        "tests/Dockerfile": (dockerfile + "\nRUN pip install tqdm\n").encode(),
+        # Install the same native tools there; private grading files belong
+        # only to that container, never in the agent's image.
+        # Separate mode skips verifier test upload: this private image must
+        # already contain /tests. Its context is never used for the agent.
+        "tests/Dockerfile": (
+            dockerfile + "\nRUN pip install tqdm\nCOPY . /tests/\n"
+        ).encode(),
         "tests/test.sh": b"#!/bin/bash\nset -euo pipefail\n/usr/local/bin/python /tests/_verify.py\n",
         "tests/_verify.py": (package / "_verify.py").read_bytes(),
         "tests/_recalculate.py": recalculate,
