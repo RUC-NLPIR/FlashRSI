@@ -8,4 +8,4 @@
 
 HotpotQA 与 MuSiQue 共用 QA 基类中的完整题池检查和 train 替换实现，各自保留数据契约、原生来源和评分器。算法、gate、角色预算都没有改变。Claude Code 按 [公开三扩展示例](../examples/modular_rsi_claude_code.yaml) 配置 `agent.source_dir` 和 prompt/skill/hook，MiniAgent 保留五个模块。
 
-原生 dev 是带标签的公开池。这里的实验 test 是自定义 held-out，不代表官方隐藏 test 或完整榜单成绩。离线检查、真实数据准备与两 Target 的模型 smoke 分别记录在 [Smoke 表](smoke-matrix.md)，旧缺数据拒绝及失败历史继续保留。
+原生 dev 是带标签的公开池。这里的实验 test 是自定义 held-out，不代表官方隐藏 test 或完整榜单成绩。离线检查、真实数据准备与两 Target 的模型 smoke 分别记录在 本地记录 `smoke-matrix.md`，旧缺数据拒绝及失败历史继续保留。

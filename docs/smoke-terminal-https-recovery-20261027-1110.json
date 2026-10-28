@@ -1,6 +1,0 @@
-{
-  "status": "free_dependency_setup_started",
-  "model_dispatch": "conditional_after_free_setup",
-  "control": "/root/.cache/terminal-https-recovery-1110",
-  "note": "最新用户要求：可恢复环境问题由代理自主修复并排恢复验证，不将尚未恢复作为交付或等待用户。2026-10-27已实际启动原机/root/.cache/terminal-https-recovery-1110/recover.py supervisor8132及私有代理8118。仅Ubuntu官方archive/security主机HTTP GET转同主机HTTPS，经既有loopback代理；不改产品/任务/评分。原生任务镜像零模型apt ca-certificates/curl及uv0.11.4安装验证，600秒有界，失败保存state/setup.log停止该付费恢复；通过且engine稳定后自动创建/root/.cache/terminal-rrsi-https-recovery-1110并独占锁一次派发，使用原source228/111/80轮2400秒，只换container proxy，report smoke-terminal-rrsi-https-recovery-20261027.json。先查state/dispatch-once/plan/paid不能重复。用户要求每30分钟检查及结束立即接续继续有效。非行动性状态保持安静；通知实际通过、重要失败诊断或需用户条件，继续自主处理可恢复故障。"
-}

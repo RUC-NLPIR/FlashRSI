@@ -1,9 +1,0 @@
-{
-  "sockets": [
-    {
-      "path": "/var/ebcloud/1a19514a-da83-44bf-ad67-397ede8f865f/dind/docker.sock",
-      "exit_code": 0,
-      "engine_id": "03f20045-8a39-4937-bbf7-1e9286b612b0"
-    }
-  ]
-}

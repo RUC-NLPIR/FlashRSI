@@ -93,8 +93,8 @@ SuperGPQA：[论文](https://arxiv.org/abs/2502.14739)、[上游仓库](https://
 数据集为 ODC-BY，组成内容保留各自的许可与署名要求。运行数据没有随包分发，
 研究引用应同时遵循上游 README 的来源说明。
 
-验证证据见 [本轮报告](validation-lightweight-benchmarks-20261025.json) 和
-[Smoke 验证表](smoke-matrix.md)。真实数据获取、全量 schema 与参考答案自检、离线测试、
+验证证据见 本地记录 `validation-lightweight-benchmarks-20261025.json` 和
+本地记录 `smoke-matrix.md`。真实数据获取、全量 schema 与参考答案自检、离线测试、
 wheel 入口验证分别记录；这些均不替代算法 × Target Agent × Benchmark 的真实模型 smoke。
 本轮没有可用的角色 API 密钥，尚未运行真实模型演化。
 

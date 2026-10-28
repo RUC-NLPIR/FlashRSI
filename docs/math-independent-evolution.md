@@ -8,4 +8,4 @@
 
 示例明确使用整个 `geometry/train` 子集。这是按原生科目指定的来源，不是完整 MATH train 的验证：全七科原始 train 中发现两条空 `\\boxed{}` 参考答案及重复问题，当前加载器会拒绝不满足数据契约的原始记录；没有补写答案、跳过错误或放宽评分。数据来源范围必须随结果一同报告。自定义 1/1/1 是实验划分，不代表官方独立测试榜单。
 
-Claude Code 使用 [公开三扩展示例](../examples/modular_rsi_claude_code.yaml) 的 `agent.source_dir` 和 prompt/skill/hook 模块映射；Worker 仍使用自身独立配置。配置准备、离线参考评分与真实两 Target 模型 smoke 分别记账，见 [Smoke 表](smoke-matrix.md)。
+Claude Code 使用 [公开三扩展示例](../examples/modular_rsi_claude_code.yaml) 的 `agent.source_dir` 和 prompt/skill/hook 模块映射；Worker 仍使用自身独立配置。配置准备、离线参考评分与真实两 Target 模型 smoke 分别记账，见 本地记录 `smoke-matrix.md`。

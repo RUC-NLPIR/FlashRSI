@@ -120,7 +120,7 @@ python scripts/run_experiment.py --config examples/quickstart_launch.yaml
 
 ## 支持的 Benchmarks
 
-当前版本注册 **30 个适配器**。完整示例和前置条件见[配置索引](docs/benchmark-quickstart.md)，真实运行覆盖见[Smoke 验证表](docs/smoke-matrix.md)；注册不代表任意组合均已完成真实实验。
+当前版本注册 **30 个适配器**。完整示例和前置条件见[配置索引](docs/benchmark-quickstart.md)。Smoke 结果和验证报告仅在本地保存，不随源码发布；注册不代表任意组合均已完成真实实验。
 
 | Benchmark | 任务 | 评分 |
 | --- | --- | --- |

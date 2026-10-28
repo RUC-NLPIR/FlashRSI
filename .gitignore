@@ -14,3 +14,10 @@ dist/
 runs/
 .cache/
 experiments/.preparing-*/
+
+# Local smoke results, validation reports, and integration journals
+/docs/smoke*
+/docs/validation-*
+/docs/core-source-audit*
+/docs/main-sync-*
+/docs/git-integration-*

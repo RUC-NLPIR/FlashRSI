@@ -1,9 +1,0 @@
-{
-  "engine_before": "c70c50d1-b854-45a5-a1ff-ee417de50a92",
-  "engine_after": "c70c50d1-b854-45a5-a1ff-ee417de50a92",
-  "same_engine": true,
-  "container": "flashrsi-terminal-resource-proof-newengine",
-  "exit_code": 0,
-  "model_calls": 0,
-  "note": "Task image startup with native CPU/memory limits; not full Harbor setup or scoring."
-}

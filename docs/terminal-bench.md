@@ -37,4 +37,4 @@ Claude Code 的 shell / 文件工具应按示例授权。Codex 的源码模式�
 
 Harbor 负责 trial 的环境生命周期和原生评分；框架保留 Snapshot、轨迹、分数和日志。
 临时 trial 中的交付文件尚未统一长期归档，详细边界见 [Coding / Working 接入](coding-working-benchmarks.md)。
-真实组合验证与历史证据见 [Smoke 验证表](smoke-matrix.md)。
+真实组合验证与历史证据见 本地记录 `smoke-matrix.md`。

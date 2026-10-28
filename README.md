@@ -119,7 +119,7 @@ These implementations adapt each method to FlashRSI's resource and evaluation in
 
 ## Supported Benchmarks
 
-This integration registers **30 adapters**. See the [configuration index](docs/benchmark-quickstart.md) for examples and prerequisites, and the [smoke matrix](docs/smoke-matrix.md) for actual run coverage. Registration does not imply every combination has been validated.
+This integration registers **30 adapters**. See the [configuration index](docs/benchmark-quickstart.md) for examples and prerequisites. Smoke results and validation reports are local artifacts and are not distributed with the source. Registration does not imply every combination has been validated.
 
 | Benchmark | Tasks | Scoring |
 | --- | --- | --- |

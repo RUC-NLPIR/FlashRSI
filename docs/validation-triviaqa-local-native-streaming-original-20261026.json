@@ -1,8 +1,0 @@
-{
-  "status": "blocked",
-  "scope": "Existing public datasets streaming local-directory source, full native validation; zero model calls",
-  "new_model_calls": 0,
-  "error_type": "ValueError",
-  "error": "BuilderConfig 'rc.wikipedia' not found. Available: ['default']",
-  "checked_at": "2026-10-26T04:42:59.217573+00:00"
-}

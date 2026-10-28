@@ -48,4 +48,4 @@ Docker Linux daemon 和 Compose；自动获取数据需要 Git。`--plan` 只显
 这是接入现有 Agent 的评测接口，不声称复现官方榜单的模型、预算或 harness 配置。
 原生任务、镜像和真实容器行为尚未验证；离线测试仅确认格式解析、划分、网络策略参数传递和结果映射。
 
-验证记录：[接口验证报告](validation-deepswe-interface-20261028.json)。
+验证记录：本地记录 `validation-deepswe-interface-20261028.json`。

@@ -36,7 +36,7 @@ builder 的配置名为 `default`。此来源字符串遵循 `datasets` 本身�
 
 ## 原生 SearchQA split 的重合诊断
 
-[公开示例](../examples/modular_rsi_searchqa.yaml) 声明完整原生 train ZIP 演化、完整 validation ZIP 作自定义下游 1/1/1 划分，用于检查来源独立性。真实全池核查已确认该配置会在 `--check-only` 拒绝：train/validation、train/test、validation/test 分别有 439、145、23 个规范化问题交集。它目前不是可直接正式运行的 ModularRSI 配方，不能删题或关闭检查来使它通过；见[完整原生来源核查](smoke-searchqa-native-pool-overlap-20261026.json)。后续需真正独立的来源；公开 `data_path` 可指定真实独立的原生格式下游数据，仍接受同样的全池检查。
+[公开示例](../examples/modular_rsi_searchqa.yaml) 声明完整原生 train ZIP 演化、完整 validation ZIP 作自定义下游 1/1/1 划分，用于检查来源独立性。真实全池核查已确认该配置会在 `--check-only` 拒绝：train/validation、train/test、validation/test 分别有 439、145、23 个规范化问题交集。它目前不是可直接正式运行的 ModularRSI 配方，不能删题或关闭检查来使它通过；见本地记录 `smoke-searchqa-native-pool-overlap-20261026.json`。后续需真正独立的来源；公开 `data_path` 可指定真实独立的原生格式下游数据，仍接受同样的全池检查。
 
 通过统一入口的 `--plan`、`--check-only` 后，条件具备时才正式运行。首次准备可能需要下载较大的原生 ZIP；已有完整 Hugging Face 缓存可以复用。本轮仅做零模型来源检查，没有因为该配置重复付费。
 
@@ -44,4 +44,4 @@ builder 的配置名为 `default`。此来源字符串遵循 `datasets` 本身�
 
 来源固定为 `kyunghyuncho/search_qa` 的 `train_test_val`，revision `06907e45883b7cae435453b65d598447039fde79`。元数据记录实际 source/revision/native split、全池数量和校验和。原始问题、搜索片段、答案和既有 text EM/F1 评分均保留；空 snippet 仍按原有规则处理。实现复用 QA 基类的完整来源检查，不修改算法、gate 或预算。
 
-MiniAgent 使用五模块，Claude Code 使用[公开 prompt/skill/hook 三扩展示例](../examples/modular_rsi_claude_code.yaml)。数据准备、离线验证与真实模型 smoke 分别记录在 [Smoke 表](smoke-matrix.md)，旧缺来源拒绝和失败历史保留。
+MiniAgent 使用五模块，Claude Code 使用[公开 prompt/skill/hook 三扩展示例](../examples/modular_rsi_claude_code.yaml)。数据准备、离线验证与真实模型 smoke 分别记录在 本地记录 `smoke-matrix.md`，旧缺来源拒绝和失败历史保留。

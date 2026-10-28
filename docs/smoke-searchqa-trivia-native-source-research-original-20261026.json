@@ -1,8 +1,0 @@
-{
-  "new_model_calls": 0,
-  "source_data_modified": false,
-  "scope": "Whole TriviaQA native train vs all three complete native SearchQA pools; identity research only, no public evolution configuration or model pass",
-  "status": "waiting_for_previous_queue",
-  "updated_at": "2026-10-26T05:18:12.011624+00:00",
-  "previous_control": "/root/flashrsi-triviaqa-evolution-public-20261026/independent-triviaqa2-20261026"
-}

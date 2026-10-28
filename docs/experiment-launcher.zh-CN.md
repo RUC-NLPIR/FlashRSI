@@ -6,7 +6,7 @@ FlashRSI 用同一套实验入口连接 Algorithm、Benchmark 和 Agent，记录
 当前注册 12 个算法、3 个 Target Agent、30 个 Benchmark；接入范围及各项额外配置见
 [Benchmark 配置索引](benchmark-quickstart.md)。注册数量不表示所有组合均已通过真实运行。
 
-当前优先组合的真实运行进度与证据见 [Smoke 验证表](smoke-matrix.md)。
+Smoke 结果、验证报告和临时集成记录仅在运行者本地保存，不随源码发布。指南中提到的本地记录路径不会出现在新克隆的仓库中；请依据自己的运行结果判断组合是否通过。
 
 首次体验也可使用附带 12 道题的 [quickstart_launch.yaml](../examples/quickstart_launch.yaml)，无需下载 SearchQA 全量数据。Codex 的额外工具链和 Responses API 要求见 [Codex 指南](codex.md)。
 
@@ -268,4 +268,3 @@ YAML 中的 `run.output_dir`、数据路径（含 `evolution_data_path`）、语
 本仓库当前还缺少项目级 `LICENSE` 和完整的第三方归属清单；部分移植提示词只有来源/commit 注释。
 维护者需在正式开源发布前明确项目许可证，并核对随源码分发部分的许可及归属信息。
 本次检查没有代替维护者选择许可证，也没有把“能够运行实验”当作发布许可已齐备。
-本次 main 同步与离线验证范围见[同步记录](main-sync-20261028.md)。

@@ -112,6 +112,6 @@ Agent 的文件系统安全隔离，数据目录应视作评测基础设施。
 本阶段仅接入三个标准文本领域；未接入语音、多语言、solo、telecom workflow 变体、
 多次试验统计或新的 Agent harness。`mode: voice` 等不支持的配置会明确报错。
 
-验证详情见[本轮报告](validation-tau2-20261025.json)与 [Smoke 验证表](smoke-matrix.md)。
+验证详情见本地记录 `validation-tau2-20261025.json`与 本地记录 `smoke-matrix.md`。
 原生离线用例运行真实环境、工具和评分器，仅替换模型回复；不能算作真实模型演化
 smoke。目前没有配置各角色 API 凭据，真实算法 × Target × τ² 组合仍待验证。

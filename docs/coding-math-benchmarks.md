@@ -106,8 +106,8 @@ AIME 使用上述 math-ai 镜像，数据卡标注 Apache-2.0；没有将镜像�
 提示 AST 与固定上游 commit 对齐。来源还包括 [CRUXEval 论文](https://arxiv.org/abs/2401.03065)
 及其[原始评估逻辑](https://github.com/facebookresearch/cruxeval/blob/190faf16d175b5847b0af05d937872b1fb395942/evaluation/utils_general.py)。
 
-验证记录见[本轮报告](validation-coding-math-benchmarks-20261025.json)和
-[Smoke 验证表](smoke-matrix.md)。全量数据加载、参考答案回填与格式化答案回填
+验证记录见本地记录 `validation-coding-math-benchmarks-20261025.json`和
+本地记录 `smoke-matrix.md`。全量数据加载、参考答案回填与格式化答案回填
 用于检查适配器和评分协议，不等于模型解题，也不验证参考答案在数学或程序上的正确性。
 真实算法 × Target Agent × Benchmark 模型 smoke 尚未运行；本地未配置角色 API 密钥。
 

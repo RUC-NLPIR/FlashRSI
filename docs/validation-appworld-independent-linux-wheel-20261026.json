@@ -1,8 +1,0 @@
-{
-  "model_calls": 0,
-  "status": "passed",
-  "source": "fresh wheel installed package, explicit warmed dependency path",
-  "module_sha256": "614a1384eaf1293ea6a4adcbd3499f61e594a4f607602327e745737bcbc8cfe3",
-  "tests_output": "..........                                                               [100%]\n10 passed in 0.15s\n",
-  "setup_history": "Initial pip saw same-version controller package through pth and skipped install. Preserved failing fixture log; force isolated installation with ignore-installed and verify exact installed byte identity before rerun."
-}

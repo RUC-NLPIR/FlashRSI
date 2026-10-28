@@ -1,6 +1,0 @@
-{
-  "observed_at": "2026-10-27T16:47:00+08:00",
-  "note": "2026-10-27 16:47实查：无新增通过/Benchmark，总账441/113/22/24/24。OfficeADAS1615 needs_attention（1Targeterror2finished1Workerfinished，usage齐source未变）；DarwinX1615 public25297真实running已3Target2Workerfinished，SkillOpt1615仍pending未paid，顺序followup保留。WideMetaHarness1618已execution_failed，1Target JudgeError+1Worker60轮error，usage齐source267未变，paidmarker保留不重派；磁盘416837632bytes，暂不派新模型。已启动env-cleanup-review-1645旧searchqa环境proc/pth引用只读核查，但SSH读通道超时，未确认完整结果，未删任何env；下轮先查references.json及真实进程，确认已完成可重建、全部引用和未来配置保护后才清。原机SSH31447仍连接拒绝，状态未知。OfficeADAS及WideMetaHarness终结报告已SFTP保存，无产品修改/无清理。",
-  "new_passes": 0,
-  "new_benchmarks": []
-}

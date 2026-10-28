@@ -4,7 +4,7 @@
 
 从项目根目录用 `python scripts/run_experiment.py --config examples/<示例>.yaml --plan` 查看所选依赖，再填配置运行 `--check-only`，最后去掉该参数开始实验。两个模型角色及 Judge / User Simulator / Postprocess 互不继承凭据。示例包含不同算法，切换时也需保留对应组件配置。
 
-注册、离线接口测试、真实 smoke 是不同状态。真实覆盖以 [Smoke 验证表](smoke-matrix.md) 为准；Codex 此次合入不表示 30 项均已用它完成真实运行。完整入口说明见[一键实验指南](experiment-launcher.zh-CN.md)。
+注册、离线接口测试、真实 smoke 是不同状态。Smoke 结果和验证报告仅本地保存，不随源码发布；Codex 此次合入不表示 30 项均已用它完成真实运行。完整入口说明见[一键实验指南](experiment-launcher.zh-CN.md)。
 
 | 领域 | Registry ID | 完整示例 | 额外准备 / 接入边界 |
 | --- | --- | --- | --- |

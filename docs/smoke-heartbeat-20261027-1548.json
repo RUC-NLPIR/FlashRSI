@@ -1,6 +1,0 @@
-{
-  "observed_at": "2026-10-27T15:48:00+08:00",
-  "note": "2026-10-27 15:48实查：无新增通过/无新增Benchmark，总账441/113/22/24/24保持。OfficeEvoPrompt1515已needs_attention，2Targetfinished3Target80轮error、3Workerfinished，usage齐source未变。OfficeGEPA1515原followup因前项短暂pending误记blocked_previous_status，已保存attempt01-pending-race，外部调度脚本仅把pending纳入等待（非产品改动），确认无paid/dispatch后恢复；现controller由followup23068派发、public23075真实experiment且唯一paid。原机31447仍SSH连接拒绝，当前模型状态未知。smoke3无队列，pidnamespace与bootid保持；查到loopback33616不在，已重建唯一SSH reverse转本地7897（本地session70690），免费models200通过、0模型，proof process-survival-1516/network-recovery.json。Wide1418仍interrupted_unknown/usage未知，不自动重派；网络恢复不能反推旧中断原因。无环境清理/无产品改动。",
-  "new_passes": 0,
-  "new_benchmarks": []
-}

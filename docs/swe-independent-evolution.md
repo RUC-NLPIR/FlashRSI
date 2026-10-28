@@ -27,4 +27,4 @@ Docker 连接和固定官方评估器仍须可用；原生字段和零模型启�
 此前完整 SWE-bench train 19,008题的 image/eval_script/log_parser 全为空，
 原拒绝证据继续保留。不能为使旧集合通过而伪造字段、删除问题，或把
 Verified heldout 挪作演化数据。每批次独立保存来源和配置；真实结果维护在
-[Smoke 表](smoke-matrix.md)。
+本地记录 `smoke-matrix.md`。

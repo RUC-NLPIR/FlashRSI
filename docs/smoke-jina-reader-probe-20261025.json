@@ -1,7 +1,0 @@
-{
-  "scope": "one bounded independent reader diagnostic,zero model calls",
-  "result": {
-    "http_status": 200,
-    "bytes_at_most_2MiB": 462973
-  }
-}

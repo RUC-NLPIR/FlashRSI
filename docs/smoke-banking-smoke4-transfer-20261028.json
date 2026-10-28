@@ -1,7 +1,0 @@
-{
-  "bytes": 188855967,
-  "sha256": "11af9378ec55c6558c816b84cc92873c132f54a79535e4855ae4e656a2424246",
-  "source": "smoke3 existing pinned native env and Banking frozen root",
-  "destination": "smoke4:33746",
-  "model_calls": 0
-}

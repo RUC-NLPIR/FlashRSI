@@ -74,7 +74,7 @@ Agent 与独立评分容器分别从 `environment/` 和 `tests/` 构建；两个
 
 ## 本轮验证边界
 
-见[验证报告](validation-coding-working-20261028.json)和[Smoke 表](smoke-matrix.md)。
+见本地记录 `validation-coding-working-20261028.json`和本地记录 `smoke-matrix.md`。
 本轮机器缺少 Docker CLI，未执行新基准的容器或真实模型组合。真实数据加载、原生配置解析、
 离线评分控制、单元测试和 wheel 入口核验均单独记录；旧 Terminal 2.0 smoke 不计为 2.1 通过。
 
