@@ -23,7 +23,9 @@ def tagged(reply: str, tag: str) -> str:
     An untagged reply is taken whole, which is what a provider that simply
     answered produces.
     """
-    found = re.findall(f"<{tag}>(.*?)</{tag}>", reply, flags=re.DOTALL)
+    tag = re.escape(tag)
+    # A prose mention of an opening tag must not swallow a later complete block.
+    found = re.findall(f"<{tag}>((?:(?!<{tag}>).)*?)</{tag}>", reply, flags=re.DOTALL)
     return _text(found[-1] if found else reply)
 
 

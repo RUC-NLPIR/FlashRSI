@@ -36,7 +36,7 @@ def plugin_agent(tmp_path):
     for relative, content in files.items():
         path = bundle / relative
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content)
+        path.write_bytes(content.encode())
     runtime_files = {
         "plugins/data/demo@flashrsi/session.json": '{"last_task": "PRIVATE_TASK"}',
         "plugins/data/demo@flashrsi/oauth.json": '{"refresh_token": "PRIVATE_TOKEN"}',
@@ -47,7 +47,7 @@ def plugin_agent(tmp_path):
     for relative, content in runtime_files.items():
         path = source / relative
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content)
+        path.write_bytes(content.encode())
     agent = Codex(
         {"source_dir": source, "llm": {"model_name": "gpt-5", "api_key": "test"}}
     )

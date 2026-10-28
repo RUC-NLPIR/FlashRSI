@@ -1,4 +1,8 @@
-"""Built-in evolution algorithms."""
+"""Built-in evolution algorithms.
+
+Additional algorithms imported from https://github.com/ignorejjj/FlashRSI-Lite
+at d8d5e35e77e1c0360a1df55505db3cfb2b113cd0. Existing local ports are retained.
+"""
 
 from flashrsi.algorithms.ace import ACE
 from flashrsi.algorithms.adas import ADAS

@@ -51,7 +51,7 @@ For another harness or task suite, start with a matching configuration:
 | Terminal-Bench 2.0 | [examples/terminal_bench.yaml](../examples/terminal_bench.yaml) | `harbor`, Python 3.12+, Docker |
 | τ³ Banking | [examples/tau3_banking.yaml](../examples/tau3_banking.yaml) | `tau2` and the upstream benchmark |
 
-The default installation includes the Python dependencies for the harnesses and LLM Worker. Harbor and tau2 need separate environments because their upstream dependencies conflict. See the [Terminal-Bench guide](terminal-bench.md), [Codex guide](codex.md), and linked configurations for setup and validation coverage.
+The default installation includes the Python dependencies for MiniAgent, Claude Code and the LLM Worker. Codex additionally requires the `codex` extra and its native build prerequisites. Harbor and tau2 need separate environments because their upstream dependencies conflict. See the [Terminal-Bench guide](terminal-bench.md), [Codex guide](codex.md), and linked configurations for setup and validation coverage.
 
 ### Isolated installation
 
@@ -64,6 +64,8 @@ pip install -e .
 ```
 
 For uv, use `uv sync` instead. Commands below use `uv run flashrsi`; use `flashrsi` directly in an activated pip environment.
+
+See also the [30-benchmark configuration index](benchmark-quickstart.md) and [automatic launcher guide](experiment-launcher.zh-CN.md).
 
 ## Native harnesses
 

@@ -1,0 +1,32 @@
+# Copy to a *.local.yaml and fill both independent model/API configurations.
+# Python 3.12+, Git; bundled MiniAgent shell runs on Linux/WSL/macOS.
+run:
+  output_dir: ../runs
+benchmark:
+  name: workbench
+  # Downloads/reuses pinned original tools, databases and v2 task outcomes.
+  # Optional data_path: /absolute/path/to/native/WorkBench/data
+  # Optional domains: [email, calendar, analytics, project_management,
+  #                    customer_relationship_manager, multi_domain]
+  seed: 42
+  # Explicit experimental partition, not an official train/dev/test split.
+  split_counts: {train: 1, dev: 1, test: 1}
+agent:
+  name: miniagent
+  max_turns: 8
+  timeout: 600
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    api_key:
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  worker:
+    type: llm
+    timeout: 180
+    llm:
+      model_name: deepseek-flash
+      base_url: https://api.deepseek.com
+      api_key:

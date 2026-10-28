@@ -3,10 +3,20 @@
 from __future__ import annotations
 
 import random
+from dataclasses import dataclass
 
 from flashrsi.algorithms import _replies
 from flashrsi.algorithms.opro import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
+
+
+@dataclass(frozen=True, slots=True)
+class _Scored:
+    """One evaluated instruction: the unit OPRO accumulates and re-ranks."""
+
+    text: str
+    score: float
+    snapshot: Snapshot
 
 
 class OPRO(Algorithm):
@@ -47,47 +57,42 @@ class OPRO(Algorithm):
         results = await self._evaluate(current, train, label="baseline")
         # The starting instruction is row zero of the history OPRO re-ranks.
         self._history = [
-            {
-                "text": self._read_text(current).get(path, ""),
-                "score": results.score,
-                "snapshot_id": current.id,
-            }
+            _Scored(self._read_text(current).get(path, ""), results.score, current)
         ]
-        self._snapshots = {current.id: current}
         self._leader = results
 
         for step in range(self.config.max_steps):
             parent = self._best()
             for text in await self._propose(step):
-                candidate = self._candidate(
-                    self._snapshots[parent["snapshot_id"]], {path: text}
-                )
+                candidate = self._candidate(parent.snapshot, {path: text})
                 # OPRO scores on the training split itself, not a held-out set.
                 results = await self._evaluate(candidate, train, label="candidate")
-                scored = {
-                    "text": text,
-                    "score": results.score,
-                    "snapshot_id": candidate.id,
-                }
-                self._snapshots[candidate.id] = candidate
+                scored = _Scored(text, results.score, candidate)
                 # Evaluated before appending, so the evidence follows exactly
                 # the instruction _best() will return, ties included.
-                if scored["score"] > self._best()["score"]:
+                if scored.score > self._best().score:
                     self._leader = results
                 self._history.append(scored)
 
         best = self._best()
         return self._promote(
             current,
-            self._snapshots[best["snapshot_id"]],
-            score=best["score"],
-            baseline_score=self._history[0]["score"],
-            history=self._history,
+            best.snapshot,
+            score=best.score,
+            baseline_score=self._history[0].score,
+            history=[
+                {
+                    "text": item.text,
+                    "score": item.score,
+                    "snapshot_id": item.snapshot.id,
+                }
+                for item in self._history
+            ],
         )
 
-    def _best(self) -> dict:
+    def _best(self) -> _Scored:
         """The global best so far; ties keep the earlier instruction."""
-        return max(self._history, key=lambda item: item["score"])
+        return max(self._history, key=lambda item: item.score)
 
     async def _propose(self, step: int) -> tuple[str, ...]:
         """Sample this step's novel instructions from the scored history.
@@ -114,7 +119,7 @@ class OPRO(Algorithm):
                 for item in sample
             ),
         )
-        seen = {item["text"] for item in self._history}
+        seen = {item.text for item in self._history}
         proposed = []
         for _ in range(self.config.num_candidates):
             text = _replies.tagged(await self.worker.ask(prompt), "INS")
@@ -134,13 +139,13 @@ class OPRO(Algorithm):
             (
                 item
                 for item in self._history
-                if item["score"] >= self.config.score_threshold
+                if item.score >= self.config.score_threshold
             ),
-            key=lambda item: item["score"],
+            key=lambda item: item.score,
         )[-self.config.history_size :]
         return (
             "".join(
-                prompts.ROW.format(text=item["text"], score=round(item["score"] * 100))
+                prompts.ROW.format(text=item.text, score=round(item.score * 100))
                 for item in rows
             )
             or prompts.NO_HISTORY

@@ -1,0 +1,41 @@
+# Copy to a sibling *.local.yaml so relative paths keep their meaning.
+# Fill Target/Worker model settings and every extra role/service below.
+# Python 3.12/3.13 and independent native Anthropic/OpenAI judges; launcher prepares Pandoc.
+# 1/1/1 is a custom experiment partition, not an official benchmark result.
+run:
+  output_dir: ../runs
+benchmark:
+  name: harvey_lab
+  seed: 42
+  split_counts:
+    train: 1
+    dev: 1
+    test: 1
+  judge:
+    anthropic:
+      model_name: claude-sonnet-4-6
+      api_key: null
+      base_url: null
+    openai:
+      model_name: gpt-5.5
+      api_key: null
+      base_url: null
+agent:
+  name: miniagent
+  max_turns: 40
+  timeout: 1200
+  llm:
+    model_name: null
+    api_key: null
+    base_url: null
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  worker:
+    type: llm
+    timeout: 300
+    llm:
+      model_name: null
+      api_key: null
+      base_url: null

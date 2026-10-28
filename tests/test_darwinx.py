@@ -2,12 +2,13 @@
 
 import asyncio
 import json
+import os
 import shutil
 from collections import Counter
 from dataclasses import replace
 
 import pytest
-from test_opro import PATHS, MemoryBenchmark
+from algorithm_helpers import PATHS, MemoryBenchmark
 
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
 from flashrsi.algorithms import DarwinX
@@ -56,9 +57,9 @@ class Worker(Agent):
                         "snapshot_id": r["snapshot_id"],
                         "text": (working_dir / r["directory"] / self.path).read_text(),
                         "files": {
-                            str(
-                                p.relative_to(working_dir / r["directory"])
-                            ): p.read_bytes()
+                            p.relative_to(
+                                working_dir / r["directory"]
+                            ).as_posix(): p.read_bytes()
                             for p in (working_dir / r["directory"]).rglob("*")
                             if p.is_file()
                         },
@@ -77,7 +78,7 @@ class Worker(Agent):
             if content is None:
                 destination.unlink()
             else:
-                destination.write_text(content)
+                destination.write_text(content, newline="\n")
         return Trajectory(output=f"<DESIGN>edit {len(self.prompts)}</DESIGN>")
 
 
@@ -308,7 +309,7 @@ def test_merge_records_and_later_ancestry_use_persisted_snapshots(
     # Run another proposal using loaded Snapshots. The donor must not become an
     # ancestor just because its changes were integrated into the merged version.
     with merged.check_out() as directory:
-        (directory / PATHS[MiniAgent]).write_text("AB-next")
+        (directory / PATHS[MiniAgent]).write_text("AB-next", newline="\n")
         descendant = merged.commit(directory)
     algo._versions[descendant.id] = (descendant, algo._versions[merged.id][1])
     algo.worker.edits = iter(["next"])
@@ -320,6 +321,9 @@ def test_merge_records_and_later_ancestry_use_persisted_snapshots(
     assert not list((tmp_path / "working").iterdir())
 
 
+@pytest.mark.skipif(
+    os.name == "nt", reason="POSIX executable bits are unavailable on Windows"
+)
 @pytest.mark.parametrize("initial,desired", [(False, True), (True, False)])
 @pytest.mark.parametrize(
     "content", [b"#!/bin/sh\necho capability\n", b"\x7fELF\xffbinary"]

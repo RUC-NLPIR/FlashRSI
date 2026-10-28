@@ -8,11 +8,14 @@
 
 ## 演化流程
 
-五个模块都从相同的初始 Snapshot 出发，分别演化 Agent Loop、Tool Use、
+默认五个模块都从相同的初始 Snapshot 出发，分别演化 Agent Loop、Tool Use、
 Observation Management、Context Management 与 Task Completion Detection。
+也支持 `prompt / skill / hook` 三个原生扩展模块，适用于 Claude Code 等提供
+外部扩展的 harness。三模块使用相同的独立演化与集成流程，但演化的是外部
+扩展，并不等价于修改上述五种运行时机制的源码。
 实现顺序执行独立分支；模块间不共享中间修改或轨迹记忆。
 
-每个 epoch 打乱独立演化集，逐 batch 对当前版本重复执行 `num_rollouts` 次。
+每个 epoch 打乱 Benchmark 的 train 集，逐 batch 对当前版本重复执行 `num_rollouts` 次。
 同一任务有成功和失败时进行对比；全部失败时寻找该模块记忆中的历史成功，
 找不到则做失败诊断；全部成功时寻找效率改进。Worker 输出带目标位置、
 支持任务 ID、原因与修改建议的 findings。同一文件合并建议，按不同支持任务数
@@ -35,7 +38,7 @@ Worker 失败、分析/review 协议错误中止实验，由框架保存已有�
 rollout/评分协议异常记录为整批执行失败证据，不假定其中哪个任务触发异常，
 仍允许 Worker 根据错误继续修复。
 
-独立演化结束后，将五个分支的原生 `Snapshot.check_out()` 临时放到 seed
+独立演化结束后，将所选各分支的原生 `Snapshot.check_out()` 临时放到 seed
 的编辑目录中。Worker 读取这些完整版本，把各模块的修改集成到 seed；共享
 文件也由 Worker 集成，不使用 AST、函数切片或额外的合并协议。参考目录
 通过原生上下文管理器清理，然后才 `_commit`，不会进入候选 Snapshot。
@@ -50,7 +53,8 @@ rollout/评分协议异常记录为整批执行失败证据，不假定其中哪
 
 ## 模块边界
 
-`algorithm.modules` 必须声明五个模块，每个映射到非空的 Snapshot 文件列表：
+`algorithm.modules` 必须完整声明五个运行时模块，或完整声明三个扩展模块，
+每个映射到非空的现有 Snapshot 文件列表。五模块示例：
 
 ```yaml
 modules:
@@ -72,28 +76,69 @@ Snapshot 的 component 分类、兼容性、文件权限和版本历史继续由
 算法只使用 `changed_paths()` 判断修改是否在模块声明的文件内。允许修改
 这些文件中的签名、decorator 和新增/删除函数，不另建函数注册或发现系统。
 文件列表指向现有资源；需要新的文件边界时，在初始 harness 中准备它们。
-Claude Code 不能提供闭源 SDK 的可编辑源码，缺少实际模块资源的配置在启动时报错。
+Claude Code 不能提供闭源 SDK 的可编辑源码，因此不能照搬 MiniAgent 的运行时
+文件映射。可使用三模块配置：
+
+```yaml
+modules:
+  prompt: [CLAUDE.md]
+  skill: [skills/workflow/SKILL.md]
+  hook: [hooks/hooks.json]
+```
+
+[Claude Code 示例](../examples/modular_rsi_claude_code.yaml)通过独立 `source_dir`
+提供这些初始文件和原生插件清单；提示词作为原生 system prompt 的补充，skills
+与 hooks 通过原生插件加载。默认 Claude Code 资源不添加演化策略。
+文件列表仍是精确路径，分支仅能修改已声明的文件；不自动开放整个扩展目录。
+缺少文件或模块声明不完整时，在启动时明确报错。切换 Agent 时需要同时选择
+对应的模块映射与资源目录，不会按 Agent 名称隐式转换。
+
+填写示例中的任务目录、Target 和 Worker 各自的模型与 API 配置后，通过统一入口启动：
+
+```bash
+python scripts/run_experiment.py --config examples/modular_rsi_claude_code.yaml
+```
 
 这一实现取舍改变了函数隔离方式及 Worker 的演化方式，并增加了模型参与
 初始合并的编辑与 review；不是与此前实现逐步等价的重构，也未验证收益等价。
 
-## 独立演化数据
+## 演化数据
 
-TerminalBench 新增可选 `benchmark.evolution_data_path` 与 `evolution_limit`。
-前者加载一个独立的 Harbor 任务目录，以该目录的任务替换 `train`，沿用原生
-加载与 verifier 评分；原有 `dev/test` 划分保持不变。`limit` 仍限制下游数据，
+2026-10-28 起，本项目按适配需求允许同一来源的数据集：ModularRSI 默认使用当前
+`benchmark.train` 演化，不要求外部数据集或 `metadata.evolution_source`。
+train 必须非空，任务 ID 唯一，且与 dev/test 的任务 ID 不重合；不同任务可以共享
+领域 policy 文本或环境目录。各 Benchmark 继续负责原生数据与划分校验，runner
+继续在版本选定后执行 sealed test。算法的模块演化、review 和执行 gate 保持原规则。
+
+例如，从同一原生任务池显式划分实验数据：
+
+```yaml
+benchmark:
+  split_counts: {train: 1, dev: 1, test: 1}
+```
+
+这项默认适配不追求论文的独立演化来源设置。下述外部数据参数仍可选用；显式使用
+这些参数时，加载器继续执行该模式原有的来源与重合检查。
+
+TerminalBench 和 SWEBench 支持可选 `benchmark.evolution_data_path` 与 `evolution_limit`。
+TerminalBench 加载独立的 Harbor 任务目录；SWEBench 加载独立的 SWE 原生记录文件或目录，
+必须包含该加载器要求的任务镜像、基线 commit 及官方评分字段，不能填写 Harbor 任务目录。
+两者都以独立任务替换 `train`，沿用各自原生加载、执行与 verifier 评分；
+原有 `dev/test` 划分保持不变。`limit` 仍限制下游数据，
 `evolution_limit` 单独限制演化数据。未设置这些参数时，原有 benchmark 行为不变。
-路径与原有 `data_path` 一样相对执行命令的 cwd；示例使用绝对路径。
+一键入口中的相对数据路径以 YAML 所在目录解析；普通 CLI 的模块数据路径仍相对 cwd。
+示例使用绝对路径。
 
 官方独立任务集见
 [ModularRSI_2000_Instances](https://huggingface.co/datasets/IQuestLab/ModularRSI_2000_Instances)。
 需要先下载并解包为 Harbor 任务目录；本次没有加入自动下载器或实际运行这批任务。
-示例：[examples/modular_rsi.yaml](../examples/modular_rsi.yaml)。
+Terminal 示例：[examples/modular_rsi.yaml](../examples/modular_rsi.yaml)。
+SWE 示例：[examples/modular_rsi_swe_bench.yaml](../examples/modular_rsi_swe_bench.yaml)。
+可选外部数据需要用户准备；未提供时直接使用当前数据集的 train。
 
-加载器拒绝与下游已加载任务重合的 ID、指令或 checksum；算法再次检查各 split
-的 ID、问题和环境路径。自定义 Benchmark 应提供独立任务作为 `train`，并在
-`metadata.evolution_source` 记录来源。来源记录和精确去重不能证明语义层面完全
-无重叠，仍需数据构建者做来源审计和相似度过滤。
+显式外部模式的加载器拒绝与下游已加载任务重合的 ID、指令或 checksum，SWE 还
+拒绝共用任务镜像。算法统一检查 train 与 dev/test 的任务 ID 隔离，不按来源、
+问题文本或环境目录拒绝同数据集任务。自定义 Benchmark 可以直接提供常规 train。
 
 ## 移植边界与验证
 

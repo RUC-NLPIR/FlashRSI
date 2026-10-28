@@ -1,0 +1,33 @@
+# Copy to ../aime.local.yaml and fill both independent model configurations.
+run:
+  output_dir: ./runs
+benchmark:
+  name: aime
+  year: 2026
+  scoring: integer_exact
+  seed: 42
+  # Custom experiment partition of public evaluation questions, NOT leaderboard test.
+  split_counts: {train: 8, dev: 4, test: 4}
+agent:
+  name: miniagent
+  max_turns: 3
+  timeout: 180
+  llm:
+    model_name:
+    api_key:
+    base_url:
+    max_tokens: 4096
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  few_shot_size: 3
+  seed: 42
+  worker:
+    type: llm
+    timeout: 180
+    llm:
+      model_name:
+      api_key:
+      base_url:
+      max_tokens: 4096

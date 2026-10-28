@@ -1,0 +1,44 @@
+# Copy to a *.local.yaml and fill each role and service credential separately.
+# BrowseComp native judging prompt/regex with an explicit CUSTOM DeepSeek Judge.
+run:
+  output_dir: ../runs
+benchmark:
+  name: browsecomp
+  seed: 42
+  # User-defined experiment partition of the native eval collection.
+  split_counts: {train: 1, dev: 1, test: 1}
+  retrieval:
+    provider: serper
+    api_key:
+    top_k: 5
+    timeout: 30
+    max_page_chars: 20000
+    reader:
+      provider: jina
+      api_key:
+  judge:
+    timeout: 300
+    max_retries: 1
+    llm:
+      model_name: deepseek-flash
+      base_url: https://api.deepseek.com
+      api_key:
+agent:
+  name: miniagent
+  max_turns: 8
+  timeout: 600
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    api_key:
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  worker:
+    type: llm
+    timeout: 180
+    llm:
+      model_name: deepseek-flash
+      base_url: https://api.deepseek.com
+      api_key:

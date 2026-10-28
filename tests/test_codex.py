@@ -33,6 +33,8 @@ def source(tmp_path):
 
 @pytest.fixture
 def native_cli(tmp_path):
+    if os.name == "nt":
+        pytest.skip("This fake CLI uses a POSIX executable shebang")
     binary, record = tmp_path / "codex", tmp_path / "requests.jsonl"
     binary.write_text(
         f"#!{sys.executable}\nRECORD = {str(record)!r}\n"

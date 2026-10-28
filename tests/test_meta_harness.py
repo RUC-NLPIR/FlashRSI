@@ -71,10 +71,12 @@ def setup(monkeypatch, tmp_path, edit, *, cls=MiniAgent, relocate=False, **optio
     source = tmp_path / "source"
     (source / "skills").mkdir(parents=True)
     (source / "tools").mkdir()
-    (source / "skills/main.md").write_text("SEED")
+    (source / "skills/main.md").write_text("SEED", newline="\n")
     (source / "tools/binary").write_bytes(b"\x00\xff\x01")
     (source / "tools/binary").chmod(0o755)
-    (source / "components.yaml").write_text("skill: ['skills/**']\ntool: ['tools/**']")
+    (source / "components.yaml").write_text(
+        "skill: ['skills/**']\ntool: ['tools/**']", newline="\n"
+    )
     calls = []
 
     async def run(self, prompt, working_dir=None):
@@ -137,7 +139,10 @@ def test_full_history_includes_regressions_and_survives_workspace_relocation(
         assert markers == ["SEED", "GOOD", "WORSE"][: len(seen)]
         assert all(
             (folder / row["directory"] / "tools/binary").read_bytes() == b"\x00\xff\x01"
-            and (folder / row["directory"] / "tools/binary").stat().st_mode & 0o111
+            and bool(
+                (folder / row["directory"] / "tools/binary").stat().st_mode & 0o111
+            )
+            == algo.target.snapshot.files["tools/binary"].executable
             for row in index
         )
         records = [
@@ -163,7 +168,7 @@ def test_full_history_includes_regressions_and_survives_workspace_relocation(
                 directory / "skills/main.md",
             )
         (directory / "skills/main.md").write_text(
-            ["GOOD", "WORSE", "GREAT"][len(seen) - 1]
+            ["GOOD", "WORSE", "GREAT"][len(seen) - 1], newline="\n"
         )
 
     algo, calls = setup(
@@ -195,7 +200,7 @@ def test_ties_keep_the_earlier_best_after_later_regressions(monkeypatch, tmp_pat
     markers = iter(["GOOD", "GOOD-TIED", "WORSE"])
 
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text(next(markers))
+        (directory / "skills/main.md").write_text(next(markers), newline="\n")
 
     algo, _ = setup(monkeypatch, tmp_path, edit, max_steps=3)
     run_dir = attach_run(algo, tmp_path)
@@ -223,11 +228,13 @@ def test_invalid_edits_consume_one_attempt_and_next_round_reads_the_rejection(
         count += 1
         if count == 1:
             if problem == "unclassified":
-                (directory / "unknown.txt").write_text("invalid")
+                (directory / "unknown.txt").write_text("invalid", newline="\n")
             elif problem == "credential":
-                (directory / "skills/main.md").write_text("target-private-secret")
+                (directory / "skills/main.md").write_text(
+                    "target-private-secret", newline="\n"
+                )
             elif problem == "rules":
-                (directory / "components.yaml").write_text("tool: ['**']")
+                (directory / "components.yaml").write_text("tool: ['**']", newline="\n")
         else:
             folder, index = history(prompt, directory)
             assert len(index) == 1
@@ -236,7 +243,7 @@ def test_invalid_edits_consume_one_attempt_and_next_round_reads_the_rejection(
                 for p in (folder / "trajectories").glob("*.json")
             ]
             assert any(row.get("kind") == "decline" for row in records)
-            (directory / "skills/main.md").write_text("GOOD")
+            (directory / "skills/main.md").write_text("GOOD", newline="\n")
 
     algo, calls = setup(monkeypatch, tmp_path, edit, max_steps=2)
     directory = attach_run(algo, tmp_path)
@@ -257,8 +264,8 @@ def test_history_changes_are_discarded_and_rebuilt_from_native_records(
         folder, index = history(prompt, directory)
         seed_source = folder / index[0]["directory"] / "skills/main.md"
         assert seed_source.read_text() == "SEED"
-        seed_source.write_text("corrupted reference")
-        (directory / "skills/main.md").write_text("GOOD")
+        seed_source.write_text("corrupted reference", newline="\n")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         (directory / "skills/__pycache__").mkdir()
         (directory / "skills/__pycache__/generated.pyc").write_bytes(b"cache")
 
@@ -298,7 +305,7 @@ def test_direct_python_use_provides_full_history_and_restores_recording_state(
         assert len(index) == 1 and list(
             (folder / "trajectories").glob("*-baseline.json")
         )
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
 
     algo, _ = setup(monkeypatch, tmp_path, edit)
     final = asyncio.run(algo.evolve())

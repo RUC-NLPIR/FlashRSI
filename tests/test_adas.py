@@ -5,7 +5,7 @@ import json
 from dataclasses import replace
 
 import pytest
-from test_opro import MemoryBenchmark
+from algorithm_helpers import MemoryBenchmark
 
 from flashrsi.agents import LLM, ClaudeCode, MiniAgent
 from flashrsi.algorithms import ADAS
@@ -52,7 +52,7 @@ class DesigningWorker(Agent):
             if content is None:
                 destination.unlink()
             else:
-                destination.write_text(content)
+                destination.write_text(content, newline="\n")
         if account is None:
             return Trajectory(output="Edited, but said nothing about the design.")
         return Trajectory(output=f"Done.\n<DESIGN>{account}</DESIGN>")

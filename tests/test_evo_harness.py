@@ -6,7 +6,7 @@ from dataclasses import replace
 
 import pytest
 import yaml
-from test_opro import MemoryBenchmark
+from algorithm_helpers import MemoryBenchmark
 
 from flashrsi.agents import ClaudeCode, MiniAgent
 from flashrsi.algorithms import EvoHarness
@@ -53,14 +53,16 @@ class FileWorker(Agent):
         for path, content in reply.items():
             file = working_dir / path
             if content is None:
+                file.chmod(0o644)
                 file.unlink()
             else:
                 file.parent.mkdir(parents=True, exist_ok=True)
                 # Replace like an editor using atomic writes: commit must still
                 # reject changes to resources exported read-only.
                 if file.exists():
+                    file.chmod(0o644)
                     file.unlink()
-                file.write_text(content)
+                file.write_text(content, newline="\n")
         return Trajectory(output="Curated native skills.")
 
 
@@ -325,7 +327,7 @@ def test_removing_provenance_cannot_leave_an_untracked_native_skill(
     with seed.check_out() as directory:
         path = directory / PATH
         path.parent.mkdir(parents=True)
-        path.write_text(skill("OLD"))
+        path.write_text(skill("OLD"), newline="\n")
         seed = seed.commit(directory)
     algo.target.update(seed)
     algo._run_dir = tmp_path

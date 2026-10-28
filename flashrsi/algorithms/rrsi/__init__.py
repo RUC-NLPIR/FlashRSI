@@ -399,7 +399,9 @@ class RRSI(Algorithm):
         if not isinstance(lens, str) or lens not in prompts.DIGEST_SCHEMAS:
             lens = "failure"
         evidence = trace["evidence"]
-        original = json.dumps(evidence, ensure_ascii=False).encode()
+        # Native file tools paginate by line; a single long JSON line hides
+        # even short outputs and metrics behind the context's size limit.
+        original = json.dumps(evidence, ensure_ascii=False, indent=2).encode()
         objection = ""
         for _ in range(_PROTOCOL_RETRIES):
             with TemporaryDirectory(
@@ -440,16 +442,20 @@ class RRSI(Algorithm):
                             "digest must identify the requested task and lens"
                         )
                     quotes = result.get("evidence", [])
-                    if not isinstance(quotes, list) or any(
-                        not isinstance(row, dict)
-                        or not isinstance(row.get("quote"), str)
-                        or not row["quote"]
-                        or not _quote_in_trace(row["quote"], evidence)
-                        for row in quotes
-                    ):
-                        raise ValueError(
-                            "digest quotes must occur in the supplied trace"
-                        )
+                    if not isinstance(quotes, list):
+                        raise ValueError("digest evidence must be a list")
+                    for index, row in enumerate(quotes):
+                        if (
+                            not isinstance(row, dict)
+                            or not isinstance(row.get("quote"), str)
+                            or not row["quote"]
+                            or not _quote_in_trace(row["quote"], evidence)
+                        ):
+                            raise ValueError(
+                                f"digest evidence[{index}].quote must be an exact "
+                                "substring of one decoded trace value; put field "
+                                "names in where, not in quote"
+                            )
                     return result
                 except ValueError as error:
                     objection = str(error)
@@ -470,12 +476,17 @@ class RRSI(Algorithm):
                 ) as temporary:
                     reference = Path(temporary) / "context.json"
                     shutil.copy2(evidence_file, reference)
+                    # Repair retains the checkout, so its manifest must account
+                    # for earlier edits as well as this call's new changes.
+                    repair_diff = reference.with_name("current-diff.txt")
+                    repair_diff.write_text(changes, encoding="utf-8")
                     reply = await self.worker.edit(
                         directory,
                         prompts.PROPOSE.format(
                             step=step,
                             variant=variant,
                             evidence=reference.relative_to(directory).as_posix(),
+                            current_diff=repair_diff.relative_to(directory).as_posix(),
                             budget=budget,
                             components=json.dumps(sorted(_COMPONENTS)),
                             permissions=json.dumps(dict(parent.component_rules)),
@@ -922,7 +933,10 @@ def _parse_edits(reply, changed, budget):
                 raise ValueError("declared paths must actually change")
         covered.update(files)
     if covered != set(changed):
-        raise ValueError("declare every changed file")
+        raise ValueError(
+            "declare every changed file relative to the incumbent; "
+            f"missing paths: {json.dumps(sorted(set(changed) - covered))}"
+        )
     return edits
 
 

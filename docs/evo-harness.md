@@ -71,7 +71,7 @@ flashrsi:
   `read_skill`；添加、删除技能只需编辑文件，无需同步修改配置。目录技能只向首次请求
   提供 description，模型按需读取正文，来源元数据不进入正文。
   无目录技能时保持原有工具列表；显式启用的工具仍由原生配置控制。
-  这是独立的原生能力增强，见 [harness 改动清单](agent-integration.md#harness-的小改动)。
+  这是独立的原生能力增强，见 [harness 改动清单](https://github.com/ignorejjj/FlashRSI-Lite/blob/d8d5e35e77e1c0360a1df55505db3cfb2b113cd0/docs/agent-integration.md#harness-的小改动)。
 
 Algorithm 不按 harness 或 benchmark 名称分支；Curator 根据 checkout 识别原生布局。
 两类目标都通过普通执行路径消费最终文件。自定义 harness 需具备相应的原生 skill 能力；

@@ -138,13 +138,25 @@ class Algorithm:
         Messages arrive as immutable views, which ``_evidence`` cannot encode;
         a row exists to be rendered, so they are plain dicts on the way out.
         """
-        record = _trajectory_record(trajectory)
-        record["messages"] = [
-            dict(message)
-            for message in record["messages"]
-            if message.get("type") != "RunConfig"
-        ]
-        return record
+
+        def clean(value):
+            # Sampling and delegated traces may nest runtime records. Rebuild
+            # containers so removing them never changes the audit trajectory.
+            if isinstance(value, Mapping):
+                return {
+                    key: clean(item)
+                    for key, item in value.items()
+                    if not isinstance(item, Mapping) or item.get("type") != "RunConfig"
+                }
+            if isinstance(value, (list, tuple)):
+                return [
+                    clean(item)
+                    for item in value
+                    if not isinstance(item, Mapping) or item.get("type") != "RunConfig"
+                ]
+            return value
+
+        return clean(_trajectory_record(trajectory))
 
     def _promote(self, current: Snapshot, best: Snapshot, **details) -> Snapshot:
         """Select one version at the end of the search and record the decision.
@@ -252,13 +264,22 @@ class Algorithm:
         self._save_snapshot(candidate)
         return candidate
 
-    def _commit(self, baseline: Snapshot, directory: Path) -> Snapshot:
-        """Version a directory an Agent Worker edited, refusing a leaked credential.
+    def _record(self, label: str, payload: Mapping) -> None:
+        if self._run_dir is not None:
+            self._sequence += 1
+            _write_record(
+                self._run_dir / "trajectories" / f"{self._sequence:05d}-{label}.json",
+                payload,
+                {"target": self.target.config, "worker": self.worker.config},
+            )
 
-        ``_candidate`` covers an algorithm that computed the new text itself.
-        Here the bytes came from a process the algorithm does not control, so
-        they are checked: the scan reads exactly what would be versioned, and
-        the Snapshot is still only in memory until it has passed.
+    def _commit(self, baseline: Snapshot, directory: Path) -> Snapshot:
+        """Version the edited directory, refusing one that leaked a credential.
+
+        ``_candidate`` covers an algorithm that computed the new text; here the
+        bytes came from a process this algorithm does not control, so they are
+        checked. The scan reads exactly what would be versioned, and the
+        Snapshot is still only in memory until it has passed.
         """
         candidate = baseline.commit(directory)
         secrets = self._runtime_secrets()
@@ -270,15 +291,6 @@ class Algorithm:
                 raise ValueError(f"candidate contains a runtime credential: {path}")
         self._save_snapshot(candidate)
         return candidate
-
-    def _record(self, label: str, payload: Mapping) -> None:
-        if self._run_dir is not None:
-            self._sequence += 1
-            _write_record(
-                self._run_dir / "trajectories" / f"{self._sequence:05d}-{label}.json",
-                payload,
-                {"target": self.target.config, "worker": self.worker.config},
-            )
 
     def _save_snapshot(self, snapshot: Snapshot) -> None:
         if self._run_dir is not None:

@@ -1290,15 +1290,21 @@ async def run(
     # ------------------------------------------------------------------
     def _clean_answer(text: str) -> str:
         return re.sub(
-            r"<｜｜DSML｜｜tool_calls>.*?(?:</｜｜DSML｜｜tool_calls>|\Z)",
+            # Providers emit both tool_calls and whitespace-prefixed calls.
+            r"<｜｜DSML｜｜\s*(?:tool_calls|calls)>.*?"
+            r"(?:</｜｜DSML｜｜\s*(?:tool_calls|calls)>|\Z)",
             "",
             text,
             flags=re.DOTALL,
         ).strip()
 
-    answer = _clean_answer(answer)
-
-    needs_forced_answer = not answer and not stop_reason.startswith("llm_error")
+    cleaned_answer = _clean_answer(answer)
+    # A tool-call preamble is not a final answer either. Ask the existing
+    # finalization pass to finish the requested format without executing it.
+    needs_forced_answer = (
+        not cleaned_answer or cleaned_answer != answer.strip()
+    ) and not stop_reason.startswith("llm_error")
+    answer = "" if needs_forced_answer else cleaned_answer
 
     # ------------------------------------------------------------------
     # Forced answer for non-normal exits
@@ -1306,11 +1312,11 @@ async def run(
     if needs_forced_answer:
         forced_prompt = (
             "You have used all available turns. No more tool calls are allowed. "
-            "Do NOT output any tool-call markup or XML tags. "
-            "Provide your best final answer to the original question now "
-            "as plain text, citing source URLs inline. "
-            "If the evidence you gathered is insufficient, give your best "
-            "guess and explicitly note the uncertainty."
+            "Do not request or simulate further tool calls. "
+            "Return the final response required by the original task, preserving "
+            "its required format (including any manifest or structured tags). "
+            "For an editing task, report only changes actually completed; "
+            "do not claim unfinished work succeeded. State any uncertainty."
         )
         for _attempt in range(1, llm.LLM_MAX_RETRIES + 1):
             try:
@@ -1352,6 +1358,8 @@ async def run(
                 ctx.model_usage.append(usage)
                 trace.event("model_usage", **usage)
                 forced = _clean_answer(forced_content or "")
+                if forced != (forced_content or "").strip():
+                    forced = ""
                 messages.extend(
                     [
                         {"role": "user", "content": forced_prompt},

@@ -51,7 +51,7 @@ uv run flashrsi run --config examples/quickstart.yaml \
 | Terminal-Bench 2.0 | [examples/terminal_bench.yaml](../examples/terminal_bench.yaml) | `harbor`、Python 3.12+、Docker |
 | τ³ Banking | [examples/tau3_banking.yaml](../examples/tau3_banking.yaml) | `tau2` 和上游 benchmark |
 
-默认安装已包含各 harness 和 LLM Worker 的 Python 依赖。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
+默认安装已包含 MiniAgent、Claude Code 和 LLM Worker 的 Python 依赖。Codex 另需 `codex` extra 及原生构建环境。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
 
 ### 使用独立环境安装
 
@@ -176,3 +176,5 @@ uv run ruff format --check .
 ```
 
 [动态封面](../assets/readme/cover.gif)直接使用 React Bits ElectricLogo 组件渲染，附 [PNG 静态预览](../assets/readme/cover.png)、[录制说明](../scripts/readme-cover/README.md)和[设计说明](../assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](../scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
+
+完整的 30 项配置与一键入口见[配置索引](benchmark-quickstart.md)及[一键实验指南](experiment-launcher.zh-CN.md)。

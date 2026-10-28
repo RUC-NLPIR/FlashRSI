@@ -1,0 +1,41 @@
+# Three native extension branches; this is not five-module runtime evolution.
+run:
+  output_dir: ../runs
+benchmark:
+  name: terminal_bench
+  data_path: /absolute/path/to/terminal-bench-2
+  split_counts: {train: 1, dev: 1, test: 1}
+  seed: 42
+agent:
+  name: claude_code
+  source_dir: modular_rsi_claude_code
+  permission_mode: bypassPermissions
+  allowed_tools: [Read, Write, Edit, Glob, Grep, Bash, Skill]
+  max_turns: 30
+  timeout: 600
+  llm:
+    model_name: your-model
+    api_key: your-api-key
+algorithm:
+  name: modular_rsi
+  num_epochs: 1
+  integration_epochs: 1
+  num_rollouts: 2
+  batch_size: 1
+  validation_samples: 1
+  worker:
+    type: agent
+    name: claude_code
+    source_dir: claude_edit_worker
+    permission_mode: bypassPermissions
+    tools: [Read, Write, Edit, Glob, Grep]
+    allowed_tools: [Read, Write, Edit, Glob, Grep]
+    max_turns: 50
+    timeout: 420
+    llm:
+      model_name: your-model
+      api_key: your-api-key
+  modules:
+    prompt: [CLAUDE.md]
+    skill: [skills/workflow/SKILL.md]
+    hook: [hooks/hooks.json]

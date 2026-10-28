@@ -26,6 +26,15 @@ Snapshot 的组件声明这一份。标签根据各项编辑自己的文件 diff
 `component_signals` 补充目标 harness 的机制信号；critic 判断接线与独立性。
 prune 是接受相同审查与测量的删除提案，不自动删除当前版本。
 
+修复在同一个 checkout 内累计修改，返回的清单必须覆盖相对 incumbent 的全部
+差异，包括之前尝试留下的文件；漏报错误会列出缺失路径。一个机制及其配置接线
+归在同一项声明中，不按文件拆成多项。digester 的 `evidence[].quote` 必须是
+脱敏 trace 中某个解码后 JSON 值的原文子串；字段路径放在 `where`，不能把
+序列化的键值对或自行拼出的指标描述当作引用。
+analyst 表格中的 `rewards` 列出各次试验分数，但每个任务只提供 `trial/reward`
+指明的代表轨迹；切换调查视角不会切换试验。其他试验的具体过程不可从汇总分数
+还原，报告应保留证据缺口，不重复请求 digester 比较未提供的轨迹。
+
 编辑历史是唯一反馈账本，包含完整 diff、胜负、分数／成本变化与 `attribution`。
 预测命中和未预测退步按逐题均值核对，退步阈值固定为 `1/k`；未知预测任务不进入
 命中率分母。捆绑机制共享一次候选测量，归因不代表逐项因果消融。
@@ -76,8 +85,11 @@ analysis_max_turns/digest_max_chars/protocol_retries/smoke_task_ids/regression_t
 实现，数值规则和编辑解析留在文件下方。评测聚合直接在 `_measure()` 内完成，
 没有候选状态类、独立评估层或并行 scoreboard。角色调用由框架自动记录，完整
 分析在 round context，归因在 edit history；摘要数量直接从列表计算。
-提案只读取一份临时 `context.json`，随 checkout 移动并在提交前清理；原文引用
+提案读取临时 `context.json` 和 `current-diff.txt`；后者提供修复开始时相对 incumbent
+的累计差异，首次为空，帮助 Worker 保留此前编辑的清单。两者随 checkout 移动并在提交前清理；原文引用
 与只读 trace 仍检查，不为角色回复搭建完整字段校验体系。
+critic 区分清单中必需的任务归因和版本文件中的任务记忆；也不把 diff 未包含的
+原生加载器误判为不存在。任务特化、未接线机制等规则不变，拒绝理由需要对应实际文件证据。
 
 没有复制上游 git 管理、Domain adapter、角色模型配置、恢复／重评命令及三套起始
 harness。示例使用 SearchQA 和 MiniAgent，属于框架内的机制验证。官方 coding 实验
