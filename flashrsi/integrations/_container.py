@@ -59,12 +59,15 @@ async def _run(request_path: Path, output_path: Path) -> int:
         adapter = _agent_class(request["agent_class"])
         if "name" in config and config["name"] != adapter.name:
             raise ValueError("container config name does not match agent_class")
-        config.pop("source_dir", None)
+        source_dir = config.pop("source_dir", None)
         snapshot = Snapshot.load(Path(request["snapshot_path"]))
         if snapshot.agent_type != adapter.name:
             raise ValueError("container Snapshot agent_type does not match agent_class")
 
         agent = adapter(config)
+        # Keep only the original path identity for native resource references;
+        # the host source tree is never recaptured or exposed as runtime config.
+        agent._container_source_dir = source_dir
         agent._check_container()
         # This process receives a complete, validated version from the host.
         # Recapturing its files as a seed would discard the original lineage.

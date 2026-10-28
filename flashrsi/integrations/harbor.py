@@ -188,12 +188,22 @@ def _stage(directory, agent, config, prompt):
     )
     agent.snapshot.save(directory / "snapshot.json")
     cls = type(agent)
+    runtime_config = _plain(config)
+    source = runtime_config.get("source_dir")
+    if source is None:
+        module_file = getattr(sys.modules[cls.__module__], "__file__", None)
+        if module_file is not None:
+            source = Path(module_file).resolve().parent
+    if source is not None:
+        # The container keeps this host path only as private provenance for
+        # relocating native resource references, never as a file source to load.
+        runtime_config["source_dir"] = str(Path(source).expanduser().resolve())
     request = directory / "request.json"
     request.write_text(
         json.dumps(
             {
                 "agent_class": f"{cls.__module__}:{cls.__qualname__}",
-                "config_yaml": yaml.safe_dump(_plain(config)),
+                "config_yaml": yaml.safe_dump(runtime_config),
                 "snapshot_path": f"{_ROOT}/snapshot.json",
                 "prompt": prompt,
             },

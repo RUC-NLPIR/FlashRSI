@@ -9,7 +9,7 @@ from statistics import mean
 
 from flashrsi._records import _write_record
 from flashrsi._run_summary import _finish_summary
-from flashrsi.agents import LLM, ClaudeCode, MiniAgent
+from flashrsi.agents import LLM, ClaudeCode, Codex, MiniAgent
 from flashrsi.algorithms import (
     ACE,
     ADAS,
@@ -27,7 +27,7 @@ from flashrsi.algorithms import (
 from flashrsi.benchmarks import HotpotQA, SearchQA, Tau3Banking, TerminalBench
 from flashrsi.config import prepare_run_dir
 
-_AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode}
+_AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode, "codex": Codex}
 _BENCHMARKS = {
     "searchqa": SearchQA,
     "hotpotqa": HotpotQA,

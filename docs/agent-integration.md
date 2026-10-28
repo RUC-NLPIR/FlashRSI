@@ -44,6 +44,9 @@ skill:
 该记录包含当前角色配置，不展开后端默认值，也不等同于完整模型请求。
 用户参数统一来自 config；模型、凭据和端点直接填写在各角色的 `llm` 中。
 原生 CLI 必须使用 env 时，由适配器从 config 构造子进程 env。
+登录与连接由框架的角色配置提供：目标和 Worker 分别设置自己的 `llm`，凭据不进入
+Snapshot。接入 harness 时重点保留它的工具、skills、hooks、子 agent 等执行能力；
+不要求复刻原生产品的账号登录界面或账号管理命令。
 日期、二进制、集合等非 JSON 的 YAML 值以 `type: yaml` 和 YAML 文本 `value`
 记录，保证 trajectory 可序列化；实验配置文件保留这些值的原类型。
 `update(snapshot)` 只选择资源版本，不更改模型或连接配置。
@@ -61,6 +64,16 @@ Claude Code 的 [适配类](../flashrsi/agents/claude_code/__init__.py) 直接�
 追加。这是显式选择 Snapshot 资源，不是 CLI 的目录发现与分层加载。默认版本不含这个文件。
 会话与子任务输出使用独立临时运行目录，关闭历史 auto memory，仅在 `llm.auth: login` 时从原位置读取原生凭据。
 扩展加载失败、SDK 异常和暂停／中止结果返回错误轨迹，并保留脱敏诊断。
+
+Codex 的 [适配类](../flashrsi/agents/codex/__init__.py) 调用原生 `codex exec --json`。
+将 Snapshot 的资源复制到每次调用独立的原生 home，加载 `AGENTS.md`、skills、
+配置、规则、hooks 和显式插件；任务 cwd 仍由 `working_dir` 指定。宿主的技能、插件
+和历史记忆不会自动混入所选资源，内置能力和版本内显式功能开关沿用原生配置。
+插件只版本化 `plugins/cache/**` 下的已安装 bundle 及其元数据；`plugins/data/**`
+等运行状态不从来源目录捕获，插件启用配置保留在 `config.toml`。
+模型与凭据通过角色配置映射，CLI JSONL 事件和脱敏诊断转为 Trajectory，
+退出时清理进程与运行状态。服务、hooks 和子 agent 仍需原生注册；接入与验证边界见
+[Codex 说明](codex.md)。
 
 ## 可选：容器执行
 

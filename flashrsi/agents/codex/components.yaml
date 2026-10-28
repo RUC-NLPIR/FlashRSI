@@ -1,0 +1,17 @@
+prompt:
+  - AGENTS.md
+skill:
+  - skills/**
+agent:
+  - agents/**
+hook:
+  - hooks/**
+tool:
+  - servers/**
+plugin:
+  - plugins/cache/**
+memory:
+  - memories/**
+config:
+  - config.toml
+  - rules/**

@@ -17,6 +17,7 @@ dev = ["pytest>=8", "ruff>=0.9"]
 llm = ["openai>=2,<3"]
 miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
 claude-code = ["claude-agent-sdk>=0.2.153,<0.3"]
+codex = ["openai-codex-cli-bin==0.147.0"]
 harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
 # tau2-bench is not published on PyPI, so it cannot be a dependency here.
 # Install it alongside this package, in its own environment:
@@ -32,6 +33,7 @@ include = ["flashrsi*"]
 [tool.setuptools.package-data]
 "flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
 "flashrsi.agents.claude_code" = ["*.yaml", "*.md", "settings.json", ".mcp.json", ".lsp.json", ".claude-plugin/*.json", "skills/**/*", "commands/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "output-styles/**/*"]
+"flashrsi.agents.codex" = ["components.yaml", "config.toml", "AGENTS.md", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
