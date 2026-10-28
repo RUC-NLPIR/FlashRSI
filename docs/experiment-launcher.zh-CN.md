@@ -241,12 +241,24 @@ YAML 中的 `run.output_dir`、数据路径（含 `evolution_data_path`）、语
 | `trajectories/` | 逐批任务、模型输出、指标、执行状态及用量 |
 | `trajectories/*-<label>.json` | 算法的候选、评估、选择等事件 |
 | `working/` | 算法的工作文件；不同算法可能另有专属记录目录 |
+| `artifacts/harbor/trial-*/` | Harbor 已收集的交付文件、原生评分明细与日志；每次执行单独保存，包含归档清单 `manifest.json` |
 
 `Completed experiment` 表示框架流程结束，不保证分数提高或所有任务执行成功。
 先核对 `test_tasks > 0`，再查看轨迹中的 `status` 和错误；模型预算耗尽、Judge 失败与正常零分需要区分。
 示例多为小规模流程验证，修改 `split_counts`、`limit` 和算法预算后才是你自己的实验设置。
-当前 Harbor 接入保留指标和日志，但临时 trial 中的交付文件尚未统一长期归档；
-例如 SpreadsheetBench 2 的输出工作簿不能仅凭保存的 reward 独立重评，见[边界说明](coding-working-benchmarks.md)。
+Terminal、DeepSWE、JobBench、SpreadsheetBench 2 和 SWE-bench Pro 在临时 trial 清理前归档
+Harbor 已收集的文件。轨迹的 verifier 事件记录归档目录和文件清单；SWE-bench Pro 分别记录
+`solve_artifacts` 与 `regrade_artifacts`。失败或正常取消时也保留已经落盘的文件；
+强制终止进程或主机故障不保证执行归档。归档失败会明确标记执行错误。
+
+SpreadsheetBench 2 的工作簿一般位于归档中的 `artifacts/logs/artifacts/`，
+原生明细位于 `verifier/native-result.json`。交付文件和补丁保留原始字节，UTF-8 日志及清单替换已知凭据；
+不复制包含连接凭据的 trial 配置、lock 或 payload。原始交付文件仍可能含任务数据，按本地实验产物管理。
+重新评分仍需要原任务数据、固定版本评分器及运行环境，保存文件不等于已经完成独立重评。
+
+可用 `agent.harbor.artifacts_dir` 显式指定归档根目录，相对路径按启动时工作目录解析；
+普通实验默认使用本次实验的 `artifacts/harbor/`。直接调用 Harbor integration 而不经过 runner 时，
+默认根目录为当前工作目录的 `runs/artifacts/harbor/`。重复任务或重试均新建目录。
 
 ## 常见启动问题
 

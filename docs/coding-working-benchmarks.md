@@ -79,6 +79,8 @@ Agent 与独立评分容器分别从 `environment/` 和 `tests/` 构建；两个
 离线评分控制、单元测试和 wheel 入口核验均单独记录；旧 Terminal 2.0 smoke 不计为 2.1 通过。
 
 开源流程复核发现并修复了独立评分容器缺少构建入口的问题，新增测试使用 Harbor 自身的
-评分环境选择与构建前置检查，不能替代完整容器执行。当前 Harbor 接入将 rewards 和日志
-写入 Trajectory 后清理临时 trial 目录，交付 `.xlsx` 和 `native-result.json` 尚未长期归档；
-因此目前不能承诺实验结束后能从保存结果独立重算 workbook 评分。这仍是可复现交付的缺口。
+评分环境选择与构建前置检查，不能替代完整容器执行。Harbor 接入现在会在清理临时 trial 前，
+将已收集的 `.xlsx`、`verifier/native-result.json` 及日志保存到实验的 `artifacts/harbor/trial-*/`，
+并在 Trajectory 中记录目录和清单。交付文件保留原始字节，日志中的已知凭据脱敏。
+临时目录清理后的文件保留已做离线回归验证；完整容器执行与独立重评仍需实际验证，
+重评也仍需要原任务、固定评分器和运行环境。路径和失败行为见[查看结果](experiment-launcher.zh-CN.md#查看结果)。

@@ -25,6 +25,7 @@ from flashrsi.integrations.harbor import (
     Trial,
     TrialConfig,
     VerifierConfig,
+    _archive_trial,
     _positive,
     _SnapshotAgent,
     _stage,
@@ -191,6 +192,7 @@ async def _run(agent, task, verifier_env):
         payload = root / "payload"
         payload.mkdir(mode=0o700)
         _stage(payload, agent, config, task.question)
+        solve = replay = None
         try:
             replay_path, capture = _native_tooling()
             environment = {
@@ -316,6 +318,28 @@ async def _run(agent, task, verifier_env):
             trajectory = replace(
                 trajectory, status="error", error_message=event["error"]
             )
+        finally:
+            for phase, trial in (("solve", solve), ("regrade", replay)):
+                if trial is None:
+                    continue
+                try:
+                    event[phase + "_artifacts"] = _archive_trial(
+                        trial,
+                        options.get("artifacts_dir", "runs/artifacts/harbor"),
+                        {
+                            **event,
+                            "phase": phase,
+                            "snapshot_id": agent.snapshot.id,
+                        },
+                        secrets,
+                    )
+                except Exception as exc:
+                    event[phase + "_artifact_error"] = str(exc)
+                    trajectory = replace(
+                        trajectory,
+                        status="error",
+                        error_message="Harbor artifact archive failed: " + str(exc),
+                    )
     return replace(
         trajectory,
         output=_redact(trajectory.output, secrets),
