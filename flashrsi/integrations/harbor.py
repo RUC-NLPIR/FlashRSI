@@ -12,7 +12,7 @@ import sys
 from dataclasses import replace
 from importlib.metadata import version
 from pathlib import Path
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, mkdtemp
 
 if sys.version_info < (3, 12):
     raise ImportError("Harbor execution requires Python 3.12 or newer")
@@ -190,6 +190,22 @@ async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
             error = str(exc) or type(exc).__name__
             event["error"] = error
             trajectory = replace(trajectory, status="error", error_message=error)
+        finally:
+            if trial is not None:
+                try:
+                    event["artifacts"] = _archive_trial(
+                        trial,
+                        options.get("artifacts_dir", "runs/artifacts/harbor"),
+                        {**event, "snapshot_id": snapshot.id},
+                        secrets,
+                    )
+                except Exception as exc:
+                    event["artifact_error"] = str(exc)
+                    trajectory = replace(
+                        trajectory,
+                        status="error",
+                        error_message="Harbor artifact archive failed: " + str(exc),
+                    )
         review_options = options.get("integrity_review")
         if review_options is not None:
             from flashrsi.integrations._terminal_integrity import review
@@ -227,9 +243,63 @@ def _read_log(path):
     return path.read_text(errors="replace") if path.is_file() else ""
 
 
+def _archive_trial(trial, directory, metadata, secrets):
+    """Keep native outputs before temporary cleanup, without staging credentials."""
+    directory = Path(directory).expanduser().resolve()
+    directory.mkdir(parents=True, exist_ok=True)
+    saved = Path(mkdtemp(prefix="trial-", dir=directory))
+    record = {"directory": str(saved), "files": []}
+    try:
+        # Never copy the trial's config/lock or our payload: those can contain
+        # solver and verifier credentials. Harbor already collected these outputs.
+        for source in (
+            trial.paths.artifacts_dir,
+            trial.paths.verifier_dir,
+            trial.paths.agent_dir,
+            trial.paths.result_path,
+        ):
+            if source.is_symlink() or source.is_junction():
+                raise ValueError(f"Refusing linked artifact: {source}")
+            if not source.exists():
+                continue
+            paths = sorted(source.rglob("*")) if source.is_dir() else [source]
+            for path in paths:
+                if path.is_symlink() or path.is_junction():
+                    raise ValueError(f"Refusing linked artifact: {path}")
+                if not path.is_file():
+                    continue
+                relative = path.relative_to(trial.paths.trial_dir)
+                destination = saved / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                data = path.read_bytes()
+                # Deliverables (including patches) must remain reproducible.
+                # Redact native logs, not the files that the verifier evaluated.
+                if source != trial.paths.artifacts_dir and path.name != "model.patch":
+                    try:
+                        text = data.decode("utf-8")
+                    except UnicodeDecodeError:
+                        pass
+                    else:
+                        if "\0" not in text:
+                            data = _redact(text, secrets).encode("utf-8")
+                destination.write_bytes(data)
+                record["files"].append(relative.as_posix())
+    except Exception as exc:
+        record["error"] = str(exc)
+        raise RuntimeError(f"Could not archive outputs to {saved}: {exc}") from exc
+    finally:
+        # Also identify partial archives when a trial fails or is cancelled.
+        (saved / "manifest.json").write_text(
+            json.dumps(_redact({**metadata, **record}, secrets), ensure_ascii=False),
+            encoding="utf-8",
+        )
+    return record
+
+
 def _stage(directory, agent, config, prompt):
     config = copy.deepcopy(config)
     config.get("harbor", {}).pop("integrity_review", None)
+    config.get("harbor", {}).pop("artifacts_dir", None)
     # Keep evaluation rules outside the candidate's mutable snapshot. Public
     # benchmark repositories expose hidden tests and oracle answers online.
     prompt += (

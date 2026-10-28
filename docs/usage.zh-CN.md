@@ -143,12 +143,15 @@ runs/<algorithm>-<agent>-<benchmark>-<timestamp>/
 ├── config.yaml           # 保存的配置，凭据已脱敏
 ├── snapshots/            # 资源版本及其继承关系
 ├── trajectories/         # Target 执行、Worker 调用和搜索决策
+├── artifacts/harbor/     # Harbor 任务已收集的交付文件和原生日志
 ├── result.json           # 选中的 Snapshot 和最终 test 结果
 ├── end-summary.json      # 供程序读取的实验摘要
 └── end-summary.md        # 供人工阅读的实验摘要
 ```
 
 分数和轨迹始终关联到产生它们的资源版本。Target 与 Worker 分别记录，便于同时查看解题行为和改进开销。用量统计以各原生 harness 实际提供的信息为准。
+
+Harbor 在清理临时 trial 前归档已收集的文件，失败或正常取消的尝试也保留已有产物。轨迹的 verifier 事件记录独立归档目录和清单；SWE-bench Pro 分别保存求解、复评分两个阶段。交付文件和补丁保留原始字节，UTF-8 日志和清单中的已知凭据脱敏，不复制 trial 配置、lock 或 payload。强制终止进程不保证归档。可用 `agent.harbor.artifacts_dir` 覆盖根目录（相对启动工作目录）；不经过 runner 时默认使用 `runs/artifacts/harbor/`。独立重评仍需原任务和评分环境，详见[查看结果](experiment-launcher.zh-CN.md#查看结果)。
 
 ## 扩展 FlashRSI
 

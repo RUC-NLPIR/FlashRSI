@@ -215,7 +215,8 @@ def test_harbor_forwards_agent_allowlist_and_keeps_native_verifier(
     task = bench.test[0]
     agent = SimpleNamespace(
         config={
-            "llm": {"model_name": "fixture", "base_url": "https://model.example/v1"}
+            "llm": {"model_name": "fixture", "base_url": "https://model.example/v1"},
+            "harbor": {"artifacts_dir": str(tmp_path / "saved")},
         },
         snapshot=SimpleNamespace(id="fixture-snapshot"),
         _check_container=lambda: None,
@@ -233,7 +234,11 @@ def test_harbor_forwards_agent_allowlist_and_keeps_native_verifier(
     )
     trial = SimpleNamespace(
         paths=SimpleNamespace(
+            trial_dir=tmp_path,
             agent_dir=log,
+            artifacts_dir=tmp_path / "artifacts",
+            verifier_dir=tmp_path / "verifier",
+            result_path=tmp_path / "result.json",
             test_stdout_path=log / "stdout",
             test_stderr_path=log / "stderr",
         ),

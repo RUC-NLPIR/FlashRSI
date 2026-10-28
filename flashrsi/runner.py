@@ -238,6 +238,12 @@ async def _run(config):
     run_dir = prepare_run_dir(resolved)
     if isinstance(benchmark, HarveyLAB) and benchmark._artifacts_dir is None:
         benchmark._artifacts_dir = run_dir / "artifacts" / "harvey_lab"
+    if isinstance(
+        benchmark, (TerminalBench, SpreadsheetBench2, DeepSWE, JobBench, SWEBenchPro)
+    ):
+        algorithm.target.config.setdefault("harbor", {}).setdefault(
+            "artifacts_dir", str(run_dir / "artifacts" / "harbor")
+        )
     algorithm._run_dir = run_dir
     _LOGGER.info("Experiment: %s", run_dir)
     try:
