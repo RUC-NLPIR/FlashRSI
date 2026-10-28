@@ -42,7 +42,7 @@ Smoke 中两侧候选均因 dev 打平被拒，不能声称有技能提升。
 
 ## 入口与凭据
 
-在 FlashRSI-Lite 目录执行。已有 `.venv` 中的 Python 3.12、OpenAI SDK、Claude Agent
+在仓库根目录执行。已有 `.venv` 中的 Python 3.12、OpenAI SDK、Claude Agent
 SDK 与数据依赖可以直接复用。两份可审查配置为
 [`miniagent.yaml`](../examples/searchqa_deepseek/miniagent.yaml) 和
 [`claude_code.yaml`](../examples/searchqa_deepseek/claude_code.yaml)。

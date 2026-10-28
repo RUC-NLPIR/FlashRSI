@@ -11,7 +11,7 @@
 <!-- TODO: add paper, project page, and discussion links; set the license before release. -->
 <p align="center">
   <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="Paper — link forthcoming"></a>
-  <a href="https://github.com/ignorejjj/FlashRSI-Lite"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="Code on GitHub"></a>
+  <a href="https://github.com/ignorejjj/FlashRSI"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="Code on GitHub"></a>
   <a href=""><img src="https://img.shields.io/badge/Project_Page-Live-0E9B9B?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="Project page — link forthcoming"></a>
   <a href="#demo"><img src="https://img.shields.io/badge/Live_Demo-Watch-FF5C8A?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="Watch the demo"></a><br>
   <a href="docs/usage.md"><img src="https://img.shields.io/badge/Docs-Guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="Usage guide"></a>
@@ -55,8 +55,8 @@ See the [usage guide](docs/usage.md) for the framework overview, harness resourc
 Use **Python 3.11+** and [uv](https://docs.astral.sh/uv/):
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/ignorejjj/FlashRSI-Lite.git
-cd FlashRSI-Lite
+GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/ignorejjj/FlashRSI.git
+cd FlashRSI
 uv sync --extra miniagent --extra llm
 ```
 

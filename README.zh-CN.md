@@ -11,7 +11,7 @@
 <!-- TODO: 发布前补充论文、项目主页、讨论区链接和许可证信息。 -->
 <p align="center">
   <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="论文，链接待补充"></a>
-  <a href="https://github.com/ignorejjj/FlashRSI-Lite"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="GitHub 代码仓库"></a>
+  <a href="https://github.com/ignorejjj/FlashRSI"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="GitHub 代码仓库"></a>
   <a href=""><img src="https://img.shields.io/badge/Project_Page-Live-0E9B9B?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="项目主页，链接待补充"></a>
   <a href="#demo"><img src="https://img.shields.io/badge/Live_Demo-Watch-FF5C8A?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="观看演示"></a><br>
   <a href="docs/usage.zh-CN.md"><img src="https://img.shields.io/badge/Docs-Guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="使用指南"></a>
@@ -55,8 +55,8 @@
 使用 **Python 3.11+** 和 [uv](https://docs.astral.sh/uv/)：
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/ignorejjj/FlashRSI-Lite.git
-cd FlashRSI-Lite
+GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/ignorejjj/FlashRSI.git
+cd FlashRSI
 uv sync --extra miniagent --extra llm
 ```
 
