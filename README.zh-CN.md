@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cover.gif" alt="FlashRSI 动态封面：白色字标旁，蓝白细线缓慢聚拢、舒展并循环流动。" width="100%">
+  <img src="assets/readme/cover.gif" alt="FlashRSI 动态封面：白色字标旁，React Bits ElectricLogo 渲染蓝白闪电与游走的电弧。" width="100%">
 </p>
 
 <h1 align="center">FlashRSI</h1>
@@ -285,7 +285,7 @@ uv run ruff check .
 uv run ruff format --check .
 ```
 
-[动态封面](assets/readme/cover.gif)由 [scripts/render_readme_cover.py](scripts/render_readme_cover.py) 生成，附 [SVG](assets/readme/cover.svg) 和 [PNG](assets/readme/cover.png) 静态预览、[另一版动效](assets/readme/cover-floating.gif)和[设计说明](assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
+[动态封面](assets/readme/cover.gif)直接使用 React Bits ElectricLogo 组件渲染，附 [PNG 静态预览](assets/readme/cover.png)、[录制说明](scripts/readme-cover/README.md)和[设计说明](assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
 
 </details>
 

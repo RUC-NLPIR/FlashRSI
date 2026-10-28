@@ -1,0 +1,16 @@
+{
+  "name": "flashrsi-readme-cover",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "node server.mjs"
+  },
+  "dependencies": {
+    "ogl": "1.0.11",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10"
+  }
+}
