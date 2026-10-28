@@ -1,0 +1,36 @@
+# A small local QA example for trying the evolution workflow.
+# Set the target and Worker models and credentials independently before running.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  # Local benchmark paths are resolved from the working directory (repo root).
+  data_path: ./examples/data/quickstart.jsonl
+  split:
+    train: 0.5
+    dev: 0.25
+    test: 0.25
+  seed: 42
+
+agent:
+  name: miniagent
+  max_turns: 6
+  llm:
+    model_name: your-target-model
+    api_key: null
+    base_url: null
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 1
+  batch_size: 2
+  reflection_minibatch_size: 2
+  edit_budget: 1
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: null
+      base_url: null

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-labelledby="framework-title framework-description">
+  <title id="framework-title">FlashRSI: scoped edits, complete candidates, and held-out assessment</title>
+  <desc id="framework-description">The algorithm proposes candidate changes within an editing scope. A Snapshot retains all harness-declared resources, including unchanged prompts, tools, and configuration around the edited skill. The native harness loads and executes the candidate. The benchmark returns scores, traces, and available usage to the algorithm for search and selection. After search, the selected Snapshot is evaluated on held-out test tasks in a separate one-way path, with no test feedback returning to search.</desc>
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 Z" fill="#182427"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 Z" fill="#3F7B78"/>
+    </marker>
+  </defs>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" fill="#182427">
+    <rect width="1280" height="440" rx="22" fill="#FAF8F5"/>
+
+    <text x="48" y="38" font-size="17" font-weight="650" fill="#68736F" letter-spacing="1.5">SEARCH</text>
+
+    <rect x="48" y="91" width="250" height="159" rx="17" fill="#FFFFFF" stroke="#DDDCD5" stroke-width="1.5"/>
+    <rect x="48" y="91" width="6" height="159" rx="3" fill="#EB6B45"/>
+    <text x="72" y="132" font-size="28" font-weight="650">Algorithm</text>
+    <text x="72" y="171" font-size="19" fill="#596762">Propose candidates</text>
+    <text x="72" y="201" font-size="19" fill="#596762">Choose a version</text>
+
+    <path d="M 298 168 H 400" fill="none" stroke="#182427" stroke-width="2.5" marker-end="url(#arrow-ink)"/>
+    <text x="349" y="153" text-anchor="middle" font-size="17" fill="#596762">edit</text>
+
+    <rect x="402" y="58" width="416" height="218" rx="17" fill="#FFFFFF" stroke="#DDDCD5" stroke-width="1.5"/>
+    <text x="426" y="98" font-size="28" font-weight="650">Snapshot</text>
+    <rect x="674" y="76" width="120" height="29" rx="14.5" fill="#FCE9E0"/>
+    <text x="734" y="96" text-anchor="middle" font-size="16" font-weight="600" fill="#AD462B">Skill scope</text>
+    <text x="426" y="129" font-size="19" fill="#596762">Complete declared resources</text>
+    <rect x="426" y="151" width="174" height="42" rx="9" fill="#F4F3EE" stroke="#E4E4DC"/>
+    <text x="513" y="179" text-anchor="middle" font-size="21" font-weight="550">Prompts</text>
+    <rect x="614" y="151" width="180" height="42" rx="9" fill="#FCE9E0" stroke="#EB6B45" stroke-width="2"/>
+    <text x="704" y="179" text-anchor="middle" font-size="21" font-weight="650" fill="#A64127">Skills</text>
+    <rect x="426" y="204" width="174" height="42" rx="9" fill="#F4F3EE" stroke="#E4E4DC"/>
+    <text x="513" y="232" text-anchor="middle" font-size="21" font-weight="550">Tools</text>
+    <rect x="614" y="204" width="180" height="42" rx="9" fill="#F4F3EE" stroke="#E4E4DC"/>
+    <text x="704" y="232" text-anchor="middle" font-size="21" font-weight="550">Config / code</text>
+
+    <path d="M 818 102 H 912" fill="none" stroke="#182427" stroke-width="2.5" marker-end="url(#arrow-ink)"/>
+
+    <rect x="914" y="58" width="318" height="87" rx="17" fill="#FFFFFF" stroke="#DDDCD5" stroke-width="1.5"/>
+    <text x="938" y="96" font-size="26" font-weight="650">Native harness</text>
+    <text x="938" y="125" font-size="19" fill="#596762">Load and run the candidate</text>
+    <path d="M 1073 145 V 188" fill="none" stroke="#182427" stroke-width="2.5" marker-end="url(#arrow-ink)"/>
+    <rect x="914" y="190" width="318" height="87" rx="17" fill="#EDF4F1" stroke="#C9DAD3" stroke-width="1.5"/>
+    <text x="938" y="228" font-size="26" font-weight="650">Benchmark</text>
+    <text x="938" y="257" font-size="19" fill="#416C66">Scores · traces · usage</text>
+
+    <path d="M 914 234 H 870 V 302 H 173 V 252" fill="none" stroke="#3F7B78" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#arrow-teal)"/>
+    <rect x="432" y="289" width="180" height="26" rx="7" fill="#FAF8F5"/>
+    <text x="522" y="309" text-anchor="middle" font-size="18" fill="#416C66">Search feedback</text>
+
+    <path d="M 48 328 H 1232" stroke="#DDDCD5" stroke-width="1.2"/>
+    <text x="48" y="383" font-size="23" font-weight="600" fill="#68736F">After search</text>
+    <rect x="402" y="350" width="416" height="64" rx="15" fill="#FFFFFF" stroke="#DDDCD5" stroke-width="1.5"/>
+    <text x="426" y="390" font-size="25" font-weight="600">Selected Snapshot</text>
+    <path d="M 818 382 H 912" fill="none" stroke="#182427" stroke-width="2.5" marker-end="url(#arrow-ink)"/>
+    <rect x="914" y="350" width="318" height="64" rx="15" fill="#EBF0F5" stroke="#CCD9E4" stroke-width="1.5"/>
+    <text x="938" y="390" font-size="25" font-weight="600">Held-out test</text>
+  </g>
+</svg>
