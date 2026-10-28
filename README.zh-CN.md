@@ -5,7 +5,7 @@
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
 
 <p align="center">
-  FlashRSI 将 RSI 算法、benchmark 和原生 Agent harness 接入同一个框架，用于开发和评测 Agent 自我改进方法。目前支持 <b>12 种算法</b>、<b>4 个 benchmark 接入</b>和 <b>3 个 harness</b>（MiniAgent、Claude Code、Codex），覆盖指令搜索、技能学习与 harness 演化。
+  FlashRSI 将 RSI 算法、benchmark 和原生 Agent harness 接入同一个框架，用于开发和评测 Agent 自我改进方法。目前支持 <b>12 种算法</b>和 <b>3 个 harness</b>（MiniAgent、Claude Code、Codex），<a href="https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke"><code>integration/flashrsi-smoke</code></a> 分支提供扩展的 <b>28 个 benchmark 适配器</b>。
 </p>
 
 <!-- TODO: 发布前补充论文、项目主页、讨论区链接和许可证信息。 -->
@@ -105,14 +105,40 @@ uv run flashrsi run --config examples/quickstart.yaml \
 
 ## 支持的 Benchmarks
 
+以下 **28 个适配器**位于 [`integration/flashrsi-smoke`](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks) 分支。`main` 目前包含 SearchQA、HotpotQA、Terminal-Bench 2.0 和 τ³ Banking。各 benchmark 均链接到该分支的实现。
+
 | Benchmark | 任务 | 评分 |
 | --- | --- | --- |
-| [SearchQA](flashrsi/benchmarks/searchqa) | 提供搜索上下文的短答案问答 | 答案 EM / F1 |
-| [HotpotQA](examples/hotpotqa.yaml) | 基于给定 Wikipedia 上下文的多跳问答 | 答案 EM / F1 |
-| [Terminal-Bench 2.0](docs/terminal-bench.md) | 通过 Harbor 执行的 Linux 终端任务 | 原生 verifier reward |
-| [τ³ Banking](examples/tau3_banking.yaml) | 多轮银行业务任务 | 原生 tau2 reward |
+| [SearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/searchqa) | 提供搜索片段的短答案问答 | 答案 EM / F1 |
+| [HotpotQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hotpotqa) | Wikipedia 多跳问答 | 答案 EM / F1；fullwiki 模式支持 joint F1 |
+| [MuSiQue](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/musique) | 组合式多跳问答 | 答案 EM / F1；可选支撑段落 F1 |
+| [TriviaQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/triviaqa) | 基于 Wikipedia 上下文的知识问答 | 支持答案别名的 EM / F1 |
+| [Natural Questions](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/nq) | Wikipedia 问答，短答案与 yes/no 子集 | 本地文本 EM / F1 |
+| [2WikiMultiHopQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/twowiki_multihopqa) | 基于给定上下文的多跳问答 | 答案 EM / F1 |
+| [BBEH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard 复杂推理 | 官方逐题准确率 |
+| [SuperGPQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/supergpqa) | 研究生级别多项选择题 | 答案字母准确率 |
+| [HLE](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hle) | Humanity's Last Exam，仅文本子集 | 官方 Judge 准确率 |
+| [MATH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/math) | 竞赛数学 | Math-Verify 等价性准确率 |
+| [AIME](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/aime) | AIME 2025 / 2026 数学题 | 整数答案准确率 |
+| [LiveMathBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/livemathbench) | 多次采样的数学评测 | G-Pass@k / mG-Pass@k |
+| [CRUXEval-O](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/cruxeval_output) | Python 函数输出预测 | Python 字面量相等准确率 |
+| [SWE-bench Verified](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench) | 代码仓库 issue 修复 | 官方 verifier 修复率 |
+| [SWE-bench Pro V2](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench_pro) | 代码仓库修复，all / hard 题集 | 官方容器复评修复率 |
+| [BrowseComp](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/browsecomp) | 网络信息搜索 | 官方答案 Judge 准确率 |
+| [DeepSearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/deepsearchqa) | 单答案与集合答案的网络搜索 | 官方 autorater F1 |
+| [WideSearch](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/widesearch) | 表格型广泛信息搜索 | 官方表格评分 |
+| [OfficeQA-Pro](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/officeqa_pro) | 文档检索问答 | 数值 / 文本答案准确率 |
+| [Harvey LAB](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/harvey_lab) | 法律文档任务 | 双 Judge rubric 全部通过率 |
+| [JobBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/jobbench) | 专业文件交付 | 官方加权 rubric reward |
+| [AppWorld](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/appworld) | 应用与 API 自动化 | 官方任务完成 reward |
+| [BFCL V4](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bfcl) | 多轮函数调用，仅 Base track | 官方会话成功率 |
+| [WorkBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/workbench) | 工作场景工具操作 | 原生数据库结果正确率 |
+| [TravelPlanner](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/travelplanner) | 旅行行程规划，仅 sole-planning track | 最终约束通过率 |
+| [τ²-bench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau2) | 航空、零售、电信多轮对话，文本模式 | 原生 reward 均值 |
+| [τ³ Banking](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau3_banking) | 多轮银行客服 | 原生 tau2 reward |
+| [Terminal-Bench 2.0](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/terminal_bench) | 通过 Harbor 执行的 Linux 终端任务 | 原生 verifier reward |
 
-QA 接入支持本地 **JSON、JSONL 和 Parquet** 数据。快速示例自带数据，完整 QA 默认数据源需要固定版本 Hugging Face 数据集的访问权限。Terminal-Bench 需要 Python 3.12+ 与 Docker；Harbor 和 tau2 分别安装在独立环境中。环境类 benchmark 的准备步骤见对应链接。
+环境按 benchmark 准备：文本问答与推理类使用本地数据或固定版本的 Hugging Face 数据；网络搜索类可能需要搜索服务与独立 Judge 凭据；文档类需要语料或文件工具；交互与代码任务使用各自原生环境，按需安装 Docker / Harbor。具体步骤见各实现，以及该分支的[数学与代码](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/coding-math-benchmarks.md)、[网络搜索](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md)、[τ²-bench](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/tau2-bench.md)和 [Terminal-Bench](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/terminal-bench.md) 指南。
 
 ## 实验结果
 

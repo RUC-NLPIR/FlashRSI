@@ -5,7 +5,7 @@
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
 
 <p align="center">
-  FlashRSI brings RSI algorithms, benchmarks, and native agent harnesses into one framework for developing and evaluating agent self-improvement. It supports <b>12 algorithms</b>, <b>4 benchmark adapters</b>, and <b>3 harnesses</b>—MiniAgent, Claude Code, and Codex—with experiments spanning instruction search, skill learning, and harness evolution.
+  FlashRSI brings RSI algorithms, benchmarks, and native agent harnesses into one framework for developing and evaluating agent self-improvement. It supports <b>12 algorithms</b> and <b>3 harnesses</b>—MiniAgent, Claude Code, and Codex—with an expanded collection of <b>28 benchmark adapters</b> on the <a href="https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke"><code>integration/flashrsi-smoke</code></a> branch.
 </p>
 
 <!-- TODO: add paper, project page, and discussion links; set the license before release. -->
@@ -105,14 +105,40 @@ These implementations adapt each method to FlashRSI's resource and evaluation in
 
 ## Supported Benchmarks
 
+The **28-adapter collection** below is available on [`integration/flashrsi-smoke`](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks). `main` currently includes SearchQA, HotpotQA, Terminal-Bench 2.0, and τ³ Banking. Each benchmark links to its implementation on that branch.
+
 | Benchmark | Tasks | Scoring |
 | --- | --- | --- |
-| [SearchQA](flashrsi/benchmarks/searchqa) | Short-answer QA with supplied search context | Answer EM / F1 |
-| [HotpotQA](examples/hotpotqa.yaml) | Multi-hop QA with supplied Wikipedia context | Answer EM / F1 |
-| [Terminal-Bench 2.0](docs/terminal-bench.md) | Linux terminal tasks through Harbor | Native verifier reward |
-| [τ³ Banking](examples/tau3_banking.yaml) | Multi-turn banking tasks | Native tau2 reward |
+| [SearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/searchqa) | Short-answer QA with search snippets | Answer EM / F1 |
+| [HotpotQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hotpotqa) | Multi-hop Wikipedia QA | Answer EM / F1; joint F1 in fullwiki mode |
+| [MuSiQue](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/musique) | Compositional multi-hop QA | Answer EM / F1; optional support F1 |
+| [TriviaQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/triviaqa) | Trivia QA with Wikipedia context | Alias-aware EM / F1 |
+| [Natural Questions](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/nq) | Wikipedia QA, short-answer and yes/no subset | Local text EM / F1 |
+| [2WikiMultiHopQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/twowiki_multihopqa) | Multi-hop QA with supplied context | Answer EM / F1 |
+| [BBEH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard reasoning | Official per-answer accuracy |
+| [SuperGPQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/supergpqa) | Graduate-level multiple-choice questions | Answer-letter accuracy |
+| [HLE](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hle) | Humanity's Last Exam, text-only subset | Official judge accuracy |
+| [MATH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/math) | Competition mathematics | Math-Verify equivalence accuracy |
+| [AIME](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/aime) | AIME 2025 / 2026 mathematics | Exact integer accuracy |
+| [LiveMathBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/livemathbench) | Mathematics with repeated sampling | G-Pass@k / mG-Pass@k |
+| [CRUXEval-O](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/cruxeval_output) | Python function output prediction | Python literal equality accuracy |
+| [SWE-bench Verified](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench) | Repository issue repair | Official verifier resolved rate |
+| [SWE-bench Pro V2](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench_pro) | Repository repair, all / hard sets | Official container regrade resolved rate |
+| [BrowseComp](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/browsecomp) | Web research | Official answer judge accuracy |
+| [DeepSearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/deepsearchqa) | Web research with single or set answers | Official autorater F1 |
+| [WideSearch](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/widesearch) | Broad web research with tabular answers | Official table score |
+| [OfficeQA-Pro](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/officeqa_pro) | Document research | Numeric / text answer accuracy |
+| [Harvey LAB](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/harvey_lab) | Legal document work | Dual-judge rubric, all-criteria pass rate |
+| [JobBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/jobbench) | Professional file deliverables | Official weighted rubric reward |
+| [AppWorld](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/appworld) | Application and API automation | Official task-completion reward |
+| [BFCL V4](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bfcl) | Multi-turn function calling, Base track | Official conversation success |
+| [WorkBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/workbench) | Workplace tool use | Native database outcome correctness |
+| [TravelPlanner](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/travelplanner) | Travel itineraries, sole-planning track | Final constraint pass rate |
+| [τ²-bench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau2) | Airline, retail, and telecom dialogue, text mode | Mean native reward |
+| [τ³ Banking](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau3_banking) | Multi-turn banking support | Native tau2 reward |
+| [Terminal-Bench 2.0](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/terminal_bench) | Linux terminal tasks through Harbor | Native verifier reward |
 
-QA adapters accept local **JSON, JSONL, and Parquet** data. The quickstart bundles its own data; default full QA sources require access to the pinned Hugging Face dataset. Terminal-Bench requires Python 3.12+ and Docker. Install Harbor and tau2 in separate environments; follow the linked setup notes for environment benchmarks.
+Setup depends on the benchmark: text QA and reasoning adapters use local or pinned Hugging Face data; web research may require search services and separate judge credentials; document tasks need their corpora or file tools; interactive and coding tasks use their native environments, with Docker / Harbor where required. Follow each implementation's setup notes and the branch guides for [math and code](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/coding-math-benchmarks.md), [web research](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md), [τ²-bench](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/tau2-bench.md), and [Terminal-Bench](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/terminal-bench.md).
 
 ## Experimental Results
 
