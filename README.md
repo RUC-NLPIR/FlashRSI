@@ -10,12 +10,15 @@
   Choose a benchmark, an RSI algorithm, and a harness. Run the search. Measure what changed.
 </p>
 
-<!-- TODO: add the paper, project page, and dataset URLs before release. -->
+<!-- TODO: add paper, project page, and discussion links; set the license before release. -->
 <p align="center">
-  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-B84B35?style=flat-square&amp;logo=arxiv&amp;logoColor=white" alt="Paper — link forthcoming"></a>
-  <a href=""><img src="https://img.shields.io/badge/Project-Page-273D3A?style=flat-square" alt="Project page — link forthcoming"></a>
-  <a href=""><img src="https://img.shields.io/badge/Dataset-Hugging_Face-B48A31?style=flat-square&amp;logo=huggingface&amp;logoColor=white" alt="Dataset — link forthcoming"></a>
-  <a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.11%2B-366B82?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.11 and above"></a>
+  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="Paper — link forthcoming"></a>
+  <a href="https://github.com/ignorejjj/FlashRSI-Lite"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="Code on GitHub"></a>
+  <a href=""><img src="https://img.shields.io/badge/Project_Page-Live-0E9B9B?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="Project page — link forthcoming"></a>
+  <a href="#demo"><img src="https://img.shields.io/badge/Live_Demo-Watch-FF5C8A?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="Watch the demo"></a><br>
+  <a href="docs/"><img src="https://img.shields.io/badge/Docs-Guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="Documentation"></a>
+  <a href=""><img src="https://img.shields.io/badge/Discussions-Join-5865F2?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="Discussions — link forthcoming"></a>
+  <a href=""><img src="https://img.shields.io/badge/License-TBD-D22128?style=for-the-badge&amp;logo=opensourceinitiative&amp;logoColor=white" alt="License — to be specified"></a>
 </p>
 
 <p align="center">

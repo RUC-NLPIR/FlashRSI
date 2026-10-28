@@ -10,12 +10,15 @@
   选择 benchmark、RSI 算法和 harness，开始搜索，检验改进。
 </p>
 
-<!-- TODO: 发布前补充论文、项目主页和数据集链接。 -->
+<!-- TODO: 发布前补充论文、项目主页、讨论区链接和许可证信息。 -->
 <p align="center">
-  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-B84B35?style=flat-square&amp;logo=arxiv&amp;logoColor=white" alt="论文，链接待补充"></a>
-  <a href=""><img src="https://img.shields.io/badge/Project-Page-273D3A?style=flat-square" alt="项目主页，链接待补充"></a>
-  <a href=""><img src="https://img.shields.io/badge/Dataset-Hugging_Face-B48A31?style=flat-square&amp;logo=huggingface&amp;logoColor=white" alt="数据集，链接待补充"></a>
-  <a href="#快速开始"><img src="https://img.shields.io/badge/Python-3.11%2B-366B82?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.11 及以上"></a>
+  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="论文，链接待补充"></a>
+  <a href="https://github.com/ignorejjj/FlashRSI-Lite"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="GitHub 代码仓库"></a>
+  <a href=""><img src="https://img.shields.io/badge/Project_Page-Live-0E9B9B?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="项目主页，链接待补充"></a>
+  <a href="#演示"><img src="https://img.shields.io/badge/Live_Demo-Watch-FF5C8A?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="观看演示"></a><br>
+  <a href="docs/"><img src="https://img.shields.io/badge/Docs-Guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="文档"></a>
+  <a href=""><img src="https://img.shields.io/badge/Discussions-Join-5865F2?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="讨论区，链接待补充"></a>
+  <a href=""><img src="https://img.shields.io/badge/License-TBD-D22128?style=for-the-badge&amp;logo=opensourceinitiative&amp;logoColor=white" alt="许可证，待指定"></a>
 </p>
 
 <p align="center">
