@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["fonttools==4.60.1"]
+# ///
 """Generate the minimal, self-contained README cover SVG.
 
-Run with Python 3.11+. The particle motif is deterministic; cover.png is a
-separately rasterized preview of the same SVG.
+Run with uv run --script scripts/render_readme_cover.py. The particle motif is
+deterministic; cover.png is a separately rasterized preview of the same SVG.
 """
 
 from __future__ import annotations
@@ -11,11 +15,30 @@ import math
 import random
 from pathlib import Path
 
+from fontTools.pens.svgPathPen import SVGPathPen
+from fontTools.pens.transformPen import TransformPen
+from fontTools.ttLib import TTFont
+
 WIDTH, HEIGHT = 1600, 440
 BACKGROUND = "#080B10"
 WHITE = "#F3F5F7"
 BLUE = "#8AB8E8"
 ORANGE = "#DDA57B"
+
+
+def wordmark():
+    font_path = Path(__file__).resolve().parents[1] / "assets/fonts/SpaceGrotesk.ttf"
+    with TTFont(font_path) as font:
+        glyphs = font.getGlyphSet(location={"wght": 700})
+        cmap = font.getBestCmap()
+        pen = SVGPathPen(glyphs)
+        cursor = 0
+        for character in "FlashRSI":
+            glyph = glyphs[cmap[ord(character)]]
+            glyph.draw(TransformPen(pen, (1, 0, 0, 1, cursor, 0)))
+            cursor += glyph.width - font["head"].unitsPerEm * 0.0173
+        scale = 104 / font["head"].unitsPerEm
+        return f'<path transform="translate(118 237) scale({scale} {-scale})" fill="{WHITE}" d="{pen.getCommands()}"/>'
 
 
 def render():
@@ -43,8 +66,8 @@ def render():
   <title id="cover-title">FlashRSI — Improve the agent you already have.</title>
   <desc id="cover-desc">A white FlashRSI wordmark and a small, quiet spiral of blue-white points on a plain dark background.</desc>
   <rect width="{WIDTH}" height="{HEIGHT}" fill="{BACKGROUND}"/>
+  {wordmark()}
   <g font-family="Arial, Helvetica, sans-serif">
-    <text x="118" y="237" fill="{WHITE}" font-size="104" font-weight="400" letter-spacing="-4">FlashRSI</text>
     <text x="124" y="289" fill="#929EAD" font-size="23">Improve the agent you already have.</text>
   </g>
   <g>

@@ -10,6 +10,7 @@ Run with uv (or install Pillow and use Python directly):
 
 The default fonts use macOS SF Pro/Arial or Linux DejaVu Sans. Pass --font
 and --bold-font to reproduce the same typography on another machine.
+The FlashRSI wordmark uses the bundled Space Grotesk font at weight 700.
 """
 
 from __future__ import annotations
@@ -150,7 +151,16 @@ class Hero:
     def background(self):
         image = Image.new("RGB", (WIDTH * SCALE, HEIGHT * SCALE), PAPER)
         draw = ImageDraw.Draw(image)
-        self.text(draw, (65, 43), "FlashRSI", 40)
+        brand = ImageFont.truetype(
+            str(Path(__file__).resolve().parents[1] / "assets/fonts/SpaceGrotesk.ttf"),
+            40 * SCALE,
+        )
+        brand.set_variation_by_axes([700])
+        x = 65 * SCALE
+        baseline = 43 * SCALE - brand.getbbox("FlashRSI", anchor="ls")[1]
+        for character in "FlashRSI":
+            draw.text((x, baseline), character, font=brand, fill=INK, anchor="ls")
+            x += brand.getlength(character) - 0.7 * SCALE
         self.text(draw, (65, 101), "Choose. Improve. Evaluate.", 20, MUTED)
         for column, (label, _) in enumerate(REELS):
             x = 65 + 420 * column
