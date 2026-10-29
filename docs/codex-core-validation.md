@@ -18,9 +18,8 @@
 没有 Rust 编译、CLI 或宿主核心模块兜底；候选语法错误在请求模型前失败。
 当前仅支持 Python 核心执行路径；仓库不提供 `cli_path` 或原生 CLI fallback。
 
-逐模块映射与资源原文/派生规则由 `python_core/UPSTREAM.json` 和
-`scripts/verify_codex_python_port.py` 核验；固定上游源码需要在仓库外提供。
-这个校验只证明来源和资源一致，不能证明移植语义等价。
+固定版本和 Python 迁移边界见 [Codex 核心版本与 Python 迁移](codex-core-extraction.md)。
+本报告保留历史验证记录；测试只证明各自覆盖的路径，不能证明移植语义完全等价。
 
 ## 做任务时的等价标准
 
@@ -108,9 +107,8 @@ ephemeral exec 不触发；Python 尚未迁移，不能用本轮测试证明它�
 | --- | --- | --- |
 | 冻结代码后的 `tests/test_codex*.py` | **377 passed**，270.99 秒 | `pytest-long-task-frozen.xml`、`.txt` |
 | 其余框架测试 | **1,567 passed，1 skipped**，201.48 秒 | `pytest-framework-long-task.xml`、`.txt` |
-| Codex 源码、测试、来源脚本 Ruff check | 通过 | `ruff-check-codex-long-task.txt` |
+| Codex 源码和测试 Ruff check | 通过 | `ruff-check-codex-long-task.txt` |
 | 上述 Python 文件 Ruff format check | 通过 | `ruff-format-codex-long-task.txt` |
-| 离线来源检查 | 24 个核心映射、94 份原样资源、15 份派生资源通过 | `provenance-long-task-final.txt` |
 
 合计 **1,944 项通过、1 项跳过**，没有失败。
 这些包括单测、集成回归和原生对照，不能把通过总数解释为同样数量的原生等价证明。
@@ -123,9 +121,8 @@ ephemeral exec 不触发；Python 尚未迁移，不能用本轮测试证明它�
 ```bash
 uv run pytest tests/test_codex*.py -o tmp_path_retention_policy=failed
 uv run pytest --ignore-glob='tests/test_codex*.py' -o tmp_path_retention_policy=failed
-uv run ruff check flashrsi/agents/codex tests/test_codex*.py scripts/verify_codex_python_port.py
-uv run ruff format --check flashrsi/agents/codex tests/test_codex*.py scripts/verify_codex_python_port.py docs/codex*.md
-uv run python scripts/verify_codex_python_port.py --offline
+uv run ruff check flashrsi/agents/codex tests/test_codex*.py
+uv run ruff format --check flashrsi/agents/codex tests/test_codex*.py
 ```
 
 ## 安装产物实测

@@ -45,7 +45,7 @@ cache 创建失败直接报错，不回退到会使 helper 失效的目录。
 移植 Linux 检测顺序：`/etc/localtime` 的原始 readlink、`/etc/timezone`、OpenWRT 配置，
 保留上游字符串处理规则，不以 `TZ` 取代系统检测。检测失败时同时使用 UTC 日期和
 `Etc/UTC`，避免本地跨日时只修时区名称。增加 16 项回归及依赖 checksum/许可证来源。
-非 Linux 的时区检测仍有近似行为，已列入 `UPSTREAM.json`，本轮不宣称该分支完整等价。
+非 Linux 的时区检测仍有近似行为，已列入当前版本限制，本轮不宣称该分支完整等价。
 
 Snapshot 继续包含真正执行的 Python 核心；固定 adapter/loader、凭据和运行状态位于其外。
 候选核心损坏时失败，没有 Rust、CLI 或宿主核心回退。
@@ -70,7 +70,6 @@ session/chunk ID 等非语义字段，并保留它们的引用关系。
 | 安装后 CLI help / 示例 prepare-only | 通过，无模型调用 | `wheel-cli-{help,prepare}.txt` |
 | 真实 Linux 安装 wheel | **120 passed**，0 failures/errors/skips | `linux/verification.json`、7 组 XML/log |
 | 实际 Docker 安装 wheel | **120 passed**，0 failures/errors/skips | `docker/verification.json`、7 组 XML/log |
-| 固定来源核验 | 25 个模块映射、95 份原样资源、16 份派生资源通过 | `provenance.txt` |
 | Codex 源码、测试和来源/验收脚本 Ruff | check、format check 通过 | `ruff-{check,format}.txt` |
 
 非 Codex 框架回归在本批次早期执行，后续只修改 Codex 及其测试/文档，

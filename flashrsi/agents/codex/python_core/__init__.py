@@ -1,8 +1,5 @@
-"""Python semantic port of openai/codex rust-v0.147.0.
+"""Python Codex core for the fixed 0.147.0 baseline.
 
-Upstream commit: be6e8eac029b183056b7e4402879f15d2c85f61b.
-This package is loaded from the selected Snapshot in a fresh Python process.
+The core is loaded from the selected Snapshot in a fresh Python process.
+The baseline and its source commit are documented in ``docs/codex.md``.
 """
-
-UPSTREAM_COMMIT = "be6e8eac029b183056b7e4402879f15d2c85f61b"
-UPSTREAM_TAG = "rust-v0.147.0"

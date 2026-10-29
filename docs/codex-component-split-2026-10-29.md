@@ -7,13 +7,13 @@ scope 的编辑面；运行时仍使用 `Snapshot._export(full=True)` 导出全�
 
 ## 当前分类
 
-默认 Snapshot：`37eef409…`，141 个文件，内容 **1,835,309 bytes**。
-`Snapshot.save()` 的 JSON 为 **2,466,080 bytes**，gzip 后为 **739,602 bytes**。
+默认 Snapshot：当前基线，137 个文件，内容 **1,690,825 bytes**。
+`Snapshot.save()` 的 JSON 为 **2,272,943 bytes**，gzip 后为 **687,744 bytes**。
 分类及内容大小如下：
 
 | component | 文件数 | 内容字节 | 现在负责 |
 | --- | ---: | ---: | --- |
-| `code` | 11 | 187,873 | 主循环、请求、上下文、历史、压缩、模型协议 |
+| `code` | 11 | 187,787 | 主循环、请求、上下文、历史、压缩、模型协议 |
 | `tool` | 26 | 698,148 | tools、shell、patch、Code Mode、MCP、搜索及工具资源 |
 | `agent` | 6 | 89,753 | v1/v2 子代理与角色/模板资源 |
 | `hook` | 11 | 29,812 | hook 运行时和 schema |
@@ -21,7 +21,7 @@ scope 的编辑面；运行时仍使用 `Snapshot._export(full=True)` 导出全�
 | `plugin` | 2 | 7,506 | plugin 运行时和 plugin 提示 |
 | `prompt` | 3 | 21,728 | Codex 基础/压缩提示模板 |
 | `skill` | 59 | 406,050 | 内置 system skills 和技能提示 |
-| `config` | 21 | 362,696 | 配置、权限、模型目录、来源和许可证元数据 |
+| `config` | 17 | 218,298 | 配置、权限、模型目录和许可证 |
 
 顶层 `AGENTS.md`、`skills/**`、`agents/**`、`hooks/**`、`servers/**`、
 `plugins/cache/**`、`memories/**` 和 `config.toml` 继续使用原来的分类。
@@ -49,7 +49,7 @@ instructions；`tools.py` 仍整体归 `tool`，因为工具描述、schema 构�
 - 新分类 wheel 的独立 macOS 安装验收：10 个 localhost/实际工具检查通过；
   wheel 为 `811,501 bytes`，SHA-256 为
   `0cdec62b89e8929557423f29f68ff19ef2e19bdb8a12071921fdfed8844e8f88`。
-- 141 个文件均恰好匹配一个组件规则；没有修改 `mvp_doc.md`。
+- 137 个文件均恰好匹配一个组件规则；没有修改 `mvp_doc.md`。
 
 这次拆分没有声称模块之间已经没有依赖。此前 Linux/Docker 的 120 项证据对应拆分前的
 wheel；当前新分类 wheel 已完成 macOS 安装验收，若要把它作为 Linux/Docker 发布基线，

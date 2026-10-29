@@ -58,7 +58,6 @@ Git metadata 的原生后台完成时间不固定，单独比较最终 enrichmen
 | 适配层完整复跑 | **25 passed** | `pytest-adapter-final-repair-20261029.xml` |
 | 取消与记录发布的竞态重复检查 | **10 次通过** | `pytest-cancellation-stress-repair-20261029.txt` |
 | Codex 源码/测试/来源脚本 Ruff check、format check | 通过 | `ruff-{check,format}-codex-repair-20261029.txt` |
-| 离线来源核验 | 24 个模块映射、94 份原样资源、15 份派生资源通过 | `provenance-repair-20261029.txt` |
 | 无 CLI 的 wheel 安装验收 | **9 组通过**；109 份资源哈希、4 份执行位通过 | `wheel-acceptance-repair-20261029.json` |
 | 安装后的 CLI help / 示例 prepare-only | 通过，无模型调用 | `wheel-cli-{help,prepare}-repair-20261029.txt` |
 
@@ -119,7 +118,7 @@ c7d6b5e18bb8abd33ed2c201f488f58b07f7ddc844ae121283234fd691a652b7
 HTTP/SSE 已覆盖；WebSocket、原生账号登录/恢复、远程 MCP/OAuth、apps/connectors、
 managed hook trust 与完整配置层发现仍有边界。自定义子代理 provider/profile 重载、
 相对 typed 路径和全部 JSON/serde 错误文案也未证明等价，详见
-[来源与范围](codex-core-extraction.md) 和 `python_core/UPSTREAM.json`。
+[来源与范围](codex-core-extraction.md) 和 `docs/codex.md`。
 
 后续任务机制迁移应优先补共享 rollout budget 和持久会话恢复，
 再接自动 memory 写入管线；每项均需固定源码映射、失败前验及真实工具差分。

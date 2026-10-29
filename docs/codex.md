@@ -10,7 +10,7 @@
 固定框架适配层只处理配置、目录、进程和 Trajectory 映射；启动独立 Python 进程后，
 从选定运行副本导入核心，不导入宿主包中的核心作为兜底。不需要 Cargo、Rust 或 Codex CLI。
 
-来源映射和原始资源校验见 [codex-core-extraction.md](codex-core-extraction.md)，
+固定版本、Python 迁移边界和验证方式见 [codex-core-extraction.md](codex-core-extraction.md)，
 当前状态、shell snapshot 与平台验收见 [任务基线验收](codex-task-baseline-2026-10-29.md)，
 上一批修复见 [审计修复验收](codex-core-repair-2026-10-29.md)，
 更早记录见 [codex-core-validation.md](codex-core-validation.md)。
@@ -69,7 +69,7 @@ print(result.status, result.output)
 | plugin | `plugins.py` 与 plugin 提示；外部 `plugins/cache/**` | 本地 plugin 机制 |
 | prompt | `AGENTS.md` 与 `python_core/assets/` 的提示模板 | 版本全局指令和内置提示模板 |
 | skill | `skills/**` 与 `resource_assets/system_skills/**` | 自定义及内置技能资源 |
-| config | `config.toml`、`rules/**`、模型目录、权限模板和来源元数据 | 原生形状配置及静态元数据 |
+| config | `config.toml`、`rules/**`、模型目录、权限模板和许可证 | 原生形状配置及静态资源 |
 
 开启 `code: rw` 后，算法可以修改主循环和协议上下文；需要演化工具、子代理、hook、
 memory 或 plugin 机制时，分别选择对应组件。`{"*": "rw"}` 仍表示整个 Snapshot。
@@ -78,8 +78,8 @@ memory 或 plugin 机制时，分别选择对应组件。`{"*": "rw"}` 仍表示
 `source_dir` 自定义版本必须提供 `components.yaml` 和完整 `python_core/`。
 固定 `_entry.py`、`_python.py` 和 Agent 适配器均不属于 Snapshot。
 
-当前默认 Snapshot 有 141 个文件，文件内容合计 1,835,309 bytes；保存为 JSON 为
-2,466,080 bytes，gzip 后为 739,602 bytes。这里的大小只统计 Snapshot 文件 payload，
+当前默认 Snapshot 有 137 个文件，文件内容合计 1,690,825 bytes；保存为 JSON 为
+2,272,943 bytes，gzip 后为 687,744 bytes。这里的大小只统计 Snapshot 文件 payload，
 不含适配器、依赖、Rust 参考目录、凭据和运行状态；分类明细见
 [组件拆分记录](codex-component-split-2026-10-29.md)。
 
