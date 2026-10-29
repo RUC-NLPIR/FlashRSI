@@ -4,10 +4,10 @@
 
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
 
-<p align="center"><i>A unified workflow for agent self-improvement across supported algorithms, benchmarks, and harnesses.</i></p>
+<p align="center"><i>One click to reproduce any RSI algorithm with any benchmark and harness.</i></p>
 
 <p align="center">
-  FlashRSI brings together <b>12 RSI algorithms</b>, <b>30 benchmarks</b>, and <b>3 harnesses</b>—MiniAgent, Claude Code, and Codex—to reproduce, compare, and develop agent self-improvement methods.
+  FlashRSI brings together <b>12 RSI algorithms</b>, <b>30 benchmarks</b>, and <b>3 harnesses</b> (MiniAgent, Claude Code, and Codex) to reproduce, compare, and develop agent self-improvement methods.
 </p>
 
 <!-- TODO: add paper, project page, and discussion links; set the license before release. -->
@@ -29,6 +29,7 @@
   <a href="#features">Features</a> &nbsp;/&nbsp;
   <a href="#quick-start">Quick start</a> &nbsp;/&nbsp;
   <a href="#supported-algorithms">Algorithms</a> &nbsp;/&nbsp;
+  <a href="#supported-harnesses">Harnesses</a> &nbsp;/&nbsp;
   <a href="#supported-benchmarks">Benchmarks</a> &nbsp;/&nbsp;
   <a href="#experimental-results">Results</a>
 </p>
@@ -47,6 +48,12 @@
 
 [Documentation →](docs/usage.md)
 
+<p align="center">
+  <a href="assets/readme/framework-overview.svg">
+    <img src="assets/readme/framework-overview.png" alt="FlashRSI framework overview: 12 RSI algorithms, immutable AgentSnapshots, three agent harnesses, and 30 benchmarks." width="100%">
+  </a>
+</p>
+
 ## Quick start
 
 ### 1. Install
@@ -64,6 +71,8 @@ python -m pip install -e .
 
 ### 2. Run
 
+Run **SkillOpt × SearchQA × MiniAgent** on the bundled 12-question QA sample.
+
 **Command line**
 
 Set `TARGET_API_KEY` and `WORKER_API_KEY` in your shell for the two independent roles. For custom endpoints, also set each role's `llm.base_url`.
@@ -79,7 +88,7 @@ flashrsi run \
   --algorithm.num_epochs 1 --algorithm.max_steps 1
 ```
 
-**YAML**
+**[YAML](examples/quickstart.yaml)**
 
 Set the model, API key and optional endpoint for both `agent.llm` and `algorithm.worker.llm` in [examples/quickstart.yaml](examples/quickstart.yaml), then run:
 
@@ -87,76 +96,79 @@ Set the model, API key and optional endpoint for both `agent.llm` and `algorithm
 flashrsi run --config examples/quickstart.yaml
 ```
 
-### Automatically prepare selected dependencies
-
-Use Linux / WSL with Python 3.12. Fill both roles in [examples/quickstart_launch.yaml](examples/quickstart_launch.yaml), then run from the repository root:
-
-```bash
-python scripts/run_experiment.py --config examples/quickstart_launch.yaml --plan
-python scripts/run_experiment.py --config examples/quickstart_launch.yaml --check-only
-python scripts/run_experiment.py --config examples/quickstart_launch.yaml
-```
-
-The launcher creates a separate Python environment for the selected combination. This example uses the bundled 12 questions; `--check-only` validates initialization without model calls. See the [launcher guide](docs/experiment-launcher.zh-CN.md) for additional services and output records.
-Use `quickstart.yaml` with direct `flashrsi run`, and `quickstart_launch.yaml` with the launcher: the two entries resolve data paths differently.
+Results are saved under `runs/`; see [scores, Snapshots, and trajectories](docs/running-experiments.md#read-the-results). For automatic environment setup, see the [launcher guide](docs/experiment-launcher.zh-CN.md).
 
 ## Supported Algorithms
 
-| Algorithm | Editable resources | Search strategy |
+| Algorithm (paper) | Editable resources | Example |
 | --- | --- | --- |
-| [OPRO](examples/opro.yaml) | Instructions | Propose instructions from scored history. |
-| [GEPA](examples/gepa.yaml) | Instructions | Reflect on task feedback and select a Pareto frontier. |
-| [EvoPrompt](examples/evoprompt.yaml) | Instructions | Evolve a population with GA or DE operators. |
-| [ACE](docs/ace.md) | Instructions / playbook | Accumulate and curate experience through reflection. |
-| [SkillOpt](examples/quickstart.yaml) | Skills | Combine batch edits with epoch-level guidance. |
-| [Evo-Harness](docs/evo-harness.md) | Skills | Turn online experience into reusable skills. |
-| [AHE](docs/ahe.md) | Harness resources | Retain legal edits and revise them using later diagnoses. |
-| [ADAS](docs/adas.md) | Harness resources | Search an archive of designs with self-reflection. |
-| [DarwinX](docs/darwinx.md) | Harness resources | Extend a population while preserving existing capabilities. |
-| [Meta-Harness](docs/meta-harness.md) | Harness resources | Retrieve search history to diagnose and edit candidates. |
-| [ModularRSI](docs/modular-rsi.md) | Harness resources | Evolve module branches, then integrate their changes. |
-| [RRSI](docs/rrsi.md) | Harness resources | Use repeated trials, attribution, and cost-aware selection. |
+| [OPRO](https://arxiv.org/abs/2309.03409) | Instructions | [Config](examples/opro.yaml) |
+| [GEPA](https://arxiv.org/abs/2507.19457) | Instructions | [Config](examples/gepa.yaml) |
+| [EvoPrompt](https://arxiv.org/abs/2309.08532) | Instructions | [Config](examples/evoprompt.yaml) |
+| [ACE](https://arxiv.org/abs/2510.04618) | Instructions / playbook | [Config](examples/ace.yaml) |
+| [SkillOpt](https://arxiv.org/abs/2605.23904) | Skills | [Config](examples/quickstart.yaml) |
+| [Evo-Harness](https://arxiv.org/abs/2608.15071v2) | Skills | [Config](examples/evo_harness.yaml) |
+| [AHE](https://arxiv.org/abs/2604.25850) | Harness resources | [Config](examples/ahe.yaml) |
+| [ADAS](https://arxiv.org/abs/2408.08435) | Harness resources | [Config](examples/adas.yaml) |
+| [DarwinX](https://arxiv.org/abs/2608.07545) | Harness resources | [Config](examples/darwinx.yaml) |
+| [Meta-Harness](https://arxiv.org/abs/2603.28052) | Harness resources | [Config](examples/meta_harness.yaml) |
+| [ModularRSI](https://arxiv.org/abs/2609.14857) | Harness resources | [Config](examples/modular_rsi.yaml) |
+| [RRSI](https://arxiv.org/abs/2609.24972) | Harness resources | [Config](examples/rrsi.yaml) |
 
-These implementations adapt each method to FlashRSI's resource and evaluation interfaces. Supported combinations depend on the resources exposed by the harness; directory-editing methods require an **Agent Worker**. Method notes document the implementation choices.
+Implementations adapt each method to FlashRSI's resource and evaluation interfaces. Evo-Harness and harness-editing methods need an Agent Worker; see [method requirements](docs/running-experiments.md#choose-an-algorithm-and-harness).
+
+## Supported Harnesses
+
+| Harness | Editable resources | Example |
+| --- | --- | --- |
+| [MiniAgent](docs/usage.md#native-harnesses) | Instructions, skills, tools, runtime code, configuration | [Config](examples/quickstart.yaml) |
+| [Claude Code](docs/usage.md#native-harnesses) | Instructions, skills, agents, hooks, tool servers, settings | [Config](examples/searchqa_deepseek/claude_code.yaml) |
+| [Codex](docs/codex.md) | Instructions, skills, agents, hooks, plugins, memory, tools, configuration | [Config](examples/codex.yaml) |
 
 ## Supported Benchmarks
 
-This integration registers **30 adapters**. See the [configuration index](docs/benchmark-quickstart.md) for examples and prerequisites. Smoke results and validation reports are local artifacts and are not distributed with the source. Registration does not imply every combination has been validated.
+FlashRSI registers **30 benchmarks**, each with a configuration example. See the [configuration index](docs/benchmark-quickstart.md) for data, services, and environment requirements. Combinations depend on harness resources and execution capabilities; registration does not imply every combination has been validated.
 
-| Benchmark | Tasks | Scoring |
-| --- | --- | --- |
-| [SearchQA](flashrsi/benchmarks/searchqa) | Short-answer QA with search snippets | Answer EM / F1 |
-| [HotpotQA](flashrsi/benchmarks/hotpotqa) | Multi-hop Wikipedia QA | Answer EM / F1; joint F1 in fullwiki mode |
-| [MuSiQue](flashrsi/benchmarks/musique) | Compositional multi-hop QA | Answer EM / F1; optional support F1 |
-| [TriviaQA](flashrsi/benchmarks/triviaqa) | Trivia QA with Wikipedia context | Alias-aware EM / F1 |
-| [Natural Questions](flashrsi/benchmarks/nq) | Wikipedia QA, short-answer and yes/no subset | Local text EM / F1 |
-| [2WikiMultiHopQA](flashrsi/benchmarks/twowiki_multihopqa) | Multi-hop QA with supplied context | Answer EM / F1 |
-| [BBEH](flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard reasoning | Official per-answer accuracy |
-| [SuperGPQA](flashrsi/benchmarks/supergpqa) | Graduate-level multiple-choice questions | Answer-letter accuracy |
-| [HLE](flashrsi/benchmarks/hle) | Humanity's Last Exam, text-only subset | Official judge accuracy |
-| [MATH](flashrsi/benchmarks/math) | Competition mathematics | Math-Verify equivalence accuracy |
-| [AIME](flashrsi/benchmarks/aime) | AIME 2025 / 2026 mathematics | Exact integer accuracy |
-| [LiveMathBench](flashrsi/benchmarks/livemathbench) | Mathematics with repeated sampling | G-Pass@k / mG-Pass@k |
-| [SWE-bench Verified](flashrsi/benchmarks/swe_bench) | Repository issue repair | Official verifier resolved rate |
-| [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | Repository repair, all / hard sets | Official container regrade resolved rate |
-| [BrowseComp](flashrsi/benchmarks/browsecomp) | Web research | Official answer judge accuracy |
-| [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | Web research with single or set answers | Official autorater F1 |
-| [WideSearch](flashrsi/benchmarks/widesearch) | Broad web research with tabular answers | Official table score |
-| [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | Document research | Numeric / text answer accuracy |
-| [Harvey LAB](flashrsi/benchmarks/harvey_lab) | Legal document work | Dual-judge rubric, all-criteria pass rate |
-| [JobBench](flashrsi/benchmarks/jobbench) | Professional file deliverables | Official weighted rubric reward |
-| [AppWorld](flashrsi/benchmarks/appworld) | Application and API automation | Official task-completion reward |
-| [BFCL V4](flashrsi/benchmarks/bfcl) | Multi-turn function calling, Base track | Official conversation success |
-| [WorkBench](flashrsi/benchmarks/workbench) | Workplace tool use | Native database outcome correctness |
-| [TravelPlanner](flashrsi/benchmarks/travelplanner) | Travel itineraries, sole-planning track | Final constraint pass rate |
-| [τ²-bench](flashrsi/benchmarks/tau2) | Airline, retail, and telecom dialogue, text mode | Mean native reward |
-| [τ³ Banking](flashrsi/benchmarks/tau3_banking) | Multi-turn banking support | Native tau2 reward |
-| [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | Linux terminal tasks through Harbor | Native verifier reward |
-| [DeepSWE](flashrsi/benchmarks/deepswe) | Repository repair via native Harbor v1.3 tasks | Independent container verifier reward |
-| [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Debugging / Financial_Model / Template | Native LibreOffice verifier; Visualization excluded |
-| [ALFWorld](flashrsi/benchmarks/alfworld) | Text-only interactive environment | Native TextWorld won / success |
+| Benchmark | Task | Metric | Get started |
+| --- | --- | --- | --- |
+| **Question answering** | | | |
+| [SearchQA](flashrsi/benchmarks/searchqa) | Short-answer QA with search snippets | Answer EM / F1 | [Setup](docs/searchqa-deepseek-reproduction.md) · [Config](examples/searchqa_skillopt.yaml) |
+| [HotpotQA](flashrsi/benchmarks/hotpotqa) | Multi-hop Wikipedia QA | Answer EM / F1; joint F1 in fullwiki mode | [Setup](docs/hotpot-independent-evolution.md) · [Config](examples/hotpotqa_opro.yaml) |
+| [MuSiQue](flashrsi/benchmarks/musique) | Compositional multi-hop QA | Answer EM / F1; optional support F1 | [Setup](docs/musique-independent-evolution.md) · [Config](examples/modular_rsi_musique.yaml) |
+| [TriviaQA](flashrsi/benchmarks/triviaqa) | Trivia QA with Wikipedia context | Alias-aware EM / F1 | [Setup](docs/triviaqa-independent-evolution.md) · [Config](examples/modular_rsi_triviaqa.yaml) |
+| [Natural Questions](flashrsi/benchmarks/nq) | Wikipedia QA, short-answer and yes/no subset | Local text EM / F1 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/nq_opro.yaml) |
+| [2WikiMultiHopQA](flashrsi/benchmarks/twowiki_multihopqa) | Multi-hop QA with supplied context | Answer EM / F1 | [Setup](docs/twowiki-independent-evolution.md) · [Config](examples/twowiki_multihopqa_opro.yaml) |
+| **Reasoning and mathematics** | | | |
+| [BBEH](flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard reasoning | Official per-answer accuracy | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/bbeh_opro.yaml) |
+| [SuperGPQA](flashrsi/benchmarks/supergpqa) | Graduate-level multiple-choice questions | Answer-letter accuracy | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/supergpqa_opro.yaml) |
+| [HLE](flashrsi/benchmarks/hle) | Humanity's Last Exam, text-only subset | Official judge accuracy | [Setup](docs/benchmark-quickstart.md) · [Config](examples/hle_opro.yaml) |
+| [MATH](flashrsi/benchmarks/math) | Competition mathematics | Math-Verify equivalence accuracy | [Setup](docs/math-independent-evolution.md) · [Config](examples/modular_rsi_math500.yaml) |
+| [AIME](flashrsi/benchmarks/aime) | AIME 2025 / 2026 mathematics | Exact integer accuracy | [Setup](docs/coding-math-benchmarks.md) · [Config](examples/aime_opro.yaml) |
+| [LiveMathBench](flashrsi/benchmarks/livemathbench) | Mathematics with repeated sampling | G-Pass@k / mG-Pass@k | [Setup](docs/benchmark-quickstart.md) · [Config](examples/livemathbench_opro.yaml) |
+| **Coding** | | | |
+| [SWE-bench Verified](flashrsi/benchmarks/swe_bench) | Repository issue repair | Official verifier resolved rate | [Setup](docs/swe-independent-evolution.md) · [Config](examples/swe_bench_verified_opro.yaml) |
+| [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | Repository repair, all / hard sets | Official container regrade resolved rate | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/swe_bench_pro_opro.yaml) |
+| [DeepSWE](flashrsi/benchmarks/deepswe) | Repository repair via native Harbor v1.3 tasks | Independent container verifier reward | [Setup](docs/deepswe.md) · [Config](examples/deepswe_opro.yaml) |
+| **Web research** | | | |
+| [BrowseComp](flashrsi/benchmarks/browsecomp) | Web research | Official answer judge accuracy | [Setup](docs/web-research-services.md) · [Config](examples/browsecomp_serper_jina.yaml) |
+| [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | Web research with single or set answers | Official autorater F1 | [Setup](docs/web-research-services.md) · [Config](examples/deepsearchqa_serper_jina.yaml) |
+| [WideSearch](flashrsi/benchmarks/widesearch) | Broad web research with tabular answers | Official table score | [Setup](docs/web-research-services.md) · [Config](examples/widesearch_opro.yaml) |
+| **Documents and tool use** | | | |
+| [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | Document research | Numeric / text answer accuracy | [Setup](docs/web-research-services.md) · [Config](examples/officeqa_pro_opro.yaml) |
+| [Harvey LAB](flashrsi/benchmarks/harvey_lab) | Legal document work | Dual-judge rubric, all-criteria pass rate | [Setup](docs/benchmark-quickstart.md) · [Config](examples/harvey_lab_opro.yaml) |
+| [JobBench](flashrsi/benchmarks/jobbench) | Professional file deliverables | Official weighted rubric reward | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/jobbench_opro.yaml) |
+| [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Debugging / Financial_Model / Template | Native LibreOffice verifier; Visualization excluded | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/spreadsheetbench2_opro.yaml) |
+| [AppWorld](flashrsi/benchmarks/appworld) | Application and API automation | Official task-completion reward | [Setup](docs/appworld-independent-evolution.md) · [Config](examples/modular_rsi_appworld.yaml) |
+| [BFCL V4](flashrsi/benchmarks/bfcl) | Multi-turn function calling, Base track | Official conversation success | [Setup](docs/benchmark-quickstart.md) · [Config](examples/bfcl_opro.yaml) |
+| [WorkBench](flashrsi/benchmarks/workbench) | Workplace tool use | Native database outcome correctness | [Setup](docs/workbench.md) · [Config](examples/workbench_opro.yaml) |
+| [TravelPlanner](flashrsi/benchmarks/travelplanner) | Travel itineraries, sole-planning track | Final constraint pass rate | [Setup](docs/benchmark-quickstart.md) · [Config](examples/travelplanner_opro.yaml) |
+| **Interactive environments** | | | |
+| [τ²-bench](flashrsi/benchmarks/tau2) | Airline, retail, and telecom dialogue, text mode | Mean native reward | [Setup](docs/tau2-bench.md) · [Config](examples/tau2_opro.yaml) |
+| [τ³ Banking](flashrsi/benchmarks/tau3_banking) | Multi-turn banking support | Native tau2 reward | [Setup](docs/benchmark-quickstart.md) · [Config](examples/tau3_banking_opro.yaml) |
+| [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | Linux terminal tasks through Harbor | Native verifier reward | [Setup](docs/terminal-bench.md) · [Config](examples/terminal_bench21_opro.yaml) |
+| [ALFWorld](flashrsi/benchmarks/alfworld) | Text-only interactive environment | Native TextWorld won / success | [Setup](docs/alfworld.md) · [Config](examples/alfworld_opro.yaml) |
 
-Setup depends on the benchmark: text QA and reasoning adapters use local or pinned Hugging Face data; web research may require search services and separate judge credentials; document tasks need their corpora or file tools; interactive and coding tasks use their native environments, with Docker / Harbor where required. Follow each implementation's setup notes and the branch guides for [math and code](docs/coding-math-benchmarks.md), [web research](docs/web-research-services.md), [τ²-bench](docs/tau2-bench.md), and [Terminal-Bench](docs/terminal-bench.md).
+Examples use different algorithms. Methods such as ModularRSI also need matching module and data settings; see the [run guide](docs/running-experiments.md).
 
 ## Experimental Results
 

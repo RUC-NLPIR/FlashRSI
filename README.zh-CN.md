@@ -4,7 +4,7 @@
 
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
 
-<p align="center"><i>通过统一流程，在支持的算法、benchmark 和 harness 组合上开展 Agent 自我改进实验。</i></p>
+<p align="center"><i>One click to reproduce any RSI algorithm with any benchmark and harness.</i></p>
 
 <p align="center">
   FlashRSI 集成 <b>12 种 RSI 算法</b>、<b>30 个 benchmark</b> 和 <b>3 个 harness</b>（MiniAgent、Claude Code、Codex），用于复现、比较和开发 Agent 自我改进方法。
@@ -29,6 +29,7 @@
   <a href="#主要特性">主要特性</a> &nbsp;/&nbsp;
   <a href="#快速开始">快速开始</a> &nbsp;/&nbsp;
   <a href="#支持的算法">支持算法</a> &nbsp;/&nbsp;
+  <a href="#支持的-harnesses">Harnesses</a> &nbsp;/&nbsp;
   <a href="#支持的-benchmarks">Benchmarks</a> &nbsp;/&nbsp;
   <a href="#实验结果">实验结果</a>
 </p>
@@ -47,6 +48,12 @@
 
 [使用文档 →](docs/usage.zh-CN.md)
 
+<p align="center">
+  <a href="assets/readme/framework-overview.svg">
+    <img src="assets/readme/framework-overview.png" alt="FlashRSI 框架概览：12 种 RSI 算法、不可变 AgentSnapshot、3 个 Agent harness 和 30 个 benchmark。" width="100%">
+  </a>
+</p>
+
 ## 快速开始
 
 ### 1. 安装
@@ -64,6 +71,8 @@ python -m pip install -e .
 
 ### 2. 一键运行
 
+使用仓库自带的 12 道 QA 题目，运行 **SkillOpt × SearchQA × MiniAgent**。
+
 **命令行**
 
 先在 shell 中设置 `TARGET_API_KEY` 和 `WORKER_API_KEY`，分别对应 Target 和 Worker；两者互不继承。自定义端点还需分别设置各角色的 `llm.base_url`。
@@ -79,7 +88,7 @@ flashrsi run \
   --algorithm.num_epochs 1 --algorithm.max_steps 1
 ```
 
-**YAML**
+**[YAML](examples/quickstart.yaml)**
 
 在 [examples/quickstart.yaml](examples/quickstart.yaml) 中分别填写 `agent.llm` 和 `algorithm.worker.llm` 的模型、密钥及可选端点，再运行：
 
@@ -87,77 +96,79 @@ flashrsi run \
 flashrsi run --config examples/quickstart.yaml
 ```
 
-### 自动配置依赖的入口
-
-推荐 Linux / WSL + Python 3.12。填写 [examples/quickstart_launch.yaml](examples/quickstart_launch.yaml) 中两个角色的模型与密钥后，从项目根目录运行：
-
-```bash
-python scripts/run_experiment.py --config examples/quickstart_launch.yaml --plan
-python scripts/run_experiment.py --config examples/quickstart_launch.yaml --check-only
-python scripts/run_experiment.py --config examples/quickstart_launch.yaml
-```
-
-脚本按所选组合创建独立 Python 环境；此示例使用随源码附带的 12 道题。
-`--check-only` 检查初始化，不调用模型。入口差异、额外服务和产物说明见[一键实验指南](docs/experiment-launcher.zh-CN.md)。
-普通 `flashrsi run` 使用上面的 `quickstart.yaml`；一键脚本使用 `quickstart_launch.yaml`，二者的数据路径基准不同。
+结果保存在 `runs/`，见[分数、Snapshot 与轨迹说明](docs/running-experiments.md#read-the-results)。自动准备环境见[一键实验指南](docs/experiment-launcher.zh-CN.md)。
 
 ## 支持的算法
 
-| 算法 | 可编辑资源 | 搜索思路 |
+| 算法（论文） | 可编辑资源 | 示例 |
 | --- | --- | --- |
-| [OPRO](examples/opro.yaml) | 指令 | 根据带评分的历史提出新指令。 |
-| [GEPA](examples/gepa.yaml) | 指令 | 结合任务反馈反思与 Pareto 筛选。 |
-| [EvoPrompt](examples/evoprompt.yaml) | 指令 | 使用 GA 或 DE 算子演化种群。 |
-| [ACE](docs/ace.md) | 指令 / playbook | 通过反思积累并整理经验。 |
-| [SkillOpt](examples/quickstart.yaml) | Skills | 结合 batch 编辑与 epoch 级指导更新。 |
-| [Evo-Harness](docs/evo-harness.md) | Skills | 将在线经验整理成可复用的技能。 |
-| [AHE](docs/ahe.md) | Harness 资源 | 保留合法编辑，根据后续诊断修订。 |
-| [ADAS](docs/adas.md) | Harness 资源 | 结合自我反思，搜索已评分的设计档案。 |
-| [DarwinX](docs/darwinx.md) | Harness 资源 | 在扩展种群的同时保留已有能力。 |
-| [Meta-Harness](docs/meta-harness.md) | Harness 资源 | 检索搜索历史，诊断并编辑候选。 |
-| [ModularRSI](docs/modular-rsi.md) | Harness 资源 | 分模块演化分支，再集成修改。 |
-| [RRSI](docs/rrsi.md) | Harness 资源 | 结合重复试验、归因与成本进行选择。 |
+| [OPRO](https://arxiv.org/abs/2309.03409) | 指令 | [Config](examples/opro.yaml) |
+| [GEPA](https://arxiv.org/abs/2507.19457) | 指令 | [Config](examples/gepa.yaml) |
+| [EvoPrompt](https://arxiv.org/abs/2309.08532) | 指令 | [Config](examples/evoprompt.yaml) |
+| [ACE](https://arxiv.org/abs/2510.04618) | 指令 / playbook | [Config](examples/ace.yaml) |
+| [SkillOpt](https://arxiv.org/abs/2605.23904) | Skills | [Config](examples/quickstart.yaml) |
+| [Evo-Harness](https://arxiv.org/abs/2608.15071v2) | Skills | [Config](examples/evo_harness.yaml) |
+| [AHE](https://arxiv.org/abs/2604.25850) | Harness 资源 | [Config](examples/ahe.yaml) |
+| [ADAS](https://arxiv.org/abs/2408.08435) | Harness 资源 | [Config](examples/adas.yaml) |
+| [DarwinX](https://arxiv.org/abs/2608.07545) | Harness 资源 | [Config](examples/darwinx.yaml) |
+| [Meta-Harness](https://arxiv.org/abs/2603.28052) | Harness 资源 | [Config](examples/meta_harness.yaml) |
+| [ModularRSI](https://arxiv.org/abs/2609.14857) | Harness 资源 | [Config](examples/modular_rsi.yaml) |
+| [RRSI](https://arxiv.org/abs/2609.24972) | Harness 资源 | [Config](examples/rrsi.yaml) |
 
-这些实现将各方法适配到 FlashRSI 的资源与评估接口。具体组合取决于 harness 暴露的资源；直接编辑目录的方法需要 **Agent Worker**。实现选择见各方法说明。
+实现适配到 FlashRSI 的资源与评估接口。Evo-Harness 和 harness 资源编辑方法需要 Agent Worker；具体条件见[选型与运行指南](docs/running-experiments.md#choose-an-algorithm-and-harness)。
+
+## 支持的 Harnesses
+
+| Harness | 可编辑资源 | 示例 |
+| --- | --- | --- |
+| [MiniAgent](docs/usage.zh-CN.md#原生-harness) | 指令、skills、工具、运行代码与配置 | [Config](examples/quickstart.yaml) |
+| [Claude Code](docs/usage.zh-CN.md#原生-harness) | 指令、skills、子 Agent、hooks、工具服务与 settings | [Config](examples/searchqa_deepseek/claude_code.yaml) |
+| [Codex](docs/codex.md) | 指令、skills、子 Agent、hooks、插件、记忆、工具与配置 | [Config](examples/codex.yaml) |
 
 ## 支持的 Benchmarks
 
-当前版本注册 **30 个适配器**。完整示例和前置条件见[配置索引](docs/benchmark-quickstart.md)。Smoke 结果和验证报告仅在本地保存，不随源码发布；注册不代表任意组合均已完成真实实验。
+当前注册 **30 个 benchmark**。每项均提供配置示例；数据、服务与环境要求见[配置索引](docs/benchmark-quickstart.md)。组合需满足 harness 的资源与执行能力要求，注册不代表所有组合均已完成真实验证。
 
-| Benchmark | 任务 | 评分 |
-| --- | --- | --- |
-| [SearchQA](flashrsi/benchmarks/searchqa) | 提供搜索片段的短答案问答 | 答案 EM / F1 |
-| [HotpotQA](flashrsi/benchmarks/hotpotqa) | Wikipedia 多跳问答 | 答案 EM / F1；fullwiki 模式支持 joint F1 |
-| [MuSiQue](flashrsi/benchmarks/musique) | 组合式多跳问答 | 答案 EM / F1；可选支撑段落 F1 |
-| [TriviaQA](flashrsi/benchmarks/triviaqa) | 基于 Wikipedia 上下文的知识问答 | 支持答案别名的 EM / F1 |
-| [Natural Questions](flashrsi/benchmarks/nq) | Wikipedia 问答，短答案与 yes/no 子集 | 本地文本 EM / F1 |
-| [2WikiMultiHopQA](flashrsi/benchmarks/twowiki_multihopqa) | 基于给定上下文的多跳问答 | 答案 EM / F1 |
-| [BBEH](flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard 复杂推理 | 官方逐题准确率 |
-| [SuperGPQA](flashrsi/benchmarks/supergpqa) | 研究生级别多项选择题 | 答案字母准确率 |
-| [HLE](flashrsi/benchmarks/hle) | Humanity's Last Exam，仅文本子集 | 官方 Judge 准确率 |
-| [MATH](flashrsi/benchmarks/math) | 竞赛数学 | Math-Verify 等价性准确率 |
-| [AIME](flashrsi/benchmarks/aime) | AIME 2025 / 2026 数学题 | 整数答案准确率 |
-| [LiveMathBench](flashrsi/benchmarks/livemathbench) | 多次采样的数学评测 | G-Pass@k / mG-Pass@k |
-| [SWE-bench Verified](flashrsi/benchmarks/swe_bench) | 代码仓库 issue 修复 | 官方 verifier 修复率 |
-| [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | 代码仓库修复，all / hard 题集 | 官方容器复评修复率 |
-| [BrowseComp](flashrsi/benchmarks/browsecomp) | 网络信息搜索 | 官方答案 Judge 准确率 |
-| [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | 单答案与集合答案的网络搜索 | 官方 autorater F1 |
-| [WideSearch](flashrsi/benchmarks/widesearch) | 表格型广泛信息搜索 | 官方表格评分 |
-| [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | 文档检索问答 | 数值 / 文本答案准确率 |
-| [Harvey LAB](flashrsi/benchmarks/harvey_lab) | 法律文档任务 | 双 Judge rubric 全部通过率 |
-| [JobBench](flashrsi/benchmarks/jobbench) | 专业文件交付 | 官方加权 rubric reward |
-| [AppWorld](flashrsi/benchmarks/appworld) | 应用与 API 自动化 | 官方任务完成 reward |
-| [BFCL V4](flashrsi/benchmarks/bfcl) | 多轮函数调用，仅 Base track | 官方会话成功率 |
-| [WorkBench](flashrsi/benchmarks/workbench) | 工作场景工具操作 | 原生数据库结果正确率 |
-| [TravelPlanner](flashrsi/benchmarks/travelplanner) | 旅行行程规划，仅 sole-planning track | 最终约束通过率 |
-| [τ²-bench](flashrsi/benchmarks/tau2) | 航空、零售、电信多轮对话，文本模式 | 原生 reward 均值 |
-| [τ³ Banking](flashrsi/benchmarks/tau3_banking) | 多轮银行客服 | 原生 tau2 reward |
-| [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | 通过 Harbor 执行的 Linux 终端任务 | 原生 verifier reward |
-| [DeepSWE](flashrsi/benchmarks/deepswe) | 仓库修复，原生 Harbor v1.3 任务接口 | 独立容器 verifier reward |
-| [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Debugging / Financial_Model / Template | 原生 LibreOffice verifier；暂不含 Visualization |
-| [ALFWorld](flashrsi/benchmarks/alfworld) | 纯文本交互环境 | 原生 TextWorld won / success |
+| Benchmark | 任务 | 评分 | 运行入口 |
+| --- | --- | --- | --- |
+| **问答** | | | |
+| [SearchQA](flashrsi/benchmarks/searchqa) | 提供搜索片段的短答案问答 | 答案 EM / F1 | [Setup](docs/searchqa-deepseek-reproduction.md) · [Config](examples/searchqa_skillopt.yaml) |
+| [HotpotQA](flashrsi/benchmarks/hotpotqa) | Wikipedia 多跳问答 | 答案 EM / F1；fullwiki 模式支持 joint F1 | [Setup](docs/hotpot-independent-evolution.md) · [Config](examples/hotpotqa_opro.yaml) |
+| [MuSiQue](flashrsi/benchmarks/musique) | 组合式多跳问答 | 答案 EM / F1；可选支撑段落 F1 | [Setup](docs/musique-independent-evolution.md) · [Config](examples/modular_rsi_musique.yaml) |
+| [TriviaQA](flashrsi/benchmarks/triviaqa) | 基于 Wikipedia 上下文的知识问答 | 支持答案别名的 EM / F1 | [Setup](docs/triviaqa-independent-evolution.md) · [Config](examples/modular_rsi_triviaqa.yaml) |
+| [Natural Questions](flashrsi/benchmarks/nq) | Wikipedia 问答，短答案与 yes/no 子集 | 本地文本 EM / F1 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/nq_opro.yaml) |
+| [2WikiMultiHopQA](flashrsi/benchmarks/twowiki_multihopqa) | 基于给定上下文的多跳问答 | 答案 EM / F1 | [Setup](docs/twowiki-independent-evolution.md) · [Config](examples/twowiki_multihopqa_opro.yaml) |
+| **推理与数学** | | | |
+| [BBEH](flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard 复杂推理 | 官方逐题准确率 | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/bbeh_opro.yaml) |
+| [SuperGPQA](flashrsi/benchmarks/supergpqa) | 研究生级别多项选择题 | 答案字母准确率 | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/supergpqa_opro.yaml) |
+| [HLE](flashrsi/benchmarks/hle) | Humanity's Last Exam，仅文本子集 | 官方 Judge 准确率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/hle_opro.yaml) |
+| [MATH](flashrsi/benchmarks/math) | 竞赛数学 | Math-Verify 等价性准确率 | [Setup](docs/math-independent-evolution.md) · [Config](examples/modular_rsi_math500.yaml) |
+| [AIME](flashrsi/benchmarks/aime) | AIME 2025 / 2026 数学题 | 整数答案准确率 | [Setup](docs/coding-math-benchmarks.md) · [Config](examples/aime_opro.yaml) |
+| [LiveMathBench](flashrsi/benchmarks/livemathbench) | 多次采样的数学评测 | G-Pass@k / mG-Pass@k | [Setup](docs/benchmark-quickstart.md) · [Config](examples/livemathbench_opro.yaml) |
+| **代码** | | | |
+| [SWE-bench Verified](flashrsi/benchmarks/swe_bench) | 代码仓库 issue 修复 | 官方 verifier 修复率 | [Setup](docs/swe-independent-evolution.md) · [Config](examples/swe_bench_verified_opro.yaml) |
+| [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | 代码仓库修复，all / hard 题集 | 官方容器复评修复率 | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/swe_bench_pro_opro.yaml) |
+| [DeepSWE](flashrsi/benchmarks/deepswe) | 仓库修复，原生 Harbor v1.3 任务接口 | 独立容器 verifier reward | [Setup](docs/deepswe.md) · [Config](examples/deepswe_opro.yaml) |
+| **网页研究** | | | |
+| [BrowseComp](flashrsi/benchmarks/browsecomp) | 网络信息搜索 | 官方答案 Judge 准确率 | [Setup](docs/web-research-services.md) · [Config](examples/browsecomp_serper_jina.yaml) |
+| [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | 单答案与集合答案的网络搜索 | 官方 autorater F1 | [Setup](docs/web-research-services.md) · [Config](examples/deepsearchqa_serper_jina.yaml) |
+| [WideSearch](flashrsi/benchmarks/widesearch) | 表格型广泛信息搜索 | 官方表格评分 | [Setup](docs/web-research-services.md) · [Config](examples/widesearch_opro.yaml) |
+| **文档与工具使用** | | | |
+| [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | 文档检索问答 | 数值 / 文本答案准确率 | [Setup](docs/web-research-services.md) · [Config](examples/officeqa_pro_opro.yaml) |
+| [Harvey LAB](flashrsi/benchmarks/harvey_lab) | 法律文档任务 | 双 Judge rubric 全部通过率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/harvey_lab_opro.yaml) |
+| [JobBench](flashrsi/benchmarks/jobbench) | 专业文件交付 | 官方加权 rubric reward | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/jobbench_opro.yaml) |
+| [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Debugging / Financial_Model / Template | 原生 LibreOffice verifier；暂不含 Visualization | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/spreadsheetbench2_opro.yaml) |
+| [AppWorld](flashrsi/benchmarks/appworld) | 应用与 API 自动化 | 官方任务完成 reward | [Setup](docs/appworld-independent-evolution.md) · [Config](examples/modular_rsi_appworld.yaml) |
+| [BFCL V4](flashrsi/benchmarks/bfcl) | 多轮函数调用，仅 Base track | 官方会话成功率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/bfcl_opro.yaml) |
+| [WorkBench](flashrsi/benchmarks/workbench) | 工作场景工具操作 | 原生数据库结果正确率 | [Setup](docs/workbench.md) · [Config](examples/workbench_opro.yaml) |
+| [TravelPlanner](flashrsi/benchmarks/travelplanner) | 旅行行程规划，仅 sole-planning track | 最终约束通过率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/travelplanner_opro.yaml) |
+| **交互环境** | | | |
+| [τ²-bench](flashrsi/benchmarks/tau2) | 航空、零售、电信多轮对话，文本模式 | 原生 reward 均值 | [Setup](docs/tau2-bench.md) · [Config](examples/tau2_opro.yaml) |
+| [τ³ Banking](flashrsi/benchmarks/tau3_banking) | 多轮银行客服 | 原生 tau2 reward | [Setup](docs/benchmark-quickstart.md) · [Config](examples/tau3_banking_opro.yaml) |
+| [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | 通过 Harbor 执行的 Linux 终端任务 | 原生 verifier reward | [Setup](docs/terminal-bench.md) · [Config](examples/terminal_bench21_opro.yaml) |
+| [ALFWorld](flashrsi/benchmarks/alfworld) | 纯文本交互环境 | 原生 TextWorld won / success | [Setup](docs/alfworld.md) · [Config](examples/alfworld_opro.yaml) |
 
-环境按 benchmark 准备：文本问答与推理类使用本地数据或固定版本的 Hugging Face 数据；网络搜索类可能需要搜索服务与独立 Judge 凭据；文档类需要语料或文件工具；交互与代码任务使用各自原生环境，按需安装 Docker / Harbor。具体步骤见各实现，以及该分支的[数学与代码](docs/coding-math-benchmarks.md)、[网络搜索](docs/web-research-services.md)、[τ²-bench](docs/tau2-bench.md)和 [Terminal-Bench](docs/terminal-bench.md) 指南。
+示例使用不同算法；ModularRSI 等方法还需准备相应模块与数据配置，见[选型与运行指南](docs/running-experiments.md)。
 
 ## 实验结果
 

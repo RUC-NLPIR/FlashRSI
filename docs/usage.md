@@ -2,6 +2,8 @@
 
 [Back to README](../README.md) · [简体中文](usage.zh-CN.md)
 
+[Choose an algorithm, benchmark, and harness](running-experiments.md), or continue below for configuration details.
+
 ## Configure an experiment
 
 Commands in this guide run from the repository root. The [quickstart configuration](../examples/quickstart.yaml) runs SkillOpt with MiniAgent on a local 12-question QA example, with separate train, dev, and test splits.
