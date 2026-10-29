@@ -1,6 +1,6 @@
 # ruff: noqa
 # fmt: off
-# Extracted unchanged from OpenCompass; see upstream.json and LICENSE-APACHE.
+# Extracted unchanged from OpenCompass; see upstream.json for provenance.
 import re
 
 

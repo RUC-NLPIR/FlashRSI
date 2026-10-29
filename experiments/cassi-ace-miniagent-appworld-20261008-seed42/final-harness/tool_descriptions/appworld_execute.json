@@ -1,1 +1,0 @@
-{"name": "appworld_execute", "description": "Execute Python code in the persistent official AppWorld shell. Variables persist. Use apis for applications; print results you need to observe. The response includes output and task_completed.", "parameters": {"type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"], "additionalProperties": false}}

@@ -1,6 +1,6 @@
 # ElectricLogo cover renderer
 
-This preview runs the original React Bits [ElectricLogo](https://github.com/DavidHDev/react-bits/blob/0cb75b89f16abcbcce340168b06058cac22a1715/src/content/Animations/ElectricLogo/ElectricLogo.jsx) component supplied for this design, using React and OGL. The component source is unchanged. Its MIT + Commons Clause license is included in [REACT-BITS-LICENSE.md](REACT-BITS-LICENSE.md).
+This preview runs the original React Bits [ElectricLogo](https://github.com/DavidHDev/react-bits/blob/0cb75b89f16abcbcce340168b06058cac22a1715/src/content/Animations/ElectricLogo/ElectricLogo.jsx) component supplied for this design, using React and OGL. The component source is unchanged; attribution is maintained with the project's external release materials.
 
 From this directory:
 

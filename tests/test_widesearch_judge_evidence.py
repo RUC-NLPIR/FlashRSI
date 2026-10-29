@@ -6,6 +6,8 @@ from types import ModuleType, SimpleNamespace
 
 import pytest
 
+pytest.importorskip("loguru")
+
 from flashrsi.core import Task, Trajectory
 from flashrsi.integrations import _widesearch_grade as grade
 from flashrsi.integrations import widesearch

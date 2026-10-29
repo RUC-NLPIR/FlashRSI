@@ -1,4 +1,4 @@
-# Upstream revision: 3635853403a8735609ee997664e1528f4480762a. See NOTICE and bundled licenses.
+# Upstream revision: 3635853403a8735609ee997664e1528f4480762a.
 # ruff: noqa
 # fmt: off
 import sys

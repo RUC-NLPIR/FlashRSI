@@ -1,4 +1,4 @@
-# Upstream revision: 922ac98f19a201998dbdae6d7f2887a5258dbdeb. See NOTICE and bundled licenses.
+# Upstream revision: 922ac98f19a201998dbdae6d7f2887a5258dbdeb.
 # ruff: noqa
 # fmt: off
 """

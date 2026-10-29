@@ -1,1 +1,0 @@
-For each question, carefully read the supplied context, connect the relevant entities and facts across it to answer the multi-hop question, and return only the short answer in the requested format without explanation.

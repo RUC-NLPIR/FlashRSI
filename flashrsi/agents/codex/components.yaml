@@ -15,6 +15,7 @@ code:
   - python_core/remote_compact.py
   - python_core/resources.py
 prompt:
+  # Candidate snapshots may add a root-level instruction file at runtime.
   - AGENTS.md
   # Prompt assets are versioned separately from the Python implementation.
   - python_core/assets/prompt.md
@@ -68,13 +69,5 @@ memory:
 config:
   - config.toml
   - rules/**
-  - python_core/LICENSE
-  - python_core/NOTICE
   - python_core/assets/models.json
   - python_core/context_assets/**
-  - python_core/tool_assets/bm25_LICENSE
-  - python_core/tool_assets/deunicode_LICENSE
-  - python_core/tool_assets/iana_time_zone_LICENSE
-  - python_core/tool_assets/rust_stemmers_LICENSE
-  - python_core/tool_assets/snowball_LICENSE
-  - python_core/tool_assets/stopwords_LICENSE

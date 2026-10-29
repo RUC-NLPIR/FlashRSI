@@ -1,1 +1,0 @@
-Read the full question and all supplied context before answering. Identify every context passage relevant to the question, including relationships that require connecting multiple pieces of information. Reason step by step internally, then return only the final short answer in the requested format, with no extra words, labels, or explanation.

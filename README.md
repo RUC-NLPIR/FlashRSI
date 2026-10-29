@@ -31,7 +31,6 @@
   <a href="#supported-algorithms">Algorithms</a> &nbsp;/&nbsp;
   <a href="#supported-harnesses">Harnesses</a> &nbsp;/&nbsp;
   <a href="#supported-benchmarks">Benchmarks</a> &nbsp;/&nbsp;
-  <a href="#experimental-results">Results</a>
 </p>
 
 <a id="demo"></a>
@@ -58,12 +57,11 @@
 
 ### 1. Install
 
-Use Linux / WSL with Python 3.12. These commands check out code and documentation, omitting `experiments/` and LFS downloads.
+Use Linux / WSL with Python 3.12.
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone --filter=blob:none --sparse https://github.com/ignorejjj/FlashRSI.git
+git clone https://github.com/ignorejjj/FlashRSI.git
 cd FlashRSI
-git sparse-checkout set flashrsi docs examples scripts tests assets
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
@@ -170,23 +168,9 @@ FlashRSI registers **30 benchmarks**, each with a configuration example. See the
 
 Examples use different algorithms. Methods such as ModularRSI also need matching module and data settings; see the [run guide](docs/running-experiments.md).
 
-## Experimental Results
-
-These are historical results reported by upstream main. This sync neither downloads nor merges `experiments/`, and does not rerun those experiments.
-
-**SkillOpt on SearchQA, across two native harnesses.** The target uses `deepseek-v4-flash` and the optimizer uses `deepseek-v4-pro`. Both runs use the same 400 / 200 / 1,400 train / dev / test split, seed 42, and a budget of 4 epochs / 40 fast steps. Candidates are selected on dev; the selected Snapshot is frozen before test evaluation.
-
-| Harness | Initial test EM | Final test EM | Gain |
-| --- | ---: | ---: | ---: |
-| MiniAgent | 76.43% | **82.93%** | **+6.50 pp** |
-| Claude Code | 74.71% | **83.14%** | **+8.43 pp** |
-
-These results cover a single DeepSeek transfer setting. The [experiment report](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/report.md), [independent verification](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/evidence/full-verification.json), and [reproduction guide](docs/searchqa-deepseek-reproduction.md) provide scores, usage, and differences from the upstream protocol.
-
 <details id="citation">
 <summary>Citation</summary>
 
-<!-- TODO: add the report URL and publication metadata when available. -->
 ```bibtex
 @misc{jin2026flashrsi,
   title  = {FlashRSI: A Unified Framework for Agent Self-Improvement},

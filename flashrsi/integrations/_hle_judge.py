@@ -1,6 +1,6 @@
 """HLE official prompt/schema at 22ed3074b1e7b134bcbc09028d0ba320839b0655.
 
-Copyright (c) 2025 centerforaisafety. MIT license: HLE-LICENSE.
+Copyright (c) 2025 centerforaisafety. Upstream attribution is maintained with the project's external release materials.
 The surrounding client wrapper supplies explicit, independent runtime config.
 """
 

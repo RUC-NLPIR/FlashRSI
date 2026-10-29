@@ -1,9 +1,0 @@
-{
-  "status": "finished",
-  "attempt": "/root/blockdata/FlashRSI-Tau3/runs/skillopt-miniagent-bm25-c6-t1200-20261002-203743-878337/attempts/skillopt-miniagent-tau3_banking-20261002-220458-222706",
-  "final_snapshot": "91164cd2d59757faeafb91ff21a444eaca73cb32346fed3941acca42aca0786b",
-  "initial_test_reward": 0.1,
-  "final_test_reward": 0.36666666666666664,
-  "test_used_for_selection": false,
-  "finished_at": "2026-10-03T05:11:11.879597+00:00"
-}

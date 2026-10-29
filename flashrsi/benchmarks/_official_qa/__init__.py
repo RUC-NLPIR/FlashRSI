@@ -1,1 +1,1 @@
-"""Pinned official QA scoring code; see NOTICE for sources and adaptations."""
+"""Pinned official QA scoring code with upstream revisions recorded below."""

@@ -1,7 +1,0 @@
-{
-  "initial_snapshot": "ef1a58964854177c97f58eb586f0ef2aad07a9a36eaf26bf3e9716525e31b1a7",
-  "selected_snapshot": "f926f980d182befcb328ffed20a4b621d1dcfe9d9d22a2f9c3a283eb49e71e19",
-  "selection_split": "dev",
-  "tie_policy": "later_valid_candidate",
-  "test_used_for_selection": false
-}

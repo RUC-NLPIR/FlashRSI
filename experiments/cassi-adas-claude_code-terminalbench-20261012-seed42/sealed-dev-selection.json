@@ -1,8 +1,0 @@
-{
-  "initial_snapshot": "26a1fb7c061e3aec310e5fb266d9083c5b5ab8a754dec4b4ae292a1792357f3b",
-  "selected_snapshot": "87b1fd3612e28afaad3197d6c4e142d8779cc8d97ad677ee89b2dd5bd2a5dd13",
-  "selection_split": "dev",
-  "tie_policy": "later_valid_complete_candidate",
-  "dev_pruning": "upper_bound_lte_incumbent",
-  "test_used_for_selection": false
-}

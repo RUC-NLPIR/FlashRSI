@@ -1,4 +1,4 @@
-"""BrowseComp prompts/decryption from OpenAI simple-evals, MIT (LICENSE-MIT).
+"""BrowseComp prompts/decryption from OpenAI simple-evals, MIT.
 
 Pinned at 652c89d0ca9df547706735883097e9537d40dc47/browsecomp_eval.py.
 Input validation is stricter; prompt strings and XOR decoding are unchanged.

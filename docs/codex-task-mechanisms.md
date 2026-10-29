@@ -2,9 +2,7 @@
 
 固定参考：`rust-v0.147.0` / `be6e8eac029b183056b7e4402879f15d2c85f61b`。
 这是迁移与验收清单，不是“全 Codex 已等价”的声明。实现范围以实际测试路径为准。
-后续顺序见 [演化方案](codex-evolution-plan.md)，上一轮证据见
-[审计修复报告](codex-core-repair-2026-10-29.md)，本轮证据见
-[任务基线验收](codex-task-baseline-2026-10-29.md)。
+后续顺序见 [演化方案](codex-evolution-plan.md)。
 
 ## 当前目标运行条件
 

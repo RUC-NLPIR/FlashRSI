@@ -10,10 +10,11 @@ pytest-of-*/
 build/
 dist/
 .env
+.env.*
+!.env.example
 *.local.yaml
 runs/
 .cache/
-experiments/.preparing-*/
 
 # Local smoke results, validation reports, and integration journals
 /docs/smoke*

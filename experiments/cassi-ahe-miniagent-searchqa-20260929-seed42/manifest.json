@@ -1,9 +1,0 @@
-{
-  "status": "verified",
-  "archive": "logs.tar.gz",
-  "sha256": "265f60735efd64c506605d465332d9e01b5762f0120cf89cfde1d1060b3d442c",
-  "bytes": 44850631,
-  "verified_files": 7677,
-  "credentials": "redacted and scanned",
-  "model_calls_during_archival": 0
-}

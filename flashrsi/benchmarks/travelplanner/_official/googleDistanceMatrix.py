@@ -1,5 +1,5 @@
 # Vendored from OSU-NLP-Group/TravelPlanner at e52c87f4ac348a3410c46dc3553c519db5ec5e23.
-# SPDX-License-Identifier: MIT; see ../LICENSE-MIT and ../NOTICE.
+# SPDX-License-Identifier: MIT; source provenance is recorded in ../upstream.json.
 # ruff: noqa
 # fmt: off
 import requests

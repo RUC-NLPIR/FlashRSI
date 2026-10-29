@@ -1,5 +1,0 @@
-{
-  "name": "flashrsi",
-  "description": "Versioned Claude Code extensions for the FlashRSI agent, with structured AppWorld tools and a task-completion protocol.",
-  "version": "0.2.0"
-}

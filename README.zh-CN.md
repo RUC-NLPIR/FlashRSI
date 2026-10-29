@@ -31,7 +31,6 @@
   <a href="#支持的算法">支持算法</a> &nbsp;/&nbsp;
   <a href="#支持的-harnesses">Harnesses</a> &nbsp;/&nbsp;
   <a href="#支持的-benchmarks">Benchmarks</a> &nbsp;/&nbsp;
-  <a href="#实验结果">实验结果</a>
 </p>
 
 <a id="demo"></a>
@@ -58,12 +57,11 @@
 
 ### 1. 安装
 
-推荐 Linux / WSL + Python 3.12。以下命令只展开代码和文档，跳过 `experiments/` 与 LFS 大文件。
+推荐 Linux / WSL + Python 3.12。
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone --filter=blob:none --sparse https://github.com/ignorejjj/FlashRSI.git
+git clone https://github.com/ignorejjj/FlashRSI.git
 cd FlashRSI
-git sparse-checkout set flashrsi docs examples scripts tests assets
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
@@ -170,23 +168,9 @@ flashrsi run --config examples/quickstart.yaml
 
 示例使用不同算法；ModularRSI 等方法还需准备相应模块与数据配置，见[选型与运行指南](docs/running-experiments.md)。
 
-## 实验结果
-
-以下为上游 main 的历史结果引用；本地同步未下载或合入 `experiments/`，也未重新运行这些实验。
-
-**SkillOpt 在两个原生 harness 上优化 SearchQA 表现。** 解题模型为 `deepseek-v4-flash`，改进模型为 `deepseek-v4-pro`。两侧使用相同的 400 / 200 / 1,400 train / dev / test 划分、seed 42，以及 4 epochs / 40 fast steps 的预算。候选使用 dev 筛选，冻结最终 Snapshot 后再评估 test。
-
-| Harness | 初始 test EM | 最终 test EM | 提升 |
-| --- | ---: | ---: | ---: |
-| MiniAgent | 76.43% | **82.93%** | **+6.50 个百分点** |
-| Claude Code | 74.71% | **83.14%** | **+8.43 个百分点** |
-
-以上结果对应这一组 DeepSeek 迁移实验。[实验报告](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/report.md)、[独立验收记录](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/evidence/full-verification.json)和[复现说明](docs/searchqa-deepseek-reproduction.md)提供完整分数、用量及与上游实验协议的差异。
-
 <details id="citation">
 <summary>引用</summary>
 
-<!-- TODO: 报告发布后补充链接和出版信息。 -->
 ```bibtex
 @misc{jin2026flashrsi,
   title  = {FlashRSI: A Unified Framework for Agent Self-Improvement},

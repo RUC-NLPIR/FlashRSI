@@ -1,7 +1,0 @@
-TravelPlanner by OSU Natural Language Processing (2024), MIT license.
-Source: https://github.com/OSU-NLP-Group/TravelPlanner
-Commit: e52c87f4ac348a3410c46dc3553c519db5ec5e23
-Native data: https://huggingface.co/datasets/osunlp/TravelPlanner (CC BY 4.0).
-The source hashes and adaptations are recorded in upstream.json.
-Constraint function bodies and the GoogleDistanceMatrix evaluation method are retained verbatim.
-The wrapper handles paths, client transport, safe literal parsing, and per-task macro aggregation.

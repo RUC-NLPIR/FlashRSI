@@ -1,1 +1,0 @@
-All 23 publication groups are complete. This group’s archive parts and compressed manifest have verified server sizes and SHA-256; branch metadata was read back and Git blob hashes verified. See ../RESTRICTED_RRSI_20261027.md and the final publication proof. The Release remains a draft and human merge is pending. Source machine retirement is not authorized.

@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "appworld": {
-      "command": "/usr/bin/python3",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/servers/appworld.py"]
-    }
-  }
-}

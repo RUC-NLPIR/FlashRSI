@@ -1,9 +1,0 @@
-[
-  {
-    "member": "sources/ahe-restricted-terminal-20261022-101223-185679/runs/ahe-claude_code-terminal_bench-20261023-055754-775245/diagnostics/checkpoints/target-0003-010-caffe-cifar-10/agent-workspace/files.tar.gz!files/caffe/data/cifar10/cifar-10-binary.tar.gz",
-    "bytes": 123004352,
-    "sha256": "0bf0316f31214073d463ff08be97ab202e1dfbaea9add8e711cfbc81442ee8d4",
-    "original_nested_error": "unexpected end of data",
-    "handling": "Original historical interrupted dataset download preserved unchanged. Readable decompressed prefix and all raw member bytes scanned; nested tar is incomplete, not represented as restorable."
-  }
-]

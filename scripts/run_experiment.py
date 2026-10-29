@@ -139,11 +139,12 @@ def _run(config_path, check_only, cache=None, snapshot=None):
 
 
 def main(argv=None, *, default_config="experiment.local.yaml"):
+    default_path = (ROOT / default_config).expanduser().resolve()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--config",
         type=Path,
-        default=ROOT / default_config,
+        default=default_path,
         help=f"Experiment YAML (default: {default_config} in the project)",
     )
     parser.add_argument(
@@ -174,7 +175,7 @@ def main(argv=None, *, default_config="experiment.local.yaml"):
         parser.error("Python 3.11 or newer is required")
     config = args.config.expanduser().resolve()
     if not config.is_file():
-        if config == ROOT / default_config:
+        if config == default_path:
             shutil.copy2(TEMPLATE, config)
             print(
                 f"Created configuration: {config}\nFill in both roles' model_name, api_key "

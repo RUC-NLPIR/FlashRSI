@@ -87,7 +87,7 @@ SuperGPQA 使用 `scoring: answer_letter`，不声称复现上游完整排行榜
 
 BBEH：[论文](https://arxiv.org/abs/2502.19187)、[上游仓库](https://github.com/google-deepmind/bbeh)。
 评分代码 commit 为 `80d12ca916b7158f22293fcf3144f4d3d854d4be`，Apache 2.0；
-非软件材料遵循上游 README 的 CC-BY-4.0 声明，附带 `LICENSE` 和 `NOTICE`。
+非软件材料遵循上游 README 的 CC-BY-4.0 声明；许可与归属信息统一放在项目外部发布材料中。
 
 SuperGPQA：[论文](https://arxiv.org/abs/2502.14739)、[上游仓库](https://github.com/SuperGPQA/SuperGPQA)。
 数据集为 ODC-BY，组成内容保留各自的许可与署名要求。运行数据没有随包分发，

@@ -1,4 +1,4 @@
-# Upstream revision: ca43b5820b107f3970cf4b7d67f7db7a98117b79. See NOTICE and bundled licenses.
+# Upstream revision: ca43b5820b107f3970cf4b7d67f7db7a98117b79.
 # ruff: noqa
 # fmt: off
 # -*- coding: utf-8 -*-

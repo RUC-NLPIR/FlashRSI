@@ -1469,8 +1469,6 @@ update 生效、后台双子 agent 消息收集及 SendMessage 上下文续接�
 CLI 已支持 SkillOpt 演化与最终测试；Terminal-Bench 的接入及验证状态见
 [Terminal-Bench 说明](../docs/terminal-bench.md)。
 
-### 协作者提交实验
+### 本地实验记录
 
-参见 [统一实验提交规范](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/README.md)。运行目录仍写入被 Git 忽略的 `runs/`；
-使用 `scripts/prepare_experiment_submission.py` 导出统一的 `experiments/<run-id>/`，
-配置与汇总直接进 Git，完整日志压缩包使用 Git LFS。
+运行目录写入被 Git 忽略的 `runs/`，用于本地复现、调试和结果分析。公开源码不包含实验归档、完整轨迹或模型调用日志；如需共享结果，请单独审阅并发布经过脱敏的报告和数据。

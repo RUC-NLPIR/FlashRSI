@@ -112,6 +112,8 @@ def _load(path, snapshot=None):
             raise ValueError("Invalid configuration YAML" + location) from None
         raise
 
+    base_dir = Path(path).expanduser().absolute().parent
+
     def absolute(value):
         if isinstance(value, Mapping):
             return {k: absolute(v) for k, v in value.items()}
@@ -119,7 +121,7 @@ def _load(path, snapshot=None):
             return [absolute(v) for v in value]
         if isinstance(value, (str, Path)) and str(value).strip():
             p = Path(value).expanduser()
-            return str((Path(path).parent / p).resolve())
+            return str((base_dir / p).absolute())
         return value
 
     for section, keys in (

@@ -102,7 +102,7 @@ assert f(0) == [1, 2]
 ## 来源与验证
 
 AIME 使用上述 math-ai 镜像，数据卡标注 Apache-2.0；没有将镜像当作竞赛主办方发布的
-官方评测实现。CRUXEval 的数据与上游提示为 MIT，已附 LICENSE、NOTICE；
+官方评测实现。CRUXEval 的数据与上游提示为 MIT，许可与归属信息统一放在项目外部发布材料中；
 提示 AST 与固定上游 commit 对齐。来源还包括 [CRUXEval 论文](https://arxiv.org/abs/2401.03065)
 及其[原始评估逻辑](https://github.com/facebookresearch/cruxeval/blob/190faf16d175b5847b0af05d937872b1fb395942/evaluation/utils_general.py)。
 

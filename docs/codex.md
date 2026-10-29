@@ -10,10 +10,7 @@
 固定框架适配层只处理配置、目录、进程和 Trajectory 映射；启动独立 Python 进程后，
 从选定运行副本导入核心，不导入宿主包中的核心作为兜底。不需要 Cargo、Rust 或 Codex CLI。
 
-固定版本、Python 迁移边界和验证方式见 [codex-core-extraction.md](codex-core-extraction.md)，
-当前状态、shell snapshot 与平台验收见 [任务基线验收](codex-task-baseline-2026-10-29.md)，
-上一批修复见 [审计修复验收](codex-core-repair-2026-10-29.md)，
-更早记录见 [codex-core-validation.md](codex-core-validation.md)。
+固定版本和 Python 迁移边界见 [codex-core-extraction.md](codex-core-extraction.md)。
 后续迁移顺序、状态隔离和演化验收建议见 [Codex 演化方案](codex-evolution-plan.md)。
 任务路径与未覆盖开关见 [任务机制清单](codex-task-mechanisms.md)。
 
@@ -80,8 +77,7 @@ memory 或 plugin 机制时，分别选择对应组件。`{"*": "rw"}` 仍表示
 
 当前默认 Snapshot 有 137 个文件，文件内容合计 1,690,825 bytes；保存为 JSON 为
 2,272,943 bytes，gzip 后为 687,744 bytes。这里的大小只统计 Snapshot 文件 payload，
-不含适配器、依赖、Rust 参考目录、凭据和运行状态；分类明细见
-[组件拆分记录](codex-component-split-2026-10-29.md)。
+不含适配器、依赖、Rust 参考目录、凭据和运行状态；分类明细按组件目录和 `components.yaml` 保存。
 
 每次调用复制资源到用户 cache 下 `flashrsi/codex/` 中的独立临时 home，尊重
 `XDG_CACHE_HOME`，缓存父目录和每次运行目录权限为 `0700`，调用结束后删除运行目录；
@@ -170,8 +166,7 @@ v2 驱逐后重载保留这一继承关系。
 
 受限 shell 使用 macOS Seatbelt。Linux 的受限沙箱尚未移植，会拒绝运行；
 Linux 显式选择 `danger-full-access` 的 POSIX shell、PTY、补丁与 Code Mode 路径，
-已通过真实 Linux 和实际 Docker 的固定原生对照及安装验收；条件与范围见
-[任务基线验收](codex-task-baseline-2026-10-29.md)，不能据此推断受限沙箱或完整 benchmark 已通过。
+已通过真实 Linux 和实际 Docker 的固定原生对照及安装验收；不能据此推断受限沙箱或完整 benchmark 已通过。
 Windows 的 shell、进程组和 PTY 后端尚未移植，即使选择 `danger-full-access`
 也不能运行 shell 工具。`external-sandbox` 和自定义网络/文件系统权限 profile 同样未接入。
 
