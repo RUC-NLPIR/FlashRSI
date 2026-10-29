@@ -7,8 +7,8 @@ from threading import Event, local
 from types import SimpleNamespace
 
 import pytest
-from test_codex_core_parity import _events, _responses_server
-from test_codex_core_parity import parity_source as parity_source
+from codex_test_support import _events, _responses_server
+from codex_test_support import parity_source as parity_source
 from test_codex_python_memory import _call
 
 from flashrsi.agents import Codex

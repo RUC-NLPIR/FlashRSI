@@ -1,4 +1,4 @@
-# Native Codex settings and MCP registrations belong here.
+# Codex settings and MCP registrations belong here.
 # Model connections, credentials and execution limits come from the role config.
 
 # Enable explicitly when providing versioned plugin bundles. Native discovery

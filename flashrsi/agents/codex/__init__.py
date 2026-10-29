@@ -6,7 +6,6 @@ import asyncio
 import copy
 import json
 import os
-import shutil
 import signal
 import sys
 import tomllib
@@ -15,7 +14,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from urllib.parse import quote_from_bytes, urlsplit
 
-from flashrsi._records import _redact, _secrets
 from flashrsi.core import Agent, Snapshot, Task, Trajectory
 from flashrsi.core.agent import _Execution
 
@@ -67,238 +65,17 @@ class Codex(Agent):
         super()._check_container()
         if self.config.get("cli_path"):
             raise ValueError(
-                "Container execution uses the Python Snapshot core; omit cli_path"
+                "Codex is implemented entirely in Python; cli_path is unsupported"
             )
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         if self.config.get("cli_path"):
-            # Explicit native reference for offline differential tests.
-            return await self._run_native(prompt, working_dir)
+            raise ValueError(
+                "Codex is implemented entirely in Python; cli_path is unsupported"
+            )
         from ._python import run
 
         return await run(self, prompt, working_dir)
-
-    async def _run_native(
-        self, prompt: str, working_dir: Path | None = None
-    ) -> Trajectory:
-        config, llm = self.config, self.config["llm"]
-        secrets = sorted(
-            set(_secrets(os.environ) + _secrets(config)), key=len, reverse=True
-        )
-        messages = [
-            {"type": "RunInput", "prompt": prompt, "snapshot_id": self.snapshot.id}
-        ]
-        usage, output, error = {}, "", None
-        completed = False
-        diagnostic_chunks = []
-        process = None
-        readers = []
-        started = asyncio.get_running_loop().time()
-
-        async def events(stream):
-            nonlocal usage, output, error, completed
-            while True:
-                try:
-                    line = await stream.readline()
-                except ValueError:
-                    error = "Codex JSONL event exceeded the stream limit"
-                    # Keep draining so process shutdown cannot block on a full
-                    # pipe after a malformed or exceptionally large event.
-                    while await stream.read(8192):
-                        pass
-                    return
-                if not line:
-                    return
-                try:
-                    event = json.loads(line)
-                    if not isinstance(event, dict):
-                        raise ValueError("event must be an object")
-                except (ValueError, UnicodeError) as exc:
-                    error = f"Invalid Codex JSONL event: {exc}"
-                    continue
-                messages.append(_redact(event, secrets))
-                if event.get("type") == "flashrsi.core.completed":
-                    completed = True
-                    output = event.get("output", "")
-                    native = event.get("usage") or {}
-                    usage = {
-                        "prompt_tokens": native.get("input_tokens", 0),
-                        "completion_tokens": native.get("output_tokens", 0),
-                        "prompt_tokens_details": {
-                            "cached_tokens": native.get("cached_input_tokens", 0)
-                        },
-                    }
-                    if event.get("status") != "finished":
-                        error = (
-                            error
-                            or event.get("error_message")
-                            or "Codex core turn failed"
-                        )
-                        # Native exec only exposes usage on turn.completed.
-                        # Keep the same public failure contract; raw token-count
-                        # events remain available in messages for inspection.
-                        usage = {}
-                elif event.get("type") == "item.completed":
-                    item = event.get("item", {})
-                    if not isinstance(item, dict):
-                        error = "Invalid Codex item.completed event"
-                        continue
-                    if item.get("type") == "agent_message":
-                        text = item.get("text", "")
-                        if not isinstance(text, str):
-                            error = "Invalid Codex agent message text"
-                            continue
-                        output = text
-                elif event.get("type") == "turn.completed":
-                    completed = True
-                    native = event.get("usage") or {}
-                    if not isinstance(native, dict):
-                        error = "Invalid Codex turn usage"
-                        continue
-                    # Codex input_tokens already includes cached input. The
-                    # framework's prompt_tokens convention preserves that total.
-                    usage = {
-                        "prompt_tokens": native.get("input_tokens", 0),
-                        "completion_tokens": native.get("output_tokens", 0),
-                        "prompt_tokens_details": {
-                            "cached_tokens": native.get("cached_input_tokens", 0)
-                        },
-                    }
-                elif event.get("type") == "turn.failed":
-                    detail = event.get("error")
-                    error = (
-                        detail.get("message")
-                        if isinstance(detail, dict)
-                        else str(detail or "")
-                    ) or "Codex turn failed"
-
-        async def diagnostics(stream):
-            while chunk := await stream.read(8192):
-                diagnostic_chunks.append(chunk)
-
-        with (
-            TemporaryDirectory(prefix="flashrsi-codex-") as temporary,
-            _runtime_home() as resource_temporary,
-        ):
-            runtime = Path(temporary).resolve()
-            resource_home = Path(resource_temporary).resolve() / "codex"
-            task_dir = working_dir or runtime / "task"
-            if working_dir is None:
-                task_dir.mkdir()
-            try:
-                deadline = started + config.get("timeout", 300)
-                shutil.copytree(
-                    self.files_dir,
-                    resource_home,
-                    ignore=lambda directory, names: (
-                        {"runtime"} if Path(directory) == self.files_dir else set()
-                    ),
-                )
-                overrides, env, native = _settings(
-                    config,
-                    resource_home,
-                    task_dir,
-                    source_root=getattr(self, "_container_source_dir", None),
-                )
-                binary = str(Path(config["cli_path"]).expanduser().resolve())
-                # Native Codex discovers AGENTS.md, skills/ and rules/ in this
-                # home. Auth, caches and transcripts are confined to the copy.
-                cli_command = [
-                    binary,
-                    "exec",
-                    "--json",
-                    "--strict-config",
-                    "--ephemeral",
-                    "--skip-git-repo-check",
-                    "--color",
-                    "never",
-                    "--cd",
-                    str(task_dir),
-                    "--model",
-                    llm["model_name"],
-                    "--sandbox",
-                    config.get("sandbox", "workspace-write"),
-                ]
-                # Hooks are executable resources explicitly selected in this
-                # Snapshot. Native trust keys include the temporary home, so a
-                # prior home's trust records cannot authorize this copy. Task
-                # project hooks remain disabled by its untrusted project config.
-                bypass_hook_trust = bool(
-                    native.get("hooks") or any(resource_home.rglob("hooks.json"))
-                )
-                if bypass_hook_trust:
-                    cli_command.append("--dangerously-bypass-hook-trust")
-                for key, value in overrides.items():
-                    cli_command.extend(["-c", f"{key}={_toml(value)}"])
-                cli_command.append("-")
-                command = cli_command
-                request = prompt
-                # Count preparation and process startup toward the same call
-                # budget. Synchronous preparation cannot be interrupted, but
-                # must not start a native process after its deadline has passed.
-                if asyncio.get_running_loop().time() >= deadline:
-                    raise TimeoutError
-                async with asyncio.timeout_at(deadline):
-                    process = await asyncio.create_subprocess_exec(
-                        *command,
-                        cwd=task_dir,
-                        env=env,
-                        stdin=asyncio.subprocess.PIPE,
-                        stdout=asyncio.subprocess.PIPE,
-                        stderr=asyncio.subprocess.PIPE,
-                        start_new_session=os.name == "posix",
-                        limit=16 * 1024 * 1024,
-                    )
-                    readers = [
-                        asyncio.create_task(events(process.stdout)),
-                        asyncio.create_task(diagnostics(process.stderr)),
-                    ]
-                    process.stdin.write(request.encode("utf-8"))
-                    await process.stdin.drain()
-                    process.stdin.close()
-                    await process.wait()
-                    await asyncio.gather(*readers)
-                if process.returncode:
-                    error = error or f"Codex process exited with {process.returncode}"
-                if not completed:
-                    failures = [
-                        message.get("message")
-                        for message in messages
-                        if message.get("type") == "error"
-                    ]
-                    error = error or next(filter(None, reversed(failures)), None)
-                    error = error or "Codex ended without turn.completed"
-            except TimeoutError:
-                error = f"Codex timed out after {config.get('timeout', 300):g}s"
-            except Exception as exc:
-                error = str(exc) or type(exc).__name__
-            finally:
-                if process is not None:
-                    try:
-                        await _stop(process)
-                    except Exception as exc:
-                        detail = f"Codex cleanup failed: {exc}"
-                        error = f"{error}\n{detail}" if error else detail
-                for reader in readers:
-                    if not reader.done():
-                        reader.cancel()
-                if readers:
-                    await asyncio.gather(*readers, return_exceptions=True)
-
-        diagnostic_text = b"".join(diagnostic_chunks).decode(errors="replace").rstrip()
-        if diagnostic_text:
-            # Native skill/MCP/rule warnings can accompany a successful turn.
-            # Preserve them so the search can see resources that did not load.
-            messages.append({"type": "CodexDiagnostics", "text": diagnostic_text})
-            if error:
-                error += "\nCodex stderr (tail):\n" + diagnostic_text[-8192:]
-        return Trajectory(
-            status="error" if error else "finished",
-            output=_redact(output, secrets) if not error else "",
-            messages=_redact(messages, secrets),
-            usage={} if error else usage,
-            error_message=_redact(error, secrets),
-        )
 
 
 def _settings(config, resource_home, task_dir, *, source_root=None):

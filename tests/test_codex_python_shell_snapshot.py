@@ -11,7 +11,7 @@ import uuid
 from pathlib import Path
 
 import pytest
-from test_codex_core_parity import _events, _responses_server
+from codex_test_support import _events, _responses_server
 from test_codex_python_resources import home as home
 
 from flashrsi.agents.codex.python_core import shell_snapshot as snapshot

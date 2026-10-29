@@ -7,9 +7,9 @@ import json
 import shutil
 
 import pytest
-from test_codex_core_parity import _events, _normalize, _responses_server
-from test_codex_core_parity import parity_source as parity_source
-from test_codex_core_parity import upstream_codex as upstream_codex
+from codex_test_support import _events, _normalize, _responses_server
+from codex_test_support import parity_source as parity_source
+from codex_test_support import upstream_codex as upstream_codex
 
 from flashrsi.agents import Codex
 from flashrsi.agents.codex.python_core.memory import Memories, parse_memory_citation
@@ -154,7 +154,7 @@ def test_memory_citation_parser_preserves_entries_and_deduplicates_ids():
     assert parse_memory_citation(["bad"]) is None
 
 
-def test_memory_tools_and_context_match_complete_native_trace(
+def test_memory_tools_and_context_complete_python_trace(
     parity_source, upstream_codex, tmp_path
 ):
     config_file = parity_source / "config.toml"
@@ -199,7 +199,7 @@ def test_memory_tools_and_context_match_complete_native_trace(
     ]
     observed = []
     with _responses_server() as replay:
-        for binary in (upstream_codex, None):
+        for binary in (None,):
             shutil.rmtree(root / "extensions", ignore_errors=True)
             replay.reset(
                 [(200, _call(name, args, i)) for i, (name, args) in enumerate(calls)]
@@ -215,8 +215,6 @@ def test_memory_tools_and_context_match_complete_native_trace(
                 },
                 "timeout": 60,
             }
-            if binary:
-                config["cli_path"] = binary
             result = asyncio.run(
                 Codex(config).run(
                     "Please remember the supplied note, then verify it.",
@@ -252,6 +250,4 @@ def test_memory_tools_and_context_match_complete_native_trace(
                     tmp_path,
                 )
             )
-    for label, trace in zip(("native", "python"), observed, strict=True):
-        (tmp_path / f"memory-{label}.json").write_text(json.dumps(trace, indent=2))
-    assert observed[0] == observed[1]
+    (tmp_path / "memory-python.json").write_text(json.dumps(observed[0], indent=2))

@@ -35,7 +35,6 @@ codex = [
     "tree-sitter==0.25.2",
     "tree-sitter-bash==0.25.1",
 ]
-codex-oracle = ["openai-codex-cli-bin==0.147.0"]
 harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
 swe-bench = ["packaging>=24", "swebench @ git+https://github.com/SWE-bench/SWE-bench.git@02e7a74ffd0b707aab73d203fe87bdc7c76afc8e"]
 appworld = ["packaging>=24"]
@@ -63,8 +62,6 @@ include = ["flashrsi*"]
 # Reference sources and bundled skill scripts are data. Treating those scripts
 # as namespace packages strips upstream executable bits during build_py.
 exclude = [
-    "flashrsi.agents.codex.runtime*",
-    "flashrsi.agents.codex._bridge*",
     "flashrsi.agents.codex.python_core.resource_assets.system_skills*",
 ]
 
@@ -84,7 +81,7 @@ exclude = [
 "flashrsi.agents.codex" = ["components.yaml", "config.toml", "AGENTS.md", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*", "python_core/**/*"]
 
 [tool.setuptools.exclude-package-data]
-"flashrsi.agents.codex" = ["runtime/*", "runtime/**/*", "_bridge/*", "_bridge/**/*", "_companion.json", "**/__pycache__/*", "**/*.pyc", "**/*.pyo"]
+"flashrsi.agents.codex" = ["**/__pycache__/*", "**/*.pyc", "**/*.pyo"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -96,7 +93,6 @@ target-version = "py311"
 # Also work in source archives without .git, where Ruff cannot apply .gitignore.
 extend-exclude = [
     "mvp_doc.md",
-    "flashrsi/agents/codex/runtime",
     "flashrsi/agents/codex/python_core/resource_assets/system_skills",
     ".cache",
     "runs",

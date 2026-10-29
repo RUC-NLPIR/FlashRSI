@@ -1,18 +1,16 @@
-"""Native request oracle and lifecycle regressions for background Git metadata."""
+"""Lifecycle regressions for background Git metadata in the Python adapter."""
 
 from __future__ import annotations
 
 import asyncio
 import json
 import os
-import re
 import subprocess
 from pathlib import Path
 
 import pytest
-from test_codex_core_parity import _events, _normalize, _responses_server
-from test_codex_core_parity import parity_source as parity_source
-from test_codex_core_parity import upstream_codex as upstream_codex
+from codex_test_support import _events, _responses_server
+from codex_test_support import parity_source as parity_source
 from test_codex_python_session_resume import _request
 
 from flashrsi.agents import Codex
@@ -49,8 +47,8 @@ class _WaitForEnrichment:
 
 
 @pytest.mark.parametrize("state", ["clean", "dirty", "unborn"])
-def test_native_git_workspace_enrichment_reaches_later_model_requests(
-    state, parity_source, upstream_codex, tmp_path
+def test_python_git_workspace_enrichment_reaches_later_model_requests(
+    state, parity_source, tmp_path
 ):
     repo = tmp_path / "repo"
     task = repo / "nested"
@@ -76,84 +74,26 @@ def test_native_git_workspace_enrichment_reaches_later_model_requests(
         (repo / "tracked.txt").write_text("CHANGED\n")
     observed = []
     with _responses_server() as replay:
-        for binary in (upstream_codex, None):
-            replay.reset([])
-            replay.steps = _WaitForEnrichment(replay)
-            options = {
-                "source_dir": parity_source,
-                "sandbox": "danger-full-access",
-                "timeout": 30,
-                "llm": {
-                    "model_name": "gpt-5.4",
-                    "api_key": "local-metadata-test-key",
-                    "base_url": replay.base_url,
-                },
-            }
-            if binary:
-                options["cli_path"] = binary
-            result = asyncio.run(
-                Codex(options).run("Inspect Git metadata.", working_dir=task)
-            )
-            assert result.status == "finished", result.error_message
-            assert not replay.errors
-            assert result.output == "GIT_METADATA_TASK_DONE"
-            observed.append(metadata(replay.requests[-1]).get("workspaces"))
-    assert observed[0] == {str(repo): expected}
-    assert observed[1] == observed[0]
-
-
-_REMOVED_KEYS = re.findall(
-    r'key: "([^"]+)",\s*stage: Stage::Removed',
-    (
-        Path(__file__).parents[1] / "flashrsi/agents/codex/runtime/features/src/lib.rs"
-    ).read_text(),
-)
-
-
-@pytest.mark.parametrize(
-    "flags",
-    [
-        {"js_repl": True},
-        {"undo": True},
-        {"js_repl_tools_only": True},
-        dict.fromkeys(_REMOVED_KEYS, True),
-        dict.fromkeys(_REMOVED_KEYS, False),
-    ],
-    ids=["js_repl", "undo", "js_repl_tools_only", "all_true", "all_false"],
-)
-def test_removed_compatibility_features_are_native_noops(
-    flags, parity_source, upstream_codex, tmp_path
-):
-    config = parity_source / "config.toml"
-    config.write_text(
-        config.read_text()
-        + "".join(f"{key} = {str(value).lower()}\n" for key, value in flags.items())
-    )
-    task = tmp_path / "task"
-    task.mkdir()
-    bodies = []
-    with _responses_server() as replay:
-        for binary in (upstream_codex, None):
-            replay.reset([(200, _events())])
-            options = {
-                "source_dir": parity_source,
-                "sandbox": "danger-full-access",
-                "timeout": 30,
-                "llm": {
-                    "model_name": "gpt-5.4",
-                    "api_key": "local-metadata-test-key",
-                    "base_url": replay.base_url,
-                },
-            }
-            if binary:
-                options["cli_path"] = binary
-            result = asyncio.run(
-                Codex(options).run("Compatibility task.", working_dir=task)
-            )
-            assert result.status == "finished", result.error_message
-            assert not replay.errors
-            bodies.append(_normalize(replay.requests[0], tmp_path))
-    assert bodies[0] == bodies[1]
+        replay.reset([])
+        replay.steps = _WaitForEnrichment(replay)
+        options = {
+            "source_dir": parity_source,
+            "sandbox": "danger-full-access",
+            "timeout": 30,
+            "llm": {
+                "model_name": "gpt-5.4",
+                "api_key": "local-metadata-test-key",
+                "base_url": replay.base_url,
+            },
+        }
+        result = asyncio.run(
+            Codex(options).run("Inspect Git metadata.", working_dir=task)
+        )
+        assert result.status == "finished", result.error_message
+        assert not replay.errors
+        assert result.output == "GIT_METADATA_TASK_DONE"
+        observed.append(metadata(replay.requests[-1]).get("workspaces"))
+    assert observed == [{str(repo): expected}]
 
 
 @pytest.mark.parametrize("outcome", ["finished", "error", "interrupted"])

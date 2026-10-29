@@ -1,9 +1,9 @@
-"""Verify an installed wheel on Linux using localhost replay and actual tools.
+"""Verify an installed pure-Python Codex wheel on Linux.
 
 Run with the acceptance venv's ``python -I`` from outside the source checkout.
 Stage the repository's tests separately and pass that directory with --suite.
-Only the explicit tests below run; native Rust build tests are never selected.
-The native oracle is a separate, pinned installed binary, not a fallback core.
+The suite uses localhost Responses replay and real POSIX tools; it does not
+install or invoke a native Codex CLI or Rust build.
 """
 
 from __future__ import annotations
@@ -23,22 +23,12 @@ import zipfile
 from pathlib import Path
 
 GROUPS = {
-    "file_task_parity": (
-        [
-            "test_codex_task_parity.py::test_native_and_python_complete_same_file_editing_task"
-        ],
-        "danger-full-access",
-    ),
-    "tool_mechanisms_parity": (["test_codex_task_tools_regression.py"], None),
-    "interactive_pty_parity": (["test_codex_task_exec_parity.py"], None),
-    "code_mode_parity": (
-        [
-            "test_codex_python_code_mode.py::test_code_mode_native_and_python_match_complete_local_task",
-            "test_codex_python_code_mode.py::test_code_mode_native_and_python_match_yield_wait_notify_cancel_and_errors",
-            "test_codex_python_lite.py",
-        ],
+    "source_and_adapter": (
+        ["test_codex_source.py", "test_codex_python_adapter.py"],
         None,
     ),
+    "tool_mechanisms": (["test_codex_python_tools.py"], None),
+    "core_loop": (["test_codex_python_loop.py", "test_codex_python_protocol.py"], None),
     "posix_lifecycle": (
         [
             "test_codex_python_tools.py::test_shell_exit_workdir_environment_and_timeout",
@@ -49,7 +39,7 @@ GROUPS = {
         ],
         None,
     ),
-    "snapshot_and_linux_boundary": (["test_codex_linux_acceptance.py"], None),
+    "snapshot_and_linux_boundary": (["test_codex_python_shell_snapshot.py"], None),
 }
 
 
@@ -96,8 +86,6 @@ def main():
         parser.error("Acceptance must import an installed wheel, not checkout code")
     if (installed / "runtime").exists() or (installed / "_bridge").exists():
         parser.error("The installed package unexpectedly contains the Rust runtime")
-    if importlib.metadata.version("openai-codex-cli-bin") != "0.147.0":
-        parser.error("The native oracle must be exactly 0.147.0")
     suite = args.suite.resolve()
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -129,8 +117,7 @@ def main():
         "machine": platform.machine(),
         "python": sys.version,
         "installed_codex": str(installed),
-        "oracle_version": importlib.metadata.version("openai-codex-cli-bin"),
-        "installation_scope": "Codex runtime dependencies, pytest and native oracle; unrelated harness and dataset dependencies are not installed",
+        "installation_scope": "Codex Python dependencies and pytest; unrelated harness and dataset dependencies are not installed",
         "installed_dependencies": {
             distribution.metadata["Name"]: distribution.version
             for distribution in importlib.metadata.distributions()

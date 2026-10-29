@@ -394,8 +394,7 @@ async def run(agent, prompt, working_dir):
         cwd = Path(working_dir).resolve() if working_dir else root / "task"
         cwd.mkdir(parents=True, exist_ok=True)
         try:
-            # Only the selected files participate in execution. The Rust
-            # reference tree is deliberately outside the new code component.
+            # Only the selected Snapshot files participate in execution.
             shutil.copytree(agent.files_dir, home)
             memory_overlay = _memory_overlay(agent, home)
             overrides, env, native = _settings(

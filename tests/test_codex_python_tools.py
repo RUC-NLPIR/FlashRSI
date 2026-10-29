@@ -12,11 +12,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from flashrsi.agents.codex.python_core.apply_patch import (
-    APPLY_PATCH_QUERY,
-    apply_patch_sync,
-    parse_patch,
-)
+from flashrsi.agents.codex.python_core.apply_patch import apply_patch_sync, parse_patch
 from flashrsi.agents.codex.python_core.shell import (
     Process,
     Sandbox,
@@ -62,25 +58,6 @@ def call(name, **arguments):
         "call_id": "call-1",
         "arguments": json.dumps(arguments),
     }
-
-
-def test_native_static_assets_are_byte_identical():
-    root = Path(__file__).parents[1] / "flashrsi/agents/codex"
-    assets = root / "python_core/tool_assets"
-    assert (assets / "apply_patch.lark").read_bytes() == (
-        root / "runtime/core/src/tools/handlers/apply_patch.lark"
-    ).read_bytes()
-    for name in ("seatbelt_base_policy.sbpl", "seatbelt_network_policy.sbpl"):
-        assert (assets / name).read_bytes() == (
-            root / "runtime/sandboxing/src" / name
-        ).read_bytes()
-    invocation = (root / "runtime/apply-patch/src/invocation.rs").read_text()
-    upstream_query = (
-        invocation.split("static APPLY_PATCH_QUERY:", 1)[1]
-        .split('r#"', 1)[1]
-        .split('"#', 1)[0]
-    )
-    assert APPLY_PATCH_QUERY == upstream_query
 
 
 def test_process_capacity_uses_lru_exited_preference_and_interaction_locks(tmp_path):

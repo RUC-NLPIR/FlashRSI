@@ -75,8 +75,8 @@ Codex 的 [适配类](../flashrsi/agents/codex/__init__.py) 默认在独立 Pyth
 插件只版本化 `plugins/cache/**` 下的已安装 bundle 及其元数据；`plugins/data/**`
 等运行状态不从来源目录捕获，插件启用配置保留在 `config.toml`。
 模型与凭据通过角色配置映射，Python 核心的 JSONL 事件和脱敏诊断转为 Trajectory，
-退出时清理进程与运行状态。服务、hooks 和子 agent 仍需配置注册；
-显式设置 `cli_path` 的原生 CLI 模式仅用于对照，不执行 Python 候选源码。接入与验证边界见
+退出时清理进程与运行状态。服务、hooks 和子 agent 仍需配置注册。Codex 适配器只有 Python 核心执行路径，
+不接受 `cli_path`，也不会回退到宿主或 Rust 原生 CLI。接入与验证边界见
 [Codex 说明](codex.md)。
 
 ## 可选：容器执行

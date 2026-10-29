@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
-import importlib.metadata
 import json
 import threading
 from contextlib import contextmanager
@@ -152,55 +151,6 @@ def test_model_config_overrides_and_literal_personality():
         ]
         == 160
     )
-
-
-@pytest.mark.parametrize("model_name", ["gpt-5", "gpt-5.4"])
-def test_request_matches_actual_pinned_cli_oracle(model_name, tmp_path, monkeypatch):
-    package = pytest.importorskip("codex_cli_bin")
-    assert importlib.metadata.version("openai-codex-cli-bin") == "0.147.0"
-    from flashrsi.agents import Codex
-
-    # Only the explicit, pinned CLI path is used here. Optional startup traffic
-    # is denied; the scripted model endpoint is localhost and has no paid calls.
-    for key in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "http_proxy", "https_proxy"):
-        monkeypatch.setenv(key, "http://127.0.0.1:1")
-    monkeypatch.setenv("NO_PROXY", "127.0.0.1,localhost")
-    monkeypatch.setenv("no_proxy", "127.0.0.1,localhost")
-    monkeypatch.setenv("CODEX_APP_SERVER_DISABLE_MANAGED_CONFIG", "1")
-    source, task = tmp_path / "source", tmp_path / "task"
-    source.mkdir()
-    task.mkdir()
-    (source / "components.yaml").write_text(
-        "prompt: [AGENTS.md]\nconfig: [config.toml]\n"
-    )
-    (source / "AGENTS.md").write_text("")
-    (source / "config.toml").write_text(
-        "[features]\nplugins=false\nremote_plugin=false\nunified_exec=false\n"
-    )
-    done = {"type": "response.output_item.done", "item": _message()}
-    with _server([(200, _sse(done, _completed()))]) as (url, requests, script):
-        config = {
-            "source_dir": source,
-            "cli_path": str(package.bundled_codex_path()),
-            "llm": {"model_name": model_name, "api_key": "local-key", "base_url": url},
-            "sandbox": "danger-full-access",
-            "timeout": 30,
-        }
-        result = asyncio.run(Codex(config).run("oracle", working_dir=task))
-        assert result.status == "finished", result.error_message
-        assert not script
-        oracle = requests[0]["body"]
-        client = ResponsesClient(
-            config["llm"],
-            Model(model_name, {}),
-            {},
-            oracle["prompt_cache_key"],
-            lambda event: None,
-        )
-        actual = client.request(
-            oracle["input"], oracle["tools"], oracle["client_metadata"]
-        )
-        assert actual == oracle
 
 
 def test_sse_framing_item_done_and_exact_token_usage():

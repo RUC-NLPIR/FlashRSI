@@ -13,7 +13,7 @@ import shutil
 from pathlib import Path
 
 import pytest
-from test_codex_core_parity import _events, _responses_server
+from codex_test_support import _events, _responses_server
 
 from flashrsi.agents.codex.python_core import loop
 from flashrsi.agents.codex.python_core.context import message

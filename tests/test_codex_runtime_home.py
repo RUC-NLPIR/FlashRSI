@@ -10,11 +10,8 @@ import tempfile
 from pathlib import Path
 
 import pytest
-from test_codex import _requests
-from test_codex import native_cli as native_cli
-from test_codex_core_parity import _events, _responses_server
-from test_codex_core_parity import parity_source as parity_source
-from test_codex_core_parity import upstream_codex as upstream_codex
+from codex_test_support import _events, _responses_server
+from codex_test_support import parity_source as parity_source
 
 from flashrsi.agents import Codex
 from flashrsi.agents import codex as adapter
@@ -78,9 +75,8 @@ def source(tmp_path):
     return source
 
 
-@pytest.mark.parametrize("native", [False, True])
-def test_both_adapters_use_cache_resources_and_keep_default_task_in_system_temp(
-    source, native_cli, tmp_path, monkeypatch, native
+def test_python_adapter_uses_cache_resources_and_keeps_default_task_in_system_temp(
+    source, tmp_path, monkeypatch
 ):
     cache = tmp_path / "cache"
     monkeypatch.setenv("XDG_CACHE_HOME", str(cache))
@@ -88,7 +84,7 @@ def test_both_adapters_use_cache_resources_and_keep_default_task_in_system_temp(
     original_spawn = asyncio.create_subprocess_exec
 
     async def spawn(*args, **kwargs):
-        if args[0] in {sys.executable, str(native_cli[0])}:
+        if args[0] == sys.executable:
             home = Path(kwargs["env"]["CODEX_HOME"])
             seen.append(
                 {
@@ -105,8 +101,6 @@ def test_both_adapters_use_cache_resources_and_keep_default_task_in_system_temp(
         "source_dir": source,
         "llm": {"model_name": "offline-test", "api_key": "local-test-only"},
     }
-    if native:
-        config["cli_path"] = str(native_cli[0])
     result = asyncio.run(Codex(config).run("Report runtime paths."))
     assert result.status == "finished", result.error_message
     assert len(seen) == 1
@@ -117,7 +111,7 @@ def test_both_adapters_use_cache_resources_and_keep_default_task_in_system_temp(
     assert task.parent.parent == Path(tempfile.gettempdir()).resolve()
     assert not task.is_relative_to(cache)
     assert not home.parent.exists() and not task.parent.exists()
-    actual = _requests(native_cli)[0] if native else json.loads(result.output)
+    actual = json.loads(result.output)
     assert actual["home"] == str(home) and actual["cwd"] == str(task)
 
 
@@ -132,13 +126,12 @@ def test_cache_creation_failure_does_not_fall_back_to_system_temp(
 
 
 @pytest.mark.skipif(os.name != "posix", reason="requires POSIX executable helpers")
-@pytest.mark.parametrize("native", [False, True])
 def test_default_temporary_task_uses_real_compound_patch_helper_from_cache(
-    parity_source, upstream_codex, monkeypatch, native
+    parity_source, monkeypatch
 ):
     normal_home = Path.home()
     if normal_home.is_relative_to(Path(os.environ.get("TMPDIR", "/tmp"))):
-        pytest.skip("This account's home is inside the native helper refusal tree")
+        pytest.skip("This account's home is inside the temporary helper refusal tree")
     (parity_source / "config.toml").write_text(
         "[features]\nplugins=false\nremote_plugin=false\n"
         "shell_snapshot=false\nunified_exec=true\n"
@@ -183,8 +176,6 @@ def test_default_temporary_task_uses_real_compound_patch_helper_from_cache(
                     "base_url": replay.base_url,
                 },
             }
-            if native:
-                config["cli_path"] = upstream_codex
             result = asyncio.run(Codex(config).run("Follow the localhost replay."))
             assert result.status == "finished", result.error_message
             assert not replay.errors and not replay.steps

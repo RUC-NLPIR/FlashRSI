@@ -98,15 +98,14 @@ def _role(config, label, kind):
             f"{label}.llm.api_key is required; credentials are independent for each role"
         )
     if kind == "codex":
+        if config.get("cli_path"):
+            raise ValueError(
+                f"{label}: Codex is implemented entirely in Python; cli_path is unsupported"
+            )
         if llm.get("auth", "api_key") != "api_key":
             raise ValueError(
                 f"{label}: Codex requires explicit llm.api_key; native login is unsupported"
             )
-        if (
-            config.get("cli_path")
-            and not Path(config["cli_path"]).expanduser().is_file()
-        ):
-            raise ValueError(f"{label}.cli_path must identify an installed Codex CLI")
     if llm.get("base_url"):
         _url(llm["base_url"], label + ".llm.base_url")
 

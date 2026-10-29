@@ -175,8 +175,6 @@ Linux 显式选择 `danger-full-access` 的 POSIX shell、PTY、补丁与 Code M
 Windows 的 shell、进程组和 PTY 后端尚未移植，即使选择 `danger-full-access`
 也不能运行 shell 工具。`external-sandbox` 和自定义网络/文件系统权限 profile 同样未接入。
 
-保留的 `runtime/`、`_bridge/` 和 Rust 构建脚本仅作为上游参考及历史验证资料，
-不属于当前 `code` Snapshot，也不随当前 wheel 打包或参与默认执行。
-如需固定版本的原生对照，可安装 `--extra codex-oracle` 并显式配置 `cli_path`；
-该模式运行指定的外部 CLI，**不会执行 Python 候选源码**，仅用于对照，不用于 Python
-源码演化验收。启用该模式的 RunConfig 会记录 `cli_path`。
+Rust runtime、bridge 和原生构建辅助文件已从仓库移除。当前 Codex 只有 Python 核心执行路径；
+不提供 `cli_path` 或原生 CLI fallback。原生对照若需要，必须在仓库外单独安装和运行，不属于
+FlashRSI 的生产依赖或执行路径。

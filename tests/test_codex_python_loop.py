@@ -5,8 +5,8 @@ import json
 import re
 
 import pytest
-from test_codex_core_parity import _events, _responses_server
-from test_codex_core_parity import parity_source as parity_source
+from codex_test_support import _events, _responses_server
+from codex_test_support import parity_source as parity_source
 
 from flashrsi.agents import Codex
 from flashrsi.agents.codex.python_core.loop import ToolSchedule

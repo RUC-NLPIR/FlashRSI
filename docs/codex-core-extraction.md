@@ -1,7 +1,7 @@
 # Codex 核心的来源与 Python 语义移植
 
 当前执行核心是 `flashrsi/agents/codex/python_core/`，由 Python 实现。
-它以 <https://github.com/openai/codex> 的固定版本为参考：
+它以 <https://github.com/openai/codex> 的固定版本语义为参考：
 
 - 版本：`0.147.0`
 - tag：`rust-v0.147.0`
@@ -94,23 +94,14 @@ checksum，缓存到 `.cache/codex-python-provenance/`。加 `--offline` 可要�
 原生对照。参见 [任务基线验收](codex-task-baseline-2026-10-29.md) 了解当前验证
 结果和限制。原生 CLI 对照只连接 localhost 的预设响应服务，不调用付费模型。
 
-## Rust 参考目录
+## 上游来源记录
 
-`flashrsi/agents/codex/runtime/` 保留同一 commit 的 Rust core 依赖闭包，供阅读、
-来源检查和维护原生对照使用。它不是当前 Python 运行核心，也不应把此前 Rust
-测试的通过数当作 Python 移植的验证结果。
-
-原有机械抽取工具继续用于维护这份参考：
-
-```bash
-uv run python scripts/extract_codex_core.py --upstream /path/to/openai-codex
-uv run python scripts/extract_codex_core.py --verify
-```
-
-该脚本验证 tag 对应的固定 commit，从 Git tree 选择原生 core 及本地依赖闭包，
-保留上游文件和逐文件来源记录，排除 CLI、exec、TUI、app-server 产品入口。
-workspace 成员列表和旧桥构建锁的机械差异单独保存在参考目录的 patch 中。
-`--verify` 只校验这份 Rust 参考的来源与文件状态，不验证 Python 移植行为。
+Rust runtime、bridge 和原生构建辅助文件已从仓库移除。固定版本、上游路径和资源
+来源仍记录在 `python_core/UPSTREAM.json`，用于维护 Python 语义移植和资源哈希；该
+记录不要求仓库内保存 Rust 源码，也不提供原生 CLI fallback。需要重新核对上游时，
+在仓库外检出固定 commit，并将参考目录传给
+`scripts/verify_codex_python_port.py --reference /path/to/reference`；仓库不再提供
+把 Rust 源码复制进运行目录的 extraction/build 工具。
 
 ## 当前限制
 

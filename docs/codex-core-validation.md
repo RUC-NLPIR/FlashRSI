@@ -16,10 +16,10 @@
 默认调用链是固定 Adapter → 固定 Python loader → **选定 Snapshot 的 Python core**。
 `python_core/**` 是 code 组件，主循环、协议、历史、工具和资源代码都在其中。
 没有 Rust 编译、CLI 或宿主核心模块兜底；候选语法错误在请求模型前失败。
-`cli_path` 是显式的外部原生参考模式，不执行 Python 源码候选。
+当前仅支持 Python 核心执行路径；仓库不提供 `cli_path` 或原生 CLI fallback。
 
-`runtime/` 保存固定上游参考；逐模块映射与资源原文/派生规则由
-`python_core/UPSTREAM.json` 和 `scripts/verify_codex_python_port.py` 核验。
+逐模块映射与资源原文/派生规则由 `python_core/UPSTREAM.json` 和
+`scripts/verify_codex_python_port.py` 核验；固定上游源码需要在仓库外提供。
 这个校验只证明来源和资源一致，不能证明移植语义等价。
 
 ## 做任务时的等价标准
@@ -58,7 +58,7 @@ turn ID。压缩输出、摘要和重注入上下文也使用相同的历史准�
 ## 验证方法
 
 全部模型调用使用 localhost Responses 回放与假 API key，没有付费模型或真实 benchmark。
-对照可执行文件为安装包固定的 `openai-codex-cli-bin==0.147.0`。
+历史对照曾使用安装包固定的 `openai-codex-cli-bin==0.147.0`；该依赖已从项目 extras 和锁文件移除。
 测试保留完整模型 instructions、工具 schema、历史和元数据，只归一化 UUID、时间及
 临时路径；工具退出码、文本和历史顺序仍参与比较。
 
@@ -130,8 +130,7 @@ uv run python scripts/verify_codex_python_port.py --offline
 
 ## 安装产物实测
 
-从本次 wheel 安装到新建独立 venv，只选择 `[codex]`，没有安装 `codex-oracle`
-或 `codex_cli_bin`。在源码仓库之外以 Python `-I` 实测：
+从本次 wheel 安装到新建独立 venv，只选择 `[codex]`；没有安装任何原生 CLI。在源码仓库之外以 Python `-I` 实测：
 
 - 默认 Python 核心回答、BM25 延迟工具检索和实际 shell 执行。
 - 选定 Python 源码候选的 save/load、隔离 rollout、update 与基线恢复；坏源码在 HTTP 前失败。

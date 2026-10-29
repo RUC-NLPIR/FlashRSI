@@ -76,7 +76,7 @@ def test_component_scope_allows_selected_resource_edits(codex):
     assert codex.snapshot.id == baseline.id
 
 
-def test_code_scope_edits_core_while_retaining_hidden_runtime(codex):
+def test_code_scope_edits_core_while_retaining_unselected_components(codex):
     codex.set_scope({"code": "rw"})
     baseline = codex.snapshot
     with baseline.check_out() as directory:

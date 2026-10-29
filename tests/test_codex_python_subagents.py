@@ -7,7 +7,7 @@ import uuid
 from pathlib import Path
 
 import pytest
-from test_codex_core_parity import _events, _responses_server
+from codex_test_support import _events, _responses_server
 
 from flashrsi.agents.codex.python_core.models import Model
 from flashrsi.agents.codex.python_core.shell import ToolError

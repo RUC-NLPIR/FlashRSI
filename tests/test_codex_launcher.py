@@ -14,7 +14,7 @@ from flashrsi.config import load_config
 from flashrsi.integrations import _container_payload
 
 
-def test_codex_target_and_worker_select_extra_and_source_build_prerequisites():
+def test_codex_target_and_worker_select_python_extra_without_native_prerequisites():
     config = load_config(
         overrides={
             "agent": {"name": "codex", "llm": {"model_name": "target"}},
@@ -29,7 +29,7 @@ def test_codex_target_and_worker_select_extra_and_source_build_prerequisites():
     )
     plan = _plan(config)
     assert plan["extras"] == ["codex"]
-    assert any("Cargo" in item for item in plan["prerequisites"])
+    assert not any("Cargo" in item or "Rust" in item for item in plan["prerequisites"])
     assert any("Responses" in item for item in plan["prerequisites"])
 
 

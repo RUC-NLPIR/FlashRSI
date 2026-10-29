@@ -122,7 +122,10 @@ async def _prepare(config):
     dependencies = {
         MiniAgent: (("openai", "requests"), "miniagent"),
         ClaudeCode: (("claude_agent_sdk",), "claude-code"),
-        Codex: (("codex_cli_bin",), "codex"),
+        # Codex is a pure Python core. Keep the dependency probe focused on
+        # the libraries used by its Responses and image/tool paths; there is
+        # no bundled native CLI to import.
+        Codex: (("httpx", "PIL", "tree_sitter", "tree_sitter_bash"), "codex"),
         LLM: (("openai",), "llm"),
     }
     for cls in (target_type, worker_type):

@@ -2,9 +2,9 @@
 
 import asyncio
 
-from test_codex_core_parity import _events, _responses_server
-from test_codex_core_parity import parity_source as parity_source
-from test_codex_core_parity import upstream_codex as upstream_codex
+from codex_test_support import _events, _responses_server
+from codex_test_support import parity_source as parity_source
+from codex_test_support import upstream_codex as upstream_codex
 
 from flashrsi.agents import Codex
 
@@ -39,7 +39,7 @@ def test_native_shared_retry_budget_across_partial_empty_partial(
     task = tmp_path / "task"
     task.mkdir()
     with _responses_server() as replay:
-        for binary in (upstream_codex, None):
+        for binary in (None,):
             counter = task / "counter"
             counter.unlink(missing_ok=True)
             call = ("shell_command", {"command": "printf x >> counter"})
@@ -61,8 +61,6 @@ def test_native_shared_retry_budget_across_partial_empty_partial(
                 "sandbox": "danger-full-access",
                 "timeout": 20,
             }
-            if binary:
-                config["cli_path"] = binary
             result = asyncio.run(
                 Codex(config).run("Consume one shared retry budget.", working_dir=task)
             )

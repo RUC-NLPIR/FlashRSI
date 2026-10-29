@@ -4,16 +4,13 @@ import asyncio
 import inspect
 import json
 import os
-import re
 import shlex
 import shutil
 import sys
 from pathlib import Path
 
 import pytest
-from test_codex_core_parity import upstream_codex as upstream_codex
-from test_codex_native import _config
-from test_codex_native import responses_server as responses_server
+from codex_test_support import responses_server as responses_server
 
 from flashrsi.agents import Codex
 from flashrsi.agents.codex.python_core import resources as module
@@ -787,49 +784,3 @@ def test_skill_usage_flag_and_utf8_body_limit(home, tmp_path):
 
     asyncio.run(run())
     assert any("truncated" in event.get("message", "") for event in events)
-
-
-def test_resource_context_matches_pinned_native_cli(
-    home, tmp_path, responses_server, upstream_codex, monkeypatch
-):
-    isolated = tmp_path / "isolated-home"
-    isolated.mkdir()
-    monkeypatch.setenv("HOME", str(isolated))
-    monkeypatch.setenv("HTTP_PROXY", "http://127.0.0.1:1")
-    monkeypatch.setenv("HTTPS_PROXY", "http://127.0.0.1:1")
-    monkeypatch.setenv("NO_PROXY", "127.0.0.1,localhost")
-    (home / "AGENTS.md").write_text("SELECTED_GLOBAL_INSTRUCTIONS\n")
-    _skill(home)
-    resources, router, _ = _resource(home, tmp_path)
-
-    async def run():
-        expected = await resources.start(router)
-        result = await Codex(
-            _config(responses_server, upstream_codex, source_dir=home)
-        ).run("Answer directly.", resources.cwd)
-        assert result.status == "finished", result.error_message
-        actual = [
-            content["text"]
-            for item in responses_server.requests[-1]["body"]["input"]
-            if item.get("role") in {"developer", "user"}
-            for content in item.get("content", [])
-            if content.get("type") == "input_text"
-            and (
-                content["text"].startswith("<skills_instructions>")
-                or content["text"].startswith("# AGENTS.md instructions")
-            )
-        ]
-
-        def normalize(text):
-            return re.sub(
-                r"(?<=file: )[^\n)]+(?=/skills/)",
-                "<HOME>",
-                text.replace(str(home), "<HOME>"),
-            )
-
-        assert [normalize(item["content"][0]["text"]) for item in expected] == [
-            normalize(text) for text in actual
-        ]
-        await resources.close()
-
-    asyncio.run(run())

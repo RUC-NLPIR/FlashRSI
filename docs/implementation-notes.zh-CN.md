@@ -1398,7 +1398,7 @@ Worker 编辑另一个 Agent 时仍使用自己的指令、扩展和工具配置
 | `allowed_tools` | `[Read, Glob, Grep]` | 原生自动允许列表，SDK 的 `skills="all"` 另启用 Skill；按需要显式授权 Bash 等工具 |
 | `tools` | 未设置 | 原生可用工具集合；`[]` 禁用内置工具 |
 | `llm.effort` | 未设置 | 原样传给 SDK 的推理选项 |
-| `cli_path` | 未设置 | 可选 CLI 路径；默认使用 SDK 自带版本，相对路径按当前工作目录解析 |
+| `cli_path` | 不支持 | Codex 已移除原生 CLI 路径；只执行 Snapshot 中的 Python 核心 |
 | `source_dir` | 内置目录 | 可选资源目录，需包含 `components.yaml`；扩展文件按需提供 |
 
 此后端使用 Claude 原生协议，`llm.base_url` 应指向 Anthropic 兼容端点；

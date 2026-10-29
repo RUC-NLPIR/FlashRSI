@@ -170,12 +170,6 @@ def _plan(config):
         prerequisites.append(
             "Codex requires explicit API keys and a streaming Responses API endpoint"
         )
-        for kind, role in ((target, config.agent), (worker, config.algorithm.worker)):
-            if kind == "codex" and not role.get("cli_path"):
-                prerequisites.append(
-                    "Codex Snapshot source build: Cargo / Rust 1.95.0 and native build dependencies (docs/codex.md)"
-                )
-                break
     if benchmark in {
         "bfcl",
         "swe_bench",
