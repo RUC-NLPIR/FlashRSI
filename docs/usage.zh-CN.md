@@ -180,6 +180,6 @@ uv run ruff check .
 uv run ruff format --check .
 ```
 
-[动态封面](../assets/readme/cover.gif)直接使用 React Bits ElectricLogo 组件渲染，附 [PNG 静态预览](../assets/readme/cover.png)、[录制说明](../scripts/readme-cover/README.md)和[设计说明](../assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](../scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
+[动态封面](../assets/readme/cover.gif)直接使用仓库内置的电光标志渲染器，附 [PNG 静态预览](../assets/readme/cover.png)、[录制说明](../scripts/readme-cover/README.md)和[设计说明](../assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](../scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
 
 完整的 30 项配置与一键入口见[配置索引](benchmark-quickstart.md)及[一键实验指南](experiment-launcher.zh-CN.md)。

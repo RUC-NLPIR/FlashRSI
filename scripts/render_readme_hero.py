@@ -10,7 +10,7 @@ Run with uv (or install Pillow and use Python directly):
 
 The default fonts use macOS SF Pro/Arial or Linux DejaVu Sans. Pass --font
 and --bold-font to reproduce the same typography on another machine.
-The FlashRSI wordmark uses the bundled Space Grotesk font at weight 700.
+The FlashRSI wordmark uses the bundled bold display font.
 """
 
 from __future__ import annotations

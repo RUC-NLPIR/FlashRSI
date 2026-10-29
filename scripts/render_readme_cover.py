@@ -3,7 +3,7 @@
 # requires-python = ">=3.11"
 # dependencies = ["Pillow==11.3.0", "resvg-py==0.5.0"]
 # ///
-"""Encode frames captured from the actual React Bits ElectricLogo component.
+"""Encode frames captured from the bundled electric-logo component.
 
 Start the preview in scripts/readme-cover, click Record, then run:
     uv run --script scripts/render_readme_cover.py /path/shown/by/the/preview
@@ -34,7 +34,7 @@ def main():
     parser.add_argument(
         "--reframe-original",
         action="store_true",
-        help="Reuse the ElectricLogo frames from the original 1600 x 440 cover.",
+        help="Reuse frames from the original 1600 x 440 cover.",
     )
     args = parser.parse_args()
     metadata = json.loads((args.capture_dir / "capture.json").read_text())

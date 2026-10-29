@@ -1,6 +1,5 @@
 # Vendored unchanged from databricks/officeqa at 7b9a3c154ef9fb40215bb67934afc43e6799de16.
 # Copyright (2025) Databricks, Inc. SPDX-License-Identifier: Apache-2.0
-# Upstream attribution is maintained with the project's external release materials.
 # ruff: noqa
 # fmt: off
 """

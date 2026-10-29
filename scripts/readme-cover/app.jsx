@@ -102,7 +102,7 @@ function App() {
     if (!readyRef.current && now - firstRenderRef.current >= 2000) {
       readyRef.current = true;
       setReady(true);
-      setStatus('Ready to record the actual ElectricLogo component.');
+      setStatus('Ready to record the electric-logo component.');
     }
     const session = sessionRef.current;
     if (!session || now - session.lastFrame < FRAME_INTERVAL || !baseImageRef.current || !logoFrameRef.current) return;
@@ -185,7 +185,7 @@ function App() {
     <main>
       <header>
         <h1>ElectricLogo cover</h1>
-        <p>React Bits component preview and frame capture</p>
+        <p>Electric-logo component preview and frame capture</p>
       </header>
       <div className="preview" ref={previewRef}>
         <div className="scene" style={{ transform: `scale(${previewScale})` }}>

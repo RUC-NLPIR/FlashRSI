@@ -10,7 +10,7 @@ Benchmark 核心模型与 SearchQA 接入、Snapshot 和 Agent 基类，以及 M
 现已接入 SkillOpt、OPRO、GEPA、EvoPrompt、ACE、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、Evo-Harness、RRSI、纯 LLM Worker 与 runner，可从 CLI 完成演化和最终测试。
 第 7 步已新增 Terminal-Bench 2.0 数据与通用 Harbor 执行接入，Claude Code 和 MiniAgent
 共用容器执行路径；MiniAgent 已默认启用 shell 工具，真实容器验收仍待完成，见 [接入说明](../docs/terminal-bench.md)。
-SearchQA 与 Terminal-Bench 数据均放在私有 Hugging Face 仓库
+SearchQA 与 Terminal-Bench 数据均放在 Hugging Face 仓库
 [jinjiajie/flashrsi](https://huggingface.co/datasets/jinjiajie/flashrsi)，框架按各自固定版本加载。
 
 ## RRSI
@@ -789,8 +789,8 @@ runner 根据配置名实例化 Benchmark、目标 Agent、Worker 和 Algorithm�
 
 ### 数据集准备与独立使用
 
-仓库保持 private，下载需要有读取权限的本机 Hugging Face 登录或 `HF_TOKEN` 环境变量；
-凭据无需写入实验 YAML。框架使用固定的 revision 和 Hugging Face 本地缓存。
+下载由 Hugging Face 客户端处理，凭据无需写入实验 YAML。框架使用固定的 revision
+和 Hugging Face 本地缓存。
 
 可以直接保留 Hugging Face 上发布的原始分区：
 

@@ -182,4 +182,4 @@ uv run ruff check .
 uv run ruff format --check .
 ```
 
-The [animated cover](../assets/readme/cover.gif) uses the actual React Bits ElectricLogo component, with a [PNG still](../assets/readme/cover.png), [capture instructions](../scripts/readme-cover/README.md), and [design notes](../assets/readme/cover-design.md). The demo GIF is generated from [scripts/render_readme_hero.py](../scripts/render_readme_hero.py) using Pillow. Its training and evaluation curves are schematic. Images are checked into `assets/readme/`, so viewing the README needs no renderer.
+The [animated cover](../assets/readme/cover.gif) uses the bundled electric-logo renderer, with a [PNG still](../assets/readme/cover.png), [capture instructions](../scripts/readme-cover/README.md), and [design notes](../assets/readme/cover-design.md). The demo GIF is generated from [scripts/render_readme_hero.py](../scripts/render_readme_hero.py) using Pillow. Its training and evaluation curves are schematic. Images are checked into `assets/readme/`, so viewing the README needs no renderer.

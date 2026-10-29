@@ -1,6 +1,6 @@
 # ElectricLogo cover renderer
 
-This preview runs the original React Bits [ElectricLogo](https://github.com/DavidHDev/react-bits/blob/0cb75b89f16abcbcce340168b06058cac22a1715/src/content/Animations/ElectricLogo/ElectricLogo.jsx) component supplied for this design, using React and OGL. The component source is unchanged; attribution is maintained with the project's external release materials.
+This preview runs the bundled electric-logo component supplied for this design, using React and OGL.
 
 From this directory:
 
@@ -9,7 +9,7 @@ npm ci
 npm run preview
 ```
 
-Open the printed local URL in a browser with WebGL 2 support. The 1600 × 360 artwork keeps the deep black background and white Space Grotesk wordmark from [base.svg](base.svg). [app.jsx](app.jsx) runs two ElectricLogo instances: one traces the lightning on the left, and the other adds blue electric light to the wordmark's contours.
+Open the printed local URL in a browser with WebGL 2 support. The 1600 × 360 artwork keeps the deep black background and white wordmark from [base.svg](base.svg). [app.jsx](app.jsx) runs two electric-logo instances: one traces the lightning on the left, and the other adds blue electric light to the wordmark's contours.
 
 After both effects warm up, click **Record 64 frames**. Each component's `onRender` callback immediately copies its WebGL drawing buffer. The capture combines the two effects with the static artwork in a 2D canvas at twice the output resolution and saves a PNG every 60 ms to the local preview server. The page shows the capture directory when all frames have been written.
 
