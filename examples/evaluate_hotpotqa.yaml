@@ -1,0 +1,20 @@
+# Test a frozen MiniAgent Snapshot on HotpotQA's labeled validation pool.
+# This reports a sampled validation score, not an official leaderboard test.
+# No algorithm or Worker is used. Fill Target and any benchmark-specific roles.
+run:
+  output_dir: ../runs
+benchmark:
+  name: hotpotqa
+  mode: context
+  dataset:
+    splits: [validation]
+  split: {train: 0, dev: 0, test: 1}
+  limit: 16
+  seed: 42
+agent:
+  name: miniagent
+  max_turns: 6
+  llm:
+    model_name: null
+    api_key: null
+    base_url: null

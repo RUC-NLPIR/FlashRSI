@@ -1,19 +1,24 @@
 # Choose and run an experiment
 
-[README](../README.md) · [Configuration and Python API](usage.md)
+[README](../README.md) · [Benchmark configurations](benchmark-quickstart.md) · [Launcher guide](experiment-launcher.zh-CN.md)
 
-## Choose a version
+FlashRSI registers 12 algorithms, 30 benchmark suites, and three harnesses: MiniAgent, Claude Code, and Codex. Versions, years, and task domains within one adapter count as one suite. Registration does not mean every combination has completed a real model run.
 
-| You need | Use | Harnesses |
-| --- | --- | --- |
-| The quickstart or Codex | `main`: SearchQA, HotpotQA, Terminal-Bench 2.0, τ³ Banking | MiniAgent, Claude Code, Codex |
-| The full 28-benchmark collection | [`integration/flashrsi-smoke`](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke) | MiniAgent, Claude Code |
+## Start with a small run
 
-A valid combination needs a harness that exposes the resources the algorithm edits and the tools the task uses.
+Use [quickstart_launch.yaml](../examples/quickstart_launch.yaml) to run SkillOpt with MiniAgent on 12 bundled QA questions. Fill in the Target and Worker model settings, then run from the repository root:
+
+```bash
+python scripts/run_experiment.py --config examples/quickstart_launch.yaml
+```
+
+The launcher creates an isolated environment, installs the selected dependencies, and prepares data. Add `--plan` to inspect requirements or `--check-only` to prepare dependencies and data without model calls. These checks do not validate remote model authentication.
+
+Start with Linux/WSL and Python 3.12. Git, a Docker Linux daemon, and Docker Compose are required where the chosen benchmark uses them. Codex runs the selected Snapshot Python core and needs a Responses-compatible endpoint; see [Codex setup](codex.md).
 
 ## Choose an algorithm and harness
 
-Start with a [configuration from the algorithm list](../README.md#supported-algorithms). It includes the method's parameters and Worker type.
+Start from an [algorithm configuration](../README.md#supported-algorithms) so its parameters and Worker type stay together.
 
 | What to improve | Algorithms | Worker |
 | --- | --- | --- |
@@ -22,74 +27,60 @@ Start with a [configuration from the algorithm list](../README.md#supported-algo
 | Skills discovered by the native harness | Evo-Harness | Agent |
 | Declared harness resources | AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI | Agent |
 
-The Target solves tasks; the Worker proposes changes. They can use different models and harnesses. Configure them independently in `agent` and `algorithm.worker`; see [model and connection settings](usage.md#configure-an-experiment).
+The Target solves tasks; the Worker proposes changes. Configure their models and connections independently in `agent.llm` and `algorithm.worker.llm`. Judge, user-simulator, and postprocessing models also use their own settings; see [role configuration](experiment-launcher.zh-CN.md#模型配置与文件位置).
 
-The editable scope follows each harness's declared resources; see the [harness list](../README.md#supported-harnesses).
+The editable scope follows the [resources declared by each harness](../README.md#supported-harnesses). The harness must also provide the tools needed by the task.
 
-Additional method requirements:
+- Evo-Harness needs native directory-based skill discovery and loading; see its [implementation notes](evo-harness.md).
+- ModularRSI needs module file mappings. It can evolve on the benchmark's train split; train task IDs must be unique and disjoint from dev/test. Separate evolution data is optional. See [module and data configuration](modular-rsi.md) and the [Claude Code extension example](../examples/modular_rsi_claude_code.yaml).
 
-- Evo-Harness needs native directory-based skill discovery and loading. Declaring a `skill` component alone is insufficient; see its [implementation notes](evo-harness.md).
-- ModularRSI needs separate evolution data and mappings for five modules. Fill in the paths in its [configuration](../examples/modular_rsi.yaml); see the [data and module requirements](modular-rsi.md).
-
-Other implementation notes: [ACE](ace.md), [AHE](ahe.md), [ADAS](adas.md), [DarwinX](darwinx.md), [Meta-Harness](meta-harness.md), and [RRSI](rrsi.md). These describe adaptations to the original methods.
+Other method notes: [ACE](ace.md), [AHE](ahe.md), [ADAS](adas.md), [DarwinX](darwinx.md), [Meta-Harness](meta-harness.md), and [RRSI](rrsi.md).
 
 ## Choose a benchmark
 
-The README links each benchmark to its setup and available YAML examples. An entry with only **Setup** has no ready-made benchmark YAML; use its setup instructions to configure the data, grading, and runtime.
+The [30-suite configuration index](benchmark-quickstart.md) links every registered benchmark to a YAML example and its data requirements. Keep the example's grading and environment settings when changing the algorithm or harness.
 
-### Benchmarks on main
-
-| Benchmark ID | Start here | Preparation |
+| Execution | Benchmarks and preparation | Setup |
 | --- | --- | --- |
-| `searchqa` | [Local quickstart](../examples/quickstart.yaml) | Includes 12 questions to try the workflow. For full data, use the [SearchQA experiment guide](searchqa-deepseek-reproduction.md). |
-| `hotpotqa` | [Config](../examples/hotpotqa.yaml) | Loads the benchmark data. Fullwiki mode also needs a retrieval service configured in the YAML. |
-| `terminal_bench` | [Config](../examples/terminal_bench.yaml) | [Harbor, Python 3.12+, and Docker](terminal-bench.md). |
-| `tau3_banking` | [Config](../examples/tau3_banking.yaml) | Install tau2 and prepare its banking data and user simulator as described in the configuration. |
+| Text, search, and document tasks | Prepare the dataset; search tasks need web services. Some tasks also need a Judge, document corpus, or postprocessing model. | [Per-benchmark requirements](benchmark-quickstart.md), [web services](web-research-services.md) |
+| Native Docker integrations | SWE-bench Verified uses its official verifier; AppWorld and BFCL use their own Docker integrations. | [Coding setups](coding-working-benchmarks.md), [launcher prerequisites](experiment-launcher.zh-CN.md#准备与检查) |
+| Harbor | Terminal-Bench 2.0/2.1, SWE-bench Pro, DeepSWE, JobBench, and SpreadsheetBench 2 need Docker and Compose. JobBench also needs a Judge. | [Coding and spreadsheet tasks](coding-working-benchmarks.md), [DeepSWE](deepswe.md) |
+| Native interactive environments | τ²/τ³ need their user simulator; τ² retail also needs a Judge. ALFWorld needs local native data and Python 3.11/3.12. | [τ²](tau2-bench.md), [ALFWorld](alfworld.md), [configuration index](benchmark-quickstart.md) |
 
-Harbor and tau2 use separate environments because their dependencies conflict.
+SpreadsheetBench 2 covers its first three task categories and excludes Visualization. DeepSWE currently has an interface adapter; official task downloads and real execution are unverified. Each setup guide states its supported track and metric.
 
-### Benchmark collection
+Container execution has additional harness requirements. Claude Code needs explicit credentials and cannot use host login; Claude Code and Codex containers reject `cli_path`. Codex containers execute the selected Snapshot Python core. See [container integration](agent-integration.md#可选容器执行) and [Codex setup](codex.md).
 
-Use a separate checkout for the full collection. Python 3.12 or 3.13 covers the version requirements of its supported environments.
+Harbor and tau2 use separate dependency environments. The launcher manages these environments; it does not install system tools or provide benchmark-specific credentials and private corpora.
 
-```bash
-git clone --branch integration/flashrsi-smoke --single-branch https://github.com/ignorejjj/FlashRSI.git FlashRSI-benchmarks
-cd FlashRSI-benchmarks
-```
-
-Fill in the Target and Worker model settings in the chosen YAML. For example, to run OPRO on BBEH:
-
-```bash
-python3 scripts/run_experiment.py --config examples/bbeh_opro.yaml
-```
-
-This branch's launcher creates an isolated environment, installs the selected dependencies, and prepares benchmark data. Git and any required Docker daemon must already be available. Add `--plan` to inspect requirements, or `--check-only` to install dependencies and prepare data without model calls. Neither option validates model authentication.
-
-| Task family | Extra preparation | Setup |
-| --- | --- | --- |
-| QA and reasoning | Data downloads; HotpotQA fullwiki needs retrieval. | [Data and prerequisites](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查), [BBEH / SuperGPQA](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/lightweight-benchmarks.md) |
-| Mathematics and code | Math scoring dependencies; SWE tasks need Docker. HLE and LiveMathBench need a Judge. | [Math / CRUXEval](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/coding-math-benchmarks.md), [SWE-bench](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/swe-independent-evolution.md) |
-| Web research | Search/web services and an independent Judge. | [Service configuration](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md) |
-| Documents | OfficeQA-Pro needs its corpus; Harvey LAB needs Judge models; JobBench needs Docker and a Judge. | [OfficeQA-Pro](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md), [Other prerequisites](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| Tools and applications | AppWorld and BFCL need Docker; WorkBench needs Git; TravelPlanner needs a postprocessing model. | [AppWorld](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/appworld-independent-evolution.md), [WorkBench](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/workbench.md), [Other prerequisites](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| Interactive environments | τ²/τ³ need a user simulator; τ² retail also needs a Judge. Terminal-Bench needs Docker and Harbor. | [τ²](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/tau2-bench.md), [Terminal-Bench](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/terminal-bench.md) |
-
-Some linked configurations use ModularRSI and contain paths to experiment-specific data. Prepare the required data and module files before running them.
-
-Keep train, dev, and test separate. When a benchmark only provides an evaluation pool, explicitly define an experimental split. A split made for self-improvement is a custom protocol; its scores are not automatically comparable to the official leaderboard. Follow the benchmark's setup notes for its supported track and metric.
+Keep train, dev, and test separate. If a benchmark only provides an evaluation pool, define an experimental split explicitly. A custom split for self-improvement is not automatically comparable to the official leaderboard.
 
 ## Read the results
 
-On `main`, each run writes to `runs/<algorithm>-<agent>-<benchmark>-<timestamp>/` by default. The CLI reports the directory. Start with:
+Each run creates a directory under `run.output_dir`. The bundled quickstart writes to `runs/<algorithm>-<agent>-<benchmark>-<timestamp>/` and reports the path in the terminal.
 
 | File | What to inspect |
 | --- | --- |
-| `end-summary.md` | Run status, final test score, and recorded usage. |
-| `result.json` | `test_score`, `primary_metric`, `test_tasks`, and the selected `snapshot_id`. |
-| `snapshots/` | Saved resource versions. Match the selected ID to its Snapshot. |
-| `trajectories/` | Task results, Worker calls, and candidate decisions. |
-| `config.yaml` | The saved configuration, with credentials redacted. |
+| `end-summary.md` / `end-summary.json` | Run status, final test score, and recorded Target/Worker usage. |
+| `result.json` | Selected `snapshot_id`, `test_score`, `test_metrics`, and `test_tasks`. |
+| `snapshots/` | Initial and candidate resource versions, including the selected Snapshot. |
+| `trajectories/` | Task outcomes, Worker calls, and candidate decisions. |
+| `config.yaml` | Saved configuration with credentials redacted. |
+| `error.json` | Runtime failure details, if an experiment directory was created. |
+| `artifacts/harbor/trial-*/` | Harbor-collected deliverables, verifier details, logs, and `manifest.json`. |
 
-The standard runner evaluates the selected Snapshot on test after search. It does not automatically run the initial Snapshot on test. For an improvement claim, compare both versions on the same held-out tasks and metric, as in the [SearchQA reproduction guide](searchqa-deepseek-reproduction.md).
+For Harbor tasks, inspect the archived files before rerunning: SpreadsheetBench 2 workbooks are usually under `artifacts/logs/artifacts/`, with native scores in `verifier/native-result.json`. SWE-bench Pro records separate solve and regrade archives. These archives preserve collected files; they do not constitute an independent re-evaluation. See [artifact locations](experiment-launcher.zh-CN.md#查看结果).
 
-For the collection branch's output and cache locations, see its [run guide](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#模型配置与文件位置).
+Check that `test_tasks > 0` and inspect failed task trajectories. A completed experiment does not guarantee improvement or successful execution of every task. Recorded SDK usage may be incomplete and is not the provider's final bill.
+
+The standard runner evaluates the selected Snapshot on test after search. It does not automatically evaluate the initial Snapshot on test. To measure improvement, compare both versions on the same held-out tasks and metric, as in the [SearchQA reproduction guide](searchqa-deepseek-reproduction.md).
+
+
+## Evaluate a saved Snapshot on another benchmark
+
+Use `flashrsi evaluate --config examples/evaluate_hotpotqa.yaml --snapshot /path/to/selected.json`.
+Fill the Target model and credentials first. Add `--check-only` to validate setup without model calls.
+This runs only the destination benchmark's test split, without a Worker or evolution.
+The automatic launcher accepts the same `--snapshot` option. Agent type, root resource version and
+component rules must match the saved Snapshot; model and connection settings come from the destination
+configuration. See [Snapshot evaluation](snapshot-evaluation.md) for preparation, split selection and output records.
