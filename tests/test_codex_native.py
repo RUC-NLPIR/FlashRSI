@@ -61,15 +61,10 @@ def _events(text="Paris", *, call=None, namespace=None, response_id="resp_local"
 
 @pytest.fixture
 def codex_binary():
-    try:
-        from codex_cli_bin import bundled_codex_path
-
-        return str(bundled_codex_path())
-    except ImportError:
-        binary = shutil.which("codex")
-        if binary is None:
-            pytest.skip("Native Codex tests need flashrsi-lite[codex] or Codex CLI")
-        return binary
+    # An ambient desktop Codex may be a different revision or a UI entry point.
+    # Native parity must exercise the explicitly pinned distribution.
+    package = pytest.importorskip("codex_cli_bin")
+    return str(package.bundled_codex_path())
 
 
 @pytest.fixture

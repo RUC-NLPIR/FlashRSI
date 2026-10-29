@@ -1,0 +1,4 @@
+Harvey LAB integration calls the unmodified official lab-core 1.2.0 evaluator.
+Upstream: https://github.com/harveyai/harvey-labs at f93ae2ac2831e65892fea83094cfb50149bc2e59.
+Harvey LAB is licensed under the MIT license; see LICENSE-MIT.
+No native harness strategy or task data is embedded in FlashRSI snapshots.

@@ -1,0 +1,5 @@
+Official QA scoring sources:
+HotpotQA: https://github.com/hotpotqa/hotpot/blob/3635853403a8735609ee997664e1528f4480762a/hotpot_evaluate_v1.py (Apache 2.0).
+TriviaQA: https://github.com/mandarjoshi90/triviaqa/blob/ca43b5820b107f3970cf4b7d67f7db7a98117b79/evaluation/triviaqa_evaluation.py (Apache 2.0).
+MuSiQue: https://github.com/StonyBrookNLP/musique/tree/922ac98f19a201998dbdae6d7f2887a5258dbdeb/metrics (CC BY 4.0; includes SQuAD/Hotpot-derived metric code).
+Adaptations: HotpotQA ujson import replaced by stdlib json; TriviaQA dataset-CLI utils imports removed (only scoring functions are called); MuSiQue Metric imports made package-relative. Metric bodies are unchanged. The CLI helpers in these copies are not entry points.

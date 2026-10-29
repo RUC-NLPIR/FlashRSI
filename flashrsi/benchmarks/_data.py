@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import csv
 import hashlib
 import heapq
 import json
 import math
+import re
 from collections.abc import Iterable, Mapping
 from pathlib import Path
 from types import MappingProxyType
@@ -17,6 +19,25 @@ from flashrsi.core import Task
 def _split_tasks(
     tasks: Iterable[Task], config: Mapping[str, Any]
 ) -> Mapping[str, tuple[Task, ...]]:
+    requested = config.get("split_counts")
+    if requested is not None:
+        if (
+            not isinstance(requested, Mapping)
+            or set(requested) != {"train", "dev", "test"}
+            or any(type(n) is not int or n < 0 for n in requested.values())
+            or not sum(requested.values())
+        ):
+            raise ValueError(
+                "benchmark.split_counts needs three nonnegative integer counts"
+            )
+        if config.get("split", "auto") != "auto" or config.get("limit") is not None:
+            raise ValueError("Use split_counts alone, or split ratios with limit")
+        total = sum(requested.values())
+        config = {
+            **config,
+            "limit": total,
+            "split": {k: n / total for k, n in requested.items()},
+        }
     seed = config.get("seed", 0)
     if not isinstance(seed, int) or isinstance(seed, bool):
         raise ValueError("benchmark.seed must be an integer")
@@ -55,20 +76,22 @@ def _split_tasks(
     names = ("train", "dev", "test")
     counts = _split_counts(len(ordered), [config["split"][name] for name in names])
     train_end, dev_end = counts[0], counts[0] + counts[1]
-    return MappingProxyType(
+    splits = MappingProxyType(
         {
             "train": ordered[:train_end],
             "dev": ordered[train_end:dev_end],
             "test": ordered[dev_end:],
         }
     )
+    if requested is not None and any(len(splits[k]) != n for k, n in requested.items()):
+        raise ValueError("Not enough eligible records for benchmark.split_counts")
+    return splits
 
 
 def _split_counts(total: int, weights: list[float], *, minimum: int = 0) -> list[int]:
     if total < minimum * len(weights):
         raise ValueError(
-            "benchmark.split=auto needs enough training/unassigned tasks to fill "
-            "train, dev and test without overlap; add data or set explicit split ratios"
+            "benchmark.limit must retain at least one task per nonempty source split"
         )
     exact = [total * weight / sum(weights) for weight in weights]
     counts = [math.floor(value) for value in exact]
@@ -91,50 +114,56 @@ def _split_counts(total: int, weights: list[float], *, minimum: int = 0) -> list
 def _auto_split(
     tasks: Iterable[Task], *, seed: int, limit: int | None
 ) -> Mapping[str, tuple[Task, ...]]:
-    """Preserve provided holdouts; fill missing ones only from training data."""
+    """Keep source membership; missing experiment roles remain empty.
+
+    A collection without native roles needs an explicit user partition. It is
+    never implicitly treated as training data.
+    """
     names = ("train", "dev", "test")
-    if limit is not None and limit < len(names):
-        raise ValueError("benchmark.limit must be at least 3 when benchmark.split=auto")
     groups: dict[str, list[Task]] = {name: [] for name in names}
-    for task in tasks:
-        source = task.metadata.get("source_split", "train")
-        if source == "validation":
-            source = "dev"
-        groups[source if source in groups else "train"].append(task)
-    if not any(groups.values()):
-        raise ValueError("benchmark dataset contains no tasks")
-    if not groups["train"]:
-        raise ValueError(
-            "benchmark.split=auto needs training/unassigned data; existing dev/test "
-            "tasks are held out. Provide train data or set explicit split ratios"
-        )
+    counts = dict.fromkeys(names, 0)
 
     def split_key(task: Task) -> tuple[bytes, str]:
         return hashlib.sha256(f"{seed}:{task.task_id}".encode()).digest(), task.task_id
 
+    unknown = set()
+    for task in tasks:
+        source = task.metadata.get("source_split", "unassigned")
+        if source == "validation":
+            source = "dev"
+        if source not in groups:
+            unknown.add(str(source))
+        else:
+            group = groups[source]
+            group.append(task)
+            counts[source] += 1
+            # Retain enough candidates for any final proportional allocation,
+            # without holding the full dataset's contexts for a small trial.
+            if limit is not None and len(group) >= 2 * limit:
+                group[:] = heapq.nsmallest(limit, group, key=split_key)
+    if unknown:
+        raise ValueError(
+            f"No experiment role for source splits: {', '.join(sorted(unknown))}. "
+            "Set benchmark.split ratios, split_counts, or an explicit data_path "
+            "role mapping; split=auto only preserves native train/dev/test."
+        )
+    if not any(groups.values()):
+        raise ValueError("benchmark dataset contains no tasks")
+
     for group in groups.values():
         group.sort(key=split_key)
-    missing = [name for name in ("dev", "test") if not groups[name]]
-    if missing:
-        pool = groups["train"]
-        weights = [1 - 0.2 * len(missing), *[0.2 for _ in missing]]
-        counts = _split_counts(len(pool), weights, minimum=1)
-        start = 0
-        for name, count in zip(("train", *missing), counts, strict=True):
-            groups[name] = pool[start : start + count]
-            start += count
-
-    sizes = [len(groups[name]) for name in names]
-    counts = (
-        sizes
-        if limit is None
-        else _split_counts(min(limit, sum(sizes)), sizes, minimum=1)
-    )
+    if limit is not None:
+        present = [name for name in names if groups[name]]
+        sizes = [counts[name] for name in present]
+        counts.update(
+            zip(
+                present,
+                _split_counts(min(limit, sum(sizes)), sizes, minimum=1),
+                strict=True,
+            )
+        )
     return MappingProxyType(
-        {
-            name: tuple(groups[name][:count])
-            for name, count in zip(names, counts, strict=True)
-        }
+        {name: tuple(groups[name][: counts[name]]) for name in names}
     )
 
 
@@ -142,41 +171,141 @@ def _load_rows(
     data_path: str | Path | None, source: Mapping[str, Any]
 ) -> tuple[Iterable[tuple[str, Mapping[str, Any]]], Mapping[str, Any]]:
     if data_path is not None:
-        if not isinstance(data_path, (str, Path)) or not str(data_path).strip():
-            raise ValueError("benchmark.data_path must be a path")
-        path = Path(data_path).expanduser().resolve()
-        return _load_local_rows(path), MappingProxyType(
-            {"source": "local", "data_path": str(path)}
+        return _local_source_rows(data_path), MappingProxyType(
+            {"source": "local", "data_path": _paths_record(data_path)}
         )
 
     from datasets import load_dataset
 
-    dataset = load_dataset(
-        source["source"], name=source["config"], revision=source["revision"]
-    )
-    return (
-        (str(split), row) for split, records in dataset.items() for row in records
-    ), source
-
-
-def _load_local_rows(path: Path) -> Iterable[tuple[str, Mapping[str, Any]]]:
-    if path.is_file():
-        return (("local", row) for row in _read_records(path))
-    if not path.is_dir():
-        raise ValueError(f"benchmark.data_path does not exist: {path}")
-
-    sources = []
-    for split in ("train", "dev", "validation", "test"):
-        for suffix in (".parquet", ".jsonl", ".json"):
-            candidate = path / f"{split}{suffix}"
-            if candidate.is_file():
-                sources.append((split, candidate))
-                break
-    if not sources:
-        raise ValueError(
-            f"benchmark.data_path has no train/dev/validation/test data files: {path}"
+    options = {
+        "name": source.get("config"),
+        "revision": source["revision"],
+        "streaming": True,
+    }
+    if "splits" in source:
+        rows = (
+            (split, row)
+            for split in source["splits"]
+            for row in load_dataset(source["source"], split=split, **options)
         )
-    return ((split, row) for split, source in sources for row in _read_records(source))
+    else:
+        dataset = load_dataset(source["source"], **options)
+        rows = (
+            (str(split), row) for split, records in dataset.items() for row in records
+        )
+    return rows, source
+
+
+def _local_source_rows(data):
+    if isinstance(data, Mapping):
+        if not data or set(data) - {"train", "dev", "validation", "test"}:
+            raise ValueError(
+                "benchmark.data_path mapping must name train/dev/test splits"
+            )
+        for split, paths in data.items():
+            for path in paths if isinstance(paths, list) else [paths]:
+                for _, row in _load_local_rows(path):
+                    yield split, row
+    else:
+        yield from _load_local_rows(data)
+
+
+def _paths_record(value):
+    if isinstance(value, Mapping):
+        return {k: _paths_record(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_paths_record(v) for v in value]
+    if not isinstance(value, (str, Path)) or not str(value).strip():
+        raise ValueError("benchmark.data_path must be a path")
+    return str(Path(value).expanduser().resolve())
+
+
+def _load_local_rows(value):
+    if not isinstance(value, (str, Path)) or not str(value).strip():
+        raise ValueError("benchmark.data_path must be a path")
+    # Hub filenames may point to extensionless blobs. Their exposed filename
+    # determines the native format and split; resolving it would discard both.
+    path = Path(value).expanduser().absolute()
+    if path.is_file():
+        files = [
+            (
+                path.stem
+                if path.stem in ("train", "dev", "val", "validation", "test")
+                else "local",
+                path,
+            )
+        ]
+    elif path.is_dir():
+        files = []
+        for file in sorted(path.rglob("*")):
+            if file.name in (
+                "manifest.json",
+                "dataset_info.json",
+                "dataset_infos.json",
+            ):
+                continue
+            if file.is_file() and file.suffix.lower() in (
+                ".json",
+                ".jsonl",
+                ".parquet",
+                ".csv",
+            ):
+                first = file.relative_to(path).parts[0]
+                split = (
+                    first
+                    if first in ("train", "dev", "val", "validation", "test")
+                    else file.stem
+                )
+                files.append((split, file))
+    else:
+        raise ValueError(f"benchmark.data_path does not exist: {path}")
+    if not files:
+        raise ValueError(f"No native dataset files in {path}")
+    for split, file in files:
+        if split == "val":
+            split = "validation"
+        if file.name == "browse_comp_test_set.csv" and split not in (
+            "train",
+            "dev",
+            "validation",
+            "test",
+        ):
+            split = "test"
+        if split not in (
+            "train",
+            "dev",
+            "validation",
+            "test",
+        ) and file.suffix.lower() in (".json", ".jsonl"):
+            match = re.fullmatch(
+                r"(?:musique_ans_v1\.0_|hotpot_)(train|dev|test)(?:_(?:distractor|fullwiki))?(?:_v\d+(?:\.\d+)?)?",
+                file.stem,
+            )
+            if match:
+                split = match[1]
+        if file.suffix.lower() == ".parquet" and split not in (
+            "train",
+            "dev",
+            "validation",
+            "test",
+        ):
+            # Hub snapshots put shards below subject/data directories, not splits.
+            match = re.fullmatch(r"(train|dev|validation|test)-\d+-of-\d+", file.stem)
+            if match:
+                split = match[1]
+        if file.suffix.lower() == ".csv":
+            with file.open(encoding="utf-8-sig", newline="") as stream:
+                for row in csv.DictReader(stream):
+                    yield split, row
+        elif file.suffix.lower() == ".json":
+            value = json.loads(file.read_text(encoding="utf-8"))
+            for row in value if isinstance(value, list) else [value]:
+                if not isinstance(row, Mapping):
+                    raise ValueError(f"Native dataset records must be objects: {file}")
+                yield split, row
+        else:
+            for row in _read_records(file):
+                yield split, row
 
 
 def _read_records(path: Path) -> Iterable[Mapping[str, Any]]:

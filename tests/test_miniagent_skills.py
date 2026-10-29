@@ -26,7 +26,8 @@ def add_skill(root):
     path.write_text(
         "---\nname: probe\ndescription: Check evidence when applicable\n"
         "flashrsi:\n  source_task_ids: [train-0]\n---\n"
-        "PROCEDURE_BODY\n```python\nprint('checked')\n```\n"
+        "PROCEDURE_BODY\n```python\nprint('checked')\n```\n",
+        newline="\n",
     )
 
 
@@ -59,7 +60,9 @@ def test_directory_skill_removal_clears_catalog_and_reader(native_workspace):
 
 def test_directory_cannot_shadow_flat_skill(native_workspace):
     add_skill(native_workspace)
-    (native_workspace / "skills/probe.md").write_text("Unrelated native skill")
+    (native_workspace / "skills/probe.md").write_text(
+        "Unrelated native skill", newline="\n"
+    )
     with pytest.raises(ValueError, match="shadows"):
         workspace.load(native_workspace)
 

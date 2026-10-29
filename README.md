@@ -58,33 +58,45 @@
 
 ### 1. Install
 
+Use Linux / WSL with Python 3.12. These commands check out code and documentation, omitting `experiments/` and LFS downloads.
+
 ```bash
-git clone https://github.com/ignorejjj/FlashRSI.git
+GIT_LFS_SKIP_SMUDGE=1 git clone --filter=blob:none --sparse https://github.com/ignorejjj/FlashRSI.git
 cd FlashRSI
-pip install -e .
+git sparse-checkout set flashrsi docs examples scripts tests assets
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 ```
 
 ### 2. Run
 
-Run **SkillOpt × SearchQA × MiniAgent** on the 12-question QA sample included in the repository.
+Run **SkillOpt × SearchQA × MiniAgent** on the bundled 12-question QA sample.
 
 **Command line**
+
+Set `TARGET_API_KEY` and `WORKER_API_KEY` in your shell for the two independent roles. For custom endpoints, also set each role's `llm.base_url`.
 
 ```bash
 flashrsi run \
   --algorithm skillopt --benchmark searchqa --agent miniagent \
   --model gpt-5-mini --worker-model gpt-5-mini \
+  --agent.llm.api_key "$TARGET_API_KEY" \
+  --algorithm.worker.llm.api_key "$WORKER_API_KEY" \
   --benchmark.data_path examples/data/quickstart.jsonl \
+  --benchmark.split '{train: 0.5, dev: 0.25, test: 0.25}' \
   --algorithm.num_epochs 1 --algorithm.max_steps 1
 ```
 
 **[YAML](examples/quickstart.yaml)**
 
+Set the model, API key and optional endpoint for both `agent.llm` and `algorithm.worker.llm` in [examples/quickstart.yaml](examples/quickstart.yaml), then run:
+
 ```bash
 flashrsi run --config examples/quickstart.yaml
 ```
 
-Results are saved under `runs/`. See [test scores, the selected Snapshot, and trajectories](docs/running-experiments.md#read-the-results).
+Results are saved under `runs/`; see [scores, Snapshots, and trajectories](docs/running-experiments.md#read-the-results). For automatic environment setup, see the [launcher guide](docs/experiment-launcher.zh-CN.md).
 
 ## Supported Algorithms
 
@@ -115,48 +127,52 @@ Implementations adapt each method to FlashRSI's resource and evaluation interfac
 
 ## Supported Benchmarks
 
-`main` includes SearchQA, HotpotQA, Terminal-Bench 2.0, and τ³ Banking. The full **28-benchmark collection** is on the [collection branch](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke), which supports MiniAgent and Claude Code. See [version and environment setup](docs/running-experiments.md#choose-a-version).
+FlashRSI registers **30 benchmarks**, each with a configuration example. See the [configuration index](docs/benchmark-quickstart.md) for data, services, and environment requirements. Combinations depend on harness resources and execution capabilities; registration does not imply every combination has been validated.
 
 | Benchmark | Task | Metric | Get started |
 | --- | --- | --- | --- |
 | **Question answering** | | | |
-| [SearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/searchqa) | Short-answer QA with search snippets | Answer EM / F1 | [Setup](docs/running-experiments.md#benchmarks-on-main) · [Config](examples/quickstart.yaml) |
-| [HotpotQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hotpotqa) | Multi-hop Wikipedia QA | Answer EM / F1; joint F1 in fullwiki mode | [Setup](docs/running-experiments.md#benchmarks-on-main) · [Config](examples/hotpotqa.yaml) |
-| [MuSiQue](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/musique) | Compositional multi-hop QA | Answer EM / F1; optional support F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/musique-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_musique.yaml) |
-| [TriviaQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/triviaqa) | Trivia QA with Wikipedia context | Alias-aware EM / F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/triviaqa-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_triviaqa.yaml) |
-| [Natural Questions](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/nq) | Wikipedia QA, short-answer and yes/no subset | Local text EM / F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [2WikiMultiHopQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/twowiki_multihopqa) | Multi-hop QA with supplied context | Answer EM / F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/twowiki_multihopqa_opro.yaml) |
+| [SearchQA](flashrsi/benchmarks/searchqa) | Short-answer QA with search snippets | Answer EM / F1 | [Setup](docs/searchqa-deepseek-reproduction.md) · [Config](examples/searchqa_skillopt.yaml) |
+| [HotpotQA](flashrsi/benchmarks/hotpotqa) | Multi-hop Wikipedia QA | Answer EM / F1; joint F1 in fullwiki mode | [Setup](docs/hotpot-independent-evolution.md) · [Config](examples/hotpotqa_opro.yaml) |
+| [MuSiQue](flashrsi/benchmarks/musique) | Compositional multi-hop QA | Answer EM / F1; optional support F1 | [Setup](docs/musique-independent-evolution.md) · [Config](examples/modular_rsi_musique.yaml) |
+| [TriviaQA](flashrsi/benchmarks/triviaqa) | Trivia QA with Wikipedia context | Alias-aware EM / F1 | [Setup](docs/triviaqa-independent-evolution.md) · [Config](examples/modular_rsi_triviaqa.yaml) |
+| [Natural Questions](flashrsi/benchmarks/nq) | Wikipedia QA, short-answer and yes/no subset | Local text EM / F1 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/nq_opro.yaml) |
+| [2WikiMultiHopQA](flashrsi/benchmarks/twowiki_multihopqa) | Multi-hop QA with supplied context | Answer EM / F1 | [Setup](docs/twowiki-independent-evolution.md) · [Config](examples/twowiki_multihopqa_opro.yaml) |
 | **Reasoning and mathematics** | | | |
-| [BBEH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard reasoning | Official per-answer accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/lightweight-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/bbeh_opro.yaml) |
-| [SuperGPQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/supergpqa) | Graduate-level multiple-choice questions | Answer-letter accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/lightweight-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/supergpqa_opro.yaml) |
-| [HLE](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hle) | Humanity's Last Exam, text-only subset | Official judge accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [MATH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/math) | Competition mathematics | Math-Verify equivalence accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/math-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_math500.yaml) |
-| [AIME](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/aime) | AIME 2025 / 2026 mathematics | Exact integer accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/coding-math-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/aime_opro.yaml) |
-| [LiveMathBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/livemathbench) | Mathematics with repeated sampling | G-Pass@k / mG-Pass@k | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [BBEH](flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard reasoning | Official per-answer accuracy | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/bbeh_opro.yaml) |
+| [SuperGPQA](flashrsi/benchmarks/supergpqa) | Graduate-level multiple-choice questions | Answer-letter accuracy | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/supergpqa_opro.yaml) |
+| [HLE](flashrsi/benchmarks/hle) | Humanity's Last Exam, text-only subset | Official judge accuracy | [Setup](docs/benchmark-quickstart.md) · [Config](examples/hle_opro.yaml) |
+| [MATH](flashrsi/benchmarks/math) | Competition mathematics | Math-Verify equivalence accuracy | [Setup](docs/math-independent-evolution.md) · [Config](examples/modular_rsi_math500.yaml) |
+| [AIME](flashrsi/benchmarks/aime) | AIME 2025 / 2026 mathematics | Exact integer accuracy | [Setup](docs/coding-math-benchmarks.md) · [Config](examples/aime_opro.yaml) |
+| [LiveMathBench](flashrsi/benchmarks/livemathbench) | Mathematics with repeated sampling | G-Pass@k / mG-Pass@k | [Setup](docs/benchmark-quickstart.md) · [Config](examples/livemathbench_opro.yaml) |
 | **Coding** | | | |
-| [CRUXEval-O](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/cruxeval_output) | Python function output prediction | Python literal equality accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/coding-math-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/cruxeval_output_opro.yaml) |
-| [SWE-bench Verified](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench) | Repository issue repair | Official verifier resolved rate | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/swe-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_swe_bench.yaml) |
-| [SWE-bench Pro V2](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench_pro) | Repository repair, all / hard sets | Official container regrade resolved rate | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [SWE-bench Verified](flashrsi/benchmarks/swe_bench) | Repository issue repair | Official verifier resolved rate | [Setup](docs/swe-independent-evolution.md) · [Config](examples/swe_bench_verified_opro.yaml) |
+| [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | Repository repair, all / hard sets | Official container regrade resolved rate | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/swe_bench_pro_opro.yaml) |
+| [DeepSWE](flashrsi/benchmarks/deepswe) | Repository repair via native Harbor v1.3 tasks | Independent container verifier reward | [Setup](docs/deepswe.md) · [Config](examples/deepswe_opro.yaml) |
 | **Web research** | | | |
-| [BrowseComp](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/browsecomp) | Web research | Official answer judge accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/browsecomp_serper_jina.yaml) |
-| [DeepSearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/deepsearchqa) | Web research with single or set answers | Official autorater F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/deepsearchqa_serper_jina.yaml) |
-| [WideSearch](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/widesearch) | Broad web research with tabular answers | Official table score | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [BrowseComp](flashrsi/benchmarks/browsecomp) | Web research | Official answer judge accuracy | [Setup](docs/web-research-services.md) · [Config](examples/browsecomp_serper_jina.yaml) |
+| [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | Web research with single or set answers | Official autorater F1 | [Setup](docs/web-research-services.md) · [Config](examples/deepsearchqa_serper_jina.yaml) |
+| [WideSearch](flashrsi/benchmarks/widesearch) | Broad web research with tabular answers | Official table score | [Setup](docs/web-research-services.md) · [Config](examples/widesearch_opro.yaml) |
 | **Documents and tool use** | | | |
-| [OfficeQA-Pro](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/officeqa_pro) | Document research | Numeric / text answer accuracy | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/officeqa_pro_opro.yaml) |
-| [Harvey LAB](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/harvey_lab) | Legal document work | Dual-judge rubric, all-criteria pass rate | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [JobBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/jobbench) | Professional file deliverables | Official weighted rubric reward | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [AppWorld](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/appworld) | Application and API automation | Official task-completion reward | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/appworld-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_appworld.yaml) |
-| [BFCL V4](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bfcl) | Multi-turn function calling, Base track | Official conversation success | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [WorkBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/workbench) | Workplace tool use | Native database outcome correctness | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/workbench.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/workbench_opro.yaml) |
-| [TravelPlanner](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/travelplanner) | Travel itineraries, sole-planning track | Final constraint pass rate | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | Document research | Numeric / text answer accuracy | [Setup](docs/web-research-services.md) · [Config](examples/officeqa_pro_opro.yaml) |
+| [Harvey LAB](flashrsi/benchmarks/harvey_lab) | Legal document work | Dual-judge rubric, all-criteria pass rate | [Setup](docs/benchmark-quickstart.md) · [Config](examples/harvey_lab_opro.yaml) |
+| [JobBench](flashrsi/benchmarks/jobbench) | Professional file deliverables | Official weighted rubric reward | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/jobbench_opro.yaml) |
+| [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Debugging / Financial_Model / Template | Native LibreOffice verifier; Visualization excluded | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/spreadsheetbench2_opro.yaml) |
+| [AppWorld](flashrsi/benchmarks/appworld) | Application and API automation | Official task-completion reward | [Setup](docs/appworld-independent-evolution.md) · [Config](examples/modular_rsi_appworld.yaml) |
+| [BFCL V4](flashrsi/benchmarks/bfcl) | Multi-turn function calling, Base track | Official conversation success | [Setup](docs/benchmark-quickstart.md) · [Config](examples/bfcl_opro.yaml) |
+| [WorkBench](flashrsi/benchmarks/workbench) | Workplace tool use | Native database outcome correctness | [Setup](docs/workbench.md) · [Config](examples/workbench_opro.yaml) |
+| [TravelPlanner](flashrsi/benchmarks/travelplanner) | Travel itineraries, sole-planning track | Final constraint pass rate | [Setup](docs/benchmark-quickstart.md) · [Config](examples/travelplanner_opro.yaml) |
 | **Interactive environments** | | | |
-| [τ²-bench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau2) | Airline, retail, and telecom dialogue, text mode | Mean native reward | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/tau2-bench.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/tau2_opro.yaml) |
-| [τ³ Banking](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau3_banking) | Multi-turn banking support | Native tau2 reward | [Setup](docs/running-experiments.md#benchmarks-on-main) · [Config](examples/tau3_banking.yaml) |
-| [Terminal-Bench 2.0](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/terminal_bench) | Linux terminal tasks through Harbor | Native verifier reward | [Setup](docs/terminal-bench.md) · [Config](examples/terminal_bench.yaml) |
+| [τ²-bench](flashrsi/benchmarks/tau2) | Airline, retail, and telecom dialogue, text mode | Mean native reward | [Setup](docs/tau2-bench.md) · [Config](examples/tau2_opro.yaml) |
+| [τ³ Banking](flashrsi/benchmarks/tau3_banking) | Multi-turn banking support | Native tau2 reward | [Setup](docs/benchmark-quickstart.md) · [Config](examples/tau3_banking_opro.yaml) |
+| [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | Linux terminal tasks through Harbor | Native verifier reward | [Setup](docs/terminal-bench.md) · [Config](examples/terminal_bench21_opro.yaml) |
+| [ALFWorld](flashrsi/benchmarks/alfworld) | Text-only interactive environment | Native TextWorld won / success | [Setup](docs/alfworld.md) · [Config](examples/alfworld_opro.yaml) |
 
-Config links open available YAML examples; entries with only Setup have no ready-made YAML. ModularRSI examples also need separate evolution data and module files; see the [run guide](docs/running-experiments.md#benchmark-collection).
+Examples use different algorithms. Methods such as ModularRSI also need matching module and data settings; see the [run guide](docs/running-experiments.md).
 
 ## Experimental Results
+
+These are historical results reported by upstream main. This sync neither downloads nor merges `experiments/`, and does not rerun those experiments.
 
 **SkillOpt on SearchQA, across two native harnesses.** The target uses `deepseek-v4-flash` and the optimizer uses `deepseek-v4-pro`. Both runs use the same 400 / 200 / 1,400 train / dev / test split, seed 42, and a budget of 4 epochs / 40 fast steps. Candidates are selected on dev; the selected Snapshot is frozen before test evaluation.
 
@@ -165,11 +181,7 @@ Config links open available YAML examples; entries with only Setup have no ready
 | MiniAgent | 76.43% | **82.93%** | **+6.50 pp** |
 | Claude Code | 74.71% | **83.14%** | **+8.43 pp** |
 
-<p align="center">
-  <img src="experiments/skillopt-searchqa-deepseek-20260920-seed42/figures/test-em.png" alt="SkillOpt on 1,400 held-out SearchQA questions: MiniAgent test EM increases from 76.43% to 82.93%; Claude Code increases from 74.71% to 83.14%." width="100%">
-</p>
-
-These results cover a single DeepSeek transfer setting. The [experiment report](experiments/skillopt-searchqa-deepseek-20260920-seed42/report.md), [independent verification](experiments/skillopt-searchqa-deepseek-20260920-seed42/evidence/full-verification.json), and [reproduction guide](docs/searchqa-deepseek-reproduction.md) provide scores, usage, and differences from the upstream protocol.
+These results cover a single DeepSeek transfer setting. The [experiment report](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/report.md), [independent verification](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/evidence/full-verification.json), and [reproduction guide](docs/searchqa-deepseek-reproduction.md) provide scores, usage, and differences from the upstream protocol.
 
 <details id="citation">
 <summary>Citation</summary>

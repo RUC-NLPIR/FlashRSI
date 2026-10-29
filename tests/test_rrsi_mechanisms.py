@@ -87,7 +87,9 @@ def test_calibration_matches_pinned_upstream_outputs(row):
 
 def test_comment_cannot_earn_memory_novelty(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "tools/runtime.py").write_text("value = 0\n# reusable hint\n")
+        (directory / "tools/runtime.py").write_text(
+            "value = 0\n# reusable hint\n", newline="\n"
+        )
         return [change(component="memory", path="tools/runtime.py")]
 
     algo, _ = setup(
@@ -108,8 +110,8 @@ def test_comment_cannot_earn_memory_novelty(monkeypatch, tmp_path):
 
 def test_bundled_edits_are_tagged_from_their_own_files(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
-        (directory / "tools/runtime.py").write_text("value = 1\n")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
+        (directory / "tools/runtime.py").write_text("value = 1\n", newline="\n")
         return [
             change(component="memory"),
             change(component="client_tool", path="tools/runtime.py"),
@@ -125,7 +127,7 @@ def test_bundled_edits_are_tagged_from_their_own_files(monkeypatch, tmp_path):
 
 def test_identical_siblings_still_have_only_one_winning_variant(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, m=2)
@@ -139,7 +141,9 @@ def test_upstream_generic_credential_precheck_runs_before_model_critic(
     monkeypatch, tmp_path
 ):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("invented key: sk-" + "x" * 25)
+        (directory / "skills/main.md").write_text(
+            "invented key: sk-" + "x" * 25, newline="\n"
+        )
         return [change()]
 
     algo, calls = setup(monkeypatch, tmp_path, edit)
@@ -151,7 +155,7 @@ def test_upstream_generic_credential_precheck_runs_before_model_critic(
 
 def test_manifest_component_case_is_canonicalized_like_upstream(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change(component="SKILL")]
 
     algo, _ = setup(monkeypatch, tmp_path, edit)
@@ -164,9 +168,9 @@ def test_default_semantic_tags_reuse_snapshot_permissions(
     monkeypatch, tmp_path, outside_scope
 ):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         if outside_scope:
-            (directory / "outside.py").write_text("value = 1\n")
+            (directory / "outside.py").write_text("value = 1\n", newline="\n")
         return [change()]
 
     algo, calls = setup(monkeypatch, tmp_path, edit)
@@ -184,9 +188,13 @@ def test_reserved_slot_is_checked_after_retagging(monkeypatch, tmp_path):
         nonlocal count
         count += 1
         if count == 1:
-            (directory / "tools/runtime.py").write_text("value = 0\n# first hint\n")
+            (directory / "tools/runtime.py").write_text(
+                "value = 0\n# first hint\n", newline="\n"
+            )
             return [change(component="client_tool", path="tools/runtime.py")]
-        (directory / "tools/runtime.py").write_text("value = 0\n# new hint\n")
+        (directory / "tools/runtime.py").write_text(
+            "value = 0\n# new hint\n", newline="\n"
+        )
         return [change(component="client_tool", path="tools/runtime.py")]
 
     algo, calls = setup(monkeypatch, tmp_path, edit, T=2, w=1, component_signals={})
@@ -211,7 +219,7 @@ def test_siblings_do_not_receive_each_others_proposals_or_repairs(
             assert "FIRST_PRIVATE_OBJECTION" in prompt
         if calls == 3:
             assert "FIRST_PRIVATE_OBJECTION" not in prompt
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [
             change(
                 hypothesis="FIRST_PRIVATE_HYPOTHESIS"
@@ -279,7 +287,7 @@ def test_round_evidence_retains_digests_and_history_without_individual_logs(
                 "ACCEPTED",
                 "LOST",
             }
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, T=2, m=2)
@@ -303,7 +311,7 @@ def test_round_evidence_retains_digests_and_history_without_individual_logs(
 
 def test_trial_evidence_does_not_count_as_extra_worker_usage(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, calls = setup(monkeypatch, tmp_path, edit)
@@ -324,7 +332,7 @@ def test_critic_worker_failure_propagates_and_cleans_up_direct_run(
         raise failure("worker unavailable")
 
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, critic=critic, repair_rounds=2)
@@ -336,7 +344,9 @@ def test_critic_worker_failure_propagates_and_cleans_up_direct_run(
     assert algo._run_dir is None and algo.target.snapshot.id == seed.id
 
 
-@pytest.mark.parametrize("problem", ["quote", "write", "json", "identity", "oversize"])
+@pytest.mark.parametrize(
+    "problem", ["quote", "metric_quote", "write", "json", "identity", "oversize"]
+)
 def test_digest_repairs_protocol_without_mutating_the_incumbent(
     monkeypatch, tmp_path, problem
 ):
@@ -352,8 +362,12 @@ def test_digest_repairs_protocol_without_mutating_the_incumbent(
                 digest = json.loads(result.output)
                 if problem == "quote":
                     digest["evidence"][0]["quote"] = "FABRICATED_EVIDENCE"
+                elif problem == "metric_quote":
+                    digest["evidence"].append(
+                        {"where": "reward", "quote": "reward = 0.0"}
+                    )
                 elif problem == "write":
-                    (working_dir / "trace.json").write_text("{}")
+                    (working_dir / "trace.json").write_text("{}", newline="\n")
                 elif problem == "json":
                     return Trajectory(output="not JSON")
                 elif problem == "identity":
@@ -361,12 +375,16 @@ def test_digest_repairs_protocol_without_mutating_the_incumbent(
                 else:
                     digest["narrative"] = "x" * 7000
                 return replace(result, output=json.dumps(digest))
+            if problem in {"quote", "metric_quote"}:
+                index = 0 if problem == "quote" else 1
+                assert f"evidence[{index}].quote" in prompt
+                assert "one decoded trace value" in prompt
         return result
 
     monkeypatch.setattr(Worker, "_run", run)
 
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit)
@@ -376,6 +394,38 @@ def test_digest_repairs_protocol_without_mutating_the_incumbent(
     assert not any(
         "ANALYST-TAMPER" in path or "trace.json" == path for path in result.files
     )
+    assert not list((algo._run_dir / "working").iterdir())
+
+
+def test_digest_long_context_keeps_short_evidence_readable_by_line(
+    monkeypatch, tmp_path
+):
+    evidence = {
+        "task_id": "train-0",
+        "trajectory": {
+            "messages": [{"text": "long context " * 20000}],
+            "output": "TAIL_EVIDENCE",
+        },
+    }
+    original = Worker._run
+    inspected = []
+
+    async def run(self, prompt, working_dir=None):
+        if prompt.startswith("[RRSI: digest]"):
+            text = (working_dir / "trace.json").read_text(encoding="utf-8")
+            assert json.loads(text) == evidence
+            output_lines = [line for line in text.splitlines() if '"output"' in line]
+            assert len(output_lines) == 1 and len(output_lines[0]) < 100
+            inspected.append(True)
+        return await original(self, prompt, working_dir)
+
+    monkeypatch.setattr(Worker, "_run", run)
+    algo, _ = setup(monkeypatch, tmp_path, lambda *_: [])
+    result = asyncio.run(
+        algo._digest({"task_id": "train-0", "evidence": evidence}, "failure", [])
+    )
+    assert inspected == [True]
+    assert result["evidence"][0]["quote"] == "TAIL_EVIDENCE"
     assert not list((algo._run_dir / "working").iterdir())
 
 
@@ -440,7 +490,7 @@ def test_analyst_can_dispatch_all_lenses_and_follow_up(monkeypatch, tmp_path):
     monkeypatch.setattr(Worker, "_run", run)
 
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, n_fail_traces=1, n_success_traces=1)
@@ -485,7 +535,7 @@ def test_analyst_must_investigate_before_returning_a_report(monkeypatch, tmp_pat
     monkeypatch.setattr(Worker, "_run", run)
 
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit)
@@ -532,7 +582,7 @@ def test_critic_protocol_retries_never_default_to_accept(
         )
 
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, evaluations = setup(monkeypatch, tmp_path, edit, critic=critic)
@@ -548,7 +598,7 @@ def test_critic_protocol_retries_never_default_to_accept(
 )
 def test_candidate_requires_a_falsifiable_edit_manifest(monkeypatch, tmp_path, missing):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         item = change()
         del item[missing]
         return [item]
@@ -574,7 +624,7 @@ def test_predictions_are_scored_and_supplied_to_the_next_round(monkeypatch, tmp_
             assert row["predicted_hit"] == ["train-0"]
             assert row["unpredicted_regressions"] == ["train-1"]
             assert row["hit_rate"] == 1
-        (directory / "skills/main.md").write_text(f"GOOD-{count}")
+        (directory / "skills/main.md").write_text(f"GOOD-{count}", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, T=2, k=2)
@@ -612,7 +662,7 @@ def _preserve_extra_metrics(results):
 
 def test_weighted_benchmark_metric_prevents_reversed_selection(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, weight_metric="criteria")
@@ -643,7 +693,7 @@ def test_weighted_benchmark_metric_prevents_reversed_selection(monkeypatch, tmp_
 
 def test_domain_guard_rejects_a_higher_scoring_candidate(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, guards={"valid": {"max_drop": 0.1}})
@@ -679,7 +729,7 @@ def test_missing_guard_metric_cannot_silently_disable_a_guard(monkeypatch, tmp_p
 
 def test_smoke_failure_is_not_a_measured_component(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, smoke_n=1)
@@ -712,7 +762,7 @@ def test_repeated_baseline_calibration_supports_single_trial_evaluations(
     monkeypatch, tmp_path
 ):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit, delta=None, calibration_evals=2)

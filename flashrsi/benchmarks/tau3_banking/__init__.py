@@ -5,29 +5,29 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Iterable, Mapping
-from dataclasses import replace
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
-from flashrsi.benchmarks._data import _split_tasks
+from flashrsi.benchmarks._tau import (
+    _GIT_URL,
+    _UPSTREAM_REVISION,
+    _UPSTREAM_TAG,
+    _TauBenchmark,
+)
 from flashrsi.benchmarks.tau3_banking._data import _download_domain
 from flashrsi.benchmarks.tau3_banking._policy import (
     _DEFAULT_VARIANT,
     _policy,
     _variants,
 )
-from flashrsi.core.benchmark import Benchmark, Task
-from flashrsi.core.trajectory import Trajectory
+from flashrsi.core.benchmark import Task
 
 _DOMAIN = "banking_knowledge"
-_GIT_URL = "https://github.com/sierra-research/tau2-bench.git"
-_UPSTREAM_TAG = "v1.0.1"
-_UPSTREAM_REVISION = "fc0055dc4e0a316c3f83133267fbd6faaa770992"
 _REVISION = "8d4ab8ad7bce903fe9959fc46b39d7e414f6711e"
 
 
-class Tau3Banking(Benchmark):
+class Tau3Banking(_TauBenchmark):
     """Multi-turn banking tasks graded by their native tau2 reward.
 
     tau2 owns the user simulator, the tool implementations and the reward, so
@@ -41,8 +41,8 @@ class Tau3Banking(Benchmark):
     once the simulator is connected, the agent's knowledge-base tools, so it
     must be reported alongside any score.
 
-    The domain publishes one collection without training splits, so
-    ``split=auto`` partitions its 97 tasks by the shared seeded rule. A local
+    The domain publishes one collection without training splits. Users
+    explicitly configure experiment partitions with ratios or counts. A local
     ``data_path`` may name an extracted domain directory.
     """
 
@@ -51,9 +51,9 @@ class Tau3Banking(Benchmark):
     primary_metric = "reward"
     metadata = MappingProxyType(
         {
-            "source": "jinjiajie/flashrsi",
+            "source": _GIT_URL,
             "config": "tau3_banking",
-            "revision": _REVISION,
+            "revision": _UPSTREAM_REVISION,
             "upstream": {
                 "git_url": _GIT_URL,
                 "tag": _UPSTREAM_TAG,
@@ -66,6 +66,9 @@ class Tau3Banking(Benchmark):
     def __init__(self, config: Mapping[str, Any]) -> None:
         super().__init__()
         self.config = config["benchmark"] if "benchmark" in config else config
+        self.metadata = MappingProxyType(
+            {**type(self).metadata, **self.config.get("dataset", {})}
+        )
         if self.config.get("name", self.name) != self.name:
             raise ValueError("Tau3Banking requires benchmark.name: tau3_banking")
         variant = self.config.get("variant", _DEFAULT_VARIANT)
@@ -75,52 +78,7 @@ class Tau3Banking(Benchmark):
                 f"available: {', '.join(_variants())}"
             )
         self.variant = variant
-        self._tasks_by_id: dict[str, Task] = {}
-
-    def load(self) -> Mapping[str, tuple[Task, ...]]:
-        """Load a local domain or the pinned Hugging Face domain archive."""
-        if self._splits is None:
-            self._splits = _split_tasks(self._iter_tasks(), self.config)
-            self._tasks_by_id = {
-                task.task_id: task for split in self._splits.values() for task in split
-            }
-            # The variant changes both the policy and the agent's tools, so it
-            # belongs with the source in any record of what was measured.
-            self.metadata = MappingProxyType({**self.metadata, "variant": self.variant})
-        return self._splits
-
-    def grade(self, trajs: tuple[Trajectory, ...]) -> tuple[Trajectory, ...]:
-        """Read the host-added simulator reward, never an Agent's self-score."""
-        if self._splits is None:
-            raise RuntimeError("tau3_banking has not been loaded; call load() first")
-        graded = []
-        for trajectory in trajs:
-            task = trajectory.task
-            if task is None or self._tasks_by_id.get(task.task_id) != task:
-                raise ValueError("Tau3Banking grading requires a loaded benchmark Task")
-            reward = 0.0
-            if trajectory.status == "finished":
-                event = trajectory.messages[-1] if trajectory.messages else {}
-                if (
-                    event.get("type") != "Tau2Simulator"
-                    or event.get("task_id") != task.task_id
-                    or event.get("task_checksum") != task.metadata["task_checksum"]
-                ):
-                    raise ValueError(
-                        "Tau3Banking requires a final Tau2Simulator event "
-                        f"for task {task.task_id}"
-                    )
-                value = event.get("reward")
-                if type(value) not in (int, float) or not 0 <= value <= 1:
-                    raise ValueError(
-                        "Tau3Banking simulator reward must be a finite number "
-                        f"between 0 and 1 for task {task.task_id}"
-                    )
-                reward = float(value)
-            graded.append(
-                replace(trajectory, metrics={**trajectory.metrics, "reward": reward})
-            )
-        return tuple(graded)
+        self.metadata = MappingProxyType({**self.metadata, "variant": self.variant})
 
     def _iter_tasks(self) -> Iterable[Task]:
         """Read the tasks/ directory, which is what the tau2 runtime loads."""
@@ -141,7 +99,9 @@ class Tau3Banking(Benchmark):
             raise ValueError(
                 f"Tau3Banking data_path must be a tau2 domain directory: {domain}"
             )
-        self.metadata = MappingProxyType({"source": "local", "data_path": str(domain)})
+        self.metadata = MappingProxyType(
+            {"source": "local", "data_path": str(domain), "variant": self.variant}
+        )
         paths = tuple(sorted((domain / "tasks").glob("task_*.json")))
         if not paths:
             raise ValueError(
@@ -174,7 +134,7 @@ def _task_from_file(
             "source_split": "unassigned",
             "source": dict(source),
             "task_checksum": hashlib.sha256(path.read_bytes()).hexdigest(),
-            "task_path": str(path.relative_to(domain)),
+            "task_path": path.relative_to(domain).as_posix(),
             "variant": variant,
             # The simulated customer's script belongs to the user simulator.
             "user_instructions": instructions,

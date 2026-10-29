@@ -24,6 +24,10 @@ from test_codex_native import responses_server as responses_server
 from flashrsi.agents import Codex
 from flashrsi.core import Task
 
+pytestmark = pytest.mark.skipif(
+    os.name == "nt", reason="Native extension fixtures require POSIX shell and tools"
+)
+
 
 def _core_config(server, **overrides):
     config = _config(server, None, **overrides)

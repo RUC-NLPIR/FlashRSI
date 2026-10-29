@@ -14,9 +14,13 @@ Across tasks, identify recurring behavioral
 deficiencies which changing THIS module could remedy. Do not equate involvement
 in a failure with a causal defect. Return [] if no justified change exists.
 
-Return JSON only: a list of findings, each with exactly these fields:
-{{"target": "one exact editable file path", "task_ids": ["supporting task ID"],
-  "rationale": "cross-task diagnosis", "change": "general reusable change"}}.
+Return JSON only: exactly one array. Each finding has exactly these fields.
+Example with a justified finding:
+[{{"target": "one exact editable file path", "task_ids": ["supporting task ID"],
+  "rationale": "cross-task diagnosis", "change": "general reusable change"}}]
+No justified findings:
+[]
+Do not include Markdown fences, headings, explanations or a bare JSON object.
 Only cite task IDs in the supplied evidence. Findings aimed at the same target
 will be consolidated and ranked by the number of distinct supporting tasks.
 Do not propose task-specific answers, conditions or grader changes.
@@ -45,7 +49,14 @@ Proposed source changes: {changes}
 Review whether the edit implements a reusable harness improvement, preserves
 interfaces and addresses the findings. Reject task-specific solutions, task IDs,
 answer memorization, unrelated edits and changes to the underlying model.
-Return JSON only: {{"accept": true or false, "reason": "specific assessment"}}.
+Return JSON only: exactly one object with exactly the keys "accept" and "reason".
+"accept" must be a JSON boolean; "reason" must be a non-empty string.
+Acceptance example:
+{{"accept": true, "reason": "The edit preserves interfaces and implements a reusable improvement."}}
+Rejection example:
+{{"accept": false, "reason": "The edit changes behavior outside the findings."}}
+Put all assessment and provenance details inside "reason". Do not add other keys,
+Markdown fences, headings, explanations or text outside the JSON object.
 """
 
 INTEGRATE = """[ModularRSI: integrate]

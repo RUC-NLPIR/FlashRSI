@@ -13,12 +13,19 @@ from dataclasses import replace
 from itertools import islice
 from statistics import mean
 
+from flashrsi.algorithms._budgets import budget_reason
 from flashrsi.algorithms.ace import _prompts as prompts
 from flashrsi.algorithms.ace._playbook import Patch, PlaybookError, Reflection, tag
 from flashrsi.core import Algorithm, Snapshot
 
 # Only this suffix is managed by ACE; native instructions remain byte-for-byte.
 _MARKER = "\n\n<!-- flashrsi:ace-playbook -->\n"
+
+
+class _WorkerBudgetExceeded(RuntimeError):
+    def __init__(self, reason, error):
+        super().__init__(error)
+        self.reason = reason
 
 
 class ACE(Algorithm):
@@ -91,11 +98,12 @@ class ACE(Algorithm):
                 # ahead of every update is what online means.
                 self._streamed.extend(batch.per_task.values())
             reflection, batch = await self._reflect(current, tasks, batch)
-            current = self._adopt(
-                current, tag(self._playbook, reflection.tags), "tally"
-            )
-            if step % self.config.curator_frequency == 0:
-                current = await self._curate(current, reflection, batch, step)
+            if reflection is not None:
+                current = self._adopt(
+                    current, tag(self._playbook, reflection.tags), "tally"
+                )
+                if step % self.config.curator_frequency == 0:
+                    current = await self._curate(current, reflection, batch, step)
             # Validation belongs to the schedule, even when curation is skipped
             # or declined. A counter-only update is still a different context.
             if offline and step % self.config.eval_steps == 0:
@@ -138,13 +146,17 @@ class ACE(Algorithm):
 
     async def _reflect(self, current, tasks, batch):
         for round_index in range(self.config.max_reflection_rounds):
-            reflection = Reflection.parse(
-                await self.worker.ask(
+            try:
+                reply = await self.worker.ask(
                     prompts.REFLECT.format(
                         playbook=self._playbook, evidence=self._render_evidence(batch)
                     )
                 )
-            )
+            except _WorkerBudgetExceeded as error:
+                self._decline_budget(current, error, "reflect", round=round_index + 1)
+                # A missing diagnosis cannot justify tags or Curator input.
+                return None, batch
+            reflection = Reflection.parse(reply)
             metric = self.benchmark.primary_metric
             if all(
                 item.status == "finished"
@@ -164,17 +176,22 @@ class ACE(Algorithm):
         return reflection, batch
 
     async def _curate(self, current, reflection, batch, step):
-        reply = await self.worker.ask(
-            prompts.CURATE.format(
-                playbook=self._playbook,
-                reflection=reflection.content,
-                evidence=self._render_evidence(batch),
-                progress=(
-                    f"step {step}; budget {self.config.playbook_token_budget} "
-                    f"approximate tokens; declined={json.dumps(self._rejected)}"
+        try:
+            reply = await self.worker.ask(
+                prompts.CURATE.format(
+                    playbook=self._playbook,
+                    reflection=reflection.content,
+                    evidence=self._render_evidence(batch),
+                    progress=(
+                        f"step {step}; budget {self.config.playbook_token_budget} "
+                        f"approximate tokens; at most {self.config.edit_budget} "
+                        f"ADD operations per update; declined={json.dumps(self._rejected)}"
+                    ),
                 ),
-            ),
-        )
+            )
+        except _WorkerBudgetExceeded as error:
+            self._decline_budget(current, error, "curate", step=step)
+            return current
         try:
             grown = Patch.parse(reply).apply(self._playbook, self.config.edit_budget)
             # Preserve the old port's explicit 4 chars/token approximation;
@@ -187,6 +204,26 @@ class ACE(Algorithm):
             self._record("declined", {"snapshot_id": current.id, **declined})
             return current
         return self._adopt(current, grown, "curate")
+
+    def _observe_worker(self, prompt, result):
+        error = super()._observe_worker(prompt, result)
+        reason = budget_reason(result)
+        if reason is not None:
+            raise _WorkerBudgetExceeded(reason, error)
+        return error
+
+    def _decline_budget(self, current, error, kind, **details):
+        declined = {
+            **details,
+            "snapshot_id": current.id,
+            "kind": kind,
+            "reason": "worker_budget_exhausted",
+            "budget": error.reason,
+            "problem": str(error),
+            "accepted": False,
+        }
+        self._rejected = (self._rejected + [declined])[-4:]
+        self._record("declined", declined)
 
     def _adopt(self, current, playbook, kind):
         if playbook == self._playbook:
@@ -212,6 +249,7 @@ class ACE(Algorithm):
             await self._evaluate(current, self.benchmark.dev, label="validation")
         ).score
         self._validated_id = current.id
+        # Equal dev scores retain the previously selected playbook.
         if score > self._best_score:
             self._best, self._best_score = current, score
 

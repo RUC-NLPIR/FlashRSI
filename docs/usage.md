@@ -53,7 +53,7 @@ For another harness or task suite, start with a matching configuration:
 | Terminal-Bench 2.0 | [examples/terminal_bench.yaml](../examples/terminal_bench.yaml) | `harbor`, Python 3.12+, Docker |
 | τ³ Banking | [examples/tau3_banking.yaml](../examples/tau3_banking.yaml) | `tau2` and the upstream benchmark |
 
-The default installation includes the Python dependencies for the harnesses and LLM Worker. Harbor and tau2 need separate environments because their upstream dependencies conflict. See the [Terminal-Bench guide](terminal-bench.md), [Codex guide](codex.md), and linked configurations for setup and validation coverage.
+The default installation includes the Python dependencies for MiniAgent, Claude Code and the LLM Worker. Codex additionally requires the `codex` extra and its native build prerequisites. Harbor and tau2 need separate environments because their upstream dependencies conflict. See the [Terminal-Bench guide](terminal-bench.md), [Codex guide](codex.md), and linked configurations for setup and validation coverage.
 
 ### Isolated installation
 
@@ -66,6 +66,8 @@ pip install -e .
 ```
 
 For uv, use `uv sync` instead. Commands below use `uv run flashrsi`; use `flashrsi` directly in an activated pip environment.
+
+See also the [30-benchmark configuration index](benchmark-quickstart.md) and [automatic launcher guide](experiment-launcher.zh-CN.md).
 
 ## Native harnesses
 
@@ -145,12 +147,15 @@ runs/<algorithm>-<agent>-<benchmark>-<timestamp>/
 ├── config.yaml           # Saved configuration; credentials redacted
 ├── snapshots/            # Resource versions and their lineage
 ├── trajectories/         # Target runs, Worker calls, and search decisions
+├── artifacts/harbor/     # Collected deliverables and native logs for Harbor tasks
 ├── result.json           # Selected Snapshot and final test result
 ├── end-summary.json      # Machine-readable experiment summary
 └── end-summary.md        # Human-readable experiment summary
 ```
 
 Scores and trajectories stay associated with the version that produced them. Target and Worker calls are recorded separately, so you can inspect both task behavior and the work spent improving it. Usage follows the accounting exposed by each native harness.
+
+Harbor outputs are archived before temporary trials are removed, including files already collected from failed or normally cancelled attempts. Verifier events link to a unique archive and its manifest; SWE-bench Pro keeps solver and regrade archives separately. Deliverables and patches retain their original bytes; known credentials are redacted from UTF-8 logs and manifests, and trial config/lock/payload files are excluded. Forced process termination is not covered. `agent.harbor.artifacts_dir` overrides the archive root (relative to the launch working directory); outside the runner it defaults to `runs/artifacts/harbor/`. Regrading still requires the original task and evaluator environment.
 
 ## Extend FlashRSI
 

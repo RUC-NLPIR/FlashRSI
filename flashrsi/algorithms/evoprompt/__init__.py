@@ -2,7 +2,7 @@
 
     _initialize  the target's own instruction, then paraphrases of it, all scored
     _ga / _de    one generation, repeated max_steps times
-    _promote     the shared final selection: adopt the fittest member, once
+    _promote     adopt the earliest best member seen across generations, once
 
 Fitness is always a dev score: `_member` is the only place a prompt becomes a
 candidate Snapshot, and it evaluates every one it builds.
@@ -14,6 +14,7 @@ Commit: 2e235c9410e38d531dabfae7fdd9cbded1577373
 from __future__ import annotations
 
 import random
+from dataclasses import dataclass
 
 from flashrsi.algorithms import _replies
 from flashrsi.algorithms.evoprompt import _prompts as prompts
@@ -22,6 +23,24 @@ from flashrsi.core import Algorithm, Snapshot
 #: The smallest population each variant can run: GA draws two parents per
 #: child, DE a target plus three distinct donors.
 _MINIMUM = {"ga": 2, "de": 4}
+
+
+@dataclass(frozen=True, slots=True)
+class Member:
+    """One population member and the dev fitness that admitted it.
+
+    The text is carried beside the snapshot because every operator reads it: a
+    crossover prompt quotes two members verbatim, and top-k survivor selection
+    deduplicates on the text rather than on the snapshot.
+    """
+
+    snapshot: Snapshot
+    text: str
+    score: float
+    #: True when an operator returned nothing usable and this slot kept its
+    #: parent's files and fitness. Recorded so a reader of the decision log can
+    #: tell that from a candidate that genuinely scored the same.
+    carried: bool = False
 
 
 class EvoPrompt(Algorithm):
@@ -34,8 +53,8 @@ class EvoPrompt(Algorithm):
     built from, and every other member is untouched.
 
     Neither variant moves the current version during the search: the population
-    carries every member's fitness throughout, so one promotion at the end is
-    enough and every member was scored against the same baseline.
+    carries every member's fitness throughout. Final selection remembers the
+    earliest global best even when GA's standard policy replaces its generation.
     """
 
     name = "evoprompt"
@@ -68,19 +87,24 @@ class EvoPrompt(Algorithm):
     async def evolve(self) -> Snapshot:
         current = self.target.snapshot
         await self._initialize(current)
+        best = max(self._population, key=lambda member: member.score)
 
         generation = self._ga if self.config.variant == "ga" else self._de
         for step in range(self.config.max_steps):
             await generation(random.Random(self.config.seed + step), step)
+            candidate = max(self._population, key=lambda member: member.score)
+            # Standard GA may discard a better parent from the live population;
+            # population replacement must not erase the final dev incumbent.
+            if candidate.score > best.score:
+                best = candidate
 
-        best = max(self._population, key=lambda member: member["score"])
         return self._promote(
             current,
-            self._snapshots[best["snapshot_id"]],
+            best.snapshot,
             path=self._path,
-            score=best["score"],
+            score=best.score,
             baseline_score=self._baseline,
-            population=self._population,
+            population=[_row(member) for member in self._population],
         )
 
     async def _initialize(self, seed: Snapshot) -> None:
@@ -92,11 +116,8 @@ class EvoPrompt(Algorithm):
         """
         text = self._read_text(seed).get(self._path, "")
         results = await self._evaluate(seed, self.benchmark.dev, label="baseline")
-        self._snapshots = {seed.id: seed}
-        self._population = [
-            {"snapshot_id": seed.id, "text": text, "score": results.score}
-        ]
-        self._baseline = self._population[0]["score"]
+        self._population = [Member(seed, text, results.score)]
+        self._baseline = self._population[0].score
 
         while len(self._population) < self.config.population_size:
             reply = await self.worker.ask(
@@ -121,7 +142,7 @@ class EvoPrompt(Algorithm):
             # Roulette wheel: sampling with replacement, weighted by fitness.
             # Uniform when every fitness is zero -- the ordinary state of a
             # fresh population, which random.choices would otherwise reject.
-            weights = [member["score"] for member in pool]
+            weights = [member.score for member in pool]
             pool = tuple(
                 rng.choices(
                     pool,
@@ -136,14 +157,14 @@ class EvoPrompt(Algorithm):
                 # A binary tournament per parent, which is upstream's ``tour``:
                 # sample two, keep the fitter.
                 first, second = (
-                    max(rng.sample(pool, 2), key=lambda member: member["score"])
+                    max(rng.sample(pool, 2), key=lambda member: member.score)
                     for _ in range(2)
                 )
             else:
                 first, second = rng.sample(pool, 2)
             reply = await self.worker.ask(
                 prompts.GA.format(
-                    path=self._path, prompt1=first["text"], prompt2=second["text"]
+                    path=self._path, prompt1=first.text, prompt2=second.text
                 )
             )
             children.append(
@@ -165,7 +186,7 @@ class EvoPrompt(Algorithm):
     async def _de(self, rng: random.Random, step: int) -> None:
         """One trial per target, accepted by strict pairwise replacement."""
         current = tuple(self._population)
-        base = max(current, key=lambda member: member["score"])
+        base = max(current, key=lambda member: member.score)
 
         survivors, trials = [], []
         for position, target in enumerate(current):
@@ -178,10 +199,10 @@ class EvoPrompt(Algorithm):
             reply = await self.worker.ask(
                 prompts.DE.format(
                     path=self._path,
-                    prompt0=target["text"],
-                    prompt1=first["text"],
-                    prompt2=second["text"],
-                    prompt3=(third if self.config.donor_random else base)["text"],
+                    prompt0=target.text,
+                    prompt1=first.text,
+                    prompt2=second.text,
+                    prompt3=(third if self.config.donor_random else base).text,
                 )
             )
             trial = await self._member(
@@ -190,23 +211,30 @@ class EvoPrompt(Algorithm):
             trials.append(trial)
             # A trial competes only with the target it was built from, so a
             # losing one leaves the rest of the population where it was.
-            survivors.append(trial if trial["score"] > target["score"] else target)
+            survivors.append(trial if trial.score > target.score else target)
         self._adopt(step, tuple(survivors), trials)
 
-    async def _member(self, parent: dict, text: str, *, label: str) -> dict:
-        """Score a new instruction, or carry one independent population slot."""
-        if not text or text == parent["text"]:
-            # Logs distinguish reuse from a newly evaluated candidate with equal fitness.
-            return {**parent, "carried": True}
-        candidate = self._candidate(
-            self._snapshots[parent["snapshot_id"]], {self._path: text}
-        )
+    # -- the pieces a generation is built from -----------------------------
+
+    async def _member(self, parent: Member, text: str, *, label: str) -> Member:
+        """Commit one prompt as a candidate and score it on dev.
+
+        Every fitness in the population comes from here. An operator that
+        returned nothing usable, or the parent's own text back, keeps the
+        parent's snapshot and fitness: re-scoring the same files would spend a
+        dev pass to learn nothing. It still becomes its own record, so a
+        population slot never aliases another slot's member -- top-k pads from
+        the ranked pool by excluding the entries it already took, and an alias
+        would remove the fitter member's every copy at once.
+        """
+        if not text or _text_key(text) == _text_key(parent.text):
+            return Member(parent.snapshot, parent.text, parent.score, carried=True)
+        candidate = self._candidate(parent.snapshot, {self._path: text})
         results = await self._evaluate(candidate, self.benchmark.dev, label=label)
-        self._snapshots[candidate.id] = candidate
-        return {"snapshot_id": candidate.id, "text": text, "score": results.score}
+        return Member(candidate, text, results.score)
 
     def _adopt(
-        self, step: int, survivors: tuple[dict, ...], candidates: list[dict]
+        self, step: int, survivors: tuple[Member, ...], candidates: list[Member]
     ) -> None:
         """Adopt a generation's survivors and record what it displaced."""
         self._record(
@@ -215,15 +243,11 @@ class EvoPrompt(Algorithm):
                 "kind": "generation",
                 "variant": self.config.variant,
                 "step": step,
-                "candidates": candidates,
-                "population": list(survivors),
+                "candidates": [_row(member) for member in candidates],
+                "population": [_row(member) for member in survivors],
             },
         )
         self._population = list(survivors)
-        # Discarded candidates need no in-memory file versions after this generation.
-        self._snapshots = {
-            row["snapshot_id"]: self._snapshots[row["snapshot_id"]] for row in survivors
-        }
 
     def _normalize(self) -> None:
         # Upstream's CLI calls tournament selection ``tour``.
@@ -241,7 +265,12 @@ class EvoPrompt(Algorithm):
             )
 
 
-def _top_k(pool: tuple[dict, ...], size: int) -> tuple[dict, ...]:
+def _text_key(text: str) -> str:
+    """Compare line endings consistently without rewriting snapshot contents."""
+    return text.replace("\r\n", "\n").rstrip("\n")
+
+
+def _top_k(pool: tuple[Member, ...], size: int) -> tuple[Member, ...]:
     """The best distinct prompts in ``pool``, padded back to a fixed size.
 
     Deduplicating on the text is what makes this top-k rather than a plain sort:
@@ -250,28 +279,41 @@ def _top_k(pool: tuple[dict, ...], size: int) -> tuple[dict, ...]:
     -- the next generation still needs ``size`` members to draw parents from, so
     once the distinct prompts run out the best duplicates come back in.
 
-    Track slots by position, since repeated or carried prompts still occupy
-    independent slots that the next generation needs.
+    Members are tracked by position because two slots can legitimately hold
+    equal records: a carried parent compares equal to the member it was carried
+    from, and dropping one as a duplicate would lose a slot the next generation
+    needs.
     """
     fittest: dict[str, int] = {}
     for index, member in enumerate(pool):
-        holder = fittest.get(member["text"])
-        if holder is None or member["score"] > pool[holder]["score"]:
-            fittest[member["text"]] = index
-    ranked = sorted(
-        range(len(pool)), key=lambda index: pool[index]["score"], reverse=True
-    )
+        key = _text_key(member.text)
+        holder = fittest.get(key)
+        if holder is None or member.score > pool[holder].score:
+            fittest[key] = index
+    ranked = sorted(range(len(pool)), key=lambda index: pool[index].score, reverse=True)
 
     # One slot per distinct prompt, fittest first, then the best entries left
     # over -- duplicates included -- to pad back to a full population.
     survivors = sorted(
-        fittest.values(), key=lambda index: pool[index]["score"], reverse=True
+        fittest.values(), key=lambda index: pool[index].score, reverse=True
     )[:size]
     remaining = [index for index in ranked if index not in survivors]
     survivors += remaining[: size - len(survivors)]
     while len(survivors) < size:
         survivors.append(ranked[len(survivors) % len(ranked)])
     return tuple(pool[index] for index in survivors)
+
+
+def _row(member: Member) -> dict:
+    row = {
+        "snapshot_id": member.snapshot.id,
+        "text": member.text,
+        "score": member.score,
+    }
+    # Only marked when true, so an ordinary candidate's row stays as it was.
+    if member.carried:
+        row["carried"] = True
+    return row
 
 
 __all__ = ["EvoPrompt"]

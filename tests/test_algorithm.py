@@ -62,9 +62,10 @@ class Example(Algorithm):
 def target(tmp_path):
     for component in ("skills", "prompts", "code"):
         (tmp_path / component).mkdir()
-        (tmp_path / component / "main.md").write_text(component)
+        (tmp_path / component / "main.md").write_text(component, newline="\n")
     (tmp_path / "components.yaml").write_text(
-        "skill: ['skills/**']\nprompt: ['prompts/**']\ncode: ['code/**']\n"
+        "skill: ['skills/**']\nprompt: ['prompts/**']\ncode: ['code/**']\n",
+        newline="\n",
     )
     return Target({"source_dir": tmp_path})
 
@@ -86,7 +87,7 @@ def test_base_initializes_scope_data_and_defaults_before_algorithm_hook(target):
             "skills/main.md",
             "prompts/main.md",
         }
-        (directory / "skills/main.md").write_text("evolved")
+        (directory / "skills/main.md").write_text("evolved", newline="\n")
         candidate = baseline.commit(directory)
     assert candidate.files["skills/main.md"].content == b"evolved"
     assert candidate.files["code/main.md"] == baseline.files["code/main.md"]
@@ -94,7 +95,7 @@ def test_base_initializes_scope_data_and_defaults_before_algorithm_hook(target):
     with baseline.check_out() as directory:
         prompt = directory / "prompts/main.md"
         prompt.chmod(0o644)
-        prompt.write_text("changed observation")
+        prompt.write_text("changed observation", newline="\n")
         with pytest.raises(ValueError, match="outside allowed components"):
             baseline.commit(directory)
 
@@ -444,8 +445,8 @@ def test_a_wildcard_scope_resolves_to_every_component_the_target_declares(
     baseline = target.snapshot
     # Every component is editable, including the one an ordinary scope hides.
     with baseline.check_out() as directory:
-        (directory / "code/main.md").write_text("evolved")
-        (directory / "code/added.md").write_text("new")
+        (directory / "code/main.md").write_text("evolved", newline="\n")
+        (directory / "code/added.md").write_text("new", newline="\n")
         candidate = baseline.commit(directory)
     assert candidate.files["code/main.md"].content == b"evolved"
     assert candidate.files["code/added.md"].component == "code"

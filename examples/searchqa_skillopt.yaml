@@ -1,0 +1,37 @@
+# Quick start: small experiment, not a full benchmark reproduction.
+# Copy to ../experiment.local.yaml before editing, or let the launcher create it.
+# output_dir is relative to this YAML file. The launcher-created file lives at project root.
+run:
+  output_dir: ./runs
+
+benchmark:
+  name: searchqa
+  split: auto # Keep native train/validation/test membership; validation becomes dev.
+  seed: 42
+  limit: 30 # Sample within the native splits. null runs on the full dataset.
+
+agent:
+  name: miniagent
+  max_turns: 3
+  timeout: 180
+  llm:
+    model_name: # Your target model
+    api_key: # Or set FLASHRSI_AGENT_API_KEY
+    base_url: # Provider API URL; null uses https://api.openai.com/v1
+    max_tokens: 4096
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 1 # One fast update for the first run; null enables all batches.
+  batch_size: 8
+  reflection_minibatch_size: 4
+  seed: 42
+  worker:
+    type: llm
+    timeout: 180
+    llm:
+      model_name: # Your evolution model (configured independently)
+      api_key: # Or set FLASHRSI_WORKER_API_KEY
+      base_url: # OpenAI-compatible Chat Completions API
+      max_tokens: 4096

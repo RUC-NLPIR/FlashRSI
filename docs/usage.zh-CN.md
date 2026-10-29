@@ -53,7 +53,7 @@ uv run flashrsi run --config examples/quickstart.yaml \
 | Terminal-Bench 2.0 | [examples/terminal_bench.yaml](../examples/terminal_bench.yaml) | `harbor`、Python 3.12+、Docker |
 | τ³ Banking | [examples/tau3_banking.yaml](../examples/tau3_banking.yaml) | `tau2` 和上游 benchmark |
 
-默认安装已包含各 harness 和 LLM Worker 的 Python 依赖。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
+默认安装已包含 MiniAgent、Claude Code 和 LLM Worker 的 Python 依赖。Codex 另需 `codex` extra 及原生构建环境。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
 
 ### 使用独立环境安装
 
@@ -145,12 +145,15 @@ runs/<algorithm>-<agent>-<benchmark>-<timestamp>/
 ├── config.yaml           # 保存的配置，凭据已脱敏
 ├── snapshots/            # 资源版本及其继承关系
 ├── trajectories/         # Target 执行、Worker 调用和搜索决策
+├── artifacts/harbor/     # Harbor 任务已收集的交付文件和原生日志
 ├── result.json           # 选中的 Snapshot 和最终 test 结果
 ├── end-summary.json      # 供程序读取的实验摘要
 └── end-summary.md        # 供人工阅读的实验摘要
 ```
 
 分数和轨迹始终关联到产生它们的资源版本。Target 与 Worker 分别记录，便于同时查看解题行为和改进开销。用量统计以各原生 harness 实际提供的信息为准。
+
+Harbor 在清理临时 trial 前归档已收集的文件，失败或正常取消的尝试也保留已有产物。轨迹的 verifier 事件记录独立归档目录和清单；SWE-bench Pro 分别保存求解、复评分两个阶段。交付文件和补丁保留原始字节，UTF-8 日志和清单中的已知凭据脱敏，不复制 trial 配置、lock 或 payload。强制终止进程不保证归档。可用 `agent.harbor.artifacts_dir` 覆盖根目录（相对启动工作目录）；不经过 runner 时默认使用 `runs/artifacts/harbor/`。独立重评仍需原任务和评分环境，详见[查看结果](experiment-launcher.zh-CN.md#查看结果)。
 
 ## 扩展 FlashRSI
 
@@ -178,3 +181,5 @@ uv run ruff format --check .
 ```
 
 [动态封面](../assets/readme/cover.gif)直接使用 React Bits ElectricLogo 组件渲染，附 [PNG 静态预览](../assets/readme/cover.png)、[录制说明](../scripts/readme-cover/README.md)和[设计说明](../assets/readme/cover-design.md)。演示 GIF 由 [scripts/render_readme_hero.py](../scripts/render_readme_hero.py) 使用 Pillow 生成，训练和评估曲线均为示意。图片已保存在 `assets/readme/`，查看 README 无需运行渲染脚本。
+
+完整的 30 项配置与一键入口见[配置索引](benchmark-quickstart.md)及[一键实验指南](experiment-launcher.zh-CN.md)。

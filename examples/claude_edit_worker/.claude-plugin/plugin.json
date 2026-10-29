@@ -1,0 +1,5 @@
+{
+  "name": "flashrsi-checkout-editor",
+  "version": "0.1.0",
+  "description": "File-only Worker for editing the current checkout."
+}

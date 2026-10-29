@@ -106,7 +106,7 @@ class Worker(Agent):
             lens = prompt.split("lens: ")[1].split(";")[0]
             quote = trace["trajectory"]["output"] or task
             # A digester's unrelated writes cannot enter the target Snapshot.
-            (working_dir / "ANALYST-TAMPER").write_text("discard me")
+            (working_dir / "ANALYST-TAMPER").write_text("discard me", newline="\n")
             value = {
                 "task_id": task,
                 "lens": lens,
@@ -167,10 +167,12 @@ def setup(
     source = tmp_path / "source"
     (source / "skills").mkdir(parents=True)
     (source / "tools").mkdir()
-    (source / "skills/main.md").write_text("SEED")
-    (source / "tools/runtime.py").write_text("value = 0\n")
+    (source / "skills/main.md").write_text("SEED", newline="\n")
+    (source / "tools/runtime.py").write_text("value = 0\n", newline="\n")
     (source / "tools/binary").write_bytes(b"\x00\xff")
-    (source / "components.yaml").write_text("skill: ['skills/**']\ntool: ['tools/**']")
+    (source / "components.yaml").write_text(
+        "skill: ['skills/**']\ntool: ['tools/**']", newline="\n"
+    )
     calls = []
     outcomes = outcomes or {"SEED": (0.5, 100), "GOOD": (1, 120)}
 
@@ -250,7 +252,7 @@ def test_full_history_siblings_and_heldout_boundaries(
         assert (
             not context["history"] if len(parents) < 3 else len(context["history"]) == 2
         )
-        (directory / "skills/main.md").write_text(next(markers))
+        (directory / "skills/main.md").write_text(next(markers), newline="\n")
         return [change()]
 
     algo, calls = setup(
@@ -302,7 +304,7 @@ def test_cost_saving_can_select_regression_and_next_floor_uses_best(
     versions = iter(["CHEAP", "TOO-LOW"])
 
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text(next(versions))
+        (directory / "skills/main.md").write_text(next(versions), newline="\n")
         return [change()]
 
     algo, _ = setup(
@@ -339,11 +341,12 @@ def test_bad_drafts_are_never_evaluated(monkeypatch, tmp_path, problem):
         if problem == "unchanged":
             return [change()]
         (directory / "skills/main.md").write_text(
-            "GOOD worker-private-secret" if problem == "credential" else "GOOD"
+            "GOOD worker-private-secret" if problem == "credential" else "GOOD",
+            newline="\n",
         )
         if problem in ("undeclared", "syntax"):
             (directory / "tools/runtime.py").write_text(
-                "value = (" if problem == "syntax" else "value = 1\n"
+                "value = (" if problem == "syntax" else "value = 1\n", newline="\n"
             )
         if problem == "binary":
             (directory / "tools/binary").write_bytes(b"\x00\xfe")
@@ -383,11 +386,16 @@ def test_critic_repair_is_cumulative_from_same_parent(monkeypatch, tmp_path):
         nonlocal count
         count += 1
         if count == 1:
-            (directory / "skills/main.md").write_text("BAD")
+            assert next(directory.rglob("current-diff.txt")).read_text() == ""
+            (directory / "skills/main.md").write_text("BAD", newline="\n")
         else:
             assert (directory / "skills/main.md").read_text() == "BAD"
             assert "suite-specific" in prompt
-            (directory / "skills/main.md").write_text("GOOD")
+            repair_diff = next(directory.rglob("current-diff.txt"))
+            assert repair_diff.relative_to(directory).as_posix() in prompt
+            assert "FILE skills/main.md" in repair_diff.read_text()
+            assert "+BAD" in repair_diff.read_text()
+            (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     verdicts = iter(["reject", "accept"])
@@ -410,6 +418,31 @@ def test_critic_repair_is_cumulative_from_same_parent(monkeypatch, tmp_path):
     assert len(calls) == 4 and count == 2
 
 
+def test_manifest_repair_receives_retained_diff_without_committing_evidence(
+    monkeypatch, tmp_path
+):
+    count = 0
+
+    def edit(prompt, directory):
+        nonlocal count
+        count += 1
+        if count == 1:
+            (directory / "skills/main.md").write_text("GOOD", newline="\n")
+            (directory / "tools/runtime.py").write_text("value = 1\n", newline="\n")
+            return [change()]
+        assert "missing paths" in prompt
+        difference = next(directory.rglob("current-diff.txt")).read_text()
+        assert "FILE skills/main.md" in difference and "+GOOD" in difference
+        assert "FILE tools/runtime.py" in difference and "+value = 1" in difference
+        return [change(paths=["skills/main.md", "tools/runtime.py"])]
+
+    algo, calls = setup(monkeypatch, tmp_path, edit, repair_rounds=1)
+    result = asyncio.run(algo.evolve())
+    assert count == 2 and len(calls) == 4
+    assert result.files["tools/runtime.py"].content == b"value = 1\n"
+    assert not any("rrsi-evidence-" in path for path in result.files)
+
+
 def test_stall_requires_actual_untried_component_and_history_prunes_losers(
     monkeypatch, tmp_path
 ):
@@ -424,7 +457,7 @@ def test_stall_requires_actual_untried_component_and_history_prunes_losers(
             assert context["untried"] == sorted(COMPONENTS - {"skill"})
             assert context["prune"][0]["component"] == "skill"
             assert context["history"][0]["outcome"] == "REJECTED"
-        (directory / "skills/main.md").write_text(f"UNHELPFUL-{count}")
+        (directory / "skills/main.md").write_text(f"UNHELPFUL-{count}", newline="\n")
         return [change()]
 
     algo, calls = setup(monkeypatch, tmp_path, edit, T=2, w=1, m_draft=1)
@@ -439,7 +472,7 @@ def test_stall_requires_actual_untried_component_and_history_prunes_losers(
 
 def test_zero_score_pruning_and_structural_novelty_are_measured(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "tools/runtime.py").write_text("value = 1\n")
+        (directory / "tools/runtime.py").write_text("value = 1\n", newline="\n")
         return [change(component="client_tool", path="tools/runtime.py")]
 
     algo, calls = setup(monkeypatch, tmp_path, edit, w_s=0)
@@ -456,7 +489,7 @@ def test_pruning_accepted_machinery_is_a_measured_cost_saving(monkeypatch, tmp_p
         nonlocal count
         count += 1
         if count == 1:
-            (directory / "tools/runtime.py").write_text("value = 1\n")
+            (directory / "tools/runtime.py").write_text("value = 1\n", newline="\n")
             return [change(component="client_tool", path="tools/runtime.py")]
         context = [row for row in records(prompt, directory) if "history" in row][-1]
         machinery = context["prune"][0]["accepted_edits"]
@@ -562,8 +595,8 @@ def test_token_accounting(usage, expected):
 @pytest.mark.parametrize("complete", [True, False])
 def test_subagent_cost_controls_candidate_acceptance(monkeypatch, tmp_path, complete):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("DELEGATED")
-        (directory / "tools/runtime.py").write_text("value = 1\n")
+        (directory / "skills/main.md").write_text("DELEGATED", newline="\n")
+        (directory / "tools/runtime.py").write_text("value = 1\n", newline="\n")
         return [change(), change(component="client_tool", path="tools/runtime.py")]
 
     policy = {"inputTokens": 100, "outputTokens": 10}
@@ -615,7 +648,7 @@ def test_subagent_cost_controls_candidate_acceptance(monkeypatch, tmp_path, comp
 
 def test_missing_candidate_usage_is_not_free_cost(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("MISSING")
+        (directory / "skills/main.md").write_text("MISSING", newline="\n")
         return [change()]
 
     algo, _ = setup(
@@ -628,7 +661,7 @@ def test_missing_candidate_usage_is_not_free_cost(monkeypatch, tmp_path):
 
 def test_failed_trials_keep_denominator_even_if_grade_would_pass(monkeypatch, tmp_path):
     def edit(prompt, directory):
-        (directory / "skills/main.md").write_text("CRASH")
+        (directory / "skills/main.md").write_text("CRASH", newline="\n")
         return [change()]
 
     algo, _ = setup(
@@ -656,7 +689,7 @@ def test_failed_trials_keep_denominator_even_if_grade_would_pass(monkeypatch, tm
 def test_direct_use_creates_and_removes_reference_records(monkeypatch, tmp_path):
     def edit(prompt, directory):
         assert records(prompt, directory)
-        (directory / "skills/main.md").write_text("GOOD")
+        (directory / "skills/main.md").write_text("GOOD", newline="\n")
         return [change()]
 
     algo, _ = setup(monkeypatch, tmp_path, edit)
@@ -753,3 +786,14 @@ def test_missing_files_in_manifest_are_not_a_valid_edit():
             ["skills/main.md"],
             1,
         )
+
+
+@pytest.mark.parametrize("prefix", ["", "Preserve `<EDITS>` output.\n"])
+def test_manifest_objection_names_changes_omitted_from_repair(prefix):
+    with pytest.raises(ValueError, match="relative to the incumbent") as error:
+        declaration(
+            prefix + "<EDITS>" + json.dumps({"edits": [change()]}) + "</EDITS>",
+            ["skills/main.md", "tools/runtime.py", "agent.yaml"],
+            1,
+        )
+    assert 'missing paths: ["agent.yaml", "tools/runtime.py"]' in str(error.value)

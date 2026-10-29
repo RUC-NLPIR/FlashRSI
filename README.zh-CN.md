@@ -58,10 +58,15 @@
 
 ### 1. 安装
 
+推荐 Linux / WSL + Python 3.12。以下命令只展开代码和文档，跳过 `experiments/` 与 LFS 大文件。
+
 ```bash
-git clone https://github.com/ignorejjj/FlashRSI.git
+GIT_LFS_SKIP_SMUDGE=1 git clone --filter=blob:none --sparse https://github.com/ignorejjj/FlashRSI.git
 cd FlashRSI
-pip install -e .
+git sparse-checkout set flashrsi docs examples scripts tests assets
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 ```
 
 ### 2. 一键运行
@@ -70,21 +75,28 @@ pip install -e .
 
 **命令行**
 
+先在 shell 中设置 `TARGET_API_KEY` 和 `WORKER_API_KEY`，分别对应 Target 和 Worker；两者互不继承。自定义端点还需分别设置各角色的 `llm.base_url`。
+
 ```bash
 flashrsi run \
   --algorithm skillopt --benchmark searchqa --agent miniagent \
   --model gpt-5-mini --worker-model gpt-5-mini \
+  --agent.llm.api_key "$TARGET_API_KEY" \
+  --algorithm.worker.llm.api_key "$WORKER_API_KEY" \
   --benchmark.data_path examples/data/quickstart.jsonl \
+  --benchmark.split '{train: 0.5, dev: 0.25, test: 0.25}' \
   --algorithm.num_epochs 1 --algorithm.max_steps 1
 ```
 
 **[YAML](examples/quickstart.yaml)**
 
+在 [examples/quickstart.yaml](examples/quickstart.yaml) 中分别填写 `agent.llm` 和 `algorithm.worker.llm` 的模型、密钥及可选端点，再运行：
+
 ```bash
 flashrsi run --config examples/quickstart.yaml
 ```
 
-结果保存在 `runs/`，见[分数、Snapshot 与轨迹说明](docs/running-experiments.md#read-the-results)。
+结果保存在 `runs/`，见[分数、Snapshot 与轨迹说明](docs/running-experiments.md#read-the-results)。自动准备环境见[一键实验指南](docs/experiment-launcher.zh-CN.md)。
 
 ## 支持的算法
 
@@ -115,48 +127,52 @@ flashrsi run --config examples/quickstart.yaml
 
 ## 支持的 Benchmarks
 
-`main` 包含 SearchQA、HotpotQA、Terminal-Bench 2.0 和 τ³ Banking；完整 **28 个 benchmark** 见[集合分支](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke)，该分支支持 MiniAgent 和 Claude Code。开始前请查看[版本选择与环境准备](docs/running-experiments.md#choose-a-version)。
+当前注册 **30 个 benchmark**。每项均提供配置示例；数据、服务与环境要求见[配置索引](docs/benchmark-quickstart.md)。组合需满足 harness 的资源与执行能力要求，注册不代表所有组合均已完成真实验证。
 
 | Benchmark | 任务 | 评分 | 运行入口 |
 | --- | --- | --- | --- |
 | **问答** | | | |
-| [SearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/searchqa) | 提供搜索片段的短答案问答 | 答案 EM / F1 | [Setup](docs/running-experiments.md#benchmarks-on-main) · [Config](examples/quickstart.yaml) |
-| [HotpotQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hotpotqa) | Wikipedia 多跳问答 | 答案 EM / F1；fullwiki 模式支持 joint F1 | [Setup](docs/running-experiments.md#benchmarks-on-main) · [Config](examples/hotpotqa.yaml) |
-| [MuSiQue](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/musique) | 组合式多跳问答 | 答案 EM / F1；可选支撑段落 F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/musique-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_musique.yaml) |
-| [TriviaQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/triviaqa) | 基于 Wikipedia 上下文的知识问答 | 支持答案别名的 EM / F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/triviaqa-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_triviaqa.yaml) |
-| [Natural Questions](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/nq) | Wikipedia 问答，短答案与 yes/no 子集 | 本地文本 EM / F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [2WikiMultiHopQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/twowiki_multihopqa) | 基于给定上下文的多跳问答 | 答案 EM / F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/twowiki_multihopqa_opro.yaml) |
+| [SearchQA](flashrsi/benchmarks/searchqa) | 提供搜索片段的短答案问答 | 答案 EM / F1 | [Setup](docs/searchqa-deepseek-reproduction.md) · [Config](examples/searchqa_skillopt.yaml) |
+| [HotpotQA](flashrsi/benchmarks/hotpotqa) | Wikipedia 多跳问答 | 答案 EM / F1；fullwiki 模式支持 joint F1 | [Setup](docs/hotpot-independent-evolution.md) · [Config](examples/hotpotqa_opro.yaml) |
+| [MuSiQue](flashrsi/benchmarks/musique) | 组合式多跳问答 | 答案 EM / F1；可选支撑段落 F1 | [Setup](docs/musique-independent-evolution.md) · [Config](examples/modular_rsi_musique.yaml) |
+| [TriviaQA](flashrsi/benchmarks/triviaqa) | 基于 Wikipedia 上下文的知识问答 | 支持答案别名的 EM / F1 | [Setup](docs/triviaqa-independent-evolution.md) · [Config](examples/modular_rsi_triviaqa.yaml) |
+| [Natural Questions](flashrsi/benchmarks/nq) | Wikipedia 问答，短答案与 yes/no 子集 | 本地文本 EM / F1 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/nq_opro.yaml) |
+| [2WikiMultiHopQA](flashrsi/benchmarks/twowiki_multihopqa) | 基于给定上下文的多跳问答 | 答案 EM / F1 | [Setup](docs/twowiki-independent-evolution.md) · [Config](examples/twowiki_multihopqa_opro.yaml) |
 | **推理与数学** | | | |
-| [BBEH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard 复杂推理 | 官方逐题准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/lightweight-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/bbeh_opro.yaml) |
-| [SuperGPQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/supergpqa) | 研究生级别多项选择题 | 答案字母准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/lightweight-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/supergpqa_opro.yaml) |
-| [HLE](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/hle) | Humanity's Last Exam，仅文本子集 | 官方 Judge 准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [MATH](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/math) | 竞赛数学 | Math-Verify 等价性准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/math-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_math500.yaml) |
-| [AIME](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/aime) | AIME 2025 / 2026 数学题 | 整数答案准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/coding-math-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/aime_opro.yaml) |
-| [LiveMathBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/livemathbench) | 多次采样的数学评测 | G-Pass@k / mG-Pass@k | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [BBEH](flashrsi/benchmarks/bbeh) | BIG-Bench Extra Hard 复杂推理 | 官方逐题准确率 | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/bbeh_opro.yaml) |
+| [SuperGPQA](flashrsi/benchmarks/supergpqa) | 研究生级别多项选择题 | 答案字母准确率 | [Setup](docs/lightweight-benchmarks.md) · [Config](examples/supergpqa_opro.yaml) |
+| [HLE](flashrsi/benchmarks/hle) | Humanity's Last Exam，仅文本子集 | 官方 Judge 准确率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/hle_opro.yaml) |
+| [MATH](flashrsi/benchmarks/math) | 竞赛数学 | Math-Verify 等价性准确率 | [Setup](docs/math-independent-evolution.md) · [Config](examples/modular_rsi_math500.yaml) |
+| [AIME](flashrsi/benchmarks/aime) | AIME 2025 / 2026 数学题 | 整数答案准确率 | [Setup](docs/coding-math-benchmarks.md) · [Config](examples/aime_opro.yaml) |
+| [LiveMathBench](flashrsi/benchmarks/livemathbench) | 多次采样的数学评测 | G-Pass@k / mG-Pass@k | [Setup](docs/benchmark-quickstart.md) · [Config](examples/livemathbench_opro.yaml) |
 | **代码** | | | |
-| [CRUXEval-O](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/cruxeval_output) | Python 函数输出预测 | Python 字面量相等准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/coding-math-benchmarks.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/cruxeval_output_opro.yaml) |
-| [SWE-bench Verified](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench) | 代码仓库 issue 修复 | 官方 verifier 修复率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/swe-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_swe_bench.yaml) |
-| [SWE-bench Pro V2](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/swe_bench_pro) | 代码仓库修复，all / hard 题集 | 官方容器复评修复率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [SWE-bench Verified](flashrsi/benchmarks/swe_bench) | 代码仓库 issue 修复 | 官方 verifier 修复率 | [Setup](docs/swe-independent-evolution.md) · [Config](examples/swe_bench_verified_opro.yaml) |
+| [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | 代码仓库修复，all / hard 题集 | 官方容器复评修复率 | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/swe_bench_pro_opro.yaml) |
+| [DeepSWE](flashrsi/benchmarks/deepswe) | 仓库修复，原生 Harbor v1.3 任务接口 | 独立容器 verifier reward | [Setup](docs/deepswe.md) · [Config](examples/deepswe_opro.yaml) |
 | **网页研究** | | | |
-| [BrowseComp](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/browsecomp) | 网络信息搜索 | 官方答案 Judge 准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/browsecomp_serper_jina.yaml) |
-| [DeepSearchQA](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/deepsearchqa) | 单答案与集合答案的网络搜索 | 官方 autorater F1 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/deepsearchqa_serper_jina.yaml) |
-| [WideSearch](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/widesearch) | 表格型广泛信息搜索 | 官方表格评分 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [BrowseComp](flashrsi/benchmarks/browsecomp) | 网络信息搜索 | 官方答案 Judge 准确率 | [Setup](docs/web-research-services.md) · [Config](examples/browsecomp_serper_jina.yaml) |
+| [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | 单答案与集合答案的网络搜索 | 官方 autorater F1 | [Setup](docs/web-research-services.md) · [Config](examples/deepsearchqa_serper_jina.yaml) |
+| [WideSearch](flashrsi/benchmarks/widesearch) | 表格型广泛信息搜索 | 官方表格评分 | [Setup](docs/web-research-services.md) · [Config](examples/widesearch_opro.yaml) |
 | **文档与工具使用** | | | |
-| [OfficeQA-Pro](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/officeqa_pro) | 文档检索问答 | 数值 / 文本答案准确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/web-research-services.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/officeqa_pro_opro.yaml) |
-| [Harvey LAB](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/harvey_lab) | 法律文档任务 | 双 Judge rubric 全部通过率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [JobBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/jobbench) | 专业文件交付 | 官方加权 rubric reward | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [AppWorld](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/appworld) | 应用与 API 自动化 | 官方任务完成 reward | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/appworld-independent-evolution.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/modular_rsi_appworld.yaml) |
-| [BFCL V4](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/bfcl) | 多轮函数调用，仅 Base track | 官方会话成功率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
-| [WorkBench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/workbench) | 工作场景工具操作 | 原生数据库结果正确率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/workbench.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/workbench_opro.yaml) |
-| [TravelPlanner](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/travelplanner) | 旅行行程规划，仅 sole-planning track | 最终约束通过率 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/README.md#准备与检查) |
+| [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | 文档检索问答 | 数值 / 文本答案准确率 | [Setup](docs/web-research-services.md) · [Config](examples/officeqa_pro_opro.yaml) |
+| [Harvey LAB](flashrsi/benchmarks/harvey_lab) | 法律文档任务 | 双 Judge rubric 全部通过率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/harvey_lab_opro.yaml) |
+| [JobBench](flashrsi/benchmarks/jobbench) | 专业文件交付 | 官方加权 rubric reward | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/jobbench_opro.yaml) |
+| [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Debugging / Financial_Model / Template | 原生 LibreOffice verifier；暂不含 Visualization | [Setup](docs/coding-working-benchmarks.md) · [Config](examples/spreadsheetbench2_opro.yaml) |
+| [AppWorld](flashrsi/benchmarks/appworld) | 应用与 API 自动化 | 官方任务完成 reward | [Setup](docs/appworld-independent-evolution.md) · [Config](examples/modular_rsi_appworld.yaml) |
+| [BFCL V4](flashrsi/benchmarks/bfcl) | 多轮函数调用，仅 Base track | 官方会话成功率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/bfcl_opro.yaml) |
+| [WorkBench](flashrsi/benchmarks/workbench) | 工作场景工具操作 | 原生数据库结果正确率 | [Setup](docs/workbench.md) · [Config](examples/workbench_opro.yaml) |
+| [TravelPlanner](flashrsi/benchmarks/travelplanner) | 旅行行程规划，仅 sole-planning track | 最终约束通过率 | [Setup](docs/benchmark-quickstart.md) · [Config](examples/travelplanner_opro.yaml) |
 | **交互环境** | | | |
-| [τ²-bench](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau2) | 航空、零售、电信多轮对话，文本模式 | 原生 reward 均值 | [Setup](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/docs/tau2-bench.md) · [Config](https://github.com/ignorejjj/FlashRSI/blob/integration/flashrsi-smoke/examples/tau2_opro.yaml) |
-| [τ³ Banking](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/tau3_banking) | 多轮银行客服 | 原生 tau2 reward | [Setup](docs/running-experiments.md#benchmarks-on-main) · [Config](examples/tau3_banking.yaml) |
-| [Terminal-Bench 2.0](https://github.com/ignorejjj/FlashRSI/tree/integration/flashrsi-smoke/flashrsi/benchmarks/terminal_bench) | 通过 Harbor 执行的 Linux 终端任务 | 原生 verifier reward | [Setup](docs/terminal-bench.md) · [Config](examples/terminal_bench.yaml) |
+| [τ²-bench](flashrsi/benchmarks/tau2) | 航空、零售、电信多轮对话，文本模式 | 原生 reward 均值 | [Setup](docs/tau2-bench.md) · [Config](examples/tau2_opro.yaml) |
+| [τ³ Banking](flashrsi/benchmarks/tau3_banking) | 多轮银行客服 | 原生 tau2 reward | [Setup](docs/benchmark-quickstart.md) · [Config](examples/tau3_banking_opro.yaml) |
+| [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | 通过 Harbor 执行的 Linux 终端任务 | 原生 verifier reward | [Setup](docs/terminal-bench.md) · [Config](examples/terminal_bench21_opro.yaml) |
+| [ALFWorld](flashrsi/benchmarks/alfworld) | 纯文本交互环境 | 原生 TextWorld won / success | [Setup](docs/alfworld.md) · [Config](examples/alfworld_opro.yaml) |
 
-Config 链接指向可用的 YAML；仅有 Setup 的条目尚无现成 YAML。ModularRSI 示例还需独立演化数据与模块文件，见[运行指南](docs/running-experiments.md#benchmark-collection)。
+示例使用不同算法；ModularRSI 等方法还需准备相应模块与数据配置，见[选型与运行指南](docs/running-experiments.md)。
 
 ## 实验结果
+
+以下为上游 main 的历史结果引用；本地同步未下载或合入 `experiments/`，也未重新运行这些实验。
 
 **SkillOpt 在两个原生 harness 上优化 SearchQA 表现。** 解题模型为 `deepseek-v4-flash`，改进模型为 `deepseek-v4-pro`。两侧使用相同的 400 / 200 / 1,400 train / dev / test 划分、seed 42，以及 4 epochs / 40 fast steps 的预算。候选使用 dev 筛选，冻结最终 Snapshot 后再评估 test。
 
@@ -165,11 +181,7 @@ Config 链接指向可用的 YAML；仅有 Setup 的条目尚无现成 YAML。Mo
 | MiniAgent | 76.43% | **82.93%** | **+6.50 个百分点** |
 | Claude Code | 74.71% | **83.14%** | **+8.43 个百分点** |
 
-<p align="center">
-  <img src="experiments/skillopt-searchqa-deepseek-20260920-seed42/figures/test-em.png" alt="SkillOpt 在 1,400 道独立 SearchQA 测试题上的表现：MiniAgent 的 EM 从 76.43% 提升至 82.93%，Claude Code 从 74.71% 提升至 83.14%。" width="100%">
-</p>
-
-以上结果对应这一组 DeepSeek 迁移实验。[实验报告](experiments/skillopt-searchqa-deepseek-20260920-seed42/report.md)、[独立验收记录](experiments/skillopt-searchqa-deepseek-20260920-seed42/evidence/full-verification.json)和[复现说明](docs/searchqa-deepseek-reproduction.md)提供完整分数、用量及与上游实验协议的差异。
+以上结果对应这一组 DeepSeek 迁移实验。[实验报告](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/report.md)、[独立验收记录](https://github.com/ignorejjj/FlashRSI/blob/f66a875925bf14f05b013f33a82e59e686a9f787/experiments/skillopt-searchqa-deepseek-20260920-seed42/evidence/full-verification.json)和[复现说明](docs/searchqa-deepseek-reproduction.md)提供完整分数、用量及与上游实验协议的差异。
 
 <details id="citation">
 <summary>引用</summary>

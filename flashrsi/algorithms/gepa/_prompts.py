@@ -34,5 +34,12 @@ REFLECT = (
     "[GEPA: propose]\n"
     "The instruction becomes the complete contents of {path}, which the target "
     "agent loads for every task. Keep that file's native format, write general "
-    "guidance rather than answers, and never name a specific task.\n\n" + _REFLECT
+    "guidance rather than answers, and never name a specific task.\n"
+    "The examples are training tasks. Their feedback includes reference answers "
+    "when available, execution status and errors. The "
+    "trajectory contains recorded reasoning, tool calls and tool results. "
+    "Compare the response and trajectory with the references to diagnose why "
+    "the attempt failed and derive reusable improvements. Missing references "
+    "or trace details are unknown; do not invent them. Evidence ending in an "
+    "ellipsis is truncated.\n\n" + _REFLECT
 )

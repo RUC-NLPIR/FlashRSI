@@ -2,10 +2,15 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
+import re
 from collections.abc import Mapping, Sequence
+from dataclasses import replace
 from types import MappingProxyType
 from typing import Any
 
+from flashrsi.benchmarks._official_qa import _hotpot as scorer
 from flashrsi.benchmarks._qa import QABenchmark
 from flashrsi.core.benchmark import Task
 
@@ -16,35 +21,175 @@ _PROMPT = (
 
 
 class HotpotQA(QABenchmark):
-    """HotpotQA fullwiki with the published held-out splits and EM/F1 grading.
+    """Contextual short answers or fullwiki retrieval with official evidence metrics.
 
-    The published splits already implement ``flashrsi-hotpotqa-heldout-v1``: the
-    labeled official validation split is ``test`` and ``dev`` is a seeded holdout
-    of official train. ``split=auto`` preserves that partition; explicit ratios
-    merge and repartition it, which discards the held-out guarantee.
-
-    Those splits are not drawn from one pool. Official train always contains the
-    gold paragraphs, while the official validation split used as ``test`` is
-    entirely ``hard`` and contains them for only 28% of its rows, so train and
-    dev scores do not predict test scores.
-
-    Only the short answer is scored. Supporting-fact and joint metrics need the
-    agent to report its evidence, which this prompt does not ask for.
+    Native train/validation names are preserved. The user chooses experiment
+    roles; historical sources and Unicode EM/F1 remain explicit options.
     """
 
     name = "hotpotqa"
+    _modes = ("context", "fullwiki")
     description = "Multi-hop question answering over retrieved Wikipedia paragraphs."
     metadata = MappingProxyType(
         {
-            "source": "jinjiajie/flashrsi",
-            "config": "hotpotqa",
-            "revision": "40aa3932298226b2b5063351519291c989b85087",
+            "source": "hotpotqa/hotpot_qa",
+            "config": "fullwiki",
+            "revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+            "splits": ("train", "validation"),
+            "scorer_revision": "3635853403a8735609ee997664e1528f4480762a",
         }
     )
 
+    _scorer_revision = metadata["scorer_revision"]
+
+    def __init__(self, config):
+        super().__init__(config)
+        if self.mode == "fullwiki" and self.scoring != "official":
+            raise ValueError("HotpotQA fullwiki requires official scoring")
+        if self.mode == "fullwiki":
+            self.primary_metric = "joint_f1"
+        self._supports_by_id = {}
+
+    def load(self):
+        if self._splits is not None:
+            return self._splits
+        source_split = self.config.get("evolution_split")
+        if source_split is None:
+            if self.config.get("evolution_limit") is not None:
+                raise ValueError("HotpotQA evolution_limit requires evolution_split")
+            return super().load()
+        if source_split not in type(self).metadata["splits"]:
+            raise ValueError("HotpotQA evolution_split must be train or validation")
+
+        external = HotpotQA(
+            {
+                "dataset": {**type(self).metadata, "splits": (source_split,)},
+                "mode": self.mode,
+                "scoring": self.scoring,
+            }
+        )
+        evolution = self._load_evolution(external, source_split)
+        if self.mode == "fullwiki":
+            self._supports_by_id.update(
+                {
+                    task.task_id: external._supports_by_id[task.task_id]
+                    for task in evolution
+                }
+            )
+        return self._splits
+
+    def _prepare_task(self, task, row):
+        if self.mode == "context":
+            return task
+        support = row.get("supporting_facts")
+        if isinstance(support, Mapping):
+            titles, indices = support.get("title"), support.get("sent_id")
+            if (
+                not isinstance(titles, list)
+                or not isinstance(indices, list)
+                or len(titles) != len(indices)
+            ):
+                raise ValueError(
+                    f"HotpotQA task {task.task_id} has malformed supporting_facts"
+                )
+            support = list(zip(titles, indices, strict=True))
+        if not isinstance(support, list) or any(
+            not isinstance(item, (list, tuple))
+            or len(item) != 2
+            or not isinstance(item[0], str)
+            or type(item[1]) is not int
+            or item[1] < 0
+            for item in support
+        ):
+            raise ValueError(
+                f"HotpotQA task {task.task_id} has malformed supporting_facts"
+            )
+        self._supports_by_id[task.task_id] = support
+        return replace(
+            task,
+            env="hotpotqa_fullwiki",
+            question=(
+                "Answer the multi-hop question by searching the configured Wikipedia corpus. "
+                'Return only JSON: {"answer": "short answer", "sp": [["article title", 0], ...]}. '
+                "Each supporting fact is an article title and its zero-based sentence index.\n\n"
+                f"Question:\n{row['question']}"
+            ),
+        )
+
+    def _zero_scores(self):
+        scores = super()._zero_scores()
+        if self.mode == "fullwiki":
+            scores.update(
+                {
+                    k: 0.0
+                    for k in (
+                        "prec",
+                        "recall",
+                        "sp_em",
+                        "sp_f1",
+                        "sp_prec",
+                        "sp_recall",
+                        "joint_em",
+                        "joint_f1",
+                        "joint_prec",
+                        "joint_recall",
+                    )
+                }
+            )
+        return scores
+
+    def _score(self, prediction, task):
+        if self.scoring == "legacy":
+            return super()._score(prediction, task)
+        if self.mode == "context":
+            em = scorer.exact_match_score(prediction, task.ground_truth)
+            return {
+                "exact_match": float(em),
+                "f1": scorer.f1_score(prediction, task.ground_truth)[0],
+            }
+        try:
+            value = json.loads(prediction)
+            if not isinstance(value, dict):
+                return self._zero_scores()
+        except ValueError:
+            return self._zero_scores()
+        answer, support = value.get("answer"), value.get("sp")
+        answer_valid = isinstance(answer, str)
+        support_valid = isinstance(support, list) and all(
+            isinstance(item, list)
+            and len(item) == 2
+            and isinstance(item[0], str)
+            and type(item[1]) is int
+            and item[1] >= 0
+            for item in support
+        )
+        scores = {"em": 0.0, **self._zero_scores()}
+        # The official evaluator scores each present component independently;
+        # a missing evidence prediction must not erase a valid answer score.
+        if answer_valid:
+            em, precision, recall = scorer.update_answer(
+                scores, answer, task.ground_truth
+            )
+        if support_valid:
+            sp_em, sp_prec, sp_recall = scorer.update_sp(
+                scores, support, self._supports_by_id[task.task_id]
+            )
+        if answer_valid and support_valid:
+            joint_prec, joint_recall = precision * sp_prec, recall * sp_recall
+            scores.update(
+                joint_em=float(em * sp_em),
+                joint_prec=joint_prec,
+                joint_recall=joint_recall,
+                joint_f1=2 * joint_prec * joint_recall / (joint_prec + joint_recall)
+                if joint_prec + joint_recall
+                else 0.0,
+            )
+        scores["exact_match"] = scores.pop("em")
+        return scores
+
     @staticmethod
     def _task_from_row(row: Mapping[str, Any], source_split: str) -> Task:
-        task_id = row.get("id")
+        task_id = row.get("id", row.get("_id"))
         question = row.get("question")
         answer = row.get("answer")
         if not isinstance(task_id, str) or not task_id.strip():
@@ -62,6 +207,9 @@ class HotpotQA(QABenchmark):
             metadata={
                 "answers": (answer,),
                 "source_split": source_split,
+                "question_checksum": hashlib.sha256(
+                    re.sub(r"\s+", "", question).casefold().encode()
+                ).hexdigest(),
                 # Kept for reporting and analysis; not used by the grader.
                 **{
                     key: row[key]
@@ -80,6 +228,13 @@ def _context(value: Any, task_id: str) -> str:
     benchmark and are simply unanswerable from context.
     """
     malformed = ValueError(f"HotpotQA row {task_id} has a malformed context")
+    if isinstance(value, list):
+        if any(not isinstance(item, list) or len(item) != 2 for item in value):
+            raise malformed
+        value = {
+            "title": [item[0] for item in value],
+            "sentences": [item[1] for item in value],
+        }
     if not isinstance(value, Mapping):
         raise malformed
     titles, paragraphs = value.get("title"), value.get("sentences")

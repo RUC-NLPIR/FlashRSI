@@ -27,11 +27,18 @@ def _empty():
 
 
 def _entries(usage):
-    if usage.get("model_calls"):
+    if "samples" in usage:
+        for sample in usage["samples"]:
+            yield from _entries(sample)
+    elif usage.get("model_calls"):
         for call in usage["model_calls"]:
             yield call.get("call_id"), call.get("usage") or {}
     else:
         yield usage.get("session_id"), usage
+    # These calls belong to this trajectory, unlike copies embedded in messages.
+    for key in ("benchmark_judge", "benchmark_postprocess"):
+        if usage.get(key):
+            yield from _entries(usage[key])
 
 
 def _add_usage(total, usage, seen, role):
@@ -57,19 +64,33 @@ def _add_usage(total, usage, seen, role):
                 and row.get("outputTokens") is not None
                 for row in rows
             )
+        elif "prompt_token_count" in entry:
+            # Gemini stores the judge's response and reasoning counts separately.
+            incoming = entry.get("prompt_token_count") or 0
+            outgoing = (entry.get("candidates_token_count") or 0) + (
+                entry.get("thoughts_token_count") or 0
+            )
+            cached = entry.get("cached_content_token_count") or 0
+            written = 0
+            known = entry.get("prompt_token_count") is not None and (
+                entry.get("candidates_token_count") is not None
+            )
         else:
             cached = (
                 entry.get(
                     "prompt_cache_hit_tokens",
                     (entry.get("prompt_tokens_details") or {}).get(
-                        "cached_tokens", entry.get("cache_read_input_tokens", 0)
+                        "cached_tokens",
+                        (entry.get("input_tokens_details") or {}).get(
+                            "cached_tokens", entry.get("cache_read_input_tokens", 0)
+                        ),
                     ),
                 )
                 or 0
             )
             written = entry.get("cache_creation_input_tokens", 0) or 0
             incoming = entry.get("prompt_tokens", entry.get("input_tokens", 0)) or 0
-            if "prompt_tokens" not in entry:
+            if "prompt_tokens" not in entry and "input_tokens_details" not in entry:
                 incoming += cached + written
             outgoing = (
                 entry.get("completion_tokens", entry.get("output_tokens", 0)) or 0
@@ -109,12 +130,18 @@ def _records(root):
         for role in ("target", "worker"):
             for directory in (root / "cache" / role, root / "cache/errors" / role):
                 for path in sorted(directory.glob("*/*.json")):
-                    yield role, json.loads(path.read_text())["trajectory"]
+                    yield (
+                        role,
+                        json.loads(path.read_text(encoding="utf-8"))["trajectory"],
+                    )
         for path in sorted((root / "cache/protocol_retries").glob("*/*/*.json")):
-            yield "worker_protocol_retry", json.loads(path.read_text())["trajectory"]
+            yield (
+                "worker_protocol_retry",
+                json.loads(path.read_text(encoding="utf-8"))["trajectory"],
+            )
     else:
         for path in sorted((root / "trajectories").glob("*.json")):
-            record = json.loads(path.read_text())
+            record = json.loads(path.read_text(encoding="utf-8"))
             for trajectory in record.get("trajectories", []):
                 yield "target", trajectory
             if "trajectory" in record:
@@ -171,8 +198,9 @@ def _render_summary(summary):
         ]
     if "baseline_test" in result:
         before, after = result["baseline_test"], result["evolved_test"]
+        metric = "hard" if "hard" in before else "exact_match"
         lines += [
-            f"测试集：{after['tasks']} 题；EM {before['hard']:.2%} → {after['hard']:.2%}（{(after['hard'] - before['hard']) * 100:+.2f} pp）；F1 {before['f1']:.2%} → {after['f1']:.2%}。",
+            f"测试集：{after['tasks']} 题；EM {before[metric]:.2%} → {after[metric]:.2%}（{(after[metric] - before[metric]) * 100:+.2f} pp）；F1 {before['f1']:.2%} → {after['f1']:.2%}。",
             f"接受候选：{result.get('accepted_candidates', '未记录')}；候选决策：{result.get('candidate_decisions', '未记录')}。",
             "",
         ]
@@ -213,7 +241,7 @@ def _write_run_summary(root, *, result=None, emit=True):
         result = {}
         for name in ("result.json", "error.json", "status.json"):
             if (root / name).exists():
-                result = json.loads((root / name).read_text())
+                result = json.loads((root / name).read_text(encoding="utf-8"))
                 break
     # Whitelist result fields: never copy configuration or provider error strings.
     allowed = (
@@ -250,7 +278,7 @@ def _write_run_summary(root, *, result=None, emit=True):
         ("end-summary.md", markdown),
     ):
         temporary = root / (name + ".tmp")
-        temporary.write_text(content)
+        temporary.write_text(content, encoding="utf-8")
         temporary.replace(root / name)
     if emit:
         print(markdown, flush=True)
