@@ -42,6 +42,7 @@ except ImportError as exc:
 
 from flashrsi._records import _config_record, _redact, _secrets, _trajectory_record
 from flashrsi.core import Trajectory
+from flashrsi.integrations._container import _agent_class
 from flashrsi.integrations._tau2_evidence import _Evidence
 
 _AGENT_NAME = "flashrsi-lite"
@@ -78,6 +79,9 @@ def bind(
         )
     if task_timeout is not None and (type(task_timeout) is not int or task_timeout < 1):
         raise ValueError("tau task_timeout must be a positive integer in seconds")
+    if task_timeout is not None:
+        cls = type(agent)
+        _agent_class(f"{cls.__module__}:{cls.__qualname__}")
     judge_llm = dict((judge or {}).get("llm") or {})
     if judge_llm and not judge_llm.get("model_name"):
         raise ValueError(
@@ -192,7 +196,7 @@ async def _isolated_simulation(
         request.write_text(
             json.dumps(
                 {
-                    "agent_name": agent.name,
+                    "agent_class": f"{type(agent).__module__}:{type(agent).__qualname__}",
                     "config": config,
                     "snapshot": str(snapshot),
                     "task_id": task.task_id,

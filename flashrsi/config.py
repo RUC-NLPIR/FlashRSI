@@ -158,6 +158,9 @@ def load_config(
         raise ValueError("Configuration overrides must be a mapping")
 
     config = _merge(_merge(_DEFAULTS, values), overrides)
+    if isinstance(config["run"], Mapping) and config["run"].get("mode") == "evaluate":
+        # Evaluation has no search algorithm or Worker, including in saved configs.
+        config["algorithm"] = {"name": "evaluation"}
     _validate(config)
     origin = Path.cwd() if "output_dir" in overrides.get("run", {}) else base_dir
     output_dir = Path(config["run"]["output_dir"]).expanduser()
@@ -242,17 +245,26 @@ def _validate(config: dict) -> None:
             raise ValueError("benchmark.split ratios must sum to 1")
         config["benchmark"]["split"] = split
 
-    worker = config["algorithm"]["worker"]
-    if not isinstance(worker, Mapping):
-        raise ValueError("algorithm.worker must be a mapping")
-    if worker["type"] not in ("llm", "agent"):
-        raise ValueError("algorithm.worker.type must be 'llm' or 'agent'")
-    if worker["type"] == "agent":
-        _require_name(worker.get("name"), "algorithm.worker.name")
-    elif worker.get("name") is not None:
-        raise ValueError("algorithm.worker.name requires type: agent")
+    mode = config["run"].get("mode", "run")
+    if mode not in ("run", "evaluate"):
+        raise ValueError("run.mode must be run or evaluate")
+    roles = [("agent", config["agent"])]
+    if mode == "evaluate":
+        _require_text(config["run"].get("snapshot"), "run.snapshot")
+    else:
+        worker = config["algorithm"]["worker"]
+        if not isinstance(worker, Mapping):
+            raise ValueError("algorithm.worker must be a mapping")
+        if worker["type"] not in ("llm", "agent"):
+            raise ValueError("algorithm.worker.type must be 'llm' or 'agent'")
+        if worker["type"] == "agent":
+            _require_name(worker.get("name"), "algorithm.worker.name")
+        elif worker.get("name") is not None:
+            raise ValueError("algorithm.worker.name requires type: agent")
 
-    for section, values in (("agent", config["agent"]), ("algorithm.worker", worker)):
+        roles.append(("algorithm.worker", worker))
+
+    for section, values in roles:
         _validate_role_config(values, section)
         llm = values["llm"]
         if not isinstance(llm, Mapping):

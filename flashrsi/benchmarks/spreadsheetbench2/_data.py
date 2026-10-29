@@ -127,8 +127,13 @@ def _materialize(category, row, workbook, golden, native, dockerfile):
     }
     files = {
         "instruction.md": (
-            row["instruction"] + "\n\nInput workbook: /app/input.xlsx\n"
+            row["instruction"] + "\n\nSpreadsheetBench2 task environment:\n"
+            "Use your native shell tool to work with files in /app.\n"
+            "The task's Python interpreter is /usr/local/bin/python; "
+            "it is separate from the harness Python environment.\n"
+            "Input workbook: /app/input.xlsx (read-only).\n"
             f"Save the completed workbook to /logs/artifacts/{row['id']}_output.xlsx.\n"
+            "The host evaluates that output workbook after the session ends.\n"
         ).encode(),
         "task.toml": (
             'version = "1.0"\n[metadata]\n'

@@ -11,17 +11,15 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from flashrsi._records import _redact, _secrets
-from flashrsi.agents import ClaudeCode, MiniAgent
 from flashrsi.core import Snapshot
+from flashrsi.integrations._container import _agent_class
 from flashrsi.integrations._tau2_evidence import _Evidence
 from flashrsi.integrations.tau2 import _simulate, _simulation_result
 
 
 def main(request_path: Path, response_path: Path) -> None:
     request = json.loads(request_path.read_text(encoding="utf-8"))
-    agent_type = {"miniagent": MiniAgent, "claude_code": ClaudeCode}[
-        request["agent_name"]
-    ]
+    agent_type = _agent_class(request["agent_class"])
     agent = agent_type(request["config"])
     agent.update(Snapshot.load(Path(request["snapshot"])))
     task = SimpleNamespace(
