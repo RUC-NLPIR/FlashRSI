@@ -7,6 +7,7 @@ import asyncio
 import os
 import sys
 from collections.abc import Sequence
+from pathlib import Path
 from typing import Any
 
 import yaml
@@ -32,6 +33,27 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error(str(exc))
     except OSError as exc:
         parser.error(str(exc))
+
+    if args.command == "evaluate":
+        from flashrsi.runner import _evaluate, _prepare_evaluation
+
+        try:
+            if args.check_only:
+                target, benchmark = asyncio.run(_prepare_evaluation(config))
+                print(
+                    f"Evaluation checks passed: snapshot={target.snapshot.id}, test={len(benchmark.test)}"
+                )
+                print(
+                    "No model calls or experiment directory created; remote APIs were not tested."
+                )
+                return 0
+            run_dir, result = asyncio.run(_evaluate(config))
+        except Exception as exc:
+            parser.error(_redact(str(exc), _secrets(config) + _secrets(os.environ)))
+        print(f"Completed evaluation: {run_dir}")
+        print(f"Snapshot: {result['snapshot_id']}")
+        print(f"Test {result['primary_metric']}: {result['test_score']}")
+        return 0
 
     if not args.prepare_only:
         from flashrsi.runner import _prepare, _run
@@ -73,47 +95,53 @@ def main(argv: Sequence[str] | None = None) -> int:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="flashrsi", allow_abbrev=False)
     commands = parser.add_subparsers(dest="command", required=True)
-    run = commands.add_parser(
-        "run",
-        help="Configure an experiment",
-        allow_abbrev=False,
-        epilog=(
-            "Any configuration field accepts --path.to.key VALUE or --path.to.key=VALUE, "
-            "e.g. --algorithm.worker.llm.temperature 0.7. Values use YAML syntax. "
-            "Dotted options and --set override named flags; the last setting wins."
-        ),
-    )
-    run.add_argument(
-        "--config", "-c", metavar="PATH", help="Read configuration from YAML"
-    )
-    run.add_argument("--benchmark", help="Override benchmark.name")
-    run.add_argument("--algorithm", help="Override algorithm.name")
-    run.add_argument("--agent", help="Override agent.name")
-    run.add_argument("--model", help="Override agent.llm.model_name")
-    run.add_argument("--worker-model", help="Override algorithm.worker.llm.model_name")
-    run.add_argument("--output-dir", metavar="PATH", help="Override run.output_dir")
-    run.add_argument(
-        "--set",
-        dest="settings",
-        metavar="PATH=VALUE",
-        action="append",
-        default=[],
-        help="Set a dotted configuration path to a YAML value; repeat for more settings",
-    )
-    preparation = run.add_mutually_exclusive_group()
-    preparation.add_argument(
-        "--prepare-only",
-        action="store_true",
-        help="Validate configuration and create a run directory without executing tasks",
-    )
-    preparation.add_argument(
-        "--check-only",
-        action="store_true",
-        help=(
-            "Check dependencies, local services, data and algorithm setup without "
-            "running tasks or models; may download native data"
-        ),
-    )
+    for command in ("run", "evaluate"):
+        sub = commands.add_parser(
+            command,
+            allow_abbrev=False,
+            help="Run evolution"
+            if command == "run"
+            else "Test a saved Snapshot without evolution",
+            epilog="Any configuration field accepts --path.to.key VALUE or --set path.to.key=VALUE.",
+        )
+        sub.add_argument(
+            "--config", "-c", metavar="PATH", help="Read configuration from YAML"
+        )
+        sub.add_argument("--benchmark", help="Override benchmark.name")
+        sub.add_argument("--agent", help="Override agent.name")
+        sub.add_argument("--model", help="Override agent.llm.model_name")
+        sub.add_argument("--output-dir", metavar="PATH", help="Override run.output_dir")
+        sub.add_argument(
+            "--set",
+            dest="settings",
+            metavar="PATH=VALUE",
+            action="append",
+            default=[],
+            help="Set a dotted configuration path to a YAML value",
+        )
+        preparation = sub.add_mutually_exclusive_group()
+        preparation.add_argument(
+            "--check-only",
+            action="store_true",
+            help="Check startup without model calls; may download native data",
+        )
+        if command == "run":
+            sub.add_argument("--algorithm", help="Override algorithm.name")
+            sub.add_argument(
+                "--worker-model", help="Override algorithm.worker.llm.model_name"
+            )
+            preparation.add_argument(
+                "--prepare-only",
+                action="store_true",
+                help="Create a configuration directory without checking runtime readiness",
+            )
+        else:
+            sub.add_argument(
+                "--snapshot",
+                required=True,
+                metavar="PATH",
+                help="Saved Snapshot JSON, relative to the working directory",
+            )
     return parser
 
 
@@ -166,7 +194,7 @@ def _overrides(args: argparse.Namespace) -> dict[str, Any]:
         "output_dir": "run.output_dir",
     }
     for flag, path in fields.items():
-        value = getattr(args, flag)
+        value = getattr(args, flag, None)
         if value is not None:
             _set_value(result, path, value)
 
@@ -180,6 +208,11 @@ def _overrides(args: argparse.Namespace) -> dict[str, Any]:
             # Parser diagnostics may include a credential supplied as the value.
             raise ValueError(f"Invalid YAML value for --set {path}") from None
         _set_value(result, path, value)
+    result.setdefault("run", {})["mode"] = (
+        "evaluate" if args.command == "evaluate" else "run"
+    )
+    if args.command == "evaluate":
+        result["run"]["snapshot"] = str(Path(args.snapshot).expanduser().resolve())
     return result
 
 

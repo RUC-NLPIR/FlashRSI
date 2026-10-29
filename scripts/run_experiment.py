@@ -132,10 +132,10 @@ def _runtime(cache, env, extras=("llm", "miniagent"), requirements=()):
     return python
 
 
-def _run(config_path, check_only, cache=None):
+def _run(config_path, check_only, cache=None, snapshot=None):
     from flashrsi._launch import _run as execute
 
-    return execute(config_path, check_only, cache or _cache_root())
+    return execute(config_path, check_only, cache or _cache_root(), snapshot=snapshot)
 
 
 def main(argv=None, *, default_config="experiment.local.yaml"):
@@ -156,6 +156,11 @@ def main(argv=None, *, default_config="experiment.local.yaml"):
         "--check-only",
         action="store_true",
         help="Install dependencies and prepare data without calling models",
+    )
+    parser.add_argument(
+        "--snapshot",
+        type=Path,
+        help="Evaluate this saved Snapshot on test, without evolution or a Worker",
     )
     parser.add_argument("--_run", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--_launch", action="store_true", help=argparse.SUPPRESS)
@@ -180,7 +185,7 @@ def main(argv=None, *, default_config="experiment.local.yaml"):
     cache = args.cache_dir.expanduser().resolve()
     env = _environment(cache)
     if args._run:
-        return _run(config, args.check_only, cache)
+        return _run(config, args.check_only, cache, args.snapshot)
     try:
         stage = "--_launch"
         if args._launch:
@@ -188,7 +193,7 @@ def main(argv=None, *, default_config="experiment.local.yaml"):
             sys.path.insert(0, str(ROOT))
             from flashrsi._launch import _load, _plan, _validate_host, _validate_roles
 
-            resolved = _load(config)
+            resolved = _load(config, args.snapshot)
             plan = _plan(resolved)
             if args.plan:
                 print(json.dumps(plan, indent=2, ensure_ascii=False))
@@ -219,6 +224,8 @@ def main(argv=None, *, default_config="experiment.local.yaml"):
             "--cache-dir",
             str(cache),
         ]
+        if args.snapshot is not None:
+            command.extend(["--snapshot", str(args.snapshot.expanduser().resolve())])
         if args.check_only:
             command.append("--check-only")
         if args.plan:

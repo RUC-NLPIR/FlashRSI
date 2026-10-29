@@ -85,6 +85,8 @@ def test_native_materialization_isolated_and_reproducible(dataset):
             directory / "tests" / row["golden_response_path"]
         ).read_bytes() == b"SECRET_GOLDEN"
         assert "/logs/artifacts/01_01_output.xlsx" in task.question
+        assert "SpreadsheetBench2 task environment:" in task.question
+        assert "/usr/local/bin/python" in task.question
 
 
 def test_category_filter_and_cache_tamper(dataset):

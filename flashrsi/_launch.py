@@ -70,8 +70,13 @@ _EDITING_ALGORITHMS = {
 _TAU_REQUIREMENT = "tau2 @ git+https://github.com/sierra-research/tau2-bench.git@fc0055dc4e0a316c3f83133267fbd6faaa770992"
 
 
-def _load(path):
+def _load(path, snapshot=None):
     overrides = {}
+    if snapshot is not None:
+        overrides["run"] = {
+            "mode": "evaluate",
+            "snapshot": str(Path(snapshot).expanduser().resolve()),
+        }
     for role, keys in (
         ("AGENT", ("agent", "llm")),
         ("WORKER", ("algorithm", "worker", "llm")),
@@ -123,7 +128,7 @@ def _load(path):
             ("data_path", "corpus_path", "gold_path", "evolution_data_path"),
         ),
         (config.agent, ("source_dir", "cli_path")),
-        (config.algorithm.worker, ("source_dir", "cli_path")),
+        (config.algorithm.get("worker", {}), ("source_dir", "cli_path")),
     ):
         for key in keys:
             if section.get(key) is not None:
@@ -134,35 +139,48 @@ def _load(path):
 def _plan(config):
     benchmark = config.benchmark.name
     target = config.agent.name
+    evaluating = config.run.get("mode") == "evaluate"
     worker = (
-        "llm" if config.algorithm.worker.type == "llm" else config.algorithm.worker.name
+        None
+        if evaluating
+        else (
+            "llm"
+            if config.algorithm.worker.type == "llm"
+            else config.algorithm.worker.name
+        )
     )
     if benchmark not in _BENCHMARK_EXTRAS:
         raise ValueError(
             "Unsupported benchmark; choose: " + ", ".join(_BENCHMARK_EXTRAS)
         )
-    if (
-        target not in {"miniagent", "claude_code", "codex"}
-        or worker not in _AGENT_EXTRAS
-        or (config.algorithm.worker.type == "agent" and worker == "llm")
+    if target not in {"miniagent", "claude_code", "codex"} or (
+        not evaluating
+        and (
+            worker not in _AGENT_EXTRAS
+            or (config.algorithm.worker.type == "agent" and worker == "llm")
+        )
     ):
         raise ValueError(
             "Agent/Agent Worker must be miniagent, claude_code or codex; a text Worker uses type: llm"
         )
-    algorithm_names = {getattr(algorithms, name).name for name in algorithms.__all__}
-    if config.algorithm.name not in algorithm_names:
-        raise ValueError(
-            "Unsupported algorithm; choose: " + ", ".join(sorted(algorithm_names))
-        )
-    if (
-        config.algorithm.name in _EDITING_ALGORITHMS
-        and config.algorithm.worker.type != "agent"
-    ):
-        raise ValueError(
-            f"{config.algorithm.name} requires algorithm.worker.type: agent and worker.name"
-        )
+    if not evaluating:
+        algorithm_names = {
+            getattr(algorithms, name).name for name in algorithms.__all__
+        }
+        if config.algorithm.name not in algorithm_names:
+            raise ValueError(
+                "Unsupported algorithm; choose: " + ", ".join(sorted(algorithm_names))
+            )
+        if (
+            config.algorithm.name in _EDITING_ALGORITHMS
+            and config.algorithm.worker.type != "agent"
+        ):
+            raise ValueError(
+                f"{config.algorithm.name} requires algorithm.worker.type: agent and worker.name"
+            )
     extras = sorted(
-        {_AGENT_EXTRAS[target], _AGENT_EXTRAS[worker], *_BENCHMARK_EXTRAS[benchmark]}
+        {_AGENT_EXTRAS[target], *_BENCHMARK_EXTRAS[benchmark]}
+        | ({_AGENT_EXTRAS[worker]} if worker is not None else set())
     )
     requirements = []
     prerequisites = []
@@ -170,7 +188,10 @@ def _plan(config):
         prerequisites.append(
             "Codex requires explicit API keys and a streaming Responses API endpoint"
         )
-        for kind, role in ((target, config.agent), (worker, config.algorithm.worker)):
+        for kind, role in (
+            (target, config.agent),
+            (worker, config.algorithm.get("worker", {})),
+        ):
             if kind == "codex" and not role.get("cli_path"):
                 prerequisites.append(
                     "Codex Snapshot source build: Cargo / Rust 1.95.0 and native build dependencies (docs/codex.md)"
@@ -259,8 +280,11 @@ def _plan(config):
 
 def _validate_roles(config):
     _role(config.agent, "agent", config.agent.name)
-    worker = config.algorithm.worker
-    _role(worker, "algorithm.worker", "llm" if worker.type == "llm" else worker.name)
+    if config.run.get("mode") != "evaluate":
+        worker = config.algorithm.worker
+        _role(
+            worker, "algorithm.worker", "llm" if worker.type == "llm" else worker.name
+        )
 
 
 def _validate_host(config):
@@ -397,17 +421,17 @@ async def _resources(config, cache):
         os.environ["PATH"] = directory + os.pathsep + os.environ.get("PATH", "")
 
 
-def _run(path, check_only, cache):
+def _run(path, check_only, cache, snapshot=None):
     config = None
     try:
-        config = _load(path)
+        config = _load(path, snapshot)
         _plan(config)
         _validate_roles(config)
         _validate_host(config)
         logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 
         async def execute():
-            from flashrsi.runner import _prepare
+            from flashrsi.runner import _evaluate, _prepare, _prepare_evaluation
             from flashrsi.runner import _run as run_experiment
 
             print(
@@ -416,9 +440,12 @@ def _run(path, check_only, cache):
             )
             await _resources(config, Path(cache))
             if check_only:
-                algorithm = await _prepare(config)
+                if config.run.get("mode") == "evaluate":
+                    _, benchmark = await _prepare_evaluation(config)
+                else:
+                    benchmark = (await _prepare(config)).benchmark
                 counts = ", ".join(
-                    f"{role}={len(getattr(algorithm.benchmark, role))}"
+                    f"{role}={len(getattr(benchmark, role))}"
                     for role in ("train", "dev", "test")
                 )
                 print(
@@ -432,7 +459,11 @@ def _run(path, check_only, cache):
                     f"[3/3] Loading data, running {config.algorithm.name}, and saving results under {config.run.output_dir}",
                     flush=True,
                 )
-                run_dir, result = await run_experiment(config)
+                run_dir, result = await (
+                    _evaluate(config)
+                    if config.run.get("mode") == "evaluate"
+                    else run_experiment(config)
+                )
                 print(f"Completed experiment: {run_dir}")
                 print(f"Test {result['primary_metric']}: {result['test_score']}")
 
