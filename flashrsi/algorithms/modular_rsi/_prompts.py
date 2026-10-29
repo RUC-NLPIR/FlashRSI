@@ -49,7 +49,14 @@ Proposed source changes: {changes}
 Review whether the edit implements a reusable harness improvement, preserves
 interfaces and addresses the findings. Reject task-specific solutions, task IDs,
 answer memorization, unrelated edits and changes to the underlying model.
-Return JSON only: {{"accept": true or false, "reason": "specific assessment"}}.
+Return JSON only: exactly one object with exactly the keys "accept" and "reason".
+"accept" must be a JSON boolean; "reason" must be a non-empty string.
+Acceptance example:
+{{"accept": true, "reason": "The edit preserves interfaces and implements a reusable improvement."}}
+Rejection example:
+{{"accept": false, "reason": "The edit changes behavior outside the findings."}}
+Put all assessment and provenance details inside "reason". Do not add other keys,
+Markdown fences, headings, explanations or text outside the JSON object.
 """
 
 INTEGRATE = """[ModularRSI: integrate]

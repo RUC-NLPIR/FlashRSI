@@ -130,8 +130,12 @@ def test_separate_verifier_has_native_build_context(dataset):
     )
     assert "RUN pip install tqdm" in recipe
     assert "COPY input.xlsx" not in recipe
-    # The grader recipe does not copy golden data into an agent image layer.
-    assert not any(line.startswith(("COPY ", "ADD ")) for line in recipe.splitlines())
+    # Harbor's separate verifier skips test upload. Only its private image
+    # receives /tests; the agent context still contains no golden workbook.
+    assert [line for line in recipe.splitlines() if line.startswith("COPY ")] == [
+        "COPY . /tests/"
+    ]
+    assert not (Path(bench.train[0].env) / "environment/golden.xlsx").exists()
 
 
 @pytest.mark.parametrize("value", ["Visualization", "debugging", None, 2])

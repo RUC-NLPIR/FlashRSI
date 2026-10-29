@@ -260,6 +260,13 @@ SpreadsheetBench 2 的工作簿一般位于归档中的 `artifacts/logs/artifact
 普通实验默认使用本次实验的 `artifacts/harbor/`。直接调用 Harbor integration 而不经过 runner 时，
 默认根目录为当前工作目录的 `runs/artifacts/harbor/`。重复任务或重试均新建目录。
 
+Terminal、DeepSWE、JobBench 和 SpreadsheetBench 2 还支持 `agent.harbor.trials_dir`，
+用于额外保留 Harbor 原生 trial 目录；相对路径按启动时工作目录解析，建议使用绝对路径。
+设置后，`HarborVerifier` 记录 `trial_directory`、Task checksum、Snapshot ID，以及收集的
+产物和 verifier 文件的 SHA256。默认的产物归档仍然执行；未设置时原生 trial 随临时目录清理。
+原生 trial 配置可能包含运行凭据，不属于上述脱敏归档，应保留在 Git 忽略的本地实验目录中。
+SWE-bench Pro 的双阶段执行仍使用 `solve_artifacts` / `regrade_artifacts`，不支持此选项。
+
 ## 常见启动问题
 
 | 现象 | 检查位置 |

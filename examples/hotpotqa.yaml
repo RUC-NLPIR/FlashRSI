@@ -1,16 +1,16 @@
-# HotpotQA fullwiki with SkillOpt on MiniAgent.
+# HotpotQA contextual QA with SkillOpt on MiniAgent.
 #
-# The published splits already hold out the labeled official validation split
-# as `test`, so keep `split: auto` to preserve that partition. Explicit ratios
-# merge and repartition the splits, which discards the held-out guarantee.
+# Explicit custom train/dev/test partition of the labeled upstream pool.
+# This is an experiment split, not the official held-out leaderboard test.
 run:
   output_dir: ../runs
 
 benchmark:
   name: hotpotqa
-  split: auto
+  mode: context
+  split: {train: 0.5, dev: 0.25, test: 0.25}
   seed: 42
-  # Samples proportionally inside the published splits; remove for the full set.
+  # Total experiment size; remove for the full labeled pool.
   limit: 60
 
 agent:

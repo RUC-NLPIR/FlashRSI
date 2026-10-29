@@ -285,6 +285,61 @@ def test_generated_merge_passes_file_and_review_gates(tmp_path, problem):
     assert asyncio.run(algo.evolve()) == seed
 
 
+@pytest.mark.parametrize("accepted", [True, False])
+def test_review_prompt_examples_obey_native_gate(tmp_path, accepted):
+    from flashrsi.algorithms.modular_rsi._prompts import REVIEW
+
+    prompt = REVIEW.format(module=MODULES[0], findings="[]", changes="[]")
+    examples = [
+        json.loads(line) for line in prompt.splitlines() if line.startswith('{"accept"')
+    ]
+    assert len(examples) == 2
+    verdict = next(v for v in examples if v["accept"] is accepted)
+    assert set(verdict) == {"accept", "reason"}
+
+    def edit(prompt, directory):
+        if prompt.startswith("[ModularRSI: review]"):
+            return Trajectory(output=json.dumps(verdict))
+        return script(prompt, directory)
+
+    algo = setup(tmp_path, edit)
+    result = asyncio.run(
+        algo._edit(
+            algo.target.snapshot,
+            MODULES[0],
+            f"[ModularRSI: edit]\nModule: {MODULES[0]}",
+        )
+    )
+    assert (result is not None) is accepted
+
+
+@pytest.mark.parametrize(
+    "verdict",
+    [
+        {"accept": True, "reason": "Reusable", "reviewed_from": "working tree"},
+        {"accept": "true", "reason": "Reusable"},
+        {"accept": True, "reason": ""},
+        {"accept": True, "reason": 1},
+        [{"accept": True, "reason": "Reusable"}],
+    ],
+)
+def test_review_keeps_exact_keys_boolean_and_reason_contract(tmp_path, verdict):
+    def edit(prompt, directory):
+        if prompt.startswith("[ModularRSI: review]"):
+            return Trajectory(output=json.dumps(verdict))
+        return script(prompt, directory)
+
+    algo = setup(tmp_path, edit)
+    with pytest.raises(ValueError, match="review requires boolean accept"):
+        asyncio.run(
+            algo._edit(
+                algo.target.snapshot,
+                MODULES[0],
+                f"[ModularRSI: edit]\nModule: {MODULES[0]}",
+            )
+        )
+
+
 @pytest.mark.parametrize(
     "problem", ["scope", "syntax", "credential", "review", "runtime"]
 )
