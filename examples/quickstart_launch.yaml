@@ -6,7 +6,7 @@ run:
 
 benchmark:
   name: searchqa
-  # Local benchmark paths are resolved from the working directory (repo root).
+  # The launcher resolves this path relative to this YAML file.
   data_path: ./data/quickstart.jsonl
   split:
     train: 0.5

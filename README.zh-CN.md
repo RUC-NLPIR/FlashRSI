@@ -4,7 +4,7 @@
 
 <h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
 
-<p align="center"><i>One click to reproduce any RSI algorithm with any benchmark and harness.</i></p>
+<p align="center"><i>通过统一流程，在支持的算法、benchmark 和 harness 组合上开展 Agent 自我改进实验。</i></p>
 
 <p align="center">
   FlashRSI 集成 <b>12 种 RSI 算法</b>、<b>30 个 benchmark</b> 和 <b>3 个 harness</b>（MiniAgent、Claude Code、Codex），用于复现、比较和开发 Agent 自我改进方法。
@@ -57,7 +57,9 @@
 GIT_LFS_SKIP_SMUDGE=1 git clone --filter=blob:none --sparse https://github.com/ignorejjj/FlashRSI.git
 cd FlashRSI
 git sparse-checkout set flashrsi docs examples scripts tests assets
-pip install -e .
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 ```
 
 ### 2. 一键运行

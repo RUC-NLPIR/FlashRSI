@@ -9,7 +9,9 @@ run:
 
 benchmark:
   name: hotpotqa
-  split: auto
+  mode: context
+  # Custom experiment partition of labeled questions, not official test roles.
+  split: {train: 0.5, dev: 0.25, test: 0.25}
   seed: 42
   limit: 60
 
