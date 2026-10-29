@@ -64,7 +64,7 @@ def test_python_codex_startup_does_not_require_native_oracle(tmp_path, monkeypat
 
     def available(module):
         checked.append(module)
-        return None if module == "codex_cli_bin" else object()
+        return object()
 
     monkeypatch.setattr(runner.importlib.util, "find_spec", available)
     target = runner._make_agent(
@@ -77,6 +77,7 @@ def test_python_codex_startup_does_not_require_native_oracle(tmp_path, monkeypat
     )
     assert target.snapshot.agent_type == "codex"
     assert checked == ["httpx", "PIL", "tree_sitter", "tree_sitter_bash"]
+    assert "codex_cli_bin" not in checked
 
 
 @pytest.fixture
