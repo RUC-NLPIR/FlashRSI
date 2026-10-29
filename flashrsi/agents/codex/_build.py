@@ -90,6 +90,34 @@ def _source_digest(directory: Path, digest) -> None:
             digest.update(bytes([bool(path.stat().st_mode & 0o111)]))
 
 
+def _reject_external_cargo_config(workspace: Path, env: dict) -> None:
+    # Cargo merges configuration from its actual cwd's ancestors and Cargo home.
+    # Relative CARGO_HOME is relative to that cwd, not this Python process's cwd.
+    # Only the selected workspace's own .cargo config is bound by its source hash.
+    workspace = workspace.resolve()
+    directories = {parent / ".cargo" for parent in workspace.parents}
+    cargo_home = (
+        Path(env["CARGO_HOME"]) if env.get("CARGO_HOME") else Path.home() / ".cargo"
+    )
+    if not cargo_home.is_absolute():
+        cargo_home = workspace / cargo_home
+    directories.add(cargo_home.resolve())
+    external = sorted(
+        path
+        for directory in directories
+        for name in ("config", "config.toml")
+        if (path := directory / name).exists() or path.is_symlink()
+    )
+    if external:
+        raise ValueError(
+            "External Cargo configuration is not supported for Codex source builds: "
+            + ", ".join(str(path) for path in external)
+            + ". Use an isolated CARGO_HOME without config/config.toml and an isolated "
+            "FLASHRSI_CODEX_BUILD_CACHE whose ancestors contain no .cargo/config or "
+            ".cargo/config.toml. Keep selected build configuration in runtime/.cargo."
+        )
+
+
 async def build_core(runtime_dir: Path) -> Path:
     """Compile exactly this source version; never substitute an installed engine.
 
@@ -163,7 +191,9 @@ async def build_core(runtime_dir: Path) -> Path:
     binary_name = "flashrsi-codex-core" + (".exe" if os.name == "nt" else "")
     binary = cached / binary_name
     metadata_path = cached / "build.json"
+    source = cache_root / "workspace"
     async with _build_lock(cache_root):
+        _reject_external_cargo_config(source, env)
         if binary.is_file() and metadata_path.is_file():
             record = json.loads(metadata_path.read_text())
             if (
@@ -179,7 +209,6 @@ async def build_core(runtime_dir: Path) -> Path:
                 return binary
             raise RuntimeError("Cached Codex core executable failed its SHA-256 check")
         cached.mkdir(parents=True, exist_ok=True)
-        source = cache_root / "workspace"
         _stage_source(runtime_dir, source)
         return await _compile(
             cargo,

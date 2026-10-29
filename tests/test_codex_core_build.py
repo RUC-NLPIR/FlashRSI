@@ -257,6 +257,110 @@ def test_rustflags_changes_cannot_reuse_another_build(compiler, monkeypatch):
     assert len(_records(compiler)) == 2
 
 
+@pytest.mark.parametrize("filename", ["config", "config.toml"])
+def test_ancestor_cargo_configuration_is_rejected_before_compilation(
+    compiler, filename
+):
+    configuration = compiler.cache.parent / ".cargo" / filename
+    configuration.parent.mkdir()
+    configuration.write_text('[build]\nrustflags = ["--cfg", "ambient"]\n')
+
+    with pytest.raises(ValueError, match="External Cargo configuration") as error:
+        asyncio.run(_build.build_core(compiler.runtime))
+
+    assert str(configuration) in str(error.value)
+    assert "isolated CARGO_HOME" in str(error.value)
+    assert "FLASHRSI_CODEX_BUILD_CACHE" in str(error.value)
+    assert _records(compiler) == []
+
+
+@pytest.mark.parametrize("filename", ["config", "config.toml"])
+@pytest.mark.parametrize("default_home", [False, True], ids=["explicit", "default"])
+def test_cargo_home_configuration_is_rejected(
+    compiler, tmp_path, monkeypatch, filename, default_home
+):
+    if default_home:
+        monkeypatch.delenv("CARGO_HOME", raising=False)
+        monkeypatch.setattr(
+            _build.Path, "home", classmethod(lambda cls: tmp_path / "user-home")
+        )
+        cargo_home = tmp_path / "user-home/.cargo"
+    else:
+        cargo_home = tmp_path / "cargo-home"
+        monkeypatch.setenv("CARGO_HOME", str(cargo_home))
+    configuration = cargo_home / filename
+    configuration.parent.mkdir(parents=True)
+    configuration.write_text('[build]\nrustflags = ["--cfg", "ambient"]\n')
+
+    with pytest.raises(ValueError, match="External Cargo configuration") as error:
+        asyncio.run(_build.build_core(compiler.runtime))
+
+    assert str(configuration) in str(error.value)
+    assert _records(compiler) == []
+
+
+def test_relative_cargo_home_is_resolved_from_the_cargo_workspace(
+    compiler, tmp_path, monkeypatch
+):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("CARGO_HOME", "../relative-cargo-home")
+    # Cargo runs in cache/workspace, which differs from both Python's cwd and
+    # the selected runtime directory used for the rustc identity probe.
+    configuration = compiler.cache / "relative-cargo-home/config.toml"
+    configuration.parent.mkdir(parents=True)
+    configuration.write_text('[build]\nrustflags = ["--cfg", "ambient"]\n')
+
+    with pytest.raises(ValueError, match="External Cargo configuration") as error:
+        asyncio.run(_build.build_core(compiler.runtime))
+
+    assert str(configuration) in str(error.value)
+    assert _records(compiler) == []
+
+
+@pytest.mark.parametrize("location", ["ancestor", "cargo-home", "default-home"])
+def test_a_cached_build_still_rejects_new_external_cargo_configuration(
+    compiler, tmp_path, monkeypatch, location
+):
+    if location == "ancestor":
+        directory = compiler.cache.parent / ".cargo"
+    elif location == "cargo-home":
+        directory = tmp_path / "cargo-home"
+        monkeypatch.setenv("CARGO_HOME", str(directory))
+    else:
+        monkeypatch.delenv("CARGO_HOME", raising=False)
+        monkeypatch.setattr(
+            _build.Path, "home", classmethod(lambda cls: tmp_path / "user-home")
+        )
+        directory = tmp_path / "user-home/.cargo"
+    baseline = asyncio.run(_build.build_core(compiler.runtime))
+    assert asyncio.run(_build.build_core(compiler.runtime)) == baseline
+    configuration = directory / "config.toml"
+    configuration.parent.mkdir(parents=True)
+    configuration.write_text('[build]\nrustflags = ["--cfg", "ambient"]\n')
+
+    with pytest.raises(ValueError, match="External Cargo configuration") as error:
+        asyncio.run(_build.build_core(compiler.runtime))
+
+    assert str(configuration) in str(error.value)
+    assert len(_records(compiler)) == 1
+    assert _artifact(baseline)["selected"] == "BASELINE"
+
+
+@pytest.mark.parametrize("filename", ["config", "config.toml"])
+def test_selected_runtime_cargo_configuration_is_allowed(compiler, filename):
+    configuration = compiler.runtime / ".cargo" / filename
+    configuration.parent.mkdir()
+    configuration.write_text('[build]\nrustflags = ["--cfg", "selected"]\n')
+
+    binary = asyncio.run(_build.build_core(compiler.runtime))
+
+    assert _artifact(binary)["selected"] == "BASELINE"
+    assert f".cargo/{filename}" in _records(compiler)[0]["files"]
+    assert (compiler.cache / "workspace/.cargo" / filename).read_bytes() == (
+        configuration.read_bytes()
+    )
+
+
 def test_staging_removes_stale_directory_links_and_dangling_links(compiler, tmp_path):
     destination = tmp_path / "workspace"
     destination.mkdir()

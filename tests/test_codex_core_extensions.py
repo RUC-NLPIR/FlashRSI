@@ -247,14 +247,16 @@ def test_core_startup_warning_matches_upstream_without_failing_turn(
         warnings = []
         for event in result.messages:
             if binary is None:
-                payload = event.get("msg", {})
-                if payload.get("type") == "warning":
-                    warnings.append(payload["message"])
+                if event.get("type") == "warning":
+                    warnings.append(event["message"])
             elif event.get("type") == "item.completed":
                 item = event.get("item", {})
                 if item.get("type") == "error":
                     warnings.append(item["message"])
-        warnings = [message for message in warnings if message.startswith(expected)]
+        # exec may present a warning again after its native config reload.
+        warnings = sorted(
+            {message for message in warnings if message.startswith(expected)}
+        )
         assert warnings == [expected], result.messages
         observed.append(
             _normalize(
@@ -367,7 +369,7 @@ def test_core_custom_subagent_executes_selected_role(responses_server, tmp_path)
     role.write_text(f'developer_instructions="{marker}"\n')
     (source / "config.toml").write_text(
         "[features]\nplugins=false\nremote_plugin=false\n"
-        "[features.multi_agent_v2]\nenabled=true\n"
+        "multi_agent=true\n"
         '[agents.researcher]\ndescription="Research the delegated evidence."\n'
         'config_file="agents/researcher.toml"\n'
     )
@@ -380,24 +382,35 @@ def test_core_custom_subagent_executes_selected_role(responses_server, tmp_path)
             child_requests.append(body)
             return _events("CHILD_CORE_COMPLETE", response_id="resp_core_child")
         if "call_resp_core_spawn" not in serialized:
-            assert any(tool.get("name") == "collaboration" for tool in body["tools"])
+            assert any(tool.get("name") == "multi_agent_v1" for tool in body["tools"])
             return _events(
                 call=(
                     "spawn_agent",
                     {
-                        "task_name": "core_researcher",
                         "agent_type": "researcher",
-                        "fork_turns": "none",
                         "message": "CORE_CHILD_TASK: return the role evidence.",
                     },
                 ),
-                namespace="collaboration",
+                namespace="multi_agent_v1",
                 response_id="resp_core_spawn",
             )
         if "call_resp_core_wait" not in serialized:
             return _events(
-                call=("wait_agent", {"timeout_ms": 10000}),
-                namespace="collaboration",
+                call=(
+                    "wait_agent",
+                    {
+                        "targets": [
+                            next(
+                                json.loads(item["output"])["agent_id"]
+                                for item in body["input"]
+                                if item.get("type") == "function_call_output"
+                                and item.get("call_id") == "call_resp_core_spawn"
+                            )
+                        ],
+                        "timeout_ms": 10000,
+                    },
+                ),
+                namespace="multi_agent_v1",
                 response_id="resp_core_wait",
             )
         assert "CHILD_CORE_COMPLETE" in serialized
@@ -515,7 +528,7 @@ def test_core_mcp_elicitation_matches_noninteractive_upstream(
     assert observed[0] == observed[1]
 
 
-def test_core_code_mode_matches_upstream_execution(
+def test_native_code_mode_reference_and_python_execute_same_cell(
     responses_server, upstream_codex, tmp_path
 ):
     source = _source(tmp_path)
@@ -583,7 +596,7 @@ def test_core_code_mode_matches_upstream_execution(
         assert "42" in json.dumps(outputs[0]["output"])
         assert "Error:" not in json.dumps(outputs[0]["output"])
         observed.append(_normalize(responses_server.requests, tmp_path))
-    for label, trace in zip(("upstream", "core"), observed, strict=True):
+    for label, trace in zip(("upstream", "python"), observed, strict=True):
         (tmp_path / f"code-mode-{label}.json").write_text(json.dumps(trace, indent=2))
     assert observed[0] == observed[1]
 
@@ -608,6 +621,9 @@ def test_core_apply_patch_matches_upstream_edit_and_requests(
         edited.unlink(missing_ok=True)
         responses_server.requests.clear()
         config = _core_config(responses_server, source_dir=source)
+        # The pinned catalog advertises native patch support for this model;
+        # the unknown gpt-5 fixture intentionally has no apply_patch metadata.
+        config["llm"]["model_name"] = "gpt-5.4"
         if binary is not None:
             config["cli_path"] = binary
         result = asyncio.run(Codex(config).run("Apply the supplied patch.", task))
@@ -631,7 +647,7 @@ def test_core_apply_patch_matches_upstream_edit_and_requests(
     assert observed[0] == observed[1]
 
 
-def test_core_tiff_view_image_matches_upstream_payload(
+def test_native_tiff_reference_and_python_transcode_rejection(
     responses_server, upstream_codex, tmp_path
 ):
     source = _source(tmp_path)
@@ -686,6 +702,14 @@ def test_core_tiff_view_image_matches_upstream_payload(
         result = asyncio.run(
             Codex(config).run("Inspect the supplied TIFF image.", task)
         )
+        if binary is None:
+            assert result.status == "error"
+            assert any(
+                word in result.error_message.lower()
+                for word in ("transcod", "tiff", "re-encod")
+            ), result.error_message
+            assert len(responses_server.requests) == 1
+            continue
         assert result.status == "finished", result.error_message
         assert result.output == "Image complete"
         assert len(responses_server.requests) == 2
@@ -703,9 +727,9 @@ def test_core_tiff_view_image_matches_upstream_payload(
         assert images[0]["image_url"].startswith("data:image/")
         observed.append(_normalize(responses_server.requests, tmp_path))
     assert image.read_bytes() == original
-    for label, trace in zip(("upstream", "core"), observed, strict=True):
+    for label, trace in zip(("upstream",), observed, strict=True):
         (tmp_path / f"tiff-{label}.json").write_text(json.dumps(trace, indent=2))
-    assert observed[0] == observed[1]
+    assert len(observed) == 1
 
 
 @pytest.mark.skipif(os.name != "posix", reason="Native tool sessions require POSIX")

@@ -22,7 +22,6 @@ from pathlib import Path
 import pytest
 
 from flashrsi.agents import Codex
-from flashrsi.core import Snapshot, Task
 
 _UUID = re.compile(
     r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
@@ -188,7 +187,9 @@ def parity_source(tmp_path, monkeypatch):
     shutil.copytree(
         Path(inspect.getfile(Codex)).parent,
         source,
-        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "target", ".git"),
+        ignore=shutil.ignore_patterns(
+            "__pycache__", "*.pyc", "target", ".git", "runtime"
+        ),
     )
     (source / "config.toml").write_text(
         "[features]\nplugins = false\nremote_plugin = false\nunified_exec = false\n"
@@ -262,7 +263,9 @@ def test_extracted_core_matches_upstream_requests_and_results(
                 )
             )
             assert not replay.errors
-            assert not replay.steps, "Codex failed to consume the response script"
+            assert not replay.steps, (
+                result.error_message or "Codex failed to consume the response script"
+            )
             assert replay.requests
             assert all(
                 request["authorization"] == "Bearer local-parity-test-key"
@@ -325,86 +328,3 @@ def test_parity_normalization_preserves_identity_and_semantic_differences(tmp_pa
     assert _normalize({"instructions": "first"}, tmp_path) != _normalize(
         {"instructions": "second"}, tmp_path
     )
-
-
-def test_snapshot_rust_source_candidate_executes_and_roundtrips(
-    parity_source, tmp_path
-):
-    relative = "runtime/models-manager/src/model_info.rs"
-    source_file = parity_source / relative
-    original = source_file.read_bytes()
-    marker = "PARITY_COMPILED_RUST_CANDIDATE"
-    declaration = 'pub const BASE_INSTRUCTIONS: &str = include_str!("../prompt.md");'
-    assert original.decode().count(declaration) == 1
-    replacement = (
-        'pub const BASE_INSTRUCTIONS: &str = concat!(include_str!("../prompt.md"), '
-        + json.dumps("\n" + marker + "\n")
-        + ");"
-    )
-
-    with _responses_server() as replay:
-        agent = Codex(
-            {
-                "source_dir": parity_source,
-                "llm": {
-                    "model_name": "gpt-5",
-                    "api_key": "local-parity-test-key",
-                    "base_url": replay.base_url,
-                },
-                "sandbox": "danger-full-access",
-                "timeout": 60,
-            }
-        )
-        agent.set_scope({"code": "rw"})
-        baseline = agent.snapshot
-        assert baseline.files[relative].component == "code"
-        with baseline.check_out() as directory:
-            candidate_source = directory / relative
-            candidate_source.write_text(
-                original.decode().replace(declaration, replacement)
-            )
-            candidate = baseline.commit(directory)
-        assert baseline.changed_paths(candidate) == (relative,)
-        saved = tmp_path / "candidate.json"
-        candidate.save(saved)
-        restored = Snapshot.load(saved)
-        assert restored.id == candidate.id
-
-        async def request_instructions(snapshot=None):
-            replay.reset([(200, _events())])
-            task = Task("source-proof", "Return the scripted answer.")
-            (result,) = await agent.rollout([task], snapshot=snapshot)
-            assert result.status == "finished", result.error_message
-            assert result.output == "PARITY_ANSWER"
-            assert not replay.errors and not replay.steps
-            assert len(replay.requests) == 1
-            return replay.requests[0]["body"]["instructions"]
-
-        assert marker not in asyncio.run(request_instructions())
-        assert marker in asyncio.run(request_instructions(candidate))
-        assert agent.snapshot.id == baseline.id
-        assert marker not in asyncio.run(request_instructions())
-        agent.update(restored)
-        assert marker in asyncio.run(request_instructions())
-        agent.update(baseline)
-        assert marker not in asyncio.run(request_instructions())
-
-        with baseline.check_out() as directory:
-            (directory / relative).write_bytes(original + b"\nthis is invalid Rust;\n")
-            invalid = baseline.commit(directory)
-        replay.reset([(200, _events())])
-        (failed,) = asyncio.run(
-            agent.rollout(
-                [Task("invalid-source", "Answer only if compilation succeeds.")],
-                snapshot=invalid,
-            )
-        )
-        assert failed.status == "error"
-        assert "source build failed" in failed.error_message
-        assert replay.requests == [], "Invalid Rust must fail before calling a model"
-        assert agent.snapshot.id == baseline.id
-        assert marker not in asyncio.run(request_instructions())
-
-    assert source_file.read_bytes() == original
-    assert baseline.files[relative].content == original
-    assert marker.encode() in restored.files[relative].content

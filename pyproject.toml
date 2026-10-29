@@ -15,6 +15,8 @@ dependencies = [
     "claude-agent-sdk>=0.2.153,<0.3",
     "httpx>=0.28,<1",
     "pillow>=11,<13",
+    "tree-sitter==0.25.2",
+    "tree-sitter-bash==0.25.1",
     "packaging>=24",
     "rank_bm25>=0.2,<1",
 ]
@@ -27,7 +29,13 @@ dev = ["pytest>=8", "ruff>=0.9"]
 llm = ["openai>=2,<3"]
 miniagent = ["openai>=2,<3", "requests>=2.32,<3"]
 claude-code = ["claude-agent-sdk>=0.2.153,<0.3"]
-codex = ["openai-codex-cli-bin==0.147.0"]
+codex = [
+    "httpx>=0.28,<1",
+    "pillow>=11,<13",
+    "tree-sitter==0.25.2",
+    "tree-sitter-bash==0.25.1",
+]
+codex-oracle = ["openai-codex-cli-bin==0.147.0"]
 harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
 # tau2-bench is not published on PyPI, so it cannot be a dependency here.
 # Install it alongside this package, in its own environment:
@@ -39,14 +47,21 @@ tau2 = ["rank_bm25>=0.2,<1"]
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["flashrsi*"]
-# Native source fixtures are data. Treating their Python scripts as namespace
-# packages strips upstream executable bits during build_py.
-exclude = ["flashrsi.agents.codex.runtime*", "flashrsi.agents.codex._bridge*"]
+# Reference sources and bundled skill scripts are data. Treating those scripts
+# as namespace packages strips upstream executable bits during build_py.
+exclude = [
+    "flashrsi.agents.codex.runtime*",
+    "flashrsi.agents.codex._bridge*",
+    "flashrsi.agents.codex.python_core.resource_assets.system_skills*",
+]
 
 [tool.setuptools.package-data]
 "flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
 "flashrsi.agents.claude_code" = ["*.yaml", "*.md", "settings.json", ".mcp.json", ".lsp.json", ".claude-plugin/*.json", "skills/**/*", "commands/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "output-styles/**/*"]
-"flashrsi.agents.codex" = ["components.yaml", "config.toml", "_companion.json", "AGENTS.md", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*", "runtime/**/*", "runtime/**/.*", "runtime/.cargo/*", "_bridge/**/*"]
+"flashrsi.agents.codex" = ["components.yaml", "config.toml", "AGENTS.md", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*", "python_core/**/*"]
+
+[tool.setuptools.exclude-package-data]
+"flashrsi.agents.codex" = ["runtime/*", "runtime/**/*", "_bridge/*", "_bridge/**/*", "_companion.json", "**/__pycache__/*", "**/*.pyc", "**/*.pyo"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -55,7 +70,7 @@ addopts = "-q"
 
 [tool.ruff]
 target-version = "py311"
-extend-exclude = ["mvp_doc.md", "flashrsi/agents/codex/runtime"]
+extend-exclude = ["mvp_doc.md", "flashrsi/agents/codex/runtime", "flashrsi/agents/codex/python_core/resource_assets/system_skills"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]

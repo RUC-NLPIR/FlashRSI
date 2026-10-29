@@ -319,6 +319,42 @@ def test_explicit_build_inputs_disable_the_official_cache(monkeypatch, key):
     assert _companion._platform_asset({key: "1"}, metadata) is None
 
 
+@pytest.mark.parametrize(
+    ("key", "value"),
+    [
+        ("SDKROOT", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"),
+        ("DEVELOPER_DIR", "/Applications/Xcode-beta.app/Contents/Developer"),
+        ("MACOSX_DEPLOYMENT_TARGET", "15.0"),
+        ("ARCHFLAGS", "-arch x86_64"),
+        ("RUSTUP_TOOLCHAIN", "nightly"),
+        ("RUSTUP_TOOLCHAIN", "1.95.0"),
+        ("CARGO_BUILD_RUSTC", "/custom/toolchain/bin/rustc"),
+        ("CARGO_BUILD_RUSTC_WRAPPER", "/custom/compiler-wrapper"),
+        ("CARGO_BUILD_RUSTC_WORKSPACE_WRAPPER", "/custom/workspace-wrapper"),
+    ],
+)
+def test_explicit_sdk_and_toolchain_selection_requires_selected_source(
+    monkeypatch, key, value
+):
+    metadata = json.loads(_companion._METADATA.read_text())
+    monkeypatch.setattr(_companion.sys, "platform", "darwin")
+    monkeypatch.setattr(_companion.platform, "machine", lambda: "arm64")
+    assert _companion._platform_asset({}, metadata) is not None
+    assert _companion._platform_asset({key: value}, metadata) is None
+
+
+def test_unrelated_runtime_settings_allow_the_verified_build_cache(monkeypatch):
+    metadata = json.loads(_companion._METADATA.read_text())
+    monkeypatch.setattr(_companion.sys, "platform", "darwin")
+    monkeypatch.setattr(_companion.platform, "machine", lambda: "arm64")
+    assert (
+        _companion._platform_asset(
+            {"RUST_BACKTRACE": "1", "LANG": "zh_CN.UTF-8"}, metadata
+        )
+        is not None
+    )
+
+
 @pytest.mark.skipif(sys.platform == "win32", reason="POSIX process cancellation")
 def test_cancelling_an_http_worker_reaps_the_process_promptly(
     selected_host, tmp_path, monkeypatch

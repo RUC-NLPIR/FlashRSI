@@ -1,19 +1,83 @@
 code:
-  - runtime/**
+  # The orchestration/protocol modules stay together because they form the
+  # request and context core. Tool, agent, hook, memory and plugin runtimes
+  # below, including the Code Mode worker, are independently evolvable
+  # components with the same Snapshot rules.
+  - python_core/__init__.py
+  - python_core/client.py
+  - python_core/compact.py
+  - python_core/context.py
+  - python_core/context_budget.py
+  - python_core/history.py
+  - python_core/images.py
+  - python_core/loop.py
+  - python_core/models.py
+  - python_core/remote_compact.py
+  - python_core/resources.py
 prompt:
   - AGENTS.md
+  # Prompt assets are versioned separately from the Python implementation.
+  - python_core/assets/prompt.md
+  - python_core/assets/compact/prompt.md
+  - python_core/assets/compact/summary_prefix.md
 skill:
   - skills/**
+  - python_core/resource_assets/system_skills/**
+  - python_core/resource_assets/skills_prompt.json
 agent:
   - agents/**
+  - python_core/subagents.py
+  - python_core/subagents_v2.py
+  - python_core/tool_assets/agent_names.txt
+  - python_core/tool_assets/agent_roles.json
+  - python_core/tool_assets/spawn_agent_templates.json
+  - python_core/tool_assets/subagents_v2.json
 hook:
   - hooks/**
+  - python_core/hooks.py
+  - python_core/resource_assets/hook_schemas/**
 tool:
   - servers/**
+  - python_core/apply_patch.py
+  - python_core/code_mode_assets/**
+  - python_core/code_mode.py
+  - python_core/code_mode_spec.py
+  - python_core/code_mode_worker.js
+  - python_core/mcp.py
+  - python_core/resource_assets/mcp_resource_tools.json
+  - python_core/shell.py
+  - python_core/shell_snapshot.py
+  - python_core/tool_search.py
+  - python_core/tools.py
+  - python_core/tool_assets/collaboration_output_schemas.json
+  - python_core/tool_assets/apply_patch.lark
+  - python_core/tool_assets/deunicode_mapping.txt
+  - python_core/tool_assets/deunicode_pointers.bin
+  - python_core/tool_assets/seatbelt_base_policy.sbpl
+  - python_core/tool_assets/seatbelt_network_policy.sbpl
+  - python_core/tool_assets/shell_snapshot_scripts.json
+  - python_core/tool_assets/stopwords_english.txt
 plugin:
   - plugins/cache/**
+  - python_core/plugins.py
+  - python_core/resource_assets/plugins_prompt.txt
 memory:
   - memories/**
+  - python_core/memory.py
+  - python_core/memory_assets/**
 config:
   - config.toml
   - rules/**
+  - python_core/LICENSE
+  - python_core/NOTICE
+  - python_core/UPSTREAM.json
+  - python_core/assets/PROVENANCE.json
+  - python_core/assets/models.json
+  - python_core/context_assets/**
+  - python_core/resource_assets/upstream.json
+  - python_core/tool_assets/bm25_LICENSE
+  - python_core/tool_assets/deunicode_LICENSE
+  - python_core/tool_assets/iana_time_zone_LICENSE
+  - python_core/tool_assets/rust_stemmers_LICENSE
+  - python_core/tool_assets/snowball_LICENSE
+  - python_core/tool_assets/stopwords_LICENSE

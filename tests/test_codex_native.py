@@ -164,7 +164,7 @@ def _source(tmp_path):
     shutil.copytree(
         Path(inspect.getfile(Codex)).parent,
         source,
-        ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "runtime"),
     )
     # These tests cover local snapshot resources. Plugin network discovery has
     # a separate test suite and must not contact remote catalogs here.
@@ -196,7 +196,10 @@ def test_native_cli_answers_and_preserves_usage(responses_server, codex_binary):
     assert result.output == "Paris"
     assert result.task.task_id == "capital"
     assert result.messages[0]["type"] == "RunConfig"
-    assert any(message["type"] == "turn.completed" for message in result.messages)
+    completion_type = (
+        "turn.completed" if config.get("cli_path") else "flashrsi.core.completed"
+    )
+    assert any(message.get("type") == completion_type for message in result.messages)
     assert result.usage["prompt_tokens"] == 20
     assert result.usage["completion_tokens"] == 3
     assert result.usage["prompt_tokens_details"]["cached_tokens"] == 5

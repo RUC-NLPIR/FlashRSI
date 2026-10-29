@@ -1,37 +1,86 @@
-"""Run pinned native Codex core source and resources from the selected Snapshot."""
+"""Fixed framework adapter; the selected Snapshot supplies the Python Codex core."""
 
 from __future__ import annotations
 
 import asyncio
+import copy
 import json
 import os
 import shutil
 import signal
+import sys
 import tomllib
+from collections.abc import Iterable
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from urllib.parse import quote_from_bytes, urlsplit
 
 from flashrsi._records import _redact, _secrets
-from flashrsi.agents.codex._build import build_core
-from flashrsi.core import Agent, Trajectory
+from flashrsi.core import Agent, Snapshot, Task, Trajectory
+from flashrsi.core.agent import _Execution
+
+
+def _runtime_home():
+    """Keep per-run executable resources outside the system temporary tree."""
+    configured = os.environ.get("XDG_CACHE_HOME")
+    cache = (
+        Path(configured).expanduser()
+        if configured
+        else Path.home() / ("Library/Caches" if sys.platform == "darwin" else ".cache")
+    )
+    parent = cache / "flashrsi/codex"
+    parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    parent.chmod(0o700)
+    return TemporaryDirectory(prefix="flashrsi-codex-", dir=parent)
 
 
 class Codex(Agent):
-    """Build the selected core version and use a fresh native session per call."""
+    """Run the selected Python core in an isolated process for each call."""
 
     name = "codex"
-    description = (
-        "Codex with versioned native core source, instructions and extensions."
-    )
+    description = "Codex with a pinned Python core port, instructions and extensions."
     instruction_file = "AGENTS.md"
     _container_extra = "codex"
+
+    async def rollout(
+        self, tasks: Iterable[Task], *, snapshot: Snapshot | None = None
+    ) -> tuple[Trajectory, ...]:
+        # Keep benchmark inputs independent of online notes. This call-local
+        # config also crosses the existing container config transport; a bare
+        # ContextVar flag would be lost when Harbor creates a fresh adapter.
+        execution = self._execution.get()
+        config = copy.deepcopy(self.config)
+        config["_codex_evaluation"] = True
+        token = self._execution.set(
+            _Execution(
+                execution.snapshot if execution is not None else self._snapshot,
+                None,
+                config,
+            )
+        )
+        try:
+            return await super().rollout(tasks, snapshot=snapshot)
+        finally:
+            self._execution.reset(token)
 
     def _check_container(self) -> None:
         super()._check_container()
         if self.config.get("cli_path"):
-            raise ValueError("Container execution builds Snapshot core; omit cli_path")
+            raise ValueError(
+                "Container execution uses the Python Snapshot core; omit cli_path"
+            )
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
+        if self.config.get("cli_path"):
+            # Explicit native reference for offline differential tests.
+            return await self._run_native(prompt, working_dir)
+        from ._python import run
+
+        return await run(self, prompt, working_dir)
+
+    async def _run_native(
+        self, prompt: str, working_dir: Path | None = None
+    ) -> Trajectory:
         config, llm = self.config, self.config["llm"]
         secrets = sorted(
             set(_secrets(os.environ) + _secrets(config)), key=len, reverse=True
@@ -127,9 +176,12 @@ class Codex(Agent):
             while chunk := await stream.read(8192):
                 diagnostic_chunks.append(chunk)
 
-        with TemporaryDirectory(prefix="flashrsi-codex-") as temporary:
+        with (
+            TemporaryDirectory(prefix="flashrsi-codex-") as temporary,
+            _runtime_home() as resource_temporary,
+        ):
             runtime = Path(temporary).resolve()
-            resource_home = runtime / "codex"
+            resource_home = Path(resource_temporary).resolve() / "codex"
             task_dir = working_dir or runtime / "task"
             if working_dir is None:
                 task_dir.mkdir()
@@ -148,29 +200,7 @@ class Codex(Agent):
                     task_dir,
                     source_root=getattr(self, "_container_source_dir", None),
                 )
-                native_cli = bool(config.get("cli_path"))
-                if native_cli:
-                    binary = str(Path(config["cli_path"]).expanduser().resolve())
-                    path_dir = None
-                else:
-                    from codex_cli_bin import bundled_path_dir
-
-                    path_dir = bundled_path_dir()
-                    build_started = asyncio.get_running_loop().time()
-                    binary = str(await build_core(self.files_dir / "runtime"))
-                    # Compilation prepares an execution environment. Exclude it
-                    # from the task budget, while still counting other setup.
-                    deadline += asyncio.get_running_loop().time() - build_started
-                    build_record = Path(binary).with_name("build.json")
-                    messages.append(
-                        {
-                            "type": "CoreBuild",
-                            **json.loads(build_record.read_text()),
-                            "snapshot_id": self.snapshot.id,
-                        }
-                    )
-                if path_dir is not None:
-                    env["PATH"] = str(path_dir) + os.pathsep + env.get("PATH", "")
+                binary = str(Path(config["cli_path"]).expanduser().resolve())
                 # Native Codex discovers AGENTS.md, skills/ and rules/ in this
                 # home. Auth, caches and transcripts are confined to the copy.
                 cli_command = [
@@ -201,23 +231,8 @@ class Codex(Agent):
                 for key, value in overrides.items():
                     cli_command.extend(["-c", f"{key}={_toml(value)}"])
                 cli_command.append("-")
-                command = cli_command if native_cli else [binary]
-                core_request = {
-                    "prompt": prompt,
-                    "cwd": str(task_dir),
-                    "codex_home": str(resource_home),
-                    "model": llm["model_name"],
-                    "sandbox": config.get("sandbox", "workspace-write"),
-                    "overrides": [
-                        [key, _toml(value)] for key, value in overrides.items()
-                    ],
-                    "bypass_hook_trust": bypass_hook_trust,
-                }
-                if not native_cli:
-                    zsh = Path(path_dir).parent / "codex-resources" / "zsh" / "zsh"
-                    if zsh.is_file():
-                        core_request["default_zsh_path"] = str(zsh)
-                request = prompt if native_cli else json.dumps(core_request) + "\n"
+                command = cli_command
+                request = prompt
                 # Count preparation and process startup toward the same call
                 # budget. Synchronous preparation cannot be interrupted, but
                 # must not start a native process after its deadline has passed.
@@ -252,11 +267,7 @@ class Codex(Agent):
                         if message.get("type") == "error"
                     ]
                     error = error or next(filter(None, reversed(failures)), None)
-                    error = error or (
-                        "Codex ended without turn.completed"
-                        if native_cli
-                        else "Codex core ended without a completed turn"
-                    )
+                    error = error or "Codex ended without turn.completed"
             except TimeoutError:
                 error = f"Codex timed out after {config.get('timeout', 300):g}s"
             except Exception as exc:
@@ -298,6 +309,7 @@ def _settings(config, resource_home, task_dir, *, source_root=None):
         "base_url",
         "auth",
         "reasoning_effort",
+        "provider_name",
     }
     if unsupported:
         raise ValueError(
@@ -309,6 +321,20 @@ def _settings(config, resource_home, task_dir, *, source_root=None):
         raise ValueError(
             "Codex credentials come from llm.api_key; auth_dir is unsupported"
         )
+    provider_name = llm.get("provider_name")
+    if "provider_name" in llm and (
+        not isinstance(provider_name, str) or not provider_name.strip()
+    ):
+        raise ValueError("Codex llm.provider_name must be a nonempty string")
+    base_url = llm.get("base_url") or "https://api.openai.com/v1"
+    if provider_name is None:
+        hostname = urlsplit(base_url).hostname or ""
+        if hostname == "api.openai.com":
+            provider_name = "OpenAI"
+        elif hostname.endswith((".openai.azure.com", ".services.ai.azure.com")):
+            provider_name = "Azure"
+        else:
+            provider_name = "FlashRSI endpoint"
     native_path = resource_home / "config.toml"
     native = (
         tomllib.loads(native_path.read_text(encoding="utf-8"))
@@ -343,7 +369,8 @@ def _settings(config, resource_home, task_dir, *, source_root=None):
     task_roots = (task_path, *task_path.parents)
     projects = dict(native.get("projects", {}))
     # Native trust may be selected by the Git/project root instead of the exact
-    # cwd. A trusted ancestor must not load resources from the task project.
+    # cwd. Project config/hooks remain outside the selected harness version;
+    # task AGENTS.md and .agents/skills are still ordinary native task inputs.
     for path in task_roots:
         projects[str(path)] = {
             **projects.get(str(path), {}),
@@ -354,9 +381,6 @@ def _settings(config, resource_home, task_dir, *, source_root=None):
         "cli_auth_credentials_store": "file",
         "log_dir": str(resource_home.parent / "logs"),
         "history.persistence": "none",
-        # The resource home's global AGENTS.md is still read. This disables
-        # implicit task-project instruction discovery, including Worker targets.
-        "project_doc_max_bytes": 0,
         "projects": projects,
     }
     # Codex 0.147 has no stdio MCP cwd field. Only explicit paths name resources:
@@ -383,19 +407,13 @@ def _settings(config, resource_home, task_dir, *, source_root=None):
         # Native dotted overrides split on '.', including inside quoted keys.
         # Pass the whole table so arbitrary server names remain intact.
         overrides["mcp_servers"] = mapped_servers
-    # Native discovery includes both current .agents/skills and legacy
-    # .codex/skills roots, even in untrusted projects. Disable those individual
-    # skills while keeping discovery in the selected resource home unchanged.
+    # Isolate unrelated host installations, while leaving task project skills
+    # available to native discovery. Explicit Snapshot disables still apply.
     ambient = {
         Path.home() / ".agents" / "skills",
         Path.home() / ".codex" / "skills",
         Path("/etc/codex/skills"),
     }
-    ambient.update(
-        parent / directory / "skills"
-        for parent in task_roots
-        for directory in (".agents", ".codex")
-    )
     disabled = [
         {"path": str(path), "enabled": False} for path in _ambient_skills(ambient)
     ]
@@ -404,11 +422,13 @@ def _settings(config, resource_home, task_dir, *, source_root=None):
             **entry,
             "path": _resource_path(entry["path"], source_root, resource_home),
         }
+        if "path" in entry
+        else dict(entry)
         for entry in native.get("skills", {}).get("config", [])
     ]
     if configured or disabled:
         overrides["skills.config"] = [*configured, *disabled]
-    if llm.get("reasoning_effort"):
+    if llm.get("reasoning_effort") is not None:
         overrides["model_reasoning_effort"] = llm["reasoning_effort"]
     auth = llm.get("auth", "api_key")
     if auth == "api_key":
@@ -419,9 +439,8 @@ def _settings(config, resource_home, task_dir, *, source_root=None):
         overrides.update(
             {
                 "model_provider": "flashrsi",
-                "model_providers.flashrsi.name": "FlashRSI endpoint",
-                "model_providers.flashrsi.base_url": llm.get("base_url")
-                or "https://api.openai.com/v1",
+                "model_providers.flashrsi.name": provider_name,
+                "model_providers.flashrsi.base_url": base_url,
                 "model_providers.flashrsi.env_key": "FLASHRSI_CODEX_API_KEY",
                 "model_providers.flashrsi.wire_api": "responses",
                 "model_providers.flashrsi.requires_openai_auth": False,
@@ -455,16 +474,52 @@ def _resource_path(value, source_root, resource_home):
 
 def _ambient_skills(roots):
     """Match native skill discovery, including symlinked skill installations."""
-    files, visited = set(), set()
+    files = set()
     for root in sorted(roots):
-        for directory, children, names in os.walk(root, followlinks=True):
-            resolved = Path(directory).resolve()
-            if resolved in visited:
-                children.clear()
+        try:
+            if not root.is_dir():
                 continue
-            visited.add(resolved)
-            if "SKILL.md" in names:
-                files.add((resolved / "SKILL.md").resolve())
+            root = root.resolve()
+            visited = {root}
+        except (OSError, RuntimeError):
+            continue
+        stack, directories, entries, response_bytes = [(root, 0)], 1, 0, 0
+        while stack:
+            directory, depth = stack.pop(0)
+            try:
+                children = sorted(directory.iterdir())
+            except OSError:
+                continue
+            for path in children:
+                if entries == 20_000:
+                    stack.clear()
+                    break
+                entries += 1
+                try:
+                    is_directory = path.is_dir()
+                    if path.is_symlink() and not is_directory:
+                        continue
+                    if not is_directory and not path.is_file():
+                        continue
+                    uri = "file://" + quote_from_bytes(
+                        os.fsencode(path), safe="/!$&'()*+,-.:;=@_~"
+                    )
+                    response_bytes += len(uri.encode()) + 64
+                    if response_bytes > 4 * 1024 * 1024:
+                        stack.clear()
+                        break
+                    if path.name == "SKILL.md" and not is_directory:
+                        files.add(path.resolve())
+                    if is_directory and depth < 6 and not path.name.startswith("."):
+                        identity = path.resolve()
+                        if identity in visited:
+                            continue
+                        visited.add(identity)
+                        if directories < 2000:
+                            directories += 1
+                            stack.append((path, depth + 1))
+                except (OSError, RuntimeError):
+                    continue
     return sorted(files)
 
 
@@ -477,8 +532,28 @@ def _toml(value):
     return json.dumps(value, ensure_ascii=False)
 
 
-async def _stop(process):
+async def _wait_for_group_exit(pid, timeout):
+    deadline = asyncio.get_running_loop().time() + timeout
+    while asyncio.get_running_loop().time() < deadline:
+        try:
+            os.killpg(pid, 0)
+        except ProcessLookupError:
+            return True
+        except PermissionError:
+            # A child can still be completing exec/sandbox transitions.
+            # Signal failures remain errors if the group outlives the wait.
+            pass
+        await asyncio.sleep(0.05)
+    return False
+
+
+async def _stop(process, *, interrupt_timeout=2):
     """Reap the native process and its children before removing resource files."""
+    if os.name == "posix" and process.returncode is not None:
+        # Native notify hooks intentionally outlive the main process. Give them
+        # a bounded opportunity to finish before tearing down their group/home.
+        if await _wait_for_group_exit(process.pid, 2):
+            return
     if os.name == "posix" and process.returncode is None:
         # Codex shell tools run in their own process groups. Let the native
         # interrupt handler close those sessions before terminating the CLI.
@@ -487,26 +562,32 @@ async def _stop(process):
         except ProcessLookupError:
             pass
         try:
-            await asyncio.wait_for(process.wait(), timeout=2)
+            await asyncio.wait_for(process.wait(), timeout=interrupt_timeout)
         except TimeoutError:
             pass
+    group_finished = False
     if os.name == "posix":
         try:
             os.killpg(process.pid, signal.SIGTERM)
         except ProcessLookupError:
             pass
+        # Waiting only for the already-exited parent misses surviving children.
+        # Let TERM finish the group before deciding whether KILL is necessary.
+        group_finished = await _wait_for_group_exit(process.pid, 2)
     elif process.returncode is None:
         process.terminate()
     try:
         await asyncio.wait_for(process.wait(), timeout=2)
     except TimeoutError:
         pass
-    if os.name == "posix":
+    if os.name == "posix" and not group_finished:
         try:
             os.killpg(process.pid, signal.SIGKILL)
         except ProcessLookupError:
             pass
-    elif process.returncode is None:
+        if not await _wait_for_group_exit(process.pid, 2):
+            raise RuntimeError("Codex process group survived forced termination")
+    elif os.name != "posix" and process.returncode is None:
         process.kill()
     try:
         await asyncio.wait_for(process.wait(), timeout=2)

@@ -5,3 +5,4 @@
 # otherwise refreshes external plugin catalogs even without an installed plugin.
 [features]
 plugins = false
+remote_plugin = false

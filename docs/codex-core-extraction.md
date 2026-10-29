@@ -1,131 +1,154 @@
-# Codex 核心源码的来源与抽取
+# Codex 核心的来源与 Python 语义移植
 
-`flashrsi/agents/codex/runtime/` 保存 Codex **0.147.0** 的 Rust 核心及完整本地依赖闭包。
-上游固定为 <https://github.com/openai/codex> 的
-`be6e8eac029b183056b7e4402879f15d2c85f61b`，对应固定 tag `rust-v0.147.0`。
-抽取前必须验证本地 tag 解析到该 commit。版本号、tag 与 commit 一起记录在
-`runtime/UPSTREAM.json`，不随上游分支移动。
+当前执行核心是 `flashrsi/agents/codex/python_core/`，由 Python 实现。
+它以 <https://github.com/openai/codex> 的固定版本为参考：
 
-抽取从原生 core、配置、协议、arg0 和运行所需的扩展注册入口出发，递归保留所有
-平台的普通、构建及开发 path dependencies：92 个生产 crate 和 5 个测试支持 crate，
-共 3,463 个上游文件、约 34.2 MB。开发依赖和原测试源码保留，以便后续对照原生测试；
-它们不成为 bridge 的生产执行入口。
+- 版本：`0.147.0`
+- tag：`rust-v0.147.0`
+- commit：`be6e8eac029b183056b7e4402879f15d2c85f61b`
 
-CLI、`exec`、TUI、app-server 及 app-server-daemon workspace 入口被排除。
-`app-server-protocol` 是 core 的实际依赖，因此保留。`exec-server`、sandbox、
-MCP、skills、hooks、memory、工具路由和模型连接等 core 依赖同样保留。
-code-mode 的 host 和 runtime 也属于执行实现，其源码纳入所选 Snapshot；
-发行包 extra 只提供 `rg`、`zsh` 等工具及上游 CLI 对照基线。
-抽取不删除 core 内部能力，不将 Rust 逻辑重写成 Python。
+这是一份人工完成的**语义移植**。上游执行逻辑使用 Rust，不能通过删除 CLI、app
+和前端代码机械地得到 Python 实现。当前代码没有宣称全部原生行为等价；已支持路径
+通过本地进程测试和固定原生 CLI 对照验证，尚未移植的能力有明确边界。
 
-## 机械变化与字节一致性
+## 执行边界
 
-全部 Rust 文件、crate 级 `Cargo.toml`、提示词和编译时资源保持上游字节一致。
-初始抽取唯一修改是 workspace 根 `Cargo.toml` 的 `members` 和
-`default-members`：成员裁剪为依赖闭包，并预留 `bridge`。
-其余依赖版本、features、平台依赖、Rust toolchain 和上游 patch 配置保持原样。
-上游根 `LICENSE`、`NOTICE` 和各 crate 内的许可证一并保留。
+框架把选中的 Snapshot materialize 到独立目录，再从其中加载 Python 核心、配置、
+指令、skills、hooks、plugins 和 MCP 配置。核心运行过程中不需要编译 Rust，也不
+通过原生 Codex CLI 执行模型循环。修改 Snapshot 中的核心或资源会影响下一次执行。
+Code Mode 的模型输入本来就是 JavaScript；`code_mode_worker.js` 在每个 cell 的独立 Node V8 上下文求值，工具委派和会话生命周期仍由 Python 管理，不调用 Rust harness。
+适配器负责配置、目录、输入输出和事件映射；会话循环、Responses 请求、历史、工具
+执行等逻辑位于选中的 Python 核心中。
 
-Cargo 会将同一依赖的 features 按构建上下文联合启用，因此文件字节一致本身不足以
-证明裁剪后的编译语义一致。固定 bridge 显式恢复原 CLI 通过产品层间接开启的共享库
-features，例如 `serde_json/preserve_order` 和 `image/tiff`，不重新引入产品入口。
-[codex-core-features.json](codex-core-features.json) 保存原 CLI 与抽取核心的依赖特性
-对照：在所列 macOS host/target 上，14 个包的差异已恢复，保留各个 host/build 与
-target 特性配置，未将其混成一个并集。该记录不替代运行测试或其他平台的特性校验。
-补齐 model refresh 和 plugin startup 生命周期后，重新对照的 859 个核心共享包及
-888 个含 code-mode host 的共享包仍无特性配置差异；外部依赖锁标识没有变化。
+主要模块及其移植职责与 Snapshot 组件边界如下。组件只影响 checkout/commit 的编辑面，
+完整执行仍导出全部 Snapshot 文件，因此拆分不会把运行时依赖截断：
 
-构建还必须保留上游 `profile.release`。`dev-small` 继承 `dev`，不只是编译速度与
-符号信息不同：`debug_assertions` 会改变首个 WebSocket 重试事件、部分错误的
-panic/日志处理、遥测导出及测试专用环境开关；arg0 的 helper 路径检查也不同。
-仅关闭 debug assertions 和 overflow checks 仍不能消除依赖构建脚本读取
-`PROFILE`、`OPT_LEVEL` 的差异，例如 V8 源码构建的 GN `is_debug` 和 aws-lc 的
-C 编译参数。因此适配器直接使用原版 release profile，不重写其配置。
-依赖特性对照独立于 profile；该对照没有覆盖运行行为或构建产物的一致性。
+| 模块 | 职责 |
+| --- | --- |
+| `loop.py`、`context.py` | `code`：会话、初始上下文、采样与工具执行顺序 |
+| `models.py`、`client.py` | `code`：固定模型目录、请求字段、HTTP Responses/SSE、重试 |
+| `history.py`、`compact.py`、`remote_compact.py`、`context_budget.py` | 历史、用量、压缩 v1/v2、窗口切换和预算 |
+| `images.py` | PNG/JPEG/WebP 原始字节传递和图像输入限制 |
+| `tools.py`、`shell.py`、`shell_snapshot.py`、`apply_patch.py` | `tool`：工具注册、shell 生命周期、后台环境快照、补丁解析与执行 |
+| `subagents.py`、`subagents_v2.py` | `agent`：v1/v2 子代理、mailbox、fork、持续任务与生命周期 |
+| `memory.py` | `memory`：summary 自动注入、读取/搜索/列表和 append-only 笔记 |
+| `code_mode.py`、`code_mode_spec.py` | `tool`：Python 管理 V8 cells、工具委派、声明和输出 |
+| `tool_search.py`、`mcp.py` | `tool`：延迟加载工具、BM25 检索、stdio MCP |
+| `resources.py` | `code`：AGENTS.md、skills、指令注入和资源组装 |
+| `hooks.py` | `hook`：command hooks、notify 和 hook 生命周期 |
+| `plugins.py` | `plugin`：本地已安装插件资源 |
 
-`runtime/UPSTREAM.json` 为每个文件记录：
+Codex 当前把原先整体 `code` 的核心拆成 11 个核心模块、26 个工具模块、6 个子代理模块、
+11 个 hook、2 个 memory、2 个 plugin，以及独立的静态 prompt/skill/config/agent 资源。
+`models.json` 仍是混合模型能力、预算、工具配置和 system instructions 的整体 config，
+`tools.py` 仍是工具描述、schema 构造和执行逻辑的整体 tool；这两处需要后续提取文件后才能
+继续细分，不能只靠 YAML 伪造语义边界。
 
-- 原始仓库路径与 Git blob SHA-1；
-- 原始文件和落盘文件的 SHA-256；
-- 原始可执行位。
+上表描述实现职责，不能作为完整行为等价的证明。逐模块上游源路径记录在
+`python_core/UPSTREAM.json`。
 
-workspace 的机械变化记录在 `runtime/upstream-build.patch`。bridge 加入后由 Cargo
-生成的 `Cargo.lock` 差异也可通过下面的命令记录到同一 patch，不修改 Rust 文件。
-这些记录描述初始来源；算法产生的后代 Snapshot 可以按其 code scope 修改核心源码，
-修改后的完整文件内容由 Snapshot 自己的内容哈希标识。
+## 原样资源与派生数据
 
-## 固定桥与构建目录
+原生模型目录、基础提示词、权限与压缩模板、内置 system skills、hook 输出 schema、
+apply_patch 语法和 Seatbelt 策略保持上游字节一致。Codex 的 `LICENSE`、`NOTICE`
+一并保留在 Python 核心目录。
 
-`flashrsi/agents/codex/_bridge/` 是 FlashRSI 的固定输入输出包装，位于 Snapshot 之外。
-构建时，适配器将选中的 runtime Snapshot 复制到构建缓存，然后把 `_bridge/` 注入为
-该构建副本的 `bridge/`。因此原始 `runtime/` 的 `members` 虽然包含 `bridge`，
-其中没有实际的 bridge 目录，也不应直接在原始 runtime 目录构建。
+部分上游字符串嵌在 Rust 源码中，移植时将其提取为运行时数据：skills 目录提示、
+plugins 提示、MCP resource 工具定义、spawn_agent 模板、v2 协作提示、Code Mode 声明模板与工具返回 schema、bash/zsh/sh snapshot 捕获脚本，以及内置角色描述。
+这些属于**派生数据**：JSON 容器的字节不同于 Rust 文件，字段与字符串内容可以
+机械地对照上游重建，不能称为整个文件原样复制。
 
-原生 core 处理模型调用、工具执行和线程运行；bridge 选择并构造原生入口，转发输入与事件。
-这种进程边界不要求把 Rust 核心翻译为 Python，也允许演化后的 core 在独立构建目录编译。
-编译产物、Cargo 缓存、凭据和任务状态不放进 runtime Snapshot。
+工具检索还使用固定 `Cargo.lock` 中 deunicode 1.6.2 和 stop-words 0.9.0 的数据，
+以及 bm25 2.3.2、rust-stemmers 1.2.0 的算法语义。来源记录包含 registry archive
+checksum、归档内路径及文件哈希；相应许可证一并保留。依赖数据通过归档对照，
+不需要运行这些 Rust crate。
 
-固定桥同时保留原 exec/app-server 的原生配置、扩展注册和启动/关闭动作，包括
-模型目录刷新、plugin analytics、后台 plugin startup 与消费者缓存刷新。
-模型刷新循环由固定上游 `app-server/src/models_refresh_worker.rs` 机械搬入桥中，
-生产函数体保持一致并标注出处；其余动作调用原生公开方法。
-不支持 native login，因而不接入依赖账号登录与 app-server 配置 RPC 的远程插件
-自动 hook trust；该边界与框架仅接受角色 `llm.api_key` 的现有运行契约一致。
+`python_core/UPSTREAM.json` 分别记录：
 
-### code-mode 宿主的已验证构建缓存
+- Python 模块的语义来源及集成模块类型；
+- 每个上游参考文件的固定路径和 SHA-256；
+- 运行时资源的 SHA-256、原样复制或派生类型、派生规则；
+- 已知未移植范围，以及不宣称完整行为等价的声明。
 
-核心始终从选中源码编译。code-mode 的独立宿主还允许复用固定官方 tag 的构建产物，
-目前只记录了 macOS arm64 的官方发布文件、归档 SHA-256 和可执行文件 SHA-256。
-固定 `_companion.json` 位于 Snapshot 外，记录宿主的完整生产 path 依赖闭包和
-workspace 配置的逐文件哈希；候选不能通过修改自己的 `UPSTREAM.json` 改写这些基线。
+模块源码是本项目维护的 Python 代码，其内容不可能与 Rust 文件字节相等。
+来源检查不会把模块路径映射解释成实现等价，也不会将测试通过解释成全路径证明。
+算法产生的后代 Snapshot 可以修改核心或资源；这些候选版本由 Snapshot 自身内容
+哈希标识，初始上游来源校验用于维护仓库中的基线。
 
-只有该闭包文件集合、内容、可执行位及 workspace/lock/toolchain 配置全部匹配时，
-才可以复用该产物。修改无关的核心模块仍能复用未改变的宿主；修改宿主或其依赖、
-增加/删除文件、改变构建参数时，必须编译候选源码，失败即返回错误。固定 bridge 和
-宿主缓存策略/元数据也参与核心构建指纹，避免接入实现改变后命中旧执行产物。
+## 校验
 
-该分支用于处理上游 `v8=150.4.0` 未发布 sandbox 预编译库的构建限制，未关闭 V8
-sandbox。宿主源码构建使用原版 V8；在 macOS 上需要完整 Xcode。构建记录明确区分
-`verified-upstream-build-cache` 与 `selected-source-build`，不将官方产物记为本机源码编译。
-
-## 重新抽取与校验
-
-使用 Python 3.11 或更高版本。`--upstream` 指向包含固定 commit 的本地 Git 仓库：
+在仓库根目录执行：
 
 ```bash
-uv run python scripts/extract_codex_core.py \
-  --upstream /path/to/openai-codex
+uv run python scripts/verify_codex_python_port.py
+```
+
+脚本不访问模型、不运行 Rust 编译器。它检查固定版本身份、Python 模块清单、
+参考源哈希、运行时资源清单与哈希、复制资源的逐字节一致性，以及派生数据能否从
+固定 Rust 源码重新提取。`--core` 可指定待验证的 Python 基线目录，`--reference`
+可指定包含 `UPSTREAM.json` 的 Rust 参考目录。
+第三方 crate 归档优先复用本机缓存；缺失时下载固定 crates.io 归档并验证锁中的
+checksum，缓存到 `.cache/codex-python-provenance/`。加 `--offline` 可要求只用已有缓存。
+
+该检查证明来源和资源数据一致；语义移植需要另外运行受影响的 Python 测试及
+原生对照。参见 [任务基线验收](codex-task-baseline-2026-10-29.md) 了解当前验证
+结果和限制。原生 CLI 对照只连接 localhost 的预设响应服务，不调用付费模型。
+
+## Rust 参考目录
+
+`flashrsi/agents/codex/runtime/` 保留同一 commit 的 Rust core 依赖闭包，供阅读、
+来源检查和维护原生对照使用。它不是当前 Python 运行核心，也不应把此前 Rust
+测试的通过数当作 Python 移植的验证结果。
+
+原有机械抽取工具继续用于维护这份参考：
+
+```bash
+uv run python scripts/extract_codex_core.py --upstream /path/to/openai-codex
 uv run python scripts/extract_codex_core.py --verify
 ```
 
-脚本读取 Git tree，不切换或修改上游工作树。默认下载固定 commit 的 codeload tarball
-到 `.cache/codex-build/`，避免 sparse/partial clone 按文件触发大量网络请求。
-下载文件中的每个实际选中 blob 必须与本地固定 Git tree 一致，才会写入 runtime。
-可通过 `--archive /path/to/codex-COMMIT.tar.gz` 使用已下载归档；归档本身的
-SHA-256 也记录在 manifest。脚本不会直接解压归档路径到文件系统。
+该脚本验证 tag 对应的固定 commit，从 Git tree 选择原生 core 及本地依赖闭包，
+保留上游文件和逐文件来源记录，排除 CLI、exec、TUI、app-server 产品入口。
+workspace 成员列表和旧桥构建锁的机械差异单独保存在参考目录的 patch 中。
+`--verify` 只校验这份 Rust 参考的来源与文件状态，不验证 Python 移植行为。
 
-`--verify` 检查固定来源标识、初始基线的所有文件哈希和可执行位、额外文件，
-以及构建 patch 的哈希，不运行模型或编译器。
-需要验证抽取结果时使用它；预期已被算法修改的后代 Snapshot 应使用其自身版本记录。
+## 当前限制
 
-在构建副本成功解析 bridge 并生成 lockfile 后，维护者可将该 `Cargo.lock` 复制回
-初始 runtime，再执行：
+当前主要覆盖 custom API-key provider 的 HTTP Responses / Lite 任务和持久子代理会话，
+包括 Code Mode、本地/远程压缩、token-budget rollover 和 `body_after_prefix` 预算。
+WebSocket、原生账号登录与恢复、音频及多模态用量估算尚未完整移植。
+该固定版本已移除独立 JS REPL，保留 Code Mode；不将旧版功能自行加回基线。
+Code Mode 由 Python 调度本机 Node V8 worker；不同 V8 版本、全部错误诊断文字、
+非 WAV 音频预算及超长计时器边界尚未证明等价。
+图像当前保留原生预算内 PNG/JPEG/WebP 的原始字节；需要 TIFF/GIF 转码或 resize
+的路径在原生编码器与滤镜移植完成前明确拒绝。
 
-```bash
-uv run python scripts/extract_codex_core.py --record-build-lock
-uv run python scripts/extract_codex_core.py --verify
-```
+执行层已经迁移 POSIX shell snapshot 的后台捕获、验证、条件恢复和清理；
+使用文件系统查询清理遗留快照，尚未接入原生持久 state DB。
+执行层尚未覆盖 execpolicy 规则、zsh-fork、交互审批 UI、
+Linux/Windows 受限 sandbox 及自定义网络/文件系统 sandbox profile。
+Windows 还缺少 shell、进程组和 PTY 执行后端；`danger-full-access` 不能使其可用。
+`external-sandbox` 也未接入。
+自定义子代理角色 TOML 尚不支持重新加载 provider/profile，明确拒绝顶层
+`model_provider`、`model_providers`、`profile`、`profiles`。它也拒绝有类型约束的
+相对路径字段：嵌套 `config_file`、`cwd`、`model_instructions_file`、
+`experimental_compact_prompt_file`、`model_catalog_json`、`js_repl_node_path`、
+`sqlite_home`、`log_dir`、`export_dir`、`load_path`，以及 `writable_roots`、
+`js_repl_node_module_dirs` 数组中的相对路径。
+资源层尚未覆盖远程 MCP HTTP/OAuth、远程 MCP 执行环境、plugin apps/connectors，
+以及原生 managed hook trust 和完整配置层发现流程。v1/v2 子代理及
+`SubagentStart`、`SubagentStop` hooks 已接入；未接入的配置层发现流程不能统一归为显式拒绝。
+memory 当前覆盖该 commit 的 summary 注入、读工具和显式笔记行为。
+上游 app-server 另有 phase1 extraction / phase2 consolidation 管线，
+ephemeral exec 不触发；Python 尚未移植这条长期持久会话能力。
+可选运行时笔记持久化属于固定适配层，保存在 Snapshot 之外，用于普通 `run` 的在线积累。
+`rollout` 的初始 memory 只来自选定 Snapshot，题内笔记不跨题传播；memory 指纹和环境证据写入轨迹。
+子代理会话持久性限于一次运行，跨进程恢复、完整 rollout 数据库以及 rollback/旧压缩事件
+重放尚未迁移。缓存续轮支持兼容模型、effort 和预算更新；改变工具协议、资源配置或环境会明确拒绝。
+`features.rollout_budget` 的父子线程共享预算、提醒和超限终止尚未移植；该开关
+在固定上游默认关闭，Python 显式启用时会拒绝。
 
-该命令先复核来源标识、除 `Cargo.lock` 内容以外的完整基线及现有 patch，验证失败
-不更新来源记录或 patch；然后验证归档 SHA-256 仍与来源 manifest 一致，并检查当前 lockfile 中每个
-外部依赖的 `(name, version, source, checksum)` 均来自原始上游锁。
-允许裁掉不再引用的包、将所选本地 crate 按其可信 `Cargo.toml` 和 workspace 版本
-重新记入锁，以及添加固定 bridge 包。本地包的许可集合从已校验归档重新计算的依赖
-闭包导出，并逐个比对其原始 manifest；不按名称前缀或仅凭旧锁条目放行任意 path 包。
-不允许变更外部版本、源码引用或校验和，也不允许增加其他包。它还拒绝已经修改的
-workspace manifest，并复核其余源文件。
-重新执行抽取命令会恢复所选上游文件，包括原始 lockfile。
-
-源码字节校验能证明初始实现来源一致。行为保真还需要 bridge 的配置和扩展注册与
-原生入口相匹配，并通过固定模型响应、工具响应及错误路径的对照测试；仅编译成功或
-最终答案相同不足以证明所有运行路径完全等价。
+本地插件、skills 目录压缩、MCP schema 清理等已有实现也未覆盖全部原生边界条件。
+这些属于后续逐项移植和补充对照的范围，不能据现有测试推断已经完全保真。
+工具检索对相同 BM25 分数保留注册顺序；上游的同分顺序来自 Rust HashSet，
+本身没有固定顺序保证。

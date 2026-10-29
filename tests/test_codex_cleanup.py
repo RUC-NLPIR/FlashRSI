@@ -146,11 +146,16 @@ def test_forced_termination_wait_is_bounded(monkeypatch):
             await asyncio.Future()
 
     original = asyncio.wait_for
+    original_group_wait = adapter._wait_for_group_exit
 
     async def short_wait(awaitable, timeout):
         return await original(awaitable, timeout=min(timeout, 0.01))
 
+    async def short_group_wait(pid, timeout):
+        return await original_group_wait(pid, min(timeout, 0.01))
+
     monkeypatch.setattr(asyncio, "wait_for", short_wait)
+    monkeypatch.setattr(adapter, "_wait_for_group_exit", short_group_wait)
     monkeypatch.setattr(os, "killpg", lambda *_: None)
 
     async def scenario():

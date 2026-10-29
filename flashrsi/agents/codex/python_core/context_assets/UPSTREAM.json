@@ -1,0 +1,41 @@
+{
+  "commit": "be6e8eac029b183056b7e4402879f15d2c85f61b",
+  "tag": "rust-v0.147.0",
+  "files": [
+    {
+      "path": "permissions/approval_policy/on_request.md",
+      "upstream_path": "codex-rs/prompts/templates/permissions/approval_policy/on_request.md",
+      "sha256": "85541a9738741407642b3c39bbe3781fbf8bb42f628d50e562c87738ab192b3a"
+    },
+    {
+      "path": "permissions/approval_policy/unless_trusted.md",
+      "upstream_path": "codex-rs/prompts/templates/permissions/approval_policy/unless_trusted.md",
+      "sha256": "5c7a62d4b7f1d6221715b6d0fe1a3f906b2d03724df912e1a36f751ccdf450dc"
+    },
+    {
+      "path": "permissions/approval_policy/on_request_rule_request_permission.md",
+      "upstream_path": "codex-rs/prompts/templates/permissions/approval_policy/on_request_rule_request_permission.md",
+      "sha256": "98e8a78ac869d64fb094fb1a12e20e327e46a159bf74022c588b84326bf6afba"
+    },
+    {
+      "path": "permissions/approval_policy/never.md",
+      "upstream_path": "codex-rs/prompts/templates/permissions/approval_policy/never.md",
+      "sha256": "41c7931bac2391a24046362bd07615d5a3e73dca4672b911516fac99646be8c4"
+    },
+    {
+      "path": "permissions/sandbox_mode/danger_full_access.md",
+      "upstream_path": "codex-rs/prompts/templates/permissions/sandbox_mode/danger_full_access.md",
+      "sha256": "0d887cb1eaba21a6cade67ab958a6ffee00f671c46f8cf29c83706e397942dbf"
+    },
+    {
+      "path": "permissions/sandbox_mode/workspace_write.md",
+      "upstream_path": "codex-rs/prompts/templates/permissions/sandbox_mode/workspace_write.md",
+      "sha256": "763661195d613a48173638af6227d480d70ab0a6898d3a81ff075155e82f7555"
+    },
+    {
+      "path": "permissions/sandbox_mode/read_only.md",
+      "upstream_path": "codex-rs/prompts/templates/permissions/sandbox_mode/read_only.md",
+      "sha256": "509b39f88e6a4f5cb36485ea8b340680c03f27175ba20200b823ec07bc79668d"
+    }
+  ]
+}

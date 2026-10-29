@@ -5,6 +5,7 @@ import json
 import os
 import signal
 import sys
+import time
 from contextlib import suppress
 from pathlib import Path
 
@@ -71,6 +72,21 @@ if prompt == 'block':
         child.wait(timeout=2)
         raise SystemExit(0)
     signal.signal(signal.SIGTERM, stop)
+elif prompt in {'notify-delayed', 'background-linger'}:
+    delay = 0.15 if prompt == 'notify-delayed' else 30
+    child = subprocess.Popen([
+        sys.executable, '-c',
+        "import json,os,time;from pathlib import Path;"
+        "Path('notify-child.json').write_text(json.dumps({'pid':os.getpid(),'pgid':os.getpgid(0)}));"
+        "time.sleep(" + str(delay) + ");"
+        "Path('notify-completed.txt').write_text('NATIVE_NOTIFY_COMPLETED')",
+    ], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    deadline = time.monotonic() + 5
+    while not Path('notify-child.json').exists():
+        if time.monotonic() >= deadline:
+            raise RuntimeError('notification child did not start')
+        time.sleep(0.005)
+    request['child_pid'] = child.pid
 with Path(RECORD).open('a') as stream:
     stream.write(json.dumps(request) + '\n')
 
@@ -166,7 +182,7 @@ def test_native_resources_and_role_config_are_run_local(
     assert provider["base_url"] == "http://127.0.0.1:1/v1"
     assert provider["env_key"] == "FLASHRSI_CODEX_API_KEY"
     assert request["overrides"]["model_reasoning_effort"] == "low"
-    assert request["overrides"]["project_doc_max_bytes"] == 0
+    assert "project_doc_max_bytes" not in request["overrides"]
     assert request["env"]["FLASHRSI_CODEX_API_KEY"] == "local-test-private-key"
     assert "CODEX_API_KEY" not in request["env"]
     assert "OPENAI_API_KEY" not in request["env"]
@@ -197,6 +213,39 @@ def test_candidate_rollout_uses_candidate_without_selecting_it(source, native_cl
     assert result.messages[0]["snapshot_id"] == candidate.id
     assert agent.snapshot is baseline
     assert asyncio.run(agent.run("question")).output == "VERSIONED_INSTRUCTIONS"
+
+
+@pytest.mark.skipif(os.name != "posix", reason="POSIX process group cleanup")
+@pytest.mark.parametrize("prompt", ["notify-delayed", "background-linger"])
+def test_successful_native_exit_finishes_short_notify_and_bounds_background_cleanup(
+    source, native_cli, tmp_path, prompt
+):
+    task = tmp_path / "notify-task"
+    task.mkdir()
+    started = time.monotonic()
+    try:
+        result = asyncio.run(_agent(source, native_cli).run(prompt, task))
+        elapsed = time.monotonic() - started
+        assert result.status == "finished", result.error_message
+        request = _requests(native_cli)[0]
+        child = json.loads((task / "notify-child.json").read_text())
+        assert child["pid"] == request["child_pid"]
+        assert child["pgid"] == request["pid"]
+        assert not Path(request["home"]).exists()
+        if prompt == "notify-delayed":
+            assert (
+                task / "notify-completed.txt"
+            ).read_text() == "NATIVE_NOTIFY_COMPLETED"
+        else:
+            assert not (task / "notify-completed.txt").exists()
+        assert elapsed < 12
+        with pytest.raises(ProcessLookupError):
+            os.kill(child["pid"], 0)
+    finally:
+        marker = task / "notify-child.json"
+        if marker.exists():
+            with suppress(ProcessLookupError):
+                os.kill(json.loads(marker.read_text())["pid"], signal.SIGKILL)
 
 
 def test_worker_edits_target_using_its_own_resource_version(
@@ -319,15 +368,24 @@ def test_mcp_script_paths_follow_the_selected_resource_home(
 
 
 def test_symlinked_ambient_skills_are_disabled_without_following_cycles(
-    source, native_cli, tmp_path
+    source, native_cli, tmp_path, monkeypatch
 ):
     task = tmp_path / "task"
-    ambient = task / ".agents/skills"
+    task.mkdir()
+    host = tmp_path / "host-home"
+    monkeypatch.setenv("HOME", str(host))
+    ambient = host / ".agents/skills"
     ambient.mkdir(parents=True)
     external = tmp_path / "installed-skill"
     external.mkdir()
     skill = external / "SKILL.md"
     skill.write_text("---\nname: ambient\ndescription: Ambient skill\n---\n")
+    nested = external / "assets/nested/SKILL.md"
+    nested.parent.mkdir(parents=True)
+    nested.write_text("---\nname: internal\ndescription: Not a discovered skill\n---\n")
+    hidden = ambient / ".hidden/SKILL.md"
+    hidden.parent.mkdir()
+    hidden.write_text("---\nname: hidden\ndescription: Hidden installation\n---\n")
     (ambient / "external").symlink_to(external, target_is_directory=True)
     (external / "cycle").symlink_to(ambient, target_is_directory=True)
 
@@ -337,13 +395,20 @@ def test_symlinked_ambient_skills_are_disabled_without_following_cycles(
     disabled = _requests(native_cli)[0]["overrides"]["skills"]["config"]
     assert {"path": str(skill.resolve()), "enabled": False} in disabled
     assert sum(item["path"] == str(skill.resolve()) for item in disabled) == 1
+    assert {"path": str(nested.resolve()), "enabled": False} in disabled
+    assert not any(item["path"] == str(hidden.resolve()) for item in disabled)
 
 
 @pytest.mark.skipif(
     os.name != "posix", reason="Process-group cleanup is POSIX-specific"
 )
 @pytest.mark.parametrize("mode", ["timeout", "cancel"])
-def test_timeout_and_cancellation_stop_process_group(source, native_cli, mode):
+def test_timeout_and_cancellation_stop_process_group(
+    source, native_cli, mode, tmp_path, monkeypatch
+):
+    # The call budget includes host-skill discovery. This test needs a running
+    # child to exercise cleanup, rather than timing out while scanning HOME.
+    monkeypatch.setenv("HOME", str(tmp_path / "empty-home"))
     agent = _agent(source, native_cli, timeout=1 if mode == "timeout" else 30)
 
     async def scenario():
@@ -355,7 +420,13 @@ def test_timeout_and_cancellation_stop_process_group(source, native_cli, mode):
                 assert "timed out" in result.error_message
             else:
                 async with asyncio.timeout(5):
-                    while not native_cli[1].exists():
+                    while True:
+                        try:
+                            recorded = _requests(native_cli)
+                        except (FileNotFoundError, json.JSONDecodeError):
+                            recorded = []
+                        if recorded and "child_pid" in recorded[0]:
+                            break
                         await asyncio.sleep(0.01)
                 running.cancel()
                 with pytest.raises(asyncio.CancelledError):

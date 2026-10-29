@@ -65,14 +65,18 @@ Claude Code 的 [适配类](../flashrsi/agents/claude_code/__init__.py) 直接�
 会话与子任务输出使用独立临时运行目录，关闭历史 auto memory，仅在 `llm.auth: login` 时从原位置读取原生凭据。
 扩展加载失败、SDK 异常和暂停／中止结果返回错误轨迹，并保留脱敏诊断。
 
-Codex 的 [适配类](../flashrsi/agents/codex/__init__.py) 调用原生 `codex exec --json`。
-将 Snapshot 的资源复制到每次调用独立的原生 home，加载 `AGENTS.md`、skills、
-配置、规则、hooks 和显式插件；任务 cwd 仍由 `working_dir` 指定。宿主的技能、插件
-和历史记忆不会自动混入所选资源，内置能力和版本内显式功能开关沿用原生配置。
+Codex 的 [适配类](../flashrsi/agents/codex/__init__.py) 默认在独立 Python 进程中执行
+选定 Snapshot 的 `python_core/`，不调用原生 CLI，也不回退宿主核心。
+将 Snapshot 的核心与资源复制到每次调用独立的 home，加载 `AGENTS.md`、skills、
+配置、hooks 和显式插件；任务 cwd 仍由 `working_dir` 指定。宿主的技能、插件
+和历史记忆不会自动混入所选资源；项目 AGENTS/skills 作为任务输入发现。
+未迁移能力有明确边界，例如 rules 执行策略尚未实现。POSIX shell snapshot 默认开启，
+生成、条件恢复与清理均由 Snapshot 内的核心负责。
 插件只版本化 `plugins/cache/**` 下的已安装 bundle 及其元数据；`plugins/data/**`
 等运行状态不从来源目录捕获，插件启用配置保留在 `config.toml`。
-模型与凭据通过角色配置映射，CLI JSONL 事件和脱敏诊断转为 Trajectory，
-退出时清理进程与运行状态。服务、hooks 和子 agent 仍需原生注册；接入与验证边界见
+模型与凭据通过角色配置映射，Python 核心的 JSONL 事件和脱敏诊断转为 Trajectory，
+退出时清理进程与运行状态。服务、hooks 和子 agent 仍需配置注册；
+显式设置 `cli_path` 的原生 CLI 模式仅用于对照，不执行 Python 候选源码。接入与验证边界见
 [Codex 说明](codex.md)。
 
 ## 可选：容器执行

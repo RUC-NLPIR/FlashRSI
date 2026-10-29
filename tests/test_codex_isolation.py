@@ -1,4 +1,4 @@
-"""Keep task project configuration and skills outside the selected resources."""
+"""Isolate task configuration while retaining native task instruction inputs."""
 
 import asyncio
 import json
@@ -68,13 +68,14 @@ def test_native_git_root_stays_untrusted_when_task_is_nested(
 
 
 @pytest.mark.parametrize("directory", [".codex", ".agents"])
-def test_native_ancestor_skills_are_disabled_and_snapshot_skills_still_load(
+def test_native_ancestor_skill_discovery_respects_untrusted_project_config(
     responses_server, codex_binary, tmp_path, directory
 ):
     project = tmp_path / "target-project"
     task = project / "nested/work"
     task.mkdir(parents=True)
     external = tmp_path / "ambient-skill"
+    subprocess.run(["git", "init", "-q", str(project)], check=True)
     external.mkdir()
     (external / "SKILL.md").write_text(
         "---\nname: ambient-probe\ndescription: TARGET_AMBIENT_SKILL\n---\n"
@@ -97,5 +98,5 @@ def test_native_ancestor_skills_are_disabled_and_snapshot_skills_still_load(
     assert result.status == "finished", result.error_message
     request = json.dumps(responses_server.requests[-1]["body"])
     assert "SNAPSHOT_SELECTED_SKILL" in request
-    assert "TARGET_AMBIENT_SKILL" not in request
+    assert "TARGET_AMBIENT_SKILL" in request
     assert "TARGET_AMBIENT_SKILL" in (external / "SKILL.md").read_text()

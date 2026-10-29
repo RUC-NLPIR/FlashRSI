@@ -1,0 +1,508 @@
+{
+  "repository": "https://github.com/openai/codex",
+  "tag": "rust-v0.147.0",
+  "commit": "be6e8eac029b183056b7e4402879f15d2c85f61b",
+  "files": {
+    "hook_schemas/permission-request.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "749c73245b4b6d43537c3049f76720ab1c2bd48d7e4752b744b376925b9d57a1",
+      "sources": [
+        "codex-rs/hooks/schema/generated/permission-request.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/post-compact.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "48355bfcb568259cf396beb6ade2ac32827f50bf6a3c20b395c337dce184cbed",
+      "sources": [
+        "codex-rs/hooks/schema/generated/post-compact.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/post-tool-use.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "a823d0e2c941e98d7d3af825dfdb0b1dfa6a935696ff8b8529e8e83232a1b0c8",
+      "sources": [
+        "codex-rs/hooks/schema/generated/post-tool-use.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/pre-compact.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "c392f3054ae6750f427d4dec07380fd67e8c58a7939a35d5c69bfa070c7ca032",
+      "sources": [
+        "codex-rs/hooks/schema/generated/pre-compact.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/pre-tool-use.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "e684f81c63fbb5972892f6a848b49fec68c8ce137931651093d2dd1da56a1dd6",
+      "sources": [
+        "codex-rs/hooks/schema/generated/pre-tool-use.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/session-start.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "f375e6de1c59ecbabd8c1aff05a67976d0f3aa2ef061808838de4c7c20be1c71",
+      "sources": [
+        "codex-rs/hooks/schema/generated/session-start.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/stop.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "dc2b30e84c97beca5825aa64ca46e1337e402781dc5a9142b67111d10523f15c",
+      "sources": [
+        "codex-rs/hooks/schema/generated/stop.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/subagent-start.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "34e8ec95393d2aa930d7932a34c3fb29a5e5f90c264fdbcc581393c5838b4660",
+      "sources": [
+        "codex-rs/hooks/schema/generated/subagent-start.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/subagent-stop.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "8ba2cd7899ae4544193764e67e988235edebe984abe5788634d123bbf13e3e3a",
+      "sources": [
+        "codex-rs/hooks/schema/generated/subagent-stop.command.output.schema.json"
+      ]
+    },
+    "hook_schemas/user-prompt-submit.command.output.schema.json": {
+      "kind": "byte-copy",
+      "sha256": "5e290303db710f3ccc12f4a2744e8586e7749b3ca2b6bf9f57781ed75bf17b2b",
+      "sources": [
+        "codex-rs/hooks/schema/generated/user-prompt-submit.command.output.schema.json"
+      ]
+    },
+    "mcp_resource_tools.json": {
+      "kind": "derived-data",
+      "sha256": "c0f4e3a89afef3b882392213ede615bbceef89ff13f95df116903fd7a11038bc",
+      "sources": [
+        "codex-rs/core/src/tools/handlers/mcp_resource_spec.rs"
+      ],
+      "recipe": "mcp_resource_tool_specs"
+    },
+    "plugins_prompt.txt": {
+      "kind": "derived-data",
+      "sha256": "81d37acb6feff552b562f712b1e854339d90a0b19aa9f271047cca787f77a51a",
+      "sources": [
+        "codex-rs/core/src/context/available_plugins_instructions.rs",
+        "codex-rs/protocol/src/protocol.rs"
+      ],
+      "recipe": "plugin_instructions"
+    },
+    "skills_prompt.json": {
+      "kind": "derived-data",
+      "sha256": "70096afa3511163dcf37f5fa25f4570ed640d952fa1461eeb152ea1c92a369f9",
+      "sources": [
+        "codex-rs/ext/skills/src/catalog_prompt.rs"
+      ],
+      "recipe": "skill_catalog_constants"
+    },
+    "system_skills/imagegen/LICENSE.txt": {
+      "kind": "byte-copy",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/LICENSE.txt"
+      ]
+    },
+    "system_skills/imagegen/SKILL.md": {
+      "kind": "byte-copy",
+      "sha256": "59981d23519222bcecf1be48bb37730bbc50539ceb0e35ad09fcef98a3df19d3",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/SKILL.md"
+      ]
+    },
+    "system_skills/imagegen/agents/openai.yaml": {
+      "kind": "byte-copy",
+      "sha256": "9ca574af14580dc7a2a3dc37a1796d17f93cb8850be66501f0799ef8603e9dc0",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/agents/openai.yaml"
+      ]
+    },
+    "system_skills/imagegen/assets/imagegen-small.svg": {
+      "kind": "byte-copy",
+      "sha256": "cff5f34f57ff60b3ee92eaedd17b15e96dd4b9e776df3e78936c9e00d42be294",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/assets/imagegen-small.svg"
+      ]
+    },
+    "system_skills/imagegen/assets/imagegen.png": {
+      "kind": "byte-copy",
+      "sha256": "95952f644064eb9e890f98d8db07216347186526e4c41ad66d3420629eb86e20",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/assets/imagegen.png"
+      ]
+    },
+    "system_skills/imagegen/references/cli.md": {
+      "kind": "byte-copy",
+      "sha256": "38d92cdbec5f3430439a3868ced0a3c5694e0e84a75e46d6e7f7a00aca6e673b",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/references/cli.md"
+      ]
+    },
+    "system_skills/imagegen/references/codex-network.md": {
+      "kind": "byte-copy",
+      "sha256": "c88298ca4481f6116a16fa7987434fc977f8b311c1bbc0c3d862ffd0c5981148",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/references/codex-network.md"
+      ]
+    },
+    "system_skills/imagegen/references/image-api.md": {
+      "kind": "byte-copy",
+      "sha256": "ca5424dfcad5a4c87b4401d1cffb70bfcc18c7ca2c281d12045f822e59fa4093",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/references/image-api.md"
+      ]
+    },
+    "system_skills/imagegen/references/prompting.md": {
+      "kind": "byte-copy",
+      "sha256": "a88c459a0306051535d1b68eb899925f08a175cbbcd07d72a9d0c43f330cb81f",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/references/prompting.md"
+      ]
+    },
+    "system_skills/imagegen/references/sample-prompts.md": {
+      "kind": "byte-copy",
+      "sha256": "43307821f1db18e06be50189a078f3e1ccc3ee6b5523934614e22e64d27597ab",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/references/sample-prompts.md"
+      ]
+    },
+    "system_skills/imagegen/scripts/image_gen.py": {
+      "kind": "byte-copy",
+      "sha256": "35e8f9fa47deca111e46c63c4ac2008e09198ef664c0926a9dfdcd6745aa37ed",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/scripts/image_gen.py"
+      ]
+    },
+    "system_skills/imagegen/scripts/remove_chroma_key.py": {
+      "kind": "byte-copy",
+      "sha256": "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/imagegen/scripts/remove_chroma_key.py"
+      ]
+    },
+    "system_skills/openai-docs/LICENSE.txt": {
+      "kind": "byte-copy",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/LICENSE.txt"
+      ]
+    },
+    "system_skills/openai-docs/SKILL.md": {
+      "kind": "byte-copy",
+      "sha256": "7cb8fa1b2a0c635b5c61ffe1da7b8594a7ea0fce5b71e8d523e2025d88b2a05e",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/SKILL.md"
+      ]
+    },
+    "system_skills/openai-docs/agents/openai.yaml": {
+      "kind": "byte-copy",
+      "sha256": "44b9efac6be1bae32d869aa2942fecbe4dcae82682ee03e4120f2f9b7d4658ec",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/agents/openai.yaml"
+      ]
+    },
+    "system_skills/openai-docs/assets/openai-small.svg": {
+      "kind": "byte-copy",
+      "sha256": "45be1f0757eb18889eefb1e7db79668ef46a275dc4e0e78e8df5ebd7f6cdeadc",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/assets/openai-small.svg"
+      ]
+    },
+    "system_skills/openai-docs/assets/openai.png": {
+      "kind": "byte-copy",
+      "sha256": "156cc84d7332bfe95b310350bd470b690d22aa33d65340cc6c2e06022946194c",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/assets/openai.png"
+      ]
+    },
+    "system_skills/openai-docs/references/codex-self-knowledge.md": {
+      "kind": "byte-copy",
+      "sha256": "8c8fb00e6e5cb1977924f5164684a6095427fa828bbc765225f17d9aeb79a912",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/codex-self-knowledge.md"
+      ]
+    },
+    "system_skills/openai-docs/references/latest-model.md": {
+      "kind": "byte-copy",
+      "sha256": "f25e351e522dd6e30e82d482f31f44c992e794b11031cdcb6ac7c0e6b20c9d5d",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/latest-model.md"
+      ]
+    },
+    "system_skills/openai-docs/references/mcp-diagnostics.md": {
+      "kind": "byte-copy",
+      "sha256": "49bbd2f73df7bbd7f86c80425dea4da2d301c22046080399a36bfc0ca49509e9",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/mcp-diagnostics.md"
+      ]
+    },
+    "system_skills/openai-docs/references/model-migration.md": {
+      "kind": "byte-copy",
+      "sha256": "5f20c38fbbb10319767b216d91ba74bae49c68fc1bfd6d1abd7c9b4cc9cb9ab0",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/model-migration.md"
+      ]
+    },
+    "system_skills/openai-docs/references/model-selection.md": {
+      "kind": "byte-copy",
+      "sha256": "ba2d164abbca30435a460a0bc3a7d82398dce2bdf092705c98ba55b3f3af38a8",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/model-selection.md"
+      ]
+    },
+    "system_skills/openai-docs/references/official-docs.md": {
+      "kind": "byte-copy",
+      "sha256": "7962f2dce55089b93bde4115bb89fd42f20993c1597a2b13edd4956f463875b9",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/official-docs.md"
+      ]
+    },
+    "system_skills/openai-docs/references/prompting-guide.md": {
+      "kind": "byte-copy",
+      "sha256": "db913884cfe0fabf29bee1a139918f56e299decfa0a14d61c48596f23f76621d",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/prompting-guide.md"
+      ]
+    },
+    "system_skills/openai-docs/references/upgrade-guide.md": {
+      "kind": "byte-copy",
+      "sha256": "ed1b75a89b8ec4d67787774ef6c4e8b98eace16c63348f42e969e6ffa67cb656",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/upgrade-guide.md"
+      ]
+    },
+    "system_skills/openai-docs/references/upgrading-to-gpt-5p6-sol.md": {
+      "kind": "byte-copy",
+      "sha256": "9a918a0c8dd051d574f2fd0309201afa8a9b9c08241c11ca1fb0ac2f4724e7ac",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/references/upgrading-to-gpt-5p6-sol.md"
+      ]
+    },
+    "system_skills/openai-docs/scripts/fetch-codex-manual.mjs": {
+      "kind": "byte-copy",
+      "sha256": "f53eb6d2f286e9efcc397e8bee93a938e37296c90953e4e06e94899ef1b6c363",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/scripts/fetch-codex-manual.mjs"
+      ]
+    },
+    "system_skills/openai-docs/scripts/resolve-latest-model-info": {
+      "kind": "byte-copy",
+      "sha256": "7354dbb030ca0736dd633a7ca1b930cf640abd40370725dea3a458cb51d49523",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/scripts/resolve-latest-model-info"
+      ]
+    },
+    "system_skills/openai-docs/scripts/resolve-latest-model-info.cjs": {
+      "kind": "byte-copy",
+      "sha256": "eeb1bb486018e16b37edfc06b1a37179dbc672982d501040d4f7142f29dd2e64",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/openai-docs/scripts/resolve-latest-model-info.cjs"
+      ]
+    },
+    "system_skills/plugin-creator/SKILL.md": {
+      "kind": "byte-copy",
+      "sha256": "8fd56316b2c49cbdc657a5d197967a233018e1fada65b00a5dd030dce6499a6e",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/SKILL.md"
+      ]
+    },
+    "system_skills/plugin-creator/agents/openai.yaml": {
+      "kind": "byte-copy",
+      "sha256": "fecaf35d692bd3d33d1a065648258d12e393afa9055d78adf6e57b42f4142f6d",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/agents/openai.yaml"
+      ]
+    },
+    "system_skills/plugin-creator/assets/plugin-creator-small.svg": {
+      "kind": "byte-copy",
+      "sha256": "6591bf8ea9bb9435890dbdea299e0d2bd05f3aa893a335d26e4c535e93c8e7fb",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/assets/plugin-creator-small.svg"
+      ]
+    },
+    "system_skills/plugin-creator/assets/plugin-creator.png": {
+      "kind": "byte-copy",
+      "sha256": "a4024b0306ddb05847e1012879d37aaf1e658205199da596f5145ed7a88d9162",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/assets/plugin-creator.png"
+      ]
+    },
+    "system_skills/plugin-creator/references/installing-and-updating.md": {
+      "kind": "byte-copy",
+      "sha256": "b030517fe05b12dda71babe2890656d7c6db6a0111797e1d20d208804427276d",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/references/installing-and-updating.md"
+      ]
+    },
+    "system_skills/plugin-creator/references/plugin-json-spec.md": {
+      "kind": "byte-copy",
+      "sha256": "eeb640130f69636affaa299d4170d5a7ae6a0ff978296ddf75c409ce6dd87b91",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/references/plugin-json-spec.md"
+      ]
+    },
+    "system_skills/plugin-creator/scripts/create_basic_plugin.py": {
+      "kind": "byte-copy",
+      "sha256": "b5aa34f7f9dcec4bb007a66d65cff0c5c77a67042ae6c4de57d8ab7f4ef737d2",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/scripts/create_basic_plugin.py"
+      ]
+    },
+    "system_skills/plugin-creator/scripts/read_marketplace_name.py": {
+      "kind": "byte-copy",
+      "sha256": "7659216759152f83087020b4d2971b4ad3cc13851e2614efc30fc2317ad59d96",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/scripts/read_marketplace_name.py"
+      ]
+    },
+    "system_skills/plugin-creator/scripts/update_plugin_cachebuster.py": {
+      "kind": "byte-copy",
+      "sha256": "4fe3c5a49212f6e30a2306e245c460e01aaf5e36bc8ad3dd2852c199257eff89",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/scripts/update_plugin_cachebuster.py"
+      ]
+    },
+    "system_skills/plugin-creator/scripts/validate_plugin.py": {
+      "kind": "byte-copy",
+      "sha256": "ebda00d55d7518b127f675f062fb5c6e7a1ffdc0a99df1a55ac594400d7d3228",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/plugin-creator/scripts/validate_plugin.py"
+      ]
+    },
+    "system_skills/review-agent/SKILL.md": {
+      "kind": "byte-copy",
+      "sha256": "07079efd0dc76f05fade424e5dfb048dce1de2df7626e1a4f56292a4f3f92228",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/review-agent/SKILL.md"
+      ]
+    },
+    "system_skills/review-agent/agents/openai.yaml": {
+      "kind": "byte-copy",
+      "sha256": "4d867a46d15e36ac880176484aae160f59855340c6059b2ea6ab9fbc9af084de",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/review-agent/agents/openai.yaml"
+      ]
+    },
+    "system_skills/skill-creator/SKILL.md": {
+      "kind": "byte-copy",
+      "sha256": "da44c88f6b3845a8fa8c60792ec9a722110a55a9793c279757b48fefb11f819c",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/SKILL.md"
+      ]
+    },
+    "system_skills/skill-creator/agents/openai.yaml": {
+      "kind": "byte-copy",
+      "sha256": "d07d21b93fcf3d4dc8d9a3399c05fc226a49a333a96d3e1c68b451b8dd9eade6",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/agents/openai.yaml"
+      ]
+    },
+    "system_skills/skill-creator/assets/skill-creator-small.svg": {
+      "kind": "byte-copy",
+      "sha256": "6591bf8ea9bb9435890dbdea299e0d2bd05f3aa893a335d26e4c535e93c8e7fb",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/assets/skill-creator-small.svg"
+      ]
+    },
+    "system_skills/skill-creator/assets/skill-creator.png": {
+      "kind": "byte-copy",
+      "sha256": "a4024b0306ddb05847e1012879d37aaf1e658205199da596f5145ed7a88d9162",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/assets/skill-creator.png"
+      ]
+    },
+    "system_skills/skill-creator/license.txt": {
+      "kind": "byte-copy",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/license.txt"
+      ]
+    },
+    "system_skills/skill-creator/references/openai_yaml.md": {
+      "kind": "byte-copy",
+      "sha256": "ffac39318e408108141d40f820968e59f70434a891694f9bf1d25be8237b150c",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md"
+      ]
+    },
+    "system_skills/skill-creator/scripts/generate_openai_yaml.py": {
+      "kind": "byte-copy",
+      "sha256": "ddaf9abdfb3e762ed3c82571e9c607ce964188f49f2146281beb2cb8a553a93d",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/scripts/generate_openai_yaml.py"
+      ]
+    },
+    "system_skills/skill-creator/scripts/init_skill.py": {
+      "kind": "byte-copy",
+      "sha256": "f40cb8fafc34e2d5dbbb8b6b04297af128b70844b67bc9445ef69790e0cdb49e",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/scripts/init_skill.py"
+      ]
+    },
+    "system_skills/skill-creator/scripts/quick_validate.py": {
+      "kind": "byte-copy",
+      "sha256": "6cc9dc3199c935916cf6f73fcbbbb0e3bb1b58c8f5109fefa499978908164f51",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-creator/scripts/quick_validate.py"
+      ]
+    },
+    "system_skills/skill-installer/LICENSE.txt": {
+      "kind": "byte-copy",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/LICENSE.txt"
+      ]
+    },
+    "system_skills/skill-installer/SKILL.md": {
+      "kind": "byte-copy",
+      "sha256": "d68b77e5bbb34dedab89d134da52855f140fc4b4299b80104f534e3b9e98f8ee",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/SKILL.md"
+      ]
+    },
+    "system_skills/skill-installer/agents/openai.yaml": {
+      "kind": "byte-copy",
+      "sha256": "5ce223d8b1070b82c42298538f1b8d376f788eb9e7a42a987e8c094070d73f0e",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/agents/openai.yaml"
+      ]
+    },
+    "system_skills/skill-installer/assets/skill-installer-small.svg": {
+      "kind": "byte-copy",
+      "sha256": "3928703ff00dc1a681e7a22401843b7edcbd4b2051651ce4c43b75f7e140504e",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/assets/skill-installer-small.svg"
+      ]
+    },
+    "system_skills/skill-installer/assets/skill-installer.png": {
+      "kind": "byte-copy",
+      "sha256": "d0a230b1a79b71b858b7c215a0fbb0768d6459c14ea4ef80c61592629bf0e605",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/assets/skill-installer.png"
+      ]
+    },
+    "system_skills/skill-installer/scripts/github_utils.py": {
+      "kind": "byte-copy",
+      "sha256": "61c1bbe2ae217433b4b6f9f09f21aca4df52c12598068343ade719f706e4859b",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/scripts/github_utils.py"
+      ]
+    },
+    "system_skills/skill-installer/scripts/install-skill-from-github.py": {
+      "kind": "byte-copy",
+      "sha256": "0fbbd36e8ea294442c0bd48d6f610a2e8656216bfef5c322f1dcf448ef2f09f1",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/scripts/install-skill-from-github.py"
+      ]
+    },
+    "system_skills/skill-installer/scripts/list-skills.py": {
+      "kind": "byte-copy",
+      "sha256": "e4e1f78ca3d045827f2a05cfd99fae57cc7c1a1bfeba8704029108834debff35",
+      "sources": [
+        "codex-rs/skills/src/assets/samples/skill-installer/scripts/list-skills.py"
+      ]
+    }
+  }
+}

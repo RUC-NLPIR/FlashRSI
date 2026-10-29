@@ -2,6 +2,8 @@
 
 [返回 README](../README.zh-CN.md) · [English](usage.md)
 
+选择算法、benchmark 与 harness，见[选型与运行指南](running-experiments.md)；具体配置方式如下。
+
 ## 配置实验
 
 本文中的命令均在仓库根目录执行。[快速示例配置](../examples/quickstart.yaml) 使用 SkillOpt 和 MiniAgent，附带 12 道本地 QA 题目，分别划分为 train、dev 和 test。
