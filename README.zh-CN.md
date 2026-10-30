@@ -123,6 +123,8 @@ flashrsi run --config examples/quickstart.yaml
 
 当前注册 **30 个 benchmark**。每项均提供配置示例；数据、服务与环境要求见[配置索引](docs/benchmark-quickstart.md)。组合需满足 harness 的资源与执行能力要求，注册不代表所有组合均已完成真实验证。
 
+其中 29 项也支持固定版本的 [HF prepared 数据源](docs/hf-prepared-data.md)，共 34 份配置，保留已发布的 train/dev/test 划分并复用现有 Adapter。原生来源仍为默认；模型、服务和容器依赖仍需准备。
+
 | Benchmark | 任务 | 评分 | 运行入口 |
 | --- | --- | --- | --- |
 | **问答** | | | |

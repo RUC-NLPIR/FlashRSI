@@ -117,6 +117,15 @@ class Tau2Benchmark(_TauBenchmark):
                 question=policy,
                 env=str(domain),
                 metadata={
+                    **(
+                        {
+                            "prepared_user_simulator": self.config[
+                                "_prepared_user_simulator"
+                            ]
+                        }
+                        if self.config.get("_prepared_user_simulator")
+                        else {}
+                    ),
                     "domain": self.domain,
                     "task_path": "tasks.json",
                     "task_file_checksum": file_checksum,

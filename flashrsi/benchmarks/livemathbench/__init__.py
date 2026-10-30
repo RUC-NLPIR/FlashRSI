@@ -98,6 +98,16 @@ class LiveMathBench(NativeBenchmark):
 
     def _iter_records(self):
         data = self.config.get("data_path")
+        if self.config.get("_prepared_source"):
+            for role, path in data.items():
+                for _, row in _load_local_rows(Path(path)):
+                    yield (
+                        role,
+                        row.get("native_subset", "all"),
+                        row["native_language"],
+                        row,
+                    )
+            return
         if data is None:
             from datasets import load_dataset
             from datasets.exceptions import DatasetNotFoundError

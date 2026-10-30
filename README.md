@@ -123,6 +123,8 @@ Implementations adapt each method to FlashRSI's resource and evaluation interfac
 
 FlashRSI registers **30 benchmarks**, each with a configuration example. See the [configuration index](docs/benchmark-quickstart.md) for data, services, and environment requirements. Combinations depend on harness resources and execution capabilities; registration does not imply every combination has been validated.
 
+Twenty-nine benchmarks also accept 34 pinned [HF prepared configurations](docs/hf-prepared-data.md), preserving published train/dev/test membership and reusing their existing adapters. Native data sources remain the defaults; models, services and container prerequisites still apply.
+
 | Benchmark | Task | Metric | Get started |
 | --- | --- | --- | --- |
 | **Question answering** | | | |

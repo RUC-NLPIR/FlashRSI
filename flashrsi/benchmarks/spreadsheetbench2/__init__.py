@@ -61,7 +61,13 @@ class SpreadsheetBench2(Benchmark):
                     "SpreadsheetBench2 requires flashrsi-lite[harbor] and Python >=3.12"
                 ) from None
             directories, provenance = _prepare_tasks(
-                self.category, self.config.get("data_path")
+                self.category,
+                self.config.get("data_path"),
+                **(
+                    {"prepared": self.config["_prepared_spreadsheet"]}
+                    if self.config.get("_prepared_spreadsheet")
+                    else {}
+                ),
             )
             self.metadata = MappingProxyType({**self.metadata, **provenance})
             self._splits = _split_tasks(

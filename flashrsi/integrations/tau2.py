@@ -294,7 +294,9 @@ def _simulate(agent, task, domain, simulator, config, evidence=None, judge=None)
         domain_name = task.metadata.get("domain", _DOMAIN)
         with (
             _SIMULATION_LOCK,
-            _domain_paths(domain, domain_name),
+            _domain_paths(
+                domain, domain_name, task.metadata.get("prepared_user_simulator")
+            ),
             _judge_settings(judge),
         ):
             _register_once()
@@ -319,7 +321,7 @@ def _simulate(agent, task, domain, simulator, config, evidence=None, judge=None)
 
 
 @contextmanager
-def _domain_paths(domain: Path, domain_name=_DOMAIN):
+def _domain_paths(domain: Path, domain_name=_DOMAIN, user_simulator=None):
     """Point tau2 at the verified domain this Task came from.
 
     tau2 resolves TAU2_DATA_DIR once at import, and the domain modules copy
@@ -354,6 +356,17 @@ def _domain_paths(domain: Path, domain_name=_DOMAIN):
         for name, value in vars(module).items()
         if isinstance(value, Path) and value.is_relative_to(installed)
     ]
+    # The prepared package includes the same native prompts. Their module-level
+    # paths also need rebinding when tau2 was imported before dataset resolution.
+    user_paths = []
+    if user_simulator is not None:
+        user_module = importlib.import_module("tau2.user.user_simulator")
+        installed_user = user_module.GLOBAL_USER_SIM_GUIDELINES_DIR
+        user_paths = [
+            (name, value)
+            for name, value in vars(user_module).items()
+            if isinstance(value, Path) and value.is_relative_to(installed_user)
+        ]
 
     def rebind(path: Path) -> Path:
         return domain / path.relative_to(installed)
@@ -363,12 +376,20 @@ def _domain_paths(domain: Path, domain_name=_DOMAIN):
             setattr(module, name, rebind(value))
         for variant, template in variants:
             object.__setattr__(variant, "prompt_template", rebind(template))
+        for name, value in user_paths:
+            setattr(
+                user_module,
+                name,
+                Path(user_simulator) / value.relative_to(installed_user),
+            )
         yield
     finally:
         for module, name, value in originals:
             setattr(module, name, value)
         for variant, template in variants:
             object.__setattr__(variant, "prompt_template", template)
+        for name, value in user_paths:
+            setattr(user_module, name, value)
 
 
 @contextmanager

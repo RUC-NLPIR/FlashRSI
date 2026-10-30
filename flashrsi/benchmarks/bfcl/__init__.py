@@ -73,7 +73,10 @@ class BFCL(Benchmark):
                 self.metadata = MappingProxyType(
                     {**self.metadata, "data_path": str(self.data_path)}
                 )
-            package, source_checksum = _source(self.data_path)
+            proof = self.config.get("_prepared_archive")
+            package, source_checksum = (
+                _source(self.data_path, proof) if proof else _source(self.data_path)
+            )
             data = package / "bfcl_eval" / "data"
             filename = f"BFCL_v4_{_CATEGORY}.json"
             rows = _records(data / filename)
@@ -138,6 +141,7 @@ class BFCL(Benchmark):
                             "category": _CATEGORY,
                             "scenario_id": task_id,
                             "task_checksum": checksum,
+                            **({"prepared_archive": proof} if proof else {}),
                         },
                     )
                 )
@@ -206,8 +210,12 @@ def _records(path):
     return records
 
 
-def _source(root):
-    """Verify native data and executable sources against immutable Git objects."""
+def _source(root, archive=None):
+    """Verify native sources against pinned Git objects or a checked HF archive."""
+    if archive is not None:
+        from flashrsi.benchmarks._prepared import verify_native
+
+        return root / _PACKAGE, verify_native(root, archive)
 
     def git(*args):
         result = subprocess.run(

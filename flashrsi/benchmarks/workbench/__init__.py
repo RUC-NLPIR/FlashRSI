@@ -57,7 +57,11 @@ class WorkBench(NativeBenchmark):
     )
 
     def _iter_tasks(self):
-        self._upstream_root = _upstream()
+        self._upstream_root = (
+            Path(self.config["_prepared_root"])
+            if self.config.get("_prepared_root")
+            else _upstream()
+        )
         # A local override is the complete native data/ directory, not rewritten
         # question/answer records. Tools and grader read the same initial world.
         self._data_root = Path(

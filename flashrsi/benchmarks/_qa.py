@@ -45,8 +45,13 @@ class QABenchmark(Benchmark):
         if self.mode not in self._modes:
             raise ValueError(f"benchmark.mode must be one of {self._modes}")
         self.scoring = self.config.get("scoring", self._default_scoring)
-        if self.scoring not in self._scoring_modes:
-            raise ValueError(f"benchmark.scoring must be one of {self._scoring_modes}")
+        modes = (
+            ("text_em_f1",)
+            if self.config.get("_prepared_mrqa")
+            else self._scoring_modes
+        )
+        if self.scoring not in modes:
+            raise ValueError(f"benchmark.scoring must be one of {modes}")
 
     def load(self) -> Mapping[str, tuple[Task, ...]]:
         """Load the pinned dataset (or local data), then apply configured splits."""
@@ -79,11 +84,18 @@ class QABenchmark(Benchmark):
                     f"trajectory has unknown {type(self).__name__} task: "
                     f"{trajectory.task.task_id}"
                 ) from error
-            scores = (
-                self._score(trajectory.output, task)
-                if trajectory.status == "finished"
-                else self._zero_scores()
-            )
+            if self.config.get("_prepared_mrqa"):
+                scores = (
+                    qa_metrics(trajectory.output, task.metadata["answers"])
+                    if trajectory.status == "finished"
+                    else {"exact_match": 0.0, "f1": 0.0}
+                )
+            else:
+                scores = (
+                    self._score(trajectory.output, task)
+                    if trajectory.status == "finished"
+                    else self._zero_scores()
+                )
             graded.append(replace(trajectory, metrics={**trajectory.metrics, **scores}))
         return tuple(graded)
 
@@ -100,7 +112,26 @@ class QABenchmark(Benchmark):
         for source, row in self._load_source_rows():
             if not isinstance(row, Mapping):
                 raise ValueError(f"{type(self).__name__} rows must be mappings")
-            yield self._prepare_task(self._task_from_row(row, source), row)
+            if self.config.get("_prepared_mrqa"):
+                # MRQA preserves public context and answer aliases, not native
+                # NQ span annotations or TriviaQA rc.wikipedia evidence fields.
+                from flashrsi.benchmarks.searchqa import SearchQA
+
+                task = SearchQA._task_from_row(row, source)
+            else:
+                task = self._prepare_task(self._task_from_row(row, source), row)
+            if (
+                self.config.get("_prepared_splits") is not None
+                and "native_source_split" in row
+            ):
+                task = replace(
+                    task,
+                    metadata={
+                        **task.metadata,
+                        "native_source_split": row["native_source_split"],
+                    },
+                )
+            yield task
 
     def _load_source_rows(self) -> Iterable[tuple[str, Mapping[str, Any]]]:
         rows, self.metadata = _load_rows(

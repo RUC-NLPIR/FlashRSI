@@ -120,7 +120,11 @@ def _is_sha256(value: Any) -> bool:
 
 def _is_safe(value: Any) -> bool:
     """Reject any path that could escape the directory it is joined to."""
-    if not isinstance(value, str) or not value or "\\" in value or "\0" in value:
+    if (
+        not isinstance(value, str)
+        or not value
+        or any(c in value for c in ("\\", "\0", ":"))
+    ):
         return False
     path = PurePosixPath(value)
     return (

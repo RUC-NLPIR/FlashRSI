@@ -9,13 +9,15 @@
 - Linux/WSL/macOS、Python 3.11 或 3.12；Windows 原生启动明确报错。
 - 使用原生 Python 文本环境，无需 Docker、Harbor、GPU 或独立 Judge。
   TextWorld 编译依赖按[官方说明](https://github.com/microsoft/TextWorld#installation)准备。
-- `benchmark.data_path` 必填，指向原始 `json_2.1.1` 或其父目录。
+- 原生默认来源下 `benchmark.data_path` 必填，指向原始 `json_2.1.1` 或其父目录。
   YAML 路径相对配置文件，CLI 路径相对当前目录。不自动下载任何任务或视觉模型。
 - 数据来自官方 release 的 JSON 和 TW-PDDL 游戏包（官方下载脚本中的
   `json_2.1.1_json.zip` 与 `json_2.1.3_tw-pddl.zip`），按其原始路径合并。
   每道任务目录包含 `traj_data.json` 和自包含的 `game.tw-pddl`。
   本适配直接加载现有游戏，不调用生成脚本，不要求视觉检测权重。
   官方 `alfworld-download` 默认还下载 MaskRCNN；本接口不自动调用它。
+
+也可选择 [HF prepared 数据源](hf-prepared-data.md)：不设置 `data_path`，由框架下载约 8 MB 的精选原生任务包并保留 200/140/134 的发布划分。示例见 [hf_prepared_alfworld.yaml](../examples/hf_prepared_alfworld.yaml)。上面的手动数据准备适用于原生默认来源；系统和运行依赖对两种来源都适用。
 
 默认采用框架角色映射：原生 `train → train`、`valid_seen → dev`、
 `valid_unseen → test`。后两者仍是官方的 seen/unseen 验证集，并非声称拥有官方隐藏测试集。

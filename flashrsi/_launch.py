@@ -14,6 +14,7 @@ from tempfile import TemporaryDirectory
 import yaml
 
 from flashrsi import algorithms
+from flashrsi._hf import selected as _hf_prepared
 from flashrsi._records import _redact, _secrets
 from flashrsi._startup import _CONTAINERS, _HARBOR, _check_docker, _role
 from flashrsi.config import load_config
@@ -140,6 +141,8 @@ def _load(path, snapshot=None):
 
 def _plan(config):
     benchmark = config.benchmark.name
+    dataset = config.benchmark.get("dataset", {})
+    prepared = _hf_prepared(config.benchmark)
     target = config.agent.name
     evaluating = config.run.get("mode") == "evaluate"
     worker = (
@@ -243,12 +246,11 @@ def _plan(config):
     if benchmark == "hotpotqa" and config.benchmark.get("mode") == "fullwiki":
         prerequisites.append("Deployed retrieval service: benchmark.retrieval")
     if benchmark == "alfworld":
-        prerequisites.extend(
-            [
-                "Linux/WSL/macOS, Python 3.11 or 3.12",
-                "Local native ALFWorld benchmark.data_path (no automatic download)",
-            ]
-        )
+        prerequisites.append("Linux/WSL/macOS, Python 3.11 or 3.12")
+        if not prepared:
+            prerequisites.append(
+                "Local native ALFWorld benchmark.data_path (no automatic download)"
+            )
     if benchmark == "workbench":
         prerequisites.extend(["Python >=3.12", "Git for pinned native tools and data"])
     if benchmark == "travelplanner":
@@ -260,7 +262,9 @@ def _plan(config):
         "benchmark": benchmark,
         "extras": extras,
         "requirements": requirements,
-        "data": "use explicit local data"
+        "data": f"download/reuse HF prepared {dataset['config']} at {dataset.get('revision')}"
+        if prepared
+        else "use explicit local data"
         if config.benchmark.get("data_path")
         else (
             "provide local ALFWorld benchmark.data_path"
@@ -343,6 +347,7 @@ async def _resources(config, cache):
     from flashrsi.integrations._docker import _docker
 
     name = config.benchmark.name
+    prepared = _hf_prepared(config.benchmark)
     if name in _CONTAINERS:
         await _check_docker(name, config.benchmark, images=False)
     if name in {"appworld", "bfcl"}:
@@ -367,7 +372,11 @@ async def _resources(config, cache):
             else:
                 print(f"Pulling configured {name} image...", flush=True)
                 await _docker("pull", image, timeout=3600)
-        if name == "appworld" and not config.benchmark.get("data_path"):
+        if (
+            name == "appworld"
+            and not prepared
+            and not config.benchmark.get("data_path")
+        ):
             parent = cache / "data"
             parent.mkdir(parents=True, exist_ok=True)
             destination = parent / "appworld-0.1.3.post1"
@@ -401,7 +410,11 @@ async def _resources(config, cache):
                             )
                         data.rename(destination)
             config.benchmark.data_path = str(destination)
-    if name in {"tau2", "tau3_banking"} and not os.environ.get("TAU2_DATA_DIR"):
+    if (
+        name in {"tau2", "tau3_banking"}
+        and not prepared
+        and not os.environ.get("TAU2_DATA_DIR")
+    ):
         from flashrsi.benchmarks._git import _download_git
         from flashrsi.benchmarks._tau import _GIT_URL, _UPSTREAM_REVISION
 

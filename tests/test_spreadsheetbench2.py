@@ -6,6 +6,7 @@ import sys
 from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
+from zipfile import ZipFile
 
 import pytest
 
@@ -87,6 +88,46 @@ def test_native_materialization_isolated_and_reproducible(dataset):
         assert "/logs/artifacts/01_01_output.xlsx" in task.question
         assert "SpreadsheetBench2 task environment:" in task.question
         assert "/usr/local/bin/python" in task.question
+
+
+def test_prepared_resources_use_mirrored_workbooks_and_evaluator(
+    dataset, monkeypatch, tmp_path
+):
+    root, upstream = dataset
+    archive = tmp_path / "native.zip"
+    with ZipFile(archive, "w") as output:
+        for path in root.rglob("*"):
+            if path.is_file():
+                output.write(
+                    path, "spreadsheetbench-v2/" + path.relative_to(root).as_posix()
+                )
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Prepared inputs must not fetch upstream resources")
+
+    monkeypatch.setattr(_data, "_download_git", forbidden)
+    monkeypatch.setattr(_data, "hf_hub_download", forbidden)
+    prepared = {
+        "archive": str(archive),
+        "code": {
+            name: str(upstream / name)
+            for name in (
+                "evaluation/evaluation.py",
+                "evaluation/open_spreadsheet.py",
+                "SWE-agent/spreadsheet.Dockerfile",
+            )
+        },
+    }
+    bench = SpreadsheetBench2(
+        {
+            "_prepared_spreadsheet": prepared,
+            "split_counts": {"train": 1, "dev": 1, "test": 1},
+        }
+    )
+    assert all(len(tasks) == 1 for tasks in bench.load().values())
+    assert (Path(bench.test[0].env) / "tests/evaluation.py").read_bytes() == (
+        upstream / "evaluation/evaluation.py"
+    ).read_bytes()
 
 
 def test_category_filter_and_cache_tamper(dataset):

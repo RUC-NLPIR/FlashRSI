@@ -53,15 +53,19 @@ async def _preflight(config):
             raise ValueError(
                 "tau on Windows requires PYTHONUTF8=1 before starting Python"
             )
-        from tau2.user.user_simulator import get_global_user_sim_guidelines
+        from flashrsi._hf import selected
 
-        try:
-            for tools in (False, True):
-                get_global_user_sim_guidelines(use_tools=tools)
-        except OSError:
-            raise ValueError(
-                "Prepare tau2 user_simulator/*.md and set TAU2_DATA_DIR before startup; see README.md"
-            ) from None
+        # HF resolution validates and binds its own native prompt files later.
+        if not selected(benchmark):
+            from tau2.user.user_simulator import get_global_user_sim_guidelines
+
+            try:
+                for tools in (False, True):
+                    get_global_user_sim_guidelines(use_tools=tools)
+            except OSError:
+                raise ValueError(
+                    "Prepare tau2 user_simulator/*.md and set TAU2_DATA_DIR before startup; see README.md"
+                ) from None
         if benchmark.get("task_timeout") is not None and os.name != "posix":
             raise ValueError("tau hard task_timeout requires a POSIX host")
     if name in _CONTAINERS:

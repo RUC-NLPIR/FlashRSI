@@ -72,6 +72,11 @@ class NativeBenchmark(Benchmark):
                     yield str(split), row
 
     def _register(self, row, split, task_id, question, *, env=None, **metadata):
+        if (
+            self.config.get("_prepared_splits") is not None
+            and "native_source_split" in row
+        ):
+            metadata["native_source_split"] = row["native_source_split"]
         if not isinstance(task_id, str) or not task_id.strip():
             raise ValueError(f"{self.name} row requires a non-empty id")
         if not isinstance(question, str) or not question.strip():

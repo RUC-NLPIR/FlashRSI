@@ -2,6 +2,8 @@
 
 当前注册 **30 个 Benchmark、12 个算法、3 个 Target Agent**。同一适配器的版本、年份和领域不重复计数；例如 Terminal-Bench 2.0 / 2.1、AIME 2025 / 2026、τ² 三个领域分别只计一项。
 
+其中 29 项可选择 [`RUC-NLPIR/FlashRSI` 的 HF prepared 数据源](hf-prepared-data.md)，共 34 份配置，使用固定发布划分和校验过的原生资源；原有默认来源保持不变。
+
 从项目根目录用 `python scripts/run_experiment.py --config examples/<示例>.yaml --plan` 查看所选依赖，再填配置运行 `--check-only`，最后去掉该参数开始实验。两个模型角色及 Judge / User Simulator / Postprocess 互不继承凭据。示例包含不同算法，切换时也需保留对应组件配置。
 
 注册、离线接口测试、真实 smoke 是不同状态。Smoke 结果和验证报告仅本地保存，不随源码发布；Codex 此次合入不表示 30 项均已用它完成真实运行。完整入口说明见[一键实验指南](experiment-launcher.zh-CN.md)。
@@ -36,7 +38,7 @@
 | Coding | `deepswe` | [deepswe_opro.yaml](../examples/deepswe_opro.yaml) | Docker + Harbor；接口适配，未下载官方任务或开展实验 |
 | Knowledge / Reasoning | `bbeh` | [bbeh_opro.yaml](../examples/bbeh_opro.yaml) | 本地或原生数据；按示例设置实验划分 |
 | Knowledge / Reasoning | `supergpqa` | [supergpqa_opro.yaml](../examples/supergpqa_opro.yaml) | 本地或原生数据；按示例设置实验划分 |
-| Knowledge / Reasoning | `hle` | [hle_opro.yaml](../examples/hle_opro.yaml) | 纯文本子集；独立 Judge |
+| Knowledge / Reasoning | `hle` | [hle_opro.yaml](../examples/hle_opro.yaml) | 官方 HF `cais/hle`；固定版本的纯文本子集，自动排除带图题；HF 授权及独立 Judge |
 | Math | `math` | [modular_rsi_math500.yaml](../examples/modular_rsi_math500.yaml) | 本地或原生数据；按示例设置实验划分 |
 | Math | `aime` | [aime_opro.yaml](../examples/aime_opro.yaml) | 本地或原生数据；按示例设置实验划分 |
 | Math | `livemathbench` | [livemathbench_opro.yaml](../examples/livemathbench_opro.yaml) | 独立 Judge；按示例设置版本及采样次数 |

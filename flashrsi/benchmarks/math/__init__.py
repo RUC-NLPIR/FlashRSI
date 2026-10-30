@@ -170,6 +170,8 @@ class MATH(NativeBenchmark):
             task_id = (
                 row.get("unique_id") or hashlib.sha256(problem.encode()).hexdigest()
             )
+            if self.config.get("_prepared_splits"):
+                task_id = row["id"]
             boxed = _last_boxed(gold)
             if boxed is not None and not boxed.strip():
                 raise ValueError(

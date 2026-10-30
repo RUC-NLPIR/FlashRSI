@@ -1,0 +1,34 @@
+# Linux/WSL/macOS + Python 3.11/3.12; copy to a sibling *.local.yaml.
+# Download the prepared native games from HF; no manual data_path required.
+run:
+  output_dir: ../runs
+benchmark:
+  name: alfworld
+  dataset:
+    source: RUC-NLPIR/FlashRSI
+    revision: 8e226b748e648d4e001cf247f255cfb9eb752292
+    config: alfworld
+  split: auto
+  seed: 42
+  max_steps: 50
+  admissible_commands: false
+  limit: 3
+agent:
+  name: miniagent
+  max_turns: 60
+  timeout: 600
+  llm:
+    model_name: your-target-model
+    api_key: null
+    base_url: null
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  worker:
+    type: llm
+    timeout: 180
+    llm:
+      model_name: your-worker-model
+      api_key: null
+      base_url: null

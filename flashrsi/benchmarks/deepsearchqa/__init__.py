@@ -58,6 +58,8 @@ class DeepSearchQA(NativeBenchmark):
                 "deepsearchqa-"
                 + hashlib.sha256(str(row.get("problem", "")).encode()).hexdigest()
             )
+            if self.config.get("_prepared_splits") is not None:
+                task_id = row["_flashrsi_id"]
             if any(
                 not isinstance(row.get(k), str) or not row[k].strip()
                 for k in ("problem", "answer", "problem_category", "answer_type")

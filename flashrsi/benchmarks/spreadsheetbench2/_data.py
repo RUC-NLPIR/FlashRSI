@@ -22,15 +22,25 @@ _UPSTREAM_REVISION = "a7bdc2d358e052d35a94768e1f487c0d9e9c0011"
 _CATEGORIES = ("Debugging", "Financial_Model", "Template")
 
 
-def _prepare_tasks(category, data_path):
-    upstream = _download_git(_UPSTREAM, _UPSTREAM_REVISION, ["evaluation", "SWE-agent"])
+def _prepare_tasks(category, data_path, prepared=None):
+    upstream = (
+        None
+        if prepared
+        else _download_git(_UPSTREAM, _UPSTREAM_REVISION, ["evaluation", "SWE-agent"])
+    )
     native = {
-        name: (upstream / "evaluation" / name).read_bytes()
+        name: (
+            Path(prepared["code"]["evaluation/" + name])
+            if prepared
+            else upstream / "evaluation" / name
+        ).read_bytes()
         for name in ("evaluation.py", "open_spreadsheet.py")
     }
-    dockerfile = (upstream / "SWE-agent/spreadsheet.Dockerfile").read_text(
-        encoding="utf-8"
-    )
+    dockerfile = (
+        Path(prepared["code"]["SWE-agent/spreadsheet.Dockerfile"])
+        if prepared
+        else upstream / "SWE-agent/spreadsheet.Dockerfile"
+    ).read_text(encoding="utf-8")
     categories = _CATEGORIES if category == "all" else (category,)
     root = None
     if data_path is not None:
@@ -47,7 +57,9 @@ def _prepare_tasks(category, data_path):
         if root is None:
             archive = stack.enter_context(
                 ZipFile(
-                    hf_hub_download(
+                    prepared["archive"]
+                    if prepared
+                    else hf_hub_download(
                         _SOURCE,
                         _ARCHIVE,
                         repo_type="dataset",

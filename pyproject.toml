@@ -39,7 +39,7 @@ codex = [
 ]
 harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
 swe-bench = ["packaging>=24", "swebench @ git+https://github.com/SWE-bench/SWE-bench.git@02e7a74ffd0b707aab73d203fe87bdc7c76afc8e"]
-appworld = ["packaging>=24"]
+appworld = ["packaging>=24", "cryptography>=44"]
 bfcl = ["packaging>=24"]
 alfworld = ["alfworld==0.4.2; sys_platform != 'win32' and python_version < '3.13'", "textworld[pddl]==1.7.0; sys_platform != 'win32' and python_version < '3.13'"]
 workbench = ["pandas>=2.1,<3", "numpy>=1.26,<2"]

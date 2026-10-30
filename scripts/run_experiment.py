@@ -30,7 +30,12 @@ def _environment(cache):
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONUTF8"] = "1"
     # Explicit user cache locations take precedence; defaults stay outside the repo.
-    env.setdefault("HF_HOME", str(cache / "huggingface"))
+    if "HF_HOME" not in env:
+        # Moving the cache must not hide a prior `hf auth login` token. Point
+        # Hub at the original credential file without reading or copying it.
+        home = Path(env.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "huggingface"
+        env.setdefault("HF_TOKEN_PATH", str(home / "token"))
+        env["HF_HOME"] = str(cache / "huggingface")
     env.setdefault("PIP_CACHE_DIR", str(cache / "pip"))
     return env
 

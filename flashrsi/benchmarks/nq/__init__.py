@@ -36,11 +36,19 @@ class NQ(QABenchmark):
     def _load_source_rows(self):
         rows = super()._load_source_rows()
         self.metadata = MappingProxyType(
-            {**self.metadata, "subset": type(self).metadata["subset"]}
+            {
+                **self.metadata,
+                "subset": "mrqa-v2"
+                if self.config.get("_prepared_mrqa")
+                else type(self).metadata["subset"],
+            }
         )
         return rows
 
     def _iter_tasks(self) -> Iterable[Task]:
+        if self.config.get("_prepared_mrqa"):
+            yield from super()._iter_tasks()
+            return
         # Filtering belongs to this subset, not to the shared QA contract.
         for source, row in self._load_source_rows():
             task = self._task_from_row(row, source)

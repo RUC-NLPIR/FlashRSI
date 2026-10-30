@@ -7,6 +7,7 @@ import importlib.util
 import logging
 from pathlib import Path
 from statistics import mean
+from types import MappingProxyType
 
 from flashrsi._records import _trajectory_record, _write_record
 from flashrsi._run_summary import _finish_summary
@@ -145,6 +146,12 @@ async def _prepare_target(config, *, snapshot=None):
                 f"Cannot evaluate this Snapshot: {exc}. Use the original Agent type and "
                 "root source tree (agent.source_dir); evaluation does not rebase snapshots."
             ) from exc
+    from flashrsi.benchmarks import _prepared
+
+    prepared = _prepared.selected(config.benchmark)
+    if prepared:
+        config = copy.deepcopy(config)
+        config.benchmark = _prepared.prepare(config.benchmark)
     # Bind the task environment to the selected harness, including any evolved
     # tool/config changes. A benchmark must not silently install another version.
     selected = target.snapshot.id
@@ -238,6 +245,11 @@ async def _prepare_target(config, *, snapshot=None):
         raise ValueError(
             f"{benchmark.name} integration replaced the selected harness Snapshot; "
             "task environments and tools must be provided outside Snapshot files"
+        )
+    if prepared:
+        benchmark.load()
+        benchmark.metadata = MappingProxyType(
+            {**benchmark.metadata, "prepared": config.benchmark["_prepared_source"]}
         )
     return target, benchmark
 

@@ -69,7 +69,10 @@ def bind(agent, config):
 
 def _prepare(task, directory, max_calls_per_turn):
     package = Path(task.env).resolve()
-    actual, digest = _source(package.parent)
+    proof = task.metadata.get("prepared_archive")
+    actual, digest = (
+        _source(package.parent, proof) if proof else _source(package.parent)
+    )
     if package != actual:
         raise ValueError("BFCL Task.env must identify the pinned native package")
     data = package / "bfcl_eval" / "data"

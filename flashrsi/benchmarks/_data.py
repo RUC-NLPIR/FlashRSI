@@ -9,6 +9,7 @@ import json
 import math
 import re
 from collections.abc import Iterable, Mapping
+from dataclasses import replace
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
@@ -62,6 +63,34 @@ def _split_tasks(
         return digest, task.task_id
 
     selected = unique_tasks()
+    membership = config.get("_prepared_splits")
+    if membership is not None:
+        roles = {task_id: role for role, ids in membership.items() for task_id in ids}
+
+        def prepared_tasks(source):
+            missing = set(roles)
+            for task in source:
+                if task.task_id in roles:
+                    missing.remove(task.task_id)
+                    yield replace(
+                        task,
+                        metadata={
+                            **task.metadata,
+                            "native_source_split": task.metadata.get(
+                                "native_source_split", task.metadata.get("source_split")
+                            ),
+                            "source_split": roles[task.task_id],
+                            "prepared_task_id": config.get("_prepared_ids", {}).get(
+                                task.task_id, task.task_id
+                            ),
+                        },
+                    )
+            if missing:
+                raise ValueError(
+                    f"Prepared native tasks are missing: {', '.join(sorted(missing)[:5])}"
+                )
+
+        selected = prepared_tasks(selected)
     if config.get("split", "auto") == "auto":
         return _auto_split(selected, seed=seed, limit=limit)
 

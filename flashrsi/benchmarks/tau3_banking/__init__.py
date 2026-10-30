@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Iterable, Mapping
+from dataclasses import replace
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
@@ -84,7 +85,13 @@ class Tau3Banking(_TauBenchmark):
         """Read the tasks/ directory, which is what the tau2 runtime loads."""
         paths, domain = self._task_files()
         for path in paths:
-            yield _task_from_file(path, domain, dict(self.metadata), self.variant)
+            task = _task_from_file(path, domain, dict(self.metadata), self.variant)
+            if simulator := self.config.get("_prepared_user_simulator"):
+                task = replace(
+                    task,
+                    metadata={**task.metadata, "prepared_user_simulator": simulator},
+                )
+            yield task
 
     def _task_files(self) -> tuple[tuple[Path, ...], Path]:
         data_path = self.config.get("data_path")

@@ -120,7 +120,11 @@ class AIME(QABenchmark):
     def _load_source_rows(self):
         if self.config.get("data_path") is not None:
             rows = super()._load_source_rows()
-            self.metadata = MappingProxyType({**self.metadata, "year": self.year})
+            metadata = {**self.metadata, "year": self.year}
+            if self.config.get("_prepared_source"):
+                metadata.pop("year", None)
+                metadata["years"] = (2025, 2026)
+            self.metadata = MappingProxyType(metadata)
             yield from rows
             return
         from huggingface_hub import hf_hub_download
@@ -138,6 +142,7 @@ class AIME(QABenchmark):
                     yield "test", json.loads(line)
 
     def _task_from_row(self, row, source_split):
+        year = row["native_year"] if self.config.get("_prepared_source") else self.year
         if not isinstance(row.get("problem"), str) or not row["problem"].strip():
             raise ValueError("AIME row requires a nonempty problem")
         task_id = row.get("id")
@@ -150,7 +155,7 @@ class AIME(QABenchmark):
             raise ValueError("AIME answer must be an integer from 0 to 999")
         answer = str(int(answer))
         return Task(
-            task_id=f"aime{self.year}:{task_id}",
+            task_id=f"aime{year}:{task_id}",
             question=(
                 f"{row['problem']}\n\n"
                 "Solve the problem. End with the integer answer from 0 to 999 "
@@ -160,7 +165,7 @@ class AIME(QABenchmark):
             metadata={
                 "answers": (answer,),
                 "source_split": source_split,
-                "year": self.year,
+                "year": year,
             },
         )
 

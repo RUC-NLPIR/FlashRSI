@@ -5,6 +5,8 @@ from types import MappingProxyType
 
 from flashrsi.benchmarks._native import NativeBenchmark
 
+_TEXT_COLUMNS = ("id", "question", "image", "answer", "category", "answer_type")
+
 
 class HLE(NativeBenchmark):
     name = "hle"
@@ -21,10 +23,29 @@ class HLE(NativeBenchmark):
         }
     )
 
+    def _source_rows(self):
+        if self.config.get("data_path") is not None:
+            yield from super()._source_rows()
+            return
+        from datasets import load_dataset
+
+        # Official shards also contain Image features for previews and
+        # rationales. Project before iteration so text tasks never decode them.
+        dataset = load_dataset(
+            self.metadata["source"],
+            revision=self.metadata["revision"],
+            streaming=True,
+            columns=list(_TEXT_COLUMNS),
+        )
+        for split, rows in dataset.items():
+            for row in rows:
+                yield split, row
+
     def _iter_tasks(self):
         from flashrsi.integrations._hle_judge import SYSTEM_PROMPT
 
         for split, row in self._source_rows():
+            row = {key: row[key] for key in _TEXT_COLUMNS if key in row}
             image = row.get("image", "")
             if image is not None and not isinstance(image, str):
                 raise ValueError("HLE image must be a URL/base64 string or empty")
