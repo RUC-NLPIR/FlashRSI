@@ -65,4 +65,3 @@ These are historical implementation notes and plans. Use the main guides and mod
 - [Early implementation records](./implementation-notes.zh-CN.md)
 - [Benchmark and algorithm migration plan](./migration-plan.md)
 - [MVP interface drift review](./mvp-doc-drift.md)
-- [Revised MVP specification](./mvp_doc.revised.md)

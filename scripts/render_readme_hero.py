@@ -365,8 +365,8 @@ def main():
     poster = args.output_dir / "poster.png"
     gif = args.output_dir / "slot-machine.gif"
     first = hero.render(COMBINATIONS[0])
-    first.save(poster, optimize=True)
     if args.poster_only:
+        first.save(poster, optimize=True)
         print(poster)
         return
     palette = first.quantize(colors=112)
@@ -407,7 +407,6 @@ def main():
     print(
         f"{gif}: {WIDTH}×{HEIGHT}, {sum(durations) / 1000:.2f}s, {gif.stat().st_size:,} bytes"
     )
-    print(poster)
 
 
 if __name__ == "__main__":

@@ -67,7 +67,7 @@ export default defineConfig({
         _render(src, env, md) {
           const historical = new Set([
             'README.md', 'implementation-notes.zh-CN.md', 'migration-plan.md',
-            'mvp-doc-drift.md', 'mvp_doc.revised.md',
+            'mvp-doc-drift.md',
           ])
           return historical.has(env.relativePath) ? '' : md.render(src, env)
         },
