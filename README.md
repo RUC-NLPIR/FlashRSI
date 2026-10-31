@@ -19,7 +19,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-D22128?style=for-the-badge&amp;logo=apache&amp;logoColor=white" alt="Apache-2.0 License"></a><br>
   <a href="#demo"><img src="https://img.shields.io/badge/Live_Demo-Watch-FF5C8A?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="Watch the live demo"></a>
   <a href="https://ruc-nlpir.github.io/FlashRSI/project.html"><img src="https://img.shields.io/badge/Project_Page-Visit-0E9B9B?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="FlashRSI project page"></a>
-  <a href="docs/index.md"><img src="https://img.shields.io/badge/Docs-Read_the_guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="FlashRSI documentation"></a>
+  <a href="https://ruc-nlpir.github.io/FlashRSI/"><img src="https://img.shields.io/badge/Docs-Read_the_guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="FlashRSI documentation"></a>
 </p>
 
 <p align="center">

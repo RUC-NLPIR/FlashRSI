@@ -11,12 +11,13 @@
 </p>
 
 <p align="center">
-  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="论文，链接待补充"></a>
-  <a href="https://github.com/RUC-NLPIR/FlashRSI"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="GitHub 代码仓库"></a>
-  <a href="https://ruc-nlpir.github.io/FlashRSI/project.html"><img src="https://img.shields.io/badge/Project_Page-Visit-0E9B9B?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="FlashRSI 项目主页"></a>
-  <a href="#demo"><img src="https://img.shields.io/badge/Live_Demo-Watch-FF5C8A?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="观看演示"></a><br>
-  <a href="docs/usage.zh-CN.md"><img src="https://img.shields.io/badge/Docs-Guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="使用指南"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-D22128?style=for-the-badge&amp;logo=apache&amp;logoColor=white" alt="Apache-2.0 许可证"></a>
+  <a href="https://arxiv.org/search/?query=FlashRSI&amp;searchtype=all"><img src="https://img.shields.io/badge/Paper-arXiv-B31B1B?style=for-the-badge&amp;logo=arxiv&amp;logoColor=white" alt="Search arXiv for FlashRSI"></a>
+  <a href="https://huggingface.co/datasets/RUC-NLPIR/FlashRSI"><img src="https://img.shields.io/badge/Datasets-Hugging%20Face-FF8C00?style=for-the-badge&amp;logo=huggingface&amp;logoColor=white" alt="FlashRSI datasets on Hugging Face"></a>
+  <a href="https://deepwiki.com/RUC-NLPIR/FlashRSI"><img src="https://img.shields.io/badge/Ask%20DeepWiki-8B5CF6?style=for-the-badge" alt="Ask DeepWiki about FlashRSI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-D22128?style=for-the-badge&amp;logo=apache&amp;logoColor=white" alt="Apache-2.0 License"></a><br>
+  <a href="#demo"><img src="https://img.shields.io/badge/Live_Demo-Watch-FF5C8A?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="Watch the live demo"></a>
+  <a href="https://ruc-nlpir.github.io/FlashRSI/project.html"><img src="https://img.shields.io/badge/Project_Page-Visit-0E9B9B?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="FlashRSI project page"></a>
+  <a href="https://ruc-nlpir.github.io/FlashRSI/usage.zh-CN.html"><img src="https://img.shields.io/badge/Docs-Read_the_guide-526CFE?style=for-the-badge&amp;logo=readthedocs&amp;logoColor=white" alt="FlashRSI documentation"></a>
 </p>
 
 <p align="center">
