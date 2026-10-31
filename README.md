@@ -73,12 +73,22 @@ single `all` extra:
 ```bash
 git clone https://github.com/RUC-NLPIR/FlashRSI.git
 cd FlashRSI
+uv venv --python 3.12
+source .venv/bin/activate
+uv sync --extra all
+```
+
+or using `pip`:
+```bash
 python -m pip install -e ".[all]"
 ```
 
 Harbor is kept as a separate extra. Install it together with the complete
 environment when you need Harbor tasks:
-
+```bash
+uv sync --extra all --extra harbor
+```
+or using `pip`:
 ```bash
 python -m pip install -e ".[all,harbor]"
 ```
