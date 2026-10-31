@@ -35,6 +35,18 @@
   <a href="#supporting-benchmarks">Supporting Benchmarks</a>
 </p>
 
+<p align="center">
+  <a href="assets/readme/overall-result-1.jpg">
+    <img src="assets/readme/overall-result-1.jpg" alt="Benchmark performance matrix for Claude Code, showing final scores and changes from the initial harness across source, near-domain, and far-OOD benchmarks." width="100%">
+  </a>
+</p>
+
+<p align="center">
+  <a href="assets/readme/overall-result-2.jpg">
+    <img src="assets/readme/overall-result-2.jpg" alt="Benchmark performance matrix for Mini-Agent, showing final scores and changes from the initial harness across source, near-domain, and far-OOD benchmarks." width="100%">
+  </a>
+</p>
+
 <a id="demo"></a>
 <p align="center">
   <img src="assets/readme/slot-machine.gif" alt="Benchmark, RSI algorithm, and harness reels settle on a combination, followed by illustrative Training, Held-out, Near-domain, and OOD-domain curves." width="100%">

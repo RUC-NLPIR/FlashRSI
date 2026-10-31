@@ -33,6 +33,18 @@
   <a href="#支持的-benchmarks">Benchmarks</a> &nbsp;/&nbsp;
 </p>
 
+<p align="center">
+  <a href="assets/readme/overall-result-1.jpg">
+    <img src="assets/readme/overall-result-1.jpg" alt="Claude Code 在 source、近域和远 OOD benchmark 上的最终分数及相对初始 Harness 变化。" width="100%">
+  </a>
+</p>
+
+<p align="center">
+  <a href="assets/readme/overall-result-2.jpg">
+    <img src="assets/readme/overall-result-2.jpg" alt="Mini-Agent 在 source、近域和远 OOD benchmark 上的最终分数及相对初始 Harness 变化。" width="100%">
+  </a>
+</p>
+
 <a id="demo"></a>
 <p align="center">
   <img src="assets/readme/slot-machine.gif" alt="Benchmark、RSI 算法和 harness 三个转轮停在一组组合，随后绘制 Training、Held-out、Near-domain 和 OOD-domain 示意曲线。" width="100%">
