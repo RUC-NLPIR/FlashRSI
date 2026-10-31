@@ -2,7 +2,7 @@
   <img src="assets/readme/cover.gif" alt="FlashRSI: blue-white electric arcs trace a lightning logo and the large white wordmark on a deep black background." width="100%">
 </p>
 
-<h1 align="center">FlashRSI: A Unified Framework for Agent Self-Improvement</h1>
+<h1 align="center">FlashRSI: A Unified Framework for Agent Recursive Self-Improvement</h1>
 
 <p align="center"><i>One click to reproduce, compare, and develop RSI methods across agents and tasks.</i></p>
 
