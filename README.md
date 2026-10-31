@@ -271,7 +271,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">76.67</td>
       <td align="center">65.00</td>
       <td align="center">44.19</td>
-      <td align="center">62.00</td>
+      <td align="center">66.00</td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -300,7 +300,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">80.00<br><sub>+3.33 pp</sub></td>
       <td align="center">68.75<br><sub>+3.75 pp</sub></td>
       <td align="center">46.51<br><sub>+2.32 pp</sub></td>
-      <td align="center">36.00<br><sub>-26.00 pp</sub></td>
+      <td align="center">58.00<br><sub>-8.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -329,7 +329,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">80.00<br><sub>+3.33 pp</sub></td>
       <td align="center">66.25<br><sub>+1.25 pp</sub></td>
       <td align="center">51.16<br><sub>+6.97 pp</sub></td>
-      <td align="center">30.00<br><sub>-32.00 pp</sub></td>
+      <td align="center">60.00<br><sub>-6.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -358,7 +358,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">80.00<br><sub>+3.33 pp</sub></td>
       <td align="center">71.25<br><sub>+6.25 pp</sub></td>
       <td align="center">46.51<br><sub>+2.32 pp</sub></td>
-      <td align="center">46.00<br><sub>-16.00 pp</sub></td>
+      <td align="center">60.00<br><sub>-6.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -387,7 +387,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">73.33<br><sub>-3.34 pp</sub></td>
       <td align="center"><strong>73.75</strong><br><sub>+8.75 pp</sub></td>
       <td align="center">41.86<br><sub>-2.33 pp</sub></td>
-      <td align="center">36.00<br><sub>-26.00 pp</sub></td>
+      <td align="center">54.00<br><sub>-12.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -416,7 +416,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center"><strong>83.33</strong><br><sub>+6.66 pp</sub></td>
       <td align="center">66.25<br><sub>+1.25 pp</sub></td>
       <td align="center">44.19<br><sub>0.00 pp</sub></td>
-      <td align="center">44.00<br><sub>-18.00 pp</sub></td>
+      <td align="center">64.00<br><sub>-2.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -445,7 +445,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">76.67<br><sub>0.00 pp</sub></td>
       <td align="center">70.00<br><sub>+5.00 pp</sub></td>
       <td align="center">41.86<br><sub>-2.33 pp</sub></td>
-      <td align="center">38.00<br><sub>-24.00 pp</sub></td>
+      <td align="center">52.00<br><sub>-14.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -474,7 +474,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">73.33<br><sub>-3.34 pp</sub></td>
       <td align="center">70.00<br><sub>+5.00 pp</sub></td>
       <td align="center">51.16<br><sub>+6.97 pp</sub></td>
-      <td align="center">42.00<br><sub>-20.00 pp</sub></td>
+      <td align="center">54.00<br><sub>-12.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -503,7 +503,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">66.67<br><sub>-10.00 pp</sub></td>
       <td align="center">72.50<br><sub>+7.50 pp</sub></td>
       <td align="center">48.84<br><sub>+4.65 pp</sub></td>
-      <td align="center">36.00<br><sub>-26.00 pp</sub></td>
+      <td align="center">60.00<br><sub>-6.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -532,7 +532,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">80.00<br><sub>+3.33 pp</sub></td>
       <td align="center">66.25<br><sub>+1.25 pp</sub></td>
       <td align="center"><strong>53.49</strong><br><sub>+9.30 pp</sub></td>
-      <td align="center">28.00<br><sub>-34.00 pp</sub></td>
+      <td align="center"><strong>68.00</strong><br><sub>+2.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -561,7 +561,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">80.00<br><sub>+3.33 pp</sub></td>
       <td align="center">65.00<br><sub>0.00 pp</sub></td>
       <td align="center">44.19<br><sub>0.00 pp</sub></td>
-      <td align="center">46.00<br><sub>-16.00 pp</sub></td>
+      <td align="center">52.00<br><sub>-14.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -590,7 +590,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">80.00<br><sub>+3.33 pp</sub></td>
       <td align="center">72.50<br><sub>+7.50 pp</sub></td>
       <td align="center"><strong>53.49</strong><br><sub>+9.30 pp</sub></td>
-      <td align="center">52.00<br><sub>-10.00 pp</sub></td>
+      <td align="center">58.00<br><sub>-8.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
@@ -619,7 +619,7 @@ highest final score within each benchmark and harness, including ties.
       <td align="center">80.00<br><sub>+3.33 pp</sub></td>
       <td align="center">65.00<br><sub>0.00 pp</sub></td>
       <td align="center">34.88<br><sub>-9.31 pp</sub></td>
-      <td align="center"><strong>60.00</strong><br><sub>-2.00 pp</sub></td>
+      <td align="center">60.00<br><sub>-6.00 pp</sub></td>
     </tr>
     <tr>
       <td align="left">Mini-Agent</td>
