@@ -1,25 +1,35 @@
 ---
 title: Quickstart
-description: Run a small, reproducible agent self-improvement experiment with FlashRSI.
+description: Run a first reproducible FlashRSI experiment and keep the evidence behind the score.
 prev: false
 next:
   text: Installation
   link: /guide/installation
 ---
 
-<!-- Direction A approved by the user. This is a task guide, with real local
-     sample data and independent Target/Worker credentials, not a benchmark result. -->
 <div class="quickstart-intro">
-  <p class="intro-context">Guide / Quickstart</p>
-  <h1>Run a first self-improvement experiment</h1>
+  <p class="intro-context">FlashRSI · Field guide</p>
+  <h1>Run a first self-improvement experiment.</h1>
   <p class="intro-lead">Give an RSI method a defined editing scope. Run each candidate through a native harness and keep the evidence behind the score.</p>
   <div class="intro-actions">
-    <a href="#run-the-experiment">Run the quickstart</a>
-    <a class="secondary" href="./development/framework.html">Understand the design</a>
+    <a href="#run-the-experiment">Start with the run →</a>
+    <a href="./development/framework.html">Understand the design</a>
+    <a href="./project.html">Open the project page</a>
   </div>
 </div>
 
-This example runs **SkillOpt with MiniAgent** on 12 bundled SearchQA questions. It uses six questions for train, three for dev, and three for test. You need Python and two model configurations. Docker is not required.
+This quickstart runs **SkillOpt with MiniAgent** on 12 bundled SearchQA questions. It uses six questions for train, three for dev, and three for test. You need Python and two model configurations; Docker is not required.
+
+## What FlashRSI is
+
+FlashRSI gives research teams one experiment interface for changing agent resources, running the complete candidate, and comparing the result across tasks. The method, harness, worker, and benchmark stay explicit in one configuration.
+
+<div class="guide-pillars">
+  <div class="guide-pillar"><strong>Defined scope</strong><p>Algorithms declare which prompts, skills, tools, and runtime files they may edit.</p></div>
+  <div class="guide-pillar"><strong>Native execution</strong><p>The full candidate runs through MiniAgent, Claude Code, or Codex.</p></div>
+  <div class="guide-pillar"><strong>Shared evidence</strong><p>Snapshots, trajectories, usage, and scores stay under one run directory.</p></div>
+  <div class="guide-pillar"><strong>Broad coverage</strong><p>12 methods and 30 benchmark suites use the same runner.</p></div>
+</div>
 
 ## Install FlashRSI
 
@@ -35,7 +45,7 @@ python -m pip install -e ".[all]"
 
 Python 3.11+ is supported. Python 3.12 covers the widest set of benchmark integrations. See [Installation](./guide/installation.md) for Harbor, τ², Windows activation, and Docker.
 
-## Run the experiment
+## Run the experiment {#run-the-experiment}
 
 The **Target** answers benchmark questions. The **Worker** proposes changes to its skills. Set their credentials separately before running from the repository root:
 
@@ -54,15 +64,39 @@ flashrsi run \
   --set algorithm.worker.llm.api_key="$WORKER_API_KEY"
 ```
 
-Use model names supported by your provider. For a custom endpoint, set `agent.llm.base_url` and `algorithm.worker.llm.base_url`. See [Configuration](./guide/configuration.md).
+Use model names supported by your provider. For a custom endpoint, set `agent.llm.base_url` and `algorithm.worker.llm.base_url`. The complete parser reference is in [Configuration & CLI](./guide/configuration.md).
 
 ::: tip Check setup first
-Run `flashrsi run --config examples/quickstart.yaml --check-only` to check startup without model calls. This may prepare data and dependencies; it does not test remote model authentication.
+Run `flashrsi run --config examples/quickstart.yaml --check-only` to check startup without model calls. It may prepare data and dependencies; it does not test remote model authentication.
 :::
+
+## Choose the parts of a run
+
+Change one part while keeping the others visible. That is what makes a comparison useful.
+
+<div class="run-slots">
+  <div class="run-slot"><small>Algorithm</small><strong>How to search</strong><p>OPRO, GEPA, ACE, SkillOpt, RRSI, and other methods propose and select edits.</p></div>
+  <div class="run-slot"><small>Harness</small><strong>Where to execute</strong><p>A native harness provides the prompts, tools, runtime, and execution boundary.</p></div>
+  <div class="run-slot"><small>Benchmark</small><strong>What to measure</strong><p>Tasks, data, grading rules, and splits turn a candidate into a comparable result.</p></div>
+</div>
+
+See the supported [algorithms](./integrations/algorithms.md), [benchmarks](./integrations/benchmarks.md), and [harnesses](./integrations/harnesses.md) before choosing a combination.
+
+## How a run works
+
+Every experiment follows the same evidence path. The method can change; the boundary stays legible.
+
+<ol class="run-lifecycle">
+  <li><strong>Capture the baseline</strong><p>Build the initial AgentSnapshot from the harness components and record its identity.</p></li>
+  <li><strong>Propose a candidate</strong><p>The algorithm uses Target feedback or Worker edits inside its declared resource scope.</p></li>
+  <li><strong>Run the complete candidate</strong><p>The native harness executes the candidate and records the trajectory.</p></li>
+  <li><strong>Score and select</strong><p>The benchmark grades the trajectory; the algorithm keeps or rejects the Snapshot.</p></li>
+  <li><strong>Inspect the evidence</strong><p>Read the config, resource lineage, calls, artifacts, and final test result together.</p></li>
+</ol>
 
 ## Inspect the output
 
-The command prints the experiment directory. The sample configuration writes it under `../runs/`, relative to the repository root.
+The command prints the experiment directory. The sample configuration writes it under `runs/`, relative to the repository root.
 
 | File | What to look for |
 | --- | --- |
@@ -88,17 +122,10 @@ flashrsi evaluate \
 
 This evaluates the destination benchmark's test split without starting a Worker or continuing the search. Read [Snapshot evaluation](./guide/evaluation.md) before transferring resources between experiments.
 
-## Choose your next experiment
+## From here
 
-A run combines four pieces. Change one while keeping the others explicit.
-
-<div class="resource-map">
-  <div><strong>Algorithm</strong><p>The search policy. It decides what to edit, how to use feedback, and which candidate to keep.</p></div>
-  <div><strong>Harness</strong><p>The Target's native execution path and its declared prompts, skills, tools, and runtime resources.</p></div>
-  <div><strong>Worker</strong><p>An LLM that proposes text edits or an agent that edits candidate files.</p></div>
-  <div><strong>Benchmark</strong><p>The tasks, environments, grading rules, and train/dev/test split.</p></div>
+<div class="guide-links">
+  <a class="guide-link" href="./running-experiments.html"><small>Run experiments</small><strong>Choose a full run</strong><span>Compare methods, harnesses, splits, and output settings.</span></a>
+  <a class="guide-link" href="./development/framework.html"><small>Build on FlashRSI</small><strong>Understand the Snapshot</strong><span>See how tagged resources create a portable candidate.</span></a>
+  <a class="guide-link" href="./project.html"><small>Project page</small><strong>Browse the results</strong><span>Open the benchmark surface and the evidence model.</span></a>
 </div>
-
-- [Choose and run an experiment](./running-experiments.md) for practical setup and output details.
-- [Algorithms](./integrations/algorithms.md), [benchmarks](./integrations/benchmarks.md), and [harnesses](./integrations/harnesses.md) for supported combinations and limits.
-- [Framework & Snapshot](./development/framework.md) for the resource boundary.

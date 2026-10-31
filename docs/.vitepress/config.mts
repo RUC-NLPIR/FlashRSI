@@ -15,7 +15,7 @@ export default defineConfig({
   srcExclude: ['**/node_modules/**'],
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
-    ['meta', { name: 'theme-color', content: '#f7f9fc' }],
+    ['meta', { name: 'theme-color', content: '#f7f5f2' }],
   ],
   markdown: {
     theme: { light: 'github-dark', dark: 'github-dark' },
@@ -28,14 +28,17 @@ export default defineConfig({
       { text: 'Project page', link: '/project.html', activeMatch: '^/project\\.html$' },
       { text: 'Guide', link: '/guide/installation', activeMatch: '^/(guide/|$|index)' },
       { text: 'Integrations', link: '/integrations/algorithms', activeMatch: '^/integrations/' },
-      { text: 'Developments', link: '/development/framework', activeMatch: '^/development/' },
+      { text: 'Build', link: '/development/framework', activeMatch: '^/development/' },
       { text: '简体中文', link: '/usage.zh-CN' },
     ],
     sidebar: [
-      { text: 'Guide', items: [
+      { text: 'Introduction', items: [
         item('Quickstart', '/'),
+        item('Framework & Snapshot', '/development/framework'),
+        item('How a run works', '/running-experiments'),
+      ] },
+      { text: 'Run experiments', items: [
         item('Installation', '/guide/installation'),
-        item('Run an experiment', '/running-experiments'),
         item('Configuration & CLI', '/guide/configuration'),
         item('Evaluate a Snapshot', '/guide/evaluation'),
         item('Snapshot storage', '/guide/snapshot-storage'),
@@ -46,8 +49,7 @@ export default defineConfig({
         item('Datasets & splits', '/integrations/datasets'),
         item('Harnesses', '/integrations/harnesses'),
       ] },
-      { text: 'Developments', items: [
-        item('Framework & Snapshot', '/development/framework'),
+      { text: 'Build on FlashRSI', items: [
         item('Add a benchmark', '/development/benchmark'),
         item('Add a harness', '/development/harness'),
         item('Add an algorithm', '/development/algorithm'),
