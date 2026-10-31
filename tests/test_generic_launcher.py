@@ -80,6 +80,7 @@ class GenericLauncherTests(unittest.TestCase):
                         if algorithm
                         in {
                             "ahe",
+                            "arbor",
                             "adas",
                             "darwinx",
                             "evo_harness",

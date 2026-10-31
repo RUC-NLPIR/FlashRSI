@@ -7,7 +7,7 @@
 <p align="center"><i>一键在不同 Agent 与任务上复现、比较和开发 RSI 方法。</i></p>
 
 <p align="center">
-  FlashRSI 集成 <b>12 种 RSI 算法</b>、<b>30 个 benchmark</b> 和 <b>4 个 harness</b>（MiniAgent、Claude Code、Codex、Pi），用于复现、比较和开发 Agent 自我改进方法。
+  FlashRSI 集成 <b>13 种 RSI 算法</b>、<b>30 个 benchmark</b> 和 <b>4 个 harness</b>（MiniAgent、Claude Code、Codex、Pi），用于复现、比较和开发 Agent 自我改进方法。
 </p>
 
 <p align="center">
@@ -54,9 +54,9 @@
 
 - 🧩 **可配置实验框架。** 在同一个 YAML/CLI 实验中组合 RSI 算法、Target harness、Worker、benchmark
   和各自的模型配置；资源范围与执行角色可以直接切换。
-- 🧪 **30 个 Benchmark 与 12 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
+- 🧪 **30 个 Benchmark 与 13 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
   和交互任务，提供 **29 个套件的 34 份 Hugging Face 固定配置**，以及 OPRO、GEPA、EvoPrompt、ACE、
-  SkillOpt、Evo-Harness、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、RRSI 的可运行适配。
+  SkillOpt、Evo-Harness、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、RRSI、Arbor 的可运行适配。
 - 🧠 **原生 Harness 与可复现证据。** 支持 MiniAgent、Claude Code、Codex 和 Pi，将 prompts、skills、工具、
   配置、hooks、plugins、memory 与 runtime 资源纳入版本化 Snapshot；每次运行集中保存候选版本、轨迹、
   指标、用量和任务产物。
@@ -125,7 +125,7 @@ flashrsi run --config examples/quickstart.yaml
 
 ## 支持的算法
 
-FlashRSI 目前实现 12 种 RSI 方法：
+FlashRSI 目前实现 13 种 RSI 方法：
 
 | 方法 | Scope | 搜索组织 | 使用的反馈 |
 | --- | --- | --- | --- |
@@ -141,6 +141,9 @@ FlashRSI 目前实现 12 种 RSI 方法：
 | [ADAS](https://arxiv.org/abs/2408.08435) | 归档搜索 | 设计归档 | 设计记录、开发集分数 |
 | [DarwinX](https://arxiv.org/abs/2608.07545) | 分支演化 | 分支与重组 | 重复结果、轨迹 |
 | [ModularRSI](https://arxiv.org/abs/2609.14857) | 分支演化 | 独立分支；集成 | 成功 / 失败轨迹 |
+| [Arbor](docs/arbor.md) | 分支演化 | 假设树与经验向上归纳 | Train 轨迹、dev 分数 |
+
+Arbor 为新接入算法；原框架图和下方实验表仍对应十二方法的已有研究，尚无 Arbor 的真实模型结果。
 
 这些方法均适配了 FlashRSI 的资源与评估接口。Evo-Harness 和 Harness 资源编辑方法需要 Agent Worker；具体条件见[选型与运行指南](docs/running-experiments.md#choose-an-algorithm-and-harness)。
 

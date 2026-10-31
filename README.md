@@ -7,7 +7,7 @@
 <p align="center"><i>One click to reproduce, compare, and develop RSI methods across agents and tasks.</i></p>
 
 <p align="center">
-  FlashRSI provides one experiment interface for <b>12 RSI algorithms</b>, <b>30 benchmarks</b>, and native
+  FlashRSI provides one experiment interface for <b>13 RSI algorithms</b>, <b>30 benchmarks</b>, and native
   integrations for MiniAgent, Claude Code, Codex, and Pi. Each run records the resources that changed, the
   trajectories that produced the score, and the Snapshot selected at the end.
 </p>
@@ -57,10 +57,10 @@
 - 🧩 **Configurable Experiment Framework**: Combines an RSI method, Target harness, Worker, benchmark,
   and independent model settings in one YAML/CLI experiment. Resource scopes and execution roles can
   change without writing a new runner.
-- 🧪 **30 Benchmarks and 12 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
+- 🧪 **30 Benchmarks and 13 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
   web research, documents, tool use, and interactive tasks, with **34 pinned Hugging Face prepared
   configurations** for 29 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt,
-  Evo-Harness, AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, and RRSI.
+  Evo-Harness, AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, and Arbor.
 - 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, and Pi map prompts,
   skills, tools, configuration, hooks, plugins, memory, and runtime resources into versioned Snapshots.
   Each run keeps immutable candidates, redacted configuration, Target/Worker trajectories, metrics,
@@ -209,7 +209,7 @@ See [Agent integration](docs/agent-integration.md), [Codex integration](docs/cod
 
 ## Supporting Methods
 
-FlashRSI implements 12 RSI methods:
+FlashRSI implements 13 RSI methods:
 
 | Method | Scope | Search organization | Feedback used |
 | --- | --- | --- | --- |
@@ -225,6 +225,9 @@ FlashRSI implements 12 RSI methods:
 | [ADAS](https://arxiv.org/abs/2408.08435) | Archive search | Design archive | Design accounts, dev scores |
 | [DarwinX](https://arxiv.org/abs/2608.07545) | Branch evolution | Branches and recombination | Repeated outcomes, traces |
 | [ModularRSI](https://arxiv.org/abs/2609.14857) | Branch evolution | Independent branches; integration | Success / failure traces |
+| [Arbor](docs/arbor.md) | Branch evolution | Hypothesis tree and insight propagation | Train traces, dev scores |
+
+Arbor is newly integrated; the original diagram and experiment results below cover the twelve-method study. Arbor has no real-model results yet.
 
 ### Overall experiment results
 

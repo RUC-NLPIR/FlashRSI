@@ -2,7 +2,7 @@
 
 [README](../README.md) · [Benchmark configurations](benchmark-quickstart.md) · [Launcher guide](experiment-launcher.zh-CN.md)
 
-FlashRSI registers 12 algorithms, 30 benchmark suites, and four harnesses: MiniAgent, Claude Code, Codex, and Pi. Versions, years, and task domains within one adapter count as one suite. Registration does not mean every combination has completed a real model run.
+FlashRSI registers 13 algorithms, 30 benchmark suites, and four harnesses: MiniAgent, Claude Code, Codex, and Pi. Versions, years, and task domains within one adapter count as one suite. Registration does not mean every combination has completed a real model run.
 
 ## Start with a small run
 
@@ -25,7 +25,7 @@ Start from an [algorithm configuration](../README.md#supported-algorithms) so it
 | Instructions | OPRO, GEPA, EvoPrompt, ACE | LLM or Agent |
 | Skills | SkillOpt | LLM or Agent |
 | Skills discovered by the native harness | Evo-Harness | Agent |
-| Declared harness resources | AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI | Agent |
+| Declared harness resources | AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, Arbor | Agent |
 
 The Target solves tasks; the Worker proposes changes. Configure their models and connections independently in `agent.llm` and `algorithm.worker.llm`. Judge, user-simulator, and postprocessing models also use their own settings; see [role configuration](experiment-launcher.zh-CN.md#模型配置与文件位置).
 
@@ -34,7 +34,7 @@ The editable scope follows the [resources declared by each harness](../README.md
 - Evo-Harness needs native directory-based skill discovery and loading; see its [implementation notes](evo-harness.md).
 - ModularRSI needs module file mappings. It can evolve on the benchmark's train split; train task IDs must be unique and disjoint from dev/test. Separate evolution data is optional. See [module and data configuration](modular-rsi.md) and the [Claude Code extension example](../examples/modular_rsi_claude_code.yaml).
 
-Other method notes: [ACE](ace.md), [AHE](ahe.md), [ADAS](adas.md), [DarwinX](darwinx.md), [Meta-Harness](meta-harness.md), and [RRSI](rrsi.md).
+Other method notes: [ACE](ace.md), [AHE](ahe.md), [ADAS](adas.md), [DarwinX](darwinx.md), [Meta-Harness](meta-harness.md), [RRSI](rrsi.md), and [Arbor](arbor.md).
 
 ## Choose a benchmark
 

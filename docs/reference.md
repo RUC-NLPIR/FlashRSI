@@ -25,6 +25,7 @@ Use these detailed notes for version boundaries, method settings, source revisio
 | Meta-Harness | [File history and candidate search](./meta-harness.md) |
 | ModularRSI | [Modules, integration, and evolution data](./modular-rsi.md) |
 | RRSI | [Selection rules, budgets, and costs](./rrsi.md) |
+| Arbor | [Hypothesis tree, trunk adoption, and insight propagation](./arbor.md) |
 
 ## Benchmarks and environments
 
