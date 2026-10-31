@@ -745,7 +745,7 @@ Please cite our paper if FlashRSI helps your research:
 @misc{jin2026flashrsi,
   title  = {FlashRSI: A Unified Framework for Agent Self-Improvement},
   author = {Jiajie Jin and Yuze Li and Yuyang Hu and Guanting Dong and
-            Xiaoxi Li and Xinyu Yang and Zhicheng Dou and Yutao Zhu},
+            Xiaoxi Li and Xinyu Yang and Jiejun Tan and Zhicheng Dou and Yutao Zhu},
   year   = {2026},
 }
 ```
