@@ -206,42 +206,17 @@ FlashRSI implements 12 RSI methods:
 
 ### Overall experiment results
 
-We evaluate these methods under a shared experimental setting:
+The table below reports source-task performance and frozen transfer performance for the twelve
+methods evaluated on Claude Code and Mini-Agent. It covers four source benchmarks, five near-domain
+transfers, and two far-OOD transfers. Scores are percentages; colored values show the change from the
+corresponding initial harness in percentage points, and bold marks the highest final score within each
+benchmark and harness, including ties.
 
-- **Evolution model:** `deepseek-v4-pro`
-- **Worker model:** `deepseek-v4.1-flash`
-- **Harnesses:** Claude Code and Mini-Agent
-- **Benchmarks:** 12 benchmark suites
-
-Scores are percentages; values in parentheses show the change from the corresponding initial
-Harness in percentage points.
-
-| Method | Harness | SearchQA | HotpotQA | Terminal-Bench 2.0 | AppWorld |
-| --- | --- | ---: | ---: | ---: | ---: |
-| [SkillOpt](https://arxiv.org/abs/2605.23904) | Claude Code | 83.14 (+9.21) | 60.98 (+3.66) | 70.00 (+6.67) | 84.52 (+19.64) |
-| [SkillOpt](https://arxiv.org/abs/2605.23904) | Mini-Agent | 82.93 (+6.50) | 59.76 (+1.22) | 66.67 (0.00) | 91.67 (+26.19) |
-| [OPRO](https://arxiv.org/abs/2309.03409) | Claude Code | 81.43 (+7.50) | 62.20 (+4.88) | 63.33 (0.00) | 66.07 (+1.19) |
-| [OPRO](https://arxiv.org/abs/2309.03409) | Mini-Agent | 80.71 (+4.28) | 60.98 (+2.44) | 66.67 (0.00) | 59.52 (-5.96) |
-| [AHE](https://arxiv.org/abs/2604.25850) | Claude Code | 79.36 (+5.43) | 60.98 (+3.66) | 70.00 (+6.67) | 91.67 (+26.79) |
-| [AHE](https://arxiv.org/abs/2604.25850) | Mini-Agent | 78.57 (+2.14) | 57.32 (-1.22) | 60.00 (-6.67) | 71.43 (+5.95) |
-| [ACE](https://arxiv.org/abs/2510.04618) | Claude Code | 83.93 (+10.00) | 63.41 (+6.09) | 66.67 (+3.34) | 91.07 (+26.19) |
-| [ACE](https://arxiv.org/abs/2510.04618) | Mini-Agent | 84.71 (+8.28) | 63.41 (+4.87) | 70.00 (+3.33) | 91.67 (+26.19) |
-| [EvoPrompt](https://arxiv.org/abs/2309.08532) | Claude Code | 74.07 (+0.14) | 58.54 (+1.22) | 63.33 (0.00) | 61.90 (-2.98) |
-| [EvoPrompt](https://arxiv.org/abs/2309.08532) | Mini-Agent | 76.71 (+0.28) | 59.76 (+1.22) | 76.67 (+10.00) | 64.29 (-1.19) |
-| [GEPA](https://arxiv.org/abs/2507.19457) | Claude Code | 82.43 (+8.50) | 62.20 (+4.88) | 66.67 (+3.34) | 67.86 (+2.98) |
-| [GEPA](https://arxiv.org/abs/2507.19457) | Mini-Agent | 84.64 (+8.21) | 59.76 (+1.22) | 70.00 (+3.33) | 75.00 (+9.52) |
-| [ADAS](https://arxiv.org/abs/2408.08435) | Claude Code | 81.36 (+7.43) | 60.98 (+3.66) | 73.33 (+10.00) | 89.88 (+25.00) |
-| [ADAS](https://arxiv.org/abs/2408.08435) | Mini-Agent | 84.86 (+8.43) | 60.98 (+2.44) | 66.67 (0.00) | 79.76 (+14.28) |
-| [DarwinX](https://arxiv.org/abs/2608.07545) | Claude Code | 80.50 (+6.57) | 60.98 (+3.66) | 63.33 (0.00) | 70.83 (+5.95) |
-| [DarwinX](https://arxiv.org/abs/2608.07545) | Mini-Agent | 79.29 (+2.86) | 60.98 (+2.44) | 66.67 (0.00) | 69.05 (+3.57) |
-| [Meta-Harness](https://arxiv.org/abs/2603.28052) | Claude Code | 85.07 (+11.14) | 62.20 (+4.88) | 70.00 (+6.67) | 90.48 (+25.60) |
-| [Meta-Harness](https://arxiv.org/abs/2603.28052) | Mini-Agent | 79.14 (+2.71) | 59.76 (+1.22) | 73.33 (+6.66) | 88.10 (+22.62) |
-| [ModularRSI](https://arxiv.org/abs/2609.14857) | Claude Code | 81.07 (+7.14) | 59.76 (+2.44) | 60.00 (-3.33) | 56.55 (-8.33) |
-| [ModularRSI](https://arxiv.org/abs/2609.14857) | Mini-Agent | 78.64 (+2.21) | 59.76 (+1.22) | 70.00 (+3.33) | 69.05 (+3.57) |
-| [RRSI](https://arxiv.org/abs/2609.24972) | Claude Code | 82.79 (+8.86) | 60.98 (+3.66) | 76.67 (+13.34) | 92.86 (+27.98) |
-| [RRSI](https://arxiv.org/abs/2609.24972) | Mini-Agent | 81.64 (+5.21) | 59.76 (+1.22) | 76.67 (+10.00) | 84.52 (+19.04) |
-| [Evo-Harness](https://arxiv.org/abs/2608.15071v2) | Claude Code | 75.36 (+1.43) | 60.98 (+3.66) | 66.67 (+3.34) | 81.55 (+16.67) |
-| [Evo-Harness](https://arxiv.org/abs/2608.15071v2) | Mini-Agent | 80.64 (+4.21) | 59.76 (+1.22) | 66.67 (0.00) | 77.38 (+11.90) |
+<p align="center">
+  <a href="assets/readme/results-table.png">
+    <img src="assets/readme/results-table.png" alt="Source-task and transfer performance table for Claude Code and Mini-Agent across source, near-domain, and far-OOD benchmarks." width="100%">
+  </a>
+</p>
 
 ## Supporting Harnesses
 
