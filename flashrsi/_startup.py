@@ -101,6 +101,19 @@ def _role(config, label, kind):
         raise ValueError(
             f"{label}.llm.api_key is required; credentials are independent for each role"
         )
+    elif kind == "pi":
+        if not llm.get("api_key"):
+            raise ValueError(
+                f"{label}.llm.api_key is required; credentials are independent for each role"
+            )
+        from flashrsi.agents.pi_agent import _executable, _model
+
+        _executable(config)
+        _model(llm)
+        if config.get("cli_path") or config.get("node_path"):
+            raise ValueError(
+                f"{label}: Pi is implemented in the Snapshot's Python runtime; cli_path/node_path are unsupported"
+            )
     if kind == "codex":
         if config.get("cli_path"):
             raise ValueError(

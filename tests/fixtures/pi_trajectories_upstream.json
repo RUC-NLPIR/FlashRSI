@@ -1,0 +1,1826 @@
+{
+  "baseline": "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0",
+  "system_prompt": "Deterministic trajectory replay.",
+  "zero_usage": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "totalTokens": 0,
+    "cost": {
+      "input": 0,
+      "output": 0,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "total": 0
+    }
+  },
+  "method": "Actual upstream runAgentLoop and built-in read/write/edit; fixed model reply replay, not live LLM parity. Initial system context controlled. Loader redirects package export barrel to original pure helpers; display renderers disabled; image/subprocess shims throw if called.",
+  "source_sha256": {
+    "packages/agent/src/agent-loop.ts": "9d7589b5071ea3b8b3e3c624f9cfc09a976ebf7436024a58213837de4645167d",
+    "packages/ai/src/utils/event-stream.ts": "9fd5e33a8e295d88b5911af71d7afbfd437c9620288808d18331f16811e24dac",
+    "packages/ai/src/utils/transcript.ts": "1b20f9436a4f7e60008224d3e22098b2a7731731efdfb9c66f4c78a580cbe1e2",
+    "packages/ai/src/utils/validation.ts": "e4b8029c184bd6df830e0ee2cb7034a39d49b5ecb8c068c26af9564c20246594",
+    "packages/coding-agent/src/core/tools/read.ts": "c3c64f7105599455d3066568074796e2ddb143cb210da4981b0eb632aa3d2811",
+    "packages/coding-agent/src/core/tools/write.ts": "2ee0a438c24cf83fefd733e349d55a21aa5b633c18934b2c80759fcf14b6f297",
+    "packages/coding-agent/src/core/tools/edit.ts": "31a368c14cf5437ecac157765660001b16063302d9bd746303d6d1b1dcb5625d",
+    "packages/coding-agent/src/core/tools/edit-diff.ts": "f85a9809eb44b9828236050cf38a8e45933e5cfd583a186e9a0e55a664dd3e8d"
+  },
+  "cases": [
+    {
+      "input": {
+        "name": "text_only",
+        "prompt": "Say hello",
+        "tools": [],
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "hello"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Say hello"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "hello"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [],
+        "files": {},
+        "status": "finished"
+      }
+    },
+    {
+      "input": {
+        "name": "write_read",
+        "prompt": "Write then read note",
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "note.txt",
+                  "content": "alpha\nbeta\n"
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-2",
+                "name": "read",
+                "arguments": {
+                  "path": "note.txt",
+                  "offset": 2,
+                  "limit": 1
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Write then read note"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "note.txt",
+                  "content": "alpha\nbeta\n"
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "Successfully wrote to note.txt"
+              }
+            ],
+            "toolCallId": "call-1",
+            "toolName": "write",
+            "isError": false
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-2",
+                "name": "read",
+                "arguments": {
+                  "path": "note.txt",
+                  "offset": 2,
+                  "limit": 1
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "beta\n\n[1 more lines in file. Use offset=3 to continue.]"
+              }
+            ],
+            "toolCallId": "call-2",
+            "toolName": "read",
+            "isError": false
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-1",
+            "toolName": "write"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-1",
+            "toolName": "write",
+            "isError": false
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-2",
+            "toolName": "read"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-2",
+            "toolName": "read",
+            "isError": false
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [
+          {},
+          {}
+        ],
+        "files": {
+          "note.txt": "YWxwaGEKYmV0YQo="
+        },
+        "status": "finished"
+      }
+    },
+    {
+      "input": {
+        "name": "fuzzy_edit_bom_crlf",
+        "prompt": "Edit only target",
+        "files": {
+          "note.txt": "﻿keep   \r\nfirst target   \r\nlast   \r\n"
+        },
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "edit",
+                "arguments": {
+                  "path": "note.txt",
+                  "edits": [
+                    {
+                      "oldText": "first target\n",
+                      "newText": "FIRST\nSECOND\n"
+                    }
+                  ]
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Edit only target"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "edit",
+                "arguments": {
+                  "path": "note.txt",
+                  "edits": [
+                    {
+                      "oldText": "first target\n",
+                      "newText": "FIRST\nSECOND\n"
+                    }
+                  ]
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "Successfully replaced 1 block(s) in note.txt."
+              }
+            ],
+            "toolCallId": "call-1",
+            "toolName": "edit",
+            "isError": false
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-1",
+            "toolName": "edit"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-1",
+            "toolName": "edit",
+            "isError": false
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [
+          {
+            "diff": " 1 keep   \n-2 first target   \n+2 FIRST\n+3 SECOND\n 3 last   ",
+            "patch": "--- note.txt\n+++ note.txt\n@@ -1,3 +1,4 @@\n keep   \n-first target   \n+FIRST\n+SECOND\n last   \n",
+            "firstChangedLine": 2
+          }
+        ],
+        "files": {
+          "note.txt": "77u/a2VlcCAgIA0KRklSU1QNClNFQ09ORA0KbGFzdCAgIA0K"
+        },
+        "status": "finished"
+      }
+    },
+    {
+      "input": {
+        "name": "duplicate_edit",
+        "prompt": "Reject ambiguous edit",
+        "files": {
+          "note.txt": "hello world\nhello world\n"
+        },
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "edit",
+                "arguments": {
+                  "path": "note.txt",
+                  "edits": [
+                    {
+                      "oldText": "hello world",
+                      "newText": "replacement"
+                    }
+                  ]
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Reject ambiguous edit"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "edit",
+                "arguments": {
+                  "path": "note.txt",
+                  "edits": [
+                    {
+                      "oldText": "hello world",
+                      "newText": "replacement"
+                    }
+                  ]
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "Found 2 occurrences of the text in note.txt. The text must be unique. Please provide more context to make it unique."
+              }
+            ],
+            "toolCallId": "call-1",
+            "toolName": "edit",
+            "isError": true
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-1",
+            "toolName": "edit"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-1",
+            "toolName": "edit",
+            "isError": true
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [
+          {}
+        ],
+        "files": {
+          "note.txt": "aGVsbG8gd29ybGQKaGVsbG/CoHdvcmxkCg=="
+        },
+        "status": "finished"
+      }
+    },
+    {
+      "input": {
+        "name": "unknown_tool",
+        "prompt": "Call unknown tool",
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "missing_tool",
+                "arguments": {}
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Call unknown tool"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "missing_tool",
+                "arguments": {}
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "Tool missing_tool not found"
+              }
+            ],
+            "toolCallId": "call-1",
+            "toolName": "missing_tool",
+            "isError": true
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-1",
+            "toolName": "missing_tool"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-1",
+            "toolName": "missing_tool",
+            "isError": true
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [
+          {}
+        ],
+        "files": {},
+        "status": "finished"
+      }
+    },
+    {
+      "input": {
+        "name": "length_truncated_tool",
+        "prompt": "Do not write truncated output",
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "forbidden.txt",
+                  "content": "truncated"
+                }
+              }
+            ],
+            "stopReason": "length",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Do not write truncated output"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "forbidden.txt",
+                  "content": "truncated"
+                }
+              }
+            ],
+            "stopReason": "length",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "Tool call \"write\" was not executed: the response hit the output token limit, so its arguments may be truncated. Re-issue the tool call with complete arguments."
+              }
+            ],
+            "toolCallId": "call-1",
+            "toolName": "write",
+            "isError": true
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-1",
+            "toolName": "write"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-1",
+            "toolName": "write",
+            "isError": true
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [
+          {}
+        ],
+        "files": {},
+        "status": "finished"
+      }
+    },
+    {
+      "input": {
+        "name": "disabled_tool",
+        "prompt": "Reject a disabled write",
+        "tools": [
+          "read"
+        ],
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "forbidden.txt",
+                  "content": "should not happen"
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Reject a disabled write"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "forbidden.txt",
+                  "content": "should not happen"
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "Tool write not found"
+              }
+            ],
+            "toolCallId": "call-1",
+            "toolName": "write",
+            "isError": true
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-1",
+            "toolName": "write"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-1",
+            "toolName": "write",
+            "isError": true
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [
+          {}
+        ],
+        "files": {},
+        "status": "finished"
+      }
+    },
+    {
+      "input": {
+        "name": "error_stop",
+        "prompt": "Provider signals error",
+        "replies": [
+          {
+            "content": [],
+            "stopReason": "error",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Provider signals error"
+          },
+          {
+            "role": "assistant",
+            "content": [],
+            "stopReason": "error",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [],
+        "files": {},
+        "status": "error"
+      }
+    },
+    {
+      "input": {
+        "name": "aborted_with_tool",
+        "prompt": "Provider aborted before tool execution",
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "forbidden.txt",
+                  "content": "should not happen"
+                }
+              }
+            ],
+            "stopReason": "aborted",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Provider aborted before tool execution"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-1",
+                "name": "write",
+                "arguments": {
+                  "path": "forbidden.txt",
+                  "content": "should not happen"
+                }
+              }
+            ],
+            "stopReason": "aborted",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [],
+        "files": {},
+        "status": "error"
+      }
+    },
+    {
+      "input": {
+        "name": "parallel_reads",
+        "prompt": "Read two files in one turn",
+        "files": {
+          "a.txt": "alpha\n",
+          "b.txt": "beta\n"
+        },
+        "replies": [
+          {
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-a",
+                "name": "read",
+                "arguments": {
+                  "path": "a.txt"
+                }
+              },
+              {
+                "type": "toolCall",
+                "id": "call-b",
+                "name": "read",
+                "arguments": {
+                  "path": "b.txt"
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Read two files in one turn"
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call-a",
+                "name": "read",
+                "arguments": {
+                  "path": "a.txt"
+                }
+              },
+              {
+                "type": "toolCall",
+                "id": "call-b",
+                "name": "read",
+                "arguments": {
+                  "path": "b.txt"
+                }
+              }
+            ],
+            "stopReason": "toolUse",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "alpha\n"
+              }
+            ],
+            "toolCallId": "call-a",
+            "toolName": "read",
+            "isError": false
+          },
+          {
+            "role": "toolResult",
+            "content": [
+              {
+                "type": "text",
+                "text": "beta\n"
+              }
+            ],
+            "toolCallId": "call-b",
+            "toolName": "read",
+            "isError": false
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "stopReason": "stop",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0
+            }
+          }
+        ],
+        "control_events": [
+          {
+            "type": "agent_start"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "user"
+          },
+          {
+            "type": "message_end",
+            "role": "user"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-a",
+            "toolName": "read"
+          },
+          {
+            "type": "tool_execution_start",
+            "toolCallId": "call-b",
+            "toolName": "read"
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-a",
+            "toolName": "read",
+            "isError": false
+          },
+          {
+            "type": "tool_execution_end",
+            "toolCallId": "call-b",
+            "toolName": "read",
+            "isError": false
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_start",
+            "role": "toolResult"
+          },
+          {
+            "type": "message_end",
+            "role": "toolResult"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_start"
+          },
+          {
+            "type": "message_start",
+            "role": "assistant"
+          },
+          {
+            "type": "message_end",
+            "role": "assistant"
+          },
+          {
+            "type": "turn_end",
+            "role": "assistant"
+          },
+          {
+            "type": "agent_end"
+          }
+        ],
+        "tool_details": [
+          {},
+          {}
+        ],
+        "files": {
+          "a.txt": "YWxwaGEK",
+          "b.txt": "YmV0YQo="
+        },
+        "status": "finished"
+      }
+    }
+  ]
+}

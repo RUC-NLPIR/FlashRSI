@@ -14,7 +14,7 @@ from unittest.mock import AsyncMock, patch
 
 import yaml
 
-from flashrsi import _launch
+from flashrsi import _launch, _startup
 from flashrsi.config import load_config
 from flashrsi.runner import _AGENTS, _ALGORITHMS, _BENCHMARKS
 from scripts import run_experiment as launcher
@@ -123,6 +123,16 @@ class GenericLauncherTests(unittest.TestCase):
         )
         self.assertEqual(loaded.benchmark.judge.llm.api_key, "judge-secret")
         self.assertEqual(loaded.agent.llm.api_key, "target-secret")
+
+    def test_pi_rejects_external_node_runtime(self):
+        path = self.root / "experiment.yaml"
+        values = json.loads(json.dumps(config("searchqa", agent="pi"), default=dict))
+        values["agent"]["llm"]["model_name"] = "openai/target"
+        values["agent"]["node_path"] = "node"
+        path.write_text(yaml.safe_dump(values), encoding="utf-8")
+        loaded = _launch._load(path)
+        with self.assertRaisesRegex(ValueError, "node_path"):
+            _startup._role(loaded.agent, "agent", "pi")
 
     def test_plan_does_not_install_selected_dependencies_or_expose_keys(self):
         path = self.root / "plan.yaml"

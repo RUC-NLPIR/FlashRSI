@@ -53,7 +53,7 @@ uv run flashrsi run --config examples/quickstart.yaml \
 | Terminal-Bench 2.0 | [examples/terminal_bench.yaml](../examples/terminal_bench.yaml) | `harbor`、Python 3.12+、Docker |
 | τ³ Banking | [examples/tau3_banking.yaml](../examples/tau3_banking.yaml) | `tau2` 和上游 benchmark |
 
-`all` 安装包含 MiniAgent、Claude Code、Codex、LLM Worker 以及所有非 Harbor 基准的 Python 依赖。Codex 执行 Python 核心；Code Mode 模型另需 Node.js。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
+`all` 安装包含 MiniAgent、Claude Code、Codex、Pi、LLM Worker 以及所有非 Harbor 基准的 Python 依赖。Pi 直接执行选定 Agent Snapshot 中的纯 Python runtime，不需要 Node.js、npm 或安装 Pi CLI。Codex 执行 Python 核心；Code Mode 模型另需 Node.js。Harbor 与 tau2 的上游依赖存在冲突，需要安装在不同环境中。准备步骤与验证范围见 [Terminal-Bench 接入说明](terminal-bench.md)、[Codex 接入说明](codex.md)和对应配置。
 
 ### 使用独立环境安装
 
@@ -74,8 +74,9 @@ pip install -e ".[all]"
 | [MiniAgent](../flashrsi/agents/miniagent) | 原生 Python Agent | 指令、skills、工具、配置及声明的运行代码 |
 | [Claude Code](agent-integration.md) | 官方 Agent SDK | 指令、skills、commands、agents、hooks、MCP/LSP 注册及 settings |
 | [Codex](codex.md) | 原生 Codex runtime | 指令、skills、agents、hooks、MCP 服务、插件 bundle、记忆资源、规则和配置；具体执行模式见接入说明 |
+| [Pi](agent-integration.md) | Snapshot 内的纯 Python `runtime/pi_native` | Pi 兼容的 headless loop、provider transport、工具、指令、skills、prompt templates 与 settings；不依赖 Node/npm |
 
-**计划接入：** OpenHands、Pi、Hermes，演示中一并展示。
+**计划接入：** OpenHands、Hermes，演示中一并展示。Pi 已通过 Snapshot 内 runtime adapter 接入，详见[Agent 接入说明](agent-integration.md)。
 
 同一个 Agent 接口既可以作为解题的 Target，也可以作为编辑文件的 Worker。对于请求文本或结构化编辑建议的方法，还可以使用纯 **LLM Worker**。
 

@@ -11,7 +11,7 @@ from types import MappingProxyType
 
 from flashrsi._records import _trajectory_record, _write_record
 from flashrsi._run_summary import _finish_summary
-from flashrsi.agents import LLM, ClaudeCode, Codex, MiniAgent
+from flashrsi.agents import LLM, ClaudeCode, Codex, MiniAgent, Pi
 from flashrsi.algorithms import (
     ACE,
     ADAS,
@@ -61,7 +61,7 @@ from flashrsi.benchmarks import (
 from flashrsi.config import prepare_run_dir
 from flashrsi.core import Agent, Snapshot
 
-_AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode, "codex": Codex}
+_AGENTS = {"miniagent": MiniAgent, "claude_code": ClaudeCode, "codex": Codex, "pi": Pi}
 _BENCHMARKS = {
     "alfworld": ALFWorld,
     "tau2": Tau2Benchmark,
@@ -120,12 +120,16 @@ def _make_agent(cls, section, label):
         Codex: (("httpx", "PIL", "tree_sitter", "tree_sitter_bash"), "all"),
         LLM: (("openai",), "all"),
     }
+    if cls is Pi:
+        from flashrsi.agents.pi_agent import _executable
+
+        _executable(section)
     for module in dependencies.get(cls, ((), ""))[0]:
         if importlib.util.find_spec(module) is None:
             raise ValueError(
                 f"Missing {module}; install flashrsi-lite[{dependencies[cls][1]}]"
             )
-    if cls in (MiniAgent, ClaudeCode, Codex, LLM):
+    if cls in (MiniAgent, ClaudeCode, Codex, LLM, Pi):
         _role(section, label, cls.name)
     return cls(section)
 

@@ -1,0 +1,11 @@
+runtime:
+  - runtime/pi_native/**
+prompt:
+  - AGENTS.md
+  - CLAUDE.md
+  - prompts/**
+  - .pi/agent/prompt-templates/**
+skill:
+  - .pi/agent/skills/**
+config:
+  - .pi/agent/settings.json

@@ -1,0 +1,390 @@
+{
+  "baseline": {
+    "version": "1.4.0",
+    "commit": "4a080252f06caf63a525d7873c5d94d3c23887e0",
+    "sources": {
+      "packages/coding-agent/src/core/tools/truncate.ts": "8e4507c3ed7ca7548cf7c2d7f77d07f2ae63a38b756789cbb44e9062db6c8762",
+      "packages/coding-agent/src/core/tools/edit-diff.ts": "f85a9809eb44b9828236050cf38a8e45933e5cfd583a186e9a0e55a664dd3e8d"
+    },
+    "method": "truncate.ts imported directly by Node 24; edit-diff.ts prefix through applyEditsToNormalizedContent executed verbatim after removing imports and stripping TypeScript (diff rendering and file IO excluded)"
+  },
+  "truncation": [
+    {
+      "direction": "head",
+      "input": "hello\nworld\n",
+      "maxLines": 2,
+      "maxBytes": 11,
+      "expected": {
+        "content": "hello\nworld",
+        "truncated": true,
+        "truncatedBy": "lines",
+        "totalLines": 2,
+        "totalBytes": 12,
+        "outputLines": 2,
+        "outputBytes": 11,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2,
+        "maxBytes": 11
+      }
+    },
+    {
+      "direction": "head",
+      "input": "hello\nworld\n",
+      "maxLines": 2000,
+      "maxBytes": 11,
+      "expected": {
+        "content": "hello\nworld",
+        "truncated": true,
+        "truncatedBy": "lines",
+        "totalLines": 2,
+        "totalBytes": 12,
+        "outputLines": 2,
+        "outputBytes": 11,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 11
+      }
+    },
+    {
+      "direction": "tail",
+      "input": "hello\nworld\n",
+      "maxLines": 2,
+      "maxBytes": 11,
+      "expected": {
+        "content": "hello\nworld",
+        "truncated": true,
+        "truncatedBy": "lines",
+        "totalLines": 2,
+        "totalBytes": 12,
+        "outputLines": 2,
+        "outputBytes": 11,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2,
+        "maxBytes": 11
+      }
+    },
+    {
+      "direction": "tail",
+      "input": "hello\nworld\n",
+      "maxLines": 2000,
+      "maxBytes": 11,
+      "expected": {
+        "content": "hello\nworld",
+        "truncated": true,
+        "truncatedBy": "lines",
+        "totalLines": 2,
+        "totalBytes": 12,
+        "outputLines": 2,
+        "outputBytes": 11,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 11
+      }
+    },
+    {
+      "direction": "head",
+      "input": "alpha\nbeta\ngamma\n",
+      "maxLines": 2,
+      "maxBytes": 1024,
+      "expected": {
+        "content": "alpha\nbeta",
+        "truncated": true,
+        "truncatedBy": "lines",
+        "totalLines": 3,
+        "totalBytes": 17,
+        "outputLines": 2,
+        "outputBytes": 10,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2,
+        "maxBytes": 1024
+      }
+    },
+    {
+      "direction": "tail",
+      "input": "alpha\nbeta\ngamma\n",
+      "maxLines": 2,
+      "maxBytes": 1024,
+      "expected": {
+        "content": "beta\ngamma",
+        "truncated": true,
+        "truncatedBy": "lines",
+        "totalLines": 3,
+        "totalBytes": 17,
+        "outputLines": 2,
+        "outputBytes": 10,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2,
+        "maxBytes": 1024
+      }
+    },
+    {
+      "direction": "head",
+      "input": "abcdefghij",
+      "maxLines": 2000,
+      "maxBytes": 3,
+      "expected": {
+        "content": "",
+        "truncated": true,
+        "truncatedBy": "bytes",
+        "totalLines": 1,
+        "totalBytes": 10,
+        "outputLines": 0,
+        "outputBytes": 0,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": true,
+        "maxLines": 2000,
+        "maxBytes": 3
+      }
+    },
+    {
+      "direction": "tail",
+      "input": "abcdefghij",
+      "maxLines": 2000,
+      "maxBytes": 3,
+      "expected": {
+        "content": "hij",
+        "truncated": true,
+        "truncatedBy": "bytes",
+        "totalLines": 1,
+        "totalBytes": 10,
+        "outputLines": 1,
+        "outputBytes": 3,
+        "lastLinePartial": true,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 3
+      }
+    },
+    {
+      "direction": "tail",
+      "input": "a你好世界",
+      "maxLines": 2000,
+      "maxBytes": 7,
+      "expected": {
+        "content": "世界",
+        "truncated": true,
+        "truncatedBy": "bytes",
+        "totalLines": 1,
+        "totalBytes": 13,
+        "outputLines": 1,
+        "outputBytes": 6,
+        "lastLinePartial": true,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 7
+      }
+    },
+    {
+      "direction": "head",
+      "input": "a你好世界",
+      "maxLines": 2000,
+      "maxBytes": 7,
+      "expected": {
+        "content": "",
+        "truncated": true,
+        "truncatedBy": "bytes",
+        "totalLines": 1,
+        "totalBytes": 13,
+        "outputLines": 0,
+        "outputBytes": 0,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": true,
+        "maxLines": 2000,
+        "maxBytes": 7
+      }
+    },
+    {
+      "direction": "head",
+      "input": "",
+      "maxLines": 2000,
+      "maxBytes": 51200,
+      "expected": {
+        "content": "",
+        "truncated": false,
+        "truncatedBy": null,
+        "totalLines": 0,
+        "totalBytes": 0,
+        "outputLines": 0,
+        "outputBytes": 0,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 51200
+      }
+    },
+    {
+      "direction": "tail",
+      "input": "",
+      "maxLines": 2000,
+      "maxBytes": 51200,
+      "expected": {
+        "content": "",
+        "truncated": false,
+        "truncatedBy": null,
+        "totalLines": 0,
+        "totalBytes": 0,
+        "outputLines": 0,
+        "outputBytes": 0,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 51200
+      }
+    },
+    {
+      "direction": "head",
+      "input": "alpha\nbeta\ngamma\n",
+      "maxLines": 2000,
+      "maxBytes": 9,
+      "expected": {
+        "content": "alpha",
+        "truncated": true,
+        "truncatedBy": "bytes",
+        "totalLines": 3,
+        "totalBytes": 17,
+        "outputLines": 1,
+        "outputBytes": 5,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 9
+      }
+    },
+    {
+      "direction": "tail",
+      "input": "alpha\nbeta\ngamma\n",
+      "maxLines": 2000,
+      "maxBytes": 9,
+      "expected": {
+        "content": "gamma",
+        "truncated": true,
+        "truncatedBy": "bytes",
+        "totalLines": 3,
+        "totalBytes": 17,
+        "outputLines": 1,
+        "outputBytes": 5,
+        "lastLinePartial": false,
+        "firstLineExceedsLimit": false,
+        "maxLines": 2000,
+        "maxBytes": 9
+      }
+    }
+  ],
+  "edits": [
+    {
+      "name": "exact",
+      "input": "hello\nworld\n",
+      "edits": [
+        {
+          "oldText": "world",
+          "newText": "pi"
+        }
+      ],
+      "expected": {
+        "isError": false,
+        "baseContent": "hello\nworld\n",
+        "newContent": "hello\npi\n"
+      }
+    },
+    {
+      "name": "exact-and-fuzzy-duplicate",
+      "input": "hello world\nhello world\n",
+      "edits": [
+        {
+          "oldText": "hello world",
+          "newText": "changed"
+        }
+      ],
+      "expected": {
+        "isError": true,
+        "error": "Found 2 occurrences of the text in note.txt. The text must be unique. Please provide more context to make it unique."
+      }
+    },
+    {
+      "name": "fuzzy-add-line",
+      "input": "keep   \nfirst target   \nlast   \n",
+      "edits": [
+        {
+          "oldText": "first target\n",
+          "newText": "FIRST\nSECOND\n"
+        }
+      ],
+      "expected": {
+        "isError": false,
+        "baseContent": "keep   \nfirst target   \nlast   \n",
+        "newContent": "keep   \nFIRST\nSECOND\nlast   \n"
+      }
+    },
+    {
+      "name": "fuzzy-formatting-only",
+      "input": "keep   \ntarget   \nlast   \n",
+      "edits": [
+        {
+          "oldText": "target\n",
+          "newText": "target\n"
+        }
+      ],
+      "expected": {
+        "isError": false,
+        "baseContent": "keep   \ntarget   \nlast   \n",
+        "newContent": "keep   \ntarget\nlast   \n"
+      }
+    },
+    {
+      "name": "overlap",
+      "input": "one\ntwo\nthree\n",
+      "edits": [
+        {
+          "oldText": "one\ntwo\n",
+          "newText": "ONE\nTWO\n"
+        },
+        {
+          "oldText": "two\nthree\n",
+          "newText": "TWO\nTHREE\n"
+        }
+      ],
+      "expected": {
+        "isError": true,
+        "error": "edits[0] and edits[1] overlap in note.txt. Merge them into one edit or target disjoint regions."
+      }
+    },
+    {
+      "name": "missing-multi",
+      "input": "alpha\nbeta\n",
+      "edits": [
+        {
+          "oldText": "alpha",
+          "newText": "ALPHA"
+        },
+        {
+          "oldText": "missing",
+          "newText": "MISSING"
+        }
+      ],
+      "expected": {
+        "isError": true,
+        "error": "Could not find edits[1] in note.txt. The oldText must match exactly including all whitespace and newlines."
+      }
+    },
+    {
+      "name": "no-op",
+      "input": "hello\n",
+      "edits": [
+        {
+          "oldText": "hello",
+          "newText": "hello"
+        }
+      ],
+      "expected": {
+        "isError": true,
+        "error": "No changes made to note.txt. The replacement produced identical content. This might indicate an issue with special characters or the text not existing as expected."
+      }
+    }
+  ]
+}

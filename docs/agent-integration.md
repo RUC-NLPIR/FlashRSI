@@ -65,6 +65,33 @@ Claude Code 的 [适配类](../flashrsi/agents/claude_code/__init__.py) 直接�
 会话与子任务输出使用独立临时运行目录，关闭历史 auto memory，仅在 `llm.auth: login` 时从原位置读取原生凭据。
 扩展加载失败、SDK 异常和暂停／中止结果返回错误轨迹，并保留脱敏诊断。
 
+Pi 的 [适配类](../flashrsi/agents/pi_agent/__init__.py) 从选定 Snapshot 的
+`runtime/pi_native/` 加载纯 Python runtime，按上游 Pi v1.4.0（commit
+`4a080252f06caf63a525d7873c5d94d3c23887e0`）抽取并执行非交互 JSON 路径的语义子集。
+它直接用 `httpx` 调用 OpenAI Chat Completions、OpenAI Responses 和 Anthropic Messages，
+完成多轮工具调用，并将 `session`、agent/turn、user/assistant message、tool execution、usage
+等事件保留在 Trajectory 中；运行过程不需要 Node.js、npm、Pi CLI 或任何 npm 包。
+Snapshot 中的 `AGENTS.md`、`CLAUDE.md`、`prompts/`、`.pi/agent/skills/`、
+`.pi/agent/prompt-templates/` 和 `settings.json`（当前读取 `defaultTools`）由 Python runtime 显式读取，
+任务工作目录仍作为工具 cwd。模型使用 `provider/model`；`anthropic/...` 自动使用
+Anthropic Messages，OpenAI 兼容端点默认使用 Chat Completions，需使用 Responses 时在
+`llm.model_api: openai-responses` 显式选择。凭据只从角色配置读取，不写入 Snapshot。
+Pi 声明容器运行依赖 `httpx`（公共容器层自动加入 PyYAML），复用通用容器执行入口，
+由环境 integration 传入任务工作目录；不需要针对 Harbor 或各个 benchmark 添加 Pi 分支。
+[容器入口回归测试](../tests/test_pi_container.py) 使用打包后的代码、选定 Snapshot、
+隔离子进程和本地 HTTP 验证实际文件编辑及轨迹返回；该测试不启动 Docker 或 benchmark verifier。
+这个 native port 对齐 Pi 的 headless Target/Worker 路径；交互式 TUI/RPC、TypeScript 扩展运行时、
+完整 MCP OAuth 生命周期、持久 session/compaction 等上游能力不在当前支持范围内，详见 runtime 源码与测试。
+
+轨迹对照用同一组固定模型回复，实际执行上游 `runAgentLoop` 和原始 read/write/edit 工具，
+再将原始结果冻结为 [10 个重放 case](../tests/fixtures/pi_trajectories_upstream.json)，由
+[Python 回归测试](../tests/test_pi_trajectory_parity.py) 检查消息、控制事件、工具详情、文件字节和结束状态。
+该验证固定初始 system prompt，排除流式分块、时间戳、耗时及 provider 额外元数据；
+不代表真实模型生成轨迹或全部原始 JSON 一致。默认 prompt/tool schema、thinking/交错内容、
+图片附件及 bash 输出交织、取消清理仍有差异。参考执行使用的 Node/typebox/diff 仅用于生成测试结果；
+Pi 执行路径只需 Python、httpx、PyYAML、模型 API 和 shell 命令所需系统程序。
+项目基础安装仍包含其他 harness 的依赖，尚未拆为 Pi 的最小安装集。
+
 Codex 的 [适配类](../flashrsi/agents/codex/__init__.py) 默认在独立 Python 进程中执行
 选定 Snapshot 的 `python_core/`，不调用原生 CLI，也不回退宿主核心。
 将 Snapshot 的核心与资源复制到每次调用独立的 home，加载 `AGENTS.md`、skills、

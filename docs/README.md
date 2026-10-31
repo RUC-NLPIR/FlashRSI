@@ -176,7 +176,7 @@ The same adapter can serve as a Target that solves tasks or an Agent Worker that
 | MiniAgent | Prompts, skills, tools, configuration, runtime code | Available | [Usage](usage.md#native-harnesses) |
 | Claude Code | Instructions, skills, agents, hooks, MCP/LSP, settings | Available | [Agent integration](agent-integration.md) |
 | Codex | Python core, instructions, skills, plugins, memory, rules, configuration | Available | [Codex guide](codex.md) |
-| Pi | Instructions, skills, tools, settings | Doing | [Integration contract](agent-integration.md) |
+| Pi | Pure-Python runtime, instructions, skills, prompt templates, settings | Available | [Integration contract](agent-integration.md) |
 | Hermes | Instructions, tools, skills, runtime configuration | Doing | [Integration contract](agent-integration.md) |
 | OpenCode | Instructions, tools, plugins, settings | Doing | [Integration contract](agent-integration.md) |
 
