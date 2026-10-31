@@ -1,0 +1,36 @@
+# Core mechanism port; test is sealed until the final Snapshot is selected.
+run:
+  output_dir: ../runs
+benchmark:
+  name: hotpotqa
+  mode: context
+  dataset:
+    source: RUC-NLPIR/FlashRSI
+    revision: 8e226b748e648d4e001cf247f255cfb9eb752292
+    config: hotpotqa
+  split: auto
+  limit: 9
+  seed: 42
+agent:
+  name: miniagent
+  max_turns: 6
+  timeout: 180
+  llm:
+    model_name: your-target-model
+    api_key: null
+    base_url: null
+algorithm:
+  name: arbor
+  max_cycles: 2
+  max_depth: 3
+  merge_threshold: 0.0
+  worker:
+    type: agent
+    name: claude_code
+    max_turns: 30
+    timeout: 600
+    allowed_tools: [Read, Glob, Grep, Write, Edit, Bash]
+    llm:
+      model_name: your-worker-model
+      api_key: null
+      base_url: null

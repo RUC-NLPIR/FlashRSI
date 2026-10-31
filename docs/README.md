@@ -122,7 +122,7 @@ See [Usage guide](usage.md) for the complete configuration examples and Python A
 
 ### Algorithms
 
-FlashRSI currently registers twelve method adaptations. The shared runner supplies Snapshot checkout,
+FlashRSI currently registers thirteen method adaptations. The shared runner supplies Snapshot checkout,
 rollout, scoring, and records; each algorithm keeps its own proposal, feedback, selection, and adoption
 policy.
 
@@ -140,6 +140,7 @@ policy.
 | Meta-Harness | Harness resources | File-based history | [Meta-Harness](meta-harness.md) |
 | ModularRSI | Modules and harness resources | Branch integration | [ModularRSI](modular-rsi.md) |
 | RRSI | Harness resources | Reliability and cost admission | [RRSI](rrsi.md) |
+| Arbor | Harness resources | Hypothesis tree and propagated insights | [Arbor](arbor.md) |
 
 Implementations are adaptations to FlashRSI's resource and evaluation interfaces. A registered method is
 available through the runner, but registration does not mean every method, harness, and benchmark

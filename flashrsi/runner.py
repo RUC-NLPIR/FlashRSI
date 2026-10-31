@@ -19,6 +19,7 @@ from flashrsi.algorithms import (
     GEPA,
     OPRO,
     RRSI,
+    Arbor,
     DarwinX,
     EvoHarness,
     EvoPrompt,
@@ -95,6 +96,7 @@ _BENCHMARKS = {
     "tau3_banking": Tau3Banking,
 }
 _ALGORITHMS = {
+    "arbor": Arbor,
     "adas": ADAS,
     "darwinx": DarwinX,
     "evo_harness": EvoHarness,

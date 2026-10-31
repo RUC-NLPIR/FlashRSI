@@ -25,6 +25,7 @@ These methods edit a broader resource scope. Start from their own configurations
 | Meta-Harness | File-based history of code, scores, and traces. | [Meta-Harness guide](../meta-harness.md) · [YAML](../../examples/meta_harness.yaml) |
 | ModularRSI | Independent module branches followed by integration. | [ModularRSI guide](../modular-rsi.md) · [YAML](../../examples/modular_rsi.yaml) |
 | RRSI | History-guided revisions with score/cost admission. | [RRSI guide](../rrsi.md) · [YAML](../../examples/rrsi.yaml) |
+| Arbor | Hypothesis-tree expansion, experiment selection, and upward insight synthesis. | [Arbor guide](../arbor.md) · [YAML](../../examples/arbor.yaml) |
 
 ## Match the Worker to the method
 
@@ -34,7 +35,7 @@ These methods edit a broader resource scope. Start from their own configurations
 
 ## Interpret results
 
-The twelve implementations adapt methods to FlashRSI's resource and evaluation interfaces. Registration is a configuration entry point; consult each guide's validation and migration notes for differences from the original method and tested paths.
+The thirteen implementations adapt methods to FlashRSI's resource and evaluation interfaces. Registration is a configuration entry point; consult each guide's validation and migration notes for differences from the original method and tested paths. Arbor is newly integrated and has no real-model experiment results yet.
 
 The paper's overall experiment table will be added when its final matrix is available. No aggregate result is claimed here.
 
