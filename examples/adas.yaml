@@ -1,0 +1,55 @@
+# ADAS (Meta Agent Search) on SearchQA with MiniAgent.
+#
+# The meta agent designs agents by editing the harness directory itself, so
+# `algorithm.worker.type` must be `agent` -- a text Worker is refused at
+# startup. The Worker and the target are separate roles with separate models
+# and credentials; the Worker never runs benchmark tasks.
+#
+# One step costs `1 + num_reflections` Worker edits plus one rollout of the
+# whole dev split, and the seed costs one more dev rollout. A first run should
+# cut both: `--algorithm.max_steps 2 --algorithm.num_reflections 0
+# --benchmark.limit 9`.
+#
+# Designs are admitted on `dev`; `train` is unused, because a design is judged
+# on tasks it was not built against. runner evaluates `test` once, after the
+# search.
+#
+# What the meta agent may change is whatever the target declares in its own
+# components.yaml, so the same configuration reaches further on MiniAgent
+# (which versions its runtime source) than on Claude Code (which versions the
+# extensions and configuration its SDK supports). Set `agent.name: claude_code`
+# and an Anthropic-compatible `agent.llm` to run it there.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 30
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-target-api-key
+
+algorithm:
+  name: adas
+  # Every measured design enters the archive, improvement or not: the next
+  # proposal is written against the whole history, so a design that scored
+  # worse still tells the meta agent that direction was tried. Only the best
+  # design in the archive is promoted, once, at the end.
+  max_steps: 3
+  # Upstream reflects twice on a fresh design before measuring it. Each
+  # reflection is another Worker edit in the same checkout; 0 skips the pass.
+  num_reflections: 2
+  worker:
+    type: agent
+    name: miniagent
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
+    # The meta agent needs room to read the harness and the archive before
+    # editing, and again for each reflection.
+    max_turns: 30

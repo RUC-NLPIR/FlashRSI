@@ -1,0 +1,7 @@
+prompt:
+  - CLAUDE.md
+hook:
+  - hooks/**
+config:
+  - .claude-plugin/plugin.json
+  - settings.json

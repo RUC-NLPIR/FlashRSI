@@ -1,0 +1,42 @@
+# AIME2025 is an explicit external evolution pool, not an official training split.
+# AIME2026 dev/test membership is identical with or without evolution_year.
+run:
+  output_dir: ../runs
+benchmark:
+  name: aime
+  year: 2026
+  evolution_year: 2025
+  evolution_limit: 1
+  split_counts: {train: 1, dev: 1, test: 1}
+  seed: 42
+agent:
+  name: miniagent
+  max_turns: 8
+  timeout: 600
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    api_key:
+algorithm:
+  name: modular_rsi
+  num_epochs: 1
+  integration_epochs: 1
+  num_rollouts: 2
+  batch_size: 1
+  validation_samples: 1
+  max_evidence_chars: 60000
+  worker:
+    type: agent
+    name: miniagent
+    max_turns: 60
+    timeout: 600
+    llm:
+      model_name: deepseek-flash
+      base_url: https://api.deepseek.com
+      api_key:
+  modules:
+    agent_loop: [runtime/agent.py]
+    tool_use: [runtime/agent.py, tools/shell.py]
+    observation_management: [runtime/agent.py, runtime/tool_result.py]
+    context_management: [runtime/agent.py]
+    task_completion_detection: [runtime/agent.py]

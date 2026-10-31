@@ -1,0 +1,4 @@
+# Native provenance hashes require byte-identical source on every checkout.
+flashrsi/agents/codex/runtime/** -text
+flashrsi/agents/codex/_bridge/** -text
+flashrsi/benchmarks/**/_official/** -text

@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flashrsi-lite"
+version = "0.1.0"
+description = "A minimal framework for reproducible agent evolution"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+    "PyYAML>=6,<7",
+    "datasets>=3,<5",
+    "openai>=2,<3",
+    "requests>=2.32,<3",
+    "claude-agent-sdk>=0.2.153,<0.3",
+    "httpx>=0.28,<1",
+    "pillow>=11,<13",
+    "tree-sitter==0.25.2",
+    "tree-sitter-bash==0.25.1",
+    "packaging>=24",
+    "rank_bm25>=0.2,<1",
+]
+
+[project.scripts]
+flashrsi = "flashrsi.cli:main"
+
+[project.optional-dependencies]
+all = [
+    "pytest>=8",
+    "ruff>=0.9",
+    "openai>=2,<3",
+    "requests>=2.32,<3",
+    "claude-agent-sdk>=0.2.153,<0.3",
+    "httpx>=0.28,<1",
+    "pillow>=11,<13",
+    "tree-sitter==0.25.2",
+    "tree-sitter-bash==0.25.1",
+    "packaging>=24",
+    "rank_bm25>=0.2,<1",
+    "swebench @ git+https://github.com/SWE-bench/SWE-bench.git@02e7a74ffd0b707aab73d203fe87bdc7c76afc8e",
+    "cryptography>=44",
+    "alfworld==0.4.2; sys_platform != 'win32' and python_version < '3.13'",
+    "textworld[pddl]==1.7.0; sys_platform != 'win32' and python_version < '3.13'",
+    # WorkBench uses NumPy <2; the vendored WideSearch evaluator works with
+    # the same version range, so one all-in-one environment remains solvable.
+    "pandas==2.3.1",
+    "numpy>=1.26,<2",
+    "math-verify[antlr4_13_2]==0.9.0",
+    "lab-core @ https://github.com/harveyai/harvey-labs/releases/download/v1.2.0/lab_core-1.2.0-py3-none-any.whl#sha256=5bfd70664a99c16a97a35bf61a3845a9890477168d11978d58864f986c9f53ba ; python_version >= '3.12' and python_version < '3.14'",
+    "anthropic==0.88.0; python_version >= '3.12' and python_version < '3.14'",
+    "pypandoc_binary",
+    "google-genai>=1.75,<2",
+    "dateparser==1.2.2",
+    "loguru==0.7.3",
+]
+harbor = ["harbor==0.23.0; python_version >= '3.12'", "packaging>=24"]
+# tau2-bench is not published on PyPI, so it cannot be a dependency here.
+# Install it alongside this package when running tau2-bench. Harbor is kept as
+# a separate extra because its LiteLLM requirement is incompatible with tau2.
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["flashrsi*"]
+# Reference sources and bundled skill scripts are data. Treating those scripts
+# as namespace packages strips upstream executable bits during build_py.
+exclude = [
+    "flashrsi.agents.codex.python_core.resource_assets.system_skills*",
+]
+
+[tool.setuptools.package-data]
+"flashrsi.integrations" = ["appworld.Dockerfile", "bfcl.Dockerfile"]
+"flashrsi.benchmarks.harvey_lab" = ["upstream.json"]
+"flashrsi.benchmarks.travelplanner" = ["upstream.json"]
+"flashrsi.benchmarks.widesearch" = ["upstream.json"]
+"flashrsi.benchmarks.livemathbench" = ["upstream.json"]
+"flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
+"flashrsi.agents.claude_code" = ["*.yaml", "*.md", "settings.json", ".mcp.json", ".lsp.json", ".claude-plugin/*.json", "skills/**/*", "commands/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "output-styles/**/*"]
+"flashrsi.agents.codex" = ["components.yaml", "config.toml", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*", "python_core/**/*"]
+
+[tool.setuptools.exclude-package-data]
+"flashrsi.agents.codex" = ["**/__pycache__/*", "**/*.pyc", "**/*.pyo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+# Also work in source archives without .git, where Ruff cannot apply .gitignore.
+extend-exclude = [
+    "mvp_doc.md",
+    "flashrsi/agents/codex/python_core/resource_assets/system_skills",
+    ".cache",
+    "runs",
+    "pytest-of-*",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

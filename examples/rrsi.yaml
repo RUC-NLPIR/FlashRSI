@@ -1,0 +1,36 @@
+# Core mechanism port, not the paper's Terminal-Bench 2.1 experiment.
+# train drives evolution; runner evaluates test once after selection.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 30
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-target-api-key
+
+algorithm:
+  name: rrsi
+  T: 3
+  k: 2
+  m: 2
+  w: 2
+  delta: null  # Bootstrap from repeated baseline trials; supply a measured band if known.
+  # Other search, analysis and review settings use RRSI defaults; see docs/rrsi.md.
+  # Editable files come from the target's existing components.yaml.
+  # Optional native tool signal; file permissions still come from Snapshot.
+  component_signals:
+    client_tool: ['tools/[^\n]+\.py', 'tool_descriptions/[^\n]+\.json', '\btool_schemas\b']
+  worker:
+    type: agent
+    name: miniagent
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
+    max_turns: 30

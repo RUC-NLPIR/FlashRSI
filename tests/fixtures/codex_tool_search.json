@@ -1,0 +1,304 @@
+{
+  "provenance": {
+    "codex": "rust-v0.147.0/be6e8eac",
+    "bm25": "2.3.2",
+    "rust-stemmers": "1.2.0",
+    "deunicode": "1.6.2",
+    "stop-words": "0.9.0, nltk feature",
+    "unicode-segmentation": "1.12.0",
+    "captured_by": "local compiled Cargo dependency oracle; no remote requests"
+  },
+  "tokenization": [
+    {
+      "text": "space station",
+      "tokens": [
+        "space",
+        "station"
+      ]
+    },
+    {
+      "text": "can't you're won't let's couldn't've",
+      "tokens": [
+        "can't",
+        "let",
+        "couldn't'v"
+      ]
+    },
+    {
+      "text": "42 1337 3.14",
+      "tokens": [
+        "42",
+        "1337",
+        "3.14"
+      ]
+    },
+    {
+      "text": "connection connections connective connected connecting connect",
+      "tokens": [
+        "connect",
+        "connect",
+        "connect",
+        "connect",
+        "connect",
+        "connect"
+      ]
+    },
+    {
+      "text": "🍕 🚀 🍋",
+      "tokens": [
+        "pizza",
+        "rocket",
+        "lemon"
+      ]
+    },
+    {
+      "text": "gemüse, Gießen 北亰 ᔕᓇᓇ げんまい茶 🦄☣",
+      "tokens": [
+        "gemus",
+        "giessen",
+        "bei",
+        "jing",
+        "shanana",
+        "genmaicha",
+        "unicorn",
+        "biohazard"
+      ]
+    },
+    {
+      "text": "spawn_agent no-apps sub-agent",
+      "tokens": [
+        "spawn_ag",
+        "app",
+        "sub",
+        "agent"
+      ]
+    },
+    {
+      "text": "a.b a:b 1,234 123;4 _ _1 1_ a_ _a",
+      "tokens": [
+        "a.b",
+        "a:b",
+        "1,234",
+        "123;4",
+        "_1",
+        "1_",
+        "a_",
+        "_a"
+      ]
+    },
+    {
+      "text": "skis skies dying lying tying idly gently ugly early only singly sky news howe atlas cosmos bias andes",
+      "tokens": [
+        "ski",
+        "sky",
+        "die",
+        "lie",
+        "tie",
+        "idl",
+        "gentl",
+        "ugli",
+        "earli",
+        "singl",
+        "sky",
+        "news",
+        "howe",
+        "atlas",
+        "cosmos",
+        "bias",
+        "andes"
+      ]
+    },
+    {
+      "text": "inning outing canning herring earring proceed exceed succeed",
+      "tokens": [
+        "inning",
+        "outing",
+        "canning",
+        "herring",
+        "earring",
+        "proceed",
+        "exceed",
+        "succeed"
+      ]
+    },
+    {
+      "text": "arrows filing crying hopeful generational communally arsenical",
+      "tokens": [
+        "arrow",
+        "file",
+        "cri",
+        "hope",
+        "generat",
+        "communal",
+        "arsenic"
+      ]
+    },
+    {
+      "text": "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",
+      "tokens": []
+    }
+  ],
+  "hashes": [
+    {
+      "text": "gsncnxmgdypx",
+      "hash32": 2318797544
+    },
+    {
+      "text": "qcqgqmpvcnhi",
+      "hash32": 2318797544
+    }
+  ],
+  "search": [
+    {
+      "documents": [
+        "spawn_agent spawn agent subagent sub-agent delegate delegation parallel work worker explorer no-apps fork model reasoning",
+        "send_input send message existing agent subagent follow up interrupt redirect queue target",
+        "resume_agent resume reopen closed agent subagent thread id target",
+        "wait_agent wait agent subagent status final result complete timeout targets",
+        "close_agent close shutdown stop agent subagent thread status target"
+      ],
+      "queries": [
+        "spawn worker",
+        "send message",
+        "close shutdown",
+        "agent status",
+        "fork model reasoning",
+        "agent agent status",
+        "queue target",
+        "empty",
+        "exploring workers"
+      ],
+      "results": [
+        [
+          [
+            0,
+            2.3378623
+          ]
+        ],
+        [
+          [
+            1,
+            2.7725887
+          ]
+        ],
+        [
+          [
+            4,
+            2.443512
+          ],
+          [
+            2,
+            0.945819
+          ]
+        ],
+        [
+          [
+            4,
+            1.0398225
+          ],
+          [
+            3,
+            0.99965763
+          ],
+          [
+            0,
+            0.10607939
+          ],
+          [
+            2,
+            0.094003394
+          ],
+          [
+            1,
+            0.087011404
+          ]
+        ],
+        [
+          [
+            0,
+            3.5067935
+          ]
+        ],
+        [
+          [
+            4,
+            1.1338258
+          ],
+          [
+            3,
+            1.09003
+          ],
+          [
+            0,
+            0.21215878
+          ],
+          [
+            2,
+            0.18800679
+          ],
+          [
+            1,
+            0.17402281
+          ]
+        ],
+        [
+          [
+            1,
+            1.6739764
+          ],
+          [
+            4,
+            0.31079945
+          ],
+          [
+            2,
+            0.31079945
+          ],
+          [
+            3,
+            0.29879433
+          ]
+        ],
+        [],
+        [
+          [
+            0,
+            2.3378623
+          ]
+        ]
+      ]
+    },
+    {
+      "documents": [
+        "gsncnxmgdypx",
+        "qcqgqmpvcnhi"
+      ],
+      "queries": [
+        "gsncnxmgdypx",
+        "qcqgqmpvcnhi"
+      ],
+      "results": [
+        [
+          [
+            1,
+            0.1823216
+          ],
+          [
+            0,
+            0.1823216
+          ]
+        ],
+        [
+          [
+            1,
+            0.1823216
+          ],
+          [
+            0,
+            0.1823216
+          ]
+        ]
+      ]
+    }
+  ]
+}

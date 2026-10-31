@@ -1,0 +1,32 @@
+# Text-only ALFWorld; Linux/WSL/macOS, Python 3.11 or 3.12.
+# Fill both roles' model settings and prepare the native data directory.
+run:
+  output_dir: ../runs
+benchmark:
+  name: alfworld
+  data_path: ../data/alfworld/json_2.1.1
+  seed: 42
+  max_steps: 50
+  admissible_commands: false
+  # train -> train, valid_seen -> dev, valid_unseen -> test.
+  # This limit preserves native membership and retains one task per role.
+  limit: 3
+agent:
+  name: miniagent
+  max_turns: 60
+  timeout: 600
+  llm:
+    model_name: your-target-model
+    base_url: https://api.openai.com/v1
+    api_key:
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  worker:
+    type: llm
+    timeout: 180
+    llm:
+      model_name: your-worker-model
+      base_url: https://api.openai.com/v1
+      api_key:

@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "tokens_left": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Remaining tokens in the current context window, or null when unavailable."
+    }
+  },
+  "required": [
+    "tokens_left"
+  ],
+  "additionalProperties": false
+}

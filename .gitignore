@@ -1,0 +1,27 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+pytest-of-*/
+.ruff_cache/
+.coverage
+build/
+dist/
+.env
+.env.*
+!.env.example
+*.local.yaml
+runs/
+.cache/
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
+# Local smoke results, validation reports, and integration journals
+/docs/smoke*
+/docs/validation-*
+/docs/core-source-audit*
+/docs/main-sync-*
+/docs/git-integration-*

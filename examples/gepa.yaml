@@ -1,0 +1,35 @@
+# GEPA on HotpotQA with MiniAgent.
+#
+# One iteration costs `2 × reflection_minibatch_size + len(dev)` target runs,
+# and `max_metric_calls` bounds their total. Left unset it scales to the data:
+# the baseline dev pass plus ten iterations. A first run should cut it, for
+# example `--algorithm.max_metric_calls 30 --benchmark.limit 24`.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: hotpotqa
+  mode: context
+  # Custom experiment partition of labeled questions, not official test roles.
+  split: {train: 0.5, dev: 0.25, test: 0.25}
+  seed: 42
+  limit: 60
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-api-key
+  # MiniAgent's per-task ReAct budget is `max_turns` (default 10). Multi-hop
+  # questions need room to retrieve, read and check, so raise it here rather
+  # than letting answers be cut off mid-search.
+
+algorithm:
+  name: gepa
+  # GEPA rewrites whatever file the target agent declares as its instructions,
+  # so there is no path to configure here.
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

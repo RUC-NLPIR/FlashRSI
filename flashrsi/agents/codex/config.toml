@@ -1,0 +1,8 @@
+# Codex settings and MCP registrations belong here.
+# Model connections, credentials and execution limits come from the role config.
+
+# Enable explicitly when providing versioned plugin bundles. Native discovery
+# otherwise refreshes external plugin catalogs even without an installed plugin.
+[features]
+plugins = false
+remote_plugin = false

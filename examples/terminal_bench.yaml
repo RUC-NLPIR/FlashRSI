@@ -1,0 +1,29 @@
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: terminal_bench
+  # Explicit experiment partitions, not official benchmark splits.
+  split_counts: {train: 2, dev: 2, test: 2}
+  seed: 42
+
+agent:
+  name: claude_code
+  llm:
+    model_name: your-claude-model
+    api_key: your-api-key
+  max_turns: 30
+  allowed_tools: [Bash, Read, Write, Edit, Glob, Grep, Skill]
+  harbor:
+    setup_timeout: 600
+    cleanup_grace: 30
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 1
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

@@ -1,0 +1,53 @@
+# tau3 Banking with SkillOpt and MiniAgent.
+#
+# tau2 owns the conversation, the simulated customer, the tools, the database
+# and the reward. FlashRSI supplies the Agent and records the result.
+#
+# Requires tau2-bench, which is not on PyPI and pins litellm<1.82.7, so it
+# cannot share an environment with the harbor extra (Terminal-Bench):
+#   uv pip install "tau2 @ git+https://github.com/sierra-research/tau2-bench.git@v1.0.1"
+#   uv pip install -e ".[tau2,miniagent]"
+#
+# The user simulator reads prompt files from tau2's data directory, which the
+# wheel does not ship and which tau2 resolves at import. Copy them from the
+# pinned source and export the variable before running:
+#   data/tau2/user_simulator/*.md  ->  $TAU2_DATA_DIR/tau2/user_simulator/
+#   export TAU2_DATA_DIR=/path/to/tau2-data
+# The benchmark's own domain copy is used for the domain itself, so only the
+# user simulator files are needed there.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: tau3_banking
+  # Explicit custom experiment roles; upstream publishes no training split.
+  split_counts: {train: 1, dev: 1, test: 1}
+  seed: 42
+  # The retrieval variant selects the agent policy and its knowledge-base
+  # tools. Upstream's default `alltools` needs OPENAI_API_KEY for embeddings;
+  # grep_only, full_kb, golden_retrieval and no_knowledge need no extra service.
+  variant: grep_only
+  # The simulated customer is played by its own model. It must not reuse the
+  # evolution worker's configuration: the worker edits the Agent being measured.
+  user_simulator:
+    llm:
+      model_name: your-user-simulator-model
+      api_key: your-api-key
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-api-key
+  # Turns tau2 may take in one conversation.
+  max_steps: 30
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 1
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

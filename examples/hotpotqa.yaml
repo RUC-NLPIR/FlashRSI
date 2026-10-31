@@ -1,0 +1,33 @@
+# HotpotQA contextual QA with SkillOpt on MiniAgent.
+#
+# Explicit custom train/dev/test partition of the labeled upstream pool.
+# This is an experiment split, not the official held-out leaderboard test.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: hotpotqa
+  mode: context
+  split: {train: 0.5, dev: 0.25, test: 0.25}
+  seed: 42
+  # Total experiment size; remove for the full labeled pool.
+  limit: 60
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-api-key
+  # MiniAgent's per-task ReAct budget is `max_turns` (default 10). Multi-hop
+  # questions need room to retrieve, read and check, so raise it here rather
+  # than letting answers be cut off mid-search.
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 2
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key

@@ -1,0 +1,89 @@
+import { defineConfig } from 'vitepress'
+import { repositoryLinks } from './repository-links'
+
+const base = process.env.DOCS_BASE || '/FlashRSI/'
+const item = (text: string, link: string) => ({ text, link })
+
+export default defineConfig({
+  title: 'FlashRSI',
+  description: 'Run, compare, and develop agent self-improvement methods with native harnesses and versioned resources.',
+  lang: 'en-US',
+  base,
+  // Keep .html URLs: GitHub Pages can serve every page directly without rewrites.
+  cleanUrls: false,
+  rewrites: { 'README.md': 'overview.md' },
+  srcExclude: ['**/node_modules/**'],
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
+    ['meta', { name: 'theme-color', content: '#f7f9fc' }],
+  ],
+  markdown: {
+    theme: { light: 'github-dark', dark: 'github-dark' },
+    config: repositoryLinks,
+  },
+  themeConfig: {
+    logo: '/favicon.svg',
+    siteTitle: 'FlashRSI',
+    nav: [
+      { text: 'Project page', link: '/project.html', activeMatch: '^/project\\.html$' },
+      { text: 'Guide', link: '/guide/installation', activeMatch: '^/(guide/|$|index)' },
+      { text: 'Integrations', link: '/integrations/algorithms', activeMatch: '^/integrations/' },
+      { text: 'Developments', link: '/development/framework', activeMatch: '^/development/' },
+      { text: '简体中文', link: '/usage.zh-CN' },
+    ],
+    sidebar: [
+      { text: 'Guide', items: [
+        item('Quickstart', '/'),
+        item('Installation', '/guide/installation'),
+        item('Run an experiment', '/running-experiments'),
+        item('Configuration & CLI', '/guide/configuration'),
+        item('Evaluate a Snapshot', '/guide/evaluation'),
+        item('Snapshot storage', '/guide/snapshot-storage'),
+      ] },
+      { text: 'Integrations', items: [
+        item('Algorithms', '/integrations/algorithms'),
+        item('Benchmarks', '/integrations/benchmarks'),
+        item('Datasets & splits', '/integrations/datasets'),
+        item('Harnesses', '/integrations/harnesses'),
+      ] },
+      { text: 'Developments', items: [
+        item('Framework & Snapshot', '/development/framework'),
+        item('Add a benchmark', '/development/benchmark'),
+        item('Add a harness', '/development/harness'),
+        item('Add an algorithm', '/development/algorithm'),
+      ] },
+      { text: 'Reference', items: [
+        item('FAQ', '/faq'),
+        item('All integration notes', '/reference'),
+        item('Python API & usage', '/usage'),
+        item('Build & host these docs', '/development/docs-site'),
+      ] },
+    ],
+    outline: { label: 'On this page', level: [2, 3] },
+    search: {
+      provider: 'local',
+      options: {
+        // Preserve historical notes as pages without ranking them above current guides.
+        _render(src, env, md) {
+          const historical = new Set([
+            'README.md', 'implementation-notes.zh-CN.md', 'migration-plan.md',
+            'mvp-doc-drift.md', 'mvp_doc.revised.md',
+          ])
+          return historical.has(env.relativePath) ? '' : md.render(src, env)
+        },
+        detailedView: true,
+        translations: { button: { buttonText: 'Search documentation', buttonAriaLabel: 'Search documentation' } },
+      },
+    },
+    socialLinks: [{ icon: 'github', link: 'https://github.com/RUC-NLPIR/FlashRSI' }],
+    editLink: {
+      pattern: 'https://github.com/RUC-NLPIR/FlashRSI/edit/main/docs/:path',
+      text: 'Edit this page on GitHub',
+    },
+    docFooter: { prev: 'Previous page', next: 'Next page' },
+    footer: {
+      message: 'Released under the Apache License 2.0.',
+      copyright: 'Gaoling School of Artificial Intelligence · Renmin University of China',
+    },
+  },
+})

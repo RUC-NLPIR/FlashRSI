@@ -1,0 +1,35 @@
+# Fill in each role's model, API key and Responses-compatible endpoint.
+# Preparation only: uv run flashrsi run --config examples/codex.yaml --prepare-only
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  limit: 20
+  seed: 42
+
+agent:
+  name: codex
+  timeout: 300
+  sandbox: workspace-write
+  llm:
+    model_name: your-codex-model
+    api_key: null
+    base_url: null # Defaults to https://api.openai.com/v1
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 1
+  batch_size: 4
+  edit_budget: 2
+  worker:
+    type: agent
+    name: codex
+    timeout: 300
+    sandbox: workspace-write
+    llm:
+      model_name: your-worker-model
+      api_key: null
+      base_url: null

@@ -1,0 +1,43 @@
+# DarwinX core mechanism port on SearchQA. See docs/darwinx.md for costs,
+# admission rules and differences from the official Beagle campaign driver.
+# Fill in BOTH role models and credentials before running.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  limit: 30
+
+agent:
+  name: miniagent
+  llm:
+    model_name: your-target-model
+    api_key: your-target-api-key
+
+algorithm:
+  name: darwinx
+  # Search sees train only. runner grades test once after final promotion.
+  max_steps: 6
+  screen_size: 3
+  screen_samples: 1
+  confirm_samples: 3
+  # Screening may pay to confirm a complementary specialist. Only the strict
+  # full-pool contract below grants permission to become a mutation parent.
+  screen_regression_tolerance: 1.0
+  regression_tolerance: 0.0
+  solved_threshold: 1.0
+  exploration_probability: 0.5
+  # A cadence attempts recombination only when measured complementary branches
+  # exist. Set 0 for mutation alone; mergers also count toward max_steps.
+  merge_every: 3
+  seed: 42
+  max_evidence_chars: 24000
+  worker:
+    type: agent
+    name: miniagent
+    llm:
+      model_name: your-worker-model
+      api_key: your-worker-api-key
+    max_turns: 30

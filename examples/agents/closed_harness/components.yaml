@@ -1,0 +1,4 @@
+prompt:
+  - CLAUDE.md
+skill:
+  - .claude/skills/**

@@ -1,0 +1,24 @@
+# Relative paths below are resolved from the directory containing this file.
+run:
+  output_dir: ./runs
+
+benchmark:
+  name: searchqa
+  split: auto # Preserve native splits; missing dev/test stay empty.
+  # To define your experiment, see examples/benchmark-partitions.yaml.
+
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    api_key: # Fill in your API key
+    base_url:
+
+algorithm:
+  name: skillopt
+  worker:
+    type: llm # llm/agent
+    llm:
+      model_name: gpt-5
+      api_key: # Fill in your API key
+      base_url:

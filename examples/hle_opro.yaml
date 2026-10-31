@@ -1,0 +1,39 @@
+# Copy to a sibling *.local.yaml so relative paths keep their meaning.
+# Fill Target/Worker model settings and every extra role/service below.
+# HLE text-only. Judge must support the structured-output protocol; configure it independently.
+# Native loader streams official cais/hle at a pinned revision and excludes image questions.
+# No RUC-NLPIR/FlashRSI dataset config is needed. Obtain official HF access and log in first.
+# 1/1/1 is a custom experiment partition, not an official benchmark result.
+run:
+  output_dir: ../runs
+benchmark:
+  name: hle
+  seed: 42
+  split_counts:
+    train: 1
+    dev: 1
+    test: 1
+  judge:
+    llm:
+      model_name: null
+      api_key: null
+      base_url: null
+agent:
+  name: miniagent
+  max_turns: 40
+  timeout: 1200
+  llm:
+    model_name: null
+    api_key: null
+    base_url: null
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  worker:
+    type: llm
+    timeout: 300
+    llm:
+      model_name: null
+      api_key: null
+      base_url: null
