@@ -61,6 +61,7 @@ _AGENT_EXTRAS = {
     "codex": "codex",
     "pi": "pi",
     "hermes": "hermes",
+    "openclaw": "openclaw",
     "llm": "llm",
 }
 _EDITING_ALGORITHMS = {
@@ -162,7 +163,7 @@ def _plan(config):
         raise ValueError(
             "Unsupported benchmark; choose: " + ", ".join(_BENCHMARK_EXTRAS)
         )
-    if target not in {"miniagent", "claude_code", "codex", "pi", "hermes"} or (
+    if target not in {"miniagent", "claude_code", "codex", "pi", "hermes", "openclaw"} or (
         not evaluating
         and (
             worker not in _AGENT_EXTRAS
@@ -170,7 +171,7 @@ def _plan(config):
         )
     ):
         raise ValueError(
-            "Agent/Agent Worker must be miniagent, claude_code, codex, pi or hermes; a text Worker uses type: llm"
+            "Agent/Agent Worker must be miniagent, claude_code, codex, pi, hermes or openclaw; a text Worker uses type: llm"
         )
     if not evaluating:
         algorithm_names = {

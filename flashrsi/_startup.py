@@ -118,6 +118,10 @@ def _role(config, label, kind):
         from flashrsi.agents.hermes import _validate
 
         _validate(config)
+    elif kind == "openclaw":
+        from flashrsi.agents.openclaw import _validate
+
+        _validate(config)
     if kind == "codex":
         if config.get("cli_path"):
             raise ValueError(

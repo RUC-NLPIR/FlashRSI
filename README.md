@@ -73,7 +73,7 @@ See the [documentation home](docs/index.md) for the guide, integrations, and dev
 
 <p align="center">
   <a href="assets/readme/framework-overview.jpg">
-    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI framework overview: 12 RSI algorithms, immutable AgentSnapshots, five agent harnesses, and 30 benchmarks." width="100%">
+    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI framework overview: 12 RSI algorithms, immutable AgentSnapshots, six agent harnesses, and 30 benchmarks." width="100%">
   </a>
 </p>
 
@@ -644,7 +644,7 @@ highest final score within each benchmark and harness, including ties.
 
 ## Supporting Harnesses
 
-FlashRSI currently supports five harness integrations; additional integrations are planned.
+FlashRSI currently supports six harness integrations; additional integrations are planned.
 
 | Harness | Editable resources | Integration details | Status |
 | --- | --- | --- | --- |
@@ -653,6 +653,7 @@ FlashRSI currently supports five harness integrations; additional integrations a
 | [Codex](docs/codex.md) | Instructions, skills, agents, hooks, plugins, memory, rules, configuration | Snapshot-local Python port based on `rust-v0.147.0`, with documented coverage limits. | Available |
 | [Pi](docs/agent-integration.md) | Pure-Python Snapshot runtime, instructions, skills, prompt templates, and settings | Snapshot-local `runtime/pi_native` follows Pi v1.4.0's headless loop and Pi-shaped JSON events; no Node/npm dependency. | Available |
 | [Hermes](docs/agent-integration.md) | Python Snapshot runtime, SOUL instructions, skills, tool settings | Supported headless Hermes v0.22.5 path with upstream Python helpers and local tools; no installed Hermes CLI required. | Available |
+| [OpenClaw](docs/agent-integration.md) | Pure-Python Snapshot runtime, bootstrap files, skills, tools, policy, session and memory settings | Snapshot-local `runtime/openclaw_native` follows the pinned embedded turn path across Chat Completions, Responses and Anthropic Messages; no Node/npm/Gateway dependency. | Available |
 | [OpenCode](docs/agent-integration.md) | Instructions, tools, plugins, settings | Resource inventory and Snapshot binding are in progress. | **doing** |
 
 ## Supporting Benchmarks

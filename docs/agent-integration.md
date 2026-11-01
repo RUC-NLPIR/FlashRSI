@@ -138,6 +138,23 @@ Responses 使用 `openai-responses`。每个角色显式配置凭据和端点；
 运行依赖为 Python、httpx、Pillow、`regexrs-py`、PyYAML、Bash 和任务命令需要的程序。容器复用公共 Snapshot
 执行入口，不需要 benchmark 专用 Hermes 分支。示例见 [hermes.yaml](../examples/hermes.yaml)。
 
+OpenClaw 的 [适配类](../flashrsi/agents/openclaw/__init__.py) 从所选 Snapshot 的
+`runtime/openclaw_native/` 加载纯 Python embedded-turn runtime，基线为 OpenClaw
+`v2026.10.9`（commit `8b18b5578f66eab1501cba4cef2310d88bfb9a41`）。它按固定顺序组装
+bootstrap 文件和 skills、恢复 SQLite transcript、执行上下文压缩、请求模型、顺序执行工具，
+直到最终答复或迭代预算结束。Chat Completions、Responses 和 Anthropic Messages 各自使用
+原生的 assistant tool envelope 和 tool result 格式，并支持 SSE、usage、取消和超时。
+
+Snapshot 提供 `read`、`write`、`edit`、`apply_patch`、`exec`、`process`、`read_skill` 和
+`memory_search` 工具；工具策略支持 profile、显式 allow/deny 和 opt-in workspace sandbox。
+skill 清单遵循 workspace > `.agents/skills` > bundled 的优先级，并应用
+`metadata.openclaw` 的 disabled、OS、binary、environment 和 model-invocation gating。
+`PROVENANCE.json` 和 [native runtime README](../flashrsi/agents/openclaw/runtime/openclaw_native/README.md)
+记录了来源、范围和明确排除的 Gateway、channel、UI、cron、plugin marketplace 与容器 supervisor。
+OpenClaw 路径不启动 Node.js、npm、Gateway 或宿主 CLI；运行依赖只有 Python 项目已有的 httpx 和 PyYAML。
+示例见 [openclaw.yaml](../examples/openclaw.yaml)，wire、session、tool loop 和资源测试见
+[OpenClaw tests](../tests/test_openclaw_provider_wire.py)。
+
 上下文和长输出路径均由所选 Snapshot 内的 Python 代码执行：
 
 | 路径 | 配置与行为 |
