@@ -1,0 +1,65 @@
+{
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": {
+    "openrouter_models.json.gz": {
+      "source": "https://openrouter.ai/api/v1/models",
+      "source_sha256": "edc5b4633815622b0f60d45abb37f1a673f7e1cd349737d53dd9f3614166310c",
+      "selected_symbols": "452 model rows",
+      "adaptations": ["compressed immutable catalog; request-time explicit metadata overrides remain supported"],
+      "snapshot_sha256": "17caa54dc1cef147ca56736be3d3b26a7ce63c670efa980ab9abd7fbe06ac892"
+    },
+    "usage_pricing.py": {
+      "source": "agent/usage_pricing.py",
+      "source_sha256": "6fc01dafad5d6b78262ad9117cfa51fb9f89313c4f62cb04ca327459db2ce61a",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from agent.model_metadata import fetch_endpoint_model_metadata, fetch_model_metadata, strip_codex_context_variant_suffix",
+          "from .boundaries import fetch_endpoint_model_metadata, fetch_model_metadata\nfrom .codex_slug import strip_codex_context_variant_suffix"
+        ],
+        [
+          "from utils import base_url_host_matches, base_url_hostname, base_url_origin",
+          "from .urls import base_url_host_matches, base_url_hostname, base_url_origin"
+        ],
+        [
+          "from agent.models_dev import get_model_info",
+          "from .boundaries import get_model_info"
+        ],
+        [
+          "from providers import get_provider_profile",
+          "from .boundaries import get_provider_profile"
+        ]
+      ],
+      "snapshot_sha256": "8c057e258b961163de2f0c168250d02a53bf5313fde759c2addaba06f915de20"
+    },
+    "codex_slug.py": {
+      "source": "agent/model_metadata.py",
+      "source_sha256": "497f2342915b0c7f23e56c2ec7e191a122d6255a6d12e660e570a4013895ab3d",
+      "selected_symbols": [
+        "CODEX_CONTEXT_VARIANT_SUFFIX",
+        "_CODEX_900K_ELIGIBLE_BASES",
+        "_CODEX_900K_SNAPSHOT_BASES",
+        "_CODEX_900K_SNAPSHOT_RE",
+        "_bare_codex_slug",
+        "_codex_variant_base",
+        "is_codex_900k_base",
+        "strip_codex_context_variant_suffix"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "b4d5a37ea2e29862d71c13c424c2146ca8be87da0c50c3eb7ad5488d3d045ea6"
+    },
+    "urls.py": {
+      "source": "utils.py",
+      "source_sha256": "9c4751dc9fbcbfe7e16d9e0cc5fb25566517c4927d2dc84061d4cac993a98445",
+      "selected_symbols": [
+        "_hostname_of",
+        "_parse_base_url",
+        "base_url_host_matches",
+        "base_url_hostname",
+        "base_url_origin"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "07463065d5bf1a0f1186f47b1e6c3b67ce7845cc8ab91882abb18184d5d7306a"
+    }
+  }
+}

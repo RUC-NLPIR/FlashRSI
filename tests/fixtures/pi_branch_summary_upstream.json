@@ -1,0 +1,3167 @@
+{
+  "baseline": "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0",
+  "method": "Original pinned TypeScript collectEntriesForBranchSummary, prepareBranchEntries and generateBranchSummary with offline fixed assistant responses; no paid requests.",
+  "source_sha256": {
+    "packages/coding-agent/src/core/compaction/branch-summarization.ts": "cdffdcb3ca37f5121383d0f5ba98295eb07ce0e2085c8d57d8cb2fb5dc5e9243",
+    "packages/coding-agent/src/core/compaction/compaction.ts": "32714966eb644da31cd84e8eb172965256160626b3d26ae9752c3894300f2b0b",
+    "packages/coding-agent/src/core/compaction/utils.ts": "37eab7698cdbff8b5987d4529005ea16d7e1ae4a5344d7d0443c3466444aa90e",
+    "packages/coding-agent/src/core/session-manager.ts": "450d82c529933214e088b8422f00061815e617f352f6c834689787a314064bff"
+  },
+  "cases": [
+    {
+      "input": {
+        "name": "whole_branch",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {}
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 34
+        },
+        "result": {
+          "summary": "The user explored a different conversation branch before returning here.\nSummary of that exploration:\n\nbranch checkpoint\n\n<read-files>\ninherited.py\nseen.py\n</read-files>\n\n<modified-files>\nchanged.py\nwritten.py\n</modified-files>",
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "readFiles": [
+            "inherited.py",
+            "seen.py"
+          ],
+          "modifiedFiles": [
+            "changed.py",
+            "written.py"
+          ]
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: explore a branch\n\n[Assistant tool calls]: read(path=\"seen.py\"); write(path=\"written.py\", content=\"yes\")\n\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "budget_newest",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 5,
+        "options": {
+          "contextWindow": 20,
+          "reserveTokens": 15
+        }
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py"
+            ],
+            "modifiedFiles": [
+              "changed.py"
+            ]
+          },
+          "totalTokens": 7
+        },
+        "result": {
+          "summary": "The user explored a different conversation branch before returning here.\nSummary of that exploration:\n\nbranch checkpoint\n\n<read-files>\ninherited.py\n</read-files>\n\n<modified-files>\nchanged.py\n</modified-files>",
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "readFiles": [
+            "inherited.py"
+          ],
+          "modifiedFiles": [
+            "changed.py"
+          ]
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "checkpoint_beyond_budget",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 15,
+        "options": {
+          "contextWindow": 30,
+          "reserveTokens": 15
+        }
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 14
+        },
+        "result": {
+          "summary": "The user explored a different conversation branch before returning here.\nSummary of that exploration:\n\nbranch checkpoint\n\n<read-files>\ninherited.py\nseen.py\n</read-files>\n\n<modified-files>\nchanged.py\nwritten.py\n</modified-files>",
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "readFiles": [
+            "inherited.py",
+            "seen.py"
+          ],
+          "modifiedFiles": [
+            "changed.py",
+            "written.py"
+          ]
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "append_focus",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {
+          "customInstructions": "track exact paths"
+        }
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 34
+        },
+        "result": {
+          "summary": "The user explored a different conversation branch before returning here.\nSummary of that exploration:\n\nbranch checkpoint\n\n<read-files>\ninherited.py\nseen.py\n</read-files>\n\n<modified-files>\nchanged.py\nwritten.py\n</modified-files>",
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "readFiles": [
+            "inherited.py",
+            "seen.py"
+          ],
+          "modifiedFiles": [
+            "changed.py",
+            "written.py"
+          ]
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: explore a branch\n\n[Assistant tool calls]: read(path=\"seen.py\"); write(path=\"written.py\", content=\"yes\")\n\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: track exact paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "replace_focus",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {
+          "customInstructions": "only report status",
+          "replaceInstructions": true
+        }
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 34
+        },
+        "result": {
+          "summary": "The user explored a different conversation branch before returning here.\nSummary of that exploration:\n\nbranch checkpoint\n\n<read-files>\ninherited.py\nseen.py\n</read-files>\n\n<modified-files>\nchanged.py\nwritten.py\n</modified-files>",
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "readFiles": [
+            "inherited.py",
+            "seen.py"
+          ],
+          "modifiedFiles": [
+            "changed.py",
+            "written.py"
+          ]
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: explore a branch\n\n[Assistant tool calls]: read(path=\"seen.py\"); write(path=\"written.py\", content=\"yes\")\n\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nonly report status"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "empty",
+        "entries": [
+          {
+            "type": "label",
+            "id": "label",
+            "parentId": null,
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "targetId": "x",
+            "label": "hi"
+          }
+        ],
+        "budget": 0,
+        "options": {}
+      },
+      "expected": {
+        "preparation": {
+          "messages": [],
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "totalTokens": 0
+        },
+        "result": {
+          "summary": "No content to summarize"
+        },
+        "requests": []
+      }
+    },
+    {
+      "input": {
+        "name": "failure_length",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {},
+        "reason": "length"
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 34
+        },
+        "result": {
+          "error": "Branch summarization failed: generation hit the token cap and the summary is incomplete"
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: explore a branch\n\n[Assistant tool calls]: read(path=\"seen.py\"); write(path=\"written.py\", content=\"yes\")\n\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "failure_error",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {},
+        "reason": "error"
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 34
+        },
+        "result": {
+          "error": "Branch summarization failed: invalid request"
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: explore a branch\n\n[Assistant tool calls]: read(path=\"seen.py\"); write(path=\"written.py\", content=\"yes\")\n\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "failure_aborted",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {},
+        "reason": "aborted"
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 34
+        },
+        "result": {
+          "aborted": true
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: explore a branch\n\n[Assistant tool calls]: read(path=\"seen.py\"); write(path=\"written.py\", content=\"yes\")\n\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "failure_toolUse",
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {},
+        "reason": "toolUse"
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "important compacted history",
+              "tokensBefore": 500,
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [
+              "inherited.py",
+              "seen.py"
+            ],
+            "modifiedFiles": [
+              "changed.py",
+              "written.py"
+            ]
+          },
+          "totalTokens": 34
+        },
+        "result": {
+          "error": "Branch summarization attempted to call a tool"
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: explore a branch\n\n[Assistant tool calls]: read(path=\"seen.py\"); write(path=\"written.py\", content=\"yes\")\n\n[User]: The conversation history before this point was compacted into the following summary:\n\n<summary>\nimportant compacted history\n</summary>\n\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: work done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "hook_files_ignored",
+        "entries": [
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            },
+            "fromHook": true
+          },
+          {
+            "type": "message",
+            "id": "last",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "budget": 0,
+        "options": {}
+      },
+      "expected": {
+        "preparation": {
+          "messages": [
+            {
+              "role": "branchSummary",
+              "summary": "nested branch",
+              "fromId": "elsewhere",
+              "timestamp": 1793491200000
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "totalTokens": 5
+        },
+        "result": {
+          "summary": "The user explored a different conversation branch before returning here.\nSummary of that exploration:\n\nbranch checkpoint",
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "readFiles": [],
+          "modifiedFiles": []
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: The following is a summary of a branch that this conversation came back from:\n\n<summary>\nnested branch</summary>\n\n[Assistant]: done\n</conversation>\n\nCreate a structured summary of this conversation branch for context when returning later.\n\nUse this EXACT format:\n\n## Goal\n[What was the user trying to accomplish in this branch?]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Work that was started but not finished]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [What should happen next to continue this work]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages."
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "treeEntries": [
+    {
+      "type": "message",
+      "id": "root",
+      "parentId": null,
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "message": {
+        "role": "system",
+        "content": "system",
+        "timestamp": 0
+      }
+    },
+    {
+      "type": "message",
+      "id": "old-user",
+      "parentId": "root",
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "message": {
+        "role": "user",
+        "content": "explore a branch",
+        "timestamp": 1
+      }
+    },
+    {
+      "type": "message",
+      "id": "old-tools",
+      "parentId": "old-user",
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "toolCall",
+            "id": "call",
+            "name": "read",
+            "arguments": {
+              "path": "seen.py"
+            }
+          },
+          {
+            "type": "toolCall",
+            "id": "call",
+            "name": "write",
+            "arguments": {
+              "path": "written.py",
+              "content": "yes"
+            }
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "toolUse",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      }
+    },
+    {
+      "type": "message",
+      "id": "tool-result",
+      "parentId": "old-tools",
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "message": {
+        "role": "toolResult",
+        "toolCallId": "call",
+        "toolName": "write",
+        "content": [
+          {
+            "type": "text",
+            "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+          }
+        ],
+        "isError": false,
+        "timestamp": 3
+      }
+    },
+    {
+      "type": "compaction",
+      "id": "compact",
+      "parentId": "tool-result",
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "summary": "important compacted history",
+      "firstKeptEntryId": "old-tools",
+      "tokensBefore": 500
+    },
+    {
+      "type": "branch_summary",
+      "id": "nested",
+      "parentId": "compact",
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "fromId": "elsewhere",
+      "summary": "nested branch",
+      "details": {
+        "readFiles": [
+          "inherited.py"
+        ],
+        "modifiedFiles": [
+          "changed.py"
+        ]
+      }
+    },
+    {
+      "type": "message",
+      "id": "old-leaf",
+      "parentId": "nested",
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "work done"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      }
+    },
+    {
+      "type": "message",
+      "id": "target",
+      "parentId": "root",
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "the chosen branch"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      }
+    }
+  ],
+  "collections": [
+    {
+      "input": {
+        "oldLeafId": "old-leaf",
+        "targetId": "target"
+      },
+      "expected": {
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-user",
+            "parentId": "root",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "explore a branch",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "commonAncestorId": "root"
+      }
+    },
+    {
+      "input": {
+        "oldLeafId": "old-leaf",
+        "targetId": "old-user"
+      },
+      "expected": {
+        "entries": [
+          {
+            "type": "message",
+            "id": "old-tools",
+            "parentId": "old-user",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "seen.py"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "write",
+                  "arguments": {
+                    "path": "written.py",
+                    "content": "yes"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "tool-result",
+            "parentId": "old-tools",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "write",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "must be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omittedmust be omitted"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "compact",
+            "parentId": "tool-result",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "summary": "important compacted history",
+            "firstKeptEntryId": "old-tools",
+            "tokensBefore": 500
+          },
+          {
+            "type": "branch_summary",
+            "id": "nested",
+            "parentId": "compact",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "fromId": "elsewhere",
+            "summary": "nested branch",
+            "details": {
+              "readFiles": [
+                "inherited.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "old-leaf",
+            "parentId": "nested",
+            "timestamp": "2026-11-01T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "work done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "commonAncestorId": "old-user"
+      }
+    },
+    {
+      "input": {
+        "oldLeafId": "old-leaf",
+        "targetId": "old-leaf"
+      },
+      "expected": {
+        "entries": [],
+        "commonAncestorId": "old-leaf"
+      }
+    },
+    {
+      "input": {
+        "oldLeafId": null,
+        "targetId": "target"
+      },
+      "expected": {
+        "entries": [],
+        "commonAncestorId": null
+      }
+    }
+  ]
+}

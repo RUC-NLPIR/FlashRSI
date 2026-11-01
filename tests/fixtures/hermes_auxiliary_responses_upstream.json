@@ -1,0 +1,372 @@
+{
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "generation": "Actual original module execution, no FlashRSI imports or semantic substitutes; network prohibited.",
+  "source_sha256": {
+    "agent/auxiliary_client.py": "053078416f2b2d94256584a5c1ed6176bfbd3f3de88a8ca858e8257274a04bb5",
+    "agent/auxiliary_codex_response.py": "c3dde8e9cd05d2f9f8d6bc220aee4bb87a95dbe06ebca182f3c3ff527257d06b"
+  },
+  "build": [
+    {
+      "name": "openai_default_omits_cap_temperature_reasoning",
+      "base_url": "https://api.openai.com/v1",
+      "payload": {
+        "model": "gpt-5.6",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Summarize preserved constraints."
+          },
+          {
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "max_tokens": 1500,
+        "temperature": 0.1,
+        "extra_body": {}
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Summarize preserved constraints.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "store": false,
+        "_issuer_kind": "other:https://api.openai.com/v1",
+        "prompt_cache_key": "pck_9cf94aa82b00cd06879ae34e"
+      },
+      "model": "gpt-5.6",
+      "timeout": null
+    },
+    {
+      "name": "codex_default_uses_typed_parts",
+      "base_url": "https://chatgpt.com/backend-api/codex",
+      "payload": {
+        "model": "gpt-5.6",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Summarize preserved constraints."
+          },
+          {
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "max_tokens": 1500,
+        "temperature": 0.1,
+        "extra_body": {}
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Summarize preserved constraints.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": [
+              {
+                "type": "input_text",
+                "text": "Prior work"
+              }
+            ]
+          }
+        ],
+        "store": false,
+        "_issuer_kind": "codex_backend",
+        "prompt_cache_key": "pck_9cf94aa82b00cd06879ae34e"
+      },
+      "model": "gpt-5.6",
+      "timeout": null
+    },
+    {
+      "name": "explicit_reasoning_high",
+      "base_url": "https://api.openai.com/v1",
+      "payload": {
+        "model": "gpt-5.6",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Summarize preserved constraints."
+          },
+          {
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "max_tokens": 1500,
+        "temperature": 0.1,
+        "extra_body": {
+          "reasoning": {
+            "enabled": true,
+            "effort": "high"
+          }
+        }
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Summarize preserved constraints.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "store": false,
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "_issuer_kind": "other:https://api.openai.com/v1",
+        "prompt_cache_key": "pck_9cf94aa82b00cd06879ae34e"
+      },
+      "model": "gpt-5.6",
+      "timeout": null
+    },
+    {
+      "name": "explicit_reasoning_none",
+      "base_url": "https://api.openai.com/v1",
+      "payload": {
+        "model": "gpt-5.6",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Summarize preserved constraints."
+          },
+          {
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "max_tokens": 1500,
+        "temperature": 0.1,
+        "extra_body": {
+          "reasoning": {
+            "enabled": false,
+            "effort": "none"
+          }
+        }
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Summarize preserved constraints.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "store": false,
+        "reasoning": {
+          "effort": "none"
+        },
+        "_issuer_kind": "other:https://api.openai.com/v1",
+        "prompt_cache_key": "pck_9cf94aa82b00cd06879ae34e"
+      },
+      "model": "gpt-5.6",
+      "timeout": null
+    },
+    {
+      "name": "explicit_priority_tier",
+      "base_url": "https://api.openai.com/v1",
+      "payload": {
+        "model": "gpt-5.6",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Summarize preserved constraints."
+          },
+          {
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "max_tokens": 1500,
+        "temperature": 0.1,
+        "extra_body": {
+          "service_tier": "priority"
+        }
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Summarize preserved constraints.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Prior work"
+          }
+        ],
+        "store": false,
+        "service_tier": "priority",
+        "_issuer_kind": "other:https://api.openai.com/v1",
+        "prompt_cache_key": "pck_9cf94aa82b00cd06879ae34e"
+      },
+      "model": "gpt-5.6",
+      "timeout": null
+    }
+  ],
+  "normalize": [
+    {
+      "name": "completed:None",
+      "response": {
+        "status": "completed",
+        "incomplete_details": {
+          "reason": null
+        },
+        "output": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "partial"
+              }
+            ]
+          }
+        ],
+        "usage": {
+          "input_tokens": 100,
+          "output_tokens": 20,
+          "total_tokens": 120
+        }
+      },
+      "result": [
+        [
+          "partial"
+        ],
+        [],
+        {
+          "prompt_tokens": 100,
+          "completion_tokens": 20,
+          "total_tokens": 120
+        },
+        "stop"
+      ]
+    },
+    {
+      "name": "incomplete:max_output_tokens",
+      "response": {
+        "status": "incomplete",
+        "incomplete_details": {
+          "reason": "max_output_tokens"
+        },
+        "output": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "partial"
+              }
+            ]
+          }
+        ],
+        "usage": {
+          "input_tokens": 100,
+          "output_tokens": 20,
+          "total_tokens": 120
+        }
+      },
+      "result": [
+        [
+          "partial"
+        ],
+        [],
+        {
+          "prompt_tokens": 100,
+          "completion_tokens": 20,
+          "total_tokens": 120
+        },
+        "length"
+      ]
+    },
+    {
+      "name": "incomplete:content_filter",
+      "response": {
+        "status": "incomplete",
+        "incomplete_details": {
+          "reason": "content_filter"
+        },
+        "output": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "partial"
+              }
+            ]
+          }
+        ],
+        "usage": {
+          "input_tokens": 100,
+          "output_tokens": 20,
+          "total_tokens": 120
+        }
+      },
+      "result": [
+        [
+          "partial"
+        ],
+        [],
+        {
+          "prompt_tokens": 100,
+          "completion_tokens": 20,
+          "total_tokens": 120
+        },
+        "length"
+      ]
+    },
+    {
+      "name": "incomplete:other",
+      "response": {
+        "status": "incomplete",
+        "incomplete_details": {
+          "reason": "other"
+        },
+        "output": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "partial"
+              }
+            ]
+          }
+        ],
+        "usage": {
+          "input_tokens": 100,
+          "output_tokens": 20,
+          "total_tokens": 120
+        }
+      },
+      "result": [
+        [
+          "partial"
+        ],
+        [],
+        {
+          "prompt_tokens": 100,
+          "completion_tokens": 20,
+          "total_tokens": 120
+        },
+        "length"
+      ]
+    }
+  ]
+}

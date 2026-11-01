@@ -137,6 +137,31 @@ def test_pi_replays_original_upstream_trajectory(case, tmp_path, monkeypatch):
         )
 
     monkeypatch.setattr(loop.httpx, "AsyncClient", client)
+    if source["name"] == "aborted_with_tool":
+        # An abort is a transport/agent event, not a Chat Completions
+        # finish_reason. Replay this original fixed stream outcome at the same
+        # provider boundary rather than inventing a nonstandard HTTP response.
+        async def aborted_reply(*args, **kwargs):
+            reply = next(responses)
+            requests.append({"boundary": "aborted original stream"})
+            calls = [
+                {
+                    "id": block["id"],
+                    "name": block["name"],
+                    "arguments": json.dumps(block["arguments"]),
+                }
+                for block in reply["content"]
+                if block["type"] == "toolCall"
+            ]
+            return loop._ProviderReply(
+                {"role": "assistant", "content": ""},
+                calls,
+                reply["usage"],
+                "aborted",
+                {"_pi_content": reply["content"]},
+            )
+
+        monkeypatch.setattr(loop, "_provider_call", aborted_reply)
     selected = source.get("tools", ["read", "write", "edit"])
     result = asyncio.run(
         loop.run(

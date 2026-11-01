@@ -1,0 +1,477 @@
+{
+  "upstream": "https://github.com/NousResearch/hermes-agent",
+  "version": "v0.22.5",
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "source_sha256": {
+    "tools/file_operations.py": "2867e7207852e36e19635e74a1510063f839dd86221ad990da913977def81dd2",
+    "tools/file_operations_common.py": "24ec11b1703616c0b403b094c11a92c6f39c81a6f2396665bf0666690595d41c",
+    "tools/fuzzy_match.py": "ea10db677c24e7f056471488c0e5194599a526b59e6d62ab76e195be6bbc4765",
+    "tools/todo_tool.py": "a895fb70e9d6d118cc7992114e7efaece753d57af115cf822caf27e67cef4c87",
+    "tools/tool_output_truncate.py": "c008f5f4dab87a9607e1d79ee5536207cededd574eb37a47e79c9587d59c3db1"
+  },
+  "method": "Original upstream leaf modules and original AST method bodies executed with fixed default limits; no FlashRSI imports.",
+  "fuzzy": [
+    {
+      "args": [
+        "alpha beta\n",
+        "alpha",
+        "ALPHA",
+        false
+      ],
+      "result": [
+        "ALPHA beta\n",
+        1,
+        "exact",
+        null
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "keep\n    alpha   \nend\n",
+        "alpha",
+        "ALPHA",
+        false
+      ],
+      "result": [
+        "keep\n    ALPHA   \nend\n",
+        1,
+        "exact",
+        null
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "if ready:\n    old()\n",
+        "if ready:\n  old()",
+        "if ready:\n  new()",
+        false
+      ],
+      "result": [
+        "if ready:\n  new()\n",
+        1,
+        "line_trimmed",
+        null
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "a\r\nb\r\n",
+        "a\nb",
+        "A\nB",
+        false
+      ],
+      "result": [
+        "A\nB\n",
+        1,
+        "line_trimmed",
+        null
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "print(“old”)\n",
+        "print(\"old\")",
+        "print(\"new\")",
+        false
+      ],
+      "result": [
+        "print(“new”)\n",
+        1,
+        "unicode_normalized",
+        null
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "a a\n",
+        "a",
+        "A",
+        false
+      ],
+      "result": [
+        "a a\n",
+        0,
+        null,
+        "Found 2 matches for old_string. Provide more context to make it unique, or use replace_all=True. Matches:\n  L1: a a\n  L1: a a"
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "a a\n",
+        "a",
+        "A",
+        true
+      ],
+      "result": [
+        "A A\n",
+        2,
+        "exact",
+        null
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "same",
+        "same",
+        "same",
+        false
+      ],
+      "result": [
+        "same",
+        0,
+        null,
+        "No edit was applied because old_string and new_string are identical. Provide the existing text to replace in old_string and the changed replacement text in new_string."
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "something else entirely\n",
+        "missing text",
+        "new text",
+        false
+      ],
+      "result": [
+        "something else entirely\n",
+        0,
+        null,
+        "Could not find a match for old_string in the file"
+      ],
+      "notes": []
+    },
+    {
+      "args": [
+        "value = \"a\\\\nb\"\n",
+        "value = \"a\\\\nb\"",
+        "value = \"c\\\\nd\"",
+        false
+      ],
+      "result": [
+        "value = \"c\\\\nd\"\n",
+        1,
+        "exact",
+        null
+      ],
+      "notes": []
+    }
+  ],
+  "reads": [
+    {
+      "filename": "plain.txt",
+      "hex": "6f6e650a74776f0a",
+      "offset": 1,
+      "limit": 2000,
+      "result": {
+        "content": "1|one\n2|two",
+        "total_lines": 2,
+        "file_size": 8,
+        "truncated": false,
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "no-newline.txt",
+      "hex": "6f6e650a74776f",
+      "offset": 1,
+      "limit": 2000,
+      "result": {
+        "content": "1|one\n2|two",
+        "total_lines": 2,
+        "file_size": 7,
+        "truncated": false,
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "bom.txt",
+      "hex": "efbbbf6f6e650d0a74776f0d0a",
+      "offset": 1,
+      "limit": 2000,
+      "result": {
+        "content": "1|one\r\n2|two\r",
+        "total_lines": 2,
+        "file_size": 13,
+        "truncated": false,
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "empty.txt",
+      "hex": "",
+      "offset": 1,
+      "limit": 2000,
+      "result": {
+        "content": "",
+        "total_lines": 0,
+        "file_size": 0,
+        "truncated": false,
+        "hint": "File is empty (0 bytes).",
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "page.txt",
+      "hex": "6f6e650a74776f0a74687265650a",
+      "offset": 2,
+      "limit": 1,
+      "result": {
+        "content": "2|two",
+        "total_lines": 3,
+        "file_size": 14,
+        "truncated": true,
+        "hint": "Use offset=3 to continue reading (showing 2-2 of 3 lines)",
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "beyond.txt",
+      "hex": "6f6e650a74776f0a",
+      "offset": 9,
+      "limit": 2,
+      "result": {
+        "content": "",
+        "total_lines": 2,
+        "file_size": 8,
+        "truncated": false,
+        "hint": "Note: offset 9 is beyond the end of the file (2 lines total). Retry with offset <= 2.",
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "long.txt",
+      "hex": "616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161610a",
+      "offset": 1,
+      "limit": 2000,
+      "result": {
+        "content": "1|aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... [truncated]",
+        "total_lines": 1,
+        "file_size": 2201,
+        "truncated": false,
+        "truncated_lines": true,
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "utf16.txt",
+      "hex": "fffe680065006c006c006f000a0077006f0072006c0064000a00",
+      "offset": 1,
+      "limit": 2000,
+      "result": {
+        "content": "1|hello\n2|world",
+        "total_lines": 3,
+        "file_size": 26,
+        "truncated": false,
+        "hint": "Transcoded from UTF-16-LE to UTF-8 for display. Text edits via patch/write_file would re-encode as UTF-8.",
+        "is_binary": false,
+        "is_image": false,
+        "not_found": false
+      }
+    },
+    {
+      "filename": "binary.dat",
+      "hex": "000102",
+      "offset": 1,
+      "limit": 2000,
+      "result": {
+        "content": "",
+        "total_lines": 0,
+        "file_size": 3,
+        "truncated": false,
+        "is_binary": true,
+        "is_image": false,
+        "error": "Binary file (unknown binary, 3 bytes) — cannot display as text.",
+        "not_found": false
+      }
+    }
+  ],
+  "todo": [
+    {
+      "args": {},
+      "result": {
+        "todos": [],
+        "revision": 0,
+        "summary": {
+          "total": 0,
+          "pending": 0,
+          "in_progress": 0,
+          "completed": 0,
+          "cancelled": 0
+        }
+      }
+    },
+    {
+      "args": {
+        "todos": [
+          {
+            "id": "1",
+            "content": " first "
+          },
+          {
+            "id": "2",
+            "content": "active",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "result": {
+        "todos": [
+          {
+            "id": "2",
+            "content": "active",
+            "status": "in_progress"
+          },
+          {
+            "id": "1",
+            "content": "first",
+            "status": "pending"
+          }
+        ],
+        "revision": 1,
+        "summary": {
+          "total": 2,
+          "pending": 1,
+          "in_progress": 1,
+          "completed": 0,
+          "cancelled": 0
+        }
+      }
+    },
+    {
+      "args": {
+        "todos": [
+          {
+            "id": "2",
+            "status": "completed"
+          }
+        ],
+        "merge": true
+      },
+      "result": {
+        "todos": [
+          {
+            "id": "2",
+            "content": "active",
+            "status": "completed"
+          },
+          {
+            "id": "1",
+            "content": "first",
+            "status": "pending"
+          }
+        ],
+        "revision": 2,
+        "summary": {
+          "total": 2,
+          "pending": 1,
+          "in_progress": 0,
+          "completed": 1,
+          "cancelled": 0
+        }
+      }
+    },
+    {
+      "args": {
+        "todos": [
+          {
+            "id": "bad",
+            "content": ""
+          }
+        ]
+      },
+      "result": {
+        "error": "Todo item 'bad' has empty or missing content. Each item must have a non-empty description."
+      }
+    },
+    {
+      "args": {},
+      "result": {
+        "todos": [
+          {
+            "id": "2",
+            "content": "active",
+            "status": "completed"
+          },
+          {
+            "id": "1",
+            "content": "first",
+            "status": "pending"
+          }
+        ],
+        "revision": 2,
+        "summary": {
+          "total": 2,
+          "pending": 1,
+          "in_progress": 0,
+          "completed": 1,
+          "cancelled": 0
+        }
+      }
+    },
+    {
+      "args": {
+        "todos": [
+          {
+            "id": "3",
+            "content": "child",
+            "parent": "missing"
+          }
+        ]
+      },
+      "result": {
+        "todos": [
+          {
+            "id": "3",
+            "content": "child",
+            "status": "pending"
+          }
+        ],
+        "revision": 3,
+        "summary": {
+          "total": 1,
+          "pending": 1,
+          "in_progress": 0,
+          "completed": 0,
+          "cancelled": 0
+        }
+      }
+    }
+  ],
+  "truncation": [
+    {
+      "text": "abcdef",
+      "limit": 6,
+      "result": "abcdef"
+    },
+    {
+      "text": "abcdefghijklmnop",
+      "limit": 10,
+      "result": "abcd\n\n... [OUTPUT TRUNCATED - 6 chars omitted out of 16 total] ...\n\nklmnop"
+    },
+    {
+      "text": "一二三四五六七八",
+      "limit": 5,
+      "result": "一二\n\n... [OUTPUT TRUNCATED - 3 chars omitted out of 8 total] ...\n\n六七八"
+    }
+  ]
+}

@@ -1,0 +1,304 @@
+{
+  "repository": "https://github.com/NousResearch/hermes-agent",
+  "version": "v0.22.5",
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "extraction": "AST dependency closure preserving original source bodies; import paths localized. Host-boundary overrides are explicit below.",
+  "boundaries": [
+    "No ambient provider profiles, gateway scheduler, or optional SVG rasterizer. Explicit route supported_reasoning_efforts/web_search_backend only. SVG follows original no-rasterizer fallback.",
+    "No installed Hermes, SDK or Node dependency. HTTP transport lives in native_responses.py."
+  ],
+  "files": [
+    {
+      "source": "agent/codex_headers.py",
+      "source_sha256": "54d165f64bb3988c16254f587a5dccac2efa988e57e86027714bf98f16bbbca9",
+      "selected_symbols": [
+        "CODEX_AUX_BASE_URL",
+        "codex_account_headers",
+        "codex_cloudflare_headers",
+        "is_official_codex_base_url"
+      ]
+    },
+    {
+      "source": "hermes_cli/route_identity.py",
+      "source_sha256": "26030db2efe4c4566a9276c1aaf5b31ed67d0e6734f0b2b53985d612d13c36d2",
+      "selected_symbols": [
+        "normalize_route_base_url"
+      ]
+    },
+    {
+      "source": "utils.py",
+      "source_sha256": "9c4751dc9fbcbfe7e16d9e0cc5fb25566517c4927d2dc84061d4cac993a98445",
+      "selected_symbols": [
+        "_hostname_of",
+        "_parse_base_url",
+        "base_url_host_matches",
+        "base_url_hostname"
+      ]
+    },
+    {
+      "source": "agent/reasoning_effort.py",
+      "source_sha256": "050b8d56b474f24aaa0a63e542554f0382ffc49431ba769133157f617e5a8c6f",
+      "selected_symbols": [
+        "ASTRA_MODEL_IDS",
+        "CODEX_ASTRA_EFFORTS",
+        "CODEX_GPT56_EFFORTS",
+        "CODEX_LEGACY_EFFORTS",
+        "DAYBREAK_MODEL_IDS",
+        "EFFORT_LADDER",
+        "GPT6_TIER_PREFIXES",
+        "NO_DISABLE_TIER_PREFIXES",
+        "XAI_GROK46_EFFORTS",
+        "XAI_LEGACY_EFFORTS",
+        "clamp_effort",
+        "codex_supported_efforts",
+        "is_astra_model"
+      ]
+    },
+    {
+      "source": "agent/model_metadata.py",
+      "source_sha256": "497f2342915b0c7f23e56c2ec7e191a122d6255a6d12e660e570a4013895ab3d",
+      "selected_symbols": [
+        "CODEX_CONTEXT_VARIANT_SUFFIX",
+        "_CODEX_900K_ELIGIBLE_BASES",
+        "_CODEX_900K_SNAPSHOT_BASES",
+        "_CODEX_900K_SNAPSHOT_RE",
+        "_GROK_EFFORT_CAPABLE_PREFIXES",
+        "_OPENAI_NON_REASONING_RE",
+        "_bare_codex_slug",
+        "_codex_variant_base",
+        "grok_supports_reasoning_effort",
+        "is_codex_900k_base",
+        "is_grok_46_family",
+        "openai_model_rejects_reasoning",
+        "strip_codex_context_variant_suffix"
+      ]
+    },
+    {
+      "source": "agent/message_sanitization.py",
+      "source_sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+      "selected_symbols": [
+        "_VALID_TOOL_NAME_RE",
+        "coerce_tool_name",
+        "deterministic_call_id"
+      ]
+    },
+    {
+      "source": "agent/prompt_builder.py",
+      "source_sha256": "1baa8a654a13da62d422d4cfa32b645d6757b0e92042f62cff92b12c03cd17c7",
+      "selected_symbols": [
+        "DEFAULT_AGENT_IDENTITY"
+      ]
+    },
+    {
+      "source": "tools/vision_tools_image_prep.py",
+      "source_sha256": "94ef5f78b3e746395036a2e24e5ce452735e5636dc8762f3507b2cfbaae38d4f",
+      "selected_symbols": [
+        "_ANTHROPIC_SUPPORTED_MEDIA_TYPES",
+        "unsupported_inline_image_media_type"
+      ]
+    },
+    {
+      "source": "tools/schema_sanitizer.py",
+      "source_sha256": "3c999f0726db1dfd9fe0386883ccdcfdd95a289b07e9e6376ceb5ca9fcfd8691",
+      "selected_symbols": [
+        "_SCHEMA_MARKERS",
+        "_STRIP_ON_RECOVERY_KEYS",
+        "_dict_nodes",
+        "_reactive_strip",
+        "logger",
+        "strip_pattern_and_format",
+        "strip_slash_enum"
+      ]
+    },
+    {
+      "source": "hermes_cli/models.py",
+      "source_sha256": "c3546748426161eae3d2b47b1dfe95495e2e99442df4ff2cbf5d77c5efb7c0cd",
+      "selected_symbols": [
+        "_OPENCODE_FAMILIES",
+        "normalize_provider",
+        "opencode_provider_family"
+      ]
+    },
+    {
+      "source": "agent/message_content.py",
+      "source_sha256": "65d45e23dba4d05eab9a7c61de3037f26e4effebf39121e85fd6e084b785123b",
+      "adaptations": "verbatim"
+    },
+    {
+      "source": "agent/native_compaction.py",
+      "source_sha256": "6b21f68dc5976bf4a09ca945cac4377b2574d97b261d51f040229e685b8be0f7",
+      "adaptations": "snapshot-local relative imports only"
+    },
+    {
+      "source": "agent/codex_responses_adapter.py",
+      "source_sha256": "c86e14ebe721e94f86a1a50266272c364ccea9660a6da456eb00fa109e5f054d",
+      "selected_symbols": [
+        "ResponsesRouteFlags",
+        "_",
+        "_ACTION_VERBS",
+        "_ASSISTANT_IMAGE_PLACEHOLDER",
+        "_CROSS_ISSUER_WARN_EMITTED",
+        "_FULLWIDTH_PIPE",
+        "_HARMONY_CONTROL_TOKEN_RE",
+        "_IMAGE_PART_TYPES",
+        "_INCOMPLETE_STATUSES",
+        "_MAX_RESPONSES_ITEM_ID_LENGTH",
+        "_OPENAI_ALL_TURNS_FAMILIES",
+        "_OUTPUT_TEXT_TYPES",
+        "_OutputScan",
+        "_PREFLIGHT_ALLOWED_KEYS",
+        "_PREFLIGHT_ITEM_HANDLERS",
+        "_PREFLIGHT_OPTIONAL_FIELDS",
+        "_PreflightCtx",
+        "_RESPONSES_BUILTIN_TOOL_TYPES",
+        "_RESPONSE_MESSAGE_STATUSES",
+        "_ROLE_MESSAGE_PHASES",
+        "_SERVER_SIDE_TOOL_CALL_TYPES",
+        "_SHELL_JSON_LEAK_LEADIN_PATTERN",
+        "_SHELL_JSON_LEAK_PATTERN",
+        "_TEXT_PART_TYPES",
+        "_TOOL_CALL_LEAK_PATTERN",
+        "_VIDEO_PART_TYPES",
+        "_WireCallIds",
+        "_as_list",
+        "_assistant_message_item",
+        "_canonical_call_id_from_fc",
+        "_canonical_issuer_kind",
+        "_capture_encrypted_item",
+        "_chat_content_to_responses_parts",
+        "_chat_messages_to_responses_input",
+        "_clamp_responses_call_id",
+        "_classify_responses_issuer",
+        "_coerce_arguments",
+        "_derive_responses_function_call_id",
+        "_extract_responses_message_text",
+        "_extract_responses_reasoning_text",
+        "_field",
+        "_format_responses_error",
+        "_input_image_part",
+        "_is_openai_api_issuer",
+        "_iter_content_parts",
+        "_leaked_tool_call_text",
+        "_lower_or_none",
+        "_message_item",
+        "_model_can_read_blob",
+        "_neutralize_harmony_structure",
+        "_neutralize_harmony_tokens",
+        "_nonblank",
+        "_nonempty_str",
+        "_normalize_codex_response",
+        "_normalize_responses_message_status",
+        "_optional_dict",
+        "_part_type",
+        "_preflight_codex_api_kwargs",
+        "_preflight_codex_input_items",
+        "_preflight_encrypted",
+        "_preflight_function_call",
+        "_preflight_function_call_output",
+        "_preflight_message",
+        "_preflight_role_message",
+        "_preflight_tool",
+        "_replay_message_items",
+        "_replay_reasoning_items",
+        "_replay_tool_call_items",
+        "_resolve_call_id",
+        "_response_tool_call",
+        "_responses_tools",
+        "_role_message_item",
+        "_split_responses_tool_id",
+        "_str_or_empty",
+        "_text_chunks",
+        "_text_type_for",
+        "_tool_output_items",
+        "_wire_model_identity",
+        "classify_responses_route",
+        "key",
+        "logger",
+        "openai_reasoning_family",
+        "strip_unverified_reasoning_items"
+      ]
+    },
+    {
+      "source": "agent/transports/codex.py",
+      "source_sha256": "dd5b7acb4ad905f560c7b9669b26e3f2ff4af2de4fdc22856b1d669b74f844b2",
+      "selected_symbols": [
+        "_CRON_SESSION_ID_RE",
+        "_EXTENDED_PROMPT_CACHE_MODELS",
+        "_EXTENDED_PROMPT_CACHE_MODEL_RE",
+        "_OPENAI_RESPONSES_HOSTS",
+        "_OPENCODE_RESERVED_TOOL_NAMES",
+        "_PERPLEXITY_RESERVED_TOOL_NAMES",
+        "_PROMPT_CACHE_OPTIONS_DROP_WARNED",
+        "_RESERVED_TOOL_ALIAS_PREFIX",
+        "_UNPROJECTABLE_DISABLE_WARNED",
+        "_XAI_CLIENT_WEB_SEARCH_ALIAS",
+        "_XAI_RESERVED_TOOL_NAMES",
+        "_alias_reserved_tools",
+        "_alias_wire_tools",
+        "_bound_prompt_cache_key_field",
+        "_bounded_prompt_cache_key",
+        "_cache_scope_from_session_id",
+        "_codex_efforts_for_route",
+        "_coerce_timeout",
+        "_content_cache_key",
+        "_default_prompt_cache_retention_for_request",
+        "_is_azure_foundry_responses",
+        "_is_azure_responses",
+        "_is_official_openai_responses_route",
+        "_is_openai_api_origin",
+        "_is_opencode_responses_backend",
+        "_is_perplexity_responses_backend",
+        "_is_post_tool_replay",
+        "_merge_extra_headers",
+        "_native_compaction_active",
+        "_newest_reasoning_only",
+        "_openai_prefers_native_web_search",
+        "_reasoning_fields",
+        "_reserves_tool_search",
+        "_resolve_reasoning",
+        "_sanitize_astra_request_kwargs",
+        "_sends_all_turns",
+        "_xai_prefers_native_web_search",
+        "logger",
+        "name"
+      ]
+    },
+    {
+      "source": "agent/auxiliary_client.py",
+      "source_sha256": "053078416f2b2d94256584a5c1ed6176bfbd3f3de88a8ca858e8257274a04bb5",
+      "selected_symbols": [
+        "_CodexCompletionsAdapter._build_responses_kwargs"
+      ],
+      "adaptations": "method only; explicit model/base_url/provider namespace replaces SDK client; imports localized"
+    },
+    {
+      "source": "agent/usage_pricing.py",
+      "source_sha256": "6fc01dafad5d6b78262ad9117cfa51fb9f89313c4f62cb04ca327459db2ce61a",
+      "selected_symbols": [
+        "CanonicalUsage",
+        "_ANTHROPIC_USAGE_SHAPE",
+        "_CHAT_USAGE_SHAPE",
+        "_CODEX_USAGE_SHAPE",
+        "_first_nonzero",
+        "_usage_field",
+        "logger",
+        "normalize_usage"
+      ]
+    }
+  ],
+  "snapshot_files": {
+    "native_compaction.py": "8efd208ea6263f4ca0251d7116e3fc6fc31f618a1c756c4ea7856adb8c99c11d",
+    "native_responses.py": "b71f26f34a428fb63bf0dfe2cc0f71d7800621b2dd447e24d6c38648e4274a3f",
+    "upstream_compaction/responses_auxiliary.py": "44a6b0d8402cedf1cfda5a57a831a0517265aa053d1c765e91cf69f20f4c2930",
+    "upstream_compaction/responses_usage.py": "60a8a1fe59ba3e02ce52f5b88ec8a7f47940663d7e8ddd3fb10fc7200855c9e0",
+    "upstream_compaction/responses_boundaries.py": "985330a471f004f5ecc1cf387680651a3702518f2384f4884ece64eb7e20236b",
+    "upstream_compaction/responses_transport.py": "cdc827d8fbba4e072c24484eb1986aa153b2f3e7ab23a234e8312f5db733943a",
+    "upstream_compaction/responses_adapter.py": "eb57c70c735bf94877b6e663d7c2f85d2e884a3994e018e4054886e46b6dabcb",
+    "upstream_compaction/message_content.py": "65d45e23dba4d05eab9a7c61de3037f26e4effebf39121e85fd6e084b785123b"
+  },
+  "host_bridge": "native_responses.py supplies explicit role routes, JSON/httpx boundaries, completed SSE decoding and the original main/auxiliary request distinctions. No installed Hermes, SDK or Node is used. No live provider/model equivalence is claimed.",
+  "verification_fixtures": {
+    "tests/fixtures/hermes_native_compaction_upstream.json": "107 actual original executions",
+    "tests/fixtures/hermes_auxiliary_responses_upstream.json": "9 actual original auxiliary executions"
+  }
+}

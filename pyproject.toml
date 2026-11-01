@@ -17,6 +17,8 @@ dependencies = [
     "claude-agent-sdk>=0.2.153,<0.3",
     "httpx>=0.28,<1",
     "pillow>=11,<13",
+    "regexrs-py==0.1.0",
+    "numpy>=1.26,<3",
     "tree-sitter==0.25.2",
     "tree-sitter-bash==0.25.1",
     "packaging>=24",
@@ -35,6 +37,7 @@ all = [
     "claude-agent-sdk>=0.2.153,<0.3",
     "httpx>=0.28,<1",
     "pillow>=11,<13",
+    "regexrs-py==0.1.0",
     "tree-sitter==0.25.2",
     "tree-sitter-bash==0.25.1",
     "packaging>=24",
@@ -67,6 +70,7 @@ include = ["flashrsi*"]
 # as namespace packages strips upstream executable bits during build_py.
 exclude = [
     "flashrsi.agents.codex.python_core.resource_assets.system_skills*",
+    "flashrsi.agents.pi_agent.runtime.pi_native.reference*",
 ]
 
 [tool.setuptools.package-data]
@@ -78,11 +82,13 @@ exclude = [
 "flashrsi.agents.miniagent" = ["*.yaml", "**/*.md", "**/*.json", "**/*.yaml"]
 "flashrsi.agents.claude_code" = ["*.yaml", "*.md", "settings.json", ".mcp.json", ".lsp.json", ".claude-plugin/*.json", "skills/**/*", "commands/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "output-styles/**/*"]
 "flashrsi.agents.codex" = ["components.yaml", "config.toml", "skills/**/*", "rules/**/*", "agents/**/*", "hooks/**/*", "servers/**/*", "plugins/**/*", "memories/**/*", "python_core/**/*"]
-"flashrsi.agents.pi_agent" = ["components.yaml", "AGENTS.md", "CLAUDE.md", "prompts/**/*", ".pi/agent/settings.json", ".pi/agent/skills/**/*", ".pi/agent/prompt-templates/**/*", "runtime/pi_native/**/*"]
+"flashrsi.agents.pi_agent" = ["components.yaml", "AGENTS.md", "CLAUDE.md", "SYSTEM.md", "APPEND_SYSTEM.md", "prompts/**/*", ".pi/agent/settings.json", ".pi/agent/skills/**/*", ".pi/agent/prompt-templates/**/*", ".pi/agent/prompts/**/*", ".pi/agent/SYSTEM.md", ".pi/agent/APPEND_SYSTEM.md", "runtime/pi_native/**/*", "runtime/pi_native/reference/**/.gitignore"]
+"flashrsi.agents.hermes" = ["components.yaml", "SOUL.md", "AGENTS.md", "config.yaml", "prompts/**/*", "skills/**/*", "runtime/hermes_native/**/*"]
 
 [tool.setuptools.exclude-package-data]
 "flashrsi.agents.codex" = ["**/__pycache__/*", "**/*.pyc", "**/*.pyo"]
 "flashrsi.agents.pi_agent" = ["**/__pycache__/*", "**/*.pyc", "**/*.pyo"]
+"flashrsi.agents.hermes" = ["**/__pycache__/*", "**/*.pyc", "**/*.pyo"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -95,6 +101,16 @@ target-version = "py311"
 extend-exclude = [
     "mvp_doc.md",
     "flashrsi/agents/codex/python_core/resource_assets/system_skills",
+    "flashrsi/agents/hermes/runtime/hermes_native/_vendor",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_*.py",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_compaction",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_loop",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_chat",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_pricing",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_anthropic",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_catalog",
+    "flashrsi/agents/hermes/runtime/hermes_native/upstream_recovery",
+    "flashrsi/agents/hermes/runtime/hermes_native/iteration_budget.py",
     ".cache",
     "runs",
     "pytest-of-*",

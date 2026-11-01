@@ -1,0 +1,197 @@
+{
+  "agent/prompt_builder.py": {
+    "sha256": "1baa8a654a13da62d422d4cfa32b645d6757b0e92042f62cff92b12c03cd17c7",
+    "definitions": [
+      "CONTEXT_FILE_MAX_CHARS",
+      "CONTEXT_TRUNCATE_HEAD_RATIO",
+      "CONTEXT_TRUNCATE_TAIL_RATIO",
+      "DEFAULT_AGENT_IDENTITY",
+      "EXECUTION_GUIDANCE_MODELS",
+      "GOOGLE_MODEL_OPERATIONAL_GUIDANCE",
+      "HERMES_AGENT_HELP_GUIDANCE",
+      "HERMES_AGENT_HELP_GUIDANCE_NO_SKILLS",
+      "OPENAI_MODEL_EXECUTION_GUIDANCE",
+      "PARALLEL_TOOL_CALL_GUIDANCE",
+      "RUNTIME_ENVIRONMENT_END",
+      "RUNTIME_ENVIRONMENT_HEADING",
+      "SKILLS_GUIDANCE",
+      "SKILL_SAFETY_HEADING",
+      "STEER_CHANNEL_NOTE",
+      "STEER_MARKER_CLOSE",
+      "STEER_MARKER_OPEN",
+      "TASK_COMPLETION_GUIDANCE",
+      "TOOL_USE_ENFORCEMENT_GUIDANCE",
+      "TOOL_USE_ENFORCEMENT_MODELS",
+      "_CONTEXT_FILE_DYNAMIC_CEILING",
+      "_CONTEXT_FILE_READ_TIMEOUT_SECS",
+      "_CONTEXT_FILE_WINDOW_FRACTION",
+      "_EXECUTION_GUIDANCE_LINE_TOOLS",
+      "_agents_md_candidates",
+      "_agents_md_directory_chain",
+      "_claude_md_candidates",
+      "_context_section",
+      "_cursorrules_candidates",
+      "_dynamic_context_file_max_chars",
+      "_exists_or_denied",
+      "_find_git_root",
+      "_find_hermes_md",
+      "_get_context_file_max_chars",
+      "_get_context_file_read_timeout",
+      "_hermes_md_candidates",
+      "_is_dir_or_denied",
+      "_is_file_or_denied",
+      "_load_agents_md",
+      "_load_claude_md",
+      "_load_cursorrules",
+      "_load_hermes_md",
+      "_omitted_headings",
+      "_read_context_file",
+      "_read_text_with_timeout",
+      "_scan_context_content",
+      "_strip_yaml_frontmatter",
+      "_truncate_content",
+      "_truncation_warnings",
+      "drain_truncation_warnings",
+      "execution_guidance_text",
+      "_render_skills_index"
+    ],
+    "adaptations": [
+      "_render_skills_index: replace ambient single-query-session import/lookup with explicit bool argument",
+      "_config_readonly: bind settings to the explicit Snapshot call with ContextVar instead of ambient profile configuration"
+    ]
+  },
+  "agent/system_prompt.py": {
+    "sha256": "fd8d23565f5eb17b304b0443fa19e3729a69cd699b4217acb27e7eb1503db500",
+    "definitions": [
+      "_GATE_WORDS",
+      "_join_tier",
+      "_model_gate"
+    ]
+  },
+  "agent/oneshot_footprint.py": {
+    "sha256": "67afdc4c3be008e321fe8781d18ada1145854556b800ddf7ed16e9a4a806dc99",
+    "definitions": [
+      "ONESHOT_SKILLS_LOAD_GUIDANCE"
+    ]
+  },
+  "agent/iteration_budget.py": {
+    "sha256": "c6ac199bf3d53ae6eb840fa1e72fa191e8c00af535f0621896a98196fe880f72",
+    "scope": "complete original module, unchanged"
+  },
+  "tools/threat_patterns.py": {
+    "sha256": "9e93a48960d55b7403c04bb30ca24ea178ba60dfc79e1a3938ce4e19a792fa02",
+    "scope": "complete original module, formatting and unused imports only"
+  },
+  "SOUL.md": {
+    "sha256": "36c1f5a2e92cd1d018311eaf4c8f1e8886672eae78212e033c681d0e3d5d506f",
+    "scope": "complete original Snapshot identity, unchanged"
+  },
+  "agent/skill_utils.py": {
+    "sha256": "cb1996a2ef7f52f075f1a45fa64eee4ea9f332b9910da4ecc123ce0ead79fb46",
+    "definitions": [
+      "EXCLUDED_SKILL_DIRS",
+      "PLATFORM_MAP",
+      "SKILL_SUPPORT_DIRS",
+      "_SHADOW_CHECKED",
+      "is_disabled_entry",
+      "is_excluded_skill_path",
+      "is_skill_support_path",
+      "iter_skill_index_files",
+      "parse_frontmatter",
+      "pick_skill_candidate",
+      "provably_same_skill",
+      "resolve_skill_catalog",
+      "skill_candidate_rank",
+      "skill_matches_platform",
+      "skill_matches_platform_list",
+      "SKILL_PROMPT_DESC_LIMIT",
+      "_normalize_skill_description",
+      "extract_skill_description"
+    ]
+  },
+  "agent/coding_context.py": {
+    "sha256": "0f8b52c8c8ac01173f8b33dd7652a7e62a5ed94304cf3888b8d7f46fbe4beb1c",
+    "definitions": [
+      "ContextProfile",
+      "_model_family",
+      "_agent_config_value",
+      "_coding_mode",
+      "_resolve_cwd",
+      "_git_root",
+      "_home",
+      "_marker_root",
+      "_has_code_files",
+      "_detect_profile",
+      "RuntimeMode",
+      "resolve_runtime_mode",
+      "is_coding_context",
+      "coding_system_prompt_parts",
+      "coding_compact_skill_categories",
+      "_git",
+      "_parse_status",
+      "_read_small",
+      "ProjectFacts",
+      "detect_project_facts",
+      "_workspace_roots",
+      "project_facts_for",
+      "build_coding_workspace_block",
+      "logger",
+      "CODING_TOOLSET",
+      "INTERACTIVE_CODING_PLATFORMS",
+      "_PROJECT_MARKERS",
+      "_CONTEXT_FILES",
+      "_CODE_EXTENSIONS",
+      "_CODE_SCAN_SKIP_DIRS",
+      "_CODE_SCAN_MAX_ENTRIES",
+      "_PY_LOCKFILES",
+      "_JS_LOCKFILES",
+      "_VERIFY_TARGETS",
+      "_MAX_VERIFY_COMMANDS",
+      "_MAX_FACT_FILE_BYTES",
+      "_GIT_TIMEOUT",
+      "_EDIT_FORMAT_GUIDANCE",
+      "CODING_AGENT_GUIDANCE",
+      "_TODO_SENTENCE",
+      "_NO_TODO_SENTENCE",
+      "_NON_CODING_SKILL_CATEGORIES",
+      "_MODE_ALIASES",
+      "GENERAL_PROFILE",
+      "CODING_PROFILE",
+      "WORKSPACE_BLOCK_HEADER"
+    ],
+    "adaptations": [
+      "_agent_config_value/_resolve_cwd: use only explicit Snapshot settings/task cwd; no ambient Hermes profile",
+      "RuntimeMode excludes toolset_selection; provider/MCP toolset routing helpers are not extracted",
+      "Git helpers imported from Snapshot-local upstream_git instead of installed hermes_cli"
+    ]
+  },
+  "hermes_cli/_subprocess_compat.py": {
+    "sha256": "4d036c56de8065099f4b82a50fde9095c43dab7e851e0e3a3fe4cd5c143a212e",
+    "definitions": [
+      "IS_WINDOWS",
+      "NO_LAZY_FETCH_ENV",
+      "_CREATE_NO_WINDOW",
+      "_DISCOVERY_KEYS_REGEXP",
+      "_FILTER_COMMAND_KEY",
+      "_GIT_CONFIG_INJECT_PREFIXES",
+      "_GIT_CONFIG_OVERRIDES",
+      "_INCLUDE_IF_KEY",
+      "_INCLUDE_KEY",
+      "_MAX_FILTER_KEYS",
+      "_MAX_INCLUDE_TARGETS",
+      "_legacy_kill_process_tree",
+      "_safe_directory_cache",
+      "_safe_directory_cache_key",
+      "_user_safe_directories",
+      "bounded_git_probe",
+      "kill_and_drain",
+      "noninteractive_git_env",
+      "noninteractive_repo_git_env",
+      "windows_hide_flags"
+    ],
+    "adaptations": [
+      "bounded_probe_run: direct stdlib Popen plus retained bounded tree cleanup instead of Hermes/PM spawn_server services",
+      "kill_process_tree: retained _legacy_kill_process_tree stdlib implementation; no Hermes deadline service"
+    ]
+  }
+}

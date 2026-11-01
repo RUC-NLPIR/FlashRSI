@@ -1,0 +1,9 @@
+{
+  "url": "https://models.dev/api.json",
+  "captured_date": "2026-11-01",
+  "raw_sha256": "9ed7ae8dfa9b0a2570ff65dc532165b4544c21322a813ee2c90c12ab55c5eed5",
+  "compressed_sha256": "4ca975f0538b067ac6bf1db53690250c87c5b49e2494857799422a4605b5ff74",
+  "providers": 235,
+  "models": 8940,
+  "policy": "Snapshot metadata input. No ambient user cache or runtime network refresh; replace models_dev_catalog explicitly to replay another catalog."
+}

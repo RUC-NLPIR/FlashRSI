@@ -1,0 +1,233 @@
+{
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": {
+    "endpoints.py": {
+      "source": "agent/anthropic_endpoints.py",
+      "source_sha256": "d4b4e4c0f85b1c526b86df1e4fd85bb2a2e39ee728c2f8c2cd60de4bcfca848f",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from utils import base_url_host_matches, base_url_hostname",
+          "from ..upstream_pricing.urls import base_url_host_matches, base_url_hostname"
+        ],
+        [
+          "from hermes_cli.auth import _nous_inference_env_override",
+          "from .boundaries import _nous_inference_env_override"
+        ]
+      ],
+      "snapshot_sha256": "55a5baa3d8cd3a034a40a90a41bfaaf0d9c92cece303d6fc3827823dce05cfe2"
+    },
+    "thinking_policy.py": {
+      "source": "agent/anthropic_thinking_policy.py",
+      "source_sha256": "840c8eade4809429009d07e9565eee666dcda7f8c27436fb1e7ef816845a9a78",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from agent.anthropic_endpoints import",
+          "from .endpoints import"
+        ]
+      ],
+      "snapshot_sha256": "b7b4a9f134c7ab513443610dbd2d0d0c2c419fe09ef963c0d12e8a979d09b719"
+    },
+    "image_eviction_policy.py": {
+      "source": "agent/image_eviction_policy.py",
+      "source_sha256": "effa90f99c91b3ec421cb0b3570a8a1893ef890ddee0a3d68219e19d44de56dd",
+      "selected_symbols": "whole file",
+      "adaptations": [],
+      "snapshot_sha256": "effa90f99c91b3ec421cb0b3570a8a1893ef890ddee0a3d68219e19d44de56dd"
+    },
+    "schema_sanitizer.py": {
+      "source": "tools/schema_sanitizer.py",
+      "source_sha256": "3c999f0726db1dfd9fe0386883ccdcfdd95a289b07e9e6376ceb5ca9fcfd8691",
+      "selected_symbols": "whole file",
+      "adaptations": [],
+      "snapshot_sha256": "3c999f0726db1dfd9fe0386883ccdcfdd95a289b07e9e6376ceb5ca9fcfd8691"
+    },
+    "message_convert.py": {
+      "source": "agent/anthropic_message_convert.py",
+      "source_sha256": "89cd2f66edef53f47530ac473300c000bd78c2f26f5a7ae2f18b1214f7354ec3",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from agent.anthropic_thinking_policy import",
+          "from .thinking_policy import"
+        ],
+        [
+          "from agent.image_eviction_policy import",
+          "from .image_eviction_policy import"
+        ],
+        [
+          "from tools.schema_sanitizer import",
+          "from .schema_sanitizer import"
+        ],
+        [
+          "from tools.vision_tools_image_prep import",
+          "from .image_prep import"
+        ]
+      ],
+      "snapshot_sha256": "d31462296bc7eeadcc8d4b39fb5fb3f201fdcc8755729ffe31d4f3e960a41e95"
+    },
+    "image_prep.py": {
+      "source": "tools/vision_tools_image_prep.py",
+      "source_sha256": "94ef5f78b3e746395036a2e24e5ce452735e5636dc8762f3507b2cfbaae38d4f",
+      "selected_symbols": [
+        "_ANTHROPIC_SUPPORTED_MEDIA_TYPES",
+        "_nonempty_file",
+        "_rasterize_svg_to_png",
+        "rasterize_svg_data_url",
+        "unsupported_inline_image_media_type"
+      ],
+      "adaptations": [
+        [
+          "from tools.vision_tools import _secure_cache_dir, _write_private_bytes",
+          "from .boundaries import _secure_cache_dir, _write_private_bytes"
+        ]
+      ],
+      "snapshot_sha256": "dd30d04f706cc113dc5e2618fb5ef3c6faa1276e01fcb65fdf774f43a95930b7"
+    },
+    "credentials.py": {
+      "source": "agent/anthropic_credentials.py",
+      "source_sha256": "caedbc2e4f832c7147db540d8a1395b96dca7e201cbfec2cb30f8d335de0ee1e",
+      "selected_symbols": [
+        "_is_oauth_token",
+        "anthropic_route_is_oauth",
+        "is_native_anthropic_host"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "9c893710b52d80ee9f5947cde5058b3e0fd42fa70bdab43dc9889b3b94e57562"
+    },
+    "metadata.py": {
+      "source": "agent/model_metadata.py",
+      "source_sha256": "497f2342915b0c7f23e56c2ec7e191a122d6255a6d12e660e570a4013895ab3d",
+      "selected_symbols": [
+        "_ANTHROPIC_FAST_MODE_MODELS",
+        "is_anthropic_fast_mode_model"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "3fb92bca0bc4b8a488b3fb55431db622a1a03acb47b18b6d96b891e075ec0092"
+    },
+    "guardrails.py": {
+      "source": "agent/bedrock_adapter.py",
+      "source_sha256": "e7a0c2ee1fb0f235ed3dc20aa960c14331b0a257c3a679efb98e0faa9aa7161c",
+      "selected_symbols": [
+        "GUARDRAIL_ACTION_FIELD",
+        "anthropic_response_guardrail_intervened"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "a54a1191ae69d5e0f4b8bb2a29dbdf1b293577b0379c7b1ba4c98ea5b91f395c"
+    },
+    "adapter.py": {
+      "source": "agent/anthropic_adapter.py",
+      "source_sha256": "2eb338a8d0b759f8b4bfb761f18c10208484d4e75afc166f3c91a0f867a333a4",
+      "selected_symbols": [
+        "ADAPTIVE_EFFORT_MAP",
+        "THINKING_BUDGET",
+        "_ANTHROPIC_DEFAULT_OUTPUT_LIMIT",
+        "_ANTHROPIC_OUTPUT_LIMITS",
+        "_BETWEEN_TOOLS_OFF_CLAUDE_SUBSTRINGS",
+        "_CLAUDE_CODE_SYSTEM_PREFIX",
+        "_COMMON_BETAS",
+        "_CONTEXT_1M_BETA",
+        "_FAST_MODE_BETA",
+        "_LEGACY_MANUAL_THINKING_CLAUDE_SUBSTRINGS",
+        "_MANDATORY_THINKING_CLAUDE_SUBSTRINGS",
+        "_MCP_TOOL_PREFIX",
+        "_NO_XHIGH_CLAUDE_SUBSTRINGS",
+        "_OAUTH_ONLY_BETAS",
+        "_OAUTH_PROSE_ALIAS_NAMES",
+        "_OAUTH_PROSE_ALIAS_PATTERNS",
+        "_OAUTH_SLUG_PATTERN",
+        "_OAUTH_SYSTEM_REPLACEMENTS",
+        "_OAUTH_TOOL_NAME_ALIASES",
+        "_OAUTH_TOOL_NAME_REVERSE_ALIASES",
+        "_RESPONSES_ONLY_KWARGS",
+        "_TOOL_CHOICE_MAP",
+        "_TOOL_STREAMING_BETA",
+        "_accepts_thinking_disable",
+        "_apply_claude_code_identity",
+        "_apply_oauth_prose_aliases",
+        "_attribution_headers",
+        "_auth_style",
+        "_base_client_kwargs",
+        "_beta_header",
+        "_client_timeout",
+        "_common_betas_for_base_url",
+        "_forbids_sampling_params",
+        "_get_anthropic_max_output",
+        "_is_claude_model",
+        "_is_pre_thinking_haiku",
+        "_model_matches",
+        "_normalize_to_mcp_wire",
+        "_oauth_wire_namer",
+        "_resolve_anthropic_messages_max_tokens",
+        "_resolve_positive_anthropic_max_tokens",
+        "_supports_adaptive_thinking",
+        "_supports_fast_mode",
+        "_supports_xhigh_effort",
+        "_thinking_kwargs",
+        "buffer_anthropic_tool_input",
+        "build_anthropic_kwargs",
+        "logger",
+        "sanitize_anthropic_kwargs"
+      ],
+      "adaptations": [
+        [
+          "from agent.anthropic_thinking_policy import",
+          "from .thinking_policy import"
+        ],
+        [
+          "from agent.model_metadata import is_anthropic_fast_mode_model",
+          "from .metadata import is_anthropic_fast_mode_model"
+        ]
+      ],
+      "snapshot_sha256": "73601c8608afcebaa8b86f73aacabc9fefa6737906f66220717f20caaced42c7"
+    },
+    "transport.py": {
+      "source": "agent/transports/anthropic.py",
+      "source_sha256": "8dbd8dbfdda682a1452ee4fa8107ea96aae876d544a3e32ea438a4336c84a6f5",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from agent.anthropic_message_convert import",
+          "from .message_convert import"
+        ],
+        [
+          "from agent.transports.base import ProviderTransport",
+          "from ..upstream_chat.base import ProviderTransport"
+        ],
+        [
+          "from agent.transports.types import NormalizedResponse, ToolCall",
+          "from ..upstream_chat.types import NormalizedResponse, ToolCall"
+        ],
+        [
+          "from agent.anthropic_adapter import",
+          "from .adapter import"
+        ],
+        [
+          "from tools.registry import registry as _tool_registry",
+          "from .boundaries import tool_registry as _tool_registry"
+        ],
+        [
+          "from agent.bedrock_adapter import anthropic_response_guardrail_intervened",
+          "from .guardrails import anthropic_response_guardrail_intervened"
+        ],
+        [
+          "from agent.transports import register_transport\n\nregister_transport(\"anthropic_messages\", AnthropicTransport)",
+          ""
+        ]
+      ],
+      "snapshot_sha256": "e56c8a7541725a1bdefb42ac9f0404407c6b6c6736ea700fd19f8ea3cee13ca7"
+    },
+    "dot_policy.py": {
+      "source": "agent/vision_message_prep.py",
+      "source_sha256": "2cb7b57a67d6e6922bd42557dbec175116fba12bc7168106020964ccf370fde1",
+      "selected_symbols": [
+        "VisionMessagePrepMixin._anthropic_preserve_dots"
+      ],
+      "adaptations": [
+        "method extracted as function; URLs use local source helpers"
+      ],
+      "snapshot_sha256": "9bc49540bc0a4f041402f7bf5160af5fd9648c8c922ae6fe6234833c69f6ad29"
+    }
+  }
+}

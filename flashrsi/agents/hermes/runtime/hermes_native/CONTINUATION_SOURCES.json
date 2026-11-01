@@ -1,0 +1,57 @@
+{
+  "upstream_repository": "https://github.com/NousResearch/hermes-agent",
+  "version": "v0.22.5",
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "source_files": {
+    "agent/error_classifier.py": {
+      "source_sha256": "fcb13c614352848cad708384d505a241dae6b2b182f35e3acb63d4d1b6bce849",
+      "symbols": [
+        "FailoverReason"
+      ]
+    },
+    "agent/turn_truncation.py": {
+      "source_sha256": "cded3d067441ddac4e2362347cc55ba4d00e47baf529ba4b68b30380c396e0eb",
+      "symbols": [
+        "partial_result",
+        "_CODEX_REPLAY_KEYS",
+        "CODEX_FALLBACK_ACTIVATED",
+        "continue_codex_incomplete"
+      ]
+    },
+    "agent/turn_response_check.py": {
+      "source_sha256": "bc67386b27bb125247a428a489a6f88929cb739ee9479bb841e798c6cf9fa54a",
+      "symbols": [
+        "_codex_finish_reason"
+      ]
+    },
+    "agent/history_commentary.py": {
+      "source_sha256": "a89d59a44516c661b938e35685c21747b32053a41e635790319257e49a0747df",
+      "symbols": [
+        "visible_commentary"
+      ]
+    },
+    "agent/stream_delivery.py": {
+      "source_sha256": "96ff29f25dacf4286fe642e31db6b10d0197b0b89df7c77999f2b8194b45eb7e",
+      "symbols": [
+        "_extract_codex_interim_visible_parts",
+        "_visible_commentary",
+        "_extract_codex_interim_visible_text",
+        "_interim_assistant_visible_text"
+      ]
+    },
+    "agent/conversation_loop.py": {
+      "source_sha256": "36dd6f02b169a544a95598dee74cb775914420dc700cc88cc946effd103b72bc",
+      "symbols": [
+        "_CODEX_INCOMPLETE_NUDGE"
+      ],
+      "scope": "Existing source extraction from upstream_compaction/conversation_loop.py"
+    }
+  },
+  "adaptations": [
+    "Package-relative imports; no installed Hermes dependency",
+    "Use existing identical boosted_output_cap with model-output-limit boundary fixed None for Responses",
+    "Caller supplies a prepared assistant message; persistence/display/fallback callbacks are explicit in-memory host boundaries",
+    "External provider fallback is unavailable; original terminal sentinel path remains intact",
+    "Original visible_commentary fallback imports package-local think helper; redaction uses existing explicit host boundary"
+  ]
+}

@@ -21,7 +21,13 @@ def test_pi_container_payload_installs_only_its_runtime_dependencies(tmp_path):
     _container_payload._stage(tmp_path, agent, agent.config, "hello")
 
     requirements = (tmp_path / "requirements.txt").read_text().splitlines()
-    assert {line.split("==")[0] for line in requirements} == {"PyYAML", "httpx"}
+    assert {line.split("==")[0] for line in requirements} == {
+        "PyYAML",
+        "httpx",
+        "pillow",
+        "regexrs-py",
+        "numpy",
+    }
     assert all("==" in line for line in requirements)
     assert Snapshot.load(tmp_path / "snapshot.json").id == agent.snapshot.id
     assert (tmp_path / "package/flashrsi/agents/pi_agent/__init__.py").is_file()

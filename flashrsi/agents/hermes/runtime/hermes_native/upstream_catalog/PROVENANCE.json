@@ -1,0 +1,95 @@
+{
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": {
+    "models_dev.py": {
+      "source": "agent/models_dev.py",
+      "source_sha256": "92bab26726beae0259989c75316167134b0f67a243a5faa4a29c5f6e4ac9f30d",
+      "selected_symbols": [
+        "ModelCapabilities",
+        "ModelInfo",
+        "PROVIDER_TO_MODELS_DEV",
+        "_BUILTIN_MODEL_METADATA",
+        "_DEEPSEEK_FLASH_VISION",
+        "_MODELS_DEV_TO_PROVIDER",
+        "_OPENROUTER_CATALOG_PROVIDERS",
+        "_OVERRIDE_WARNED_KEYS",
+        "_UNKNOWN_CATALOG_PROVIDER_WARNED",
+        "_UNKNOWN_MODEL_BASE",
+        "_apply_overrides",
+        "_builtin_model_metadata",
+        "_cfg_get",
+        "_configured_catalog_provider",
+        "_default_model_override",
+        "_default_override_context",
+        "_dict_or_empty",
+        "_entry_supports_vision",
+        "_explicit_model_override",
+        "_extract_context",
+        "_extract_limit",
+        "_find_model_entry",
+        "_get_provider_models",
+        "_iter_model_entries",
+        "_load_model_overrides",
+        "_merge_catalog_entry_with_override",
+        "_models_dev_id",
+        "_models_dev_to_hermes_ids",
+        "_openrouter_catalog_lookup_base",
+        "_override_context_window",
+        "_override_for",
+        "_override_int",
+        "_override_to_catalog_shape",
+        "_parse_model_info",
+        "_provider_model_capabilities",
+        "_provider_override_section",
+        "_registry_models",
+        "_registry_provider",
+        "_relay_vision_marker_metadata",
+        "get_model_capabilities",
+        "get_model_info",
+        "logger",
+        "lookup_models_dev_context"
+      ],
+      "adaptations": [
+        [
+          "from hermes_cli.config import cfg_get, load_config_readonly",
+          "from .boundaries import cfg_get,load_config_readonly"
+        ],
+        [
+          "from providers import get_provider_profile",
+          "from ..chat_transport import provider_profile as get_provider_profile"
+        ],
+        [
+          "from hermes_cli.models import opencode_provider_family",
+          "from .boundaries import opencode_provider_family"
+        ]
+      ],
+      "snapshot_sha256": "35cf6105f792173c334937f43fe7ec561ebb364409a7715aeeae36c443d7bb2c"
+    },
+    "variants.py": {
+      "source": "hermes_constants.py",
+      "source_sha256": "870ad9935a62968636d6a14d160c0269dfbefd8091ab3cb71be78b30bef6360f",
+      "selected_symbols": [
+        "OPENROUTER_VARIANT_SUFFIXES",
+        "openrouter_variant_base"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "3ef3e8edb931d43b208d7b35295e59080ab0cc971780648dc1d2edd630dfe020"
+    },
+    "vision.py": {
+      "source": "agent/image_routing.py",
+      "source_sha256": "f458ebce761c525e922aa3af284fb8464efc630c7b407d4f25b6b3647f38b6c6",
+      "selected_symbols": [
+        "_BOOL_TOKENS",
+        "_clean_str",
+        "_coerce_capability_bool",
+        "_custom_provider_entries",
+        "_custom_provider_list",
+        "_dict_or_empty",
+        "_model_supports_vision_override",
+        "_supports_vision_override"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "f222176795d7f4ae853663579d83076c76925bd4d9e6a4dfa8a79d61cfceaf00"
+    }
+  }
+}

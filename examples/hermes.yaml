@@ -1,0 +1,52 @@
+# Hermes native Python Target; the selected Snapshot supplies executable code.
+# No installed Hermes CLI, upstream checkout, Node.js, or npm is required.
+# Run from the repository root and configure Target and Worker independently.
+run:
+  output_dir: ../runs
+
+benchmark:
+  name: searchqa
+  data_path: ./examples/data/quickstart.jsonl
+  split:
+    train: 0.5
+    dev: 0.25
+    test: 0.25
+  seed: 42
+
+agent:
+  name: hermes
+  timeout: 300
+  max_iterations: 30
+  compression:
+    enabled: true
+    threshold: 0.50
+    # Optional automatic maintenance; full threshold/overflow compaction is enabled above.
+    proactive_prune_tokens: 0
+    micro_compact: false
+    idle_compact_after_seconds: 0
+    # Requires a durable pre-compression checkpoint; provide a session_file to enable.
+    checkpoint_required: false
+    # Opt-in only for a supported Responses route/model; local compression remains available.
+    codex_responses_native: false
+  # Opt in per conversation; use a separate file for each independent task.
+  # session_file: ../runs/hermes-session.json
+  llm:
+    # Passed literally to the configured endpoint; no provider/model prefix is required.
+    model_name: your-model
+    # Use openai-responses for a Responses endpoint.
+    model_api: chat_completions
+    api_key: null
+    base_url: null
+
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  max_steps: 1
+  batch_size: 2
+  edit_budget: 1
+  worker:
+    type: llm
+    llm:
+      model_name: your-worker-model
+      api_key: null
+      base_url: null

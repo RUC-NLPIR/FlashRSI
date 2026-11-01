@@ -96,6 +96,7 @@ def test_pi_native_loop_emits_tool_lifecycle_and_usage(tmp_path, monkeypatch):
             "model_name": "openai/gpt-4o",
             "api_key": "secret",
             "base_url": "https://provider.test/v1",
+            "model_api": "openai-completions",
         },
         "max_turns": 4,
     }
@@ -193,6 +194,7 @@ def test_pi_adapter_executes_selected_snapshot_runtime(tmp_path, monkeypatch):
                 "model_name": "openai/gpt-4o",
                 "api_key": "secret",
                 "base_url": "https://provider.test/v1",
+                "model_api": "openai-completions",
             }
         }
     )
@@ -357,6 +359,7 @@ def test_pi_length_truncated_tool_call_is_reported_without_execution(
                     "model_name": "openai/gpt-4o",
                     "api_key": "secret",
                     "base_url": "https://provider.test/v1",
+                    "model_api": "openai-completions",
                 },
                 "max_turns": 2,
             },
@@ -387,8 +390,10 @@ def test_pi_provider_error_completes_turn_before_settlement(tmp_path, monkeypatc
                     "model_name": "openai/gpt-4o",
                     "api_key": "secret",
                     "base_url": "https://provider.test/v1",
+                    "model_api": "openai-completions",
                     "max_retries": 0,
                 },
+                "retry": {"enabled": False},
             },
             "hello",
             tmp_path,

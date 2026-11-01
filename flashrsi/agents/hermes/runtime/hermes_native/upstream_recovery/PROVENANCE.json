@@ -1,0 +1,343 @@
+{
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": {
+    "__init__.py": {
+      "source": "agent/turn_retry_state.py",
+      "source_sha256": "9cb374f452ce3813aae07f151e83a9459eea07ab78ab93cb7c548d3de5f3048b",
+      "selected_symbols": [],
+      "adaptations": []
+    },
+    "retry_state.py": {
+      "source": "agent/turn_retry_state.py",
+      "source_sha256": "9cb374f452ce3813aae07f151e83a9459eea07ab78ab93cb7c548d3de5f3048b",
+      "selected_symbols": "whole file",
+      "adaptations": []
+    },
+    "sanitization.py": {
+      "source": "agent/message_sanitization.py",
+      "source_sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+      "selected_symbols": [
+        "_SURROGATE_RE",
+        "_MESSAGE_CORE_KEYS",
+        "_sanitize_surrogates",
+        "_strip_non_ascii",
+        "_fix_str_field",
+        "_sanitize_structure",
+        "_sanitize_messages",
+        "_sanitize_structure_surrogates",
+        "_sanitize_messages_surrogates",
+        "_sanitize_structure_non_ascii",
+        "_sanitize_messages_non_ascii",
+        "sanitize_outbound_kwargs",
+        "_IMAGE_PART_TYPES",
+        "_strip_images_from_messages",
+        "_IMAGE_REJECTION_PHRASES",
+        "_IMAGE_CORRUPT_PHRASES",
+        "strip_images_for_rejecting_model",
+        "_looks_like_image_content_rejection",
+        "_looks_like_corrupt_image_rejection",
+        "_REASONING_ECHO_RULES",
+        "_REASONING_ECHO_RULE_BY_FAMILY",
+        "R",
+        "REASONING_CARRIERS",
+        "_ALL_CARRIERS",
+        "matches_reasoning_echo_family",
+        "reasoning_echo_family",
+        "needs_reasoning_echo",
+        "_replayable_reasoning_text",
+        "_apply_legacy_must_echo_pad",
+        "apply_reasoning_content_policy",
+        "_reasoning_shape",
+        "reapply_reasoning_echo",
+        "_UNKNOWN_FIELD_PHRASES",
+        "_NAMED_FIELD_RES",
+        "rejected_reasoning_fields",
+        "reasoning_route_key",
+        "_REJECTION_MODEL_CONFIG_KEY",
+        "rejected_reasoning_carriers",
+        "record_reasoning_field_rejection"
+      ],
+      "adaptations": [
+        [
+          "from agent.context_compressor import _DB_PERSISTED_MARKER",
+          "from .boundaries import _DB_PERSISTED_MARKER"
+        ],
+        [
+          "from agent.turn_context import drop_stale_api_content",
+          "from .boundaries import drop_stale_api_content"
+        ],
+        [
+          "from agent.conversation_loop import _clone_message_for_send",
+          "from .boundaries import _clone_message_for_send"
+        ],
+        [
+          "from utils import base_url_host_matches",
+          "from ..upstream_loop.urls import base_url_host_matches"
+        ],
+        [
+          "from utils import base_url_hostname",
+          "from ..upstream_loop.urls import base_url_hostname"
+        ]
+      ]
+    },
+    "vision.py": {
+      "source": "agent/vision_message_prep.py",
+      "source_sha256": "2cb7b57a67d6e6922bd42557dbec175116fba12bc7168106020964ccf370fde1",
+      "selected_symbols": [
+        "_IMAGE_PART_TYPES",
+        "_TEXT_PART_TYPES",
+        "_is_image_part",
+        "_salvage_text_parts",
+        "_provider_model_key"
+      ],
+      "adaptations": []
+    },
+    "vision_methods.py": {
+      "source": "agent/vision_message_prep.py",
+      "source_sha256": "2cb7b57a67d6e6922bd42557dbec175116fba12bc7168106020964ccf370fde1",
+      "selected_symbols": [
+        "VisionMessagePrepMixin._content_has_image_parts",
+        "VisionMessagePrepMixin._tool_result_content_for_active_model",
+        "VisionMessagePrepMixin._try_strip_image_parts_from_tool_messages"
+      ],
+      "adaptations": []
+    },
+    "images.py": {
+      "source": "agent/conversation_compression.py",
+      "source_sha256": "796494d28180659f2843599420840832e1f528ecad2110b498a59f53e34e6bcb",
+      "selected_symbols": [
+        "logger",
+        "_IMAGE_SHRINK_TARGET_BYTES",
+        "_IMAGE_SUFFIX_BY_MIME",
+        "_data_url_mime",
+        "_decode_pixels",
+        "_shrink_data_url",
+        "_source_to_data_url",
+        "_write_data_url_to_source",
+        "try_shrink_image_parts_in_messages"
+      ],
+      "adaptations": [
+        [
+          "from tools.vision_tools import _resize_image_for_vision",
+          "from .resize import _resize_image_for_vision"
+        ]
+      ]
+    },
+    "resize.py": {
+      "source": "tools/vision_tools.py",
+      "source_sha256": "df3072ca25fbe9bc5d58acfb22cd2ce71af64f72b00477f4f4f841d1a27c2084",
+      "selected_symbols": [
+        "logger",
+        "_image_to_base64_data_url",
+        "_RESIZE_TARGET_BYTES",
+        "_import_pillow_for_resize",
+        "_resize_image_for_vision"
+      ],
+      "adaptations": [
+        [
+          "from pm import ensure_import",
+          "from .boundaries import ensure_import"
+        ]
+      ]
+    },
+    "image_prep.py": {
+      "source": "tools/vision_tools_image_prep.py",
+      "source_sha256": "94ef5f78b3e746395036a2e24e5ce452735e5636dc8762f3507b2cfbaae38d4f",
+      "selected_symbols": [
+        "_EXTENSION_MIME_TYPES",
+        "_determine_mime_type",
+        "_image_exceeds_dimension"
+      ],
+      "adaptations": []
+    },
+    "schema.py": {
+      "source": "tools/schema_sanitizer.py",
+      "source_sha256": "3c999f0726db1dfd9fe0386883ccdcfdd95a289b07e9e6376ceb5ca9fcfd8691",
+      "selected_symbols": [
+        "logger",
+        "_STRIP_ON_RECOVERY_KEYS",
+        "_SCHEMA_MARKERS",
+        "_dict_nodes",
+        "_reactive_strip",
+        "strip_pattern_and_format"
+      ],
+      "adaptations": []
+    },
+    "affordable.py": {
+      "source": "agent/auxiliary_client.py",
+      "source_sha256": "053078416f2b2d94256584a5c1ed6176bfbd3f3de88a8ca858e8257274a04bb5",
+      "selected_symbols": [
+        "_contains_any",
+        "_PAYMENT_KEYWORDS",
+        "_is_payment_error",
+        "_AFFORDABLE_TOKENS_RE",
+        "_AFFORDABLE_RETRY_FLOOR_TOKENS",
+        "_AFFORDABLE_RETRY_MARGIN_TOKENS",
+        "_affordable_max_tokens_from_error"
+      ],
+      "adaptations": []
+    },
+    "error_context.py": {
+      "source": "agent/agent_runtime_helpers.py",
+      "source_sha256": "7725dfa3b5c12e2ec289e86a2f83eb99dc75052687aa9cb4d2e71bc3f770b5d4",
+      "selected_symbols": [
+        "_set_reset_from_retry_after",
+        "_DURATION_COMPONENT_RE",
+        "_DURATION_UNIT_SECONDS",
+        "_VENDOR_RESET_HEADERS",
+        "_duration_string_seconds",
+        "_set_reset_from_vendor_headers",
+        "extract_api_error_context"
+      ],
+      "adaptations": []
+    },
+    "codex.py": {
+      "source": "agent/turn_recovery_codex.py",
+      "source_sha256": "81898940cfd30144d19579b0a8c246b9adacc448945c73697b01b10e3a50b786",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from agent.turn_retry_state import TurnRetryState",
+          "from .retry_state import TurnRetryState"
+        ],
+        [
+          "from agent.turn_recovery import _vlines",
+          "from .recovery import _vlines"
+        ]
+      ]
+    },
+    "codex_methods.py": {
+      "source": "run_agent.py",
+      "source_sha256": "33c7195fc6efa9122f1a6700d416fd283f9634712189af3fd72feb01bcea054f",
+      "selected_symbols": [
+        "AIAgent._disable_codex_reasoning_replay"
+      ],
+      "adaptations": []
+    },
+    "transport_methods.py": {
+      "source": "agent/transports/codex.py",
+      "source_sha256": "dd5b7acb4ad905f560c7b9669b26e3f2ff4af2de4fdc22856b1d669b74f844b2",
+      "selected_symbols": [
+        "ResponsesApiTransport.reject_all_turns",
+        "ResponsesApiTransport.drop_unverified_replay"
+      ],
+      "adaptations": [
+        [
+          "from agent.codex_responses_adapter import strip_unverified_reasoning_items",
+          "from ..upstream_compaction.responses_adapter import strip_unverified_reasoning_items"
+        ]
+      ]
+    },
+    "recovery.py": {
+      "source": "agent/turn_recovery.py",
+      "source_sha256": "7e0210cbf902b53081f849e1c33ac7e5882c15a46f10d0ada65ab7d1db92d85f",
+      "selected_symbols": [
+        "logger",
+        "_runtime_uses_ascii_encoding",
+        "_vlines",
+        "_image_error_max_dimension",
+        "_repair_transport_credentials",
+        "_recover_unicode_encode_error",
+        "_strip_request_images_and_retry",
+        "recover_before_classification",
+        "_recover_format_errors",
+        "_clamp_to_affordable_budget",
+        "_reject_all_turns",
+        "recover_after_classification"
+      ],
+      "adaptations": [
+        [
+          "from agent.conversation_loop import _is_nous_inference_route",
+          "from .boundaries import _is_nous_inference_route"
+        ],
+        [
+          "from agent.auxiliary_client import _affordable_max_tokens_from_error",
+          "from .affordable import _affordable_max_tokens_from_error"
+        ],
+        [
+          "from agent.anthropic_thinking_replay import remember_rejected_thinking, tracks_rejected_thinking",
+          "from .boundaries import remember_rejected_thinking, tracks_rejected_thinking"
+        ],
+        [
+          "from agent.native_compaction import is_native_compaction_rejection",
+          "from ..native_compaction import is_native_compaction_rejection"
+        ],
+        [
+          "from tools.schema_sanitizer import strip_pattern_and_format",
+          "from .schema import strip_pattern_and_format"
+        ],
+        [
+          "from agent.error_classifier import is_reasoning_required_rejection",
+          "from ..upstream_loop.error_classifier import is_reasoning_required_rejection"
+        ],
+        [
+          "from hermes_cli.models_reasoning_caps import refresh_reasoning_caps_async",
+          "from .boundaries import refresh_reasoning_caps_async"
+        ],
+        [
+          "from agent.auxiliary_reasoning_floor import REASONING_FLOOR_EFFORT",
+          "from .boundaries import REASONING_FLOOR_EFFORT"
+        ]
+      ]
+    },
+    "timestamps.py": {
+      "source": "agent/credential_pool_timestamps.py",
+      "source_sha256": "3cbe24d8f9751695fdd8c12670b4f522dc5e3963b824c1ad9810f89b7087f840",
+      "selected_symbols": "whole file",
+      "adaptations": []
+    },
+    "reasoning_wire.py": {
+      "source": "agent/chat_completion_helpers.py",
+      "source_sha256": "d5ac7612af5819891293c4ec182f71a1a9e59f6aa32e98f15266a85fca64e4a8",
+      "selected_symbols": [
+        "_consume_ephemeral_reasoning_off",
+        "_reasoning_config_for_wire"
+      ],
+      "adaptations": [
+        [
+          "from agent.reasoning_params import unset_reasoning_default",
+          "from .boundaries import unset_reasoning_default"
+        ],
+        [
+          "from agent.auxiliary_reasoning_floor import REASONING_FLOOR_EFFORT",
+          "from .boundaries import REASONING_FLOOR_EFFORT"
+        ]
+      ]
+    },
+    "cache_boundary.py": {
+      "source": "agent/prompt_cache_boundary.py",
+      "source_sha256": "82dfe2db84454e42583a0fa9b512317db973c9e842380543c6f787add3f0d548",
+      "selected_symbols": "whole file",
+      "adaptations": []
+    },
+    "cache_cleanup.py": {
+      "source": "agent/prompt_caching.py",
+      "source_sha256": "b36630f00317fae22466ce4dbd7844c61f9390d60755f128b27a928eaa687e39",
+      "selected_symbols": [
+        "_has_part_marker",
+        "strip_anthropic_cache_control"
+      ],
+      "adaptations": []
+    },
+    "fast_mode.py": {
+      "source": "agent/fast_mode.py",
+      "source_sha256": "7aaa66abd438c0bd98610baf151a93285ef184ad7fc07f7f04df52d678fbec98",
+      "selected_symbols": [
+        "_FAST_LIMIT_HEADERS",
+        "fast_mode_unprovisioned",
+        "mark_fast_mode_unavailable"
+      ],
+      "adaptations": []
+    },
+    "multimodal.py": {
+      "source": "agent/tool_dispatch_helpers.py",
+      "source_sha256": "bf4c6e4af26ba8a93ece9dfa6afa9a2e4d96bfe27ae854bd483a6613306c2cfc",
+      "selected_symbols": [
+        "_is_multimodal_tool_result",
+        "_is_text_part",
+        "_multimodal_text_summary"
+      ],
+      "adaptations": []
+    }
+  }
+}

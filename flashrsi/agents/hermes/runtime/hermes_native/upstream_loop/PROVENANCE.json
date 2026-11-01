@@ -1,0 +1,523 @@
+{
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": {
+    "__init__.py": {
+      "source": "agent/retry_utils.py",
+      "source_sha256": "4c643880c012dd536dca08041f1bae93b6a58477186b5cf0b4e27ec3c640014c",
+      "selected_symbols": [],
+      "adaptations": [],
+      "snapshot_sha256": "69e0a0bdc26aa4f6dddc8d9abcc319d4205d396791ec2bf3bd9cd08fabb9c567"
+    },
+    "retry_utils.py": {
+      "source": "agent/retry_utils.py",
+      "source_sha256": "4c643880c012dd536dca08041f1bae93b6a58477186b5cf0b4e27ec3c640014c",
+      "selected_symbols": "whole file",
+      "adaptations": [],
+      "snapshot_sha256": "4c643880c012dd536dca08041f1bae93b6a58477186b5cf0b4e27ec3c640014c"
+    },
+    "repetition_guard.py": {
+      "source": "agent/repetition_guard.py",
+      "source_sha256": "b24651bbfe8a56f083e75064846a42e75dd799269de4aa32895da0226ed8f98b",
+      "selected_symbols": "whole file",
+      "adaptations": [],
+      "snapshot_sha256": "b24651bbfe8a56f083e75064846a42e75dd799269de4aa32895da0226ed8f98b"
+    },
+    "reasoning_timeouts.py": {
+      "source": "agent/reasoning_timeouts.py",
+      "source_sha256": "92dde9ab6a2fd7a32161db4b5e3551253fd0c097dd2e05a8115825d36282475d",
+      "selected_symbols": "whole file",
+      "adaptations": [],
+      "snapshot_sha256": "92dde9ab6a2fd7a32161db4b5e3551253fd0c097dd2e05a8115825d36282475d"
+    },
+    "errors.py": {
+      "source": "agent/errors.py",
+      "source_sha256": "d59845a9357f14109589cc07ff327b89a43569108e798cbfd121b618d4edc8a6",
+      "selected_symbols": [
+        "MoAPresetNotFoundError"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "33f10c986184a74513f40304708b32b19297b524b61e0d9f07b66308b085a0ab"
+    },
+    "urls.py": {
+      "source": "utils.py",
+      "source_sha256": "9c4751dc9fbcbfe7e16d9e0cc5fb25566517c4927d2dc84061d4cac993a98445",
+      "selected_symbols": [
+        "_parse_base_url",
+        "_hostname_of",
+        "base_url_hostname",
+        "base_url_host_matches"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "d43454090a54c47885dbe27433e7d8c99f0e654d0712cef9680cceea882b08dc"
+    },
+    "user_message.py": {
+      "source": "agent/codex_responses_adapter.py",
+      "source_sha256": "c86e14ebe721e94f86a1a50266272c364ccea9660a6da456eb00fa109e5f054d",
+      "selected_symbols": [
+        "_TEXT_PART_TYPES",
+        "_IMAGE_PART_TYPES",
+        "_nonempty_str",
+        "_str_or_empty",
+        "_part_type",
+        "_iter_content_parts",
+        "_summarize_user_message_for_log"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "7ef4718c8b1a87e705cddf5e380711f90f94b326303ae052a020154825d3f284"
+    },
+    "guards.py": {
+      "source": "agent/agent_runtime_helpers.py",
+      "source_sha256": "7725dfa3b5c12e2ec289e86a2f83eb99dc75052687aa9cb4d2e71bc3f770b5d4",
+      "selected_symbols": [
+        "_ACK_FUTURE_RE",
+        "_ACK_ACTION_MARKERS",
+        "_ACK_WORKSPACE_MARKERS",
+        "looks_like_codex_intermediate_ack",
+        "_DEGENERATE_FINAL_MAX_CHARS",
+        "_SENTENCE_TERMINALS",
+        "_DEGENERATE_LEADING_PUNCT",
+        "looks_like_degenerate_final",
+        "tool_results_this_turn",
+        "_TRAILING_CONTINUE_INTENT_RE",
+        "_TRAILING_CONTINUE_INTENT_MAX_CHARS",
+        "trailing_continue_intent",
+        "_PROMOTED_REASONING_PLAN_TAIL_RE",
+        "promoted_reasoning_announces_action",
+        "_INTENT_ACK_ON",
+        "_INTENT_ACK_OFF",
+        "intent_ack_continuation_mode"
+      ],
+      "adaptations": [
+        [
+          "from agent.codex_responses_adapter import _summarize_user_message_for_log",
+          "from .user_message import _summarize_user_message_for_log"
+        ]
+      ],
+      "snapshot_sha256": "3c67ebf4f0c96afff79c02ad837b8bf4aae72bac00f84a1e71928514d752f6b4"
+    },
+    "nudges.py": {
+      "source": "agent/conversation_loop.py",
+      "source_sha256": "36dd6f02b169a544a95598dee74cb775914420dc700cc88cc946effd103b72bc",
+      "selected_symbols": [
+        "_CODEX_ACK_CONTINUATION_NUDGE",
+        "_DEGENERATE_FINAL_NUDGE"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "df3d74160051125f903199608b3e4db4129b27c57eebfd8b6a34da4ff1fa9d32"
+    },
+    "auto_recovery.py": {
+      "source": "agent/turn_recovery_autorecover.py",
+      "source_sha256": "5b1c1e0a2e46bf7200db4ddb07bf2d3e9c85fc1aef2403dcb99c799ca465cfbb",
+      "selected_symbols": [
+        "_LADDER_REASONS",
+        "_LADDER_BASE_DELAY_S",
+        "_LADDER_CAP_S",
+        "_RETRY_AFTER_CAP_S",
+        "_STOP_HINTS",
+        "_DEFAULT_STOP_HINT",
+        "auto_recovery_cycles",
+        "ladder_wait_seconds",
+        "ladder_eligible",
+        "ladder_notice"
+      ],
+      "adaptations": [
+        [
+          "from agent.retry_utils import jittered_backoff, provider_retry_after_seconds",
+          "from .retry_utils import jittered_backoff, provider_retry_after_seconds"
+        ]
+      ],
+      "snapshot_sha256": "635a192983923b2d9589f14b2216a203ab177505e3cbe4e7cb90a8499d61c616"
+    },
+    "error_classifier.py": {
+      "source": "agent/error_classifier.py",
+      "source_sha256": "fcb13c614352848cad708384d505a241dae6b2b182f35e3acb63d4d1b6bce849",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from hermes_cli.plugins import get_plugin_error_classification",
+          "from .boundaries import get_plugin_error_classification"
+        ],
+        [
+          "from providers import get_provider_profile",
+          "from .boundaries import get_provider_profile"
+        ],
+        [
+          "from hermes_cli.anon_auth import (",
+          "from .anonymous import ("
+        ],
+        [
+          "from agent.nous_rate_guard import welcome_refusal_from_headers",
+          "from .anonymous_headers import welcome_refusal_from_headers"
+        ],
+        [
+          "from agent.errors import MoAPresetNotFoundError",
+          "from .errors import MoAPresetNotFoundError"
+        ],
+        [
+          "from agent.reasoning_timeouts import get_reasoning_stale_timeout_floor",
+          "from .reasoning_timeouts import get_reasoning_stale_timeout_floor"
+        ],
+        [
+          "from hermes_cli.anon_auth import is_anonymous_request",
+          "from .anonymous import is_anonymous_request"
+        ],
+        [
+          "from hermes_cli.route_identity import provider_owns_route",
+          "from .boundaries import provider_owns_route"
+        ],
+        [
+          "from utils import base_url_hostname",
+          "from .urls import base_url_hostname"
+        ],
+        [
+          "from utils import base_url_host_matches",
+          "from .urls import base_url_host_matches"
+        ],
+        [
+          "from agent.conversation_compression import _IMAGE_SHRINK_TARGET_BYTES",
+          "from .boundaries import _IMAGE_SHRINK_TARGET_BYTES"
+        ],
+        [
+          "from agent.retry_utils import parse_retry_after_seconds, reset_delay_from_message",
+          "from .retry_utils import parse_retry_after_seconds, reset_delay_from_message"
+        ],
+        [
+          "from hermes_cli.model_normalize import suggest_prefixed_model_id",
+          "from .boundaries import suggest_prefixed_model_id"
+        ]
+      ],
+      "snapshot_sha256": "cd347d7b59f141f1790d1613a7e80020ebd3e259129f04e39175646125e44520"
+    },
+    "anonymous.py": {
+      "source": "hermes_cli/anon_auth.py",
+      "source_sha256": "5024e096122e7141f3e27b30e2ff5d40fe64c10c01ed77513e8f92630d718c5b",
+      "selected_symbols": [
+        "ANON_ACCOUNT_TIER",
+        "is_anonymous_request",
+        "WELCOME_HOSTS",
+        "EXTRA_WELCOME_HOSTS_ENV",
+        "welcome_hosts",
+        "route_is_welcome_host",
+        "WELCOME_REFUSAL_REASONS",
+        "WELCOME_TIER_GATE_REASONS",
+        "_WELCOME_ROUTE_REFUSALS",
+        "parse_welcome_refusal",
+        "welcome_route_refusal"
+      ],
+      "adaptations": [
+        [
+          "os.environ.get(EXTRA_WELCOME_HOSTS_ENV)",
+          "{}.get(EXTRA_WELCOME_HOSTS_ENV)"
+        ],
+        [
+          "from hermes_cli.auth_constants import _decode_jwt_claims",
+          "from .jwt_claims import _decode_jwt_claims"
+        ]
+      ],
+      "snapshot_sha256": "d18cf268f233d2621d1c5b77467d30f650f35f79173180ce247a33f4a5e0dd11"
+    },
+    "jwt_claims.py": {
+      "source": "hermes_cli/auth_constants.py",
+      "source_sha256": "eaaab33840ab6bfb5b0bd86bf1c7e58b7645b52c59b8caf6b2553a165080432b",
+      "selected_symbols": [
+        "_decode_jwt_claims"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "04fc2954489cf0cd2516645a61fd69f8aac473460ea9be8ecc6d32d8b1dd5b50"
+    },
+    "anonymous_headers.py": {
+      "source": "agent/nous_rate_guard.py",
+      "source_sha256": "53ac0ab624a4cea469f8c7c717a5238bf945bd80e625339fb3b117a2cdd61157",
+      "selected_symbols": [
+        "WELCOME_LONG_WAIT_SECONDS",
+        "welcome_refusal_from_headers",
+        "_parse_buckets_from_headers"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "3b5aaaad5a4c669ede5ddbdda1390322593b5de1b327c9438989529ff18bf3f7"
+    },
+    "rate_headers.py": {
+      "source": "agent/rate_limit_tracker.py",
+      "source_sha256": "159a432d6d96cdcb669bcf944494dfe61f41c369ed302bd4217d56d3ace12fff",
+      "selected_symbols": [
+        "_BUCKET_TAGS",
+        "_safe_float",
+        "_safe_int",
+        "lower_headers",
+        "has_rate_limit_headers"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "f09da4ee80f945ae676ab0e511228149a1448588e72f14f67949f48d99edc356"
+    },
+    "reasoning.py": {
+      "source": "agent/message_sanitization.py",
+      "source_sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+      "selected_symbols": [
+        "_REASONING_ECHO_RULES",
+        "_REASONING_ECHO_RULE_BY_FAMILY",
+        "R",
+        "REASONING_CARRIERS",
+        "_ALL_CARRIERS",
+        "_DEFAULT_CARRIERS",
+        "_LOCAL_CARRIERS",
+        "_REASONING_CARRIER_ROUTES",
+        "ReasoningReplayRoute",
+        "matches_reasoning_echo_family",
+        "reasoning_echo_family",
+        "needs_reasoning_echo",
+        "route_reasoning_carriers",
+        "_profile_declares_native_details",
+        "reasoning_replay_route",
+        "_replayable_reasoning_text",
+        "_apply_legacy_must_echo_pad",
+        "apply_reasoning_content_policy"
+      ],
+      "adaptations": [
+        [
+          "from utils import base_url_host_matches",
+          "from .urls import base_url_host_matches"
+        ],
+        [
+          "from agent.model_metadata import is_local_endpoint",
+          "from ..upstream_compaction.model_metadata import is_local_endpoint"
+        ],
+        [
+          "from providers import get_provider_profile",
+          "from .boundaries import get_provider_profile"
+        ]
+      ],
+      "snapshot_sha256": "0f42f65f415b20d99e2a2bcd4e917a358174b880246cd2959372b8ea8519e2aa"
+    },
+    "empty_response_guard.py": {
+      "source": "agent/empty_response_guard.py",
+      "source_sha256": "8a7126d457ebc021a72b906973e74adbf13ff2504cc4b07d5e8b29f617019c1e",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from agent.usage_pricing import normalize_usage",
+          "from ..upstream_compaction.responses_usage import normalize_usage"
+        ],
+        [
+          "from agent.usage_pricing import estimate_usage_cost",
+          "from .boundaries import estimate_usage_cost"
+        ]
+      ],
+      "snapshot_sha256": "3d27b0f42f01d0bb9018aedc78c063c14d639a6bdc1308fc0ca32adb11059940"
+    },
+    "truncation.py": {
+      "source": "agent/turn_truncation.py",
+      "source_sha256": "cded3d067441ddac4e2362347cc55ba4d00e47baf529ba4b68b30380c396e0eb",
+      "selected_symbols": [
+        "repetition_copy",
+        "_REPETITION_DOMINATED",
+        "_CEILING_NO_TEXT",
+        "_MIN_CONTINUATION_HEADROOM",
+        "_WINDOW_FILLED",
+        "_prompt_filled_window"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "d01045d4cb5fa3862b4598b0dd29da96eff060d46f94ce1887c5370c074d440f"
+    },
+    "recovery.py": {
+      "source": "agent/agent_runtime_helpers.py",
+      "source_sha256": "7725dfa3b5c12e2ec289e86a2f83eb99dc75052687aa9cb4d2e71bc3f770b5d4",
+      "selected_symbols": [
+        "_TRANSIENT_TRANSPORT_ERRORS"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "143b4539cf417008666941ac93bdbf4e65e8910456d35d1966e862aa7f3e945a"
+    },
+    "persistence.py": {
+      "source": "agent/session_persistence.py",
+      "source_sha256": "b1a0a29ad4089c77dd6c7ee7551c92d4b103ccd2ecdd1e05fd8f9af5bc11b119",
+      "selected_symbols": [
+        "_EPHEMERAL_SCAFFOLDING_FLAGS",
+        "_is_ephemeral_scaffolding"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "2f0f14ae41600899e6e091df57465e5cb168f00a97b82eaecb016612021da853"
+    },
+    "history.py": {
+      "source": "run_agent.py",
+      "source_sha256": "33c7195fc6efa9122f1a6700d416fd283f9634712189af3fd72feb01bcea054f",
+      "selected_symbols": [
+        "AIAgent._is_thinking_only_assistant",
+        "AIAgent._content_has_real_payload"
+      ],
+      "adaptations": [
+        "native_compaction import redirected to snapshot"
+      ],
+      "snapshot_sha256": "6b6d65725f2083d272a6c0633a35ad06b78e8f1665cd24dec97f78a7909f75dc"
+    },
+    "fallback.py": {
+      "source": "agent/agent_init_fallback.py",
+      "source_sha256": "1cd07326d7c899ae62fe1d1c09f5b71a565a3051974a2ba96feaa54bdff31e5c",
+      "selected_symbols": [
+        "_fallback_entries"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "481b5460eba5a364b1ea1a195e9beff2eba9aa84e7474698d78eb0713e450918"
+    },
+    "recovery_reasons.py": {
+      "source": "agent/turn_recovery.py",
+      "source_sha256": "7e0210cbf902b53081f849e1c33ac7e5882c15a46f10d0ada65ab7d1db92d85f",
+      "selected_symbols": [
+        "_RATE_LIMIT_REASONS",
+        "_TRANSPORT_FAILURE_REASONS"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "09f332da6fe5a9e90a924970e6d000b83e5fdb597c8b59d17a34519c31004bf3"
+    },
+    "toolcall_ids.py": {
+      "source": "agent/message_sanitization.py",
+      "source_sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+      "selected_symbols": [
+        "deterministic_call_id"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "0b6837990bcb7022e643e2072fdcfbf7d0b563990559ff69d7dc8c54473794e9"
+    },
+    "assistant_storage.py": {
+      "source": "agent/chat_completion_helpers.py",
+      "source_sha256": "d5ac7612af5819891293c4ec182f71a1a9e59f6aa32e98f15266a85fca64e4a8",
+      "selected_symbols": [
+        "_model_dump_safe",
+        "_dump_if_model",
+        "_assistant_tool_call_dict"
+      ],
+      "adaptations": [
+        [
+          "from agent.reasoning_carriers import field",
+          "from .reasoning_carriers import field"
+        ]
+      ],
+      "snapshot_sha256": "4c0d47563f68c04dac7cefc0974e974c83401f7f5ae4eb579b846f3678ae518e"
+    },
+    "reasoning_carriers.py": {
+      "source": "agent/reasoning_carriers.py",
+      "source_sha256": "c21e95fccadfeddc433be1a4837824b4a0e94715e0bf31ba07172d896e772480",
+      "selected_symbols": [
+        "CARRIER_TYPE",
+        "field",
+        "thought_signature",
+        "carrier_record"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "aa79a20cb1209208187901bcb094e102cf8566bf91a3ac4cfd2e28fda2f2dd6e"
+    },
+    "capabilities.py": {
+      "source": "hermes_cli/config_providers.py",
+      "source_sha256": "9fb0cab242c7d76c878a9c1fec238c8247567b1d027a71f34a326197268cd075",
+      "selected_symbols": [
+        "_entries_for_route",
+        "_route_model_cfg",
+        "_route_model_cfgs",
+        "get_custom_provider_model_capability"
+      ],
+      "adaptations": [
+        [
+          "from hermes_cli.config import get_compatible_custom_providers, load_config_readonly",
+          "from .boundaries import get_compatible_custom_providers, load_config_readonly"
+        ],
+        [
+          "from hermes_cli.config import get_compatible_custom_providers",
+          "from .boundaries import get_compatible_custom_providers"
+        ]
+      ],
+      "snapshot_sha256": "465c07e824998e5f6c13f042e1569e990472731fcd2fe1d2d5e6b355407f83cd"
+    },
+    "provider_slug.py": {
+      "source": "hermes_cli/providers.py",
+      "source_sha256": "0861401ea0609e497036d6e8398a516d41e28946841f50572d40d57408d20b07",
+      "selected_symbols": [
+        "custom_provider_slug"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "b06b0ad02a9a69bf693729f14f0422d3525d5371d315b7da910c0db296b7c182"
+    },
+    "reasoning_promotion.py": {
+      "source": "agent/reasoning_promotion.py",
+      "source_sha256": "feae047d0ed6352ecfd992daa98544f54f588cde793571bf3171566f6344a285",
+      "selected_symbols": "whole file",
+      "adaptations": [
+        [
+          "from utils import base_url_host_matches",
+          "from .urls import base_url_host_matches"
+        ],
+        [
+          "from hermes_cli.config import _entries_for_route, get_custom_provider_model_capability",
+          "from .capabilities import _entries_for_route, get_custom_provider_model_capability"
+        ],
+        [
+          "from hermes_cli.providers import custom_provider_slug",
+          "from .provider_slug import custom_provider_slug"
+        ],
+        [
+          "from agent.model_metadata import is_local_endpoint",
+          "from ..upstream_compaction.model_metadata import is_local_endpoint"
+        ]
+      ],
+      "snapshot_sha256": "6fd70e64faa73a4deb8ee053d94eec66e0d775cd3165ecd36a23818fa51934f4"
+    },
+    "refusal.py": {
+      "source": "agent/turn_failure_copy.py",
+      "source_sha256": "b5ef4fd4ac4715b79ccf6eebf0e363fbf5252525827691c329f7088d02e0206b",
+      "selected_symbols": [
+        "CONTENT_POLICY_NEXT_STEPS",
+        "content_policy_copy"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "f46d89495f080bb79d2c6d124e37092d9f29e5483aaefadeb16c5fe737bfdf57"
+    },
+    "housekeeping.py": {
+      "source": "agent/turn_tool_round.py",
+      "source_sha256": "1ccd3574528597f5c3a5589729849f8a10e422f0d970af3bb03b1fbd277f1f29",
+      "selected_symbols": [
+        "_HOUSEKEEPING_TOOLS",
+        "_LINE_IS_REPLY_TOOLS"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "9839d78531df778321fac0f1d4936c7168da39e14cb42eac4150c3df12f578bd"
+    },
+    "provider_label.py": {
+      "source": "hermes_cli/models.py",
+      "source_sha256": "c3546748426161eae3d2b47b1dfe95495e2e99442df4ff2cbf5d77c5efb7c0cd",
+      "selected_symbols": [
+        "normalize_provider",
+        "provider_label"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "cb4ffa866c472c00911a66ff7867074197e411adf96bd58a5d338c6da822eedd"
+    },
+    "stale_markers.py": {
+      "source": "agent/conversation_loop.py",
+      "source_sha256": "36dd6f02b169a544a95598dee74cb775914420dc700cc88cc946effd103b72bc",
+      "selected_symbols": [
+        "_STALE_MARKER_RE"
+      ],
+      "adaptations": [],
+      "snapshot_sha256": "d8ad758807f9e6f005cf7d836ad822ac95ee9e77798cd30eac5a706c1b3254a0"
+    },
+    "provider_labels.py": {
+      "source": "hermes_cli/models_catalog_static.py",
+      "source_sha256": "2e40a82d20cd0b79cd6a3155d20a0f14d0e79dafaa175b2e86ab2d9548a2eb1e",
+      "selected_symbols": [
+        "_PROVIDER_LABELS",
+        "_PROVIDER_ALIASES"
+      ],
+      "adaptations": [
+        "Materialized pinned original static provider labels/aliases under isolated HERMES_HOME. No runtime catalogue imports."
+      ],
+      "snapshot_sha256": "e578e750a563d3b9300dbe7fa02958758bcaece4351818fea5d134ae498d5552"
+    },
+    "boundaries.py": {
+      "source": "agent/error_classifier.py",
+      "source_sha256": "fcb13c614352848cad708384d505a241dae6b2b182f35e3acb63d4d1b6bce849",
+      "selected_symbols": [],
+      "adaptations": [
+        "Explicit-runtime optional discovery/pricing/config boundaries. No plugin/provider registry, profile credentials, or pricing catalogue are read; unknown pricing retains upstream fail-open semantics."
+      ],
+      "snapshot_sha256": "14344f0d554628ee34ffa4e83be2b357498f8db01ae126f56b1061b9f51f3361"
+    }
+  }
+}

@@ -1,0 +1,430 @@
+{
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "purpose": "Bundled profile identities only, for explicit rejection of unported provider hooks. No auth/config discovery at runtime.",
+  "profiles": [
+    {
+      "name": "actual",
+      "aliases": [
+        "actual-computer",
+        "actualcomputer",
+        "aci"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "ai-gateway",
+      "aliases": [
+        "vercel",
+        "vercel-ai-gateway",
+        "ai_gateway",
+        "aigateway"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "alibaba",
+      "aliases": [
+        "dashscope",
+        "alibaba-cloud",
+        "qwen-dashscope",
+        "aliyun"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "alibaba-cn",
+      "aliases": [
+        "dashscope-cn",
+        "alibaba-cloud-cn"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "alibaba-token-plan",
+      "aliases": [
+        "dashscope-token-plan"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "alibaba-token-plan-cn",
+      "aliases": [
+        "dashscope-token-plan-cn"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "alibaba-coding-plan",
+      "aliases": [
+        "alibaba_coding",
+        "alibaba-coding",
+        "dashscope-coding"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "alibaba-coding-plan-cn",
+      "aliases": [
+        "alibaba-coding-cn",
+        "dashscope-coding-cn"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "anthropic",
+      "aliases": [
+        "claude",
+        "claude-oauth",
+        "claude-code"
+      ],
+      "api_mode": "anthropic_messages"
+    },
+    {
+      "name": "arcee",
+      "aliases": [
+        "arcee-ai",
+        "arceeai"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "azure-foundry",
+      "aliases": [
+        "azure",
+        "azure-ai-foundry",
+        "azure-ai"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "bedrock",
+      "aliases": [
+        "aws",
+        "aws-bedrock",
+        "amazon-bedrock",
+        "amazon"
+      ],
+      "api_mode": "bedrock_converse"
+    },
+    {
+      "name": "commandcode",
+      "aliases": [
+        "commandcode-chat"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "commandcode-anthropic",
+      "aliases": [
+        "commandcode-claude"
+      ],
+      "api_mode": "anthropic_messages"
+    },
+    {
+      "name": "copilot",
+      "aliases": [
+        "github-copilot",
+        "github-models",
+        "github-model",
+        "github"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "copilot-acp",
+      "aliases": [
+        "github-copilot-acp",
+        "copilot-acp-agent"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "custom",
+      "aliases": [
+        "ollama",
+        "local",
+        "vllm",
+        "llamacpp",
+        "llama.cpp",
+        "llama-cpp"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "deepinfra",
+      "aliases": [
+        "deep-infra",
+        "deepinfra-ai"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "deepseek",
+      "aliases": [
+        "deepseek-chat",
+        "deep-seek"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "fireworks",
+      "aliases": [
+        "fireworks-ai",
+        "fw"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "gemini",
+      "aliases": [
+        "google",
+        "google-gemini",
+        "google-ai-studio"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "gmi",
+      "aliases": [
+        "gmi-cloud",
+        "gmicloud"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "huggingface",
+      "aliases": [
+        "hf",
+        "hugging-face",
+        "huggingface-hub"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "kilocode",
+      "aliases": [
+        "kilo-code",
+        "kilo",
+        "kilo-gateway"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "kimi-coding",
+      "aliases": [
+        "kimi",
+        "moonshot",
+        "kimi-for-coding"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "kimi-coding-cn",
+      "aliases": [
+        "kimi-cn",
+        "moonshot-cn"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "lmstudio",
+      "aliases": [],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "meta-ai",
+      "aliases": [
+        "meta",
+        "muse",
+        "muse-spark",
+        "model-api",
+        "msl"
+      ],
+      "api_mode": "codex_responses"
+    },
+    {
+      "name": "minimax",
+      "aliases": [
+        "mini-max"
+      ],
+      "api_mode": "anthropic_messages"
+    },
+    {
+      "name": "minimax-cn",
+      "aliases": [
+        "minimax-china",
+        "minimax_cn"
+      ],
+      "api_mode": "anthropic_messages"
+    },
+    {
+      "name": "minimax-oauth",
+      "aliases": [
+        "minimax_oauth",
+        "minimax-portal",
+        "minimax-global",
+        "minimax-oauth-io"
+      ],
+      "api_mode": "anthropic_messages"
+    },
+    {
+      "name": "nebius-token-factory",
+      "aliases": [
+        "nebius",
+        "nebius-tokenfactory",
+        "nebius-tf",
+        "token-factory",
+        "tokenfactory"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "nous",
+      "aliases": [
+        "nous-portal",
+        "nousresearch"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "novita",
+      "aliases": [
+        "novita-ai",
+        "novitaai"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "nvidia",
+      "aliases": [
+        "nvidia-nim",
+        "nim",
+        "build-nvidia",
+        "nemotron"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "ollama-cloud",
+      "aliases": [
+        "ollama_cloud"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "openai-codex",
+      "aliases": [
+        "codex",
+        "openai_codex"
+      ],
+      "api_mode": "codex_responses"
+    },
+    {
+      "name": "opencode-zen",
+      "aliases": [
+        "opencode",
+        "opencode_zen",
+        "zen"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "opencode-go",
+      "aliases": [
+        "opencode_go",
+        "go",
+        "opencode-go-sub"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "openrouter",
+      "aliases": [
+        "or"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "qwen-oauth",
+      "aliases": [
+        "qwen",
+        "qwen-portal",
+        "qwen-cli"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "router",
+      "aliases": [
+        "ramp-router",
+        "ramp",
+        "router.com"
+      ],
+      "api_mode": "codex_responses"
+    },
+    {
+      "name": "solstice",
+      "aliases": [
+        "solstice-oauth"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "stepfun",
+      "aliases": [
+        "step",
+        "stepfun-coding-plan"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "tencent-tokenhub",
+      "aliases": [],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "upstage",
+      "aliases": [
+        "solar"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "vertex",
+      "aliases": [
+        "google-vertex",
+        "vertex-ai",
+        "gcp-vertex",
+        "vertexai"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "xai",
+      "aliases": [
+        "grok",
+        "x-ai",
+        "x.ai"
+      ],
+      "api_mode": "codex_responses"
+    },
+    {
+      "name": "xiaomi",
+      "aliases": [
+        "mimo",
+        "xiaomi-mimo"
+      ],
+      "api_mode": "chat_completions"
+    },
+    {
+      "name": "zai",
+      "aliases": [
+        "glm",
+        "z-ai",
+        "z.ai",
+        "zhipu"
+      ],
+      "api_mode": "chat_completions"
+    }
+  ]
+}

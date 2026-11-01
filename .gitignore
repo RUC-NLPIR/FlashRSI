@@ -8,6 +8,10 @@ pytest-of-*/
 .ruff_cache/
 .coverage
 build/
+# Pinned Pi documentation includes these two read-only example assets.
+!flashrsi/agents/pi_agent/runtime/pi_native/reference/examples/extensions/doom-overlay/doom/build/
+!flashrsi/agents/pi_agent/runtime/pi_native/reference/examples/extensions/doom-overlay/doom/build/doom.js
+!flashrsi/agents/pi_agent/runtime/pi_native/reference/examples/extensions/doom-overlay/doom/build/doom.wasm
 dist/
 .env
 .env.*

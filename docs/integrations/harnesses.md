@@ -10,6 +10,7 @@ A harness executes the agent's instructions, tools, skills, and runtime logic. I
 | Claude Code | Instructions, skills, commands, agents, hooks, MCP/LSP registrations, settings | Official Agent SDK (`claude-agent-sdk>=0.2.153,<0.3`); exposed resource interfaces are mapped to files. [Adapter details](../agent-integration.md) |
 | Codex | Python core, instructions, tools, skills, agents, hooks, plugins, memory, rules/config files | Snapshot-local Python semantic port based on `rust-v0.147.0`; runs in an isolated process. [Guide](../codex.md) · [version and migration boundary](../codex-core-extraction.md) |
 | Pi | Pure-Python Pi-compatible runtime, instructions, skills, prompt templates, settings | Snapshot-local `runtime/pi_native` implements the headless Pi v1.4.0 path and emits Pi-shaped JSON events; no Node/npm dependency. [Adapter details](../agent-integration.md) |
+| Hermes | Python runtime, SOUL instructions, skills and tool settings | Snapshot-local headless Hermes v0.22.5 subset, retaining upstream Python policies and local tool helpers. [Adapter details and limits](../agent-integration.md) · [example](../../examples/hermes.yaml) |
 
 Codex's Python core implements the documented paths from a pinned Rust baseline. It does not launch the Codex CLI, fall back to the host core, or claim complete equivalence to every upstream feature. For example, declaring rules as resources does not implement rules-based execution policy; see [capability limits](../codex.md#明确的能力边界).
 
@@ -36,8 +37,6 @@ This fragment only illustrates role selection. Keep the rest of the destination 
 
 | Harness | Status |
 | --- | --- |
-| Pi | Available |
-| Hermes | Doing |
 | OpenCode | Doing |
 
 These are planned integrations and are not available CLI harness choices.

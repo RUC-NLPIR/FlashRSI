@@ -1,0 +1,1891 @@
+{
+  "baseline": "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0",
+  "method": "Actual original TypeScript completeSummarization -> anthropic.streamSimple -> SDK custom fetch; original estimateContextTokens/estimateMessageTokens/clampMaxTokensToContext. Fixed offline SSE, no network or paid model requests. Hydrated model metadata only comes from matching pi-ai 1.4.0 release.",
+  "source_sha256": {
+    "packages/ai/src/api/anthropic-messages.ts": "1121bf549d81337d6d69ef63dff25bb0f6ca80ba6fa6b726b765ddfcf9d7ca02",
+    "packages/ai/src/api/simple-options.ts": "4fc3131c480cb5c16506037195c5d9668b7b85ce7cf8117ecc77bd81188494ef",
+    "packages/ai/src/utils/estimate.ts": "b1fb184f293167b9f270567a09bf43e296ff7dd809e26fa4bc5c1f968946eaed",
+    "packages/ai/src/utils/text.ts": "d37c1825855c7fc71669a545b5b266810242c1c7e58d57228c0c143f29c1c544",
+    "packages/ai/src/utils/transcript.ts": "1b20f9436a4f7e60008224d3e22098b2a7731731efdfb9c66f4c78a580cbe1e2",
+    "packages/coding-agent/src/core/compaction/compaction.ts": "32714966eb644da31cd84e8eb172965256160626b3d26ae9752c3894300f2b0b"
+  },
+  "release": {
+    "@earendil-works/pi-ai": "1.4.0"
+  },
+  "providers": [
+    {
+      "input": {
+        "name": "legacy_off",
+        "id": "claude-sonnet-4-5",
+        "thinkingLevel": "off",
+        "model": {
+          "id": "claude-sonnet-4-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 200000,
+          "maxTokens": 64000,
+          "compat": {
+            "supportsStrictTools": true
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-sonnet-4-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 64000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "disabled"
+              }
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "legacy_high",
+        "id": "claude-sonnet-4-5",
+        "thinkingLevel": "high",
+        "model": {
+          "id": "claude-sonnet-4-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 200000,
+          "maxTokens": 64000,
+          "compat": {
+            "supportsStrictTools": true
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-sonnet-4-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 64000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "enabled",
+                "budget_tokens": 16384,
+                "display": "summarized"
+              }
+            },
+            "headers": {
+              "anthropic-beta": "interleaved-thinking-2025-05-14",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "high",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "adaptive_high",
+        "id": "claude-opus-4-7",
+        "thinkingLevel": "high",
+        "model": {
+          "id": "claude-opus-4-7",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "forceAdaptiveThinking": true,
+            "supportsTemperature": false,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-opus-4-7",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "adaptive",
+                "display": "summarized"
+              },
+              "output_config": {
+                "effort": "high"
+              }
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "high",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "adaptive_xhigh",
+        "id": "claude-opus-4-7",
+        "thinkingLevel": "xhigh",
+        "model": {
+          "id": "claude-opus-4-7",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "forceAdaptiveThinking": true,
+            "supportsTemperature": false,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-opus-4-7",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "adaptive",
+                "display": "summarized"
+              },
+              "output_config": {
+                "effort": "xhigh"
+              }
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "xhigh",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "adaptive_max",
+        "id": "claude-opus-4-7",
+        "thinkingLevel": "max",
+        "model": {
+          "id": "claude-opus-4-7",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "forceAdaptiveThinking": true,
+            "supportsTemperature": false,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-opus-4-7",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "adaptive",
+                "display": "summarized"
+              },
+              "output_config": {
+                "effort": "max"
+              }
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "max",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "adaptive_off",
+        "id": "claude-opus-4-7",
+        "thinkingLevel": "off",
+        "model": {
+          "id": "claude-opus-4-7",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "forceAdaptiveThinking": true,
+            "supportsTemperature": false,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-opus-4-7",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "disabled"
+              }
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "managed_fable_high",
+        "id": "claude-fable-5-1",
+        "thinkingLevel": "high",
+        "model": {
+          "id": "claude-fable-5-1",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "supportsMidConvoEffort": true,
+            "supportsMidConvoSystemMessages": true,
+            "supportsMidConvoToolChanges": true,
+            "forceAdaptiveThinking": true,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "off": null,
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-fable-5-1",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                },
+                {
+                  "role": "system",
+                  "content": [],
+                  "output_config": {
+                    "effort": "high"
+                  }
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "adaptive",
+                "display": "summarized",
+                "block_binding": {
+                  "prefix_mismatch_behavior": "drop_block"
+                }
+              },
+              "output_config": {
+                "effort": "high"
+              }
+            },
+            "headers": {
+              "anthropic-beta": "mid-conversation-output-config-2026-07-01,thinking-binding-controls-2026-08-01",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "high",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop",
+        "providerThinkingLevel": "high"
+      }
+    },
+    {
+      "input": {
+        "name": "managed_fable_off",
+        "id": "claude-fable-5-1",
+        "thinkingLevel": "off",
+        "model": {
+          "id": "claude-fable-5-1",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "supportsMidConvoEffort": true,
+            "supportsMidConvoSystemMessages": true,
+            "supportsMidConvoToolChanges": true,
+            "forceAdaptiveThinking": true,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "off": null,
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-fable-5-1",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                },
+                {
+                  "role": "system",
+                  "content": [],
+                  "output_config": {
+                    "effort": "high"
+                  }
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "adaptive",
+                "display": "summarized",
+                "block_binding": {
+                  "prefix_mismatch_behavior": "drop_block"
+                }
+              },
+              "output_config": {
+                "effort": "high"
+              }
+            },
+            "headers": {
+              "anthropic-beta": "mid-conversation-output-config-2026-07-01,thinking-binding-controls-2026-08-01",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop",
+        "providerThinkingLevel": "high"
+      }
+    },
+    {
+      "input": {
+        "name": "managed_haiku_high",
+        "id": "claude-haiku-5-5",
+        "thinkingLevel": "high",
+        "model": {
+          "id": "claude-haiku-5-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "supportsMidConvoEffort": true,
+            "supportsMidConvoSystemMessages": true,
+            "supportsMidConvoToolChanges": true,
+            "forceAdaptiveThinking": true,
+            "supportsTemperature": false,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-haiku-5-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                },
+                {
+                  "role": "system",
+                  "content": [],
+                  "output_config": {
+                    "effort": "high"
+                  }
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "adaptive",
+                "display": "summarized",
+                "block_binding": {
+                  "prefix_mismatch_behavior": "drop_block"
+                }
+              },
+              "output_config": {
+                "effort": "high"
+              }
+            },
+            "headers": {
+              "anthropic-beta": "mid-conversation-output-config-2026-07-01,thinking-binding-controls-2026-08-01",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "high",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop",
+        "providerThinkingLevel": "high"
+      }
+    },
+    {
+      "input": {
+        "name": "managed_haiku_off",
+        "id": "claude-haiku-5-5",
+        "thinkingLevel": "off",
+        "model": {
+          "id": "claude-haiku-5-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "supportsMidConvoEffort": true,
+            "supportsMidConvoSystemMessages": true,
+            "supportsMidConvoToolChanges": true,
+            "forceAdaptiveThinking": true,
+            "supportsTemperature": false,
+            "supportsStrictTools": true
+          },
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-haiku-5-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "disabled"
+              }
+            },
+            "headers": {
+              "anthropic-beta": "mid-conversation-output-config-2026-07-01,thinking-binding-controls-2026-08-01",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "fallback_fable_high",
+        "id": "claude-fable-5",
+        "thinkingLevel": "high",
+        "model": {
+          "id": "claude-fable-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "supportsMidConvoSystemMessages": true,
+            "supportsMidConvoToolChanges": true,
+            "forceAdaptiveThinking": true,
+            "supportsStrictTools": true,
+            "allowedFallbackModels": [
+              {
+                "provider": "anthropic",
+                "model": "claude-opus-4-8",
+                "cost": {
+                  "input": 5,
+                  "output": 25,
+                  "cacheRead": 0.5,
+                  "cacheWrite": 6.25
+                }
+              },
+              {
+                "provider": "anthropic",
+                "model": "claude-opus-5",
+                "cost": {
+                  "input": 5,
+                  "output": 25,
+                  "cacheRead": 0.5,
+                  "cacheWrite": 6.25
+                }
+              }
+            ]
+          },
+          "thinkingLevelMap": {
+            "off": null,
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-fable-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "adaptive",
+                "display": "summarized"
+              },
+              "output_config": {
+                "effort": "high"
+              },
+              "fallbacks": [
+                {
+                  "model": "claude-opus-4-8"
+                },
+                {
+                  "model": "claude-opus-5"
+                }
+              ]
+            },
+            "headers": {
+              "anthropic-beta": "server-side-fallback-2026-07-01",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "high",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "fallback_fable_off",
+        "id": "claude-fable-5",
+        "thinkingLevel": "off",
+        "model": {
+          "id": "claude-fable-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "supportsMidConvoSystemMessages": true,
+            "supportsMidConvoToolChanges": true,
+            "forceAdaptiveThinking": true,
+            "supportsStrictTools": true,
+            "allowedFallbackModels": [
+              {
+                "provider": "anthropic",
+                "model": "claude-opus-4-8",
+                "cost": {
+                  "input": 5,
+                  "output": 25,
+                  "cacheRead": 0.5,
+                  "cacheWrite": 6.25
+                }
+              },
+              {
+                "provider": "anthropic",
+                "model": "claude-opus-5",
+                "cost": {
+                  "input": 5,
+                  "output": 25,
+                  "cacheRead": 0.5,
+                  "cacheWrite": 6.25
+                }
+              }
+            ]
+          },
+          "thinkingLevelMap": {
+            "off": null,
+            "xhigh": "xhigh",
+            "max": "max"
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-fable-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 128000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "fallbacks": [
+                {
+                  "model": "claude-opus-4-8"
+                },
+                {
+                  "model": "claude-opus-5"
+                }
+              ]
+            },
+            "headers": {
+              "anthropic-beta": "server-side-fallback-2026-07-01",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "synthetic_nonreasoning_high",
+        "catalogId": "claude-sonnet-4-5",
+        "id": "fixture-claude-nonreasoning",
+        "thinkingLevel": "high",
+        "overrides": {
+          "reasoning": false
+        },
+        "model": {
+          "id": "fixture-claude-nonreasoning",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": false,
+          "contextWindow": 200000,
+          "maxTokens": 64000,
+          "compat": {
+            "supportsStrictTools": true
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "fixture-claude-nonreasoning",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 64000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ]
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "synthetic_nonreasoning_off",
+        "catalogId": "claude-sonnet-4-5",
+        "id": "fixture-claude-nonreasoning",
+        "thinkingLevel": "off",
+        "overrides": {
+          "reasoning": false
+        },
+        "model": {
+          "id": "fixture-claude-nonreasoning",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": false,
+          "contextWindow": 200000,
+          "maxTokens": 64000,
+          "compat": {
+            "supportsStrictTools": true
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "fixture-claude-nonreasoning",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 64000,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ]
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "legacy_small_context_high",
+        "id": "claude-sonnet-4-5",
+        "thinkingLevel": "high",
+        "overrides": {
+          "contextWindow": 5000
+        },
+        "model": {
+          "id": "claude-sonnet-4-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 5000,
+          "maxTokens": 64000,
+          "compat": {
+            "supportsStrictTools": true
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-sonnet-4-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 856,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "enabled",
+                "budget_tokens": 1024,
+                "display": "summarized"
+              }
+            },
+            "headers": {
+              "anthropic-beta": "interleaved-thinking-2025-05-14",
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "reasoning": "high",
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    },
+    {
+      "input": {
+        "name": "legacy_small_context_off",
+        "id": "claude-sonnet-4-5",
+        "thinkingLevel": "off",
+        "overrides": {
+          "contextWindow": 5000
+        },
+        "model": {
+          "id": "claude-sonnet-4-5",
+          "api": "anthropic-messages",
+          "provider": "anthropic",
+          "baseUrl": "https://offline.invalid",
+          "reasoning": true,
+          "contextWindow": 5000,
+          "maxTokens": 64000,
+          "compat": {
+            "supportsStrictTools": true
+          }
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "requests": [
+          {
+            "url": "https://offline.invalid/v1/messages?beta=true",
+            "body": {
+              "model": "claude-sonnet-4-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                    }
+                  ]
+                }
+              ],
+              "max_tokens": 856,
+              "stream": true,
+              "system": [
+                {
+                  "type": "text",
+                  "text": "You are a context summarization assistant. Only output a summary."
+                }
+              ],
+              "thinking": {
+                "type": "disabled"
+              }
+            },
+            "headers": {
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          }
+        ],
+        "options": [
+          {
+            "cacheRetention": "none",
+            "hasSessionId": true
+          }
+        ],
+        "stopReason": "stop"
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "input": {
+        "name": "empty",
+        "model": {
+          "contextWindow": 128000,
+          "maxTokens": 128000
+        },
+        "context": {
+          "messages": []
+        },
+        "output": 128000
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 0,
+          "usageTokens": 0,
+          "trailingTokens": 0,
+          "lastUsageIndex": null
+        },
+        "messageTokens": [],
+        "clamped": 123904
+      }
+    },
+    {
+      "input": {
+        "name": "small",
+        "model": {
+          "contextWindow": 5000,
+          "maxTokens": 2000
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a context summarization assistant. Only output a summary.",
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "<conversation>\n[User]: update files\n[Assistant]: completed\n</conversation>\n\nSummarize the progress."
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        },
+        "output": 2000
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 48,
+          "usageTokens": 0,
+          "trailingTokens": 48,
+          "lastUsageIndex": null
+        },
+        "messageTokens": [
+          19,
+          29
+        ],
+        "clamped": 856
+      }
+    },
+    {
+      "input": {
+        "name": "huge",
+        "model": {
+          "contextWindow": 8192,
+          "maxTokens": 4096
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              "timestamp": 1
+            }
+          ]
+        },
+        "output": 4096
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 5715,
+          "usageTokens": 0,
+          "trailingTokens": 5715,
+          "lastUsageIndex": null
+        },
+        "messageTokens": [
+          5715
+        ],
+        "clamped": 1
+      }
+    },
+    {
+      "input": {
+        "name": "zero_context",
+        "model": {
+          "contextWindow": 0,
+          "maxTokens": 300
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              "timestamp": 1
+            }
+          ]
+        },
+        "output": 300
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 29,
+          "usageTokens": 0,
+          "trailingTokens": 29,
+          "lastUsageIndex": null
+        },
+        "messageTokens": [
+          29
+        ],
+        "clamped": 300
+      }
+    },
+    {
+      "input": {
+        "name": "zero_output",
+        "model": {
+          "contextWindow": 10000,
+          "maxTokens": 0
+        },
+        "context": {
+          "messages": []
+        },
+        "output": 0
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 0,
+          "usageTokens": 0,
+          "trailingTokens": 0,
+          "lastUsageIndex": null
+        },
+        "messageTokens": [],
+        "clamped": 0
+      }
+    },
+    {
+      "input": {
+        "name": "unicode_system_sections_tools",
+        "model": {
+          "contextWindow": 5000,
+          "maxTokens": 5000
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "根提示😊",
+              "sections": {
+                "goal": "项目目标",
+                "context": "详细上下文😊😊",
+                "removed": null
+              },
+              "toolsAdded": [
+                {
+                  "name": "read",
+                  "description": "读取",
+                  "parameters": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              ],
+              "toolsRemoved": [
+                {
+                  "name": "edit"
+                }
+              ],
+              "timestamp": 0
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "😊😊😊😊😊😊😊"
+                },
+                {
+                  "type": "text",
+                  "text": "Unicode 参数与文件"
+                }
+              ],
+              "timestamp": 1
+            }
+          ]
+        },
+        "output": 5000
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 51,
+          "usageTokens": 0,
+          "trailingTokens": 51,
+          "lastUsageIndex": null
+        },
+        "messageTokens": [
+          43,
+          8
+        ],
+        "clamped": 853
+      }
+    },
+    {
+      "input": {
+        "name": "usage_backed",
+        "model": {
+          "contextWindow": 10000,
+          "maxTokens": 8000
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "initial",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "done"
+                }
+              ],
+              "usage": {
+                "input": 100,
+                "output": 5,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 105,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "timestamp": 2
+            },
+            {
+              "role": "user",
+              "content": "trailing input",
+              "timestamp": 3
+            }
+          ]
+        },
+        "output": 8000
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 109,
+          "usageTokens": 105,
+          "trailingTokens": 4,
+          "lastUsageIndex": 1
+        },
+        "messageTokens": [
+          2,
+          2,
+          4
+        ],
+        "clamped": 5795
+      }
+    },
+    {
+      "input": {
+        "name": "stale_usage_after_new_prefix",
+        "model": {
+          "contextWindow": 10000,
+          "maxTokens": 8000
+        },
+        "context": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "a newer compacted prefix",
+              "timestamp": 100
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old retained"
+                }
+              ],
+              "usage": {
+                "input": 9000,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 9000,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "timestamp": 2
+            },
+            {
+              "role": "user",
+              "content": "new request",
+              "timestamp": 101
+            }
+          ]
+        },
+        "output": 8000
+      },
+      "expected": {
+        "estimate": {
+          "tokens": 15,
+          "usageTokens": 0,
+          "trailingTokens": 15,
+          "lastUsageIndex": null
+        },
+        "messageTokens": [
+          7,
+          4,
+          4
+        ],
+        "clamped": 5889
+      }
+    }
+  ]
+}

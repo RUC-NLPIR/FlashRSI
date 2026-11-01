@@ -1,0 +1,93 @@
+{
+  "repository": "https://github.com/NousResearch/hermes-agent",
+  "version": "v0.22.5",
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "policy_extractions": {
+    "agent/think_scrubber.py": {
+      "sha256": "0587ee758fa8251193da8109016fa82f8cb3d5a18c770a3c118ecbcc56436242",
+      "symbols": [
+        "THINK_TAG_NAMES"
+      ]
+    },
+    "agent/agent_runtime_helpers.py": {
+      "sha256": "7725dfa3b5c12e2ec289e86a2f83eb99dc75052687aa9cb4d2e71bc3f770b5d4",
+      "symbols": [
+        "_TOOL_CALL_TAG_NAMES",
+        "_NS_PREFIX",
+        "_REASONING_BLOCK_PATTERNS",
+        "_TOOL_CALL_BLOCK_PATTERNS",
+        "_NAMED_FUNCTION_BLOCK_PATTERN",
+        "_UNTERMINATED_REASONING_BLOCK_PATTERN",
+        "_ORPHAN_REASONING_TAG_PATTERN",
+        "_STRAY_TOOL_CALL_CLOSER_PATTERN",
+        "_UNTERMINATED_TOOL_CALL_PATTERN",
+        "_flatten_content_text",
+        "_THINK_STRIP_PATTERNS",
+        "strip_think_blocks",
+        "repair_tool_call",
+        "_INLINE_REASONING_PATTERNS",
+        "extract_reasoning"
+      ],
+      "adaptations": [
+        "extract_reasoning: package-relative message_content import"
+      ]
+    },
+    "agent/conversation_loop.py": {
+      "sha256": "36dd6f02b169a544a95598dee74cb775914420dc700cc88cc946effd103b72bc",
+      "symbols": [
+        "_MIN_CONTINUATION_OVERLAP",
+        "_continuation_overlap_length",
+        "_join_truncated_parts",
+        "_LENGTH_CONTINUATION_NETWORK_STUB",
+        "_LENGTH_CONTINUATION_OUTPUT_LIMIT",
+        "_LENGTH_CONTINUATION_DROPPED_TOOLS_PREFIX",
+        "_get_continuation_prompt",
+        "_DROPPED_TOOLCALL_NUDGE_CONTENT",
+        "_invalid_tool_name_error_content",
+        "_EMPTY_TOOL_RESPONSE_NUDGE"
+      ]
+    },
+    "agent/turn_response_intake.py": {
+      "sha256": "e0cf381f7c9fc9a5bad5e6c955643a86c575707194924f1d680e16170c1e821f",
+      "symbols": [
+        "_coerce_content_text"
+      ]
+    },
+    "agent/context_compressor.py": {
+      "sha256": "065dc9babbcb811a514c32319ed13a6ddaeefbc3964a109f7bb8e4c9260779d1",
+      "symbols": [
+        "MAX_ITERATIONS_SUMMARY_REQUEST"
+      ]
+    },
+    "agent/chat_completion_helpers.py": {
+      "sha256": "d5ac7612af5819891293c4ec182f71a1a9e59f6aa32e98f15266a85fca64e4a8",
+      "symbols": [
+        "_EMPTY_SUMMARY_RESPONSE"
+      ]
+    },
+    "run_agent.py": {
+      "sha256": "33c7195fc6efa9122f1a6700d416fd283f9634712189af3fd72feb01bcea054f",
+      "symbols": [
+        "_deduplicate_tool_calls",
+        "AIAgent._TOOL_CALL_ARGUMENTS_CORRUPTION_MARKER"
+      ]
+    },
+    "agent/message_content.py": {
+      "sha256": "65d45e23dba4d05eab9a7c61de3037f26e4effebf39121e85fd6e084b785123b",
+      "scope": "complete original module, import formatting only"
+    },
+    "agent/turn_failure_copy.py": {
+      "sha256": "b5ef4fd4ac4715b79ccf6eebf0e363fbf5252525827691c329f7088d02e0206b",
+      "symbols": [
+        "truncated_unreported (from _ONE_OFF_COPY)",
+        "truncated (from _FAILURE_CODE_COPY)"
+      ]
+    },
+    "agent/turn_explainers.py": {
+      "sha256": "5a18d2d2a1dc153b712c3e0ad8db0cd52dab254e8c8677beec1016ab1efcd050",
+      "symbols": [
+        "EMPTY_RESPONSE_EXPLANATION"
+      ]
+    }
+  }
+}

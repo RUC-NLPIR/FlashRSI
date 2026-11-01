@@ -1,0 +1,3951 @@
+{
+  "baseline": "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0",
+  "method": "Original pinned TypeScript prepareCompaction + compact executed with offline fixed assistant responses; original session projection and overflow utilities.",
+  "source_sha256": {
+    "packages/coding-agent/src/core/compaction/compaction.ts": "32714966eb644da31cd84e8eb172965256160626b3d26ae9752c3894300f2b0b",
+    "packages/coding-agent/src/core/compaction/utils.ts": "37eab7698cdbff8b5987d4529005ea16d7e1ae4a5344d7d0443c3466444aa90e",
+    "packages/coding-agent/src/core/session-manager.ts": "450d82c529933214e088b8422f00061815e617f352f6c834689787a314064bff",
+    "packages/coding-agent/src/core/messages.ts": "5397e3c96c9504266e4ee8b6e88d5098b3280ee7dbb0c687b74708c62a06c8d4",
+    "packages/ai/src/utils/overflow.ts": "36f75a74005df67c4c4a742603f3de46d32d7d764c8c4b6a74065f6c3c2ed505"
+  },
+  "cases": [
+    {
+      "input": {
+        "name": "whole_turn",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 11
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e3",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 22,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 11
+          }
+        },
+        "result": {
+          "summary": "summary-1",
+          "firstKeptEntryId": "e3",
+          "tokensBefore": 22,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: old request is long enough\n\n[Assistant]: old done\n</conversation>\n\nThe messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.\n\nUse this EXACT format:\n\n## Goal\n[What is the user trying to accomplish? Can be multiple items if the session covers different tasks.]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned by user]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Current work]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [Ordered list of what should happen next]\n\n## Critical Context\n- [Any data, examples, or references needed to continue]\n- [Or \"(none)\" if not applicable]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "split_turn",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 3
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e4",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [
+            {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          ],
+          "isSplitTurn": true,
+          "tokensBefore": 22,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 3
+          }
+        },
+        "result": {
+          "summary": "summary-1\n\n---\n\n**Turn Context (split turn):**\n\nsummary-2",
+          "firstKeptEntryId": "e4",
+          "tokensBefore": 22,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: old request is long enough\n\n[Assistant]: old done\n</conversation>\n\nThe messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.\n\nUse this EXACT format:\n\n## Goal\n[What is the user trying to accomplish? Can be multiple items if the session covers different tasks.]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned by user]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Current work]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [Ordered list of what should happen next]\n\n## Critical Context\n- [Any data, examples, or references needed to continue]\n- [Or \"(none)\" if not applicable]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          },
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "# Conversation\n[User]: current task\n\n# Instructions\nThe messages above are earlier context from an ongoing conversation. Later messages are stored separately and do not need to be reconstructed.\n\nCreate a concise checkpoint of the user's request and the progress shown above. This checkpoint will be placed before the later messages so the conversation can continue with the necessary context.\n\n## Original Request\n[What did the user ask for?]\n\n## Progress So Far\n- [Key decisions and work completed in these messages]\n\n## Context Needed to Continue\n- [Information from these messages needed to understand the later work]\n\nOnly summarize information explicitly present above. Do not infer or recreate later messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "tool_result_keeps_call",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "update the project",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "a.py"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "edit",
+                  "arguments": {
+                    "path": "a.py",
+                    "oldText": "A",
+                    "newText": "B"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e5",
+            "parentId": "e4",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "edit",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                }
+              ],
+              "isError": false,
+              "timestamp": 4
+            }
+          },
+          {
+            "type": "message",
+            "id": "e6",
+            "parentId": "e5",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 4
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e6",
+          "messagesToSummarize": [],
+          "turnPrefixMessages": [
+            {
+              "role": "user",
+              "content": "update the project",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "a.py"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "edit",
+                  "arguments": {
+                    "path": "a.py",
+                    "oldText": "A",
+                    "newText": "B"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "edit",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                }
+              ],
+              "isError": false,
+              "timestamp": 4
+            }
+          ],
+          "isSplitTurn": true,
+          "tokensBefore": 65,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": [
+              "a.py"
+            ]
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 4
+          }
+        },
+        "result": {
+          "summary": "No prior history.\n\n---\n\n**Turn Context (split turn):**\n\nsummary-1\n\n<modified-files>\na.py\n</modified-files>",
+          "firstKeptEntryId": "e6",
+          "tokensBefore": 65,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": [
+              "a.py"
+            ]
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "# Conversation\n[User]: update the project\n\n[Assistant tool calls]: read(path=\"a.py\")\n\n[Tool result]: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n[Assistant tool calls]: edit(path=\"a.py\", oldText=\"A\", newText=\"B\")\n\n[Tool result]: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n\n# Instructions\nThe messages above are earlier context from an ongoing conversation. Later messages are stored separately and do not need to be reconstructed.\n\nCreate a concise checkpoint of the user's request and the progress shown above. This checkpoint will be placed before the later messages so the conversation can continue with the necessary context.\n\n## Original Request\n[What did the user ask for?]\n\n## Progress So Far\n- [Key decisions and work completed in these messages]\n\n## Context Needed to Continue\n- [Information from these messages needed to understand the later work]\n\nOnly summarize information explicitly present above. Do not infer or recreate later messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "trailing_large_tool_result_keeps_its_call",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "update the project",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "a.py"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "edit",
+                  "arguments": {
+                    "path": "a.py",
+                    "oldText": "A",
+                    "newText": "B"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e5",
+            "parentId": "e4",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "edit",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                }
+              ],
+              "isError": false,
+              "timestamp": 4
+            }
+          }
+        ],
+        "keep": 4
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e4",
+          "messagesToSummarize": [],
+          "turnPrefixMessages": [
+            {
+              "role": "user",
+              "content": "update the project",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "a.py"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          ],
+          "isSplitTurn": true,
+          "tokensBefore": 64,
+          "fileOps": {
+            "readFiles": [
+              "a.py"
+            ],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 4
+          }
+        },
+        "result": {
+          "summary": "No prior history.\n\n---\n\n**Turn Context (split turn):**\n\nsummary-1\n\n<read-files>\na.py\n</read-files>",
+          "firstKeptEntryId": "e4",
+          "tokensBefore": 64,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [
+              "a.py"
+            ],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "# Conversation\n[User]: update the project\n\n[Assistant tool calls]: read(path=\"a.py\")\n\n[Tool result]: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n# Instructions\nThe messages above are earlier context from an ongoing conversation. Later messages are stored separately and do not need to be reconstructed.\n\nCreate a concise checkpoint of the user's request and the progress shown above. This checkpoint will be placed before the later messages so the conversation can continue with the necessary context.\n\n## Original Request\n[What did the user ask for?]\n\n## Progress So Far\n- [Key decisions and work completed in these messages]\n\n## Context Needed to Continue\n- [Information from these messages needed to understand the later work]\n\nOnly summarize information explicitly present above. Do not infer or recreate later messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "incremental",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "checkpoint",
+            "parentId": "e4",
+            "timestamp": "2026-10-31T00:00:01.000Z",
+            "summary": "previous summary",
+            "firstKeptEntryId": "e3",
+            "tokensBefore": 100,
+            "details": {
+              "readFiles": [
+                "older.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            },
+            "systemMessage": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "fresh",
+            "parentId": "checkpoint",
+            "timestamp": "2026-10-31T00:00:02.000Z",
+            "message": {
+              "role": "user",
+              "content": "new work",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "fresh-answer",
+            "parentId": "fresh",
+            "timestamp": "2026-10-31T00:00:03.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "new answer"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 5
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "fresh",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 22,
+          "previousSummary": "previous summary",
+          "fileOps": {
+            "readFiles": [
+              "older.py"
+            ],
+            "modifiedFiles": [
+              "changed.py"
+            ]
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 5
+          }
+        },
+        "result": {
+          "summary": "summary-1\n\n<read-files>\nolder.py\n</read-files>\n\n<modified-files>\nchanged.py\n</modified-files>",
+          "firstKeptEntryId": "fresh",
+          "tokensBefore": 22,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [
+              "older.py"
+            ],
+            "modifiedFiles": [
+              "changed.py"
+            ]
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: current task\n\n[Assistant]: current current current current\n</conversation>\n\n<previous-summary>\nprevious summary\n</previous-summary>\n\nThe messages above are NEW conversation messages to incorporate into the existing summary provided in <previous-summary> tags.\n\nUpdate the existing structured summary with new information. RULES:\n- PRESERVE all existing information from the previous summary\n- ADD new progress, decisions, and context from the new messages\n- UPDATE the Progress section: move items from \"In Progress\" to \"Done\" when completed\n- UPDATE \"Next Steps\" based on what was accomplished\n- PRESERVE exact file paths, function names, and error messages\n- If something is no longer relevant, you may remove it\n\nUse this EXACT format:\n\n## Goal\n[Preserve existing goals, add new ones if the task expanded]\n\n## Constraints & Preferences\n- [Preserve existing, add new ones discovered]\n\n## Progress\n### Done\n- [x] [Include previously done items AND newly completed items]\n\n### In Progress\n- [ ] [Current work - update based on progress]\n\n### Blocked\n- [Current blockers - remove if resolved]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale] (preserve all previous, add new)\n\n## Next Steps\n1. [Update based on current state]\n\n## Critical Context\n- [Preserve important context, add new if needed]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "tool_files",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "update the project",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "a.py"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "edit",
+                  "arguments": {
+                    "path": "a.py",
+                    "oldText": "A",
+                    "newText": "B"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e5",
+            "parentId": "e4",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "edit",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                }
+              ],
+              "isError": false,
+              "timestamp": 4
+            }
+          },
+          {
+            "type": "message",
+            "id": "e6",
+            "parentId": "e5",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "n0",
+            "parentId": "e6",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "next task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "n1",
+            "parentId": "n0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "latest"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 5
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "n0",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "update the project",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "a.py"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "edit",
+                  "arguments": {
+                    "path": "a.py",
+                    "oldText": "A",
+                    "newText": "B"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "edit",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                }
+              ],
+              "isError": false,
+              "timestamp": 4
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 70,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": [
+              "a.py"
+            ]
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 5
+          }
+        },
+        "result": {
+          "summary": "summary-1\n\n<modified-files>\na.py\n</modified-files>",
+          "firstKeptEntryId": "n0",
+          "tokensBefore": 70,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": [
+              "a.py"
+            ]
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: update the project\n\n[Assistant tool calls]: read(path=\"a.py\")\n\n[Tool result]: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n[Assistant tool calls]: edit(path=\"a.py\", oldText=\"A\", newText=\"B\")\n\n[Tool result]: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n\n[Assistant]: done\n</conversation>\n\nThe messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.\n\nUse this EXACT format:\n\n## Goal\n[What is the user trying to accomplish? Can be multiple items if the session covers different tasks.]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned by user]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Current work]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [Ordered list of what should happen next]\n\n## Critical Context\n- [Any data, examples, or references needed to continue]\n- [Or \"(none)\" if not applicable]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "edited_projection",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "context_edit",
+            "id": "edit",
+            "parentId": "e4",
+            "targetId": "e1",
+            "replacement": {
+              "content": "edited user"
+            },
+            "timestamp": "2026-10-31T00:00:04.000Z"
+          }
+        ],
+        "keep": 11
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e3",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "edited user",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 18,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 11
+          }
+        },
+        "result": {
+          "summary": "summary-1",
+          "firstKeptEntryId": "e3",
+          "tokensBefore": 18,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: edited user\n\n[Assistant]: old done\n</conversation>\n\nThe messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.\n\nUse this EXACT format:\n\n## Goal\n[What is the user trying to accomplish? Can be multiple items if the session covers different tasks.]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned by user]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Current work]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [Ordered list of what should happen next]\n\n## Critical Context\n- [Any data, examples, or references needed to continue]\n- [Or \"(none)\" if not applicable]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "system_replay",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0,
+              "sections": {
+                "a": "retained section",
+                "b": "remove me"
+              },
+              "toolsAdded": [
+                {
+                  "name": "read",
+                  "description": "read",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "extra instructions",
+              "timestamp": 0,
+              "sections": {
+                "b": null,
+                "c": "new section"
+              },
+              "toolsRemoved": [
+                {
+                  "name": "read"
+                }
+              ],
+              "toolsAdded": [
+                {
+                  "name": "write",
+                  "description": "write",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e5",
+            "parentId": "e4",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 11
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e4",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 51,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 11
+          }
+        },
+        "result": {
+          "summary": "summary-1",
+          "firstKeptEntryId": "e4",
+          "tokensBefore": 51,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: old request is long enough\n\n[Assistant]: old done\n</conversation>\n\nThe messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.\n\nUse this EXACT format:\n\n## Goal\n[What is the user trying to accomplish? Can be multiple items if the session covers different tasks.]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned by user]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Current work]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [Ordered list of what should happen next]\n\n## Critical Context\n- [Any data, examples, or references needed to continue]\n- [Or \"(none)\" if not applicable]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system\n\nextra instructions",
+          "sections": {
+            "a": "retained section",
+            "c": "new section"
+          },
+          "toolsAdded": [
+            {
+              "name": "write",
+              "description": "write",
+              "parameters": {
+                "type": "object"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "null_content",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": null,
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old answer"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 11
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e3",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": [],
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old answer"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 16,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 11
+          }
+        },
+        "result": {
+          "summary": "summary-1",
+          "firstKeptEntryId": "e3",
+          "tokensBefore": 16,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[Assistant]: old answer\n</conversation>\n\nThe messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.\n\nUse this EXACT format:\n\n## Goal\n[What is the user trying to accomplish? Can be multiple items if the session covers different tasks.]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned by user]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Current work]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [Ordered list of what should happen next]\n\n## Critical Context\n- [Any data, examples, or references needed to continue]\n- [Or \"(none)\" if not applicable]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "unicode_tool_slice",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "read file",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "emoji.txt"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx😊end"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "next task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e5",
+            "parentId": "e4",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "next answer"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 7
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e4",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "read file",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "emoji.txt"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            },
+            {
+              "role": "toolResult",
+              "toolCallId": "call",
+              "toolName": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx😊end"
+                }
+              ],
+              "isError": false,
+              "timestamp": 3
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 518,
+          "fileOps": {
+            "readFiles": [
+              "emoji.txt"
+            ],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 7
+          }
+        },
+        "result": {
+          "summary": "summary-1\n\n<read-files>\nemoji.txt\n</read-files>",
+          "firstKeptEntryId": "e4",
+          "tokensBefore": 518,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [
+              "emoji.txt"
+            ],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: read file\n\n[Assistant tool calls]: read(path=\"emoji.txt\")\n\n[Tool result]: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\ud83d\n\n[... 4 more characters truncated]\n</conversation>\n\nThe messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.\n\nUse this EXACT format:\n\n## Goal\n[What is the user trying to accomplish? Can be multiple items if the session covers different tasks.]\n\n## Constraints & Preferences\n- [Any constraints, preferences, or requirements mentioned by user]\n- [Or \"(none)\" if none were mentioned]\n\n## Progress\n### Done\n- [x] [Completed tasks/changes]\n\n### In Progress\n- [ ] [Current work]\n\n### Blocked\n- [Issues preventing progress, if any]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale]\n\n## Next Steps\n1. [Ordered list of what should happen next]\n\n## Critical Context\n- [Any data, examples, or references needed to continue]\n- [Or \"(none)\" if not applicable]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "stale_usage_after_compaction",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "old request is long enough",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "old done"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 100000,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 100000,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "compaction",
+            "id": "checkpoint",
+            "parentId": "e4",
+            "timestamp": "2026-10-31T00:00:01.000Z",
+            "summary": "previous summary",
+            "firstKeptEntryId": "e3",
+            "tokensBefore": 100,
+            "details": {
+              "readFiles": [
+                "older.py"
+              ],
+              "modifiedFiles": [
+                "changed.py"
+              ]
+            },
+            "systemMessage": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "fresh",
+            "parentId": "checkpoint",
+            "timestamp": "2026-10-31T00:00:02.000Z",
+            "message": {
+              "role": "user",
+              "content": "new work",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "fresh-answer",
+            "parentId": "fresh",
+            "timestamp": "2026-10-31T00:00:03.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "new answer"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 5
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "fresh",
+          "messagesToSummarize": [
+            {
+              "role": "user",
+              "content": "current task",
+              "timestamp": 1
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "current current current current"
+                }
+              ],
+              "usage": {
+                "input": 100000,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 100000,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          ],
+          "turnPrefixMessages": [],
+          "isSplitTurn": false,
+          "tokensBefore": 22,
+          "previousSummary": "previous summary",
+          "fileOps": {
+            "readFiles": [
+              "older.py"
+            ],
+            "modifiedFiles": [
+              "changed.py"
+            ]
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 5
+          }
+        },
+        "result": {
+          "summary": "summary-1\n\n<read-files>\nolder.py\n</read-files>\n\n<modified-files>\nchanged.py\n</modified-files>",
+          "firstKeptEntryId": "fresh",
+          "tokensBefore": 22,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [
+              "older.py"
+            ],
+            "modifiedFiles": [
+              "changed.py"
+            ]
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "<conversation>\n[User]: current task\n\n[Assistant]: current current current current\n</conversation>\n\n<previous-summary>\nprevious summary\n</previous-summary>\n\nThe messages above are NEW conversation messages to incorporate into the existing summary provided in <previous-summary> tags.\n\nUpdate the existing structured summary with new information. RULES:\n- PRESERVE all existing information from the previous summary\n- ADD new progress, decisions, and context from the new messages\n- UPDATE the Progress section: move items from \"In Progress\" to \"Done\" when completed\n- UPDATE \"Next Steps\" based on what was accomplished\n- PRESERVE exact file paths, function names, and error messages\n- If something is no longer relevant, you may remove it\n\nUse this EXACT format:\n\n## Goal\n[Preserve existing goals, add new ones if the task expanded]\n\n## Constraints & Preferences\n- [Preserve existing, add new ones discovered]\n\n## Progress\n### Done\n- [x] [Include previously done items AND newly completed items]\n\n### In Progress\n- [ ] [Current work - update based on progress]\n\n### Blocked\n- [Current blockers - remove if resolved]\n\n## Key Decisions\n- **[Decision]**: [Brief rationale] (preserve all previous, add new)\n\n## Next Steps\n1. [Update based on current state]\n\n## Critical Context\n- [Preserve important context, add new if needed]\n\nKeep each section concise. Preserve exact file paths, function names, and error messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "unicode_file_sort",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "read these",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e2",
+            "parentId": "e1",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": ".txt"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "😊.txt"
+                  }
+                },
+                {
+                  "type": "toolCall",
+                  "id": "call",
+                  "name": "read",
+                  "arguments": {
+                    "path": "a.txt"
+                  }
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "toolUse",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          },
+          {
+            "type": "message",
+            "id": "e3",
+            "parentId": "e2",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "next task",
+              "timestamp": 1
+            }
+          },
+          {
+            "type": "message",
+            "id": "e4",
+            "parentId": "e3",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "next answer"
+                }
+              ],
+              "usage": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "totalTokens": 0,
+                "cost": {
+                  "input": 0,
+                  "output": 0,
+                  "cacheRead": 0,
+                  "cacheWrite": 0,
+                  "total": 0
+                }
+              },
+              "stopReason": "stop",
+              "api": "openai-completions",
+              "provider": "openai",
+              "model": "oracle",
+              "timestamp": 2
+            }
+          }
+        ],
+        "keep": 7
+      },
+      "expected": {
+        "preparation": {
+          "firstKeptEntryId": "e2",
+          "messagesToSummarize": [],
+          "turnPrefixMessages": [
+            {
+              "role": "user",
+              "content": "read these",
+              "timestamp": 1
+            }
+          ],
+          "isSplitTurn": true,
+          "tokensBefore": 27,
+          "fileOps": {
+            "readFiles": [],
+            "modifiedFiles": []
+          },
+          "settings": {
+            "enabled": true,
+            "reserveTokens": 16384,
+            "keepRecentTokens": 7
+          }
+        },
+        "result": {
+          "summary": "No prior history.\n\n---\n\n**Turn Context (split turn):**\n\nsummary-1",
+          "firstKeptEntryId": "e2",
+          "tokensBefore": 27,
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "details": {
+            "readFiles": [],
+            "modifiedFiles": []
+          }
+        },
+        "requests": [
+          {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.\n\nDo NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary."
+              },
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "# Conversation\n[User]: read these\n\n# Instructions\nThe messages above are earlier context from an ongoing conversation. Later messages are stored separately and do not need to be reconstructed.\n\nCreate a concise checkpoint of the user's request and the progress shown above. This checkpoint will be placed before the later messages so the conversation can continue with the necessary context.\n\n## Original Request\n[What did the user ask for?]\n\n## Progress So Far\n- [Key decisions and work completed in these messages]\n\n## Context Needed to Continue\n- [Information from these messages needed to understand the later work]\n\nOnly summarize information explicitly present above. Do not infer or recreate later messages.\n\nAdditional focus: preserve paths"
+                  }
+                ]
+              }
+            ],
+            "options": {
+              "cacheRetention": "none",
+              "hasSessionId": true
+            }
+          }
+        ],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "too_small",
+        "entries": [
+          {
+            "type": "message",
+            "id": "e0",
+            "parentId": null,
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "system",
+              "content": "system",
+              "timestamp": 0
+            }
+          },
+          {
+            "type": "message",
+            "id": "e1",
+            "parentId": "e0",
+            "timestamp": "2026-10-31T00:00:00.000Z",
+            "message": {
+              "role": "user",
+              "content": "hi",
+              "timestamp": 1
+            }
+          }
+        ],
+        "keep": 20000
+      },
+      "expected": {
+        "preparation": null,
+        "result": null,
+        "requests": [],
+        "systemAfter": {
+          "role": "system",
+          "content": "system"
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "message": {
+        "role": "system",
+        "content": "system",
+        "timestamp": 0
+      },
+      "expected": 2
+    },
+    {
+      "message": {
+        "role": "user",
+        "content": "old request is long enough",
+        "timestamp": 1
+      },
+      "expected": 7
+    },
+    {
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "old done"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      "expected": 2
+    },
+    {
+      "message": {
+        "role": "user",
+        "content": "current task",
+        "timestamp": 1
+      },
+      "expected": 3
+    },
+    {
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "current current current current"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      "expected": 8
+    },
+    {
+      "message": {
+        "role": "user",
+        "content": "😊😊😊😊😊",
+        "timestamp": 1
+      },
+      "expected": 3
+    },
+    {
+      "message": {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "data": "AA",
+            "mimeType": "image/png"
+          },
+          {
+            "type": "text",
+            "text": "abc"
+          }
+        ]
+      },
+      "expected": 1201
+    },
+    {
+      "message": {
+        "role": "system",
+        "content": "s",
+        "sections": {
+          "a": "section"
+        },
+        "toolsAdded": [
+          {
+            "name": "read",
+            "parameters": {}
+          }
+        ]
+      },
+      "expected": 11
+    },
+    {
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "valid"
+          }
+        ],
+        "usage": {
+          "input": 20,
+          "output": 0,
+          "cacheRead": 10,
+          "cacheWrite": 0,
+          "totalTokens": 30,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      "expected": 2
+    },
+    {
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "error"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 900,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "error",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      "expected": 2
+    }
+  ],
+  "context": {
+    "messages": [
+      {
+        "role": "system",
+        "content": "system",
+        "timestamp": 0
+      },
+      {
+        "role": "user",
+        "content": "old request is long enough",
+        "timestamp": 1
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "old done"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      {
+        "role": "user",
+        "content": "current task",
+        "timestamp": 1
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "current current current current"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      {
+        "role": "user",
+        "content": "😊😊😊😊😊",
+        "timestamp": 1
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "data": "AA",
+            "mimeType": "image/png"
+          },
+          {
+            "type": "text",
+            "text": "abc"
+          }
+        ]
+      },
+      {
+        "role": "system",
+        "content": "s",
+        "sections": {
+          "a": "section"
+        },
+        "toolsAdded": [
+          {
+            "name": "read",
+            "parameters": {}
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "valid"
+          }
+        ],
+        "usage": {
+          "input": 20,
+          "output": 0,
+          "cacheRead": 10,
+          "cacheWrite": 0,
+          "totalTokens": 30,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "error"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 900,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "error",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      }
+    ],
+    "expected": {
+      "tokens": 32,
+      "usageTokens": 30,
+      "trailingTokens": 2,
+      "lastUsageIndex": 8
+    }
+  },
+  "serialization": {
+    "messages": [
+      {
+        "role": "system",
+        "content": "system",
+        "timestamp": 0
+      },
+      {
+        "role": "user",
+        "content": "old request is long enough",
+        "timestamp": 1
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "old done"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      {
+        "role": "user",
+        "content": "current task",
+        "timestamp": 1
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "current current current current"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      {
+        "role": "user",
+        "content": "😊😊😊😊😊",
+        "timestamp": 1
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "data": "AA",
+            "mimeType": "image/png"
+          },
+          {
+            "type": "text",
+            "text": "abc"
+          }
+        ]
+      },
+      {
+        "role": "system",
+        "content": "s",
+        "sections": {
+          "a": "section"
+        },
+        "toolsAdded": [
+          {
+            "name": "read",
+            "parameters": {}
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "valid"
+          }
+        ],
+        "usage": {
+          "input": 20,
+          "output": 0,
+          "cacheRead": 10,
+          "cacheWrite": 0,
+          "totalTokens": 30,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "error"
+          }
+        ],
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 900,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "error",
+        "api": "openai-completions",
+        "provider": "openai",
+        "model": "oracle",
+        "timestamp": 2
+      }
+    ],
+    "expected": "[User]: old request is long enough\n\n[Assistant]: old done\n\n[User]: current task\n\n[Assistant]: current current current current\n\n[User]: 😊😊😊😊😊\n\n[User]: abc\n\n[Assistant]: valid\n\n[Assistant]: error"
+  },
+  "overflow": [
+    {
+      "input": {
+        "message": {
+          "role": "assistant",
+          "content": [],
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "stopReason": "error",
+          "api": "openai-completions",
+          "provider": "openai",
+          "model": "oracle",
+          "timestamp": 2,
+          "errorMessage": "prompt is too long: 200 tokens > 100 maximum"
+        },
+        "window": 100
+      },
+      "overflow": true,
+      "recoverable": false
+    },
+    {
+      "input": {
+        "message": {
+          "role": "assistant",
+          "content": [],
+          "usage": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "stopReason": "error",
+          "api": "openai-completions",
+          "provider": "openai",
+          "model": "oracle",
+          "timestamp": 2,
+          "errorMessage": "rate limit: too many tokens"
+        },
+        "window": 100
+      },
+      "overflow": false,
+      "recoverable": false
+    },
+    {
+      "input": {
+        "message": {
+          "role": "assistant",
+          "content": [],
+          "usage": {
+            "input": 101,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "stopReason": "stop",
+          "api": "openai-completions",
+          "provider": "openai",
+          "model": "oracle",
+          "timestamp": 2
+        },
+        "window": 100
+      },
+      "overflow": true,
+      "recoverable": false
+    },
+    {
+      "input": {
+        "message": {
+          "role": "assistant",
+          "content": [],
+          "usage": {
+            "input": 99,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "stopReason": "length",
+          "api": "openai-completions",
+          "provider": "openai",
+          "model": "oracle",
+          "timestamp": 2
+        },
+        "window": 100
+      },
+      "overflow": true,
+      "recoverable": true
+    },
+    {
+      "input": {
+        "message": {
+          "role": "assistant",
+          "content": [],
+          "usage": {
+            "input": 10,
+            "output": 2,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "totalTokens": 0,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0
+            }
+          },
+          "stopReason": "length",
+          "api": "openai-completions",
+          "provider": "openai",
+          "model": "oracle",
+          "timestamp": 2
+        },
+        "window": 100
+      },
+      "overflow": false,
+      "recoverable": true
+    }
+  ]
+}

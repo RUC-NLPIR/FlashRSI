@@ -1,0 +1,4258 @@
+{
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "metadata": {
+    "openrouter": {
+      "vendor/fixture": {
+        "pricing": {
+          "prompt": "0.000003",
+          "completion": "0.000015",
+          "input_cache_read": "0.0000003",
+          "cache_creation": "0.00000375",
+          "request": "0.001"
+        }
+      }
+    },
+    "endpoints": {
+      "https://fixture.example/v1": {
+        "fixture": {
+          "pricing": {
+            "prompt": "0.000002",
+            "completion": "0.00001"
+          }
+        }
+      }
+    },
+    "models_dev": {
+      "deepseek": {
+        "future-fixture": {
+          "cost": {
+            "input": 3,
+            "output": 15,
+            "cache_read": 0.3,
+            "cache_write": 3.75
+          }
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "anthropic/claude-3-5-haiku-20241022",
+      "route": {
+        "model_name": "claude-3-5-haiku-20241022",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-3-5-sonnet-20241022",
+      "route": {
+        "model_name": "claude-3-5-sonnet-20241022",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-3-haiku-20240307",
+      "route": {
+        "model_name": "claude-3-haiku-20240307",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-3-opus-20240229",
+      "route": {
+        "model_name": "claude-3-opus-20240229",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-haiku-4-5",
+      "route": {
+        "model_name": "claude-haiku-4-5",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-20250514",
+      "route": {
+        "model_name": "claude-opus-4-20250514",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-5",
+      "route": {
+        "model_name": "claude-opus-4-5",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-6",
+      "route": {
+        "model_name": "claude-opus-4-6",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-6-20250414",
+      "route": {
+        "model_name": "claude-opus-4-6-20250414",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-7",
+      "route": {
+        "model_name": "claude-opus-4-7",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-7-20250507",
+      "route": {
+        "model_name": "claude-opus-4-7-20250507",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-8",
+      "route": {
+        "model_name": "claude-opus-4-8",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-4-8-fast",
+      "route": {
+        "model_name": "claude-opus-4-8-fast",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-5",
+      "route": {
+        "model_name": "claude-opus-5",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-opus-5-5",
+      "route": {
+        "model_name": "claude-opus-5-5",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-sonnet-4-20250514",
+      "route": {
+        "model_name": "claude-sonnet-4-20250514",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-sonnet-4-5",
+      "route": {
+        "model_name": "claude-sonnet-4-5",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-sonnet-4-6",
+      "route": {
+        "model_name": "claude-sonnet-4-6",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-sonnet-4-6-20250414",
+      "route": {
+        "model_name": "claude-sonnet-4-6-20250414",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-05",
+        "notes": []
+      }
+    },
+    {
+      "name": "anthropic/claude-sonnet-5",
+      "route": {
+        "model_name": "claude-sonnet-5",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "$0.00",
+        "fetched_at": null,
+        "pricing_version": "anthropic-pricing-2026-06-intro",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/amazon.nova-lite",
+      "route": {
+        "model_name": "amazon.nova-lite",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00329616",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0033",
+        "fetched_at": null,
+        "pricing_version": "bedrock-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/amazon.nova-micro",
+      "route": {
+        "model_name": "amazon.nova-micro",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00192276",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0019",
+        "fetched_at": null,
+        "pricing_version": "bedrock-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/amazon.nova-pro",
+      "route": {
+        "model_name": "amazon.nova-pro",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0439488",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.04",
+        "fetched_at": null,
+        "pricing_version": "bedrock-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-haiku-4-5",
+      "route": {
+        "model_name": "anthropic.claude-haiku-4-5",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.044936",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.04",
+        "fetched_at": null,
+        "pricing_version": "bedrock-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-opus-4-6",
+      "route": {
+        "model_name": "anthropic.claude-opus-4-6",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.28085",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.28",
+        "fetched_at": null,
+        "pricing_version": "anthropic-list-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-opus-4-7",
+      "route": {
+        "model_name": "anthropic.claude-opus-4-7",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.28085",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.28",
+        "fetched_at": null,
+        "pricing_version": "anthropic-list-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-opus-4-8",
+      "route": {
+        "model_name": "anthropic.claude-opus-4-8",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.28085",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.28",
+        "fetched_at": null,
+        "pricing_version": "anthropic-list-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-opus-5",
+      "route": {
+        "model_name": "anthropic.claude-opus-5",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.28085",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.28",
+        "fetched_at": null,
+        "pricing_version": "anthropic-list-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-opus-5-5",
+      "route": {
+        "model_name": "anthropic.claude-opus-5-5",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.22468",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.22",
+        "fetched_at": null,
+        "pricing_version": "anthropic-list-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-sonnet-4-5",
+      "route": {
+        "model_name": "anthropic.claude-sonnet-4-5",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.16851",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.17",
+        "fetched_at": null,
+        "pricing_version": "bedrock-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-sonnet-4-6",
+      "route": {
+        "model_name": "anthropic.claude-sonnet-4-6",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.16851",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.17",
+        "fetched_at": null,
+        "pricing_version": "bedrock-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "bedrock/anthropic.claude-sonnet-5",
+      "route": {
+        "model_name": "anthropic.claude-sonnet-5",
+        "provider": "bedrock",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.16851",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.17",
+        "fetched_at": null,
+        "pricing_version": "bedrock-pricing-2026-06",
+        "notes": []
+      }
+    },
+    {
+      "name": "deepseek/deepseek-chat",
+      "route": {
+        "model_name": "deepseek-chat",
+        "provider": "deepseek",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0082404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0082",
+        "fetched_at": null,
+        "pricing_version": "deepseek-pricing-2026-09-10",
+        "notes": []
+      }
+    },
+    {
+      "name": "deepseek/deepseek-flash",
+      "route": {
+        "model_name": "deepseek-flash",
+        "provider": "deepseek",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0082404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0082",
+        "fetched_at": null,
+        "pricing_version": "deepseek-pricing-2026-09-10",
+        "notes": []
+      }
+    },
+    {
+      "name": "deepseek/deepseek-reasoner",
+      "route": {
+        "model_name": "deepseek-reasoner",
+        "provider": "deepseek",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0082404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0082",
+        "fetched_at": null,
+        "pricing_version": "deepseek-pricing-2026-09-10",
+        "notes": []
+      }
+    },
+    {
+      "name": "deepseek/deepseek-v4-flash",
+      "route": {
+        "model_name": "deepseek-v4-flash",
+        "provider": "deepseek",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0082404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0082",
+        "fetched_at": null,
+        "pricing_version": "deepseek-pricing-2026-09-10",
+        "notes": []
+      }
+    },
+    {
+      "name": "deepseek/deepseek-v4-pro",
+      "route": {
+        "model_name": "deepseek-v4-pro",
+        "provider": "deepseek",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.03544332",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.04",
+        "fetched_at": null,
+        "pricing_version": "deepseek-pricing-2026-09-10",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/deepseek-v4-flash",
+      "route": {
+        "model_name": "deepseek-v4-flash",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.00734552",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0073",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/deepseek-v4-pro",
+      "route": {
+        "model_name": "deepseek-v4-pro",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.09129432",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.09",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/glm-5p1",
+      "route": {
+        "model_name": "glm-5p1",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0754296",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.08",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/glm-5p1-fast",
+      "route": {
+        "model_name": "glm-5p1-fast",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.1508592",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.15",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/glm-5p2",
+      "route": {
+        "model_name": "glm-5p2",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0754296",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.08",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/glm-5p2-fast",
+      "route": {
+        "model_name": "glm-5p2-fast",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.1131444",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/gpt-oss-120b",
+      "route": {
+        "model_name": "gpt-oss-120b",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0082404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0082",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/gpt-oss-20b",
+      "route": {
+        "model_name": "gpt-oss-20b",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0038702",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0039",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/kimi-k2p6",
+      "route": {
+        "model_name": "kimi-k2p6",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.052436",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.05",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/kimi-k2p6-fast",
+      "route": {
+        "model_name": "kimi-k2p6-fast",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.109872",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/kimi-k2p6-turbo",
+      "route": {
+        "model_name": "kimi-k2p6-turbo",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.109872",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/kimi-k2p7-code",
+      "route": {
+        "model_name": "kimi-k2p7-code",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.052436",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.05",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/kimi-k2p7-code-fast",
+      "route": {
+        "model_name": "kimi-k2p7-code-fast",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.104872",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.10",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/minimax-m2p7",
+      "route": {
+        "model_name": "minimax-m2p7",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0164808",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.02",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/minimax-m3",
+      "route": {
+        "model_name": "minimax-m3",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0164808",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.02",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "fireworks/qwen3p7-plus",
+      "route": {
+        "model_name": "qwen3p7-plus",
+        "provider": "fireworks",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0219744",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.02",
+        "fetched_at": null,
+        "pricing_version": "fireworks-pricing-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-2.0-flash",
+      "route": {
+        "model_name": "gemini-2.0-flash",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0054936",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0055",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-2.5-flash",
+      "route": {
+        "model_name": "gemini-2.5-flash",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0082404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0082",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-2.5-pro",
+      "route": {
+        "model_name": "gemini-2.5-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.07484",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.07",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3-flash-preview",
+      "route": {
+        "model_name": "gemini-3-flash-preview",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.028702",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.03",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3-pro-preview",
+      "route": {
+        "model_name": "gemini-3-pro-preview",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.114808",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.1-flash-lite",
+      "route": {
+        "model_name": "gemini-3.1-flash-lite",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.014351",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.01",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.1-flash-lite-preview",
+      "route": {
+        "model_name": "gemini-3.1-flash-lite-preview",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.014351",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.01",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.1-pro",
+      "route": {
+        "model_name": "gemini-3.1-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.114808",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.1-pro-preview",
+      "route": {
+        "model_name": "gemini-3.1-pro-preview",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.114808",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.5-flash",
+      "route": {
+        "model_name": "gemini-3.5-flash",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.086106",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.09",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.5-flash-lite",
+      "route": {
+        "model_name": "gemini-3.5-flash-lite",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.018085",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.02",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-28",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.6-flash",
+      "route": {
+        "model_name": "gemini-3.6-flash",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.084255",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.08",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-07-28",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.7-flash",
+      "route": {
+        "model_name": "gemini-3.7-flash",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0421275",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.04",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-09-02",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-3.8-flash",
+      "route": {
+        "model_name": "gemini-3.8-flash",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0421275",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.04",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-09-02",
+        "notes": []
+      }
+    },
+    {
+      "name": "google/gemini-4-argon",
+      "route": {
+        "model_name": "gemini-4-argon",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "google-pricing-2026-10-13",
+        "notes": []
+      }
+    },
+    {
+      "name": "minimax/minimax-m2.7",
+      "route": {
+        "model_name": "minimax-m2.7",
+        "provider": "minimax",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0164808",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.02",
+        "fetched_at": null,
+        "pricing_version": "minimax-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "minimax-cn/minimax-m2.7",
+      "route": {
+        "model_name": "minimax-m2.7",
+        "provider": "minimax-cn",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0164808",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.02",
+        "fetched_at": null,
+        "pricing_version": "minimax-pricing-2026-04",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-4.1",
+      "route": {
+        "model_name": "gpt-4.1",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.109872",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-pricing-2026-03-16",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-4.1-mini",
+      "route": {
+        "model_name": "gpt-4.1-mini",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0219744",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.02",
+        "fetched_at": null,
+        "pricing_version": "openai-pricing-2026-03-16",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-4.1-nano",
+      "route": {
+        "model_name": "gpt-4.1-nano",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0054936",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0055",
+        "fetched_at": null,
+        "pricing_version": "openai-pricing-2026-03-16",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-4o",
+      "route": {
+        "model_name": "gpt-4o",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.13734",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.14",
+        "fetched_at": null,
+        "pricing_version": "openai-pricing-2026-03-16",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-4o-mini",
+      "route": {
+        "model_name": "gpt-4o-mini",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0082404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0082",
+        "fetched_at": null,
+        "pricing_version": "openai-pricing-2026-03-16",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-luna",
+      "route": {
+        "model_name": "gpt-5.6-luna",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.057404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.06",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-luna-900k",
+      "route": {
+        "model_name": "gpt-5.6-luna-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.057404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.06",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-luna-pro",
+      "route": {
+        "model_name": "gpt-5.6-luna-pro",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.057404",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.06",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-sol",
+      "route": {
+        "model_name": "gpt-5.6-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.28702",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.29",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-sol-900k",
+      "route": {
+        "model_name": "gpt-5.6-sol-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.28702",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.29",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-sol-pro",
+      "route": {
+        "model_name": "gpt-5.6-sol-pro",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.28702",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.29",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-terra",
+      "route": {
+        "model_name": "gpt-5.6-terra",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.14351",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.14",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-terra-900k",
+      "route": {
+        "model_name": "gpt-5.6-terra-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.14351",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.14",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-5.6-terra-pro",
+      "route": {
+        "model_name": "gpt-5.6-terra-pro",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.14351",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.14",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-5.6-2026-07",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6-astra",
+      "route": {
+        "model_name": "gpt-6-astra",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.5617",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.56",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-astra-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6-luna",
+      "route": {
+        "model_name": "gpt-6-luna",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.005617",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0056",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6-luna-900k",
+      "route": {
+        "model_name": "gpt-6-luna-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.005617",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0056",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6-luna-pro",
+      "route": {
+        "model_name": "gpt-6-luna-pro",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.005617",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.0056",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6-sol",
+      "route": {
+        "model_name": "gpt-6-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6-sol-900k",
+      "route": {
+        "model_name": "gpt-6-sol-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6-sol-pro",
+      "route": {
+        "model_name": "gpt-6-sol-pro",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6.1-sol",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6.1-sol-900k",
+      "route": {
+        "model_name": "gpt-6.1-sol-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/gpt-6.1-sol-pro",
+      "route": {
+        "model_name": "gpt-6.1-sol-pro",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/o3",
+      "route": {
+        "model_name": "o3",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.54936",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.55",
+        "fetched_at": null,
+        "pricing_version": "openai-pricing-2026-03-16",
+        "notes": []
+      }
+    },
+    {
+      "name": "openai/o3-mini",
+      "route": {
+        "model_name": "o3-mini",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.0604296",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.06",
+        "fetched_at": null,
+        "pricing_version": "openai-pricing-2026-03-16",
+        "notes": []
+      }
+    },
+    {
+      "name": "tier/google/199999",
+      "route": {
+        "model_name": "gemini-3.1-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 199999,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 196999,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 199999,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "official_docs_snapshot",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": [
+          "cache-write pricing unavailable for route"
+        ]
+      }
+    },
+    {
+      "name": "tier/openai/199999",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 199999,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 196999,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 199999,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": "0.409098",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.41",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "tier/google/200000",
+      "route": {
+        "model_name": "gemini-3.1-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 200000,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 197000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 200000,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "official_docs_snapshot",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": [
+          "cache-write pricing unavailable for route"
+        ]
+      }
+    },
+    {
+      "name": "tier/openai/200000",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 200000,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 197000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 200000,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": "0.4091",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.41",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "tier/google/200001",
+      "route": {
+        "model_name": "gemini-3.1-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 200001,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 197001,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 200001,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "official_docs_snapshot",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": [
+          "cache-write pricing unavailable for route"
+        ]
+      }
+    },
+    {
+      "name": "tier/openai/200001",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 200001,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 197001,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 200001,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": "0.409102",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.41",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "tier/google/272000",
+      "route": {
+        "model_name": "gemini-3.1-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 272000,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 269000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 272000,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "official_docs_snapshot",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": [
+          "cache-write pricing unavailable for route"
+        ]
+      }
+    },
+    {
+      "name": "tier/openai/272000",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 272000,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 269000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 272000,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": "0.5531",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.55",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "tier/google/272001",
+      "route": {
+        "model_name": "gemini-3.1-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 272001,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 269001,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 272001,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "official_docs_snapshot",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": [
+          "cache-write pricing unavailable for route"
+        ]
+      }
+    },
+    {
+      "name": "tier/openai/272001",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 272001,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 1000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 269001,
+        "output_tokens": 1000,
+        "cache_read_tokens": 1000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 272001,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 1000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": "1.101204",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$1.10",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "served_ultrafast",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "input_tokens": 300000,
+        "output_tokens": 1000,
+        "service_tier": "ultrafast"
+      },
+      "mode": "codex_responses",
+      "usage": {
+        "input_tokens": 300000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "input_tokens": 300000,
+          "output_tokens": 1000,
+          "service_tier": "ultrafast"
+        }
+      },
+      "expected": {
+        "amount_usd": "7.29",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$7.29",
+        "fetched_at": null,
+        "pricing_version": "openai-ultrafast-2026-10-08",
+        "notes": []
+      }
+    },
+    {
+      "name": "served_ultrafast_unknown",
+      "route": {
+        "model_name": "gpt-4o",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "input_tokens": 300000,
+        "output_tokens": 1000,
+        "service_tier": "ultrafast"
+      },
+      "mode": "codex_responses",
+      "usage": {
+        "input_tokens": 300000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "input_tokens": 300000,
+          "output_tokens": 1000,
+          "service_tier": "ultrafast"
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "official_docs_snapshot",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": [
+          "ultrafast pricing unavailable for model"
+        ]
+      }
+    },
+    {
+      "name": "served_fast",
+      "route": {
+        "model_name": "claude-opus-4.8",
+        "provider": "anthropic",
+        "base_url": ""
+      },
+      "raw": {
+        "input_tokens": 50000,
+        "output_tokens": 1000,
+        "cache_read_input_tokens": 5000,
+        "cache_creation_input_tokens": 5000,
+        "speed": "fast"
+      },
+      "mode": "anthropic_messages",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 5000,
+        "cache_write_tokens": 5000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "input_tokens": 50000,
+          "output_tokens": 1000,
+          "cache_read_input_tokens": 5000,
+          "cache_creation_input_tokens": 5000,
+          "speed": "fast"
+        }
+      },
+      "expected": {
+        "amount_usd": "0.6175",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.62",
+        "fetched_at": null,
+        "pricing_version": "anthropic-fast-mode-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "openrouter_fixed_catalog",
+      "route": {
+        "model_name": "vendor/fixture",
+        "provider": "openrouter",
+        "base_url": "https://openrouter.ai/api/v1"
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1000,
+        "prompt_tokens_details": {
+          "cached_tokens": 5000,
+          "cache_write_tokens": 2000
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 43000,
+        "output_tokens": 1000,
+        "cache_read_tokens": 5000,
+        "cache_write_tokens": 2000,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1000,
+          "prompt_tokens_details": {
+            "cached_tokens": 5000,
+            "cache_write_tokens": 2000
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": "0.15400000",
+        "status": "estimated",
+        "source": "provider_models_api",
+        "label": "~$0.15",
+        "fetched_at": "2026-10-01T00:00:00+00:00",
+        "pricing_version": "openrouter-models-api",
+        "notes": [
+          "OpenRouter cost is estimated from the models API until reconciled."
+        ]
+      }
+    },
+    {
+      "name": "endpoint_fixed_catalog",
+      "route": {
+        "model_name": "fixture",
+        "provider": "custom",
+        "base_url": "https://fixture.example/v1"
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.112340",
+        "status": "estimated",
+        "source": "provider_models_api",
+        "label": "~$0.11",
+        "fetched_at": "2026-10-01T00:00:00+00:00",
+        "pricing_version": "openai-compatible-models-api",
+        "notes": []
+      }
+    },
+    {
+      "name": "models_dev_direct",
+      "route": {
+        "model_name": "future-fixture",
+        "provider": "deepseek",
+        "base_url": "https://api.deepseek.com/v1"
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.16851",
+        "status": "estimated",
+        "source": "provider_models_api",
+        "label": "~$0.17",
+        "fetched_at": "2026-10-01T00:00:00+00:00",
+        "pricing_version": "models.dev",
+        "notes": []
+      }
+    },
+    {
+      "name": "models_dev_proxy_unknown",
+      "route": {
+        "model_name": "future-fixture",
+        "provider": "deepseek",
+        "base_url": "https://proxy.example/v1"
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "none",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": []
+      }
+    },
+    {
+      "name": "included",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "openai-codex",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0",
+        "status": "included",
+        "source": "none",
+        "label": "included",
+        "fetched_at": null,
+        "pricing_version": "included-route",
+        "notes": [
+          "subscription-included; no provider invoice for usage"
+        ]
+      }
+    },
+    {
+      "name": "custom_unknown",
+      "route": {
+        "model_name": "gpt-6.1-sol",
+        "provider": "custom",
+        "base_url": "http://localhost:8000/v1"
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "none",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": []
+      }
+    },
+    {
+      "name": "inferred_openai",
+      "route": {
+        "model_name": "openai/gpt-6.1-sol",
+        "provider": "",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "invalid_codex_suffix",
+      "route": {
+        "model_name": "gpt-5.5-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "none",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": []
+      }
+    },
+    {
+      "name": "prefixed_valid_codex_suffix",
+      "route": {
+        "model_name": "openai/gpt-6.1-sol-900k",
+        "provider": "openai",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 50000,
+        "completion_tokens": 1234
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 50000,
+        "output_tokens": 1234,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 50000,
+          "completion_tokens": 1234
+        }
+      },
+      "expected": {
+        "amount_usd": "0.11234",
+        "status": "estimated",
+        "source": "official_docs_snapshot",
+        "label": "~$0.11",
+        "fetched_at": null,
+        "pricing_version": "openai-gpt-6-tiers-2026-09",
+        "notes": []
+      }
+    },
+    {
+      "name": "missing_cache_rate",
+      "route": {
+        "model_name": "gemini-2.5-pro",
+        "provider": "google",
+        "base_url": ""
+      },
+      "raw": {
+        "prompt_tokens": 1000,
+        "completion_tokens": 1,
+        "prompt_tokens_details": {
+          "cache_write_tokens": 500
+        }
+      },
+      "mode": "chat_completions",
+      "usage": {
+        "input_tokens": 500,
+        "output_tokens": 1,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 500,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "prompt_tokens": 1000,
+          "completion_tokens": 1,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 500
+          }
+        }
+      },
+      "expected": {
+        "amount_usd": null,
+        "status": "unknown",
+        "source": "official_docs_snapshot",
+        "label": "n/a",
+        "fetched_at": null,
+        "pricing_version": null,
+        "notes": [
+          "cache-write pricing unavailable for route"
+        ]
+      }
+    }
+  ],
+  "guards": [
+    {
+      "name": "expensive",
+      "model": "gpt-6-astra",
+      "provider": "openai",
+      "raw": {
+        "prompt_tokens": 100000,
+        "completion_tokens": 1000
+      },
+      "budget": 1,
+      "streak": "1.05"
+    },
+    {
+      "name": "cheap",
+      "model": "gpt-6-luna",
+      "provider": "openai",
+      "raw": {
+        "prompt_tokens": 100,
+        "completion_tokens": 1
+      },
+      "budget": 3,
+      "streak": "0.0000105"
+    },
+    {
+      "name": "included",
+      "model": "gpt-6-astra",
+      "provider": "openai-codex",
+      "raw": {
+        "prompt_tokens": 1000000,
+        "completion_tokens": 10000
+      },
+      "budget": 3,
+      "streak": null
+    },
+    {
+      "name": "unknown",
+      "model": "unknown",
+      "provider": "custom",
+      "raw": {
+        "prompt_tokens": 1000000,
+        "completion_tokens": 10000
+      },
+      "budget": 3,
+      "streak": null
+    }
+  ],
+  "sources": {
+    "agent/usage_pricing.py": "6fc01dafad5d6b78262ad9117cfa51fb9f89313c4f62cb04ca327459db2ce61a",
+    "agent/empty_response_guard.py": "8a7126d457ebc021a72b906973e74adbf13ff2504cc4b07d5e8b29f617019c1e"
+  }
+}

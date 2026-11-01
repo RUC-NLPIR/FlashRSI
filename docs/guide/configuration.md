@@ -43,7 +43,7 @@ This is the [bundled quickstart](../../examples/quickstart.yaml). Method-specifi
 | --- | --- |
 | `run.output_dir` | Parent directory for experiment records. |
 | `run.mode`, `run.snapshot` | Saved-Snapshot evaluation when selected through configuration. See [evaluation](./evaluation.md). |
-| `agent.name` | Target harness: `miniagent`, `claude_code`, or `codex`. |
+| `agent.name` | Target harness: `miniagent`, `claude_code`, `codex`, `pi`, or `hermes`. |
 | `agent.llm.*` | Target model, credentials, endpoint, and supported request options. |
 | `agent.max_turns` | Target execution budget, subject to harness support. |
 | `agent.source_dir` | Alternate resource source for a harness. |
@@ -72,6 +72,20 @@ flashrsi run --config examples/quickstart.yaml \
 For example, `--agent.llm.api_key "$TARGET_API_KEY"` is equivalent to its `--set` form. Overrides are parsed as YAML values, including numbers, booleans, lists, and `null`. Saved configuration records redact known credentials.
 
 Judge models, user simulators, and postprocessing models have their own configuration where required. Changing the Target does not configure these roles. See the [launcher role guide](../experiment-launcher.zh-CN.md#模型配置与文件位置).
+
+## Pi and Hermes context settings
+
+Both harnesses execute Python code from the selected Snapshot, without an installed upstream CLI or npm packages. Configure these fields on the selected role (`agent` or `algorithm.worker`); keep model connections under that role's `llm`.
+
+| Harness | Fields and behavior |
+| --- | --- |
+| Pi | `compaction.enabled` defaults to `true`; `reserveTokens` and `keepRecentTokens` default to 16384 and 20000. Supports threshold/overflow compaction and `/compact [instructions]`. `context_window` and `model_max_tokens` override the pinned model catalog. |
+| Pi session | `session_file` selects a Pi v3 JSONL conversation; `session_leaf_id` resumes a branch. `/tree ENTRY_ID` selects a history node, with `branch_summary` controlling the abandoned branch summary. |
+| Hermes | `compression.enabled` defaults to `true`, with `threshold: 0.50`. Optional `proactive_prune_tokens`, `micro_compact` and `idle_compact_after_seconds` enable separate maintenance strategies. `/compress [focus]` requests manual compaction. |
+| Hermes session | `session_file` saves messages, todos and compression state. `compression.checkpoint_required: true` requires a durable local checkpoint before a lossy rewrite and suppresses micro/provider-native compaction. |
+| Hermes Responses | Set `llm.model_api: openai-responses` for Responses. `compression.codex_responses_native: true` opts into provider-native compaction only when the upstream model, endpoint and capability checks permit it. |
+
+Session files are opt-in runtime state outside the Snapshot. Use a separate file for each independent benchmark task. The [integration guide](../agent-integration.md) describes supported paths and validation boundaries; fixed-response parity checks do not establish live-model accuracy.
 
 ## CLI options
 

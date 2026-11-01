@@ -1,0 +1,1525 @@
+{
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "generator_sha256": "d130db07b5927e9b872771e8d2bb81199595e9228bce4b0ba69e7b80956d40f3",
+  "sources": {
+    "agent/turn_recovery.py": "7e0210cbf902b53081f849e1c33ac7e5882c15a46f10d0ada65ab7d1db92d85f",
+    "agent/turn_recovery_codex.py": "81898940cfd30144d19579b0a8c246b9adacc448945c73697b01b10e3a50b786",
+    "agent/turn_retry_state.py": "9cb374f452ce3813aae07f151e83a9459eea07ab78ab93cb7c548d3de5f3048b",
+    "agent/message_sanitization.py": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+    "agent/transports/codex.py": "dd5b7acb4ad905f560c7b9669b26e3f2ff4af2de4fdc22856b1d669b74f844b2",
+    "agent/anthropic_thinking_replay.py": "269a4902dd97887a429b50cf66c4b81e360cb352b57d55f1945200a0a4c22077",
+    "agent/fast_mode.py": "7aaa66abd438c0bd98610baf151a93285ef184ad7fc07f7f04df52d678fbec98",
+    "agent/tool_dispatch_helpers.py": "bf4c6e4af26ba8a93ece9dfa6afa9a2e4d96bfe27ae854bd483a6613306c2cfc",
+    "agent/prompt_cache_boundary.py": "82dfe2db84454e42583a0fa9b512317db973c9e842380543c6f787add3f0d548",
+    "agent/prompt_caching.py": "b36630f00317fae22466ce4dbd7844c61f9390d60755f128b27a928eaa687e39",
+    "run_agent.py": "33c7195fc6efa9122f1a6700d416fd283f9634712189af3fd72feb01bcea054f"
+  },
+  "boundaries": [
+    "fixed explicit route/credentials",
+    "fixed provider error",
+    "explicit runtime ASCII locale probe",
+    "no SDK client, provider request, profiles, credential pools or session database"
+  ],
+  "cases": [
+    {
+      "input": {
+        "name": "unicode_header_utf8",
+        "key": "key\u2014copied",
+        "headers": {
+          "x-test": "r\u00e9sum\u00e9"
+        },
+        "error": {
+          "unicode": "ascii"
+        },
+        "locale_ascii": false
+      },
+      "output": [
+        {
+          "before": true,
+          "after": false,
+          "reason": "unknown",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "kwargs": {
+            "model": "parity-model",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "keycopied",
+          "headers": {
+            "x-test": "rsum"
+          },
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 1,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "unicode_false_ascii_no_repair",
+        "error": {
+          "unicode": "ascii"
+        },
+        "locale_ascii": false
+      },
+      "output": [
+        {
+          "before": false,
+          "after": false,
+          "reason": "unknown",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "kwargs": {
+            "model": "parity-model",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "unicode_ascii_locale",
+        "key": "key\u2014copied",
+        "headers": {
+          "x-test": "r\u00e9sum\u00e9"
+        },
+        "error": {
+          "unicode": "ascii"
+        },
+        "locale_ascii": true
+      },
+      "output": [
+        {
+          "before": true,
+          "after": false,
+          "reason": "unknown",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": ": inspect rsum."
+            },
+            {
+              "role": "user",
+              "content": " question: caf?"
+            }
+          ],
+          "kwargs": {
+            "model": "parity-model",
+            "messages": [
+              {
+                "role": "system",
+                "content": ": inspect rsum."
+              },
+              {
+                "role": "user",
+                "content": " question: caf?"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": ": inspect rsum.",
+          "api_key": "keycopied",
+          "headers": {
+            "x-test": "rsum"
+          },
+          "image_models": [],
+          "tool_models": [],
+          "ascii": true,
+          "unicode_passes": 1,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "unicode_surrogate",
+        "messages": [
+          {
+            "role": "user",
+            "content": "bad \ud800 paste"
+          }
+        ],
+        "error": {
+          "unicode": "utf-8"
+        },
+        "locale_ascii": false
+      },
+      "output": [
+        {
+          "before": true,
+          "after": false,
+          "reason": "unknown",
+          "messages": [
+            {
+              "role": "user",
+              "content": "bad \ufffd paste"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "user",
+              "content": "bad \ufffd paste"
+            }
+          ],
+          "kwargs": {
+            "model": "parity-model",
+            "messages": [
+              {
+                "role": "user",
+                "content": "bad \ufffd paste"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 1,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "multimodal_tool_downgrade",
+        "messages": [
+          {
+            "role": "system",
+            "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+          },
+          {
+            "role": "user",
+            "content": "\u4e2d\u6587 question: caf\u00e9?"
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "Screenshot text"
+              },
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "https://fixture.invalid/shot.png"
+                }
+              }
+            ]
+          }
+        ],
+        "error": {
+          "message": "Invalid request: messages.2.content text is not set",
+          "status": 400
+        }
+      },
+      "output": [
+        {
+          "before": false,
+          "after": true,
+          "reason": "multimodal_tool_content_unsupported",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "tool",
+              "tool_call_id": "read",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Screenshot text"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "https://fixture.invalid/shot.png"
+                  }
+                }
+              ]
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "tool",
+              "tool_call_id": "read",
+              "content": "Screenshot text"
+            }
+          ],
+          "kwargs": {
+            "model": "parity-model",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "tool",
+                "tool_call_id": "read",
+                "content": "Screenshot text"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [
+            [
+              "custom",
+              "parity-model"
+            ]
+          ],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "chat_signature_request_only",
+        "messages": [
+          {
+            "role": "system",
+            "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+          },
+          {
+            "role": "user",
+            "content": "\u4e2d\u6587 question: caf\u00e9?"
+          },
+          {
+            "role": "assistant",
+            "content": "Read first.",
+            "reasoning_details": [
+              {
+                "type": "thinking",
+                "thinking": "Inspect the file.",
+                "signature": "fixed-signed-history"
+              }
+            ]
+          }
+        ],
+        "error": {
+          "message": "Invalid signature in thinking block",
+          "status": 400
+        }
+      },
+      "output": [
+        {
+          "before": false,
+          "after": true,
+          "reason": "thinking_signature",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Read first.",
+              "reasoning_details": [
+                {
+                  "type": "thinking",
+                  "thinking": "Inspect the file.",
+                  "signature": "fixed-signed-history"
+                }
+              ]
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Read first."
+            }
+          ],
+          "kwargs": {
+            "model": "parity-model",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "assistant",
+                "content": "Read first."
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "anthropic_signed_request_only",
+        "route": {
+          "api_mode": "anthropic_messages",
+          "base_url": "https://api.anthropic.com",
+          "model": "claude-opus-4-6",
+          "provider": "anthropic"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+          },
+          {
+            "role": "user",
+            "content": "\u4e2d\u6587 question: caf\u00e9?"
+          },
+          {
+            "role": "assistant",
+            "content": "Read first.",
+            "reasoning": "Inspect the file.",
+            "reasoning_details": [
+              {
+                "type": "thinking",
+                "thinking": "Inspect the file.",
+                "signature": "fixed-signed-history"
+              }
+            ],
+            "_anthropic_content_blocks": [
+              {
+                "type": "thinking",
+                "thinking": "Inspect the file.",
+                "signature": "fixed-signed-history"
+              },
+              {
+                "type": "text",
+                "text": "Read first."
+              }
+            ]
+          }
+        ],
+        "error": {
+          "message": "Invalid signature in thinking block",
+          "status": 400
+        }
+      },
+      "output": [
+        {
+          "before": false,
+          "after": true,
+          "reason": "thinking_signature",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Read first.",
+              "reasoning": "Inspect the file.",
+              "reasoning_details": [
+                {
+                  "type": "thinking",
+                  "thinking": "Inspect the file.",
+                  "signature": "fixed-signed-history"
+                }
+              ],
+              "_anthropic_content_blocks": [
+                {
+                  "type": "thinking",
+                  "thinking": "Inspect the file.",
+                  "signature": "fixed-signed-history"
+                },
+                {
+                  "type": "text",
+                  "text": "Read first."
+                }
+              ]
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Read first.",
+              "_anthropic_content_blocks": [
+                {
+                  "type": "text",
+                  "text": "Read first."
+                }
+              ]
+            }
+          ],
+          "kwargs": {
+            "model": "claude-opus-4-6",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "assistant",
+                "content": "Read first.",
+                "_anthropic_content_blocks": [
+                  {
+                    "type": "text",
+                    "text": "Read first."
+                  }
+                ]
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [
+            "65d0d8bb6806d2c5196ec298a68a8e8c2ebea96bae07c322eb9d2c1cbf7eee29"
+          ],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "anthropic_fast_capacity",
+        "route": {
+          "api_mode": "anthropic_messages",
+          "base_url": "https://api.anthropic.com",
+          "model": "claude-opus-4-6",
+          "provider": "anthropic"
+        },
+        "kwargs": {
+          "extra_body": {
+            "speed": "fast"
+          }
+        },
+        "error": {
+          "message": "rate limit",
+          "status": 429,
+          "headers": {
+            "anthropic-fast-input-tokens-limit": "0"
+          }
+        }
+      },
+      "output": [
+        {
+          "before": true,
+          "after": false,
+          "reason": "rate_limit",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "kwargs": {
+            "model": "claude-opus-4-6",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ],
+            "extra_body": {
+              "speed": "fast"
+            }
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": [
+            "claude-opus-4-6"
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "responses_foreign_then_own",
+        "route": {
+          "api_mode": "codex_responses",
+          "base_url": "https://api.openai.com/v1",
+          "model": "gpt-5.4",
+          "provider": "openai"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+          },
+          {
+            "role": "user",
+            "content": "\u4e2d\u6587 question: caf\u00e9?"
+          },
+          {
+            "role": "assistant",
+            "content": "Older answer",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_old",
+                "encrypted_content": "old-fixed-blob"
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "content": "Own answer",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_own",
+                "encrypted_content": "own-fixed-blob",
+                "_issuer_kind": "other:https://api.openai.com/v1",
+                "_issuer_model": "gpt-5.4"
+              }
+            ]
+          }
+        ],
+        "errors": [
+          {
+            "message": "invalid_encrypted_content",
+            "status": 400
+          },
+          {
+            "message": "invalid_encrypted_content",
+            "status": 400
+          }
+        ]
+      },
+      "output": [
+        {
+          "before": false,
+          "after": true,
+          "reason": "invalid_encrypted_content",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Older answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_own",
+                  "encrypted_content": "own-fixed-blob",
+                  "_issuer_kind": "other:https://api.openai.com/v1",
+                  "_issuer_model": "gpt-5.4"
+                }
+              ]
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Older answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_own",
+                  "encrypted_content": "own-fixed-blob",
+                  "_issuer_kind": "other:https://api.openai.com/v1",
+                  "_issuer_model": "gpt-5.4"
+                }
+              ]
+            }
+          ],
+          "kwargs": {
+            "model": "gpt-5.4",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "assistant",
+                "content": "Older answer"
+              },
+              {
+                "role": "assistant",
+                "content": "Own answer",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_own",
+                    "encrypted_content": "own-fixed-blob",
+                    "_issuer_kind": "other:https://api.openai.com/v1",
+                    "_issuer_model": "gpt-5.4"
+                  }
+                ]
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        },
+        {
+          "before": false,
+          "after": true,
+          "reason": "invalid_encrypted_content",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Older answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Older answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            }
+          ],
+          "kwargs": {
+            "model": "gpt-5.4",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "assistant",
+                "content": "Older answer"
+              },
+              {
+                "role": "assistant",
+                "content": "Own answer"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": true,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "responses_token_expired",
+        "route": {
+          "api_mode": "codex_responses",
+          "base_url": "https://api.openai.com/v1",
+          "model": "gpt-5.4",
+          "provider": "openai"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+          },
+          {
+            "role": "user",
+            "content": "\u4e2d\u6587 question: caf\u00e9?"
+          },
+          {
+            "role": "assistant",
+            "content": "Older answer",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_old",
+                "encrypted_content": "old-fixed-blob"
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "content": "Own answer",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_own",
+                "encrypted_content": "own-fixed-blob",
+                "_issuer_kind": "other:https://api.openai.com/v1",
+                "_issuer_model": "gpt-5.4"
+              }
+            ]
+          }
+        ],
+        "error": {
+          "message": "Provided authentication token is expired.",
+          "status": 401,
+          "code": "token_expired"
+        }
+      },
+      "output": [
+        {
+          "before": false,
+          "after": true,
+          "reason": "auth",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Older answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_own",
+                  "encrypted_content": "own-fixed-blob",
+                  "_issuer_kind": "other:https://api.openai.com/v1",
+                  "_issuer_model": "gpt-5.4"
+                }
+              ]
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Older answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_own",
+                  "encrypted_content": "own-fixed-blob",
+                  "_issuer_kind": "other:https://api.openai.com/v1",
+                  "_issuer_model": "gpt-5.4"
+                }
+              ]
+            }
+          ],
+          "kwargs": {
+            "model": "gpt-5.4",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "assistant",
+                "content": "Older answer"
+              },
+              {
+                "role": "assistant",
+                "content": "Own answer",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_own",
+                    "encrypted_content": "own-fixed-blob",
+                    "_issuer_kind": "other:https://api.openai.com/v1",
+                    "_issuer_model": "gpt-5.4"
+                  }
+                ]
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "responses_repeat_own_rejection",
+        "route": {
+          "api_mode": "codex_responses",
+          "base_url": "https://api.openai.com/v1",
+          "model": "gpt-5.4",
+          "provider": "openai"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+          },
+          {
+            "role": "user",
+            "content": "\u4e2d\u6587 question: caf\u00e9?"
+          },
+          {
+            "role": "assistant",
+            "content": "Own answer",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_own",
+                "encrypted_content": "own-fixed-blob",
+                "_issuer_kind": "other:https://api.openai.com/v1",
+                "_issuer_model": "gpt-5.4"
+              }
+            ]
+          }
+        ],
+        "errors": [
+          {
+            "message": "invalid_encrypted_content",
+            "status": 400
+          },
+          {
+            "message": "invalid_encrypted_content",
+            "status": 400
+          }
+        ],
+        "new_turn_own": true
+      },
+      "output": [
+        {
+          "before": false,
+          "after": true,
+          "reason": "invalid_encrypted_content",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            }
+          ],
+          "kwargs": {
+            "model": "gpt-5.4",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "assistant",
+                "content": "Own answer"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": true,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        },
+        {
+          "before": false,
+          "after": true,
+          "reason": "invalid_encrypted_content",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            },
+            {
+              "role": "assistant",
+              "content": "Own answer"
+            }
+          ],
+          "kwargs": {
+            "model": "gpt-5.4",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              },
+              {
+                "role": "assistant",
+                "content": "Own answer"
+              },
+              {
+                "role": "assistant",
+                "content": "Own answer"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": false,
+          "replay_rejected": true,
+          "all_turns_rejected": [],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    },
+    {
+      "input": {
+        "name": "responses_all_turns",
+        "route": {
+          "api_mode": "codex_responses",
+          "base_url": "https://api.openai.com/v1",
+          "model": "gpt-5.4",
+          "provider": "openai"
+        },
+        "all_turns": true,
+        "error": {
+          "message": "Unsupported reasoning.context all_turns",
+          "status": 400
+        }
+      },
+      "output": [
+        {
+          "before": false,
+          "after": true,
+          "reason": "reasoning_mandatory",
+          "messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "api_messages": [
+            {
+              "role": "system",
+              "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+            },
+            {
+              "role": "user",
+              "content": "\u4e2d\u6587 question: caf\u00e9?"
+            }
+          ],
+          "kwargs": {
+            "model": "gpt-5.4",
+            "messages": [
+              {
+                "role": "system",
+                "content": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9."
+              },
+              {
+                "role": "user",
+                "content": "\u4e2d\u6587 question: caf\u00e9?"
+              }
+            ],
+            "tools": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "read_file",
+                  "description": "\u8bfb r\u00e9sum\u00e9",
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "\u7cfb\u7edf\u6307\u4ee4: inspect r\u00e9sum\u00e9.",
+          "api_key": "fixed-ascii-key",
+          "headers": {},
+          "image_models": [],
+          "tool_models": [],
+          "ascii": false,
+          "unicode_passes": 0,
+          "replay_enabled": true,
+          "replay_rejected": false,
+          "all_turns_rejected": [
+            "gpt-5.4"
+          ],
+          "rejected_thinking": [],
+          "fast_unavailable": []
+        }
+      ]
+    }
+  ]
+}

@@ -8,7 +8,7 @@
 
 <p align="center">
   FlashRSI provides one experiment interface for <b>13 RSI algorithms</b>, <b>30 benchmarks</b>, and native
-  integrations for MiniAgent, Claude Code, Codex, and Pi. Each run records the resources that changed, the
+  integrations for MiniAgent, Claude Code, Codex, Pi, and Hermes. Each run records the resources that changed,
   trajectories that produced the score, and the Snapshot selected at the end.
 </p>
 
@@ -61,19 +61,19 @@
   web research, documents, tool use, and interactive tasks, with **34 pinned Hugging Face prepared
   configurations** for 29 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt,
   Evo-Harness, AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, and Arbor.
-- 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, and Pi map prompts,
+- 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, Pi, and Hermes map prompts,
   skills, tools, configuration, hooks, plugins, memory, and runtime resources into versioned Snapshots.
   Each run keeps immutable candidates, redacted configuration, Target/Worker trajectories, metrics,
   usage, and task artifacts together.
 - 🚀 **Simple Workflow and Extensible Docs**: Use `flashrsi run` for evolution and `flashrsi evaluate`
   for saved Snapshots, with method examples, a searchable documentation site, and GitHub Pages support.
-  Hermes and OpenCode integrations are in progress.
+  OpenCode integration is in progress.
 
 See the [documentation home](docs/index.md) for the guide, integrations, and development notes.
 
 <p align="center">
   <a href="assets/readme/framework-overview.jpg">
-    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI framework overview: 12 RSI algorithms, immutable AgentSnapshots, four agent harnesses, and 30 benchmarks." width="100%">
+    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI framework overview: 12 RSI algorithms, immutable AgentSnapshots, five agent harnesses, and 30 benchmarks." width="100%">
   </a>
 </p>
 
@@ -644,7 +644,7 @@ highest final score within each benchmark and harness, including ties.
 
 ## Supporting Harnesses
 
-FlashRSI currently supports four harness integrations; additional integrations are planned.
+FlashRSI currently supports five harness integrations; additional integrations are planned.
 
 | Harness | Editable resources | Integration details | Status |
 | --- | --- | --- | --- |
@@ -652,7 +652,7 @@ FlashRSI currently supports four harness integrations; additional integrations a
 | [Claude Code](docs/agent-integration.md) | Instructions, skills, agents, hooks, MCP/LSP, settings | Closed SDK integration; stable exposed interfaces are mapped into the Snapshot. | Available |
 | [Codex](docs/codex.md) | Instructions, skills, agents, hooks, plugins, memory, rules, configuration | Snapshot-local Python port based on `rust-v0.147.0`, with documented coverage limits. | Available |
 | [Pi](docs/agent-integration.md) | Pure-Python Snapshot runtime, instructions, skills, prompt templates, and settings | Snapshot-local `runtime/pi_native` follows Pi v1.4.0's headless loop and Pi-shaped JSON events; no Node/npm dependency. | Available |
-| [Hermes](docs/agent-integration.md) | Instructions, tools, skills, runtime configuration | Adapter design and native execution checks are in progress. | **doing** |
+| [Hermes](docs/agent-integration.md) | Python Snapshot runtime, SOUL instructions, skills, tool settings | Supported headless Hermes v0.22.5 path with upstream Python helpers and local tools; no installed Hermes CLI required. | Available |
 | [OpenCode](docs/agent-integration.md) | Instructions, tools, plugins, settings | Resource inventory and Snapshot binding are in progress. | **doing** |
 
 ## Supporting Benchmarks

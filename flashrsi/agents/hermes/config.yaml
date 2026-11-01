@@ -1,0 +1,22 @@
+# Runtime resources are versioned; model connections belong to the role config.
+toolsets:
+  - terminal
+  - file
+  - todo
+  - skills
+
+# The role config may override these Snapshot defaults.
+# Full compression is enabled; prune/micro/idle are separate optional strategies.
+compression:
+  enabled: true
+  threshold: 0.50
+  proactive_prune_tokens: 0
+  micro_compact: false
+  idle_compact_after_seconds: 0
+  # A role-level session_file supplies durable local checkpoints when required.
+  checkpoint_required: false
+  # Supported Responses routes/models only; ordinary local compaction remains available.
+  codex_responses_native: false
+
+# Keep session_file in the role config and its generated state outside the Snapshot.
+# Manual compaction uses the task prompt /compress [focus].

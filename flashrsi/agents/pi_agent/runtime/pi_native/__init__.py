@@ -6,7 +6,8 @@ transport and event emission; this module owns the stable Pi resource and
 tool contracts used by that loop.
 """
 
-from .loop import NativePiResult, run
+from .controls import PendingMessageQueue
+from .loop import NativePiResult, compact, navigate_session, run
 from .resources import (
     ResourceBundle,
     default_tools,
@@ -20,9 +21,12 @@ PI_BASELINE = "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0"
 
 __all__ = [
     "PI_BASELINE",
+    "PendingMessageQueue",
     "ResourceBundle",
     "default_tools",
     "NativePiResult",
+    "compact",
+    "navigate_session",
     "ToolResult",
     "execute_tool",
     "load_resources",

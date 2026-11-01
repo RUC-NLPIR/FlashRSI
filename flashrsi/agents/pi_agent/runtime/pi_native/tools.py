@@ -7,16 +7,27 @@ to a temporary directory for a rollout.
 
 from __future__ import annotations
 
+import base64
+import codecs
+import copy
 import difflib
-import fnmatch
+import io
 import json
+import math
 import os
 import re
+import selectors
 import shutil
+import signal
 import subprocess
+import tempfile
+import threading
+import time
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote, urlparse
 
 DEFAULT_MAX_LINES = 2000
 DEFAULT_MAX_BYTES = 50 * 1024
@@ -30,6 +41,10 @@ class ToolResult:
     content: str
     is_error: bool = False
     details: dict[str, Any] = field(default_factory=dict)
+    content_blocks: list[dict[str, Any]] | None = None
+    structured_content: Any = None
+    usage: dict[str, Any] | None = None
+    terminate: bool | None = None
 
     def as_message_content(self) -> str:
         return self.content
@@ -179,38 +194,286 @@ def truncate_tail(
 
 
 def _resolve(path: str | None, cwd: str | Path) -> Path:
-    value = "." if path is None or not str(path).strip() else str(path)
+    value = "." if path is None else path
+    value = re.sub("[\u00a0\u2000-\u200a\u202f\u205f\u3000]", " ", value)
     if value.startswith("@"):
         value = value[1:]
-    value = os.path.expanduser(value).replace("\u202f", " ")
-    candidate = Path(value)
-    return (candidate if candidate.is_absolute() else Path(cwd) / candidate).resolve()
+    if value == "~" or value.startswith("~/"):
+        value = os.path.expanduser(value)
+    if value.startswith("file://"):
+        value = unquote(urlparse(value).path)
+    return Path(os.path.abspath(os.path.join(str(cwd), value)))
+
+
+def _resolve_read(path: str, cwd: str | Path) -> Path:
+    resolved = _resolve(path, cwd)
+    value = str(resolved)
+    nfd = unicodedata.normalize("NFD", value)
+    variants = [
+        value,
+        re.sub(
+            r" (AM|PM)\.", lambda match: "\u202f" + match[1] + ".", value, flags=re.I
+        ),
+        nfd,
+        value.replace("'", "\u2019"),
+        nfd.replace("'", "\u2019"),
+    ]
+    return next((Path(item) for item in variants if Path(item).exists()), resolved)
+
+
+def _image_mime(raw: bytes) -> str | None:
+    raw = raw[:4100]
+    if raw.startswith(b"\xff\xd8\xff"):
+        return None if len(raw) > 3 and raw[3] == 0xF7 else "image/jpeg"
+    if raw.startswith(b"\x89PNG\r\n\x1a\n"):
+        if len(raw) < 16 or raw[8:16] != b"\x00\x00\x00\rIHDR":
+            return None
+        offset = 8
+        while offset + 8 <= len(raw):
+            size = int.from_bytes(raw[offset : offset + 4], "big")
+            kind = raw[offset + 4 : offset + 8]
+            if kind == b"acTL":
+                return None
+            if kind == b"IDAT":
+                break
+            offset += size + 12
+        return "image/png"
+    if raw.startswith((b"GIF87a", b"GIF89a")):
+        return "image/gif"
+    if raw.startswith(b"RIFF") and raw[8:12] == b"WEBP":
+        return "image/webp"
+    if raw.startswith(b"BM") and len(raw) >= 26:
+        size = int.from_bytes(raw[2:6], "little")
+        offset = int.from_bytes(raw[10:14], "little")
+        dib = int.from_bytes(raw[14:18], "little")
+        if size and (size < 26 or offset >= size) or offset < 14 + dib:
+            return None
+        header = (
+            22 if dib == 12 else 26 if 40 <= dib <= 124 and len(raw) >= 30 else None
+        )
+        if (
+            header is not None
+            and int.from_bytes(raw[header : header + 2], "little") == 1
+            and int.from_bytes(raw[header + 2 : header + 4], "little")
+            in {1, 4, 8, 16, 24, 32}
+        ):
+            return "image/bmp"
+    return None
+
+
+def _read_image(
+    raw: bytes,
+    mime: str,
+    *,
+    model: dict[str, Any] | None = None,
+    auto_resize_images: bool = True,
+) -> ToolResult:
+    """Use original bytes below limits and Photon's original resampler/codecs."""
+    from PIL import Image, ImageOps
+
+    from .photon_image import encode_jpeg, encode_png, resize_rgba
+
+    limits = ((model or {}).get("inputLimits") or {}).get("images", {}).get(
+        "resize"
+    ) or {}
+    max_width = limits.get("maxWidth", 2000)
+    max_height = limits.get("maxHeight", 2000)
+    max_bytes = limits.get("maxBytes", 4.5 * 1024 * 1024)
+    hints: list[str] = []
+    converted_from = None
+    try:
+        decoded_webp = None
+        if mime == "image/webp":
+            try:
+                from .photon_image import decode_webp_lossy
+
+                decoded_webp = decode_webp_lossy(raw)
+            except Exception:
+                decoded_webp = None
+        decoded_jpeg = None
+        if mime == "image/jpeg":
+            try:
+                from .photon_image import decode_jpeg
+
+                decoded_jpeg = decode_jpeg(raw)
+            except Exception:
+                decoded_jpeg = None
+        if decoded_webp is not None:
+            decoded_pixels, decoded_width, decoded_height = decoded_webp
+            image = Image.frombytes("RGBA", (decoded_width, decoded_height), decoded_pixels)
+            # VP8X WebP may carry EXIF orientation. Pixel values came from
+            # image-rs above; use Pillow only to parse the TIFF tag and apply
+            # the same exact flips/quarter-turns to that RGBA buffer.
+            try:
+                metadata = Image.open(io.BytesIO(raw)).getexif()
+                orientation = int(metadata.get(274, 1))
+                transforms = {
+                    2: Image.Transpose.FLIP_LEFT_RIGHT,
+                    3: Image.Transpose.ROTATE_180,
+                    4: Image.Transpose.FLIP_TOP_BOTTOM,
+                    5: Image.Transpose.TRANSPOSE,
+                    6: Image.Transpose.ROTATE_270,
+                    7: Image.Transpose.TRANSVERSE,
+                    8: Image.Transpose.ROTATE_90,
+                }
+                if orientation in transforms:
+                    image = image.transpose(transforms[orientation])
+            except Exception:
+                pass
+        elif decoded_jpeg is not None:
+            decoded_pixels, decoded_width, decoded_height = decoded_jpeg
+            image = Image.frombytes("RGBA", (decoded_width, decoded_height), decoded_pixels)
+            try:
+                orientation = int(Image.open(io.BytesIO(raw)).getexif().get(274, 1))
+                transforms = {
+                    2: Image.Transpose.FLIP_LEFT_RIGHT,
+                    3: Image.Transpose.ROTATE_180,
+                    4: Image.Transpose.FLIP_TOP_BOTTOM,
+                    5: Image.Transpose.TRANSPOSE,
+                    6: Image.Transpose.ROTATE_270,
+                    7: Image.Transpose.TRANSVERSE,
+                    8: Image.Transpose.ROTATE_90,
+                }
+                if orientation in transforms:
+                    image = image.transpose(transforms[orientation])
+            except Exception:
+                pass
+        elif not auto_resize_images and mime != "image/bmp":
+            image = None
+        else:
+            image = Image.open(io.BytesIO(raw))
+            # Pi only reads TIFF orientation from JPEG APP1 and WebP EXIF.
+            if mime in {"image/jpeg", "image/webp"}:
+                image = ImageOps.exif_transpose(image)
+            image = image.convert("RGBA")
+            image.load()
+        if mime == "image/bmp":
+            raw = encode_png(image.tobytes(), *image.size)
+            mime, converted_from = "image/png", "image/bmp"
+        width, height = image.size if image is not None else (0, 0)
+        original_width, original_height = width, height
+        if auto_resize_images and (
+            width > max_width
+            or height > max_height
+            or len(base64.b64encode(raw)) >= max_bytes
+        ):
+            if width > max_width:
+                height, width = math.floor(height * max_width / width + 0.5), max_width
+            if height > max_height:
+                width, height = (
+                    math.floor(width * max_height / height + 0.5),
+                    max_height,
+                )
+            while True:
+                pixels = resize_rgba(
+                    image.tobytes(), image.width, image.height, width, height
+                )
+                chosen = None
+                for quality in [
+                    None,
+                    *dict.fromkeys([limits.get("jpegQuality", 80), 85, 70, 55, 40]),
+                ]:
+                    if quality is None:
+                        data = encode_png(pixels, width, height)
+                    else:
+                        data = encode_jpeg(pixels, width, height, quality)
+                    if len(base64.b64encode(data)) < max_bytes:
+                        chosen = data, "image/png" if quality is None else "image/jpeg"
+                        break
+                if chosen:
+                    raw, mime = chosen
+                    hints.append(
+                        f"[Image: original {original_width}x{original_height}, displayed at {width}x{height}. Multiply coordinates by {original_width / width:.2f} to map to original image.]"
+                    )
+                    break
+                if width == height == 1:
+                    raise ValueError("cannot fit image")
+                width, height = (
+                    max(1, math.floor(width * 0.75)),
+                    max(1, math.floor(height * 0.75)),
+                )
+        if converted_from:
+            hints.insert(0, f"[Image converted from {converted_from} to {mime}.]")
+        note = f"Read image file [{mime}]" + ("\n" + "\n".join(hints) if hints else "")
+        if model and "image" not in model.get("input", ["text"]):
+            note += "\n[Current model does not support images. The image will be omitted from this request.]"
+        return ToolResult(
+            note,
+            content_blocks=[
+                {"type": "text", "text": note},
+                {
+                    "type": "image",
+                    "data": base64.b64encode(raw).decode("ascii"),
+                    "mimeType": mime,
+                },
+            ],
+        )
+    except Exception:
+        failure = (
+            "converted to a supported inline image format"
+            if mime == "image/bmp"
+            else "resized below the inline image size limit"
+        )
+        note = f"Read image file [{mime}]\n[Image omitted: could not be {failure}.]"
+        if model and "image" not in model.get("input", ["text"]):
+            note += "\n[Current model does not support images. The image will be omitted from this request.]"
+        return _result(note)
+
+
+def _public_truncation(details: dict[str, Any], content: str) -> dict[str, Any]:
+    return {
+        "content": content,
+        **{
+            re.sub(r"_([a-z])", lambda match: match[1].upper(), key): value
+            for key, value in details.items()
+        },
+    }
+
+
+def _number_text(value: float | int) -> str:
+    return str(int(value)) if value == int(value) else str(value)
 
 
 def _result(text: str, **details: Any) -> ToolResult:
-    return ToolResult(text, details=details)
+    return ToolResult(
+        text,
+        details={key: value for key, value in details.items() if value is not None},
+    )
 
 
 def _error(text: str, **details: Any) -> ToolResult:
     return ToolResult(text, is_error=True, details=details)
 
 
-def _read(args: dict[str, Any], cwd: str | Path) -> ToolResult:
+def _read(
+    args: dict[str, Any],
+    cwd: str | Path,
+    *,
+    model: dict[str, Any] | None = None,
+    auto_resize_images: bool = True,
+) -> ToolResult:
     path_text = str(args.get("path", ""))
-    if not path_text.strip():
-        return _error("read requires a non-empty path")
-    path = _resolve(path_text, cwd)
+    path = _resolve_read(path_text, cwd)
     try:
         raw = path.read_bytes()
     except OSError as exc:
-        return _error(f"Could not read {path_text}: {exc}")
-    if path.suffix.lower() in {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"}:
-        return _result(f"Read image file [{_mime(path.suffix.lower())}]")
+        if isinstance(exc, FileNotFoundError):
+            return _error(f"ENOENT: no such file or directory, access '{path}'")
+        if isinstance(exc, IsADirectoryError):
+            return _error("EISDIR: illegal operation on a directory, read")
+        if isinstance(exc, PermissionError):
+            return _error(f"EACCES: permission denied, access '{path}'")
+        return _error(str(exc))
+    mime = _image_mime(raw)
+    if mime:
+        return _read_image(
+            raw, mime, model=model, auto_resize_images=auto_resize_images
+        )
     text = raw.decode("utf-8", errors="replace")
     lines = text.split("\n")
     offset = args.get("offset")
     try:
-        start = max(0, int(offset) - 1) if offset is not None else 0
+        start = max(0, offset - 1) if offset else 0
     except (TypeError, ValueError):
         return _error("offset must be an integer")
     if start >= len(lines):
@@ -219,13 +482,14 @@ def _read(args: dict[str, Any], cwd: str | Path) -> ToolResult:
         )
     limit = args.get("limit")
     try:
-        end = min(start + int(limit), len(lines)) if limit is not None else len(lines)
+        end = min(start + limit, len(lines)) if limit is not None else len(lines)
     except (TypeError, ValueError):
         return _error("limit must be an integer")
-    selected = "\n".join(lines[start:end])
+    selected = "\n".join(lines[int(start) : int(end)])
     output, truncation = truncate_head(selected)
+    public_truncation = _public_truncation(truncation, output)
     if truncation.get("first_line_exceeds_limit"):
-        first_size = format_size(len(lines[start].encode("utf-8")))
+        first_size = format_size(len(lines[int(start)].encode("utf-8")))
         output = (
             f"[Line {start + 1} is {first_size}, exceeds {format_size(DEFAULT_MAX_BYTES)} "
             f"limit. Use bash: sed -n '{start + 1}p' {path_text} | head -c {DEFAULT_MAX_BYTES}]"
@@ -241,9 +505,10 @@ def _read(args: dict[str, Any], cwd: str | Path) -> ToolResult:
             )
         output += "\n\n" + suffix
     elif limit is not None and end < len(lines):
-        output += f"\n\n[{len(lines) - end} more lines in file. Use offset={end + 1} to continue.]"
+        output += f"\n\n[{_number_text(len(lines) - end)} more lines in file. Use offset={_number_text(end + 1)} to continue.]"
     return _result(
-        output, **({"truncation": truncation} if truncation.get("truncated") else {})
+        output,
+        **({"truncation": public_truncation} if truncation.get("truncated") else {}),
     )
 
 
@@ -261,7 +526,7 @@ def _mime(suffix: str) -> str:
 def _write(args: dict[str, Any], cwd: str | Path) -> ToolResult:
     path_text = str(args.get("path", ""))
     content = args.get("content")
-    if not path_text.strip() or not isinstance(content, str):
+    if not isinstance(content, str):
         return _error("write requires path and string content")
     path = _resolve(path_text, cwd)
     try:
@@ -498,7 +763,7 @@ def _edit(args: dict[str, Any], cwd: str | Path) -> ToolResult:
     if isinstance(args.get("oldText"), str) and isinstance(args.get("newText"), str):
         edits = list(edits) if isinstance(edits, list) else []
         edits.append({"oldText": args["oldText"], "newText": args["newText"]})
-    if not path_text.strip() or not isinstance(edits, list) or not edits:
+    if not isinstance(edits, list) or not edits:
         return _error(
             "Edit tool input is invalid. edits must contain at least one replacement."
         )
@@ -610,120 +875,245 @@ def _edit(args: dict[str, Any], cwd: str | Path) -> ToolResult:
     )
 
 
-def _bash(args: dict[str, Any], cwd: str | Path) -> ToolResult:
-    command = args.get("command")
-    if not isinstance(command, str) or not command.strip():
-        return _error("bash requires a non-empty command")
+class _OutputAccumulator:
+    """Pi's bounded UTF-8 display tail and full raw output spill."""
+
+    def __init__(self):
+        self.decoder = codecs.getincrementaldecoder("utf-8")("replace")
+        self.tail = ""
+        self.boundary = True
+        self.total_bytes = 0
+        self.completed_lines = 0
+        self.line_bytes = 0
+        self.raw = tempfile.SpooledTemporaryFile(max_size=DEFAULT_MAX_BYTES)
+        self.full_path = None
+        self._spill = None
+
+    def append(self, data: bytes, *, final: bool = False):
+        self.raw.write(data)
+        if self._spill is not None:
+            self._spill.write(data)
+            self._spill.flush()
+        text = self.decoder.decode(data, final=final)
+        self.total_bytes += len(text.encode("utf-8"))
+        self.tail += text
+        if "\n" in text:
+            self.completed_lines += text.count("\n")
+            self.line_bytes = len(text.rsplit("\n", 1)[1].encode("utf-8"))
+        else:
+            self.line_bytes += len(text.encode("utf-8"))
+        encoded = self.tail.encode("utf-8")
+        if len(encoded) > DEFAULT_MAX_BYTES * 4:
+            start = len(encoded) - DEFAULT_MAX_BYTES * 2
+            while start < len(encoded) and encoded[start] & 0xC0 == 0x80:
+                start += 1
+            self.boundary = (
+                start == 0 and self.boundary or (start > 0 and encoded[start - 1] == 10)
+            )
+            self.tail = encoded[start:].decode("utf-8")
+
+    def snapshot(self, *, raw_display: bool = False):
+        text = self.tail
+        if not self.boundary and "\n" in text:
+            text = text.split("\n", 1)[1]
+        shown, truncation = truncate_tail(text)
+        total_lines = self.completed_lines + int(self.line_bytes > 0)
+        truncated = (
+            total_lines > DEFAULT_MAX_LINES or self.total_bytes > DEFAULT_MAX_BYTES
+        )
+        truncation.update(
+            truncated=truncated, total_lines=total_lines, total_bytes=self.total_bytes
+        )
+        if not truncated:
+            return shown if raw_display else shown or "(no output)", {}
+        if not truncation["truncated_by"]:
+            truncation["truncated_by"] = (
+                "bytes" if self.total_bytes > DEFAULT_MAX_BYTES else "lines"
+            )
+        if not self.full_path:
+            with tempfile.NamedTemporaryFile(
+                prefix="pi-bash-", suffix=".log", delete=False
+            ) as output:
+                self.full_path = output.name
+                self.raw.seek(0)
+                shutil.copyfileobj(self.raw, output)
+            self._spill = open(self.full_path, "ab")
+        start = total_lines - truncation["output_lines"] + 1
+        if truncation["last_line_partial"]:
+            note = f"Showing last {format_size(truncation['output_bytes'])} of line {total_lines} (line is {format_size(self.line_bytes)}). Full output: {self.full_path}"
+        elif truncation["truncated_by"] == "lines":
+            note = f"Showing lines {start}-{total_lines} of {total_lines}. Full output: {self.full_path}"
+        else:
+            note = f"Showing lines {start}-{total_lines} of {total_lines} ({format_size(DEFAULT_MAX_BYTES)} limit). Full output: {self.full_path}"
+        rendered = (
+            shown if raw_display else (shown or "(no output)") + "\n\n[" + note + "]"
+        )
+        return rendered, {
+            "truncation": _public_truncation(truncation, shown),
+            "fullOutputPath": self.full_path,
+        }
+
+    def read_full_output(self, maximum: int = 1024 * 1024):
+        self.raw.seek(0, os.SEEK_END)
+        size = self.raw.tell()
+        self.raw.seek(0)
+        if size <= maximum:
+            return self.raw.read().decode("utf-8", errors="replace"), False
+        half = maximum // 2
+        decoder = codecs.getincrementaldecoder("utf-8")("replace")
+        head = decoder.decode(self.raw.read(half), final=False)
+        self.raw.seek(size - (maximum - half))
+        tail = self.raw.read()
+        while tail and tail[0] & 0xC0 == 0x80:
+            tail = tail[1:]
+        return (
+            f"{head}\n\n[... {size - maximum} bytes omitted ...]\n\n{tail.decode('utf-8', errors='replace')}",
+            True,
+        )
+
+    def close(self):
+        if self._spill is not None:
+            self._spill.close()
+        self.raw.close()
+
+
+def _bash(
+    args: dict[str, Any],
+    cwd: str | Path,
+    cancel_event: Any = None,
+    on_update: Any = None,
+) -> ToolResult:
+    command = args["command"]
     timeout = args.get("timeout")
-    try:
-        timeout_value = float(timeout) if timeout is not None else None
-    except (TypeError, ValueError):
-        return _error("timeout must be a number")
-    try:
-        # Pi selects bash independently of the user's login shell. In
-        # particular, zsh uses different array indices and container /bin/sh
-        # may be dash, which rejects bash syntax altogether.
-        shell = (
-            "/bin/bash" if Path("/bin/bash").exists() else shutil.which("bash") or "sh"
+    if timeout is not None and (not math.isfinite(timeout) or timeout <= 0):
+        return _error("Invalid timeout: must be a finite number of seconds")
+    if timeout is not None and timeout > 2147483.647:
+        return _error("Invalid timeout: maximum is 2147483.647 seconds")
+    if cancel_event is not None and cancel_event.is_set():
+        return _error("Command aborted")
+    if not Path(cwd).exists():
+        return _error(
+            f"Working directory does not exist: {cwd}\nCannot execute bash commands."
         )
-        completed = subprocess.run(
-            command,
-            shell=True,
+    shell = "/bin/bash" if Path("/bin/bash").exists() else shutil.which("bash") or "sh"
+    accumulator = _OutputAccumulator()
+    if on_update is not None:
+        on_update(ToolResult("", content_blocks=[]))
+    process = None
+    status = None
+    update_dirty = False
+    last_update = 0.0
+
+    def emit_update():
+        nonlocal last_update, update_dirty
+        if on_update is not None and update_dirty:
+            update_dirty = False
+            last_update = time.monotonic()
+            shown, details = accumulator.snapshot(raw_display=True)
+            on_update(ToolResult(shown, details=details))
+
+    try:
+        process = subprocess.Popen(
+            [shell, "-c", command],
             cwd=str(cwd),
-            capture_output=True,
-            text=True,
-            errors="replace",
-            timeout=timeout_value,
-            executable=shell,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            start_new_session=os.name != "nt",
         )
-        output = completed.stdout + completed.stderr
-        code = completed.returncode
-    except subprocess.TimeoutExpired as exc:
-        # TimeoutExpired carries bytes even when subprocess.run(text=True).
-        stdout = exc.stdout or b""
-        stderr = exc.stderr or b""
-        output = (
-            stdout.decode("utf-8", errors="replace")
-            if isinstance(stdout, bytes)
-            else stdout
-        ) + (
-            stderr.decode("utf-8", errors="replace")
-            if isinstance(stderr, bytes)
-            else stderr
+        started = time.monotonic()
+        last_data = started
+        exited_at = None
+        with selectors.DefaultSelector() as selector:
+            selector.register(process.stdout, selectors.EVENT_READ)
+            while selector.get_map():
+                now = time.monotonic()
+                if update_dirty and now - last_update >= 0.1:
+                    emit_update()
+                cancelled = cancel_event is not None and cancel_event.is_set()
+                expired = timeout is not None and now - started >= timeout
+                if (cancelled or expired) and status is None:
+                    status = (
+                        "Command aborted"
+                        if cancelled
+                        else f"Command timed out after {timeout:g} seconds"
+                    )
+                    try:
+                        if os.name != "nt":
+                            os.killpg(process.pid, signal.SIGKILL)
+                        else:
+                            process.kill()
+                    except ProcessLookupError:
+                        pass
+                if process.poll() is not None:
+                    exited_at = exited_at or now
+                    if now - max(exited_at, last_data) >= 0.1:
+                        break
+                for key, _ in selector.select(0.02):
+                    data = os.read(key.fd, 65536)
+                    if data:
+                        accumulator.append(data)
+                        update_dirty = True
+                        last_data = time.monotonic()
+                        if last_data - last_update >= 0.1:
+                            emit_update()
+                    else:
+                        selector.unregister(key.fileobj)
+        process.stdout.close()
+        code = process.wait()
+        if code < 0:
+            code = 128 - code
+        accumulator.append(b"", final=True)
+        emit_update()
+        shown, details = accumulator.snapshot()
+        if status:
+            shown = "" if shown == "(no output)" else shown
+            return _error((shown + "\n\n" if shown else "") + status)
+        if code != 0:
+            shown += f"\n\nCommand exited with code {code}"
+        full_output, full_truncated = accumulator.read_full_output()
+        structured = {
+            "output": full_output,
+            "truncated": full_truncated,
+            "exit_code": code,
+            "wall_time_seconds": math.floor((time.monotonic() - started) * 10 + 0.5)
+            / 10,
+        }
+        if full_truncated and accumulator.full_path:
+            structured["full_output_path"] = accumulator.full_path
+        return ToolResult(
+            shown, is_error=code != 0, details=details, structured_content=structured
         )
-        shown, _ = truncate_tail(output)
-        status = f"Command timed out after {timeout_value:g} seconds"
-        return _error(f"{shown}\n\n{status}" if shown else status)
     except OSError as exc:
-        return _error(f"Failed to execute command: {exc}")
-    shown, truncation = truncate_tail(output)
-    if truncation.get("truncated"):
-        shown += f"\n\n[{format_size(DEFAULT_MAX_BYTES)} output limit reached]"
-    text = shown or "(no output)"
-    if code != 0:
-        text += f"\n\nCommand exited with code {code}"
-    return ToolResult(
-        text,
-        is_error=code != 0,
-        details={"exit_code": code, "truncation": truncation},
+        return _error(str(exc))
+    finally:
+        if process is not None and process.stdout is not None:
+            process.stdout.close()
+        accumulator.close()
+
+
+def _load_ignore_rules(root: Path, *, for_find: bool = False):
+    from .ignore import IgnoreRules
+
+    repository = next(
+        (parent for parent in (root, *root.parents) if (parent / ".git").exists()), None
     )
+    names = (
+        (".gitignore", ".ignore", ".fdignore")
+        if for_find
+        else ((".gitignore", ".ignore") if repository else (".ignore",))
+    )
+    return IgnoreRules(repository or root, names=names, boundary=root)
 
 
-def _load_ignore_rules(root: Path) -> list[tuple[Path, str, bool]]:
-    """Load the common gitignore forms used by Pi's rg/fd-backed tools."""
-
-    rules: list[tuple[Path, str, bool]] = []
-    for ignore_file in root.rglob(".gitignore"):
-        if not ignore_file.is_file() or ".git" in ignore_file.parts:
-            continue
-        try:
-            lines = ignore_file.read_text(encoding="utf-8").splitlines()
-        except OSError:
-            continue
-        for line in lines:
-            value = line.strip()
-            if not value or value.startswith("#"):
-                continue
-            negated = value.startswith("!")
-            if negated:
-                value = value[1:]
-            rules.append((ignore_file.parent, value, negated))
-    return rules
-
-
-def _is_ignored(path: Path, root: Path, rules: list[tuple[Path, str, bool]]) -> bool:
-    if any(part in {".git", "node_modules"} for part in path.relative_to(root).parts):
-        return True
-    ignored = False
-    for base, pattern, negated in rules:
-        try:
-            relative = path.relative_to(base).as_posix()
-        except ValueError:
-            continue
-        directory_pattern = pattern.endswith("/")
-        pattern = pattern.rstrip("/")
-        matched = (
-            fnmatch.fnmatch(relative, pattern)
-            or fnmatch.fnmatch(path.name, pattern)
-            or ("/" not in pattern and fnmatch.fnmatch(relative, f"**/{pattern}"))
-        )
-        if directory_pattern and (matched or relative.startswith(pattern + "/")):
-            matched = True
-        if matched:
-            ignored = not negated
-    return ignored
+def _is_ignored(path: Path, root: Path, rules) -> bool:
+    return rules.is_ignored(path)
 
 
 def _iter_files(root: Path):
-    rules = _load_ignore_rules(root)
-    for current, dirs, files in os.walk(root):
-        dirs[:] = sorted(
-            d for d in dirs if not _is_ignored(Path(current) / d, root, rules)
-        )
-        for name in sorted(files):
-            path = Path(current) / name
-            if path.is_file() and not _is_ignored(path, root, rules):
-                yield path
+    from .ignore import walk_lifo
+
+    yield from walk_lifo(root, _load_ignore_rules(root))
 
 
 def _grep(args: dict[str, Any], cwd: str | Path) -> ToolResult:
@@ -734,20 +1124,31 @@ def _grep(args: dict[str, Any], cwd: str | Path) -> ToolResult:
     if not root.exists():
         return _error(f"Path not found: {root}")
     literal = bool(args.get("literal"))
-    flags = re.IGNORECASE if args.get("ignoreCase") else 0
+    from .search_regex import SearchRegexError, compile_search
+
     try:
-        matcher = re.compile(re.escape(pattern) if literal else pattern, flags)
-    except re.error as exc:
-        return _error(f"Invalid regex: {exc}")
-    limit = max(1, int(args.get("limit") or 100))
+        matcher = compile_search(
+            pattern, literal=literal, ignore_case=bool(args.get("ignoreCase"))
+        )
+    except SearchRegexError as exc:
+        return _error(str(exc))
+    limit = max(1, args.get("limit", 100))
     context = max(0, int(args.get("context") or 0))
     glob = args.get("glob")
+    from .ignore import matches_glob
+
     files = [root] if root.is_file() else list(_iter_files(root))
     matches: list[tuple[Path, int, list[str]]] = []
     for path in files:
         relative = path.name if root.is_file() else path.relative_to(root).as_posix()
-        if glob and not fnmatch.fnmatch(relative, str(glob)):
-            continue
+        if glob:
+            negated = glob.startswith("!")
+            selected_glob = glob[1:] if negated else glob
+            glob_matches = matches_glob(
+                relative, selected_glob, basename="/" not in selected_glob
+            )
+            if glob_matches == negated:
+                continue
         try:
             lines = (
                 path.read_text(encoding="utf-8", errors="replace")
@@ -785,11 +1186,11 @@ def _grep(args: dict[str, Any], cwd: str | Path) -> ToolResult:
                 # Match ripgrep's context convention used by Pi: context
                 # lines use a dash before and after the line number.
                 output.append(f"{base}-{current}- {line}")
-    text, truncation = truncate_head("\n".join(output), max_lines=10**9)
+    text, truncation = truncate_head("\n".join(output), max_lines=9007199254740991)
     notices = []
     if len(matches) >= limit:
         notices.append(
-            f"{limit} matches limit reached. Use limit={limit * 2} for more, or refine pattern"
+            f"{_number_text(limit)} matches limit reached. Use limit={_number_text(limit * 2)} for more, or refine pattern"
         )
     if truncation.get("truncated"):
         notices.append(f"{format_size(DEFAULT_MAX_BYTES)} limit reached")
@@ -799,7 +1200,14 @@ def _grep(args: dict[str, Any], cwd: str | Path) -> ToolResult:
         )
     if notices:
         text += "\n\n[" + ". ".join(notices) + "]"
-    return _result(text, truncation=truncation if truncation.get("truncated") else None)
+    return _result(
+        text,
+        truncation=_public_truncation(truncation, text.rsplit("\n\n[", 1)[0])
+        if truncation.get("truncated")
+        else None,
+        matchLimitReached=limit if len(matches) >= limit else None,
+        linesTruncated=True if line_truncated else None,
+    )
 
 
 def _find(args: dict[str, Any], cwd: str | Path) -> ToolResult:
@@ -809,32 +1217,43 @@ def _find(args: dict[str, Any], cwd: str | Path) -> ToolResult:
     root = _resolve(args.get("path") or ".", cwd)
     if not root.exists():
         return _error(f"Path not found: {root}")
-    limit = max(1, int(args.get("limit") or 1000))
+    limit = args.get("limit", 1000)
     results: list[str] = []
-    rules = _load_ignore_rules(root)
-    candidates = sorted(
-        root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()
-    )
+    rules = _load_ignore_rules(root, for_find=True)
+    from .ignore import matches_glob, walk_lifo
+
+    candidates = walk_lifo(root, rules, directories=True, symlinks=True)
     for path in candidates:
         relative = path.relative_to(root).as_posix()
         if _is_ignored(path, root, rules):
             continue
-        if fnmatch.fnmatch(relative, pattern) or fnmatch.fnmatch(path.name, pattern):
+        if matches_glob(
+            relative,
+            pattern,
+            basename="/" not in pattern,
+            ignore_case=pattern.lower() == pattern,
+        ):
             results.append(relative + "/" if path.is_dir() else relative)
             if len(results) >= limit:
                 break
     if not results:
         return _result("No files found matching pattern")
-    output, truncation = truncate_head("\n".join(results), max_lines=10**9)
+    output, truncation = truncate_head("\n".join(results), max_lines=9007199254740991)
     notices = []
     if len(results) >= limit:
-        notices.append(f"{limit} results limit reached")
+        notices.append(
+            f"{_number_text(limit)} results limit reached. Use limit={_number_text(limit * 2)} for more, or refine pattern"
+        )
     if truncation.get("truncated"):
         notices.append(f"{format_size(DEFAULT_MAX_BYTES)} limit reached")
     if notices:
         output += "\n\n[" + ". ".join(notices) + "]"
     return _result(
-        output, truncation=truncation if truncation.get("truncated") else None
+        output,
+        truncation=_public_truncation(truncation, output.rsplit("\n\n[", 1)[0])
+        if truncation.get("truncated")
+        else None,
+        resultLimitReached=limit if len(results) >= limit else None,
     )
 
 
@@ -844,122 +1263,191 @@ def _ls(args: dict[str, Any], cwd: str | Path) -> ToolResult:
         return _error(f"Path not found: {path}")
     if not path.is_dir():
         return _error(f"Not a directory: {path}")
-    limit = max(1, int(args.get("limit") or 500))
+    limit = args.get("limit", 500)
     entries = sorted(path.iterdir(), key=lambda item: item.name.casefold())
-    selected = entries[:limit]
+    selected = [entry for entry in entries if entry.exists()][
+        : max(0, math.ceil(limit))
+    ]
     output = "\n".join(item.name + ("/" if item.is_dir() else "") for item in selected)
     if not output:
         return _result("(empty directory)")
     notices = []
     if len(entries) > limit:
-        notices.append(f"{limit} entries limit reached. Use limit={limit * 2} for more")
-    output, truncation = truncate_head(output, max_lines=10**9)
+        notices.append(
+            f"{_number_text(limit)} entries limit reached. Use limit={_number_text(limit * 2)} for more"
+        )
+    output, truncation = truncate_head(output, max_lines=9007199254740991)
     if truncation.get("truncated"):
         notices.append(f"{format_size(DEFAULT_MAX_BYTES)} limit reached")
     if notices:
         output += "\n\n[" + ". ".join(notices) + "]"
     return _result(
-        output, truncation=truncation if truncation.get("truncated") else None
+        output,
+        truncation=_public_truncation(truncation, output.rsplit("\n\n[", 1)[0])
+        if truncation.get("truncated")
+        else None,
+        entryLimitReached=limit if len(entries) > limit else None,
     )
 
 
-_SCHEMAS: dict[str, dict[str, Any]] = {
-    "read": {
-        "description": "Read the contents of a file. Supports text files and images. For text files, output is truncated to 2000 lines or 50KB; use offset and limit for large files.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "path": {"type": "string"},
-                "offset": {"type": "integer"},
-                "limit": {"type": "integer"},
-            },
-            "required": ["path"],
-            "additionalProperties": False,
-        },
-    },
-    "bash": {
-        "description": "Execute a shell command in the current working directory. Returns stdout and stderr, truncated to the last 2000 lines or 50KB.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "command": {"type": "string"},
-                "timeout": {"type": "number"},
-            },
-            "required": ["command"],
-            "additionalProperties": False,
-        },
-    },
-    "edit": {
-        "description": "Edit a single file using exact text replacement. Every oldText must match a unique, non-overlapping region of the original file.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "path": {"type": "string"},
-                "edits": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "oldText": {"type": "string"},
-                            "newText": {"type": "string"},
-                        },
-                        "required": ["oldText", "newText"],
-                        "additionalProperties": False,
-                    },
-                },
-            },
-            "required": ["path", "edits"],
-            "additionalProperties": False,
-        },
-    },
-    "write": {
-        "description": "Write content to a file. Creates parent directories and overwrites an existing file.",
-        "parameters": {
-            "type": "object",
-            "properties": {"path": {"type": "string"}, "content": {"type": "string"}},
-            "required": ["path", "content"],
-            "additionalProperties": False,
-        },
-    },
-    "grep": {
-        "description": "Search file contents for a regex or literal pattern. Returns matching lines with file paths and line numbers.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "pattern": {"type": "string"},
-                "path": {"type": "string"},
-                "glob": {"type": "string"},
-                "ignoreCase": {"type": "boolean"},
-                "literal": {"type": "boolean"},
-                "context": {"type": "integer"},
-                "limit": {"type": "integer"},
-            },
-            "required": ["pattern"],
-            "additionalProperties": False,
-        },
-    },
-    "find": {
-        "description": "Search for files by glob pattern. Returns paths relative to the search directory.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "pattern": {"type": "string"},
-                "path": {"type": "string"},
-                "limit": {"type": "integer"},
-            },
-            "required": ["pattern"],
-            "additionalProperties": False,
-        },
-    },
-    "ls": {
-        "description": "List directory contents alphabetically, including dotfiles; directories have a trailing slash.",
-        "parameters": {
-            "type": "object",
-            "properties": {"path": {"type": "string"}, "limit": {"type": "integer"}},
-            "additionalProperties": False,
-        },
-    },
+# Generated from pinned upstream tool definitions, including model-visible wording.
+_MANIFEST = json.loads(
+    Path(__file__).with_name("tool_manifest.json").read_text(encoding="utf-8")
+)
+_SCHEMAS = {
+    name: {"description": entry["description"], "parameters": entry["parameters"]}
+    for name, entry in _MANIFEST.items()
 }
+
+
+def _prepare_edit_arguments(arguments: Any) -> Any:
+    if not isinstance(arguments, dict):
+        return arguments
+    args = copy.deepcopy(arguments)
+    edits = args.get("edits")
+    if isinstance(edits, str):
+        try:
+            parsed = json.loads(edits)
+        except (ValueError, TypeError):
+            parsed = None
+        if isinstance(parsed, list) or _single_edit(parsed):
+            args["edits"] = parsed if isinstance(parsed, list) else [parsed]
+    elif _single_edit(edits):
+        args["edits"] = [edits]
+    if isinstance(args.get("oldText"), str) and isinstance(args.get("newText"), str):
+        args["edits"] = (
+            list(args["edits"]) if isinstance(args.get("edits"), list) else []
+        ) + [{"oldText": args.pop("oldText"), "newText": args.pop("newText")}]
+    return args
+
+
+def _single_edit(value: Any) -> bool:
+    return (
+        isinstance(value, dict)
+        and isinstance(value.get("oldText"), str)
+        and isinstance(value.get("newText"), str)
+    )
+
+
+def _typebox_convert(value: Any, schema: dict[str, Any]) -> Any:
+    kind = schema.get("type")
+    if kind == "object" and isinstance(value, dict):
+        required = schema.get("required", [])
+        for key, prop in schema.get("properties", {}).items():
+            if key not in value:
+                continue
+            if value[key] is None and key not in required:
+                del value[key]
+            else:
+                value[key] = _typebox_convert(value[key], prop)
+    elif kind == "array":
+        value = value if isinstance(value, list) else [value]
+        value = [_typebox_convert(item, schema["items"]) for item in value]
+    elif kind == "string" and (value is None or isinstance(value, (bool, int, float))):
+        value = (
+            "null"
+            if value is None
+            else (
+                "true" if value is True else "false" if value is False else str(value)
+            )
+        )
+        if isinstance(value, str) and value.endswith(".0"):
+            value = value[:-2]
+    elif kind == "number":
+        if isinstance(value, bool) or value is None:
+            value = int(value or 0)
+        elif isinstance(value, str):
+            text = value.strip()
+            try:
+                if text.lower() in {"true", "false"}:
+                    value = 1 if text.lower() == "true" else 0
+                elif text.lower().startswith(("0x", "0o", "0b")):
+                    value = int(text, 0)
+                else:
+                    converted = float(text) if text else 0
+                    if math.isfinite(converted):
+                        value = (
+                            int(converted) if converted == int(converted) else converted
+                        )
+            except ValueError:
+                pass
+    elif kind == "boolean" and not isinstance(value, bool):
+        if (
+            value is None
+            or value == 0
+            or value == "0"
+            or (isinstance(value, str) and value.lower() == "false")
+        ):
+            value = False
+        elif (
+            value == 1
+            or value == "1"
+            or (isinstance(value, str) and value.lower() == "true")
+        ):
+            value = True
+    return value
+
+
+def _validation_errors(value: Any, schema: dict[str, Any], path: str = "") -> list[str]:
+    kind = schema.get("type")
+    valid = {
+        "object": isinstance(value, dict),
+        "array": isinstance(value, list),
+        "string": isinstance(value, str),
+        "number": isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        and math.isfinite(value),
+        "boolean": isinstance(value, bool),
+    }.get(kind, True)
+    if not valid:
+        return [f"  - {path or 'root'}: must be {kind}"]
+    errors: list[str] = []
+    if kind == "object":
+        required = schema.get("required", [])
+        missing = [key for key in required if key not in value]
+        if missing:
+            target = f"{path}.{missing[0]}" if path else missing[0]
+            errors.append(
+                f"  - {target}: must have required properties {', '.join(required)}"
+            )
+        for key, prop in schema.get("properties", {}).items():
+            if key in value:
+                errors.extend(
+                    _validation_errors(
+                        value[key], prop, f"{path}.{key}" if path else key
+                    )
+                )
+    elif kind == "array":
+        for index, item in enumerate(value):
+            errors.extend(_validation_errors(item, schema["items"], f"{path}.{index}"))
+    return errors
+
+
+def prepare_tool_arguments(
+    name: str, arguments: Any, arguments_error: str | None = None
+) -> dict[str, Any]:
+    """Run Pi's prepareArguments + TypeBox conversion/validation before dispatch."""
+    if arguments_error:
+        raise ValueError(f'Invalid arguments for tool "{name}": {arguments_error}')
+    if name not in _SCHEMAS:
+        raise ValueError(f"Tool {name} not found")
+    prepared = (
+        _prepare_edit_arguments(arguments)
+        if name == "edit"
+        else copy.deepcopy(arguments)
+    )
+    received = copy.deepcopy(prepared)
+    converted = _typebox_convert(prepared, _SCHEMAS[name]["parameters"])
+    errors = _validation_errors(converted, _SCHEMAS[name]["parameters"])
+    if errors:
+        formatted = json.dumps(received, ensure_ascii=False, indent=2)
+        raise ValueError(
+            f'Validation failed for tool "{name}":\n'
+            + "\n".join(errors)
+            + "\n\nReceived arguments:\n"
+            + formatted
+        )
+    return converted
 
 
 def tool_schemas(
@@ -973,7 +1461,20 @@ def tool_schemas(
     ]
 
 
-def execute_tool(name: str, arguments: dict[str, Any], cwd: str | Path) -> ToolResult:
+_FILE_LOCKS: dict[str, threading.Lock] = {}
+_FILE_LOCKS_GUARD = threading.Lock()
+
+
+def execute_tool(
+    name: str,
+    arguments: dict[str, Any],
+    cwd: str | Path,
+    *,
+    cancel_event: Any = None,
+    model: dict[str, Any] | None = None,
+    auto_resize_images: bool = True,
+    on_update: Any = None,
+) -> ToolResult:
     handlers = {
         "read": _read,
         "bash": _bash,
@@ -987,7 +1488,36 @@ def execute_tool(name: str, arguments: dict[str, Any], cwd: str | Path) -> ToolR
     if handler is None:
         return _error(f"Unknown tool: {name}")
     try:
-        return handler(arguments, cwd)
+        args = prepare_tool_arguments(name, arguments)
+        if name == "bash":
+            return _bash(args, cwd, cancel_event, on_update)
+        if cancel_event is not None and cancel_event.is_set():
+            return _error("Operation aborted")
+        if name == "read":
+            result = _read(args, cwd, model=model, auto_resize_images=auto_resize_images)
+            if not result.is_error:
+                image = next(
+                    (block for block in result.content_blocks or [] if block["type"] == "image"),
+                    None,
+                )
+                result.structured_content = (
+                    {**image, "note": result.content} if image else result.content
+                )
+            return result
+        if name in {"write", "edit"}:
+            key = str(_resolve(args["path"], cwd))
+            with _FILE_LOCKS_GUARD:
+                lock = _FILE_LOCKS.setdefault(key, threading.Lock())
+            with lock:
+                if cancel_event is not None and cancel_event.is_set():
+                    return _error("Operation aborted")
+                result = handler(args, cwd)
+                if cancel_event is not None and cancel_event.is_set():
+                    return _error("Operation aborted")
+                return result
+        return handler(args, cwd)
+    except ValueError as exc:
+        return _error(str(exc))
     except Exception as exc:  # Keep tool failures in the model-visible protocol.
         return _error(f"{name} failed: {type(exc).__name__}: {exc}")
 
@@ -996,6 +1526,7 @@ __all__ = [
     "ToolResult",
     "execute_tool",
     "tool_schemas",
+    "prepare_tool_arguments",
     "truncate_head",
     "truncate_tail",
 ]

@@ -1,0 +1,6483 @@
+{
+  "baseline": "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0",
+  "method": "Unmodified original streamSimple; request-body onPayload capture, and fake in-memory fetch/SSE only. No network or model calls.",
+  "networkCalls": 0,
+  "fakeTransportCalls": 23,
+  "source_sha256": {
+    "packages/ai/src/api/openai-completions.ts": "d29c626c0c595f2e9a11cf8a38d82c788cae0fd591fdb216327ea185c4ee21be",
+    "packages/ai/src/api/openai-responses.ts": "3d49a7d5860545300f243e68b1c08e1a4bc94f60fa7e4ab67ff082c30004d15e",
+    "packages/ai/src/api/openai-responses-shared.ts": "22747329d8cb720bfc428bbfe35fa3ff41e5c3f57e904eedd4298640c0ea8b2c",
+    "packages/ai/src/api/openai-prompt-cache.ts": "78727b9b42d5c5cdc47d17f44d532cdf951cbee3b158cacfb3e640d8f792e8a4",
+    "packages/ai/src/api/simple-options.ts": "4fc3131c480cb5c16506037195c5d9668b7b85ce7cf8117ecc77bd81188494ef"
+  },
+  "bodyCases": [
+    {
+      "name": "openai_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openai",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "high"
+      }
+    },
+    {
+      "name": "openai_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openai",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "zai_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "zai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "zai",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": {
+          "type": "enabled",
+          "clear_thinking": false
+        },
+        "reasoning_effort": "high"
+      }
+    },
+    {
+      "name": "zai_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "zai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "zai",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": {
+          "type": "disabled"
+        }
+      }
+    },
+    {
+      "name": "qwen_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "qwen",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "qwen",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "enable_thinking": true,
+        "reasoning_effort": "high"
+      }
+    },
+    {
+      "name": "qwen_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "qwen",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "qwen",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "enable_thinking": false
+      }
+    },
+    {
+      "name": "qwen-chat-template_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "qwen-chat-template",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "qwen-chat-template",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "chat_template_kwargs": {
+          "enable_thinking": true,
+          "preserve_thinking": true
+        }
+      }
+    },
+    {
+      "name": "qwen-chat-template_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "qwen-chat-template",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "qwen-chat-template",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "chat_template_kwargs": {
+          "enable_thinking": false,
+          "preserve_thinking": true
+        }
+      }
+    },
+    {
+      "name": "deepseek_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "deepseek",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "deepseek",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high"
+      }
+    },
+    {
+      "name": "deepseek_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "deepseek",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "deepseek",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": {
+          "type": "disabled"
+        }
+      }
+    },
+    {
+      "name": "openrouter_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openrouter",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openrouter",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "effort": "high"
+        }
+      }
+    },
+    {
+      "name": "openrouter_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openrouter",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openrouter",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "effort": "none"
+        }
+      }
+    },
+    {
+      "name": "ant-ling_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "ant-ling",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "ant-ling",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "effort": "high"
+        }
+      }
+    },
+    {
+      "name": "ant-ling_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "ant-ling",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "ant-ling",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "together_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "together",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "together",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "enabled": true
+        },
+        "reasoning_effort": "high"
+      }
+    },
+    {
+      "name": "together_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "together",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "together",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "string-thinking_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "string-thinking",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "string-thinking",
+        "supportsReasoningEffort": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": "high"
+      }
+    },
+    {
+      "name": "string-thinking_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "string-thinking",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "string-thinking",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": "none"
+      }
+    },
+    {
+      "name": "openai_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openai",
+        "supportsReasoningEffort": true
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "minimal"
+      }
+    },
+    {
+      "name": "openai_unset_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openai",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {}
+    },
+    {
+      "name": "zai_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "zai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "zai",
+        "supportsReasoningEffort": true
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": {
+          "type": "enabled",
+          "clear_thinking": false
+        },
+        "reasoning_effort": "minimal"
+      }
+    },
+    {
+      "name": "zai_unset_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "zai",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "zai",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": {
+          "type": "disabled"
+        }
+      }
+    },
+    {
+      "name": "qwen_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "qwen",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "qwen",
+        "supportsReasoningEffort": true
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "enable_thinking": true,
+        "reasoning_effort": "minimal"
+      }
+    },
+    {
+      "name": "qwen_unset_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "qwen",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "qwen",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "enable_thinking": false
+      }
+    },
+    {
+      "name": "deepseek_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "deepseek",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "deepseek",
+        "supportsReasoningEffort": true
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "minimal"
+      }
+    },
+    {
+      "name": "deepseek_unset_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "deepseek",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "deepseek",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {}
+    },
+    {
+      "name": "openrouter_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openrouter",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openrouter",
+        "supportsReasoningEffort": true
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "effort": "minimal"
+        }
+      }
+    },
+    {
+      "name": "openrouter_unset_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "openrouter",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "openrouter",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {}
+    },
+    {
+      "name": "together_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "together",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "together",
+        "supportsReasoningEffort": true
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "enabled": true
+        },
+        "reasoning_effort": "minimal"
+      }
+    },
+    {
+      "name": "together_unset_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "together",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "together",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "string-thinking_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "string-thinking",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "string-thinking",
+        "supportsReasoningEffort": true
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "thinking": "minimal"
+      }
+    },
+    {
+      "name": "string-thinking_unset_off_null",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null,
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "string-thinking",
+          "supportsReasoningEffort": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "string-thinking",
+        "supportsReasoningEffort": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {}
+    },
+    {
+      "name": "ant_ling_unmapped_effort",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none"
+        },
+        "compat": {
+          "thinkingFormat": "ant-ling"
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "ant-ling"
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {}
+    },
+    {
+      "name": "chat-template_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "chat-template",
+          "supportsReasoningEffort": true,
+          "chatTemplateKwargs": {
+            "literal": "keep",
+            "number": 7,
+            "disabledLiteral": false,
+            "nullLiteral": null,
+            "enabled": {
+              "$var": "thinking.enabled"
+            },
+            "effort": {
+              "$var": "thinking.effort"
+            },
+            "budget": {
+              "$var": "thinking.budget"
+            },
+            "onlyEnabled": {
+              "$var": "thinking.enabled",
+              "omitWhenOff": true
+            },
+            "onlyEffort": {
+              "$var": "thinking.effort",
+              "omitWhenOff": true
+            }
+          }
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "chat-template",
+        "supportsReasoningEffort": true,
+        "chatTemplateKwargs": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": {
+            "$var": "thinking.enabled"
+          },
+          "effort": {
+            "$var": "thinking.effort"
+          },
+          "budget": {
+            "$var": "thinking.budget"
+          },
+          "onlyEnabled": {
+            "$var": "thinking.enabled",
+            "omitWhenOff": true
+          },
+          "onlyEffort": {
+            "$var": "thinking.effort",
+            "omitWhenOff": true
+          }
+        }
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "chat_template_kwargs": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": true,
+          "effort": "high",
+          "budget": 8976,
+          "onlyEnabled": true,
+          "onlyEffort": "high"
+        }
+      }
+    },
+    {
+      "name": "chat-template_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "chat-template",
+          "supportsReasoningEffort": true,
+          "chatTemplateKwargs": {
+            "literal": "keep",
+            "number": 7,
+            "disabledLiteral": false,
+            "nullLiteral": null,
+            "enabled": {
+              "$var": "thinking.enabled"
+            },
+            "effort": {
+              "$var": "thinking.effort"
+            },
+            "budget": {
+              "$var": "thinking.budget"
+            },
+            "onlyEnabled": {
+              "$var": "thinking.enabled",
+              "omitWhenOff": true
+            },
+            "onlyEffort": {
+              "$var": "thinking.effort",
+              "omitWhenOff": true
+            }
+          }
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "chat-template",
+        "supportsReasoningEffort": true,
+        "chatTemplateKwargs": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": {
+            "$var": "thinking.enabled"
+          },
+          "effort": {
+            "$var": "thinking.effort"
+          },
+          "budget": {
+            "$var": "thinking.budget"
+          },
+          "onlyEnabled": {
+            "$var": "thinking.enabled",
+            "omitWhenOff": true
+          },
+          "onlyEffort": {
+            "$var": "thinking.effort",
+            "omitWhenOff": true
+          }
+        }
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "chat_template_kwargs": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": false,
+          "effort": "none"
+        }
+      }
+    },
+    {
+      "name": "baseten_high",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "baseten",
+          "supportsReasoningEffort": true,
+          "chatTemplateArgs": {
+            "literal": "keep",
+            "number": 7,
+            "disabledLiteral": false,
+            "nullLiteral": null,
+            "enabled": {
+              "$var": "thinking.enabled"
+            },
+            "effort": {
+              "$var": "thinking.effort"
+            },
+            "budget": {
+              "$var": "thinking.budget"
+            },
+            "onlyEnabled": {
+              "$var": "thinking.enabled",
+              "omitWhenOff": true
+            },
+            "onlyEffort": {
+              "$var": "thinking.effort",
+              "omitWhenOff": true
+            }
+          }
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "baseten",
+        "supportsReasoningEffort": true,
+        "chatTemplateArgs": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": {
+            "$var": "thinking.enabled"
+          },
+          "effort": {
+            "$var": "thinking.effort"
+          },
+          "budget": {
+            "$var": "thinking.budget"
+          },
+          "onlyEnabled": {
+            "$var": "thinking.enabled",
+            "omitWhenOff": true
+          },
+          "onlyEffort": {
+            "$var": "thinking.effort",
+            "omitWhenOff": true
+          }
+        }
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "chat_template_args": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": true,
+          "effort": "high",
+          "budget": 8976,
+          "onlyEnabled": true,
+          "onlyEffort": "high"
+        },
+        "reasoning_effort": "high"
+      }
+    },
+    {
+      "name": "baseten_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingFormat": "baseten",
+          "supportsReasoningEffort": true,
+          "chatTemplateArgs": {
+            "literal": "keep",
+            "number": 7,
+            "disabledLiteral": false,
+            "nullLiteral": null,
+            "enabled": {
+              "$var": "thinking.enabled"
+            },
+            "effort": {
+              "$var": "thinking.effort"
+            },
+            "budget": {
+              "$var": "thinking.budget"
+            },
+            "onlyEnabled": {
+              "$var": "thinking.enabled",
+              "omitWhenOff": true
+            },
+            "onlyEffort": {
+              "$var": "thinking.effort",
+              "omitWhenOff": true
+            }
+          }
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "baseten",
+        "supportsReasoningEffort": true,
+        "chatTemplateArgs": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": {
+            "$var": "thinking.enabled"
+          },
+          "effort": {
+            "$var": "thinking.effort"
+          },
+          "budget": {
+            "$var": "thinking.budget"
+          },
+          "onlyEnabled": {
+            "$var": "thinking.enabled",
+            "omitWhenOff": true
+          },
+          "onlyEffort": {
+            "$var": "thinking.effort",
+            "omitWhenOff": true
+          }
+        }
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "chat_template_args": {
+          "literal": "keep",
+          "number": 7,
+          "disabledLiteral": false,
+          "nullLiteral": null,
+          "enabled": false,
+          "effort": "none"
+        },
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "chat_template_omits_all_off",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": null
+        },
+        "compat": {
+          "thinkingFormat": "chat-template",
+          "chatTemplateKwargs": {
+            "x": {
+              "$var": "thinking.budget"
+            },
+            "y": {
+              "$var": "thinking.effort"
+            }
+          }
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingFormat": "chat-template",
+        "chatTemplateKwargs": {
+          "x": {
+            "$var": "thinking.budget"
+          },
+          "y": {
+            "$var": "thinking.effort"
+          }
+        }
+      },
+      "level": "minimal",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "chat_template_kwargs": {
+          "x": 1024,
+          "y": "minimal"
+        }
+      }
+    },
+    {
+      "name": "budget_default_alias",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsThinkingTokenBudget": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsThinkingTokenBudget": true
+      },
+      "level": "high",
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "high",
+        "thinking_token_budget": 8976
+      }
+    },
+    {
+      "name": "budget_thinking_token_budget",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingTokenBudgetField": "thinking_token_budget"
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingTokenBudgetField": "thinking_token_budget"
+      },
+      "level": "medium",
+      "ceiling": 10000,
+      "thinking_budgets": {
+        "medium": 6000
+      },
+      "expected": {
+        "reasoning_effort": "medium",
+        "thinking_token_budget": 6000
+      }
+    },
+    {
+      "name": "budget_thinking_budget",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingTokenBudgetField": "thinking_budget"
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingTokenBudgetField": "thinking_budget"
+      },
+      "level": "medium",
+      "ceiling": 10000,
+      "thinking_budgets": {
+        "medium": 6000
+      },
+      "expected": {
+        "reasoning_effort": "medium",
+        "thinking_budget": 6000
+      }
+    },
+    {
+      "name": "budget_thinking_budget_tokens",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingTokenBudgetField": "thinking_budget_tokens"
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingTokenBudgetField": "thinking_budget_tokens"
+      },
+      "level": "medium",
+      "ceiling": 10000,
+      "thinking_budgets": {
+        "medium": 6000
+      },
+      "expected": {
+        "reasoning_effort": "medium",
+        "thinking_budget_tokens": 6000
+      }
+    },
+    {
+      "name": "budget_no_answer_room",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsThinkingTokenBudget": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsThinkingTokenBudget": true
+      },
+      "level": "high",
+      "ceiling": 1024,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "high"
+      }
+    },
+    {
+      "name": "budget_context_window_ceiling",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 7000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "thinkingTokenBudgetField": "thinking_budget"
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "thinkingTokenBudgetField": "thinking_budget"
+      },
+      "level": "high",
+      "ceiling": 2900,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "high",
+        "thinking_budget": 1876
+      }
+    },
+    {
+      "name": "budget_xhigh_uses_high_custom",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsThinkingTokenBudget": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsThinkingTokenBudget": true
+      },
+      "level": "xhigh",
+      "ceiling": 20000,
+      "thinking_budgets": {
+        "high": 12000
+      },
+      "expected": {
+        "reasoning_effort": "xhigh",
+        "thinking_token_budget": 12000
+      }
+    },
+    {
+      "name": "budget_disabled_for_nonreasoning",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": false,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsThinkingTokenBudget": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsThinkingTokenBudget": true
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {}
+    },
+    {
+      "name": "routing_empty_router",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "openRouterRouting": {}
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "openRouterRouting": {}
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "reasoning_effort": "none",
+        "provider": {}
+      }
+    },
+    {
+      "name": "routing_gateway_priority",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "openRouterRouting": {
+            "order": [
+              "a",
+              "b"
+            ],
+            "allow_fallbacks": false
+          },
+          "vercelGatewayRouting": {
+            "only": [],
+            "order": [
+              "b",
+              "a"
+            ]
+          },
+          "vllmPriority": 0
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "openRouterRouting": {
+          "order": [
+            "a",
+            "b"
+          ],
+          "allow_fallbacks": false
+        },
+        "vercelGatewayRouting": {
+          "only": [],
+          "order": [
+            "b",
+            "a"
+          ]
+        },
+        "vllmPriority": 0
+      },
+      "level": null,
+      "ceiling": 10000,
+      "thinking_budgets": null,
+      "expected": {
+        "priority": 0,
+        "reasoning_effort": "none",
+        "provider": {
+          "order": [
+            "a",
+            "b"
+          ],
+          "allow_fallbacks": false
+        },
+        "providerOptions": {
+          "gateway": {
+            "only": [],
+            "order": [
+              "b",
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "cache_openai-completions_none_explicit_false",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": false
+      },
+      "api": "openai-completions",
+      "retention": "none",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {}
+    },
+    {
+      "name": "cache_openai-completions_none_explicit_true",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-completions",
+      "retention": "none",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {}
+    },
+    {
+      "name": "cache_openai-completions_short_explicit_false",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": false
+      },
+      "api": "openai-completions",
+      "retention": "short",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+      }
+    },
+    {
+      "name": "cache_openai-completions_short_explicit_true",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-completions",
+      "retention": "short",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+      }
+    },
+    {
+      "name": "cache_openai-completions_long_explicit_false",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": false
+      },
+      "api": "openai-completions",
+      "retention": "long",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "prompt_cache_retention": "24h"
+      }
+    },
+    {
+      "name": "cache_openai-completions_long_explicit_true",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-completions",
+      "retention": "long",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "prompt_cache_retention": "24h"
+      }
+    },
+    {
+      "name": "cache_openai-completions_short_unsupported",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": false
+      },
+      "api": "openai-completions",
+      "retention": "short",
+      "session_id": "session",
+      "api_key": "sk-offline-fixture",
+      "expected": {}
+    },
+    {
+      "name": "cache_openai-completions_long_unsupported",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-completions",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": false
+      },
+      "api": "openai-completions",
+      "retention": "long",
+      "session_id": "session",
+      "api_key": "sk-offline-fixture",
+      "expected": {}
+    },
+    {
+      "name": "cache_openai-responses_none_explicit_false",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": false
+      },
+      "api": "openai-responses",
+      "retention": "none",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {}
+    },
+    {
+      "name": "cache_openai-responses_none_explicit_true",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-responses",
+      "retention": "none",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_options": {
+          "mode": "explicit"
+        }
+      }
+    },
+    {
+      "name": "cache_openai-responses_short_explicit_false",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": false
+      },
+      "api": "openai-responses",
+      "retention": "short",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+      }
+    },
+    {
+      "name": "cache_openai-responses_short_explicit_true",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-responses",
+      "retention": "short",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+      }
+    },
+    {
+      "name": "cache_openai-responses_long_explicit_false",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": false
+      },
+      "api": "openai-responses",
+      "retention": "long",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "prompt_cache_retention": "24h"
+      }
+    },
+    {
+      "name": "cache_openai-responses_long_explicit_true",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-responses",
+      "retention": "long",
+      "session_id": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀tail",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "prompt_cache_options": {
+          "ttl": "30m"
+        }
+      }
+    },
+    {
+      "name": "cache_openai-responses_short_unsupported",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": false
+      },
+      "api": "openai-responses",
+      "retention": "short",
+      "session_id": "session",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "session"
+      }
+    },
+    {
+      "name": "cache_openai-responses_long_unsupported",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "fixture",
+        "baseUrl": "https://fixture.invalid/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": false
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": false
+      },
+      "api": "openai-responses",
+      "retention": "long",
+      "session_id": "session",
+      "api_key": "sk-offline-fixture",
+      "expected": {
+        "prompt_cache_key": "session"
+      }
+    },
+    {
+      "name": "cache_chatgpt_none",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-responses",
+      "retention": "none",
+      "session_id": "signin",
+      "api_key": "fake-chatgpt-token",
+      "expected": {}
+    },
+    {
+      "name": "cache_chatgpt_long",
+      "kind": "cache",
+      "model": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "api": "openai-responses",
+        "provider": "openai",
+        "baseUrl": "https://api.openai.com/v1",
+        "reasoning": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 1.25,
+          "output": 10,
+          "cacheRead": 0.125,
+          "cacheWrite": 0
+        },
+        "contextWindow": 400000,
+        "maxTokens": 128000,
+        "thinkingLevelMap": {
+          "off": "none",
+          "minimal": "minimal",
+          "low": "low",
+          "medium": "medium",
+          "high": "high",
+          "xhigh": "xhigh",
+          "max": "max"
+        },
+        "compat": {
+          "supportsLongCacheRetention": true,
+          "supportsExplicitPromptCacheMode": true
+        },
+        "inputLimits": {
+          "maxRequestBytes": 536870912,
+          "images": {
+            "maxPerRequest": 1500,
+            "resize": {
+              "maxWidth": 2000,
+              "maxHeight": 2000,
+              "maxBytes": 4718592,
+              "jpegQuality": 80
+            }
+          }
+        },
+        "type": "chat"
+      },
+      "compat": {
+        "supportsLongCacheRetention": true,
+        "supportsExplicitPromptCacheMode": true
+      },
+      "api": "openai-responses",
+      "retention": "long",
+      "session_id": "signin",
+      "api_key": "fake-chatgpt-token",
+      "expected": {
+        "prompt_cache_key": "signin"
+      }
+    }
+  ],
+  "headerCases": [
+    {
+      "name": "headers_openai-completions_openai_short",
+      "api": "openai-completions",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openai"
+      },
+      "session_id": "session-fixture",
+      "expected": {
+        "session_id": "session-fixture",
+        "x-client-request-id": "session-fixture",
+        "x-session-affinity": "session-fixture"
+      }
+    },
+    {
+      "name": "headers_openai-completions_openai_none",
+      "api": "openai-completions",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openai"
+      },
+      "session_id": null,
+      "expected": {}
+    },
+    {
+      "name": "headers_openai-completions_openrouter_short",
+      "api": "openai-completions",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openrouter"
+      },
+      "session_id": "session-fixture",
+      "expected": {
+        "x-session-id": "session-fixture"
+      }
+    },
+    {
+      "name": "headers_openai-completions_openrouter_none",
+      "api": "openai-completions",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openrouter"
+      },
+      "session_id": null,
+      "expected": {}
+    },
+    {
+      "name": "headers_openai-completions_other_short",
+      "api": "openai-completions",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "other"
+      },
+      "session_id": "session-fixture",
+      "expected": {
+        "x-client-request-id": "session-fixture",
+        "x-session-affinity": "session-fixture"
+      }
+    },
+    {
+      "name": "headers_openai-completions_other_none",
+      "api": "openai-completions",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "other"
+      },
+      "session_id": null,
+      "expected": {}
+    },
+    {
+      "name": "headers_openai-responses_openai_short",
+      "api": "openai-responses",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openai"
+      },
+      "session_id": "session-fixture",
+      "expected": {
+        "session_id": "session-fixture",
+        "x-client-request-id": "session-fixture"
+      }
+    },
+    {
+      "name": "headers_openai-responses_openai_none",
+      "api": "openai-responses",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openai"
+      },
+      "session_id": null,
+      "expected": {}
+    },
+    {
+      "name": "headers_openai-responses_openrouter_short",
+      "api": "openai-responses",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openrouter"
+      },
+      "session_id": "session-fixture",
+      "expected": {
+        "x-session-id": "session-fixture"
+      }
+    },
+    {
+      "name": "headers_openai-responses_openrouter_none",
+      "api": "openai-responses",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "openrouter"
+      },
+      "session_id": null,
+      "expected": {}
+    },
+    {
+      "name": "headers_openai-responses_other_short",
+      "api": "openai-responses",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "other"
+      },
+      "session_id": "session-fixture",
+      "expected": {
+        "x-client-request-id": "session-fixture"
+      }
+    },
+    {
+      "name": "headers_openai-responses_other_none",
+      "api": "openai-responses",
+      "compat": {
+        "sendSessionAffinityHeaders": true,
+        "sessionAffinityFormat": "other"
+      },
+      "session_id": null,
+      "expected": {}
+    },
+    {
+      "name": "headers_completions_disabled",
+      "api": "openai-completions",
+      "compat": {
+        "sendSessionAffinityHeaders": false,
+        "sessionAffinityFormat": "openai"
+      },
+      "session_id": "session-fixture",
+      "expected": {}
+    }
+  ],
+  "costCases": [
+    {
+      "name": "cost_gpt-5_default",
+      "model_id": "gpt-5",
+      "tier": "default",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.00011999999999999999,
+          "output": 0.00015999999999999999,
+          "cacheRead": 0.000029999999999999997,
+          "cacheWrite": 0.00003,
+          "total": 0.00033999999999999997
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5_flex",
+      "model_id": "gpt-5",
+      "tier": "flex",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.000059999999999999995,
+          "output": 0.00007999999999999999,
+          "cacheRead": 0.000014999999999999999,
+          "cacheWrite": 0.000015,
+          "total": 0.00016999999999999999
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5_priority",
+      "model_id": "gpt-5",
+      "tier": "priority",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.00023999999999999998,
+          "output": 0.00031999999999999997,
+          "cacheRead": 0.000059999999999999995,
+          "cacheWrite": 0.00006,
+          "total": 0.0006799999999999999
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5_fast",
+      "model_id": "gpt-5",
+      "tier": "fast",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.00023999999999999998,
+          "output": 0.00031999999999999997,
+          "cacheRead": 0.000059999999999999995,
+          "cacheWrite": 0.00006,
+          "total": 0.0006799999999999999
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5_null",
+      "model_id": "gpt-5",
+      "tier": null,
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.00011999999999999999,
+          "output": 0.00015999999999999999,
+          "cacheRead": 0.000029999999999999997,
+          "cacheWrite": 0.00003,
+          "total": 0.00033999999999999997
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5.5_default",
+      "model_id": "gpt-5.5",
+      "tier": "default",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.00011999999999999999,
+          "output": 0.00015999999999999999,
+          "cacheRead": 0.000029999999999999997,
+          "cacheWrite": 0.00003,
+          "total": 0.00033999999999999997
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5.5_flex",
+      "model_id": "gpt-5.5",
+      "tier": "flex",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.000059999999999999995,
+          "output": 0.00007999999999999999,
+          "cacheRead": 0.000014999999999999999,
+          "cacheWrite": 0.000015,
+          "total": 0.00016999999999999999
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5.5_priority",
+      "model_id": "gpt-5.5",
+      "tier": "priority",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.0003,
+          "output": 0.00039999999999999996,
+          "cacheRead": 0.000075,
+          "cacheWrite": 0.00007500000000000001,
+          "total": 0.0008499999999999998
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5.5_fast",
+      "model_id": "gpt-5.5",
+      "tier": "fast",
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.0003,
+          "output": 0.00039999999999999996,
+          "cacheRead": 0.000075,
+          "cacheWrite": 0.00007500000000000001,
+          "total": 0.0008499999999999998
+        }
+      }
+    },
+    {
+      "name": "cost_gpt-5.5_null",
+      "model_id": "gpt-5.5",
+      "tier": null,
+      "base_usage": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "totalTokens": 120,
+        "reasoning": 0,
+        "cost": {
+          "input": 0.00012,
+          "output": 0.00016,
+          "cacheRead": 0.00003,
+          "cacheWrite": 0.00003,
+          "total": 0.00034
+        }
+      },
+      "expected": {
+        "input": 60,
+        "output": 20,
+        "cacheRead": 30,
+        "cacheWrite": 10,
+        "reasoning": 0,
+        "totalTokens": 120,
+        "cost": {
+          "input": 0.00011999999999999999,
+          "output": 0.00015999999999999999,
+          "cacheRead": 0.000029999999999999997,
+          "cacheWrite": 0.00003,
+          "total": 0.00033999999999999997
+        }
+      }
+    }
+  ],
+  "cacheControlCases": [
+    {
+      "name": "compat_cache_string_last_user_short",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "short",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "hello",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_string_last_user_long",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "long",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "hello",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_string_last_user_none",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "none",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_assistant_empty_skipped_short",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "short",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "hello",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_assistant_empty_skipped_long",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "long",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "hello",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_assistant_empty_skipped_none",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "none",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_image_only_user_skipped_short",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "short",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "data:image/png;base64,aGVsbG8="
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "hello",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "data:image/png;base64,aGVsbG8="
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_image_only_user_skipped_long",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "long",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "data:image/png;base64,aGVsbG8="
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "hello",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "data:image/png;base64,aGVsbG8="
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_image_only_user_skipped_none",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "none",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "data:image/png;base64,aGVsbG8="
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "data:image/png;base64,aGVsbG8="
+                }
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_tool_and_last_tool_definition_short",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "short",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_one",
+                "type": "function",
+                "function": {
+                  "name": "fixture",
+                  "arguments": "{}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "text",
+                "text": "first\nlast"
+              }
+            ],
+            "tool_call_id": "call_one"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fixture",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "second",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ],
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_one",
+                "type": "function",
+                "function": {
+                  "name": "fixture",
+                  "arguments": "{}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "text",
+                "text": "first\nlast",
+                "cache_control": {
+                  "type": "ephemeral"
+                }
+              }
+            ],
+            "tool_call_id": "call_one"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fixture",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "second",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "cache_control": {
+              "type": "ephemeral"
+            }
+          }
+        ],
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_tool_and_last_tool_definition_long",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "long",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system"
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_one",
+                "type": "function",
+                "function": {
+                  "name": "fixture",
+                  "arguments": "{}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "text",
+                "text": "first\nlast"
+              }
+            ],
+            "tool_call_id": "call_one"
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fixture",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "second",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ],
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": [
+              {
+                "type": "text",
+                "text": "system",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_one",
+                "type": "function",
+                "function": {
+                  "name": "fixture",
+                  "arguments": "{}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "text",
+                "text": "first\nlast",
+                "cache_control": {
+                  "type": "ephemeral",
+                  "ttl": "1h"
+                }
+              }
+            ],
+            "tool_call_id": "call_one"
+          }
+        ],
+        "stream": true,
+        "prompt_cache_retention": "24h",
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fixture",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "second",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "cache_control": {
+              "type": "ephemeral",
+              "ttl": "1h"
+            }
+          }
+        ],
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "name": "compat_cache_last_tool_and_last_tool_definition_none",
+      "compat": {
+        "cacheControlFormat": "anthropic",
+        "supportsLongCacheRetention": true
+      },
+      "retention": "none",
+      "before": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_one",
+                "type": "function",
+                "function": {
+                  "name": "fixture",
+                  "arguments": "{}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": "first\nlast",
+            "tool_call_id": "call_one"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fixture",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "second",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ],
+        "reasoning_effort": "none"
+      },
+      "expected": {
+        "model": "gpt-5",
+        "messages": [
+          {
+            "role": "developer",
+            "content": "system"
+          },
+          {
+            "role": "user",
+            "content": "hello"
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_one",
+                "type": "function",
+                "function": {
+                  "name": "fixture",
+                  "arguments": "{}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": "first\nlast",
+            "tool_call_id": "call_one"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 10000,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fixture",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "second",
+              "description": "fixture",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ],
+        "reasoning_effort": "none"
+      }
+    }
+  ],
+  "budgetCases": [
+    {
+      "name": "budget_minimal_undefined_undefined",
+      "level": "minimal",
+      "budgets": null,
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_minimal_undefined_1",
+      "level": "minimal",
+      "budgets": null,
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 1025,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_minimal_undefined_1024",
+      "level": "minimal",
+      "budgets": null,
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 2048,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_minimal_undefined_16000",
+      "level": "minimal",
+      "budgets": null,
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_minimal_{\"high\":12000,\"low\":1500}_undefined",
+      "level": "minimal",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_minimal_{\"high\":12000,\"low\":1500}_1",
+      "level": "minimal",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 1025,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_minimal_{\"high\":12000,\"low\":1500}_1024",
+      "level": "minimal",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 2048,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_minimal_{\"high\":12000,\"low\":1500}_16000",
+      "level": "minimal",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 1024,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 1024
+      }
+    },
+    {
+      "name": "budget_low_undefined_undefined",
+      "level": "low",
+      "budgets": null,
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 2048,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 2048
+      }
+    },
+    {
+      "name": "budget_low_undefined_1",
+      "level": "low",
+      "budgets": null,
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 2048,
+      "expected_adjust": {
+        "maxTokens": 2049,
+        "thinkingBudget": 2048
+      }
+    },
+    {
+      "name": "budget_low_undefined_1024",
+      "level": "low",
+      "budgets": null,
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 2048,
+      "expected_adjust": {
+        "maxTokens": 3072,
+        "thinkingBudget": 2048
+      }
+    },
+    {
+      "name": "budget_low_undefined_16000",
+      "level": "low",
+      "budgets": null,
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 2048,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 2048
+      }
+    },
+    {
+      "name": "budget_low_{\"high\":12000,\"low\":1500}_undefined",
+      "level": "low",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 1500,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 1500
+      }
+    },
+    {
+      "name": "budget_low_{\"high\":12000,\"low\":1500}_1",
+      "level": "low",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 1500,
+      "expected_adjust": {
+        "maxTokens": 1501,
+        "thinkingBudget": 1500
+      }
+    },
+    {
+      "name": "budget_low_{\"high\":12000,\"low\":1500}_1024",
+      "level": "low",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 1500,
+      "expected_adjust": {
+        "maxTokens": 2524,
+        "thinkingBudget": 1500
+      }
+    },
+    {
+      "name": "budget_low_{\"high\":12000,\"low\":1500}_16000",
+      "level": "low",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 1500,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 1500
+      }
+    },
+    {
+      "name": "budget_medium_undefined_undefined",
+      "level": "medium",
+      "budgets": null,
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_medium_undefined_1",
+      "level": "medium",
+      "budgets": null,
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_medium_undefined_1024",
+      "level": "medium",
+      "budgets": null,
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_medium_undefined_16000",
+      "level": "medium",
+      "budgets": null,
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_medium_{\"high\":12000,\"low\":1500}_undefined",
+      "level": "medium",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_medium_{\"high\":12000,\"low\":1500}_1",
+      "level": "medium",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_medium_{\"high\":12000,\"low\":1500}_1024",
+      "level": "medium",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_medium_{\"high\":12000,\"low\":1500}_16000",
+      "level": "medium",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 8192,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_undefined_undefined",
+      "level": "high",
+      "budgets": null,
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_undefined_1",
+      "level": "high",
+      "budgets": null,
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_undefined_1024",
+      "level": "high",
+      "budgets": null,
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_undefined_16000",
+      "level": "high",
+      "budgets": null,
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_{\"high\":12000,\"low\":1500}_undefined",
+      "level": "high",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_{\"high\":12000,\"low\":1500}_1",
+      "level": "high",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_{\"high\":12000,\"low\":1500}_1024",
+      "level": "high",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_high_{\"high\":12000,\"low\":1500}_16000",
+      "level": "high",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_undefined_undefined",
+      "level": "xhigh",
+      "budgets": null,
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_undefined_1",
+      "level": "xhigh",
+      "budgets": null,
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_undefined_1024",
+      "level": "xhigh",
+      "budgets": null,
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_undefined_16000",
+      "level": "xhigh",
+      "budgets": null,
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_{\"high\":12000,\"low\":1500}_undefined",
+      "level": "xhigh",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_{\"high\":12000,\"low\":1500}_1",
+      "level": "xhigh",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_{\"high\":12000,\"low\":1500}_1024",
+      "level": "xhigh",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_xhigh_{\"high\":12000,\"low\":1500}_16000",
+      "level": "xhigh",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_undefined_undefined",
+      "level": "max",
+      "budgets": null,
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_undefined_1",
+      "level": "max",
+      "budgets": null,
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_undefined_1024",
+      "level": "max",
+      "budgets": null,
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_undefined_16000",
+      "level": "max",
+      "budgets": null,
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 16384,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_{\"high\":12000,\"low\":1500}_undefined",
+      "level": "max",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": null,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_{\"high\":12000,\"low\":1500}_1",
+      "level": "max",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_{\"high\":12000,\"low\":1500}_1024",
+      "level": "max",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 1024,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    },
+    {
+      "name": "budget_max_{\"high\":12000,\"low\":1500}_16000",
+      "level": "max",
+      "budgets": {
+        "high": 12000,
+        "low": 1500
+      },
+      "base": 16000,
+      "model_max": 8192,
+      "expected_budget": 12000,
+      "expected_adjust": {
+        "maxTokens": 8192,
+        "thinkingBudget": 7168
+      }
+    }
+  ]
+}

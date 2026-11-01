@@ -1,0 +1,107 @@
+{
+  "baseline": "Pi 1.4.0 skills.ts prefixIgnorePattern + original npm ignore dependency",
+  "cases": [
+    {
+      "name": "negation-and-parents",
+      "files": {
+        ".gitignore": "*.tmp\n!keep.tmp\nbuild/\n!build/keep.md\n"
+      },
+      "paths": [
+        "a.tmp",
+        "keep.tmp",
+        "deep/a.tmp",
+        "deep/keep.tmp",
+        "build/keep.md",
+        "deep/build/keep.md",
+        "note.md"
+      ],
+      "expected": {
+        "a.tmp": true,
+        "keep.tmp": false,
+        "deep/a.tmp": true,
+        "deep/keep.tmp": false,
+        "build/keep.md": true,
+        "deep/build/keep.md": true,
+        "note.md": false
+      }
+    },
+    {
+      "name": "globstar",
+      "files": {
+        ".ignore": "**/cache/**\nsrc/**/test?.md\nroot/*.md\n"
+      },
+      "paths": [
+        "cache/a.md",
+        "deep/cache/a.md",
+        "src/test1.md",
+        "src/lib/test2.md",
+        "root/a.md",
+        "root/nested/a.md",
+        "src/a.md"
+      ],
+      "expected": {
+        "cache/a.md": true,
+        "deep/cache/a.md": true,
+        "src/test1.md": true,
+        "src/lib/test2.md": true,
+        "root/a.md": true,
+        "root/nested/a.md": false,
+        "src/a.md": false
+      }
+    },
+    {
+      "name": "nested-prefix",
+      "files": {
+        "nested/.fdignore": "hidden.md\n!visible.md\n"
+      },
+      "paths": [
+        "hidden.md",
+        "nested/hidden.md",
+        "nested/deep/hidden.md",
+        "nested/visible.md"
+      ],
+      "expected": {
+        "hidden.md": false,
+        "nested/hidden.md": true,
+        "nested/deep/hidden.md": false,
+        "nested/visible.md": false
+      }
+    },
+    {
+      "name": "escaping-and-case",
+      "files": {
+        ".gitignore": "\\#literal.md\n\\!literal.md\nUPPER.md\nfile[0-9].md\n"
+      },
+      "paths": [
+        "#literal.md",
+        "!literal.md",
+        "upper.md",
+        "file1.md",
+        "filex.md"
+      ],
+      "expected": {
+        "#literal.md": true,
+        "!literal.md": false,
+        "upper.md": true,
+        "file1.md": true,
+        "filex.md": false
+      }
+    },
+    {
+      "name": "root-slash-skills",
+      "files": {
+        ".gitignore": "/hidden/\n"
+      },
+      "paths": [
+        "hidden/a.md",
+        "nested/hidden/a.md",
+        "other/a.md"
+      ],
+      "expected": {
+        "hidden/a.md": true,
+        "nested/hidden/a.md": true,
+        "other/a.md": false
+      }
+    }
+  ]
+}

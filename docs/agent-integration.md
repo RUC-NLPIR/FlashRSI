@@ -71,26 +71,136 @@ Pi 的 [适配类](../flashrsi/agents/pi_agent/__init__.py) 从选定 Snapshot �
 它直接用 `httpx` 调用 OpenAI Chat Completions、OpenAI Responses 和 Anthropic Messages，
 完成多轮工具调用，并将 `session`、agent/turn、user/assistant message、tool execution、usage
 等事件保留在 Trajectory 中；运行过程不需要 Node.js、npm、Pi CLI 或任何 npm 包。
-Snapshot 中的 `AGENTS.md`、`CLAUDE.md`、`prompts/`、`.pi/agent/skills/`、
-`.pi/agent/prompt-templates/` 和 `settings.json`（当前读取 `defaultTools`）由 Python runtime 显式读取，
+Snapshot 中的 `AGENTS.md`、`CLAUDE.md`、`SYSTEM.md`、`APPEND_SYSTEM.md`、`prompts/`、`.pi/agent/skills/`、
+`.pi/agent/prompts/`（兼容 `.pi/agent/prompt-templates/`）和 `.pi/agent/settings.json`（工具、compaction、branch summary 与重试设置）由 Python runtime 显式读取，
 任务工作目录仍作为工具 cwd。模型使用 `provider/model`；`anthropic/...` 自动使用
 Anthropic Messages，OpenAI 兼容端点默认使用 Chat Completions，需使用 Responses 时在
 `llm.model_api: openai-responses` 显式选择。凭据只从角色配置读取，不写入 Snapshot。
-Pi 声明容器运行依赖 `httpx`（公共容器层自动加入 PyYAML），复用通用容器执行入口，
+Pi 声明容器运行依赖 `httpx`、Pillow、`regexrs-py` 和 NumPy（公共容器层自动加入 PyYAML），复用通用容器执行入口，
 由环境 integration 传入任务工作目录；不需要针对 Harbor 或各个 benchmark 添加 Pi 分支。
 [容器入口回归测试](../tests/test_pi_container.py) 使用打包后的代码、选定 Snapshot、
 隔离子进程和本地 HTTP 验证实际文件编辑及轨迹返回；该测试不启动 Docker 或 benchmark verifier。
-这个 native port 对齐 Pi 的 headless Target/Worker 路径；交互式 TUI/RPC、TypeScript 扩展运行时、
-完整 MCP OAuth 生命周期、持久 session/compaction 等上游能力不在当前支持范围内，详见 runtime 源码与测试。
+这个 native port 对齐 Pi 的 headless Target/Worker 路径，支持 Pi v3 JSONL session、自动/手动
+compaction 和 branch summary。角色配置用 `session_file` 显式选择会话文件；未配置时使用内存
+会话，不自动读取宿主 Pi 历史。持久状态放在 Snapshot 外，每个独立任务使用独立文件。
+`compaction.enabled` 默认开启，`reserveTokens`/`keepRecentTokens` 默认 16384/20000；
+按固定模型目录解析窗口，也可显式设置 `context_window` 和 `model_max_tokens`。
+阈值触发、context overflow 和可恢复的 length 会走 Python 摘要与恢复路径；
+任务 prompt `/compact [instructions]` 可以手动压缩。摘要错误或取消不会提交部分 compaction。
+`/tree ENTRY_ID` 选择历史分支，并在需要时生成被离开分支的摘要；`branch_summary` 控制该行为，
+也可用 `session_leaf_id` 显式恢复已有分支。摘要使用该角色的模型连接与显式重试设置。
+交互式 TUI/RPC、TypeScript 扩展运行时和完整 MCP OAuth 生命周期仍不在此实现范围。
 
 轨迹对照用同一组固定模型回复，实际执行上游 `runAgentLoop` 和原始 read/write/edit 工具，
 再将原始结果冻结为 [10 个重放 case](../tests/fixtures/pi_trajectories_upstream.json)，由
 [Python 回归测试](../tests/test_pi_trajectory_parity.py) 检查消息、控制事件、工具详情、文件字节和结束状态。
 该验证固定初始 system prompt，排除流式分块、时间戳、耗时及 provider 额外元数据；
-不代表真实模型生成轨迹或全部原始 JSON 一致。默认 prompt/tool schema、thinking/交错内容、
-图片附件及 bash 输出交织、取消清理仍有差异。参考执行使用的 Node/typebox/diff 仅用于生成测试结果；
-Pi 执行路径只需 Python、httpx、PyYAML、模型 API 和 shell 命令所需系统程序。
+不代表真实模型生成轨迹或全部原始 JSON 一致。另有实际原版生成的 prompt sections、资源发现、
+工具 schema/参数校验、OpenAI/Anthropic 请求及重试对照；Python 集成测试覆盖取消和超时的部分轨迹保留。
+小图附件保留原始字节；Photon 的 Lanczos 缩放、PNG/JPEG 编码和 VP8 WebP 解码使用纯 Python/NumPy
+实现，并对固定原版样本逐字节对照。Bash `onUpdate`、三种 provider 的 SSE 增量事件、程序调用的
+`structuredContent`、steering/follow-up 队列和 hooks 均已接入；TypeScript 扩展运行时、完整 MCP
+OAuth 和交互式 RPC 仍按上文边界处理。搜索使用 `regexrs-py` 和 Python 文件遍历，已覆盖原版的
+regex/glob、排序、分页和 fd 过滤路径；参考执行使用的 Node/typebox/diff 仅用于生成测试结果。
+Pi 执行路径只需 Python、httpx、PyYAML、Pillow、`regexrs-py`、NumPy、模型 API 和 shell 命令所需系统程序。
+Snapshot 的 `pi_native/reference/` 保存原版默认 prompt 所引用的文档和示例（包括 TS/JS/WASM 等参考数据），
+运行时只将这些文件作为可读资料，不加载 npm 依赖或执行其中的 Node 程序。
+[压缩测试](../tests/test_pi_compaction.py)和[分支摘要测试](../tests/test_pi_branch_summary.py)
+另行执行原版 TypeScript helper 的固定输入对照，并验证 Python 主循环、JSONL 会话、
+摘要失败与取消的提交边界。固定回复对照不能证明真实模型准确率；此前真实请求返回 401，
+没有得到可用于比较的模型任务得分。
 项目基础安装仍包含其他 harness 的依赖，尚未拆为 Pi 的最小安装集。
+
+Hermes 的 [适配类](../flashrsi/agents/hermes/__init__.py) 从选定 Snapshot 的
+`runtime/hermes_native/` 加载纯 Python runtime，基于 NousResearch Hermes Agent
+v0.22.5（commit `bf0203a794a07aac3ff764972ab9087baa4e4f4e`）抽取 headless 执行逻辑。
+上游的迭代预算、思考标签清理、同轮工具去重、文本续写、提示词与 skills helper、
+文件读取、fuzzy patch 和上下文压缩代码保留在 Snapshot 中，并携带 MIT 许可和源码哈希。
+适配器通过 `httpx` 调用 Chat Completions、Responses 或 Anthropic Messages，模型名按字面传给端点，
+不要求 `provider/model` 前缀。`llm.model_api` 默认 `chat_completions`，
+Responses 使用 `openai-responses`。每个角色显式配置凭据和端点；不需要安装 Hermes CLI、
+上游源码、Node.js 或 npm，不发现宿主 Hermes profile 或 OAuth 登录状态。
+
+默认 Snapshot 提供身份指令 `SOUL.md`、`config.yaml`、一个精简的 `hermes-agent` 说明 skill
+以及实际执行代码；用户新增的 skills 也可以放入 Snapshot 的 `skills/`。`SOUL.md` 是指令
+编辑算法使用的主文件。角色配置覆盖 Snapshot 同名设置，模型、凭据和
+端点始终来自该角色的 `llm`。任务工作目录独立传入，项目 context 按上游规则发现。
+默认工具为 `terminal`、`read_file`、`write_file`、`patch`、`search_files`、`todo_list`、
+`skills_list`、`skill_view`；压缩启用且未显式限制工具时自动提供 `session_search`，用于查回
+压缩前的本地原始消息。用 `enabled_tools` 选择具体工具，或用 `enabled_toolsets` 选择
+`terminal`、`file`、`todo`、`skills` 分组；`disabled_toolsets` 可禁用分组。
+
+`patch` 支持 `mode: replace` 定向替换及上游 V4A 多文件更新、添加、移动、删除；
+按上游模型分组规则向 OpenAI/GPT 系列声明 V4A 参数。覆盖已有文件前，`write_file` 要求
+已读取完整且未变化的当前内容；分页未读完或展示被截断时拒绝覆盖。它也拒绝写入内部行号，
+默认校验 JSON/TOML；YAML 语法校验沿用上游的可选 `ruamel.yaml`，最小容器未安装时跳过。
+`search_files` 使用 `regexrs-py` 与 Python 文件遍历；结果顺序、分页和正则错误文字仍可能与原版 ripgrep 不同。
+运行依赖为 Python、httpx、Pillow、`regexrs-py`、PyYAML、Bash 和任务命令需要的程序。容器复用公共 Snapshot
+执行入口，不需要 benchmark 专用 Hermes 分支。示例见 [hermes.yaml](../examples/hermes.yaml)。
+
+上下文和长输出路径均由所选 Snapshot 内的 Python 代码执行：
+
+| 路径 | 配置与行为 |
+| --- | --- |
+| full context compaction | `compression.enabled: true` 默认启用，`threshold` 默认 0.50；可用 `threshold_tokens` 设绝对触发上限，用 `context_length` 覆盖固定模型目录中的窗口 |
+| 主动历史工具 prune | `compression.proactive_prune_tokens` 大于 0 时启用，保留工具配对及必要的尾部上下文 |
+| micro / idle compaction | `compression.micro_compact: true`、`idle_compact_after_seconds` 分别启用；默认关闭 |
+| manual / overflow recovery | 任务 prompt 使用 `/compress [focus]` 手动摘要；context overflow 自动压缩重试，可用窗口不足时调整请求输出 cap；手动摘要在自动压缩关闭时仍可用 |
+| 压缩边界恢复 | 保留当前用户任务、todo/skill 状态，重置读取缓存和 usage anchor；鉴权失败、空或被截断摘要保留原历史，取消后的晚到摘要不能发布状态 |
+| session / checkpoint | 显式 `session_file` 保存消息、todo、压缩状态与 archive；锁定会话并原子写入；`compression.checkpoint_required: true` 要求改写前完成本地持久快照，未提供时保留历史 |
+| Responses native compaction | `compression.codex_responses_native: true` 显式启用，由原版模型/端点/能力规则决定是否发送 `context_management`；保留并回放 provider checkpoint，被拒绝后回退本地压缩 |
+| 工具输出和资源截断 | 支持 `tool_output` 输出限制、`file_read_max_chars`、长输出落盘/回读及 context 文件动态字符预算；这些操作与历史摘要分别执行 |
+| `finish_reason=length` / 迭代预算 | 文本续写会按原版提高输出 cap；截断工具调用先重试；预算耗尽时生成最终答复 |
+
+`session_file` 由角色显式指定，放在 Snapshot 之外；每个独立 benchmark 任务使用独立文件，
+避免把另一任务的历史带入执行。`checkpoint_required` 同时关闭无法先执行本地 checkpoint 的
+micro 和 server-side native compaction。本地 JSON session/快照不是上游 MemoryManager
+checkpoint API、SQLite 事务、数据库 row lease 或 session rotation 的移植。
+
+Responses native compaction 默认关闭。原版 gates 只对支持的模型和路由开放，例如官方
+OpenAI 端点上的受支持模型，或显式配置官方 Codex token/端点的对应模型；仅选择 Responses
+不代表 native compaction 已启用。可以用 `compression.codex_responses_compact_threshold`
+设置 native 阈值；原版规则仍约束请求，且明确的 capability 禁用与 checkpoint 要求优先。
+凭据始终由角色配置提供，运行时不会启动登录流程。
+
+IPYNB、DOCX、XLSX、SQLite 读取通过原版标准库抽取器处理；图片/binary 读取按原版拒绝。
+可选 anydoc/PDF/OCR、vision/video、web/browser、execute_code、完整 CLI/TUI/gateway、账号管理、
+插件/MCP、委派子 agent、后台/PTY/远程 terminal 以及上游完整持久 memory 生态仍未移植。技能资源只读，不自动安装
+其依赖或执行模板 shell。coding brief、workspace/operator 指令和 skills focus 有原版 prompt
+builder 对照；profile、时间、provider 和 home/scratch 文字另有实际原版函数对照，宿主事实显式传入。
+Scratch 使用真实独立目录，`TMPDIR/TMP/TEMP` 指向该路径；持久会话默认保存在其 artifacts 目录。
+上游 24h retention、孤儿进程和 worktree 清理服务尚未移植，因此 prompt 不承诺该清理政策。
+未宣称整个 CLI prompt 或宿主生命周期逐字/逐事件一致。
+
+Chat、Responses 和 Anthropic Messages 请求及响应现在复用 Snapshot 内抽取的原版 transport，支持已移植的
+custom、OpenRouter、Kimi、DeepSeek、Gemini OpenAI-compatible 和 xAI profile hooks，以及未注册 provider
+的标准兼容路径。`reasoning_config`、reasoning 拒绝后的 drop/floor、request overrides、cache scope、
+tool alias、图片/多模态降级、grammar/schema 修复、credit 恢复、Anthropic signed thinking 和重放签名均有
+实际原版对照。Bedrock、Gemini REST、实时 provider catalog 和宿主插件发现仍不在这个 headless port 中；
+模型能力与 pricing 使用固定的 models.dev/OpenRouter snapshot，显式配置可覆盖。
+FlashRSI 角色中的 `api_max_retries`、`auto_recovery_cycles`、`stall_guards`、
+`intent_ack_continuation`、`empty_response_guard` 使用顶层键，映射到原版 `agent` 配置段。
+
+[Chat transport 对照](../tests/test_hermes_chat_transport.py)、
+[policy 对照](../tests/test_hermes_policy_parity.py)、[工具测试](../tests/test_hermes_tools.py)、
+[资源测试](../tests/test_hermes_resources.py)和[集成测试](../tests/test_hermes_agent.py)分别验证
+helper、工具、资源和多轮执行；[容器入口测试](../tests/test_hermes_container.py)使用隔离本地
+进程和本地 HTTP，不启动 Docker verifier。[基础轨迹回放](../tests/test_hermes_trajectory_parity.py)
+对照实际原版 `AIAgent.run_conversation` 的文本、工具、预算、续写和失败恢复。
+[压缩对照](../tests/test_hermes_compression.py)另含 30 个实际原版压缩器场景、8 个原版启用压缩的
+完整循环场景，以及 native 的鉴权失败、取消、会话恢复和持久 checkpoint 测试。
+[Responses 对照](../tests/test_hermes_native_responses.py)覆盖 116 个实际原版策略、checkpoint、
+请求与响应转换及辅助摘要场景；[incomplete 续写对照](../tests/test_hermes_native_continuation.py)
+包含 18 个原版场景、44 步状态变化，验证 checkpoint 合并、去重、重试与输出预算。
+
+本轮进一步审计的已修复问题、逐层证据和仍未覆盖的产品边界见仓库本地
+`runs/full-parity-audit-20261101/REPORT.md`。Pi 和 Hermes 的 FlashRSI Target/Worker
+headless 执行路径、agent loop、provider transport、工具、流式控制、压缩、恢复和 Snapshot
+已经接入并通过固定原版回放；Pi/Hermes 的完整上游 CLI、TUI、扩展与账号生命周期仍属于产品边界之外。
+
+轨迹验证使用固定的模型/摘要回复，比较消息、工具动作、结束状态及请求 cap 等控制逻辑。
+流式分块、时间戳、provider 元数据和模型生成随机性不在逐字对照范围。它不能证明真实模型的
+任务准确率或 benchmark 分数一致；此前真实模型请求返回 401，没有得到可用的准确率结果。
 
 Codex 的 [适配类](../flashrsi/agents/codex/__init__.py) 默认在独立 Python 进程中执行
 选定 Snapshot 的 `python_core/`，不调用原生 CLI，也不回退宿主核心。

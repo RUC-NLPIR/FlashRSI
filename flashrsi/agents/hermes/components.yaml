@@ -1,0 +1,10 @@
+runtime:
+  - runtime/hermes_native/**
+prompt:
+  - AGENTS.md
+  - SOUL.md
+  - prompts/**
+skill:
+  - skills/**
+config:
+  - config.yaml

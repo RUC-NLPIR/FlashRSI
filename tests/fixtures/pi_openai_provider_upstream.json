@@ -1,0 +1,4687 @@
+{
+  "baseline": "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0",
+  "method": "Unmodified original streamSimple and request builders; onPayload captures then throws, custom/global fetch forbidden. Matching release model metadata only. No model generation or network.",
+  "release": {
+    "@earendil-works/pi-ai": "1.4.0"
+  },
+  "source_sha256": {
+    "packages/ai/src/api/openai-completions.ts": "d29c626c0c595f2e9a11cf8a38d82c788cae0fd591fdb216327ea185c4ee21be",
+    "packages/ai/src/api/openai-responses.ts": "3d49a7d5860545300f243e68b1c08e1a4bc94f60fa7e4ab67ff082c30004d15e",
+    "packages/ai/src/api/openai-responses-shared.ts": "22747329d8cb720bfc428bbfe35fa3ff41e5c3f57e904eedd4298640c0ea8b2c",
+    "packages/ai/src/api/simple-options.ts": "4fc3131c480cb5c16506037195c5d9668b7b85ce7cf8117ecc77bd81188494ef",
+    "packages/ai/src/api/transform-messages.ts": "1afe70d8ab9ac24fcfc7ee46bf002b24f9557396ffe3c61e44d3e35c692e27f4",
+    "packages/ai/src/utils/transcript.ts": "1b20f9436a4f7e60008224d3e22098b2a7731731efdfb9c66f4c78a580cbe1e2",
+    "packages/ai/src/utils/text.ts": "d37c1825855c7fc71669a545b5b266810242c1c7e58d57228c0c143f29c1c544"
+  },
+  "fetchCalls": 0,
+  "cases": [
+    {
+      "input": {
+        "name": "completions_gpt41_plain",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "hello"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 32768
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_gpt41_tools",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          },
+          "max_tokens": 100,
+          "temperature": 0.2
+        },
+        "api": "openai-completions",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "read"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 100,
+          "temperature": 0.2,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": false
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_gpt5_high",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "messages": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "hello"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 128000,
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_gpt5_off",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "off",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "messages": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "hello"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 128000,
+          "reasoning_effort": "minimal"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_gpt5_xhigh",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "xhigh",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "messages": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "hello"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 128000,
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_deepseek_high",
+        "config": {
+          "llm": {
+            "model_name": "deepseek/deepseek-flash",
+            "model_api": "openai-completions",
+            "base_url": "https://api.deepseek.com",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "deepseek-flash",
+          "name": "DeepSeek V4.1 Flash",
+          "api": "openai-completions",
+          "baseUrl": "https://api.deepseek.com",
+          "provider": "deepseek",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": null,
+            "high": "high",
+            "max": "max"
+          },
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.006,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "compat": {
+            "supportsStore": false,
+            "supportsDeveloperRole": false,
+            "maxTokensField": "max_tokens",
+            "requiresReasoningContentOnAssistantMessages": true,
+            "thinkingFormat": "deepseek",
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "images": {
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "deepseek-flash",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "hello"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "max_tokens": 384000,
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_deepseek_off",
+        "config": {
+          "llm": {
+            "model_name": "deepseek/deepseek-flash",
+            "model_api": "openai-completions",
+            "base_url": "https://api.deepseek.com",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "off",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "deepseek-flash",
+          "name": "DeepSeek V4.1 Flash",
+          "api": "openai-completions",
+          "baseUrl": "https://api.deepseek.com",
+          "provider": "deepseek",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": null,
+            "high": "high",
+            "max": "max"
+          },
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.006,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "compat": {
+            "supportsStore": false,
+            "supportsDeveloperRole": false,
+            "maxTokensField": "max_tokens",
+            "requiresReasoningContentOnAssistantMessages": true,
+            "thinkingFormat": "deepseek",
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "images": {
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "deepseek-flash",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "hello"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "max_tokens": 384000,
+          "thinking": {
+            "type": "disabled"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_gpt5_high",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "hello"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000,
+          "reasoning": {
+            "effort": "high",
+            "summary": "auto"
+          },
+          "include": [
+            "reasoning.encrypted_content"
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_gpt5_off",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": "off",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "hello"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000,
+          "reasoning": {
+            "effort": "minimal",
+            "summary": "auto"
+          },
+          "include": [
+            "reasoning.encrypted_content"
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_gpt5_xhigh",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": "xhigh",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "hello"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000,
+          "reasoning": {
+            "effort": "high",
+            "summary": "auto"
+          },
+          "include": [
+            "reasoning.encrypted_content"
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_gpt41_plain",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "input": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "hello"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 32768
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_cap_one_has_minimum_16",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          },
+          "max_tokens": 1,
+          "context_window": 30
+        },
+        "api": "openai-responses",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "hello",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 30,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "hello"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 16,
+          "reasoning": {
+            "effort": "high",
+            "summary": "auto"
+          },
+          "include": [
+            "reasoning.encrypted_content"
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "interrupted_calls_openai-completions",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call_a|fc_a",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "user",
+            "content": "continue after interrupted tool",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "messages": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "read"
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "call_a|fc_a",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "content": "No result provided",
+              "tool_call_id": "call_a|fc_a"
+            },
+            {
+              "role": "user",
+              "content": "continue after interrupted tool"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 128000,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": false
+              }
+            }
+          ],
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "interrupted_calls_openai-responses",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call_a|fc_a",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "user",
+            "content": "continue after interrupted tool",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "read"
+                }
+              ]
+            },
+            {
+              "type": "function_call",
+              "id": "fc_a",
+              "call_id": "call_a",
+              "name": "read",
+              "arguments": "{\"path\":\"fixture.txt\"}"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call_a",
+              "output": "No result provided"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "continue after interrupted tool"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000,
+          "tools": [
+            {
+              "type": "function",
+              "name": "read",
+              "description": "Read a fixture file",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false
+              },
+              "strict": false
+            }
+          ],
+          "reasoning": {
+            "effort": "high",
+            "summary": "auto"
+          },
+          "include": [
+            "reasoning.encrypted_content"
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_encrypted_reasoning_text_signature_pairs",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "thinking",
+                "thinking": "reason",
+                "thinkingSignature": "{\"id\":\"rs_fixture\",\"type\":\"reasoning\",\"summary\":[{\"type\":\"summary_text\",\"text\":\"reason\"}],\"encrypted_content\":\"encrypted-fixture\"}"
+              },
+              {
+                "type": "text",
+                "text": "reading",
+                "textSignature": "{\"v\":1,\"id\":\"msg_fixture\",\"phase\":\"commentary\"}"
+              },
+              {
+                "type": "toolCall",
+                "id": "call_a|fc_a",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "call_a|fc_a",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "read result"
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "continue",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "read"
+                }
+              ]
+            },
+            {
+              "id": "rs_fixture",
+              "type": "reasoning",
+              "summary": [
+                {
+                  "type": "summary_text",
+                  "text": "reason"
+                }
+              ],
+              "encrypted_content": "encrypted-fixture"
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "reading",
+                  "annotations": []
+                }
+              ],
+              "status": "completed",
+              "id": "msg_fixture",
+              "phase": "commentary"
+            },
+            {
+              "type": "function_call",
+              "id": "fc_a",
+              "call_id": "call_a",
+              "name": "read",
+              "arguments": "{\"path\":\"fixture.txt\"}"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call_a",
+              "output": "read result"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "continue"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000,
+          "tools": [
+            {
+              "type": "function",
+              "name": "read",
+              "description": "Read a fixture file",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false
+              },
+              "strict": false
+            }
+          ],
+          "reasoning": {
+            "effort": "high",
+            "summary": "auto"
+          },
+          "include": [
+            "reasoning.encrypted_content"
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_multiple_text_blocks_without_signature",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "first",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "one"
+              },
+              {
+                "type": "text",
+                "text": "two"
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "first"
+                }
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "one",
+                  "annotations": []
+                }
+              ],
+              "status": "completed",
+              "id": "msg_pi_1"
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "two",
+                  "annotations": []
+                }
+              ],
+              "status": "completed",
+              "id": "msg_pi_1_1"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "next"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_cross_provider_id_pair",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call|item with @symbols",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "another",
+            "model": "other",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "call|item with @symbols",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "read result"
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "read"
+                }
+              ]
+            },
+            {
+              "type": "function_call",
+              "id": "fc_37m3wjx42jbh",
+              "call_id": "call",
+              "name": "read",
+              "arguments": "{\"path\":\"fixture.txt\"}"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call",
+              "output": "read result"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "next"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_distinct_response_items_share_call_prefix",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "shared|fc_one",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              },
+              {
+                "type": "toolCall",
+                "id": "shared|fc_two",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "shared|fc_one",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "read result"
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "shared|fc_two",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "read result"
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "read"
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "shared_fc_one",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                },
+                {
+                  "id": "shared_fc_two",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "content": "read result",
+              "tool_call_id": "shared_fc_one"
+            },
+            {
+              "role": "tool",
+              "content": "read result",
+              "tool_call_id": "shared_fc_two"
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 32768,
+          "tools": []
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_long_response_item_id_hash",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|fc_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "call_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|fc_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "read result"
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "read"
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "call_aaaaaaaaaaaaaaaaaaaaaaaaaa_993gzno2",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "content": "read result",
+              "tool_call_id": "call_aaaaaaaaaaaaaaaaaaaaaaaaaa_993gzno2"
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 32768,
+          "tools": []
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_same_provider_different_model_id_pair",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "read",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call_a|fc_a",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "call_a|fc_a",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "read result"
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "read"
+                }
+              ]
+            },
+            {
+              "type": "function_call",
+              "call_id": "call_a",
+              "name": "read",
+              "arguments": "{\"path\":\"fixture.txt\"}"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call_a",
+              "output": "read result"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "next"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "native_user_and_tool_images_openai-completions",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "look"
+              },
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              }
+            ],
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call_image",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "call_image",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "image result"
+              },
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "describe",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "look"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "data:image/png;base64,iVBORw0KGgo="
+                  }
+                }
+              ]
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "call_image",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "content": "image result",
+              "tool_call_id": "call_image"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Attached image(s) from tool result:"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "data:image/png;base64,iVBORw0KGgo="
+                  }
+                }
+              ]
+            },
+            {
+              "role": "user",
+              "content": "describe"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 32768,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": false
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "native_user_and_tool_images_openai-responses",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "look"
+              },
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              }
+            ],
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "call_image",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "call_image",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "image result"
+              },
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "describe",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "input": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "look"
+                },
+                {
+                  "type": "input_image",
+                  "detail": "auto",
+                  "image_url": "data:image/png;base64,iVBORw0KGgo="
+                }
+              ]
+            },
+            {
+              "type": "function_call",
+              "call_id": "call_image",
+              "name": "read",
+              "arguments": "{\"path\":\"fixture.txt\"}"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call_image",
+              "output": [
+                {
+                  "type": "input_text",
+                  "text": "image result"
+                },
+                {
+                  "type": "input_image",
+                  "detail": "auto",
+                  "image_url": "data:image/png;base64,iVBORw0KGgo="
+                }
+              ]
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "describe"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 32768,
+          "tools": [
+            {
+              "type": "function",
+              "name": "read",
+              "description": "Read a fixture file",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false
+              },
+              "strict": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_multiple_tool_images_group_after_all_results",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "read both",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "image_one",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              },
+              {
+                "type": "toolCall",
+                "id": "image_two",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "image_one",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "image_two",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "text",
+                "text": "second"
+              },
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "read both"
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "image_one",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                },
+                {
+                  "id": "image_two",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "content": "(see attached image)",
+              "tool_call_id": "image_one"
+            },
+            {
+              "role": "tool",
+              "content": "second",
+              "tool_call_id": "image_two"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Attached image(s) from tool result:"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "data:image/png;base64,iVBORw0KGgo="
+                  }
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "data:image/png;base64,iVBORw0KGgo="
+                  }
+                }
+              ]
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 32768,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": false
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "completions_sections_and_tools_update",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "sections": {
+              "goal": "initial",
+              "remove": "old"
+            },
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "first",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "system",
+            "content": "updated prompt",
+            "sections": {
+              "goal": "new",
+              "remove": null
+            },
+            "toolsRemoved": [
+              {
+                "name": "read"
+              }
+            ],
+            "toolsAdded": [
+              {
+                "name": "other",
+                "description": "Another fixture tool",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "messages": [
+            {
+              "role": "developer",
+              "content": "system prompt\n\nupdated prompt\n\nnew"
+            },
+            {
+              "role": "user",
+              "content": "first"
+            },
+            {
+              "role": "assistant",
+              "content": "done"
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 128000,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "other",
+                "description": "Another fixture tool",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": false
+              }
+            }
+          ],
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "responses_sections_and_tools_update",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-5",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "sections": {
+              "goal": "initial",
+              "remove": "old"
+            },
+            "toolsAdded": [
+              {
+                "name": "read",
+                "description": "Read a fixture file",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": "first",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-5",
+            "timestamp": 2
+          },
+          {
+            "role": "system",
+            "content": "updated prompt",
+            "sections": {
+              "goal": "new",
+              "remove": null
+            },
+            "toolsRemoved": [
+              {
+                "name": "read"
+              }
+            ],
+            "toolsAdded": [
+              {
+                "name": "other",
+                "description": "Another fixture tool",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 1.25,
+            "output": 10,
+            "cacheRead": 0.125,
+            "cacheWrite": 0
+          },
+          "contextWindow": 400000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": null
+          },
+          "compat": {
+            "supportsStrictMode": true,
+            "supportsOpenAIGrammarTools": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "developer",
+              "content": "system prompt\n\nupdated prompt\n\nnew"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "first"
+                }
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "done",
+                  "annotations": []
+                }
+              ],
+              "status": "completed",
+              "id": "msg_pi_1"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "next"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 128000,
+          "tools": [
+            {
+              "type": "function",
+              "name": "other",
+              "description": "Another fixture tool",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false
+              },
+              "strict": false
+            }
+          ],
+          "reasoning": {
+            "effort": "high",
+            "summary": "auto"
+          },
+          "include": [
+            "reasoning.encrypted_content"
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "deepseek_native_system_update",
+        "config": {
+          "llm": {
+            "model_name": "deepseek/deepseek-v4-pro",
+            "model_api": "openai-completions",
+            "base_url": "https://api.deepseek.com",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0,
+            "sections": {
+              "goal": "initial"
+            }
+          },
+          {
+            "role": "user",
+            "content": "first",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "deepseek",
+            "model": "deepseek-v4-pro",
+            "timestamp": 2
+          },
+          {
+            "role": "system",
+            "content": "updated prompt",
+            "sections": {
+              "goal": "new"
+            },
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro",
+          "api": "openai-completions",
+          "baseUrl": "https://api.deepseek.com",
+          "provider": "deepseek",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 1.32,
+            "output": 3.96,
+            "cacheRead": 0.044,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "compat": {
+            "supportsStore": false,
+            "supportsDeveloperRole": false,
+            "maxTokensField": "max_tokens",
+            "requiresReasoningContentOnAssistantMessages": true,
+            "thinkingFormat": "deepseek",
+            "supportsStrictMode": true,
+            "supportsMidConvoSystemMessages": true
+          },
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "max": "max"
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "deepseek-v4-pro",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt\n\ninitial"
+            },
+            {
+              "role": "user",
+              "content": "first"
+            },
+            {
+              "role": "assistant",
+              "content": "done",
+              "reasoning_content": ""
+            },
+            {
+              "role": "system",
+              "content": "updated prompt\n\nUpdated system prompt section \"goal\":\n\nnew"
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "max_tokens": 384000,
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "deepseek_same_model_reasoning_content_replay",
+        "config": {
+          "llm": {
+            "model_name": "deepseek/deepseek-flash",
+            "model_api": "openai-completions",
+            "base_url": "https://api.deepseek.com",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "first",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "thinking",
+                "thinking": "first thought",
+                "thinkingSignature": "reasoning_content"
+              },
+              {
+                "type": "thinking",
+                "thinking": "second thought",
+                "thinkingSignature": "reasoning_content"
+              },
+              {
+                "type": "text",
+                "text": "done"
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "deepseek",
+            "model": "deepseek-flash",
+            "timestamp": 2
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "deepseek-flash",
+          "name": "DeepSeek V4.1 Flash",
+          "api": "openai-completions",
+          "baseUrl": "https://api.deepseek.com",
+          "provider": "deepseek",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": null,
+            "high": "high",
+            "max": "max"
+          },
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.006,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "compat": {
+            "supportsStore": false,
+            "supportsDeveloperRole": false,
+            "maxTokensField": "max_tokens",
+            "requiresReasoningContentOnAssistantMessages": true,
+            "thinkingFormat": "deepseek",
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "images": {
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "deepseek-flash",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "first"
+            },
+            {
+              "role": "assistant",
+              "content": "done",
+              "reasoning_content": "first thought\nsecond thought"
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "max_tokens": 384000,
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "deepseek_nonvision_images_downgrade",
+        "config": {
+          "llm": {
+            "model_name": "deepseek/deepseek-v4-pro",
+            "model_api": "openai-completions",
+            "base_url": "https://api.deepseek.com",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": "high",
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              },
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              },
+              {
+                "type": "text",
+                "text": "look"
+              }
+            ],
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "toolCall",
+                "id": "image",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "api": "openai-completions",
+            "provider": "deepseek",
+            "model": "deepseek-v4-pro",
+            "timestamp": 2
+          },
+          {
+            "role": "toolResult",
+            "toolCallId": "image",
+            "toolName": "read",
+            "content": [
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              },
+              {
+                "type": "image",
+                "mimeType": "image/png",
+                "data": "iVBORw0KGgo="
+              }
+            ],
+            "isError": false,
+            "timestamp": 3
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro",
+          "api": "openai-completions",
+          "baseUrl": "https://api.deepseek.com",
+          "provider": "deepseek",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 1.32,
+            "output": 3.96,
+            "cacheRead": 0.044,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "compat": {
+            "supportsStore": false,
+            "supportsDeveloperRole": false,
+            "maxTokensField": "max_tokens",
+            "requiresReasoningContentOnAssistantMessages": true,
+            "thinkingFormat": "deepseek",
+            "supportsStrictMode": true,
+            "supportsMidConvoSystemMessages": true
+          },
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "max": "max"
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "deepseek-v4-pro",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "(image omitted: model does not support images)"
+                },
+                {
+                  "type": "text",
+                  "text": "look"
+                }
+              ]
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "image",
+                  "type": "function",
+                  "function": {
+                    "name": "read",
+                    "arguments": "{\"path\":\"fixture.txt\"}"
+                  }
+                }
+              ],
+              "reasoning_content": ""
+            },
+            {
+              "role": "tool",
+              "content": "(tool image omitted: model does not support images)",
+              "tool_call_id": "image"
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "max_tokens": 384000,
+          "tools": [],
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "error_and_aborted_assistant_filter_openai-completions",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-completions",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-completions",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "first",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "partial"
+              },
+              {
+                "type": "toolCall",
+                "id": "skip",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "error",
+            "api": "openai-completions",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "aborted"
+              },
+              {
+                "type": "toolCall",
+                "id": "also-skip",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "aborted",
+            "api": "openai-completions",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-completions",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "messages": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": "first"
+            },
+            {
+              "role": "user",
+              "content": "next"
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 32768,
+          "tools": []
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "error_and_aborted_assistant_filter_openai-responses",
+        "config": {
+          "llm": {
+            "model_name": "openai/gpt-4.1",
+            "model_api": "openai-responses",
+            "base_url": "https://api.openai.com/v1",
+            "api_key": "sk-offline-fixture"
+          }
+        },
+        "api": "openai-responses",
+        "reasoning": null,
+        "context": [
+          {
+            "role": "system",
+            "content": "system prompt",
+            "timestamp": 0
+          },
+          {
+            "role": "user",
+            "content": "first",
+            "timestamp": 1
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "partial"
+              },
+              {
+                "type": "toolCall",
+                "id": "skip",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "error",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "aborted"
+              },
+              {
+                "type": "toolCall",
+                "id": "also-skip",
+                "name": "read",
+                "arguments": {
+                  "path": "fixture.txt"
+                }
+              }
+            ],
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "aborted",
+            "api": "openai-responses",
+            "provider": "openai",
+            "model": "gpt-4.1",
+            "timestamp": 2
+          },
+          {
+            "role": "user",
+            "content": "next",
+            "timestamp": 1
+          }
+        ],
+        "model": {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "api": "openai-responses",
+          "provider": "openai",
+          "baseUrl": "https://api.openai.com/v1",
+          "reasoning": false,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 8,
+            "cacheRead": 0.5,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1047576,
+          "maxTokens": 32768,
+          "compat": {
+            "supportsStrictMode": true
+          },
+          "inputLimits": {
+            "maxRequestBytes": 536870912,
+            "images": {
+              "maxPerRequest": 1500,
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        }
+      },
+      "expected": {
+        "payload": {
+          "model": "gpt-4.1",
+          "input": [
+            {
+              "role": "system",
+              "content": "system prompt"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "first"
+                }
+              ]
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "next"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "store": false,
+          "max_output_tokens": 32768
+        }
+      }
+    }
+  ]
+}

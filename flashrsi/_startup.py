@@ -114,6 +114,10 @@ def _role(config, label, kind):
             raise ValueError(
                 f"{label}: Pi is implemented in the Snapshot's Python runtime; cli_path/node_path are unsupported"
             )
+    elif kind == "hermes":
+        from flashrsi.agents.hermes import _validate
+
+        _validate(config)
     if kind == "codex":
         if config.get("cli_path"):
             raise ValueError(

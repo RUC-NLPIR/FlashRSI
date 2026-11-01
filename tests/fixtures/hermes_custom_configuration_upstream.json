@@ -1,0 +1,872 @@
+{
+  "baseline": "v0.22.5@bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "method": "Unmodified four-function AST closure from original agent/agent_init.py; explicit arguments only, no imports/config/network/model calls.",
+  "source_sha256": "1e29225039534583ef0f3e7ae0d7a02b091e03792f8170c880ba83fff9c977cd",
+  "functions": {
+    "_normalized_custom_base_url": {
+      "line": 255,
+      "end_line": 258
+    },
+    "_custom_provider_model_matches": {
+      "line": 261,
+      "end_line": 271
+    },
+    "_custom_provider_extra_body_for_agent": {
+      "line": 274,
+      "end_line": 305
+    },
+    "_merge_custom_provider_extra_body": {
+      "line": 308,
+      "end_line": 321
+    }
+  },
+  "cases": [
+    {
+      "name": "unnamed_custom_default",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "non_custom_ignores_matching_endpoint",
+      "input": {
+        "provider": "openai",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": null,
+      "expected": {}
+    },
+    {
+      "name": "named_custom_matches_name",
+      "input": {
+        "provider": " custom:foo ",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "name": "FOO"
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "named_custom_matches_key",
+      "input": {
+        "provider": "custom:foo",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "provider_key": " FOO "
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "named_custom_rejects_other",
+      "input": {
+        "provider": "custom:foo",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "provider_key": "bar"
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": null,
+      "expected": {}
+    },
+    {
+      "name": "url_trims_whitespace_and_slashes",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": " https://fixture.invalid/v1/// ",
+        "custom_providers": [
+          {
+            "base_url": " https://fixture.invalid/v1/ ",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "url_case_is_preserved",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://FIXTURE.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": null,
+      "expected": {}
+    },
+    {
+      "name": "url_path_mismatch",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v2",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": null,
+      "expected": {}
+    },
+    {
+      "name": "missing_target_url",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": null,
+      "expected": {}
+    },
+    {
+      "name": "invalid_entries_ignored",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          null,
+          "entry",
+          {},
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": []
+          },
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {}
+          },
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "empty_entries",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [],
+        "request_overrides": {}
+      },
+      "selected": null,
+      "expected": {}
+    },
+    {
+      "name": "specific_model_matches",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "model": " MODEL-A "
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "specific_model_mismatch",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "model": "model-b"
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": null,
+      "expected": {}
+    },
+    {
+      "name": "first_fallback_retained",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "first": true
+            }
+          },
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "second": true
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "first": true
+      },
+      "expected": {
+        "extra_body": {
+          "first": true
+        }
+      }
+    },
+    {
+      "name": "specific_model_beats_prior_fallback",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          },
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "specific": true
+            },
+            "model": "model-a"
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "specific": true
+      },
+      "expected": {
+        "extra_body": {
+          "specific": true
+        }
+      }
+    },
+    {
+      "name": "first_specific_model_wins",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "first": true
+            },
+            "model": "model-a"
+          },
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "second": true
+            },
+            "model": "model-a"
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "first": true
+      },
+      "expected": {
+        "extra_body": {
+          "first": true
+        }
+      }
+    },
+    {
+      "name": "catalog_match_list",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "model": "model-b",
+            "models": [
+              "model-a"
+            ]
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "catalog_match_dict",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "model": "model-b",
+            "models": {
+              "model-a": {}
+            }
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "catalog_match_tuple",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "model": "model-b",
+            "models": [
+              "model-a"
+            ]
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "models_only_remains_fallback_per_source",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            },
+            "models": [
+              "different"
+            ]
+          }
+        ],
+        "request_overrides": {}
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "explicit_extra_body_wins_shallow",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {
+          "temperature": 0.2,
+          "extra_body": {
+            "service_tier": "priority",
+            "provider": {
+              "only": [
+                "b"
+              ]
+            },
+            "seed": 42
+          }
+        }
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "temperature": 0.2,
+        "extra_body": {
+          "service_tier": "priority",
+          "provider": {
+            "only": [
+              "b"
+            ]
+          },
+          "seed": 42
+        }
+      }
+    },
+    {
+      "name": "empty_explicit_body_keeps_defaults",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {
+          "extra_body": {}
+        }
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "non_mapping_explicit_body_replaced_with_defaults",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [
+          {
+            "base_url": "https://fixture.invalid/v1",
+            "extra_body": {
+              "service_tier": "flex",
+              "provider": {
+                "order": [
+                  "a"
+                ]
+              }
+            }
+          }
+        ],
+        "request_overrides": {
+          "extra_body": null
+        }
+      },
+      "selected": {
+        "service_tier": "flex",
+        "provider": {
+          "order": [
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "extra_body": {
+          "service_tier": "flex",
+          "provider": {
+            "order": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "explicit_only_without_defaults",
+      "input": {
+        "provider": "custom",
+        "model": "model-a",
+        "base_url": "https://fixture.invalid/v1",
+        "custom_providers": [],
+        "request_overrides": {
+          "extra_body": {
+            "service_tier": "priority"
+          },
+          "seed": 1
+        }
+      },
+      "selected": null,
+      "expected": {
+        "extra_body": {
+          "service_tier": "priority"
+        },
+        "seed": 1
+      }
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import json
 import sys
 from collections.abc import Mapping
 from contextlib import contextmanager
+from contextvars import ContextVar
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import ModuleType
@@ -24,6 +25,7 @@ from flashrsi._records import _redact, _secrets
 from flashrsi.core import Agent, Trajectory
 
 _THINKING_LEVELS = {"off", "minimal", "low", "medium", "high", "xhigh", "max"}
+_RUN_CONTROLS = ContextVar("pi_run_controls", default=None)
 
 
 class Pi(Agent):
@@ -34,7 +36,56 @@ class Pi(Agent):
         "Pi-compatible Python coding agent with versioned resources and tools."
     )
     instruction_file = "AGENTS.md"
-    _container_dependencies = ("httpx",)
+    _container_dependencies = ("httpx", "pillow", "regexrs-py", "numpy")
+
+    async def run_with_controls(
+        self,
+        prompt: str,
+        working_dir: Path | None = None,
+        *,
+        on_event=None,
+        steering_queue=None,
+        follow_up_queue=None,
+        hooks=None,
+        cancel_event=None,
+    ) -> Trajectory:
+        """Run with Python observers, message queues, hooks and an abort signal.
+
+        Callables remain local to this invocation; the normal Agent.run path
+        still selects and records the configured Snapshot and configuration.
+        """
+        controls = {
+            "on_event": on_event,
+            "steering_queue": steering_queue,
+            "follow_up_queue": follow_up_queue,
+            "hooks": hooks,
+        }
+        if cancel_event is not None:
+            controls["cancel_event"] = cancel_event
+        token = _RUN_CONTROLS.set(controls)
+        try:
+            return await self.run(prompt, working_dir)
+        finally:
+            _RUN_CONTROLS.reset(token)
+
+    async def compact(
+        self, working_dir: Path | None = None, custom_instructions: str | None = None
+    ) -> Trajectory:
+        """Compact the configured persistent session using the selected Snapshot."""
+        prompt = "/compact" + (" " + custom_instructions if custom_instructions else "")
+        return await self.run(prompt, working_dir)
+
+    async def navigate_session(
+        self,
+        target_id: str,
+        working_dir: Path | None = None,
+        custom_instructions: str | None = None,
+    ) -> Trajectory:
+        """Checkpoint the abandoned branch and select an explicit session node."""
+        prompt = f"/tree {target_id}" + (
+            " " + custom_instructions if custom_instructions else ""
+        )
+        return await self.run(prompt, working_dir)
 
     async def _run(self, prompt: str, working_dir: Path | None = None) -> Trajectory:
         config = self.config
@@ -52,15 +103,38 @@ class Pi(Agent):
             return Trajectory(status="error", error_message=str(exc))
 
         secrets = sorted(set(_secrets(config)), key=len, reverse=True)
+        timeout_error = None
         with TemporaryDirectory(prefix="flashrsi-pi-") as temporary:
             task_dir = working_dir or Path(temporary) / "work"
             task_dir.mkdir(parents=True, exist_ok=True)
             try:
                 with _native_runtime(self.files_dir) as native:
-                    result = await asyncio.wait_for(
-                        native.run(native_config, prompt, task_dir, self.files_dir),
-                        timeout=float(timeout),
+                    controls = dict(_RUN_CONTROLS.get() or {})
+                    abort = controls.pop("cancel_event", None) or asyncio.Event()
+                    operation = asyncio.create_task(
+                        native.run(
+                            native_config,
+                            prompt,
+                            task_dir,
+                            self.files_dir,
+                            cancel_event=abort,
+                            **controls,
+                        )
                     )
+                    try:
+                        done, _ = await asyncio.wait(
+                            (operation,), timeout=float(timeout)
+                        )
+                        if not done:
+                            abort.set()
+                        result = await operation
+                        if not done:
+                            timeout_error = f"Pi timed out after {timeout:g}s"
+                    except BaseException:
+                        abort.set()
+                        operation.cancel()
+                        await asyncio.gather(operation, return_exceptions=True)
+                        raise
             except TimeoutError:
                 return Trajectory(
                     status="error",
@@ -75,8 +149,10 @@ class Pi(Agent):
         events = _value(result, "events", [])
         output = _value(result, "output", "")
         usage = _value(result, "usage", {})
-        status = _value(result, "status", "finished")
-        error = _value(result, "error_message", _value(result, "error", None))
+        status = "error" if timeout_error else _value(result, "status", "finished")
+        error = timeout_error or _value(
+            result, "error_message", _value(result, "error", None)
+        )
         if not isinstance(events, list):
             events = list(events) if isinstance(events, (tuple, list)) else []
         if not isinstance(output, str):

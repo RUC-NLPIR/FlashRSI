@@ -1,0 +1,3467 @@
+{
+  "upstream_repository": "https://github.com/NousResearch/hermes-agent",
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "generation": "Actual pinned upstream module imports and function execution; isolated HERMES_HOME and prohibited network; no FlashRSI modules or helper substitutes.",
+  "source_sha256": {
+    "agent/native_compaction.py": "6b21f68dc5976bf4a09ca945cac4377b2574d97b261d51f040229e685b8be0f7",
+    "agent/codex_responses_adapter.py": "c86e14ebe721e94f86a1a50266272c364ccea9660a6da456eb00fa109e5f054d",
+    "agent/usage_pricing.py": "6fc01dafad5d6b78262ad9117cfa51fb9f89313c4f62cb04ca327459db2ce61a",
+    "agent/context_compressor.py": "065dc9babbcb811a514c32319ed13a6ddaeefbc3964a109f7bb8e4c9260779d1",
+    "agent/model_metadata.py": "497f2342915b0c7f23e56c2ec7e191a122d6255a6d12e660e570a4013895ab3d",
+    "agent/message_content.py": "65d45e23dba4d05eab9a7c61de3037f26e4effebf39121e85fd6e084b785123b",
+    "agent/codex_headers.py": "54d165f64bb3988c16254f587a5dccac2efa988e57e86027714bf98f16bbbca9",
+    "agent/reasoning_effort.py": "050b8d56b474f24aaa0a63e542554f0382ffc49431ba769133157f617e5a8c6f",
+    "agent/transports/codex.py": "dd5b7acb4ad905f560c7b9669b26e3f2ff4af2de4fdc22856b1d669b74f844b2"
+  },
+  "manual_compact_endpoint": "Pinned source has automatic context_management compaction; no /responses/compact endpoint invocation. CLI /compact uses Hermes compressor or Codex app-server thread/compact/start.",
+  "functions": [
+    {
+      "label": "gpt-5.6:None",
+      "name": "is_native_compaction_model",
+      "args": [
+        "gpt-5.6"
+      ],
+      "kwargs": {
+        "provider": null,
+        "base_url": null
+      },
+      "result": true
+    },
+    {
+      "label": "GPT-5.6-mini-2026-07-15:None",
+      "name": "is_native_compaction_model",
+      "args": [
+        "GPT-5.6-mini-2026-07-15"
+      ],
+      "kwargs": {
+        "provider": null,
+        "base_url": null
+      },
+      "result": true
+    },
+    {
+      "label": "vendor/gpt-5.6-sol:custom",
+      "name": "is_native_compaction_model",
+      "args": [
+        "vendor/gpt-5.6-sol"
+      ],
+      "kwargs": {
+        "provider": "custom",
+        "base_url": "https://proxy.example/v1"
+      },
+      "result": true
+    },
+    {
+      "label": "gpt-5.3-codex:openai-codex",
+      "name": "is_native_compaction_model",
+      "args": [
+        "gpt-5.3-codex"
+      ],
+      "kwargs": {
+        "provider": "openai-codex",
+        "base_url": "https://chatgpt.com/backend-api/codex"
+      },
+      "result": false
+    },
+    {
+      "label": "gpt-6-astra:openai-codex",
+      "name": "is_native_compaction_model",
+      "args": [
+        "gpt-6-astra"
+      ],
+      "kwargs": {
+        "provider": "openai-codex",
+        "base_url": "https://chatgpt.com/backend-api/codex"
+      },
+      "result": true
+    },
+    {
+      "label": "vendor/gpt-6-astra-900k:openai-codex",
+      "name": "is_native_compaction_model",
+      "args": [
+        "vendor/gpt-6-astra-900k"
+      ],
+      "kwargs": {
+        "provider": "openai-codex",
+        "base_url": "https://chatgpt.com/backend-api/codex/"
+      },
+      "result": true
+    },
+    {
+      "label": "gpt-6-astra:openai",
+      "name": "is_native_compaction_model",
+      "args": [
+        "gpt-6-astra"
+      ],
+      "kwargs": {
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1"
+      },
+      "result": false
+    },
+    {
+      "label": "gpt-6-astra:openai-codex",
+      "name": "is_native_compaction_model",
+      "args": [
+        "gpt-6-astra"
+      ],
+      "kwargs": {
+        "provider": "openai-codex",
+        "base_url": "https://proxy.example/codex"
+      },
+      "result": false
+    },
+    {
+      "label": "None:None",
+      "name": "is_native_compaction_model",
+      "args": [
+        null
+      ],
+      "kwargs": {
+        "provider": null,
+        "base_url": null
+      },
+      "result": false
+    },
+    {
+      "label": "https://api.openai.com/v1:False",
+      "name": "is_direct_openai_route",
+      "args": [
+        "https://api.openai.com/v1"
+      ],
+      "kwargs": {
+        "is_codex_backend": false
+      },
+      "result": true
+    },
+    {
+      "label": "https://chatgpt.com/backend-api/codex:True",
+      "name": "is_direct_openai_route",
+      "args": [
+        "https://chatgpt.com/backend-api/codex"
+      ],
+      "kwargs": {
+        "is_codex_backend": true
+      },
+      "result": true
+    },
+    {
+      "label": "https://chatgpt.com/backend-api/codex:False",
+      "name": "is_direct_openai_route",
+      "args": [
+        "https://chatgpt.com/backend-api/codex"
+      ],
+      "kwargs": {
+        "is_codex_backend": false
+      },
+      "result": false
+    },
+    {
+      "label": "https://api.openai.com.evil.example/v1:False",
+      "name": "is_direct_openai_route",
+      "args": [
+        "https://api.openai.com.evil.example/v1"
+      ],
+      "kwargs": {
+        "is_codex_backend": false
+      },
+      "result": false
+    },
+    {
+      "label": "https://api.openai.com/v1:True",
+      "name": "is_direct_openai_route",
+      "args": [
+        "https://api.openai.com/v1"
+      ],
+      "kwargs": {
+        "is_codex_backend": true
+      },
+      "result": true
+    },
+    {
+      "label": "None:False",
+      "name": "is_direct_openai_route",
+      "args": [
+        null
+      ],
+      "kwargs": {
+        "is_codex_backend": false
+      },
+      "result": false
+    },
+    {
+      "label": "https://[broken:False",
+      "name": "is_direct_openai_route",
+      "args": [
+        "https://[broken"
+      ],
+      "kwargs": {
+        "is_codex_backend": false
+      },
+      "result": false
+    },
+    {
+      "label": "configured=None,local=None",
+      "name": "resolve_compact_threshold",
+      "args": [
+        null,
+        null
+      ],
+      "kwargs": {},
+      "result": 200000
+    },
+    {
+      "label": "configured=None,local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        null,
+        765000
+      ],
+      "kwargs": {},
+      "result": 756808
+    },
+    {
+      "label": "configured=200000,local=100000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        200000,
+        100000
+      ],
+      "kwargs": {},
+      "result": 91808
+    },
+    {
+      "label": "configured=200000,local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        200000,
+        765000
+      ],
+      "kwargs": {},
+      "result": 200000
+    },
+    {
+      "label": "configured=None,local=8192",
+      "name": "resolve_compact_threshold",
+      "args": [
+        null,
+        8192
+      ],
+      "kwargs": {},
+      "result": 6553
+    },
+    {
+      "label": "configured=None,local=4000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        null,
+        4000
+      ],
+      "kwargs": {},
+      "result": 3200
+    },
+    {
+      "label": "configured=None,local=100",
+      "name": "resolve_compact_threshold",
+      "args": [
+        null,
+        100
+      ],
+      "kwargs": {},
+      "result": 1024
+    },
+    {
+      "label": "configured=1,local=100000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        1,
+        100000
+      ],
+      "kwargs": {},
+      "result": 1024
+    },
+    {
+      "label": "configured=10,local=None",
+      "name": "resolve_compact_threshold",
+      "args": [
+        10,
+        null
+      ],
+      "kwargs": {},
+      "result": 10
+    },
+    {
+      "label": "configured=True,local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        true,
+        765000
+      ],
+      "kwargs": {},
+      "result": 756808
+    },
+    {
+      "label": "configured=123.4,local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        123.4,
+        765000
+      ],
+      "kwargs": {},
+      "result": 756808
+    },
+    {
+      "label": "configured='120000',local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        "120000",
+        765000
+      ],
+      "kwargs": {},
+      "result": 120000
+    },
+    {
+      "label": "configured='12.5',local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        "12.5",
+        765000
+      ],
+      "kwargs": {},
+      "result": 756808
+    },
+    {
+      "label": "configured=0,local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        0,
+        765000
+      ],
+      "kwargs": {},
+      "result": 756808
+    },
+    {
+      "label": "configured=-1,local=765000",
+      "name": "resolve_compact_threshold",
+      "args": [
+        -1,
+        765000
+      ],
+      "kwargs": {},
+      "result": 756808
+    },
+    {
+      "label": "configured=None,local='4000'",
+      "name": "resolve_compact_threshold",
+      "args": [
+        null,
+        "4000"
+      ],
+      "kwargs": {},
+      "result": 3200
+    },
+    {
+      "label": "{\"base_url\": null, \"model\": \"gpt-5.6\", \"provider\": \"openai\"}",
+      "name": "resolve_native_compaction_capabilities",
+      "args": [],
+      "kwargs": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": null
+      },
+      "result": {
+        "native_compaction": true
+      }
+    },
+    {
+      "label": "{\"base_url\": null, \"model\": \"gpt-5.6\", \"provider\": \"custom\"}",
+      "name": "resolve_native_compaction_capabilities",
+      "args": [],
+      "kwargs": {
+        "model": "gpt-5.6",
+        "provider": "custom",
+        "base_url": null
+      },
+      "result": {
+        "native_compaction": false
+      }
+    },
+    {
+      "label": "{\"base_url\": \"https://api.openai.com/v1\", \"model\": \"gpt-5.6\", \"provider\": \"custom\"}",
+      "name": "resolve_native_compaction_capabilities",
+      "args": [],
+      "kwargs": {
+        "model": "gpt-5.6",
+        "provider": "custom",
+        "base_url": "https://api.openai.com/v1"
+      },
+      "result": {
+        "native_compaction": true
+      }
+    },
+    {
+      "label": "{\"base_url\": \"https://chatgpt.com/backend-api/codex\", \"is_codex_backend\": true, \"model\": \"gpt-6-astra\", \"provider\": \"openai-codex\"}",
+      "name": "resolve_native_compaction_capabilities",
+      "args": [],
+      "kwargs": {
+        "model": "gpt-6-astra",
+        "provider": "openai-codex",
+        "base_url": "https://chatgpt.com/backend-api/codex",
+        "is_codex_backend": true
+      },
+      "result": {
+        "native_compaction": true
+      }
+    },
+    {
+      "label": "{\"base_url\": \"https://api.openai.com/v1\", \"model\": \"gpt-6-astra\", \"provider\": \"openai\"}",
+      "name": "resolve_native_compaction_capabilities",
+      "args": [],
+      "kwargs": {
+        "model": "gpt-6-astra",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1"
+      },
+      "result": {
+        "native_compaction": false
+      }
+    },
+    {
+      "label": "unsupported field context_management:400",
+      "name": "is_native_compaction_rejection",
+      "args": [
+        "unsupported field context_management",
+        400
+      ],
+      "kwargs": {},
+      "result": true
+    },
+    {
+      "label": "unsupported field context_management:500",
+      "name": "is_native_compaction_rejection",
+      "args": [
+        "unsupported field context_management",
+        500
+      ],
+      "kwargs": {},
+      "result": false
+    },
+    {
+      "label": "unsupported field compact_threshold:429",
+      "name": "is_native_compaction_rejection",
+      "args": [
+        "unsupported field compact_threshold",
+        429
+      ],
+      "kwargs": {},
+      "result": false
+    },
+    {
+      "label": "context_management appeared in request:400",
+      "name": "is_native_compaction_rejection",
+      "args": [
+        "context_management appeared in request",
+        400
+      ],
+      "kwargs": {},
+      "result": false
+    },
+    {
+      "label": "invalid compact_threshold:None",
+      "name": "is_native_compaction_rejection",
+      "args": [
+        "invalid compact_threshold",
+        null
+      ],
+      "kwargs": {},
+      "result": true
+    },
+    {
+      "label": "invalid compact_threshold:not-a-number",
+      "name": "is_native_compaction_rejection",
+      "args": [
+        "invalid compact_threshold",
+        "not-a-number"
+      ],
+      "kwargs": {},
+      "result": true
+    },
+    {
+      "label": "connection timed out:None",
+      "name": "is_native_compaction_rejection",
+      "args": [
+        "connection timed out",
+        null
+      ],
+      "kwargs": {},
+      "result": false
+    },
+    {
+      "label": "without_checkpoint_unchanged",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "keep full"
+          },
+          {
+            "role": "assistant",
+            "content": "answer"
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": [
+        {
+          "type": "message",
+          "role": "user",
+          "content": "keep full"
+        },
+        {
+          "role": "assistant",
+          "content": "answer"
+        }
+      ]
+    },
+    {
+      "label": "newest_contiguous_checkpoint_run",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "first ask"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-old"
+          },
+          {
+            "role": "assistant",
+            "content": "discard ordinary history"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "latest ask"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new-part-2"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "after checkpoint"
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new-part-2"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "first ask"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "latest ask"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "after checkpoint"
+        }
+      ]
+    },
+    {
+      "label": "ascii_boundary_head",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "older ask"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "abcdefghijklmnop"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "retained_user_token_budget": 2
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "abcdefgh"
+        }
+      ]
+    },
+    {
+      "label": "cjk_boundary_head",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "old ask"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "癌症治疗与检查方案"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "retained_user_token_budget": 3
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "癌症治"
+        }
+      ]
+    },
+    {
+      "label": "cyrillic_boundary_head",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Привет мир привет"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "retained_user_token_budget": 3
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "Привет"
+        }
+      ]
+    },
+    {
+      "label": "typed_parts_keep_metadata",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": [
+              {
+                "type": "input_text",
+                "text": "abcd",
+                "tag": "keep"
+              },
+              {
+                "type": "input_text",
+                "text": "efghijkl",
+                "tag": "truncate"
+              }
+            ]
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "retained_user_token_budget": 2
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "abcd",
+              "tag": "keep"
+            },
+            {
+              "type": "input_text",
+              "text": "efgh",
+              "tag": "truncate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "image_only_one_token",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": [
+              {
+                "type": "input_image",
+                "image_url": "data:image/png;base64,AA=="
+              }
+            ]
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "retained_user_token_budget": 1
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_image",
+              "image_url": "data:image/png;base64,AA=="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "oversize_mixed_stops_older_asks",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "old"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": [
+              {
+                "type": "input_text",
+                "text": "oversized ask"
+              },
+              {
+                "type": "input_image",
+                "image_url": "https://example.invalid/image.png"
+              }
+            ]
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "retained_user_token_budget": 1
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        }
+      ]
+    },
+    {
+      "label": "summary_kept_once_whole",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "Canonical handoff summary",
+            "_compressed_summary": true
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "ask"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "Canonical handoff summary",
+            "_compressed_summary": true
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "ask"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "Canonical handoff summary",
+          "_compressed_summary": true
+        }
+      ]
+    },
+    {
+      "label": "summary_never_sliced",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "Canonical handoff summary",
+            "_compressed_summary": true
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "retained_summary_token_budget": 1
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        }
+      ]
+    },
+    {
+      "label": "summary_retention_disabled",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "Canonical handoff summary",
+            "_compressed_summary": true
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "ask"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "enable_summary_retention": false
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "ask"
+        }
+      ]
+    },
+    {
+      "label": "source_summary_survives_lossy_tool_conversion",
+      "name": "prune_pre_checkpoint_items",
+      "args": [
+        [
+          {
+            "type": "function_call_output",
+            "call_id": "call_a",
+            "output": "stale"
+          },
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {
+        "item_sources": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "Canonical handoff summary",
+            "_compressed_summary": true
+          },
+          null
+        ]
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "Canonical handoff summary"
+        }
+      ]
+    },
+    {
+      "label": "valid",
+      "name": "has_compaction_checkpoint",
+      "args": [
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": true
+    },
+    {
+      "label": "blank",
+      "name": "has_compaction_checkpoint",
+      "args": [
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": " "
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": false
+    },
+    {
+      "label": "wrong_type",
+      "name": "has_compaction_checkpoint",
+      "args": [
+        [
+          {
+            "type": "reasoning",
+            "encrypted_content": "blob"
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": false
+    },
+    {
+      "label": "none",
+      "name": "has_compaction_checkpoint",
+      "args": [
+        null
+      ],
+      "kwargs": {},
+      "result": false
+    },
+    {
+      "label": "carry_prior_checkpoint",
+      "name": "merge_interim_reasoning_items",
+      "args": [
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-old"
+          },
+          {
+            "type": "reasoning",
+            "encrypted_content": "old-reason"
+          }
+        ],
+        [
+          {
+            "type": "reasoning",
+            "encrypted_content": "new-reason"
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-old"
+        },
+        {
+          "type": "reasoning",
+          "encrypted_content": "new-reason"
+        }
+      ]
+    },
+    {
+      "label": "new_checkpoint_wins",
+      "name": "merge_interim_reasoning_items",
+      "args": [
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-old"
+          }
+        ],
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        }
+      ]
+    },
+    {
+      "label": "blank_new_checkpoint_keeps_prior",
+      "name": "merge_interim_reasoning_items",
+      "args": [
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-old"
+          }
+        ],
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": ""
+          }
+        ]
+      ],
+      "kwargs": {},
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-old"
+        },
+        {
+          "type": "compaction",
+          "encrypted_content": ""
+        }
+      ]
+    },
+    {
+      "label": "missing_new_keeps_checkpoint",
+      "name": "merge_interim_reasoning_items",
+      "args": [
+        [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-old"
+          }
+        ],
+        null
+      ],
+      "kwargs": {},
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-old"
+        }
+      ]
+    }
+  ],
+  "context_management": [
+    {
+      "name": "eligible_auto_threshold",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "compact_threshold": 91808
+        }
+      ]
+    },
+    {
+      "name": "session_kill_switch",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": false,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    },
+    {
+      "name": "compression_disabled",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": false,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    },
+    {
+      "name": "checkpoint_required_true",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {},
+        "compression_checkpoint_required": true
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    },
+    {
+      "name": "checkpoint_required_integer_not_explicit_true",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {},
+        "compression_checkpoint_required": 1
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "compact_threshold": 91808
+        }
+      ]
+    },
+    {
+      "name": "resolved_false_survives",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {},
+        "runtime_capabilities": {
+          "native_compaction": false
+        }
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    },
+    {
+      "name": "resolved_empty_dict_is_false",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {},
+        "runtime_capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    },
+    {
+      "name": "xai_suppressed",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false,
+        "is_xai_responses": true
+      },
+      "result": null
+    },
+    {
+      "name": "github_suppressed",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false,
+        "is_github_responses": true
+      },
+      "result": null
+    },
+    {
+      "name": "untrusted_proxy_suppressed",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://proxy.example/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    },
+    {
+      "name": "trusted_proxy_enabled",
+      "agent": {
+        "model": "gpt-5.6",
+        "provider": "openai",
+        "base_url": "https://proxy.example/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {
+          "openai_native_compaction": true
+        }
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "compact_threshold": 91808
+        }
+      ]
+    },
+    {
+      "name": "wrong_model_even_trusted_proxy",
+      "agent": {
+        "model": "gpt-5.3-codex",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {
+          "openai_native_compaction": true
+        }
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    },
+    {
+      "name": "astra_official_codex",
+      "agent": {
+        "model": "gpt-6-astra-900k",
+        "provider": "openai-codex",
+        "base_url": "https://chatgpt.com/backend-api/codex",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": true
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "compact_threshold": 91808
+        }
+      ]
+    },
+    {
+      "name": "astra_direct_api_suppressed",
+      "agent": {
+        "model": "gpt-6-astra",
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "codex_responses_native_compaction": true,
+        "compression_enabled": true,
+        "codex_responses_compact_threshold": null,
+        "context_compressor": {
+          "threshold_tokens": 100000
+        },
+        "capabilities": {}
+      },
+      "route": {
+        "is_codex_backend": false
+      },
+      "result": null
+    }
+  ],
+  "responses_input": [
+    {
+      "name": "eligible_checkpoint_replay_prunes_old_assistant",
+      "messages": [
+        {
+          "role": "system",
+          "content": "system supplied separately"
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "kwargs": {
+        "current_issuer_kind": "other:https://api.openai.com/v1",
+        "current_issuer_model": "gpt-5.6",
+        "native_compaction_eligible": true
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "checkpoint answer"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "continue"
+        }
+      ]
+    },
+    {
+      "name": "disabled_preserves_full_plaintext_history",
+      "messages": [
+        {
+          "role": "system",
+          "content": "system supplied separately"
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "kwargs": {
+        "current_issuer_kind": "other:https://api.openai.com/v1",
+        "current_issuer_model": "gpt-5.6",
+        "native_compaction_eligible": false
+      },
+      "result": [
+        {
+          "type": "message",
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "checkpoint answer"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "continue"
+        }
+      ]
+    },
+    {
+      "name": "foreign_issuer_omits_checkpoint",
+      "messages": [
+        {
+          "role": "system",
+          "content": "system supplied separately"
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "kwargs": {
+        "current_issuer_kind": "codex_backend",
+        "current_issuer_model": "gpt-5.6",
+        "native_compaction_eligible": true
+      },
+      "result": [
+        {
+          "type": "message",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "retain the plaintext user ask"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "before native boundary"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "checkpoint answer"
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "continue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "foreign_model_omits_checkpoint",
+      "messages": [
+        {
+          "role": "system",
+          "content": "system supplied separately"
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "kwargs": {
+        "current_issuer_kind": "other:https://api.openai.com/v1",
+        "current_issuer_model": "gpt-4.1",
+        "native_compaction_eligible": true
+      },
+      "result": [
+        {
+          "type": "message",
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "checkpoint answer"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "continue"
+        }
+      ]
+    },
+    {
+      "name": "api_same_family_accepts_sibling_blob",
+      "messages": [
+        {
+          "role": "system",
+          "content": "system supplied separately"
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "kwargs": {
+        "current_issuer_kind": "other:https://api.openai.com/v1",
+        "current_issuer_model": "gpt-5.6-mini",
+        "native_compaction_eligible": true
+      },
+      "result": [
+        {
+          "type": "compaction",
+          "encrypted_content": "checkpoint-new"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "checkpoint answer"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "continue"
+        }
+      ]
+    },
+    {
+      "name": "replay_session_kill_switch",
+      "messages": [
+        {
+          "role": "system",
+          "content": "system supplied separately"
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "kwargs": {
+        "current_issuer_kind": "other:https://api.openai.com/v1",
+        "current_issuer_model": "gpt-5.6",
+        "native_compaction_eligible": true,
+        "replay_encrypted_reasoning": false
+      },
+      "result": [
+        {
+          "type": "message",
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "type": "message",
+          "role": "assistant",
+          "content": "checkpoint answer"
+        },
+        {
+          "type": "message",
+          "role": "user",
+          "content": "continue"
+        }
+      ]
+    }
+  ],
+  "capture": [
+    {
+      "name": "compaction_nonempty",
+      "item": {
+        "type": "compaction",
+        "encrypted_content": "opaque-checkpoint",
+        "id": "cp_a",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "visible summary"
+          }
+        ]
+      },
+      "issuer_kind": "other:https://api.openai.com/v1",
+      "issuer_model": "gpt-5.6",
+      "result": {
+        "type": "compaction",
+        "encrypted_content": "opaque-checkpoint",
+        "_issuer_kind": "other:https://api.openai.com/v1",
+        "_issuer_model": "gpt-5.6"
+      }
+    },
+    {
+      "name": "compaction_empty",
+      "item": {
+        "type": "compaction",
+        "encrypted_content": "",
+        "id": "cp_a",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "visible summary"
+          }
+        ]
+      },
+      "issuer_kind": "other:https://api.openai.com/v1",
+      "issuer_model": "gpt-5.6",
+      "result": null
+    },
+    {
+      "name": "reasoning_nonempty",
+      "item": {
+        "type": "reasoning",
+        "encrypted_content": "opaque-reasoning",
+        "id": "rs_a",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "visible summary"
+          }
+        ]
+      },
+      "issuer_kind": "other:https://api.openai.com/v1",
+      "issuer_model": "gpt-5.6",
+      "result": {
+        "type": "reasoning",
+        "encrypted_content": "opaque-reasoning",
+        "_issuer_kind": "other:https://api.openai.com/v1",
+        "_issuer_model": "gpt-5.6",
+        "id": "rs_a",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "visible summary"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": [
+    {
+      "name": "responses_inclusive_cache_and_reasoning",
+      "usage": {
+        "input_tokens": 1000,
+        "output_tokens": 100,
+        "input_tokens_details": {
+          "cached_tokens": 400,
+          "cache_write_tokens": 100,
+          "cache_creation_tokens": 300
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 60
+        }
+      },
+      "kwargs": {
+        "provider": "openai",
+        "api_mode": "codex_responses"
+      },
+      "result": {
+        "input_tokens": 500,
+        "output_tokens": 100,
+        "cache_read_tokens": 400,
+        "cache_write_tokens": 100,
+        "reasoning_tokens": 60,
+        "request_count": 1,
+        "raw_usage": {
+          "input_tokens": 1000,
+          "output_tokens": 100,
+          "input_tokens_details": {
+            "cached_tokens": 400,
+            "cache_write_tokens": 100,
+            "cache_creation_tokens": 300
+          },
+          "output_tokens_details": {
+            "reasoning_tokens": 60
+          }
+        },
+        "prompt_tokens": 1000,
+        "total_tokens": 1100
+      }
+    },
+    {
+      "name": "legacy_cache_creation_fallback",
+      "usage": {
+        "input_tokens": 500,
+        "output_tokens": 20,
+        "input_tokens_details": {
+          "cached_tokens": 100,
+          "cache_creation_tokens": 50
+        }
+      },
+      "kwargs": {
+        "provider": "openai",
+        "api_mode": "codex_responses"
+      },
+      "result": {
+        "input_tokens": 350,
+        "output_tokens": 20,
+        "cache_read_tokens": 100,
+        "cache_write_tokens": 50,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "input_tokens": 500,
+          "output_tokens": 20,
+          "input_tokens_details": {
+            "cached_tokens": 100,
+            "cache_creation_tokens": 50
+          }
+        },
+        "prompt_tokens": 500,
+        "total_tokens": 520
+      }
+    },
+    {
+      "name": "cache_totals_cannot_make_negative_uncached",
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 3,
+        "input_tokens_details": {
+          "cached_tokens": 100
+        }
+      },
+      "kwargs": {
+        "provider": "openai",
+        "api_mode": "codex_responses"
+      },
+      "result": {
+        "input_tokens": 0,
+        "output_tokens": 3,
+        "cache_read_tokens": 100,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": {
+          "input_tokens": 10,
+          "output_tokens": 3,
+          "input_tokens_details": {
+            "cached_tokens": 100
+          }
+        },
+        "prompt_tokens": 100,
+        "total_tokens": 103
+      }
+    },
+    {
+      "name": "missing_usage",
+      "usage": null,
+      "kwargs": {
+        "provider": "openai",
+        "api_mode": "codex_responses"
+      },
+      "result": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "request_count": 1,
+        "raw_usage": null,
+        "prompt_tokens": 0,
+        "total_tokens": 0
+      }
+    }
+  ],
+  "request_build": [
+    {
+      "name": "openai_gpt56_native_tools",
+      "model": "gpt-5.6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Maintain this Python project. Complete the latest real user request."
+        },
+        {
+          "role": "user",
+          "content": "Inspect the failing test."
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "description": "Run a shell command",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "command": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "command"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "description": "Read text",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        }
+      ],
+      "params": {
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "session_id": "hermes-native-parity-session",
+        "cache_scope_id": "hermes-native-parity-scope",
+        "max_tokens": 1024,
+        "timeout": 30,
+        "reasoning_config": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ]
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Inspect the failing test."
+          }
+        ],
+        "store": false,
+        "tools": [
+          {
+            "type": "function",
+            "name": "terminal",
+            "description": "Run a shell command",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "command": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "command"
+              ]
+            }
+          },
+          {
+            "type": "function",
+            "name": "read_file",
+            "description": "Read text",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "parallel_tool_calls": true,
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ],
+        "prompt_cache_key": "pck_e79f52af4f765a7d161f9b8c",
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "timeout": 30.0,
+        "max_output_tokens": 1024
+      },
+      "preflight": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Inspect the failing test."
+          }
+        ],
+        "store": false,
+        "tools": [
+          {
+            "type": "function",
+            "name": "terminal",
+            "description": "Run a shell command",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "command": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "command"
+              ]
+            }
+          },
+          {
+            "type": "function",
+            "name": "read_file",
+            "description": "Read text",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "max_output_tokens": 1024,
+        "timeout": 30.0,
+        "tool_choice": "auto",
+        "parallel_tool_calls": true,
+        "prompt_cache_key": "pck_e79f52af4f765a7d161f9b8c",
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ]
+      },
+      "transport_state": {
+        "_last_issuer_kind": "other:https://api.openai.com/v1",
+        "_last_issuer_model": "gpt-5.6",
+        "_last_wire_aliases": {},
+        "_last_sent_all_turns": true
+      }
+    },
+    {
+      "name": "codex_typed_text_and_tool_ids",
+      "model": "gpt-5.6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Maintain this Python project. Complete the latest real user request."
+        },
+        {
+          "role": "user",
+          "content": "Read note.txt then report."
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_original_1",
+              "type": "function",
+              "function": {
+                "name": "terminal",
+                "arguments": "{\"command\":\"cat note.txt\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_original_1",
+          "content": "note body\n"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "description": "Run a shell command",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "command": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "command"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "description": "Read text",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        }
+      ],
+      "params": {
+        "provider": "openai-codex",
+        "base_url": "https://chatgpt.com/backend-api/codex",
+        "session_id": "hermes-native-parity-session",
+        "cache_scope_id": "hermes-native-parity-scope",
+        "max_tokens": 1024,
+        "timeout": 30,
+        "reasoning_config": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "is_codex_backend": true,
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ]
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": [
+              {
+                "type": "input_text",
+                "text": "Read note.txt then report."
+              }
+            ]
+          },
+          {
+            "type": "function_call",
+            "call_id": "call_original_1",
+            "name": "terminal",
+            "arguments": "{\"command\":\"cat note.txt\"}"
+          },
+          {
+            "type": "function_call_output",
+            "call_id": "call_original_1",
+            "output": "note body\n"
+          }
+        ],
+        "store": false,
+        "tools": [
+          {
+            "type": "function",
+            "name": "terminal",
+            "description": "Run a shell command",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "command": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "command"
+              ]
+            }
+          },
+          {
+            "type": "function",
+            "name": "read_file",
+            "description": "Read text",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "parallel_tool_calls": true,
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ],
+        "prompt_cache_key": "pck_e79f52af4f765a7d161f9b8c",
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "timeout": 30.0,
+        "extra_headers": {
+          "session_id": "hermes-native-parity-session",
+          "x-client-request-id": "pck_e79f52af4f765a7d161f9b8c"
+        }
+      },
+      "preflight": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": [
+              {
+                "type": "input_text",
+                "text": "Read note.txt then report."
+              }
+            ]
+          },
+          {
+            "type": "function_call",
+            "call_id": "call_original_1",
+            "name": "terminal",
+            "arguments": "{\"command\":\"cat note.txt\"}"
+          },
+          {
+            "type": "function_call_output",
+            "call_id": "call_original_1",
+            "output": "note body\n"
+          }
+        ],
+        "store": false,
+        "tools": [
+          {
+            "type": "function",
+            "name": "terminal",
+            "description": "Run a shell command",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "command": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "command"
+              ]
+            }
+          },
+          {
+            "type": "function",
+            "name": "read_file",
+            "description": "Read text",
+            "strict": false,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "timeout": 30.0,
+        "tool_choice": "auto",
+        "parallel_tool_calls": true,
+        "prompt_cache_key": "pck_e79f52af4f765a7d161f9b8c",
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ],
+        "extra_headers": {
+          "session_id": "hermes-native-parity-session",
+          "x-client-request-id": "pck_e79f52af4f765a7d161f9b8c"
+        }
+      },
+      "transport_state": {
+        "_last_issuer_kind": "codex_backend",
+        "_last_issuer_model": "gpt-5.6",
+        "_last_wire_aliases": {},
+        "_last_sent_all_turns": false
+      }
+    },
+    {
+      "name": "summary_without_context_management",
+      "model": "gpt-5.6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Maintain this Python project. Complete the latest real user request."
+        },
+        {
+          "role": "user",
+          "content": "Keep the latest request"
+        },
+        {
+          "role": "assistant",
+          "content": "[CONTEXT SUMMARY]:\nPrior completed steps and pending check.",
+          "_compressed_summary": true
+        },
+        {
+          "role": "user",
+          "content": "Continue the pending check."
+        }
+      ],
+      "tools": null,
+      "params": {
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "session_id": "hermes-native-parity-session",
+        "cache_scope_id": "hermes-native-parity-scope",
+        "max_tokens": 1024,
+        "timeout": 30,
+        "reasoning_config": {
+          "enabled": true,
+          "effort": "high"
+        }
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Keep the latest request"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "[CONTEXT SUMMARY]:\nPrior completed steps and pending check."
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Continue the pending check."
+          }
+        ],
+        "store": false,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc",
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "timeout": 30.0,
+        "max_output_tokens": 1024
+      },
+      "preflight": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Keep the latest request"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "[CONTEXT SUMMARY]:\nPrior completed steps and pending check."
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Continue the pending check."
+          }
+        ],
+        "store": false,
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "max_output_tokens": 1024,
+        "timeout": 30.0,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc"
+      },
+      "transport_state": {
+        "_last_issuer_kind": "other:https://api.openai.com/v1",
+        "_last_issuer_model": "gpt-5.6",
+        "_last_wire_aliases": {},
+        "_last_sent_all_turns": true
+      }
+    },
+    {
+      "name": "explicit_reasoning_none",
+      "model": "gpt-5.6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Maintain this Python project. Complete the latest real user request."
+        },
+        {
+          "role": "user",
+          "content": "Reply briefly."
+        }
+      ],
+      "tools": null,
+      "params": {
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "session_id": "hermes-native-parity-session",
+        "cache_scope_id": "hermes-native-parity-scope",
+        "max_tokens": 1024,
+        "timeout": 30,
+        "reasoning_config": {
+          "enabled": false,
+          "effort": "none"
+        }
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Reply briefly."
+          }
+        ],
+        "store": false,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc",
+        "include": [],
+        "reasoning": {
+          "effort": "none"
+        },
+        "timeout": 30.0,
+        "max_output_tokens": 1024
+      },
+      "preflight": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Reply briefly."
+          }
+        ],
+        "store": false,
+        "reasoning": {
+          "effort": "none"
+        },
+        "include": [],
+        "max_output_tokens": 1024,
+        "timeout": 30.0,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc"
+      },
+      "transport_state": {
+        "_last_issuer_kind": "other:https://api.openai.com/v1",
+        "_last_issuer_model": "gpt-5.6",
+        "_last_wire_aliases": {},
+        "_last_sent_all_turns": false
+      }
+    },
+    {
+      "name": "astra_900k_alias_sampling_sanitized",
+      "model": "gpt-6-astra-900k",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Maintain this Python project. Complete the latest real user request."
+        },
+        {
+          "role": "user",
+          "content": "Verify the proof."
+        }
+      ],
+      "tools": null,
+      "params": {
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "session_id": "hermes-native-parity-session",
+        "cache_scope_id": "hermes-native-parity-scope",
+        "max_tokens": 1024,
+        "timeout": 30,
+        "reasoning_config": {
+          "enabled": true,
+          "effort": "none"
+        },
+        "request_overrides": {
+          "temperature": 0.5,
+          "top_p": 0.9,
+          "logprobs": true,
+          "prompt_cache_retention": "24h"
+        }
+      },
+      "result": {
+        "model": "gpt-6-astra",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Verify the proof."
+          }
+        ],
+        "store": false,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc",
+        "reasoning": {
+          "effort": "low",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "timeout": 30.0,
+        "max_output_tokens": 1024
+      },
+      "preflight": {
+        "model": "gpt-6-astra",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "Verify the proof."
+          }
+        ],
+        "store": false,
+        "reasoning": {
+          "effort": "low",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "max_output_tokens": 1024,
+        "timeout": 30.0,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc"
+      },
+      "transport_state": {
+        "_last_issuer_kind": "other:https://api.openai.com/v1",
+        "_last_issuer_model": "gpt-6-astra",
+        "_last_wire_aliases": {},
+        "_last_sent_all_turns": true
+      }
+    },
+    {
+      "name": "checkpoint_native_disabled_full_history",
+      "model": "gpt-5.6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Maintain this Python project. Complete the latest real user request."
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "tools": null,
+      "params": {
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "session_id": "hermes-native-parity-session",
+        "cache_scope_id": "hermes-native-parity-scope",
+        "max_tokens": 1024,
+        "timeout": 30,
+        "reasoning_config": {
+          "enabled": true,
+          "effort": "high"
+        }
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "retain the plaintext user ask"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "before native boundary"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "checkpoint answer"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "continue"
+          }
+        ],
+        "store": false,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc",
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "timeout": 30.0,
+        "max_output_tokens": 1024
+      },
+      "preflight": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "message",
+            "role": "user",
+            "content": "retain the plaintext user ask"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "before native boundary"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "checkpoint answer"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "continue"
+          }
+        ],
+        "store": false,
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "max_output_tokens": 1024,
+        "timeout": 30.0,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc"
+      },
+      "transport_state": {
+        "_last_issuer_kind": "other:https://api.openai.com/v1",
+        "_last_issuer_model": "gpt-5.6",
+        "_last_wire_aliases": {},
+        "_last_sent_all_turns": true
+      }
+    },
+    {
+      "name": "checkpoint_native_enabled_wire_pruned",
+      "model": "gpt-5.6",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Maintain this Python project. Complete the latest real user request."
+        },
+        {
+          "role": "user",
+          "content": "retain the plaintext user ask"
+        },
+        {
+          "role": "assistant",
+          "content": "before native boundary"
+        },
+        {
+          "role": "assistant",
+          "content": "checkpoint answer",
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "checkpoint-new",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "continue"
+        }
+      ],
+      "tools": null,
+      "params": {
+        "provider": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "session_id": "hermes-native-parity-session",
+        "cache_scope_id": "hermes-native-parity-scope",
+        "max_tokens": 1024,
+        "timeout": 30,
+        "reasoning_config": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ]
+      },
+      "result": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "retain the plaintext user ask"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "checkpoint answer"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "continue"
+          }
+        ],
+        "store": false,
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ],
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc",
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "timeout": 30.0,
+        "max_output_tokens": 1024
+      },
+      "preflight": {
+        "model": "gpt-5.6",
+        "instructions": "Maintain this Python project. Complete the latest real user request.",
+        "input": [
+          {
+            "type": "compaction",
+            "encrypted_content": "checkpoint-new"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "retain the plaintext user ask"
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "content": "checkpoint answer"
+          },
+          {
+            "type": "message",
+            "role": "user",
+            "content": "continue"
+          }
+        ],
+        "store": false,
+        "reasoning": {
+          "effort": "high",
+          "summary": "auto",
+          "context": "all_turns"
+        },
+        "include": [
+          "reasoning.encrypted_content"
+        ],
+        "max_output_tokens": 1024,
+        "timeout": 30.0,
+        "prompt_cache_key": "pck_ac23109c3c51a3f6161a94fc",
+        "context_management": [
+          {
+            "type": "compaction",
+            "compact_threshold": 91808
+          }
+        ]
+      },
+      "transport_state": {
+        "_last_issuer_kind": "other:https://api.openai.com/v1",
+        "_last_issuer_model": "gpt-5.6",
+        "_last_wire_aliases": {},
+        "_last_sent_all_turns": true
+      }
+    }
+  ],
+  "normalize": [
+    {
+      "name": "completed_final_answer",
+      "response": {
+        "status": "completed",
+        "output": [
+          {
+            "type": "message",
+            "id": "msg_parity_answer",
+            "role": "assistant",
+            "status": "completed",
+            "phase": "final_answer",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "All checks pass."
+              }
+            ]
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "All checks pass.",
+          "tool_calls": [],
+          "reasoning": null,
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": null,
+          "codex_message_items": [
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "All checks pass."
+                }
+              ],
+              "id": "msg_parity_answer",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "name": "structured_function_call",
+      "response": {
+        "status": "completed",
+        "output": [
+          {
+            "type": "function_call",
+            "status": "completed",
+            "id": "fc_parity_terminal",
+            "call_id": "call_parity_terminal",
+            "name": "terminal",
+            "arguments": "{\"command\":\"pwd\"}"
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_parity_terminal",
+              "call_id": "call_parity_terminal",
+              "response_item_id": "fc_parity_terminal",
+              "type": "function",
+              "function": {
+                "name": "terminal",
+                "arguments": "{\"command\":\"pwd\"}"
+              }
+            }
+          ],
+          "reasoning": null,
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": null,
+          "codex_message_items": null
+        },
+        "finish_reason": "tool_calls"
+      }
+    },
+    {
+      "name": "compaction_with_final_answer",
+      "response": {
+        "status": "completed",
+        "output": [
+          {
+            "type": "compaction",
+            "id": "cp_not_replayed",
+            "encrypted_content": "opaque-cumulative-checkpoint"
+          },
+          {
+            "type": "message",
+            "id": "msg_parity_answer",
+            "role": "assistant",
+            "status": "completed",
+            "phase": "final_answer",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "Checkpoint saved; continue."
+              }
+            ]
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "Checkpoint saved; continue.",
+          "tool_calls": [],
+          "reasoning": null,
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": [
+            {
+              "type": "compaction",
+              "encrypted_content": "opaque-cumulative-checkpoint",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6"
+            }
+          ],
+          "codex_message_items": [
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Checkpoint saved; continue."
+                }
+              ],
+              "id": "msg_parity_answer",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "name": "codex_reasoning_only_requires_continuation",
+      "response": {
+        "status": "completed",
+        "output": [
+          {
+            "type": "reasoning",
+            "id": "rs_parity_reasoning",
+            "encrypted_content": "opaque-reasoning",
+            "summary": [
+              {
+                "type": "summary_text",
+                "text": "Inspecting the next boundary."
+              }
+            ]
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "codex_backend",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "",
+          "tool_calls": [],
+          "reasoning": "Inspecting the next boundary.",
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": [
+            {
+              "type": "reasoning",
+              "encrypted_content": "opaque-reasoning",
+              "_issuer_kind": "codex_backend",
+              "_issuer_model": "gpt-5.6",
+              "id": "rs_parity_reasoning",
+              "summary": [
+                {
+                  "type": "summary_text",
+                  "text": "Inspecting the next boundary."
+                }
+              ]
+            }
+          ],
+          "codex_message_items": null
+        },
+        "finish_reason": "incomplete"
+      }
+    },
+    {
+      "name": "openai_reasoning_only_trusted_completed",
+      "response": {
+        "status": "completed",
+        "output": [
+          {
+            "type": "reasoning",
+            "id": "rs_parity_reasoning",
+            "encrypted_content": "opaque-reasoning",
+            "summary": [
+              {
+                "type": "summary_text",
+                "text": "Inspecting the next boundary."
+              }
+            ]
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "",
+          "tool_calls": [],
+          "reasoning": "Inspecting the next boundary.",
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": [
+            {
+              "type": "reasoning",
+              "encrypted_content": "opaque-reasoning",
+              "_issuer_kind": "other:https://api.openai.com/v1",
+              "_issuer_model": "gpt-5.6",
+              "id": "rs_parity_reasoning",
+              "summary": [
+                {
+                  "type": "summary_text",
+                  "text": "Inspecting the next boundary."
+                }
+              ]
+            }
+          ],
+          "codex_message_items": null
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "name": "commentary_phase_is_not_final",
+      "response": {
+        "status": "completed",
+        "output": [
+          {
+            "type": "message",
+            "id": "msg_parity_answer",
+            "role": "assistant",
+            "status": "completed",
+            "phase": "commentary",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "I will inspect the failing test."
+              }
+            ]
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "",
+          "tool_calls": [],
+          "reasoning": "I will inspect the failing test.",
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": null,
+          "codex_message_items": [
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "I will inspect the failing test."
+                }
+              ],
+              "id": "msg_parity_answer",
+              "phase": "commentary"
+            }
+          ]
+        },
+        "finish_reason": "incomplete"
+      }
+    },
+    {
+      "name": "incomplete_output_is_not_final",
+      "response": {
+        "status": "incomplete",
+        "incomplete_details": {
+          "reason": "max_output_tokens"
+        },
+        "output": [
+          {
+            "type": "message",
+            "id": "msg_parity_answer",
+            "role": "assistant",
+            "status": "in_progress",
+            "phase": "final_answer",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "partial answer"
+              }
+            ]
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "partial answer",
+          "tool_calls": [],
+          "reasoning": null,
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": null,
+          "codex_message_items": [
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "in_progress",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "partial answer"
+                }
+              ],
+              "id": "msg_parity_answer",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        "finish_reason": "incomplete"
+      }
+    },
+    {
+      "name": "leaked_harmony_tool_call_is_reelicited",
+      "response": {
+        "status": "completed",
+        "output": [
+          {
+            "type": "message",
+            "id": "msg_parity_answer",
+            "role": "assistant",
+            "status": "completed",
+            "phase": "final_answer",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "to=functions.terminal {\"command\":\"pwd\"}"
+              }
+            ]
+          }
+        ]
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "",
+          "tool_calls": [],
+          "reasoning": null,
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": null,
+          "codex_message_items": null
+        },
+        "finish_reason": "incomplete"
+      }
+    },
+    {
+      "name": "output_text_stream_fallback",
+      "response": {
+        "status": "completed",
+        "output": [],
+        "output_text": "Streamed final answer."
+      },
+      "kwargs": {
+        "issuer_kind": "other:https://api.openai.com/v1",
+        "issuer_model": "gpt-5.6"
+      },
+      "result": {
+        "message": {
+          "content": "Streamed final answer.",
+          "tool_calls": [],
+          "reasoning": null,
+          "reasoning_content": null,
+          "reasoning_details": null,
+          "codex_reasoning_items": null,
+          "codex_message_items": [
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Streamed final answer."
+                }
+              ]
+            }
+          ]
+        },
+        "finish_reason": "stop"
+      }
+    }
+  ]
+}

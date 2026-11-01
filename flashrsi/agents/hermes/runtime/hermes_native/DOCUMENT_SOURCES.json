@@ -1,0 +1,191 @@
+{
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "source": "tools/read_extract.py",
+  "source_sha256": "8f145d85ae418e54e9339a9f71f9bd98f449a17cd2f3968e95d824061f5e1102",
+  "extracted": [
+    {
+      "name": "EXTRACTABLE_EXTENSIONS",
+      "start_line": 30,
+      "end_line": 30
+    },
+    {
+      "name": "ExtractionError",
+      "start_line": 46,
+      "end_line": 47
+    },
+    {
+      "name": "MAX_DOCUMENT_BYTES",
+      "start_line": 36,
+      "end_line": 36
+    },
+    {
+      "name": "_CELL_LABELS",
+      "start_line": 411,
+      "end_line": 411
+    },
+    {
+      "name": "_MAX_OUTPUT_CHARS",
+      "start_line": 359,
+      "end_line": 359
+    },
+    {
+      "name": "_MAX_XLSX_COLS",
+      "start_line": 38,
+      "end_line": 38
+    },
+    {
+      "name": "_MAX_XLSX_ROWS_PER_SHEET",
+      "start_line": 37,
+      "end_line": 37
+    },
+    {
+      "name": "_NS_PKG_REL",
+      "start_line": 43,
+      "end_line": 43
+    },
+    {
+      "name": "_NS_REL",
+      "start_line": 42,
+      "end_line": 42
+    },
+    {
+      "name": "_NS_S",
+      "start_line": 41,
+      "end_line": 41
+    },
+    {
+      "name": "_NS_W",
+      "start_line": 40,
+      "end_line": 40
+    },
+    {
+      "name": "_SQLITE_CELL_CHARS",
+      "start_line": 563,
+      "end_line": 563
+    },
+    {
+      "name": "_SQLITE_MAGIC",
+      "start_line": 560,
+      "end_line": 560
+    },
+    {
+      "name": "_SQLITE_MAX_TABLES",
+      "start_line": 562,
+      "end_line": 562
+    },
+    {
+      "name": "_SQLITE_PREVIEW_ROWS",
+      "start_line": 561,
+      "end_line": 561
+    },
+    {
+      "name": "_V3_MIME_KEYS",
+      "start_line": 361,
+      "end_line": 361
+    },
+    {
+      "name": "_base64_bytes",
+      "start_line": 346,
+      "end_line": 349
+    },
+    {
+      "name": "_cell_value",
+      "start_line": 544,
+      "end_line": 557
+    },
+    {
+      "name": "_check_size",
+      "start_line": 97,
+      "end_line": 99
+    },
+    {
+      "name": "_clean_stream_text",
+      "start_line": 352,
+      "end_line": 356
+    },
+    {
+      "name": "_col_index",
+      "start_line": 519,
+      "end_line": 523
+    },
+    {
+      "name": "_extract_docx",
+      "start_line": 474,
+      "end_line": 487
+    },
+    {
+      "name": "_extract_notebook",
+      "start_line": 414,
+      "end_line": 448
+    },
+    {
+      "name": "_extract_sqlite",
+      "start_line": 566,
+      "end_line": 608
+    },
+    {
+      "name": "_extract_xlsx",
+      "start_line": 497,
+      "end_line": 516
+    },
+    {
+      "name": "_human_size",
+      "start_line": 342,
+      "end_line": 343
+    },
+    {
+      "name": "_joined",
+      "start_line": 328,
+      "end_line": 332
+    },
+    {
+      "name": "_notebook_output_text",
+      "start_line": 364,
+      "end_line": 396
+    },
+    {
+      "name": "_notebook_outputs",
+      "start_line": 399,
+      "end_line": 408
+    },
+    {
+      "name": "_open_zip",
+      "start_line": 452,
+      "end_line": 459
+    },
+    {
+      "name": "_sheet_rows",
+      "start_line": 526,
+      "end_line": 541
+    },
+    {
+      "name": "_source_text",
+      "start_line": 335,
+      "end_line": 339
+    },
+    {
+      "name": "_sqlite_cell",
+      "start_line": 611,
+      "end_line": 617
+    },
+    {
+      "name": "_temp_copy",
+      "start_line": 103,
+      "end_line": 111
+    },
+    {
+      "name": "_xlsx_string_text",
+      "start_line": 490,
+      "end_line": 494
+    },
+    {
+      "name": "_zip_xml",
+      "start_line": 462,
+      "end_line": 471
+    }
+  ],
+  "adaptations": [
+    "Relative ansi_strip import",
+    "Stdlib-only byte dispatcher; optional anydoc/OCR path excluded"
+  ]
+}

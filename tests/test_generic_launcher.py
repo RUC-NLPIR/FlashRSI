@@ -135,6 +135,62 @@ class GenericLauncherTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "node_path"):
             _startup._role(loaded.agent, "agent", "pi")
 
+    def test_hermes_plans_as_target_and_agent_worker(self):
+        for benchmark in ("searchqa", "terminal_bench"):
+            for target, algorithm, worker in (
+                ("hermes", "skillopt", "llm"),
+                ("pi", "ahe", "hermes"),
+            ):
+                with self.subTest(benchmark=benchmark, target=target, worker=worker):
+                    plan = _launch._plan(config(benchmark, target, algorithm, worker))
+                    self.assertEqual(plan["agent"], target)
+                    self.assertEqual(plan["worker"], worker)
+                    self.assertEqual(
+                        set(plan["extras"]),
+                        {"all", "harbor"} if benchmark == "terminal_bench" else {"all"},
+                    )
+                    self.assertEqual(plan["requirements"], [])
+                    self.assertNotIn("secret", json.dumps(plan))
+
+    def test_hermes_roles_keep_independent_connections(self):
+        path = self.root / "hermes.yaml"
+        values = json.loads(
+            json.dumps(config(agent="hermes", worker="hermes"), default=dict)
+        )
+        path.write_text(yaml.safe_dump(values), encoding="utf-8")
+        env = {k: v for k, v in os.environ.items() if not k.startswith("FLASHRSI_")}
+        env.update(
+            {
+                "FLASHRSI_AGENT_MODEL": "openai/target-runtime",
+                "FLASHRSI_AGENT_API_KEY": "independent-target-key",
+                "FLASHRSI_AGENT_BASE_URL": "https://target.test/v1",
+                "FLASHRSI_WORKER_MODEL": "openai/worker-runtime",
+                "FLASHRSI_WORKER_API_KEY": "independent-worker-key",
+                "FLASHRSI_WORKER_BASE_URL": "https://worker.test/v1",
+            }
+        )
+        with patch.dict(os.environ, env, clear=True):
+            loaded = _launch._load(path)
+        self.assertEqual(loaded.agent.llm.model_name, "openai/target-runtime")
+        self.assertEqual(loaded.agent.llm.api_key, "independent-target-key")
+        self.assertEqual(loaded.agent.llm.base_url, "https://target.test/v1")
+        worker = loaded.algorithm.worker
+        self.assertEqual(worker.llm.model_name, "openai/worker-runtime")
+        self.assertEqual(worker.llm.api_key, "independent-worker-key")
+        self.assertEqual(worker.llm.base_url, "https://worker.test/v1")
+        _startup._role(loaded.agent, "agent", "hermes")
+        _startup._role(worker, "algorithm.worker", "hermes")
+        worker.llm.api_key = None
+        with self.assertRaisesRegex(ValueError, "api_key"):
+            _startup._role(worker, "algorithm.worker", "hermes")
+        self.assertEqual(loaded.agent.llm.api_key, "independent-target-key")
+
+    def test_hermes_rejects_host_cli(self):
+        cfg = config(agent="hermes")
+        cfg.agent.cli_path = "hermes"
+        with self.assertRaisesRegex(ValueError, "cli_path"):
+            _startup._role(cfg.agent, "agent", "hermes")
+
     def test_plan_does_not_install_selected_dependencies_or_expose_keys(self):
         path = self.root / "plan.yaml"
         path.touch()

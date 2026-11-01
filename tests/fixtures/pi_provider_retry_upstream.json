@@ -1,0 +1,494 @@
+{
+  "baseline": "v1.4.0@4a080252f06caf63a525d7873c5d94d3c23887e0",
+  "method": "Unmodified original retryProviderRequest with fixed time/random and immediate recorded timers; offline, no model requests.",
+  "source_sha256": {
+    "packages/ai/src/utils/provider-retry.ts": "91350009509d50845ff0c609bf98bd8818081b6fcc64d034e6d45522f41db9ab"
+  },
+  "fixedNow": 1735689600000,
+  "fixedRandom": 0.4,
+  "cases": [
+    {
+      "name": "status_400",
+      "status": 400,
+      "retries": 1,
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "400: fixture failure"
+      }
+    },
+    {
+      "name": "status_408",
+      "status": 408,
+      "retries": 1,
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "status_409",
+      "status": 409,
+      "retries": 1,
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "status_429",
+      "status": 429,
+      "retries": 1,
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "status_499",
+      "status": 499,
+      "retries": 1,
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "499: fixture failure"
+      }
+    },
+    {
+      "name": "status_500",
+      "status": 500,
+      "retries": 1,
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "status_599",
+      "status": 599,
+      "retries": 1,
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "default_no_retries",
+      "status": 500,
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "500: fixture failure"
+      }
+    },
+    {
+      "name": "explicit_header_retry_400",
+      "status": 400,
+      "retries": 1,
+      "headers": {
+        "x-should-retry": "true"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "explicit_header_no_retry_500",
+      "status": 500,
+      "retries": 3,
+      "headers": {
+        "x-should-retry": "false"
+      },
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "500: fixture failure"
+      }
+    },
+    {
+      "name": "case_sensitive_header_value",
+      "status": 400,
+      "retries": 1,
+      "headers": {
+        "x-should-retry": "TRUE"
+      },
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "400: fixture failure"
+      }
+    },
+    {
+      "name": "retry_after_ms_priority",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after-ms": "125",
+        "retry-after": "5"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          125
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "retry_after_ms_zero",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after-ms": "0",
+        "retry-after": "5"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          0
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "retry_after_ms_numeric_prefix",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after-ms": "125ms"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          125
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "retry_after_ms_invalid_falls_back",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after-ms": "bad",
+        "retry-after": "1.25"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          1250
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "retry_after_ms_infinite_falls_back",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after-ms": "Infinity",
+        "retry-after": "2"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          2000
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "retry_after_seconds_prefix",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after": "1.5 seconds"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          1500
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "retry_after_http_date",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after": "Wed, 01 Jan 2025 00:00:04 GMT"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          4000
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "retry_after_past_date",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after": "Tue, 31 Dec 2024 23:59:59 GMT"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          0
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "negative_server_delay",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after-ms": "-3"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          0
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "bad_headers_use_jitter",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after-ms": "bad",
+        "retry-after": "bad"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "server_delay_exceeds_default",
+      "status": 429,
+      "retries": 1,
+      "headers": {
+        "retry-after": "61"
+      },
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "Server requested 61s retry delay (max: 60s). 429: fixture failure"
+      }
+    },
+    {
+      "name": "server_delay_exceeds_custom",
+      "status": 429,
+      "retries": 1,
+      "maxRetryDelayMs": 1000,
+      "headers": {
+        "retry-after-ms": "1001"
+      },
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "Server requested 2s retry delay (max: 1s). 429: fixture failure"
+      }
+    },
+    {
+      "name": "server_delay_limit_disabled",
+      "status": 429,
+      "retries": 1,
+      "maxRetryDelayMs": 0,
+      "headers": {
+        "retry-after": "300"
+      },
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          300000
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "exponential_limit_and_jitter",
+      "status": 500,
+      "retries": 7,
+      "failures": 7,
+      "expected": {
+        "calls": 8,
+        "delaysMs": [
+          450,
+          900,
+          1800,
+          3600,
+          7200,
+          7200,
+          7200
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "server_max_does_not_cap_backoff",
+      "status": 500,
+      "retries": 3,
+      "failures": 3,
+      "maxRetryDelayMs": 100,
+      "expected": {
+        "calls": 4,
+        "delaysMs": [
+          450,
+          900,
+          1800
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "network_provider_error",
+      "retries": 1,
+      "network": true,
+      "expected": {
+        "calls": 2,
+        "delaysMs": [
+          450
+        ],
+        "output": {
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "non_provider_error_no_retry",
+      "retries": 1,
+      "nonProvider": true,
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "fixture failure"
+      }
+    },
+    {
+      "name": "retry_budget_exhausted",
+      "status": 500,
+      "retries": 2,
+      "failures": 3,
+      "expected": {
+        "calls": 3,
+        "delaysMs": [
+          450,
+          900
+        ],
+        "error": "500: fixture failure"
+      }
+    },
+    {
+      "name": "excluded_retryable_status",
+      "status": 504,
+      "retries": 2,
+      "noRetryStatuses": [
+        504
+      ],
+      "headers": {
+        "retry-after-ms": "0"
+      },
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "504: fixture failure"
+      }
+    },
+    {
+      "name": "excluded_status_overrides_retry_header",
+      "status": 400,
+      "retries": 2,
+      "noRetryStatuses": [
+        400
+      ],
+      "headers": {
+        "x-should-retry": "true"
+      },
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "400: fixture failure"
+      }
+    },
+    {
+      "name": "no_retry_budget_ignores_long_delay",
+      "status": 429,
+      "headers": {
+        "retry-after": "99999"
+      },
+      "expected": {
+        "calls": 1,
+        "delaysMs": [],
+        "error": "429: fixture failure"
+      }
+    }
+  ]
+}

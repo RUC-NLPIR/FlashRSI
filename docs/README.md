@@ -178,7 +178,7 @@ The same adapter can serve as a Target that solves tasks or an Agent Worker that
 | Claude Code | Instructions, skills, agents, hooks, MCP/LSP, settings | Available | [Agent integration](agent-integration.md) |
 | Codex | Python core, instructions, skills, plugins, memory, rules, configuration | Available | [Codex guide](codex.md) |
 | Pi | Pure-Python runtime, instructions, skills, prompt templates, settings | Available | [Integration contract](agent-integration.md) |
-| Hermes | Instructions, tools, skills, runtime configuration | Doing | [Integration contract](agent-integration.md) |
+| Hermes | Python runtime, SOUL instructions, skills, tool settings | Available | [Integration contract](agent-integration.md) |
 | OpenCode | Instructions, tools, plugins, settings | Doing | [Integration contract](agent-integration.md) |
 
 For task environments and Harbor boundaries, see [Harness and benchmark responsibilities](benchmark-harness-boundary.md).

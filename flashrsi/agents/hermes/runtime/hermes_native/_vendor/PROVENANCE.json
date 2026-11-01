@@ -1,0 +1,178 @@
+{
+  "upstream": "https://github.com/NousResearch/hermes-agent",
+  "version": "v0.22.5",
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": {
+    "file_operations_common.py": {
+      "source": "tools/file_operations_common.py",
+      "sha256": "24ec11b1703616c0b403b094c11a92c6f39c81a6f2396665bf0666690595d41c",
+      "changes": [
+        "package-local output-limit import"
+      ]
+    },
+    "escape_drift_autocorrect.py": {
+      "source": "tools/escape_drift_autocorrect.py",
+      "sha256": "d0860600cb93d0fa52f81379e99ffc3a0d47cf0dff7b73cbcd907db3f1ac2d6f",
+      "changes": []
+    },
+    "tool_output_truncate.py": {
+      "source": "tools/tool_output_truncate.py",
+      "sha256": "c008f5f4dab87a9607e1d79ee5536207cededd574eb37a47e79c9587d59c3db1",
+      "changes": []
+    },
+    "terminal_session.py": {
+      "source": "tools/environments/base_session_env.py",
+      "sha256": "cabd748bb0c40465650bbab2e7e85a59d0af855f728ac955d8ce6fa913759692",
+      "changes": []
+    },
+    "binary_extensions.py": {
+      "source": "tools/binary_extensions.py",
+      "sha256": "a2d59139f7bffa274738074f4d11ccd5b299a6ef7ad6542a65738e0760cd38da",
+      "changes": []
+    },
+    "fuzzy_match.py": {
+      "source": "tools/fuzzy_match.py",
+      "sha256": "ea10db677c24e7f056471488c0e5194599a526b59e6d62ab76e195be6bbc4765",
+      "changes": [
+        "package-relative escape-drift import",
+        "disable optional global CLI metrics hook"
+      ]
+    },
+    "todo.py": {
+      "source": "tools/todo_tool.py",
+      "sha256": "a895fb70e9d6d118cc7992114e7efaece753d57af115cf822caf27e67cef4c87",
+      "changes": [
+        "retain original TodoStore, todo_tool and TODO_SCHEMA; omit registry and transcript aliases",
+        "local JSON error encoder preserving original 2048-character error cap"
+      ]
+    },
+    "file_read_core.py": {
+      "source": "tools/file_operations.py",
+      "sha256": "2867e7207852e36e19635e74a1510063f839dd86221ad990da913977def81dd2",
+      "changes": [
+        "extract original native-read and presentation methods with UTF16 constants",
+        "package-local imports"
+      ]
+    },
+    "file_operations_native.py": {
+      "source": "tools/file_operations_native.py",
+      "sha256": "4b216f7c2333c4802728c69832f30767e79f9e62080e2c654f9e4f5c29a724b4",
+      "changes": []
+    },
+    "inproc_lint.py": {
+      "source": "tools/file_operations_lint.py",
+      "sha256": "bf7c8769afd36765104a2c017ae792cc06c1f35de7d79b3347aa2a6bc92ebe50",
+      "changes": [
+        "extract original four in-process syntax functions; omit shell and LSP tiers"
+      ]
+    },
+    "schemas.json": {
+      "source": "tools/file_tools.py",
+      "sha256": "228fc428c7641d98bacbfa52e0a4f5e117a94abcd000bf0d6140ea43f088fcdf",
+      "changes": [
+        "extract original read/write/replace-patch/search schemas; skills schemas extracted from tools/skills_tool.py",
+        "wrapper narrows descriptions to supported text/foreground functionality"
+      ],
+      "additional_sources": {
+        "tools/skills_tool.py": "f75e1047efba2640daefa2f03b897db12ac74890792621151ed9fbfd974176b8"
+      }
+    },
+    "limits.py": {
+      "source": "tools/tool_output_limits.py",
+      "sha256": "e7e101de344c8e8effb887d5f2235fde0b58e12654a593c022d931a3762f812a",
+      "changes": [
+        "retain original coercion and defaults; bind explicit per-tool-instance settings using ContextVar instead of host profile discovery"
+      ]
+    },
+    "patch_parser.py": {
+      "source": "tools/patch_parser.py",
+      "sha256": "1e87fa5410bec09ef7da26c50734397eeb370b7cd39689ca79db06fab4d2677a",
+      "changes": [
+        "package-relative imports"
+      ]
+    },
+    "terminal_hints.py": {
+      "source": "tools/terminal_hints.py",
+      "sha256": "d9110a468f9e8cd743e84db50bd1f563b0f235f9f45955dd83911d113157fa2f",
+      "changes": []
+    },
+    "ansi_strip.py": {
+      "source": "tools/ansi_strip.py",
+      "sha256": "71f339d1be720c24f407565b4a90cb55164dead2e860cf438258104fd96c1922",
+      "changes": []
+    },
+    "terminal_exit.py": {
+      "source": "tools/terminal_tool_result.py",
+      "sha256": "c49ee19931ccc21e7b7bacc5b1c39c545039fe816220c680c0f7a6b10f31d247",
+      "changes": [
+        "extract original signal/exit tables and interpretation functions; omit CLI/LSP/redaction integration"
+      ]
+    },
+    "read_tracking.py": {
+      "source": "tools/file_tools_read_tracking.py",
+      "sha256": "fb839642d9e8de715ef7beb85a9d971e07fc16ae4a5b07fd05cc3da9238644fb",
+      "changes": [
+        "extract original bump/cap/metadata and file_tools dedup stub helpers; instance task_data supplied by wrapper"
+      ],
+      "additional_sources": {
+        "tools/file_tools.py": "228fc428c7641d98bacbfa52e0a4f5e117a94abcd000bf0d6140ea43f088fcdf",
+        "tools/file_state.py": "b8c71f277bab2a93b6fed0b237fecace4345b417fdb3e050247ce66b13abd86a",
+        "tools/file_tools_write_guards.py": "da864eadeccbeb7d1ba1d9190a606343db70ddedef9f42eca8820eb6d3f8eefa"
+      }
+    },
+    "patch_paths.py": {
+      "source": "tools/file_tools.py",
+      "sha256": "228fc428c7641d98bacbfa52e0a4f5e117a94abcd000bf0d6140ea43f088fcdf",
+      "changes": [
+        "extract original header collector and path rewriting; bind host-path predicate to the local backend"
+      ]
+    },
+    "path_security.py": {
+      "source": "tools/path_security.py",
+      "sha256": "13439f63f555e7f441e1d8b7e1091906ac67f125fd97cdd227c5ff0c5e4a7de1",
+      "changes": []
+    },
+    "write_binary_guard.py": {
+      "source": "tools/file_tools_write_guards.py",
+      "sha256": "da864eadeccbeb7d1ba1d9190a606343db70ddedef9f42eca8820eb6d3f8eefa",
+      "changes": [
+        "extract original binary/document guard with unchanged function body; bind existence probe to task-local filesystem"
+      ]
+    },
+    "read_budget.py": {
+      "source": "tools/file_tools.py",
+      "sha256": "228fc428c7641d98bacbfa52e0a4f5e117a94abcd000bf0d6140ea43f088fcdf",
+      "symbols": [
+        "_apply_char_budget",
+        "_truncate_to_char_budget"
+      ],
+      "changes": [
+        "extract original function bodies; explicit Snapshot configuration supplied by wrapper"
+      ]
+    },
+    "truncation.py": {
+      "source": "agent/turn_truncation.py",
+      "sha256": "cded3d067441ddac4e2362347cc55ba4d00e47baf529ba4b68b30380c396e0eb",
+      "symbols": [
+        "boosted_output_cap"
+      ],
+      "changes": [
+        "extract original function bodies; explicit Snapshot configuration supplied by wrapper"
+      ]
+    },
+    "output_collector.py": {
+      "source": "tools/environments/base_output.py",
+      "sha256": "e951f16776fa76589e03ea035d8ec40543993eb85e80ea609963190781a8d0b5",
+      "changes": [
+        "extract original _BoundedOutputCollector; package-relative spill safety import"
+      ]
+    },
+    "spill_safety.py": {
+      "source": "tools/spill_safety.py",
+      "sha256": "a485f5faed522a35b8066150ceef48dc97f2a719383737192cde863ca225d9f1",
+      "changes": [
+        "replace platform CLI directory-ACL helper with pathlib mkdir inside private explicit artifact directory"
+      ]
+    }
+  }
+}

@@ -1,0 +1,3629 @@
+{
+  "upstream_repository": "https://github.com/NousResearch/hermes-agent",
+  "upstream_commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "generation": "Actual original continue_codex_incomplete, budget helper, finish classifier, StreamDeliveryMixin visible selection and checkpoint merge; prepared assistant-message boundary, no fallback, fixed clock, in-memory display/persistence. No FlashRSI code or HTTP.",
+  "fixed_wall_time": 1700000000.0,
+  "source_sha256": {
+    "agent/turn_truncation.py": "cded3d067441ddac4e2362347cc55ba4d00e47baf529ba4b68b30380c396e0eb",
+    "agent/turn_response_check.py": "bc67386b27bb125247a428a489a6f88929cb739ee9479bb841e798c6cf9fa54a",
+    "agent/stream_delivery.py": "96ff29f25dacf4286fe642e31db6b10d0197b0b89df7c77999f2b8194b45eb7e",
+    "agent/conversation_loop.py": "36dd6f02b169a544a95598dee74cb775914420dc700cc88cc946effd103b72bc",
+    "agent/native_compaction.py": "6b21f68dc5976bf4a09ca945cac4377b2574d97b261d51f040229e685b8be0f7",
+    "agent/message_metadata.py": "b7cf8f650d87d468773029482298424b3dee1bc71650918c8377417827266946",
+    "agent/agent_runtime_helpers.py": "7725dfa3b5c12e2ec289e86a2f83eb99dc75052687aa9cb4d2e71bc3f770b5d4"
+  },
+  "cases": [
+    {
+      "name": "three_visible_partials_end_aggregate",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "First partial.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Second partial.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Third partial.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "First partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Second partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Second partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              },
+              {
+                "role": "assistant",
+                "content": "First partial.",
+                "reasoning": null,
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "Second partial.",
+                "reasoning": null,
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "Third partial.",
+                "reasoning": null,
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              }
+            ],
+            "api_calls": 3,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Third partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Second partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Third partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "empty_responses_preserve_user_alternation",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              }
+            ],
+            "api_calls": 3,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "plaintext_reasoning_nudges_first_retry",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "Planning internally.",
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "Planning internally.",
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "Planning internally.",
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "Planning internally.",
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "Planning internally.",
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "Planning internally.",
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              }
+            ],
+            "api_calls": 3,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "Planning internally.",
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "opaque_reasoning_bare_then_nudge",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-0"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-1"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-2"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-1"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-2"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              }
+            ],
+            "api_calls": 3,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "mixed_partial_then_three_reasoning_streak",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Visible progress.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-0"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-1"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-2"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Visible progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Visible progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Visible progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Visible progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 3,
+            "reasoning_only_streak": 2
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              },
+              {
+                "role": "assistant",
+                "content": "Visible progress.",
+                "reasoning": null,
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-0"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-1"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-2"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              }
+            ],
+            "api_calls": 4,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Visible progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "two_partials_then_streak_exceeds_aggregate",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "First progress.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Next progress.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-0"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-1"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque-2"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "First progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Next progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Next progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Next progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 3,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Next progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 4,
+            "reasoning_only_streak": 2
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              },
+              {
+                "role": "assistant",
+                "content": "First progress.",
+                "reasoning": null,
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "Next progress.",
+                "reasoning": null,
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-0"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-1"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "opaque-2"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              }
+            ],
+            "api_calls": 5,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "First progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Next progress.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque-2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "visible_partial_resets_reasoning_streak",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "one"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "two"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Visible progress resets the streak.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "one"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "one"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "two"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "two"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "Visible progress resets the streak.",
+                "reasoning": null,
+                "finish_reason": "incomplete",
+                "timestamp": 1700000000.0
+              }
+            ],
+            "api_calls": 3,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Visible progress resets the streak.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "two"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "Visible progress resets the streak.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "duplicate_visible_merges_checkpoint",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Working.",
+            "reasoning": "private one",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "compaction",
+                "encrypted_content": "checkpoint-old"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Working.",
+            "reasoning": "private two",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "encrypted_content": "new reasoning"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Working.",
+              "reasoning": "private one",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Working.",
+              "reasoning": "private one",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Working.",
+              "reasoning": "private two",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                },
+                {
+                  "type": "reasoning",
+                  "encrypted_content": "new reasoning"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "duplicate_visible_new_checkpoint_wins",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Working.",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "compaction",
+                "encrypted_content": "checkpoint-old"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Working.",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "compaction",
+                "encrypted_content": "checkpoint-new"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Working.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Working.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Working.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-new"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "structured_commentary_controls_visible_dedup",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "partial answer A",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_message_items": [
+              {
+                "type": "message",
+                "role": "assistant",
+                "phase": "commentary",
+                "content": [
+                  {
+                    "type": "output_text",
+                    "text": "Inspecting now."
+                  }
+                ]
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "partial answer B",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_message_items": [
+              {
+                "type": "message",
+                "role": "assistant",
+                "phase": "commentary",
+                "content": [
+                  {
+                    "type": "output_text",
+                    "text": "Inspecting now."
+                  }
+                ]
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "partial answer A",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "commentary",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "Inspecting now."
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "partial answer A",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "commentary",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "Inspecting now."
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "partial answer B",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "commentary",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "Inspecting now."
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "hidden_analysis_does_not_replace_visible_content",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "partial A",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_message_items": [
+              {
+                "type": "message",
+                "role": "assistant",
+                "phase": "analysis",
+                "content": [
+                  {
+                    "type": "output_text",
+                    "text": "hidden"
+                  }
+                ]
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "partial B",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_message_items": [
+              {
+                "type": "message",
+                "role": "assistant",
+                "phase": "analysis",
+                "content": [
+                  {
+                    "type": "output_text",
+                    "text": "hidden"
+                  }
+                ]
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "partial A",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "analysis",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "hidden"
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "partial A",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "analysis",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "hidden"
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "partial B",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "analysis",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "hidden"
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "partial A",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "analysis",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "hidden"
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "partial B",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_message_items": [
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "phase": "analysis",
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "hidden"
+                    }
+                  ]
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "reasoning_budget_doubles_configured_cap",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "0"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 2000
+          }
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "1"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 2000
+          }
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "2"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 2000
+          }
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": 4000,
+          "reasoning_off": true,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": 8000,
+          "reasoning_off": true,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        },
+        {
+          "continue_turn": false,
+          "result": {
+            "final_response": "Codex response remained incomplete after 3 continuation attempts",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Complete the requested work.",
+                "timestamp": 100.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "1"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "user",
+                "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+                "timestamp": 1700000000.0
+              },
+              {
+                "role": "assistant",
+                "content": "",
+                "reasoning": "planning",
+                "finish_reason": "incomplete",
+                "codex_reasoning_items": [
+                  {
+                    "type": "reasoning",
+                    "id": "rs_a",
+                    "encrypted_content": "2"
+                  }
+                ],
+                "timestamp": 1700000000.0
+              }
+            ],
+            "api_calls": 3,
+            "completed": false,
+            "partial": true,
+            "error": "Codex response remained incomplete after 3 continuation attempts"
+          },
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "2"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 0,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "observed_ceiling_seeds_unconfigured_cap",
+      "configured_cap": null,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "0"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 6000
+          }
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "1"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 6000
+          }
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": 12000,
+          "reasoning_off": true,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": 24000,
+          "reasoning_off": true,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "missing_ceiling_uses_4096_seed",
+      "configured_cap": null,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "length",
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": 8192,
+          "reasoning_off": true,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "high_cap_boost_is_bounded",
+      "configured_cap": 20000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "0"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 20000
+          }
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "1"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 20000
+          }
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": 40000,
+          "reasoning_off": true,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "0"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": 40000,
+          "reasoning_off": true,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "1"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "visible_budget_partial_does_not_disable_reasoning",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "Visible partial.",
+            "reasoning": null,
+            "finish_reason": "incomplete"
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "max_output_tokens",
+          "usage": {
+            "output_tokens": 2000
+          }
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "Visible partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "Visible partial.",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "nonbudget_incomplete_does_not_escalate",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": "planning",
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "reasoning",
+                "id": "rs_a",
+                "encrypted_content": "opaque"
+              }
+            ]
+          },
+          "response_status": "incomplete",
+          "incomplete_reason": "content_filter",
+          "usage": {
+            "output_tokens": 2000
+          }
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": "planning",
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "reasoning",
+                  "id": "rs_a",
+                  "encrypted_content": "opaque"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "opaque_checkpoint_only_gets_nudge_on_second",
+      "configured_cap": 2000,
+      "initial_messages": [
+        {
+          "role": "user",
+          "content": "Complete the requested work.",
+          "timestamp": 100.0
+        }
+      ],
+      "initial_state": {
+        "incomplete_retries": 0,
+        "reasoning_only_streak": 0
+      },
+      "steps": [
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "compaction",
+                "encrypted_content": "checkpoint-old"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        },
+        {
+          "assistant": {
+            "role": "assistant",
+            "content": "",
+            "reasoning": null,
+            "finish_reason": "incomplete",
+            "codex_reasoning_items": [
+              {
+                "type": "compaction",
+                "encrypted_content": "checkpoint-old"
+              }
+            ]
+          },
+          "response_status": "completed",
+          "incomplete_reason": null,
+          "usage": null
+        }
+      ],
+      "trace": [
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                }
+              ],
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 1,
+            "reasoning_only_streak": 1
+          }
+        },
+        {
+          "continue_turn": true,
+          "result": null,
+          "max_output_tokens": null,
+          "reasoning_off": false,
+          "emitted": [],
+          "messages": [
+            {
+              "role": "user",
+              "content": "Complete the requested work.",
+              "timestamp": 100.0
+            },
+            {
+              "role": "assistant",
+              "content": "",
+              "reasoning": null,
+              "finish_reason": "incomplete",
+              "codex_reasoning_items": [
+                {
+                  "type": "compaction",
+                  "encrypted_content": "checkpoint-old"
+                }
+              ],
+              "timestamp": 1700000000.0
+            },
+            {
+              "role": "user",
+              "content": "[System: Your previous response contained only internal reasoning and never produced a visible answer or tool call. Do not keep thinking. Produce your final answer as plain text now (or make the tool call you were planning).]",
+              "timestamp": 1700000000.0
+            }
+          ],
+          "state": {
+            "incomplete_retries": 2,
+            "reasoning_only_streak": 2
+          }
+        }
+      ]
+    }
+  ]
+}

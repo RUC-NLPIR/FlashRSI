@@ -1,0 +1,852 @@
+{
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": [
+    {
+      "file": "__init__.py",
+      "source": "agent/transports/__init__.py",
+      "source_sha256": "0c00fe21466cc3d49bc213ab3b5c9109e8d1a64592ddbbb79e21dec89f27cef3",
+      "selected_symbols": [
+        "_none"
+      ],
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "f9a2beec55715918d2d992983be6549ab0344620650e12c76f5bb9c87e4b0b5d"
+    },
+    {
+      "file": "types.py",
+      "source": "agent/transports/types.py",
+      "source_sha256": "208098a093cf7243e2168681ad3d0ce8eafecdee65e0a6e19839fcdfbf4e3fa4",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "208098a093cf7243e2168681ad3d0ce8eafecdee65e0a6e19839fcdfbf4e3fa4"
+    },
+    {
+      "file": "base.py",
+      "source": "agent/transports/base.py",
+      "source_sha256": "a6cfd8f58ac16dcdef7b2098c5a8254472a050b06a8c4dac8cc5f2186c0b1d02",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "73c10b5de78246e46bde62cb309ea84ca93da3ce2db5910acac197ade5b72903"
+    },
+    {
+      "file": "reasoning_effort.py",
+      "source": "agent/reasoning_effort.py",
+      "source_sha256": "050b8d56b474f24aaa0a63e542554f0382ffc49431ba769133157f617e5a8c6f",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "050b8d56b474f24aaa0a63e542554f0382ffc49431ba769133157f617e5a8c6f"
+    },
+    {
+      "file": "moonshot_schema.py",
+      "source": "agent/moonshot_schema.py",
+      "source_sha256": "3ee817021128bd5caa1d9ac1c10567aa7566ef8ca6b839ae526f6bdd798c1b07",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "3ee817021128bd5caa1d9ac1c10567aa7566ef8ca6b839ae526f6bdd798c1b07"
+    },
+    {
+      "file": "provider_base.py",
+      "source": "providers/base.py",
+      "source_sha256": "b948b1369e80690fe36bbedef5c5d4871c748bc34a0e31a64fc012fb5c99f0b1",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "b948b1369e80690fe36bbedef5c5d4871c748bc34a0e31a64fc012fb5c99f0b1"
+    },
+    {
+      "file": "gemini.py",
+      "source": "agent/gemini_native_adapter.py",
+      "source_sha256": "2d880b8476ef8bcfc71f7ea24fe259299801eb64ae4fb065deb2c2343eae66f5",
+      "selected_symbols": [
+        "bare_gemini_model_id",
+        "_gemini_version",
+        "gemini_uses_thinking_level",
+        "is_native_gemini_base_url",
+        "is_vertex_express_base_url",
+        "_THINKING_KEYS",
+        "GEMINI_DEFAULT_MAX_OUTPUT_TOKENS",
+        "_normalize_thinking_config",
+        "_thinking_requests_output_headroom",
+        "_effective_gemini_max_output_tokens"
+      ],
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "e372b977ef8cbee1f0ba5a95edc4b46770442886c678c22105aa61c3db56f43d"
+    },
+    {
+      "file": "wire_helpers.py",
+      "source": "agent/message_sanitization.py",
+      "source_sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+      "selected_symbols": [
+        "_tc_field",
+        "_FINISH_REASON_ALIASES",
+        "normalize_finish_reason",
+        "coalesce_tool_call_id"
+      ],
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "92af3b9ea5648935f37d3a075c2d9c54bc02eb9da0901e67955bf799296a0b97"
+    },
+    {
+      "file": "chat_completions.py",
+      "source": "agent/transports/chat_completions.py",
+      "source_sha256": "6793be69882fad0eae48f02b2fcc959c0e9718af625202b1095565a2ba1c74de",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "057c99874113e592a0d270adc01eb33d3af46537d99c4db8504d6efea47c4eb6"
+    },
+    {
+      "file": "custom_profile.py",
+      "source": "plugins/model-providers/custom/__init__.py",
+      "source_sha256": "e0bebb5675726793c87be3ba12d2cce088742106c852f142bcdf74f1d0156d98",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "f394c0668c29440e0492495ae5fed416e6812377ddf3a12c829359e5b6159591"
+    },
+    {
+      "file": "kimi_coding_profile.py",
+      "source": "plugins/model-providers/kimi-coding/__init__.py",
+      "source_sha256": "d0863eca8545a6235b0d3e194f2d432d02c13ac526362407702a8651cfbf93d8",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "a2620e1374e13d80d97797ccc525fa748dfd74fb68293abbfc3713770d766b76"
+    },
+    {
+      "file": "deepseek_profile.py",
+      "source": "plugins/model-providers/deepseek/__init__.py",
+      "source_sha256": "c534fabea55549d28fb6340a9e26a70b13166aa9aa396bb43bffa5350bb0fda8",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "b7e14862dca29e3f63feea4fae4f74e292b0f84971631e8c210bcb25c05c91e6"
+    },
+    {
+      "file": "openrouter_profile.py",
+      "source": "plugins/model-providers/openrouter/__init__.py",
+      "source_sha256": "cd2ab32a31659782bee9064eace125f7521215045713e375c1305215adab17dc",
+      "selected_symbols": null,
+      "adaptations": "snapshot-local relative imports; explicit immutable route metadata boundaries; registration removed",
+      "snapshot_sha256": "cb011efc00a392514975339a50511525784e8ebb09770c7d95b49ec54aecc84b"
+    },
+    {
+      "file": "reasoning_carriers.py",
+      "source": "agent/reasoning_carriers.py",
+      "source_sha256": "c21e95fccadfeddc433be1a4837824b4a0e94715e0bf31ba07172d896e772480",
+      "adaptations": "snapshot-local relative imports only",
+      "snapshot_sha256": "3da627598d00185fbb03ece5d6ec025c03e13ef1513441193550e161c73118a2"
+    },
+    {
+      "file": "wire_helpers.py",
+      "source": "utils.py",
+      "source_sha256": "9c4751dc9fbcbfe7e16d9e0cc5fb25566517c4927d2dc84061d4cac993a98445",
+      "selected_symbols": [
+        "model_forces_max_completion_tokens"
+      ],
+      "adaptations": "AST-selected original pure function appended to message_sanitization closure",
+      "snapshot_sha256": "92af3b9ea5648935f37d3a075c2d9c54bc02eb9da0901e67955bf799296a0b97"
+    },
+    {
+      "file": "gemini_profile.py",
+      "source": "plugins/model-providers/gemini/__init__.py",
+      "source_sha256": "8344c76e448d3faa5451f6919835ba924f3c632a9affb92e9d48baf78a34b12a",
+      "snapshot_sha256": "b548cb7d1ef825c928e0b01fb3bcf65e506bd0817b3005055e8a9e2bcbf0f953",
+      "adaptations": "Snapshot-local imports; removed plugin registration; original pure Python hooks unchanged"
+    },
+    {
+      "file": "xai_profile.py",
+      "source": "plugins/model-providers/xai/__init__.py",
+      "source_sha256": "060f034de2aababbd274f924e99937e9116f8c4c95eff55db8fa47e0b6cec39c",
+      "snapshot_sha256": "494b344bca4269430fe74bdfd2218249f0538a847c4736d5e17f4f9f18043680",
+      "adaptations": "Snapshot-local imports; removed plugin registration; original pure Python hooks unchanged"
+    },
+    {
+      "file": "gemini_long_decode.py",
+      "source": "agent/gemini_long_decode.py",
+      "source_sha256": "3778378d6550d21874b4762c4a09f2b85fe5432e6d52d7950b77d50b9260e76f",
+      "snapshot_sha256": "3778378d6550d21874b4762c4a09f2b85fe5432e6d52d7950b77d50b9260e76f",
+      "adaptations": "Snapshot-local imports; removed plugin registration; original pure Python hooks unchanged"
+    },
+    {
+      "file": "reasoning_config.py",
+      "source": "hermes_constants.py",
+      "source_sha256": "870ad9935a62968636d6a14d160c0269dfbefd8091ab3cb71be78b30bef6360f",
+      "snapshot_sha256": "dd287628c2e24efa285239928d45c73c83429f009d4602256a6a5d3089a455d5",
+      "selected_symbols": [
+        "VALID_REASONING_EFFORTS",
+        "parse_reasoning_effort",
+        "_canonical_model_variants",
+        "resolve_per_model_reasoning_effort",
+        "resolve_reasoning_config"
+      ],
+      "adaptations": "AST-selected original stdlib-only resolver dependency closure"
+    },
+    {
+      "file": "configuration.py",
+      "source": "agent/chat_completion_helpers.py",
+      "source_sha256": "d5ac7612af5819891293c4ec182f71a1a9e59f6aa32e98f15266a85fca64e4a8",
+      "snapshot_sha256": "062c2b5970d05fe4ab34453807946081ce58b37aefaef06045dfab5d7e91abd9",
+      "selected_symbols": [
+        "_validated_openrouter_provider_sort",
+        "_provider_preferences_for_agent"
+      ],
+      "adaptations": "Original AST-selected policy plus explicit Snapshot routing/override projection; ambient config loader replaced with request-local ContextVar. configuration also contains original hermes_constants.resolve_per_model_provider_routing."
+    },
+    {
+      "file": "custom_configuration.py",
+      "source": "agent/agent_init.py",
+      "source_sha256": "1e29225039534583ef0f3e7ae0d7a02b091e03792f8170c880ba83fff9c977cd",
+      "snapshot_sha256": "ea3e89f4a0c202da34f95bb4173c6615c0506631848c2d9efa6d7623ac6f4d8e",
+      "selected_symbols": [
+        "_normalized_custom_base_url",
+        "_custom_provider_model_matches",
+        "_custom_provider_extra_body_for_agent",
+        "_merge_custom_provider_extra_body"
+      ],
+      "adaptations": "Original AST-selected policy plus explicit Snapshot routing/override projection; ambient config loader replaced with request-local ContextVar. configuration also contains original hermes_constants.resolve_per_model_provider_routing."
+    },
+    {
+      "file": "profiles/actual.py",
+      "source": "plugins/model-providers/actual/__init__.py",
+      "source_sha256": "93c891e36be2c110c99b1f6da025c13ac359e49c88779f89218214db01bea284",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": [
+            "ActualProfile.build_client_kwargs_extras",
+            "ActualProfile.fetch_models"
+          ]
+        }
+      ],
+      "snapshot_sha256": "f35b45717f5c24e450f1bb5c600fcd94e61ddf4f0fdda2f4beed6095c9ce4bff"
+    },
+    {
+      "file": "profiles/ai_gateway.py",
+      "source": "plugins/model-providers/ai-gateway/__init__.py",
+      "source_sha256": "d59d6bf990b3817b33dc2b5477d61396d18882092ea9964c8321f48da168059e",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "0aad83d77ad96147a5ffdd75b59a9c35805c2a0209cd719513c7265dee1f5db5"
+    },
+    {
+      "file": "profiles/alibaba.py",
+      "source": "plugins/model-providers/alibaba/__init__.py",
+      "source_sha256": "e4fa3e75ce787558f12b51fa1f8b1a971fe17b6cbd3527f10adab76b6241e1b6",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "ec91cd05379c29ca9c9814d7c633557dbf8fc5c6fc31ee357f8b33490d2732d0"
+    },
+    {
+      "file": "profiles/alibaba_coding_plan.py",
+      "source": "plugins/model-providers/alibaba-coding-plan/__init__.py",
+      "source_sha256": "d37daa680d02c48cb7c165470fa51ddfaa35f90637f2c57f30bc6c26ef6d1759",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "875765b9873af95b15ba24c376a16f1d01e5e9ca4f104c6c8d9ca7d811b83d91"
+    },
+    {
+      "file": "profiles/arcee.py",
+      "source": "plugins/model-providers/arcee/__init__.py",
+      "source_sha256": "42268f1c6ad743fd9a89977c4941a61fe23c5e9973ac07663ed3bd04d7d3636b",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "782528a8b7b4f99cb4da8763664f96e976ae94b58a8689fdacfabb91ae945047"
+    },
+    {
+      "file": "profiles/azure_foundry.py",
+      "source": "plugins/model-providers/azure-foundry/__init__.py",
+      "source_sha256": "7463d513a89aebcaaead8888038493e5dbbe4e630b49d5b8970b4eef4fddbdb9",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "de940bfede48c847278bdb0b184879d061936214a920c4d0feebb702cad61d34"
+    },
+    {
+      "file": "profiles/copilot.py",
+      "source": "plugins/model-providers/copilot/__init__.py",
+      "source_sha256": "120d51dbd8af4c7eeb79653d2883458682c27b6f21c74e821b7ae057cbe78cc4",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from hermes_cli.models import clamp_github_reasoning_effort, github_model_reasoning_efforts",
+          "from ..boundaries import clamp_github_reasoning_effort, github_model_reasoning_efforts"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "8d0a78d79ecf159f563058d8cf70a71cd814ea1c5c25d9a67889b70597885342"
+    },
+    {
+      "file": "profiles/deepinfra.py",
+      "source": "plugins/model-providers/deepinfra/__init__.py",
+      "source_sha256": "7819591882c289cc83ad110d3b71467d3e826ecef38abab6c79a83a39bd74a79",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": [
+            "_DeepInfraProfile.default_vision_model"
+          ]
+        }
+      ],
+      "snapshot_sha256": "b91e4b841bc6b98a256f586c0a9156d878dd5878b3842189b72f5cb84a212ce1"
+    },
+    {
+      "file": "profiles/fireworks.py",
+      "source": "plugins/model-providers/fireworks/__init__.py",
+      "source_sha256": "a0fa31f422ebea9af020da6a42f8f55f3cdf5872bb61b296f2d1c8f6f4e69d31",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from hermes_cli.version_info import get_version_info",
+          "from ..boundaries import get_version_info"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "0e9d849b6f0dc90260e7e51f7b6b5a5c6a894117d21b4406b4ed7f2998addff8"
+    },
+    {
+      "file": "profiles/gmi.py",
+      "source": "plugins/model-providers/gmi/__init__.py",
+      "source_sha256": "1cfc7c6501d977b22878674091a10ac896809a695a63c76bcf30e3ed900de910",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from hermes_cli.version_info import get_version_info",
+          "from ..boundaries import get_version_info"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "d52438064ac6bd89b0561d9334a7b3cc18eccaefb28f6b901e08a5345d3c8dfc"
+    },
+    {
+      "file": "profiles/huggingface.py",
+      "source": "plugins/model-providers/huggingface/__init__.py",
+      "source_sha256": "88a5c2f345a0e3da30b2993f18d11307ac4d293b4d9270f904cc2f9fc7af011d",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "6a56b254347abd944b4efd822b71513d43b8feebed08d9bcd358212e1446f641"
+    },
+    {
+      "file": "profiles/kilocode.py",
+      "source": "plugins/model-providers/kilocode/__init__.py",
+      "source_sha256": "34698a725a22f355189816beff958dcea1f7afb5c837d5f7be6a13e6ec802329",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "e037d87d5741ea0198c1060c0e81b61d1d0d1ad644c060b4b0c5354d81b4000c"
+    },
+    {
+      "file": "profiles/lmstudio.py",
+      "source": "plugins/model-providers/lmstudio/__init__.py",
+      "source_sha256": "e2da9fbbec22ba24fa0250b342dc8da3bbde6a408f2f3e57d16212fdfff41489",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        [
+          "from agent.lmstudio_reasoning import resolve_lmstudio_effort",
+          "from ..lmstudio_reasoning import resolve_lmstudio_effort"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "492738b50e364cdad94e4482515a3fe1a12d8839380fb0a8a371ca459c147887"
+    },
+    {
+      "file": "profiles/meta_ai.py",
+      "source": "plugins/model-providers/meta-ai/__init__.py",
+      "source_sha256": "1b78fcabb23420cea419ce6563191b7cc5cd69a255fca3fbe5885a6b04c37608",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": [
+            "MetaAIProfile.fetch_models"
+          ]
+        }
+      ],
+      "snapshot_sha256": "b90daf5b34e458facf33260d41d6dbaea7a1028afaf437acd3f179859e0e6c94"
+    },
+    {
+      "file": "profiles/minimax.py",
+      "source": "plugins/model-providers/minimax/__init__.py",
+      "source_sha256": "760d67345be1441bd97a48eca1f38ece96229a2285cd7ca9039024acd84c9196",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "68a221f5e974aeff185dd00812f8d6bca81ea6bb4a49e135f45143c9a377cd32"
+    },
+    {
+      "file": "profiles/nebius_token_factory.py",
+      "source": "plugins/model-providers/nebius-token-factory/__init__.py",
+      "source_sha256": "2ac113698c549bf1224527252c50dda966a63f372fa6f98e604ab7cc4a6bfa2d",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "ef0db0601a04d94dd586dadc2dd32aad4be20bfb19ec0becd30c4709e3a74ced"
+    },
+    {
+      "file": "profiles/nous.py",
+      "source": "plugins/model-providers/nous/__init__.py",
+      "source_sha256": "3eababd43df407fd2e5c31b66db3758ba27c15f3dbdddc1cb837a217c75a487c",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.portal_tags import get_affinity_scope, get_conversation_context, nous_portal_tags",
+          "from ..boundaries import get_affinity_scope, get_conversation_context, nous_portal_tags"
+        ],
+        [
+          "from agent.transports.codex import _cache_scope_from_session_id",
+          "from ..openrouter_profile import _cache_scope_from_session_id"
+        ],
+        [
+          "from hermes_cli.models_reasoning_caps import nous_model_reasoning_capabilities, warm_nous_reasoning_caps_async",
+          "from ..boundaries import nous_model_reasoning_capabilities, warm_nous_reasoning_caps_async"
+        ],
+        {
+          "omitted_application_methods": [
+            "NousProfile.resolve_aux_model"
+          ]
+        }
+      ],
+      "snapshot_sha256": "bcc4c61c32c949a94934817b386a59c2d013c20c692fd5cb0ebce7c45f072781"
+    },
+    {
+      "file": "profiles/novita.py",
+      "source": "plugins/model-providers/novita/__init__.py",
+      "source_sha256": "19e5b6fc302981b45148c05eccca057f51de22a068eae06f7ede64fb22b856c2",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "c9a4709d99ba0044ab685765ce012636287f99fe1dd464deb6ce9799cd327a98"
+    },
+    {
+      "file": "profiles/nvidia.py",
+      "source": "plugins/model-providers/nvidia/__init__.py",
+      "source_sha256": "199ca112b6d5760226b6b481e1495d4df9459fd2863a2ae46291bef637c7aa3d",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "5151bfb05766d0f358e01bd9cbdc9f88a52be45771c99610fa3bf5f47fe54c86"
+    },
+    {
+      "file": "profiles/ollama_cloud.py",
+      "source": "plugins/model-providers/ollama-cloud/__init__.py",
+      "source_sha256": "16bc259bd3737d34a706c49a604bbb2737128b94db62b1fe89fc750452e00ab8",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "866bba5377e33dc9f8b122fad3f7b7a86d95f9c2985f56ca14a2a89958844038"
+    },
+    {
+      "file": "profiles/opencode_zen.py",
+      "source": "plugins/model-providers/opencode-zen/__init__.py",
+      "source_sha256": "1d35092490d098257c406b0805fb455e64af4af251a3a928a901edb8536ed978",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent import reasoning_effort as re_",
+          "from .. import reasoning_effort as re_"
+        ],
+        [
+          "from hermes_cli.version_info import get_version_info",
+          "from ..boundaries import get_version_info"
+        ],
+        {
+          "omitted_application_methods": [
+            "OpenCodeGoProfile.fetch_account_usage"
+          ]
+        }
+      ],
+      "snapshot_sha256": "36cccada6d048205f881811f5b410b535a485a55a405ed826d4b1f114ca90958"
+    },
+    {
+      "file": "profiles/qwen_oauth.py",
+      "source": "plugins/model-providers/qwen-oauth/__init__.py",
+      "source_sha256": "edda9ac166d39170f81d25166b9df083c5a87efbe240bed897a58259349775b4",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "e3b8646a3d523f3916d89a451429da0bdd192b1293cb8c79ffd9333d310830a6"
+    },
+    {
+      "file": "profiles/stepfun.py",
+      "source": "plugins/model-providers/stepfun/__init__.py",
+      "source_sha256": "935f440d36dae0bb1f33a3dad73390c765c9ec22bc3528e9cfcca8bb271ef07b",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "9e7188c10763259ce6a2d5a334b0cd730e9cb27d2eed68c3329da866d41651b5"
+    },
+    {
+      "file": "profiles/tencent_tokenhub.py",
+      "source": "plugins/model-providers/tencent-tokenhub/__init__.py",
+      "source_sha256": "0be617766a840d44c9dc272d35acc5ae4631bfbe5ceac0ae61840a5637ad6b3b",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "456e175886c162d006485aedd0188748958e74f85239918459804c656f2b4780"
+    },
+    {
+      "file": "profiles/upstage.py",
+      "source": "plugins/model-providers/upstage/__init__.py",
+      "source_sha256": "34bc6eca4c810714bf6a5e763e8d2afccffa5602620bd8a2958b67e4fddf8ecd",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent.reasoning_effort import",
+          "from ..reasoning_effort import"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "267e472678f8a6b9fb7c0bca909f581901b1c4c87c8979f5552784e6c97339c4"
+    },
+    {
+      "file": "profiles/xiaomi.py",
+      "source": "plugins/model-providers/xiaomi/__init__.py",
+      "source_sha256": "bfea5d6817480db02a593806cb609e4a125db04904d042158c49ab5a7d2bc245",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "7dc08b227d50b8a89a00430dfeb0c07798403c2251bc11173f2c51e753e8f20b"
+    },
+    {
+      "file": "profiles/zai.py",
+      "source": "plugins/model-providers/zai/__init__.py",
+      "source_sha256": "963504f89a7de677cc51e825079ba63dfa5e6414724ff23494dc71444e3d9fdc",
+      "selected_symbols": "whole file except explicit application boundaries",
+      "adaptations": [
+        [
+          "from providers import register_provider",
+          "from ..profile_registry import register_provider"
+        ],
+        [
+          "from providers.base import ProviderProfile",
+          "from ..provider_base import ProviderProfile"
+        ],
+        [
+          "from agent import reasoning_effort as re_",
+          "from .. import reasoning_effort as re_"
+        ],
+        {
+          "omitted_application_methods": []
+        }
+      ],
+      "snapshot_sha256": "8ec30caac0d5879f87217a6bc47b080e397df846afb606fcebd6c5a263af5245"
+    },
+    {
+      "file": "lmstudio_reasoning.py",
+      "source": "agent/lmstudio_reasoning.py",
+      "source_sha256": "dfe6d4d1593475825f84a1c0299a3acbd5639716a1181717eaaf30ab44e760cf",
+      "selected_symbols": "whole file",
+      "adaptations": [],
+      "snapshot_sha256": "dfe6d4d1593475825f84a1c0299a3acbd5639716a1181717eaaf30ab44e760cf"
+    }
+  ],
+  "boundaries": "Selected Snapshot routes only; no plugin discovery, ambient profile, catalog network, credentials or SDK clients. Catalog capabilities are explicit inputs.",
+  "boundary_files": {
+    "boundaries.py": "c07d9774afc427544aa022b6a211a3811469fd234240a6a75f94f3956ae74b5e"
+  },
+  "generated_metadata": {
+    "provider_profiles.json": {
+      "sha256": "e96d451ae3454d97432916a311e4107004c1cbb12667b77223cadda4a9f0a699",
+      "source": "Actual pinned providers.list_providers() under isolated HERMES_HOME;50 bundled profiles;no model requests"
+    }
+  }
+}

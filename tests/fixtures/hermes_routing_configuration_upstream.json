@@ -1,0 +1,389 @@
+{
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "method": "Actual original _provider_preferences_for_agent; original validation/model resolution; host config replaced only with explicit fixture settings. No HTTP or model requests.",
+  "source_sha256": {
+    "agent/chat_completion_helpers.py": "d5ac7612af5819891293c4ec182f71a1a9e59f6aa32e98f15266a85fca64e4a8",
+    "hermes_constants.py": "870ad9935a62968636d6a14d160c0269dfbefd8091ab3cb71be78b30bef6360f"
+  },
+  "cases": [
+    {
+      "input": {
+        "name": "empty",
+        "settings": {},
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    },
+    {
+      "input": {
+        "name": "all_flat",
+        "settings": {
+          "provider_routing": {
+            "only": [
+              "a"
+            ],
+            "ignore": [
+              "b"
+            ],
+            "order": [
+              "c"
+            ],
+            "sort": " LATENCY ",
+            "require_parameters": true,
+            "data_collection": "deny"
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "only": [
+          "a"
+        ],
+        "ignore": [
+          "b"
+        ],
+        "order": [
+          "c"
+        ],
+        "sort": "latency",
+        "require_parameters": true,
+        "data_collection": "deny"
+      }
+    },
+    {
+      "input": {
+        "name": "falsy_omitted",
+        "settings": {
+          "provider_routing": {
+            "only": [],
+            "ignore": null,
+            "sort": "",
+            "require_parameters": false,
+            "data_collection": ""
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    },
+    {
+      "input": {
+        "name": "sort_price",
+        "settings": {
+          "provider_routing": {
+            "sort": "price"
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "sort": "price"
+      }
+    },
+    {
+      "input": {
+        "name": "sort_throughput",
+        "settings": {
+          "provider_routing": {
+            "sort": "THROUGHPUT"
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "sort": "throughput"
+      }
+    },
+    {
+      "input": {
+        "name": "sort_invalid",
+        "settings": {
+          "provider_routing": {
+            "sort": "quality"
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    },
+    {
+      "input": {
+        "name": "sort_integer",
+        "settings": {
+          "provider_routing": {
+            "sort": 2
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    },
+    {
+      "input": {
+        "name": "sort_mapping",
+        "settings": {
+          "provider_routing": {
+            "sort": {
+              "by": "price"
+            }
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    },
+    {
+      "input": {
+        "name": "exact_model_overlay",
+        "settings": {
+          "provider_routing": {
+            "only": [
+              "base"
+            ],
+            "sort": "price",
+            "models": {
+              "openai/gpt-5.4": {
+                "only": [
+                  "model"
+                ],
+                "require_parameters": true,
+                "unrelated": "ignored"
+              }
+            }
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "only": [
+          "model"
+        ],
+        "sort": "price",
+        "require_parameters": true
+      }
+    },
+    {
+      "input": {
+        "name": "dashed_model_overlay",
+        "settings": {
+          "provider_routing": {
+            "models": {
+              "gpt-5-4": {
+                "order": [
+                  "matching"
+                ]
+              }
+            }
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "order": [
+          "matching"
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "aggregator_model_overlay",
+        "settings": {
+          "provider_routing": {
+            "models": {
+              "anthropic/claude-sonnet-4-6": {
+                "only": [
+                  "anthropic"
+                ]
+              }
+            }
+          }
+        },
+        "route": {},
+        "model": "openrouter/anthropic/claude-sonnet-4.6"
+      },
+      "expected": {
+        "only": [
+          "anthropic"
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "model_false_removes_global",
+        "settings": {
+          "provider_routing": {
+            "only": [
+              "global"
+            ],
+            "require_parameters": true,
+            "models": {
+              "gpt-5.4": {
+                "only": [],
+                "require_parameters": false
+              }
+            }
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    },
+    {
+      "input": {
+        "name": "invalid_per_model_sort_removes_global",
+        "settings": {
+          "provider_routing": {
+            "sort": "latency",
+            "models": {
+              "gpt-5.4": {
+                "sort": "not-valid"
+              }
+            }
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    },
+    {
+      "input": {
+        "name": "nonmatching_model_keeps_global",
+        "settings": {
+          "provider_routing": {
+            "only": [
+              "global"
+            ],
+            "models": {
+              "other": {
+                "only": [
+                  "other"
+                ]
+              }
+            }
+          }
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "only": [
+          "global"
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "route_routing_overrides_flat",
+        "settings": {
+          "provider_routing": {
+            "only": [
+              "global"
+            ]
+          }
+        },
+        "route": {
+          "provider_routing": {
+            "only": [
+              "route"
+            ],
+            "sort": "price"
+          }
+        },
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "only": [
+          "route"
+        ],
+        "sort": "price"
+      }
+    },
+    {
+      "input": {
+        "name": "constructor_aliases",
+        "settings": {
+          "provider_routing": {
+            "only": [
+              "global"
+            ]
+          },
+          "providers_allowed": [
+            "constructor"
+          ]
+        },
+        "route": {
+          "providers_allowed": [
+            "route-constructor"
+          ]
+        },
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "only": [
+          "route-constructor"
+        ]
+      }
+    },
+    {
+      "input": {
+        "name": "explicit_preferences_win",
+        "settings": {
+          "provider_routing": {
+            "only": [
+              "global"
+            ],
+            "sort": "price"
+          },
+          "provider_preferences": {
+            "only": [
+              "settings"
+            ]
+          }
+        },
+        "route": {
+          "provider_preferences": {
+            "only": [
+              "route"
+            ],
+            "max_price": {
+              "prompt": 1
+            }
+          }
+        },
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {
+        "only": [
+          "route"
+        ],
+        "sort": "price",
+        "max_price": {
+          "prompt": 1
+        }
+      }
+    },
+    {
+      "input": {
+        "name": "malformed_settings_ignored",
+        "settings": {
+          "provider_routing": "wrong"
+        },
+        "route": {},
+        "model": "openai/gpt-5.4"
+      },
+      "expected": {}
+    }
+  ]
+}

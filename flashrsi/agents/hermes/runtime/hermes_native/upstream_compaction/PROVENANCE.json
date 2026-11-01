@@ -1,0 +1,531 @@
+{
+  "repository": "https://github.com/NousResearch/hermes-agent",
+  "version": "v0.22.5",
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": [
+    {
+      "file": "context_compressor.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_compressor.py",
+      "source_sha256": "065dc9babbcb811a514c32319ed13a6ddaeefbc3964a109f7bb8e4c9260779d1"
+    },
+    {
+      "file": "context_compressor_prellm.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_compressor_prellm.py",
+      "source_sha256": "05756eff95595dfb24c6e8c94bcef3c19041ea9197a22a78e35a483ead14a14a"
+    },
+    {
+      "file": "context_compressor_prune.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_compressor_prune.py",
+      "source_sha256": "4f9870b04158f8a46a7e4f7039d3169b3d9ded1d2060f8f4432d19902c68e40f"
+    },
+    {
+      "file": "context_compressor_summary.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_compressor_summary.py",
+      "source_sha256": "138edc1f3d86939b373d6c64a48ce70605fb48b5cc91184e39bc281064796073"
+    },
+    {
+      "file": "context_compressor_retry.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_compressor_retry.py",
+      "source_sha256": "056b297bede846f20a19ec58886017e29e0c444ab8d0ab2228ab7d0736367984"
+    },
+    {
+      "file": "context_compressor_tail.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_compressor_tail.py",
+      "source_sha256": "ed0ccb9dc43c7b6475df3949f6ba379d23f7b700f8ba2f4fe62e027cb4b0bbe4"
+    },
+    {
+      "file": "context_compressor_telemetry.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_compressor_telemetry.py",
+      "source_sha256": "7c8bf9554fd17c06b7142980071b7571a807a1cfa0392091835eaf1a82b3588e"
+    },
+    {
+      "file": "context_engine.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/context_engine.py",
+      "source_sha256": "516a4961c59af4c1048dc523b83f135b1fd0089423775fbe3fc04ffdcdb45cbb"
+    },
+    {
+      "file": "micro_compaction.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/micro_compaction.py",
+      "source_sha256": "4c0f31b6f7eb5ed820e6cad70f208c53fb6399de3565146c01c56cc31621b392"
+    },
+    {
+      "file": "compression_marker.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/compression_marker.py",
+      "source_sha256": "3bee18dc944e95453a42035c2cf1001269974bca0086018176d346c73507c95e"
+    },
+    {
+      "file": "image_eviction_policy.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/image_eviction_policy.py",
+      "source_sha256": "effa90f99c91b3ec421cb0b3570a8a1893ef890ddee0a3d68219e19d44de56dd"
+    },
+    {
+      "file": "usage_anchor.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/usage_anchor.py",
+      "source_sha256": "1d41b911b5809ec4a3eda590ab939b3c69a4085536ad4e02e2022119a8c149be"
+    },
+    {
+      "file": "model_metadata_token_memo.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/model_metadata_token_memo.py",
+      "source_sha256": "382271313a84f02a3a07bd99cf109940acbf197b6c3aa146bde726eaf86a714f"
+    },
+    {
+      "file": "conversation_compression_archive.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/conversation_compression_archive.py",
+      "source_sha256": "ac7e79f15559cd24cd0efcaa868f8fc0f127ba0bbee280d51433b30e47b00890"
+    },
+    {
+      "file": "message_metadata.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/message_metadata.py",
+      "source_sha256": "b7cf8f650d87d468773029482298424b3dee1bc71650918c8377417827266946"
+    },
+    {
+      "file": "anthropic_thinking_policy.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/anthropic_thinking_policy.py",
+      "source_sha256": "840c8eade4809429009d07e9565eee666dcda7f8c27436fb1e7ef816845a9a78"
+    },
+    {
+      "file": "anthropic_thinking_replay.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/anthropic_thinking_replay.py",
+      "source_sha256": "269a4902dd97887a429b50cf66c4b81e360cb352b57d55f1945200a0a4c22077"
+    },
+    {
+      "file": "anthropic_endpoints.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/anthropic_endpoints.py",
+      "source_sha256": "d4b4e4c0f85b1c526b86df1e4fd85bb2a2e39ee728c2f8c2cd60de4bcfca848f"
+    },
+    {
+      "file": "hermes_state_errors.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "hermes_state_errors.py",
+      "source_sha256": "05039e5c88ea1ce41792832743578b6facc582b89bebf2d68f3673d89515b47c"
+    },
+    {
+      "file": "__init__.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries"
+    },
+    {
+      "file": "model_metadata.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/model_metadata.py",
+      "source_sha256": "497f2342915b0c7f23e56c2ec7e191a122d6255a6d12e660e570a4013895ab3d",
+      "selected_symbols": [
+        "CHARS_PER_TOKEN",
+        "CONTEXT_PROBE_TIERS",
+        "DEFAULT_CONTEXT_LENGTHS",
+        "DEFAULT_FALLBACK_CONTEXT",
+        "MINIMUM_CONTEXT_LENGTH",
+        "_BOUNDARY_MATCHED_KEY_PREFIXES",
+        "_CJK_DENSE_RE",
+        "_HYPHENATED_GENERATION_RE",
+        "_IMAGE_PART_TYPES",
+        "_MSG_TOKENS_CACHE",
+        "_MSG_TOKENS_CACHE_MAX",
+        "_STALE_THINKING_ESTIMATE_KEYS",
+        "_TOOLS_TOKENS_CACHE",
+        "_TOOLS_TOKENS_CACHE_MAX",
+        "_catalog_key_matches",
+        "_count_image_tokens",
+        "_count_parts",
+        "_estimate_message_tokens_cached",
+        "_estimate_message_tokens_without_images",
+        "_estimate_tools_tokens_rough",
+        "_longest_key_match",
+        "_msg_fingerprint",
+        "_normalize_model_version",
+        "_strip_stale_thinking_for_estimate",
+        "_tool_name_for_cache",
+        "_wire_message_shadow",
+        "estimate_messages_tokens_rough",
+        "estimate_request_tokens_rough",
+        "estimate_tokens_rough",
+        "strip_opaque_replay_items"
+      ]
+    },
+    {
+      "file": "skill_commands.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/skill_commands.py",
+      "source_sha256": "f392971ceea36792eac3e705da6ac6a9a14ab1d5f86caa25e783d0dd4cf6c4c5",
+      "selected_symbols": [
+        "SKILL_EXCERPT_JOINT",
+        "_AUTO_LOAD_HEADER_RE",
+        "_AUTO_LOAD_PREFIX",
+        "_AUTO_LOAD_SUFFIX_RE",
+        "_BUNDLE_FIRST_SKILL_BLOCK",
+        "_BUNDLE_LOADED_RE",
+        "_BUNDLE_MARKER",
+        "_BUNDLE_USER_INSTRUCTION",
+        "_RUNTIME_NOTE",
+        "_SINGLE_SKILL_INSTRUCTION",
+        "_SINGLE_SKILL_MARKER",
+        "_SKILL_DIR_NOTE_END",
+        "_SKILL_INVOCATION_PREFIX",
+        "_SKILL_NAME_RE",
+        "_SUPPORTING_FILES_END",
+        "_TRAILING_BLOCK_ENDS",
+        "_cut_after",
+        "_describe_auto_loaded_skill_turn",
+        "describe_skill_invocation",
+        "extract_user_instruction_from_skill_message",
+        "skills_loaded_by_scaffold"
+      ]
+    },
+    {
+      "file": "turn_context.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/turn_context.py",
+      "source_sha256": "09a6159b0301da271f1a6bdcf15d924a05dee8d7d6b9e2f4ed46e406aac0aa4e",
+      "selected_symbols": [
+        "drop_stale_api_content"
+      ]
+    },
+    {
+      "file": "agent_runtime_helpers.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/agent_runtime_helpers.py",
+      "source_sha256": "7725dfa3b5c12e2ec289e86a2f83eb99dc75052687aa9cb4d2e71bc3f770b5d4",
+      "selected_symbols": [
+        "_classify_tool_call_orphans"
+      ]
+    },
+    {
+      "file": "message_sanitization.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/message_sanitization.py",
+      "source_sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+      "selected_symbols": [
+        "REASONING_CARRIERS",
+        "ReasoningReplayRoute",
+        "_ALL_CARRIERS",
+        "_DEFAULT_CARRIERS",
+        "_LOCAL_CARRIERS",
+        "_REASONING_CARRIER_ROUTES",
+        "_REASONING_ECHO_RULES",
+        "_REASONING_ECHO_RULE_BY_FAMILY",
+        "_expand_tool_id_variants",
+        "_profile_declares_native_details",
+        "_tc_field",
+        "matches_reasoning_echo_family",
+        "native_anthropic_accounting_projection",
+        "needs_reasoning_echo",
+        "reasoning_echo_family",
+        "reasoning_replay_route",
+        "route_reasoning_carriers",
+        "stale_thinking_reaches_wire",
+        "tool_call_id_variants",
+        "tool_result_id_variants"
+      ]
+    },
+    {
+      "file": "conversation_loop.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/conversation_loop.py",
+      "source_sha256": "36dd6f02b169a544a95598dee74cb775914420dc700cc88cc946effd103b72bc",
+      "selected_symbols": [
+        "_CODEX_ACK_CONTINUATION_NUDGE",
+        "_CODEX_INCOMPLETE_NUDGE",
+        "_DEGENERATE_FINAL_NUDGE",
+        "_DROPPED_TOOLCALL_NUDGE_CONTENT",
+        "_EMPTY_TOOL_RESPONSE_NUDGE",
+        "_LEGACY_LENGTH_CONTINUATION_NETWORK_STUB",
+        "_LENGTH_CONTINUATION_DROPPED_TOOLS_PREFIX",
+        "_LENGTH_CONTINUATION_NETWORK_STUB",
+        "_LENGTH_CONTINUATION_OUTPUT_LIMIT"
+      ]
+    },
+    {
+      "file": "conversation_compression.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/conversation_compression.py",
+      "source_sha256": "796494d28180659f2843599420840832e1f528ecad2110b498a59f53e34e6bcb",
+      "selected_symbols": [
+        "_COMPRESSOR_ATTEMPT_GENERATION",
+        "_COMPRESSOR_ATTEMPT_LOCK",
+        "_PRUNED_SKILL_RELOAD_NOTICE_HEADER",
+        "_SYNTHETIC_USER_FLAGS",
+        "_SYNTHETIC_USER_PREFIXES",
+        "_caller_attempt_is_current",
+        "_is_real_user_message",
+        "_message_text",
+        "_raise_if_stale_attempt",
+        "_working_attempt_is_current"
+      ]
+    },
+    {
+      "file": "conversation_compression_deadline.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/conversation_compression_deadline.py",
+      "source_sha256": "6d28da47d6a66988f0248e6165bc6a7da07f50c20ba931816f7ff079b7d72ab5",
+      "selected_symbols": [
+        "DEFAULT_CONTEXT_TIMEOUT_SECONDS",
+        "DEFAULT_CONTEXT_TOTAL_CEILING_SECONDS",
+        "resolve_context_compression_timeouts"
+      ]
+    },
+    {
+      "file": "auxiliary_client.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/auxiliary_client.py",
+      "source_sha256": "053078416f2b2d94256584a5c1ed6176bfbd3f3de88a8ca858e8257274a04bb5",
+      "selected_symbols": [
+        "AuxiliaryExplicitCancellation",
+        "CODEX_STREAM_STALL_MARKER",
+        "_coerce_llm_message",
+        "_message_field",
+        "extract_content_or_reasoning",
+        "logger"
+      ]
+    },
+    {
+      "file": "redact.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/redact.py",
+      "source_sha256": "cea25df8139675b600eca448f70756bfa9ad22f537abf4f123d01bcbfc71e563",
+      "selected_symbols": [
+        "SECRET_HEADER_NAME_LIST",
+        "_AUTH_HEADER_RE",
+        "_CFG_ANCHORED_RE",
+        "_CFG_DOTTED_RE",
+        "_CFG_SECRET_WORD_RE",
+        "_CFG_VALUE",
+        "_CONTROL_CHARS_RE",
+        "_DB_CONNSTR_RE",
+        "_DISPLAY_CONTROL_RE",
+        "_ENV_ASSIGN_LOWER_RE",
+        "_ENV_ASSIGN_RE",
+        "_ENV_LOOKUP_VALUE_RE",
+        "_FORM_BODY_RE",
+        "_JSON_FIELD_ESCAPED_RE",
+        "_JSON_FIELD_RE",
+        "_JSON_KEY_NAMES",
+        "_JWT_RE",
+        "_KEY_KEYWORD_RE",
+        "_LINE_NUMBER_GUTTER",
+        "_OPAQUE_PATH_SEGMENT_RE",
+        "_PASSWORD_KEY_RE",
+        "_PATH_OR_VAR_VALUE_RE",
+        "_PREFIX_PATTERNS",
+        "_PREFIX_RE",
+        "_PREFIX_SUBSTRINGS",
+        "_PRIVATE_KEY_RE",
+        "_PYTHON_REPR_CREDENTIAL_SUFFIXES",
+        "_PYTHON_REPR_ENV_SUFFIXES",
+        "_PYTHON_REPR_FIELD_RE",
+        "_PYTHON_REPR_SECRET_KEYS",
+        "_SECRET_CFG_NAMES",
+        "_SECRET_ENV_NAMES",
+        "_SECRET_HEADER_NAMES",
+        "_SECRET_HEADER_RE",
+        "_SENSITIVE_QUERY_PARAMS",
+        "_SHELL_VAR_REF",
+        "_SIGNAL_PHONE_RE",
+        "_STRICT_URL_PARAM_RE",
+        "_STRICT_URL_USERINFO_RE",
+        "_STRONG_KEY_KEYWORD_RE",
+        "_TELEGRAM_RE",
+        "_TOKEN_BODY_CHARS",
+        "_URL_BARE_TOKEN_RE",
+        "_YAML_ASSIGN_RE",
+        "_YAML_CFG_NAMES",
+        "_ZHIPU_API_KEY_RE",
+        "_assignment_sub",
+        "_canonical_url_param_name",
+        "_compile_prefix_matcher",
+        "_extract_literal_prefix",
+        "_has_known_prefix_substring",
+        "_has_word_bounded_keyword",
+        "_is_python_repr_secret_key",
+        "_is_word_end",
+        "_is_word_start",
+        "_key_has_secret_keyword",
+        "_looks_like_opaque_credential",
+        "_mask_control_split_tokens",
+        "_mask_token",
+        "_mask_token_nonreusable",
+        "_redact_assignments",
+        "_redact_form_body",
+        "_redact_phone",
+        "_redact_python_repr_fields",
+        "_redact_query_string",
+        "_redact_strict_url_credentials",
+        "_redact_url_credentials",
+        "_should_redact_assignment",
+        "mask_secret",
+        "redact_sensitive_text"
+      ]
+    },
+    {
+      "file": "prompt_builder.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/prompt_builder.py",
+      "source_sha256": "1baa8a654a13da62d422d4cfa32b645d6757b0e92042f62cff92b12c03cd17c7",
+      "selected_symbols": [
+        "STEER_DISPLAY_KIND",
+        "STEER_MARKER_CLOSE",
+        "STEER_MARKER_OPEN"
+      ]
+    },
+    {
+      "file": "utils.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "utils.py",
+      "source_sha256": "9c4751dc9fbcbfe7e16d9e0cc5fb25566517c4927d2dc84061d4cac993a98445",
+      "selected_symbols": [
+        "_hostname_of",
+        "_parse_base_url",
+        "base_url_host_matches",
+        "base_url_hostname"
+      ]
+    },
+    {
+      "file": "anthropic_message_convert.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/anthropic_message_convert.py",
+      "source_sha256": "89cd2f66edef53f47530ac473300c000bd78c2f26f5a7ae2f18b1214f7354ec3",
+      "selected_symbols": [
+        "_CACHEABLE_TYPES",
+        "_EMPTY_TEXT_PLACEHOLDER",
+        "_REPLAY_SANITIZERS",
+        "_THINKING_TYPES",
+        "_apply_assistant_cache_control_to_last_cacheable_block",
+        "_block_type",
+        "_cache_control_of",
+        "_carry_cache_control",
+        "_extract_preserved_thinking_blocks",
+        "_has_block_type",
+        "_is_blank_text_block",
+        "_parse_tool_args",
+        "_replay_image",
+        "_replay_ordered_blocks",
+        "_replay_redacted_thinking",
+        "_replay_text",
+        "_replay_thinking",
+        "_replay_tool_use",
+        "_sanitize_replay_block",
+        "_sanitize_tool_id",
+        "_text_block",
+        "_text_block_with_citations",
+        "_tool_use_block",
+        "assistant_replay_carrier"
+      ]
+    },
+    {
+      "file": "conversation_compression_watermark.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/conversation_compression_watermark.py",
+      "source_sha256": "1c033bbc56e97d5168b560a305df49438f11cd486a1c4fac0499aca1ea5857a2",
+      "selected_symbols": [
+        "held_archive_watermark"
+      ]
+    },
+    {
+      "file": "image_token_cost.py",
+      "adaptations": "snapshot-local relative imports and explicit host boundaries",
+      "source": "agent/image_token_cost.py",
+      "source_sha256": "911576bc03f2ca3c0d909af432f99328a70752dff988e8146bbf2a31b0739f3c",
+      "selected_symbols": [
+        "DEFAULT_IMAGE_TOKEN_COST",
+        "_image_cost_var",
+        "current_image_token_cost"
+      ]
+    },
+    {
+      "file": "context_errors.py",
+      "source": "agent/model_metadata.py",
+      "source_sha256": "497f2342915b0c7f23e56c2ec7e191a122d6255a6d12e660e570a4013895ab3d",
+      "adaptations": "AST-selected pure function dependency closure and relative imports"
+    },
+    {
+      "file": "context_boundary.py",
+      "source": "agent/conversation_compression.py",
+      "source_sha256": "796494d28180659f2843599420840832e1f528ecad2110b498a59f53e34e6bcb",
+      "adaptations": "AST-selected pure function dependency closure and relative imports"
+    },
+    {
+      "file": "context_endpoints.py",
+      "source": "agent/model_metadata.py",
+      "source_sha256": "497f2342915b0c7f23e56c2ec7e191a122d6255a6d12e660e570a4013895ab3d",
+      "selected_symbols": [
+        "_CONTAINER_LOCAL_SUFFIXES",
+        "_LOCAL_HOSTS",
+        "_TAILSCALE_CGNAT",
+        "_normalize_base_url",
+        "_parse_base_url",
+        "is_local_endpoint"
+      ],
+      "adaptations": "AST-selected stdlib-only pure local-endpoint policy"
+    }
+  ],
+  "snapshot_hashes": {
+    "responses_auxiliary.py": "44a6b0d8402cedf1cfda5a57a831a0517265aa053d1c765e91cf69f20f4c2930",
+    "anthropic_thinking_policy.py": "73dbb1c21e2f79e581ff912cd3b59bf2cc6b9249cd0f2078a83ea5a0ac522820",
+    "context_compressor_tail.py": "2e7fe1ea19113cef619904fd6c2bb7fd840fe8419d6a645faea8dc6e21be27ba",
+    "turn_context.py": "96a3a5cbb6b99d9c2a0a0833c8c87acf211eedb64338af15cb083a28923de732",
+    "message_sanitization.py": "466dad9477d083a4d5e23acd356cc475cca8c89e939f9d81fefbddec67fcf36d",
+    "conversation_loop.py": "1d0ed5978d145a3cd0b249f51e0c93c49d1ff65eb78e048e115a5d7027628ba9",
+    "conversation_compression_archive.py": "a1fef4bbd53dda4d6fc612bb41ac723f01eda9e78b81cf5d836222dc2375a925",
+    "context_compressor_summary.py": "78fd352eaf3f0b6ed8a727316c3e7ac753ead16d305896c435caf9b8b4340bb8",
+    "agent_runtime_helpers.py": "a266b7fcbc31745fa33fbe36b8c1a24c859d079b5376a06d73853c652b29f11e",
+    "prompt_builder.py": "69b7b35c3947de42356d123f3b469650a69e1b9305d421b872624b893cd1adce",
+    "image_token_cost.py": "aca048b4bb0b0c456bd797daffbf7ca25602cac9c6001f48163b4d90dc1cf1f1",
+    "context_compressor_prune.py": "4358a37fc6297d01f54ecb4eb2165c0637228a7fa8d21252c3d029534e952b32",
+    "anthropic_message_convert.py": "56a60d35ea9bc3550d119fa797c17b9e4c1fea9ab2701fa6f416f6055fb17500",
+    "context_compressor_prellm.py": "f03fe8ef353c57f3d9ea8741057963988ebf691aceb5b9cbdcdc1b5b9513b516",
+    "clock.py": "fde85c711de32b1c93c12bef4823a08f1377fab90a3fe37f355362645dc28937",
+    "__init__.py": "74d4c8db7d59a2e0c4303f4ad4e449ee683bcaaa416ab14a6b5a73b004c2e914",
+    "error_classifier.py": "97365b7093dab790aaba028f2f22a5c9ff79e669d65bdbbeef5f8b66cd14c91c",
+    "skill_commands.py": "ff5886f36a0a4afe0b02d7d75a02611dc9049ffeb657fecd679fe6ed97fd2762",
+    "usage_anchor.py": "a635daf0df97b336f6c723bd8f047871ebd2c4e336b2eb287805f4d90180d7b5",
+    "message_metadata.py": "b2beaecbcbd4428a39aa032459c4aa2b51acd8f550c52fd226a4d584e1de55c6",
+    "context_compressor_retry.py": "056b297bede846f20a19ec58886017e29e0c444ab8d0ab2228ab7d0736367984",
+    "context_boundary.py": "26f8ede5b3bbae8b63c2193b7534d3c3d73b432cbbbb050b3cce0d962842a425",
+    "conversation_compression_deadline.py": "c35ee2c6b7e18c3f8b0394721939259c45c7842458a1f9a26441828f07054518",
+    "hermes_state_errors.py": "05039e5c88ea1ce41792832743578b6facc582b89bebf2d68f3673d89515b47c",
+    "responses_usage.py": "60a8a1fe59ba3e02ce52f5b88ec8a7f47940663d7e8ddd3fb10fc7200855c9e0",
+    "context_compressor.py": "eab61f63cd8b3505b8ff3d5e1f9384027dc41259bd0e04260e9dfa16c8b2afc6",
+    "model_metadata.py": "fbf886641f12ec71d29df73876507a6c405f6542a95a98db905f1d21dcc0b3e0",
+    "image_eviction_policy.py": "effa90f99c91b3ec421cb0b3570a8a1893ef890ddee0a3d68219e19d44de56dd",
+    "hermes_time.py": "dfa344b5c2517229c3f1ff3ea7d26503dd13cf9184b77047e282ac174eb99d9a",
+    "model_metadata_token_memo.py": "ec6fab73953b4e5dcb4ea7a12c276a8aa950d9ab7e8d4d8cee176d3d960bb5be",
+    "utils.py": "a9e56416efa1dc716eaa235e91b60e75035c1c689d574aa58dbaa725babdfaea",
+    "anthropic_endpoints.py": "c113ccdbafbcb680ba85bc4ab8bc905c60232560b37a5cc5c78b0e3615c666b6",
+    "auxiliary_client.py": "c84fa580437fd48f250754058e51552ec8410dea624b531ef5bcc789b1bf2fb2",
+    "redact.py": "eb77916d756fe13fec61416c869441e9f7a0d1b30dd4fca206af46c410a11071",
+    "responses_boundaries.py": "985330a471f004f5ecc1cf387680651a3702518f2384f4884ece64eb7e20236b",
+    "context_engine.py": "342f8919ee5fdf9d08d4a6e78ed11bedbaa89a1703778a80d394a1e6c2864109",
+    "compression_marker.py": "3bee18dc944e95453a42035c2cf1001269974bca0086018176d346c73507c95e",
+    "message_content.py": "65d45e23dba4d05eab9a7c61de3037f26e4effebf39121e85fd6e084b785123b",
+    "context_endpoints.py": "c344c4fad78a9338898df5b439c8a2fa43fd20f9b1b28c5d83513fafa6d7ba4f",
+    "auxiliary_task_config.py": "b293fddff25585c02467b2e9ea818573bdbc1cb1b9fc58d138fdb9de6274e497",
+    "host_boundaries.py": "a098a556eb6efb98e056a1463ff84432329be41c1d28acde9a0df10087d4a2d9",
+    "responses_transport.py": "cdc827d8fbba4e072c24484eb1986aa153b2f3e7ab23a234e8312f5db733943a",
+    "compaction_events.py": "0271f4ba4ee3fba9c4b6138f8d9e55ca3cbaa529a1ce4d4a38484c87e3599238",
+    "micro_compaction.py": "ccee45e0048ba43528009b27876621d3627a502c99ae755f5939e1dac644a658",
+    "responses_adapter.py": "eb57c70c735bf94877b6e663d7c2f85d2e884a3994e018e4054886e46b6dabcb",
+    "context_compressor_telemetry.py": "0298741b295575899fc5fed69a0ead027b177af6171ccb32fd2696fb77f7db4d",
+    "anthropic_thinking_replay.py": "bc0dd760f8aec2ad1f8d2fe9fb9ad8d228d51c1c761adb5b4648ff6b9ee010d9",
+    "conversation_compression.py": "34a9110f42d6abf478576e75f2be0027dff7a7c8c8a826a1c3399eca39ee4303",
+    "conversation_compression_watermark.py": "610a47b730160b45d4c5305d721ee30aaa389366a6c130c5dbe164e3ee743ed6",
+    "context_errors.py": "44f1f0ab3a3bb98da83572de3f50067fbef88c5564c7a0dfba87b747365faa58",
+    "secret_scope.py": "ece3057c55121c1c6b003688ed828d16f9ad3497fe029d252d3eb6861673eb6b"
+  },
+  "native_responses_manifest": "RESPONSES_PROVENANCE.json"
+}

@@ -3,8 +3,13 @@ runtime:
 prompt:
   - AGENTS.md
   - CLAUDE.md
+  - SYSTEM.md
+  - APPEND_SYSTEM.md
   - prompts/**
   - .pi/agent/prompt-templates/**
+  - .pi/agent/prompts/**
+  - .pi/agent/SYSTEM.md
+  - .pi/agent/APPEND_SYSTEM.md
 skill:
   - .pi/agent/skills/**
 config:
