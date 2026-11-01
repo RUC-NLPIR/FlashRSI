@@ -71,8 +71,8 @@ SkillOpt 使用 `num_epochs`、`batch_size` 等。AHE 必须使用 Agent Worker�
 | 选择字段 | 可用值 |
 | --- | --- |
 | `algorithm.name` | `ace`、`adas`、`ahe`、`darwinx`、`evo_harness`、`evoprompt`、`gepa`、`meta_harness`、`modular_rsi`、`opro`、`rrsi`、`skillopt` |
-| `agent.name` | `miniagent`、`claude_code`、`codex`、`pi`、`hermes` |
-| `algorithm.worker.type` | `llm`；或 `agent` 并配置 `worker.name: miniagent / claude_code / codex / pi / hermes` |
+| `agent.name` | `miniagent`、`claude_code`、`codex`、`pi`、`hermes`、`openclaw`、`opencode` |
+| `algorithm.worker.type` | `llm`；或 `agent` 并配置 `worker.name: miniagent / claude_code / codex / pi / hermes / openclaw / opencode` |
 | `benchmark.name` | [30 个注册项及对应示例](benchmark-quickstart.md) |
 
 `adas`、`darwinx`、`evo_harness`、`meta_harness`、`modular_rsi`、`rrsi` 和 `ahe`

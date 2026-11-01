@@ -122,6 +122,10 @@ def _role(config, label, kind):
         from flashrsi.agents.openclaw import _validate
 
         _validate(config)
+    elif kind == "opencode":
+        from flashrsi.agents.opencode import _validate
+
+        _validate(config)
     if kind == "codex":
         if config.get("cli_path"):
             raise ValueError(

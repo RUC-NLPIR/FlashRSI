@@ -30,7 +30,7 @@ These methods edit a broader resource scope. Start from their own configurations
 ## Match the Worker to the method
 
 - Use `algorithm.worker.type: llm` when the method requests textual proposals.
-- For an Agent Worker, set `type: agent` and choose `name: miniagent`, `claude_code`, `codex`, `pi`, or `hermes`, with independent `llm` settings.
+- For an Agent Worker, set `type: agent` and choose `name: miniagent`, `claude_code`, `codex`, `pi`, `hermes`, `openclaw`, or `opencode`, with independent `llm` settings.
 - Evo-Harness needs directory-based native skill discovery. ModularRSI needs explicit module mappings. Follow the linked method guide before switching harnesses.
 
 ## Interpret results

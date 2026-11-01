@@ -11,6 +11,7 @@ A harness executes the agent's instructions, tools, skills, and runtime logic. I
 | Codex | Python core, instructions, tools, skills, agents, hooks, plugins, memory, rules/config files | Snapshot-local Python semantic port based on `rust-v0.147.0`; runs in an isolated process. [Guide](../codex.md) · [version and migration boundary](../codex-core-extraction.md) |
 | Pi | Pure-Python Pi-compatible runtime, instructions, skills, prompt templates, settings | Snapshot-local `runtime/pi_native` implements the headless Pi v1.4.0 path and emits Pi-shaped JSON events; no Node/npm dependency. [Adapter details](../agent-integration.md) |
 | Hermes | Python runtime, SOUL instructions, skills and tool settings | Snapshot-local headless Hermes v0.22.5 subset, retaining upstream Python policies and local tool helpers. [Adapter details and limits](../agent-integration.md) · [example](../../examples/hermes.yaml) |
+| OpenCode | Pure-Python Snapshot runtime, instructions, coding tools, permissions, sessions and settings | Snapshot-local `runtime/opencode_native` follows OpenCode v1.19.3's embedded prompt/processor path and provider tool envelopes; no Bun/Node/CLI dependency. [Adapter details](../agent-integration.md) · [example](../../examples/opencode.yaml) |
 
 Codex's Python core implements the documented paths from a pinned Rust baseline. It does not launch the Codex CLI, fall back to the host core, or claim complete equivalence to every upstream feature. For example, declaring rules as resources does not implement rules-based execution policy; see [capability limits](../codex.md#明确的能力边界).
 
@@ -33,13 +34,9 @@ algorithm:
 
 This fragment only illustrates role selection. Keep the rest of the destination method's example and supply both roles' credentials and endpoints.
 
-## Upcoming adapters
-
-| Harness | Status |
-| --- | --- |
-| OpenCode | Doing |
-
-These are planned integrations and are not available CLI harness choices.
+OpenCode is available as a Target and Agent Worker. Its Snapshot excludes the Bun/Node host CLI, TUI,
+server, OAuth account flows, MCP supervisor, and LSP process supervisor; benchmark execution uses the
+shared Agent/container boundary.
 
 ## Check the task environment
 

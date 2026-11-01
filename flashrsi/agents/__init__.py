@@ -6,6 +6,7 @@ from flashrsi.agents.hermes import Hermes
 from flashrsi.agents.llm import LLM
 from flashrsi.agents.miniagent import MiniAgent
 from flashrsi.agents.openclaw import OpenClaw
+from flashrsi.agents.opencode import OpenCode
 from flashrsi.agents.pi_agent import Pi, PiAgent
 
 __all__ = [
@@ -15,6 +16,7 @@ __all__ = [
     "LLM",
     "MiniAgent",
     "OpenClaw",
+    "OpenCode",
     "Pi",
     "PiAgent",
 ]
