@@ -120,7 +120,7 @@ flashrsi run \
   --algorithm skillopt \
   --benchmark searchqa \
   --agent-harness miniagent \
-  --model deepseek-v4.1-pro \
+  --model deepseek-v4-pro \
   --worker-model deepseek-v4.1-flash \
   --set agent.llm.api_key="$TARGET_API_KEY" \
   --set algorithm.worker.llm.api_key="$WORKER_API_KEY"
