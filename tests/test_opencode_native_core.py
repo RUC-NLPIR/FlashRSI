@@ -484,6 +484,36 @@ def test_opencode_compaction_tail_zero_summarizes_all_history():
     assert all(item["role"] != "user" for item in compacted)
 
 
+def test_opencode_compaction_summary_keeps_tool_attachment_metadata():
+    rendered = compaction._serialize(
+        {
+            "role": "tool",
+            "content": "Image read successfully",
+            "receipt": {
+                "ok": True,
+                "attachments": [
+                    {
+                        "mime": "image/png",
+                        "filename": "plot.png",
+                        "url": "data:image/png;base64,AA==",
+                    }
+                ],
+            },
+        }
+    )
+    assert "[Attached image/png: plot.png]" in rendered
+
+
+def test_opencode_model_tool_output_never_serializes_receipt_fallback(tmp_path):
+    rendered = loop._tool_output(
+        "custom",
+        {"ok": True, "secret": "internal", "nested": {"receipt": True}},
+        tmp_path,
+    )
+    assert rendered == "Tool completed successfully."
+    assert "internal" not in rendered
+
+
 def test_opencode_compaction_oversized_latest_turn_falls_back_to_full_summary():
     messages = [
         {"role": "user", "content": "old"},

@@ -417,3 +417,83 @@ def test_loop_event_observer_cannot_mutate_retained_trace(tmp_path, monkeypatch)
     )
     start = next(event for event in result["events"] if event["type"] == "agent_start")
     assert start["workspace"] != "mutated"
+
+def test_read_byte_cap_reports_complete_total_line_count(tmp_path):
+    path = tmp_path / "large.txt"
+    path.write_text(
+        "\n".join(f"line-{index:04d}-" + "x" * 100 for index in range(600)),
+        encoding="utf-8",
+    )
+    runner = tools.ToolRunner(tmp_path, tmp_path, policy.ToolPolicy({}, tmp_path))
+
+    result = asyncio.run(runner.execute("read", {"path": "large.txt"}))
+
+    assert result["ok"]
+    assert result["truncated"] is True
+    assert result["total_lines"] == 600
+    assert result["line_end"] < result["total_lines"]
+    assert (
+        "of 600" not in result["output"]
+    )  # byte-cap footer points to the continuation offset
+
+def test_loop_keeps_media_attachments_in_provider_transcript(tmp_path, monkeypatch):
+    calls = []
+    (tmp_path / "pixel.png").write_bytes(b"\x89PNG\r\n\x1a\n" + b"pixel")
+
+    async def fake_complete(config, messages, tool_schemas, **kwargs):
+        calls.append(messages)
+        if len(calls) == 1:
+            return models.ModelResult(
+                tool_calls=(
+                    {"id": "c1", "name": "read", "arguments": {"path": "pixel.png"}},
+                )
+            )
+        return models.ModelResult(text="done", stop_reason="stop")
+
+    monkeypatch.setattr(loop.providers, "complete", fake_complete)
+    result = asyncio.run(
+        loop.run(
+            {"llm": {"model_name": "test", "api_key": "x"}},
+            "inspect",
+            tmp_path,
+            tmp_path,
+        )
+    )
+
+    assert result["status"] == "finished"
+    tool_message = next(item for item in calls[1] if item["role"] == "tool")
+    assert tool_message["content"] == "Image read successfully"
+    assert tool_message["attachments"][0]["mime"] == "image/png"
+    persisted = session.Session(tmp_path / ".openclaw" / "session.sqlite").messages()
+    persisted_tool = next(item for item in persisted if item["role"] == "tool")
+    assert persisted_tool["content"] == "Image read successfully"
+    assert persisted_tool["receipt"]["attachments"][0]["mime"] == "image/png"
+
+def test_compaction_summary_keeps_tool_attachment_metadata():
+    rendered = compaction._serialize(
+        {
+            "role": "tool",
+            "content": "Image read successfully",
+            "receipt": {
+                "ok": True,
+                "attachments": [
+                    {
+                        "mime": "image/png",
+                        "filename": "plot.png",
+                        "url": "data:image/png;base64,AA==",
+                    }
+                ],
+            },
+        }
+    )
+    assert "[Attached image/png: plot.png]" in rendered
+
+
+def test_model_tool_output_never_serializes_receipt_fallback(tmp_path):
+    rendered = loop._tool_output(
+        "custom",
+        {"ok": True, "secret": "internal", "nested": {"receipt": True}},
+        tmp_path,
+    )
+    assert rendered == "Tool completed successfully."
+    assert "internal" not in rendered

@@ -18,6 +18,63 @@ from .session import Session
 from .tools import ToolRunner, schemas
 
 
+def _tool_output(name: str, result: Mapping[str, Any], workspace: Path) -> str:
+    """Render structured receipts as OpenClaw model-facing tool text."""
+
+    if not result.get("ok", False):
+        return f"Error: {result.get('error', 'tool execution failed')}"
+    if isinstance(result.get("output"), str):
+        return str(result["output"])
+    if name == "read":
+        path = Path(str(result.get("path", "")))
+        if not path.is_absolute():
+            path = workspace / path
+        path = path.resolve()
+        content = str(result.get("content", ""))
+        start = int(result.get("line_start", 1) or 1)
+        lines = content.splitlines()
+        numbered = "\n".join(
+            f"{start + index}: {line}" for index, line in enumerate(lines)
+        )
+        total = int(result.get("total_lines", len(lines)) or 0)
+        end = int(result.get("line_end", start + len(lines) - 1) or start)
+        footer = (
+            f"(Showing lines {start}-{end} of {total}. Use offset={end + 1} to continue.)"
+            if result.get("truncated")
+            else f"(End of file - total {total} lines)"
+        )
+        return "\n".join(
+            [
+                f"<path>{path}</path>",
+                "<type>file</type>",
+                "<content>",
+                numbered,
+                footer,
+                "</content>",
+            ]
+        )
+    if name in {"exec", "process"}:
+        return str(result.get("output", ""))
+    if name == "write":
+        return "Wrote file successfully."
+    if name == "edit":
+        return "Edit applied successfully."
+    if name == "apply_patch":
+        path = result.get("path")
+        return "Success. Updated the following files:\nM " + str(path or "")
+    if name in {"skill", "read_skill"}:
+        skill_name = str(result.get("name", ""))
+        content = str(result.get("content", ""))
+        return f'<skill_content name="{skill_name}">\n{content}\n</skill_content>'
+    if name == "memory_search":
+        return str(result.get("output", "No memory matches"))
+    if isinstance(result.get("content"), str):
+        return str(result["content"])
+    # Receipts are retained for events/session replay only. Never fall back to
+    # serializing the whole structured result into the next model message.
+    return str(result.get("message") or "Tool completed successfully.")
+
+
 def _emit(events: list[dict[str, Any]], callback, event: RuntimeEvent) -> None:
     value = event.as_dict()
     events.append(value)
@@ -71,8 +128,12 @@ async def run(
     tools = ToolRunner(workspace, snapshot_root, policy)
     session_cfg = config.get("session")
     session_cfg = session_cfg if isinstance(session_cfg, Mapping) else {}
-    persist_session = bool(session_cfg.get("persist", config.get("session_persist", True)))
-    configured_session_path = config.get("session_file") or session_cfg.get("transcript")
+    persist_session = bool(
+        session_cfg.get("persist", config.get("session_persist", True))
+    )
+    configured_session_path = config.get("session_file") or session_cfg.get(
+        "transcript"
+    )
     if configured_session_path:
         session_path = Path(configured_session_path).expanduser()
         if not session_path.is_absolute():
@@ -110,13 +171,30 @@ async def run(
             if 0 < threshold <= 1
             else max(1, int(threshold))
         )
+    preserve_recent_tokens = compaction_cfg.get("preserve_recent_tokens")
+    if isinstance(preserve_recent_tokens, bool) or not isinstance(
+        preserve_recent_tokens, (int, float)
+    ):
+        preserve_recent_tokens = None
+    elif preserve_recent_tokens > 0:
+        preserve_recent_tokens = int(preserve_recent_tokens)
+    else:
+        preserve_recent_tokens = None
+    tail_turns = compaction_cfg.get("tail_turns")
+    if isinstance(tail_turns, bool) or not isinstance(tail_turns, int):
+        tail_turns = None
+    elif tail_turns <= 0:
+        tail_turns = 0
+    prune_compaction = bool(compaction_cfg.get("prune", False))
     await _notify(
         events,
         on_event,
         RuntimeEvent(
             "agent_start",
             {
-                "session_file": str(session.path if session is not None else session_path),
+                "session_file": str(
+                    session.path if session is not None else session_path
+                ),
                 "workspace": str(workspace),
             },
         ),
@@ -128,7 +206,13 @@ async def run(
             if cancel_event.is_set():
                 raise asyncio.CancelledError
             if compaction_enabled:
-                messages = compact(messages, max_tokens=compact_limit)
+                messages = compact(
+                    messages,
+                    max_tokens=compact_limit,
+                    preserve_recent_tokens=preserve_recent_tokens,
+                    tail_turns=tail_turns,
+                    prune=prune_compaction,
+                )
             await _notify(
                 events,
                 on_event,
@@ -299,18 +383,31 @@ async def run(
                         "error": str(exc),
                         "error_type": type(exc).__name__,
                     }
-                messages.append(
-                    message("tool", tool_result, tool_call_id=call_id, name=name)
+                tool_content = _tool_output(name, tool_result, workspace)
+                tool_message = message(
+                    "tool",
+                    tool_content,
+                    tool_call_id=call_id,
+                    name=name,
                 )
+                # Keep media attachments in the provider-neutral transcript.
+                # The wire adapters decide whether to embed them in a native
+                # tool result or inject the upstream synthetic user message.
+                if isinstance(tool_result.get("attachments"), list):
+                    tool_message["attachments"] = copy.deepcopy(
+                        tool_result["attachments"]
+                    )
+                messages.append(tool_message)
                 # Persist each result associated by its call id.  The
                 # assistant envelope above is recorded once even when a turn
                 # contains several calls.
                 if session is not None:
                     session.append(
                         "tool",
-                        tool_result,
+                        tool_content,
                         tool_call_id=call_id,
                         name=name,
+                        receipt=tool_result,
                     )
                 await _notify(
                     events,

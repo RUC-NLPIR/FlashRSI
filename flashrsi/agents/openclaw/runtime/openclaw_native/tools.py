@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import hashlib
+import mimetypes
 import os
 import re
 import sqlite3
@@ -15,6 +17,68 @@ from typing import Any
 
 from .policy import ToolPolicy
 from .resources import load as load_resources
+
+_READ_DEFAULT_LIMIT = 2000
+_READ_MAX_LINE_LENGTH = 2000
+_READ_MAX_BYTES = 50 * 1024
+_READ_BINARY_EXTENSIONS = {
+    ".zip",
+    ".tar",
+    ".gz",
+    ".exe",
+    ".dll",
+    ".so",
+    ".class",
+    ".jar",
+    ".war",
+    ".7z",
+    ".doc",
+    ".docx",
+    ".xls",
+    ".xlsx",
+    ".ppt",
+    ".pptx",
+    ".odt",
+    ".ods",
+    ".odp",
+    ".bin",
+    ".dat",
+    ".obj",
+    ".o",
+    ".a",
+    ".lib",
+    ".wasm",
+    ".pyc",
+    ".pyo",
+}
+_READ_IMAGE_MIMES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
+
+
+def _read_mime(path: Path, sample: bytes) -> str:
+    if sample.startswith(b"%PDF-") or path.suffix.lower() == ".pdf":
+        return "application/pdf"
+    if sample.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "image/png"
+    if sample.startswith(b"\xff\xd8\xff"):
+        return "image/jpeg"
+    if sample.startswith((b"GIF87a", b"GIF89a")):
+        return "image/gif"
+    if sample.startswith(b"RIFF") and sample[8:12] == b"WEBP":
+        return "image/webp"
+    return mimetypes.guess_type(path.name)[0] or ""
+
+
+def _read_is_binary(path: Path, sample: bytes) -> bool:
+    if path.suffix.lower() in _READ_BINARY_EXTENSIONS:
+        return True
+    if not sample:
+        return False
+    if b"\x00" in sample:
+        return True
+    non_printable = sum(
+        1 for value in sample if value < 9 or (value > 13 and value < 32)
+    )
+    return non_printable / len(sample) > 0.3
 
 
 def schemas() -> list[dict[str, Any]]:
@@ -71,70 +135,316 @@ class ToolRunner:
     def _read(self, args: dict[str, Any]) -> dict[str, Any]:
         try:
             path = self.policy.path(args["path"])
-            text = path.read_text(encoding="utf-8")
+            if not path.exists():
+                return _error("read", f"File not found: {path}", error_type="not_found")
+            if path.is_dir():
+                raw_offset = args.get("offset")
+                raw_limit = args.get("limit", _READ_DEFAULT_LIMIT)
+                offset = 1 if raw_offset in (None, 0) else raw_offset
+                limit = _READ_DEFAULT_LIMIT if raw_limit is None else raw_limit
+                if (
+                    isinstance(offset, bool)
+                    or not isinstance(offset, int)
+                    or offset < 0
+                    or isinstance(limit, bool)
+                    or not isinstance(limit, int)
+                    or limit < 0
+                ):
+                    return _error(
+                        "read",
+                        "offset and limit must be non-negative integers",
+                        error_type="invalid_arguments",
+                    )
+                entries = sorted(
+                    item.name + ("/" if item.is_dir() else "")
+                    for item in path.iterdir()
+                )
+                start = max(offset - 1, 0)
+                selected = entries[start : start + limit]
+                truncated = start + len(selected) < len(entries)
+                output = "\n".join(
+                    [
+                        f"<path>{path}</path>",
+                        "<type>directory</type>",
+                        "<entries>",
+                        "\n".join(selected),
+                        f"(Showing {len(selected)} of {len(entries)} entries. Use offset parameter to read beyond entry {offset + len(selected)})"
+                        if truncated
+                        else f"({len(entries)} entries)",
+                        "</entries>",
+                    ]
+                )
+                return {
+                    "ok": True,
+                    "tool": "read",
+                    "path": _relative(path, self.workspace),
+                    "directory": True,
+                    "entries": selected,
+                    "total_entries": len(entries),
+                    "offset": offset,
+                    "truncated": truncated,
+                    "content": output,
+                    "output": output,
+                }
+            raw_bytes = path.read_bytes()
         except KeyError:
-            return _error("read", "missing required argument: path", error_type="invalid_arguments")
+            return _error(
+                "read",
+                "missing required argument: path",
+                error_type="invalid_arguments",
+            )
         except PermissionError:
             raise
-        except (OSError, UnicodeError) as exc:
+        except OSError as exc:
             return _error("read", str(exc), error_type=type(exc).__name__)
-        try:
-            offset = args.get("offset")
-            if offset is not None and (isinstance(offset, bool) or not isinstance(offset, int)):
-                return _error("read", "offset must be an integer", error_type="invalid_arguments")
-            start = max((offset - 1) if offset else 0, 0)
-            limit = args.get("limit")
-            if limit is not None and (isinstance(limit, bool) or not isinstance(limit, int)):
-                return _error("read", "limit must be an integer", error_type="invalid_arguments")
-            if limit is not None and limit < 0:
-                return _error("read", "limit must be non-negative", error_type="invalid_arguments")
-            lines = text.split("\n")
-            if start >= len(lines):
-                return _error("read", f"offset {offset} is beyond end of file", error_type="invalid_arguments")
-            end = start + limit if limit is not None else len(lines)
-        except (TypeError, ValueError):
-            return _error("read", "offset and limit must be integers", error_type="invalid_arguments")
-        return {"ok": True, "tool": "read", "path": _relative(path, self.workspace), "content": "\n".join(lines[start:end]), "line_start": start + 1, "line_end": min(end, len(lines)), "total_lines": len(lines)}
+        mime = _read_mime(path, raw_bytes[:4096])
+        if mime in _READ_IMAGE_MIMES or mime == "application/pdf":
+            output = (
+                "PDF read successfully"
+                if mime == "application/pdf"
+                else "Image read successfully"
+            )
+            return {
+                "ok": True,
+                "tool": "read",
+                "path": _relative(path, self.workspace),
+                "content": output,
+                "output": output,
+                "attachments": [
+                    {
+                        "type": "file",
+                        "mime": mime,
+                        "url": f"data:{mime};base64,{base64.b64encode(raw_bytes).decode('ascii')}",
+                    }
+                ],
+            }
+        if _read_is_binary(path, raw_bytes[:4096]):
+            return _error(
+                "read", f"Cannot read binary file: {path}", error_type="binary_file"
+            )
+        text = raw_bytes.decode("utf-8-sig", errors="replace")
+        raw_offset = args.get("offset")
+        raw_limit = args.get("limit", _READ_DEFAULT_LIMIT)
+        if raw_offset is None:
+            offset = 1
+        elif (
+            isinstance(raw_offset, bool)
+            or not isinstance(raw_offset, int)
+            or raw_offset < 0
+        ):
+            return _error(
+                "read",
+                "offset must be a non-negative integer",
+                error_type="invalid_arguments",
+            )
+        else:
+            offset = raw_offset or 1
+        if raw_limit is None:
+            limit = _READ_DEFAULT_LIMIT
+        elif (
+            isinstance(raw_limit, bool)
+            or not isinstance(raw_limit, int)
+            or raw_limit < 0
+        ):
+            return _error(
+                "read",
+                "limit must be a non-negative integer",
+                error_type="invalid_arguments",
+            )
+        else:
+            limit = raw_limit
+        lines = text.splitlines()
+        selected: list[str] = []
+        byte_count = 0
+        more = False
+        cut = False
+        # Count the complete file independently from the bounded model-facing
+        # selection.  Once the 50 KB cap is reached we stop materializing
+        # content, but OpenClaw still reports the real total line count so a
+        # caller can continue with a reliable offset.
+        count = len(lines)
+        start = offset - 1
+        for line_index, source_line in enumerate(lines):
+            line_number = line_index + 1
+            if line_number <= start:
+                continue
+            if len(selected) >= limit:
+                more = True
+                continue
+            line = source_line
+            if len(line) > _READ_MAX_LINE_LENGTH:
+                line = (
+                    line[:_READ_MAX_LINE_LENGTH]
+                    + f"... (line truncated to {_READ_MAX_LINE_LENGTH} chars)"
+                )
+            size = len(line.encode("utf-8")) + (1 if selected else 0)
+            if byte_count + size > _READ_MAX_BYTES:
+                cut = True
+                more = True
+                break
+            selected.append(line)
+            byte_count += size
+        if count < offset and not (count == 0 and offset == 1):
+            return _error(
+                "read",
+                f"Offset {offset} is out of range for this file ({count} lines)",
+                error_type="range_error",
+            )
+        last = offset + len(selected) - 1
+        if cut:
+            suffix = f"(Output capped at 50 KB. Showing lines {offset}-{last}. Use offset={last + 1} to continue.)"
+        elif more:
+            suffix = f"(Showing lines {offset}-{last} of {count}. Use offset={last + 1} to continue.)"
+        else:
+            suffix = f"(End of file - total {count} lines)"
+        output = "\n".join(
+            [
+                f"<path>{path}</path>",
+                "<type>file</type>",
+                "<content>",
+                "\n".join(
+                    f"{index + offset}: {line}" for index, line in enumerate(selected)
+                ),
+                suffix,
+                "</content>",
+            ]
+        )
+        content = "\n".join(selected)
+        return {
+            "ok": True,
+            "tool": "read",
+            "path": _relative(path, self.workspace),
+            "content": content,
+            "output": output,
+            "line_start": offset,
+            "line_end": last,
+            "total_lines": count,
+            "truncated": more or cut,
+        }
 
     def _write(self, args: dict[str, Any]) -> dict[str, Any]:
         try:
             path = self.policy.path(args["path"])
             content = str(args["content"])
         except KeyError as exc:
-            return _error("write", f"missing required argument: {exc.args[0]}", error_type="invalid_arguments")
+            return _error(
+                "write",
+                f"missing required argument: {exc.args[0]}",
+                error_type="invalid_arguments",
+            )
         try:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(content, encoding="utf-8")
         except PermissionError:
             raise
         except (OSError, UnicodeError) as exc:
-            return _error("write", str(exc), error_type=type(exc).__name__, path=_relative(path, self.workspace))
-        return {"ok": True, "tool": "write", "path": _relative(path, self.workspace), "bytes": len(content.encode("utf-8")), "sha256": hashlib.sha256(content.encode("utf-8")).hexdigest()}
+            return _error(
+                "write",
+                str(exc),
+                error_type=type(exc).__name__,
+                path=_relative(path, self.workspace),
+            )
+        return {
+            "ok": True,
+            "tool": "write",
+            "path": _relative(path, self.workspace),
+            "bytes": len(content.encode("utf-8")),
+            "sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+            "output": "Wrote file successfully.",
+        }
 
     def _edit(self, args: dict[str, Any]) -> dict[str, Any]:
         try:
             path = self.policy.path(args["path"])
-            before = path.read_text(encoding="utf-8")
             old_value = args.get("oldText", args.get("old"))
             new_value = args.get("newText", args.get("new"))
             if not isinstance(old_value, str) or not isinstance(new_value, str):
                 raise KeyError("oldText/newText")
-            old, new = old_value, new_value
         except KeyError as exc:
-            return _error("edit", f"missing required argument: {exc.args[0]}", error_type="invalid_arguments")
+            return _error(
+                "edit",
+                f"missing required argument: {exc.args[0]}",
+                error_type="invalid_arguments",
+            )
+        except PermissionError:
+            raise
+        if old_value == new_value:
+            return _error(
+                "edit",
+                "No changes to apply: oldString and newString are identical.",
+                error_type="no_changes",
+                path=_relative(path, self.workspace),
+            )
+        if old_value == "":
+            if path.exists():
+                return _error(
+                    "edit",
+                    "oldString cannot be empty when editing an existing file. Provide the exact text to replace, or use write for an intentional full-file replacement.",
+                    error_type="invalid_arguments",
+                    path=_relative(path, self.workspace),
+                )
+            before = ""
+            after = new_value
+            count = 1
+            source_bom = False
+        else:
+            if not path.exists():
+                return _error(
+                    "edit",
+                    f"File {path} not found",
+                    error_type="not_found",
+                    path=_relative(path, self.workspace),
+                )
+            try:
+                raw = path.read_bytes()
+                source_bom = raw.startswith(b"\xef\xbb\xbf")
+                before = raw.decode("utf-8-sig")
+            except PermissionError:
+                raise
+            except (OSError, UnicodeError) as exc:
+                return _error("edit", str(exc), error_type=type(exc).__name__)
+            ending = "\r\n" if "\r\n" in before else "\n"
+            normalized_before = before.replace("\r\n", "\n")
+            old = old_value.replace("\r\n", "\n")
+            new = new_value.replace("\r\n", "\n")
+            count = normalized_before.count(old)
+            replace_all = bool(args.get("replaceAll", False))
+            if count != 1 and not (replace_all and count > 0):
+                return _error(
+                    "edit",
+                    f"expected one match, found {count}",
+                    error_type="match_error",
+                    path=_relative(path, self.workspace),
+                    matches=count,
+                )
+            after = normalized_before.replace(old, new, -1 if replace_all else 1)
+            if ending == "\r\n":
+                after = after.replace("\n", "\r\n")
+        if after.startswith("\ufeff"):
+            source_bom = True
+            after = after[1:]
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(
+                (b"\xef\xbb\xbf" if source_bom else b"") + after.encode("utf-8")
+            )
         except PermissionError:
             raise
         except (OSError, UnicodeError) as exc:
-            return _error("edit", str(exc), error_type=type(exc).__name__)
-        count = before.count(old)
-        if count != 1:
-            return _error("edit", f"expected one match, found {count}", error_type="match_error", path=_relative(path, self.workspace), matches=count)
-        after = before.replace(old, new)
-        try:
-            path.write_text(after, encoding="utf-8")
-        except OSError as exc:
-            return _error("edit", str(exc), error_type=type(exc).__name__, path=_relative(path, self.workspace))
-        return {"ok": True, "tool": "edit", "path": _relative(path, self.workspace), "replacements": 1, "sha256": hashlib.sha256(after.encode("utf-8")).hexdigest()}
+            return _error(
+                "edit",
+                str(exc),
+                error_type=type(exc).__name__,
+                path=_relative(path, self.workspace),
+            )
+        return {
+            "ok": True,
+            "tool": "edit",
+            "path": _relative(path, self.workspace),
+            "replacements": count,
+            "sha256": hashlib.sha256(after.encode("utf-8")).hexdigest(),
+            "output": "Edit applied successfully.",
+        }
 
     def _patch(self, args: dict[str, Any]) -> dict[str, Any]:
         patch = str(args.get("patch", ""))
@@ -142,13 +452,19 @@ class ToolRunner:
         old_header = next((line for line in lines if line.startswith("--- ")), None)
         new_header = next((line for line in lines if line.startswith("+++ ")), None)
         if old_header is None or new_header is None:
-            return _error("apply_patch", "patch must contain --- and +++ file headers", error_type="invalid_patch")
+            return _error(
+                "apply_patch",
+                "patch must contain --- and +++ file headers",
+                error_type="invalid_patch",
+            )
         old_name = old_header[4:].split("\t", 1)[0].strip()
         new_name = new_header[4:].split("\t", 1)[0].strip()
         target_name = new_name if new_name != "/dev/null" else old_name
         target_name = target_name.removeprefix("a/").removeprefix("b/")
         if target_name == "/dev/null" or not target_name:
-            return _error("apply_patch", "patch has no target", error_type="invalid_patch")
+            return _error(
+                "apply_patch", "patch has no target", error_type="invalid_patch"
+            )
         try:
             path = self.policy.path(target_name)
             exists = path.exists()
@@ -176,17 +492,28 @@ class ToolRunner:
                 index += 1
             hunks.append((old_start, old_count, new_start, new_count, body))
         if not hunks:
-            return _error("apply_patch", "patch contains no hunks", error_type="invalid_patch")
+            return _error(
+                "apply_patch", "patch contains no hunks", error_type="invalid_patch"
+            )
         offset = 0
         output = list(source)
         for old_start, old_count, _new_start, new_count, body in hunks:
             removed = [line[1:] for line in body if line[:1] in (" ", "-")]
             replacement = [line[1:] for line in body if line[:1] in (" ", "+")]
             if len(removed) != old_count or len(replacement) != new_count:
-                return _error("apply_patch", "hunk line counts do not match header", error_type="invalid_patch")
+                return _error(
+                    "apply_patch",
+                    "hunk line counts do not match header",
+                    error_type="invalid_patch",
+                )
             pos = max(0, old_start - 1 + offset)
             if output[pos : pos + len(removed)] != removed:
-                return _error("apply_patch", f"patch context not found at line {old_start}", error_type="context_error", path=_relative(path, self.workspace))
+                return _error(
+                    "apply_patch",
+                    f"patch context not found at line {old_start}",
+                    error_type="context_error",
+                    path=_relative(path, self.workspace),
+                )
             output[pos : pos + len(removed)] = replacement
             offset += len(replacement) - len(removed)
         after = "".join(output)
@@ -200,8 +527,24 @@ class ToolRunner:
                 path.write_text(after, encoding="utf-8")
                 changed = before != after
         except OSError as exc:
-            return _error("apply_patch", str(exc), error_type=type(exc).__name__, path=_relative(path, self.workspace))
-        return {"ok": True, "tool": "apply_patch", "path": _relative(path, self.workspace), "changed": changed, "hunks": len(hunks), "sha256": hashlib.sha256(after.encode("utf-8")).hexdigest() if new_name != "/dev/null" else None}
+            return _error(
+                "apply_patch",
+                str(exc),
+                error_type=type(exc).__name__,
+                path=_relative(path, self.workspace),
+            )
+        return {
+            "ok": True,
+            "tool": "apply_patch",
+            "path": _relative(path, self.workspace),
+            "changed": changed,
+            "hunks": len(hunks),
+            "sha256": hashlib.sha256(after.encode("utf-8")).hexdigest()
+            if new_name != "/dev/null"
+            else None,
+            "output": "Success. Updated the following files:\nM "
+            + _relative(path, self.workspace),
+        }
 
     async def _exec(self, args: dict[str, Any]) -> dict[str, Any]:
         try:
@@ -271,20 +614,47 @@ class ToolRunner:
                         "output": self._process_output.get(session_id, "")[-2000:],
                     }
                 )
-            return {"ok": True, "tool": "process", "action": action, "sessions": rows}
+            output = "No active processes"
+            if rows:
+                rendered = []
+                for row in rows:
+                    state = (
+                        "running" if row["running"] else f"exited ({row['returncode']})"
+                    )
+                    rendered.append(f"{row['sessionId']}: {state}")
+                output = "\n".join(rendered)
+            return {
+                "ok": True,
+                "tool": "process",
+                "action": action,
+                "sessions": rows,
+                "output": output,
+            }
         if action == "run":
             command = str(args.get("command", "")).strip()
             if not command:
-                return _error("process", "command is required", error_type="invalid_arguments")
+                return _error(
+                    "process", "command is required", error_type="invalid_arguments"
+                )
             try:
                 timeout = float(args.get("timeout", 0))
             except (TypeError, ValueError):
-                return _error("process", "timeout must be a number", error_type="invalid_arguments")
+                return _error(
+                    "process",
+                    "timeout must be a number",
+                    error_type="invalid_arguments",
+                )
             if timeout < 0:
-                return _error("process", "timeout must be non-negative", error_type="invalid_arguments")
+                return _error(
+                    "process",
+                    "timeout must be non-negative",
+                    error_type="invalid_arguments",
+                )
             extra_env = args.get("env") or {}
             if not isinstance(extra_env, Mapping):
-                return _error("process", "env must be an object", error_type="invalid_arguments")
+                return _error(
+                    "process", "env must be an object", error_type="invalid_arguments"
+                )
             try:
                 proc = await asyncio.create_subprocess_shell(
                     command,
@@ -292,7 +662,10 @@ class ToolRunner:
                     stdin=asyncio.subprocess.PIPE,
                     stdout=asyncio.subprocess.PIPE,
                     stderr=asyncio.subprocess.STDOUT,
-                    env={**os.environ, **{str(key): str(value) for key, value in extra_env.items()}},
+                    env={
+                        **os.environ,
+                        **{str(key): str(value) for key, value in extra_env.items()},
+                    },
                 )
             except OSError as exc:
                 return _error("process", str(exc), error_type=type(exc).__name__)
@@ -326,7 +699,11 @@ class ToolRunner:
             try:
                 timeout = max(0.0, float(args.get("timeout", 0)))
             except (TypeError, ValueError):
-                return _error("process", "timeout must be a number", error_type="invalid_arguments")
+                return _error(
+                    "process",
+                    "timeout must be a number",
+                    error_type="invalid_arguments",
+                )
             if not task.done() and timeout:
                 try:
                     await asyncio.wait_for(asyncio.shield(task), timeout)
@@ -350,7 +727,11 @@ class ToolRunner:
                 offset = max(0, int(args.get("offset", 0)))
                 limit = max(0, int(args.get("limit", 2000)))
             except (TypeError, ValueError):
-                return _error("process", "offset and limit must be integers", error_type="invalid_arguments")
+                return _error(
+                    "process",
+                    "offset and limit must be integers",
+                    error_type="invalid_arguments",
+                )
             output = self._process_output.get(session_id, "")
             return {
                 "ok": True,
@@ -361,11 +742,14 @@ class ToolRunner:
                 "content": output[offset : offset + limit],
                 "offset": offset,
                 "total": len(output),
+                "output": output[offset : offset + limit],
             }
         if action == "write":
             data = args.get("data", "")
             if not isinstance(data, str):
-                return _error("process", "data must be a string", error_type="invalid_arguments")
+                return _error(
+                    "process", "data must be a string", error_type="invalid_arguments"
+                )
             if proc.stdin is None or proc.returncode is not None:
                 return _error("process", "process stdin is closed", error_type="closed")
             try:
@@ -382,6 +766,7 @@ class ToolRunner:
                 "action": action,
                 "sessionId": session_id,
                 "bytes": len(data.encode("utf-8")),
+                "output": f"Wrote {len(data.encode('utf-8'))} bytes to process {session_id}.",
             }
         if action == "kill":
             if not task.done():
@@ -409,8 +794,11 @@ class ToolRunner:
                 "action": action,
                 "sessionId": session_id,
                 "running": not task.done(),
+                "output": f"Cleared output for process {session_id}.",
             }
-        return _error("process", f"unknown action: {action}", error_type="invalid_arguments")
+        return _error(
+            "process", f"unknown action: {action}", error_type="invalid_arguments"
+        )
 
     async def _collect_process(self, session_id: str) -> None:
         proc = self._processes[session_id]
@@ -434,17 +822,35 @@ class ToolRunner:
 
     def _skill(self, args: dict[str, Any]) -> dict[str, Any]:
         name = str(args.get("name", ""))
-        if not name or Path(name).is_absolute() or ".." in name.replace("\\", "/").split("/"):
-            return _error("read_skill", "skill name must be a relative name", error_type="invalid_arguments")
+        if (
+            not name
+            or Path(name).is_absolute()
+            or ".." in name.replace("\\", "/").split("/")
+        ):
+            return _error(
+                "read_skill",
+                "skill name must be a relative name",
+                error_type="invalid_arguments",
+            )
         loaded = load_resources(self.root, self.workspace, self.policy.config)
         skill = loaded.skill(name)
         if skill is None:
-            return _error("read_skill", f"skill not found: {name}", error_type="not_found")
+            return _error(
+                "read_skill", f"skill not found: {name}", error_type="not_found"
+            )
         try:
             content = skill.path.read_text(encoding="utf-8-sig", errors="replace")
         except OSError as exc:
             return _error("read_skill", str(exc), error_type=type(exc).__name__)
-        return {"ok": True, "tool": "read_skill", "name": skill.name, "path": _relative(skill.path, self.workspace), "content": content, "sha256": skill.digest}
+        return {
+            "ok": True,
+            "tool": "read_skill",
+            "name": skill.name,
+            "path": _relative(skill.path, self.workspace),
+            "content": content,
+            "sha256": skill.digest,
+            "output": f'<skill_content name="{skill.name}">\n{content}\n</skill_content>',
+        }
 
     def _memory(self, args: dict[str, Any]) -> dict[str, Any]:
         query = str(args.get("query", "")).strip()
@@ -452,7 +858,11 @@ class ToolRunner:
             offset = max(int(args.get("offset", 0)), 0)
             limit = max(int(args.get("limit", 20)), 0)
         except (TypeError, ValueError):
-            return _error("memory_search", "offset and limit must be integers", error_type="invalid_arguments")
+            return _error(
+                "memory_search",
+                "offset and limit must be integers",
+                error_type="invalid_arguments",
+            )
         memory_cfg = self.policy.config.get("memory")
         memory_cfg = memory_cfg if isinstance(memory_cfg, Mapping) else {}
         if memory_cfg.get("enabled") is False:
@@ -464,6 +874,7 @@ class ToolRunner:
                 "limit": limit,
                 "total": 0,
                 "results": [],
+                "output": "Memory search is disabled",
             }
         needle = query.casefold()
         hits: list[dict[str, Any]] = []
@@ -502,11 +913,25 @@ class ToolRunner:
                 continue
             if needle and needle not in text.casefold():
                 continue
-            line = next((i for i, value in enumerate(text.splitlines(), 1) if not needle or needle in value.casefold()), 1)
+            line = next(
+                (
+                    i
+                    for i, value in enumerate(text.splitlines(), 1)
+                    if not needle or needle in value.casefold()
+                ),
+                1,
+            )
             lines = text.splitlines()
             start = max(line - 2, 0)
             end = min(start + 5, len(lines))
-            hits.append({"path": _relative(path, self.workspace), "line": line, "snippet": "\n".join(lines[start:end]), "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()})
+            hits.append(
+                {
+                    "path": _relative(path, self.workspace),
+                    "line": line,
+                    "snippet": "\n".join(lines[start:end]),
+                    "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                }
+            )
         # Session memory indexes are optional. Search text-bearing columns while
         # tolerating unrelated SQLite files and schema versions.
         for candidate in sorted(self.workspace.glob("**/*.sqlite")):
@@ -520,18 +945,61 @@ class ToolRunner:
                 continue
             try:
                 with sqlite3.connect(dbpath) as db:
-                    tables = [r[0] for r in db.execute("select name from sqlite_master where type='table'")]
+                    tables = [
+                        r[0]
+                        for r in db.execute(
+                            "select name from sqlite_master where type='table'"
+                        )
+                    ]
                     for table in tables:
-                        cols = [r[1] for r in db.execute(f'pragma table_info("{table.replace(chr(34), chr(34) * 2)}")')]
-                        text_col = next((c for c in ("content", "text", "body", "value") if c in cols), None)
+                        cols = [
+                            r[1]
+                            for r in db.execute(
+                                f'pragma table_info("{table.replace(chr(34), chr(34) * 2)}")'
+                            )
+                        ]
+                        text_col = next(
+                            (
+                                c
+                                for c in ("content", "text", "body", "value")
+                                if c in cols
+                            ),
+                            None,
+                        )
                         if not text_col:
                             continue
-                        rows = db.execute(f'select "{text_col.replace(chr(34), chr(34) * 2)}" from "{table.replace(chr(34), chr(34) * 2)}"').fetchall()
+                        rows = db.execute(
+                            f'select "{text_col.replace(chr(34), chr(34) * 2)}" from "{table.replace(chr(34), chr(34) * 2)}"'
+                        ).fetchall()
                         for (value,) in rows:
                             value = str(value or "")
                             if needle and needle not in value.casefold():
                                 continue
-                            hits.append({"path": _relative(dbpath, self.workspace), "table": table, "snippet": value[:1000], "sha256": hashlib.sha256(value.encode("utf-8")).hexdigest()})
+                            hits.append(
+                                {
+                                    "path": _relative(dbpath, self.workspace),
+                                    "table": table,
+                                    "snippet": value[:1000],
+                                    "sha256": hashlib.sha256(
+                                        value.encode("utf-8")
+                                    ).hexdigest(),
+                                }
+                            )
             except (OSError, sqlite3.Error):
                 continue
-        return {"ok": True, "tool": "memory_search", "query": query, "offset": offset, "limit": limit, "total": len(hits), "results": hits[offset : offset + limit]}
+        rendered = []
+        for hit in hits[offset : offset + limit]:
+            location = str(hit.get("path", ""))
+            if hit.get("line"):
+                location += f":{hit['line']}"
+            rendered.append(f"{location}\n{hit.get('snippet', '')}")
+        return {
+            "ok": True,
+            "tool": "memory_search",
+            "query": query,
+            "offset": offset,
+            "limit": limit,
+            "total": len(hits),
+            "results": hits[offset : offset + limit],
+            "output": "\n\n".join(rendered) if rendered else "No memory matches",
+        }

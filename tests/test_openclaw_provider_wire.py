@@ -319,3 +319,71 @@ def test_responses_sse_does_not_duplicate_call_in_completed_output():
 
     result = asyncio.run(call())
     assert result.tool_calls == ({"id": "call1", "name": "read", "arguments": {"path": "a"}},)
+
+def test_chat_wire_separates_tool_text_and_media_attachments():
+    messages = [
+        {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+                {"id": "c1", "name": "read", "arguments": {"path": "pixel.png"}}
+            ],
+        },
+        {
+            "role": "tool",
+            "content": "Image read successfully",
+            "tool_call_id": "c1",
+            "name": "read",
+            "receipt": {
+                "ok": True,
+                "attachments": [
+                    {"mime": "image/png", "url": "data:image/png;base64,AAAA"}
+                ],
+            },
+        },
+    ]
+
+    wire = providers._chat_messages(messages)
+
+    assert wire[1] == {
+        "role": "tool",
+        "content": "Image read successfully",
+        "tool_call_id": "c1",
+    }
+    media = wire[2]
+    assert media["role"] == "user"
+    assert media["content"][1] == {
+        "type": "image_url",
+        "image_url": {"url": "data:image/png;base64,AAAA"},
+    }
+    assert "receipt" not in str(wire)
+
+def test_anthropic_and_responses_wire_preserve_media_types():
+    messages = [
+        {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [{"id": "c1", "name": "read", "arguments": {}}],
+        },
+        {
+            "role": "tool",
+            "content": "Read complete",
+            "tool_call_id": "c1",
+            "attachments": [
+                {"mime": "image/png", "url": "data:image/png;base64,AAAA"},
+                {
+                    "mime": "application/pdf",
+                    "url": "data:application/pdf;base64,JVBERi0=",
+                },
+            ],
+        },
+    ]
+
+    _system, anthropic = providers._anthropic_messages(messages)
+    block = anthropic[1]["content"][0]
+    assert block["type"] == "tool_result"
+    assert [part["type"] for part in block["content"]] == ["text", "image", "document"]
+    responses = providers._responses_input(messages)
+    assert responses[1]["type"] == "function_call_output"
+    assert responses[2]["content"][1]["type"] == "input_image"
+    assert responses[2]["content"][2]["type"] == "input_file"

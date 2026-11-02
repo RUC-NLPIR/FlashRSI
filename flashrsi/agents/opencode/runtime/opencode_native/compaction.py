@@ -64,13 +64,15 @@ def _serialize(item: dict[str, Any]) -> str:
         if isinstance(receipt, dict) and not receipt.get("ok", True):
             error = str(receipt.get("error", value))
             return f"[Tool error]: {error}" if error else ""
-        if isinstance(receipt, dict):
-            attachments = receipt.get("attachments")
+        if isinstance(receipt, dict) or isinstance(item.get("attachments"), list):
+            attachments = item.get("attachments")
+            if not isinstance(attachments, list):
+                attachments = receipt.get("attachments")
             if isinstance(attachments, list):
                 labels = [
-                    f"[Attached {item.get('mime')}: {item.get('filename', 'file')}]"
-                    for item in attachments
-                    if isinstance(item, dict) and item.get("mime")
+                    f"[Attached {attachment.get('mime')}: {attachment.get('filename', 'file')}]"
+                    for attachment in attachments
+                    if isinstance(attachment, dict) and attachment.get("mime")
                 ]
                 if labels:
                     value = "\n".join([value, *labels]) if value else "\n".join(labels)

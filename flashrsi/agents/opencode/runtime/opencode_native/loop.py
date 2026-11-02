@@ -166,7 +166,9 @@ def _tool_output(name: str, result: Mapping[str, Any], workspace: Path) -> str:
         return str(result["content"])
     if isinstance(result.get("output"), str):
         return str(result["output"])
-    return json.dumps(dict(result), ensure_ascii=False, default=str)
+    # Receipts are retained for events/session replay only. Never fall back to
+    # serializing the whole structured result into the next model message.
+    return str(result.get("message") or "Tool completed successfully.")
 
 
 def _emit(events: list[dict[str, Any]], callback, event: RuntimeEvent) -> None:

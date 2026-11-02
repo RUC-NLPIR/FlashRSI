@@ -106,7 +106,11 @@ def _json_args(value: Any) -> str:
     if isinstance(value, str):
         return value
     try:
-        return json.dumps(value if value is not None else {}, ensure_ascii=False, separators=(",", ":"))
+        return json.dumps(
+            value if value is not None else {},
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
     except (TypeError, ValueError):
         return "{}"
 
@@ -121,6 +125,37 @@ def _object_args(value: Any) -> dict[str, Any]:
             return {}
         return dict(parsed) if isinstance(parsed, Mapping) else {}
     return {}
+
+
+def _attachments(original: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """Return validated data URL attachments from a local tool receipt."""
+
+    value = original.get("attachments")
+    if not isinstance(value, list):
+        receipt = original.get("receipt")
+        value = receipt.get("attachments") if isinstance(receipt, Mapping) else None
+    if not isinstance(value, list):
+        return []
+    return [
+        item
+        for item in value
+        if isinstance(item, Mapping)
+        and str(item.get("url", "")).startswith("data:")
+        and "," in str(item.get("url", ""))
+    ]
+
+
+def _data_attachment(attachment: Mapping[str, Any]) -> tuple[str, str, str] | None:
+    url = str(attachment.get("url", ""))
+    if not url.startswith("data:") or "," not in url:
+        return None
+    head, data = url.split(",", 1)
+    mime = str(
+        attachment.get("mime")
+        or head[5:].split(";", 1)[0]
+        or "application/octet-stream"
+    )
+    return mime, url, data
 
 
 def _tool_schema(tools: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -161,7 +196,7 @@ def _normal_call(call: Mapping[str, Any]) -> dict[str, Any]:
     except (json.JSONDecodeError, TypeError):
         args = {}
     return {
-        "id": str(call.get("id") or call.get("call_id") or "call"),
+        "id": str(call.get("call_id") or call.get("id") or "call"),
         "name": str(fn.get("name", call.get("name", ""))),
         "arguments": args if isinstance(args, Mapping) else {},
     }
@@ -185,21 +220,80 @@ def _chat_messages(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Translate provider-neutral tool calls to Chat Completions messages."""
 
     out: list[dict[str, Any]] = []
+    pending_media: list[Mapping[str, Any]] = []
+
+    def flush_media() -> None:
+        if not pending_media:
+            return
+        blocks: list[dict[str, Any]] = [
+            {"type": "text", "text": "Attached media from tool result:"}
+        ]
+        for attachment in pending_media:
+            parsed = _data_attachment(attachment)
+            if parsed is None:
+                continue
+            mime, url, _data = parsed
+            if mime.startswith("image/"):
+                blocks.append({"type": "image_url", "image_url": {"url": url}})
+            else:
+                blocks.append(
+                    {
+                        "type": "file",
+                        "file": {
+                            "file_data": url,
+                            "filename": str(attachment.get("filename") or "attachment"),
+                        },
+                    }
+                )
+        if len(blocks) > 1:
+            out.append({"role": "user", "content": blocks})
+        pending_media.clear()
+
     for original in messages:
-        item = dict(original)
-        calls = item.pop("tool_calls", None)
-        role = item.get("role")
+        role = str(original.get("role", "user"))
+        if role != "tool":
+            flush_media()
+        content = original.get("content", "")
+        calls = original.get("tool_calls") or []
         if calls:
-            item["tool_calls"] = [{"id": str(call.get("id") or "call"), "type": "function", "function": {"name": str(call.get("name", "")), "arguments": _json_args(call.get("arguments", {}))}} for call in calls]
-            item["content"] = item.get("content") or None
-        if role == "tool":
-            value = item.get("content", "")
-            item["content"] = value if isinstance(value, str) else json.dumps(value, ensure_ascii=False)
+            item = {
+                "role": role,
+                "content": content or None,
+                "tool_calls": [
+                    {
+                        "id": str(call.get("id") or "call"),
+                        "type": "function",
+                        "function": {
+                            "name": str(call.get("name", "")),
+                            "arguments": _json_args(call.get("arguments", {})),
+                        },
+                    }
+                    for call in calls
+                ],
+            }
+        elif role == "tool":
+            value = (
+                content
+                if isinstance(content, str)
+                else json.dumps(content, ensure_ascii=False)
+            )
+            item = {
+                "role": "tool",
+                "content": value,
+                "tool_call_id": str(original.get("tool_call_id") or "call"),
+            }
+        else:
+            item = {"role": role, "content": content}
         out.append(item)
+        if role == "tool":
+            pending_media.extend(_attachments(original))
+    flush_media()
     return out
 
 
-def _anthropic_messages(messages: list[dict[str, Any]]) -> tuple[str, list[dict[str, Any]]]:
+def _anthropic_messages(
+    messages: list[dict[str, Any]],
+) -> tuple[str, list[dict[str, Any]]]:
     """Translate transcript into Anthropic ``system`` + block messages."""
 
     system_parts: list[str] = []
@@ -216,15 +310,64 @@ def _anthropic_messages(messages: list[dict[str, Any]]) -> tuple[str, list[dict[
             blocks: list[dict[str, Any]] = []
             if content_text(content):
                 blocks.append({"type": "text", "text": content_text(content)})
-            blocks.extend({"type": "tool_use", "id": str(call.get("id") or "call"), "name": str(call.get("name", "")), "input": _object_args(call.get("arguments"))} for call in calls)
+            blocks.extend(
+                {
+                    "type": "tool_use",
+                    "id": str(call.get("id") or "call"),
+                    "name": str(call.get("name", "")),
+                    "input": _object_args(call.get("arguments")),
+                }
+                for call in calls
+            )
             out.append({"role": "assistant", "content": blocks})
         elif role == "tool":
-            value = content if isinstance(content, str) else json.dumps(content, ensure_ascii=False)
-            block = {"type": "tool_result", "tool_use_id": str(item.get("tool_call_id") or "call"), "content": value}
+            value = (
+                content
+                if isinstance(content, str)
+                else json.dumps(content, ensure_ascii=False)
+            )
+            block: dict[str, Any] = {
+                "type": "tool_result",
+                "tool_use_id": str(item.get("tool_call_id") or "call"),
+                "content": [{"type": "text", "text": value}],
+            }
+            for attachment in _attachments(item):
+                parsed = _data_attachment(attachment)
+                if parsed is None:
+                    continue
+                mime, _url, data = parsed
+                if mime.startswith("image/"):
+                    block["content"].append(
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": mime,
+                                "data": data,
+                            },
+                        }
+                    )
+                elif mime == "application/pdf":
+                    block["content"].append(
+                        {
+                            "type": "document",
+                            "source": {
+                                "type": "base64",
+                                "media_type": mime,
+                                "data": data,
+                            },
+                        }
+                    )
+            if not _attachments(item):
+                block["content"] = value
             # Anthropic requires alternating user/assistant turns.  A model
             # may emit several tool calls in one assistant envelope, so all
             # corresponding results belong to one user content array.
-            if out and out[-1].get("role") == "user" and isinstance(out[-1].get("content"), list):
+            if (
+                out
+                and out[-1].get("role") == "user"
+                and isinstance(out[-1].get("content"), list)
+            ):
                 out[-1]["content"].append(block)
             else:
                 out.append({"role": "user", "content": [block]})
@@ -249,9 +392,41 @@ def _responses_input(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Translate transcript to Responses input items."""
 
     out: list[dict[str, Any]] = []
+    pending_media: list[Mapping[str, Any]] = []
+
+    def flush_media() -> None:
+        if not pending_media:
+            return
+        media: list[dict[str, Any]] = []
+        for attachment in pending_media:
+            parsed = _data_attachment(attachment)
+            if parsed is None:
+                continue
+            mime, url, _data = parsed
+            if mime.startswith("image/"):
+                media.append({"type": "input_image", "image_url": url})
+            elif mime == "application/pdf":
+                media.append({"type": "input_file", "file_data": url})
+        if media:
+            out.append(
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": "Attached media from tool result:",
+                        },
+                        *media,
+                    ],
+                }
+            )
+        pending_media.clear()
+
     for original in messages:
         item = dict(original)
         role = str(item.get("role", "user"))
+        if role != "tool":
+            flush_media()
         content = item.get("content", "")
         calls = item.get("tool_calls") or []
         if role == "assistant" and calls:
@@ -259,12 +434,31 @@ def _responses_input(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if text:
                 out.append({"role": "assistant", "content": text})
             for call in calls:
-                out.append({"type": "function_call", "call_id": str(call.get("id") or "call"), "name": str(call.get("name", "")), "arguments": _json_args(call.get("arguments", {}))})
+                out.append(
+                    {
+                        "type": "function_call",
+                        "call_id": str(call.get("id") or "call"),
+                        "name": str(call.get("name", "")),
+                        "arguments": _json_args(call.get("arguments", {})),
+                    }
+                )
         elif role == "tool":
-            value = content if isinstance(content, str) else json.dumps(content, ensure_ascii=False)
-            out.append({"type": "function_call_output", "call_id": str(item.get("tool_call_id") or "call"), "output": value})
+            value = (
+                content
+                if isinstance(content, str)
+                else json.dumps(content, ensure_ascii=False)
+            )
+            out.append(
+                {
+                    "type": "function_call_output",
+                    "call_id": str(item.get("tool_call_id") or "call"),
+                    "output": value,
+                }
+            )
+            pending_media.extend(_attachments(item))
         else:
             out.append({"role": role, "content": content})
+    flush_media()
     return out
 
 
