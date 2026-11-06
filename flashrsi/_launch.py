@@ -30,6 +30,7 @@ from flashrsi.config import load_config
 # metadata; its values are component labels, not pip extras. Package
 # installation uses the public ``all`` extra below.
 _BENCHMARK_EXTRAS = {
+    "webshop": (),
     "alfworld": ("alfworld",),
     "tau2": ("tau2",),
     "aime": (),
@@ -276,6 +277,14 @@ def _plan(config):
             prerequisites.append(
                 "Local native ALFWorld benchmark.data_path (no automatic download)"
             )
+    if benchmark == "webshop":
+        prerequisites.extend(
+            [
+                "Pinned WebShop benchmark.native_root with full catalog and Lucene index",
+                "Separate upstream Python environment: benchmark.native_python (see docs/webshop.md)",
+                "Explicit agent.llm.base_url for model-only Target access",
+            ]
+        )
     if benchmark == "workbench":
         prerequisites.extend(["Python >=3.12", "Git for pinned native tools and data"])
     if benchmark == "travelplanner":

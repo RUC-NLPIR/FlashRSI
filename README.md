@@ -7,7 +7,7 @@
 <p align="center"><i>One click to reproduce, compare, and develop RSI methods across agents and tasks.</i></p>
 
 <p align="center">
-  FlashRSI provides one experiment interface for <b>13 RSI algorithms</b>, <b>30 benchmarks</b>, and <b>7 harness integrations</b>:
+  FlashRSI provides one experiment interface for <b>13 RSI algorithms</b>, <b>31 benchmarks</b>, and <b>7 harness integrations</b>:
   MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode. Each run records the resources that changed,
   trajectories that produced the score, and the Snapshot selected at the end.
 </p>
@@ -58,9 +58,9 @@
 - 🧩 **Configurable Experiment Framework**: Combines an RSI method, Target harness, Worker, benchmark,
   and independent model settings in one YAML/CLI experiment. Resource scopes and execution roles can
   change without writing a new runner.
-- 🧪 **30 Benchmarks and 13 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
-  web research, documents, tool use, and interactive tasks, with **34 pinned Hugging Face prepared
-  configurations** for 29 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt,
+- 🧪 **31 Benchmarks and 13 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
+  web research, documents, tool use, and interactive tasks, with **35 pinned Hugging Face
+  configurations** for 30 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt,
   Evo-Harness, AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, and Arbor.
 - 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode map prompts,
   skills, tools, configuration, hooks, plugins, memory, and runtime resources into versioned Snapshots.
@@ -675,10 +675,10 @@ FlashRSI currently supports seven harness integrations; additional integrations 
 
 ## Supporting Benchmarks
 
-FlashRSI supports **30 benchmark suites** across question answering, reasoning, mathematics, coding,
+FlashRSI supports **31 benchmark suites** across question answering, reasoning, mathematics, coding,
 web research, documents, tool use, and interactive tasks. The table below summarizes each suite's task,
-and primary metric. **34 pinned Hugging Face configurations** are available for 29 suites, while native
-data sources remain supported.
+and primary metric. **35 pinned Hugging Face configurations** are available for 30 suites, while native
+data sources remain supported. WebShop provides task IDs on HF and requires its native catalog and index separately.
 
 | Domain | Benchmark | Task | Primary metric |
 | --- | --- | --- | --- |
@@ -701,6 +701,7 @@ data sources remain supported.
 | Web research | [BrowseComp](flashrsi/benchmarks/browsecomp) | Broad web research | Accuracy |
 | Web research | [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | Single- and set-answer search | F1 |
 | Web research | [WideSearch](flashrsi/benchmarks/widesearch) | Tabular broad search | Score |
+| Web interaction | [WebShop](docs/webshop.md) | Product search, option selection, and purchase | Reward |
 | Documents | [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | Document research | Accuracy |
 | Documents | [Harvey LAB](flashrsi/benchmarks/harvey_lab) | Legal document work | All-pass rate |
 | Documents | [JobBench](flashrsi/benchmarks/jobbench) | Professional file delivery | Reward |

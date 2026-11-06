@@ -7,7 +7,7 @@
 <p align="center"><i>一键在不同 Agent 与任务上复现、比较和开发 RSI 方法。</i></p>
 
 <p align="center">
-  FlashRSI 集成 <b>13 种 RSI 算法</b>、<b>30 个 benchmark</b> 和 <b>7 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode），用于复现、比较和开发 Agent 自我改进方法。
+  FlashRSI 集成 <b>13 种 RSI 算法</b>、<b>31 个 benchmark</b> 和 <b>7 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode），用于复现、比较和开发 Agent 自我改进方法。
 </p>
 
 <p align="center">
@@ -54,8 +54,8 @@
 
 - 🧩 **可配置实验框架。** 在同一个 YAML/CLI 实验中组合 RSI 算法、Target harness、Worker、benchmark
   和各自的模型配置；资源范围与执行角色可以直接切换。
-- 🧪 **30 个 Benchmark 与 13 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
-  和交互任务，提供 **29 个套件的 34 份 Hugging Face 固定配置**，以及 OPRO、GEPA、EvoPrompt、ACE、
+- 🧪 **31 个 Benchmark 与 13 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
+  和交互任务，提供 **30 个套件的 35 份 Hugging Face 固定配置**，以及 OPRO、GEPA、EvoPrompt、ACE、
   SkillOpt、Evo-Harness、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、RRSI、Arbor 的可运行适配。
 - 🧠 **原生 Harness 与可复现证据。** 支持 MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw 和 OpenCode，将 prompts、skills、工具、
   配置、hooks、plugins、memory 与 runtime 资源纳入版本化 Snapshot；每次运行集中保存候选版本、轨迹、
@@ -594,7 +594,7 @@ FlashRSI 当前支持七种 Harness 接入，其他接入正在规划中。
 
 ## 支持的 Benchmarks
 
-FlashRSI 支持 **30 个 benchmark 套件**，覆盖问答、推理、数学、代码、网页研究、文档、工具使用和交互任务。下表列出各套件的任务类型和主指标。**29 个套件提供 34 份固定的 Hugging Face 配置**，同时保留原生数据源。具体数据、服务与环境要求见[配置索引](docs/benchmark-quickstart.md)。
+FlashRSI 支持 **31 个 benchmark 套件**，覆盖问答、推理、数学、代码、网页研究、文档、工具使用和交互任务。下表列出各套件的任务类型和主指标。**30 个套件提供 35 份固定的 Hugging Face 配置**，同时保留原生数据源。WebShop 的 HF 配置当前只提供任务 ID，完整商品库和索引需另行准备。具体数据、服务与环境要求见[配置索引](docs/benchmark-quickstart.md)。
 
 | 领域 | Benchmark | 任务 | 主指标 |
 | --- | --- | --- | --- |
@@ -617,6 +617,7 @@ FlashRSI 支持 **30 个 benchmark 套件**，覆盖问答、推理、数学、�
 | 网页研究 | [BrowseComp](flashrsi/benchmarks/browsecomp) | 网络信息搜索 | Accuracy |
 | 网页研究 | [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | 单答案与集合答案的网络搜索 | F1 |
 | 网页研究 | [WideSearch](flashrsi/benchmarks/widesearch) | 表格型广泛信息搜索 | Score |
+| 网页交互 | [WebShop](docs/webshop.md) | 商品搜索、选项选择与购买 | Reward |
 | 文档 | [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | 文档检索问答 | Accuracy |
 | 文档 | [Harvey LAB](flashrsi/benchmarks/harvey_lab) | 法律文档任务 | All-pass rate |
 | 文档 | [JobBench](flashrsi/benchmarks/jobbench) | 专业文件交付 | Reward |

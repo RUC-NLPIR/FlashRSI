@@ -3,7 +3,7 @@
 [返回首页](../README.zh-CN.md) · [使用指南](usage.zh-CN.md)
 
 FlashRSI 用同一套实验入口连接 Algorithm、Benchmark 和 Agent，记录演化版本、逐题轨迹与最终 test 结果。
-当前注册 13 个算法、7 个 Target Agent、30 个 Benchmark；接入范围及各项额外配置见
+当前注册 13 个算法、7 个 Target Agent、31 个 Benchmark；接入范围及各项额外配置见
 [Benchmark 配置索引](benchmark-quickstart.md)。注册数量不表示所有组合均已通过真实运行。
 
 首次体验也可使用附带 12 道题的 [quickstart_launch.yaml](../examples/quickstart_launch.yaml)，无需下载 SearchQA 全量数据。Codex 的额外工具链和 Responses API 要求见 [Codex 指南](codex.md)。
@@ -73,7 +73,7 @@ SkillOpt 使用 `num_epochs`、`batch_size` 等。AHE 必须使用 Agent Worker�
 | `algorithm.name` | `ace`、`adas`、`ahe`、`darwinx`、`evo_harness`、`evoprompt`、`gepa`、`meta_harness`、`modular_rsi`、`opro`、`rrsi`、`skillopt` |
 | `agent.name` | `miniagent`、`claude_code`、`codex`、`pi`、`hermes`、`openclaw`、`opencode` |
 | `algorithm.worker.type` | `llm`；或 `agent` 并配置 `worker.name: miniagent / claude_code / codex / pi / hermes / openclaw / opencode` |
-| `benchmark.name` | [30 个注册项及对应示例](benchmark-quickstart.md) |
+| `benchmark.name` | [31 个注册项及对应示例](benchmark-quickstart.md) |
 
 `adas`、`darwinx`、`evo_harness`、`meta_harness`、`modular_rsi`、`rrsi` 和 `ahe`
 需要能编辑文件的 Worker：设置 `algorithm.worker.type: agent`，并填写 `worker.name`
@@ -100,7 +100,7 @@ python scripts/run_experiment.py --config examples/hotpotqa.local.yaml
 
 PowerShell 可用 `Copy-Item` 替代 `cp`。保留示例所在目录可以维持相对路径语义；
 若移动 YAML，必须同步调整数据路径、输出目录以及 Agent/Worker 的 `source_dir`。
-30 个 Benchmark 均有可定位的完整示例，见[配置索引](benchmark-quickstart.md)。
+31 个 Benchmark 均有可定位的完整示例，见[配置索引](benchmark-quickstart.md)。
 
 切换 Claude Code 时，将 `agent.name` 改为 `claude_code`，并填写该角色的 Claude 模型和
 认证配置。Agent Worker 的配置形如：

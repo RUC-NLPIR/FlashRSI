@@ -75,6 +75,10 @@ def prepare(config):
     if name == "spreadsheetbench2" and config.get("category", "all") != "all":
         raise ValueError("Prepared SpreadsheetBench2 membership requires category: all")
     download = {"repo_id": REPO, "repo_type": "dataset", "revision": revision}
+    if name == "webshop":
+        from flashrsi.benchmarks.webshop import _prepare
+
+        return _prepare(config, download)
     if revision in LEGACY_REVISIONS:
         package = f"tau2_{config.get('domain', 'telecom')}" if name == "tau2" else name
         release = (

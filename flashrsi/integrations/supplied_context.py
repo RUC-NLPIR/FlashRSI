@@ -58,7 +58,16 @@ async def _run_prompt(
                     "cp", str(workspace) + os.sep + ".", f"{name}:/task", timeout=600
                 )
             if model_only:
-                return await _model_egress.run(_docker, name, timeout, grace, origins)
+                if execute is None:
+                    return await _model_egress.run(
+                        _docker, name, timeout, grace, origins
+                    )
+                # The custom relay finishes (including in-flight actions) before
+                # restricted() removes its container and network.
+                async with _model_egress.restricted(
+                    _docker, name, grace, origins
+                ) as env:
+                    return await execute(_docker, name, timeout, grace, env=env)
             result = await (execute or _run)(_docker, name, timeout, grace)
             if collect is not None and result.status == "finished":
                 await collect(_docker, name, grace)

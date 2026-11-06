@@ -46,7 +46,7 @@ Docker、原生工具、数据授权和额外模型角色的要求不变。
 
 ## 兼容性与版本固定
 
-全部 30 个接入的逐项分工见 [Harness 与任务环境边界](benchmark-harness-boundary.md)。
+全部 31 个接入的逐项分工见 [Harness 与任务环境边界](benchmark-harness-boundary.md)。
 
 Snapshot 固定的是 Agent 的资源；任务环境由目标 benchmark 的接入层准备。
 以 MiniAgent 从 AppWorld 迁移到 SpreadsheetBench2 为例：
