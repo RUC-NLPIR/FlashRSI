@@ -2,6 +2,8 @@
 
 当前适配 `RUC-NLPIR/FlashRSI` 的 `benchmark-directories.v1` 布局，固定 revision 为 `8e226b748e648d4e001cf247f255cfb9eb752292`。覆盖 **29 个 Benchmark、34 份实验配置**；**HLE 单独使用官方 HF `cais/hle` 的纯文本题目，不纳入本镜像**。原有原生默认来源保留，只有明确配置 `benchmark.dataset` 才使用本仓库数据。
 
+WebShop 另使用下文所列的较新 revision，只提供任务 ID。计入 WebShop 后，接入共覆盖 30 个 Benchmark、35 份 HF 配置；商品资源的准备范围见 [WebShop 说明](webshop.md)。
+
 ## 选择数据
 
 ```yaml
@@ -101,3 +103,17 @@ ALFWorld 的完整数据配置见 [hf_prepared_alfworld.yaml](../examples/hf_pre
 ## 旧配置
 
 固定旧 revision `1b976eec446eec4cb5354c07bc81b27f92b69c49` 或 `f950bd8dc40a9b498d9b1edbf5ca71720a38cd3d` 的旧 `_experiment_v1` 配置继续按对应的旧路径读取，不自动升级。更新到本页 revision 时，建议同时使用表中的新 config 名；已支持的旧别名也可映射到新 catalog。现有实验记录与 Snapshot 不改写。
+
+## WebShop 划分准备
+
+[HF 的 WebShop 目录](https://huggingface.co/datasets/RUC-NLPIR/FlashRSI/tree/3d89e1589deeb3215c468849ba1b268beb9b0eba/webshop) 发布了固定的 150 / 75 / 150 道题的任务 ID。下载命令会校验文件哈希、数量、重复 ID 和官方划分归属。
+
+```bash
+uv run python scripts/prepare_webshop.py
+```
+
+默认将划分文件写入 `.cache/webshop/prepared/`。已取得官方资源时，可加 `--native-root /path/to/WebShop`，检查上游 checkout、基准任务顺序文件的哈希、完整商品和属性文件以及 Lucene 索引布局。这个检查覆盖文件布局和任务清单，运行时的目标匹配和原生评分仍需单独验证。
+
+`webshop` 已接入统一 runner：示例 [webshop_opro.yaml](../examples/webshop_opro.yaml)
+会自动读取上述 HF 划分。此 revision 只有任务 ID，完整原生商品库、索引和独立 Python
+环境仍需准备；路径配置、原生评分与隔离方式见 [WebShop](webshop.md)。

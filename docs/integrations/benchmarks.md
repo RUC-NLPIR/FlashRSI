@@ -1,6 +1,6 @@
 # Benchmarks
 
-Choose a task suite, then follow its configuration and environment guide. FlashRSI registers 30 suites; years, variants, and domains within one adapter count as one suite.
+Choose a task suite, then follow its configuration and environment guide. FlashRSI registers 31 suites; years, variants, and domains within one adapter count as one suite.
 
 ## Prepare the environment
 
@@ -8,6 +8,7 @@ Choose a task suite, then follow its configuration and environment guide. FlashR
 | --- | --- |
 | Text, QA, and reasoning | [Configuration index](../benchmark-quickstart.md) for data, grading, and optional model roles. |
 | Web research | [Search and reader services](../web-research-services.md). |
+| Web shopping | [WebShop](../webshop.md): published task IDs, full native catalog, Lucene index, and a separate Python environment. |
 | Repository and container tasks | [Coding setups](../coding-working-benchmarks.md), [Terminal-Bench](../terminal-bench.md), and the native verifier guide. |
 | Interactive environments | [τ²-bench](../tau2-bench.md), [ALFWorld](../alfworld.md), or the configuration index for τ³. |
 
@@ -40,6 +41,7 @@ link to the corresponding integration or configuration guide.
 | Web research | [BrowseComp](../../flashrsi/benchmarks/browsecomp) | Broad web research | Official judge accuracy | — | — | native | [Services](../web-research-services.md) |
 | Web research | [DeepSearchQA](../../flashrsi/benchmarks/deepsearchqa) | Single- and set-answer search | Autorater F1 | — | — | native | [Services](../web-research-services.md) |
 | Web research | [WideSearch](../../flashrsi/benchmarks/widesearch) | Tabular broad search | Official table score | — | — | native | [Services](../web-research-services.md) |
+| Web interaction | [WebShop](../../flashrsi/benchmarks/webshop) | Product search, option selection, and purchase | Native reward | 150 | 75 | 150 | [HF experimental split and setup](../webshop.md) |
 | Documents | [OfficeQA-Pro](../../flashrsi/benchmarks/officeqa_pro) | Document research | Numeric / text accuracy | configured | configured | configured | [Index](../benchmark-quickstart.md) |
 | Documents | [Harvey LAB](../../flashrsi/benchmarks/harvey_lab) | Legal document work | Dual-judge all-pass rate | configured | configured | configured | [Index](../benchmark-quickstart.md) |
 | Documents | [JobBench](../../flashrsi/benchmarks/jobbench) | Professional file delivery | Weighted rubric reward | configured | configured | configured | [Guide](../coding-working-benchmarks.md) |
@@ -57,5 +59,7 @@ link to the corresponding integration or configuration guide.
 DeepSWE currently has an interface adapter; official downloads and real execution remain unverified. SpreadsheetBench 2 covers its first three task categories and excludes Visualization. Check each guide for the supported track and validation status.
 
 A registered benchmark is not evidence of a completed model run. Inspect task failures and trajectories alongside its aggregate metric. Report custom experimental splits separately from official leaderboard settings.
+
+WebShop has completed three real-model episodes on the native 1,000-product preview. Its full-catalog HF task mapping and complete evolution workflow remain unverified.
 
 To integrate another task suite, see [Add a benchmark](../development/benchmark.md).

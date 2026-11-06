@@ -118,8 +118,8 @@ def _command(timeout):
     return shlex.join([_PYTHON, "/task/web.py", "--timeout", str(timeout)])
 
 
-async def _run_with_relay(target, prompt, respond):
-    async def execute(docker, name, timeout, grace):
+async def _run_with_relay(target, prompt, respond, *, model_only=False):
+    async def execute(docker, name, timeout, grace, *, env=None):
         # Only the task container has the client socket. The host receives
         # requests over an attached Docker exec, without a listening host port.
         process = await asyncio.create_subprocess_exec(
@@ -141,7 +141,11 @@ async def _run_with_relay(target, prompt, respond):
             if await asyncio.wait_for(process.stdout.readline(), grace) != b"ready\n":
                 raise RuntimeError("Web relay did not start")
             relay = asyncio.create_task(_relay(process, respond))
-            solver = asyncio.create_task(_run(docker, name, timeout, grace))
+            solver = asyncio.create_task(
+                _run(docker, name, timeout, grace, env=env)
+                if env is not None
+                else _run(docker, name, timeout, grace)
+            )
             done, _ = await asyncio.wait(
                 (relay, solver), return_when=asyncio.FIRST_COMPLETED
             )
@@ -167,7 +171,11 @@ async def _run_with_relay(target, prompt, respond):
             Path(__file__).with_name("_browsecomp_client.py"), root / "web.py"
         )
         return await supplied_context._run_prompt(
-            target, prompt, workspace=root, execute=execute
+            target,
+            prompt,
+            workspace=root,
+            execute=execute,
+            model_only=model_only,
         )
 
 

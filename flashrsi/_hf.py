@@ -33,6 +33,7 @@ PROFILES = {
         "triviaqa",
         "twowiki_multihopqa",
         "widesearch",
+        "webshop",
         "workbench",
     )
 }

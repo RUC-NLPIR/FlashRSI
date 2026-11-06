@@ -1,8 +1,8 @@
 # Benchmark 配置索引
 
-当前注册 **30 个 Benchmark、13 个算法、7 个 Target Agent**。同一适配器的版本、年份和领域不重复计数；例如 Terminal-Bench 2.0 / 2.1、AIME 2025 / 2026、τ² 三个领域分别只计一项。
+当前注册 **31 个 Benchmark、13 个算法、7 个 Target Agent**。同一适配器的版本、年份和领域不重复计数；例如 Terminal-Bench 2.0 / 2.1、AIME 2025 / 2026、τ² 三个领域分别只计一项。
 
-其中 29 项可选择 [`RUC-NLPIR/FlashRSI` 的 HF prepared 数据源](hf-prepared-data.md)，共 34 份配置，使用固定发布划分和校验过的原生资源；原有默认来源保持不变。
+其中 30 项可选择 [`RUC-NLPIR/FlashRSI` 的 HF prepared 数据源](hf-prepared-data.md)，共 35 份配置；WebShop 当前只提供固定任务 ID，完整商品库和索引另行准备。各项使用固定发布划分；原有默认来源保持不变。
 
 从项目根目录用 `python scripts/run_experiment.py --config examples/<示例>.yaml --plan` 查看所选依赖，再填配置运行 `--check-only`，最后去掉该参数开始实验。两个模型角色及 Judge / User Simulator / Postprocess 互不继承凭据。示例包含不同算法，切换时也需保留对应组件配置。
 
@@ -44,7 +44,8 @@ SearchQA、MuSiQue、TriviaQA、NQ、2WikiMultiHopQA、MATH、AIME、BBEH、Supe
 | Math | `aime` | [aime_opro.yaml](../examples/aime_opro.yaml) | 本地或原生数据；按示例设置实验划分 |
 | Math | `livemathbench` | [livemathbench_opro.yaml](../examples/livemathbench_opro.yaml) | 独立 Judge；按示例设置版本及采样次数 |
 | Embodied / Interactive | `alfworld` | [alfworld_opro.yaml](../examples/alfworld_opro.yaml) | 纯文本；预先准备原生数据；Linux/WSL + Python 3.11/3.12 |
+| Web interaction | `webshop` | [webshop_opro.yaml](../examples/webshop_opro.yaml) | HF 任务划分；完整原生商品库、索引与独立 Python 环境；[说明](webshop.md) |
 
-共 30 项。ALFWorld 单列为交互环境，避免把它混同办公任务。
+共 31 项。ALFWorld 单列为交互环境，避免把它混同办公任务。
 
 Docker / Harbor 的资源准备细节见 [Coding / Working 指南](coding-working-benchmarks.md)、[DeepSWE](deepswe.md)、[ALFWorld](alfworld.md) 和 [Web 服务](web-research-services.md)。

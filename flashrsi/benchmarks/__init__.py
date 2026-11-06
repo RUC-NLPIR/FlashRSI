@@ -28,6 +28,7 @@ from flashrsi.benchmarks.terminal_bench import TerminalBench
 from flashrsi.benchmarks.travelplanner import TravelPlanner
 from flashrsi.benchmarks.triviaqa import TriviaQA
 from flashrsi.benchmarks.twowiki_multihopqa import TwoWikiMultiHopQA
+from flashrsi.benchmarks.webshop import WebShop
 from flashrsi.benchmarks.widesearch import WideSearch
 from flashrsi.benchmarks.workbench import WorkBench
 
@@ -61,5 +62,6 @@ __all__ = [
     "TerminalBench",
     "TriviaQA",
     "WideSearch",
+    "WebShop",
     "WorkBench",
 ]

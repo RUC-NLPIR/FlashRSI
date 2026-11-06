@@ -32,6 +32,7 @@ _CONTAINERS = _HARBOR | {
     "widesearch",
     "hotpotqa",
     "alfworld",
+    "webshop",
     "workbench",
     "tau2",
     "tau3_banking",

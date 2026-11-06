@@ -65,6 +65,7 @@ from flashrsi.benchmarks import (
     TravelPlanner,
     TriviaQA,
     TwoWikiMultiHopQA,
+    WebShop,
     WideSearch,
     WorkBench,
 )
@@ -81,6 +82,7 @@ _AGENTS = {
     "opencode": OpenCode,
 }
 _BENCHMARKS = {
+    "webshop": WebShop,
     "alfworld": ALFWorld,
     "tau2": Tau2Benchmark,
     "aime": AIME,
@@ -186,6 +188,10 @@ async def _prepare_target(config, *, snapshot=None):
     )
     if isinstance(benchmark, ALFWorld):
         from flashrsi.integrations.alfworld import bind
+
+        bind(target, benchmark)
+    if isinstance(benchmark, WebShop):
+        from flashrsi.integrations.webshop import bind
 
         bind(target, benchmark)
     if isinstance(benchmark, WorkBench):
