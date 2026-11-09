@@ -55,6 +55,11 @@ class DesigningWorker(Agent):
                 destination.write_text(content, newline="\n")
         if account is None:
             return Trajectory(output="Edited, but said nothing about the design.")
+        if isinstance(account, dict):
+            return Trajectory(
+                output=f"<NAME>{account['name']}</NAME>\n"
+                f"<DESIGN>{account['thought']}</DESIGN>"
+            )
         return Trajectory(output=f"Done.\n<DESIGN>{account}</DESIGN>")
 
 
@@ -160,7 +165,7 @@ def test_an_improving_design_is_promoted(monkeypatch, tmp_path, cls):
     assert (admit["parent_score"], admit["candidate_score"]) == (0.0, 1 / 3)
     # The whole archive is recorded with the promotion, seed included.
     assert promote["kind"] == "promote" and promote["accepted"] is True
-    assert [row["account"] for row in promote["archive"]] == [
+    assert [row["thought"] for row in promote["archive"]] == [
         "the harness this run started from",
         "answers dev-0",
     ]
@@ -188,8 +193,9 @@ def test_a_worse_design_enters_the_archive_but_is_not_promoted(monkeypatch, tmp_
     assert promote["accepted"] is False
     # Kept anyway: the archive carries the design and what it scored.
     assert promote["archive"][1] == {
-        "account": "a design that loses",
-        "score": 1 / 3,
+        "name": "design-1",
+        "thought": "a design that loses",
+        "fitness": 1 / 3,
     }
 
 
@@ -215,7 +221,7 @@ def test_the_best_design_is_promoted_even_when_a_later_one_regressed(
     # The regression was measured against the leader, not against the seed.
     assert second["parent_score"] == 2 / 3
     assert second["parent_id"] == first["candidate_id"]
-    assert [row["score"] for row in promote["archive"]] == [0.0, 2 / 3, 1 / 3]
+    assert [row["fitness"] for row in promote["archive"]] == [0.0, 2 / 3, 1 / 3]
 
 
 # -- the archive is what the meta agent reads --
@@ -290,6 +296,52 @@ def test_zero_reflections_skips_the_review_pass(monkeypatch, tmp_path):
     assert [prompt.splitlines()[0] for prompt in algo.worker.prompts] == [
         "[ADAS: propose]"
     ]
+
+
+def test_every_reflection_receives_archive_and_latest_design(monkeypatch, tmp_path):
+    algo, _ = setup(
+        monkeypatch,
+        [
+            ({_MARKER: "DRAFT\n"}, {"name": "draft", "thought": "first idea"}),
+            ({_MARKER: "REVIEW\n"}, {"name": "reviewed", "thought": "first review"}),
+            ({_MARKER: "GOOD\n"}, {"name": "alpha", "thought": "final alpha idea"}),
+            ({_MARKER: "BETA\n"}, {"name": "beta", "thought": "second idea"}),
+            ({}, "second review"),
+            ({_MARKER: "BAD\n"}, "final beta idea"),
+        ],
+        table={"GOOD": {"dev-0", "dev-1"}, "BAD": {"dev-2"}},
+        max_steps=2,
+        num_reflections=2,
+    )
+    directory = run_dir(algo, tmp_path)
+
+    final = asyncio.run(algo.evolve())
+
+    first, second, promote = decisions(directory)
+    seed = {
+        "name": "initial",
+        "thought": "the harness this run started from",
+        "fitness": 0.0,
+    }
+    alpha = {"name": "alpha", "thought": "final alpha idea", "fitness": 2 / 3}
+    beta = {"name": "beta", "thought": "final beta idea", "fitness": 1 / 3}
+    assert promote["archive"] == [seed, alpha, beta]
+    assert first["name"] == "alpha" and second["name"] == "beta"
+    assert second["fitness"] == second["candidate_score"] == 1 / 3
+    assert second["accepted"] is False
+    assert final.files[_MARKER].content == b"GOOD\n"
+
+    # Each independent call receives the same measured archive for its attempt.
+    for index, prompt in enumerate(algo.worker.prompts):
+        encoded = prompt.split("(name, thought, and fitness):\n", 1)[1]
+        archive = json.JSONDecoder().raw_decode(encoded)[0]
+        assert archive == ([seed] if index < 3 else [seed, alpha])
+    assert "draft" in algo.worker.prompts[1]
+    assert "first idea" in algo.worker.prompts[1]
+    assert "reviewed" in algo.worker.prompts[2]
+    assert "first review" in algo.worker.prompts[2]
+    assert "beta" in algo.worker.prompts[5]
+    assert "second review" in algo.worker.prompts[5]
 
 
 # -- a refused design costs one step, not the experiment --
@@ -441,6 +493,6 @@ def test_a_design_that_only_ties_does_not_move_the_incumbent(monkeypatch, tmp_pa
     assert admit["parent_score"] == admit["candidate_score"] == 2 / 3
     assert admit["accepted"] is False and promote["accepted"] is False
     # It is still archived -- the next round should be able to see it tied.
-    assert [row["account"] for row in promote["archive"]][1] == (
+    assert [row["thought"] for row in promote["archive"]][1] == (
         "a design that merely ties"
     )

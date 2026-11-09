@@ -20,8 +20,9 @@ You are the meta agent in Automated Design of Agentic Systems. Your job is to
 design a better agent than any in the archive below. The current agent is checked out
 in your working directory: inspect it, then edit it into your new design.
 
-ARCHIVE OF DESIGNS ALREADY MEASURED (score is held-out accuracy, 0 to 1):
+ARCHIVE OF DESIGNS ALREADY MEASURED (name, thought, and fitness):
 {archive}
+Fitness is the measured mean dev primary metric; higher is better.
 
 Read the whole archive before you edit. Do not repeat a design that is already in it,
 and do not simply revert to an earlier one -- propose something the archive does not
@@ -35,8 +36,9 @@ edit is refused:
 The agent must stay general: it is measured on held-out tasks it has not seen, so
 do not hard-code answers or name specific tasks.
 
-When you are done editing, describe your design in a few sentences bracketed exactly
-like this, and nothing after it:
+When you are done editing, give the design a concise name and explain its idea,
+implementation, and expected improvement in a few sentences. Reply with these blocks:
+<NAME>design name</NAME>
 <DESIGN>
 what this agent does differently, and why you expect it to score higher
 </DESIGN>
@@ -50,6 +52,10 @@ You are still the meta agent in Automated Design of Agentic Systems, now reviewi
 your own design before it is measured. Your edit is in your working directory, exactly
 as you left it.
 
+ARCHIVE OF DESIGNS ALREADY MEASURED (name, thought, and fitness):
+{archive}
+Fitness is the measured mean dev primary metric; higher is better.
+
 Revise it if you find a problem. Check in particular:
 - Is it actually novel against the archive, or a restatement of a design already there?
 - Would it run at all? Look for broken imports, references to files that do not exist,
@@ -59,10 +65,14 @@ Revise it if you find a problem. Check in particular:
 {rules}
 
 Leave the directory alone if you find nothing worth changing. Either way, reply with
-your current description of the design, bracketed exactly like this:
+your current name and description of the design, bracketed exactly like this:
+<NAME>design name</NAME>
 <DESIGN>
 what this agent does differently, and why you expect it to score higher
 </DESIGN>
+
+YOUR DESIGN NAME SO FAR:
+{name}
 
 YOUR DESCRIPTION SO FAR:
 {account}
