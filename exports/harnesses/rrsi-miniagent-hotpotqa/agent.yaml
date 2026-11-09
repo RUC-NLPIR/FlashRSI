@@ -1,0 +1,10 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools:
+  - shell
+middlewares:
+  - exact_final
+skills:
+  - main
+sub_agents: []

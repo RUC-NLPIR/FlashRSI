@@ -1,0 +1,1 @@
+Before answering each question, invoke the Skill tool with skill "flashrsi:hotpotqa" and follow that skill. Then answer with only the answer itself, exactly as the skill's output rules describe: the complete name or value as given in the supplied context, with no explanation, no extra words, and no surrounding punctuation.

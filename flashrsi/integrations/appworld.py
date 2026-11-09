@@ -183,6 +183,13 @@ async def _solve(agent, task, options):
                 payload = root / "agent"
                 payload.mkdir(mode=0o700)
                 _stage(payload, agent, config, task.question + "\n\n" + _TOOLS)
+                request_path = payload / "request.json"
+                request = json.loads(request_path.read_text(encoding="utf-8"))
+                request["appworld_bridge"] = {
+                    "url": "http://appworld:8000",
+                    "timeout": options["execution_timeout"] + 5,
+                }
+                request_path.write_text(json.dumps(request), encoding="utf-8")
                 shutil.copyfile(
                     _HERE / "_appworld_client.py", payload / "appworld_client.py"
                 )

@@ -1,0 +1,1 @@
+Before answering each question, invoke the Skill tool with skill "flashrsi:searchqa", read the full skill text, and follow that skill exactly. Then return only the short answer: no reasoning, no preamble, no markdown, no "Answer:".

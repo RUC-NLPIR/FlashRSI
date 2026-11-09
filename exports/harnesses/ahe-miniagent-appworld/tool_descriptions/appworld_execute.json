@@ -1,0 +1,14 @@
+{
+  "name": "appworld_execute",
+  "description": "Execute Python code in the persistent official AppWorld shell. Variables persist across calls. The shell already binds `apis` and `requester` as globals; do NOT run `import apis`, `import sys`, or `importlib` (they are blocked). Use the globals directly, e.g. `apis.api_docs.show_app_descriptions()`. Fetch only the specific API docs you need and print only the fields you need. AppWorld apps are stateless: after `login()` returns an `access_token`, pass that token as an explicit `access_token` argument to every authenticated call. Output is size-capped; truncation is marked explicitly. The response includes output and task_completed.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "string"
+      }
+    },
+    "required": ["code"],
+    "additionalProperties": false
+  }
+}

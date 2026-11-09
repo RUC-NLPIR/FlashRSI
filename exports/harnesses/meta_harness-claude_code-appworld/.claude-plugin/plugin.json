@@ -1,0 +1,5 @@
+{
+  "name": "flashrsi",
+  "description": "Versioned Claude Code extensions for the FlashRSI agent.",
+  "version": "0.3.0"
+}

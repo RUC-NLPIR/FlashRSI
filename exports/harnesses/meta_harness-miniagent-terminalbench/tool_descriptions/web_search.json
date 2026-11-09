@@ -1,0 +1,15 @@
+{
+  "name": "web_search",
+  "description": "Search the web and return up to 10 results with title, URL, and snippet. Use this only for current, external, or factual information that is not available in the local task environment. If the service is unavailable or returns an error, do not retry the same query repeatedly; continue with local tools or state the limitation.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "Search query. Be specific and include key terms."
+      }
+    },
+    "required": ["query"],
+    "additionalProperties": false
+  }
+}

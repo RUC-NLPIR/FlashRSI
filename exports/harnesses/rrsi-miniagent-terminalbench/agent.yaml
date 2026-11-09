@@ -1,0 +1,11 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools:
+  - shell
+middlewares:
+  - deadline
+  - artifact_gate
+skills:
+  - main
+sub_agents: []

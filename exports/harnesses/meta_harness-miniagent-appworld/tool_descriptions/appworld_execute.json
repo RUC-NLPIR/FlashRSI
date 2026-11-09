@@ -1,0 +1,15 @@
+{
+  "name": "appworld_execute",
+  "description": "Execute Python code in the persistent official AppWorld shell. Variables persist between calls. The global `apis` object is already available; never import or introspect it. Print results you need to observe. Inspect APIs with apis.api_docs.app_descriptions(), apis.api_docs.api_descriptions(app_name=...), and apis.api_docs.show_api_doc(app_name=..., api_name=...). The shell has a hard execution limit, so batch related API calls into one script, avoid repeated probes, and never use os/sys/inspect/open or runtime internals like __closure__/__dict__/request_tracker. Authenticate an app before calling it: apis.<app>.login(username=<supervisor_email or phone_number>, password=<password from apis.supervisor.show_account_passwords()>); store the returned access_token and reuse it, passing it as access_token=<token> to every authenticated endpoint that documents it. Before an endpoint call, check show_api_doc and pass only documented arguments (for example spotify.show_song takes song_id only). List/search endpoints are paginated and default to a small page size (often 5); loop with page_index/page_limit until an empty page, because the first page is not the complete set. Once you have enough information to act, perform the action in the next script and call apis.supervisor.complete_task(); do not over-explore. A final text answer cannot change world state. For 'enough songs/items' tasks, count the bulleted items/exercises in the referenced note for today and prefer the first topically relevant result that meets that count rather than maximizing duration. Only pass an `answer` to complete_task when the task instruction asks a question; for action tasks call complete_task() or complete_task(status='success'). The response includes output and task_completed.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "string",
+        "description": "Python code to execute in the AppWorld shell. Batch related statements into one call, and when the task is an action task, include the action and supervisor completion together when possible."
+      }
+    },
+    "required": ["code"],
+    "additionalProperties": false
+  }
+}

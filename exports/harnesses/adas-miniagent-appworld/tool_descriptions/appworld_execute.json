@@ -1,0 +1,14 @@
+{
+  "name": "appworld_execute",
+  "description": "Execute Python code in the persistent official AppWorld shell. Variables and imports persist across calls. The `apis` object is already available; inspect it first with print(dir(apis)). A guard blocks direct `apis.<name>` calls for top-level names not yet observed in `print(dir(apis))` output. After orientation, the runtime may automatically query `apis.api_docs` for relevant API names and parameters; read any extra result. When you inspect a concrete app with `dir(apis.<app>)`, the runtime may automatically fetch that app's API docs for you before your next call. If a call raises a traceback, the runtime may automatically run one short read-only diagnostic snippet and show its result. Always print values you need to observe. The response contains OUTPUT (stdout), TASK_COMPLETED (boolean), and any extra fields. TASK_COMPLETED becomes true only after the task is marked complete with `apis.supervisor.complete_task()` (pass `answer=` only when the task asks for a value). If TASK_COMPLETED is false, the task is not finished yet. Use small, incremental snippets and handle errors with try/except or by printing tracebacks.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "string"
+      }
+    },
+    "required": ["code"],
+    "additionalProperties": false
+  }
+}
