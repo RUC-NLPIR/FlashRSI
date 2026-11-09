@@ -1,5 +1,3 @@
 harnesses/** -text
-snapshots/*.json -text
 README*.md text eol=lf
-MANIFEST.json text eol=lf
 .gitattributes text eol=lf
