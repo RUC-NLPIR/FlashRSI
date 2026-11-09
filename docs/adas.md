@@ -32,16 +32,16 @@ This requests one design and one pre-evaluation review. Set `num_reflections: 0`
 
 1. Evaluate the initial Snapshot on full dev. Seed the archive with its description and score, and make it the current best.
 2. Check out the best Snapshot. Give the Worker the scored archive and Target component rules, then request a new design through file edits and a `<DESIGN>` description.
-3. Run `num_reflections` further editing calls in that same checkout. Each sees the latest description and component rules; only the proposal prompt explicitly includes the archive. These reviews happen before measurement, with no intermediate framework evaluation.
+3. Run `num_reflections` further editing calls in that same checkout. Each receives the same scored archive as the proposal, the latest design name and description, and component rules. These reviews happen before measurement, with no intermediate framework evaluation.
 4. Remove known runtime artifacts and commit once. Empty or invalid resource changes are declined without candidate evaluation, consuming one step.
 5. Evaluate a valid candidate on full dev. Append its final description and score to the archive whether it improved or regressed. Strictly higher dev changes `best`; a tie keeps the earlier selected version.
 6. Repeat from best, not from the last candidate when it lost. At the end, promote best and record the archive and declined designs.
 
-The archive passed to the Worker contains `account` and `score`, not full historical source trees or execution traces. The complete list is retained, but its prompt serialization is truncated by `max_evidence_chars`. Unlike [Meta-Harness](./meta-harness.md), this implementation does not provide a filesystem history for selective retrieval.
+The archive passed to the Worker contains `name`, `thought` (the design idea and implementation explanation), and `fitness` (the measured mean dev primary metric). The complete list is retained, but its prompt serialization is truncated by `max_evidence_chars`. Full historical source trees and execution traces are outside this archive. See [Meta-Harness](./meta-harness.md) for filesystem history and selective retrieval.
 
 ## Design descriptions and invalid edits
 
-The last `<DESIGN>...</DESIGN>` block becomes the design account. If no complete tag pair exists, the entire reply is used. There is no AHE-style per-file prediction manifest; the edited files define the candidate and the description explains it to later proposals.
+The last `<NAME>...</NAME>` block supplies the design name, and the last `<DESIGN>...</DESIGN>` block supplies `thought`. If no complete DESIGN tag pair exists, the entire reply is used as the description. A missing or empty name defaults to `design-N` for attempt N; a reflection retains the latest name when it omits a name. The initial archive row is named `initial`. Fitness comes from framework evaluation. The edited files define the candidate and the description explains it to later proposals.
 
 Declined edits have no score, so they do not enter the scored archive. Their reasons are recorded in decisions and final `declined_designs`, but are not fed into the next proposal prompt. Low-scoring *evaluated* designs do enter the archive.
 
@@ -61,9 +61,9 @@ For D dev tasks and S attempts, Target search costs at most `(1 + S) * D` task e
 
 ## Inspect an experiment
 
-`kind: admit` means a measured design entered the archive. Its `accepted` field specifically indicates whether it became the new best/next parent. Inspect `parent_id`, `candidate_id`, `parent_score`, `candidate_score`, and `account` to distinguish exploration from selection.
+`kind: admit` means a measured design entered the archive. Its `accepted` field specifically indicates whether it became the new best/next parent. Inspect `parent_id`, `candidate_id`, `parent_score`, `candidate_score`, `name`, `thought`, and `fitness` to distinguish exploration from selection. Decision records also retain `account` as an alias of `thought` for existing readers.
 
-`kind: decline` explains unmeasured attempts. The final `promote` contains the selected `candidate_id`, full `archive`, and `declined_designs`. Archive rows themselves contain descriptions and scores; the per-attempt decisions provide the Snapshot linkage.
+`kind: decline` explains unmeasured attempts. The final `promote` contains the selected `candidate_id`, full `archive`, and `declined_designs`. Archive rows contain names, design ideas, and fitness; the per-attempt decisions provide the Snapshot linkage. Earlier experiment records keep their original `account` / `score` archive format.
 
 ## Source and adaptation
 

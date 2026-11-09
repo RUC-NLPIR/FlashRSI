@@ -26,6 +26,8 @@ Commit: TODO -- pin the reviewed upstream revision (network access unavailable
 
 from __future__ import annotations
 
+import re
+
 from flashrsi.algorithms import _replies
 from flashrsi.algorithms.adas import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
@@ -71,13 +73,17 @@ class ADAS(Algorithm):
         # of itself and what it scored. The leading design is tracked beside
         # the archive, because only a Snapshot can be checked out or promoted.
         archive = [
-            {"account": "the harness this run started from", "score": seed.score}
+            {
+                "name": "initial",
+                "thought": "the harness this run started from",
+                "fitness": seed.score,
+            }
         ]
         best, best_score = current, seed.score
         self._declined: list[dict] = []
 
         for step in range(self.config.max_steps):
-            candidate, account = await self._propose(archive, best, step)
+            candidate, design = await self._propose(archive, best, step)
             if candidate is None:
                 continue
             score = (await self._evaluate(candidate, dev, label="candidate")).score
@@ -85,7 +91,7 @@ class ADAS(Algorithm):
             # the next proposal is written against the whole history, so one
             # that scored worse still says this direction was tried, and what
             # it cost.
-            archive.append({"account": account, "score": score})
+            archive.append({**design, "fitness": score})
             self._record(
                 "decision",
                 {
@@ -98,7 +104,10 @@ class ADAS(Algorithm):
                     "accepted": score > best_score,
                     "parent_score": best_score,
                     "candidate_score": score,
-                    "account": account,
+                    **design,
+                    "fitness": score,
+                    # Retain the description field used by existing record readers.
+                    "account": design["thought"],
                 },
             )
             # A tie does not move the incumbent: an equal score is no evidence.
@@ -117,25 +126,29 @@ class ADAS(Algorithm):
         archive.
         """
         rules = self._evidence([dict(self.target.component_rules)])
+        evidence = self._evidence(archive)
         working = self._run_dir / "working" if self._run_dir else None
         with parent.check_out(working_dir=working) as directory:
-            account = _replies.tagged(
+            design = self._design(
                 await self.worker.edit(
                     directory,
-                    prompts.PROPOSE.format(
-                        archive=self._evidence(archive), rules=rules
-                    ),
+                    prompts.PROPOSE.format(archive=evidence, rules=rules),
                 ),
-                "DESIGN",
-            ).strip()
+                fallback_name=f"design-{step + 1}",
+            )
             for _ in range(self.config.num_reflections):
-                account = _replies.tagged(
+                design = self._design(
                     await self.worker.edit(
                         directory,
-                        prompts.REFLECT.format(rules=rules, account=account),
+                        prompts.REFLECT.format(
+                            archive=evidence,
+                            rules=rules,
+                            name=design["name"],
+                            account=design["thought"],
+                        ),
                     ),
-                    "DESIGN",
-                ).strip()
+                    fallback_name=design["name"],
+                )
             # The meta agent ran its own tools in there, so it also left what
             # those tools produce; commit refuses those paths outright.
             discard_runtime_files(directory)
@@ -149,7 +162,15 @@ class ADAS(Algorithm):
             # is recognized by its files and not by its identity.
             if not parent.changed_paths(candidate):
                 return self._decline(parent, step, "the harness was left unchanged")
-        return candidate, account
+        return candidate, design
+
+    def _design(self, reply: str, *, fallback_name: str) -> dict[str, str]:
+        """Keep legacy description-only replies usable while recording names."""
+        names = re.findall(r"<NAME>((?:(?!<NAME>).)*?)</NAME>", reply, re.DOTALL)
+        return {
+            "name": (names[-1].strip() if names else "") or fallback_name,
+            "thought": _replies.tagged(reply, "DESIGN").strip(),
+        }
 
     def _decline(self, parent: Snapshot, step: int, problem: str):
         """Cost one step rather than the experiment.

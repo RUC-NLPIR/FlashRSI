@@ -32,16 +32,16 @@ flashrsi run --config examples/quickstart.yaml \
 
 1. 在完整 dev 上评估初始 Snapshot，用其说明与分数初始化档案，并设为当前最佳。
 2. 检出最佳 Snapshot，向 Worker 提供评分档案和 Target 组件规则，请它编辑文件并用 `<DESIGN>` 说明新设计。
-3. 在同一 checkout 中再执行 `num_reflections` 次编辑复查。每次读取最新设计说明和组件规则，只有最初的提案提示显式包含档案。这些复查都在测量前进行，框架不做中间评估。
+3. 在同一 checkout 中再执行 `num_reflections` 次编辑复查。每次提供与提案相同的评分档案、最新设计名称和说明，以及组件规则。这些复查都在测量前进行，框架不做中间评估。
 4. 清理已知运行时产物，只提交一次。空编辑或非法资源变化被拒绝，不评估候选，但消耗一步。
 5. 在完整 dev 上评估合法候选，无论升降都将最终说明与分数加入档案。严格更高分才更新 `best`，同分保留此前版本。
 6. 下一步仍从 best 出发，而不是从落选的上一个候选出发。结束时提升 best，记录档案和被拒设计。
 
-传给 Worker 的档案包含 `account` 和 `score`，不包含全部历史源码树或执行轨迹。完整列表会保留，但进入提示的序列化内容受 `max_evidence_chars` 截断。与 [Meta-Harness](./meta-harness.zh-CN.md) 不同，这里不提供可选择检索的文件系统历史。
+传给 Worker 的档案包含 `name`、`thought`（设计思路及实现说明）和 `fitness`（实测 dev 主指标均值）。完整列表会保留，但进入提示的序列化内容受 `max_evidence_chars` 截断。历史源码树和执行轨迹另行保存在实验记录中。文件系统历史与选择检索的方式见 [Meta-Harness](./meta-harness.zh-CN.md)。
 
 ## 设计说明与非法编辑
 
-最后一对完整 `<DESIGN>...</DESIGN>` 内的文本作为设计说明；没有完整标签时使用整条回复。这里没有 AHE 式逐文件预测 manifest，编辑后的文件定义候选，说明供后续提案理解设计。
+最后一对完整 `<NAME>...</NAME>` 提供设计名称，最后一对完整 `<DESIGN>...</DESIGN>` 提供 `thought`。没有完整 DESIGN 标签时使用整条回复作为说明。名称缺失或为空时，第 N 次尝试默认使用 `design-N`，反思中省略名称则沿用最近的名称。初始档案条目名为 `initial`。Fitness 由框架评估填写。编辑后的文件定义候选，说明供后续提案理解设计。
 
 被拒编辑没有分数，所以不进入评分档案。拒绝理由写入决策及最终 `declined_designs`，但不交给下一轮提案提示。已经评估的低分设计则会进入档案。
 
@@ -61,9 +61,9 @@ Worker 失败向外传播。候选运行错误由 Target 和 Benchmark 的契约
 
 ## 查看实验记录
 
-`kind: admit` 表示已测设计进入档案，其中 `accepted` 专门表示它是否成为新最佳/下一轮父版本。结合 `parent_id`、`candidate_id`、`parent_score`、`candidate_score` 和 `account` 区分探索与选中。
+`kind: admit` 表示已测设计进入档案，其中 `accepted` 专门表示它是否成为新最佳/下一轮父版本。结合 `parent_id`、`candidate_id`、`parent_score`、`candidate_score`、`name`、`thought` 和 `fitness` 区分探索与选中。决策记录还保留 `account` 作为 `thought` 的别名，供已有读取脚本使用。
 
-`kind: decline` 解释未评估的尝试。最终 `promote` 包含选中的 `candidate_id`、完整 `archive` 和 `declined_designs`。档案行本身只有说明与分数，Snapshot 对应关系在各次尝试的决策中。
+`kind: decline` 解释未评估的尝试。最终 `promote` 包含选中的 `candidate_id`、完整 `archive` 和 `declined_designs`。档案行包含名称、设计思路和 fitness，Snapshot 对应关系在各次尝试的决策中。历史实验记录保留原来的 `account` / `score` 档案格式。
 
 ## 来源与适配
 
