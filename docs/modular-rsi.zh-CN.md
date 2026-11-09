@@ -12,7 +12,7 @@ train 必须非空，任务 ID 唯一且与 dev/test ID 不重合。dev 不参�
 
 Worker 必须是独立的 Agent 实例，配置 `algorithm.worker.type: agent`。编辑 Target checkout 时，它保留自己的 harness 资源、模型与连接配置。Target 和 Worker 可以使用不同 harness。Target 活动 Snapshot 只在最终提升时切换，故障候选不会替换 Worker 的执行资源。
 
-`algorithm.modules` 必须完整声明下述五个运行时模块或三个扩展模块。每个模块映射到非空的现有 Target Snapshot 文件列表。`evolve_scope = {"*"}` 总体允许 Target 组件编辑，模块文件列表进一步限制每次修改范围。
+`algorithm.modules` 必须完整声明下述五个运行时模块或扩展模块组合。每个模块映射到非空的现有 Target Snapshot 文件列表。`evolve_scope = {"*"}` 总体允许 Target 组件编辑，模块文件列表进一步限制每次修改范围。
 
 ## 模块边界
 
@@ -29,16 +29,21 @@ modules:
 
 多个模块可以共用一个文件。框架强制约束的是**文件边界**；文件内部的功能职责靠提示与 Worker review 约束，不是 AST 隔离或函数级权限。不接受 `文件.py::函数`。允许在已声明文件内新增或删除函数、签名、decorator；若需要新的文件路径，必须先在初始资源映射中准备好。
 
-Claude Code 提供原生扩展资源，不开放闭源运行时源码。其三模块配置为：
+Claude Code 提供原生扩展资源，不开放闭源运行时源码。其四模块配置为：
 
 ```yaml
 modules:
   prompt: [CLAUDE.md]
   skill: [skills/workflow/SKILL.md]
   hook: [hooks/hooks.json]
+  tool: [.mcp.json]
 ```
 
-[Claude Code 示例](../examples/modular_rsi_claude_code.yaml)通过 `source_dir` 提供这些文件和原生插件资源，并使用独立编辑 Worker。这些是扩展分支，不等价于替换五种运行时机制。文件列表是精确路径，不是目录通配符。切换 harness 时要同时提供匹配的资源目录和模块映射，不会根据 harness 名称自动推断。
+`tool` 分支编辑 `.mcp.json` 中的原生 MCP 服务注册，包括服务名称、地址和启动参数。示例从空的 `mcpServers` 开始，实验配置者应先提供可用服务及其前置条件，再让 Worker 调整注册配置。Claude Code 通过 SDK 加载所选 Snapshot 的注册表。凭据放在运行环境中，benchmark 的任务工具、环境和评分器由对应集成管理。
+
+示例为该分支开放 `.mcp.json`。若还需要演化本地 MCP 服务代码，应将其文件声明为 Target 资源，并把已有文件路径显式加入 `modules.tool`。服务依赖与连通性需要在 Target 实际运行的位置准备好，包括任务容器。
+
+[Claude Code 示例](../examples/modular_rsi_claude_code.yaml)通过 `source_dir` 提供这些文件和原生插件资源，并使用独立编辑 Worker。Claude Code 使用自身的原生执行循环。已有 prompt、skill、hook 三模块配置仍受支持。文件列表是精确路径，不是目录通配符。切换 harness 时要同时提供匹配的资源目录和模块映射，不会根据 harness 名称自动推断。
 
 ## 运行小示例
 
@@ -93,7 +98,7 @@ findings 必须是 JSON 数组。每项严格包含 `target`、`task_ids`、`rat
 
 | 字段 | 默认值 | 含义 |
 | --- | --- | --- |
-| `modules` | `{}` | 必填的完整五运行时模块或三扩展模块到现有文件的映射；空默认值无法运行。 |
+| `modules` | `{}` | 必填的完整五运行时模块或三/四扩展模块到现有文件的映射；空默认值无法运行。 |
 | `num_epochs` | `3` | 每个独立模块的 epoch 数；整数，至少 1。 |
 | `batch_size` | `10` | 每批 train 任务数；整数，至少 1。 |
 | `num_rollouts` | `3` | 每题用于对比证据的重复执行次数；整数，至少 2。 |
@@ -136,7 +141,7 @@ TerminalBench 与 SWEBench 可选配置 `benchmark.evolution_data_path` 和 `evo
 [实现](../flashrsi/algorithms/modular_rsi/__init__.py)固定引用 [IQuestLab/ModularRSI](https://github.com/IQuestLab/ModularRSI/tree/b5c72c36b0d08ff93f00ee202a8fbdebe849dfb9) commit `b5c72c36b0d08ff93f00ee202a8fbdebe849dfb9`，参考 `src/harbor/agents/terminus_2_modular/self_evo/`。本地代码与提示围绕 FlashRSI 接口独立编写。
 
 - 原生 harness 文件替代上游可发现函数库及按任务组合的运行时 Function Composer，未提供函数级权限、discovery-contract 强制检查或 self-attribute audit。
-- 三扩展模块模式用于 Claude Code 等 harness，不会开放五种运行时机制的源码。
+- 扩展模式演化 prompt、skill、hook 和可选的 MCP 工具注册资源，Claude Code 管理自身的原生执行循环。
 - 分支顺序执行。集成通过 Worker 文件编辑和 review 完成，包括共享文件冲突处理及可选的冗余函数删除，没有独立 Function Merge 阶段。
 - 默认允许同源 train/dev/test 划分，不强制采用上游独立演化池；可显式配置外部数据。
 - Python 检查编译修改源码，不在宿主 import 候选。diff review 是模型判断，不是独立反作弊证明。执行与最终选择遵循上述本地门禁，不做 dev 分数优化。

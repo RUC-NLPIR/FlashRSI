@@ -1,4 +1,4 @@
-# Three native extension branches; this is not five-module runtime evolution.
+# Four native extension branches using Claude Code's own execution loop.
 run:
   output_dir: ../runs
 benchmark:
@@ -39,3 +39,4 @@ algorithm:
     prompt: [CLAUDE.md]
     skill: [skills/workflow/SKILL.md]
     hook: [hooks/hooks.json]
+    tool: [.mcp.json]

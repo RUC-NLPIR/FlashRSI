@@ -498,10 +498,11 @@ class ModularRSI(Algorithm):
         if not isinstance(modules, Mapping) or set(modules) not in (
             set(MODULES),
             {"prompt", "skill", "hook"},
+            {"prompt", "skill", "hook", "tool"},
         ):
             raise ValueError(
                 "algorithm.modules must map the five runtime modules or "
-                "the three extension modules (prompt, skill, hook) to files"
+                "the extension modules (prompt, skill, hook, optionally tool) to files"
             )
         for module in modules:
             if (

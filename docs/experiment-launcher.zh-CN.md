@@ -83,7 +83,7 @@ SkillOpt 使用 `num_epochs`、`batch_size` 等。AHE 必须使用 Agent Worker�
 ModularRSI 使用当前 Benchmark 的 `train` 演化，允许与 dev/test 来自同一数据集；
 train 任务 ID 必须唯一且与 dev/test 不重合。需要配置模块文件映射；可选的独立演化数据
 仍可通过 `benchmark.evolution_data_path` 等现有参数提供，见 [SWE 示例](../examples/modular_rsi_swe_bench.yaml)。默认采用五个运行时模块，
-Claude Code 可使用 [prompt / skill / hook 三扩展示例](../examples/modular_rsi_claude_code.yaml)。
+Claude Code 可使用 [prompt / skill / hook / tool 四扩展示例](../examples/modular_rsi_claude_code.yaml)。
 
 上述六个新增算法来自 FlashRSI-Lite commit `d8d5e35e77e1c0360a1df55505db3cfb2b113cd0`，
 已有六个算法保留当前项目的实现与修复。
