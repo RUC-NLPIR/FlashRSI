@@ -78,3 +78,21 @@ The viewer takes a `data-path` and reads its titles, models, splits, update sche
 The display schema uses `schemaVersion: 1`, experiment metadata (`algorithm`, `benchmark`, `date`, `dateLabel`, `seed`, `dataset`, `description`, and `metric`), and an `agents` mapping. Each agent includes its label, models, splits, initial dev score, accepted count, candidate decisions, development evaluations, and progress logs. Decisions carry scores, acceptance, rationale, proposed edits, and before/after file comparisons. The TypeScript types in `docs/.vitepress/theme/ExperimentExplorer.vue` define these fields.
 
 Use `null` for an unscored candidate. Preserve the recorded acceptance decisions and keep test scores and answers out of this display dataset, including log summaries. Missing conversations must remain missing rather than being reconstructed as model transcripts. Updating an existing experiment only requires regenerating its display JSON and rebuilding the site.
+
+### Selection-aware SearchQA views
+
+The [experiment index](../experiments/index.md) also includes eleven method-specific views using `schemaVersion: 2`. These pages use `SelectionExplorer.vue` for harness selection, resource comparison, and the event ledger. The components under `docs/.vitepress/theme/selection/` each implement a method's actual selection process, rather than assigning every event a generic accepted/rejected dev update.
+
+Regenerate these display datasets from reduced historical run records:
+
+```bash
+python scripts/export_searchqa_explorers.py \
+  --records /path/to/reduced-searchqa-records \
+  --output docs/public/experiment-data/searchqa
+```
+
+The input contains `records/<algorithm>-<harness>.json`, with recorded non-test algorithm events, evaluation summaries, source model configuration, and deduplicated resource states/text. DarwinX additionally uses `records-full/` to preserve its original branch search alongside the later fixed-archive reselection. The exporter selects public model names without publishing connection settings, omits test evaluation stages, and keeps the recorded selected artifact. Resource text is a separate file, loaded only when a visitor opens a comparison.
+
+Each method's **View diff** action opens the shared file inspector within its selection view and preserves the current selection. The inspector supports added/removed lines with folded unchanged context, complete before/after text, side-by-side comparisons, and recorded executable flags. Its default comparison is the recorded parent when available, otherwise the initial version; visitors can select a different base. The line diff normalizes CRLF, while the complete text retains the archived content. Large unrelated files use a bounded full-replacement display.
+
+Adding more runs of an existing method means mapping their records to that method's display fields and adding a page entry. A new selection policy needs its own view: train optimization is not dev selection, archive admission is not final promotion, and a successful execution gate is not a correct answer. Do not silently replay a new selection rule over historical scores. Mark missing evidence as missing.
