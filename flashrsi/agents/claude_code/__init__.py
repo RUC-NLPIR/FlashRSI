@@ -12,6 +12,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from flashrsi._records import _redact, _secrets
+from flashrsi.agents.claude_code._mcp import evidence as _mcp_evidence
 from flashrsi.core import Agent, Trajectory
 
 _LOGGER = logging.getLogger(__name__)
@@ -183,6 +184,8 @@ class ClaudeCode(Agent):
                                     error = _result_error(result)
                                     if error:
                                         break
+                    if result is not None and not error:
+                        messages.append(await _mcp_evidence(client, messages))
                 finally:
                     # Cleanup has its own bounded SDK waits. The execution
                     # deadline or caller cancellation must not interrupt them.
