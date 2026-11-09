@@ -52,3 +52,29 @@ Add a Markdown page and link it from `docs/.vitepress/config.mts`. Keep links re
 `docs/README.md` stays available as a Markdown overview and is built at `overview.html`. `docs/index.md` is the website's quickstart. All integration notes are reachable through [the reference index](../reference.md).
 
 Before publishing, run the production build, check links and anchors, and inspect desktop and mobile layouts. Avoid putting credentials, private run logs, or experimental output into public documentation.
+
+## Experiment explorer
+
+The [SkillOpt × SearchQA explorer](../experiments/skillopt-searchqa.md) uses a static display dataset under `docs/public/experiment-data/`. It includes selected historical candidate decisions, skill comparisons, development evaluations, and progress logs. Sealed-test results and complete model transcripts are not included.
+
+To regenerate the display dataset from the curated historical experiment directory:
+
+```bash
+python scripts/export_skillopt_explorer.py \
+  --source /path/to/skillopt-searchqa-deepseek-20260920-seed42 \
+  --output docs/public/experiment-data/skillopt-searchqa.json
+```
+
+The exporter selects display fields rather than copying model configs or the original experiment directory. Review the exported text before publishing. The page is built and hosted with the existing documentation site; it needs no backend or model API.
+
+### Adding another experiment
+
+The viewer takes a `data-path` and reads its titles, models, splits, update schedule, and records from that JSON file. It is shared across experiment pages.
+
+1. Export a display JSON into `docs/public/experiment-data/`. The current exporter handles the curated SkillOpt/SearchQA archive; other log formats need their own mapping to the display schema.
+2. Copy `docs/experiments/skillopt-searchqa.md`, update its title and description, and point `data-path` at the new JSON.
+3. Add the page to `docs/experiments/index.md`, then build and check the site before deploying.
+
+The display schema uses `schemaVersion: 1`, experiment metadata (`algorithm`, `benchmark`, `date`, `dateLabel`, `seed`, `dataset`, `description`, and `metric`), and an `agents` mapping. Each agent includes its label, models, splits, initial dev score, accepted count, candidate decisions, development evaluations, and progress logs. Decisions carry scores, acceptance, rationale, proposed edits, and before/after file comparisons. The TypeScript types in `docs/.vitepress/theme/ExperimentExplorer.vue` define these fields.
+
+Use `null` for an unscored candidate. Preserve the recorded acceptance decisions and keep test scores and answers out of this display dataset, including log summaries. Missing conversations must remain missing rather than being reconstructed as model transcripts. Updating an existing experiment only requires regenerating its display JSON and rebuilding the site.
