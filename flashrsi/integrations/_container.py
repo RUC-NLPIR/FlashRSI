@@ -7,6 +7,7 @@ import asyncio
 import importlib
 import json
 import os
+from contextlib import AsyncExitStack
 from pathlib import Path
 
 import yaml
@@ -72,7 +73,14 @@ async def _run(request_path: Path, output_path: Path) -> int:
         # This process receives a complete, validated version from the host.
         # Recapturing its files as a seed would discard the original lineage.
         agent._snapshot = snapshot
-        result = await agent.run(request["prompt"], working_dir=Path.cwd())
+        async with AsyncExitStack() as environment:
+            if "appworld_bridge" in request:
+                from flashrsi.integrations._appworld_legacy import bridge
+
+                await environment.enter_async_context(
+                    bridge(Path.cwd(), request["appworld_bridge"])
+                )
+            result = await agent.run(request["prompt"], working_dir=Path.cwd())
     except Exception as exc:
         result = Trajectory(
             status="error",

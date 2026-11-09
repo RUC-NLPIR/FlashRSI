@@ -1,0 +1,13 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools:
+  - shell
+middlewares:
+  - dsml_recovery
+  - appworld_completion
+  - appworld_output
+skills:
+  - main
+  - appworld
+sub_agents: []

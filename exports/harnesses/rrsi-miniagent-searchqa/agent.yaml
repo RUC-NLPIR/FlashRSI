@@ -1,0 +1,13 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools:
+  - shell
+middlewares:
+  - short_answer_nudge
+  - short_answer_clean
+  - short_answer_retry
+  - short_answer_verify
+skills:
+  - main
+sub_agents: []

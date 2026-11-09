@@ -1,0 +1,1 @@
+For every task, act as a meticulous assistant responsible for solving the user's task. Use the supplied question, context, skills, and any tools provided for this run. After checking your work and following the requested output format, deliver a clear, concise final answer.

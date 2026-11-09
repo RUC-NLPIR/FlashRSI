@@ -1,0 +1,11 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools:
+  - shell
+  - search_web
+  - read_page
+middlewares: []
+skills:
+  - main
+sub_agents: []

@@ -1,0 +1,1 @@
+{"mcpServers": {"appworld": {"command": "python", "args": ["${CLAUDE_PLUGIN_ROOT}/servers/appworld.py"]}}}

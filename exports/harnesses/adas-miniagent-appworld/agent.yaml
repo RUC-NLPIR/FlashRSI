@@ -1,0 +1,14 @@
+prompts:
+  system: prompts/system.md
+  extract: prompts/extract.md
+tools:
+  - appworld_execute
+middlewares:
+  - api_guard
+  - autodoc
+  - method_docs
+  - autodebug
+  - verify_final
+skills:
+  - appworld
+sub_agents: []
