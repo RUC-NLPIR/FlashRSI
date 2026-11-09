@@ -78,7 +78,7 @@ train 替换为 2025 题目。原生整数评分不变，元数据记录来源�
 与用途；手填 `evolution_source` 不能绕过检查。
 
 见 [ModularRSI + AIME 示例](../examples/modular_rsi_aime.yaml)。Claude Code 版本使用
-[三扩展示例](../examples/modular_rsi_claude_code.yaml) 中的 `agent.source_dir` 与
-prompt/skill/hook 文件映射，并保留各角色独立的模型配置与预算。
+[四扩展示例](../examples/modular_rsi_claude_code.yaml) 中的 `agent.source_dir` 与
+prompt/skill/hook/tool 文件映射，并保留各角色独立的模型配置与预算。
 
 执行型 Coding 基准见 [Coding 与 SpreadsheetBench 2 接入](coding-working-benchmarks.md)。

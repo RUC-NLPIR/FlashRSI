@@ -4,5 +4,7 @@ skill:
   - skills/**
 hook:
   - hooks/**
+tool:
+  - .mcp.json
 config:
   - .claude-plugin/plugin.json

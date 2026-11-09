@@ -12,7 +12,7 @@ Train must be non-empty, its task IDs unique and disjoint from dev/test IDs. Dev
 
 The Worker must be a separate Agent instance with `algorithm.worker.type: agent`. It keeps its own harness resources, model, and connection settings while editing Target checkouts. Target and Worker may use different harnesses. The Target's active Snapshot changes only at final promotion, so a broken candidate does not replace the Worker's execution resources.
 
-`algorithm.modules` must name either all five runtime modules or all three extension modules below. Every module needs a non-empty list of existing Target Snapshot files. `evolve_scope = {"*"}` permits Target components generally, while module file lists further restrict each edit.
+`algorithm.modules` must name either all five runtime modules or the extension modules below. Every module needs a non-empty list of existing Target Snapshot files. `evolve_scope = {"*"}` permits Target components generally, while module file lists further restrict each edit.
 
 ## Module boundaries
 
@@ -29,16 +29,25 @@ modules:
 
 Multiple modules may share a file. The framework enforces **file boundaries**; functional boundaries within those files are instructions checked by the Worker review, not AST isolation or function-level permissions. `file.py::function` is not accepted. Changes may add or remove functions, signatures, or decorators inside allowed files; new file paths must already exist in the initial resource mapping to be eligible.
 
-Claude Code exposes native extension resources instead of its closed runtime source. Its three-module configuration is:
+Claude Code exposes native extension resources instead of its closed runtime source. Its four-module configuration is:
 
 ```yaml
 modules:
   prompt: [CLAUDE.md]
   skill: [skills/workflow/SKILL.md]
   hook: [hooks/hooks.json]
+  tool: [.mcp.json]
 ```
 
-The [Claude Code example](../examples/modular_rsi_claude_code.yaml) supplies these files and native plugin resources through `source_dir`, and uses a separate editing Worker. These are extension branches, not replacements for the five runtime mechanisms. File lists are exact paths, not directory globs. Changing harnesses requires a matching resource directory and module mapping; neither is inferred from the harness name.
+The `tool` branch edits native MCP server registration in `.mcp.json`, including server names, endpoints, and launch arguments. The example starts with an empty `mcpServers` object. Supply the available services and their prerequisites before asking the Worker to configure them. Claude Code loads the selected Snapshot's registration through its SDK. Credentials belong in the runtime environment. Benchmark task tools, environments, and graders remain under their benchmark integrations.
+
+The example grants this branch access to `.mcp.json`. To evolve a local MCP server implementation as well, declare its files as Target resources and explicitly include their existing paths in `modules.tool`. Registering a service requires its dependencies and connectivity wherever the Target runs, including task containers.
+
+MCP changes have an additional acceptance gate. A changed `.mcp.json` must be valid JSON with an `mcpServers` mapping. Compared with the initial Snapshot, each added or reconfigured server must be connected and expose tools in every sampled execution, and at least one of its discovered tools must have a completed, non-error call across the sampled tasks. Changes to other declared `modules.tool` files require this evidence for all currently registered servers. Removed servers must no longer be loaded. These checks also run after merging branches and before final promotion; unchanged MCP resources do not add this requirement.
+
+Claude Code records native SDK discovery and matched tool requests/results in an `MCPStatus` trajectory message, excluding server configs and credentials. Missing evidence, pending/failed/auth-required connections, empty tool discovery, or no successful call reject the candidate. Other adapters must provide equivalent `MCPStatus` evidence for this gate; missing evidence is not treated as success. The gate reads actual execution traces and does not invoke arbitrary tools itself. Use training tasks that exercise the affected tools and a sufficient `validation_samples` budget; an unrelated sampled task can leave a useful change unverified and therefore rejected. A successful protocol-level tool result does not prove its content is correct or the change improves benchmark scores.
+
+The [Claude Code example](../examples/modular_rsi_claude_code.yaml) supplies these files and native plugin resources through `source_dir`, and uses a separate editing Worker. Claude Code retains its native execution loop. Existing three-module configurations with prompt, skill, and hook remain supported. File lists are exact paths, not directory globs. Changing harnesses requires a matching resource directory and module mapping; neither is inferred from the harness name.
 
 ## Run a small example
 
@@ -93,7 +102,7 @@ Implementation defaults belong under `algorithm`.
 
 | Field | Default | Meaning |
 | --- | --- | --- |
-| `modules` | `{}` | Required complete five-runtime-module or three-extension-module mapping to existing files; the empty default cannot run. |
+| `modules` | `{}` | Required five-runtime-module or three/four-extension-module mapping to existing files; the empty default cannot run. |
 | `num_epochs` | `3` | Epochs per independent module; integer, at least 1. |
 | `batch_size` | `10` | Train tasks per batch; integer, at least 1. |
 | `num_rollouts` | `3` | Repeated executions per task for contrast evidence; integer, at least 2. |
@@ -136,7 +145,7 @@ Final `promote` records the selected candidate and a `modules` mapping from each
 The [implementation](../flashrsi/algorithms/modular_rsi/__init__.py) pins [IQuestLab/ModularRSI](https://github.com/IQuestLab/ModularRSI/tree/b5c72c36b0d08ff93f00ee202a8fbdebe849dfb9) commit `b5c72c36b0d08ff93f00ee202a8fbdebe849dfb9`, referencing `src/harbor/agents/terminus_2_modular/self_evo/`. The local code and prompts are independently written around FlashRSI interfaces.
 
 - Native harness files replace upstream's discoverable function library and task-aware runtime Function Composer. There is no function-level permission system, discovery-contract enforcement, or self-attribute audit.
-- The three-extension-module mode supports harnesses such as Claude Code; it does not expose the source of the five runtime mechanisms.
+- Extension mode evolves prompt, skill, hook, and optionally MCP tool registration resources while Claude Code manages its native execution loop.
 - Branches run sequentially. Integration uses Worker file editing and review, including shared-file conflict resolution and possible removal of redundant functions; there is no separate Function Merge stage.
 - The default permits same-source train/dev/test partitions instead of requiring upstream's independent evolution pool. Optional external data can be configured explicitly.
 - Python checks compile changed source without importing it into the host. Diff review is a model judgment, not an independent anti-cheat proof. Execution and final selection follow the local gates above rather than dev-score optimization.

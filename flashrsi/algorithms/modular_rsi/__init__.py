@@ -17,6 +17,7 @@ from difflib import unified_diff
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from flashrsi.algorithms.modular_rsi import _mcp
 from flashrsi.algorithms.modular_rsi import _prompts as prompts
 from flashrsi.core import Algorithm, Snapshot
 from flashrsi.core.snapshot import discard_runtime_files
@@ -360,6 +361,8 @@ class ModularRSI(Algorithm):
                 changed = parent.changed_paths(candidate)
                 if set(changed) - set(allowed):
                     raise ValueError("edit outside module files")
+                if ".mcp.json" in changed:
+                    _mcp.servers(candidate)
                 for path in changed:
                     if path.endswith(".py") and path in candidate.files:
                         compile(candidate.files[path].content, path, "exec")
@@ -466,8 +469,14 @@ class ModularRSI(Algorithm):
     async def _execution_gate(self, candidate, tasks, module):
         gate = {"module": module, "snapshot_id": candidate.id}
         try:
+            requirements = _mcp.required(
+                self.target.snapshot, candidate, self.config.modules.get("tool", [])
+            )
             results = await self._evaluate(candidate, tasks, label="execution_gate")
             gate["passed"] = all(row.status == "finished" for row in results)
+            if requirements is not None:
+                gate["mcp"] = requirements
+                gate["mcp"].update(_mcp.validate(requirements, results))
         except (ValueError, TypeError, KeyError, AttributeError) as error:
             gate.update(passed=False, problem=str(error))
         self._record("gate", gate)
@@ -498,10 +507,11 @@ class ModularRSI(Algorithm):
         if not isinstance(modules, Mapping) or set(modules) not in (
             set(MODULES),
             {"prompt", "skill", "hook"},
+            {"prompt", "skill", "hook", "tool"},
         ):
             raise ValueError(
                 "algorithm.modules must map the five runtime modules or "
-                "the three extension modules (prompt, skill, hook) to files"
+                "the extension modules (prompt, skill, hook, optionally tool) to files"
             )
         for module in modules:
             if (
