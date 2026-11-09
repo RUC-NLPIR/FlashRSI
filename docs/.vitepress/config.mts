@@ -32,6 +32,7 @@ export default defineConfig({
       { text: 'Project page', link: '/project.html', activeMatch: '^/project\\.html$' },
       { text: 'Guide', link: '/guide/installation', activeMatch: '^/(guide/|$|index)' },
       { text: 'Integrations', link: '/integrations/algorithms', activeMatch: '^/integrations/' },
+      { text: 'Experiments', link: '/experiments/', activeMatch: '^/experiments/' },
       { text: 'Build', link: '/development/', activeMatch: '^/development/' },
       { text: '简体中文', link: '/usage.zh-CN' },
     ],
