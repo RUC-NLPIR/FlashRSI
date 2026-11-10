@@ -18,6 +18,13 @@ next:
   </div>
 </div>
 
+We welcome community experiment results and reproductions! [Submit your results](https://github.com/RUC-NLPIR/FlashRSI/issues/new) or [open a pull request](https://github.com/RUC-NLPIR/FlashRSI/compare).
+
+<section id="news" aria-labelledby="news-title">
+  <h2 id="news-title">📣 Latest News</h2>
+  <!-- Add dated news entries here. -->
+</section>
+
 This quickstart runs **SkillOpt with MiniAgent** on 12 bundled SearchQA questions. It uses six questions for train, three for dev, and three for test. You need Python, a running Docker Linux daemon, and two model configurations. Each Target task runs in a separate container with access to its configured model endpoint. It exercises one fast update; see the [SkillOpt guide](./skillopt.md) for slow updates, selection rules, and budgets.
 
 ## What FlashRSI is

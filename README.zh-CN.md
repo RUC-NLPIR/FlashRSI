@@ -21,6 +21,18 @@
 </p>
 
 <p align="center">
+  <b>欢迎大家提交实验结果与复现记录！</b><br>
+  <a href="https://github.com/RUC-NLPIR/FlashRSI/issues/new">提交实验结果</a> ·
+  <a href="https://github.com/RUC-NLPIR/FlashRSI/compare">发起 Pull Request</a> ·
+  <a href="#news">最新动态</a>
+</p>
+
+<div id="news">
+  <h2>📣 最新动态</h2>
+  <!-- 在此添加带日期的动态。 -->
+</div>
+
+<p align="center">
   <a href="README.md">English</a> · <b>简体中文</b>
 </p>
 
