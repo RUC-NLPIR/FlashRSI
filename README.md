@@ -31,6 +31,7 @@
 <div id="news">
   <h2>📣 Latest News</h2>
   <ul>
+    <li>[Nov 10, 2026]: 🔍 We have released <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">HotpotQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
     <li>[Nov 09, 2026]: 🔍 We have released <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">SearchQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
   </ul>
 </div>
