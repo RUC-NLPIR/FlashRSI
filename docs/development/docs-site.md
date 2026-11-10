@@ -71,7 +71,7 @@ The exporter selects display fields rather than copying model configs or the ori
 
 The viewer takes a `data-path` and reads its titles, models, splits, update schedule, and records from that JSON file. It is shared across experiment pages.
 
-1. Export a display JSON into `docs/public/experiment-data/`. The current exporter handles the curated SkillOpt/SearchQA archive; other log formats need their own mapping to the display schema.
+1. Export a display JSON into `docs/public/experiment-data/`. The SkillOpt exporter handles the curated SearchQA archive and reduced HotpotQA records; other log formats need their own mapping to the display schema.
 2. Copy `docs/experiments/skillopt-searchqa.md`, update its title and description, and point `data-path` at the new JSON.
 3. Add the page to `docs/experiments/index.md`, then build and check the site before deploying.
 
@@ -79,7 +79,7 @@ The display schema uses `schemaVersion: 1`, experiment metadata (`algorithm`, `b
 
 Use `null` for an unscored candidate. Preserve the recorded acceptance decisions and keep test scores and answers out of this display dataset, including log summaries. Missing conversations must remain missing rather than being reconstructed as model transcripts. Updating an existing experiment only requires regenerating its display JSON and rebuilding the site.
 
-### Selection-aware SearchQA views
+### Selection-aware QA views
 
 The [experiment index](../experiments/index.md) also includes eleven method-specific views using `schemaVersion: 2`. These pages use `SelectionExplorer.vue` for harness selection, resource comparison, and the event ledger. The components under `docs/.vitepress/theme/selection/` each implement a method's actual selection process, rather than assigning every event a generic accepted/rejected dev update.
 
@@ -89,9 +89,19 @@ Regenerate these display datasets from reduced historical run records:
 python scripts/export_searchqa_explorers.py \
   --records /path/to/reduced-searchqa-records \
   --output docs/public/experiment-data/searchqa
+
+python scripts/export_searchqa_explorers.py \
+  --benchmark hotpotqa \
+  --records /path/to/reduced-hotpotqa-records \
+  --output docs/public/experiment-data/hotpotqa
+
+python scripts/export_skillopt_explorer.py \
+  --benchmark hotpotqa --reduced \
+  --source /path/to/reduced-hotpotqa-records \
+  --output docs/public/experiment-data/skillopt-hotpotqa.json
 ```
 
-The input contains `records/<algorithm>-<harness>.json`, with recorded non-test algorithm events, evaluation summaries, source model configuration, and deduplicated resource states/text. DarwinX additionally uses `records-full/` to preserve its original branch search alongside the later fixed-archive reselection. The exporter selects public model names without publishing connection settings, omits test evaluation stages, and keeps the recorded selected artifact. Resource text is a separate file, loaded only when a visitor opens a comparison.
+The input contains `records/<algorithm>-<harness>.json`, with recorded non-test algorithm events, evaluation summaries, source model configuration, and deduplicated resource states/text. SearchQA's DarwinX input additionally uses `records-full/` to preserve its original branch search alongside the later fixed-archive reselection. HotpotQA uses exact match as its score. The exporter selects public model names without publishing connection settings, omits test evaluation stages, and keeps the recorded selected artifact. Resource text is a separate file, loaded only when a visitor opens a comparison.
 
 Each method's **View diff** action opens the shared file inspector within its selection view and preserves the current selection. The inspector supports added/removed lines with folded unchanged context, complete before/after text, side-by-side comparisons, and recorded executable flags. Its default comparison is the recorded parent when available, otherwise the initial version; visitors can select a different base. The line diff normalizes CRLF, while the complete text retains the archived content. Large unrelated files use a bounded full-replacement display.
 

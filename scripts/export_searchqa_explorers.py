@@ -1,4 +1,4 @@
-"""Export selection-focused website data from reduced historical SearchQA records.
+"""Export selection-focused website data from reduced historical QA records.
 
 Input contains records/<algorithm>-<harness>.json and, for DarwinX, records-full/
 with its earlier search history. These reduced records retain algorithm events,
@@ -77,15 +77,15 @@ def take(value, keys):
     return {key: value[key] for key in keys if key in value}
 
 
-def metric(record):
+def metric(record, score_key="hard"):
     rows = record.get("per_task")
     if not isinstance(rows, list) or not rows:
         return None
-    scores = [row.get("metrics", {}).get("hard") for row in rows]
+    scores = [row.get("metrics", {}).get(score_key) for row in rows]
     return mean(scores) if all(isinstance(x, (int, float)) for x in scores) else None
 
 
-def build(raw, key, harness):
+def build(raw, key, harness, benchmark="searchqa"):
     records = raw["records"]
     meta = raw.get("meta") or {}
     if key == "evoharness":
@@ -144,7 +144,9 @@ def build(raw, key, harness):
                 "stage": re.sub(r"^\d+-", "", row["name"]).removesuffix(".json"),
                 "id": value.get("snapshot_id"),
                 "tasks": len(value["per_task"]),
-                "score": metric(value),
+                "score": metric(
+                    value, "exact_match" if benchmark == "hotpotqa" else "hard"
+                ),
             }
         )
     decisions = [
@@ -433,22 +435,40 @@ def build(raw, key, harness):
             for row in records
             if "reselection-gate" in row["name"]
         ]
+        if not gates:
+            gates = promotion.get("gates", [])
         dev = [
             node(row["id"], score=row["score"])
             for row in evaluations
             if row["stage"] == "reselection-dev"
         ]
+        if not dev:
+            dev = [
+                node(row["snapshot_id"], score=row["dev_score"])
+                for row in promotion.get("dev_scores", [])
+            ]
+        selection_rows = promotion.get("dev_scores", [])
+        eligible_ids = {
+            row["snapshot_id"]
+            for row in selection_rows
+            if row.get("gate_admitted", True)
+        }
         method = {
             "original": original,
             "gates": gates,
             "dev": dev,
-            "eligible": dev_selection(),
-            "newProposals": meta["new_proposals"],
-            "mode": meta["mode"],
+            "eligible": [row for row in dev_selection() if row["id"] in eligible_ids]
+            if selection_rows
+            else dev_selection(),
+            "newProposals": meta.get("new_proposals"),
+            "mode": meta.get("mode", "search_then_dev_gate_selection"),
         }
     elif key == "modular_rsi":
         branches = []
-        for name, version in promotion["modules"].items():
+        module_promotion = next(
+            (row for row in reversed(promotions) if "modules" in row), promotion
+        )
+        for name, version in module_promotion["modules"].items():
             branch_events = [row for row in decisions if row.get("module") == name]
             branches.append(
                 {
@@ -737,7 +757,7 @@ def build(raw, key, harness):
         "evaluations": evaluations,
         "events": events,
         "changedPaths": sorted(changed),
-        "resourcesPath": f"/experiment-data/searchqa/resources/{key}-{harness}.json",
+        "resourcesPath": f"/experiment-data/{benchmark}/resources/{key}-{harness}.json",
     }
     return agent, resources
 
@@ -759,16 +779,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--records", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--benchmark", choices=("searchqa", "hotpotqa"), default="searchqa"
+    )
     args = parser.parse_args()
     for key, (label, lens, rule) in METHODS.items():
         agents = {}
         for harness in ["miniagent", "claude_code"]:
             path = args.records / "records" / f"{key}-{harness}.json"
-            if key == "darwinx":
+            if key == "darwinx" and args.benchmark == "searchqa":
                 path = args.records / "records-full" / path.name
             with path.open(encoding="utf-8") as stream:
                 raw = json.load(stream)
-            agent, resources = build(raw, key, harness)
+            agent, resources = build(raw, key, harness, args.benchmark)
             agents[harness] = agent
             write(args.output / "resources" / f"{key}-{harness}.json", resources)
             print(
@@ -780,9 +803,13 @@ def main():
                 "schemaVersion": 2,
                 "key": key,
                 "algorithm": label,
-                "benchmark": "SearchQA",
+                "benchmark": "HotpotQA" if args.benchmark == "hotpotqa" else "SearchQA",
                 "lens": lens,
-                "selectionRule": rule,
+                "selectionRule": (
+                    "Original screen/confirmation decisions, the recorded dev gates, and final selection are distinct phases. This run selected from the searched archive after evolution."
+                    if args.benchmark == "hotpotqa" and key == "darwinx"
+                    else rule
+                ),
                 "agents": agents,
             },
         )

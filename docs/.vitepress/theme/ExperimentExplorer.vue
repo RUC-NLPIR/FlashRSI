@@ -14,12 +14,12 @@ type Agent = {
   splits: { train: number; dev: number; test: number }
   initialDev: number; accepted: number
   decisions: Candidate[]
-  evaluations: { stage: string; tasks: number; finished: number; hard: number; f1: number }[]
+  evaluations: { stage: string; tasks: number; finished: number; hard?: number; score?: number; f1: number }[]
   logs: { name: string; text: string }[]
 }
 type Archive = {
   schemaVersion: number; algorithm: string; benchmark: string; date: string; dateLabel: string
-  seed: number; dataset: string; description: string; metric: string; agents: Record<string, Agent>
+  seed: number; dataset: string; description: string; metric: string; scoreLabel?: string; agents: Record<string, Agent>
 }
 
 const props = defineProps<{ dataPath: string }>()
@@ -44,7 +44,7 @@ const updateSchedule = computed(() => {
   for (const row of agent.value?.decisions || []) counts.set(row.kind, (counts.get(row.kind) || 0) + 1)
   return [...counts].map(([kind, count]) => `${count} ${kind}`).join(' · ')
 })
-const pct = (score: number) => `${(score * 100).toFixed(2)}%`
+const pct = (score: number | null | undefined) => score == null ? 'Not recorded' : `${(score * 100).toFixed(2)}%`
 const status = (row: Candidate) => row.score === null ? 'Invalid edit' : row.accepted ? 'Accepted' : 'Rejected'
 const statusClass = (row: Candidate) => row.score === null ? 'invalid' : row.accepted ? 'accepted' : 'rejected'
 
@@ -154,7 +154,7 @@ const logLines = computed(() => {
             <line x1="57" :y1="chart.baseline" x2="877" :y2="chart.baseline" class="baseline-line" />
             <path :d="chart.best" class="best-line" />
             <circle v-for="point in chart.candidates" :key="point.number" :cx="point.x" :cy="point.y" :r="selected === point.index ? 6 : point.accepted ? 4.5 : 3.5" :class="['candidate-point', { accepted: point.accepted, selected: selected === point.index }]" role="button" tabindex="0" :aria-label="`Candidate ${point.number}: ${pct(point.score!)}, ${status(point)}`" @click="selectCandidate(point.index)" @keydown.enter.prevent="selectCandidate(point.index)" @keydown.space.prevent="selectCandidate(point.index)"><title>{{ `#${point.number} · ${point.kind} · ${pct(point.score!)} · ${status(point)}` }}</title></circle>
-            <text x="57" y="207" class="axis-label">Initial</text><text x="247" y="207" class="axis-label">10</text><text x="437" y="207" class="axis-label">20</text><text x="628" y="207" class="axis-label">30</text><text x="819" y="207" class="axis-label">40</text><text x="877" y="225" text-anchor="end" class="axis-caption">Candidate decision →</text>
+            <text x="57" y="207" class="axis-label">Initial</text><text v-for="fraction in [0.25, 0.5, 0.75, 1]" :key="fraction" :x="57 + Math.round(agent.decisions.length * fraction) / agent.decisions.length * 820" y="207" text-anchor="middle" class="axis-label">{{ Math.round(agent.decisions.length * fraction) }}</text><text x="877" y="225" text-anchor="end" class="axis-caption">Candidate decision →</text>
           </svg>
           <p class="chart-note">Dev: {{ agent.splits.dev }} tasks · Test is held out from selection · Invalid edits have no score and are listed below.</p>
         </div>
@@ -195,7 +195,7 @@ const logLines = computed(() => {
         <div class="section-heading"><div><h2>About this experiment</h2><p>{{ data!.description }}</p></div></div>
         <dl class="run-metadata"><div><dt>Dataset</dt><dd>{{ data!.dataset }}</dd></div><div><dt>Splits</dt><dd>{{ agent.splits.train }} train / {{ agent.splits.dev }} dev / {{ agent.splits.test }} test</dd></div><div><dt>Update schedule</dt><dd>{{ epochCount }} epochs · {{ updateSchedule }} decisions</dd></div><div><dt>Selection</dt><dd>Dev only · sealed test after selection</dd></div><div><dt>Primary metric</dt><dd>{{ data!.metric }}</dd></div><div><dt>Models</dt><dd>Target: {{ agent.targetModel }}<br>Worker: {{ agent.workerModel }}</dd></div></dl>
         <div class="scope-note"><h3>What is preserved here</h3><p>Candidate decisions, recorded edit rationale, archived skill versions, development evaluation summaries, and runtime logs. Test results are not displayed in this explorer. Epochs are displayed from 1; the original records use zero-based epochs.</p><p>These curated records do not include every Worker prompt or Target tool call. Invalid edits are kept without a score. This page displays recorded results and does not rerun models.</p></div>
-        <details class="evaluation-ledger"><summary>Evaluation ledger <span>{{ agent.evaluations.length }} records</span></summary><div class="table-scroll"><table><thead><tr><th>#</th><th>Stage</th><th>Tasks / finished</th><th>Hard score</th><th>F1</th></tr></thead><tbody><tr v-for="(row, index) in agent.evaluations" :key="index"><td>{{ index + 1 }}</td><td>{{ row.stage }}</td><td>{{ row.tasks }} / {{ row.finished }}</td><td>{{ pct(row.hard) }}</td><td>{{ pct(row.f1) }}</td></tr></tbody></table></div></details>
+        <details class="evaluation-ledger"><summary>Evaluation ledger <span>{{ agent.evaluations.length }} records</span></summary><div class="table-scroll"><table><thead><tr><th>#</th><th>Stage</th><th>Tasks / finished</th><th>{{ data?.scoreLabel || 'Hard score' }}</th><th>F1</th></tr></thead><tbody><tr v-for="(row, index) in agent.evaluations" :key="index"><td>{{ index + 1 }}</td><td>{{ row.stage }}</td><td>{{ row.tasks }} / {{ row.finished }}</td><td>{{ pct(row.score ?? row.hard) }}</td><td>{{ pct(row.f1) }}</td></tr></tbody></table></div></details>
       </section>
       <footer class="explorer-footer"><span>FlashRSI · Inspectable evolution</span><span>Historical evidence · {{ data!.date }} · Seed {{ data!.seed }}</span></footer>
     </template>

@@ -23,6 +23,7 @@ We welcome community experiment results and reproductions! [Submit your results]
 <section id="news" aria-labelledby="news-title">
   <h2 id="news-title">📣 Latest News</h2>
   <ul>
+    <li>[Nov 10, 2026]: 🔍 We have released <a href="./experiments/">HotpotQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
     <li>[Nov 09, 2026]: 🔍 We have released <a href="./experiments/">SearchQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
   </ul>
 </section>
