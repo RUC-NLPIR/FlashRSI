@@ -64,7 +64,7 @@ flashrsi run --config examples/modular_rsi.yaml \
   --algorithm.validation_samples 1
 ```
 
-The example's `split_counts: {train: 1, dev: 1, test: 1}` remains in effect. This still evolves five branches and performs integration, so one epoch is not one Worker edit. Append `--check-only` for initialization without model calls or remote authentication validation. For native Terminal-Bench or SWE tasks, configure the corresponding dataset and execution environment; see [Terminal configuration](../examples/modular_rsi.yaml) and [SWE configuration](../examples/modular_rsi_swe_bench.yaml).
+The example's `split_counts: {train: 1, dev: 1, test: 1}` remains in effect. This still evolves five branches and performs integration, so one epoch is not one Worker edit. Append `--check-only` for initialization without model calls or remote authentication validation. For native Terminal-Bench or SWE tasks, configure the corresponding dataset and execution environment; see [Terminal configuration](../examples/modular_rsi.yaml) and [SWE configuration](../examples/quickstarts/modular_rsi_swe_bench.yaml).
 
 ## Branch evolution and admission
 

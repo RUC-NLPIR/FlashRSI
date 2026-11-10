@@ -1,0 +1,48 @@
+run:
+  output_dir: ./runs/evoprompt-miniagent-terminalbench
+  seed: 42
+benchmark:
+  name: terminal_bench
+  split: auto
+  data_path: ./data/terminalbench/tasks
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 65535
+    reasoning_effort: high
+    llm_max_retries: 1
+  source_dir: ./harnesses/evoprompt-miniagent-terminalbench/target
+  max_turns: 100
+  harbor:
+    remote_docker: true
+    uv_install_source: github
+    setup_timeout: 600
+    integrity_review:
+      llm:
+        model_name: deepseek-flash
+        base_url: https://api.deepseek.com/v1
+      records_dir: ./runs/evoprompt-miniagent-terminalbench/integrity-review-records
+algorithm:
+  name: evoprompt
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 32768
+      reasoning_effort: high
+      llm_max_retries: 1
+    name: miniagent
+    source_dir: ./harnesses/evoprompt-miniagent-terminalbench/worker
+    timeout: 600
+    max_turns: 10
+  variant: de
+  population_size: 4
+  max_steps: 3
+  selection: wheel
+  survivor_selection: topk
+  donor_random: false
+  seed: 42

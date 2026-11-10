@@ -113,7 +113,7 @@ flashrsi run --config examples/quickstart.yaml [OPTIONS]
 ### Evaluate a Snapshot
 
 ```bash
-flashrsi evaluate --config examples/evaluate_hotpotqa.yaml \
+flashrsi evaluate --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/snapshot.json [OPTIONS]
 ```
 
@@ -127,7 +127,7 @@ evolution-only options.
 To switch the quickstart from skill learning to instruction search:
 
 ```bash
-flashrsi run --config examples/opro.yaml \
+flashrsi run --config examples/quickstarts/opro.yaml \
   --agent-harness miniagent \
   --benchmark searchqa \
   --set benchmark.data_path=./examples/data/quickstart.jsonl

@@ -2,7 +2,7 @@
 
 [English](./darwinx.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/darwinx.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/darwinx.yaml)
 
 DarwinX 按“保留已有能力并扩展能力”的契约搜索 harness 版本。候选通过低成本筛选和重新执行的全量 train 确认后，才有资格成为普通变异的父版本。已经完成全量评估但被拒绝的分支，仍可通过重组贡献互补能力。最终在已准入版本（含初始版本）中按保存的 train 分数选优，不使用 dev。
 
@@ -29,7 +29,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.merge_every 0
 ```
 
-这会请求一次变异尝试，确认阶段重复两次，不进行重组。只有候选通过筛选才会进入确认。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。专用 [DarwinX 配置](../examples/darwinx.yaml)启用周期重组。覆盖方式见[配置与 CLI](./guide/configuration.md)。
+这会请求一次变异尝试，确认阶段重复两次，不进行重组。只有候选通过筛选才会进入确认。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。专用 [DarwinX 配置](../examples/quickstarts/darwinx.yaml)启用周期重组。覆盖方式见[配置与 CLI](./guide/configuration.md)。
 
 ## 搜索与选择
 

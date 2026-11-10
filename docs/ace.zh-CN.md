@@ -2,7 +2,7 @@
 
 [English](./ace.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/ace.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/ace.yaml)
 
 ACE 通过 Generator → Reflector → Curator 流程积累 playbook。合法增量和使用计数变化立即被采用，允许学习在分数下降时继续。Offline 定期评估 dev 并返回测得的最佳版本，online 保留最终积累的 playbook。
 
@@ -39,7 +39,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.max_reflection_rounds 1
 ```
 
-命令沿用 `batch_size: 2` 和 `edit_budget: 1`。追加 `--check-only` 可检查初始化，不调用模型，也不检查远端认证。专用的 [ACE 配置](../examples/ace.yaml)启用两轮反思。凭据和覆盖方式见[配置与 CLI](./guide/configuration.md)。
+命令沿用 `batch_size: 2` 和 `edit_budget: 1`。追加 `--check-only` 可检查初始化，不调用模型，也不检查远端认证。专用的 [ACE 配置](../examples/quickstarts/ace.yaml)启用两轮反思。凭据和覆盖方式见[配置与 CLI](./guide/configuration.md)。
 
 ## 搜索与选择
 

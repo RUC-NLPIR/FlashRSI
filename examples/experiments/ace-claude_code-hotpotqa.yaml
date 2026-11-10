@@ -1,0 +1,65 @@
+run:
+  output_dir: ./runs/ace-claude_code-hotpotqa
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+  seed: 42
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 32768
+    max_retries: 1
+    effort: high
+  timeout: 600
+  max_turns: 10
+  tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+  allowed_tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+  source_dir: ./harnesses/ace-claude_code-hotpotqa/target
+algorithm:
+  name: ace
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 65536
+      llm_max_retries: 1
+      effort: high
+    timeout: 900
+    max_retries: 1
+    name: claude_code
+    max_turns: 10
+    source_dir: ./harnesses/ace-claude_code-hotpotqa/worker
+    tools:
+    - Skill
+    - Read
+    - Glob
+    - Grep
+    allowed_tools:
+    - Skill
+    - Read
+    - Glob
+    - Grep
+  mode: offline
+  num_epochs: 1
+  batch_size: 1
+  max_steps: null
+  edit_budget: 4
+  eval_steps: 100
+  max_reflection_rounds: 3
+  curator_frequency: 1
+  playbook_token_budget: 8000
+  success_threshold: 1.0
+  max_evidence_chars: 24000
+  seed: 42

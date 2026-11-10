@@ -8,7 +8,7 @@ commit `0b9fabbb63b9104d678fe965e1632f2dd9eaa2ea`。
 
 ## 配置
 
-完整配置见 [OPRO 示例](../examples/deepswe_opro.yaml)。
+完整配置见 [OPRO 示例](../examples/quickstarts/deepswe_opro.yaml)。
 
 ```yaml
 benchmark:

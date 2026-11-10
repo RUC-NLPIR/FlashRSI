@@ -40,14 +40,14 @@ train/test 角色，须明确配置实验划分；适配器不会自动把变体
 复制示例到项目根目录，填写各角色自己的模型、凭据和连接：
 
 ```powershell
-Copy-Item examples/tau2_opro.yaml tau2.local.yaml
+Copy-Item examples/quickstarts/tau2_opro.yaml tau2.local.yaml
 python scripts/run_experiment.py --config tau2.local.yaml --plan
 python scripts/run_experiment.py --config tau2.local.yaml --check-only
 python scripts/run_experiment.py --config tau2.local.yaml
 ```
 
 默认运行 telecom；追加 `--benchmark.domain airline` 可切换航空领域。
-retail 使用 `examples/tau2_retail_opro.yaml`，其中包含独立 Judge 配置。
+retail 使用 `examples/quickstarts/tau2_retail_opro.yaml`，其中包含独立 Judge 配置。
 示例采用 OPRO、一轮、一个候选。`--check-only` 仅准备并初始化组件，不调用模型，
 也不验证远程认证与模型可用性。
 

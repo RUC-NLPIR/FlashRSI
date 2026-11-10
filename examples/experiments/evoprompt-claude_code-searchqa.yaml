@@ -1,0 +1,58 @@
+run:
+  output_dir: ./runs/evoprompt-claude_code-searchqa
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  data_path: ./data/searchqa
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com/anthropic
+    effort: high
+    max_tokens: 16384
+    max_retries: 1
+  timeout: 300
+  max_turns: 10
+  tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+  allowed_tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+  source_dir: ./harnesses/evoprompt-claude_code-searchqa/target
+algorithm:
+  name: evoprompt
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 32768
+      effort: high
+      max_retries: 1
+    timeout: 600
+    max_retries: 1
+    name: claude_code
+    max_turns: 10
+    source_dir: ./harnesses/evoprompt-claude_code-searchqa/worker
+    tools:
+    - Read
+    - Glob
+    - Grep
+    allowed_tools:
+    - Read
+    - Glob
+    - Grep
+  variant: de
+  population_size: 6
+  max_steps: 5
+  selection: wheel
+  survivor_selection: topk
+  donor_random: false
+  seed: 42

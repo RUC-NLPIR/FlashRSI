@@ -133,6 +133,8 @@ The same experiment can be started entirely from the checked-in YAML file:
 flashrsi run --config examples/quickstart.yaml
 ```
 
+The [96 experiment configurations](examples/experiments/) cover 12 algorithms, two harnesses, and four benchmarks. Smaller setup examples are in [examples/quickstarts/](examples/quickstarts/). Experiment configurations use relative paths for the required data and harness resources; fill in role credentials and any endpoint placeholders before running.
+
 ### Run options
 
 The CLI keeps the common choices short and accepts every nested configuration field through a dotted

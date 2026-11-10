@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./opro.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/opro.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/opro.yaml)
 
 OPRO improves an instruction by showing the Worker a history of instructions and their scores. Every evaluated instruction remains in the search history. The Target's active Snapshot stays unchanged during search; only the final selection activates the best version.
 
@@ -23,7 +23,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.num_candidates 2
 ```
 
-Add `--check-only` to check initialization without model calls. This does not verify remote authentication. For a method-specific SearchQA configuration, see [examples/opro.yaml](../examples/opro.yaml); its default search budget is much larger. Model settings and CLI overrides are described in [Configuration & CLI](./guide/configuration.md).
+Add `--check-only` to check initialization without model calls. This does not verify remote authentication. For a method-specific SearchQA configuration, see [examples/quickstarts/opro.yaml](../examples/quickstarts/opro.yaml); its default search budget is much larger. Model settings and CLI overrides are described in [Configuration & CLI](./guide/configuration.md).
 
 ## Search and selection
 

@@ -126,6 +126,8 @@ flashrsi run --config examples/quickstart.yaml
 
 结果保存在 `runs/`，见[分数、Snapshot 与轨迹说明](docs/running-experiments.md#read-the-results)。自动准备环境见[一键实验指南](docs/experiment-launcher.zh-CN.md)。
 
+[96 份实验配置](examples/experiments/)覆盖 12 个算法、两种 harness 和四个 benchmark。基础示例集中在 [examples/quickstarts/](examples/quickstarts/)。实验配置中的数据与 harness 资源采用相对路径，运行前需准备对应资源，并填写各角色凭据及服务地址占位值。
+
 ## 支持的算法
 
 FlashRSI 目前实现 13 种 RSI 方法：

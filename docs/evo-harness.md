@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./evo-harness.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/evo_harness.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/evo_harness.yaml)
 
 Evo-Harness consumes training tasks once and compiles failures into native skills at two levels: topic-specific procedures and general cross-task guidance. Each batch uses one fixed Snapshot; compilation happens afterward. Valid changes are continuously adopted without a dev gate. The final Snapshot runs through ordinary Agent execution without an optimizer at inference.
 
@@ -31,7 +31,7 @@ flashrsi run --config examples/quickstart.yaml \
 
 This consumes the six bundled train tasks in two batches, allowing observation of skill reuse by a later batch. It does not guarantee compilation: a batch needs usable failure memories, and a revised general skill needs at least three distinct supporting tasks here. Append `--check-only` for initialization without model calls; it does not verify model authentication or skill use.
 
-The dedicated [Evo-Harness configuration](../examples/evo_harness.yaml) also uses MiniAgent for both roles. See [Configuration & CLI](./guide/configuration.md) and [harness integrations](./integrations/harnesses.md) when changing providers or harnesses.
+The dedicated [Evo-Harness configuration](../examples/quickstarts/evo_harness.yaml) also uses MiniAgent for both roles. See [Configuration & CLI](./guide/configuration.md) and [harness integrations](./integrations/harnesses.md) when changing providers or harnesses.
 
 ## Search and selection
 

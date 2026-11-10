@@ -1,0 +1,39 @@
+run:
+  output_dir: ./runs/gepa-miniagent-appworld
+  seed: 42
+benchmark:
+  name: appworld
+  split: auto
+  seed: 42
+  data_path: ./data/appworld/split-manifest.json
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 8192
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 600
+  max_turns: 30
+  source_dir: ./harnesses/gepa-miniagent-appworld/target
+algorithm:
+  name: gepa
+  worker:
+    type: llm
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+    timeout: 900
+    max_retries: 1
+  max_metric_calls: null
+  num_epochs: 1
+  reflection_minibatch_size: 3
+  skip_perfect_score: true
+  candidate_selection_strategy: pareto
+  max_evidence_chars: 24000
+  seed: 42
+  use_merge: false
+  acceptance_criterion: improvement_or_equal

@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./meta-harness.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/meta_harness.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/meta_harness.yaml)
 
 Meta-Harness lets a coding Worker retrieve historical source, scores, and full traces from files before constructing a candidate. Each editable checkout starts from the initial Snapshot, while the Worker can reuse or combine any measured version. The loop retains all measured candidates and promotes only the best dev version at the end; ties keep the earlier selected version.
 
@@ -25,7 +25,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.max_steps 2
 ```
 
-Two attempts allow the second Worker call to inspect a prior candidate or decline. They do not guarantee actual history retrieval or valid edits. Append `--check-only` for initialization without model calls or remote authentication checks. See the dedicated [Meta-Harness configuration](../examples/meta_harness.yaml) and [Configuration & CLI](./guide/configuration.md).
+Two attempts allow the second Worker call to inspect a prior candidate or decline. They do not guarantee actual history retrieval or valid edits. Append `--check-only` for initialization without model calls or remote authentication checks. See the dedicated [Meta-Harness configuration](../examples/quickstarts/meta_harness.yaml) and [Configuration & CLI](./guide/configuration.md).
 
 ## Search and selection
 

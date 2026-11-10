@@ -1,6 +1,6 @@
 # 2WikiMultiHopQA 独立演化来源
 
-[公开示例](../examples/modular_rsi_twowiki.yaml) 使用固定原生 train 池演化，完整 validation 池作自定义下游 1/1/1 划分。填写 Target 和 Worker 各自的模型/API 后，依次用 `python scripts/run_experiment.py --config examples/modular_rsi_twowiki.yaml` 执行 `--plan`、`--check-only` 和正式运行。
+[公开示例](../examples/quickstarts/modular_rsi_twowiki.yaml) 使用固定原生 train 池演化，完整 validation 池作自定义下游 1/1/1 划分。填写 Target 和 Worker 各自的模型/API 后，依次用 `python scripts/run_experiment.py --config examples/quickstarts/modular_rsi_twowiki.yaml` 执行 `--plan`、`--check-only` 和正式运行。
 
 `benchmark.evolution_split` 支持 `train`、`validation`，`evolution_limit` 限制最终演化样本数。加载器先比较两完整来源的 ID 和规范化原始问题文本，再限样；不同题号或不同上下文不能掩盖相同问题。默认下游同时加载 train/validation 时，把其中 train 再声明为外部来源会被拒绝。仅替换实验 train，原下游 dev/test 保持不变。
 

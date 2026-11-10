@@ -1,0 +1,53 @@
+run:
+  output_dir: ./runs/ace-claude_code-appworld
+  seed: 42
+benchmark:
+  name: appworld
+  split: auto
+  seed: 42
+  data_path: ./data/appworld/split-manifest.json
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 8192
+    effort: high
+    max_retries: 1
+  source_dir: ./harnesses/ace-claude_code-appworld/target
+  timeout: 600
+  max_turns: 30
+  tools:
+  - Read
+  - Glob
+  - Grep
+  - Skill
+  allowed_tools:
+  - Read
+  - Glob
+  - Grep
+  - Skill
+  - mcp__appworld__appworld_execute
+algorithm:
+  name: ace
+  worker:
+    type: llm
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+    timeout: 900
+    max_retries: 1
+  mode: offline
+  num_epochs: 1
+  batch_size: 1
+  max_steps: null
+  max_reflection_rounds: 1
+  curator_frequency: 1
+  edit_budget: 4
+  playbook_token_budget: 8000
+  max_evidence_chars: 24000
+  eval_steps: 100
+  success_threshold: 1.0
+  seed: 42

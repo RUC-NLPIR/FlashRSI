@@ -1,0 +1,40 @@
+run:
+  output_dir: ./runs/evoprompt-miniagent-hotpotqa
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 600
+  max_turns: 10
+  source_dir: ./harnesses/evoprompt-miniagent-hotpotqa/target
+algorithm:
+  name: evoprompt
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      llm_max_retries: 1
+    timeout: 900
+    max_retries: 1
+    name: miniagent
+    max_turns: 10
+    source_dir: ./harnesses/evoprompt-miniagent-hotpotqa/worker
+  variant: de
+  population_size: 6
+  max_steps: 5
+  selection: wheel
+  survivor_selection: topk
+  donor_random: false
+  seed: 42

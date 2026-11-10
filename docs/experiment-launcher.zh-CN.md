@@ -82,17 +82,17 @@ SkillOpt 使用 `num_epochs`、`batch_size` 等。AHE 必须使用 Agent Worker�
 [MetaHarness](meta-harness.md)、[ModularRSI](modular-rsi.md)、[RRSI](rrsi.md)。
 ModularRSI 使用当前 Benchmark 的 `train` 演化，允许与 dev/test 来自同一数据集；
 train 任务 ID 必须唯一且与 dev/test 不重合。需要配置模块文件映射；可选的独立演化数据
-仍可通过 `benchmark.evolution_data_path` 等现有参数提供，见 [SWE 示例](../examples/modular_rsi_swe_bench.yaml)。默认采用五个运行时模块，
+仍可通过 `benchmark.evolution_data_path` 等现有参数提供，见 [SWE 示例](../examples/quickstarts/modular_rsi_swe_bench.yaml)。默认采用五个运行时模块，
 Claude Code 可使用 [prompt / skill / hook / tool 四扩展示例](../examples/modular_rsi_claude_code.yaml)。
 
 上述六个新增算法来自 FlashRSI-Lite commit `d8d5e35e77e1c0360a1df55505db3cfb2b113cd0`，
 已有六个算法保留当前项目的实现与修复。
 
-例如，把 [HotpotQA + OPRO 示例](../examples/hotpotqa_opro.yaml)复制为同目录下的
+例如，把 [HotpotQA + OPRO 示例](../examples/quickstarts/hotpotqa_opro.yaml)复制为同目录下的
 `examples/hotpotqa.local.yaml`，填写模型配置后运行：
 
 ```bash
-cp examples/hotpotqa_opro.yaml examples/hotpotqa.local.yaml
+cp examples/quickstarts/hotpotqa_opro.yaml examples/hotpotqa.local.yaml
 python scripts/run_experiment.py --config examples/hotpotqa.local.yaml --plan
 python scripts/run_experiment.py --config examples/hotpotqa.local.yaml --check-only
 python scripts/run_experiment.py --config examples/hotpotqa.local.yaml
@@ -218,7 +218,7 @@ YAML 中的 `run.output_dir`、数据路径（含 `evolution_data_path`）、语
 原来的 `python scripts/run_searchqa.py` 命令仍兼容，默认读取 `searchqa.local.yaml`，
 内部转到通用入口。普通 `python -m flashrsi run --config ...` CLI 仍按已安装环境运行。
 
-2WikiMultiHopQA 示例：`examples/twowiki_multihopqa_opro.yaml`。默认数据源为
+2WikiMultiHopQA 示例：`examples/quickstarts/twowiki_multihopqa_opro.yaml`。默认数据源为
 `framolfese/2WikiMultihopQA`（固定 revision），原始来源为
 [Alab-NII/2wikimultihop](https://github.com/Alab-NII/2wikimultihop)。
 示例将有标签的 train/validation 池重新划分为实验集，不是官方 test 成绩。
