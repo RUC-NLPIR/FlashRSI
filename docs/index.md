@@ -22,7 +22,9 @@ We welcome community experiment results and reproductions! [Submit your results]
 
 <section id="news" aria-labelledby="news-title">
   <h2 id="news-title">📣 Latest News</h2>
-  <!-- Add dated news entries here. -->
+  <ul>
+    <li>[Nov 09, 2026]: 🔍 We have released <a href="./experiments/">SearchQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
+  </ul>
 </section>
 
 This quickstart runs **SkillOpt with MiniAgent** on 12 bundled SearchQA questions. It uses six questions for train, three for dev, and three for test. You need Python, a running Docker Linux daemon, and two model configurations. Each Target task runs in a separate container with access to its configured model endpoint. It exercises one fast update; see the [SkillOpt guide](./skillopt.md) for slow updates, selection rules, and budgets.
