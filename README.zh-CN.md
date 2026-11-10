@@ -29,7 +29,9 @@
 
 <div id="news">
   <h2>📣 最新动态</h2>
-  <!-- 在此添加带日期的动态。 -->
+  <ul>
+    <li>[2026-11-09]：🔍 已公开 <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">SearchQA 演化记录</a>，涵盖 MiniAgent 和 Claude Code 上的 12 种 RSI 方法，支持交互查看 harness 改动与版本选择过程。</li>
+  </ul>
 </div>
 
 <p align="center">
