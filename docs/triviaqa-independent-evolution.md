@@ -50,6 +50,6 @@ ModularRSI still needs a real experiment through the public entry point.
 
 Source, revision, native split, complete pool size/checksum, and the external
 evolution role are recorded by the loader. See
-[the public example](../examples/modular_rsi_triviaqa.yaml). Claude Code uses the
+[the public example](../examples/quickstarts/modular_rsi_triviaqa.yaml). Claude Code uses the
 existing public `examples/modular_rsi_claude_code` three-module example;
 MiniAgent retains five modules, with an independently configured native Worker.

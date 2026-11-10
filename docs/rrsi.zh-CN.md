@@ -2,7 +2,7 @@
 
 [English](./rrsi.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/rrsi.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/rrsi.yaml)
 
 RRSI 根据轨迹调查和编辑历史，在逐渐收缩的机制预算内提出 harness 修改。候选必须满足历史分数底线以及分数/token 成本规则。每轮选出分数最高的可接受候选，再从胜者继续搜索。最终返回最后接受的版本，不一定是历史最高分版本。
 
@@ -10,10 +10,10 @@ RRSI 根据轨迹调查和编辑历史，在逐渐收缩的机制预算内提出
 
 train 必须非空、任务 ID 唯一，主指标分数在 `[0, 1]`。Worker 必须是独立的文件编辑 Agent（`algorithm.worker.type: agent`），Target 与 Worker 分别配置模型与连接。可编辑范围为 Target 声明的全部组件；RRSI 语义标签不额外授予文件权限。不使用 dev，Runner 在最终选择后评估 test。
 
-按[安装指南](./guide/installation.md)准备环境，在 [examples/rrsi.yaml](../examples/rrsi.yaml) 中配置两个角色，再从仓库根目录使用本地任务运行：
+按[安装指南](./guide/installation.md)准备环境，在 [examples/quickstarts/rrsi.yaml](../examples/quickstarts/rrsi.yaml) 中配置两个角色，再从仓库根目录使用本地任务运行：
 
 ```bash
-flashrsi run --config examples/rrsi.yaml \
+flashrsi run --config examples/quickstarts/rrsi.yaml \
   --benchmark.data_path ./examples/data/quickstart.jsonl \
   --benchmark.limit null \
   --benchmark.split_counts '{train: 3, dev: 1, test: 1}' \

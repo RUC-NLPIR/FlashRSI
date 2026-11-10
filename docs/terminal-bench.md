@@ -20,15 +20,15 @@
 
 ## 运行
 
-先填写 [2.1 + OPRO 示例](../examples/terminal_bench21_opro.yaml) 中 Target 与 Worker 各自的模型和凭据：
+先填写 [2.1 + OPRO 示例](../examples/quickstarts/terminal_bench21_opro.yaml) 中 Target 与 Worker 各自的模型和凭据：
 
 ```bash
-python scripts/run_experiment.py --config examples/terminal_bench21_opro.yaml --plan
-python scripts/run_experiment.py --config examples/terminal_bench21_opro.yaml --check-only
-python scripts/run_experiment.py --config examples/terminal_bench21_opro.yaml
+python scripts/run_experiment.py --config examples/quickstarts/terminal_bench21_opro.yaml --plan
+python scripts/run_experiment.py --config examples/quickstarts/terminal_bench21_opro.yaml --check-only
+python scripts/run_experiment.py --config examples/quickstarts/terminal_bench21_opro.yaml
 ```
 
-2.0 + Claude Code + SkillOpt 可参考 [terminal_bench.yaml](../examples/terminal_bench.yaml)。
+2.0 + Claude Code + SkillOpt 可参考 [terminal_bench.yaml](../examples/quickstarts/terminal_bench.yaml)。
 Claude Code 的 shell / 文件工具应按示例授权。Codex 在容器中执行选定 Snapshot 的 Python 核心，
 Code Mode 模型另需容器内可用的 Node.js，见 [Codex 指南](codex.md)。具体组合仍需按所选模型与任务验证。
 

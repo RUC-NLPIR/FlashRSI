@@ -2,7 +2,7 @@
 
 [English](./arbor.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/arbor.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/arbor.yaml)
 
 Arbor 用假设树组织搜索。Coordinator 扩展研究方向、选择实验，Executor 从当前已选 trunk 实现假设。train 筛选候选，dev 严格提升才允许采纳；实验经验沿树向上综合，供后续规划使用。树的父子关系表示思路，不表示代码继承。
 
@@ -29,7 +29,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.merge_threshold 0.0
 ```
 
-这会使用本地 SearchQA 数据，最多派发两次实验。Coordinator 可提前停止，每次请求也可能包含多个原生模型/工具调用。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。专用 [Arbor 示例](../examples/arbor.yaml)则使用固定版本的 HotpotQA context 数据，Target 为 MiniAgent，Worker 为 Claude Code。
+这会使用本地 SearchQA 数据，最多派发两次实验。Coordinator 可提前停止，每次请求也可能包含多个原生模型/工具调用。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。专用 [Arbor 示例](../examples/quickstarts/arbor.yaml)则使用固定版本的 HotpotQA context 数据，Target 为 MiniAgent，Worker 为 Claude Code。
 
 ## 搜索与选择
 

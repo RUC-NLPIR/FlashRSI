@@ -114,7 +114,7 @@ Use any saved compatible candidate, including an intermediate Snapshot:
 
 ```bash
 flashrsi evaluate \
-  --config examples/evaluate_hotpotqa.yaml \
+  --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run/snapshots/SELECTED_ID.json \
   --model gpt-5-mini \
   --set agent.llm.api_key="$TARGET_API_KEY"

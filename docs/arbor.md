@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./arbor.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/arbor.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/arbor.yaml)
 
 Arbor organizes search as a hypothesis tree. A Coordinator expands research directions and chooses experiments; an Executor implements each hypothesis from the current selected trunk. Train screens candidates, while strict dev improvement controls adoption. Experiment lessons are synthesized upward through the tree to inform later planning. Tree ancestry describes ideas, not code inheritance.
 
@@ -29,7 +29,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.merge_threshold 0.0
 ```
 
-This uses local SearchQA data and permits at most two dispatched experiments. Coordinator planning can stop earlier, and the Worker may make multiple native model/tool calls per request. Append `--check-only` for initialization without model calls or remote authentication validation. The dedicated [Arbor example](../examples/arbor.yaml) instead uses a pinned HotpotQA context dataset with MiniAgent Target and Claude Code Worker.
+This uses local SearchQA data and permits at most two dispatched experiments. Coordinator planning can stop earlier, and the Worker may make multiple native model/tool calls per request. Append `--check-only` for initialization without model calls or remote authentication validation. The dedicated [Arbor example](../examples/quickstarts/arbor.yaml) instead uses a pinned HotpotQA context dataset with MiniAgent Target and Claude Code Worker.
 
 ## Search and selection
 

@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./ahe.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/ahe.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/ahe.yaml)
 
 AHE edits the current harness, declares which task outcomes each change should affect, and checks those predictions against the next train evaluation. Every protocol-valid, evaluated edit is kept, including regressions. The next Worker uses the verdicts to decide what to keep, improve, or undo. The final result is the last retained version, not a best-dev selection.
 
@@ -28,7 +28,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.use_debugger false
 ```
 
-This uses bundled local QA data and omits the optional debugger calls. It still evaluates the complete train split. If the initial train score already meets `target_score`, it stops without editing. Append `--check-only` for initialization without model calls or authentication validation. The dedicated [AHE example](../examples/ahe.yaml) enables the debugger by default.
+This uses bundled local QA data and omits the optional debugger calls. It still evaluates the complete train split. If the initial train score already meets `target_score`, it stops without editing. Append `--check-only` for initialization without model calls or authentication validation. The dedicated [AHE example](../examples/quickstarts/ahe.yaml) enables the debugger by default.
 
 ## Search and selection
 

@@ -1,0 +1,59 @@
+run:
+  output_dir: ./runs/rrsi-miniagent-hotpotqa
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    api_key: null
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    max_retries: 1
+    reasoning_effort: high
+  source_dir: ./harnesses/rrsi-miniagent-hotpotqa/target
+  timeout: 600
+  max_turns: 10
+algorithm:
+  name: rrsi
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      api_key: null
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      max_retries: 1
+    name: miniagent
+    timeout: 1200
+    max_turns: 100
+    source_dir: ./harnesses/rrsi-miniagent-hotpotqa/worker
+  T: 5
+  k: 2
+  m: 2
+  b_min: 1
+  b_max: 4
+  w: 3
+  m_draft: 1
+  delta: null
+  delta_z: 2.0
+  beta0: 0.1
+  beta1: 40.0
+  w_s: 100.0
+  w_c: 15.0
+  w_n: 0.5
+  n_prune: 4
+  repair_rounds: 5
+  invalid_missing_frac: 0.15
+  seed: 42
+  n_fail_traces: 22
+  n_success_traces: 6
+  calibration_evals: 1
+  smoke_n: 2
+  component_signals: {}
+  weight_metric: null
+  guards: {}

@@ -17,13 +17,13 @@ runner。Target 每题在独立 Linux 容器中执行，需要 Docker CLI 与运
 复制一个示例到项目根目录，填写目标 Agent 和 Worker 各自的模型与凭据：
 
 ```powershell
-Copy-Item examples/bbeh_opro.yaml bbeh.local.yaml
+Copy-Item examples/quickstarts/bbeh_opro.yaml bbeh.local.yaml
 python scripts/run_experiment.py --config bbeh.local.yaml --plan
 python scripts/run_experiment.py --config bbeh.local.yaml --check-only
 python scripts/run_experiment.py --config bbeh.local.yaml
 ```
 
-SuperGPQA 对应 `examples/supergpqa_opro.yaml`，同样运行。两个示例均使用
+SuperGPQA 对应 `examples/quickstarts/supergpqa_opro.yaml`，同样运行。两个示例均使用
 OPRO、一轮、一个候选，划分为 8 train / 4 dev / 4 test。
 `--check-only` 会加载数据和检查算法初始化，不调用模型，不验证 API 认证。
 若默认缓存目录不可写，一键入口可通过 `--cache-dir` 指定缓存位置；直接调用已安装的

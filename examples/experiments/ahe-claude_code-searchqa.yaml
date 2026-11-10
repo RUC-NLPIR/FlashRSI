@@ -1,0 +1,49 @@
+run:
+  output_dir: ./runs/ahe-claude_code-searchqa
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  data_path: ./data/searchqa
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 16384
+    reasoning_effort: high
+    llm_max_retries: 1
+    effort: high
+  timeout: 300
+  max_turns: 10
+  source_dir: ./harnesses/ahe-claude_code-searchqa/target
+  tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+  allowed_tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+algorithm:
+  name: ahe
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 32768
+      reasoning_effort: high
+      effort: high
+    timeout: 600
+    max_retries: 1
+    name: claude_code
+    max_turns: 10
+    source_dir: ../../flashrsi/agents/claude_code
+  max_steps: 5
+  target_score: 1.0
+  use_debugger: true
+  debugger_max_tasks: 10
+  max_evidence_chars: 30000

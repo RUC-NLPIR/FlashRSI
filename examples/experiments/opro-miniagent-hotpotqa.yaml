@@ -1,0 +1,36 @@
+run:
+  output_dir: ./runs/opro-miniagent-hotpotqa
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 600
+  max_turns: 10
+  source_dir: ./harnesses/opro-miniagent-hotpotqa/target
+algorithm:
+  name: opro
+  worker:
+    type: llm
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+    timeout: 900
+    max_retries: 1
+  max_steps: 5
+  num_candidates: 4
+  history_size: 20
+  score_threshold: 0.1
+  few_shot_size: 3
+  max_evidence_chars: 24000
+  seed: 42

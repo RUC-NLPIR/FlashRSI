@@ -1,6 +1,6 @@
 # HotpotQA 独立演化数据
 
-`examples/modular_rsi_hotpotqa.yaml` 显式使用固定版本官方 `train` 作为
+`examples/quickstarts/modular_rsi_hotpotqa.yaml` 显式使用固定版本官方 `train` 作为
 ModularRSI 的演化来源，下游 dev/test 从官方 `validation` 做实验内划分。
 这是演化实验划分，不是官方隐藏 test 或完整榜单成绩。
 

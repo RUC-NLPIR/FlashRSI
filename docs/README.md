@@ -81,12 +81,12 @@ intermediate candidate without continuing evolution:
 
 ```bash
 flashrsi evaluate \
-  --config examples/evaluate_hotpotqa.yaml \
+  --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run-A/snapshots/SELECTED_ID.json \
   --check-only
 
 flashrsi evaluate \
-  --config examples/evaluate_hotpotqa.yaml \
+  --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run-A/snapshots/SELECTED_ID.json
 ```
 
@@ -128,9 +128,9 @@ policy.
 
 | Method | Scope | Main control | Detailed guide |
 | --- | --- | --- | --- |
-| OPRO | Instructions | Scored history | [Guide](opro.md) · [中文](opro.zh-CN.md) · [Configuration](../examples/opro.yaml) |
-| GEPA | Instructions | Candidate pool and reflection | [Guide](gepa.md) · [中文](gepa.zh-CN.md) · [Configuration](../examples/gepa.yaml) |
-| EvoPrompt | Instructions | GA / DE population | [Guide](evoprompt.md) · [中文](evoprompt.zh-CN.md) · [Configuration](../examples/evoprompt.yaml) |
+| OPRO | Instructions | Scored history | [Guide](opro.md) · [中文](opro.zh-CN.md) · [Configuration](../examples/quickstarts/opro.yaml) |
+| GEPA | Instructions | Candidate pool and reflection | [Guide](gepa.md) · [中文](gepa.zh-CN.md) · [Configuration](../examples/quickstarts/gepa.yaml) |
+| EvoPrompt | Instructions | GA / DE population | [Guide](evoprompt.md) · [中文](evoprompt.zh-CN.md) · [Configuration](../examples/quickstarts/evoprompt.yaml) |
 | ACE | Instructions / playbook | Playbook accumulation | [ACE](ace.md) · [中文](ace.zh-CN.md) |
 | SkillOpt | Skills | Fast / slow updates | [SkillOpt guide](skillopt.md) · [Quickstart](../examples/quickstart.yaml) |
 | Evo-Harness | Skills | Task-stream accumulation | [Evo-Harness](evo-harness.md) · [中文](evo-harness.zh-CN.md) |

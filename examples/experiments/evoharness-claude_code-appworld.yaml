@@ -1,0 +1,82 @@
+run:
+  output_dir: ./runs/evoharness-claude_code-appworld
+benchmark:
+  name: appworld
+  seed: 42
+  split: auto
+  data_path: ./data/appworld
+  test_set: test_normal
+  setup_timeout: 1200
+  evaluation_timeout: 300
+agent:
+  name: claude_code
+  source_dir: ./harnesses/evoharness-claude_code-appworld/target
+  max_turns: 30
+  llm:
+    model_name: deepseek-flash
+    api_key: null
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 8192
+    effort: high
+    max_retries: 1
+  timeout: 600
+  tools:
+  - Bash
+  - Skill
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  allowed_tools:
+  - Bash
+  - Skill
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  permission_mode: acceptEdits
+  container_uv_install_source: github
+algorithm:
+  name: evo_harness
+  batch_size: 4
+  max_steps: null
+  success_threshold: 1.0
+  general_min_tasks: 3
+  max_general_skills: 10
+  max_topic_skills: 30
+  max_skill_chars: 2000
+  max_library_chars: 48000
+  max_evidence_chars: 96000
+  worker:
+    type: agent
+    name: claude_code
+    source_dir: ./harnesses/evoharness-claude_code-appworld/worker
+    max_turns: 100
+    timeout: 1200
+    llm:
+      model_name: deepseek-v4-pro
+      api_key: null
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 65536
+      effort: high
+      max_retries: 1
+    tools:
+    - Read
+    - Write
+    - Edit
+    - Glob
+    - Grep
+    allowed_tools:
+    - Read
+    - Write
+    - Edit
+    - Glob
+    - Grep
+    disallowed_tools:
+    - Bash
+    - Agent
+    - WebFetch
+    - WebSearch
+    permission_mode: acceptEdits
