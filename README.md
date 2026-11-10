@@ -22,6 +22,18 @@
 </p>
 
 <p align="center">
+  <b>We welcome community experiment results and reproductions!</b><br>
+  <a href="https://github.com/RUC-NLPIR/FlashRSI/issues/new">Submit your results</a> ·
+  <a href="https://github.com/RUC-NLPIR/FlashRSI/compare">Open a pull request</a> ·
+  <a href="#news">News</a>
+</p>
+
+<div id="news">
+  <h2>📣 Latest News</h2>
+  <!-- Add dated news entries here. -->
+</div>
+
+<p align="center">
   <b>English</b> · <a href="README.zh-CN.md">简体中文</a>
 </p>
 

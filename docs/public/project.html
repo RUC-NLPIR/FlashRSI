@@ -20,20 +20,25 @@
 .brand{display:flex;align-items:center;gap:10px}
 .brand-mark{display:block;width:28px;height:28px;flex:0 0 28px}
 .brand-copy{min-width:0}
+.community-invite{max-width:700px;margin:18px 0 0;color:var(--muted);font-size:14px;line-height:1.6}
+.community-invite a{font-weight:650}
+.news-section{margin-top:0;margin-bottom:32px;padding-top:20px}
+.news-section .section-head{margin-bottom:0}
 </style>
 </head>
 <body>
 <div class="shell">
   <aside class="rail" aria-label="Project navigation">
     <div class="brand"><img class="brand-mark" src="./favicon.svg" alt=""><div class="brand-copy"><b>FlashRSI</b><span>Project page</span></div></div>
-    <div class="group"><div class="label">Project</div><a class="nav active" href="#results">Results browser</a><a class="nav" href="#matrix">Full results matrix</a><a class="nav" href="#surface">Methods &amp; benchmarks</a><a class="nav" href="#evidence">Evidence model</a><a class="nav" href="./experiments/index.html">Experiment explorer</a></div>
+    <div class="group"><div class="label">Project</div><a class="nav" href="#news">News</a><a class="nav active" href="#results">Results browser</a><a class="nav" href="#matrix">Full results matrix</a><a class="nav" href="#surface">Methods &amp; benchmarks</a><a class="nav" href="#evidence">Evidence model</a><a class="nav" href="./experiments/index.html">Experiment explorer</a></div>
     <div class="group"><div class="label">Documentation</div><a class="nav" href="./index.html">Quickstart</a><a class="nav" href="./guide/configuration.html">Configuration &amp; CLI</a><a class="nav" href="./reference.html">All integration notes</a></div>
     <div class="rail-note">Compare a method, a harness, and a benchmark in one shared run.</div>
   </aside>
   <main class="main">
     <div class="topbar"><span>Project&nbsp; · &nbsp;<strong>Results browser</strong></span><span class="spacer"></span><a href="https://github.com/RUC-NLPIR/FlashRSI">GitHub ↗</a></div>
     <article class="article">
-      <section class="hero"><div class="eyebrow">FlashRSI · Benchmark atlas</div><h1>See what an agent change does to the score.</h1><p class="lede">Browse the shared experiment setting, then open the docs for the method, harness, and evidence behind each row.</p><div class="actions"><a class="btn primary" href="#results">Browse results →</a><a class="btn" href="./index.html">Run a quickstart</a></div></section>
+      <section class="hero"><div class="eyebrow">FlashRSI · Benchmark atlas</div><h1>See what an agent change does to the score.</h1><p class="lede">Browse the shared experiment setting, then open the docs for the method, harness, and evidence behind each row.</p><p class="community-invite">We welcome community experiment results and reproductions! <a href="https://github.com/RUC-NLPIR/FlashRSI/compare">Open a pull request</a> to share your work.</p><div class="actions"><a class="btn primary" href="#results">Browse results →</a><a class="btn" href="./index.html">Run a quickstart</a><a class="btn" href="https://github.com/RUC-NLPIR/FlashRSI/issues/new">Submit results ↗</a></div></section>
+      <section class="section news-section" id="news" aria-labelledby="news-title"><div class="section-head"><h2 id="news-title">📣 Latest News</h2></div><!-- Add dated news entries here. --></section>
       <section class="stats" aria-label="FlashRSI coverage"><div class="stat"><b>13</b><span>RSI methods</span></div><div class="stat"><b>30</b><span>Benchmark suites</span></div><div class="stat"><b>7</b><span>Native harnesses</span></div><div class="stat"><b>1</b><span>Run interface</span></div></section>
       <section class="section" id="results"><div class="section-head"><div><div class="kicker">Results / 01</div><h2>Results from the shared setting</h2></div><p class="section-intro">The published study covers 12 methods on Claude Code and Mini-Agent; Arbor has no results in this study. The summary rows below cover the source-task scores in the public result matrix. Filter by harness to compare methods; the full table includes near-domain and far-OOD transfers.</p></div><div class="result"><div class="toolbar" role="tablist" aria-label="Filter results"><button class="tab active" data-filter="all" type="button">All methods</button><button class="tab" data-filter="ClaudeCode" type="button">Claude Code</button><button class="tab" data-filter="Mini-Agent" type="button">Mini-Agent</button><span class="note">Percent scores · baseline delta</span></div><div class="table-wrap"><table class="result-table"><thead><tr><th>Method</th><th>Harness</th><th>SearchQA</th><th>HotpotQA</th><th>Terminal-Bench 2.0</th><th>AppWorld</th></tr></thead><tbody id="resultRows">
       <tr data-harness="ClaudeCode"><td class="method">RRSI</td><td>Claude Code</td><td class="score"><strong>82.79</strong><span class="delta">+8.86</span></td><td class="score"><strong>60.98</strong><span class="delta">+3.66</span></td><td class="score"><strong>76.67</strong><span class="delta">+13.34</span></td><td class="score"><strong>92.86</strong><span class="delta">+27.98</span></td></tr>
