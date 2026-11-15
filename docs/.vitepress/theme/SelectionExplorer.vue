@@ -6,6 +6,7 @@ import { compactDiff, lineDiff } from './selection/lineDiff'
 import './selection/style.css'
 
 const props = defineProps<{ dataPath: string }>()
+const TerminalEvolution = defineAsyncComponent(() => import('./selection/TerminalEvolution.vue'))
 const views = {
   opro: defineAsyncComponent(() => import('./selection/OPRO.vue')),
   evoprompt: defineAsyncComponent(() => import('./selection/EvoPrompt.vue')),
@@ -24,7 +25,7 @@ const agentKey = ref('miniagent')
 const tab = ref('selection')
 const error = ref('')
 const agent = computed(() => data.value?.agents[agentKey.value])
-const methodView = computed(() => views[data.value?.key as keyof typeof views])
+const methodView = computed(() => data.value?.view === 'terminal' ? TerminalEvolution : views[data.value?.key as keyof typeof views])
 const eventFilter = ref('')
 const events = computed(() => (agent.value?.events || []).filter((event: any) => JSON.stringify(event).toLowerCase().includes(eventFilter.value.toLowerCase())))
 const resourceData = ref<any>(null)
@@ -59,7 +60,7 @@ async function load() {
     const response = await fetch(withBase(props.dataPath))
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
     const archive = await response.json()
-    if (archive.schemaVersion !== 2 || !views[archive.key as keyof typeof views]) throw new Error('Unsupported experiment data')
+    if (archive.schemaVersion !== 2 || !(archive.view === 'terminal' || views[archive.key as keyof typeof views])) throw new Error('Unsupported experiment data')
     const requested = new URLSearchParams(window.location.search).get('agent') || ''
     agentKey.value = Object.hasOwn(archive.agents, requested) ? requested : Object.keys(archive.agents)[0]
     data.value = archive
@@ -137,6 +138,7 @@ async function copyLink() {
     <template v-else-if="agent">
       <div class="sx-toolbar"><div class="sx-segmented" aria-label="Target harness"><button v-for="(value, key) in data.agents" :key="key" :class="{ active: agentKey === key }" :aria-pressed="agentKey === key" @click="chooseAgent(String(key))">{{ value.label }}</button></div><p>Target <strong>{{ agent.targetModel }}</strong> / Worker <strong>{{ agent.workerModel }}</strong></p></div>
       <section class="sx-rule"><span class="sx-eyebrow">How selection works in this archive</span><p>{{ data.selectionRule }}</p></section>
+      <p v-if="data.description" class="sx-note">{{ data.description }}</p>
       <nav class="sx-tabs" aria-label="Experiment views"><button :class="{ active: tab === 'selection' }" @click="tab = 'selection'">{{ data.lens }}</button><button :class="{ active: tab === 'resources' }" @click="inspect(resourceId || agent.selectedId)">Resource comparison</button><button :class="{ active: tab === 'records' }" @click="tab = 'records'">Recorded events <small>{{ agent.events.length }}</small></button></nav>
       <component v-show="tab === 'selection'" :is="methodView" :key="agentKey" :agent="agent" @inspect="openChanges" />
       <section v-if="tab === 'resources' || (tab === 'selection' && inlineChanges)" ref="resourcePanel" class="sx-resources sx-panel">
@@ -155,7 +157,7 @@ async function copyLink() {
           </template>
         </template>
       </section>
-      <section v-else-if="tab === 'records'" class="sx-records"><div class="sx-section-title"><div><h2>Recorded algorithm events</h2><p>Admission, retention, and final selection are kept as distinct event types.</p></div><label>Filter <input v-model="eventFilter" type="search" placeholder="Type, reason, module, or version…" /></label></div><div class="sx-ledger"><details v-for="(event, index) in events" :key="event.record + index"><summary><code>{{ event.record }}</code><span>{{ event.details.kind || 'record' }}</span><span v-if="event.details.accepted !== undefined" :class="['sx-badge', event.details.accepted ? 'good' : 'muted']">accepted: {{ event.details.accepted }}</span></summary><pre><code>{{ JSON.stringify(event.details, null, 2) }}</code></pre></details><p v-if="!events.length" class="sx-empty">No recorded events match this filter.</p></div><details class="sx-panel"><summary>Non-test evaluation ledger · {{ agent.evaluations.length }} records</summary><div class="sx-table-scroll"><table><thead><tr><th>Record / stage</th><th>Version</th><th>Tasks</th><th>Recorded hard score</th></tr></thead><tbody><tr v-for="(row, index) in agent.evaluations" :key="index"><td>{{ row.record }}</td><td><code>{{ short(row.id) }}</code></td><td>{{ row.tasks }}</td><td>{{ pct(row.score) }}</td></tr></tbody></table></div></details></section>
+      <section v-else-if="tab === 'records'" class="sx-records"><div class="sx-section-title"><div><h2>Recorded algorithm events</h2><p>Admission, retention, and final selection are kept as distinct event types.</p></div><label>Filter <input v-model="eventFilter" type="search" placeholder="Type, reason, module, or version…" /></label></div><div class="sx-ledger"><details v-for="(event, index) in events" :key="event.record + index"><summary><code>{{ event.record }}</code><span>{{ event.details.kind || 'record' }}</span><span v-if="event.details.accepted !== undefined" :class="['sx-badge', event.details.accepted ? 'good' : 'muted']">accepted: {{ event.details.accepted }}</span></summary><pre><code>{{ JSON.stringify(event.details, null, 2) }}</code></pre></details><p v-if="!events.length" class="sx-empty">No recorded events match this filter.</p></div><details class="sx-panel"><summary>Non-test evaluation ledger · {{ agent.evaluations.length }} records</summary><div class="sx-table-scroll"><table><thead><tr><th>Record / stage</th><th>Version</th><th>Tasks</th><th>Recorded {{ data.metricLabel || 'hard' }} score</th></tr></thead><tbody><tr v-for="(row, index) in agent.evaluations" :key="index"><td>{{ row.record }}</td><td><code>{{ short(row.id) }}</code></td><td>{{ row.tasks }}</td><td>{{ pct(row.score) }}</td></tr></tbody></table></div></details></section>
       <footer class="sx-footer"><span>Historical evidence, not a re-ranking of the experiments.</span><span>Full Worker prompts and Target conversations are not included.</span></footer>
     </template>
   </main>

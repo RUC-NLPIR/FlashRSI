@@ -77,15 +77,17 @@ def take(value, keys):
     return {key: value[key] for key in keys if key in value}
 
 
-def metric(record):
+def metric(record, key="hard"):
     rows = record.get("per_task")
     if not isinstance(rows, list) or not rows:
         return None
-    scores = [row.get("metrics", {}).get("hard") for row in rows]
+    scores = [row.get("metrics", {}).get(key) for row in rows]
     return mean(scores) if all(isinstance(x, (int, float)) for x in scores) else None
 
 
-def build(raw, key, harness):
+def build(
+    raw, key, harness, metric_key="hard", resource_prefix="/experiment-data/searchqa"
+):
     records = raw["records"]
     meta = raw.get("meta") or {}
     if key == "evoharness":
@@ -144,7 +146,7 @@ def build(raw, key, harness):
                 "stage": re.sub(r"^\d+-", "", row["name"]).removesuffix(".json"),
                 "id": value.get("snapshot_id"),
                 "tasks": len(value["per_task"]),
-                "score": metric(value),
+                "score": metric(value, metric_key),
             }
         )
     decisions = [
@@ -163,7 +165,7 @@ def build(raw, key, harness):
         return [
             node(row["id"], score=row["score"])
             for row in evaluations
-            if row["stage"] == "selection-dev"
+            if row["stage"].startswith("selection-dev")
         ]
 
     method = {}
@@ -737,7 +739,7 @@ def build(raw, key, harness):
         "evaluations": evaluations,
         "events": events,
         "changedPaths": sorted(changed),
-        "resourcesPath": f"/experiment-data/searchqa/resources/{key}-{harness}.json",
+        "resourcesPath": f"{resource_prefix}/resources/{key}-{harness}.json",
     }
     return agent, resources
 
