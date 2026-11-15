@@ -106,3 +106,15 @@ The input contains `records/<algorithm>-<harness>.json`, with recorded non-test 
 Each method's **View diff** action opens the shared file inspector within its selection view and preserves the current selection. The inspector supports added/removed lines with folded unchanged context, complete before/after text, side-by-side comparisons, and recorded executable flags. Its default comparison is the recorded parent when available, otherwise the initial version; visitors can select a different base. The line diff normalizes CRLF, while the complete text retains the archived content. Large unrelated files use a bounded full-replacement display.
 
 Adding more runs of an existing method means mapping their records to that method's display fields and adding a page entry. A new selection policy needs its own view: train optimization is not dev selection, archive admission is not final promotion, and a successful execution gate is not a correct answer. Do not silently replay a new selection rule over historical scores. Mark missing evidence as missing.
+
+### Terminal-Bench experiments
+
+Terminal-Bench pages use the same explorer shell and resource inspector, with method-specific evolution views in `selection/TerminalEvolution.vue`. The display metric is the archived `reward`; the selected version comes from the run record.
+
+```bash
+python scripts/export_terminal_explorers.py \
+  --records /path/to/reduced-terminal-records \
+  --output docs/public/experiment-data/terminalbench
+```
+
+Each input is `<algorithm>-<harness>.json`. The exporter retains prompt history, population survival, coverage, playbook edits, repair audits, design admission, experiment scores, branch gates, round outcomes, or skill production as appropriate. Test results and complete model conversations are omitted. Add the page to the experiment index, then build and check desktop/mobile interactions before publishing.

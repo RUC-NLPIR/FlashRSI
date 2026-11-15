@@ -85,7 +85,11 @@ def metric(record, score_key="hard"):
     return mean(scores) if all(isinstance(x, (int, float)) for x in scores) else None
 
 
-def build(raw, key, harness, benchmark="searchqa"):
+def build(
+    raw, key, harness, benchmark="searchqa", *, metric_key=None, resource_prefix=None
+):
+    metric_key = metric_key or ("exact_match" if benchmark == "hotpotqa" else "hard")
+    resource_prefix = resource_prefix or f"/experiment-data/{benchmark}"
     records = raw["records"]
     meta = raw.get("meta") or {}
     if key == "evoharness":
@@ -144,9 +148,7 @@ def build(raw, key, harness, benchmark="searchqa"):
                 "stage": re.sub(r"^\d+-", "", row["name"]).removesuffix(".json"),
                 "id": value.get("snapshot_id"),
                 "tasks": len(value["per_task"]),
-                "score": metric(
-                    value, "exact_match" if benchmark == "hotpotqa" else "hard"
-                ),
+                "score": metric(value, metric_key),
             }
         )
     decisions = [
@@ -757,7 +759,7 @@ def build(raw, key, harness, benchmark="searchqa"):
         "evaluations": evaluations,
         "events": events,
         "changedPaths": sorted(changed),
-        "resourcesPath": f"/experiment-data/{benchmark}/resources/{key}-{harness}.json",
+        "resourcesPath": f"{resource_prefix}/resources/{key}-{harness}.json",
     }
     return agent, resources
 

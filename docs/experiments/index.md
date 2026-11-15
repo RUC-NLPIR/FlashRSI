@@ -5,7 +5,7 @@ description: Browse the recorded edits, development scores, and logs behind hist
 
 # Experiment explorer
 
-Inspect how a method actually searches and selects a version. The archive covers **12 methods × 2 target harnesses on SearchQA and HotpotQA**. Each method has its own selection view; a single dev curve would hide important differences between these runs.
+Inspect how a method actually searches and selects a version. The archive covers **12 methods × 2 target harnesses on SearchQA, HotpotQA, and Terminal-Bench**. Each method has its own selection view; a single dev curve would hide important differences between these runs.
 
 ## Available experiments
 
@@ -31,3 +31,22 @@ Open **View diff** on a candidate, branch, or checkpoint to inspect its file cha
 The explorer does not display test results. Training scores, dev scores, per-task coverage, admission gates, and final selection are labelled separately. Runtime progress logs and algorithm event records are distinct from complete model conversation transcripts.
 
 To add an experiment, see [maintaining the explorer](../development/docs-site.md#experiment-explorer).
+
+## Terminal-Bench
+
+| Experiment | Selection view |
+| --- | --- |
+| [OPRO × Terminal-Bench](./opro-terminal-bench.md) | Optimization history |
+| [EvoPrompt × Terminal-Bench](./evoprompt-terminal-bench.md) | Population arena |
+| [GEPA × Terminal-Bench](./gepa-terminal-bench.md) | Coverage frontier |
+| [ACE × Terminal-Bench](./ace-terminal-bench.md) | Playbook ledger |
+| [AHE × Terminal-Bench](./ahe-terminal-bench.md) | Repair audit |
+| [ADAS × Terminal-Bench](./adas-terminal-bench.md) | Design archive |
+| [Meta-Harness × Terminal-Bench](./meta-harness-terminal-bench.md) | Experiment notebook |
+| [DarwinX × Terminal-Bench](./darwinx-terminal-bench.md) | Branch admission |
+| [ModularRSI × Terminal-Bench](./modular-rsi-terminal-bench.md) | Branches and integration |
+| [RRSI × Terminal-Bench](./rrsi-terminal-bench.md) | Round tournament |
+| [Evo-Harness × Terminal-Bench](./evoharness-terminal-bench.md) | Skill production |
+| [SkillOpt × Terminal-Bench](./skillopt-terminal-bench.md) | Fast / slow skill updates |
+
+Open a method to switch between MiniAgent and Claude Code and inspect its recorded decisions, selected artifact, and file changes. Test results are omitted.
