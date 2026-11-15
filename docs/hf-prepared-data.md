@@ -76,7 +76,7 @@ benchmark:
 
 其他 benchmark 的运行条件和独立模型配置沿用[配置索引](benchmark-quickstart.md)。例如 WideSearch 仍需搜索/抓取服务和 Judge，TravelPlanner 仍需独立 postprocess。
 
-HLE 使用官方 `cais/hle`，固定 revision 为 `5a81a4c7271a2a2a312b9a690f0c2fde837e4c29`。官方发布的是混合图文 test 集；加载器读取必要文本列，用 `image` 字段排除带图题，不加载或解码 `image_preview`、`rationale_image` 列。进入实验的题目只有文本，参考答案只交给宿主侧独立 Judge。首次需在官方 HF 页面获得访问权限并登录。示例 [hle_opro.yaml](../examples/hle_opro.yaml) 的 train/dev/test 是过滤后自定义的实验划分，不是官方隐藏测试协议；无需添加本仓库的 `dataset` 配置。
+HLE 使用官方 `cais/hle`，固定 revision 为 `5a81a4c7271a2a2a312b9a690f0c2fde837e4c29`。官方发布的是混合图文 test 集；加载器读取必要文本列，用 `image` 字段排除带图题，不加载或解码 `image_preview`、`rationale_image` 列。进入实验的题目只有文本，参考答案只交给宿主侧独立 Judge。首次需在官方 HF 页面获得访问权限并登录。示例 [hle_opro.yaml](../examples/quickstarts/hle_opro.yaml) 的 train/dev/test 是过滤后自定义的实验划分，不是官方隐藏测试协议；无需添加本仓库的 `dataset` 配置。
 
 ## 原生资源与缓存
 
@@ -88,7 +88,7 @@ HLE 使用官方 `cais/hle`，固定 revision 为 `5a81a4c7271a2a2a312b9a690f0c2
 
 ## 使用示例
 
-复制 [hf_prepared_opro.yaml](../examples/hf_prepared_opro.yaml) 为同目录下的 `hf_prepared_opro.local.yaml`，分别填写 Target 与 Worker 的模型、凭据、端点后运行：
+复制 [hf_prepared_opro.yaml](../examples/quickstarts/hf_prepared_opro.yaml) 为同目录下的 `hf_prepared_opro.local.yaml`，分别填写 Target 与 Worker 的模型、凭据、端点后运行：
 
 ```bash
 python scripts/run_experiment.py --config examples/hf_prepared_opro.local.yaml --plan
@@ -114,6 +114,6 @@ uv run python scripts/prepare_webshop.py
 
 默认将划分文件写入 `.cache/webshop/prepared/`。已取得官方资源时，可加 `--native-root /path/to/WebShop`，检查上游 checkout、基准任务顺序文件的哈希、完整商品和属性文件以及 Lucene 索引布局。这个检查覆盖文件布局和任务清单，运行时的目标匹配和原生评分仍需单独验证。
 
-`webshop` 已接入统一 runner：示例 [webshop_opro.yaml](../examples/webshop_opro.yaml)
+`webshop` 已接入统一 runner：示例 [webshop_opro.yaml](../examples/quickstarts/webshop_opro.yaml)
 会自动读取上述 HF 划分。此 revision 只有任务 ID，完整原生商品库、索引和独立 Python
 环境仍需准备；路径配置、原生评分与隔离方式见 [WebShop](webshop.md)。

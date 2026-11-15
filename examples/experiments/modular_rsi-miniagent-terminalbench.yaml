@@ -1,0 +1,63 @@
+run:
+  output_dir: ./runs/modular_rsi-miniagent-terminalbench
+  seed: 42
+benchmark:
+  name: terminal_bench
+  split: auto
+  data_path: ./data/terminalbench/tasks
+  seed: 42
+agent:
+  source_dir: ./harnesses/modular_rsi-miniagent-terminalbench/target
+  name: miniagent
+  max_turns: 100
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 65535
+    reasoning_effort: high
+    max_retries: 1
+  harbor:
+    remote_docker: true
+    uv_install_source: github
+    setup_timeout: 600
+    integrity_review:
+      llm:
+        model_name: deepseek-flash
+        base_url: https://api.deepseek.com/v1
+      records_dir: ./runs/modular_rsi-miniagent-terminalbench/integrity-review-records
+algorithm:
+  name: modular_rsi
+  evolution_data_policy: benchmark_train
+  modules:
+    agent_loop:
+    - runtime/agent.py
+    tool_use:
+    - runtime/agent.py
+    - tools/shell.py
+    observation_management:
+    - runtime/agent.py
+    - runtime/tool_result.py
+    context_management:
+    - runtime/agent.py
+    task_completion_detection:
+    - runtime/agent.py
+  num_epochs: 1
+  integration_epochs: 1
+  batch_size: 5
+  num_rollouts: 2
+  validation_samples: 2
+  edit_budget: 1
+  seed: 42
+  max_evidence_chars: 60000
+  worker:
+    type: agent
+    name: miniagent
+    source_dir: ./harnesses/modular_rsi-miniagent-terminalbench/worker
+    max_turns: 100
+    timeout: 2400
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      max_retries: 1

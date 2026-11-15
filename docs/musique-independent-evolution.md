@@ -1,6 +1,6 @@
 # MuSiQue 独立演化来源
 
-[公开示例](../examples/modular_rsi_musique.yaml) 使用 MuSiQue-Ans v1.0 的原生 train 池演化，原生 dev 池作自定义下游 1/1/1 划分。填写 Target 和 Worker 各自的模型/API 后，运行统一入口的 `--plan`、`--check-only`，再用同一配置正式运行。
+[公开示例](../examples/quickstarts/modular_rsi_musique.yaml) 使用 MuSiQue-Ans v1.0 的原生 train 池演化，原生 dev 池作自定义下游 1/1/1 划分。填写 Target 和 Worker 各自的模型/API 后，运行统一入口的 `--plan`、`--check-only`，再用同一配置正式运行。
 
 `benchmark.evolution_split` 支持原生 `train`、`dev`；`evolution_limit` 限制最终抽取的演化题数量。两完整来源先按 ID 和规范化原始问题文本检查重叠，再取样。修改题号、段落或上下文不能绕过检查。仅替换实验 train，原下游 dev/test 不变；若默认同时载入原生 train/dev 后又把 train 声称为外部来源，启动时拒绝。
 

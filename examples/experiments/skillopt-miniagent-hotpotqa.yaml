@@ -1,0 +1,44 @@
+run:
+  output_dir: ./runs/skillopt-miniagent-hotpotqa
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 600
+  max_turns: 10
+  source_dir: ./harnesses/skillopt-miniagent-hotpotqa/target
+algorithm:
+  name: skillopt
+  worker:
+    type: llm
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+    timeout: 900
+    max_retries: 1
+  num_epochs: 4
+  batch_size: 40
+  reflection_minibatch_size: 8
+  edit_budget: 4
+  merge_batch_size: 8
+  seed: 42
+  max_steps: null
+  success_threshold: 0.0
+  use_slow_update: true
+  use_meta_skill: true
+  slow_update_samples: 20
+  worker_concurrency: 4
+  invalid_patch_policy: reject_without_score
+  parallel_skillopt_sha256: 62c78f23d6129db388baee2c7bb33b8758ee69e673dca7e7732735b25d8cc68a
+  patch_recovery_sha256: 16a8cd36a53abb97a4bf1209f66a48f64803930687238d2c714aee137556563d

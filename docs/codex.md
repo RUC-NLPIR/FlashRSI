@@ -18,7 +18,7 @@
 
 ```bash
 uv sync --extra all
-uv run flashrsi run --config examples/codex.yaml --agent-harness codex --prepare-only
+uv run flashrsi run --config examples/quickstarts/codex.yaml --agent-harness codex --prepare-only
 ```
 
 `all` 安装已包含 Codex 的 Python 依赖。shell 使用机器上已有的 shell/工具，

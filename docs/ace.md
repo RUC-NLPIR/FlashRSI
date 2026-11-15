@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./ace.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/ace.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/ace.yaml)
 
 ACE grows a playbook through a Generator → Reflector → Curator loop. Valid additions and usage-counter changes are adopted immediately, allowing learning to continue through score regressions. Offline mode periodically measures dev and returns the best measured version; online mode retains the final accumulated playbook.
 
@@ -39,7 +39,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.max_reflection_rounds 1
 ```
 
-These commands inherit `batch_size: 2` and `edit_budget: 1`. Append `--check-only` for initialization without model calls or remote authentication checks. The dedicated [ACE configuration](../examples/ace.yaml) enables two reflection rounds. See [Configuration & CLI](./guide/configuration.md) for credentials and overrides.
+These commands inherit `batch_size: 2` and `edit_budget: 1`. Append `--check-only` for initialization without model calls or remote authentication checks. The dedicated [ACE configuration](../examples/quickstarts/ace.yaml) enables two reflection rounds. See [Configuration & CLI](./guide/configuration.md) for credentials and overrides.
 
 ## Search and selection
 

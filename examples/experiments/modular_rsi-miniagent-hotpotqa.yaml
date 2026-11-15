@@ -1,0 +1,54 @@
+run:
+  output_dir: ./runs/modular_rsi-miniagent-hotpotqa
+  seed: 42
+benchmark:
+  name: hotpotqa
+  split: auto
+  seed: 42
+  data_path: ./data/hotpotqa
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    reasoning_effort: high
+    max_retries: 1
+  source_dir: ./harnesses/modular_rsi-miniagent-hotpotqa/target
+  timeout: 600
+  max_turns: 10
+algorithm:
+  name: modular_rsi
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      max_retries: 1
+    name: miniagent
+    max_turns: 100
+    timeout: 1200
+  evolution_data_policy: benchmark_train
+  modules:
+    agent_loop:
+    - runtime/agent.py
+    tool_use:
+    - runtime/agent.py
+    - tools/shell.py
+    observation_management:
+    - runtime/agent.py
+    - runtime/tool_result.py
+    context_management:
+    - runtime/agent.py
+    task_completion_detection:
+    - runtime/agent.py
+  num_epochs: 1
+  integration_epochs: 1
+  batch_size: 40
+  num_rollouts: 2
+  validation_samples: 2
+  edit_budget: 1
+  seed: 42
+  max_evidence_chars: 60000

@@ -2,7 +2,7 @@
 
 [English](./adas.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/adas.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/adas.yaml)
 
 ADAS 使用设计说明与实测分数组成的档案搜索 Agent 设计。每个新提案从当前 dev 最佳 Snapshot 出发，先修改、复查，再评估。低分设计也留在档案中，但只有严格提高 dev 分数才改变下一轮父版本和最终胜者。Target 活动版本只在搜索结束时提升一次。
 
@@ -26,7 +26,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.num_reflections 1
 ```
 
-这会请求一次设计和一次评估前复查。设 `num_reflections: 0` 可省去复查，但该运行就不覆盖反思阶段。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。专用 [ADAS 配置](../examples/adas.yaml)使用两次复查。覆盖方式见[配置与 CLI](./guide/configuration.md)。
+这会请求一次设计和一次评估前复查。设 `num_reflections: 0` 可省去复查，但该运行就不覆盖反思阶段。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。专用 [ADAS 配置](../examples/quickstarts/adas.yaml)使用两次复查。覆盖方式见[配置与 CLI](./guide/configuration.md)。
 
 ## 搜索与选择
 

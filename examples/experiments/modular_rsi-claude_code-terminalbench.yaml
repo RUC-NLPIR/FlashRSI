@@ -1,0 +1,75 @@
+run:
+  output_dir: ./runs/modular_rsi-claude_code-terminalbench
+  seed: 42
+benchmark:
+  name: terminal_bench
+  split: auto
+  data_path: ./data/terminalbench/tasks
+  seed: 42
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 65535
+    effort: high
+    max_retries: 1
+  source_dir: ./harnesses/modular_rsi-claude_code-terminalbench/target
+  max_turns: 100
+  harbor:
+    remote_docker: true
+    uv_install_source: github
+    setup_timeout: 600
+    integrity_review:
+      llm:
+        model_name: deepseek-flash
+        base_url: https://api.deepseek.com/v1
+      records_dir: ./runs/modular_rsi-claude_code-terminalbench/integrity-review-records
+  permission_mode: acceptEdits
+  allowed_tools:
+  - Bash
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  - Skill
+algorithm:
+  name: modular_rsi
+  evolution_data_policy: benchmark_train
+  modules:
+    solving_strategy:
+    - skills/terminal/SKILL.md
+    tool_interaction:
+    - hooks/tool_interaction.py
+    completion_check:
+    - hooks/completion_check.py
+  num_epochs: 1
+  integration_epochs: 1
+  batch_size: 5
+  num_rollouts: 2
+  validation_samples: 2
+  edit_budget: 1
+  seed: 42
+  max_evidence_chars: 60000
+  worker:
+    type: agent
+    name: claude_code
+    source_dir: ./harnesses/modular_rsi-claude_code-terminalbench/worker
+    max_turns: 100
+    timeout: 2400
+    permission_mode: acceptEdits
+    allowed_tools:
+    - Bash
+    - Read
+    - Write
+    - Edit
+    - Glob
+    - Grep
+    - Skill
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 65536
+      effort: high
+      max_retries: 1

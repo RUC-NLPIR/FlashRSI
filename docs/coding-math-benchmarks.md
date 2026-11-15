@@ -16,7 +16,7 @@ Target 每题在独立 Linux 容器中执行，需要 Docker CLI 与运行中的
 复制示例到项目根目录，填写目标 Agent 与 Worker 各自的模型、连接和凭据：
 
 ```bash
-cp examples/aime_opro.yaml aime.local.yaml
+cp examples/quickstarts/aime_opro.yaml aime.local.yaml
 python scripts/run_experiment.py --config aime.local.yaml --plan
 python scripts/run_experiment.py --config aime.local.yaml --check-only
 python scripts/run_experiment.py --config aime.local.yaml
@@ -77,7 +77,7 @@ AIME 使用 `scoring: integer_exact`。先读取最后一个 `\boxed{...}` 或
 train 替换为 2025 题目。原生整数评分不变，元数据记录来源、revision、年份、题池校验和
 与用途；手填 `evolution_source` 不能绕过检查。
 
-见 [ModularRSI + AIME 示例](../examples/modular_rsi_aime.yaml)。Claude Code 版本使用
+见 [ModularRSI + AIME 示例](../examples/quickstarts/modular_rsi_aime.yaml)。Claude Code 版本使用
 [四扩展示例](../examples/modular_rsi_claude_code.yaml) 中的 `agent.source_dir` 与
 prompt/skill/hook/tool 文件映射，并保留各角色独立的模型配置与预算。
 

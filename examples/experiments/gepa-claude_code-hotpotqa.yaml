@@ -1,0 +1,47 @@
+run:
+  output_dir: ./runs/gepa-claude_code-hotpotqa
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+  seed: 42
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 32768
+    llm_max_retries: 1
+    effort: high
+  timeout: 600
+  max_turns: 10
+  source_dir: ./harnesses/gepa-claude_code-hotpotqa/target
+  tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+  allowed_tools:
+  - Skill
+  - Read
+  - Glob
+  - Grep
+algorithm:
+  name: gepa
+  worker:
+    type: llm
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+    timeout: 900
+    max_retries: 1
+  max_metric_calls: null
+  num_epochs: 1
+  reflection_minibatch_size: 3
+  skip_perfect_score: true
+  candidate_selection_strategy: pareto
+  max_evidence_chars: 24000
+  seed: 42
+  use_merge: false

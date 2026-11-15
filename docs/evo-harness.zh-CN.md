@@ -2,7 +2,7 @@
 
 [English](./evo-harness.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/evo_harness.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/evo_harness.yaml)
 
 Evo-Harness 单次消费训练任务，将失败编译为两级原生技能：面向特定主题的程序，以及跨任务的通用指导。同一 batch 使用固定 Snapshot，整批结束后才编译。合法变化持续采用，不设 dev 门槛。最终 Snapshot 可通过普通 Agent 执行，推理时不需要优化器。
 
@@ -31,7 +31,7 @@ flashrsi run --config examples/quickstart.yaml \
 
 这会分两批消费内置的六道 train 题，便于观察后续批次是否复用技能，但不保证触发编译：每批需要可用的失败经验，这里的 general 技能修订还需要至少三个不同任务支持。追加 `--check-only` 可检查初始化，不调用模型，也不验证模型认证或技能使用。
 
-专用的 [Evo-Harness 配置](../examples/evo_harness.yaml)同样采用 MiniAgent 作为两个角色。更换提供商或 harness 时，参见[配置与 CLI](./guide/configuration.md)及 [Harness 接入](./integrations/harnesses.md)。
+专用的 [Evo-Harness 配置](../examples/quickstarts/evo_harness.yaml)同样采用 MiniAgent 作为两个角色。更换提供商或 harness 时，参见[配置与 CLI](./guide/configuration.md)及 [Harness 接入](./integrations/harnesses.md)。
 
 ## 搜索与选择
 

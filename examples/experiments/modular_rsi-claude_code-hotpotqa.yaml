@@ -1,0 +1,55 @@
+run:
+  output_dir: ./runs/modular_rsi-claude_code-hotpotqa
+  seed: 42
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 32768
+    reasoning_effort: high
+    max_retries: 1
+    effort: high
+  source_dir: ./harnesses/modular_rsi-claude_code-hotpotqa/target
+  timeout: 600
+  max_turns: 10
+  allowed_tools:
+  - Read
+  - Glob
+  - Grep
+  - Skill
+algorithm:
+  name: modular_rsi
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 65536
+      reasoning_effort: high
+      max_retries: 1
+      effort: high
+    name: claude_code
+    max_turns: 100
+    timeout: 1200
+    source_dir: ../../flashrsi/agents/claude_code
+  evolution_data_policy: benchmark_train
+  modules:
+    solving_strategy:
+    - skills/searchqa/SKILL.md
+    tool_interaction:
+    - hooks/tool_interaction.py
+    completion_check:
+    - hooks/completion_check.py
+  num_epochs: 1
+  integration_epochs: 1
+  batch_size: 40
+  num_rollouts: 2
+  validation_samples: 2
+  edit_budget: 1
+  seed: 42
+  max_evidence_chars: 60000

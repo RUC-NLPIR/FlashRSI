@@ -9,13 +9,13 @@
 先在 A 的 `result.json` 中读取 `snapshot_id`，找到同目录下
 `snapshots/<snapshot_id>.json`。不要误选 `snapshots/worker.json`。
 
-填写 [evaluate_hotpotqa.yaml](../examples/evaluate_hotpotqa.yaml) 的 Target 模型与凭据，然后从仓库根目录运行：
+填写 [evaluate_hotpotqa.yaml](../examples/quickstarts/evaluate_hotpotqa.yaml) 的 Target 模型与凭据，然后从仓库根目录运行：
 
 ```bash
-flashrsi evaluate --config examples/evaluate_hotpotqa.yaml \
+flashrsi evaluate --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run-A/snapshots/SELECTED_ID.json --check-only
 
-flashrsi evaluate --config examples/evaluate_hotpotqa.yaml \
+flashrsi evaluate --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run-A/snapshots/SELECTED_ID.json
 ```
 
@@ -33,11 +33,11 @@ flashrsi evaluate --config examples/evaluate_hotpotqa.yaml \
 自动准备脚本也支持 `--snapshot`，并只安装 Target 与 benchmark 所需的依赖：
 
 ```bash
-python scripts/run_experiment.py --config examples/evaluate_hotpotqa.yaml \
+python scripts/run_experiment.py --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run-A/snapshots/SELECTED_ID.json --plan
-python scripts/run_experiment.py --config examples/evaluate_hotpotqa.yaml \
+python scripts/run_experiment.py --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run-A/snapshots/SELECTED_ID.json --check-only
-python scripts/run_experiment.py --config examples/evaluate_hotpotqa.yaml \
+python scripts/run_experiment.py --config examples/quickstarts/evaluate_hotpotqa.yaml \
   --snapshot /path/to/run-A/snapshots/SELECTED_ID.json
 ```
 

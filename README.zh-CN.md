@@ -21,6 +21,21 @@
 </p>
 
 <p align="center">
+  <b>欢迎大家提交实验结果与复现记录！</b><br>
+  <a href="https://github.com/RUC-NLPIR/FlashRSI/issues/new">提交实验结果</a> ·
+  <a href="https://github.com/RUC-NLPIR/FlashRSI/compare">发起 Pull Request</a> ·
+  <a href="#news">最新动态</a>
+</p>
+
+<div id="news">
+  <h2>📣 最新动态</h2>
+  <ul>
+    <li>[2026-11-10]：🔍 已公开 <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">HotpotQA 演化记录</a>，涵盖 MiniAgent 和 Claude Code 上的 12 种 RSI 方法，支持交互查看 harness 改动与版本选择过程。</li>
+    <li>[2026-11-09]：🔍 已公开 <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">SearchQA 演化记录</a>，涵盖 MiniAgent 和 Claude Code 上的 12 种 RSI 方法，支持交互查看 harness 改动与版本选择过程。</li>
+  </ul>
+</div>
+
+<p align="center">
   <a href="README.md">English</a> · <b>简体中文</b>
 </p>
 
@@ -126,6 +141,8 @@ flashrsi run --config examples/quickstart.yaml
 
 结果保存在 `runs/`，见[分数、Snapshot 与轨迹说明](docs/running-experiments.md#read-the-results)。自动准备环境见[一键实验指南](docs/experiment-launcher.zh-CN.md)。
 
+[96 份实验配置](examples/experiments/)覆盖 12 个算法、两种 harness 和四个 benchmark。基础示例集中在 [examples/quickstarts/](examples/quickstarts/)。实验配置中的数据与 harness 资源采用相对路径，运行前需准备对应资源，并填写各角色凭据及服务地址占位值。
+
 ## 支持的算法
 
 FlashRSI 目前实现 13 种 RSI 方法：
@@ -201,7 +218,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>初始 Harness</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">73.93</td>
-      <td align="center">57.32</td>
+      <td align="center">55.33</td>
       <td align="center">63.33</td>
       <td align="center">64.88</td>
       <td align="center">56.67</td>
@@ -215,7 +232,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">76.43</td>
-      <td align="center">58.54</td>
+      <td align="center">59.00</td>
       <td align="center">66.67</td>
       <td align="center">65.48</td>
       <td align="center">59.33</td>
@@ -230,7 +247,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>SkillOpt</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">83.14<br><sub>+9.21 pp</sub></td>
-      <td align="center">60.98<br><sub>+3.66 pp</sub></td>
+      <td align="center">65.67<br><sub>+10.34 pp</sub></td>
       <td align="center">70.00<br><sub>+6.67 pp</sub></td>
       <td align="center">84.52<br><sub>+19.64 pp</sub></td>
       <td align="center">69.00<br><sub>+12.33 pp</sub></td>
@@ -244,7 +261,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">82.93<br><sub>+6.50 pp</sub></td>
-      <td align="center">59.76<br><sub>+1.22 pp</sub></td>
+      <td align="center">65.33<br><sub>+6.33 pp</sub></td>
       <td align="center">66.67<br><sub>0.00 pp</sub></td>
       <td align="center"><strong>91.67</strong><br><sub>+26.19 pp</sub></td>
       <td align="center">62.00<br><sub>+2.67 pp</sub></td>
@@ -259,7 +276,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>OPRO</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">81.43<br><sub>+7.50 pp</sub></td>
-      <td align="center">62.20<br><sub>+4.88 pp</sub></td>
+      <td align="center">65.33<br><sub>+10.00 pp</sub></td>
       <td align="center">63.33<br><sub>0.00 pp</sub></td>
       <td align="center">66.07<br><sub>+1.19 pp</sub></td>
       <td align="center"><strong>69.67</strong><br><sub>+13.00 pp</sub></td>
@@ -273,7 +290,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">80.71<br><sub>+4.28 pp</sub></td>
-      <td align="center">60.98<br><sub>+2.44 pp</sub></td>
+      <td align="center">65.33<br><sub>+6.33 pp</sub></td>
       <td align="center">66.67<br><sub>0.00 pp</sub></td>
       <td align="center">59.52<br><sub>-5.96 pp</sub></td>
       <td align="center">64.67<br><sub>+5.34 pp</sub></td>
@@ -288,7 +305,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>AHE</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">79.36<br><sub>+5.43 pp</sub></td>
-      <td align="center">60.98<br><sub>+3.66 pp</sub></td>
+      <td align="center">67.33<br><sub>+12.00 pp</sub></td>
       <td align="center">70.00<br><sub>+6.67 pp</sub></td>
       <td align="center">91.67<br><sub>+26.79 pp</sub></td>
       <td align="center">66.00<br><sub>+9.33 pp</sub></td>
@@ -302,7 +319,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">78.57<br><sub>+2.14 pp</sub></td>
-      <td align="center">57.32<br><sub>-1.22 pp</sub></td>
+      <td align="center">64.33<br><sub>+5.33 pp</sub></td>
       <td align="center">60.00<br><sub>-6.67 pp</sub></td>
       <td align="center">71.43<br><sub>+5.95 pp</sub></td>
       <td align="center">66.33<br><sub>+7.00 pp</sub></td>
@@ -317,7 +334,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>ACE</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">83.93<br><sub>+10.00 pp</sub></td>
-      <td align="center"><strong>63.41</strong><br><sub>+6.09 pp</sub></td>
+      <td align="center">66.33<br><sub>+11.00 pp</sub></td>
       <td align="center">66.67<br><sub>+3.34 pp</sub></td>
       <td align="center">91.07<br><sub>+26.19 pp</sub></td>
       <td align="center">64.00<br><sub>+7.33 pp</sub></td>
@@ -331,7 +348,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">84.71<br><sub>+8.28 pp</sub></td>
-      <td align="center"><strong>63.41</strong><br><sub>+4.87 pp</sub></td>
+      <td align="center">66.33<br><sub>+7.33 pp</sub></td>
       <td align="center">70.00<br><sub>+3.33 pp</sub></td>
       <td align="center"><strong>91.67</strong><br><sub>+26.19 pp</sub></td>
       <td align="center">62.67<br><sub>+3.34 pp</sub></td>
@@ -346,7 +363,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>EvoPrompt</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">74.07<br><sub>+0.14 pp</sub></td>
-      <td align="center">58.54<br><sub>+1.22 pp</sub></td>
+      <td align="center">59.33<br><sub>+4.00 pp</sub></td>
       <td align="center">63.33<br><sub>0.00 pp</sub></td>
       <td align="center">61.90<br><sub>-2.98 pp</sub></td>
       <td align="center">59.67<br><sub>+3.00 pp</sub></td>
@@ -360,7 +377,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">76.71<br><sub>+0.28 pp</sub></td>
-      <td align="center">59.76<br><sub>+1.22 pp</sub></td>
+      <td align="center">58.67<br><sub>-0.33 pp</sub></td>
       <td align="center"><strong>76.67</strong><br><sub>+10.00 pp</sub></td>
       <td align="center">64.29<br><sub>-1.19 pp</sub></td>
       <td align="center">58.67<br><sub>-0.66 pp</sub></td>
@@ -375,7 +392,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>GEPA</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">82.43<br><sub>+8.50 pp</sub></td>
-      <td align="center">62.20<br><sub>+4.88 pp</sub></td>
+      <td align="center"><strong>67.67</strong><br><sub>+12.34 pp</sub></td>
       <td align="center">66.67<br><sub>+3.34 pp</sub></td>
       <td align="center">67.86<br><sub>+2.98 pp</sub></td>
       <td align="center">65.33<br><sub>+8.66 pp</sub></td>
@@ -389,7 +406,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">84.64<br><sub>+8.21 pp</sub></td>
-      <td align="center">59.76<br><sub>+1.22 pp</sub></td>
+      <td align="center">66.67<br><sub>+7.67 pp</sub></td>
       <td align="center">70.00<br><sub>+3.33 pp</sub></td>
       <td align="center">75.00<br><sub>+9.52 pp</sub></td>
       <td align="center">61.67<br><sub>+2.34 pp</sub></td>
@@ -404,7 +421,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>ADAS</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">81.36<br><sub>+7.43 pp</sub></td>
-      <td align="center">60.98<br><sub>+3.66 pp</sub></td>
+      <td align="center"><strong>67.67</strong><br><sub>+12.34 pp</sub></td>
       <td align="center">73.33<br><sub>+10.00 pp</sub></td>
       <td align="center">89.88<br><sub>+25.00 pp</sub></td>
       <td align="center">63.67<br><sub>+7.00 pp</sub></td>
@@ -418,7 +435,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center"><strong>84.86</strong><br><sub>+8.43 pp</sub></td>
-      <td align="center">60.98<br><sub>+2.44 pp</sub></td>
+      <td align="center"><strong>67.67</strong><br><sub>+8.67 pp</sub></td>
       <td align="center">66.67<br><sub>0.00 pp</sub></td>
       <td align="center">79.76<br><sub>+14.28 pp</sub></td>
       <td align="center">62.33<br><sub>+3.00 pp</sub></td>
@@ -433,7 +450,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>DarwinX</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">80.50<br><sub>+6.57 pp</sub></td>
-      <td align="center">60.98<br><sub>+3.66 pp</sub></td>
+      <td align="center">64.00<br><sub>+8.67 pp</sub></td>
       <td align="center">63.33<br><sub>0.00 pp</sub></td>
       <td align="center">70.83<br><sub>+5.95 pp</sub></td>
       <td align="center">65.67<br><sub>+9.00 pp</sub></td>
@@ -447,7 +464,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">79.29<br><sub>+2.86 pp</sub></td>
-      <td align="center">60.98<br><sub>+2.44 pp</sub></td>
+      <td align="center">66.00<br><sub>+7.00 pp</sub></td>
       <td align="center">66.67<br><sub>0.00 pp</sub></td>
       <td align="center">69.05<br><sub>+3.57 pp</sub></td>
       <td align="center">64.67<br><sub>+5.34 pp</sub></td>
@@ -462,7 +479,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>Meta-Harness</strong></td>
       <td align="left">Claude Code</td>
       <td align="center"><strong>85.07</strong><br><sub>+11.14 pp</sub></td>
-      <td align="center">62.20<br><sub>+4.88 pp</sub></td>
+      <td align="center">66.00<br><sub>+10.67 pp</sub></td>
       <td align="center">70.00<br><sub>+6.67 pp</sub></td>
       <td align="center">90.48<br><sub>+25.60 pp</sub></td>
       <td align="center">64.00<br><sub>+7.33 pp</sub></td>
@@ -476,7 +493,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">79.14<br><sub>+2.71 pp</sub></td>
-      <td align="center">59.76<br><sub>+1.22 pp</sub></td>
+      <td align="center">63.33<br><sub>+4.33 pp</sub></td>
       <td align="center">73.33<br><sub>+6.66 pp</sub></td>
       <td align="center">88.10<br><sub>+22.62 pp</sub></td>
       <td align="center">65.67<br><sub>+6.34 pp</sub></td>
@@ -491,7 +508,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>ModularRSI</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">81.07<br><sub>+7.14 pp</sub></td>
-      <td align="center">59.76<br><sub>+2.44 pp</sub></td>
+      <td align="center"><strong>67.67</strong><br><sub>+12.34 pp</sub></td>
       <td align="center">60.00<br><sub>-3.33 pp</sub></td>
       <td align="center">56.55<br><sub>-8.33 pp</sub></td>
       <td align="center">63.00<br><sub>+6.33 pp</sub></td>
@@ -505,7 +522,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">78.64<br><sub>+2.21 pp</sub></td>
-      <td align="center">59.76<br><sub>+1.22 pp</sub></td>
+      <td align="center">63.33<br><sub>+4.33 pp</sub></td>
       <td align="center">70.00<br><sub>+3.33 pp</sub></td>
       <td align="center">69.05<br><sub>+3.57 pp</sub></td>
       <td align="center">67.00<br><sub>+7.67 pp</sub></td>
@@ -520,7 +537,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>RRSI</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">82.79<br><sub>+8.86 pp</sub></td>
-      <td align="center">60.98<br><sub>+3.66 pp</sub></td>
+      <td align="center">65.67<br><sub>+10.34 pp</sub></td>
       <td align="center"><strong>76.67</strong><br><sub>+13.34 pp</sub></td>
       <td align="center"><strong>92.86</strong><br><sub>+27.98 pp</sub></td>
       <td align="center">64.00<br><sub>+7.33 pp</sub></td>
@@ -534,7 +551,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">81.64<br><sub>+5.21 pp</sub></td>
-      <td align="center">59.76<br><sub>+1.22 pp</sub></td>
+      <td align="center">65.67<br><sub>+6.67 pp</sub></td>
       <td align="center">73.33<br><sub>+6.66 pp</sub></td>
       <td align="center">84.52<br><sub>+19.04 pp</sub></td>
       <td align="center"><strong>68.67</strong><br><sub>+9.34 pp</sub></td>
@@ -549,7 +566,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td rowspan="2" align="left"><strong>Evo-Harness</strong></td>
       <td align="left">Claude Code</td>
       <td align="center">75.36<br><sub>+1.43 pp</sub></td>
-      <td align="center">60.98<br><sub>+3.66 pp</sub></td>
+      <td align="center">66.00<br><sub>+10.67 pp</sub></td>
       <td align="center">66.67<br><sub>+3.34 pp</sub></td>
       <td align="center">81.55<br><sub>+16.67 pp</sub></td>
       <td align="center">58.67<br><sub>+2.00 pp</sub></td>
@@ -563,7 +580,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     <tr>
       <td align="left">Mini-Agent</td>
       <td align="center">80.64<br><sub>+4.21 pp</sub></td>
-      <td align="center">59.76<br><sub>+1.22 pp</sub></td>
+      <td align="center">63.33<br><sub>+4.33 pp</sub></td>
       <td align="center">66.67<br><sub>0.00 pp</sub></td>
       <td align="center">77.38<br><sub>+11.90 pp</sub></td>
       <td align="center">65.33<br><sub>+6.00 pp</sub></td>

@@ -1,0 +1,48 @@
+run:
+  output_dir: ./runs/meta_harness-claude_code-appworld
+  seed: 42
+benchmark:
+  name: appworld
+  split: auto
+  seed: 42
+  data_path: ./data/appworld/split-manifest.json
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 8192
+    effort: high
+    max_retries: 1
+  source_dir: ./harnesses/meta_harness-claude_code-appworld/target
+  timeout: 600
+  max_turns: 30
+  tools:
+  - Read
+  - Glob
+  - Grep
+  - Skill
+  allowed_tools:
+  - Read
+  - Glob
+  - Grep
+  - Skill
+  - mcp__appworld__appworld_execute
+algorithm:
+  name: meta_harness
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 65536
+      reasoning_effort: high
+      max_retries: 1
+      effort: high
+    name: claude_code
+    timeout: 1200
+    max_turns: 100
+    source_dir: ../../flashrsi/agents/claude_code
+  max_steps: 10
+  num_reflections: 2
+  max_evidence_chars: 30000

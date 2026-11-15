@@ -2,7 +2,7 @@
 
 [English](./meta-harness.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/meta_harness.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/meta_harness.yaml)
 
 Meta-Harness 让 coding Worker 在构造候选前，从文件检索历史源码、分数和完整轨迹。每次可编辑目录都从初始 Snapshot 开始，Worker 可以复用或组合任何已测版本。外循环保留全部已测候选，结束时只提升 dev 最佳版本，同分保留此前选中的版本。
 
@@ -25,7 +25,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.max_steps 2
 ```
 
-两次尝试让第二次 Worker 调用有机会查看此前候选或拒绝记录，但不保证实际检索历史或生成合法编辑。追加 `--check-only` 可检查初始化，不调用模型，也不检查远端认证。参见专用 [Meta-Harness 配置](../examples/meta_harness.yaml)与[配置和 CLI](./guide/configuration.md)。
+两次尝试让第二次 Worker 调用有机会查看此前候选或拒绝记录，但不保证实际检索历史或生成合法编辑。追加 `--check-only` 可检查初始化，不调用模型，也不检查远端认证。参见专用 [Meta-Harness 配置](../examples/quickstarts/meta_harness.yaml)与[配置和 CLI](./guide/configuration.md)。
 
 ## 搜索与选择
 

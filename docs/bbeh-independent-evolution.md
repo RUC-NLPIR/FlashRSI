@@ -19,7 +19,7 @@ revision、选择的原生任务文件、全池大小和校验值。未知文件
 原 BBEH 的 `duplicate_questions: exclude` 仍显式排除全部 9 条重复组记录；
 该配置不能称为未过滤的全量榜单。
 
-参见 [MiniAgent 配置](../examples/modular_rsi_bbeh.yaml)。填写 Target 和 Worker
+参见 [MiniAgent 配置](../examples/quickstarts/modular_rsi_bbeh.yaml)。填写 Target 和 Worker
 各自的连接参数后，依次执行公开入口的 `--plan`、`--check-only` 和正常运行。
 Claude Code 使用公开的 `modular_rsi_claude_code` 三扩展示例及其 modules 配置。
 公开预检、全池校验和离线参考评分不替代两 Target 的真实模型 smoke。

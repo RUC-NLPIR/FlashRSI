@@ -1,6 +1,6 @@
 # DeepSearchQA 与 OfficeQA 配置
 
-DeepSearchQA 可使用 `examples/deepsearchqa_serper_jina.yaml`：
+DeepSearchQA 可使用 `examples/quickstarts/deepsearchqa_serper_jina.yaml`：
 `benchmark.retrieval.provider: serper`，搜索密钥放在其 `api_key`；
 `benchmark.retrieval.reader.provider: jina`，阅读密钥放在 reader 的 `api_key`。
 两项凭据分别发送给 Serper 与 Jina，保存在主机配置中，不发给答题模型。
@@ -18,7 +18,7 @@ python scripts/run_experiment.py --config deepsearchqa.local.yaml --check-only
 python scripts/run_experiment.py --config deepsearchqa.local.yaml
 ```
 
-OfficeQA-Pro 使用 `examples/officeqa_pro_opro.yaml`。
+OfficeQA-Pro 使用 `examples/quickstarts/officeqa_pro_opro.yaml`。
 `benchmark.corpus_path` 指向完整公开文档目录，题目与答案 CSV 不放在该目录中。
 默认从固定版本的 `databricks/officeqa` 获取题目，HF 访问授权通过环境中的
 `HF_TOKEN` 提供；已有完整原生 CSV 可显式设置 `benchmark.data_path` 复用。

@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./gepa.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/gepa.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/gepa.yaml)
 
 GEPA reflects on a parent's training trajectories, screens a rewritten instruction on the same tasks, and retains candidates with per-task dev scores. Parent selection can revisit specialists that lead on individual dev tasks, even when they do not have the best mean score. Final selection uses the highest mean dev score, keeping the earlier candidate on a tie.
 
@@ -26,7 +26,7 @@ flashrsi run --config examples/quickstart.yaml \
 
 The bundled split has six train and three dev tasks. The budget allows baseline dev plus one worst-case iteration: `3 + 2 * 2 + 3 = 10` task evaluations. Early rejection can leave room for more iterations. Append `--check-only` for initialization only. GEPA uses `max_metric_calls` and `num_epochs`, not the quickstart's `max_steps` field.
 
-For HotpotQA context-mode data, start with [examples/gepa.yaml](../examples/gepa.yaml) and its dataset prerequisites. See [Configuration & CLI](./guide/configuration.md) for connection settings.
+For HotpotQA context-mode data, start with [examples/quickstarts/gepa.yaml](../examples/quickstarts/gepa.yaml) and its dataset prerequisites. See [Configuration & CLI](./guide/configuration.md) for connection settings.
 
 ## Search and selection
 

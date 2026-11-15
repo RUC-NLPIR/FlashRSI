@@ -1,0 +1,41 @@
+run:
+  output_dir: ./runs/ahe-miniagent-terminalbench
+benchmark:
+  name: terminal_bench
+  split: auto
+  data_path: ./data/terminalbench/tasks
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 65535
+    reasoning_effort: high
+    llm_max_retries: 1
+  source_dir: ./harnesses/ahe-miniagent-terminalbench/target
+  max_turns: 100
+  harbor:
+    remote_docker: true
+    uv_install_source: github
+    setup_timeout: 600
+algorithm:
+  name: ahe
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      llm_max_retries: 1
+    name: miniagent
+    source_dir: ./harnesses/ahe-miniagent-terminalbench/worker
+    timeout: 900
+    max_turns: 10
+  max_steps: 2
+  target_score: 1.0
+  use_debugger: true
+  debugger_max_tasks: 10
+  max_evidence_chars: 30000
+  worker_concurrency: 8

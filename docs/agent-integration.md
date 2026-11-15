@@ -152,7 +152,7 @@ skill 清单遵循 workspace > `.agents/skills` > bundled 的优先级，并应�
 `PROVENANCE.json` 和 [native runtime README](../flashrsi/agents/openclaw/runtime/openclaw_native/README.md)
 记录了来源、范围和明确排除的 Gateway、channel、UI、cron、plugin marketplace 与容器 supervisor。
 OpenClaw 路径不启动 Node.js、npm、Gateway 或宿主 CLI；运行依赖只有 Python 项目已有的 httpx 和 PyYAML。
-示例见 [openclaw.yaml](../examples/openclaw.yaml)，wire、session、tool loop 和资源测试见
+示例见 [openclaw.yaml](../examples/quickstarts/openclaw.yaml)，wire、session、tool loop 和资源测试见
 [OpenClaw tests](../tests/test_openclaw_provider_wire.py)。
 
 OpenCode 的 [适配类](../flashrsi/agents/opencode/__init__.py) 从所选 Snapshot 的
@@ -172,7 +172,7 @@ transcript、事件记录和本地 compaction 是 Python 等价实现；交互�
 SQLite transcript，避免不同 benchmark task 共享历史。运行不需要 Bun、Node、npm、OpenCode
 CLI 或宿主 server；明确排除 TUI、server、OAuth/account、MCP supervisor 和 LSP process
 supervisor。`PROVENANCE.json` 和 [native runtime README](../flashrsi/agents/opencode/runtime/opencode_native/README.md)
-记录了来源、适配范围和排除边界。示例见 [opencode.yaml](../examples/opencode.yaml)，核心、wire
+记录了来源、适配范围和排除边界。示例见 [opencode.yaml](../examples/quickstarts/opencode.yaml)，核心、wire
 和 adapter 测试见 [OpenCode tests](../tests/test_opencode_native_core.py)。
 
 上下文和长输出路径均由所选 Snapshot 内的 Python 代码执行：

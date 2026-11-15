@@ -1,0 +1,47 @@
+run:
+  output_dir: ./runs/evoharness-miniagent-searchqa
+benchmark:
+  name: searchqa
+  seed: 42
+  split: auto
+  data_path:
+    train: ./data/searchqa/train.jsonl
+    dev: ./data/searchqa/dev.jsonl
+    test: ./data/searchqa/test.jsonl
+  mode: context
+agent:
+  name: miniagent
+  source_dir: ./harnesses/evoharness-miniagent-searchqa/target
+  max_turns: 10
+  llm:
+    model_name: deepseek-flash
+    api_key: null
+    base_url: https://api.deepseek.com
+    max_tokens: 16384
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 300
+algorithm:
+  name: evo_harness
+  batch_size: 10
+  max_steps: null
+  success_threshold: 1.0
+  general_min_tasks: 3
+  max_general_skills: 10
+  max_topic_skills: 30
+  max_skill_chars: 2000
+  max_library_chars: 48000
+  max_evidence_chars: 24000
+  worker:
+    type: agent
+    name: miniagent
+    source_dir: ./harnesses/evoharness-miniagent-searchqa/worker
+    max_turns: 60
+    timeout: 900
+    llm:
+      model_name: deepseek-v4-pro
+      api_key: null
+      base_url: https://api.deepseek.com
+      max_tokens: 32768
+      reasoning_effort: high
+      llm_max_retries: 1

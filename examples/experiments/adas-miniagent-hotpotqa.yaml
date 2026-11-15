@@ -1,0 +1,35 @@
+run:
+  output_dir: ./runs/adas-miniagent-hotpotqa
+  seed: 42
+benchmark:
+  name: hotpotqa
+  split: auto
+  seed: 42
+  data_path: ./data/hotpotqa
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    reasoning_effort: high
+    max_retries: 1
+  source_dir: ./harnesses/adas-miniagent-hotpotqa/target
+  timeout: 600
+  max_turns: 10
+algorithm:
+  name: adas
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      max_retries: 1
+    name: miniagent
+    timeout: 1200
+    max_turns: 100
+  max_steps: 10
+  num_reflections: 2
+  max_evidence_chars: 30000

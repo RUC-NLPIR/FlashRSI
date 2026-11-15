@@ -19,7 +19,7 @@ Verified 500题没有 ID、原始问题或镜像交集。这里把公开 dev 用
 外部演化实验来源，不称为官方 train，也不是官方独立 test 榜单评测。
 
 保留下载的原始 Parquet 字节，将它的真实路径填入
-[公开示例](../examples/modular_rsi_swe_bench.yaml)。所有 native task images、
+[公开示例](../examples/quickstarts/modular_rsi_swe_bench.yaml)。所有 native task images、
 Docker 连接和固定官方评估器仍须可用；原生字段和零模型启动检查通过，
 不能替代真实模型、工具执行与官方评分。按种子和固定 limit 选定任务后，
 不得因为镜像可用性或得分重新选题。

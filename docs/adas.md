@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./adas.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/adas.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/adas.yaml)
 
 ADAS searches agent designs using an archive of design descriptions and measured scores. Every new proposal starts from the current best-dev Snapshot and is revised before evaluation. Low-scoring designs remain in the archive, but only a strict dev improvement changes the next parent and eventual winner. The Target's active version is promoted once, after search.
 
@@ -26,7 +26,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.num_reflections 1
 ```
 
-This requests one design and one pre-evaluation review. Set `num_reflections: 0` to omit review; that run would not cover the reflection phase. Append `--check-only` for initialization without model calls or remote authentication validation. The dedicated [ADAS configuration](../examples/adas.yaml) uses two review passes. See [Configuration & CLI](./guide/configuration.md) for overrides.
+This requests one design and one pre-evaluation review. Set `num_reflections: 0` to omit review; that run would not cover the reflection phase. Append `--check-only` for initialization without model calls or remote authentication validation. The dedicated [ADAS configuration](../examples/quickstarts/adas.yaml) uses two review passes. See [Configuration & CLI](./guide/configuration.md) for overrides.
 
 ## Search and selection
 

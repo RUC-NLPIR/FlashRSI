@@ -1,6 +1,6 @@
 # MATH-500 的独立演化数据
 
-通过统一入口运行 [ModularRSI 示例](../examples/modular_rsi_math500.yaml)。填写各自独立的 Target/Worker 模型与 API 配置后，依次执行 `python scripts/run_experiment.py --config examples/modular_rsi_math500.yaml --plan`、`--check-only`，最后去掉检查参数运行。
+通过统一入口运行 [ModularRSI 示例](../examples/quickstarts/modular_rsi_math500.yaml)。填写各自独立的 Target/Worker 模型与 API 配置后，依次执行 `python scripts/run_experiment.py --config examples/quickstarts/modular_rsi_math500.yaml --plan`、`--check-only`，最后去掉检查参数运行。
 
 `variant: math500` 仍使用完整、固定 revision 的 [MATH-500](https://huggingface.co/datasets/HuggingFaceH4/MATH-500) 数据池。`evolution_split` 从固定 revision `21a5633873b6a120296cce3e2df9d5550074f4a3` 的 [原生 MATH](https://huggingface.co/datasets/EleutherAI/hendrycks_math) 中选择 train 或 test；`evolution_subjects` 选择完整原生科目，省略时使用全部七个科目。`evolution_limit` 只限制最后抽取的演化题数量。
 

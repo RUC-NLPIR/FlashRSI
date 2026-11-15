@@ -15,7 +15,7 @@ SearchQA 与 Terminal-Bench 数据均放在 Hugging Face 仓库
 
 ## RRSI
 
-见 [接入说明](../docs/rrsi.md) 与 [示例配置](../examples/rrsi.yaml)。
+见 [接入说明](../docs/rrsi.md) 与 [示例配置](../examples/quickstarts/rrsi.yaml)。
 演化整个 harness，通过逐任务 digester、结构化分析、提案预测及评测后归因形成反馈。
 用退火预算、完整历史、停滞探索、剪枝建议及 critic 约束提案；组件标签由实际 diff
 归一化，同轮候选共享固定证据。候选经原生 smoke 后，按噪声 floor、token 成本和
@@ -25,7 +25,7 @@ train 用于演化，runner 最后只测一次 test；各 trial 需要完整 tok
 
 ## Evo-Harness
 
-见 [接入说明](../docs/evo-harness.md) 与 [示例配置](../examples/evo_harness.yaml)。
+见 [接入说明](../docs/evo-harness.md) 与 [示例配置](../examples/quickstarts/evo_harness.yaml)。
 单次执行训练任务流，失败后反思，批次结束编译 topic/general 两级 skill，供后续任务选择和使用。
 合法更新持续采用；记录更新前在线分数，最终冻结库做独立 test，test 不参与学习。
 Curator 通过 Agent Worker 编辑原生 skill 与启用配置，复用标准评分和 Snapshot 提交；最终版本
@@ -44,7 +44,7 @@ TerminalBench 可通过 `evolution_data_path` 加载独立 Harbor 演化任务�
 
 ## Meta-Harness
 
-新增 [迁移说明](../docs/meta-harness.md) 与 [示例配置](../examples/meta_harness.yaml)。
+新增 [迁移说明](../docs/meta-harness.md) 与 [示例配置](../examples/quickstarts/meta_harness.yaml)。
 Meta-Harness 让文件编辑型 Worker 检索全部历史源码、分数与完整轨迹，自主诊断并构造候选。
 退步版本同样保留；历史不压缩进提示词，临时参考目录在提交前清理，版本直接复用 Snapshot。
 在 dev 上搜索并选出主指标最好的版本，runner 最后只评估一次 test。
@@ -52,7 +52,7 @@ Meta-Harness 让文件编辑型 Worker 检索全部历史源码、分数与完�
 
 ## DarwinX
 
-新增 [DarwinX 迁移说明](../docs/darwinx.md) 与 [示例配置](../examples/darwinx.yaml)。
+新增 [DarwinX 迁移说明](../docs/darwinx.md) 与 [示例配置](../examples/quickstarts/darwinx.yaml)。
 DarwinX 在 train 池上演化整个 harness：低成本筛选之后做重复确认，按逐任务的
 preserve-and-extend 契约准入；总分提升也不能掩盖已有能力回退。
 种群保留旁系和被拒绝变体的证据，支持从共同祖先重组互补分支，并检查双方任务覆盖的 union。
@@ -64,7 +64,7 @@ preserve-and-extend 契约准入；总分提升也不能掩盖已有能力回退
 
 ## ADAS
 
-新增 [ADAS 迁移说明](../docs/adas.md) 与 [小规模示例配置](../examples/adas.yaml)。
+新增 [ADAS 迁移说明](../docs/adas.md) 与 [小规模示例配置](../examples/quickstarts/adas.yaml)。
 ADAS（Meta Agent Search）是第二个把 harness 当**目录**演化的算法，但它与 AHE 正交：
 其他算法都从「当前版本」出发推理，ADAS 从**它建过的全部设计**出发——archive 完整进入提示，
 一个分数很低的设计的价值就在于下一轮能看到它低。
@@ -79,7 +79,7 @@ ADAS 用分数决定去留。因此它同样要求 `algorithm.worker.type: agent
 
 ## AHE
 
-新增 [AHE 迁移说明](../docs/ahe.md) 与 [小规模示例配置](../examples/ahe.yaml)。
+新增 [AHE 迁移说明](../docs/ahe.md) 与 [小规模示例配置](../examples/quickstarts/ahe.yaml)。
 AHE 把 harness 当**目录**整体演化：Worker 拿到 checkout 自己编辑，
 而不是由算法把模型产出的文本写进文件，因此它要求 `algorithm.worker.type: agent`，
 纯 LLM Worker 在启动时报错。每次编辑必须声明改了哪些文件、预测哪些任务会翻转；
@@ -95,7 +95,7 @@ AHE 把 harness 当**目录**整体演化：Worker 拿到 checkout 自己编辑�
 
 ## ACE
 
-新增 [ACE 迁移说明](../docs/ace.md) 与 [小规模示例配置](../examples/ace.yaml)。
+新增 [ACE 迁移说明](../docs/ace.md) 与 [小规模示例配置](../examples/quickstarts/ace.yaml)。
 ACE 通过 Reflector/Curator 积累结构化 playbook，合法增量持续应用。
 `mode: offline`（默认）按 `eval_steps` 周期评估 dev，结束后恢复 dev 最佳版本；
 `mode: online` 按原顺序流式消费 train，每批先执行计分再反思更新，不访问 dev，
@@ -284,7 +284,7 @@ Snapshot 保留原始文件内容，不能把凭据写入 seed 文件；候选�
 | 目标组件 | `skill` | `prompt` |
 
 ```bash
-uv run flashrsi run --config examples/opro.yaml \
+uv run flashrsi run --config examples/quickstarts/opro.yaml \
   --algorithm.max_steps 2 --algorithm.num_candidates 2 --benchmark.limit 12
 ```
 
@@ -348,7 +348,7 @@ prompt 规则。
 | 预算 | `max_steps × num_candidates` | `max_metric_calls` 计目标执行次数 |
 
 ```bash
-uv run flashrsi run --config examples/gepa.yaml \
+uv run flashrsi run --config examples/quickstarts/gepa.yaml \
   --algorithm.max_metric_calls 30 --benchmark.limit 24
 ```
 
@@ -422,10 +422,10 @@ donor 构造 trial 并成对替换。
 | 淘汰时机 | 通过 minibatch 筛选才进种群 | GA 代末统一淘汰；DE 逐成员成对竞争 |
 
 ```bash
-uv run flashrsi run --config examples/evoprompt.yaml \
+uv run flashrsi run --config examples/quickstarts/evoprompt.yaml \
   --algorithm.population_size 4 --algorithm.max_steps 2 --benchmark.limit 12
 # DE 变体（需要 population_size >= 4）：
-uv run flashrsi run --config examples/evoprompt.yaml --algorithm.variant de \
+uv run flashrsi run --config examples/quickstarts/evoprompt.yaml --algorithm.variant de \
   --algorithm.population_size 4 --algorithm.max_steps 2 --benchmark.limit 12
 ```
 
@@ -1135,7 +1135,7 @@ Agent 基类阶段验证包括真实本地子进程、假 SDK、并发/取消和
 
 当前 Codex 执行选定 Snapshot 中的 Python 核心，可作为目标 Agent 或文件编辑 Worker，
 无需原生 CLI 或 Rust 工具链。模型与凭据分别配置在各角色的 `llm` 中，端点需支持流式 Responses API。
-配置示例、资源范围与验证边界见 [Codex 说明](codex.md)和[示例配置](../examples/codex.yaml)。
+配置示例、资源范围与验证边界见 [Codex 说明](codex.md)和[示例配置](../examples/quickstarts/codex.yaml)。
 
 ## MiniAgent
 

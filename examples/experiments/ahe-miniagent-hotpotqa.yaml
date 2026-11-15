@@ -1,0 +1,37 @@
+run:
+  output_dir: ./runs/ahe-miniagent-hotpotqa
+benchmark:
+  name: hotpotqa
+  split: auto
+  data_path: ./data/hotpotqa
+  seed: 42
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 600
+  max_turns: 10
+  source_dir: ./harnesses/ahe-miniagent-hotpotqa/target
+algorithm:
+  name: ahe
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+    timeout: 900
+    max_retries: 1
+    name: miniagent
+    max_turns: 10
+    source_dir: ./harnesses/ahe-miniagent-hotpotqa/worker
+  max_steps: 5
+  target_score: 1.0
+  use_debugger: true
+  debugger_max_tasks: 10
+  max_evidence_chars: 30000

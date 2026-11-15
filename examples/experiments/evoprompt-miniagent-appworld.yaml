@@ -1,0 +1,41 @@
+run:
+  output_dir: ./runs/evoprompt-miniagent-appworld
+  seed: 42
+benchmark:
+  name: appworld
+  split: auto
+  seed: 42
+  data_path: ./data/appworld/split-manifest.json
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 8192
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 600
+  max_turns: 30
+  source_dir: ./harnesses/evoprompt-miniagent-appworld/target
+algorithm:
+  name: evoprompt
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      llm_max_retries: 1
+    timeout: 900
+    max_retries: 1
+    name: miniagent
+    max_turns: 10
+    source_dir: ./harnesses/evoprompt-miniagent-appworld/worker
+  variant: de
+  population_size: 6
+  max_steps: 5
+  selection: wheel
+  survivor_selection: topk
+  donor_random: false
+  seed: 42

@@ -2,7 +2,7 @@
 
 ## 使用独立的 TriviaQA 原生 train
 
-[可运行来源示例](../examples/modular_rsi_searchqa_triviaqa.yaml) 通过
+[可运行来源示例](../examples/quickstarts/modular_rsi_searchqa_triviaqa.yaml) 通过
 `benchmark.evolution_triviaqa: {split: train}` 读取完整原生 TriviaQA
 `rc.wikipedia` train，仅替换 SearchQA 的实验 train。来源固定为
 `mandarjoshi/trivia_qa` revision `0f7faf33a3908546c6fd5b73a660e0f8ff173c2f`。
@@ -36,7 +36,7 @@ builder 的配置名为 `default`。此来源字符串遵循 `datasets` 本身�
 
 ## 原生 SearchQA split 的重合诊断
 
-[公开示例](../examples/modular_rsi_searchqa.yaml) 声明完整原生 train ZIP 演化、完整 validation ZIP 作自定义下游 1/1/1 划分，用于检查来源独立性。真实全池核查已确认该配置会在 `--check-only` 拒绝：train/validation、train/test、validation/test 分别有 439、145、23 个规范化问题交集。它目前不是可直接正式运行的 ModularRSI 配方，不能删题或关闭检查来使它通过。需选择真正独立的来源；公开 `data_path` 可指定真实独立的原生格式下游数据，仍接受同样的全池检查。
+[公开示例](../examples/quickstarts/modular_rsi_searchqa.yaml) 声明完整原生 train ZIP 演化、完整 validation ZIP 作自定义下游 1/1/1 划分，用于检查来源独立性。真实全池核查已确认该配置会在 `--check-only` 拒绝：train/validation、train/test、validation/test 分别有 439、145、23 个规范化问题交集。它目前不是可直接正式运行的 ModularRSI 配方，不能删题或关闭检查来使它通过。需选择真正独立的来源；公开 `data_path` 可指定真实独立的原生格式下游数据，仍接受同样的全池检查。
 
 通过统一入口的 `--plan`、`--check-only` 后，条件具备时才正式运行。首次准备可能需要下载较大的原生 ZIP；已有完整 Hugging Face 缓存可以复用。
 

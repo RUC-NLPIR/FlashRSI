@@ -2,7 +2,7 @@
 
 [English](./opro.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/opro.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/opro.yaml)
 
 OPRO 把历史指令及其分数展示给 Worker，让它提出更好的指令。所有评估过的指令都留在搜索历史中。搜索期间 Target 的活动 Snapshot 保持不变，只有最终选择才激活最佳版本。
 
@@ -23,7 +23,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.num_candidates 2
 ```
 
-追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。算法专用的 SearchQA 配置见 [examples/opro.yaml](../examples/opro.yaml)，其默认搜索预算大得多。模型设置和命令行覆盖见[配置与 CLI](./guide/configuration.md)。
+追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。算法专用的 SearchQA 配置见 [examples/quickstarts/opro.yaml](../examples/quickstarts/opro.yaml)，其默认搜索预算大得多。模型设置和命令行覆盖见[配置与 CLI](./guide/configuration.md)。
 
 ## 搜索与选择
 

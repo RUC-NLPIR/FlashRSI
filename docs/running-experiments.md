@@ -78,7 +78,7 @@ The standard runner evaluates the selected Snapshot on test after search. It doe
 
 ## Evaluate a saved Snapshot on another benchmark
 
-Use `flashrsi evaluate --config examples/evaluate_hotpotqa.yaml --snapshot /path/to/selected.json`.
+Use `flashrsi evaluate --config examples/quickstarts/evaluate_hotpotqa.yaml --snapshot /path/to/selected.json`.
 Fill the Target model and credentials first. Add `--check-only` to validate setup without model calls.
 This runs only the destination benchmark's test split, without a Worker or evolution.
 The automatic launcher accepts the same `--snapshot` option. Agent type, root resource version and

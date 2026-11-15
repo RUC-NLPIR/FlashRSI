@@ -6,12 +6,12 @@ Choose a method by the resource you want to improve. FlashRSI supplies versioned
 
 | Method | What it changes | How it searches | Settings / example |
 | --- | --- | --- | --- |
-| OPRO | Instructions | Proposes from scored history; returns the best candidate. | [Guide](../opro.md) · [中文](../opro.zh-CN.md) · [YAML](../../examples/opro.yaml) |
-| GEPA | Instructions | Reflects on trajectories and screens a candidate pool. | [Guide](../gepa.md) · [中文](../gepa.zh-CN.md) · [YAML](../../examples/gepa.yaml) |
-| EvoPrompt | Instructions | Uses GA or DE population search on dev scores. | [Guide](../evoprompt.md) · [中文](../evoprompt.zh-CN.md) · [YAML](../../examples/evoprompt.yaml) |
-| ACE | Instructions / playbook | Accumulates feedback and reflections into a playbook. | [Guide](../ace.md) · [中文](../ace.zh-CN.md) · [YAML](../../examples/ace.yaml) |
+| OPRO | Instructions | Proposes from scored history; returns the best candidate. | [Guide](../opro.md) · [中文](../opro.zh-CN.md) · [YAML](../../examples/quickstarts/opro.yaml) |
+| GEPA | Instructions | Reflects on trajectories and screens a candidate pool. | [Guide](../gepa.md) · [中文](../gepa.zh-CN.md) · [YAML](../../examples/quickstarts/gepa.yaml) |
+| EvoPrompt | Instructions | Uses GA or DE population search on dev scores. | [Guide](../evoprompt.md) · [中文](../evoprompt.zh-CN.md) · [YAML](../../examples/quickstarts/evoprompt.yaml) |
+| ACE | Instructions / playbook | Accumulates feedback and reflections into a playbook. | [Guide](../ace.md) · [中文](../ace.zh-CN.md) · [YAML](../../examples/quickstarts/ace.yaml) |
 | SkillOpt | Skills | Uses fast/slow updates and adopts strict dev gains. | [SkillOpt guide](../skillopt.md) · [Quickstart YAML](../../examples/quickstart.yaml) |
-| Evo-Harness | Skills | Accumulates task-stream skills through native skill discovery. | [Guide](../evo-harness.md) · [中文](../evo-harness.zh-CN.md) · [YAML](../../examples/evo_harness.yaml) |
+| Evo-Harness | Skills | Accumulates task-stream skills through native skill discovery. | [Guide](../evo-harness.md) · [中文](../evo-harness.zh-CN.md) · [YAML](../../examples/quickstarts/evo_harness.yaml) |
 
 ## Harness resources
 
@@ -19,13 +19,13 @@ These methods edit a broader resource scope. Start from their own configurations
 
 | Method | How it searches | Settings / example |
 | --- | --- | --- |
-| AHE | Successive edits with diagnosis and edit audits. | [Guide](../ahe.md) · [中文](../ahe.zh-CN.md) · [YAML](../../examples/ahe.yaml) |
-| ADAS | A design archive; retains proposals and selects the best. | [Guide](../adas.md) · [中文](../adas.zh-CN.md) · [YAML](../../examples/adas.yaml) |
-| DarwinX | Repeated train screening/confirmation; preservation gates and complementary recombination. | [Guide](../darwinx.md) · [中文](../darwinx.zh-CN.md) · [YAML](../../examples/darwinx.yaml) |
-| Meta-Harness | File-based history of code, scores, and traces. | [Guide](../meta-harness.md) · [中文](../meta-harness.zh-CN.md) · [YAML](../../examples/meta_harness.yaml) |
+| AHE | Successive edits with diagnosis and edit audits. | [Guide](../ahe.md) · [中文](../ahe.zh-CN.md) · [YAML](../../examples/quickstarts/ahe.yaml) |
+| ADAS | A design archive; retains proposals and selects the best. | [Guide](../adas.md) · [中文](../adas.zh-CN.md) · [YAML](../../examples/quickstarts/adas.yaml) |
+| DarwinX | Repeated train screening/confirmation; preservation gates and complementary recombination. | [Guide](../darwinx.md) · [中文](../darwinx.zh-CN.md) · [YAML](../../examples/quickstarts/darwinx.yaml) |
+| Meta-Harness | File-based history of code, scores, and traces. | [Guide](../meta-harness.md) · [中文](../meta-harness.zh-CN.md) · [YAML](../../examples/quickstarts/meta_harness.yaml) |
 | ModularRSI | Independent module branches and integration, admitted by review/execution gates rather than score gains. | [Guide](../modular-rsi.md) · [中文](../modular-rsi.zh-CN.md) · [YAML](../../examples/modular_rsi.yaml) |
-| RRSI | History-guided revisions with score/cost admission; returns the last accepted version. | [Guide](../rrsi.md) · [中文](../rrsi.zh-CN.md) · [YAML](../../examples/rrsi.yaml) |
-| Arbor | Hypothesis-tree planning; experiments start from the selected trunk and require strict dev gains for adoption. | [Guide](../arbor.md) · [中文](../arbor.zh-CN.md) · [YAML](../../examples/arbor.yaml) |
+| RRSI | History-guided revisions with score/cost admission; returns the last accepted version. | [Guide](../rrsi.md) · [中文](../rrsi.zh-CN.md) · [YAML](../../examples/quickstarts/rrsi.yaml) |
+| Arbor | Hypothesis-tree planning; experiments start from the selected trunk and require strict dev gains for adoption. | [Guide](../arbor.md) · [中文](../arbor.zh-CN.md) · [YAML](../../examples/quickstarts/arbor.yaml) |
 
 ## Match the Worker to the method
 

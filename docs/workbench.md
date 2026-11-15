@@ -5,7 +5,7 @@
 上游的五类模拟工作系统包含邮件、日历、分析、项目管理和 CRM，另提供公司通讯录工具。
 默认加载全部 690 道原题和全部原生工具。Target 需要 Docker，评分使用原生规则。
 
-复制 [配置示例](../examples/workbench_opro.yaml) 为 `experiment.local.yaml`，分别填写
+复制 [配置示例](../examples/quickstarts/workbench_opro.yaml) 为 `experiment.local.yaml`，分别填写
 Target 和 Worker 的模型/API。Python 使用 3.12 或更新版本，并安装 Git。
 MiniAgent 内置 shell 需要 Linux/WSL/macOS；Claude Code 需允许 Bash，例如
 `agent.allowed_tools: [Read, Glob, Grep, Bash]`，其模型连接仍按 Claude Code 的公开配置填写。

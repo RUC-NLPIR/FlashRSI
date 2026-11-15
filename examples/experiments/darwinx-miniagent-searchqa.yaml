@@ -1,0 +1,42 @@
+run:
+  output_dir: ./runs/darwinx-miniagent-searchqa
+  seed: 42
+benchmark:
+  name: searchqa
+  split: auto
+  data_path: ./data/searchqa
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 32768
+    reasoning_effort: high
+    max_retries: 1
+  source_dir: ./harnesses/darwinx-miniagent-searchqa/target
+  timeout: 600
+  max_turns: 10
+algorithm:
+  name: darwinx
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+      max_retries: 1
+    name: miniagent
+    timeout: 1200
+    max_turns: 100
+  max_steps: 10
+  max_evidence_chars: 24000
+  screen_size: 10
+  screen_samples: 1
+  confirm_samples: 1
+  merge_every: 3
+  seed: 42
+  regression_tolerance: 10.0
+  gate_split: dev
+  gate_fraction: 0.05
+  hard_invariant_veto: false

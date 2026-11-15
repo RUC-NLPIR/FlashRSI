@@ -5,11 +5,11 @@ SpreadsheetBench 2 的配置与执行边界。
 
 | Benchmark | 配置 | 容器与评分 | 示例 |
 | --- | --- | --- | --- |
-| Terminal-Bench 2.1 | `name: terminal_bench`, `version: "2.1"` | Harbor，原生任务 verifier | [Terminal 2.1](../examples/terminal_bench21_opro.yaml) |
-| SWE-bench Verified | `name: swe_bench` | 官方 SWE-bench harness + Docker，`resolved` | [Verified](../examples/swe_bench_verified_opro.yaml) |
-| SWE-bench Pro V2 | `name: swe_bench_pro`, `subset: all` / `hard` | Harbor 执行，官方 fresh-sandbox 评分，`resolved` | [Pro](../examples/swe_bench_pro_opro.yaml) |
-| DeepSWE v1.1 | `name: deepswe` | Harbor 原生 collect + 独立 verifier，`reward`；仅离线接口验证 | [DeepSWE](../examples/deepswe_opro.yaml) |
-| SpreadsheetBench 2 | `name: spreadsheetbench2`, `category: all` | Harbor 独立评分容器，官方 LibreOffice 重算与 workbook 评分 | [SpreadsheetBench 2](../examples/spreadsheetbench2_opro.yaml) |
+| Terminal-Bench 2.1 | `name: terminal_bench`, `version: "2.1"` | Harbor，原生任务 verifier | [Terminal 2.1](../examples/quickstarts/terminal_bench21_opro.yaml) |
+| SWE-bench Verified | `name: swe_bench` | 官方 SWE-bench harness + Docker，`resolved` | [Verified](../examples/quickstarts/swe_bench_verified_opro.yaml) |
+| SWE-bench Pro V2 | `name: swe_bench_pro`, `subset: all` / `hard` | Harbor 执行，官方 fresh-sandbox 评分，`resolved` | [Pro](../examples/quickstarts/swe_bench_pro_opro.yaml) |
+| DeepSWE v1.1 | `name: deepswe` | Harbor 原生 collect + 独立 verifier，`reward`；仅离线接口验证 | [DeepSWE](../examples/quickstarts/deepswe_opro.yaml) |
+| SpreadsheetBench 2 | `name: spreadsheetbench2`, `category: all` | Harbor 独立评分容器，官方 LibreOffice 重算与 workbook 评分 | [SpreadsheetBench 2](../examples/quickstarts/spreadsheetbench2_opro.yaml) |
 
 不是所有 Docker 基准都由 Harbor 管理：Verified 保留官方 harness；AppWorld / BFCL 也保留各自 Docker 接入。
 一键入口根据配置选择依赖和准备数据；Harbor 类基准的任务镜像由 Harbor 构建和管理。
@@ -20,7 +20,7 @@ SpreadsheetBench 2 的配置与执行边界。
 分别填写 `agent.llm` 与 `algorithm.worker.llm`，然后：
 
 ```powershell
-Copy-Item examples/spreadsheetbench2_opro.yaml spreadsheet.local.yaml
+Copy-Item examples/quickstarts/spreadsheetbench2_opro.yaml spreadsheet.local.yaml
 python scripts/run_experiment.py --config spreadsheet.local.yaml --plan
 python scripts/run_experiment.py --config spreadsheet.local.yaml --check-only
 python scripts/run_experiment.py --config spreadsheet.local.yaml

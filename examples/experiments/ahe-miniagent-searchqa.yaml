@@ -1,0 +1,37 @@
+run:
+  output_dir: ./runs/ahe-miniagent-searchqa
+benchmark:
+  name: searchqa
+  split: auto
+  seed: 42
+  data_path: ./data/searchqa
+agent:
+  name: miniagent
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://model-gateway.example/v1
+    max_tokens: 16384
+    reasoning_effort: high
+    llm_max_retries: 1
+  timeout: 300
+  max_turns: 10
+  source_dir: ./harnesses/ahe-miniagent-searchqa/target
+algorithm:
+  name: ahe
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://model-gateway.example/v1
+      max_tokens: 32768
+      reasoning_effort: high
+    timeout: 600
+    max_retries: 1
+    name: miniagent
+    max_turns: 10
+    source_dir: ./harnesses/ahe-miniagent-searchqa/worker
+  max_steps: 5
+  target_score: 1.0
+  use_debugger: true
+  debugger_max_tasks: 10
+  max_evidence_chars: 30000

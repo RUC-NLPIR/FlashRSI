@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./darwinx.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/darwinx.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/darwinx.yaml)
 
 DarwinX searches harness versions under a preserve-and-extend contract. Candidates must pass a cheap screen and fresh full-train confirmation before becoming mutation parents. Rejected but fully measured branches can still contribute complementary capabilities through recombination. Final selection uses the highest stored train score among admitted versions, including the seed; dev is unused.
 
@@ -29,7 +29,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.merge_every 0
 ```
 
-This requests one mutation attempt with two confirmation repetitions and no recombination. Confirmation happens only if the candidate passes screening. Append `--check-only` for initialization without model calls or remote authentication validation. The dedicated [DarwinX configuration](../examples/darwinx.yaml) enables periodic recombination. See [Configuration & CLI](./guide/configuration.md) for overrides.
+This requests one mutation attempt with two confirmation repetitions and no recombination. Confirmation happens only if the candidate passes screening. Append `--check-only` for initialization without model calls or remote authentication validation. The dedicated [DarwinX configuration](../examples/quickstarts/darwinx.yaml) enables periodic recombination. See [Configuration & CLI](./guide/configuration.md) for overrides.
 
 ## Search and selection
 

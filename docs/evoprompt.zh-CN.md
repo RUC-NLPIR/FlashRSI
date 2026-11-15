@@ -2,7 +2,7 @@
 
 [English](./evoprompt.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/evoprompt.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/evoprompt.yaml)
 
 EvoPrompt 用遗传算法（GA）或差分演化（DE）提示演化指令种群。GA 生成整代子代后统一选出幸存者；DE 让每个试验候选只与其目标位置上的成员比较。两种变体都保留跨代遇到的最佳 dev 版本，供最终提升。
 
@@ -34,7 +34,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.max_steps 1
 ```
 
-追加 `--check-only` 可检查初始化，不调用模型，也不验证模型认证或任何算子。算法专用的 [SearchQA 配置](../examples/evoprompt.yaml)使用更大的默认值。凭据和覆盖方式见[配置与 CLI](./guide/configuration.md)。
+追加 `--check-only` 可检查初始化，不调用模型，也不验证模型认证或任何算子。算法专用的 [SearchQA 配置](../examples/quickstarts/evoprompt.yaml)使用更大的默认值。凭据和覆盖方式见[配置与 CLI](./guide/configuration.md)。
 
 ## 搜索与选择
 

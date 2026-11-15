@@ -36,7 +36,7 @@ records and neither is removed. A complete-source probe found no question
 overlap with the complete 26529-record SuperGPQA pool. This establishes a data
 configuration, not a successful model experiment or a leaderboard result.
 
-See [the public example](../examples/modular_rsi_supergpqa.yaml). Claude Code uses
+See [the public example](../examples/quickstarts/modular_rsi_supergpqa.yaml). Claude Code uses
 the existing public three-module example at `examples/modular_rsi_claude_code`;
 its Worker keeps a separate native role configuration. The MiniAgent example
 keeps the usual five modules and fixed budgets.

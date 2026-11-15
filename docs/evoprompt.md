@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./evoprompt.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/evoprompt.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/evoprompt.yaml)
 
 EvoPrompt evolves a population of instructions using genetic algorithm (GA) or differential evolution (DE) prompts. GA selects survivors after producing a whole generation. DE compares each trial only with the member at its target position. Both variants retain the best dev version seen across generations for final promotion.
 
@@ -34,7 +34,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.max_steps 1
 ```
 
-Append `--check-only` for initialization without model calls. It does not validate model authentication or either operator. The method-specific [SearchQA configuration](../examples/evoprompt.yaml) uses larger defaults. See [Configuration & CLI](./guide/configuration.md) for credentials and overrides.
+Append `--check-only` for initialization without model calls. It does not validate model authentication or either operator. The method-specific [SearchQA configuration](../examples/quickstarts/evoprompt.yaml) uses larger defaults. See [Configuration & CLI](./guide/configuration.md) for credentials and overrides.
 
 ## Search and selection
 

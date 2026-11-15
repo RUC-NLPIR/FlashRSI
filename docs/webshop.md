@@ -30,12 +30,12 @@
 
 ## 运行
 
-填写 [webshop_opro.yaml](../examples/webshop_opro.yaml) 中的原生路径和两套独立模型配置：
+填写 [webshop_opro.yaml](../examples/quickstarts/webshop_opro.yaml) 中的原生路径和两套独立模型配置：
 
 ```bash
-python scripts/run_experiment.py --config examples/webshop_opro.yaml --plan
-python scripts/run_experiment.py --config examples/webshop_opro.yaml --check-only
-python scripts/run_experiment.py --config examples/webshop_opro.yaml
+python scripts/run_experiment.py --config examples/quickstarts/webshop_opro.yaml --plan
+python scripts/run_experiment.py --config examples/quickstarts/webshop_opro.yaml --check-only
+python scripts/run_experiment.py --config examples/quickstarts/webshop_opro.yaml
 ```
 
 示例 `limit: 3` 在已发布划分内保留每个角色各一题；移除后使用完整 150 / 75 / 150。

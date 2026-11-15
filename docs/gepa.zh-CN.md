@@ -2,7 +2,7 @@
 
 [English](./gepa.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/gepa.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/gepa.yaml)
 
 GEPA 反思父版本的训练轨迹，在相同任务上筛选重写后的指令，并保留候选的逐题 dev 分数。选择父版本时，即使某个候选平均分不最高，只要它在个别 dev 题目上领先，仍可能继续参与搜索。最终按 dev 均分选优，同分保留较早候选。
 
@@ -26,7 +26,7 @@ flashrsi run --config examples/quickstart.yaml \
 
 内置划分包含 train 6 题、dev 3 题。该预算足够执行初始 dev 加一次完整迭代：`3 + 2 * 2 + 3 = 10` 次任务评估。提前拒绝可能为更多迭代留下预算。追加 `--check-only` 可仅检查初始化。GEPA 使用 `max_metric_calls` 和 `num_epochs`，不使用 quickstart 中的 `max_steps` 字段。
 
-使用 HotpotQA context 模式时，从 [examples/gepa.yaml](../examples/gepa.yaml) 及其数据前置条件开始。连接设置见[配置与 CLI](./guide/configuration.md)。
+使用 HotpotQA context 模式时，从 [examples/quickstarts/gepa.yaml](../examples/quickstarts/gepa.yaml) 及其数据前置条件开始。连接设置见[配置与 CLI](./guide/configuration.md)。
 
 ## 搜索与选择
 

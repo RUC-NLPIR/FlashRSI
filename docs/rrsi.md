@@ -2,7 +2,7 @@
 
 **English** · [简体中文](./rrsi.zh-CN.md)
 
-[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/rrsi.yaml)
+[All algorithms](./integrations/algorithms.md) · [Example configuration](../examples/quickstarts/rrsi.yaml)
 
 RRSI uses trajectory investigation and edit history to propose harness changes under a shrinking mechanism budget. Candidates must respect a historical score floor and a score/token-cost rule. Each round selects the highest-scoring admissible candidate, then search continues from that winner. The final result is the last accepted version, not necessarily the historical highest-scoring version.
 
@@ -10,10 +10,10 @@ RRSI uses trajectory investigation and edit history to propose harness changes u
 
 Train must be non-empty with unique task IDs, and primary scores must be in `[0, 1]`. A separate file-editing Agent Worker is required (`algorithm.worker.type: agent`). Target and Worker have independent model and connection settings. The editable scope is every Target-declared component; semantic RRSI tags do not grant additional file permissions. Dev is unused; the runner evaluates test after final selection.
 
-Follow [Installation](./guide/installation.md), configure both roles in [examples/rrsi.yaml](../examples/rrsi.yaml), then run from the repository root with bundled local tasks:
+Follow [Installation](./guide/installation.md), configure both roles in [examples/quickstarts/rrsi.yaml](../examples/quickstarts/rrsi.yaml), then run from the repository root with bundled local tasks:
 
 ```bash
-flashrsi run --config examples/rrsi.yaml \
+flashrsi run --config examples/quickstarts/rrsi.yaml \
   --benchmark.data_path ./examples/data/quickstart.jsonl \
   --benchmark.limit null \
   --benchmark.split_counts '{train: 3, dev: 1, test: 1}' \

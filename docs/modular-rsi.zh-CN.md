@@ -64,7 +64,7 @@ flashrsi run --config examples/modular_rsi.yaml \
   --algorithm.validation_samples 1
 ```
 
-示例原有的 `split_counts: {train: 1, dev: 1, test: 1}` 继续生效。这仍会演化五个分支并进行集成，所以一个 epoch 不等于一次 Worker 编辑。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。运行原生 Terminal-Bench 或 SWE 任务时需配置相应数据与执行环境，见 [Terminal 配置](../examples/modular_rsi.yaml)和 [SWE 配置](../examples/modular_rsi_swe_bench.yaml)。
+示例原有的 `split_counts: {train: 1, dev: 1, test: 1}` 继续生效。这仍会演化五个分支并进行集成，所以一个 epoch 不等于一次 Worker 编辑。追加 `--check-only` 可检查初始化，不调用模型，也不验证远端认证。运行原生 Terminal-Bench 或 SWE 任务时需配置相应数据与执行环境，见 [Terminal 配置](../examples/modular_rsi.yaml)和 [SWE 配置](../examples/quickstarts/modular_rsi_swe_bench.yaml)。
 
 ## 分支演化与准入
 

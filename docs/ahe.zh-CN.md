@@ -2,7 +2,7 @@
 
 [English](./ahe.md) · **简体中文**
 
-[算法总览](./integrations/algorithms.md) · [示例配置](../examples/ahe.yaml)
+[算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/ahe.yaml)
 
 AHE 编辑当前 harness，声明每项改动预期影响哪些任务结果，再用下一次 train 评估核对预测。协议合法且完成评估的编辑全部保留，包括降分版本。下一轮 Worker 根据判决决定保留、改进或撤销。最终结果是最后保留的版本，不是 dev 最佳版本。
 
@@ -28,7 +28,7 @@ flashrsi run --config examples/quickstart.yaml \
   --algorithm.use_debugger false
 ```
 
-示例使用内置本地 QA 数据，省去可选 debugger 调用，仍评估完整 train。如果初始 train 分数已达到 `target_score`，则直接停止，不编辑。追加 `--check-only` 可检查初始化，不调用模型，也不验证认证。专用 [AHE 示例](../examples/ahe.yaml)默认启用 debugger。
+示例使用内置本地 QA 数据，省去可选 debugger 调用，仍评估完整 train。如果初始 train 分数已达到 `target_score`，则直接停止，不编辑。追加 `--check-only` 可检查初始化，不调用模型，也不验证认证。专用 [AHE 示例](../examples/quickstarts/ahe.yaml)默认启用 debugger。
 
 ## 搜索与选择
 

@@ -1,0 +1,62 @@
+run:
+  output_dir: ./runs/adas-claude_code-terminalbench
+  seed: 42
+benchmark:
+  name: terminal_bench
+  split: auto
+  data_path: ./data/terminalbench/tasks
+  seed: 42
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-v4-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 65535
+    effort: high
+    max_retries: 1
+  source_dir: ./harnesses/adas-claude_code-terminalbench/target
+  max_turns: 100
+  harbor:
+    remote_docker: true
+    uv_install_source: github
+    setup_timeout: 600
+    integrity_review:
+      llm:
+        model_name: deepseek-flash
+        base_url: https://api.deepseek.com/v1
+      records_dir: ./runs/adas-claude_code-terminalbench/integrity-review-records
+  permission_mode: acceptEdits
+  allowed_tools:
+  - Bash
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  - Skill
+algorithm:
+  name: adas
+  worker:
+    type: agent
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com/anthropic
+      max_tokens: 65536
+      effort: high
+      max_retries: 1
+    name: claude_code
+    source_dir: ./harnesses/adas-claude_code-terminalbench/worker
+    timeout: 1200
+    max_turns: 100
+    permission_mode: acceptEdits
+    allowed_tools:
+    - Bash
+    - Read
+    - Write
+    - Edit
+    - Glob
+    - Grep
+    - Skill
+  max_steps: 5
+  num_reflections: 2
+  max_evidence_chars: 30000

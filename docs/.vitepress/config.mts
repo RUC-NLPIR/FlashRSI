@@ -33,6 +33,7 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/installation', activeMatch: '^/(guide/|$|index)' },
       { text: 'Integrations', link: '/integrations/algorithms', activeMatch: '^/integrations/' },
       { text: 'Experiments', link: '/experiments/', activeMatch: '^/experiments/' },
+      { text: 'Submit results', link: 'https://github.com/RUC-NLPIR/FlashRSI/issues/new' },
       { text: 'Build', link: '/development/', activeMatch: '^/development/' },
       { text: '简体中文', link: '/usage.zh-CN' },
     ],

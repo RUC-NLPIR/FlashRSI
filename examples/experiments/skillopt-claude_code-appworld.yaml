@@ -1,0 +1,54 @@
+run:
+  output_dir: ./runs/skillopt-claude_code-appworld
+  seed: 42
+benchmark:
+  name: appworld
+  split: auto
+  seed: 42
+  data_path: ./data/appworld/split-manifest.json
+agent:
+  name: claude_code
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com/anthropic
+    max_tokens: 8192
+    effort: high
+    max_retries: 1
+  source_dir: ./harnesses/skillopt-claude_code-appworld/target
+  timeout: 600
+  max_turns: 30
+  tools:
+  - Read
+  - Glob
+  - Grep
+  - Skill
+  allowed_tools:
+  - Read
+  - Glob
+  - Grep
+  - Skill
+  - mcp__appworld__appworld_execute
+algorithm:
+  name: skillopt
+  worker:
+    type: llm
+    llm:
+      model_name: deepseek-v4-pro
+      base_url: https://api.deepseek.com
+      max_tokens: 65536
+      reasoning_effort: high
+    timeout: 900
+    max_retries: 1
+  num_epochs: 4
+  batch_size: 40
+  reflection_minibatch_size: 8
+  edit_budget: 4
+  merge_batch_size: 8
+  seed: 42
+  max_steps: null
+  success_threshold: 0.0
+  use_slow_update: true
+  use_meta_skill: true
+  slow_update_samples: 20
+  worker_concurrency: 4
+  invalid_patch_policy: reject_without_score
