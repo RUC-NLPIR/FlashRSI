@@ -18,7 +18,7 @@ const rows = computed(() => {
   return result
 })
 const item = computed(() => rows.value[active.value] || rows.value[0])
-const outcome = (r: any) => r.outcome || (r.kind === 'upper_bound_pruned' ? 'Upper bound pruned' : r.kind === 'admit' ? r.accepted ? 'Admitted' : 'Not admitted' : r.accepted === true ? 'Accepted' : r.accepted === false ? 'Not accepted' : r.kind || 'Recorded')
+const outcome = (r: any) => r.outcome || (r.kind === 'upper_bound_pruned' ? 'Upper bound pruned' : r.kind === 'admit' ? r.accepted === false ? 'Not admitted' : 'Admitted' : r.accepted === true ? 'Accepted' : r.accepted === false ? 'Not accepted' : r.kind || 'Recorded')
 const delta = (value: unknown) => typeof value === 'number' ? `${value >= 0 ? '+' : ''}${(value * 100).toFixed(2)} pp` : 'Not recorded'
 const version = (r: any) => r.candidate_id || r.snapshot_id || r.id
 const hasResource = (id: string) => props.agent.preservedVersions.includes(id)
@@ -33,7 +33,7 @@ const modes = computed(() => [...new Set((key.value === 'rrsi' ? method.value.ed
 </script>
 
 <template>
-  <div :data-method="key" class="terminal-evolution">
+  <div :data-method="key" class="artifact-evolution terminal-evolution">
     <div class="sx-stats"><div class="sx-stat"><span>Algorithm records</span><strong>{{ agent.events.length }}</strong></div><div class="sx-stat"><span>Changed resource paths</span><strong>{{ agent.changedPaths.length }}</strong></div><div class="sx-stat"><span>Selected artifact</span><strong>{{ short(agent.selectedId) }}</strong><button class="sx-button" @click="$emit('inspect', agent.selectedId)">View selected diff ↗</button></div></div>
 
     <section v-if="key === 'evoprompt'" class="sx-panel">
