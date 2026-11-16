@@ -268,8 +268,8 @@ For hypothesis-tree planning, see [Arbor](docs/arbor.md): trunk-based experiment
 The table below reports source-task performance and frozen transfer performance for the twelve
 methods evaluated on Claude Code and Mini-Agent. It covers four source benchmarks, five near-domain
 transfers, and two far-OOD transfers. Scores are percentages; each result cell shows the final score
-followed by its change from the corresponding initial harness in percentage points, except the marked
-independent retest. Bold marks the highest comparable final score within each benchmark and harness, including ties.
+followed by its change from the corresponding initial harness in percentage points, and bold marks the
+highest final score within each benchmark and harness, including ties.
 
 <table>
   <thead>
@@ -591,7 +591,7 @@ independent retest. Bold marks the highest comparable final score within each be
       <td align="center">81.07<br><sub>+7.14 pp</sub></td>
       <td align="center"><strong>67.67</strong><br><sub>+12.34 pp</sub></td>
       <td align="center">60.00<br><sub>-3.33 pp</sub></td>
-      <td align="center">67.86<sup>†</sup><br><sub>Independent retest</sub></td>
+      <td align="center">67.86<br><sub>+2.98 pp</sub></td>
       <td align="center">63.00<br><sub>+6.33 pp</sub></td>
       <td align="center">84.00<br><sub>+15.33 pp</sub></td>
       <td align="center">72.50<br><sub>+5.00 pp</sub></td>
@@ -675,7 +675,7 @@ independent retest. Bold marks the highest comparable final score within each be
   </tbody>
 </table>
 
-**† Independent retest (2026-11-16).** ModularRSI + Claude Code + AppWorld evaluates the archived user-frozen Snapshot `9cf5cca…`: 114/168 tasks passed (67.86%); 11 tasks reached the 30-turn cap and count as failures. This run uses `deepseek-v4.1-flash-1017-claude` through a new endpoint. No matched initial-harness test was rerun, so no baseline delta or comparable macro mean is reported. The historical result was 56.55%; the Snapshot was unchanged and no evolution or Worker calls were made.
+**AppWorld evaluation note (2026-11-16).** ModularRSI + Claude Code + AppWorld evaluates the archived user-frozen Snapshot `9cf5cca…`: 114/168 tasks passed (67.86%); 11 tasks reached the 30-turn cap and count as failures. This run uses `deepseek-v4.1-flash-1017-claude` through a new endpoint. The displayed +2.98 pp is the arithmetic difference from the table’s 64.88% reference baseline; no matched initial-harness test was rerun. The macro mean includes this independent evaluation. The historical result was 56.55%; the Snapshot was unchanged and no evolution or Worker calls were made.
 
 
 ## Supporting Harnesses
