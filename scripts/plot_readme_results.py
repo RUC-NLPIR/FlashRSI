@@ -94,18 +94,13 @@ def read_results(path):
         for cell in cells:
             numbers = re.findall(r"[+-]?\d+\.\d+", cell)
             baseline = not results[harness]
-            retest = "†" in cell
-            if len(numbers) != (1 if baseline or retest else 2):
+            if len(numbers) != (1 if baseline else 2):
                 raise ValueError(f"Unexpected score cell: {cell}")
             score = Decimal(numbers[0])
             if not 0 <= score <= 100:
                 raise ValueError(f"Score outside [0, 100]: {score}")
-            delta = None if retest else Decimal(0) if baseline else Decimal(numbers[1])
-            if (
-                not baseline
-                and not retest
-                and delta != score - results[harness][0][1][len(scores)]
-            ):
+            delta = Decimal(0) if baseline else Decimal(numbers[1])
+            if not baseline and delta != score - results[harness][0][1][len(scores)]:
                 raise ValueError(f"Incorrect delta: {method}, {harness}, {cell}")
             scores.append(score)
             deltas.append(delta)
@@ -202,8 +197,7 @@ def draw(harness, rows, output):
         fontsize=10,
         color=muted,
     )
-    has_retest = any(None in row[2] for row in rows)
-    best = [max(row[1][i] for row in rows if row[2][i] is not None) for i in range(11)]
+    best = [max(row[1][i] for row in rows) for i in range(11)]
     for y, (method, scores, deltas) in enumerate(rows):
         ax.text(
             -0.15,
@@ -215,24 +209,18 @@ def draw(harness, rows, output):
             weight="bold",
             color=ink,
         )
-        mixed = None in deltas
-        values = scores + [None if mixed else sum(scores) / 11]
-        changes = deltas + [None if mixed else sum(deltas) / 11]
+        values = scores + [sum(scores) / 11]
+        changes = deltas + [sum(deltas) / 11]
         for x, (score, delta) in enumerate(zip(values, changes)):
-            face = "#e7edf2" if y == 0 or delta is None else cmap(norm(float(delta)))
+            face = "#e7edf2" if y == 0 else cmap(norm(float(delta)))
             ax.add_patch(
                 Rectangle((x + 0.02, y + 0.03), 0.94, 0.9, facecolor=face, lw=0)
             )
-            weight = (
-                "bold"
-                if x < 11 and delta is not None and score == best[x]
-                else "normal"
-            )
+            weight = "bold" if x < 11 and score == best[x] else "normal"
             ax.text(
                 x + 0.49,
                 y + (0.48 if y == 0 else 0.34),
-                (f"{score:.2f}" if score is not None else "—")
-                + ("†" if delta is None else ""),
+                f"{score:.2f}",
                 ha="center",
                 va="center",
                 fontsize=12,
@@ -243,9 +231,7 @@ def draw(harness, rows, output):
                 ax.text(
                     x + 0.49,
                     y + 0.7,
-                    ("retest" if score is not None else "mixed settings")
-                    if delta is None
-                    else f"{delta:+.2f}",
+                    f"{delta:+.2f}",
                     ha="center",
                     va="center",
                     fontsize=9.5,
@@ -271,15 +257,6 @@ def draw(harness, rows, output):
             Rectangle((x, 13.32), 0.35, 0.35, facecolor=cmap(norm(delta)), lw=0)
         )
         ax.text(x + 0.43, 13.5, label, va="center", fontsize=10, color=muted)
-    if has_retest:
-        ax.set_ylim(14.55, -3.6)
-        ax.text(
-            -1.9,
-            14.15,
-            "† Independent retest with a new model/endpoint; no matched baseline. Comparable macro mean omitted.",
-            fontsize=10,
-            color=muted,
-        )
     fig.savefig(
         output, dpi=160, facecolor="white", pil_kwargs={"quality": 95, "subsampling": 0}
     )
