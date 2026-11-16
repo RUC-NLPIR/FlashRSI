@@ -117,6 +117,19 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
             for identifier, state in raw["snapshots"].items()
             if identifier in versions
         }
+    decisions = [r for r in records if r["name"].endswith("decision.json")]
+    promotions = [r["data"] for r in decisions if r["data"].get("kind") == "promote"]
+    archived_selection = None
+    if (
+        benchmark == "appworld"
+        and meta.get("selection_kind") == "explicit_user_override"
+    ):
+        archived_selection = (
+            meta.get("final_snapshot")
+            or meta.get("selected_snapshot")
+            or meta.get("snapshot_id")
+        )
+        raw["meta"]["final_snapshot"] = promotions[-1]["candidate_id"]
     agent, resources = build(
         raw,
         "artifact",
@@ -130,8 +143,6 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
     )
     agent["preservedVersions"] = list(resources["states"])
     agent.pop("method")
-    decisions = [r for r in records if r["name"].endswith("decision.json")]
-    promotions = [r["data"] for r in decisions if r["data"].get("kind") == "promote"]
     selected = agent["selectedId"]
     promotion = next(
         (r for r in reversed(promotions) if r.get("candidate_id") == selected),
@@ -190,6 +201,8 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
             if r.get("kind") in {"experiment", "admit"}
         )
         split = "train"
+    if archived_selection and not any(r["id"] == archived_selection for r in final):
+        final.append(node(archived_selection))
     evolution = {
         "key": key,
         "entries": entries,
@@ -212,20 +225,6 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
             if "validation" in r["stage"]
         ],
     }
-    if (
-        benchmark == "appworld"
-        and meta.get("selection_kind") == "explicit_user_override"
-    ):
-        native_promotion = promotions[-1]
-        evolution["promotion"] = {
-            "kind": "artifact_selection",
-            "candidate_id": selected,
-            "selection": "archived_user_frozen_version",
-            "original_algorithm_selected_id": native_promotion["candidate_id"],
-        }
-        if not any(row["id"] == selected for row in final):
-            final.append(node(selected))
-        evolution["algorithmPromotion"] = take(native_promotion, FIELDS)
     if key == "opro":
         history = next((r["history"] for r in promotions if r.get("history")), [])
         evolution["history"] = [
