@@ -190,28 +190,6 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
             if r.get("kind") in {"experiment", "admit"}
         )
         split = "train"
-    selection_note = None
-    if (
-        benchmark == "appworld"
-        and meta.get("selection_kind") == "explicit_user_override"
-    ):
-        # Saved artifact selection and automatic gate admission are separate.
-        # Keep the original decisions; never manufacture a dev score for adoption.
-        native_promotion = promotions[-1]
-        promotion = {
-            "kind": "artifact_selection",
-            "candidate_id": selected,
-            "selection": "archived_user_frozen_version",
-            "original_algorithm_selected_id": native_promotion["candidate_id"],
-        }
-        for row in final:
-            row["selected"] = row["id"] == selected
-        if not any(row["id"] == selected for row in final):
-            final.append(node(selected))
-        selection_note = (
-            "The selected artifact follows the archived user-frozen version. "
-            "The original algorithm decision and gate outcomes are preserved."
-        )
     evolution = {
         "key": key,
         "entries": entries,
@@ -234,10 +212,20 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
             if "validation" in r["stage"]
         ],
     }
-    if selection_note:
-        evolution["promotion"] = promotion
+    if (
+        benchmark == "appworld"
+        and meta.get("selection_kind") == "explicit_user_override"
+    ):
+        native_promotion = promotions[-1]
+        evolution["promotion"] = {
+            "kind": "artifact_selection",
+            "candidate_id": selected,
+            "selection": "archived_user_frozen_version",
+            "original_algorithm_selected_id": native_promotion["candidate_id"],
+        }
+        if not any(row["id"] == selected for row in final):
+            final.append(node(selected))
         evolution["algorithmPromotion"] = take(native_promotion, FIELDS)
-        evolution["selectionNote"] = selection_note
     if key == "opro":
         history = next((r["history"] for r in promotions if r.get("history")), [])
         evolution["history"] = [

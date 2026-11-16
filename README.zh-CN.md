@@ -594,8 +594,6 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
   </tbody>
 </table>
 
-**AppWorld 评估说明（2026-11-16）。** ModularRSI + Claude Code + AppWorld 使用历史固定选定的 Snapshot `9cf5cca…`：114/168 题通过（67.86%），11 题达到 30 轮上限并计为失败。本轮通过新端点使用 `deepseek-v4.1-flash-1017-claude`，表中 +2.98 pp 是相对统一参考基线 64.88% 的算术差值；本轮未重新评估匹配的初始 harness，宏平均包含此次独立评估分数。历史成绩为 56.55%；本轮 Snapshot 未修改，没有演化或 Worker 调用。
-
 
 ## 支持的 Harnesses
 

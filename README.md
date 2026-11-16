@@ -675,8 +675,6 @@ highest final score within each benchmark and harness, including ties.
   </tbody>
 </table>
 
-**AppWorld evaluation note (2026-11-16).** ModularRSI + Claude Code + AppWorld evaluates the archived user-frozen Snapshot `9cf5cca…`: 114/168 tasks passed (67.86%); 11 tasks reached the 30-turn cap and count as failures. This run uses `deepseek-v4.1-flash-1017-claude` through a new endpoint. The displayed +2.98 pp is the arithmetic difference from the table’s 64.88% reference baseline; no matched initial-harness test was rerun. The macro mean includes this independent evaluation. The historical result was 56.55%; the Snapshot was unchanged and no evolution or Worker calls were made.
-
 
 ## Supporting Harnesses
 
