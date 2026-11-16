@@ -72,37 +72,6 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
         run = meta["run_dir"].rsplit("/", 1)[-1]
         records = [r for r in records if f"/{run}/" in r["source"]]
     raw["records"] = records
-    if (
-        benchmark == "appworld"
-        and meta.get("selection_kind") == "explicit_user_override"
-    ):
-        # Display the original algorithm outcome, not the later manual adoption.
-        native = [
-            r["data"]
-            for r in records
-            if r["name"].endswith("decision.json")
-            and r["data"].get("kind") == "promote"
-        ]
-        native_id = native[-1]["candidate_id"]
-        assert native_id in raw["snapshots"], (
-            "Original algorithm selection is not archived"
-        )
-        adopted = meta.get("final_snapshot") or meta.get("selected_snapshot")
-        references = {
-            r["data"].get(field)
-            for r in records
-            for field in ("snapshot_id", "candidate_id", "parent_id")
-        }
-        if adopted not in references:
-            raw["snapshots"].pop(adopted, None)
-        meta = {**meta, "final_snapshot": native_id}
-        for field in (
-            "selection_kind",
-            "original_gate_passed",
-            "test_results_known_at_adoption",
-        ):
-            meta.pop(field, None)
-        raw["meta"] = meta
     if benchmark == "appworld":
         # Archives can also contain another harness's saved training history.
         # Keep the target lineage and versions explicitly used by its records.
@@ -221,6 +190,28 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
             if r.get("kind") in {"experiment", "admit"}
         )
         split = "train"
+    selection_note = None
+    if (
+        benchmark == "appworld"
+        and meta.get("selection_kind") == "explicit_user_override"
+    ):
+        # Saved artifact selection and automatic gate admission are separate.
+        # Keep the original decisions; never manufacture a dev score for adoption.
+        native_promotion = promotions[-1]
+        promotion = {
+            "kind": "artifact_selection",
+            "candidate_id": selected,
+            "selection": "archived_user_frozen_version",
+            "original_algorithm_selected_id": native_promotion["candidate_id"],
+        }
+        for row in final:
+            row["selected"] = row["id"] == selected
+        if not any(row["id"] == selected for row in final):
+            final.append(node(selected))
+        selection_note = (
+            "The selected artifact follows the archived user-frozen version. "
+            "The original algorithm decision and gate outcomes are preserved."
+        )
     evolution = {
         "key": key,
         "entries": entries,
@@ -243,6 +234,10 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
             if "validation" in r["stage"]
         ],
     }
+    if selection_note:
+        evolution["promotion"] = promotion
+        evolution["algorithmPromotion"] = take(native_promotion, FIELDS)
+        evolution["selectionNote"] = selection_note
     if key == "opro":
         history = next((r["history"] for r in promotions if r.get("history")), [])
         evolution["history"] = [
