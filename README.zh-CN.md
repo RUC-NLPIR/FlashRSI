@@ -187,8 +187,8 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
 
 下表汇总了 12 种方法在 Claude Code 和 Mini-Agent 上的 source-task 表现，以及冻结后的迁移表现，
 覆盖 4 个 source benchmark、5 个近域迁移 benchmark 和 2 个远 OOD benchmark。分数均为百分比；
-每个结果单元格先显示最终分数，再显示相对对应初始 Harness 的百分点变化，粗体表示每个 benchmark 与 Harness
-组合中的最高最终分数（包括并列）。
+除带标记的独立复测外，每个结果单元格先显示最终分数，再显示相对对应初始 Harness 的百分点变化；粗体表示每个 benchmark 与 Harness
+组合中可比较的最高最终分数（包括并列）。
 
 <table>
   <thead>
@@ -510,7 +510,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
       <td align="center">81.07<br><sub>+7.14 pp</sub></td>
       <td align="center"><strong>67.67</strong><br><sub>+12.34 pp</sub></td>
       <td align="center">60.00<br><sub>-3.33 pp</sub></td>
-      <td align="center">56.55<br><sub>-8.33 pp</sub></td>
+      <td align="center">67.86<sup>†</sup><br><sub>独立复测</sub></td>
       <td align="center">63.00<br><sub>+6.33 pp</sub></td>
       <td align="center">84.00<br><sub>+15.33 pp</sub></td>
       <td align="center">72.50<br><sub>+5.00 pp</sub></td>
@@ -593,6 +593,8 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
     </tr>
   </tbody>
 </table>
+
+**† 独立复测（2026-11-16）。** ModularRSI + Claude Code + AppWorld 使用历史固定选定的 Snapshot `9cf5cca…`：114/168 题通过（67.86%），11 题达到 30 轮上限并计为失败。本轮通过新端点使用 `deepseek-v4.1-flash-1017-claude`，未重新评估匹配的初始 harness，因此不报告基线差值或可比较的宏平均。历史成绩为 56.55%；本轮 Snapshot 未修改，没有演化或 Worker 调用。
 
 
 ## 支持的 Harnesses

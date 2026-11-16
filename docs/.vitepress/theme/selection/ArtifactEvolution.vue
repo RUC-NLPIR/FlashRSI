@@ -18,7 +18,7 @@ const rows = computed(() => {
   return result
 })
 const item = computed(() => rows.value[active.value] || rows.value[0])
-const outcome = (r: any) => r.outcome || (r.kind === 'upper_bound_pruned' ? 'Upper bound pruned' : r.kind === 'admit' ? r.accepted ? 'Admitted' : 'Not admitted' : r.accepted === true ? 'Accepted' : r.accepted === false ? 'Not accepted' : r.kind || 'Recorded')
+const outcome = (r: any) => r.outcome || (r.kind === 'upper_bound_pruned' ? 'Upper bound pruned' : r.kind === 'admit' ? r.accepted === false ? 'Not admitted' : 'Admitted' : r.accepted === true ? 'Accepted' : r.accepted === false ? 'Not accepted' : r.kind || 'Recorded')
 const delta = (value: unknown) => typeof value === 'number' ? `${value >= 0 ? '+' : ''}${(value * 100).toFixed(2)} pp` : 'Not recorded'
 const version = (r: any) => r.candidate_id || r.snapshot_id || r.id
 const hasResource = (id: string) => props.agent.preservedVersions.includes(id)
@@ -33,7 +33,7 @@ const modes = computed(() => [...new Set((key.value === 'rrsi' ? method.value.ed
 </script>
 
 <template>
-  <div :data-method="key" class="terminal-evolution">
+  <div :data-method="key" class="artifact-evolution terminal-evolution">
     <div class="sx-stats"><div class="sx-stat"><span>Algorithm records</span><strong>{{ agent.events.length }}</strong></div><div class="sx-stat"><span>Changed resource paths</span><strong>{{ agent.changedPaths.length }}</strong></div><div class="sx-stat"><span>Selected artifact</span><strong>{{ short(agent.selectedId) }}</strong><button class="sx-button" @click="$emit('inspect', agent.selectedId)">View selected diff ↗</button></div></div>
 
     <section v-if="key === 'evoprompt'" class="sx-panel">
@@ -61,6 +61,7 @@ const modes = computed(() => [...new Set((key.value === 'rrsi' ? method.value.ed
     </section>
     <section v-if="method.gates.length && key === 'darwinx'" class="sx-panel"><h3>Final admission gates</h3><div class="sx-table-scroll"><table><thead><tr><th>Version</th><th>Gain / regression mass</th><th>Budget δ</th><th>Admitted</th></tr></thead><tbody><tr v-for="(gate, index) in method.gates" :key="index"><td>{{ short(gate.snapshot_id) }}</td><td>{{ number(gate.gain) }} / {{ number(gate.regression_mass) }}</td><td>{{ number(gate.delta) }}</td><td>{{ gate.accepted }}</td></tr></tbody></table></div></section>
     <FinalSelection v-if="method.finalSelection.length" :rows="method.finalSelection" title="Recorded final selection" :score-label="method.finalLabel" @inspect="$emit('inspect', $event)" />
+    <p v-if="method.selectionNote" class="sx-note">{{ method.selectionNote }}</p>
     <FinalSelection v-if="key === 'ace' && method.checkpoints.length" :rows="method.checkpoints" title="Validation checkpoints" score-label="Validation reward" @inspect="$emit('inspect', $event)" />
     <section class="sx-panel"><h3>Selected artifact</h3><p><code>{{ agent.selectedId }}</code></p><button class="sx-button" @click="$emit('inspect', agent.selectedId)">View final file changes ↗</button><details style="margin-top:16px"><summary>Recorded final decision</summary><pre>{{ JSON.stringify(method.promotion, null, 2) }}</pre></details></section>
   </div>

@@ -5,7 +5,7 @@ description: Browse the recorded edits, development scores, and logs behind hist
 
 # Experiment explorer
 
-Inspect how a method actually searches and selects a version. The archive covers **12 methods × 2 target harnesses on SearchQA, HotpotQA, and Terminal-Bench**. Each method has its own selection view; a single dev curve would hide important differences between these runs.
+Inspect how a method actually searches and selects a version. The archive covers **12 methods × 2 target harnesses on SearchQA, HotpotQA, Terminal-Bench, and AppWorld**. Each method has its own selection view; a single dev curve would hide important differences between these runs.
 
 ## Available experiments
 
@@ -50,3 +50,22 @@ To add an experiment, see [maintaining the explorer](../development/docs-site.md
 | [SkillOpt × Terminal-Bench](./skillopt-terminal-bench.md) | Fast / slow skill updates |
 
 Open a method to switch between MiniAgent and Claude Code and inspect its recorded decisions, selected artifact, and file changes. Test results are omitted.
+
+## AppWorld
+
+| Experiment | Selection view |
+| --- | --- |
+| [OPRO × AppWorld](./opro-appworld.md) | Optimization history |
+| [EvoPrompt × AppWorld](./evoprompt-appworld.md) | Population arena |
+| [GEPA × AppWorld](./gepa-appworld.md) | Coverage frontier |
+| [ACE × AppWorld](./ace-appworld.md) | Playbook ledger |
+| [AHE × AppWorld](./ahe-appworld.md) | Repair audit |
+| [ADAS × AppWorld](./adas-appworld.md) | Design archive |
+| [Meta-Harness × AppWorld](./meta-harness-appworld.md) | Experiment notebook |
+| [DarwinX × AppWorld](./darwinx-appworld.md) | Branch admission |
+| [ModularRSI × AppWorld](./modular-rsi-appworld.md) | Branches and integration |
+| [RRSI × AppWorld](./rrsi-appworld.md) | Round tournament |
+| [Evo-Harness × AppWorld](./evoharness-appworld.md) | Skill production |
+| [SkillOpt × AppWorld](./skillopt-appworld.md) | Fast / slow skill updates |
+
+Each page includes MiniAgent and Claude Code, recorded evolution steps, and preserved Snapshot file comparisons. Test results are omitted.

@@ -109,7 +109,7 @@ Adding more runs of an existing method means mapping their records to that metho
 
 ### Terminal-Bench experiments
 
-Terminal-Bench pages use the same explorer shell and resource inspector, with method-specific evolution views in `selection/TerminalEvolution.vue`. The display metric is the archived `reward`; the selected version comes from the run record.
+Terminal-Bench pages use the same explorer shell and resource inspector, with method-specific evolution views in `selection/ArtifactEvolution.vue`. The display metric is the archived `reward`; the selected version comes from the run record.
 
 ```bash
 python scripts/export_terminal_explorers.py \
@@ -118,3 +118,15 @@ python scripts/export_terminal_explorers.py \
 ```
 
 Each input is `<algorithm>-<harness>.json`. The exporter retains prompt history, population survival, coverage, playbook edits, repair audits, design admission, experiment scores, branch gates, round outcomes, or skill production as appropriate. Test results and complete model conversations are omitted. Add the page to the experiment index, then build and check desktop/mobile interactions before publishing.
+
+### AppWorld experiments
+
+AppWorld pages share `selection/ArtifactEvolution.vue` and `scripts/_artifact_explorer.py` with Terminal-Bench. Each run retains its original algorithm selection, intermediate resource versions, and archived `reward` scores. Separate later manual-adoption metadata does not replace the original algorithm selection in this view.
+
+```bash
+python scripts/export_appworld_explorers.py \
+  --records /path/to/reduced-appworld-records \
+  --output docs/public/experiment-data/appworld
+```
+
+Use the same reduced-record format as Terminal-Bench. Keep the target harness's own history and Snapshot lineage when an archive also contains another harness's training history. The viewer inspects artifacts; execution still requires the AppWorld benchmark adapter and environment.

@@ -6,7 +6,7 @@ import { compactDiff, lineDiff } from './selection/lineDiff'
 import './selection/style.css'
 
 const props = defineProps<{ dataPath: string }>()
-const TerminalEvolution = defineAsyncComponent(() => import('./selection/TerminalEvolution.vue'))
+const ArtifactEvolution = defineAsyncComponent(() => import('./selection/ArtifactEvolution.vue'))
 const views = {
   opro: defineAsyncComponent(() => import('./selection/OPRO.vue')),
   evoprompt: defineAsyncComponent(() => import('./selection/EvoPrompt.vue')),
@@ -25,7 +25,7 @@ const agentKey = ref('miniagent')
 const tab = ref('selection')
 const error = ref('')
 const agent = computed(() => data.value?.agents[agentKey.value])
-const methodView = computed(() => data.value?.view === 'terminal' ? TerminalEvolution : views[data.value?.key as keyof typeof views])
+const methodView = computed(() => ['terminal', 'artifact'].includes(data.value?.view) ? ArtifactEvolution : views[data.value?.key as keyof typeof views])
 const eventFilter = ref('')
 const events = computed(() => (agent.value?.events || []).filter((event: any) => JSON.stringify(event).toLowerCase().includes(eventFilter.value.toLowerCase())))
 const resourceData = ref<any>(null)
@@ -60,7 +60,7 @@ async function load() {
     const response = await fetch(withBase(props.dataPath))
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
     const archive = await response.json()
-    if (archive.schemaVersion !== 2 || !(archive.view === 'terminal' || views[archive.key as keyof typeof views])) throw new Error('Unsupported experiment data')
+    if (archive.schemaVersion !== 2 || !(['terminal', 'artifact'].includes(archive.view) || views[archive.key as keyof typeof views])) throw new Error('Unsupported experiment data')
     const requested = new URLSearchParams(window.location.search).get('agent') || ''
     agentKey.value = Object.hasOwn(archive.agents, requested) ? requested : Object.keys(archive.agents)[0]
     data.value = archive
