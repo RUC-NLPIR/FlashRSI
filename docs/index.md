@@ -23,7 +23,7 @@ We welcome community experiment results and reproductions! [Submit your results]
 <section id="news" aria-labelledby="news-title">
   <h2 id="news-title">📣 Latest News</h2>
   <ul>
-    <li>[Nov 17, 2026] JiuwenSwarm is now available as a single-agent Target harness. Its native process runs the code, skills, and configuration from the selected Snapshot. <a href="./integrations/jiuwenswarm.html">Setup guide</a>.</li>
+    <li>[Nov 17, 2026] JiuwenSwarm is now available as a single-agent Target harness. Its native process runs the code, skills, custom tools, and configuration from the selected Snapshot. <a href="./integrations/jiuwenswarm.html">Setup guide</a>.</li>
     <li>[Nov 10, 2026]: 🔍 We have released <a href="./experiments/">HotpotQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
     <li>[Nov 09, 2026]: 🔍 We have released <a href="./experiments/">SearchQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
   </ul>

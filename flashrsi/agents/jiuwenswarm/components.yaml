@@ -3,5 +3,7 @@ code:
   - runtime/openjiuwen/core/single_agent/agents/react_agent.py
 skill:
   - skills/**
+tool:
+  - tools/**
 config:
   - config.yaml

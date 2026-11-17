@@ -75,7 +75,7 @@ exclude = [
 ]
 
 [tool.setuptools.package-data]
-"flashrsi.agents.jiuwenswarm" = ["agent-core-notices/*", "wheels.Dockerfile", "components.yaml", "config.yaml", "upstream.json", "LICENSE", "OPEN_SOURCE_SOFTWARE_NOTICE.md", "runtime/**/*", "runtime/**/.*", "_sdk/py.typed"]
+"flashrsi.agents.jiuwenswarm" = ["agent-core-notices/*", "tools/**/*", "tools/*.md", "wheels.Dockerfile", "components.yaml", "config.yaml", "upstream.json", "LICENSE", "OPEN_SOURCE_SOFTWARE_NOTICE.md", "runtime/**/*", "runtime/**/.*", "_sdk/py.typed"]
 "flashrsi.integrations" = ["appworld.Dockerfile", "bfcl.Dockerfile"]
 "flashrsi.benchmarks.harvey_lab" = ["upstream.json"]
 "flashrsi.benchmarks.travelplanner" = ["upstream.json"]

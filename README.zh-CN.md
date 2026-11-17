@@ -30,7 +30,7 @@
 <div id="news">
   <h2>📣 最新动态</h2>
   <ul>
-    <li>[2026-11-17] 新增 JiuwenSwarm 单 Agent Target harness。原生进程从选中的 Snapshot 加载代码、技能和配置。<a href="docs/agent-integration.md#jiuwenswarm">接入说明</a>。</li>
+    <li>[2026-11-17] 新增 JiuwenSwarm 单 Agent Target harness。原生进程从选中的 Snapshot 加载代码、技能、自定义工具和配置。<a href="docs/agent-integration.md#jiuwenswarm">接入说明</a>。</li>
     <li>[2026-11-10]：🔍 已公开 <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">HotpotQA 演化记录</a>，涵盖 MiniAgent 和 Claude Code 上的 12 种 RSI 方法，支持交互查看 harness 改动与版本选择过程。</li>
     <li>[2026-11-09]：🔍 已公开 <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">SearchQA 演化记录</a>，涵盖 MiniAgent 和 Claude Code 上的 12 种 RSI 方法，支持交互查看 harness 改动与版本选择过程。</li>
   </ul>
@@ -610,7 +610,7 @@ FlashRSI 当前支持八种 Harness 接入，其他接入正在规划中。
 | [Hermes](docs/agent-integration.md) | Python Snapshot runtime、SOUL 指令、skills、工具配置 | 基于 v0.22.5 原上游 Python helper 与本地工具实现 headless 路径；不依赖宿主 Hermes CLI。 | 可用 |
 | [OpenClaw](docs/agent-integration.md) | 纯 Python Snapshot runtime、bootstrap 文件、skills、工具、策略、会话与记忆配置 | Snapshot 内的 `runtime/openclaw_native` 遵循固定版本的嵌入式执行路径，支持 Chat Completions、Responses 和 Anthropic Messages；不依赖 Node/npm/Gateway。 | 可用 |
 | [OpenCode](docs/agent-integration.md) | 纯 Python Snapshot runtime、指令、工具、权限、会话与配置 | Snapshot 内的 `runtime/opencode_native` 遵循固定 v1.19.3 的嵌入式执行路径，支持 Chat Completions、Responses 和 Anthropic Messages；不依赖 Bun/Node/CLI。 | 可用 |
-| [JiuwenSwarm](docs/agent-integration.md#jiuwenswarm) | 提示词构建模块、ReAct 循环、技能与配置 | 单 Agent Target 通过原生 Process SDK 执行。Docker 任务加载选中的 Snapshot 并安装固定版本的原生依赖。 | 可用 |
+| [JiuwenSwarm](docs/agent-integration.md#jiuwenswarm) | 提示词构建模块、ReAct 循环、技能、自定义工具与配置 | 单 Agent Target 通过原生 Process SDK 执行。Docker 任务加载选中的 Snapshot 并安装固定版本的原生依赖。 | 可用 |
 
 ## 支持的 Benchmarks
 

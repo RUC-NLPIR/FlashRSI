@@ -31,7 +31,7 @@
 <div id="news">
   <h2>📣 Latest News</h2>
   <ul>
-    <li>[Nov 17, 2026] JiuwenSwarm is now available as a single-agent Target harness. Its native process runs the code, skills, and configuration from the selected Snapshot. <a href="docs/integrations/jiuwenswarm.md">Setup guide</a>.</li>
+    <li>[Nov 17, 2026] JiuwenSwarm is now available as a single-agent Target harness. Its native process runs the code, skills, custom tools, and configuration from the selected Snapshot. <a href="docs/integrations/jiuwenswarm.md">Setup guide</a>.</li>
     <li>[Nov 10, 2026]: 🔍 We have released <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">HotpotQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
     <li>[Nov 09, 2026]: 🔍 We have released <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">SearchQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
   </ul>
@@ -691,7 +691,7 @@ FlashRSI currently supports eight harness integrations; additional integrations 
 | [Hermes](docs/agent-integration.md) | Python Snapshot runtime, SOUL instructions, skills, tool settings | Supported headless Hermes v0.22.5 path with upstream Python helpers and local tools; no installed Hermes CLI required. | Available |
 | [OpenClaw](docs/agent-integration.md) | Pure-Python Snapshot runtime, bootstrap files, skills, tools, policy, session and memory settings | Snapshot-local `runtime/openclaw_native` follows the pinned embedded turn path across Chat Completions, Responses and Anthropic Messages; no Node/npm/Gateway dependency. | Available |
 | [OpenCode](docs/agent-integration.md) | Pure-Python Snapshot runtime, instructions, tools, permissions, sessions and settings | Snapshot-local `runtime/opencode_native` follows the pinned v1.19.3 embedded turn path across Chat Completions, Responses and Anthropic Messages; no Bun/Node/CLI dependency. | Available |
-| [JiuwenSwarm](docs/integrations/jiuwenswarm.md) | Prompt builder, ReAct loop, skills and configuration | Single-agent Target using the native Process SDK. Docker tasks load the selected Snapshot and install pinned native wheels. | Available |
+| [JiuwenSwarm](docs/integrations/jiuwenswarm.md) | Prompt builder, ReAct loop, skills, custom tools and configuration | Single-agent Target using the native Process SDK. Docker tasks load the selected Snapshot and install pinned native wheels. | Available |
 
 ## Supporting Benchmarks
 

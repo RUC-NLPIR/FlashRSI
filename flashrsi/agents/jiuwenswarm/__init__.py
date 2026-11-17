@@ -12,6 +12,7 @@ import yaml
 
 from flashrsi._records import _redact, _secrets
 from flashrsi.agents.jiuwenswarm._sdk import Client
+from flashrsi.agents.jiuwenswarm._tools import load_tools, run_tool
 from flashrsi.core import Agent, Trajectory
 
 _ENTRY = Path(__file__).with_name("_entry.py")
@@ -157,20 +158,19 @@ class JiuwenSwarm(Agent):
             )
             # The SDK's constructor merges env with os.environ. Supply its
             # process env explicitly so old credentials cannot reach tools.
-            client.env = {
+            tool_env = {
                 key: value
                 for key, value in os.environ.items()
                 if not _secrets({key: value})
                 and not key.startswith("FLASHRSI_")
                 and key not in {"API_BASE", "MODEL_NAME", "MODEL_PROVIDER"}
             }
-            client.env.update(
-                {
-                    "JIUWENSWARM_DATA_DIR": str(data_dir),
-                    "FLASHRSI_JIUWEN_API_KEY": llm["api_key"],
-                    "PYTHONUTF8": "1",
-                }
-            )
+            client.env = {
+                **tool_env,
+                "JIUWENSWARM_DATA_DIR": str(data_dir),
+                "FLASHRSI_JIUWEN_API_KEY": llm["api_key"],
+                "PYTHONUTF8": "1",
+            }
             if active:
                 receipt = root / "loaded-packages.json"
                 client.env["FLASHRSI_JIUWEN_PACKAGE_RECEIPT"] = str(receipt)
@@ -188,9 +188,40 @@ class JiuwenSwarm(Agent):
             }
             if "skills" in config:
                 request["skills"] = list(config["skills"])
+            definitions, scripts = load_tools(files / "tools")
+            if definitions:
+                request["host_tools"] = definitions
+
+            async def invoke_tool(event):
+                payload = event["payload"]
+                try:
+                    return await run_tool(
+                        scripts[payload["name"]],
+                        payload["arguments"],
+                        python=python,
+                        cwd=task_dir,
+                        env=tool_env,
+                    )
+                except Exception as error:
+                    messages.append(
+                        _redact(
+                            {
+                                "type": "HostToolError",
+                                "name": payload["name"],
+                                "call_id": payload["call_id"],
+                                "error": str(error),
+                            },
+                            secrets,
+                        )
+                    )
+                    raise
+
             try:
                 result = await client.run(
-                    request, on_event=observe, deadline_seconds=timeout + 60
+                    request,
+                    on_event=observe,
+                    on_tool_call=invoke_tool if definitions else None,
+                    deadline_seconds=timeout + 60,
                 )
             except Exception as error:
                 return Trajectory(
