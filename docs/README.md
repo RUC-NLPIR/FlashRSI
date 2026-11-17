@@ -122,7 +122,7 @@ See [Usage guide](usage.md) for the complete configuration examples and Python A
 
 ### Algorithms
 
-FlashRSI currently registers thirteen method adaptations. The shared runner supplies Snapshot checkout,
+FlashRSI currently registers fourteen method adaptations. The shared runner supplies Snapshot checkout,
 rollout, scoring, and records; each algorithm keeps its own proposal, feedback, selection, and adoption
 policy.
 
@@ -133,6 +133,7 @@ policy.
 | EvoPrompt | Instructions | GA / DE population | [Guide](evoprompt.md) · [中文](evoprompt.zh-CN.md) · [Configuration](../examples/quickstarts/evoprompt.yaml) |
 | ACE | Instructions / playbook | Playbook accumulation | [ACE](ace.md) · [中文](ace.zh-CN.md) |
 | SkillOpt | Skills | Fast / slow updates | [SkillOpt guide](skillopt.md) · [Quickstart](../examples/quickstart.yaml) |
+| SkillAdam | One Markdown skill | Issue memory and adaptive edit budgets | [Settings](integrations/algorithms.md#skilladam) |
 | Evo-Harness | Skills | Task-stream accumulation | [Evo-Harness](evo-harness.md) · [中文](evo-harness.zh-CN.md) |
 | AHE | Harness resources | Successive edits and audit | [AHE](ahe.md) · [中文](ahe.zh-CN.md) |
 | ADAS | Harness resources | Design archive | [ADAS](adas.md) · [中文](adas.zh-CN.md) |

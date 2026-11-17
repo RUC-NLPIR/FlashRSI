@@ -34,6 +34,7 @@ from flashrsi.algorithms import (
     EvoPrompt,
     MetaHarness,
     ModularRSI,
+    SkillAdam,
     SkillOpt,
 )
 from flashrsi.benchmarks import (
@@ -124,6 +125,7 @@ _ALGORITHMS = {
     "rrsi": RRSI,
     "ace": ACE,
     "ahe": AHE,
+    "skilladam": SkillAdam,
     "skillopt": SkillOpt,
     "opro": OPRO,
     "gepa": GEPA,
