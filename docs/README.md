@@ -182,6 +182,7 @@ The same adapter can serve as a Target that solves tasks or an Agent Worker that
 | Hermes | Python runtime, SOUL instructions, skills, tool settings | Available | [Integration contract](agent-integration.md) |
 | OpenClaw | Pure-Python Snapshot runtime, bootstrap files, skills, tools, policy, session and memory settings | Available | [Integration contract](agent-integration.md) |
 | OpenCode | Pure-Python Snapshot runtime, instructions, coding tools, permissions and session settings | Available | [Integration contract](agent-integration.md) |
+| JiuwenSwarm | Single-agent Target with native Python code, skills and configuration | Available | [Setup](integrations/jiuwenswarm.md) |
 
 For task environments and Harbor boundaries, see [Harness and benchmark responsibilities](benchmark-harness-boundary.md).
 

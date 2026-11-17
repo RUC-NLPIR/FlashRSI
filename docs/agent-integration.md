@@ -324,3 +324,9 @@ Evo-Harness 只编辑 skill 文件，配置由既有 Snapshot 权限保持只读
 
 Review 顺序：`components.yaml` → 适配类 `_run` → `_entry.py` → 上述差异文件。
 进程桥接在收到终止信号时取消原生执行；适配类给工具最多两秒完成清理，再强制终止。
+
+## JiuwenSwarm
+
+设置 `agent.name: jiuwenswarm` 即可选择单 Agent Target。原生 Process SDK 在每道题的新进程中，从当前 Snapshot 加载 `runtime/jiuwenswarm/`、`runtime/openjiuwen/`、`skills/` 和 `config.yaml`。可用模式为 `agent.work.normal` 和 `agent.code.normal`。模型连接由 `agent.llm` 提供，演化 Worker 单独配置。
+
+在 Linux x86-64 上运行 Docker benchmark 时，先构建固定版本的原生 wheels，将输出目录的绝对路径填入 `agent.container_wheels`。使用 SkillOpt 时，可用准备脚本创建带 QA 技能的初始目录，再将其绝对路径填入 `agent.source_dir`。[构建命令和配置示例](integrations/jiuwenswarm.md)

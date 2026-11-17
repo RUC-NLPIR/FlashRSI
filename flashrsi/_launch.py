@@ -179,6 +179,7 @@ def _plan(config):
         "hermes",
         "openclaw",
         "opencode",
+        "jiuwenswarm",
     } or (
         not evaluating
         and (
@@ -187,7 +188,7 @@ def _plan(config):
         )
     ):
         raise ValueError(
-            "Agent/Agent Worker must be miniagent, claude_code, codex, pi, hermes, openclaw or opencode; a text Worker uses type: llm"
+            "Choose miniagent, claude_code, codex, pi, hermes, openclaw or opencode for either role; jiuwenswarm is Target-only and llm is Worker-only"
         )
     if not evaluating:
         algorithm_names = {

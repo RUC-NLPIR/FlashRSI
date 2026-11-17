@@ -1,0 +1,7 @@
+{
+  "repository": "https://gitcode.com/openJiuwen/agent-core.git",
+  "commit": "f3f8f576164cc405c046e43079c8ad00ee17f0c4",
+  "version": "0.1.20",
+  "runtime": "openjiuwen/ (complete tracked package and resources)",
+  "native_changes": []
+}

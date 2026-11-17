@@ -1,0 +1,6 @@
+code:
+  - runtime/**
+skill:
+  - skills/**
+config:
+  - config.yaml

@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/openJiuwen-ai/jiuwenswarm",
+  "commit": "09b3b6b7f3fa7808625dc2803b1aede5125bdb8c",
+  "version": "0.2.8",
+  "runtime": "jiuwenswarm/ runtime and resources, excluding frontend and test files",
+  "sdk": "sdks/python/src/jiuwenswarm_sdk/ (unchanged, renamed _sdk)",
+  "native_changes": [
+    "server/runtime/agent_adapter/interface_deep.py: confirm required harness packages for one-shot runs"
+  ],
+  "agent_core": {
+    "repository": "https://gitcode.com/openJiuwen/agent-core.git",
+    "commit": "f3f8f576164cc405c046e43079c8ad00ee17f0c4",
+    "version": "0.1.20",
+    "runtime": "openjiuwen/ runtime and resources, excluding test files",
+    "native_changes": []
+  }
+}
