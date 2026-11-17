@@ -22,6 +22,7 @@ class JiuwenSwarm(Agent):
     """Keep native execution and skills; version files independently of sessions."""
 
     name = "jiuwenswarm"
+    instruction_file = "prompts/system.md"
     description = "JiuwenSwarm single Agent with versioned native source and skills."
 
     def _check_container(self) -> None:
@@ -186,8 +187,23 @@ class JiuwenSwarm(Agent):
                 "timeout_seconds": timeout,
                 "max_turns": config.get("max_turns", 10),
             }
-            if "skills" in config:
-                request["skills"] = list(config["skills"])
+            skills = config.get("skills")
+            if skills is None:
+                skills = sorted(
+                    path.parent.name for path in (files / "skills").glob("*/SKILL.md")
+                )
+            if skills or "skills" in config:
+                request["skills"] = list(skills)
+            # Older Snapshots predate the prompt component and use the native default.
+            instruction_path = files / self.instruction_file
+            if instruction_path.is_file():
+                instructions = instruction_path.read_text(encoding="utf-8").strip()
+                if instructions:
+                    request["agent"] = {
+                        "name": "jiuwenswarm",
+                        "instructions": instructions,
+                        "skills": list(skills),
+                    }
             definitions, scripts = load_tools(files / "tools")
             if definitions:
                 request["host_tools"] = definitions

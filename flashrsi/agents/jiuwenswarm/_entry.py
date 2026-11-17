@@ -62,6 +62,8 @@ def main():
                     if version(package) != expected:
                         raise ValueError(f"JiuwenSwarm requires {package}=={expected}")
                 sys.meta_path.insert(0, _SingleAgentModules(runtime))
+                # Native modules may import candidate-authored jiuwen_extensions helpers.
+                sys.path.append(str(runtime))
             from jiuwenswarm.common.utils import (
                 get_agent_skills_dir,
                 get_user_workspace_dir,
