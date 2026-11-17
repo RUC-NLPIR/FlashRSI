@@ -16,6 +16,7 @@ from flashrsi.algorithms.meta_harness import MetaHarness
 from flashrsi.algorithms.modular_rsi import ModularRSI
 from flashrsi.algorithms.opro import OPRO
 from flashrsi.algorithms.rrsi import RRSI
+from flashrsi.algorithms.skilladam import SkillAdam
 from flashrsi.algorithms.skillopt import SkillOpt
 
 __all__ = [
@@ -31,5 +32,6 @@ __all__ = [
     "ModularRSI",
     "OPRO",
     "RRSI",
+    "SkillAdam",
     "SkillOpt",
 ]

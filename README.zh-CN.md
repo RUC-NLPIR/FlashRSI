@@ -7,7 +7,7 @@
 <p align="center"><i>一键在不同 Agent 与任务上复现、比较和开发 RSI 方法。</i></p>
 
 <p align="center">
-  FlashRSI 集成 <b>13 种 RSI 算法</b>、<b>31 个 benchmark</b> 和 <b>7 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode），用于复现、比较和开发 Agent 自我改进方法。
+  FlashRSI 集成 <b>14 种 RSI 算法</b>、<b>31 个 benchmark</b> 和 <b>7 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode），用于复现、比较和开发 Agent 自我改进方法。
 </p>
 
 <p align="center">
@@ -69,9 +69,9 @@
 
 - 🧩 **可配置实验框架。** 在同一个 YAML/CLI 实验中组合 RSI 算法、Target harness、Worker、benchmark
   和各自的模型配置；资源范围与执行角色可以直接切换。
-- 🧪 **31 个 Benchmark 与 13 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
+- 🧪 **31 个 Benchmark 与 14 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
   和交互任务，提供 **30 个套件的 35 份 Hugging Face 固定配置**，以及 OPRO、GEPA、EvoPrompt、ACE、
-  SkillOpt、Evo-Harness、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、RRSI、Arbor 的可运行适配。
+  SkillOpt、SkillAdam、Evo-Harness、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、RRSI、Arbor 的可运行适配。
 - 🧠 **原生 Harness 与可复现证据。** 支持 MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw 和 OpenCode，将 prompts、skills、工具、
   配置、hooks、plugins、memory 与 runtime 资源纳入版本化 Snapshot；每次运行集中保存候选版本、轨迹、
   指标、用量和任务产物。
@@ -145,7 +145,7 @@ flashrsi run --config examples/quickstart.yaml
 
 ## 支持的算法
 
-FlashRSI 目前实现 13 种 RSI 方法：
+FlashRSI 目前实现 14 种 RSI 方法：
 
 | 方法 | Scope | 搜索组织 | 使用的反馈 |
 | --- | --- | --- | --- |
@@ -153,6 +153,7 @@ FlashRSI 目前实现 13 种 RSI 方法：
 | [GEPA](https://arxiv.org/abs/2507.19457) | 指令搜索 | 候选池与反思 | 分数、轨迹 |
 | [EvoPrompt](https://arxiv.org/abs/2309.08532) | 指令搜索 | GA / DE 候选群体 | 开发集分数 |
 | [SkillOpt](https://arxiv.org/abs/2605.23904) | Skill 演化 | 快速 / 慢速更新 | 训练轨迹、开发集分数 |
+| [SkillAdam](docs/integrations/algorithms.md#skilladam) | Skill 演化 | 跨轮记录问题，按逐题分差调整编辑预算 | 训练轨迹、逐题 dev 分数 |
 | [Evo-Harness](https://arxiv.org/abs/2608.15071v2) | Skill 演化 | 任务流积累 | 失败轨迹 |
 | [ACE](https://arxiv.org/abs/2510.04618) | 上下文演化 | Playbook 积累 | 任务反馈、反思 |
 | [AHE](https://arxiv.org/abs/2604.25850) | 迭代式 Harness 优化 | 连续编辑 | 轨迹、诊断、编辑审计 |
@@ -163,7 +164,7 @@ FlashRSI 目前实现 13 种 RSI 方法：
 | [ModularRSI](https://arxiv.org/abs/2609.14857) | 分支演化 | 独立分支；集成 | 成功 / 失败轨迹 |
 | [Arbor](docs/arbor.zh-CN.md) | 分支演化 | 假设树与经验向上归纳 | Train 轨迹、dev 分数 |
 
-Arbor 为新接入算法；原框架图和下方实验表仍对应十二方法的已有研究。
+原框架图和下方实验表展示原研究中评估的十二种方法。
 
 SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明](docs/skillopt.zh-CN.md)。
 

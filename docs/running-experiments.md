@@ -2,7 +2,7 @@
 
 [README](../README.md) · [Benchmark configurations](benchmark-quickstart.md) · [Launcher guide](experiment-launcher.zh-CN.md)
 
-FlashRSI registers 13 algorithms, 31 benchmark suites, and seven harnesses: MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode. Versions, years, and task domains within one adapter count as one suite. Registration does not mean every combination has completed a real model run.
+FlashRSI registers 14 algorithms, 31 benchmark suites, and seven harnesses: MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode. Versions, years, and task domains within one adapter count as one suite. Registration does not mean every combination has completed a real model run.
 
 ## Start with a small run
 
@@ -23,7 +23,7 @@ Start from an [algorithm configuration](../README.md#supported-algorithms) so it
 | What to improve | Algorithms | Worker |
 | --- | --- | --- |
 | Instructions | OPRO, GEPA, EvoPrompt, ACE | LLM or Agent |
-| Skills | SkillOpt | LLM or Agent |
+| Skills | SkillOpt, [SkillAdam](integrations/algorithms.md#skilladam) | LLM or Agent |
 | Skills discovered by the native harness | Evo-Harness | Agent |
 | Declared harness resources | AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, Arbor | Agent |
 

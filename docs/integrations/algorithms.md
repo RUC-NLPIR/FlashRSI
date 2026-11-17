@@ -11,7 +11,16 @@ Choose a method by the resource you want to improve. FlashRSI supplies versioned
 | EvoPrompt | Instructions | Uses GA or DE population search on dev scores. | [Guide](../evoprompt.md) · [中文](../evoprompt.zh-CN.md) · [YAML](../../examples/quickstarts/evoprompt.yaml) |
 | ACE | Instructions / playbook | Accumulates feedback and reflections into a playbook. | [Guide](../ace.md) · [中文](../ace.zh-CN.md) · [YAML](../../examples/quickstarts/ace.yaml) |
 | SkillOpt | Skills | Uses fast/slow updates and adopts strict dev gains. | [SkillOpt guide](../skillopt.md) · [Quickstart YAML](../../examples/quickstart.yaml) |
+| SkillAdam | One Markdown skill | Tracks recurring issues and adapts the edit budget to per-task score changes. | [Settings](#skilladam) |
 | Evo-Harness | Skills | Accumulates task-stream skills through native skill discovery. | [Guide](../evo-harness.md) · [中文](../evo-harness.zh-CN.md) · [YAML](../../examples/quickstarts/evo_harness.yaml) |
+
+### SkillAdam
+
+Set `algorithm.name` to `skilladam` and configure the Worker model under `algorithm.worker.llm`. Start from a Markdown file in the Target’s `skill` component. If there are several, set `algorithm.skill_path` to the file the Target loads, such as `skills/main.md` for MiniAgent.
+
+Each round samples training tasks and asks the Worker for edits using the trajectories and its history of issues and attempts. The candidate is scored on the same dev tasks as the incumbent. Only a strict increase in the mean score selects the candidate. Rejected attempts remain in the next round’s issue memory.
+
+`max_iterations` defaults to 4 and `batch_size` to 8. The edit budget starts at `base_budget` (4) and can shrink to `min_budget` (1) as the variance of per-task score changes grows. `beta` (0.9) smooths this variance across rounds and `v_max` (0.25) sets the scale. The Snapshot carries the selected skill. [Upstream implementation](https://github.com/ruc-datalab/SkillAdam/tree/b6c9640f7a9e0d5e3a500c25bc4e6369eeca78f1)
 
 ## Harness resources
 
@@ -45,7 +54,7 @@ These are local implementation rules, not claims of complete upstream reproducti
 
 ## Interpret results
 
-The thirteen implementations adapt methods to FlashRSI's resource and evaluation interfaces. Registration is a configuration entry point; consult each guide's migration notes for differences from the original method and supported capabilities.
+The fourteen implementations adapt methods to FlashRSI's resource and evaluation interfaces. Registration is a configuration entry point; consult each guide's migration notes for differences from the original method and supported capabilities.
 
 The paper's overall experiment table will be added when its final matrix is available. No aggregate result is claimed here.
 

@@ -7,7 +7,7 @@
 <p align="center"><i>One click to reproduce, compare, and develop RSI methods across agents and tasks.</i></p>
 
 <p align="center">
-  FlashRSI provides one experiment interface for <b>13 RSI algorithms</b>, <b>31 benchmarks</b>, and <b>7 harness integrations</b>:
+  FlashRSI provides one experiment interface for <b>14 RSI algorithms</b>, <b>31 benchmarks</b>, and <b>7 harness integrations</b>:
   MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode. Each run records the resources that changed,
   trajectories that produced the score, and the Snapshot selected at the end.
 </p>
@@ -73,9 +73,9 @@
 - 🧩 **Configurable Experiment Framework**: Combines an RSI method, Target harness, Worker, benchmark,
   and independent model settings in one YAML/CLI experiment. Resource scopes and execution roles can
   change without writing a new runner.
-- 🧪 **31 Benchmarks and 13 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
+- 🧪 **31 Benchmarks and 14 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
   web research, documents, tool use, and interactive tasks, with **35 pinned Hugging Face
-  configurations** for 30 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt,
+  configurations** for 30 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt, SkillAdam,
   Evo-Harness, AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, and Arbor.
 - 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode map prompts,
   skills, tools, configuration, hooks, plugins, memory, and runtime resources into versioned Snapshots.
@@ -227,7 +227,7 @@ See [Agent integration](docs/agent-integration.md), [Codex integration](docs/cod
 
 ## Supporting Methods
 
-FlashRSI implements 13 RSI methods:
+FlashRSI implements 14 RSI methods:
 
 | Method | Scope | Search organization | Feedback used |
 | --- | --- | --- | --- |
@@ -235,6 +235,7 @@ FlashRSI implements 13 RSI methods:
 | [GEPA](https://arxiv.org/abs/2507.19457) | Instruction search | Candidate pool and reflection | Scores, traces |
 | [EvoPrompt](https://arxiv.org/abs/2309.08532) | Instruction search | GA / DE population | Dev scores |
 | [SkillOpt](https://arxiv.org/abs/2605.23904) | Skill evolution | Fast / slow updates | Train traces, dev scores |
+| [SkillAdam](docs/integrations/algorithms.md#skilladam) | Skill evolution | Issue memory and adaptive edit budgets | Train traces, per-task dev scores |
 | [Evo-Harness](https://arxiv.org/abs/2608.15071v2) | Skill evolution | Task-stream accumulation | Failure traces |
 | [ACE](https://arxiv.org/abs/2510.04618) | Context evolution | Playbook accumulation | Task feedback, reflections |
 | [AHE](https://arxiv.org/abs/2604.25850) | Iterative harness refinement | Successive edits | Traces, diagnoses, edit audits |
@@ -245,7 +246,7 @@ FlashRSI implements 13 RSI methods:
 | [ModularRSI](https://arxiv.org/abs/2609.14857) | Branch evolution | Independent branches; integration | Success / failure traces |
 | [Arbor](docs/arbor.md) | Branch evolution | Hypothesis tree and insight propagation | Train traces, dev scores |
 
-Arbor is newly integrated; the original diagram and experiment results below cover the twelve-method study.
+The original diagram and experiment results cover the twelve methods evaluated in the original study.
 
 For SkillOpt's fast/slow updates, selection rules, and budget settings, see the [SkillOpt guide](docs/skillopt.md).
 
