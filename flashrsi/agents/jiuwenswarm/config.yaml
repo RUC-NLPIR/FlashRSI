@@ -264,19 +264,6 @@ telemetry:
     endpoint: null
     protocol: null
     headers: null
-team_observability:
-  enabled: true
-  exporter: file
-  endpoint: http://localhost:4317
-  service_name: jiuwenswarm
-  sample_rate: 1.0
-  redact_prompts: false
-  redact_completions: false
-  attribute_value_max_length: 10240
-  langfuse_public_key: ''
-  langfuse_secret_key: ''
-  traces_dir: ''
-  file_retention_days: 7
 agent_observability:
   enabled: false
   exporter: file
@@ -1116,94 +1103,6 @@ modes:
       model_name: null
       base_url: null
       api_key: null
-  team:
-    jiuwen_team:
-      team_name: jiuwen_team
-      lifecycle: persistent
-      teammate_mode: build_mode
-      spawn_mode: inprocess
-      enable_swarmflow: false
-      swarmflow_progressive_tool: false
-      external_cli_agents: []
-      external_transport: null
-      reliability:
-        enabled: true
-        monitor_roles:
-        - leader
-        - teammate
-        detectors:
-          tool_error:
-            enabled: true
-            window_seconds: 60.0
-            rate_threshold: 5
-            consecutive_threshold: 3
-          repeat_tool:
-            enabled: true
-            history_size: 30
-            repeat_warn: 10
-            pingpong_warn: 10
-            loop_block: 20
-            global_stop: 30
-          model_error:
-            enabled: true
-            window_seconds: 120.0
-            rate_threshold: 3
-            consecutive_threshold: 2
-          output_length:
-            enabled: true
-            text_threshold: 32000
-            thinking_threshold: 16000
-          compaction:
-            enabled: true
-            window_seconds: 300.0
-            frequency_threshold: 3
-            drop_ratio: 0.3
-          pingpong:
-            enabled: true
-            min_volleys: 6
-        policy:
-          severity_actions:
-            low:
-            - observe_only
-            medium:
-            - report_leader
-            high:
-            - local_steer
-            - report_leader
-            critical:
-            - local_steer
-            - escalate_user
-        restart_intensity:
-          intensity: 5
-          period_seconds: 60.0
-      swarmflow_concurrency:
-        max_workflows: 16
-        agents_per_run: null
-        max_agents_total: 64
-      worktree:
-        enabled: true
-      dispatch_mode: autonomous
-      enable_task_verification: false
-      enable_member_messaging: false
-      max_subtask_depth: 0
-      leader:
-        member_name: team-leader
-        display_name: 团队领导
-        persona: 天才项目管理专家，擅长任务分解和团队协调
-      agents:
-        leader: $agent_leader
-      workspace:
-        enabled: true
-      transport:
-        type: inprocess
-      storage:
-        type: sqlite
-      memory:
-        enabled: false
-        scenario: general
-        auto_extract: true
-        shared_memory: true
-        member_memory_prompt_mode: proactive
 recommendation:
   topic_enabled: null
   prompt_enabled: null

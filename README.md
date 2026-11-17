@@ -691,7 +691,7 @@ FlashRSI currently supports eight harness integrations; additional integrations 
 | [Hermes](docs/agent-integration.md) | Python Snapshot runtime, SOUL instructions, skills, tool settings | Supported headless Hermes v0.22.5 path with upstream Python helpers and local tools; no installed Hermes CLI required. | Available |
 | [OpenClaw](docs/agent-integration.md) | Pure-Python Snapshot runtime, bootstrap files, skills, tools, policy, session and memory settings | Snapshot-local `runtime/openclaw_native` follows the pinned embedded turn path across Chat Completions, Responses and Anthropic Messages; no Node/npm/Gateway dependency. | Available |
 | [OpenCode](docs/agent-integration.md) | Pure-Python Snapshot runtime, instructions, tools, permissions, sessions and settings | Snapshot-local `runtime/opencode_native` follows the pinned v1.19.3 embedded turn path across Chat Completions, Responses and Anthropic Messages; no Bun/Node/CLI dependency. | Available |
-| [JiuwenSwarm](docs/integrations/jiuwenswarm.md) | Native Python runtime, skills and configuration | Single-agent Target using the native Process SDK. Docker tasks load the selected Snapshot and install pinned native wheels. | Available |
+| [JiuwenSwarm](docs/integrations/jiuwenswarm.md) | Prompt builder, ReAct loop, skills and configuration | Single-agent Target using the native Process SDK. Docker tasks load the selected Snapshot and install pinned native wheels. | Available |
 
 ## Supporting Benchmarks
 

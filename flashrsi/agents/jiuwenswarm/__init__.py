@@ -72,6 +72,10 @@ class JiuwenSwarm(Agent):
                 raise ValueError(
                     "active_harness_packages must list unique Python package names"
                 )
+            if active and not (files / "runtime/openjiuwen/__init__.py").is_file():
+                raise ValueError(
+                    "active_harness_packages requires a full-runtime Snapshot"
+                )
             manifests = []
             for name in active:
                 package = files / "runtime/openjiuwen/extensions/harness" / name

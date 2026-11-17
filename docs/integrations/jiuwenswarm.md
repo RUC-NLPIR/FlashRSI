@@ -4,11 +4,11 @@ JiuwenSwarm runs a single Target agent through its native Process SDK. FlashRSI 
 
 | Component | Snapshot files |
 | --- | --- |
-| `code` | `runtime/jiuwenswarm/**` and `runtime/openjiuwen/**` |
+| `code` | JiuwenSwarm’s `prompt_builder.py` and openJiuwen’s `react_agent.py` under `runtime/` |
 | `skill` | `skills/**` |
 | `config` | `config.yaml` |
 
-The bundled runtime uses JiuwenSwarm 0.2.8 and openJiuwen Agent Core 0.1.20. The adapter supplies the model connection at run time. [Pinned source revisions](../../flashrsi/agents/jiuwenswarm/upstream.json)
+Each task loads these two modules from its selected Snapshot. The pinned wheels supply their supporting packages and native Process CLI (JiuwenSwarm 0.2.8 and openJiuwen Agent Core 0.1.20). The adapter supplies the model connection at run time. [Pinned source revisions](../../flashrsi/agents/jiuwenswarm/upstream.json)
 
 ## Configure a Docker-backed Target
 

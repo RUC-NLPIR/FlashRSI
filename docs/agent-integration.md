@@ -327,6 +327,6 @@ Review 顺序：`components.yaml` → 适配类 `_run` → `_entry.py` → 上�
 
 ## JiuwenSwarm
 
-设置 `agent.name: jiuwenswarm` 即可选择单 Agent Target。原生 Process SDK 在每道题的新进程中，从当前 Snapshot 加载 `runtime/jiuwenswarm/`、`runtime/openjiuwen/`、`skills/` 和 `config.yaml`。可用模式为 `agent.work.normal` 和 `agent.code.normal`。模型连接由 `agent.llm` 提供，演化 Worker 单独配置。
+设置 `agent.name: jiuwenswarm` 即可选择单 Agent Target。原生 Process SDK 在每道题的新进程中，从当前 Snapshot 加载 JiuwenSwarm 的提示词构建模块 `prompt_builder.py`、openJiuwen 的 ReAct 循环 `react_agent.py`、`skills/` 和 `config.yaml`；其余运行时由固定版本的 wheels 提供。可用模式为 `agent.work.normal` 和 `agent.code.normal`。模型连接由 `agent.llm` 提供，演化 Worker 单独配置。
 
 在 Linux x86-64 上运行 Docker benchmark 时，先构建固定版本的原生 wheels，将输出目录的绝对路径填入 `agent.container_wheels`。使用 SkillOpt 时，可用准备脚本创建带 QA 技能的初始目录，再将其绝对路径填入 `agent.source_dir`。[构建命令和配置示例](integrations/jiuwenswarm.md)

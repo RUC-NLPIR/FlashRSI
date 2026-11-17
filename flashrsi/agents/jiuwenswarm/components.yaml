@@ -1,5 +1,6 @@
 code:
-  - runtime/**
+  - runtime/jiuwenswarm/agents/harness/common/prompt/prompt_builder.py
+  - runtime/openjiuwen/core/single_agent/agents/react_agent.py
 skill:
   - skills/**
 config:
