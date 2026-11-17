@@ -16,6 +16,7 @@ from flashrsi.agents import (
     ClaudeCode,
     Codex,
     Hermes,
+    JiuwenSwarm,
     MiniAgent,
     OpenClaw,
     OpenCode,
@@ -74,6 +75,7 @@ from flashrsi.config import prepare_run_dir
 from flashrsi.core import Agent, Snapshot
 
 _AGENTS = {
+    "jiuwenswarm": JiuwenSwarm,
     "miniagent": MiniAgent,
     "claude_code": ClaudeCode,
     "codex": Codex,
@@ -155,7 +157,7 @@ def _make_agent(cls, section, label):
             raise ValueError(
                 f"Missing {module}; install flashrsi-lite[{dependencies[cls][1]}]"
             )
-    if cls in (MiniAgent, ClaudeCode, Codex, Hermes, OpenClaw, OpenCode, LLM, Pi):
+    if cls in dependencies or cls in (JiuwenSwarm, Pi):
         _role(section, label, cls.name)
     return cls(section)
 
@@ -296,6 +298,8 @@ async def _prepare(config):
     """Initialize search, including its independent Worker and algorithm checks."""
     algorithm_type = _lookup(_ALGORITHMS, config.algorithm.name, "algorithm")
     worker_config = config.algorithm.worker
+    if worker_config.type == "agent" and worker_config.name == "jiuwenswarm":
+        raise ValueError("JiuwenSwarm is available as a Target only")
     worker_type = (
         LLM
         if worker_config.type == "llm"

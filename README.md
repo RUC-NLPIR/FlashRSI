@@ -7,8 +7,8 @@
 <p align="center"><i>One click to reproduce, compare, and develop RSI methods across agents and tasks.</i></p>
 
 <p align="center">
-  FlashRSI provides one experiment interface for <b>14 RSI algorithms</b>, <b>31 benchmarks</b>, and <b>7 harness integrations</b>:
-  MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode. Each run records the resources that changed,
+  FlashRSI provides one experiment interface for <b>14 RSI algorithms</b>, <b>31 benchmarks</b>, and <b>8 harness integrations</b>:
+  MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, OpenCode, and JiuwenSwarm. Each run records the resources that changed,
   trajectories that produced the score, and the Snapshot selected at the end.
 </p>
 
@@ -31,6 +31,7 @@
 <div id="news">
   <h2>📣 Latest News</h2>
   <ul>
+    <li>[Nov 17, 2026] JiuwenSwarm is now available as a single-agent Target harness. Its native process loads the system instructions, code, skills, custom tools, and configuration from the selected Snapshot. <a href="docs/integrations/jiuwenswarm.md">Setup guide</a>.</li>
     <li>[Nov 10, 2026]: 🔍 We have released <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">HotpotQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
     <li>[Nov 09, 2026]: 🔍 We have released <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">SearchQA evolution records</a> for 12 RSI methods on MiniAgent and Claude Code, with interactive harness diffs and selection histories.</li>
   </ul>
@@ -77,7 +78,7 @@
   web research, documents, tool use, and interactive tasks, with **35 pinned Hugging Face
   configurations** for 30 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt, SkillAdam,
   Evo-Harness, AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, and Arbor.
-- 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, and OpenCode map prompts,
+- 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, OpenCode, and JiuwenSwarm map prompts,
   skills, tools, configuration, hooks, plugins, memory, and runtime resources into versioned Snapshots.
   Each run keeps immutable candidates, redacted configuration, Target/Worker trajectories, metrics,
   usage, and task artifacts together.
@@ -89,7 +90,7 @@ See the [documentation home](docs/index.md) for the guide, integrations, and dev
 
 <p align="center">
   <a href="assets/readme/framework-overview.jpg">
-    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI framework overview: 12 RSI algorithms, immutable AgentSnapshots, seven agent harnesses, and 30 benchmarks." width="100%">
+    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI framework overview: RSI algorithms, immutable AgentSnapshots, target harnesses, and benchmarks." width="100%">
   </a>
 </p>
 
@@ -679,7 +680,7 @@ highest final score within each benchmark and harness, including ties.
 
 ## Supporting Harnesses
 
-FlashRSI currently supports seven harness integrations; additional integrations are planned.
+FlashRSI currently supports eight harness integrations; additional integrations are planned.
 
 | Harness | Editable resources | Integration details | Status |
 | --- | --- | --- | --- |
@@ -690,6 +691,7 @@ FlashRSI currently supports seven harness integrations; additional integrations 
 | [Hermes](docs/agent-integration.md) | Python Snapshot runtime, SOUL instructions, skills, tool settings | Supported headless Hermes v0.22.5 path with upstream Python helpers and local tools; no installed Hermes CLI required. | Available |
 | [OpenClaw](docs/agent-integration.md) | Pure-Python Snapshot runtime, bootstrap files, skills, tools, policy, session and memory settings | Snapshot-local `runtime/openclaw_native` follows the pinned embedded turn path across Chat Completions, Responses and Anthropic Messages; no Node/npm/Gateway dependency. | Available |
 | [OpenCode](docs/agent-integration.md) | Pure-Python Snapshot runtime, instructions, tools, permissions, sessions and settings | Snapshot-local `runtime/opencode_native` follows the pinned v1.19.3 embedded turn path across Chat Completions, Responses and Anthropic Messages; no Bun/Node/CLI dependency. | Available |
+| [JiuwenSwarm](docs/integrations/jiuwenswarm.md) | System instructions, prompt builder, ReAct loop, skills, custom tools and configuration | Single-agent Target using the native Process SDK. Docker tasks load the selected Snapshot and install pinned native wheels. | Available |
 
 ## Supporting Benchmarks
 

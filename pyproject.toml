@@ -69,11 +69,13 @@ include = ["flashrsi*"]
 # Reference sources and bundled skill scripts are data. Treating those scripts
 # as namespace packages strips upstream executable bits during build_py.
 exclude = [
+    "flashrsi.agents.jiuwenswarm.runtime*",
     "flashrsi.agents.codex.python_core.resource_assets.system_skills*",
     "flashrsi.agents.pi_agent.runtime.pi_native.reference*",
 ]
 
 [tool.setuptools.package-data]
+"flashrsi.agents.jiuwenswarm" = ["agent-core-notices/*", "prompts/*.md", "tools/**/*", "tools/*.md", "wheels.Dockerfile", "components.yaml", "config.yaml", "upstream.json", "LICENSE", "OPEN_SOURCE_SOFTWARE_NOTICE.md", "runtime/**/*", "runtime/**/.*", "_sdk/py.typed"]
 "flashrsi.integrations" = ["appworld.Dockerfile", "bfcl.Dockerfile"]
 "flashrsi.benchmarks.harvey_lab" = ["upstream.json"]
 "flashrsi.benchmarks.travelplanner" = ["upstream.json"]
@@ -104,6 +106,8 @@ target-version = "py311"
 # Also work in source archives without .git, where Ruff cannot apply .gitignore.
 extend-exclude = [
     "mvp_doc.md",
+    "flashrsi/agents/jiuwenswarm/runtime",
+    "flashrsi/agents/jiuwenswarm/_sdk",
     "flashrsi/agents/codex/python_core/resource_assets/system_skills",
     "flashrsi/agents/hermes/runtime/hermes_native/_vendor",
     "flashrsi/agents/hermes/runtime/hermes_native/upstream_*.py",

@@ -1,0 +1,12 @@
+code:
+  - runtime/jiuwenswarm/agents/harness/common/prompt/prompt_builder.py
+  - runtime/openjiuwen/core/single_agent/agents/react_agent.py
+  - runtime/jiuwen_extensions/**
+prompt:
+  - prompts/system.md
+skill:
+  - skills/**
+tool:
+  - tools/**
+config:
+  - config.yaml

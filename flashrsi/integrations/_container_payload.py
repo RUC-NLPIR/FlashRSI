@@ -49,9 +49,25 @@ def _stage(directory, agent, config, prompt):
         )
     )
     request.chmod(0o600)
-    (directory / "requirements.txt").write_text(
-        "".join(f"{package}=={version(package)}\n" for package in _dependencies(agent))
-    )
+    requirements = [
+        f"{package}=={version(package)}" for package in _dependencies(agent)
+    ]
+    if config.get("container_wheels"):
+        # Local wheels carry native dependencies from fixed upstream Git revisions.
+        # Override their VCS references as well as installing the wheels themselves.
+        wheels = sorted(Path(config["container_wheels"]).glob("*.whl"))
+        if not wheels:
+            raise ValueError(
+                "agent.container_wheels must contain Linux-compatible wheels"
+            )
+        (directory / "wheels").mkdir()
+        overrides = []
+        for wheel in wheels:
+            shutil.copyfile(wheel, directory / "wheels" / wheel.name)
+            overrides.append(f"{_ROOT}/wheels/{wheel.name}")
+        requirements.extend(overrides)
+        (directory / "overrides.txt").write_text("\n".join(overrides) + "\n")
+    (directory / "requirements.txt").write_text("\n".join(requirements) + "\n")
 
 
 def _dependencies(agent):
@@ -110,5 +126,9 @@ UV_INSTALL_DIR={_ROOT}/bin UV_NO_MODIFY_PATH=1 sh {_ROOT}/install-uv.sh
     ;;
 esac
 {_ROOT}/bin/uv venv --python 3.12 --managed-python {_ROOT}/venv
-{_ROOT}/bin/uv pip install --python {_ROOT}/venv/bin/python -r {_ROOT}/requirements.txt
+set --
+if [ -f {_ROOT}/overrides.txt ]; then
+    set -- --overrides {_ROOT}/overrides.txt
+fi
+{_ROOT}/bin/uv pip install --python {_ROOT}/venv/bin/python -r {_ROOT}/requirements.txt "$@"
 """

@@ -3,6 +3,7 @@
 from flashrsi.agents.claude_code import ClaudeCode
 from flashrsi.agents.codex import Codex
 from flashrsi.agents.hermes import Hermes
+from flashrsi.agents.jiuwenswarm import JiuwenSwarm
 from flashrsi.agents.llm import LLM
 from flashrsi.agents.miniagent import MiniAgent
 from flashrsi.agents.openclaw import OpenClaw
@@ -13,6 +14,7 @@ __all__ = [
     "ClaudeCode",
     "Codex",
     "Hermes",
+    "JiuwenSwarm",
     "LLM",
     "MiniAgent",
     "OpenClaw",

@@ -79,6 +79,7 @@ See also the [30-benchmark configuration index](benchmark-quickstart.md) and [au
 | [Pi](agent-integration.md) | Snapshot-local pure-Python `runtime/pi_native` | Pi-compatible headless loop, provider transports, tools, instructions, skills, prompt templates, and settings; no Node/npm dependency |
 | [Hermes](agent-integration.md) | Snapshot-local Python `runtime/hermes_native` | Hermes headless subset with upstream policies, local file/terminal tools, SOUL instructions, skills and settings; [example](../examples/hermes.yaml) |
 | [OpenCode](agent-integration.md) | Snapshot-local pure-Python `runtime/opencode_native` | OpenCode v1.19.3 embedded loop, provider transports, coding tools, permissions, sessions and compaction; no Bun/Node/CLI dependency; [example](../examples/quickstarts/opencode.yaml) |
+| `jiuwenswarm` | Snapshot-local prompt builder, ReAct loop, skills, custom tools and configuration | Single-agent Target using the native Process SDK. [Setup](integrations/jiuwenswarm.md) |
 
 **Planned adapters:** OpenHands, also previewed in the demo. Pi is available through the Snapshot-local runtime adapter described in [Agent integration](agent-integration.md).
 

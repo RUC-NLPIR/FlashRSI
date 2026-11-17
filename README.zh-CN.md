@@ -7,7 +7,7 @@
 <p align="center"><i>一键在不同 Agent 与任务上复现、比较和开发 RSI 方法。</i></p>
 
 <p align="center">
-  FlashRSI 集成 <b>14 种 RSI 算法</b>、<b>31 个 benchmark</b> 和 <b>7 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode），用于复现、比较和开发 Agent 自我改进方法。
+  FlashRSI 集成 <b>14 种 RSI 算法</b>、<b>31 个 benchmark</b> 和 <b>8 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode、JiuwenSwarm），用于复现、比较和开发 Agent 自我改进方法。
 </p>
 
 <p align="center">
@@ -30,6 +30,7 @@
 <div id="news">
   <h2>📣 最新动态</h2>
   <ul>
+    <li>[2026-11-17] 新增 JiuwenSwarm 单 Agent Target harness。原生进程从选中的 Snapshot 加载系统指令、代码、技能、自定义工具和配置。<a href="docs/agent-integration.md#jiuwenswarm">接入说明</a>。</li>
     <li>[2026-11-10]：🔍 已公开 <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">HotpotQA 演化记录</a>，涵盖 MiniAgent 和 Claude Code 上的 12 种 RSI 方法，支持交互查看 harness 改动与版本选择过程。</li>
     <li>[2026-11-09]：🔍 已公开 <a href="https://ruc-nlpir.github.io/FlashRSI/experiments/">SearchQA 演化记录</a>，涵盖 MiniAgent 和 Claude Code 上的 12 种 RSI 方法，支持交互查看 harness 改动与版本选择过程。</li>
   </ul>
@@ -72,7 +73,7 @@
 - 🧪 **31 个 Benchmark 与 14 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
   和交互任务，提供 **30 个套件的 35 份 Hugging Face 固定配置**，以及 OPRO、GEPA、EvoPrompt、ACE、
   SkillOpt、SkillAdam、Evo-Harness、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、RRSI、Arbor 的可运行适配。
-- 🧠 **原生 Harness 与可复现证据。** 支持 MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw 和 OpenCode，将 prompts、skills、工具、
+- 🧠 **原生 Harness 与可复现证据。** 支持 MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode 和 JiuwenSwarm，将 prompts、skills、工具、
   配置、hooks、plugins、memory 与 runtime 资源纳入版本化 Snapshot；每次运行集中保存候选版本、轨迹、
   指标、用量和任务产物。
 - 🚀 **简单工作流与完整文档。** 使用 `flashrsi run` 演化、`flashrsi evaluate` 评估 Snapshot，配套方法
@@ -83,7 +84,7 @@
 
 <p align="center">
   <a href="assets/readme/framework-overview.jpg">
-    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI 框架概览：12 种 RSI 算法、不可变 AgentSnapshot、5 个 Agent harness 和 30 个 benchmark。" width="100%">
+    <img src="assets/readme/framework-overview.jpg" alt="FlashRSI 框架概览，包含 RSI 算法、AgentSnapshot、Target harness 与 benchmark" width="100%">
   </a>
 </p>
 
@@ -598,7 +599,7 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
 
 ## 支持的 Harnesses
 
-FlashRSI 当前支持七种 Harness 接入，其他接入正在规划中。
+FlashRSI 当前支持八种 Harness 接入，其他接入正在规划中。
 
 | Harness | 可编辑资源 | 接入说明 | 状态 |
 | --- | --- | --- | --- |
@@ -609,6 +610,7 @@ FlashRSI 当前支持七种 Harness 接入，其他接入正在规划中。
 | [Hermes](docs/agent-integration.md) | Python Snapshot runtime、SOUL 指令、skills、工具配置 | 基于 v0.22.5 原上游 Python helper 与本地工具实现 headless 路径；不依赖宿主 Hermes CLI。 | 可用 |
 | [OpenClaw](docs/agent-integration.md) | 纯 Python Snapshot runtime、bootstrap 文件、skills、工具、策略、会话与记忆配置 | Snapshot 内的 `runtime/openclaw_native` 遵循固定版本的嵌入式执行路径，支持 Chat Completions、Responses 和 Anthropic Messages；不依赖 Node/npm/Gateway。 | 可用 |
 | [OpenCode](docs/agent-integration.md) | 纯 Python Snapshot runtime、指令、工具、权限、会话与配置 | Snapshot 内的 `runtime/opencode_native` 遵循固定 v1.19.3 的嵌入式执行路径，支持 Chat Completions、Responses 和 Anthropic Messages；不依赖 Bun/Node/CLI。 | 可用 |
+| [JiuwenSwarm](docs/agent-integration.md#jiuwenswarm) | 系统指令、提示词构建模块、ReAct 循环、技能、自定义工具与配置 | 单 Agent Target 通过原生 Process SDK 执行。Docker 任务加载选中的 Snapshot 并安装固定版本的原生依赖。 | 可用 |
 
 ## 支持的 Benchmarks
 
