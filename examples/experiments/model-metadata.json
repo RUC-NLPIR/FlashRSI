@@ -1,0 +1,44 @@
+{
+  "rrsi-miniagent-appworld": {
+    "initialId": "15844806600d7865c28a9fc41b1024c20f8c80d3adb6c77efbe36dfc670418d5",
+    "selectedId": "31d8c6ba48f652c24c4a4494de0641ba76212d9d4c905e361b56cdd2a70d9e28",
+    "targetModel": "deepseek-flash",
+    "workerModel": "deepseek-v4-pro"
+  },
+  "rrsi-claude_code-appworld": {
+    "initialId": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+    "selectedId": "5eff5618b0cc62272a0e734a20894c5bc21c2a10899a4ac91d73f5630eec2474",
+    "targetModel": "deepseek-flash",
+    "workerModel": "deepseek-v4-pro"
+  },
+  "rrsi-miniagent-searchqa": {
+    "initialId": "6a622166134c5f43fd3034801e3ecb170dc103ddc98e84be0ecddaa63642099a",
+    "selectedId": "9963ca303587da5b2475c4802a4a8f8815d58480fa055dae07336fef5975a8d2",
+    "targetModel": "deepseek-flash",
+    "workerModel": "deepseek-v4-pro"
+  },
+  "modular_rsi-miniagent-terminalbench": {
+    "initialId": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+    "selectedId": "6ce261158b58d7e1b8f0f4950571452ce91415ca2efcc7eadca94d5f601c59e9",
+    "targetModel": "deepseek-flash",
+    "workerModel": "deepseek-v4-pro"
+  },
+  "modular_rsi-claude_code-terminalbench": {
+    "initialId": "a7d2400fdd03c6d0608ed4c980297a4ca6930a29620419901133a9ce0e3d6085",
+    "selectedId": "1c31a98f034f4e2c32837dda7379827623bfe7df41403a88bca7b601d3902875",
+    "targetModel": "deepseek-flash",
+    "workerModel": "deepseek-v4-pro"
+  },
+  "rrsi-miniagent-terminalbench": {
+    "initialId": "15844806600d7865c28a9fc41b1024c20f8c80d3adb6c77efbe36dfc670418d5",
+    "selectedId": "1dd56206dc1f497f48720d2c4394d35850588bba8b82af80c5aed2ef912d09ca",
+    "targetModel": "deepseek-flash",
+    "workerModel": "deepseek-v4-pro"
+  },
+  "rrsi-claude_code-terminalbench": {
+    "initialId": "52d133954850d9f4f4442269c7f47be2e28e9d5c9d2aafbc707777d5972c2c01",
+    "selectedId": "af2f711153587f81712049a34a37047511ccc9ccde77feaab97088557c54e4e6",
+    "targetModel": "deepseek-flash",
+    "workerModel": "deepseek-v4-pro"
+  }
+}

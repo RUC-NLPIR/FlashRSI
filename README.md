@@ -267,6 +267,8 @@ For hypothesis-tree planning, see [Arbor](docs/arbor.md): trunk-based experiment
 
 ### Overall results
 
+These experiments use DeepSeek-V4.1-Flash as Target and DeepSeek-V4-Pro as Worker. Train/dev/test scores come from Target executions. SearchQA Target configurations use `max_tokens: 16384`. See the [experiment protocol](docs/experiments/protocol.md) for model aliases, upstream settings and metadata corrections.
+
 The table below reports source-task performance and frozen transfer performance for the twelve
 methods evaluated on Claude Code and Mini-Agent. It covers four source benchmarks, five near-domain
 transfers, and two far-OOD transfers. Scores are percentages; each result cell shows the final score

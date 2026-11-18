@@ -8,9 +8,9 @@ benchmark:
 agent:
   name: miniagent
   llm:
-    model_name: deepseek-v4-flash
+    model_name: deepseek-flash
     base_url: https://api.deepseek.com
-    max_tokens: 32768
+    max_tokens: 16384
     reasoning_effort: high
     max_retries: 1
   source_dir: ./harnesses/darwinx-miniagent-searchqa/target

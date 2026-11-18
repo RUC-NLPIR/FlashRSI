@@ -48,6 +48,7 @@ export default defineConfig({
         item('Configuration & CLI', '/guide/configuration'),
         item('Evaluate a Snapshot', '/guide/evaluation'),
         item('Snapshot storage', '/guide/snapshot-storage'),
+        item('Experiment protocol', '/experiments/protocol'),
       ] },
       { text: 'Integrations', items: [
         item('Algorithms', '/integrations/algorithms'),

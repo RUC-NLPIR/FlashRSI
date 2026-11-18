@@ -187,6 +187,8 @@ SkillOpt 的快慢更新、选优规则和参数预算见 [SkillOpt 使用说明
 
 ### 整体实验结果
 
+这些实验统一使用 DeepSeek-V4.1-Flash 作为 Target、DeepSeek-V4-Pro 作为 Worker，train/dev/test 分数来自 Target 执行。SearchQA 的 Target 配置使用 `max_tokens: 16384`。模型别名、原方法设置及元数据更正见[实验协议](docs/experiments/protocol.zh-CN.md)。
+
 下表汇总了 12 种方法在 Claude Code 和 Mini-Agent 上的 source-task 表现，以及冻结后的迁移表现，
 覆盖 4 个 source benchmark、5 个近域迁移 benchmark 和 2 个远 OOD benchmark。分数均为百分比；
 每个结果单元格先显示最终分数，再显示相对对应初始 Harness 的百分点变化，粗体表示每个 benchmark 与 Harness

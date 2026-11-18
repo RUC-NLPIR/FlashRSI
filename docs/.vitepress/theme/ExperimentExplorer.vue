@@ -133,6 +133,7 @@ const logLines = computed(() => {
           <button v-for="(value, key) in data!.agents" :key="key" :class="{ active: agentKey === key }" :aria-pressed="agentKey === key" @click="chooseAgent(String(key))">{{ value.label }}</button>
         </div>
         <p><span>Target</span> {{ agent.targetModel }} <span class="separator">/</span> <span>Worker</span> {{ agent.workerModel }}</p>
+        <a :href="withBase('/experiments/protocol.html')">Experiment protocol</a>
       </section>
 
       <section class="metrics" aria-label="Run results">

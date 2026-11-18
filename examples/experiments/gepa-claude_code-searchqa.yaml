@@ -10,7 +10,7 @@ agent:
   llm:
     model_name: deepseek-flash
     base_url: https://api.deepseek.com/anthropic
-    max_tokens: 32768
+    max_tokens: 16384
     llm_max_retries: 1
     effort: high
   timeout: 600

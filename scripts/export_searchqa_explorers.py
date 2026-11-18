@@ -14,6 +14,8 @@ from statistics import mean
 
 import yaml
 
+from _experiment_models import model_labels
+
 METHODS = {
     "opro": (
         "OPRO",
@@ -86,7 +88,14 @@ def metric(record, score_key="hard"):
 
 
 def build(
-    raw, key, harness, benchmark="searchqa", *, metric_key=None, resource_prefix=None
+    raw,
+    key,
+    harness,
+    benchmark="searchqa",
+    *,
+    metric_key=None,
+    resource_prefix=None,
+    model_key=None,
 ):
     metric_key = metric_key or ("exact_match" if benchmark == "hotpotqa" else "hard")
     resource_prefix = resource_prefix or f"/experiment-data/{benchmark}"
@@ -747,14 +756,18 @@ def build(
         "states": public_states,
         "texts": {ref: raw["resources"][ref] for ref in sorted(text_refs)},
     }
-    model = config.get("agent", {}).get("llm", {})
-    worker = algorithm_config.get("worker", {}).get("llm", {})
     agent = {
         "label": "MiniAgent" if harness == "miniagent" else "Claude Code",
         "initialId": initial,
         "selectedId": selected,
-        "targetModel": model.get("model_name", "Not recorded"),
-        "workerModel": worker.get("model_name", "Not recorded"),
+        **model_labels(
+            config,
+            key=model_key or key,
+            harness=harness,
+            benchmark=benchmark,
+            initial=initial,
+            selected=selected,
+        ),
         "method": method,
         "evaluations": evaluations,
         "events": events,

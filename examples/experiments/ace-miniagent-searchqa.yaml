@@ -8,7 +8,7 @@ benchmark:
 agent:
   name: miniagent
   llm:
-    model_name: deepseek-v4-flash
+    model_name: deepseek-flash
     base_url: https://api.deepseek.com
     max_tokens: 16384
     reasoning_effort: high

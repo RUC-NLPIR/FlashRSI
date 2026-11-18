@@ -9,6 +9,8 @@ Inspect how a method actually searches and selects a version. The archive covers
 
 ## Available experiments
 
+The comparison uses DeepSeek-V4.1-Flash as Target and DeepSeek-V4-Pro as Worker. See the [experiment protocol](./protocol.md) for API aliases, SearchQA output limits and the seven supplemented model records.
+
 | Method | SearchQA | HotpotQA | Selection view |
 | --- | --- | --- | --- |
 | SkillOpt | [Explore](./skillopt-searchqa.md) | [Explore](./skillopt-hotpotqa.md) | Fast / slow skill updates |

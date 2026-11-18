@@ -56,6 +56,6 @@ These are local implementation rules, not claims of complete upstream reproducti
 
 The fourteen implementations adapt methods to FlashRSI's resource and evaluation interfaces. Registration is a configuration entry point; consult each guide's migration notes for differences from the original method and supported capabilities.
 
-The paper's overall experiment table will be added when its final matrix is available. No aggregate result is claimed here.
+The [overall results](../../README.md#overall-results) compare methods using DeepSeek-V4.1-Flash as Target and DeepSeek-V4-Pro as Worker. See the [experiment protocol](../experiments/protocol.md) for model aliases, SearchQA output limits and metadata corrections.
 
 To implement your own search policy, see [Add an algorithm](../development/algorithm.md).

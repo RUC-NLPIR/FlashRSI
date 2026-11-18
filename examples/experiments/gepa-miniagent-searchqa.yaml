@@ -10,7 +10,7 @@ agent:
   llm:
     model_name: deepseek-flash
     base_url: https://api.deepseek.com
-    max_tokens: 32768
+    max_tokens: 16384
     reasoning_effort: high
     llm_max_retries: 1
   timeout: 600
