@@ -81,6 +81,8 @@ Use `null` for an unscored candidate. Preserve the recorded acceptance decisions
 
 ### Selection-aware QA views
 
+Model labels normally come from the archived configuration. For seven historical runs with missing labels, `scripts/_experiment_models.py` uses fixed corrections in `examples/experiments/model-metadata.json`, checked against the published experiment YAML, only when both Snapshot IDs match. Existing labels take precedence. Non-matching Snapshot pairs keep their missing labels; later launch-configuration edits do not alter the corrections. Update the [experiment protocol](../experiments/protocol.md#missing-model-records) when adding a verified correction.
+
 The [experiment index](../experiments/index.md) also includes eleven method-specific views using `schemaVersion: 2`. These pages use `SelectionExplorer.vue` for harness selection, resource comparison, and the event ledger. The components under `docs/.vitepress/theme/selection/` each implement a method's actual selection process, rather than assigning every event a generic accepted/rejected dev update.
 
 Regenerate these display datasets from reduced historical run records:

@@ -8,10 +8,10 @@ benchmark:
 agent:
   name: miniagent
   llm:
-    model_name: deepseek-v4-flash
+    model_name: deepseek-flash
     api_key: null
     base_url: https://api.deepseek.com
-    max_tokens: 32768
+    max_tokens: 16384
     max_retries: 1
     reasoning_effort: high
   source_dir: ./harnesses/rrsi-miniagent-searchqa/target

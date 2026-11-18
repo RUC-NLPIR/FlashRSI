@@ -137,6 +137,7 @@ async function copyLink() {
     <p v-else-if="!data" class="sx-empty" role="status">Loading experiment data…</p>
     <template v-else-if="agent">
       <div class="sx-toolbar"><div class="sx-segmented" aria-label="Target harness"><button v-for="(value, key) in data.agents" :key="key" :class="{ active: agentKey === key }" :aria-pressed="agentKey === key" @click="chooseAgent(String(key))">{{ value.label }}</button></div><p>Target <strong>{{ agent.targetModel }}</strong> / Worker <strong>{{ agent.workerModel }}</strong></p></div>
+      <p><a :href="withBase('/experiments/protocol.html')">Experiment protocol and model names</a></p>
       <section class="sx-rule"><span class="sx-eyebrow">How selection works in this archive</span><p>{{ data.selectionRule }}</p></section>
       <p v-if="data.description" class="sx-note">{{ data.description }}</p>
       <nav class="sx-tabs" aria-label="Experiment views"><button :class="{ active: tab === 'selection' }" @click="tab = 'selection'">{{ data.lens }}</button><button :class="{ active: tab === 'resources' }" @click="inspect(resourceId || agent.selectedId)">Resource comparison</button><button :class="{ active: tab === 'records' }" @click="tab = 'records'">Recorded events <small>{{ agent.events.length }}</small></button></nav>

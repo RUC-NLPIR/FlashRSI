@@ -11,7 +11,7 @@ agent:
   name: miniagent
   max_turns: 100
   llm:
-    model_name: deepseek-v4-flash
+    model_name: deepseek-flash
     base_url: https://api.deepseek.com
     max_tokens: 65535
     reasoning_effort: high

@@ -137,6 +137,7 @@ def export_run(raw, key, harness, benchmark="terminalbench"):
         benchmark=benchmark,
         metric_key="reward",
         resource_prefix=f"/experiment-data/{benchmark}",
+        model_key=key,
     )
     agent["resourcesPath"] = (
         f"/experiment-data/{benchmark}/resources/{key}-{harness}.json"

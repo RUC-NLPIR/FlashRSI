@@ -9,7 +9,7 @@ benchmark:
 agent:
   name: claude_code
   llm:
-    model_name: deepseek-v4-flash
+    model_name: deepseek-flash
     base_url: https://api.deepseek.com/anthropic
     max_tokens: 65535
     effort: high
