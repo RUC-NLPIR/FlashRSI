@@ -4,15 +4,15 @@
 
 [算法总览](./integrations/algorithms.md) · [示例配置](../examples/quickstarts/ahe.yaml)
 
-AHE 编辑当前 harness，声明每项改动预期影响哪些任务结果，再用下一次 train 评估核对预测。协议合法且完成评估的编辑全部保留，包括降分版本。下一轮 Worker 根据判决决定保留、改进或撤销。最终结果是最后保留的版本，不是 dev 最佳版本。
+AHE 编辑当前 harness，声明每项改动预期影响哪些任务结果，再用下一次 train 评估核对预测。协议合法且完成评估的编辑全部保留，包括降分版本。下一轮 Worker 根据判决决定保留、改进或撤销。演化结束后，在 dev 上评估初始 Snapshot 和所有保留版本，返回最高分版本；同分保留较早版本。
 
 ## 使用条件
 
-train 必须非空且任务 ID 唯一。Worker 必须是可编辑文件的 Agent（`algorithm.worker.type: agent`），纯 LLM Worker 在启动时报错。Target 和 Worker 独立配置模型与连接。
+train 必须非空且任务 ID 唯一，dev 也必须非空，用于最终选优。Worker 必须是可编辑文件的 Agent（`algorithm.worker.type: agent`），纯 LLM Worker 在启动时报错。Target 和 Worker 独立配置模型与连接。
 
 `evolve_scope = {"*"}` 覆盖 Target 声明的全部组件，不代表任意宿主文件或所有 harness 的内部实现。MiniAgent 可以暴露运行时代码，Claude Code 暴露支持的指令、扩展与设置。新文件必须满足 Target 的组件规则，详见 [Harness 接入](./integrations/harnesses.md)。
 
-AHE 用 train 同时诊断和评分，不使用 dev，也不恢复 dev 最佳版本。最终 test 由 runner 负责，test 证据不进入 debugger 或编辑提示。
+AHE 用 train 诊断并核对逐轮改动预测。编辑结束后，使用 dev 从包括初始版本在内的完整保留历史中选出最终 Snapshot。Dev 证据不进入 debugger 或编辑提示。Runner 只对选中版本做最终 test，test 不参与选优。
 
 ## 运行小示例
 
@@ -37,9 +37,10 @@ flashrsi run --config examples/quickstart.yaml \
 3. 汇集当前训练轨迹、上一轮改动判决、有长度限制的回滚原文，以及最近四次拒绝记录。启用 `use_debugger` 时，先逐任务诊断，失败优先，再生成跨任务总览。
 4. 检出 current，由 Worker 编辑文件。清理已知运行时产物，在组件规则内提交，再将真实改动路径与返回的 manifest 对照。非法或空编辑消耗一次尝试，不评估候选。
 5. 在相同完整 train 上评估合法候选，记录逐题前后分数、分差与成败翻转，并判决 manifest 预测。
-6. 即使同分、降分或得到无效/有害判决，仍激活候选，作为下一轮编辑基线。尝试耗尽或分数达标后返回最后保留的 Snapshot。
+6. 即使同分、降分或得到无效/有害判决，仍激活候选，作为下一轮编辑基线。
+7. 尝试耗尽或 train 分数达标后，在完整 dev 上对初始版本和每个保留候选各评估一次。选出 dev 最高分版本，同分保留较早 Snapshot，再恢复该版本供最终 test 使用。非法或空编辑不进入选优池。
 
-当前未实现自动回滚或不退步门槛。回滚是后续 Worker 可以做出的编辑，参考此前判决和原文。回滚文本受长度限制，二进制内容不渲染为文本。Worker/debugger 执行失败向外传播，不视为普通编辑拒绝。
+演化过程中未实现自动回滚或不退步门槛。回滚是后续 Worker 可以做出的编辑，参考此前判决和原文。回滚文本受长度限制，二进制内容不渲染为文本。Worker/debugger 执行失败向外传播，不视为普通编辑拒绝。
 
 ## Manifest 与判决
 
@@ -82,14 +83,14 @@ flashrsi run --config examples/quickstart.yaml \
 | `debugger_max_tasks` | `90` | 每次最多诊断的轨迹数，失败优先；至少 1。 |
 | `max_evidence_chars` | `30000` | 序列化证据块字符上限；至少 1。 |
 
-设 train 有 N 题、最多 S 次尝试，Target 搜索最多执行 `(1 + S) * N` 次任务：一次初始基线，加每个合法候选的一次评估。当前分数复用，不会每步重新跑基线。每次尝试调用一次编辑；启用 debugger 时再增加最多 `min(N, debugger_max_tasks)` 次逐题调用和一次总览。原生模型/工具轮次及最终 test 另计。
+设 train 有 N 题、dev 有 D 题、最多 S 次尝试，Target 搜索与选优最多执行 `(1 + S) * (N + D)` 次任务：先在 train 上评估初始版本和各合法候选，再在 dev 上对这些版本各评估一次。当前分数复用，不会每步重新跑基线。每次尝试调用一次编辑；启用 debugger 时再增加最多 `min(N, debugger_max_tasks)` 次逐题调用和一次总览。原生模型/工具轮次及最终 test 另计。
 
 ## 查看实验记录
 
-`decision.kind: decline` 记录非法尝试及原因。`kind: keep` 记录父/候选分数、manifest、逐题归因、判决、回滚来源及 `accepted: true`。接受表示保留资源，不代表性能提升。AHE 不以选最佳版本的 `promote` 决策结束。
+`decision.kind: decline` 记录非法尝试及原因。`kind: keep` 记录父/候选分数、manifest、逐题归因、判决、回滚来源及 `accepted: true`。接受表示保留资源，不代表性能提升。结束时的 `selection-dev` 记录各候选评分；最终 `promote` 决策记录 `selection_split: dev`、`selection_policy: best_dev`、完整 `dev_scores` 及选中 Snapshot。其 parent 是最后演化版本，candidate 是返回供测试的版本。
 
 ## 来源与适配
 
-[实现](../flashrsi/algorithms/ahe/__init__.py)、[manifest 协议](../flashrsi/algorithms/ahe/_manifest.py)和[提示](../flashrsi/algorithms/ahe/_prompts.py)记录上游为 `china-qijizhifeng/agentic-harness-engineering` commit `8b2a55d97590363fe50c3cc6b5e833b020a4bb4c`，经 FlashRSI `5efe9b438483710060183c6c3ecbc5062b410a58` 迁移。原迁移记录未独立核验继承的上游版本。
+[实现](../flashrsi/algorithms/ahe/__init__.py)、[manifest 协议](../flashrsi/algorithms/ahe/_manifest.py)和[提示](../flashrsi/algorithms/ahe/_prompts.py)记录上游为 `china-qijizhifeng/agentic-harness-engineering` commit `8b2a55d97590363fe50c3cc6b5e833b020a4bb4c`，经 FlashRSI `5efe9b438483710060183c6c3ecbc5062b410a58` 迁移。本次核对了上游选优逻辑：[`update_best_ever`](https://github.com/china-qijizhifeng/agentic-harness-engineering/blob/8b2a55d97590363fe50c3cc6b5e833b020a4bb4c/evolve.py#L2361) 只在分数严格提高时更新历史最佳；[论文 Algorithm 1](https://arxiv.org/html/2604.25850v1#alg1) 返回最佳 harness。上游脚本分别记录最后分数和最佳分数。FlashRSI 为 runner 显式恢复选中版本；使用独立 dev 集做最终排序是 FlashRSI 的实验协议，并非上游要求的数据划分。
 
 本地取舍包括回复内 manifest 替代 checkout 内文件、核对真实 Snapshot diff、限制证据长度，以及非法编辑后继续。保守回滚/不退步变体和跨进程搜索恢复未实现，添加额外配置键不会产生这些能力。
