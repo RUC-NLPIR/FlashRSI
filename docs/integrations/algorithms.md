@@ -42,7 +42,7 @@ For three directory-editing methods, the current implementations differ as follo
 
 | Method | Editing base | Search evidence | Adoption and final selection |
 | --- | --- | --- | --- |
-| AHE | Current retained version | Train traces, optional debugger, previous verdicts | Keep every valid evaluated edit, including ties/regressions; return the last retained version. |
+| AHE | Current retained version | Train traces, optional debugger, previous verdicts | Keep every valid evaluated edit for continued exploration; finally return the earliest dev-best version among the seed and all retained edits. |
 | ADAS | Current best-dev version | Design descriptions and dev scores, bounded in the prompt | Retain all measured designs in the archive; strictly higher dev changes best; promote best at the end. |
 | Meta-Harness | Initial seed; Worker may copy any historical version | Historical source and full recorded dev/Worker traces in files | Retain all measured versions; strictly higher dev changes best; promote best at the end. |
 

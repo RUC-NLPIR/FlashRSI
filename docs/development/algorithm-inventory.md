@@ -11,7 +11,7 @@ The [runner registry](../../flashrsi/runner.py) contains 14 methods. The resourc
 | [SkillOpt](../skillopt.md) | Skills | Combine fast and slow updates and adopt strict dev gains. | Text proposal |
 | [SkillAdam](../integrations/algorithms.md#skilladam) | One Markdown skill | Track issue history, adjust edit size using per-task score variance, and adopt strict dev gains. | Text proposal |
 | [Evo-Harness](../evo-harness.md) | Native directory skills | Compile training failures into topic and general skills and retain valid updates. | File editing |
-| [AHE](../ahe.md) | Harness resources | Diagnose train traces, evaluate each valid edit, and retain it for the next step. | File editing |
+| [AHE](../ahe.md) | Harness resources | Diagnose train traces and retain valid edits for exploration; select the final dev-best version, including the seed. | File editing |
 | [ADAS](../adas.md) | Harness resources | Archive measured designs and select the best dev candidate. | File editing |
 | [DarwinX](../darwinx.md) | Harness resources | Screen and confirm branches, then evaluate complementary recombinations. | File editing |
 | [Meta-Harness](../meta-harness.md) | Harness resources | Use historical sources, traces, and scores to propose edits and select on dev. | File editing |

@@ -6,6 +6,7 @@
           but must declare every file it touched and which tasks it will flip
         roll the edit out and check each declaration against what happened
         keep the edit, and hand the verdicts to the next Evolve Agent
+    evaluate the seed and retained edits on dev; return the earliest best
 
 AHE is the one method here that evolves the harness as a *directory* rather
 than a named component, which is why its scope is every component the target
@@ -37,11 +38,12 @@ class AHE(Algorithm):
     only thing tying that edit to a reason is the manifest the agent must write
     alongside it.
 
-    Nothing is gated on score. Every well-formed edit is kept, and its per-change
+    Exploration is not gated on score. Every well-formed edit is kept, and its per-change
     verdicts go to the next Evolve Agent, which decides whether to keep, improve
     or roll each one back. That is the point: a score can only say an edit did
     not help, while a verdict says which promise it broke, so the search reasons
-    about its own past edits instead of discarding them.
+    about its own past edits instead of discarding them. Final selection is
+    separate: dev ranks the seed and every retained version after editing ends.
     """
 
     name = "ahe"
@@ -68,6 +70,7 @@ class AHE(Algorithm):
         train = self.benchmark.train
         current = self.target.snapshot
         results = await self._evaluate(current, train, label="baseline")
+        versions = [current]
         self._previous: dict = {}
         self._declined: list[dict] = []
 
@@ -81,7 +84,29 @@ class AHE(Algorithm):
             self._judge(current, results, candidate, measured, manifest, step)
             self.target.update(candidate)
             current, results = candidate, measured
-        return self.target.snapshot
+            versions.append(candidate)
+
+        # Do not feed held-out scores into editing or prune the evolving lineage.
+        # Upstream tracks best-ever with strict improvement; dev supplies that
+        # final ranking in FlashRSI, including the unmodified seed as a fallback.
+        dev_scores = []
+        for snapshot in versions:
+            evaluated = await self._evaluate(
+                snapshot, self.benchmark.dev, label="selection-dev"
+            )
+            dev_scores.append(
+                {"snapshot_id": snapshot.id, "dev_score": evaluated.score}
+            )
+        best_index = max(range(len(versions)), key=lambda i: dev_scores[i]["dev_score"])
+        return self._promote(
+            current,
+            versions[best_index],
+            selection_split="dev",
+            selection_policy="best_dev",
+            dev_score=dev_scores[best_index]["dev_score"],
+            baseline_score=dev_scores[0]["dev_score"],
+            dev_scores=dev_scores,
+        )
 
     def _judge(self, current, results, candidate, measured, manifest, step):
         """Grade the edit against what the rollout actually did, and keep it.
@@ -226,6 +251,8 @@ class AHE(Algorithm):
     def _check(self) -> None:
         if not self.benchmark.train:
             raise ValueError("AHE requires a non-empty train split")
+        if not self.benchmark.dev:
+            raise ValueError("AHE requires a non-empty dev split for final selection")
         seen = set()
         for task in self.benchmark.train:
             if task.task_id in seen:
