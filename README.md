@@ -7,7 +7,7 @@
 <p align="center"><i>One click to reproduce, compare, and develop RSI methods across agents and tasks.</i></p>
 
 <p align="center">
-  FlashRSI provides one experiment interface for <b>14 RSI algorithms</b>, <b>31 benchmarks</b>, and <b>8 harness integrations</b>:
+  FlashRSI provides one experiment interface for <b>14 RSI algorithms</b>, <b>33 benchmarks</b>, and <b>8 harness integrations</b>:
   MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, OpenCode, and JiuwenSwarm. Each run records the resources that changed,
   trajectories that produced the score, and the Snapshot selected at the end.
 </p>
@@ -74,9 +74,9 @@
 - 🧩 **Configurable Experiment Framework**: Combines an RSI method, Target harness, Worker, benchmark,
   and independent model settings in one YAML/CLI experiment. Resource scopes and execution roles can
   change without writing a new runner.
-- 🧪 **31 Benchmarks and 14 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
-  web research, documents, tool use, and interactive tasks, with **35 pinned Hugging Face
-  configurations** for 30 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt, SkillAdam,
+- 🧪 **33 Benchmarks and 14 RSI Methods**: Covers question answering, reasoning, mathematics, coding,
+  web research, documents, tool use, and interactive tasks, with **37 pinned Hugging Face
+  configurations** for 32 suites, plus runnable adaptations of OPRO, GEPA, EvoPrompt, ACE, SkillOpt, SkillAdam,
   Evo-Harness, AHE, ADAS, DarwinX, Meta-Harness, ModularRSI, RRSI, and Arbor.
 - 🧠 **Native Harnesses and Reproducible Evidence**: MiniAgent, Claude Code, Codex, Pi, Hermes, OpenClaw, OpenCode, and JiuwenSwarm map prompts,
   skills, tools, configuration, hooks, plugins, memory, and runtime resources into versioned Snapshots.
@@ -697,9 +697,9 @@ FlashRSI currently supports eight harness integrations; additional integrations 
 
 ## Supporting Benchmarks
 
-FlashRSI supports **31 benchmark suites** across question answering, reasoning, mathematics, coding,
+FlashRSI supports **33 benchmark suites** across question answering, reasoning, mathematics, coding,
 web research, documents, tool use, and interactive tasks. The table below summarizes each suite's task,
-and primary metric. **35 pinned Hugging Face configurations** are available for 30 suites, while native
+and primary metric. **37 pinned Hugging Face configurations** are available for 32 suites, while native
 data sources remain supported. WebShop provides task IDs on HF and requires its native catalog and index separately.
 
 | Domain | Benchmark | Task | Primary metric |
@@ -720,6 +720,7 @@ data sources remain supported. WebShop provides task IDs on HF and requires its 
 | Coding | [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | Repository repair | Resolved rate |
 | Coding | [DeepSWE](flashrsi/benchmarks/deepswe) | DeepSWE repository tasks | Reward |
 | Coding | [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | Linux terminal tasks | Reward |
+| Web research | [GISA](flashrsi/benchmarks/gisa) | General information seeking | Global EM |
 | Web research | [BrowseComp](flashrsi/benchmarks/browsecomp) | Broad web research | Accuracy |
 | Web research | [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | Single- and set-answer search | F1 |
 | Web research | [WideSearch](flashrsi/benchmarks/widesearch) | Tabular broad search | Score |
@@ -727,6 +728,7 @@ data sources remain supported. WebShop provides task IDs on HF and requires its 
 | Documents | [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | Document research | Accuracy |
 | Documents | [Harvey LAB](flashrsi/benchmarks/harvey_lab) | Legal document work | All-pass rate |
 | Documents | [JobBench](flashrsi/benchmarks/jobbench) | Professional file delivery | Reward |
+| Documents | [SpreadsheetBench V1](flashrsi/benchmarks/spreadsheetbench) | Full train/dev and Verified test workbooks | Hard restriction |
 | Documents | [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Spreadsheet debugging and modeling | Reward |
 | Tool use | [AppWorld](flashrsi/benchmarks/appworld) | Application and API automation | Reward |
 | Tool use | [BFCL V4](flashrsi/benchmarks/bfcl) | Multi-turn function calling | Reward |

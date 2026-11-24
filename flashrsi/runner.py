@@ -42,6 +42,7 @@ from flashrsi.benchmarks import (
     AIME,
     BBEH,
     BFCL,
+    GISA,
     HLE,
     MATH,
     NQ,
@@ -57,6 +58,7 @@ from flashrsi.benchmarks import (
     MuSiQue,
     OfficeQAPro,
     SearchQA,
+    SpreadsheetBench,
     SpreadsheetBench2,
     SuperGPQA,
     SWEBench,
@@ -95,6 +97,7 @@ _BENCHMARKS = {
     "travelplanner": TravelPlanner,
     "harvey_lab": HarveyLAB,
     "bfcl": BFCL,
+    "gisa": GISA,
     "browsecomp": BrowseComp,
     "deepsearchqa": DeepSearchQA,
     "deepswe": DeepSWE,
@@ -114,6 +117,7 @@ _BENCHMARKS = {
     "swe_bench_pro": SWEBenchPro,
     "terminal_bench": TerminalBench,
     "jobbench": JobBench,
+    "spreadsheetbench": SpreadsheetBench,
     "spreadsheetbench2": SpreadsheetBench2,
     "tau3_banking": Tau3Banking,
 }
@@ -216,6 +220,14 @@ async def _prepare_target(config, *, snapshot=None):
         bind(target, benchmark)
     if isinstance(benchmark, DeepSearchQA):
         from flashrsi.integrations.deepsearchqa import bind
+
+        bind(target, benchmark)
+    if isinstance(benchmark, GISA):
+        from flashrsi.integrations.gisa import bind
+
+        bind(target, benchmark)
+    if isinstance(benchmark, SpreadsheetBench):
+        from flashrsi.integrations.spreadsheetbench import bind
 
         bind(target, benchmark)
     if isinstance(benchmark, BrowseComp):

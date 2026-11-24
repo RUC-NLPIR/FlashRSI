@@ -8,6 +8,7 @@ from flashrsi.benchmarks.bfcl import BFCL
 from flashrsi.benchmarks.browsecomp import BrowseComp
 from flashrsi.benchmarks.deepsearchqa import DeepSearchQA
 from flashrsi.benchmarks.deepswe import DeepSWE
+from flashrsi.benchmarks.gisa import GISA
 from flashrsi.benchmarks.harvey_lab import HarveyLAB
 from flashrsi.benchmarks.hle import HLE
 from flashrsi.benchmarks.hotpotqa import HotpotQA
@@ -18,6 +19,7 @@ from flashrsi.benchmarks.musique import MuSiQue
 from flashrsi.benchmarks.nq import NQ
 from flashrsi.benchmarks.officeqa_pro import OfficeQAPro
 from flashrsi.benchmarks.searchqa import SearchQA
+from flashrsi.benchmarks.spreadsheetbench import SpreadsheetBench
 from flashrsi.benchmarks.spreadsheetbench2 import SpreadsheetBench2
 from flashrsi.benchmarks.supergpqa import SuperGPQA
 from flashrsi.benchmarks.swe_bench import SWEBench
@@ -40,6 +42,7 @@ __all__ = [
     "SuperGPQA",
     "TwoWikiMultiHopQA",
     "TravelPlanner",
+    "GISA",
     "HarveyLAB",
     "BFCL",
     "BrowseComp",
@@ -57,6 +60,7 @@ __all__ = [
     "HotpotQA",
     "MuSiQue",
     "SearchQA",
+    "SpreadsheetBench",
     "SpreadsheetBench2",
     "Tau3Banking",
     "TerminalBench",

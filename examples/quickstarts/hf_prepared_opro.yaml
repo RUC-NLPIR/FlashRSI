@@ -6,7 +6,7 @@ benchmark:
   name: hotpotqa
   dataset:
     source: RUC-NLPIR/FlashRSI
-    revision: 8e226b748e648d4e001cf247f255cfb9eb752292
+    revision: 5976205472dde244a54652715aec9b3bcc721fc7
     config: hotpotqa
   split: auto
   limit: 15
