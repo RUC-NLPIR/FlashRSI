@@ -48,6 +48,7 @@ _BENCHMARK_EXTRAS = {
     "livemathbench": ("livemathbench",),
     "travelplanner": ("travelplanner",),
     "harvey_lab": ("harvey-lab",),
+    "gisa": ("gisa",),
     "browsecomp": ("browsecomp",),
     "deepsearchqa": ("deepsearchqa",),
     "widesearch": ("widesearch",),
@@ -57,6 +58,7 @@ _BENCHMARK_EXTRAS = {
     "terminal_bench": ("harbor",),
     "deepswe": ("harbor",),
     "jobbench": ("harbor",),
+    "spreadsheetbench": ("harbor",),
     "spreadsheetbench2": ("harbor",),
     "appworld": ("appworld",),
     "bfcl": ("bfcl",),
@@ -266,6 +268,8 @@ def _plan(config):
         )
     if benchmark in {"hle", "livemathbench", "jobbench"}:
         prerequisites.append("Independent benchmark.judge.llm configuration")
+    if benchmark == "gisa":
+        prerequisites.append("Configured search/web services: benchmark.retrieval")
     if benchmark in {"browsecomp", "deepsearchqa", "widesearch"}:
         prerequisites.append(
             "Configured search/web services and independent benchmark.judge credentials"

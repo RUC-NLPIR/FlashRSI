@@ -3,7 +3,7 @@
 from collections.abc import Mapping
 
 REPO = "RUC-NLPIR/FlashRSI"
-REVISION = "8e226b748e648d4e001cf247f255cfb9eb752292"
+REVISION = "5976205472dde244a54652715aec9b3bcc721fc7"
 LEGACY_REVISIONS = {
     "1b976eec446eec4cb5354c07bc81b27f92b69c49",
     "f950bd8dc40a9b498d9b1edbf5ca71720a38cd3d",
@@ -19,6 +19,7 @@ PROFILES = {
         "browsecomp",
         "deepsearchqa",
         "deepswe",
+        "gisa",
         "harvey_lab",
         "hotpotqa",
         "math",
@@ -26,6 +27,7 @@ PROFILES = {
         "nq",
         "officeqa_pro",
         "searchqa",
+        "spreadsheetbench",
         "supergpqa",
         "swe_bench",
         "tau3_banking",

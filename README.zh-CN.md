@@ -7,7 +7,7 @@
 <p align="center"><i>一键在不同 Agent 与任务上复现、比较和开发 RSI 方法。</i></p>
 
 <p align="center">
-  FlashRSI 集成 <b>14 种 RSI 算法</b>、<b>31 个 benchmark</b> 和 <b>8 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode、JiuwenSwarm），用于复现、比较和开发 Agent 自我改进方法。
+  FlashRSI 集成 <b>14 种 RSI 算法</b>、<b>33 个 benchmark</b> 和 <b>8 个 harness</b>（MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode、JiuwenSwarm），用于复现、比较和开发 Agent 自我改进方法。
 </p>
 
 <p align="center">
@@ -70,8 +70,8 @@
 
 - 🧩 **可配置实验框架。** 在同一个 YAML/CLI 实验中组合 RSI 算法、Target harness、Worker、benchmark
   和各自的模型配置；资源范围与执行角色可以直接切换。
-- 🧪 **31 个 Benchmark 与 14 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
-  和交互任务，提供 **30 个套件的 35 份 Hugging Face 固定配置**，以及 OPRO、GEPA、EvoPrompt、ACE、
+- 🧪 **33 个 Benchmark 与 14 种 RSI 方法。** 覆盖问答、推理、数学、代码、网页研究、文档、工具调用
+  和交互任务，提供 **32 个套件的 37 份 Hugging Face 固定配置**，以及 OPRO、GEPA、EvoPrompt、ACE、
   SkillOpt、SkillAdam、Evo-Harness、AHE、ADAS、DarwinX、Meta-Harness、ModularRSI、RRSI、Arbor 的可运行适配。
 - 🧠 **原生 Harness 与可复现证据。** 支持 MiniAgent、Claude Code、Codex、Pi、Hermes、OpenClaw、OpenCode 和 JiuwenSwarm，将 prompts、skills、工具、
   配置、hooks、plugins、memory 与 runtime 资源纳入版本化 Snapshot；每次运行集中保存候选版本、轨迹、
@@ -616,7 +616,7 @@ FlashRSI 当前支持八种 Harness 接入，其他接入正在规划中。
 
 ## 支持的 Benchmarks
 
-FlashRSI 支持 **31 个 benchmark 套件**，覆盖问答、推理、数学、代码、网页研究、文档、工具使用和交互任务。下表列出各套件的任务类型和主指标。**30 个套件提供 35 份固定的 Hugging Face 配置**，同时保留原生数据源。WebShop 的 HF 配置当前只提供任务 ID，完整商品库和索引需另行准备。具体数据、服务与环境要求见[配置索引](docs/benchmark-quickstart.md)。
+FlashRSI 支持 **33 个 benchmark 套件**，覆盖问答、推理、数学、代码、网页研究、文档、工具使用和交互任务。下表列出各套件的任务类型和主指标。**32 个套件提供 37 份固定的 Hugging Face 配置**，同时保留原生数据源。WebShop 的 HF 配置当前只提供任务 ID，完整商品库和索引需另行准备。具体数据、服务与环境要求见[配置索引](docs/benchmark-quickstart.md)。
 
 | 领域 | Benchmark | 任务 | 主指标 |
 | --- | --- | --- | --- |
@@ -636,6 +636,7 @@ FlashRSI 支持 **31 个 benchmark 套件**，覆盖问答、推理、数学、�
 | 代码 | [SWE-bench Pro V2](flashrsi/benchmarks/swe_bench_pro) | 代码仓库修复，all / hard 题集 | Resolved rate |
 | 代码 | [DeepSWE](flashrsi/benchmarks/deepswe) | 仓库修复，通过 Harbor 运行 DeepSWE v1.1 任务 | Reward |
 | 代码 | [Terminal-Bench 2.0 / 2.1](flashrsi/benchmarks/terminal_bench) | 通过 Harbor 执行的 Linux 终端任务 | Reward |
+| 网页研究 | [GISA](flashrsi/benchmarks/gisa) | 通用信息搜索，结构化答案 | Global EM |
 | 网页研究 | [BrowseComp](flashrsi/benchmarks/browsecomp) | 网络信息搜索 | Accuracy |
 | 网页研究 | [DeepSearchQA](flashrsi/benchmarks/deepsearchqa) | 单答案与集合答案的网络搜索 | F1 |
 | 网页研究 | [WideSearch](flashrsi/benchmarks/widesearch) | 表格型广泛信息搜索 | Score |
@@ -643,6 +644,7 @@ FlashRSI 支持 **31 个 benchmark 套件**，覆盖问答、推理、数学、�
 | 文档 | [OfficeQA-Pro](flashrsi/benchmarks/officeqa_pro) | 文档检索问答 | Accuracy |
 | 文档 | [Harvey LAB](flashrsi/benchmarks/harvey_lab) | 法律文档任务 | All-pass rate |
 | 文档 | [JobBench](flashrsi/benchmarks/jobbench) | 专业文件交付 | Reward |
+| 文档 | [SpreadsheetBench V1](flashrsi/benchmarks/spreadsheetbench) | Full 训练/开发集与 Verified 测试工作簿 | Hard restriction |
 | 文档 | [SpreadsheetBench 2](flashrsi/benchmarks/spreadsheetbench2) | Debugging / Financial_Model / Template | Reward |
 | 工具使用 | [AppWorld](flashrsi/benchmarks/appworld) | 应用与 API 自动化 | Reward |
 | 工具使用 | [BFCL V4](flashrsi/benchmarks/bfcl) | 多轮函数调用，仅 Base track | Reward |

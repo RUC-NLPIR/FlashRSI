@@ -15,6 +15,7 @@ _HARBOR = {
     "terminal_bench",
     "jobbench",
     "swe_bench_pro",
+    "spreadsheetbench",
     "spreadsheetbench2",
     "deepswe",
 }
@@ -27,6 +28,7 @@ _CONTAINERS = _HARBOR | {
     "travelplanner",
     "officeqa_pro",
     "harvey_lab",
+    "gisa",
     "browsecomp",
     "deepsearchqa",
     "widesearch",

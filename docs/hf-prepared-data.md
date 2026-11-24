@@ -1,8 +1,8 @@
 # HF 数据源
 
-当前适配 `RUC-NLPIR/FlashRSI` 的 `benchmark-directories.v1` 布局，固定 revision 为 `8e226b748e648d4e001cf247f255cfb9eb752292`。覆盖 **29 个 Benchmark、34 份实验配置**；**HLE 单独使用官方 HF `cais/hle` 的纯文本题目，不纳入本镜像**。原有原生默认来源保留，只有明确配置 `benchmark.dataset` 才使用本仓库数据。
+当前推荐固定 revision 为 `5976205472dde244a54652715aec9b3bcc721fc7`，覆盖 **32 个 Benchmark、37 份 HF 实验配置**。HLE 继续单独使用官方 HF `cais/hle` 的纯文本题目。已有适配器的原生默认来源保留；GISA 和 SpreadsheetBench V1 使用本页的 HF prepared 数据源。
 
-WebShop 另使用下文所列的较新 revision，只提供任务 ID。计入 WebShop 后，接入共覆盖 30 个 Benchmark、35 份 HF 配置；商品资源的准备范围见 [WebShop 说明](webshop.md)。
+WebShop 的 HF 包只提供任务 ID，完整商品库和索引仍需另行准备，见 [WebShop 说明](webshop.md)。
 
 ## 选择数据
 
@@ -11,13 +11,13 @@ benchmark:
   name: terminal_bench
   dataset:
     source: RUC-NLPIR/FlashRSI
-    revision: 8e226b748e648d4e001cf247f255cfb9eb752292
+    revision: 5976205472dde244a54652715aec9b3bcc721fc7
     config: terminal_bench_2_0
   split: auto
   limit: 3  # 可选；省略时加载完整发布划分
 ```
 
-`config` 使用下表中的新名称。目录由固定 revision 的 `metadata/catalog.json` 定位，再读取该目录下的 manifest。原生资源从 manifest 声明的 `native/` 路径获取，不重新访问旧的 `prepared/日期/` 目录。文件大小、SHA-256、划分 ID 的数量、重复、重叠和原生任务是否缺失都会检查。
+`config` 使用下表中的新名称。常规目录由固定 revision 的 `metadata/catalog.json` 定位，再读取该目录下的 manifest。GISA 和 SpreadsheetBench V1 使用各自目录中的 SHA-256 manifest，当前不依赖旧 catalog 是否列出它们。原生资源从 manifest 声明的 `native/` 路径获取，不重新访问旧的 `prepared/日期/` 目录。文件大小、SHA-256、划分 ID 的数量、重复、重叠和原生任务是否缺失都会检查。
 
 这批数据使用已经发布的固定实验划分。请移除原示例中的 `split_counts`、比例划分、`data_path` 和 `evolution_*` 数据覆盖项，使用 `split: auto`。`limit` 只在各个角色内采样，不将 test 分配到 train。HF 中保留的 `native` 来源配置和完整上游归档属于来源资料，不会自动混入已选实验划分。
 
@@ -33,6 +33,7 @@ benchmark:
 | `browsecomp` | `browsecomp` | `browsecomp` | 100 / 50 / 150 |
 | `deepsearchqa` | `deepsearchqa` | `deepsearchqa` | 600 / 250 / 50 |
 | `deepswe` | `deepswe` | `deepswe/v1.1` | 20 / 10 / 30 |
+| `gisa` | `gisa` | `gisa` | 120 / 53 / 200 |
 | `harvey_lab` | `harvey_lab` | `harvey_lab/v1.2.0` | 40 / 20 / 60 |
 | `hotpotqa` | `hotpotqa` | `hotpotqa` | 150 / 300 / 300 |
 | `jobbench` | `jobbench_easy` | `jobbench/easy` | 25 / 13 / 25 |
@@ -45,6 +46,7 @@ benchmark:
 | `nq` | `nq` | `nq` | 150 / 150 / 300 |
 | `officeqa_pro` | `officeqa_pro` | `officeqa_pro` | 53 / 27 / 53 |
 | `searchqa` | `searchqa` | `searchqa` | 400 / 200 / 1400 |
+| `spreadsheetbench` | `spreadsheetbench` | `spreadsheetbench/1` | 399 / 110 / 400（空指令过滤后） |
 | `spreadsheetbench2` | `spreadsheetbench2` | `spreadsheetbench/2` | 120 / 57 / 120 |
 | `supergpqa` | `supergpqa` | `supergpqa` | 600 / 400 / 1000 |
 | `swe_bench` | `swe_bench` | `swe_bench/verified` | 200 / 100 / 200 |
@@ -60,6 +62,8 @@ benchmark:
 | `widesearch` | `widesearch` | `widesearch` | 40 / 20 / 60 |
 | `workbench` | `workbench` | `workbench` | 276 / 138 / 276 |
 
+HotpotQA 使用后续发布的 300 题 test 划分（train/dev 为 150/300），所有 test 题目的 supporting facts 均有配套上下文。旧实验显式固定的 revision 继续读取旧数据，不改写历史配置或结果。
+
 ## 版本与评分边界
 
 - **Terminal-Bench**：此 HF 包是 2.0，配置 `version: "2.0"`。2.1 继续使用现有原生入口。
@@ -71,6 +75,7 @@ benchmark:
 - **SearchQA**：保留原 SkillOpt 的 2,000 题子集与 400/200/1400 角色，不代表完整 SearchQA。
 - **ALFWorld**：只下载约 8 MB 的精选原生 JSON + TW-PDDL 游戏包，不下载原始 ZIP 或视觉权重。仍需 Linux/WSL/macOS、Python 3.11/3.12 与对应运行依赖。
 - **Harvey LAB**：当前包是 120 个自包含法律任务及其文档、原生 rubrics；不是完整 2,010 题镜像。独立双 Judge 配置保持现有约定。
+- **GISA / SpreadsheetBench V1**：题目、工作簿案例、官方评分方式与运行示例见[接入指南](gisa-spreadsheetbench.md)。
 - **SpreadsheetBench2**：只含 Debugging、Financial_Model、Template；`category: all` 不包含 Visualization。需 Docker + Harbor。
 - **SWE-bench Pro / DeepSWE**：使用所选原生任务目录，保留 Harbor 的原生网络与 verifier 约束；SWE-bench Pro 此配置为 `subset: all`。
 
@@ -80,7 +85,7 @@ HLE 使用官方 `cais/hle`，固定 revision 为 `5a81a4c7271a2a2a312b9a690f0c2
 
 ## 原生资源与缓存
 
-仓库需要 HF 访问权限，先在运行机器执行 `hf auth login`，或配置 `HF_TOKEN`。一键启动器改变缓存位置时会保留原登录文件的路径，不读取或复制 token 到项目配置。
+当前数据仓库公开可读；如下载环境需要认证或限流提升，可在运行机器执行 `hf auth login`，或配置 `HF_TOKEN`。一键启动器改变缓存位置时会保留原登录文件的路径，不读取或复制 token 到项目配置。
 
 数据和原生资源在实验机器下载、校验并解包到缓存，不进入 harness Snapshot。只下载执行所需资源；归档在 HF 的完整上游历史、参考材料不会全部下载。OfficeQA-Pro 移除原 `corpus_path`，TravelPlanner 移除原 `database_path`，WideSearch 移除原 `gold_path`，由对应 HF 原生资源包提供。
 
@@ -91,9 +96,9 @@ HLE 使用官方 `cais/hle`，固定 revision 为 `5a81a4c7271a2a2a312b9a690f0c2
 复制 [hf_prepared_opro.yaml](../examples/quickstarts/hf_prepared_opro.yaml) 为同目录下的 `hf_prepared_opro.local.yaml`，分别填写 Target 与 Worker 的模型、凭据、端点后运行：
 
 ```bash
-python scripts/run_experiment.py --config examples/hf_prepared_opro.local.yaml --plan
-python scripts/run_experiment.py --config examples/hf_prepared_opro.local.yaml --check-only
-python scripts/run_experiment.py --config examples/hf_prepared_opro.local.yaml
+python scripts/run_experiment.py --config examples/quickstarts/hf_prepared_opro.local.yaml --plan
+python scripts/run_experiment.py --config examples/quickstarts/hf_prepared_opro.local.yaml --check-only
+python scripts/run_experiment.py --config examples/quickstarts/hf_prepared_opro.local.yaml
 ```
 
 ALFWorld 的完整数据配置见 [hf_prepared_alfworld.yaml](../examples/hf_prepared_alfworld.yaml)。已有安装环境也可以使用 `flashrsi run --config ...` 和 `flashrsi evaluate --config ...`；它们共用数据加载路径，但普通 CLI 不替用户安装运行依赖。

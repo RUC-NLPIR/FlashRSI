@@ -34,9 +34,9 @@ graded = benchmark.grade(trajectories)
 
 未绑定的 `rollout` 会报错，不会自动在宿主机解题。其他服务型 benchmark 仍使用各自接入层，不能直接替换为这个只接收题目的执行器。
 
-## 当前 31 个注册项的分工
+## 当前 33 个注册项的分工
 
-下表按当前支持的范围说明数据流，不表示已执行 31 个真实迁移实验。
+下表按当前支持的范围说明数据流，不表示已执行 33 个真实迁移实验。
 “题目/上下文”表示接入不要求额外领域工具；harness 自带的通用能力仍按自己的配置运行。
 
 | Registry ID | benchmark 提供的环境、工具或公开输入 | 评分边界 |
@@ -51,7 +51,9 @@ graded = benchmark.grade(trajectories)
 | `travelplanner` | sole-planning 原生题目及其中的参考信息 | 独立格式转换模型及原生约束评分；评分数据库不交给 solver |
 | `tau2` | 原生领域数据库、policy、领域工具、用户模拟器与会话协议 | 原生模拟器评分 |
 | `tau3_banking` | 银行领域数据、知识检索工具、policy、用户模拟器与会话协议 | 原生模拟器评分 |
+| `spreadsheetbench` | 每个工作簿案例的独立 Harbor 环境；整道指令保持同一划分 | 独立 LibreOffice verifier；按指令汇总 hard/soft restriction |
 | `spreadsheetbench2` | 工作簿、任务容器及其 Python、输入输出路径 | 独立 LibreOffice 重算与原生评分容器 |
+| `gisa` | 解密题目、临时搜索/读网页客户端 | 宿主端官方 TSV 评分；不向 solver 暴露参考 CSV 或人工轨迹 |
 | `browsecomp` | 临时搜索/读网页客户端及检索后端 | 宿主端独立 Judge |
 | `deepsearchqa` | 临时搜索/读网页客户端及检索后端 | 宿主端独立 autorater |
 | `widesearch` | 临时搜索/读网页客户端及检索后端 | 宿主端官方表格评分和独立 Judge |

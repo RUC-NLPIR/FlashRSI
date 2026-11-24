@@ -1,0 +1,39 @@
+# Copy to a sibling *.local.yaml and fill the two independent model roles.
+# Published HF membership is preserved; limit only samples within each role.
+run:
+  output_dir: "../../runs"
+benchmark:
+  name: gisa
+  dataset:
+    source: RUC-NLPIR/FlashRSI
+    revision: 5976205472dde244a54652715aec9b3bcc721fc7
+    config: gisa
+  retrieval:
+    provider: serper
+    api_key: null
+    reader:
+      provider: direct
+  split: auto
+  limit: 3
+  seed: 42
+agent:
+  name: miniagent
+  max_turns: 60
+  timeout: 1800
+  llm:
+    model_name: null
+    api_key: null
+    base_url: null
+algorithm:
+  name: opro
+  max_steps: 1
+  num_candidates: 1
+  few_shot_size: 1
+  seed: 42
+  worker:
+    type: llm
+    timeout: 180
+    llm:
+      model_name: null
+      api_key: null
+      base_url: null

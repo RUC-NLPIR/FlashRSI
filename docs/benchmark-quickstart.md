@@ -1,8 +1,8 @@
 # Benchmark 配置索引
 
-当前注册 **31 个 Benchmark、14 个算法、8 个 Target Agent**。同一适配器的版本、年份和领域不重复计数；例如 Terminal-Bench 2.0 / 2.1、AIME 2025 / 2026、τ² 三个领域分别只计一项。
+当前注册 **33 个 Benchmark、14 个算法、8 个 Target Agent**。同一适配器的版本、年份和领域不重复计数；例如 Terminal-Bench 2.0 / 2.1、AIME 2025 / 2026、τ² 三个领域分别只计一项。
 
-其中 30 项可选择 [`RUC-NLPIR/FlashRSI` 的 HF prepared 数据源](hf-prepared-data.md)，共 35 份配置；WebShop 当前只提供固定任务 ID，完整商品库和索引另行准备。各项使用固定发布划分；原有默认来源保持不变。
+其中 32 项可选择 [`RUC-NLPIR/FlashRSI` 的 HF prepared 数据源](hf-prepared-data.md)，共 37 份配置；WebShop 当前只提供固定任务 ID，完整商品库和索引另行准备。各项使用固定发布划分；原有默认来源保持不变。
 
 从项目根目录用 `python scripts/run_experiment.py --config examples/<示例>.yaml --plan` 查看所选依赖，再填配置运行 `--check-only`，最后去掉该参数开始实验。两个模型角色及 Judge / User Simulator / Postprocess 互不继承凭据。示例包含不同算法，切换时也需保留对应组件配置。
 
@@ -23,7 +23,9 @@ SearchQA、MuSiQue、TriviaQA、NQ、2WikiMultiHopQA、MATH、AIME、BBEH、Supe
 | Working / Tool Use | `travelplanner` | [travelplanner_opro.yaml](../examples/quickstarts/travelplanner_opro.yaml) | sole-planning；原生数据库及独立 postprocess 模型 |
 | Working / Tool Use | `tau2` | [tau2_opro.yaml](../examples/quickstarts/tau2_opro.yaml) | 固定 tau2 环境、用户模拟器模型；与 Harbor 分环境 |
 | Working / Tool Use | `tau3_banking` | [tau3_banking_opro.yaml](../examples/quickstarts/tau3_banking_opro.yaml) | 固定 tau2 环境、BM25 数据、用户模拟器模型 |
+| Working / Tool Use | `spreadsheetbench` | [spreadsheetbench_opro.yaml](../examples/quickstarts/spreadsheetbench_opro.yaml) | Docker + Harbor + LibreOffice；V1，多案例独立运行后按指令汇总 |
 | Working / Tool Use | `spreadsheetbench2` | [spreadsheetbench2_opro.yaml](../examples/quickstarts/spreadsheetbench2_opro.yaml) | Docker + Harbor + LibreOffice；只接前三类，不含 Visualization |
+| Search / QA | `gisa` | [gisa_opro.yaml](../examples/quickstarts/gisa_opro.yaml) | Docker；搜索服务；官方结构化答案评分，无需 Judge 模型 |
 | Search / QA | `searchqa` | [searchqa_skillopt.yaml](../examples/searchqa_skillopt.yaml) | 官方数据首次下载较大；可先跑附带 12 题 quickstart |
 | Search / QA | `hotpotqa` | [hotpotqa_opro.yaml](../examples/quickstarts/hotpotqa_opro.yaml) | 本地或原生数据；按示例设置实验划分 |
 | Search / QA | `twowiki_multihopqa` | [twowiki_multihopqa_opro.yaml](../examples/quickstarts/twowiki_multihopqa_opro.yaml) | 本地或原生数据；按示例设置实验划分 |

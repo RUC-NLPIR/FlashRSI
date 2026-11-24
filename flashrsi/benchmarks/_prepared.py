@@ -75,6 +75,10 @@ def prepare(config):
     if name == "spreadsheetbench2" and config.get("category", "all") != "all":
         raise ValueError("Prepared SpreadsheetBench2 membership requires category: all")
     download = {"repo_id": REPO, "repo_type": "dataset", "revision": revision}
+    if name in {"gisa", "spreadsheetbench"}:
+        from flashrsi.benchmarks._prepared_fixed import prepare as prepare_fixed
+
+        return prepare_fixed(config, download)
     if name == "webshop":
         from flashrsi.benchmarks.webshop import _prepare
 

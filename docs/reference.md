@@ -32,7 +32,7 @@ Use these detailed notes for version boundaries, method settings, source revisio
 
 ## Benchmarks and environments
 
-- [All 31 benchmark configurations](./benchmark-quickstart.md)
+- [All 33 benchmark configurations](./benchmark-quickstart.md)
 - [Harness / benchmark boundary](./benchmark-harness-boundary.md)
 - [BBEH and SuperGPQA](./lightweight-benchmarks.md)
 - [AIME](./coding-math-benchmarks.md)

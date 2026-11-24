@@ -1,6 +1,6 @@
 # Benchmarks
 
-Choose a task suite, then follow its configuration and environment guide. FlashRSI registers 31 suites; years, variants, and domains within one adapter count as one suite.
+Choose a task suite, then follow its configuration and environment guide. FlashRSI registers 33 suites; years, variants, and domains within one adapter count as one suite.
 
 ## Prepare the environment
 
@@ -38,6 +38,7 @@ link to the corresponding integration or configuration guide.
 | Coding | [SWE-bench Pro V2](../../flashrsi/benchmarks/swe_bench_pro) | Repository repair | Container regrade rate | configured | configured | configured | [Guide](../coding-working-benchmarks.md) |
 | Coding | [DeepSWE](../../flashrsi/benchmarks/deepswe) | DeepSWE repository tasks | Container verifier reward | configured | configured | configured | [Guide](../deepswe.md) |
 | Coding | [Terminal-Bench 2.0 / 2.1](../../flashrsi/benchmarks/terminal_bench) | Linux terminal tasks | Native verifier reward | configured | configured | configured | [Guide](../terminal-bench.md) |
+| Web research | [GISA](../../flashrsi/benchmarks/gisa) | Structured information seeking | Global EM | 120 | 53 | 200 | [Guide](../gisa-spreadsheetbench.md) |
 | Web research | [BrowseComp](../../flashrsi/benchmarks/browsecomp) | Broad web research | Official judge accuracy | — | — | native | [Services](../web-research-services.md) |
 | Web research | [DeepSearchQA](../../flashrsi/benchmarks/deepsearchqa) | Single- and set-answer search | Autorater F1 | — | — | native | [Services](../web-research-services.md) |
 | Web research | [WideSearch](../../flashrsi/benchmarks/widesearch) | Tabular broad search | Official table score | — | — | native | [Services](../web-research-services.md) |
@@ -45,6 +46,7 @@ link to the corresponding integration or configuration guide.
 | Documents | [OfficeQA-Pro](../../flashrsi/benchmarks/officeqa_pro) | Document research | Numeric / text accuracy | configured | configured | configured | [Index](../benchmark-quickstart.md) |
 | Documents | [Harvey LAB](../../flashrsi/benchmarks/harvey_lab) | Legal document work | Dual-judge all-pass rate | configured | configured | configured | [Index](../benchmark-quickstart.md) |
 | Documents | [JobBench](../../flashrsi/benchmarks/jobbench) | Professional file delivery | Weighted rubric reward | configured | configured | configured | [Guide](../coding-working-benchmarks.md) |
+| Documents | [SpreadsheetBench V1](../../flashrsi/benchmarks/spreadsheetbench) | Spreadsheet manipulation | Hard restriction | 399 | 110 | 400 | [Guide](../gisa-spreadsheetbench.md) |
 | Documents | [SpreadsheetBench 2](../../flashrsi/benchmarks/spreadsheetbench2) | Spreadsheet debugging and modeling | LibreOffice verifier | configured | configured | configured | [Guide](../coding-working-benchmarks.md) |
 | Tool use | [AppWorld](../../flashrsi/benchmarks/appworld) | Application and API automation | Task-completion reward | configured | configured | configured | [Setup](../appworld-independent-evolution.md) |
 | Tool use | [BFCL V4](../../flashrsi/benchmarks/bfcl) | Multi-turn function calling | Conversation success | configured | configured | configured | [Index](../benchmark-quickstart.md) |
