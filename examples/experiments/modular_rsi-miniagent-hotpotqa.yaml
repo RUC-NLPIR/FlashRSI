@@ -5,7 +5,10 @@ benchmark:
   name: hotpotqa
   split: auto
   seed: 42
-  data_path: ./data/hotpotqa
+  dataset:
+    source: RUC-NLPIR/FlashRSI
+    revision: 5976205472dde244a54652715aec9b3bcc721fc7
+    config: hotpotqa
 agent:
   name: miniagent
   llm:
