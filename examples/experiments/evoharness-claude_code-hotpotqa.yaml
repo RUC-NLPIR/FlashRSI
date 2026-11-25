@@ -4,10 +4,10 @@ benchmark:
   name: hotpotqa
   seed: 42
   split: auto
-  data_path:
-    train: ./data/hotpotqa/train.jsonl
-    dev: ./data/hotpotqa/dev.jsonl
-    test: ./data/hotpotqa/test.jsonl
+  dataset:
+    source: RUC-NLPIR/FlashRSI
+    revision: 5976205472dde244a54652715aec9b3bcc721fc7
+    config: hotpotqa
   mode: context
 agent:
   name: claude_code

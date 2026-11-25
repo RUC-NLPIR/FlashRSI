@@ -4,7 +4,11 @@ run:
 benchmark:
   name: hotpotqa
   split: auto
-  data_path: ./data/hotpotqa
+  seed: 42
+  dataset:
+    source: RUC-NLPIR/FlashRSI
+    revision: 5976205472dde244a54652715aec9b3bcc721fc7
+    config: hotpotqa
 agent:
   name: claude_code
   llm:
