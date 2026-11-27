@@ -10,11 +10,11 @@ agent:
   llm:
     model_name: deepseek-flash
     base_url: https://api.deepseek.com
-    max_tokens: 32768
+    max_tokens: 65535
     reasoning_effort: high
     llm_max_retries: 1
   source_dir: ./harnesses/skillopt-miniagent-terminalbench/target
-  max_turns: 10
+  max_turns: 100
   harbor:
     remote_docker: true
     uv_install_source: github
