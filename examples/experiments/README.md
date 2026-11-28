@@ -10,6 +10,13 @@ The 24 HotpotQA configurations load the published evaluation split directly from
 
 ## Terminal-Bench execution budgets
 
+The Terminal-Bench configurations reference ordered task IDs in `splits/terminalbench.json`
+(20 train / 15 dev / 30 test). EvoHarness uses `splits/terminalbench-no-dev.json`
+(the same train and test tasks, with no dev tasks). `benchmark.split_manifest` is
+resolved relative to the YAML file. The loader preserves the listed order, excludes
+unlisted tasks, and rejects missing or duplicate IDs. Keep `split: auto` and omit
+`split_counts` and `limit` when using these fixed partitions.
+
 The [SkillOpt + MiniAgent configuration](skillopt-miniagent-terminalbench.yaml) uses Target `max_turns: 100` and `llm.max_tokens: 65535`, matching the completed historical experiment. The previously published values of 10 turns and 32768 tokens came from the smoke configuration.
 
 The Terminal-Bench configurations omit Target `agent.timeout` so execution uses each task's native Agent deadline. The verifier also uses its task-defined deadline. `agent.harbor.setup_timeout` controls environment preparation, while `algorithm.worker.timeout` controls Worker calls; neither sets the verifier deadline.

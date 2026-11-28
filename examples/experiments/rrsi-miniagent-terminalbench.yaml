@@ -2,6 +2,8 @@ run:
   output_dir: ./runs/rrsi-miniagent-terminalbench
 benchmark:
   name: terminal_bench
+  split: auto
+  split_manifest: ./splits/terminalbench.json
 agent:
   name: miniagent
   source_dir: ./harnesses/rrsi-miniagent-terminalbench/target

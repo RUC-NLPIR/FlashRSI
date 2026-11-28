@@ -2,6 +2,8 @@ run:
   output_dir: ./runs/rrsi-claude_code-terminalbench
 benchmark:
   name: terminal_bench
+  split: auto
+  split_manifest: ./splits/terminalbench.json
 agent:
   name: claude_code
   source_dir: ./harnesses/rrsi-claude_code-terminalbench/target

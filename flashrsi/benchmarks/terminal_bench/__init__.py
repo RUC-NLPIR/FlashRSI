@@ -10,6 +10,7 @@ from typing import Any
 from flashrsi.benchmarks._data import _split_tasks
 from flashrsi.benchmarks._harbor import _grade, _task_from_directory
 from flashrsi.benchmarks.terminal_bench._data import _download_tasks
+from flashrsi.benchmarks.terminal_bench._splits import _manifest_splits
 from flashrsi.core.benchmark import Benchmark, Task
 from flashrsi.core.trajectory import Trajectory
 
@@ -37,8 +38,9 @@ class TerminalBench(Benchmark):
     """Native Linux tasks with reproducible local train/dev/test partitions.
 
     Terminal-Bench publishes one task collection, without training splits.
-    Users explicitly configure experiment partitions with ratios or counts. A local
-    ``data_path`` may name a single task or a directory containing task folders.
+    Users configure partitions with ratios, counts, or an ordered JSON
+    ``split_manifest``. A local ``data_path`` may name a single task or a directory
+    containing task folders.
     """
 
     name = "terminal_bench"
@@ -81,7 +83,19 @@ class TerminalBench(Benchmark):
     def load(self) -> Mapping[str, tuple[Task, ...]]:
         """Load local native tasks or the pinned Hugging Face task archive."""
         if self._splits is None:
-            splits = _split_tasks(self._iter_tasks(), self.config)
+            if self.config.get("split_manifest") is not None:
+                splits = _manifest_splits(self._iter_tasks(), self.config)
+                self.metadata = MappingProxyType(
+                    {
+                        **self.metadata,
+                        "split_manifest": {
+                            role: [task.task_id for task in tasks]
+                            for role, tasks in splits.items()
+                        },
+                    }
+                )
+            else:
+                splits = _split_tasks(self._iter_tasks(), self.config)
             evolution_path = self.config.get("evolution_data_path")
             if evolution_path is not None:
                 # The independent collection uses the same Harbor grading
