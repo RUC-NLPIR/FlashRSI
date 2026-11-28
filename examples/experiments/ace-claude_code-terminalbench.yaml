@@ -3,6 +3,7 @@ run:
 benchmark:
   name: terminal_bench
   split: auto
+  split_manifest: ./splits/terminalbench.json
   data_path: ./data/terminalbench/tasks
   seed: 42
 agent:

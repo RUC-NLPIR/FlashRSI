@@ -132,7 +132,8 @@ def load_config(
     """Merge defaults < YAML < overrides and validate the configuration.
 
     ``run.output_dir`` is relative to the YAML file, or to the current directory
-    when set through overrides. This function does not create directories or
+    when set through overrides. Terminal ``benchmark.split_manifest`` follows
+    the same path convention. This function does not create directories or
     read environment variables. Each category accepts additional parameters;
     nested mappings support attribute access. Target and worker model settings
     live in their independent ``llm`` mappings. Credentials remain in the result.
@@ -167,6 +168,19 @@ def load_config(
     if not output_dir.is_absolute():
         output_dir = origin / output_dir
     config["run"]["output_dir"] = str(output_dir.resolve())
+    if config["benchmark"]["name"] == "terminal_bench":
+        manifest = config["benchmark"].get("split_manifest")
+        if manifest is not None:
+            if not isinstance(manifest, (str, Path)) or not str(manifest).strip():
+                raise ValueError("benchmark.split_manifest must be a JSON file path")
+            origin = (
+                Path.cwd()
+                if "split_manifest" in overrides.get("benchmark", {})
+                else base_dir
+            )
+            config["benchmark"]["split_manifest"] = str(
+                (origin / Path(manifest).expanduser()).resolve()
+            )
     return Config(config)
 
 
